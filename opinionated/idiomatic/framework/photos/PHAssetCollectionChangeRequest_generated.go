@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,22 +62,28 @@ func (accr *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollecti
 
 // RemoveAssetsAtIndexes removes the assets at the specified indexes from the asset collection.
 func (accr *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes obj.Object) {
+	defer runtime.KeepAlive(accr)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("removeAssetsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // MoveAssetsAtIndexesToIndex moves the assets at the specified indexes in the asset collection to a new index.
 func (accr *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int) {
+	defer runtime.KeepAlive(accr)
+	defer runtime.KeepAlive(fromIndexes)
 	objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("moveAssetsAtIndexes:toIndex:"), objref.IDOf(fromIndexes), toIndex)
 }
 
 // PlaceholderForCreatedAssetCollection returns the placeholder for created asset collection.
 func (accr *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
+	defer runtime.KeepAlive(accr)
 	_r := objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("placeholderForCreatedAssetCollection"))
 	return ObjectPlaceholderFromID(_r)
 }
 
 // Title returns the title.
 func (accr *AssetCollectionChangeRequest) Title() string {
+	defer runtime.KeepAlive(accr)
 	_r := objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""

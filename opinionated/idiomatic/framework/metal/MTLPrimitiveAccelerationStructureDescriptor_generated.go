@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -98,6 +100,7 @@ func (pasd *PrimitiveAccelerationStructureDescriptor) WithUsage(usage Accelerati
 //
 // GeometryDescriptors returns the collection as a Go slice.
 func (pasd *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*AccelerationStructureGeometryDescriptor {
+	defer runtime.KeepAlive(pasd)
 	_arr := objc.Send[objc.ID](objref.IDOf(pasd), objc.RegisterName("geometryDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AccelerationStructureGeometryDescriptor {
 		return AccelerationStructureGeometryDescriptorFromID(_id)
@@ -106,30 +109,35 @@ func (pasd *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*A
 
 // MotionStartBorderMode returns motion border mode describing what happens if acceleration structure is sampled before motionStartTime. If not set defaults to MTLMotionBorderModeClamp.
 func (pasd *PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() MotionBorderMode {
+	defer runtime.KeepAlive(pasd)
 	_r := objc.Send[MotionBorderMode](objref.IDOf(pasd), objc.RegisterName("motionStartBorderMode"))
 	return _r
 }
 
 // MotionEndBorderMode returns motion border mode describing what happens if acceleration structure is sampled after motionEndTime. If not set defaults to MTLMotionBorderModeClamp.
 func (pasd *PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() MotionBorderMode {
+	defer runtime.KeepAlive(pasd)
 	_r := objc.Send[MotionBorderMode](objref.IDOf(pasd), objc.RegisterName("motionEndBorderMode"))
 	return _r
 }
 
 // MotionStartTime returns motion start time of this geometry. If not set defaults to 0.0f.
 func (pasd *PrimitiveAccelerationStructureDescriptor) MotionStartTime() float32 {
+	defer runtime.KeepAlive(pasd)
 	_r := objc.Send[float32](objref.IDOf(pasd), objc.RegisterName("motionStartTime"))
 	return _r
 }
 
 // MotionEndTime returns motion end time of this geometry. If not set defaults to 1.0f.
 func (pasd *PrimitiveAccelerationStructureDescriptor) MotionEndTime() float32 {
+	defer runtime.KeepAlive(pasd)
 	_r := objc.Send[float32](objref.IDOf(pasd), objc.RegisterName("motionEndTime"))
 	return _r
 }
 
 // MotionKeyframeCount returns motion keyframe count. Is 1 by default which means no motion.
 func (pasd *PrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() int {
+	defer runtime.KeepAlive(pasd)
 	_r := objc.Send[int](objref.IDOf(pasd), objc.RegisterName("motionKeyframeCount"))
 	return _r
 }

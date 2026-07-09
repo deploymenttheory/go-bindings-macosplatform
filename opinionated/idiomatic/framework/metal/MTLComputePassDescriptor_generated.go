@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func computePassDescriptorAdopt(id objc.ID) *ComputePassDescriptor {
 
 // Description returns the object's -description text.
 func (cpd *ComputePassDescriptor) Description() string {
+	defer runtime.KeepAlive(cpd)
 	return rt.Description(objref.IDOf(cpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpd *ComputePassDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpd *ComputePassDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpd)
 	return rt.IsKind(objref.IDOf(cpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpd *ComputePassDescriptor) String() string {
+	defer runtime.KeepAlive(cpd)
 	return rt.Description(objref.IDOf(cpd))
 }
 
@@ -80,12 +87,14 @@ func (cpd *ComputePassDescriptor) WithDispatchType(dispatchType DispatchType) *C
 
 // DispatchType returns the dispatch type of the compute command encoder.
 func (cpd *ComputePassDescriptor) DispatchType() DispatchType {
+	defer runtime.KeepAlive(cpd)
 	_r := objc.Send[DispatchType](objref.IDOf(cpd), objc.RegisterName("dispatchType"))
 	return _r
 }
 
 // SampleBufferAttachments returns an array of sample buffers and associated sample indices.
 func (cpd *ComputePassDescriptor) SampleBufferAttachments() *ComputePassSampleBufferAttachmentDescriptorArray {
+	defer runtime.KeepAlive(cpd)
 	_r := objc.Send[objc.ID](objref.IDOf(cpd), objc.RegisterName("sampleBufferAttachments"))
 	return ComputePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }

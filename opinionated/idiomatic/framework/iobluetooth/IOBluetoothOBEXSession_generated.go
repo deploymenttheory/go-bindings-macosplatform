@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,6 +50,7 @@ func iOBluetoothOBEXSessionAdopt(id objc.ID) *IOBluetoothOBEXSession {
 
 // NewIOBluetoothOBEXSessionWithSDPServiceRecord initializes a Bluetooth-based OBEX Session using an SDP service record.
 func NewIOBluetoothOBEXSessionWithSDPServiceRecord(inSDPServiceRecord *IOBluetoothSDPServiceRecord) *IOBluetoothOBEXSession {
+	defer runtime.KeepAlive(inSDPServiceRecord)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothOBEXSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSDPServiceRecord:"), objref.IDOf(inSDPServiceRecord))
 	return iOBluetoothOBEXSessionAdopt(_id)
@@ -56,6 +58,7 @@ func NewIOBluetoothOBEXSessionWithSDPServiceRecord(inSDPServiceRecord *IOBluetoo
 
 // NewIOBluetoothOBEXSessionWithDeviceChannelID initializes a Bluetooth-based OBEX Session using a Bluetooth device.
 func NewIOBluetoothOBEXSessionWithDeviceChannelID(inDevice *IOBluetoothDevice, inChannelID uint8) *IOBluetoothOBEXSession {
+	defer runtime.KeepAlive(inDevice)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothOBEXSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:channelID:"), objref.IDOf(inDevice), inChannelID)
 	return iOBluetoothOBEXSessionAdopt(_id)
@@ -63,35 +66,41 @@ func NewIOBluetoothOBEXSessionWithDeviceChannelID(inDevice *IOBluetoothDevice, i
 
 // RFCOMMChannel get the Bluetooth RFCOMM channel being used by the session object.
 func (ibos *IOBluetoothOBEXSession) RFCOMMChannel() *IOBluetoothRFCOMMChannel {
+	defer runtime.KeepAlive(ibos)
 	_r := objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("getRFCOMMChannel"))
 	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
 // Device get the Bluetooth Device being used by the session object.
 func (ibos *IOBluetoothOBEXSession) Device() *IOBluetoothDevice {
+	defer runtime.KeepAlive(ibos)
 	_r := objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
 // SendBufferTroughChannel returns sends the next block of data through the rfcomm channel.
 func (ibos *IOBluetoothOBEXSession) SendBufferTroughChannel() int {
+	defer runtime.KeepAlive(ibos)
 	_r := objc.Send[int](objref.IDOf(ibos), objc.RegisterName("sendBufferTroughChannel"))
 	return _r
 }
 
 // RestartTransmission if the transmission was stopped due to the lack of buffers this call restarts it.
 func (ibos *IOBluetoothOBEXSession) RestartTransmission() {
+	defer runtime.KeepAlive(ibos)
 	objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("restartTransmission"))
 }
 
 // IsSessionTargetAMAC reports whether tells whether the target device is a Mac by checking its service record.
 func (ibos *IOBluetoothOBEXSession) IsSessionTargetAMAC() bool {
+	defer runtime.KeepAlive(ibos)
 	_r := objc.Send[bool](objref.IDOf(ibos), objc.RegisterName("isSessionTargetAMac"))
 	return _r
 }
 
 // SetOBEXSessionOpenConnectionCallbackRefCon for C API support. Allows you to set the callback to be invoked when the OBEX connection is actually opened.
 func (ibos *IOBluetoothOBEXSession) SetOBEXSessionOpenConnectionCallbackRefCon(inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) {
+	defer runtime.KeepAlive(ibos)
 	objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("setOBEXSessionOpenConnectionCallback:refCon:"), inCallback, inUserRefCon)
 }
 

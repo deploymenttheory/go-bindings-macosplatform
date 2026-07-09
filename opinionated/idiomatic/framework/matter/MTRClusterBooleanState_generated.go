@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterBooleanStateAdopt(id objc.ID) *MTRClusterBooleanState {
 
 // NewMTRClusterBooleanStateWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterBooleanStateWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBooleanState {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBooleanState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBooleanStateAdopt(_id)
@@ -53,45 +59,59 @@ func NewMTRClusterBooleanStateWithDeviceEndpointIDQueue(device *MTRDevice, endpo
 
 // NewMTRClusterBooleanStateWithDeviceEndpointQueue creates a new MTRClusterBooleanState.
 func NewMTRClusterBooleanStateWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBooleanState {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBooleanState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterBooleanStateAdopt(_id)
 }
 
 // ReadAttributeStateValueWithParams reads attribute state value with params.
-func (mcbs *MTRClusterBooleanState) ReadAttributeStateValueWithParams(params *MTRReadParams) obj.Object {
+func (mcbs *MTRClusterBooleanState) ReadAttributeStateValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbs)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbs), objc.RegisterName("readAttributeStateValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcbs *MTRClusterBooleanState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcbs *MTRClusterBooleanState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbs)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbs), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcbs *MTRClusterBooleanState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcbs *MTRClusterBooleanState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbs)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbs), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcbs *MTRClusterBooleanState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcbs *MTRClusterBooleanState) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbs)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbs), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcbs *MTRClusterBooleanState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcbs *MTRClusterBooleanState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbs)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbs), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcbs *MTRClusterBooleanState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcbs *MTRClusterBooleanState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbs)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbs), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterBooleanState)(nil)

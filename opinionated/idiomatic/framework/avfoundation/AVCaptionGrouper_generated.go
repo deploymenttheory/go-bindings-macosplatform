@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func captionGrouperAdopt(id objc.ID) *CaptionGrouper {
 
 // Description returns the object's -description text.
 func (cg *CaptionGrouper) Description() string {
+	defer runtime.KeepAlive(cg)
 	return rt.Description(objref.IDOf(cg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cg *CaptionGrouper) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cg *CaptionGrouper) IsKind(className string) bool {
+	defer runtime.KeepAlive(cg)
 	return rt.IsKind(objref.IDOf(cg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cg *CaptionGrouper) String() string {
+	defer runtime.KeepAlive(cg)
 	return rt.Description(objref.IDOf(cg))
 }
 
@@ -75,11 +82,14 @@ func NewCaptionGrouper() *CaptionGrouper {
 
 // AddCaption adds a caption to the pending group.
 func (cg *CaptionGrouper) AddCaption(input *Caption) {
+	defer runtime.KeepAlive(cg)
+	defer runtime.KeepAlive(input)
 	objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("addCaption:"), objref.IDOf(input))
 }
 
 // FlushAddedCaptionsIntoGroupsUpToTime creates caption groups for the captions you enqueue up to the time.
 func (cg *CaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) []*CaptionGroup {
+	defer runtime.KeepAlive(cg)
 	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("flushAddedCaptionsIntoGroupsUpToTime:"), upToTime)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CaptionGroup { return CaptionGroupFromID(_id) })
 }

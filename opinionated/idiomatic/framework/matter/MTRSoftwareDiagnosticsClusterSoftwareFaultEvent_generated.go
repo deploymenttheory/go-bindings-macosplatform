@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt(id objc.ID) *MTRSoftwa
 
 // Description returns the object's -description text.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Description() string {
+	defer runtime.KeepAlive(msdcsfe)
 	return rt.Description(objref.IDOf(msdcsfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msdcsfe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msdcsfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(msdcsfe)
 	return rt.IsKind(objref.IDOf(msdcsfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) String() string {
+	defer runtime.KeepAlive(msdcsfe)
 	return rt.Description(objref.IDOf(msdcsfe))
 }
 
@@ -71,8 +79,9 @@ func NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent() *MTRSoftwareDiagnostic
 }
 
 // WithID sets the ID.
-func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setId:"), objref.IDOf(id_))
+func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithID(identifier obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
+	defer runtime.KeepAlive(identifier)
+	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setId:"), objref.IDOf(identifier))
 	return msdcsfe
 }
 
@@ -83,19 +92,21 @@ func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithName(name st
 }
 
 // WithFaultRecording sets the fault recording.
-func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(faultRecording obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
-	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setFaultRecording:"), objref.IDOf(faultRecording))
+func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(faultRecording []byte) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setFaultRecording:"), rt.BytesToNSData(faultRecording))
 	return msdcsfe
 }
 
 // ID returns the ID.
-func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) ID() obj.Object {
+func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) ID() *foundation.Number {
+	defer runtime.KeepAlive(msdcsfe)
 	_r := objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("id"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
+	defer runtime.KeepAlive(msdcsfe)
 	_r := objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -104,7 +115,8 @@ func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
 }
 
 // FaultRecording returns the fault recording.
-func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() obj.Object {
+func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() []byte {
+	defer runtime.KeepAlive(msdcsfe)
 	_r := objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("faultRecording"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

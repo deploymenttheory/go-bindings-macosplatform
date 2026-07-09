@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func extensionItemAdopt(id objc.ID) *ExtensionItem {
 
 // Description returns the object's -description text.
 func (ei *ExtensionItem) Description() string {
+	defer runtime.KeepAlive(ei)
 	return rt.Description(objref.IDOf(ei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ei *ExtensionItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ei *ExtensionItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(ei)
 	return rt.IsKind(objref.IDOf(ei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ei *ExtensionItem) String() string {
+	defer runtime.KeepAlive(ei)
 	return rt.Description(objref.IDOf(ei))
 }
 
@@ -76,12 +82,14 @@ func NewExtensionItem() *ExtensionItem {
 
 // WithAttributedTitle sets an optional title for the item.
 func (ei *ExtensionItem) WithAttributedTitle(attributedTitle AttributedStringProvider) *ExtensionItem {
+	defer runtime.KeepAlive(attributedTitle)
 	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return ei
 }
 
 // WithAttributedContentText sets an optional string describing the extension item content.
 func (ei *ExtensionItem) WithAttributedContentText(attributedContentText AttributedStringProvider) *ExtensionItem {
+	defer runtime.KeepAlive(attributedContentText)
 	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setAttributedContentText:"), objref.IDOf(attributedContentText))
 	return ei
 }
@@ -95,6 +103,7 @@ func (ei *ExtensionItem) WithAttachments(items ...*ItemProvider) *ExtensionItem 
 
 // WithUserInfo sets an optional dictionary of keys and values corresponding to the extension item’s properties.
 func (ei *ExtensionItem) WithUserInfo(userInfo obj.Object) *ExtensionItem {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return ei
 }
@@ -106,19 +115,21 @@ func (ei *ExtensionItem) WithObservationInfo(observationInfo unsafe.Pointer) *Ex
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ei *ExtensionItem) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionItem {
-	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ei *ExtensionItem) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ExtensionItem {
+	objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ei
 }
 
 // AttributedTitle returns the attributed title.
 func (ei *ExtensionItem) AttributedTitle() *AttributedString {
+	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attributedTitle"))
 	return AttributedStringFromID(_r)
 }
 
 // AttributedContentText returns the attributed content text.
 func (ei *ExtensionItem) AttributedContentText() *AttributedString {
+	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attributedContentText"))
 	return AttributedStringFromID(_r)
 }
@@ -127,12 +138,14 @@ func (ei *ExtensionItem) AttributedContentText() *AttributedString {
 //
 // Attachments returns the collection as a Go slice.
 func (ei *ExtensionItem) Attachments() []*ItemProvider {
+	defer runtime.KeepAlive(ei)
 	_arr := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("attachments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ItemProvider { return ItemProviderFromID(_id) })
 }
 
 // UserInfo returns the user info.
 func (ei *ExtensionItem) UserInfo() obj.Object {
+	defer runtime.KeepAlive(ei)
 	_r := objc.Send[objc.ID](objref.IDOf(ei), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

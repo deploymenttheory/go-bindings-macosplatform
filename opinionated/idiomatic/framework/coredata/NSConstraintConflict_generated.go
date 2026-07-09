@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func constraintConflictAdopt(id objc.ID) *ConstraintConflict {
 
 // Description returns the object's -description text.
 func (cc *ConstraintConflict) Description() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cc *ConstraintConflict) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cc *ConstraintConflict) IsKind(className string) bool {
+	defer runtime.KeepAlive(cc)
 	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cc *ConstraintConflict) String() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots initializes a constraint conflict.
 func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint []string, databaseObject *ManagedObject, databaseSnapshot obj.Object, conflictingObjects []*ManagedObject, conflictingSnapshots obj.Object) *ConstraintConflict {
+	defer runtime.KeepAlive(databaseObject)
+	defer runtime.KeepAlive(databaseSnapshot)
+	defer runtime.KeepAlive(conflictingSnapshots)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSConstraintConflict")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConstraint:databaseObject:databaseSnapshot:conflictingObjects:conflictingSnapshots:"), purego.SliceToNSArray(contraint, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(databaseObject), objref.IDOf(databaseSnapshot), purego.SliceToNSArray(conflictingObjects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), objref.IDOf(conflictingSnapshots))
 	return constraintConflictAdopt(_id)
@@ -77,32 +87,37 @@ func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictin
 //
 // Constraint returns the collection as a Go slice.
 func (cc *ConstraintConflict) Constraint() []string {
+	defer runtime.KeepAlive(cc)
 	_arr := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("constraint"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ConstraintValues returns the constraint values.
-func (cc *ConstraintConflict) ConstraintValues() obj.Object {
+func (cc *ConstraintConflict) ConstraintValues() map[string]obj.Object {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("constraintValues"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DatabaseObject returns the database object.
 func (cc *ConstraintConflict) DatabaseObject() *ManagedObject {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("databaseObject"))
 	return ManagedObjectFromID(_r)
 }
 
 // DatabaseSnapshot returns the database snapshot.
-func (cc *ConstraintConflict) DatabaseSnapshot() obj.Object {
+func (cc *ConstraintConflict) DatabaseSnapshot() map[string]obj.Object {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("databaseSnapshot"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ConflictingObjects returns the conflicting objects.
 //
 // ConflictingObjects returns the collection as a Go slice.
 func (cc *ConstraintConflict) ConflictingObjects() []*ManagedObject {
+	defer runtime.KeepAlive(cc)
 	_arr := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("conflictingObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ManagedObject { return ManagedObjectFromID(_id) })
 }
@@ -111,6 +126,7 @@ func (cc *ConstraintConflict) ConflictingObjects() []*ManagedObject {
 //
 // ConflictingSnapshots returns the collection as a Go slice.
 func (cc *ConstraintConflict) ConflictingSnapshots() []obj.Object {
+	defer runtime.KeepAlive(cc)
 	_arr := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("conflictingSnapshots"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

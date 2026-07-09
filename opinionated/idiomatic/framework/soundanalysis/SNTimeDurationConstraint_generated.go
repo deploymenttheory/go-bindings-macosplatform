@@ -5,8 +5,11 @@
 package soundanalysis
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,29 +51,34 @@ func timeDurationConstraintAdopt(id objc.ID) *TimeDurationConstraint {
 
 // Description returns the object's -description text.
 func (tdc *TimeDurationConstraint) Description() string {
+	defer runtime.KeepAlive(tdc)
 	return rt.Description(objref.IDOf(tdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tdc *TimeDurationConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tdc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tdc *TimeDurationConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(tdc)
 	return rt.IsKind(objref.IDOf(tdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tdc *TimeDurationConstraint) String() string {
+	defer runtime.KeepAlive(tdc)
 	return rt.Description(objref.IDOf(tdc))
 }
 
 // NewTimeDurationConstraintWithEnumeratedDurations initializes an enumerated-type constraint. - Parameter enumeratedDurations: A discrete set of duration values (represented as CMTime values boxed in NSValue instances) permitted by this constraint. - Returns: An instance whose `type` is `SNTimeDurationConstraintTypeEnumerated`, and which constrains duration values to the provided set of discrete values.
-func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations []obj.Object) *TimeDurationConstraint {
+func NewTimeDurationConstraintWithEnumeratedDurations(enumeratedDurations []*foundation.Value) *TimeDurationConstraint {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNTimeDurationConstraint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnumeratedDurations:"), purego.SliceToNSArray(enumeratedDurations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnumeratedDurations:"), purego.SliceToNSArray(enumeratedDurations, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 	return timeDurationConstraintAdopt(_id)
 }
 
@@ -83,6 +91,7 @@ func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRa
 
 // Type returns the time constraint type. The value of this property dictates whether or not other properties associated with this class can be validly accessed. Please refer to the documentation of other individual properties to understand their relationship to this one. This property is always valid to access.
 func (tdc *TimeDurationConstraint) Type() TimeDurationConstraintType {
+	defer runtime.KeepAlive(tdc)
 	_r := objc.Send[TimeDurationConstraintType](objref.IDOf(tdc), objc.RegisterName("type"))
 	return _r
 }
@@ -91,12 +100,14 @@ func (tdc *TimeDurationConstraint) Type() TimeDurationConstraintType {
 //
 // EnumeratedDurations returns the collection as a Go slice.
 func (tdc *TimeDurationConstraint) EnumeratedDurations() []obj.Object {
+	defer runtime.KeepAlive(tdc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("enumeratedDurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DurationRange returns if the constraint type is range, then the range of allowable window durations. - Returns: If the constraint type is range, a CMTimeRange representing the range of allowable window durations. If the constraint type is not range, `kCMTimeRangeInvalid`. The `type` property should be queried before this property is accessed. This property will only yield meaningful values if the constraint type is considered to be 'range'. The constraint type is considered to be 'range' if the `type` property is equal to `SNTimeDurationConstraintTypeRange`.
 func (tdc *TimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(tdc)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(tdc), objc.RegisterName("durationRange"))
 	return _r
 }

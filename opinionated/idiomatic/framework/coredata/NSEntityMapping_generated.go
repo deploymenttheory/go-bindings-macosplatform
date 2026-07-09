@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func entityMappingAdopt(id objc.ID) *EntityMapping {
 
 // Description returns the object's -description text.
 func (em *EntityMapping) Description() string {
+	defer runtime.KeepAlive(em)
 	return rt.Description(objref.IDOf(em))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (em *EntityMapping) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(em)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(em), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (em *EntityMapping) IsKind(className string) bool {
+	defer runtime.KeepAlive(em)
 	return rt.IsKind(objref.IDOf(em), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (em *EntityMapping) String() string {
+	defer runtime.KeepAlive(em)
 	return rt.Description(objref.IDOf(em))
 }
 
@@ -91,8 +99,8 @@ func (em *EntityMapping) WithSourceEntityName(sourceEntityName string) *EntityMa
 }
 
 // WithSourceEntityVersionHash sets the version hash of the source entity for the entity mapping.
-func (em *EntityMapping) WithSourceEntityVersionHash(sourceEntityVersionHash obj.Object) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setSourceEntityVersionHash:"), objref.IDOf(sourceEntityVersionHash))
+func (em *EntityMapping) WithSourceEntityVersionHash(sourceEntityVersionHash []byte) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setSourceEntityVersionHash:"), rt.BytesToNSData(sourceEntityVersionHash))
 	return em
 }
 
@@ -103,8 +111,8 @@ func (em *EntityMapping) WithDestinationEntityName(destinationEntityName string)
 }
 
 // WithDestinationEntityVersionHash sets the version hash for the destination entity for the entity mapping.
-func (em *EntityMapping) WithDestinationEntityVersionHash(destinationEntityVersionHash obj.Object) *EntityMapping {
-	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setDestinationEntityVersionHash:"), objref.IDOf(destinationEntityVersionHash))
+func (em *EntityMapping) WithDestinationEntityVersionHash(destinationEntityVersionHash []byte) *EntityMapping {
+	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setDestinationEntityVersionHash:"), rt.BytesToNSData(destinationEntityVersionHash))
 	return em
 }
 
@@ -124,12 +132,14 @@ func (em *EntityMapping) WithRelationshipMappings(items ...*PropertyMapping) *En
 
 // WithSourceExpression sets the source expression for the entity mapping.
 func (em *EntityMapping) WithSourceExpression(sourceExpression obj.Object) *EntityMapping {
+	defer runtime.KeepAlive(sourceExpression)
 	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setSourceExpression:"), objref.IDOf(sourceExpression))
 	return em
 }
 
 // WithUserInfo sets the user info dictionary for the entity mapping.
 func (em *EntityMapping) WithUserInfo(userInfo obj.Object) *EntityMapping {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return em
 }
@@ -142,6 +152,7 @@ func (em *EntityMapping) WithEntityMigrationPolicyClassName(entityMigrationPolic
 
 // Name returns the name.
 func (em *EntityMapping) Name() string {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -151,12 +162,14 @@ func (em *EntityMapping) Name() string {
 
 // MappingType returns the mapping type.
 func (em *EntityMapping) MappingType() EntityMappingType {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[EntityMappingType](objref.IDOf(em), objc.RegisterName("mappingType"))
 	return _r
 }
 
 // SourceEntityName returns the source entity name.
 func (em *EntityMapping) SourceEntityName() string {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceEntityName"))
 	if _r == 0 {
 		return ""
@@ -165,13 +178,15 @@ func (em *EntityMapping) SourceEntityName() string {
 }
 
 // SourceEntityVersionHash returns the source entity version hash.
-func (em *EntityMapping) SourceEntityVersionHash() obj.Object {
+func (em *EntityMapping) SourceEntityVersionHash() []byte {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceEntityVersionHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DestinationEntityName returns the destination entity name.
 func (em *EntityMapping) DestinationEntityName() string {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("destinationEntityName"))
 	if _r == 0 {
 		return ""
@@ -180,15 +195,17 @@ func (em *EntityMapping) DestinationEntityName() string {
 }
 
 // DestinationEntityVersionHash returns the destination entity version hash.
-func (em *EntityMapping) DestinationEntityVersionHash() obj.Object {
+func (em *EntityMapping) DestinationEntityVersionHash() []byte {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("destinationEntityVersionHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AttributeMappings returns the attribute mappings.
 //
 // AttributeMappings returns the collection as a Go slice.
 func (em *EntityMapping) AttributeMappings() []*PropertyMapping {
+	defer runtime.KeepAlive(em)
 	_arr := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("attributeMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyMapping { return PropertyMappingFromID(_id) })
 }
@@ -197,24 +214,28 @@ func (em *EntityMapping) AttributeMappings() []*PropertyMapping {
 //
 // RelationshipMappings returns the collection as a Go slice.
 func (em *EntityMapping) RelationshipMappings() []*PropertyMapping {
+	defer runtime.KeepAlive(em)
 	_arr := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("relationshipMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyMapping { return PropertyMappingFromID(_id) })
 }
 
 // SourceExpression returns the source expression.
-func (em *EntityMapping) SourceExpression() obj.Object {
+func (em *EntityMapping) SourceExpression() *foundation.Expression {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("sourceExpression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 // UserInfo returns the user info.
 func (em *EntityMapping) UserInfo() obj.Object {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // EntityMigrationPolicyClassName returns the entity migration policy class name.
 func (em *EntityMapping) EntityMigrationPolicyClassName() string {
+	defer runtime.KeepAlive(em)
 	_r := objc.Send[objc.ID](objref.IDOf(em), objc.RegisterName("entityMigrationPolicyClassName"))
 	if _r == 0 {
 		return ""

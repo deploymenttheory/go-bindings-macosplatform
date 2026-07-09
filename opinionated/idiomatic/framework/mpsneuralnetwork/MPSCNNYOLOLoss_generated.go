@@ -5,11 +5,13 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -84,90 +86,105 @@ func (cl *CNNYOLOLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxC
 
 // LossXY returns loss filter for prediction of bounding box position
 func (cl *CNNYOLOLoss) LossXY() *CNNLoss {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("lossXY"))
 	return CNNLossFromID(_r)
 }
 
 // LossWH returns loss filter for prediction of bounding box size
 func (cl *CNNYOLOLoss) LossWH() *CNNLoss {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("lossWH"))
 	return CNNLossFromID(_r)
 }
 
 // LossConfidence returns loss filter for prediction of bounding box probability of presence of object
 func (cl *CNNYOLOLoss) LossConfidence() *CNNLoss {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("lossConfidence"))
 	return CNNLossFromID(_r)
 }
 
 // LossClasses returns loss filter for prediction of bounding box predicted class of the detected object
 func (cl *CNNYOLOLoss) LossClasses() *CNNLoss {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("lossClasses"))
 	return CNNLossFromID(_r)
 }
 
 // ScaleXY returns see MPSCNNYOLOLossDescriptor for information about the following properties.
 func (cl *CNNYOLOLoss) ScaleXY() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleXY"))
 	return _r
 }
 
 // ScaleWH returns the scale wh.
 func (cl *CNNYOLOLoss) ScaleWH() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleWH"))
 	return _r
 }
 
 // ScaleNoObject returns the scale no object.
 func (cl *CNNYOLOLoss) ScaleNoObject() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleNoObject"))
 	return _r
 }
 
 // ScaleObject returns the scale object.
 func (cl *CNNYOLOLoss) ScaleObject() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleObject"))
 	return _r
 }
 
 // ScaleClass returns the scale class.
 func (cl *CNNYOLOLoss) ScaleClass() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("scaleClass"))
 	return _r
 }
 
 // MinIOUForObjectPresence returns the min iou for object presence.
 func (cl *CNNYOLOLoss) MinIOUForObjectPresence() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("minIOUForObjectPresence"))
 	return _r
 }
 
 // MaxIOUForObjectAbsence returns the max iou for object absence.
 func (cl *CNNYOLOLoss) MaxIOUForObjectAbsence() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("maxIOUForObjectAbsence"))
 	return _r
 }
 
 // ReductionType returns the reduction type.
 func (cl *CNNYOLOLoss) ReductionType() CNNReductionType {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[CNNReductionType](objref.IDOf(cl), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // NumberOfAnchorBoxes returns the number of anchor boxes.
 func (cl *CNNYOLOLoss) NumberOfAnchorBoxes() int {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("numberOfAnchorBoxes"))
 	return _r
 }
 
 // AnchorBoxes returns the anchor boxes.
-func (cl *CNNYOLOLoss) AnchorBoxes() obj.Object {
+func (cl *CNNYOLOLoss) AnchorBoxes() []byte {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("anchorBoxes"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (cl *CNNYOLOLoss) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }

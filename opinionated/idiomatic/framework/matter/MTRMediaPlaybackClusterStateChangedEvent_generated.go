@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMediaPlaybackClusterStateChangedEventAdopt(id objc.ID) *MTRMediaPlayback
 
 // Description returns the object's -description text.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) Description() string {
+	defer runtime.KeepAlive(mmpcsce)
 	return rt.Description(objref.IDOf(mmpcsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmpcsce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmpcsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmpcsce)
 	return rt.IsKind(objref.IDOf(mmpcsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) String() string {
+	defer runtime.KeepAlive(mmpcsce)
 	return rt.Description(objref.IDOf(mmpcsce))
 }
 
@@ -72,108 +80,125 @@ func NewMTRMediaPlaybackClusterStateChangedEvent() *MTRMediaPlaybackClusterState
 
 // WithCurrentState sets the current state.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithCurrentState(currentState obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(currentState)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setCurrentState:"), objref.IDOf(currentState))
 	return mmpcsce
 }
 
 // WithStartTime sets the start time.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithStartTime(startTime obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mmpcsce
 }
 
 // WithDuration sets the duration.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithDuration(duration obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mmpcsce
 }
 
 // WithSampledPosition sets the sampled position.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithSampledPosition(sampledPosition MTRMediaPlaybackClusterPlaybackPositionStructProvider) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(sampledPosition)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setSampledPosition:"), objref.IDOf(sampledPosition))
 	return mmpcsce
 }
 
 // WithPlaybackSpeed sets the playback speed.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithPlaybackSpeed(playbackSpeed obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(playbackSpeed)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setPlaybackSpeed:"), objref.IDOf(playbackSpeed))
 	return mmpcsce
 }
 
 // WithSeekRangeEnd sets the seek range end.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithSeekRangeEnd(seekRangeEnd obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(seekRangeEnd)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setSeekRangeEnd:"), objref.IDOf(seekRangeEnd))
 	return mmpcsce
 }
 
 // WithSeekRangeStart sets the seek range start.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithSeekRangeStart(seekRangeStart obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(seekRangeStart)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setSeekRangeStart:"), objref.IDOf(seekRangeStart))
 	return mmpcsce
 }
 
 // WithData sets the data.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithData(data obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
-	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setData:"), objref.IDOf(data))
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithData(data []byte) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return mmpcsce
 }
 
 // WithAudioAdvanceUnmuted sets the audio advance unmuted.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	defer runtime.KeepAlive(audioAdvanceUnmuted)
 	objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 	return mmpcsce
 }
 
 // CurrentState returns the current state.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) CurrentState() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) CurrentState() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("currentState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartTime returns the start time.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) StartTime() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) Duration() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SampledPosition returns the sampled position.
 func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("sampledPosition"))
 	return MTRMediaPlaybackClusterPlaybackPositionStructFromID(_r)
 }
 
 // PlaybackSpeed returns the playback speed.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) PlaybackSpeed() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) PlaybackSpeed() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("playbackSpeed"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SeekRangeEnd returns the seek range end.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeEnd() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeEnd() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("seekRangeEnd"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SeekRangeStart returns the seek range start.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeStart() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeStart() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("seekRangeStart"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) Data() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) Data() []byte {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AudioAdvanceUnmuted returns the audio advance unmuted.
-func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) AudioAdvanceUnmuted() obj.Object {
+func (mmpcsce *MTRMediaPlaybackClusterStateChangedEvent) AudioAdvanceUnmuted() *foundation.Number {
+	defer runtime.KeepAlive(mmpcsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcsce), objc.RegisterName("audioAdvanceUnmuted"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

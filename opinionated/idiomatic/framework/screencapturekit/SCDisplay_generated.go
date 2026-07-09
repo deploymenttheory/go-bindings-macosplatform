@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func displayAdopt(id objc.ID) *Display {
 
 // Description returns the object's -description text.
 func (d *Display) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Display) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Display) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Display) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -75,24 +82,28 @@ func NewDisplay() *Display {
 
 // DisplayID returns displayId the CGDirectDisplayID for the SCDisplay
 func (d *Display) DisplayID() uint32 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[uint32](objref.IDOf(d), objc.RegisterName("displayID"))
 	return _r
 }
 
 // Width returns width the width, in points, for the SCDisplay
 func (d *Display) Width() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns height the height, in points, for the SCDisplay
 func (d *Display) Height() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("height"))
 	return _r
 }
 
 // Frame returns frame the CGRect frame for the SCDisplay
 func (d *Display) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("frame"))
 	return _r
 }

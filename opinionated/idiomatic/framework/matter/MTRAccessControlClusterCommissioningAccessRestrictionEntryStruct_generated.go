@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessControlClusterCommissioningAccessRestrictionEntryStructAdopt(id ob
 
 // Description returns the object's -description text.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Description() string {
+	defer runtime.KeepAlive(macccares)
 	return rt.Description(objref.IDOf(macccares))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macccares)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macccares), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(macccares)
 	return rt.IsKind(objref.IDOf(macccares), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) String() string {
+	defer runtime.KeepAlive(macccares)
 	return rt.Description(objref.IDOf(macccares))
 }
 
@@ -72,35 +80,42 @@ func NewMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct() *MTRA
 
 // WithEndpoint sets the endpoint.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return macccares
 }
 
 // WithCluster sets the cluster.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
+	defer runtime.KeepAlive(cluster)
 	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return macccares
 }
 
 // Endpoint returns the endpoint.
-func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() obj.Object {
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(macccares)
 	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cluster returns the cluster.
-func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() obj.Object {
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(macccares)
 	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Restrictions returns the restrictions.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() obj.Object {
+	defer runtime.KeepAlive(macccares)
 	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("restrictions"))
 	return obj.Wrap(_r)
 }
 
 // SetRestrictions wraps the corresponding Objective-C method.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
+	defer runtime.KeepAlive(macccares)
+	defer runtime.KeepAlive(restrictions)
 	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
 }

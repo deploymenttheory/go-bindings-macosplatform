@@ -4,12 +4,13 @@ package idiofw
 
 import (
 	"bytes"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"path/filepath"
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
 
 // cleanDoc rewrites Apple's HeaderDoc/Doxygen documentation into plain prose.
@@ -441,6 +442,14 @@ type docGroup struct {
 type docFileView struct {
 	Header, BuildTag, PkgName, Framework string
 	Groups                               []docGroup
+	// HasErrors adds the # Errors section (the package emits Err… sentinels).
+	HasErrors bool
+	// HasMainThread adds the # Main-thread requirements section (the framework
+	// has @MainActor-isolated classes).
+	HasMainThread bool
+	// HasDelegates adds the # Delegates section (the package emits delegate
+	// interfaces).
+	HasDelegates bool
 }
 
 // buildDocGroups assembles the package type index: one entry per provider base,
@@ -497,13 +506,31 @@ func emitDocGo(
 	abstractBases abstractBaseIndex,
 	prefix string,
 ) error {
+	hasErrors := len(sidecarErrorTypedefs(fc)) > 0
+	for key := range fc.framework.Enums {
+		if strings.HasSuffix(naming.GoTypeName(key), "ErrorCode") {
+			hasErrors = true
+			break
+		}
+	}
+	hasMainThread := false
+	for _, class := range fc.framework.Classes {
+		if class.IsMainThreadRequired {
+			hasMainThread = true
+			break
+		}
+	}
+
 	var buf bytes.Buffer
 	render.Must(&buf, "docfile", docFileView{
-		Header:    strings.TrimRight(generatedHeader, "\n"),
-		BuildTag:  strings.TrimRight(buildTag, "\n"),
-		PkgName:   pkgName,
-		Framework: fc.framework.Framework,
-		Groups:    buildDocGroups(fc, abstractBases, prefix),
+		Header:        strings.TrimRight(generatedHeader, "\n"),
+		BuildTag:      strings.TrimRight(buildTag, "\n"),
+		PkgName:       pkgName,
+		Framework:     fc.framework.Framework,
+		Groups:        buildDocGroups(fc, abstractBases, prefix),
+		HasErrors:     hasErrors,
+		HasMainThread: hasMainThread,
+		HasDelegates:  len(fc.delegates) > 0,
 	})
 	return rawfw.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
 }

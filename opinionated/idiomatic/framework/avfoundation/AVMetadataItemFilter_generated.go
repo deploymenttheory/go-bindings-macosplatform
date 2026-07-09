@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func metadataItemFilterAdopt(id objc.ID) *MetadataItemFilter {
 
 // Description returns the object's -description text.
 func (mif *MetadataItemFilter) Description() string {
+	defer runtime.KeepAlive(mif)
 	return rt.Description(objref.IDOf(mif))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mif *MetadataItemFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mif)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mif), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mif *MetadataItemFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(mif)
 	return rt.IsKind(objref.IDOf(mif), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mif *MetadataItemFilter) String() string {
+	defer runtime.KeepAlive(mif)
 	return rt.Description(objref.IDOf(mif))
 }
 

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func nNInitialGradientNodeAdopt(id objc.ID) *NNInitialGradientNode {
 
 // NewNNInitialGradientNodeWithSource init a node representing a MPSNNInitialGradient MPSNNPad kernel
 func NewNNInitialGradientNodeWithSource(source *NNImageNode) *NNInitialGradientNode {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNInitialGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
 	return nNInitialGradientNodeAdopt(_id)

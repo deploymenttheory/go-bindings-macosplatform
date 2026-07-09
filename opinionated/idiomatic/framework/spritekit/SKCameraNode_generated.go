@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -149,6 +152,7 @@ func (cn *CameraNode) WithName(name string) *CameraNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (cn *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -157,6 +161,7 @@ func (cn *CameraNode) WithPhysicsBody(physicsBody *PhysicsBody) *CameraNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (cn *CameraNode) WithUserData(userData obj.Object) *CameraNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -165,6 +170,7 @@ func (cn *CameraNode) WithUserData(userData obj.Object) *CameraNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (cn *CameraNode) WithReachConstraints(reachConstraints *ReachConstraints) *CameraNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -181,9 +187,9 @@ func (cn *CameraNode) WithConstraints(items ...*Constraint) *CameraNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (cn *CameraNode) WithAttributeValues(attributeValues obj.Object) *CameraNode {
+func (cn *CameraNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *CameraNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return cn
 }
@@ -230,6 +236,7 @@ func (cn *CameraNode) WithAccessibilityFrame(accessibilityFrame corefoundation.C
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (cn *CameraNode) WithAccessibilityParent(accessibilityParent obj.Object) *CameraNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -262,6 +269,8 @@ func (cn *CameraNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Camer
 
 // ContainsNode checks to see if a node is visible in the camera’s viewport.
 func (cn *CameraNode) ContainsNode(node *Node) bool {
+	defer runtime.KeepAlive(cn)
+	defer runtime.KeepAlive(node)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -274,12 +283,14 @@ func (cn *CameraNode) ContainsNode(node *Node) bool {
 }
 
 // ContainedNodeSet returns finds nodes that are visible in the camera’s viewport.
-func (cn *CameraNode) ContainedNodeSet() obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cn *CameraNode) ContainedNodeSet() []*Node {
+	defer runtime.KeepAlive(cn)
+	var _mainthread0 []*Node
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*Node {
 			_r := objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("containedNodeSet"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *Node { return NodeFromID(_id) })
 		}()
 	})
 	return _mainthread0

@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (mcpe *MIDIChannelPressureEvent) WithChannel(channel int) *MIDIChannelPress
 
 // Pressure returns the pressure.
 func (mcpe *MIDIChannelPressureEvent) Pressure() int {
+	defer runtime.KeepAlive(mcpe)
 	_r := objc.Send[int](objref.IDOf(mcpe), objc.RegisterName("pressure"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -78,24 +80,28 @@ func (pe *ParameterEvent) WithValue(value float32) *ParameterEvent {
 
 // ParameterID returns the parameter ID.
 func (pe *ParameterEvent) ParameterID() int {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[int](objref.IDOf(pe), objc.RegisterName("parameterID"))
 	return _r
 }
 
 // Scope returns the scope.
 func (pe *ParameterEvent) Scope() int {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[int](objref.IDOf(pe), objc.RegisterName("scope"))
 	return _r
 }
 
 // Element returns the element.
 func (pe *ParameterEvent) Element() int {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[int](objref.IDOf(pe), objc.RegisterName("element"))
 	return _r
 }
 
 // Value returns the value.
 func (pe *ParameterEvent) Value() float32 {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[float32](objref.IDOf(pe), objc.RegisterName("value"))
 	return _r
 }

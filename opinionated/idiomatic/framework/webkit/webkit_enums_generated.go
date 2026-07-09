@@ -231,6 +231,33 @@ func (e WKMediaCaptureState) String() string {
 	}
 }
 
+// An enumeration listing the types of media devices that can capture audio, video, or both.
+type WKMediaCaptureType int64
+
+const (
+	// A media device that can capture video.
+	WKMediaCaptureTypeCamera WKMediaCaptureType = 0
+	// A media device that can capture audio.
+	WKMediaCaptureTypeMicrophone WKMediaCaptureType = 1
+	// A media device or devices that can capture audio and video.
+	WKMediaCaptureTypeCameraAndMicrophone WKMediaCaptureType = 2
+)
+
+// String returns the WKMediaCaptureType constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WKMediaCaptureType) String() string {
+	switch e {
+	case WKMediaCaptureTypeCamera:
+		return "WKMediaCaptureTypeCamera"
+	case WKMediaCaptureTypeMicrophone:
+		return "WKMediaCaptureTypeMicrophone"
+	case WKMediaCaptureTypeCameraAndMicrophone:
+		return "WKMediaCaptureTypeCameraAndMicrophone"
+	default:
+		return fmt.Sprintf("WKMediaCaptureType(%d)", int64(e))
+	}
+}
+
 // The type of action that triggered the navigation.
 type WKNavigationType int64
 

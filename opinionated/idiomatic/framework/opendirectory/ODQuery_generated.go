@@ -5,11 +5,14 @@
 package opendirectory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,27 +53,37 @@ func queryAdopt(id objc.ID) *Query {
 
 // Description returns the object's -description text.
 func (q *Query) Description() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (q *Query) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (q *Query) IsKind(className string) bool {
+	defer runtime.KeepAlive(q)
 	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (q *Query) String() string {
+	defer runtime.KeepAlive(q)
 	return rt.Description(objref.IDOf(q))
 }
 
-// NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a query object with provided parameters.
-func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (result *Query, err error) {
+// NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResults creates a query object with provided parameters.
+func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResults(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (result *Query, err error) {
+	defer runtime.KeepAlive(inNode)
+	defer runtime.KeepAlive(inRecordTypeOrList)
+	defer runtime.KeepAlive(inAttribute)
+	defer runtime.KeepAlive(inQueryValueOrList)
+	defer runtime.KeepAlive(inReturnAttributeOrList)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ODQuery")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), objref.IDOf(inNode), objref.IDOf(inRecordTypeOrList), objref.IDOf(inAttribute), inMatchType, objref.IDOf(inQueryValueOrList), objref.IDOf(inReturnAttributeOrList), inMaximumResults, unsafe.Pointer(&_nsErr))
@@ -80,14 +93,26 @@ func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributes
 	return queryAdopt(_id), nil
 }
 
+// WithDelegate sets the query’s delegate.
+func (q *Query) WithDelegate(delegate QueryDelegate) *Query {
+	_shim := newQueryDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(q), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(q), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return q
+}
+
 // WithOperationQueue sets the queue on which asynchronous results are delivered to the delegate.
 func (q *Query) WithOperationQueue(operationQueue obj.Object) *Query {
+	defer runtime.KeepAlive(operationQueue)
 	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
 	return q
 }
 
-// ResultsAllowingPartialError returns results from a query synchronously.
-func (q *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (result obj.Object, err error) {
+// ResultsAllowingPartial returns results from a query synchronously.
+func (q *Query) ResultsAllowingPartial(inAllowPartialResults bool) (result obj.Object, err error) {
+	defer runtime.KeepAlive(q)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("resultsAllowingPartial:error:"), inAllowPartialResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -98,21 +123,27 @@ func (q *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (result 
 
 // ScheduleInRunLoopForMode retrieves results from a query asynchronously by scheduling the query in a run loop.
 func (q *Query) ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string) {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(inRunLoop)
 	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
 // RemoveFromRunLoopForMode removes the query from a specified run loop.
 func (q *Query) RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string) {
+	defer runtime.KeepAlive(q)
+	defer runtime.KeepAlive(inRunLoop)
 	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
 // Synchronize restarts a query, disposing of any results it has obtained.
 func (q *Query) Synchronize() {
+	defer runtime.KeepAlive(q)
 	objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("synchronize"))
 }
 
 // OperationQueue returns the NSOperationQueue on which asynchronous results are delivered to the delegate. The NSOperationQueue on which asynchronous results are delivered to the delegate.
-func (q *Query) OperationQueue() obj.Object {
+func (q *Query) OperationQueue() *foundation.OperationQueue {
+	defer runtime.KeepAlive(q)
 	_r := objc.Send[objc.ID](objref.IDOf(q), objc.RegisterName("operationQueue"))
-	return obj.Wrap(_r)
+	return foundation.OperationQueueFromID(_r)
 }

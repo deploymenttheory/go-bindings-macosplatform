@@ -5,6 +5,7 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,6 +51,7 @@ func graphTensorDataAdopt(id objc.ID) *GraphTensorData {
 
 // NewGraphTensorDataWithMPSMatrix initializes a tensor data with an MPS matrix.
 func NewGraphTensorDataWithMPSMatrix(matrix obj.Object) *GraphTensorData {
+	defer runtime.KeepAlive(matrix)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSMatrix:"), objref.IDOf(matrix))
 	return graphTensorDataAdopt(_id)
@@ -57,6 +59,7 @@ func NewGraphTensorDataWithMPSMatrix(matrix obj.Object) *GraphTensorData {
 
 // NewGraphTensorDataWithMPSMatrixRank initializes a tensor data with an MPS matrix enforcing rank of the result.
 func NewGraphTensorDataWithMPSMatrixRank(matrix obj.Object, rank int) *GraphTensorData {
+	defer runtime.KeepAlive(matrix)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSMatrix:rank:"), objref.IDOf(matrix), rank)
 	return graphTensorDataAdopt(_id)
@@ -64,6 +67,7 @@ func NewGraphTensorDataWithMPSMatrixRank(matrix obj.Object, rank int) *GraphTens
 
 // NewGraphTensorDataWithMPSVector initializes a tensor data with an MPS vector.
 func NewGraphTensorDataWithMPSVector(vector obj.Object) *GraphTensorData {
+	defer runtime.KeepAlive(vector)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSVector:"), objref.IDOf(vector))
 	return graphTensorDataAdopt(_id)
@@ -71,6 +75,7 @@ func NewGraphTensorDataWithMPSVector(vector obj.Object) *GraphTensorData {
 
 // NewGraphTensorDataWithMPSVectorRank initializes a tensor data with an MPS vector enforcing rank of the result.
 func NewGraphTensorDataWithMPSVectorRank(vector obj.Object, rank int) *GraphTensorData {
+	defer runtime.KeepAlive(vector)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSVector:rank:"), objref.IDOf(vector), rank)
 	return graphTensorDataAdopt(_id)
@@ -78,6 +83,7 @@ func NewGraphTensorDataWithMPSVectorRank(vector obj.Object, rank int) *GraphTens
 
 // NewGraphTensorDataWithMPSNDArray initializes an MPSGraphTensorData with an MPS ndarray.
 func NewGraphTensorDataWithMPSNDArray(ndarray obj.Object) *GraphTensorData {
+	defer runtime.KeepAlive(ndarray)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensorData")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMPSNDArray:"), objref.IDOf(ndarray))
 	return graphTensorDataAdopt(_id)
@@ -92,12 +98,14 @@ func NewGraphTensorDataWithMPSImageBatch(imageBatch unsafe.Pointer) *GraphTensor
 
 // Mpsndarray returns an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
 func (gtd *GraphTensorData) Mpsndarray() obj.Object {
+	defer runtime.KeepAlive(gtd)
 	_r := objc.Send[objc.ID](objref.IDOf(gtd), objc.RegisterName("mpsndarray"))
 	return obj.Wrap(_r)
 }
 
 // Device returns the device of the tensor data.
 func (gtd *GraphTensorData) Device() *GraphDevice {
+	defer runtime.KeepAlive(gtd)
 	_r := objc.Send[objc.ID](objref.IDOf(gtd), objc.RegisterName("device"))
 	return GraphDeviceFromID(_r)
 }

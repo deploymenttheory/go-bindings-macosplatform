@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,72 +53,84 @@ func NewDOMTreeWalker() *DOMTreeWalker {
 
 // WithCurrentNode sets the current node.
 func (dtw *DOMTreeWalker) WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWalker {
+	defer runtime.KeepAlive(currentNode)
 	objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("setCurrentNode:"), objref.IDOf(currentNode))
 	return dtw
 }
 
 // ParentNode returns the parent node.
 func (dtw *DOMTreeWalker) ParentNode() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("parentNode"))
 	return DOMNodeFromID(_r)
 }
 
 // FirstChild returns the first child.
 func (dtw *DOMTreeWalker) FirstChild() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("firstChild"))
 	return DOMNodeFromID(_r)
 }
 
 // LastChild returns the last child.
 func (dtw *DOMTreeWalker) LastChild() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("lastChild"))
 	return DOMNodeFromID(_r)
 }
 
 // PreviousSibling returns the previous sibling.
 func (dtw *DOMTreeWalker) PreviousSibling() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("previousSibling"))
 	return DOMNodeFromID(_r)
 }
 
 // NextSibling returns the next sibling.
 func (dtw *DOMTreeWalker) NextSibling() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("nextSibling"))
 	return DOMNodeFromID(_r)
 }
 
 // PreviousNode returns the previous node.
 func (dtw *DOMTreeWalker) PreviousNode() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("previousNode"))
 	return DOMNodeFromID(_r)
 }
 
 // NextNode returns the next node.
 func (dtw *DOMTreeWalker) NextNode() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("nextNode"))
 	return DOMNodeFromID(_r)
 }
 
 // Root returns the root.
 func (dtw *DOMTreeWalker) Root() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("root"))
 	return DOMNodeFromID(_r)
 }
 
 // WhatToShow returns the what to show.
 func (dtw *DOMTreeWalker) WhatToShow() int {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[int](objref.IDOf(dtw), objc.RegisterName("whatToShow"))
 	return _r
 }
 
 // ExpandEntityReferences wraps the corresponding Objective-C method.
 func (dtw *DOMTreeWalker) ExpandEntityReferences() bool {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[bool](objref.IDOf(dtw), objc.RegisterName("expandEntityReferences"))
 	return _r
 }
 
 // CurrentNode returns the current node.
 func (dtw *DOMTreeWalker) CurrentNode() *DOMNode {
+	defer runtime.KeepAlive(dtw)
 	_r := objc.Send[objc.ID](objref.IDOf(dtw), objc.RegisterName("currentNode"))
 	return DOMNodeFromID(_r)
 }

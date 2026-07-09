@@ -5,7 +5,10 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,7 @@ func fileHandleNetworkDeviceAttachmentAdopt(id objc.ID) *FileHandleNetworkDevice
 
 // NewFileHandleNetworkDeviceAttachmentWithFileHandle creates the attachment from a file handle that contains a connected datagram socket.
 func NewFileHandleNetworkDeviceAttachmentWithFileHandle(fileHandle obj.Object) *FileHandleNetworkDeviceAttachment {
+	defer runtime.KeepAlive(fileHandle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileHandleNetworkDeviceAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:"), objref.IDOf(fileHandle))
 	return fileHandleNetworkDeviceAttachmentAdopt(_id)
@@ -60,13 +64,15 @@ func (fhnda *FileHandleNetworkDeviceAttachment) WithMaximumTransmissionUnit(maxi
 }
 
 // FileHandle returns the file handle associated with this attachment.
-func (fhnda *FileHandleNetworkDeviceAttachment) FileHandle() obj.Object {
+func (fhnda *FileHandleNetworkDeviceAttachment) FileHandle() *foundation.FileHandle {
+	defer runtime.KeepAlive(fhnda)
 	_r := objc.Send[objc.ID](objref.IDOf(fhnda), objc.RegisterName("fileHandle"))
-	return obj.Wrap(_r)
+	return foundation.FileHandleFromID(_r)
 }
 
 // MaximumTransmissionUnit returns the maximum transmission unit (MTU) associated with this attachment. The client side of the associated datagram socket must be properly configured with the appropriate values for `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF` is recommended to be four times the value of `SO_SNDBUF`. The default MTU is 1500. The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid virtual machine configuration.
 func (fhnda *FileHandleNetworkDeviceAttachment) MaximumTransmissionUnit() int {
+	defer runtime.KeepAlive(fhnda)
 	_r := objc.Send[int](objref.IDOf(fhnda), objc.RegisterName("maximumTransmissionUnit"))
 	return _r
 }

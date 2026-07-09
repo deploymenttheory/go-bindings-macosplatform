@@ -5,9 +5,13 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,59 +56,85 @@ func NewPeripheralManager() *PeripheralManager {
 	return peripheralManagerAdopt(_id)
 }
 
+// WithDelegate sets the delegate object specified to receive peripheral events.
+func (pm *PeripheralManager) WithDelegate(delegate PeripheralManagerDelegate) *PeripheralManager {
+	_shim := newPeripheralManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(pm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return pm
+}
+
 // StartAdvertising advertises peripheral manager data.
-func (pm *PeripheralManager) StartAdvertising(advertisementData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("startAdvertising:"), objref.IDOf(advertisementData))
+func (pm *PeripheralManager) StartAdvertising(advertisementData map[string]obj.Object) {
+	defer runtime.KeepAlive(pm)
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("startAdvertising:"), rt.MapToDict(advertisementData, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // StopAdvertising stops advertising peripheral manager data.
 func (pm *PeripheralManager) StopAdvertising() {
+	defer runtime.KeepAlive(pm)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("stopAdvertising"))
 }
 
 // SetDesiredConnectionLatencyForCentral sets the desired connection latency for an existing connection to a central device.
 func (pm *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency PeripheralManagerConnectionLatency, central *Central) {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(central)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setDesiredConnectionLatency:forCentral:"), latency, objref.IDOf(central))
 }
 
 // AddService publishes a service and any of its associated characteristics and characteristic descriptors to the local GATT database.
 func (pm *PeripheralManager) AddService(service *MutableService) {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(service)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("addService:"), objref.IDOf(service))
 }
 
 // RemoveService removes a specified published service from the local GATT database.
 func (pm *PeripheralManager) RemoveService(service *MutableService) {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(service)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("removeService:"), objref.IDOf(service))
 }
 
 // RemoveAllServices removes all published services from the local GATT database.
 func (pm *PeripheralManager) RemoveAllServices() {
+	defer runtime.KeepAlive(pm)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("removeAllServices"))
 }
 
 // RespondToRequestWithResult responds to a read or write request from a connected central.
 func (pm *PeripheralManager) RespondToRequestWithResult(request *ATTRequest, result ATTError) {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("respondToRequest:withResult:"), objref.IDOf(request), result)
 }
 
 // UpdateValueForCharacteristicOnSubscribedCentrals send an updated characteristic value to one or more subscribed centrals, using a notification or indication.
-func (pm *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value obj.Object, characteristic *MutableCharacteristic, centrals []*Central) bool {
-	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:"), objref.IDOf(value), objref.IDOf(characteristic), purego.SliceToNSArray(centrals, func(_v *Central) objc.ID { return objref.IDOf(_v) }))
+func (pm *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value []byte, characteristic *MutableCharacteristic, centrals []*Central) bool {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(characteristic)
+	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("updateValue:forCharacteristic:onSubscribedCentrals:"), rt.BytesToNSData(value), objref.IDOf(characteristic), purego.SliceToNSArray(centrals, func(_v *Central) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // PublishL2CAPChannelWithEncryption creates a listener for incoming L2CAP channel connections.
 func (pm *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
+	defer runtime.KeepAlive(pm)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("publishL2CAPChannelWithEncryption:"), encryptionRequired)
 }
 
 // UnpublishL2CAPChannel removes a published service from the local system.
-func (pm *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
-	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("unpublishL2CAPChannel:"), pSM)
+func (pm *PeripheralManager) UnpublishL2CAPChannel(psm uint16) {
+	defer runtime.KeepAlive(pm)
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("unpublishL2CAPChannel:"), psm)
 }
 
 // IsAdvertising reports whether the peripheral is currently advertising data.
 func (pm *PeripheralManager) IsAdvertising() bool {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[bool](objref.IDOf(pm), objc.RegisterName("isAdvertising"))
 	return _r
 }

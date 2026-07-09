@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,105 +49,140 @@ func mTRClusterNitrogenDioxideConcentrationMeasurementAdopt(id objc.ID) *MTRClus
 
 // NewMTRClusterNitrogenDioxideConcentrationMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterNitrogenDioxideConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterNitrogenDioxideConcentrationMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterNitrogenDioxideConcentrationMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterNitrogenDioxideConcentrationMeasurementAdopt(_id)
 }
 
 // ReadAttributeMeasuredValueWithParams reads attribute measured value with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinMeasuredValueWithParams reads attribute min measured value with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxMeasuredValueWithParams reads attribute max measured value with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePeakMeasuredValueWithParams reads attribute peak measured value with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePeakMeasuredValueWindowWithParams reads attribute peak measured value window with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageMeasuredValueWithParams reads attribute average measured value with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageMeasuredValueWindowWithParams reads attribute average measured value window with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUncertaintyWithParams reads attribute uncertainty with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasurementUnitWithParams reads attribute measurement unit with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasurementMediumWithParams reads attribute measurement medium with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLevelValueWithParams reads attribute level value with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcndcm *MTRClusterNitrogenDioxideConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcndcm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcndcm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterNitrogenDioxideConcentrationMeasurement)(nil)

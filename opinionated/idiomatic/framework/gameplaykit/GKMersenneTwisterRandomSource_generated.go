@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (mtrs *MersenneTwisterRandomSource) WithSeed(seed uint64) *MersenneTwisterR
 
 // Seed returns the seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
 func (mtrs *MersenneTwisterRandomSource) Seed() uint64 {
+	defer runtime.KeepAlive(mtrs)
 	_r := objc.Send[uint64](objref.IDOf(mtrs), objc.RegisterName("seed"))
 	return _r
 }

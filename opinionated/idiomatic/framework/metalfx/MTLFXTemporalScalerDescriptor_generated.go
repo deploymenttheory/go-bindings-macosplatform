@@ -5,6 +5,8 @@
 package metalfx
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func temporalScalerDescriptorAdopt(id objc.ID) *TemporalScalerDescriptor {
 
 // Description returns the object's -description text.
 func (tsd *TemporalScalerDescriptor) Description() string {
+	defer runtime.KeepAlive(tsd)
 	return rt.Description(objref.IDOf(tsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tsd *TemporalScalerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tsd *TemporalScalerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(tsd)
 	return rt.IsKind(objref.IDOf(tsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tsd *TemporalScalerDescriptor) String() string {
+	defer runtime.KeepAlive(tsd)
 	return rt.Description(objref.IDOf(tsd))
 }
 
@@ -134,60 +141,70 @@ func (tsd *TemporalScalerDescriptor) WithReactiveMaskTextureEnabled(reactiveMask
 
 // InputWidth returns the width of the input color texture for the temporal scaler you create with this descriptor.
 func (tsd *TemporalScalerDescriptor) InputWidth() int {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[int](objref.IDOf(tsd), objc.RegisterName("inputWidth"))
 	return _r
 }
 
 // InputHeight returns the height of the input color texture for the temporal scaler you create with this descriptor.
 func (tsd *TemporalScalerDescriptor) InputHeight() int {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[int](objref.IDOf(tsd), objc.RegisterName("inputHeight"))
 	return _r
 }
 
 // OutputWidth returns the width of the output color texture for the temporal scaler you create with this descriptor.
 func (tsd *TemporalScalerDescriptor) OutputWidth() int {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[int](objref.IDOf(tsd), objc.RegisterName("outputWidth"))
 	return _r
 }
 
 // OutputHeight returns the height of the output color texture for the temporal scaler you create with this descriptor.
 func (tsd *TemporalScalerDescriptor) OutputHeight() int {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[int](objref.IDOf(tsd), objc.RegisterName("outputHeight"))
 	return _r
 }
 
 // IsAutoExposureEnabled reports whether metalFX calculates the exposure for each frame. Set this property to <doc://com.apple.documentation/documentation/swift/true> to create a scaler that automatically calculates the exposure level for each image it scales. * Note: Temporal scaler instances that use auto exposure ignore their “MTLFXTemporalScalerBase/exposureTexture“ property. This property's default value is <doc://com.apple.documentation/documentation/swift/false>.
 func (tsd *TemporalScalerDescriptor) IsAutoExposureEnabled() bool {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[bool](objref.IDOf(tsd), objc.RegisterName("isAutoExposureEnabled"))
 	return _r
 }
 
 // RequiresSynchronousInitialization reports whether metalFX compiles a temporal scaling effect’s underlying upscaler as it creates the instance. This property gives you the option to decide when it’s better for your app to give MetalFX the time it needs to compile the underlying upscaler of the temporal scaling effect. The two choices are: * As you create the effect * After you create the effect, likely when your app needs to upscale the initial textures You can create a temporal scaler that can upscale textures at its best speed immediately after you create it by setting this property to <doc://com.apple.documentation/documentation/swift/true> and then calling an initialization method like “newTemporalScalerWithDevice:“. However, it may take MetalFX more time for that method to return while it creates the denoiser scaler and compiles its underlying pipelines. By default, the property is equal to <doc://com.apple.documentation/documentation/swift/false>, which tells MetalFX to quickly create and return the temporal scaling-effect instance, and then compile a faster upscaler in the background. However, this means the effect can take more time to upscale textures while the framework compiles the underlying upscaler. When the framework finishes compiling, the effect runs just as fast as if you set the property to <doc://com.apple.documentation/documentation/swift/true>. * Note: The image quality of the effect’s output texture is consistent, whether it’s using the slower interim upscaler or the final, faster upscaler.
 func (tsd *TemporalScalerDescriptor) RequiresSynchronousInitialization() bool {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[bool](objref.IDOf(tsd), objc.RegisterName("requiresSynchronousInitialization"))
 	return _r
 }
 
 // IsInputContentPropertiesEnabled reports whether the temporal scaler you create with this descriptor uses dynamic resolution. When you set this property to <doc://com.apple.documentation/documentation/swift/true> to enable dynamic resolution, scale properties “inputContentMinScale“ and “inputContentMaxScale“ represent the input and output resolution both the width and height. * Note: The scaler assumes that aspect ratio of the input and output textures doesn't change.
 func (tsd *TemporalScalerDescriptor) IsInputContentPropertiesEnabled() bool {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[bool](objref.IDOf(tsd), objc.RegisterName("isInputContentPropertiesEnabled"))
 	return _r
 }
 
 // InputContentMinScale returns the smallest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
 func (tsd *TemporalScalerDescriptor) InputContentMinScale() float32 {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[float32](objref.IDOf(tsd), objc.RegisterName("inputContentMinScale"))
 	return _r
 }
 
 // InputContentMaxScale returns the largest scale factor the temporal scaler you create with this descriptor can use to generate output textures.
 func (tsd *TemporalScalerDescriptor) InputContentMaxScale() float32 {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[float32](objref.IDOf(tsd), objc.RegisterName("inputContentMaxScale"))
 	return _r
 }
 
 // IsReactiveMaskTextureEnabled reports whether a temporal scaler you create with the descriptor applies a reactive mask.
 func (tsd *TemporalScalerDescriptor) IsReactiveMaskTextureEnabled() bool {
+	defer runtime.KeepAlive(tsd)
 	_r := objc.Send[bool](objref.IDOf(tsd), objc.RegisterName("isReactiveMaskTextureEnabled"))
 	return _r
 }

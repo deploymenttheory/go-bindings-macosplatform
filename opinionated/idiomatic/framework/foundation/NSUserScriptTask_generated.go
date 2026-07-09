@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,27 +53,32 @@ func userScriptTaskAdopt(id objc.ID) *UserScriptTask {
 
 // Description returns the object's -description text.
 func (ust *UserScriptTask) Description() string {
+	defer runtime.KeepAlive(ust)
 	return rt.Description(objref.IDOf(ust))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ust *UserScriptTask) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ust)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ust), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ust *UserScriptTask) IsKind(className string) bool {
+	defer runtime.KeepAlive(ust)
 	return rt.IsKind(objref.IDOf(ust), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ust *UserScriptTask) String() string {
+	defer runtime.KeepAlive(ust)
 	return rt.Description(objref.IDOf(ust))
 }
 
-// NewUserScriptTaskWithURLError return a user script task instance given a URL for a script file.
-func NewUserScriptTaskWithURLError(url string) (result *UserScriptTask, err error) {
+// NewUserScriptTaskWithURL return a user script task instance given a URL for a script file.
+func NewUserScriptTaskWithURL(url string) (result *UserScriptTask, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserScriptTask")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -89,15 +95,16 @@ func (ust *UserScriptTask) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ust *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
-	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ust *UserScriptTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserScriptTask {
+	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ust
 }
 
 // ScriptURL returns the script URL.
-func (ust *UserScriptTask) ScriptURL() *URL {
+func (ust *UserScriptTask) ScriptURL() string {
+	defer runtime.KeepAlive(ust)
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("scriptURL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // isUserScriptTask marks UserScriptTask — and, by embedding promotion, its

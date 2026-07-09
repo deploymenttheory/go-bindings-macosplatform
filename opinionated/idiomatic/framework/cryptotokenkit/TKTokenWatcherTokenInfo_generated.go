@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func tokenWatcherTokenInfoAdopt(id objc.ID) *TokenWatcherTokenInfo {
 
 // Description returns the object's -description text.
 func (twti *TokenWatcherTokenInfo) Description() string {
+	defer runtime.KeepAlive(twti)
 	return rt.Description(objref.IDOf(twti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (twti *TokenWatcherTokenInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(twti)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(twti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (twti *TokenWatcherTokenInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(twti)
 	return rt.IsKind(objref.IDOf(twti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (twti *TokenWatcherTokenInfo) String() string {
+	defer runtime.KeepAlive(twti)
 	return rt.Description(objref.IDOf(twti))
 }
 
@@ -72,6 +79,7 @@ func NewTokenWatcherTokenInfo() *TokenWatcherTokenInfo {
 
 // TokenID returns tokenID
 func (twti *TokenWatcherTokenInfo) TokenID() string {
+	defer runtime.KeepAlive(twti)
 	_r := objc.Send[objc.ID](objref.IDOf(twti), objc.RegisterName("tokenID"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (twti *TokenWatcherTokenInfo) TokenID() string {
 
 // SlotName returns the slot name (if available)
 func (twti *TokenWatcherTokenInfo) SlotName() string {
+	defer runtime.KeepAlive(twti)
 	_r := objc.Send[objc.ID](objref.IDOf(twti), objc.RegisterName("slotName"))
 	if _r == 0 {
 		return ""
@@ -90,6 +99,7 @@ func (twti *TokenWatcherTokenInfo) SlotName() string {
 
 // DriverName returns localized driver name (if available)
 func (twti *TokenWatcherTokenInfo) DriverName() string {
+	defer runtime.KeepAlive(twti)
 	_r := objc.Send[objc.ID](objref.IDOf(twti), objc.RegisterName("driverName"))
 	if _r == 0 {
 		return ""

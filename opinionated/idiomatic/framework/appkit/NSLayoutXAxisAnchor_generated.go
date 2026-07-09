@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,24 +55,32 @@ func NewLayoutXAxisAnchor() *LayoutXAxisAnchor {
 
 // AnchorWithOffsetToAnchor creates a layout dimension object from two anchors.
 func (lxaa *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutXAxisAnchor) *LayoutDimension {
+	defer runtime.KeepAlive(lxaa)
+	defer runtime.KeepAlive(otherAnchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
 	return LayoutDimensionFromID(_r)
 }
 
 // ConstraintEqualToSystemSpacingAfterAnchorMultiplier returns a constraint that defines by how much the current anchor trails the specified anchor.
 func (lxaa *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	defer runtime.KeepAlive(lxaa)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("constraintEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier returns a constraint that defines the minimum amount by which the current anchor trails the specified anchor.
 func (lxaa *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	defer runtime.KeepAlive(lxaa)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier returns a constraint that defines the maximum amount by which the current anchor trails the specified anchor.
 func (lxaa *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	defer runtime.KeepAlive(lxaa)
+	defer runtime.KeepAlive(anchor)
 	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }

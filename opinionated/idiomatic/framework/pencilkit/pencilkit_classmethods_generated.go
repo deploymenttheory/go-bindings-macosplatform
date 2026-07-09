@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -30,24 +32,28 @@ func MaximumWidthForEraserType(eraserType EraserType) float64 {
 
 // DefaultWidthForInkType the default width for an ink of a type.
 func DefaultWidthForInkType(inkType obj.Object) float64 {
+	defer runtime.KeepAlive(inkType)
 	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("defaultWidthForInkType:"), objref.IDOf(inkType))
 	return _r
 }
 
 // MinimumWidthForInkType the minimum width for an ink of a type.
 func MinimumWidthForInkType(inkType obj.Object) float64 {
+	defer runtime.KeepAlive(inkType)
 	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("minimumWidthForInkType:"), objref.IDOf(inkType))
 	return _r
 }
 
 // MaximumWidthForInkType the maximum width for an ink of a type.
 func MaximumWidthForInkType(inkType obj.Object) float64 {
+	defer runtime.KeepAlive(inkType)
 	_r := objc.Send[float64](objc.ID(_class("PKInkingTool")), objc.RegisterName("maximumWidthForInkType:"), objref.IDOf(inkType))
 	return _r
 }
 
 // InvertColor converts a color from light to dark appearance or vice versa.
 func InvertColor(color obj.Object) obj.Object {
+	defer runtime.KeepAlive(color)
 	_r := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("invertColor:"), objref.IDOf(color))
 	return obj.Wrap(_r)
 }

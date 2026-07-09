@@ -5,8 +5,12 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -54,12 +58,14 @@ func NewTransition() *Transition {
 
 // WithType sets specifies the predefined transition type.
 func (t *Transition) WithType(type_ obj.Object) *Transition {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return t
 }
 
 // WithSubtype sets specifies an optional subtype that indicates the direction for the predefined motion-based transitions.
 func (t *Transition) WithSubtype(subtype obj.Object) *Transition {
+	defer runtime.KeepAlive(subtype)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubtype:"), objref.IDOf(subtype))
 	return t
 }
@@ -78,13 +84,25 @@ func (t *Transition) WithEndProgress(endProgress float32) *Transition {
 
 // WithFilter sets an optional Core Image filter object that provides the transition.
 func (t *Transition) WithFilter(filter obj.Object) *Transition {
+	defer runtime.KeepAlive(filter)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	return t
 }
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (t *Transition) WithTimingFunction(timingFunction *MediaTimingFunction) *Transition {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return t
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (t *Transition) WithDelegate(delegate AnimationDelegate) *Transition {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(t), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(t), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return t
 }
 
@@ -95,31 +113,36 @@ func (t *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transiti
 }
 
 // Type returns the type.
-func (t *Transition) Type() obj.Object {
+func (t *Transition) Type() *foundation.String {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Subtype returns the subtype.
-func (t *Transition) Subtype() obj.Object {
+func (t *Transition) Subtype() *foundation.String {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subtype"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // StartProgress returns the start progress.
 func (t *Transition) StartProgress() float32 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("startProgress"))
 	return _r
 }
 
 // EndProgress returns the end progress.
 func (t *Transition) EndProgress() float32 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("endProgress"))
 	return _r
 }
 
 // Filter returns the filter.
 func (t *Transition) Filter() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("filter"))
 	return obj.Wrap(_r)
 }

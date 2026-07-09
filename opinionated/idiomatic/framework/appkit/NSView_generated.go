@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -12,6 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,6 +67,7 @@ func NewViewWithFrame(frameRect corefoundation.CGRect) *View {
 
 // NewViewWithCoder initializes a view using from data in the specified coder object.
 func NewViewWithCoder(coder obj.Object) *View {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -215,6 +218,7 @@ func (v_ *View) WithWantsLayer(wantsLayer bool) *View {
 
 // WithLayer sets the layer.
 func (v_ *View) WithLayer(layer obj.Object) *View {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -264,6 +268,7 @@ func (v_ *View) WithBackgroundFilters(items ...obj.Object) *View {
 
 // WithCompositingFilter sets the compositing filter.
 func (v_ *View) WithCompositingFilter(compositingFilter obj.Object) *View {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -281,6 +286,7 @@ func (v_ *View) WithContentFilters(items ...obj.Object) *View {
 
 // WithShadow sets the shadow.
 func (v_ *View) WithShadow(shadow *Shadow) *View {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -329,6 +335,7 @@ func (v_ *View) WithPreparedContentRect(preparedContentRect corefoundation.CGRec
 
 // WithNextKeyView sets the next key view.
 func (v_ *View) WithNextKeyView(nextKeyView ViewProvider) *View {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -378,6 +385,7 @@ func (v_ *View) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMe
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (v_ *View) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *View {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -434,6 +442,7 @@ func (v_ *View) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicR
 
 // WithPressureConfiguration sets the pressure configuration.
 func (v_ *View) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *View {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -442,6 +451,7 @@ func (v_ *View) WithPressureConfiguration(pressureConfiguration *PressureConfigu
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (v_ *View) WithNextResponder(nextResponder ResponderProvider) *View {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -450,6 +460,7 @@ func (v_ *View) WithNextResponder(nextResponder ResponderProvider) *View {
 
 // WithMenu sets returns the responder’s menu.
 func (v_ *View) WithMenu(menu *Menu) *View {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -458,6 +469,7 @@ func (v_ *View) WithMenu(menu *Menu) *View {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (v_ *View) WithUserActivity(userActivity obj.Object) *View {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -466,6 +478,7 @@ func (v_ *View) WithUserActivity(userActivity obj.Object) *View {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (v_ *View) WithTouchBar(touchBar *TouchBar) *View {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -474,6 +487,8 @@ func (v_ *View) WithTouchBar(touchBar *TouchBar) *View {
 
 // IsDescendantOf wraps the corresponding Objective-C method.
 func (v_ *View) IsDescendantOf(view *View) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -485,8 +500,10 @@ func (v_ *View) IsDescendantOf(view *View) bool {
 
 }
 
-// AncestorSharedWithView wraps the corresponding Objective-C method.
-func (v_ *View) AncestorSharedWithView(view *View) *View {
+// AncestorShared wraps the corresponding Objective-C method.
+func (v_ *View) AncestorShared(view *View) *View {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -500,6 +517,7 @@ func (v_ *View) AncestorSharedWithView(view *View) *View {
 
 // NeedsToDrawRect wraps the corresponding Objective-C method.
 func (v_ *View) NeedsToDrawRect(rect corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -513,6 +531,7 @@ func (v_ *View) NeedsToDrawRect(rect corefoundation.CGRect) bool {
 
 // ViewDidHide wraps the corresponding Objective-C method.
 func (v_ *View) ViewDidHide() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidHide"))
 	})
@@ -521,6 +540,7 @@ func (v_ *View) ViewDidHide() {
 
 // ViewDidUnhide wraps the corresponding Objective-C method.
 func (v_ *View) ViewDidUnhide() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidUnhide"))
 	})
@@ -529,6 +549,8 @@ func (v_ *View) ViewDidUnhide() {
 
 // AddSubview adds subview.
 func (v_ *View) AddSubview(view *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addSubview:"), objref.IDOf(view))
 	})
@@ -537,6 +559,9 @@ func (v_ *View) AddSubview(view *View) {
 
 // AddSubviewPositionedRelativeTo adds subview positioned relative to.
 func (v_ *View) AddSubviewPositionedRelativeTo(view *View, place WindowOrderingMode, otherView *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
+	defer runtime.KeepAlive(otherView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addSubview:positioned:relativeTo:"), objref.IDOf(view), place, objref.IDOf(otherView))
 	})
@@ -545,6 +570,7 @@ func (v_ *View) AddSubviewPositionedRelativeTo(view *View, place WindowOrderingM
 
 // SortSubviewsUsingFunctionContext wraps the corresponding Objective-C method.
 func (v_ *View) SortSubviewsUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("sortSubviewsUsingFunction:context:"), compare, context_)
 	})
@@ -553,6 +579,8 @@ func (v_ *View) SortSubviewsUsingFunctionContext(compare unsafe.Pointer, context
 
 // ViewWillMoveToWindow wraps the corresponding Objective-C method.
 func (v_ *View) ViewWillMoveToWindow(newWindow *Window) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(newWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillMoveToWindow:"), objref.IDOf(newWindow))
 	})
@@ -561,6 +589,7 @@ func (v_ *View) ViewWillMoveToWindow(newWindow *Window) {
 
 // ViewDidMoveToWindow wraps the corresponding Objective-C method.
 func (v_ *View) ViewDidMoveToWindow() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidMoveToWindow"))
 	})
@@ -569,6 +598,8 @@ func (v_ *View) ViewDidMoveToWindow() {
 
 // ViewWillMoveToSuperview wraps the corresponding Objective-C method.
 func (v_ *View) ViewWillMoveToSuperview(newSuperview *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(newSuperview)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillMoveToSuperview:"), objref.IDOf(newSuperview))
 	})
@@ -577,6 +608,7 @@ func (v_ *View) ViewWillMoveToSuperview(newSuperview *View) {
 
 // ViewDidMoveToSuperview wraps the corresponding Objective-C method.
 func (v_ *View) ViewDidMoveToSuperview() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidMoveToSuperview"))
 	})
@@ -585,6 +617,8 @@ func (v_ *View) ViewDidMoveToSuperview() {
 
 // DidAddSubview wraps the corresponding Objective-C method.
 func (v_ *View) DidAddSubview(subview *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(subview)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("didAddSubview:"), objref.IDOf(subview))
 	})
@@ -593,6 +627,8 @@ func (v_ *View) DidAddSubview(subview *View) {
 
 // WillRemoveSubview wraps the corresponding Objective-C method.
 func (v_ *View) WillRemoveSubview(subview *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(subview)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("willRemoveSubview:"), objref.IDOf(subview))
 	})
@@ -601,6 +637,7 @@ func (v_ *View) WillRemoveSubview(subview *View) {
 
 // RemoveFromSuperview removes from superview.
 func (v_ *View) RemoveFromSuperview() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeFromSuperview"))
 	})
@@ -609,6 +646,9 @@ func (v_ *View) RemoveFromSuperview() {
 
 // ReplaceSubviewWith replaces subview with.
 func (v_ *View) ReplaceSubviewWith(oldView *View, newView *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(oldView)
+	defer runtime.KeepAlive(newView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("replaceSubview:with:"), objref.IDOf(oldView), objref.IDOf(newView))
 	})
@@ -617,6 +657,7 @@ func (v_ *View) ReplaceSubviewWith(oldView *View, newView *View) {
 
 // RemoveFromSuperviewWithoutNeedingDisplay removes from superview without needing display.
 func (v_ *View) RemoveFromSuperviewWithoutNeedingDisplay() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeFromSuperviewWithoutNeedingDisplay"))
 	})
@@ -625,6 +666,7 @@ func (v_ *View) RemoveFromSuperviewWithoutNeedingDisplay() {
 
 // ViewDidChangeBackingProperties wraps the corresponding Objective-C method.
 func (v_ *View) ViewDidChangeBackingProperties() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidChangeBackingProperties"))
 	})
@@ -633,6 +675,7 @@ func (v_ *View) ViewDidChangeBackingProperties() {
 
 // ResizeSubviewsWithOldSize wraps the corresponding Objective-C method.
 func (v_ *View) ResizeSubviewsWithOldSize(oldSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resizeSubviewsWithOldSize:"), oldSize)
 	})
@@ -641,6 +684,7 @@ func (v_ *View) ResizeSubviewsWithOldSize(oldSize corefoundation.CGSize) {
 
 // ResizeWithOldSuperviewSize wraps the corresponding Objective-C method.
 func (v_ *View) ResizeWithOldSuperviewSize(oldSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resizeWithOldSuperviewSize:"), oldSize)
 	})
@@ -649,6 +693,7 @@ func (v_ *View) ResizeWithOldSuperviewSize(oldSize corefoundation.CGSize) {
 
 // SetFrameOrigin wraps the corresponding Objective-C method.
 func (v_ *View) SetFrameOrigin(newOrigin corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameOrigin:"), newOrigin)
 	})
@@ -657,6 +702,7 @@ func (v_ *View) SetFrameOrigin(newOrigin corefoundation.CGPoint) {
 
 // SetFrameSize wraps the corresponding Objective-C method.
 func (v_ *View) SetFrameSize(newSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFrameSize:"), newSize)
 	})
@@ -665,6 +711,7 @@ func (v_ *View) SetFrameSize(newSize corefoundation.CGSize) {
 
 // SetBoundsOrigin wraps the corresponding Objective-C method.
 func (v_ *View) SetBoundsOrigin(newOrigin corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBoundsOrigin:"), newOrigin)
 	})
@@ -673,6 +720,7 @@ func (v_ *View) SetBoundsOrigin(newOrigin corefoundation.CGPoint) {
 
 // SetBoundsSize wraps the corresponding Objective-C method.
 func (v_ *View) SetBoundsSize(newSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBoundsSize:"), newSize)
 	})
@@ -681,6 +729,7 @@ func (v_ *View) SetBoundsSize(newSize corefoundation.CGSize) {
 
 // TranslateOriginToPoint wraps the corresponding Objective-C method.
 func (v_ *View) TranslateOriginToPoint(translation corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("translateOriginToPoint:"), translation)
 	})
@@ -689,6 +738,7 @@ func (v_ *View) TranslateOriginToPoint(translation corefoundation.CGPoint) {
 
 // ScaleUnitSquareToSize wraps the corresponding Objective-C method.
 func (v_ *View) ScaleUnitSquareToSize(newUnitSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scaleUnitSquareToSize:"), newUnitSize)
 	})
@@ -697,6 +747,7 @@ func (v_ *View) ScaleUnitSquareToSize(newUnitSize corefoundation.CGSize) {
 
 // RotateByAngle wraps the corresponding Objective-C method.
 func (v_ *View) RotateByAngle(angle float64) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rotateByAngle:"), angle)
 	})
@@ -705,6 +756,8 @@ func (v_ *View) RotateByAngle(angle float64) {
 
 // ConvertPointFromView wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointFromView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -718,6 +771,8 @@ func (v_ *View) ConvertPointFromView(point corefoundation.CGPoint, view *View) c
 
 // ConvertPointToView wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointToView(point corefoundation.CGPoint, view *View) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -731,6 +786,8 @@ func (v_ *View) ConvertPointToView(point corefoundation.CGPoint, view *View) cor
 
 // ConvertSizeFromView wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeFromView(size corefoundation.CGSize, view *View) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -744,6 +801,8 @@ func (v_ *View) ConvertSizeFromView(size corefoundation.CGSize, view *View) core
 
 // ConvertSizeToView wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeToView(size corefoundation.CGSize, view *View) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -757,6 +816,8 @@ func (v_ *View) ConvertSizeToView(size corefoundation.CGSize, view *View) corefo
 
 // ConvertRectFromView wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectFromView(rect corefoundation.CGRect, view *View) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -770,6 +831,8 @@ func (v_ *View) ConvertRectFromView(rect corefoundation.CGRect, view *View) core
 
 // ConvertRectToView wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectToView(rect corefoundation.CGRect, view *View) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -783,6 +846,7 @@ func (v_ *View) ConvertRectToView(rect corefoundation.CGRect, view *View) corefo
 
 // CenterScanRect wraps the corresponding Objective-C method.
 func (v_ *View) CenterScanRect(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -796,6 +860,7 @@ func (v_ *View) CenterScanRect(rect corefoundation.CGRect) corefoundation.CGRect
 
 // ConvertPointToBacking wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -809,6 +874,7 @@ func (v_ *View) ConvertPointToBacking(point corefoundation.CGPoint) corefoundati
 
 // ConvertPointFromBacking wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -822,6 +888,7 @@ func (v_ *View) ConvertPointFromBacking(point corefoundation.CGPoint) corefounda
 
 // ConvertSizeToBacking wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeToBacking(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -835,6 +902,7 @@ func (v_ *View) ConvertSizeToBacking(size corefoundation.CGSize) corefoundation.
 
 // ConvertSizeFromBacking wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeFromBacking(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -848,6 +916,7 @@ func (v_ *View) ConvertSizeFromBacking(size corefoundation.CGSize) corefoundatio
 
 // ConvertRectToBacking wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -861,6 +930,7 @@ func (v_ *View) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.
 
 // ConvertRectFromBacking wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -874,6 +944,7 @@ func (v_ *View) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundatio
 
 // ConvertPointToLayer wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointToLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -887,6 +958,7 @@ func (v_ *View) ConvertPointToLayer(point corefoundation.CGPoint) corefoundation
 
 // ConvertPointFromLayer wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointFromLayer(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -900,6 +972,7 @@ func (v_ *View) ConvertPointFromLayer(point corefoundation.CGPoint) corefoundati
 
 // ConvertSizeToLayer wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeToLayer(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -913,6 +986,7 @@ func (v_ *View) ConvertSizeToLayer(size corefoundation.CGSize) corefoundation.CG
 
 // ConvertSizeFromLayer wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeFromLayer(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -926,6 +1000,7 @@ func (v_ *View) ConvertSizeFromLayer(size corefoundation.CGSize) corefoundation.
 
 // ConvertRectToLayer wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectToLayer(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -939,6 +1014,7 @@ func (v_ *View) ConvertRectToLayer(rect corefoundation.CGRect) corefoundation.CG
 
 // ConvertRectFromLayer wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectFromLayer(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -952,6 +1028,7 @@ func (v_ *View) ConvertRectFromLayer(rect corefoundation.CGRect) corefoundation.
 
 // SetNeedsDisplayInRect wraps the corresponding Objective-C method.
 func (v_ *View) SetNeedsDisplayInRect(invalidRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setNeedsDisplayInRect:"), invalidRect)
 	})
@@ -960,6 +1037,7 @@ func (v_ *View) SetNeedsDisplayInRect(invalidRect corefoundation.CGRect) {
 
 // LockFocus locks focus.
 func (v_ *View) LockFocus() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("lockFocus"))
 	})
@@ -968,6 +1046,7 @@ func (v_ *View) LockFocus() {
 
 // UnlockFocus unlocks focus.
 func (v_ *View) UnlockFocus() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unlockFocus"))
 	})
@@ -976,6 +1055,7 @@ func (v_ *View) UnlockFocus() {
 
 // LockFocusIfCanDraw wraps the corresponding Objective-C method.
 func (v_ *View) LockFocusIfCanDraw() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -989,6 +1069,8 @@ func (v_ *View) LockFocusIfCanDraw() bool {
 
 // LockFocusIfCanDrawInContext locks focus if can draw in context.
 func (v_ *View) LockFocusIfCanDrawInContext(context_ *GraphicsContext) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(context_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1002,6 +1084,7 @@ func (v_ *View) LockFocusIfCanDrawInContext(context_ *GraphicsContext) bool {
 
 // Display wraps the corresponding Objective-C method.
 func (v_ *View) Display() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("display"))
 	})
@@ -1010,6 +1093,7 @@ func (v_ *View) Display() {
 
 // DisplayIfNeeded wraps the corresponding Objective-C method.
 func (v_ *View) DisplayIfNeeded() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeeded"))
 	})
@@ -1018,6 +1102,7 @@ func (v_ *View) DisplayIfNeeded() {
 
 // DisplayIfNeededIgnoringOpacity wraps the corresponding Objective-C method.
 func (v_ *View) DisplayIfNeededIgnoringOpacity() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeededIgnoringOpacity"))
 	})
@@ -1026,6 +1111,7 @@ func (v_ *View) DisplayIfNeededIgnoringOpacity() {
 
 // DisplayRect wraps the corresponding Objective-C method.
 func (v_ *View) DisplayRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayRect:"), rect)
 	})
@@ -1034,6 +1120,7 @@ func (v_ *View) DisplayRect(rect corefoundation.CGRect) {
 
 // DisplayIfNeededInRect wraps the corresponding Objective-C method.
 func (v_ *View) DisplayIfNeededInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeededInRect:"), rect)
 	})
@@ -1042,6 +1129,7 @@ func (v_ *View) DisplayIfNeededInRect(rect corefoundation.CGRect) {
 
 // DisplayRectIgnoringOpacity wraps the corresponding Objective-C method.
 func (v_ *View) DisplayRectIgnoringOpacity(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayRectIgnoringOpacity:"), rect)
 	})
@@ -1050,6 +1138,7 @@ func (v_ *View) DisplayRectIgnoringOpacity(rect corefoundation.CGRect) {
 
 // DisplayIfNeededInRectIgnoringOpacity wraps the corresponding Objective-C method.
 func (v_ *View) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayIfNeededInRectIgnoringOpacity:"), rect)
 	})
@@ -1058,6 +1147,7 @@ func (v_ *View) DisplayIfNeededInRectIgnoringOpacity(rect corefoundation.CGRect)
 
 // DrawRect overridden by subclasses to draw the view’s image within the specified rectangle.
 func (v_ *View) DrawRect(dirtyRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawRect:"), dirtyRect)
 	})
@@ -1066,6 +1156,8 @@ func (v_ *View) DrawRect(dirtyRect corefoundation.CGRect) {
 
 // DisplayRectIgnoringOpacityInContext wraps the corresponding Objective-C method.
 func (v_ *View) DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect, context_ *GraphicsContext) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(context_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("displayRectIgnoringOpacity:inContext:"), rect, objref.IDOf(context_))
 	})
@@ -1074,6 +1166,7 @@ func (v_ *View) DisplayRectIgnoringOpacityInContext(rect corefoundation.CGRect, 
 
 // BitmapImageRepForCachingDisplayInRect wraps the corresponding Objective-C method.
 func (v_ *View) BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect) *BitmapImageRep {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *BitmapImageRep
 	purego.Main(func() {
 		_mainthread0 = func() *BitmapImageRep {
@@ -1087,6 +1180,8 @@ func (v_ *View) BitmapImageRepForCachingDisplayInRect(rect corefoundation.CGRect
 
 // CacheDisplayInRectToBitmapImageRep wraps the corresponding Objective-C method.
 func (v_ *View) CacheDisplayInRectToBitmapImageRep(rect corefoundation.CGRect, bitmapImageRep *BitmapImageRep) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(bitmapImageRep)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("cacheDisplayInRect:toBitmapImageRep:"), rect, objref.IDOf(bitmapImageRep))
 	})
@@ -1095,6 +1190,7 @@ func (v_ *View) CacheDisplayInRectToBitmapImageRep(rect corefoundation.CGRect, b
 
 // ViewWillDraw wraps the corresponding Objective-C method.
 func (v_ *View) ViewWillDraw() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillDraw"))
 	})
@@ -1103,6 +1199,7 @@ func (v_ *View) ViewWillDraw() {
 
 // ScrollPoint scrolls point.
 func (v_ *View) ScrollPoint(point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollPoint:"), point)
 	})
@@ -1111,6 +1208,7 @@ func (v_ *View) ScrollPoint(point corefoundation.CGPoint) {
 
 // ScrollRectToVisible scrolls rect to visible.
 func (v_ *View) ScrollRectToVisible(rect corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1124,6 +1222,8 @@ func (v_ *View) ScrollRectToVisible(rect corefoundation.CGRect) bool {
 
 // Autoscroll wraps the corresponding Objective-C method.
 func (v_ *View) Autoscroll(event *Event) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1137,6 +1237,7 @@ func (v_ *View) Autoscroll(event *Event) bool {
 
 // AdjustScroll wraps the corresponding Objective-C method.
 func (v_ *View) AdjustScroll(newVisible corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1150,6 +1251,7 @@ func (v_ *View) AdjustScroll(newVisible corefoundation.CGRect) corefoundation.CG
 
 // ScrollRectBy scrolls rect by.
 func (v_ *View) ScrollRectBy(rect corefoundation.CGRect, delta corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollRect:by:"), rect, delta)
 	})
@@ -1158,6 +1260,7 @@ func (v_ *View) ScrollRectBy(rect corefoundation.CGRect, delta corefoundation.CG
 
 // TranslateRectsNeedingDisplayInRectBy wraps the corresponding Objective-C method.
 func (v_ *View) TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CGRect, delta corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("translateRectsNeedingDisplayInRect:by:"), clipRect, delta)
 	})
@@ -1166,6 +1269,7 @@ func (v_ *View) TranslateRectsNeedingDisplayInRectBy(clipRect corefoundation.CGR
 
 // HitTest wraps the corresponding Objective-C method.
 func (v_ *View) HitTest(point corefoundation.CGPoint) *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1179,6 +1283,7 @@ func (v_ *View) HitTest(point corefoundation.CGPoint) *View {
 
 // MouseInRect wraps the corresponding Objective-C method.
 func (v_ *View) MouseInRect(point corefoundation.CGPoint, rect corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1192,6 +1297,7 @@ func (v_ *View) MouseInRect(point corefoundation.CGPoint, rect corefoundation.CG
 
 // ViewWithTag wraps the corresponding Objective-C method.
 func (v_ *View) ViewWithTag(tag int) *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1205,6 +1311,8 @@ func (v_ *View) ViewWithTag(tag int) *View {
 
 // AcceptsFirstMouse wraps the corresponding Objective-C method.
 func (v_ *View) AcceptsFirstMouse(event *Event) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1218,6 +1326,8 @@ func (v_ *View) AcceptsFirstMouse(event *Event) bool {
 
 // ShouldDelayWindowOrderingForEvent wraps the corresponding Objective-C method.
 func (v_ *View) ShouldDelayWindowOrderingForEvent(event *Event) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1231,6 +1341,7 @@ func (v_ *View) ShouldDelayWindowOrderingForEvent(event *Event) bool {
 
 // MakeBackingLayer returns the make backing layer.
 func (v_ *View) MakeBackingLayer() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1244,6 +1355,7 @@ func (v_ *View) MakeBackingLayer() obj.Object {
 
 // UpdateLayer updates the view’s content by modifying its underlying layer.
 func (v_ *View) UpdateLayer() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateLayer"))
 	})
@@ -1252,6 +1364,7 @@ func (v_ *View) UpdateLayer() {
 
 // LayoutSubtreeIfNeeded wraps the corresponding Objective-C method.
 func (v_ *View) LayoutSubtreeIfNeeded() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layoutSubtreeIfNeeded"))
 	})
@@ -1260,6 +1373,7 @@ func (v_ *View) LayoutSubtreeIfNeeded() {
 
 // Layout wraps the corresponding Objective-C method.
 func (v_ *View) Layout() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("layout"))
 	})
@@ -1268,6 +1382,8 @@ func (v_ *View) Layout() {
 
 // MenuForEvent overridden by subclasses to return a context-sensitive pop-up menu for a given mouse-down event.
 func (v_ *View) MenuForEvent(event *Event) *Menu {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -1281,6 +1397,9 @@ func (v_ *View) MenuForEvent(event *Event) *Menu {
 
 // WillOpenMenuWithEvent a contextual menu is being opened from the receiving view. The view should update any visual state in response — such as making a selection. \param menu The contextual menu that is being opened on the view \param event The event that caused the menu to open.
 func (v_ *View) WillOpenMenuWithEvent(menu *Menu, event *Event) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(menu)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("willOpenMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
 	})
@@ -1289,6 +1408,9 @@ func (v_ *View) WillOpenMenuWithEvent(menu *Menu, event *Event) {
 
 // DidCloseMenuWithEvent a contextual menu shown from the receiving view has been closed. This is only called if the menu had been opened and the view previously received \c -willOpenMenu:withEvent:. The view should update any visual state in response — such as removing a temporary selection. \param menu The contextual menu that was open on the view \param event The event that caused the menu to close. This may be nil if there is no specific event that triggered the closing.
 func (v_ *View) DidCloseMenuWithEvent(menu *Menu, event *Event) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(menu)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("didCloseMenu:withEvent:"), objref.IDOf(menu), objref.IDOf(event))
 	})
@@ -1297,6 +1419,8 @@ func (v_ *View) DidCloseMenuWithEvent(menu *Menu, event *Event) {
 
 // AddToolTipRectOwnerUserData adds tool tip rect owner user data.
 func (v_ *View) AddToolTipRectOwnerUserData(rect corefoundation.CGRect, owner obj.Object, data unsafe.Pointer) int {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(owner)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1310,6 +1434,7 @@ func (v_ *View) AddToolTipRectOwnerUserData(rect corefoundation.CGRect, owner ob
 
 // RemoveToolTip removes tool tip.
 func (v_ *View) RemoveToolTip(tag int) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeToolTip:"), tag)
 	})
@@ -1318,6 +1443,7 @@ func (v_ *View) RemoveToolTip(tag int) {
 
 // RemoveAllToolTips removes all tool tips.
 func (v_ *View) RemoveAllToolTips() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeAllToolTips"))
 	})
@@ -1326,6 +1452,7 @@ func (v_ *View) RemoveAllToolTips() {
 
 // ViewWillStartLiveResize wraps the corresponding Objective-C method.
 func (v_ *View) ViewWillStartLiveResize() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewWillStartLiveResize"))
 	})
@@ -1334,6 +1461,7 @@ func (v_ *View) ViewWillStartLiveResize() {
 
 // ViewDidEndLiveResize wraps the corresponding Objective-C method.
 func (v_ *View) ViewDidEndLiveResize() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidEndLiveResize"))
 	})
@@ -1342,6 +1470,7 @@ func (v_ *View) ViewDidEndLiveResize() {
 
 // RectForSmartMagnificationAtPointInRect wraps the corresponding Objective-C method.
 func (v_ *View) RectForSmartMagnificationAtPointInRect(location corefoundation.CGPoint, visibleRect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1355,6 +1484,7 @@ func (v_ *View) RectForSmartMagnificationAtPointInRect(location corefoundation.C
 
 // PrepareForReuse restores the view to an initial state so that it can be reused.
 func (v_ *View) PrepareForReuse() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("prepareForReuse"))
 	})
@@ -1363,6 +1493,7 @@ func (v_ *View) PrepareForReuse() {
 
 // PrepareContentInRect prepares content in rect.
 func (v_ *View) PrepareContentInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("prepareContentInRect:"), rect)
 	})
@@ -1371,6 +1502,7 @@ func (v_ *View) PrepareContentInRect(rect corefoundation.CGRect) {
 
 // ViewDidChangeEffectiveAppearance override point for reacting to the effective appearance of the receiver changing. At this point `effectiveAppearance` property reflects the new appearance.
 func (v_ *View) ViewDidChangeEffectiveAppearance() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("viewDidChangeEffectiveAppearance"))
 	})
@@ -1379,6 +1511,7 @@ func (v_ *View) ViewDidChangeEffectiveAppearance() {
 
 // Window returns the window.
 func (v_ *View) Window() *Window {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -1392,6 +1525,7 @@ func (v_ *View) Window() *Window {
 
 // Superview returns the superview.
 func (v_ *View) Superview() *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1407,6 +1541,7 @@ func (v_ *View) Superview() *View {
 //
 // Subviews returns the collection as a Go slice.
 func (v_ *View) Subviews() []*View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []*View
 	purego.Main(func() {
 		_mainthread0 = func() []*View {
@@ -1419,6 +1554,7 @@ func (v_ *View) Subviews() []*View {
 
 // OpaqueAncestor returns the opaque ancestor.
 func (v_ *View) OpaqueAncestor() *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1432,6 +1568,7 @@ func (v_ *View) OpaqueAncestor() *View {
 
 // IsHidden reports whether the object is hidden.
 func (v_ *View) IsHidden() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1445,6 +1582,7 @@ func (v_ *View) IsHidden() bool {
 
 // IsHiddenOrHasHiddenAncestor reports whether the object is hidden or has hidden ancestor.
 func (v_ *View) IsHiddenOrHasHiddenAncestor() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1458,6 +1596,7 @@ func (v_ *View) IsHiddenOrHasHiddenAncestor() bool {
 
 // WantsDefaultClipping wraps the corresponding Objective-C method.
 func (v_ *View) WantsDefaultClipping() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1471,6 +1610,7 @@ func (v_ *View) WantsDefaultClipping() bool {
 
 // PostsFrameChangedNotifications wraps the corresponding Objective-C method.
 func (v_ *View) PostsFrameChangedNotifications() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1484,6 +1624,7 @@ func (v_ *View) PostsFrameChangedNotifications() bool {
 
 // AutoresizesSubviews wraps the corresponding Objective-C method.
 func (v_ *View) AutoresizesSubviews() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1497,6 +1638,7 @@ func (v_ *View) AutoresizesSubviews() bool {
 
 // AutoresizingMask returns the autoresizing mask.
 func (v_ *View) AutoresizingMask() AutoresizingMaskOptions {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 AutoresizingMaskOptions
 	purego.Main(func() {
 		_mainthread0 = func() AutoresizingMaskOptions {
@@ -1510,6 +1652,7 @@ func (v_ *View) AutoresizingMask() AutoresizingMaskOptions {
 
 // Frame returns the frame.
 func (v_ *View) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1523,6 +1666,7 @@ func (v_ *View) Frame() corefoundation.CGRect {
 
 // FrameRotation returns the frame rotation.
 func (v_ *View) FrameRotation() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1536,6 +1680,7 @@ func (v_ *View) FrameRotation() float64 {
 
 // FrameCenterRotation returns the frame center rotation.
 func (v_ *View) FrameCenterRotation() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1549,6 +1694,7 @@ func (v_ *View) FrameCenterRotation() float64 {
 
 // BoundsRotation returns the bounds rotation.
 func (v_ *View) BoundsRotation() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1562,6 +1708,7 @@ func (v_ *View) BoundsRotation() float64 {
 
 // Bounds returns the bounds.
 func (v_ *View) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1575,6 +1722,7 @@ func (v_ *View) Bounds() corefoundation.CGRect {
 
 // IsFlipped reports whether the object is flipped.
 func (v_ *View) IsFlipped() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1588,6 +1736,7 @@ func (v_ *View) IsFlipped() bool {
 
 // IsRotatedFromBase reports whether the object is rotated from base.
 func (v_ *View) IsRotatedFromBase() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1601,6 +1750,7 @@ func (v_ *View) IsRotatedFromBase() bool {
 
 // IsRotatedOrScaledFromBase reports whether the object is rotated or scaled from base.
 func (v_ *View) IsRotatedOrScaledFromBase() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1614,6 +1764,7 @@ func (v_ *View) IsRotatedOrScaledFromBase() bool {
 
 // IsOpaque reports whether the object is opaque.
 func (v_ *View) IsOpaque() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1627,6 +1778,7 @@ func (v_ *View) IsOpaque() bool {
 
 // CanDrawConcurrently wraps the corresponding Objective-C method.
 func (v_ *View) CanDrawConcurrently() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1640,6 +1792,7 @@ func (v_ *View) CanDrawConcurrently() bool {
 
 // CanDraw wraps the corresponding Objective-C method.
 func (v_ *View) CanDraw() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1653,6 +1806,7 @@ func (v_ *View) CanDraw() bool {
 
 // NeedsDisplay wraps the corresponding Objective-C method.
 func (v_ *View) NeedsDisplay() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1666,6 +1820,7 @@ func (v_ *View) NeedsDisplay() bool {
 
 // VisibleRect returns the portion of the view that isn’t clipped by its superviews. Visibility, as reflected by this property, doesn’t account for whether other view or window objects overlap the current view or whether the current view is installed in a window at all. This value of this property is `NSZeroRect` if the current view is effectively hidden. During a printing operation, the visible rectangle is further clipped to the page being imaged.
 func (v_ *View) VisibleRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1679,6 +1834,7 @@ func (v_ *View) VisibleRect() corefoundation.CGRect {
 
 // Tag returns the tag.
 func (v_ *View) Tag() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1692,6 +1848,7 @@ func (v_ *View) Tag() int {
 
 // NeedsPanelToBecomeKey wraps the corresponding Objective-C method.
 func (v_ *View) NeedsPanelToBecomeKey() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1705,6 +1862,7 @@ func (v_ *View) NeedsPanelToBecomeKey() bool {
 
 // MouseDownCanMoveWindow wraps the corresponding Objective-C method.
 func (v_ *View) MouseDownCanMoveWindow() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1718,6 +1876,7 @@ func (v_ *View) MouseDownCanMoveWindow() bool {
 
 // AcceptsTouchEvents wraps the corresponding Objective-C method.
 func (v_ *View) AcceptsTouchEvents() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1731,6 +1890,7 @@ func (v_ *View) AcceptsTouchEvents() bool {
 
 // WantsRestingTouches wraps the corresponding Objective-C method.
 func (v_ *View) WantsRestingTouches() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1744,6 +1904,7 @@ func (v_ *View) WantsRestingTouches() bool {
 
 // LayerContentsRedrawPolicy returns the layer contents redraw policy.
 func (v_ *View) LayerContentsRedrawPolicy() ViewLayerContentsRedrawPolicy {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 ViewLayerContentsRedrawPolicy
 	purego.Main(func() {
 		_mainthread0 = func() ViewLayerContentsRedrawPolicy {
@@ -1757,6 +1918,7 @@ func (v_ *View) LayerContentsRedrawPolicy() ViewLayerContentsRedrawPolicy {
 
 // LayerContentsPlacement returns the layer contents placement.
 func (v_ *View) LayerContentsPlacement() ViewLayerContentsPlacement {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 ViewLayerContentsPlacement
 	purego.Main(func() {
 		_mainthread0 = func() ViewLayerContentsPlacement {
@@ -1770,6 +1932,7 @@ func (v_ *View) LayerContentsPlacement() ViewLayerContentsPlacement {
 
 // WantsLayer wraps the corresponding Objective-C method.
 func (v_ *View) WantsLayer() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1783,6 +1946,7 @@ func (v_ *View) WantsLayer() bool {
 
 // Layer returns the layer.
 func (v_ *View) Layer() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1796,6 +1960,7 @@ func (v_ *View) Layer() obj.Object {
 
 // WantsUpdateLayer wraps the corresponding Objective-C method.
 func (v_ *View) WantsUpdateLayer() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1809,6 +1974,7 @@ func (v_ *View) WantsUpdateLayer() bool {
 
 // CanDrawSubviewsIntoLayer wraps the corresponding Objective-C method.
 func (v_ *View) CanDrawSubviewsIntoLayer() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1822,6 +1988,7 @@ func (v_ *View) CanDrawSubviewsIntoLayer() bool {
 
 // NeedsLayout wraps the corresponding Objective-C method.
 func (v_ *View) NeedsLayout() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1835,6 +2002,7 @@ func (v_ *View) NeedsLayout() bool {
 
 // AlphaValue returns the alpha value.
 func (v_ *View) AlphaValue() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1848,6 +2016,7 @@ func (v_ *View) AlphaValue() float64 {
 
 // LayerUsesCoreImageFilters wraps the corresponding Objective-C method.
 func (v_ *View) LayerUsesCoreImageFilters() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1863,6 +2032,7 @@ func (v_ *View) LayerUsesCoreImageFilters() bool {
 //
 // BackgroundFilters returns the collection as a Go slice.
 func (v_ *View) BackgroundFilters() []obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1875,6 +2045,7 @@ func (v_ *View) BackgroundFilters() []obj.Object {
 
 // CompositingFilter returns the compositing filter.
 func (v_ *View) CompositingFilter() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1890,6 +2061,7 @@ func (v_ *View) CompositingFilter() obj.Object {
 //
 // ContentFilters returns the collection as a Go slice.
 func (v_ *View) ContentFilters() []obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1902,6 +2074,7 @@ func (v_ *View) ContentFilters() []obj.Object {
 
 // Shadow returns the shadow.
 func (v_ *View) Shadow() *Shadow {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *Shadow
 	purego.Main(func() {
 		_mainthread0 = func() *Shadow {
@@ -1915,6 +2088,7 @@ func (v_ *View) Shadow() *Shadow {
 
 // ClipsToBounds wraps the corresponding Objective-C method.
 func (v_ *View) ClipsToBounds() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1928,6 +2102,7 @@ func (v_ *View) ClipsToBounds() bool {
 
 // PostsBoundsChangedNotifications wraps the corresponding Objective-C method.
 func (v_ *View) PostsBoundsChangedNotifications() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1941,6 +2116,7 @@ func (v_ *View) PostsBoundsChangedNotifications() bool {
 
 // EnclosingScrollView returns the nearest ancestor scroll view that contains the current view as part of its document view. - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
 func (v_ *View) EnclosingScrollView() *ScrollView {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *ScrollView
 	purego.Main(func() {
 		_mainthread0 = func() *ScrollView {
@@ -1954,6 +2130,7 @@ func (v_ *View) EnclosingScrollView() *ScrollView {
 
 // ToolTip returns the tool tip.
 func (v_ *View) ToolTip() string {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1970,6 +2147,7 @@ func (v_ *View) ToolTip() string {
 
 // InLiveResize wraps the corresponding Objective-C method.
 func (v_ *View) InLiveResize() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1983,6 +2161,7 @@ func (v_ *View) InLiveResize() bool {
 
 // PreservesContentDuringLiveResize wraps the corresponding Objective-C method.
 func (v_ *View) PreservesContentDuringLiveResize() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1996,6 +2175,7 @@ func (v_ *View) PreservesContentDuringLiveResize() bool {
 
 // RectPreservedDuringLiveResize returns the rect preserved during live resize.
 func (v_ *View) RectPreservedDuringLiveResize() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2009,6 +2189,7 @@ func (v_ *View) RectPreservedDuringLiveResize() corefoundation.CGRect {
 
 // InputContext returns the input context.
 func (v_ *View) InputContext() *TextInputContext {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *TextInputContext
 	purego.Main(func() {
 		_mainthread0 = func() *TextInputContext {
@@ -2022,6 +2203,7 @@ func (v_ *View) InputContext() *TextInputContext {
 
 // UserInterfaceLayoutDirection returns the user interface layout direction.
 func (v_ *View) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 UserInterfaceLayoutDirection
 	purego.Main(func() {
 		_mainthread0 = func() UserInterfaceLayoutDirection {
@@ -2035,6 +2217,7 @@ func (v_ *View) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 
 // PreparedContentRect returns the prepared content rect.
 func (v_ *View) PreparedContentRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2048,6 +2231,7 @@ func (v_ *View) PreparedContentRect() corefoundation.CGRect {
 
 // AllowsVibrancy wraps the corresponding Objective-C method.
 func (v_ *View) AllowsVibrancy() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2061,6 +2245,7 @@ func (v_ *View) AllowsVibrancy() bool {
 
 // SetKeyboardFocusRingNeedsDisplayInRect wraps the corresponding Objective-C method.
 func (v_ *View) SetKeyboardFocusRingNeedsDisplayInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setKeyboardFocusRingNeedsDisplayInRect:"), rect)
 	})
@@ -2069,6 +2254,7 @@ func (v_ *View) SetKeyboardFocusRingNeedsDisplayInRect(rect corefoundation.CGRec
 
 // DrawFocusRingMask draws focus ring mask.
 func (v_ *View) DrawFocusRingMask() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawFocusRingMask"))
 	})
@@ -2077,6 +2263,7 @@ func (v_ *View) DrawFocusRingMask() {
 
 // NoteFocusRingMaskChanged wraps the corresponding Objective-C method.
 func (v_ *View) NoteFocusRingMaskChanged() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("noteFocusRingMaskChanged"))
 	})
@@ -2085,6 +2272,7 @@ func (v_ *View) NoteFocusRingMaskChanged() {
 
 // NextKeyView returns the next key view.
 func (v_ *View) NextKeyView() *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -2098,6 +2286,7 @@ func (v_ *View) NextKeyView() *View {
 
 // PreviousKeyView returns the previous key view.
 func (v_ *View) PreviousKeyView() *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -2111,6 +2300,7 @@ func (v_ *View) PreviousKeyView() *View {
 
 // NextValidKeyView returns the next valid key view.
 func (v_ *View) NextValidKeyView() *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -2124,6 +2314,7 @@ func (v_ *View) NextValidKeyView() *View {
 
 // PreviousValidKeyView returns the previous valid key view.
 func (v_ *View) PreviousValidKeyView() *View {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -2137,6 +2328,7 @@ func (v_ *View) PreviousValidKeyView() *View {
 
 // CanBecomeKeyView wraps the corresponding Objective-C method.
 func (v_ *View) CanBecomeKeyView() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2150,6 +2342,7 @@ func (v_ *View) CanBecomeKeyView() bool {
 
 // FocusRingType returns the focus ring type.
 func (v_ *View) FocusRingType() FocusRingType {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 FocusRingType
 	purego.Main(func() {
 		_mainthread0 = func() FocusRingType {
@@ -2163,6 +2356,7 @@ func (v_ *View) FocusRingType() FocusRingType {
 
 // FocusRingMaskBounds returns the focus ring mask bounds.
 func (v_ *View) FocusRingMaskBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2176,6 +2370,8 @@ func (v_ *View) FocusRingMaskBounds() corefoundation.CGRect {
 
 // WriteEPSInsideRectToPasteboard writes eps inside rect to pasteboard.
 func (v_ *View) WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(pasteboard)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("writeEPSInsideRect:toPasteboard:"), rect, objref.IDOf(pasteboard))
 	})
@@ -2183,12 +2379,13 @@ func (v_ *View) WriteEPSInsideRectToPasteboard(rect corefoundation.CGRect, paste
 }
 
 // DataWithEPSInsideRect wraps the corresponding Objective-C method.
-func (v_ *View) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (v_ *View) DataWithEPSInsideRect(rect corefoundation.CGRect) []byte {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 []byte
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []byte {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("dataWithEPSInsideRect:"), rect)
-			return obj.Wrap(_r)
+			return rt.NSDataToBytes(_r)
 		}()
 	})
 	return _mainthread0
@@ -2197,6 +2394,8 @@ func (v_ *View) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
 
 // WritePDFInsideRectToPasteboard writes pdf inside rect to pasteboard.
 func (v_ *View) WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, pasteboard *Pasteboard) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(pasteboard)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("writePDFInsideRect:toPasteboard:"), rect, objref.IDOf(pasteboard))
 	})
@@ -2204,12 +2403,13 @@ func (v_ *View) WritePDFInsideRectToPasteboard(rect corefoundation.CGRect, paste
 }
 
 // DataWithPDFInsideRect wraps the corresponding Objective-C method.
-func (v_ *View) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (v_ *View) DataWithPDFInsideRect(rect corefoundation.CGRect) []byte {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 []byte
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []byte {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("dataWithPDFInsideRect:"), rect)
-			return obj.Wrap(_r)
+			return rt.NSDataToBytes(_r)
 		}()
 	})
 	return _mainthread0
@@ -2218,6 +2418,8 @@ func (v_ *View) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
 
 // Print wraps the corresponding Objective-C method.
 func (v_ *View) Print(sender obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("print:"), objref.IDOf(sender))
 	})
@@ -2226,6 +2428,7 @@ func (v_ *View) Print(sender obj.Object) {
 
 // AdjustPageWidthNewLeftRightLimit wraps the corresponding Objective-C method.
 func (v_ *View) AdjustPageWidthNewLeftRightLimit(oldLeft float64, oldRight float64, rightLimit float64) (newRight float64) {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() (newRight float64) {
@@ -2240,6 +2443,7 @@ func (v_ *View) AdjustPageWidthNewLeftRightLimit(oldLeft float64, oldRight float
 
 // AdjustPageHeightNewTopBottomLimit wraps the corresponding Objective-C method.
 func (v_ *View) AdjustPageHeightNewTopBottomLimit(oldTop float64, oldBottom float64, bottomLimit float64) (newBottom float64) {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() (newBottom float64) {
@@ -2254,6 +2458,7 @@ func (v_ *View) AdjustPageHeightNewTopBottomLimit(oldTop float64, oldBottom floa
 
 // RectForPage wraps the corresponding Objective-C method.
 func (v_ *View) RectForPage(page int) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2267,6 +2472,7 @@ func (v_ *View) RectForPage(page int) corefoundation.CGRect {
 
 // LocationOfPrintRect wraps the corresponding Objective-C method.
 func (v_ *View) LocationOfPrintRect(rect corefoundation.CGRect) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -2280,6 +2486,7 @@ func (v_ *View) LocationOfPrintRect(rect corefoundation.CGRect) corefoundation.C
 
 // DrawPageBorderWithSize draws page border with size.
 func (v_ *View) DrawPageBorderWithSize(borderSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPageBorderWithSize:"), borderSize)
 	})
@@ -2288,6 +2495,7 @@ func (v_ *View) DrawPageBorderWithSize(borderSize corefoundation.CGSize) {
 
 // DrawSheetBorderWithSize * This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. **
 func (v_ *View) DrawSheetBorderWithSize(borderSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawSheetBorderWithSize:"), borderSize)
 	})
@@ -2296,6 +2504,7 @@ func (v_ *View) DrawSheetBorderWithSize(borderSize corefoundation.CGSize) {
 
 // BeginDocument begins document.
 func (v_ *View) BeginDocument() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("beginDocument"))
 	})
@@ -2304,6 +2513,7 @@ func (v_ *View) BeginDocument() {
 
 // EndDocument ends document.
 func (v_ *View) EndDocument() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("endDocument"))
 	})
@@ -2312,6 +2522,7 @@ func (v_ *View) EndDocument() {
 
 // BeginPageInRectAtPlacement begins page in rect at placement.
 func (v_ *View) BeginPageInRectAtPlacement(rect corefoundation.CGRect, location corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("beginPageInRect:atPlacement:"), rect, location)
 	})
@@ -2320,6 +2531,7 @@ func (v_ *View) BeginPageInRectAtPlacement(rect corefoundation.CGRect, location 
 
 // EndPage ends page.
 func (v_ *View) EndPage() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("endPage"))
 	})
@@ -2328,6 +2540,7 @@ func (v_ *View) EndPage() {
 
 // HeightAdjustLimit returns the height adjust limit.
 func (v_ *View) HeightAdjustLimit() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -2341,6 +2554,7 @@ func (v_ *View) HeightAdjustLimit() float64 {
 
 // WidthAdjustLimit returns the width adjust limit.
 func (v_ *View) WidthAdjustLimit() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -2353,12 +2567,13 @@ func (v_ *View) WidthAdjustLimit() float64 {
 }
 
 // PageHeader returns the page header.
-func (v_ *View) PageHeader() obj.Object {
-	var _mainthread0 obj.Object
+func (v_ *View) PageHeader() *foundation.AttributedString {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pageHeader"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2366,12 +2581,13 @@ func (v_ *View) PageHeader() obj.Object {
 }
 
 // PageFooter returns the page footer.
-func (v_ *View) PageFooter() obj.Object {
-	var _mainthread0 obj.Object
+func (v_ *View) PageFooter() *foundation.AttributedString {
+	defer runtime.KeepAlive(v_)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pageFooter"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2380,6 +2596,7 @@ func (v_ *View) PageFooter() obj.Object {
 
 // PrintJobTitle returns the print job title.
 func (v_ *View) PrintJobTitle() string {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -2395,15 +2612,17 @@ func (v_ *View) PrintJobTitle() string {
 }
 
 // RegisterForDraggedTypes registers for dragged types.
-func (v_ *View) RegisterForDraggedTypes(newTypes []obj.Object) {
+func (v_ *View) RegisterForDraggedTypes(newTypes []*foundation.String) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // UnregisterDraggedTypes unregisters dragged types.
 func (v_ *View) UnregisterDraggedTypes() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unregisterDraggedTypes"))
 	})
@@ -2414,6 +2633,7 @@ func (v_ *View) UnregisterDraggedTypes() {
 //
 // RegisteredDraggedTypes returns the collection as a Go slice.
 func (v_ *View) RegisteredDraggedTypes() []obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -2426,6 +2646,9 @@ func (v_ *View) RegisteredDraggedTypes() []obj.Object {
 
 // EnterFullScreenModeWithOptions wraps the corresponding Objective-C method.
 func (v_ *View) EnterFullScreenModeWithOptions(screen *Screen, options obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(screen)
+	defer runtime.KeepAlive(options)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2439,6 +2662,8 @@ func (v_ *View) EnterFullScreenModeWithOptions(screen *Screen, options obj.Objec
 
 // ExitFullScreenModeWithOptions wraps the corresponding Objective-C method.
 func (v_ *View) ExitFullScreenModeWithOptions(options obj.Object) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
 	})
@@ -2447,6 +2672,7 @@ func (v_ *View) ExitFullScreenModeWithOptions(options obj.Object) {
 
 // IsInFullScreenMode reports whether the object is in full screen mode.
 func (v_ *View) IsInFullScreenMode() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2460,6 +2686,8 @@ func (v_ *View) IsInFullScreenMode() bool {
 
 // ShowDefinitionForAttributedStringAtPoint shows definition for attributed string at point.
 func (v_ *View) ShowDefinitionForAttributedStringAtPoint(attrString obj.Object, textBaselineOrigin corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(attrString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("showDefinitionForAttributedString:atPoint:"), objref.IDOf(attrString), textBaselineOrigin)
 	})
@@ -2468,6 +2696,7 @@ func (v_ *View) ShowDefinitionForAttributedStringAtPoint(attrString obj.Object, 
 
 // IsDrawingFindIndicator reports whether the object is drawing find indicator.
 func (v_ *View) IsDrawingFindIndicator() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2481,6 +2710,8 @@ func (v_ *View) IsDrawingFindIndicator() bool {
 
 // AddGestureRecognizer adds gesture recognizer.
 func (v_ *View) AddGestureRecognizer(gestureRecognizer *GestureRecognizer) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(gestureRecognizer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addGestureRecognizer:"), objref.IDOf(gestureRecognizer))
 	})
@@ -2489,6 +2720,8 @@ func (v_ *View) AddGestureRecognizer(gestureRecognizer *GestureRecognizer) {
 
 // RemoveGestureRecognizer removes gesture recognizer.
 func (v_ *View) RemoveGestureRecognizer(gestureRecognizer *GestureRecognizer) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(gestureRecognizer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeGestureRecognizer:"), objref.IDOf(gestureRecognizer))
 	})
@@ -2499,6 +2732,7 @@ func (v_ *View) RemoveGestureRecognizer(gestureRecognizer *GestureRecognizer) {
 //
 // GestureRecognizers returns the collection as a Go slice.
 func (v_ *View) GestureRecognizers() []*GestureRecognizer {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []*GestureRecognizer
 	purego.Main(func() {
 		_mainthread0 = func() []*GestureRecognizer {
@@ -2511,6 +2745,7 @@ func (v_ *View) GestureRecognizers() []*GestureRecognizer {
 
 // AllowedTouchTypes returns the allowed touch types.
 func (v_ *View) AllowedTouchTypes() TouchTypeMask {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 TouchTypeMask
 	purego.Main(func() {
 		_mainthread0 = func() TouchTypeMask {
@@ -2524,6 +2759,7 @@ func (v_ *View) AllowedTouchTypes() TouchTypeMask {
 
 // SafeAreaInsets returns the safe area insets.
 func (v_ *View) SafeAreaInsets() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -2537,6 +2773,7 @@ func (v_ *View) SafeAreaInsets() foundation.NSEdgeInsets {
 
 // AdditionalSafeAreaInsets returns the additional safe area insets.
 func (v_ *View) AdditionalSafeAreaInsets() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -2550,6 +2787,7 @@ func (v_ *View) AdditionalSafeAreaInsets() foundation.NSEdgeInsets {
 
 // SafeAreaLayoutGuide returns the safe area layout guide.
 func (v_ *View) SafeAreaLayoutGuide() *LayoutGuide {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutGuide
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutGuide {
@@ -2563,6 +2801,7 @@ func (v_ *View) SafeAreaLayoutGuide() *LayoutGuide {
 
 // SafeAreaRect returns the safe area rect.
 func (v_ *View) SafeAreaRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2576,6 +2815,7 @@ func (v_ *View) SafeAreaRect() corefoundation.CGRect {
 
 // LayoutMarginsGuide returns the layout margins guide.
 func (v_ *View) LayoutMarginsGuide() *LayoutGuide {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutGuide
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutGuide {
@@ -2589,6 +2829,7 @@ func (v_ *View) LayoutMarginsGuide() *LayoutGuide {
 
 // PrefersCompactControlSizeMetrics reports whether when this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
 func (v_ *View) PrefersCompactControlSizeMetrics() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2602,6 +2843,8 @@ func (v_ *View) PrefersCompactControlSizeMetrics() bool {
 
 // AddTrackingArea adds tracking area.
 func (v_ *View) AddTrackingArea(trackingArea *TrackingArea) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(trackingArea)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addTrackingArea:"), objref.IDOf(trackingArea))
 	})
@@ -2610,6 +2853,8 @@ func (v_ *View) AddTrackingArea(trackingArea *TrackingArea) {
 
 // RemoveTrackingArea removes tracking area.
 func (v_ *View) RemoveTrackingArea(trackingArea *TrackingArea) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(trackingArea)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeTrackingArea:"), objref.IDOf(trackingArea))
 	})
@@ -2618,6 +2863,7 @@ func (v_ *View) RemoveTrackingArea(trackingArea *TrackingArea) {
 
 // UpdateTrackingAreas updates tracking areas.
 func (v_ *View) UpdateTrackingAreas() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateTrackingAreas"))
 	})
@@ -2626,6 +2872,8 @@ func (v_ *View) UpdateTrackingAreas() {
 
 // AddCursorRectCursor adds cursor rect cursor.
 func (v_ *View) AddCursorRectCursor(rect corefoundation.CGRect, object *Cursor) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addCursorRect:cursor:"), rect, objref.IDOf(object))
 	})
@@ -2634,6 +2882,8 @@ func (v_ *View) AddCursorRectCursor(rect corefoundation.CGRect, object *Cursor) 
 
 // RemoveCursorRectCursor removes cursor rect cursor.
 func (v_ *View) RemoveCursorRectCursor(rect corefoundation.CGRect, object *Cursor) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeCursorRect:cursor:"), rect, objref.IDOf(object))
 	})
@@ -2642,6 +2892,7 @@ func (v_ *View) RemoveCursorRectCursor(rect corefoundation.CGRect, object *Curso
 
 // DiscardCursorRects wraps the corresponding Objective-C method.
 func (v_ *View) DiscardCursorRects() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("discardCursorRects"))
 	})
@@ -2650,6 +2901,7 @@ func (v_ *View) DiscardCursorRects() {
 
 // ResetCursorRects resets cursor rects.
 func (v_ *View) ResetCursorRects() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resetCursorRects"))
 	})
@@ -2658,6 +2910,8 @@ func (v_ *View) ResetCursorRects() {
 
 // AddTrackingRectOwnerUserDataAssumeInside adds tracking rect owner user data assume inside.
 func (v_ *View) AddTrackingRectOwnerUserDataAssumeInside(rect corefoundation.CGRect, owner obj.Object, data unsafe.Pointer, flag bool) int {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(owner)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -2671,6 +2925,7 @@ func (v_ *View) AddTrackingRectOwnerUserDataAssumeInside(rect corefoundation.CGR
 
 // RemoveTrackingRect removes tracking rect.
 func (v_ *View) RemoveTrackingRect(tag int) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeTrackingRect:"), tag)
 	})
@@ -2681,6 +2936,7 @@ func (v_ *View) RemoveTrackingRect(tag int) {
 //
 // TrackingAreas returns the collection as a Go slice.
 func (v_ *View) TrackingAreas() []*TrackingArea {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []*TrackingArea
 	purego.Main(func() {
 		_mainthread0 = func() []*TrackingArea {
@@ -2693,6 +2949,11 @@ func (v_ *View) TrackingAreas() []*TrackingArea {
 
 // DragImageAtOffsetEventPasteboardSourceSlideBack wraps the corresponding Objective-C method.
 func (v_ *View) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, viewLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(pboard)
+	defer runtime.KeepAlive(sourceObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:"), objref.IDOf(image), viewLocation, initialOffset, objref.IDOf(event), objref.IDOf(pboard), objref.IDOf(sourceObj), slideFlag)
 	})
@@ -2701,6 +2962,8 @@ func (v_ *View) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, vi
 
 // DragFileFromRectSlideBackEvent wraps the corresponding Objective-C method.
 func (v_ *View) DragFileFromRectSlideBackEvent(filename string, rect corefoundation.CGRect, flag bool, event *Event) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2714,6 +2977,9 @@ func (v_ *View) DragFileFromRectSlideBackEvent(filename string, rect corefoundat
 
 // DragPromisedFilesOfTypesFromRectSourceSlideBackEvent wraps the corresponding Objective-C method.
 func (v_ *View) DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray []string, rect corefoundation.CGRect, sourceObject obj.Object, flag bool, event *Event) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(sourceObject)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2727,6 +2993,7 @@ func (v_ *View) DragPromisedFilesOfTypesFromRectSourceSlideBackEvent(typeArray [
 
 // ConvertPointToBase wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -2740,6 +3007,7 @@ func (v_ *View) ConvertPointToBase(point corefoundation.CGPoint) corefoundation.
 
 // ConvertPointFromBase wraps the corresponding Objective-C method.
 func (v_ *View) ConvertPointFromBase(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -2753,6 +3021,7 @@ func (v_ *View) ConvertPointFromBase(point corefoundation.CGPoint) corefoundatio
 
 // ConvertSizeToBase wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeToBase(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2766,6 +3035,7 @@ func (v_ *View) ConvertSizeToBase(size corefoundation.CGSize) corefoundation.CGS
 
 // ConvertSizeFromBase wraps the corresponding Objective-C method.
 func (v_ *View) ConvertSizeFromBase(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2779,6 +3049,7 @@ func (v_ *View) ConvertSizeFromBase(size corefoundation.CGSize) corefoundation.C
 
 // ConvertRectToBase wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectToBase(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2792,6 +3063,7 @@ func (v_ *View) ConvertRectToBase(rect corefoundation.CGRect) corefoundation.CGR
 
 // ConvertRectFromBase wraps the corresponding Objective-C method.
 func (v_ *View) ConvertRectFromBase(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -2805,6 +3077,7 @@ func (v_ *View) ConvertRectFromBase(rect corefoundation.CGRect) corefoundation.C
 
 // ShouldDrawColor wraps the corresponding Objective-C method.
 func (v_ *View) ShouldDrawColor() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2818,6 +3091,7 @@ func (v_ *View) ShouldDrawColor() bool {
 
 // GState returns the g state.
 func (v_ *View) GState() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -2831,6 +3105,7 @@ func (v_ *View) GState() int {
 
 // AllocateGState wraps the corresponding Objective-C method.
 func (v_ *View) AllocateGState() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("allocateGState"))
 	})
@@ -2839,6 +3114,7 @@ func (v_ *View) AllocateGState() {
 
 // ReleaseGState wraps the corresponding Objective-C method.
 func (v_ *View) ReleaseGState() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("releaseGState"))
 	})
@@ -2847,6 +3123,7 @@ func (v_ *View) ReleaseGState() {
 
 // SetUpGState wraps the corresponding Objective-C method.
 func (v_ *View) SetUpGState() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setUpGState"))
 	})
@@ -2855,6 +3132,7 @@ func (v_ *View) SetUpGState() {
 
 // RenewGState wraps the corresponding Objective-C method.
 func (v_ *View) RenewGState() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("renewGState"))
 	})
@@ -2863,6 +3141,7 @@ func (v_ *View) RenewGState() {
 
 // WritingToolsCoordinator returns the writing tools coordinator.
 func (v_ *View) WritingToolsCoordinator() *WritingToolsCoordinator {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *WritingToolsCoordinator
 	purego.Main(func() {
 		_mainthread0 = func() *WritingToolsCoordinator {
@@ -2876,6 +3155,7 @@ func (v_ *View) WritingToolsCoordinator() *WritingToolsCoordinator {
 
 // EnclosingMenuItem returns the enclosing menu item.
 func (v_ *View) EnclosingMenuItem() *MenuItem {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -2889,6 +3169,7 @@ func (v_ *View) EnclosingMenuItem() *MenuItem {
 
 // CandidateListTouchBarItem returns the candidate list touch bar item.
 func (v_ *View) CandidateListTouchBarItem() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -2902,6 +3183,8 @@ func (v_ *View) CandidateListTouchBarItem() obj.Object {
 
 // ReflectScrolledClipView wraps the corresponding Objective-C method.
 func (v_ *View) ReflectScrolledClipView(clipView *ClipView) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(clipView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("reflectScrolledClipView:"), objref.IDOf(clipView))
 	})
@@ -2910,6 +3193,8 @@ func (v_ *View) ReflectScrolledClipView(clipView *ClipView) {
 
 // ScrollClipViewToPoint scrolls clip view to point.
 func (v_ *View) ScrollClipViewToPoint(clipView *ClipView, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(clipView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollClipView:toPoint:"), objref.IDOf(clipView), point)
 	})
@@ -2918,6 +3203,8 @@ func (v_ *View) ScrollClipViewToPoint(clipView *ClipView, point corefoundation.C
 
 // AddConstraint adds constraint.
 func (v_ *View) AddConstraint(constraint *LayoutConstraint) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(constraint)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addConstraint:"), objref.IDOf(constraint))
 	})
@@ -2926,6 +3213,7 @@ func (v_ *View) AddConstraint(constraint *LayoutConstraint) {
 
 // AddConstraints adds constraints.
 func (v_ *View) AddConstraints(constraints []*LayoutConstraint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -2934,6 +3222,8 @@ func (v_ *View) AddConstraints(constraints []*LayoutConstraint) {
 
 // RemoveConstraint removes constraint.
 func (v_ *View) RemoveConstraint(constraint *LayoutConstraint) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(constraint)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeConstraint:"), objref.IDOf(constraint))
 	})
@@ -2942,6 +3232,7 @@ func (v_ *View) RemoveConstraint(constraint *LayoutConstraint) {
 
 // RemoveConstraints removes constraints.
 func (v_ *View) RemoveConstraints(constraints []*LayoutConstraint) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -2950,6 +3241,7 @@ func (v_ *View) RemoveConstraints(constraints []*LayoutConstraint) {
 
 // LeadingAnchor returns the leading anchor.
 func (v_ *View) LeadingAnchor() *LayoutXAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutXAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutXAxisAnchor {
@@ -2963,6 +3255,7 @@ func (v_ *View) LeadingAnchor() *LayoutXAxisAnchor {
 
 // TrailingAnchor returns the trailing anchor.
 func (v_ *View) TrailingAnchor() *LayoutXAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutXAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutXAxisAnchor {
@@ -2976,6 +3269,7 @@ func (v_ *View) TrailingAnchor() *LayoutXAxisAnchor {
 
 // LeftAnchor returns the left anchor.
 func (v_ *View) LeftAnchor() *LayoutXAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutXAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutXAxisAnchor {
@@ -2989,6 +3283,7 @@ func (v_ *View) LeftAnchor() *LayoutXAxisAnchor {
 
 // RightAnchor returns the right anchor.
 func (v_ *View) RightAnchor() *LayoutXAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutXAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutXAxisAnchor {
@@ -3002,6 +3297,7 @@ func (v_ *View) RightAnchor() *LayoutXAxisAnchor {
 
 // TopAnchor returns the top anchor.
 func (v_ *View) TopAnchor() *LayoutYAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutYAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutYAxisAnchor {
@@ -3015,6 +3311,7 @@ func (v_ *View) TopAnchor() *LayoutYAxisAnchor {
 
 // BottomAnchor returns the bottom anchor.
 func (v_ *View) BottomAnchor() *LayoutYAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutYAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutYAxisAnchor {
@@ -3028,6 +3325,7 @@ func (v_ *View) BottomAnchor() *LayoutYAxisAnchor {
 
 // WidthAnchor returns the width anchor.
 func (v_ *View) WidthAnchor() *LayoutDimension {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutDimension
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutDimension {
@@ -3041,6 +3339,7 @@ func (v_ *View) WidthAnchor() *LayoutDimension {
 
 // HeightAnchor returns the height anchor.
 func (v_ *View) HeightAnchor() *LayoutDimension {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutDimension
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutDimension {
@@ -3054,6 +3353,7 @@ func (v_ *View) HeightAnchor() *LayoutDimension {
 
 // CenterXAnchor returns the center x anchor.
 func (v_ *View) CenterXAnchor() *LayoutXAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutXAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutXAxisAnchor {
@@ -3067,6 +3367,7 @@ func (v_ *View) CenterXAnchor() *LayoutXAxisAnchor {
 
 // CenterYAnchor returns the center y anchor.
 func (v_ *View) CenterYAnchor() *LayoutYAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutYAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutYAxisAnchor {
@@ -3080,6 +3381,7 @@ func (v_ *View) CenterYAnchor() *LayoutYAxisAnchor {
 
 // FirstBaselineAnchor returns the first baseline anchor.
 func (v_ *View) FirstBaselineAnchor() *LayoutYAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutYAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutYAxisAnchor {
@@ -3093,6 +3395,7 @@ func (v_ *View) FirstBaselineAnchor() *LayoutYAxisAnchor {
 
 // LastBaselineAnchor returns the last baseline anchor.
 func (v_ *View) LastBaselineAnchor() *LayoutYAxisAnchor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *LayoutYAxisAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutYAxisAnchor {
@@ -3108,6 +3411,7 @@ func (v_ *View) LastBaselineAnchor() *LayoutYAxisAnchor {
 //
 // Constraints returns the collection as a Go slice.
 func (v_ *View) Constraints() []*LayoutConstraint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []*LayoutConstraint
 	purego.Main(func() {
 		_mainthread0 = func() []*LayoutConstraint {
@@ -3120,6 +3424,7 @@ func (v_ *View) Constraints() []*LayoutConstraint {
 
 // UpdateConstraintsForSubtreeIfNeeded updates constraints for subtree if needed.
 func (v_ *View) UpdateConstraintsForSubtreeIfNeeded() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateConstraintsForSubtreeIfNeeded"))
 	})
@@ -3128,6 +3433,7 @@ func (v_ *View) UpdateConstraintsForSubtreeIfNeeded() {
 
 // UpdateConstraints updates constraints.
 func (v_ *View) UpdateConstraints() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("updateConstraints"))
 	})
@@ -3136,6 +3442,7 @@ func (v_ *View) UpdateConstraints() {
 
 // NeedsUpdateConstraints wraps the corresponding Objective-C method.
 func (v_ *View) NeedsUpdateConstraints() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3149,6 +3456,7 @@ func (v_ *View) NeedsUpdateConstraints() bool {
 
 // TranslatesAutoresizingMaskIntoConstraints wraps the corresponding Objective-C method.
 func (v_ *View) TranslatesAutoresizingMaskIntoConstraints() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3162,6 +3470,7 @@ func (v_ *View) TranslatesAutoresizingMaskIntoConstraints() bool {
 
 // AlignmentRectForFrame wraps the corresponding Objective-C method.
 func (v_ *View) AlignmentRectForFrame(frame corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -3175,6 +3484,7 @@ func (v_ *View) AlignmentRectForFrame(frame corefoundation.CGRect) corefoundatio
 
 // FrameForAlignmentRect wraps the corresponding Objective-C method.
 func (v_ *View) FrameForAlignmentRect(alignmentRect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -3188,6 +3498,7 @@ func (v_ *View) FrameForAlignmentRect(alignmentRect corefoundation.CGRect) coref
 
 // InvalidateIntrinsicContentSize invalidates intrinsic content size.
 func (v_ *View) InvalidateIntrinsicContentSize() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("invalidateIntrinsicContentSize"))
 	})
@@ -3196,6 +3507,7 @@ func (v_ *View) InvalidateIntrinsicContentSize() {
 
 // ContentHuggingPriorityForOrientation wraps the corresponding Objective-C method.
 func (v_ *View) ContentHuggingPriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -3209,6 +3521,7 @@ func (v_ *View) ContentHuggingPriorityForOrientation(orientation LayoutConstrain
 
 // SetContentHuggingPriorityForOrientation wraps the corresponding Objective-C method.
 func (v_ *View) SetContentHuggingPriorityForOrientation(priority float32, orientation LayoutConstraintOrientation) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setContentHuggingPriority:forOrientation:"), priority, orientation)
 	})
@@ -3217,6 +3530,7 @@ func (v_ *View) SetContentHuggingPriorityForOrientation(priority float32, orient
 
 // ContentCompressionResistancePriorityForOrientation wraps the corresponding Objective-C method.
 func (v_ *View) ContentCompressionResistancePriorityForOrientation(orientation LayoutConstraintOrientation) float32 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -3230,6 +3544,7 @@ func (v_ *View) ContentCompressionResistancePriorityForOrientation(orientation L
 
 // SetContentCompressionResistancePriorityForOrientation wraps the corresponding Objective-C method.
 func (v_ *View) SetContentCompressionResistancePriorityForOrientation(priority float32, orientation LayoutConstraintOrientation) {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setContentCompressionResistancePriority:forOrientation:"), priority, orientation)
 	})
@@ -3238,6 +3553,7 @@ func (v_ *View) SetContentCompressionResistancePriorityForOrientation(priority f
 
 // AlignmentRectInsets returns the alignment rect insets.
 func (v_ *View) AlignmentRectInsets() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -3251,6 +3567,7 @@ func (v_ *View) AlignmentRectInsets() foundation.NSEdgeInsets {
 
 // FirstBaselineOffsetFromTop returns the first baseline offset from top.
 func (v_ *View) FirstBaselineOffsetFromTop() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3264,6 +3581,7 @@ func (v_ *View) FirstBaselineOffsetFromTop() float64 {
 
 // LastBaselineOffsetFromBottom returns the last baseline offset from bottom.
 func (v_ *View) LastBaselineOffsetFromBottom() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3277,6 +3595,7 @@ func (v_ *View) LastBaselineOffsetFromBottom() float64 {
 
 // BaselineOffsetFromBottom returns the baseline offset from bottom.
 func (v_ *View) BaselineOffsetFromBottom() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3290,6 +3609,7 @@ func (v_ *View) BaselineOffsetFromBottom() float64 {
 
 // IntrinsicContentSize returns the intrinsic content size.
 func (v_ *View) IntrinsicContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -3303,6 +3623,7 @@ func (v_ *View) IntrinsicContentSize() corefoundation.CGSize {
 
 // IsHorizontalContentSizeConstraintActive reports whether the object is horizontal content size constraint active.
 func (v_ *View) IsHorizontalContentSizeConstraintActive() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3316,6 +3637,7 @@ func (v_ *View) IsHorizontalContentSizeConstraintActive() bool {
 
 // IsVerticalContentSizeConstraintActive reports whether the object is vertical content size constraint active.
 func (v_ *View) IsVerticalContentSizeConstraintActive() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3329,6 +3651,7 @@ func (v_ *View) IsVerticalContentSizeConstraintActive() bool {
 
 // FittingSize returns the fitting size.
 func (v_ *View) FittingSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -3342,6 +3665,7 @@ func (v_ *View) FittingSize() corefoundation.CGSize {
 
 // ConstraintsAffectingLayoutForOrientation wraps the corresponding Objective-C method.
 func (v_ *View) ConstraintsAffectingLayoutForOrientation(orientation LayoutConstraintOrientation) []*LayoutConstraint {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []*LayoutConstraint
 	purego.Main(func() {
 		_mainthread0 = func() []*LayoutConstraint {
@@ -3355,6 +3679,7 @@ func (v_ *View) ConstraintsAffectingLayoutForOrientation(orientation LayoutConst
 
 // ExerciseAmbiguityInLayout wraps the corresponding Objective-C method.
 func (v_ *View) ExerciseAmbiguityInLayout() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("exerciseAmbiguityInLayout"))
 	})
@@ -3363,6 +3688,7 @@ func (v_ *View) ExerciseAmbiguityInLayout() {
 
 // HasAmbiguousLayout reports whether the object has ambiguous layout.
 func (v_ *View) HasAmbiguousLayout() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3376,6 +3702,8 @@ func (v_ *View) HasAmbiguousLayout() bool {
 
 // AddLayoutGuide adds layout guide.
 func (v_ *View) AddLayoutGuide(guide *LayoutGuide) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(guide)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("addLayoutGuide:"), objref.IDOf(guide))
 	})
@@ -3384,6 +3712,8 @@ func (v_ *View) AddLayoutGuide(guide *LayoutGuide) {
 
 // RemoveLayoutGuide removes layout guide.
 func (v_ *View) RemoveLayoutGuide(guide *LayoutGuide) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(guide)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("removeLayoutGuide:"), objref.IDOf(guide))
 	})
@@ -3394,6 +3724,7 @@ func (v_ *View) RemoveLayoutGuide(guide *LayoutGuide) {
 //
 // LayoutGuides returns the collection as a Go slice.
 func (v_ *View) LayoutGuides() []*LayoutGuide {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 []*LayoutGuide
 	purego.Main(func() {
 		_mainthread0 = func() []*LayoutGuide {
@@ -3406,6 +3737,8 @@ func (v_ *View) LayoutGuides() []*LayoutGuide {
 
 // LayoutGuideForLayoutRegion wraps the corresponding Objective-C method.
 func (v_ *View) LayoutGuideForLayoutRegion(layoutRegion *ViewLayoutRegion) *LayoutGuide {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(layoutRegion)
 	var _mainthread0 *LayoutGuide
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutGuide {
@@ -3419,6 +3752,8 @@ func (v_ *View) LayoutGuideForLayoutRegion(layoutRegion *ViewLayoutRegion) *Layo
 
 // EdgeInsetsForLayoutRegion wraps the corresponding Objective-C method.
 func (v_ *View) EdgeInsetsForLayoutRegion(layoutRegion *ViewLayoutRegion) foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(layoutRegion)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -3432,6 +3767,8 @@ func (v_ *View) EdgeInsetsForLayoutRegion(layoutRegion *ViewLayoutRegion) founda
 
 // RectForLayoutRegion wraps the corresponding Objective-C method.
 func (v_ *View) RectForLayoutRegion(layoutRegion *ViewLayoutRegion) corefoundation.CGRect {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(layoutRegion)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -3445,6 +3782,9 @@ func (v_ *View) RectForLayoutRegion(layoutRegion *ViewLayoutRegion) corefoundati
 
 // RulerViewShouldMoveMarker wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewShouldMoveMarker(ruler *RulerView, marker *RulerMarker) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3458,6 +3798,9 @@ func (v_ *View) RulerViewShouldMoveMarker(ruler *RulerView, marker *RulerMarker)
 
 // RulerViewWillMoveMarkerToLocation wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewWillMoveMarkerToLocation(ruler *RulerView, marker *RulerMarker, location float64) float64 {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3471,6 +3814,9 @@ func (v_ *View) RulerViewWillMoveMarkerToLocation(ruler *RulerView, marker *Rule
 
 // RulerViewDidMoveMarker wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewDidMoveMarker(ruler *RulerView, marker *RulerMarker) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:didMoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 	})
@@ -3479,6 +3825,9 @@ func (v_ *View) RulerViewDidMoveMarker(ruler *RulerView, marker *RulerMarker) {
 
 // RulerViewShouldRemoveMarker wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewShouldRemoveMarker(ruler *RulerView, marker *RulerMarker) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3492,6 +3841,9 @@ func (v_ *View) RulerViewShouldRemoveMarker(ruler *RulerView, marker *RulerMarke
 
 // RulerViewDidRemoveMarker wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewDidRemoveMarker(ruler *RulerView, marker *RulerMarker) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:didRemoveMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 	})
@@ -3500,6 +3852,9 @@ func (v_ *View) RulerViewDidRemoveMarker(ruler *RulerView, marker *RulerMarker) 
 
 // RulerViewShouldAddMarker wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewShouldAddMarker(ruler *RulerView, marker *RulerMarker) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3513,6 +3868,9 @@ func (v_ *View) RulerViewShouldAddMarker(ruler *RulerView, marker *RulerMarker) 
 
 // RulerViewWillAddMarkerAtLocation wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewWillAddMarkerAtLocation(ruler *RulerView, marker *RulerMarker, location float64) float64 {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3526,6 +3884,9 @@ func (v_ *View) RulerViewWillAddMarkerAtLocation(ruler *RulerView, marker *Ruler
 
 // RulerViewDidAddMarker wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewDidAddMarker(ruler *RulerView, marker *RulerMarker) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(marker)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:didAddMarker:"), objref.IDOf(ruler), objref.IDOf(marker))
 	})
@@ -3534,6 +3895,9 @@ func (v_ *View) RulerViewDidAddMarker(ruler *RulerView, marker *RulerMarker) {
 
 // RulerViewHandleMouseDown wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewHandleMouseDown(ruler *RulerView, event *Event) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:handleMouseDown:"), objref.IDOf(ruler), objref.IDOf(event))
 	})
@@ -3542,6 +3906,9 @@ func (v_ *View) RulerViewHandleMouseDown(ruler *RulerView, event *Event) {
 
 // RulerViewWillSetClientView wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewWillSetClientView(ruler *RulerView, newClient *View) {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
+	defer runtime.KeepAlive(newClient)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("rulerView:willSetClientView:"), objref.IDOf(ruler), objref.IDOf(newClient))
 	})
@@ -3550,6 +3917,8 @@ func (v_ *View) RulerViewWillSetClientView(ruler *RulerView, newClient *View) {
 
 // RulerViewLocationForPoint wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewLocationForPoint(ruler *RulerView, point corefoundation.CGPoint) float64 {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3563,6 +3932,8 @@ func (v_ *View) RulerViewLocationForPoint(ruler *RulerView, point corefoundation
 
 // RulerViewPointForLocation wraps the corresponding Objective-C method.
 func (v_ *View) RulerViewPointForLocation(ruler *RulerView, point float64) corefoundation.CGPoint {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(ruler)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -3576,6 +3947,7 @@ func (v_ *View) RulerViewPointForLocation(ruler *RulerView, point float64) coref
 
 // WantsBestResolutionOpenGLSurface wraps the corresponding Objective-C method.
 func (v_ *View) WantsBestResolutionOpenGLSurface() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3589,6 +3961,7 @@ func (v_ *View) WantsBestResolutionOpenGLSurface() bool {
 
 // WantsExtendedDynamicRangeOpenGLSurface wraps the corresponding Objective-C method.
 func (v_ *View) WantsExtendedDynamicRangeOpenGLSurface() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3602,6 +3975,7 @@ func (v_ *View) WantsExtendedDynamicRangeOpenGLSurface() bool {
 
 // PressureConfiguration returns the pressure configuration.
 func (v_ *View) PressureConfiguration() *PressureConfiguration {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 *PressureConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *PressureConfiguration {

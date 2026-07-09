@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterSlotStructAdopt(id objc.ID) *MTRDeviceEnerg
 
 // Description returns the object's -description text.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) Description() string {
+	defer runtime.KeepAlive(mdemcss)
 	return rt.Description(objref.IDOf(mdemcss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcss)
 	return rt.IsKind(objref.IDOf(mdemcss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) String() string {
+	defer runtime.KeepAlive(mdemcss)
 	return rt.Description(objref.IDOf(mdemcss))
 }
 
@@ -72,215 +80,252 @@ func NewMTRDeviceEnergyManagementClusterSlotStruct() *MTRDeviceEnergyManagementC
 
 // WithMinDuration sets the min duration.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(minDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 	return mdemcss
 }
 
 // WithMaxDuration sets the max duration.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(maxDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
 	return mdemcss
 }
 
 // WithDefaultDuration sets the default duration.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithDefaultDuration(defaultDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(defaultDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setDefaultDuration:"), objref.IDOf(defaultDuration))
 	return mdemcss
 }
 
 // WithElapsedSlotTime sets the elapsed slot time.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithElapsedSlotTime(elapsedSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(elapsedSlotTime)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setElapsedSlotTime:"), objref.IDOf(elapsedSlotTime))
 	return mdemcss
 }
 
 // WithRemainingSlotTime sets the remaining slot time.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithRemainingSlotTime(remainingSlotTime obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(remainingSlotTime)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setRemainingSlotTime:"), objref.IDOf(remainingSlotTime))
 	return mdemcss
 }
 
 // WithSlotIsPausable sets the slot is pausable.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithSlotIsPausable(slotIsPausable obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(slotIsPausable)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setSlotIsPausable:"), objref.IDOf(slotIsPausable))
 	return mdemcss
 }
 
 // WithMinPauseDuration sets the min pause duration.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPauseDuration(minPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(minPauseDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMinPauseDuration:"), objref.IDOf(minPauseDuration))
 	return mdemcss
 }
 
 // WithMaxPauseDuration sets the max pause duration.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPauseDuration(maxPauseDuration obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(maxPauseDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMaxPauseDuration:"), objref.IDOf(maxPauseDuration))
 	return mdemcss
 }
 
 // WithManufacturerESAState sets the manufacturer esa state.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithManufacturerESAState(manufacturerESAState obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(manufacturerESAState)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setManufacturerESAState:"), objref.IDOf(manufacturerESAState))
 	return mdemcss
 }
 
 // WithNominalPower sets the nominal power.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(nominalPower)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return mdemcss
 }
 
 // WithMinPower sets the min power.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(minPower)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 	return mdemcss
 }
 
 // WithMaxPower sets the max power.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(maxPower)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 	return mdemcss
 }
 
 // WithNominalEnergy sets the nominal energy.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithNominalEnergy(nominalEnergy obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(nominalEnergy)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setNominalEnergy:"), objref.IDOf(nominalEnergy))
 	return mdemcss
 }
 
 // WithMinPowerAdjustment sets the min power adjustment.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMinPowerAdjustment(minPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(minPowerAdjustment)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMinPowerAdjustment:"), objref.IDOf(minPowerAdjustment))
 	return mdemcss
 }
 
 // WithMaxPowerAdjustment sets the max power adjustment.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxPowerAdjustment(maxPowerAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(maxPowerAdjustment)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMaxPowerAdjustment:"), objref.IDOf(maxPowerAdjustment))
 	return mdemcss
 }
 
 // WithMinDurationAdjustment sets the min duration adjustment.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMinDurationAdjustment(minDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(minDurationAdjustment)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMinDurationAdjustment:"), objref.IDOf(minDurationAdjustment))
 	return mdemcss
 }
 
 // WithMaxDurationAdjustment sets the max duration adjustment.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) WithMaxDurationAdjustment(maxDurationAdjustment obj.Object) *MTRDeviceEnergyManagementClusterSlotStruct {
+	defer runtime.KeepAlive(maxDurationAdjustment)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setMaxDurationAdjustment:"), objref.IDOf(maxDurationAdjustment))
 	return mdemcss
 }
 
 // MinDuration returns the min duration.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("minDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxDuration returns the max duration.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("maxDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DefaultDuration returns the default duration.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) DefaultDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("defaultDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ElapsedSlotTime returns the elapsed slot time.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) ElapsedSlotTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("elapsedSlotTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RemainingSlotTime returns the remaining slot time.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) RemainingSlotTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("remainingSlotTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SlotIsPausable returns the slot is pausable.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) SlotIsPausable() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("slotIsPausable"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinPauseDuration returns the min pause duration.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinPauseDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("minPauseDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxPauseDuration returns the max pause duration.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxPauseDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("maxPauseDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ManufacturerESAState returns the manufacturer esa state.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) ManufacturerESAState() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("manufacturerESAState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NominalPower returns the nominal power.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) NominalPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("nominalPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinPower returns the min power.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("minPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxPower returns the max power.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("maxPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NominalEnergy returns the nominal energy.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) NominalEnergy() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("nominalEnergy"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Costs returns the costs.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) Costs() obj.Object {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("costs"))
 	return obj.Wrap(_r)
 }
 
 // SetCosts wraps the corresponding Objective-C method.
 func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) SetCosts(costs obj.Object) {
+	defer runtime.KeepAlive(mdemcss)
+	defer runtime.KeepAlive(costs)
 	objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("setCosts:"), objref.IDOf(costs))
 }
 
 // MinPowerAdjustment returns the min power adjustment.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinPowerAdjustment() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("minPowerAdjustment"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxPowerAdjustment returns the max power adjustment.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxPowerAdjustment() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("maxPowerAdjustment"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinDurationAdjustment returns the min duration adjustment.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MinDurationAdjustment() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("minDurationAdjustment"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxDurationAdjustment returns the max duration adjustment.
-func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() obj.Object {
+func (mdemcss *MTRDeviceEnergyManagementClusterSlotStruct) MaxDurationAdjustment() *foundation.Number {
+	defer runtime.KeepAlive(mdemcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcss), objc.RegisterName("maxDurationAdjustment"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

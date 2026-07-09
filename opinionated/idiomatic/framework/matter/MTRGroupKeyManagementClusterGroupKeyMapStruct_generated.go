@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGroupKeyManagementClusterGroupKeyMapStructAdopt(id objc.ID) *MTRGroupKey
 
 // Description returns the object's -description text.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) Description() string {
+	defer runtime.KeepAlive(mgkmcgkms)
 	return rt.Description(objref.IDOf(mgkmcgkms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgkmcgkms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgkmcgkms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgkmcgkms)
 	return rt.IsKind(objref.IDOf(mgkmcgkms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) String() string {
+	defer runtime.KeepAlive(mgkmcgkms)
 	return rt.Description(objref.IDOf(mgkmcgkms))
 }
 
@@ -72,36 +80,42 @@ func NewMTRGroupKeyManagementClusterGroupKeyMapStruct() *MTRGroupKeyManagementCl
 
 // WithGroupID sets the group ID.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupID(groupId obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	defer runtime.KeepAlive(groupId)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return mgkmcgkms
 }
 
 // WithGroupKeySetID sets the group key set ID.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	defer runtime.KeepAlive(groupKeySetID)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return mgkmcgkms
 }
 
 // WithFabricIndex sets the fabric index.
 func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mgkmcgkms
 }
 
 // GroupID returns the group ID.
-func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupID() obj.Object {
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupID() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkms)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("groupId"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GroupKeySetID returns the group key set ID.
-func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupKeySetID() obj.Object {
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupKeySetID() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkms)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("groupKeySetID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) FabricIndex() obj.Object {
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkms)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

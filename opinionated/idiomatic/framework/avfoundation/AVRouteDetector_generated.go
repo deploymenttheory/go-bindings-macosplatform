@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func routeDetectorAdopt(id objc.ID) *RouteDetector {
 
 // Description returns the object's -description text.
 func (rd *RouteDetector) Description() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rd *RouteDetector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rd *RouteDetector) IsKind(className string) bool {
+	defer runtime.KeepAlive(rd)
 	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rd *RouteDetector) String() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
@@ -80,12 +87,14 @@ func (rd *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *
 
 // IsRouteDetectionEnabled reports whether route detection is enabled. The default value is false. Route detection significantly increases power consumption and must be turned off when it's no longer needed.
 func (rd *RouteDetector) IsRouteDetectionEnabled() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isRouteDetectionEnabled"))
 	return _r
 }
 
 // MultipleRoutesDetected reports whether this property is true if, in addition to the local playback route, at least one more playback route has been detected. If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
 func (rd *RouteDetector) MultipleRoutesDetected() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("multipleRoutesDetected"))
 	return _r
 }

@@ -5,9 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,14 +51,16 @@ func assetReaderTrackOutputAdopt(id objc.ID) *AssetReaderTrackOutput {
 }
 
 // NewAssetReaderTrackOutputWithTrackOutputSettings creates an object that reads media data from an asset track.
-func NewAssetReaderTrackOutputWithTrackOutputSettings(track *AssetTrack, outputSettings obj.Object) *AssetReaderTrackOutput {
+func NewAssetReaderTrackOutputWithTrackOutputSettings(track *AssetTrack, outputSettings map[string]obj.Object) *AssetReaderTrackOutput {
+	defer runtime.KeepAlive(track)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderTrackOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:outputSettings:"), objref.IDOf(track), objref.IDOf(outputSettings))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:outputSettings:"), objref.IDOf(track), rt.MapToDict(outputSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return assetReaderTrackOutputAdopt(_id)
 }
 
 // WithAudioTimePitchAlgorithm sets the processing algorithm to use for scaled audio edits.
 func (arto *AssetReaderTrackOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetReaderTrackOutput {
+	defer runtime.KeepAlive(audioTimePitchAlgorithm)
 	objc.Send[objc.ID](objref.IDOf(arto), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return arto
 }
@@ -73,20 +79,23 @@ func (arto *AssetReaderTrackOutput) WithSupportsRandomAccess(supportsRandomAcces
 
 // Track returns the track from which the receiver reads sample buffers. The value of this property is an AVAssetTrack owned by the target AVAssetReader's asset.
 func (arto *AssetReaderTrackOutput) Track() *AssetTrack {
+	defer runtime.KeepAlive(arto)
 	_r := objc.Send[objc.ID](objref.IDOf(arto), objc.RegisterName("track"))
 	return AssetTrackFromID(_r)
 }
 
 // OutputSettings returns the output settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for audio tracks or AVVideoSettings.h for video tracks.  A value of nil indicates that the receiver will vend samples in their original format as stored in the target track.
-func (arto *AssetReaderTrackOutput) OutputSettings() obj.Object {
+func (arto *AssetReaderTrackOutput) OutputSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(arto)
 	_r := objc.Send[objc.ID](objref.IDOf(arto), objc.RegisterName("outputSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AudioTimePitchAlgorithm indicates the processing algorithm used to manage audio pitch for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral. This property throws an exception for any of the following reasons: - a value is set value after reading has started - a value is set other than AVAudioTimePitchAlgorithmSpectral, AVAudioTimePitchAlgorithmTimeDomain, or AVAudioTimePitchAlgorithmVarispeed.
-func (arto *AssetReaderTrackOutput) AudioTimePitchAlgorithm() obj.Object {
+func (arto *AssetReaderTrackOutput) AudioTimePitchAlgorithm() *foundation.String {
+	defer runtime.KeepAlive(arto)
 	_r := objc.Send[objc.ID](objref.IDOf(arto), objc.RegisterName("audioTimePitchAlgorithm"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ AssetReaderOutputProvider = (*AssetReaderTrackOutput)(nil)

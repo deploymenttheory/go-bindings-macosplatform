@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,7 +63,18 @@ func (ag *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationG
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (ag *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return ag
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (ag *AnimationGroup) WithDelegate(delegate AnimationDelegate) *AnimationGroup {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ag), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ag), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return ag
 }
 
@@ -74,6 +88,7 @@ func (ag *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *Ani
 //
 // Animations returns the collection as a Go slice.
 func (ag *AnimationGroup) Animations() []*Animation {
+	defer runtime.KeepAlive(ag)
 	_arr := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("animations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Animation { return AnimationFromID(_id) })
 }

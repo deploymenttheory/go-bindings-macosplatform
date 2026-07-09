@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,16 +73,19 @@ func (de *DOMEvent) WithCancelBubble(cancelBubble bool) *DOMEvent {
 
 // StopPropagation stops propagation.
 func (de *DOMEvent) StopPropagation() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("stopPropagation"))
 }
 
 // PreventDefault wraps the corresponding Objective-C method.
 func (de *DOMEvent) PreventDefault() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("preventDefault"))
 }
 
 // Type returns the type.
 func (de *DOMEvent) Type() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -90,36 +95,42 @@ func (de *DOMEvent) Type() string {
 
 // EventPhase returns the event phase.
 func (de *DOMEvent) EventPhase() uint16 {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[uint16](objref.IDOf(de), objc.RegisterName("eventPhase"))
 	return _r
 }
 
 // Bubbles wraps the corresponding Objective-C method.
 func (de *DOMEvent) Bubbles() bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("bubbles"))
 	return _r
 }
 
 // Cancelable wraps the corresponding Objective-C method.
 func (de *DOMEvent) Cancelable() bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("cancelable"))
 	return _r
 }
 
 // TimeStamp returns the time stamp.
 func (de *DOMEvent) TimeStamp() uint64 {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[uint64](objref.IDOf(de), objc.RegisterName("timeStamp"))
 	return _r
 }
 
 // ReturnValue wraps the corresponding Objective-C method.
 func (de *DOMEvent) ReturnValue() bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("returnValue"))
 	return _r
 }
 
 // CancelBubble wraps the corresponding Objective-C method.
 func (de *DOMEvent) CancelBubble() bool {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("cancelBubble"))
 	return _r
 }

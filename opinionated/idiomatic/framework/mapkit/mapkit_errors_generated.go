@@ -8,11 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the MapKit error MKErrorUnknown.
-var ErrUnknown = errkit.New("MKErrorDomain", 1)
+// ErrDecodingFailed matches the MapKit error MKErrorDecodingFailed.
+var ErrDecodingFailed = errkit.New("MKErrorDomain", 6)
 
-// ErrServerFailure matches the MapKit error MKErrorServerFailure.
-var ErrServerFailure = errkit.New("MKErrorDomain", 2)
+// ErrDirectionsNotFound matches the MapKit error MKErrorDirectionsNotFound.
+var ErrDirectionsNotFound = errkit.New("MKErrorDomain", 5)
 
 // ErrLoadingThrottled matches the MapKit error MKErrorLoadingThrottled.
 var ErrLoadingThrottled = errkit.New("MKErrorDomain", 3)
@@ -20,8 +20,8 @@ var ErrLoadingThrottled = errkit.New("MKErrorDomain", 3)
 // ErrPlacemarkNotFound matches the MapKit error MKErrorPlacemarkNotFound.
 var ErrPlacemarkNotFound = errkit.New("MKErrorDomain", 4)
 
-// ErrDirectionsNotFound matches the MapKit error MKErrorDirectionsNotFound.
-var ErrDirectionsNotFound = errkit.New("MKErrorDomain", 5)
+// ErrServerFailure matches the MapKit error MKErrorServerFailure.
+var ErrServerFailure = errkit.New("MKErrorDomain", 2)
 
-// ErrDecodingFailed matches the MapKit error MKErrorDecodingFailed.
-var ErrDecodingFailed = errkit.New("MKErrorDomain", 6)
+// ErrUnknown matches the MapKit error MKErrorUnknown.
+var ErrUnknown = errkit.New("MKErrorDomain", 1)

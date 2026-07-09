@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func rangeSpecifierAdopt(id objc.ID) *RangeSpecifier {
 
 // NewRangeSpecifierWithCoder creates a new RangeSpecifier.
 func NewRangeSpecifierWithCoder(inCoder *Coder) *RangeSpecifier {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRangeSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return rangeSpecifierAdopt(_id)
@@ -57,6 +60,10 @@ func NewRangeSpecifierWithCoder(inCoder *Coder) *RangeSpecifier {
 
 // NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier returns a range specifier initialized with the given properties.
 func NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpecifierEndSpecifier(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, startSpec *ScriptObjectSpecifier, endSpec *ScriptObjectSpecifier) *RangeSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
+	defer runtime.KeepAlive(startSpec)
+	defer runtime.KeepAlive(endSpec)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRangeSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:startSpecifier:endSpecifier:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), objref.IDOf(startSpec), objref.IDOf(endSpec))
 	return rangeSpecifierAdopt(_id)
@@ -64,24 +71,28 @@ func NewRangeSpecifierWithContainerClassDescriptionContainerSpecifierKeyStartSpe
 
 // WithStartSpecifier sets returns the object specifier representing the first object of the range.
 func (rs *RangeSpecifier) WithStartSpecifier(startSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
+	defer runtime.KeepAlive(startSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setStartSpecifier:"), objref.IDOf(startSpecifier))
 	return rs
 }
 
 // WithEndSpecifier sets sets the object specifier representing the last object of the range to a given object.
 func (rs *RangeSpecifier) WithEndSpecifier(endSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
+	defer runtime.KeepAlive(endSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setEndSpecifier:"), objref.IDOf(endSpecifier))
 	return rs
 }
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (rs *RangeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return rs
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (rs *RangeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return rs
 }
@@ -100,12 +111,14 @@ func (rs *RangeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeCo
 
 // WithKey sets sets the key of the receiver.
 func (rs *RangeSpecifier) WithKey(key StringProvider) *RangeSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return rs
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (rs *RangeSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *RangeSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return rs
 }
@@ -123,19 +136,21 @@ func (rs *RangeSpecifier) WithObservationInfo(observationInfo unsafe.Pointer) *R
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (rs *RangeSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *RangeSpecifier {
-	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (rs *RangeSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *RangeSpecifier {
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rs
 }
 
 // StartSpecifier returns the start specifier.
 func (rs *RangeSpecifier) StartSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("startSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
 // EndSpecifier returns the end specifier.
 func (rs *RangeSpecifier) EndSpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("endSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }

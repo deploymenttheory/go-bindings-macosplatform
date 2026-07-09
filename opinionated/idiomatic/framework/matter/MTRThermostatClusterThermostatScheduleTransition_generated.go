@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRThermostatClusterThermostatScheduleTransition() *MTRThermostatCluster
 
 // WithTransitionTime sets the transition time.
 func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
+	defer runtime.KeepAlive(transitionTime)
 	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mtctst
 }
 
 // WithHeatSetpoint sets the heat setpoint.
 func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
+	defer runtime.KeepAlive(heatSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
 	return mtctst
 }
 
 // WithCoolSetpoint sets the cool setpoint.
 func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
+	defer runtime.KeepAlive(coolSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
 	return mtctst
 }

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func nEFilterVerdictAdopt(id objc.ID) *NEFilterVerdict {
 
 // Description returns the object's -description text.
 func (nfv *NEFilterVerdict) Description() string {
+	defer runtime.KeepAlive(nfv)
 	return rt.Description(objref.IDOf(nfv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfv *NEFilterVerdict) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfv *NEFilterVerdict) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfv)
 	return rt.IsKind(objref.IDOf(nfv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfv *NEFilterVerdict) String() string {
+	defer runtime.KeepAlive(nfv)
 	return rt.Description(objref.IDOf(nfv))
 }
 
@@ -76,6 +83,7 @@ func (nfv *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict
 
 // ShouldReport wraps the corresponding Objective-C method.
 func (nfv *NEFilterVerdict) ShouldReport() bool {
+	defer runtime.KeepAlive(nfv)
 	_r := objc.Send[bool](objref.IDOf(nfv), objc.RegisterName("shouldReport"))
 	return _r
 }

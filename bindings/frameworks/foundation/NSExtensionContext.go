@@ -54,7 +54,7 @@ func (o *NSExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
 }
 
 // Asks the system to open a URL on behalf of the currently running app extension.
-func (o *NSExtensionContext) OpenURLCompletionHandler(uRL *NSURL, completionHandler func(bool)) {
+func (o *NSExtensionContext) OpenURLCompletionHandler(url *NSURL, completionHandler func(bool)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 bool) {
@@ -62,7 +62,7 @@ func (o *NSExtensionContext) OpenURLCompletionHandler(uRL *NSURL, completionHand
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_nSExtensionContextSelOpenURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_nSExtensionContextSelOpenURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
 func (o *NSExtensionContext) InputItems() *NSArray[objc.ID] {

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterDoorLockAdopt(id objc.ID) *MTRBaseClusterDoorLock {
 
 // NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterDoorLock {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDoorLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterDoorLockAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterDoorLockWithDeviceEndpointIDQueue(device *MTRBaseDevice, e
 
 // NewMTRBaseClusterDoorLockWithDeviceEndpointQueue creates a new MTRBaseClusterDoorLock.
 func NewMTRBaseClusterDoorLockWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterDoorLock {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDoorLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterDoorLockAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterDoorLockWithDeviceEndpointQueue(device *MTRBaseDevice, end
 //
 // GetWeekDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -90,6 +98,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParamsCompletion(ctx 
 //
 // GetYearDayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -115,6 +125,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParamsCompletion(ctx 
 //
 // GetHolidayScheduleWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -140,6 +152,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetHolidayScheduleWithParamsCompletion(ctx 
 //
 // GetUserWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -165,6 +179,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParamsCompletion(ctx context.Con
 //
 // SetCredentialWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -190,6 +206,8 @@ func (mbcdl *MTRBaseClusterDoorLock) SetCredentialWithParamsCompletion(ctx conte
 //
 // GetCredentialStatusWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -215,6 +233,7 @@ func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx
 //
 // ReadAttributeLockStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +259,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockStateWithCompletion(ctx co
 //
 // SubscribeAttributeLockStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +286,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscr
 //
 // ReadAttributeLockTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +312,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockTypeWithCompletion(ctx con
 //
 // SubscribeAttributeLockTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +339,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscri
 //
 // ReadAttributeActuatorEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +365,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabledWithCompletion(
 //
 // SubscribeAttributeActuatorEnabledWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +392,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParams
 //
 // ReadAttributeDoorStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +418,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorStateWithCompletion(ctx co
 //
 // SubscribeAttributeDoorStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +445,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscr
 //
 // ReadAttributeDoorOpenEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +471,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(c
 //
 // SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +498,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsS
 //
 // ReadAttributeDoorClosedEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +524,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion
 //
 // SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +551,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParam
 //
 // ReadAttributeOpenPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +577,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx c
 //
 // SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +604,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubsc
 //
 // ReadAttributeNumberOfTotalUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +630,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWit
 //
 // SubscribeAttributeNumberOfTotalUsersSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +657,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupport
 //
 // ReadAttributeNumberOfPINUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +683,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithC
 //
 // SubscribeAttributeNumberOfPINUsersSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +710,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupported
 //
 // ReadAttributeNumberOfRFIDUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +736,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWith
 //
 // SubscribeAttributeNumberOfRFIDUsersSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +763,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupporte
 //
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +789,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSuppor
 //
 // SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +816,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesS
 //
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +842,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSuppor
 //
 // SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +869,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesS
 //
 // ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +895,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSuppor
 //
 // SubscribeAttributeNumberOfHolidaySchedulesSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +922,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesS
 //
 // ReadAttributeMaxPINCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +948,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLengthWithCompletion
 //
 // SubscribeAttributeMaxPINCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +975,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParam
 //
 // ReadAttributeMinPINCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +1001,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLengthWithCompletion
 //
 // SubscribeAttributeMinPINCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1028,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParam
 //
 // ReadAttributeMaxRFIDCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1054,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithCompletio
 //
 // SubscribeAttributeMaxRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1081,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithPara
 //
 // ReadAttributeMinRFIDCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1107,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithCompletio
 //
 // SubscribeAttributeMinRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1134,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithPara
 //
 // ReadAttributeCredentialRulesSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1160,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupportWithComp
 //
 // SubscribeAttributeCredentialRulesSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1187,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWit
 //
 // ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1213,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPe
 //
 // SubscribeAttributeNumberOfCredentialsSupportedPerUserWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedPerUserWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1240,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSuppor
 //
 // ReadAttributeLanguageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val string
 		err error
@@ -1190,6 +1266,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx con
 //
 // SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -1215,6 +1293,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscri
 //
 // ReadAttributeLEDSettingsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1319,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx 
 //
 // SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1346,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubs
 //
 // ReadAttributeAutoRelockTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1372,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(c
 //
 // SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1399,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsS
 //
 // ReadAttributeSoundVolumeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1425,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx 
 //
 // SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1452,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubs
 //
 // ReadAttributeOperatingModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1478,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ct
 //
 // SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1505,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSu
 //
 // ReadAttributeSupportedOperatingModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1531,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModesWithCom
 //
 // SubscribeAttributeSupportedOperatingModesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1558,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWi
 //
 // ReadAttributeDefaultConfigurationRegisterWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1584,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWi
 //
 // SubscribeAttributeDefaultConfigurationRegisterWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1611,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegis
 //
 // ReadAttributeEnableLocalProgrammingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1637,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithComp
 //
 // SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1664,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWit
 //
 // ReadAttributeEnableOneTouchLockingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1690,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompl
 //
 // SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1717,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWith
 //
 // ReadAttributeEnableInsideStatusLEDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1743,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompl
 //
 // SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1770,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWith
 //
 // ReadAttributeEnablePrivacyModeButtonWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1796,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithCom
 //
 // SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1823,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWi
 //
 // ReadAttributeLocalProgrammingFeaturesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1849,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithCo
 //
 // SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1876,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesW
 //
 // ReadAttributeWrongCodeEntryLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1902,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithComplet
 //
 // SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1929,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithPa
 //
 // ReadAttributeUserCodeTemporaryDisableTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1955,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWi
 //
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1865,6 +1982,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableT
 //
 // ReadAttributeSendPINOverTheAirWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,6 +2008,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletio
 //
 // SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1915,6 +2035,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithPara
 //
 // ReadAttributeRequirePINforRemoteOperationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1940,6 +2061,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWi
 //
 // SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1965,6 +2088,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperat
 //
 // ReadAttributeExpiringUserTimeoutWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1990,6 +2114,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithComplet
 //
 // SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2015,6 +2141,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithPa
 //
 // ReadAttributeAliroReaderVerificationKeyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2040,6 +2167,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWith
 //
 // SubscribeAttributeAliroReaderVerificationKeyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKeyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2065,6 +2194,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKe
 //
 // ReadAttributeAliroReaderGroupIdentifierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2090,6 +2220,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWith
 //
 // SubscribeAttributeAliroReaderGroupIdentifierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2115,6 +2247,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifie
 //
 // ReadAttributeAliroReaderGroupSubIdentifierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2140,6 +2273,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierW
 //
 // SubscribeAttributeAliroReaderGroupSubIdentifierWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdentifierWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2165,6 +2300,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdenti
 //
 // ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,6 +2326,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroExpeditedTransactionSuppo
 //
 // SubscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2215,6 +2353,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransaction
 //
 // ReadAttributeAliroGroupResolvingKeyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2240,6 +2379,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithComp
 //
 // SubscribeAttributeAliroGroupResolvingKeyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2265,6 +2406,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWit
 //
 // ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2290,6 +2432,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVe
 //
 // SubscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProtocolVersionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2315,6 +2459,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProto
 //
 // ReadAttributeAliroBLEAdvertisingVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2340,6 +2485,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWith
 //
 // SubscribeAttributeAliroBLEAdvertisingVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2365,6 +2512,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersio
 //
 // ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2390,6 +2538,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerK
 //
 // SubscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2415,6 +2565,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIs
 //
 // ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2440,6 +2591,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSuppo
 //
 // SubscribeAttributeNumberOfAliroEndpointKeysSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeysSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2465,6 +2618,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeys
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2490,6 +2644,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandListWithComple
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2515,6 +2671,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithP
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2540,6 +2697,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandListWithComplet
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2565,6 +2724,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithPa
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2590,6 +2750,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAttributeListWithCompletion(ct
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2615,6 +2777,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSu
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2640,6 +2803,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeFeatureMapWithCompletion(ctx c
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2665,6 +2830,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubsc
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2690,6 +2856,8 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeClusterRevisionWithCompletion(
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2715,6 +2883,8 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithParams
 //
 // GetWeekDayScheduleWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -2740,6 +2910,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetWeekDayScheduleWithParams(ctx context.Co
 //
 // GetYearDayScheduleWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -2765,6 +2937,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetYearDayScheduleWithParams(ctx context.Co
 //
 // GetHolidayScheduleWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetHolidayScheduleWithParams(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -2790,6 +2964,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetHolidayScheduleWithParams(ctx context.Co
 //
 // GetUserWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParams(ctx context.Context, params *MTRDoorLockClusterGetUserParams) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -2815,6 +2991,8 @@ func (mbcdl *MTRBaseClusterDoorLock) GetUserWithParams(ctx context.Context, para
 //
 // SetCredentialWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SetCredentialWithParams(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -2840,6 +3018,8 @@ func (mbcdl *MTRBaseClusterDoorLock) SetCredentialWithParams(ctx context.Context
 //
 // GetCredentialStatusWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -2865,6 +3045,7 @@ func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.C
 //
 // ReadAttributeLockState blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockState(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2890,6 +3071,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockState(ctx context.Context)
 //
 // SubscribeAttributeLockStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2915,6 +3100,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalM
 //
 // ReadAttributeLockType blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockType(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2940,6 +3126,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockType(ctx context.Context) 
 //
 // SubscribeAttributeLockTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2965,6 +3155,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMa
 //
 // ReadAttributeActuatorEnabled blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabled(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2990,6 +3181,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabled(ctx context.Co
 //
 // SubscribeAttributeActuatorEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3015,6 +3210,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinInt
 //
 // ReadAttributeDoorState blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorState(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3040,6 +3236,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorState(ctx context.Context)
 //
 // SubscribeAttributeDoorStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3065,6 +3265,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalM
 //
 // ReadAttributeDoorOpenEvents blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3090,6 +3291,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Con
 //
 // SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3115,6 +3320,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinInte
 //
 // ReadAttributeDoorClosedEvents blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3140,6 +3346,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.C
 //
 // SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3165,6 +3375,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinIn
 //
 // ReadAttributeOpenPeriod blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3190,6 +3401,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context
 //
 // SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3215,6 +3430,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinInterval
 //
 // ReadAttributeNumberOfTotalUsersSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupported(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3240,6 +3456,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupported(ct
 //
 // SubscribeAttributeNumberOfTotalUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3265,6 +3485,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupport
 //
 // ReadAttributeNumberOfPINUsersSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupported(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3290,6 +3511,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupported(ctx 
 //
 // SubscribeAttributeNumberOfPINUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3315,6 +3540,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupported
 //
 // ReadAttributeNumberOfRFIDUsersSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupported(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3340,6 +3566,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupported(ctx
 //
 // SubscribeAttributeNumberOfRFIDUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3365,6 +3595,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupporte
 //
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3390,6 +3621,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSuppor
 //
 // SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3415,6 +3650,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesS
 //
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUser blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3440,6 +3676,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSuppor
 //
 // SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3465,6 +3705,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesS
 //
 // ReadAttributeNumberOfHolidaySchedulesSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupported(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3490,6 +3731,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSuppor
 //
 // SubscribeAttributeNumberOfHolidaySchedulesSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesSupportedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3515,6 +3760,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesS
 //
 // ReadAttributeMaxPINCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLength(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3540,6 +3786,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLength(ctx context.C
 //
 // SubscribeAttributeMaxPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3565,6 +3815,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinIn
 //
 // ReadAttributeMinPINCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLength(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3590,6 +3841,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLength(ctx context.C
 //
 // SubscribeAttributeMinPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3615,6 +3870,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinIn
 //
 // ReadAttributeMaxRFIDCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLength(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3640,6 +3896,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLength(ctx context.
 //
 // SubscribeAttributeMaxRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3665,6 +3925,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinI
 //
 // ReadAttributeMinRFIDCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLength(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3690,6 +3951,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLength(ctx context.
 //
 // SubscribeAttributeMinRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3715,6 +3980,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinI
 //
 // ReadAttributeCredentialRulesSupport blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupport(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3740,6 +4006,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupport(ctx con
 //
 // SubscribeAttributeCredentialRulesSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3765,6 +4035,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWit
 //
 // ReadAttributeNumberOfCredentialsSupportedPerUser blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3790,6 +4061,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPe
 //
 // SubscribeAttributeNumberOfCredentialsSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSupportedPerUserWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3815,6 +4090,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSuppor
 //
 // ReadAttributeLanguage blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val string
 		err error
@@ -3840,6 +4116,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) 
 //
 // SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -3865,6 +4145,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMa
 //
 // ReadAttributeLEDSettings blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3890,6 +4171,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Contex
 //
 // SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3915,6 +4200,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinInterva
 //
 // ReadAttributeAutoRelockTime blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3940,6 +4226,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Con
 //
 // SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3965,6 +4255,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinInte
 //
 // ReadAttributeSoundVolume blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3990,6 +4281,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Contex
 //
 // SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4015,6 +4310,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinInterva
 //
 // ReadAttributeOperatingMode blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4040,6 +4336,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Cont
 //
 // SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4065,6 +4365,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinInter
 //
 // ReadAttributeSupportedOperatingModes blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModes(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4090,6 +4391,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModes(ctx co
 //
 // SubscribeAttributeSupportedOperatingModesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4115,6 +4420,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWi
 //
 // ReadAttributeDefaultConfigurationRegister blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegister(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4140,6 +4446,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegister(c
 //
 // SubscribeAttributeDefaultConfigurationRegisterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegisterWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4165,6 +4475,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegis
 //
 // ReadAttributeEnableLocalProgramming blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4190,6 +4501,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx con
 //
 // SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4215,6 +4530,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWit
 //
 // ReadAttributeEnableOneTouchLocking blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4240,6 +4556,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx cont
 //
 // SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4265,6 +4585,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWith
 //
 // ReadAttributeEnableInsideStatusLED blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4290,6 +4611,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx cont
 //
 // SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4315,6 +4640,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWith
 //
 // ReadAttributeEnablePrivacyModeButton blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4340,6 +4666,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx co
 //
 // SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4365,6 +4695,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWi
 //
 // ReadAttributeLocalProgrammingFeatures blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4390,6 +4721,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx c
 //
 // SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4415,6 +4750,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesW
 //
 // ReadAttributeWrongCodeEntryLimit blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4440,6 +4776,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx contex
 //
 // SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4465,6 +4805,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMi
 //
 // ReadAttributeUserCodeTemporaryDisableTime blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4490,6 +4831,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(c
 //
 // SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4515,6 +4860,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableT
 //
 // ReadAttributeSendPINOverTheAir blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4540,6 +4886,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.
 //
 // SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4565,6 +4915,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinI
 //
 // ReadAttributeRequirePINforRemoteOperation blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4590,6 +4941,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(c
 //
 // SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4615,6 +4970,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperat
 //
 // ReadAttributeExpiringUserTimeout blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4640,6 +4996,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx contex
 //
 // SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4665,6 +5025,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMi
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4690,6 +5051,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandList(ctx conte
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4715,6 +5080,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithM
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4740,6 +5106,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandList(ctx contex
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4765,6 +5135,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMi
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4790,6 +5161,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAttributeList(ctx context.Cont
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4815,6 +5190,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinInter
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4840,6 +5216,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeFeatureMap(ctx context.Context
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4865,6 +5245,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinInterval
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4890,6 +5271,10 @@ func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeClusterRevision(ctx context.Co
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdl)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

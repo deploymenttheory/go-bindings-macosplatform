@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func nEOnDemandRuleAdopt(id objc.ID) *NEOnDemandRule {
 
 // Description returns the object's -description text.
 func (nodr *NEOnDemandRule) Description() string {
+	defer runtime.KeepAlive(nodr)
 	return rt.Description(objref.IDOf(nodr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nodr *NEOnDemandRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nodr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nodr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nodr *NEOnDemandRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(nodr)
 	return rt.IsKind(objref.IDOf(nodr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nodr *NEOnDemandRule) String() string {
+	defer runtime.KeepAlive(nodr)
 	return rt.Description(objref.IDOf(nodr))
 }
 
@@ -103,6 +110,7 @@ func (nodr *NEOnDemandRule) WithProbeURL(probeURL string) *NEOnDemandRule {
 
 // Action returns the rule's action
 func (nodr *NEOnDemandRule) Action() NEOnDemandRuleAction {
+	defer runtime.KeepAlive(nodr)
 	_r := objc.Send[NEOnDemandRuleAction](objref.IDOf(nodr), objc.RegisterName("action"))
 	return _r
 }
@@ -111,6 +119,7 @@ func (nodr *NEOnDemandRule) Action() NEOnDemandRuleAction {
 //
 // DNSSearchDomainMatch returns the collection as a Go slice.
 func (nodr *NEOnDemandRule) DNSSearchDomainMatch() []string {
+	defer runtime.KeepAlive(nodr)
 	_arr := objc.Send[objc.ID](objref.IDOf(nodr), objc.RegisterName("DNSSearchDomainMatch"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -119,12 +128,14 @@ func (nodr *NEOnDemandRule) DNSSearchDomainMatch() []string {
 //
 // DNSServerAddressMatch returns the collection as a Go slice.
 func (nodr *NEOnDemandRule) DNSServerAddressMatch() []string {
+	defer runtime.KeepAlive(nodr)
 	_arr := objc.Send[objc.ID](objref.IDOf(nodr), objc.RegisterName("DNSServerAddressMatch"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // InterfaceTypeMatch returns the type of interface that this rule matches. If the current primary network interface is of this type and all of the other conditions in the rule match, then the rule matches. If this property is 0 (the default), then the current primary interface type does not factor into the rule match.
 func (nodr *NEOnDemandRule) InterfaceTypeMatch() NEOnDemandRuleInterfaceType {
+	defer runtime.KeepAlive(nodr)
 	_r := objc.Send[NEOnDemandRuleInterfaceType](objref.IDOf(nodr), objc.RegisterName("interfaceTypeMatch"))
 	return _r
 }
@@ -133,14 +144,16 @@ func (nodr *NEOnDemandRule) InterfaceTypeMatch() NEOnDemandRuleInterfaceType {
 //
 // SSIDMatch returns the collection as a Go slice.
 func (nodr *NEOnDemandRule) SSIDMatch() []string {
+	defer runtime.KeepAlive(nodr)
 	_arr := objc.Send[objc.ID](objref.IDOf(nodr), objc.RegisterName("SSIDMatch"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ProbeURL returns an HTTP or HTTPS URL. If a request sent to this URL results in a HTTP 200 OK response and all of the other conditions in the rule match, then then rule matches. If this property is nil (the default), then an HTTP request does not factor into the rule match.
-func (nodr *NEOnDemandRule) ProbeURL() obj.Object {
+func (nodr *NEOnDemandRule) ProbeURL() string {
+	defer runtime.KeepAlive(nodr)
 	_r := objc.Send[objc.ID](objref.IDOf(nodr), objc.RegisterName("probeURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // isNEOnDemandRule marks NEOnDemandRule — and, by embedding promotion, its

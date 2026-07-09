@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -137,6 +139,7 @@ func (ngs *NNGridSample) WithLabel(label string) *NNGridSample {
 
 // UseGridValueAsInputCoordinate reports whether this determines whether the pixel locations from the grid are used as the input coordinate (if set to true) or is added to the input coordinate (if set to false). The default value is true.
 func (ngs *NNGridSample) UseGridValueAsInputCoordinate() bool {
+	defer runtime.KeepAlive(ngs)
 	_r := objc.Send[bool](objref.IDOf(ngs), objc.RegisterName("useGridValueAsInputCoordinate"))
 	return _r
 }

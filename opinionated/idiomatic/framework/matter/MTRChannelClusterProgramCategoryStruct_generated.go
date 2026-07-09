@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRChannelClusterProgramCategoryStructAdopt(id objc.ID) *MTRChannelClusterP
 
 // Description returns the object's -description text.
 func (mccpcs *MTRChannelClusterProgramCategoryStruct) Description() string {
+	defer runtime.KeepAlive(mccpcs)
 	return rt.Description(objref.IDOf(mccpcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccpcs *MTRChannelClusterProgramCategoryStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccpcs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccpcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccpcs *MTRChannelClusterProgramCategoryStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccpcs)
 	return rt.IsKind(objref.IDOf(mccpcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccpcs *MTRChannelClusterProgramCategoryStruct) String() string {
+	defer runtime.KeepAlive(mccpcs)
 	return rt.Description(objref.IDOf(mccpcs))
 }
 
@@ -84,6 +91,7 @@ func (mccpcs *MTRChannelClusterProgramCategoryStruct) WithSubCategory(subCategor
 
 // Category returns the category.
 func (mccpcs *MTRChannelClusterProgramCategoryStruct) Category() string {
+	defer runtime.KeepAlive(mccpcs)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
@@ -93,6 +101,7 @@ func (mccpcs *MTRChannelClusterProgramCategoryStruct) Category() string {
 
 // SubCategory returns the sub category.
 func (mccpcs *MTRChannelClusterProgramCategoryStruct) SubCategory() string {
+	defer runtime.KeepAlive(mccpcs)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("subCategory"))
 	if _r == 0 {
 		return ""

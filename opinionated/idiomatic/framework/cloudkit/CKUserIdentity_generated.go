@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func userIdentityAdopt(id objc.ID) *UserIdentity {
 
 // Description returns the object's -description text.
 func (ui *UserIdentity) Description() string {
+	defer runtime.KeepAlive(ui)
 	return rt.Description(objref.IDOf(ui))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ui *UserIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ui)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ui), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ui *UserIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(ui)
 	return rt.IsKind(objref.IDOf(ui), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ui *UserIdentity) String() string {
+	defer runtime.KeepAlive(ui)
 	return rt.Description(objref.IDOf(ui))
 }
 
@@ -74,24 +82,28 @@ func NewUserIdentity() *UserIdentity {
 
 // UserRecordID returns the user record ID for the corresponding user record.
 func (ui *UserIdentity) UserRecordID() *RecordID {
+	defer runtime.KeepAlive(ui)
 	_r := objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("userRecordID"))
 	return RecordIDFromID(_r)
 }
 
 // LookupInfo returns the lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the “CKDiscoverUserIdentitiesOperation“ and “CKFetchShareParticipantsOperation“ operations.
 func (ui *UserIdentity) LookupInfo() *UserIdentityLookupInfo {
+	defer runtime.KeepAlive(ui)
 	_r := objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("lookupInfo"))
 	return UserIdentityLookupInfoFromID(_r)
 }
 
 // NameComponents returns the user's name. You can use this property to construct the user's name for display. Use the components with an instance of <doc://com.apple.documentation/documentation/foundation/personnamecomponentsformatter> to create a string representation for the current locale.
-func (ui *UserIdentity) NameComponents() obj.Object {
+func (ui *UserIdentity) NameComponents() *foundation.PersonNameComponents {
+	defer runtime.KeepAlive(ui)
 	_r := objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("nameComponents"))
-	return obj.Wrap(_r)
+	return foundation.PersonNameComponentsFromID(_r)
 }
 
 // HasiCloudAccount reports whether the user has an iCloud account. `true` if the user identity has an iCloud account; otherwise, `false`.
 func (ui *UserIdentity) HasiCloudAccount() bool {
+	defer runtime.KeepAlive(ui)
 	_r := objc.Send[bool](objref.IDOf(ui), objc.RegisterName("hasiCloudAccount"))
 	return _r
 }
@@ -100,6 +112,7 @@ func (ui *UserIdentity) HasiCloudAccount() bool {
 //
 // ContactIdentifiers returns the collection as a Go slice.
 func (ui *UserIdentity) ContactIdentifiers() []string {
+	defer runtime.KeepAlive(ui)
 	_arr := objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("contactIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

@@ -5,7 +5,10 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func syncEngineConfigurationAdopt(id objc.ID) *SyncEngineConfiguration {
 
 // Description returns the object's -description text.
 func (sec *SyncEngineConfiguration) Description() string {
+	defer runtime.KeepAlive(sec)
 	return rt.Description(objref.IDOf(sec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sec *SyncEngineConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sec *SyncEngineConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(sec)
 	return rt.IsKind(objref.IDOf(sec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sec *SyncEngineConfiguration) String() string {
+	defer runtime.KeepAlive(sec)
 	return rt.Description(objref.IDOf(sec))
 }
 
@@ -74,12 +82,14 @@ func NewSyncEngineConfiguration() *SyncEngineConfiguration {
 
 // WithDatabase sets the associated database.
 func (sec *SyncEngineConfiguration) WithDatabase(database *Database) *SyncEngineConfiguration {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return sec
 }
 
 // WithStateSerialization sets the sync engine’s serialized state.
 func (sec *SyncEngineConfiguration) WithStateSerialization(stateSerialization *SyncEngineStateSerialization) *SyncEngineConfiguration {
+	defer runtime.KeepAlive(stateSerialization)
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setStateSerialization:"), objref.IDOf(stateSerialization))
 	return sec
 }
@@ -92,30 +102,35 @@ func (sec *SyncEngineConfiguration) WithAutomaticallySync(automaticallySync bool
 
 // WithSubscriptionID sets the subscription identifier for the associated database.
 func (sec *SyncEngineConfiguration) WithSubscriptionID(subscriptionID obj.Object) *SyncEngineConfiguration {
+	defer runtime.KeepAlive(subscriptionID)
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setSubscriptionID:"), objref.IDOf(subscriptionID))
 	return sec
 }
 
 // Database returns the associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database. - Important: When using CloudKit's production environment, don't create multiple sync engines that target the same database. You can, however, do this in the development environment to help testing — for example, to simulate multiple devices syncing back, and forth.
 func (sec *SyncEngineConfiguration) Database() *Database {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("database"))
 	return DatabaseFromID(_r)
 }
 
 // StateSerialization returns the sync engine's serialized state. This property returns the value you specify for the initializer's `stateSerialization` parameter. If you choose to set this property after initialization, assign the state from the most recent “CKSyncEngineStateUpdateEvent“ handled by your delegate. However, If this is the first initialization of the associated sync engine, specify `nil` instead. The default value is `nil`.
 func (sec *SyncEngineConfiguration) StateSerialization() *SyncEngineStateSerialization {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("stateSerialization"))
 	return SyncEngineStateSerializationFromID(_r)
 }
 
 // AutomaticallySync reports whether a Boolean value that determines whether the engine syncs automatically. By default, the sync engine uses the system scheduler to automatically schedule both send and fetch operations. If an operation fails due to a recoverable error, such as a network failure, or when the server is enforcing request limits, the engine reschedules those operations as necessary. Unless you have a specific need, prefer to use the default behavior in your app. If you set this property's value to <doc://com.apple.documentation/documentation/swift/false>, use “CKSyncEngine/fetchChangesWithCompletionHandler:“ and “CKSyncEngine/sendChangesWithCompletionHandler:“ to invoke immediate sync operations, allowing for more control over when your app syncs its records. For example, you may want to sync at a specific time of day, or deterministically simulate certain conditions in your unit tests. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (sec *SyncEngineConfiguration) AutomaticallySync() bool {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[bool](objref.IDOf(sec), objc.RegisterName("automaticallySync"))
 	return _r
 }
 
 // SubscriptionID returns the subscription identifier for the associated database. By default, a sync engine attempts to discover an existing subscription for the synced database. If one isn't found, the engine creates an internal “CKDatabaseSubscription“ and uses that to receive notifications about remote record changes. If you require the sync engine to use a specific database subscription, assign that subscription's identifier to this property. Doing so enables your app to be backwards compatible if you're migrating to “CKSyncEngine-4b4w9“ from a custom CloudKit sync implementation. The default value is `nil`.
-func (sec *SyncEngineConfiguration) SubscriptionID() obj.Object {
+func (sec *SyncEngineConfiguration) SubscriptionID() *foundation.String {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("subscriptionID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

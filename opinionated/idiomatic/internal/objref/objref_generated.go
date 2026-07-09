@@ -21,29 +21,65 @@ package objref
 
 import (
 	"runtime"
+	"sync/atomic"
+	"unsafe"
 
 	"github.com/ebitengine/purego/objc"
 )
 
 // selRelease is the Objective-C "release" selector, used to decrement an
-// object's reference count when its Go wrapper is garbage collected.
+// object's reference count when its Go wrapper is released or garbage
+// collected.
 var selRelease = objc.RegisterName("release")
 
 // Handle holds the Objective-C object pointer for one wrapper. Wrapper types
 // embed a Handle; the pointer field is unexported so it cannot be read from
 // outside this package.
+//
+// The pointer is read and cleared atomically (see idAddr), which is what makes
+// Release idempotent and safe to call from multiple goroutines: exactly one
+// caller observes the non-zero pointer and sends the release.
 type Handle struct {
 	id objc.ID
 }
 
 // Wrap returns a Handle holding the given Objective-C object pointer. Generated
-// constructors call it when building a wrapper.
+// constructors call it when building a wrapper; the assignment copy is safe
+// because it happens before the wrapper is shared.
 func Wrap(id objc.ID) Handle { return Handle{id: id} }
 
-// objcID returns the stored pointer. It is deliberately unexported so that only
-// this package can read it; embedding a Handle is what lets a wrapper satisfy
-// Object below.
-func (h Handle) objcID() objc.ID { return h.id }
+// idAddr addresses the stored pointer for sync/atomic. objc.ID is a uintptr,
+// so the field can be accessed atomically without changing Handle's
+// copy-at-construction shape (an atomic.Uintptr field would forbid the
+// assignment Wrap relies on).
+func (h *Handle) idAddr() *uintptr { return (*uintptr)(unsafe.Pointer(&h.id)) }
+
+// objcID returns the stored pointer (0 after Release). It is deliberately
+// unexported so that only this package can read it; embedding a Handle is what
+// lets a wrapper satisfy Object below.
+func (h *Handle) objcID() objc.ID { return objc.ID(atomic.LoadUintptr(h.idAddr())) }
+
+// Release relinquishes the Go side's reference to the Objective-C object,
+// releasing it immediately instead of waiting for the garbage collector to run
+// the wrapper's finalizer. It is idempotent and safe to call concurrently;
+// after Release the wrapper's finalizer finds a zero pointer and does nothing.
+//
+// After Release, calls through the wrapper send their message to nil, which
+// Objective-C defines as a no-op returning zero — so a released wrapper's
+// methods return zero values rather than crashing. Use Release for objects
+// that hold scarce resources (files, sockets, virtual machines) where waiting
+// for the collector is not acceptable:
+//
+//	config := virtualization.NewVirtualMachineConfiguration()
+//	defer config.Release()
+func (h *Handle) Release() {
+	if h == nil {
+		return
+	}
+	if id := objc.ID(atomic.SwapUintptr(h.idAddr(), 0)); id != 0 {
+		id.Send(selRelease)
+	}
+}
 
 // Object is satisfied by every generated wrapper, because every wrapper embeds a
 // Handle. The generated packages use Object to accept "any Objective-C object"
@@ -65,7 +101,9 @@ func IDOf(o Object) objc.ID {
 // garbage collected. A newly created Objective-C object comes back with a
 // reference that the Go side owns; Track installs the matching release so the
 // object's memory is reclaimed once nothing in Go refers to it. o must be a
-// pointer (every generated wrapper is).
+// pointer (every generated wrapper is). The finalizer reads the pointer through
+// the same atomic as Release, so a wrapper released explicitly is not released
+// a second time when it is collected.
 func Track[T Object](o T) {
 	runtime.SetFinalizer(o, func(o T) {
 		if id := o.objcID(); id != 0 {

@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -65,6 +66,8 @@ func (mc *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize)
 
 // InsertTimeRangeOfAssetAtTime inserts all the tracks within a given time range of a specified asset into the composition.
 func (mc *MutableComposition) InsertTimeRangeOfAssetAtTime(timeRange coremedia.CMTimeRange, asset *Asset, startTime coremedia.CMTime) error {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(asset)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mc), objc.RegisterName("insertTimeRange:ofAsset:atTime:error:"), timeRange, objref.IDOf(asset), startTime, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -75,32 +78,41 @@ func (mc *MutableComposition) InsertTimeRangeOfAssetAtTime(timeRange coremedia.C
 
 // InsertEmptyTimeRange adds or extends an empty time range within all tracks of the composition.
 func (mc *MutableComposition) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("insertEmptyTimeRange:"), timeRange)
 }
 
 // RemoveTimeRange removes a specified time range from all tracks of the composition.
 func (mc *MutableComposition) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTimeRange:"), timeRange)
 }
 
 // ScaleTimeRangeToDuration changes the duration of all tracks in a given time range.
 func (mc *MutableComposition) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("scaleTimeRange:toDuration:"), timeRange, duration)
 }
 
 // AddMutableTrackWithMediaTypePreferredTrackID adds an empty track to a composition.
 func (mc *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(mediaType)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:"), objref.IDOf(mediaType), preferredTrackID)
 	return MutableCompositionTrackFromID(_r)
 }
 
 // RemoveTrack removes a specified track from the composition.
 func (mc *MutableComposition) RemoveTrack(track *CompositionTrack) {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(track)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTrack:"), objref.IDOf(track))
 }
 
 // MutableTrackCompatibleWithTrack returns a composition track into which you can insert any time range of the specified asset track.
 func (mc *MutableComposition) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(track)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
 	return MutableCompositionTrackFromID(_r)
 }

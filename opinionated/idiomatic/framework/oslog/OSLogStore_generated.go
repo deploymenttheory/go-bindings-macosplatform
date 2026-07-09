@@ -5,6 +5,8 @@
 package oslog
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +52,27 @@ func logStoreAdopt(id objc.ID) *LogStore {
 
 // Description returns the object's -description text.
 func (ls *LogStore) Description() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ls *LogStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ls *LogStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(ls)
 	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ls *LogStore) String() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
@@ -75,8 +82,11 @@ func NewLogStore() *LogStore {
 	return logStoreAdopt(_id)
 }
 
-// EntriesEnumeratorWithOptionsPositionPredicateError returns a log enumerator based on an underlying store.
-func (ls *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error) {
+// EntriesEnumeratorWithOptionsPositionPredicate returns a log enumerator based on an underlying store.
+func (ls *LogStore) EntriesEnumeratorWithOptionsPositionPredicate(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error) {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(position)
+	defer runtime.KeepAlive(predicate)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("entriesEnumeratorWithOptions:position:predicate:error:"), options, objref.IDOf(position), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,8 +95,9 @@ func (ls *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options L
 	return LogEnumeratorFromID(_r), nil
 }
 
-// EntriesEnumeratorAndReturnError returns a log enumerator with default options for viewing the entries.
-func (ls *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error) {
+// EntriesEnumerator returns a log enumerator with default options for viewing the entries.
+func (ls *LogStore) EntriesEnumerator() (result *LogEnumerator, err error) {
+	defer runtime.KeepAlive(ls)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("entriesEnumeratorAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,19 +107,22 @@ func (ls *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, er
 }
 
 // PositionWithDate returns a position representing the time specified.
-func (ls *LogStore) PositionWithDate(date obj.Object) *LogPosition {
-	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithDate:"), objref.IDOf(date))
+func (ls *LogStore) PositionWithDate(date time.Time) *LogPosition {
+	defer runtime.KeepAlive(ls)
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithDate:"), rt.TimeToNSDate(date))
 	return LogPositionFromID(_r)
 }
 
 // PositionWithTimeIntervalSinceEnd returns a position representing time since the end of the time range that the entries span.
 func (ls *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithTimeIntervalSinceEnd:"), seconds)
 	return LogPositionFromID(_r)
 }
 
 // PositionWithTimeIntervalSinceLatestBoot returns a position representing time since the last boot in the series of entries.
 func (ls *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:"), seconds)
 	return LogPositionFromID(_r)
 }

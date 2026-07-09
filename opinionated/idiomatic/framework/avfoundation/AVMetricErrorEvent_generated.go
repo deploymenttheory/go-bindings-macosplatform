@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMetricErrorEvent() *MetricErrorEvent {
 
 // DidRecover reports whether the error was recoverable.
 func (mee *MetricErrorEvent) DidRecover() bool {
+	defer runtime.KeepAlive(mee)
 	_r := objc.Send[bool](objref.IDOf(mee), objc.RegisterName("didRecover"))
 	return _r
 }

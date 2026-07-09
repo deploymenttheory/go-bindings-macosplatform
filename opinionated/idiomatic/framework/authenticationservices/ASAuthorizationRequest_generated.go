@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func authorizationRequestAdopt(id objc.ID) *AuthorizationRequest {
 
 // Description returns the object's -description text.
 func (ar *AuthorizationRequest) Description() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ar *AuthorizationRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ar *AuthorizationRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(ar)
 	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ar *AuthorizationRequest) String() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 

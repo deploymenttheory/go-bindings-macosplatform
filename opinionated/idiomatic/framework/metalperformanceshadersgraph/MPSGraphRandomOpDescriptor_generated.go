@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -101,48 +103,56 @@ func (grod *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod GraphRand
 
 // Distribution returns the type of distribution to draw samples from. See MPSGraphRandomDistribution.
 func (grod *GraphRandomOpDescriptor) Distribution() GraphRandomDistribution {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[GraphRandomDistribution](objref.IDOf(grod), objc.RegisterName("distribution"))
 	return _r
 }
 
 // Min returns the lower range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 0 for uniform distributions and -2 for normal distributions.
 func (grod *GraphRandomOpDescriptor) Min() float32 {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[float32](objref.IDOf(grod), objc.RegisterName("min"))
 	return _r
 }
 
 // Max returns the upper range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 1 for uniform distributions and 2 for normal distributions.
 func (grod *GraphRandomOpDescriptor) Max() float32 {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[float32](objref.IDOf(grod), objc.RegisterName("max"))
 	return _r
 }
 
 // MinInteger returns the lower range of the distribution. This value is used for Uniform with integer data types Defaults to 0.
 func (grod *GraphRandomOpDescriptor) MinInteger() int {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[int](objref.IDOf(grod), objc.RegisterName("minInteger"))
 	return _r
 }
 
 // MaxInteger returns the upper range of the distribution. This value is used for Uniform with integer data types Defaults to INT32_MAX for uniform distributions and 0 for normal distributions.
 func (grod *GraphRandomOpDescriptor) MaxInteger() int {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[int](objref.IDOf(grod), objc.RegisterName("maxInteger"))
 	return _r
 }
 
 // Mean returns the mean of the distribution. This value is used for Normal and Truncated Normal disributions. Defaults to 0.
 func (grod *GraphRandomOpDescriptor) Mean() float32 {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[float32](objref.IDOf(grod), objc.RegisterName("mean"))
 	return _r
 }
 
 // StandardDeviation returns the standard deviation of the distribution. This value is used for Normal and Truncated Normal disributions. For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width of the Gaussian, not the true standard deviation of the truncated distribution which typically differs from the standard deviation of the original Normal distribution. Defaults to 0 for uniform distributions and 1 for normal distributions.
 func (grod *GraphRandomOpDescriptor) StandardDeviation() float32 {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[float32](objref.IDOf(grod), objc.RegisterName("standardDeviation"))
 	return _r
 }
 
 // SamplingMethod returns the sampling method of the distribution. This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod. Defaults to MPSGraphRandomNormalSamplingInvCDF.
 func (grod *GraphRandomOpDescriptor) SamplingMethod() GraphRandomNormalSamplingMethod {
+	defer runtime.KeepAlive(grod)
 	_r := objc.Send[GraphRandomNormalSamplingMethod](objref.IDOf(grod), objc.RegisterName("samplingMethod"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -97,6 +99,7 @@ func (nodrec *NEOnDemandRuleEvaluateConnection) WithProbeURL(probeURL string) *N
 //
 // ConnectionRules returns the collection as a Go slice.
 func (nodrec *NEOnDemandRuleEvaluateConnection) ConnectionRules() []*NEEvaluateConnectionRule {
+	defer runtime.KeepAlive(nodrec)
 	_arr := objc.Send[objc.ID](objref.IDOf(nodrec), objc.RegisterName("connectionRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEEvaluateConnectionRule { return NEEvaluateConnectionRuleFromID(_id) })
 }

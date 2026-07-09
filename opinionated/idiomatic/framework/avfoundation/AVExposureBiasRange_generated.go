@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func exposureBiasRangeAdopt(id objc.ID) *ExposureBiasRange {
 
 // Description returns the object's -description text.
 func (ebr *ExposureBiasRange) Description() string {
+	defer runtime.KeepAlive(ebr)
 	return rt.Description(objref.IDOf(ebr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ebr *ExposureBiasRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ebr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ebr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ebr *ExposureBiasRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(ebr)
 	return rt.IsKind(objref.IDOf(ebr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ebr *ExposureBiasRange) String() string {
+	defer runtime.KeepAlive(ebr)
 	return rt.Description(objref.IDOf(ebr))
 }
 
@@ -74,18 +81,21 @@ func NewExposureBiasRange() *ExposureBiasRange {
 
 // ContainsExposureBias determines whether the range contains the specified exposure bias.
 func (ebr *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
+	defer runtime.KeepAlive(ebr)
 	_r := objc.Send[bool](objref.IDOf(ebr), objc.RegisterName("containsExposureBias:"), exposureBias)
 	return _r
 }
 
 // MinExposureBias returns a float indicating the minimum exposure bias in EV units supported by this range.
 func (ebr *ExposureBiasRange) MinExposureBias() float32 {
+	defer runtime.KeepAlive(ebr)
 	_r := objc.Send[float32](objref.IDOf(ebr), objc.RegisterName("minExposureBias"))
 	return _r
 }
 
 // MaxExposureBias returns a float indicating the maximum exposure bias in EV units supported by this range.
 func (ebr *ExposureBiasRange) MaxExposureBias() float32 {
+	defer runtime.KeepAlive(ebr)
 	_r := objc.Send[float32](objref.IDOf(ebr), objc.RegisterName("maxExposureBias"))
 	return _r
 }

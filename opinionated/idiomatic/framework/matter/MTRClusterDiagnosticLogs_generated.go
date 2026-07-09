@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterDiagnosticLogsAdopt(id objc.ID) *MTRClusterDiagnosticLogs {
 
 // NewMTRClusterDiagnosticLogsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDiagnosticLogsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDiagnosticLogs {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDiagnosticLogs")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDiagnosticLogsAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterDiagnosticLogsWithDeviceEndpointIDQueue(device *MTRDevice, end
 
 // NewMTRClusterDiagnosticLogsWithDeviceEndpointQueue creates a new MTRClusterDiagnosticLogs.
 func NewMTRClusterDiagnosticLogsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterDiagnosticLogs {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDiagnosticLogs")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterDiagnosticLogsAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterDiagnosticLogsWithDeviceEndpointQueue(device *MTRDevice, endpo
 //
 // RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDiagnosticLogsClusterRetrieveLogsResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
 		err error
@@ -87,39 +97,52 @@ func (mcdl *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValue
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDiagnosticLogs) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDiagnosticLogsClusterRetrieveLogsResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
 		err error

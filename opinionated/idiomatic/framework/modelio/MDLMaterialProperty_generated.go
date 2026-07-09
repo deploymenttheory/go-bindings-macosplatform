@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func materialPropertyAdopt(id objc.ID) *MaterialProperty {
 
 // Description returns the object's -description text.
 func (mp *MaterialProperty) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MaterialProperty) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MaterialProperty) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MaterialProperty) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
@@ -111,21 +117,22 @@ func NewMaterialPropertyWithNameSemanticMatrix4x4(name string, semantic Material
 }
 
 // NewMaterialPropertyWithNameSemanticURL initializes a material property with a URL value.
-func NewMaterialPropertyWithNameSemanticURL(name string, semantic MaterialSemantic, uRL string) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticURL(name string, semantic MaterialSemantic, url string) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:URL:"), purego.NSString(name), semantic, rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:URL:"), purego.NSString(name), semantic, rt.FileURL(url))
 	return materialPropertyAdopt(_id)
 }
 
 // NewMaterialPropertyWithNameSemanticString initializes a material property with a string value.
-func NewMaterialPropertyWithNameSemanticString(name string, semantic MaterialSemantic, string_ string) *MaterialProperty {
+func NewMaterialPropertyWithNameSemanticString(name string, semantic MaterialSemantic, str string) *MaterialProperty {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:string:"), purego.NSString(name), semantic, purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:string:"), purego.NSString(name), semantic, purego.NSString(str))
 	return materialPropertyAdopt(_id)
 }
 
 // NewMaterialPropertyWithNameSemanticTextureSampler initializes a material property with a texture sampler object.
 func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic MaterialSemantic, textureSampler *TextureSampler) *MaterialProperty {
+	defer runtime.KeepAlive(textureSampler)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:textureSampler:"), purego.NSString(name), semantic, objref.IDOf(textureSampler))
 	return materialPropertyAdopt(_id)
@@ -133,6 +140,7 @@ func NewMaterialPropertyWithNameSemanticTextureSampler(name string, semantic Mat
 
 // NewMaterialPropertyWithNameSemanticColor initializes a material property with a color value.
 func NewMaterialPropertyWithNameSemanticColor(name string, semantic MaterialSemantic, color obj.Object) *MaterialProperty {
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialProperty")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:semantic:color:"), purego.NSString(name), semantic, objref.IDOf(color))
 	return materialPropertyAdopt(_id)
@@ -163,19 +171,21 @@ func (mp *MaterialProperty) WithStringValue(stringValue string) *MaterialPropert
 }
 
 // WithURLValue sets the URL value for the material property—typically, the URL to a texture image.
-func (mp *MaterialProperty) WithURLValue(uRLValue string) *MaterialProperty {
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setURLValue:"), rt.FileURL(uRLValue))
+func (mp *MaterialProperty) WithURLValue(urlValue string) *MaterialProperty {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setURLValue:"), rt.FileURL(urlValue))
 	return mp
 }
 
 // WithTextureSamplerValue sets a texture sampler object that provides the texture image value for the material property.
 func (mp *MaterialProperty) WithTextureSamplerValue(textureSamplerValue *TextureSampler) *MaterialProperty {
+	defer runtime.KeepAlive(textureSamplerValue)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setTextureSamplerValue:"), objref.IDOf(textureSamplerValue))
 	return mp
 }
 
 // WithColor sets the color value for the material property.
 func (mp *MaterialProperty) WithColor(color obj.Object) *MaterialProperty {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return mp
 }
@@ -218,23 +228,28 @@ func (mp *MaterialProperty) WithLuminance(luminance float32) *MaterialProperty {
 
 // SetProperties sets the material property’s attributes to those of the specified material property.
 func (mp *MaterialProperty) SetProperties(property *MaterialProperty) {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(property)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setProperties:"), objref.IDOf(property))
 }
 
 // Semantic returns the semantic.
 func (mp *MaterialProperty) Semantic() MaterialSemantic {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[MaterialSemantic](objref.IDOf(mp), objc.RegisterName("semantic"))
 	return _r
 }
 
 // Type returns the type.
 func (mp *MaterialProperty) Type() MaterialPropertyType {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[MaterialPropertyType](objref.IDOf(mp), objc.RegisterName("type"))
 	return _r
 }
 
 // Name returns the name.
 func (mp *MaterialProperty) Name() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -244,6 +259,7 @@ func (mp *MaterialProperty) Name() string {
 
 // StringValue returns the string value.
 func (mp *MaterialProperty) StringValue() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -252,31 +268,36 @@ func (mp *MaterialProperty) StringValue() string {
 }
 
 // URLValue returns the URL value.
-func (mp *MaterialProperty) URLValue() obj.Object {
+func (mp *MaterialProperty) URLValue() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("URLValue"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // TextureSamplerValue returns the texture sampler value.
 func (mp *MaterialProperty) TextureSamplerValue() *TextureSampler {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("textureSamplerValue"))
 	return TextureSamplerFromID(_r)
 }
 
 // Color returns the color.
 func (mp *MaterialProperty) Color() obj.Object {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // FloatValue returns the float value.
 func (mp *MaterialProperty) FloatValue() float32 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("floatValue"))
 	return _r
 }
 
 // Luminance returns the luminance.
 func (mp *MaterialProperty) Luminance() float32 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("luminance"))
 	return _r
 }

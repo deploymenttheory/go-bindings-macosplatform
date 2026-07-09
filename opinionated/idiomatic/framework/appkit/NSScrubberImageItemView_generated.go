@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewScrubberImageItemView() *ScrubberImageItemView {
 
 // WithImage sets the image displayed by the scrubber item.
 func (siiv *ScrubberImageItemView) WithImage(image *Image) *ScrubberImageItemView {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -231,6 +234,7 @@ func (siiv *ScrubberImageItemView) WithWantsLayer(wantsLayer bool) *ScrubberImag
 
 // WithLayer sets the layer.
 func (siiv *ScrubberImageItemView) WithLayer(layer obj.Object) *ScrubberImageItemView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -280,6 +284,7 @@ func (siiv *ScrubberImageItemView) WithBackgroundFilters(items ...obj.Object) *S
 
 // WithCompositingFilter sets the compositing filter.
 func (siiv *ScrubberImageItemView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberImageItemView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -297,6 +302,7 @@ func (siiv *ScrubberImageItemView) WithContentFilters(items ...obj.Object) *Scru
 
 // WithShadow sets the shadow.
 func (siiv *ScrubberImageItemView) WithShadow(shadow *Shadow) *ScrubberImageItemView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -345,6 +351,7 @@ func (siiv *ScrubberImageItemView) WithPreparedContentRect(preparedContentRect c
 
 // WithNextKeyView sets the next key view.
 func (siiv *ScrubberImageItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberImageItemView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -394,6 +401,7 @@ func (siiv *ScrubberImageItemView) WithPrefersCompactControlSizeMetrics(prefersC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (siiv *ScrubberImageItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberImageItemView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -450,6 +458,7 @@ func (siiv *ScrubberImageItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wa
 
 // WithPressureConfiguration sets the pressure configuration.
 func (siiv *ScrubberImageItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberImageItemView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -458,6 +467,7 @@ func (siiv *ScrubberImageItemView) WithPressureConfiguration(pressureConfigurati
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (siiv *ScrubberImageItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberImageItemView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -466,6 +476,7 @@ func (siiv *ScrubberImageItemView) WithNextResponder(nextResponder ResponderProv
 
 // WithMenu sets returns the responder’s menu.
 func (siiv *ScrubberImageItemView) WithMenu(menu *Menu) *ScrubberImageItemView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -474,6 +485,7 @@ func (siiv *ScrubberImageItemView) WithMenu(menu *Menu) *ScrubberImageItemView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (siiv *ScrubberImageItemView) WithUserActivity(userActivity obj.Object) *ScrubberImageItemView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -482,6 +494,7 @@ func (siiv *ScrubberImageItemView) WithUserActivity(userActivity obj.Object) *Sc
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (siiv *ScrubberImageItemView) WithTouchBar(touchBar *TouchBar) *ScrubberImageItemView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(siiv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -490,6 +503,7 @@ func (siiv *ScrubberImageItemView) WithTouchBar(touchBar *TouchBar) *ScrubberIma
 
 // ImageView returns the image view.
 func (siiv *ScrubberImageItemView) ImageView() *ImageView {
+	defer runtime.KeepAlive(siiv)
 	var _mainthread0 *ImageView
 	purego.Main(func() {
 		_mainthread0 = func() *ImageView {
@@ -503,6 +517,7 @@ func (siiv *ScrubberImageItemView) ImageView() *ImageView {
 
 // Image returns the image.
 func (siiv *ScrubberImageItemView) Image() *Image {
+	defer runtime.KeepAlive(siiv)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -516,6 +531,7 @@ func (siiv *ScrubberImageItemView) Image() *Image {
 
 // ImageAlignment returns the image alignment.
 func (siiv *ScrubberImageItemView) ImageAlignment() ImageAlignment {
+	defer runtime.KeepAlive(siiv)
 	var _mainthread0 ImageAlignment
 	purego.Main(func() {
 		_mainthread0 = func() ImageAlignment {

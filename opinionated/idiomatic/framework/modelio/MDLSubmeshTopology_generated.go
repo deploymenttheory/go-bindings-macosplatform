@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func submeshTopologyAdopt(id objc.ID) *SubmeshTopology {
 
 // Description returns the object's -description text.
 func (st *SubmeshTopology) Description() string {
+	defer runtime.KeepAlive(st)
 	return rt.Description(objref.IDOf(st))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (st *SubmeshTopology) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(st)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(st), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (st *SubmeshTopology) IsKind(className string) bool {
+	defer runtime.KeepAlive(st)
 	return rt.IsKind(objref.IDOf(st), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (st *SubmeshTopology) String() string {
+	defer runtime.KeepAlive(st)
 	return rt.Description(objref.IDOf(st))
 }
 
 // NewSubmeshTopologyWithSubmesh create a topology object corresponding to the topology in the submesh
 func NewSubmeshTopologyWithSubmesh(submesh *Submesh) *SubmeshTopology {
+	defer runtime.KeepAlive(submesh)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSubmeshTopology")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubmesh:"), objref.IDOf(submesh))
 	return submeshTopologyAdopt(_id)
@@ -99,24 +107,28 @@ func (st *SubmeshTopology) WithHoleCount(holeCount int) *SubmeshTopology {
 
 // FaceCount returns the number of faces encoded in faceTopologyBuffer
 func (st *SubmeshTopology) FaceCount() int {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("faceCount"))
 	return _r
 }
 
 // VertexCreaseCount returns the number of vertex creases encoded in vertexCreases
 func (st *SubmeshTopology) VertexCreaseCount() int {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("vertexCreaseCount"))
 	return _r
 }
 
 // EdgeCreaseCount returns the number of edge creases encoded in edgeCreases
 func (st *SubmeshTopology) EdgeCreaseCount() int {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("edgeCreaseCount"))
 	return _r
 }
 
 // HoleCount returns the number of holes encoded in holes
 func (st *SubmeshTopology) HoleCount() int {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("holeCount"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func destinationAdopt(id objc.ID) *Destination {
 
 // Description returns the object's -description text.
 func (d *Destination) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Destination) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Destination) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Destination) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // NewDestinationWithPageAtPoint initializes the destination.
 func NewDestinationWithPageAtPoint(page *Page, point corefoundation.CGPoint) *Destination {
+	defer runtime.KeepAlive(page)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDestination")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPage:atPoint:"), objref.IDOf(page), point)
 	return destinationAdopt(_id)
@@ -82,18 +90,21 @@ func (d *Destination) WithZoom(zoom float64) *Destination {
 
 // Page returns the page.
 func (d *Destination) Page() *Page {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
 // Point returns the point.
 func (d *Destination) Point() corefoundation.CGPoint {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(d), objc.RegisterName("point"))
 	return _r
 }
 
 // Zoom returns the zoom.
 func (d *Destination) Zoom() float64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("zoom"))
 	return _r
 }

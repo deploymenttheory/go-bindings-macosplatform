@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEFilterProviderConfigurationAdopt(id objc.ID) *NEFilterProviderConfigurati
 
 // Description returns the object's -description text.
 func (nfpc *NEFilterProviderConfiguration) Description() string {
+	defer runtime.KeepAlive(nfpc)
 	return rt.Description(objref.IDOf(nfpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfpc *NEFilterProviderConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfpc *NEFilterProviderConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfpc)
 	return rt.IsKind(objref.IDOf(nfpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfpc *NEFilterProviderConfiguration) String() string {
+	defer runtime.KeepAlive(nfpc)
 	return rt.Description(objref.IDOf(nfpc))
 }
 
@@ -91,8 +98,8 @@ func (nfpc *NEFilterProviderConfiguration) WithFilterPackets(filterPackets bool)
 }
 
 // WithVendorConfiguration sets a dictionary of provider-specific configuration settings.
-func (nfpc *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfiguration obj.Object) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setVendorConfiguration:"), objref.IDOf(vendorConfiguration))
+func (nfpc *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfiguration map[string]obj.Object) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setVendorConfiguration:"), rt.MapToDict(vendorConfiguration, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nfpc
 }
 
@@ -115,14 +122,14 @@ func (nfpc *NEFilterProviderConfiguration) WithOrganization(organization string)
 }
 
 // WithPasswordReference sets a persistent reference to a keychain item containing a password associated with the filter.
-func (nfpc *NEFilterProviderConfiguration) WithPasswordReference(passwordReference obj.Object) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+func (nfpc *NEFilterProviderConfiguration) WithPasswordReference(passwordReference []byte) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setPasswordReference:"), rt.BytesToNSData(passwordReference))
 	return nfpc
 }
 
 // WithIdentityReference sets a persistent reference to a keychain item containing a certificate and private key associated with the filter.
-func (nfpc *NEFilterProviderConfiguration) WithIdentityReference(identityReference obj.Object) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+func (nfpc *NEFilterProviderConfiguration) WithIdentityReference(identityReference []byte) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setIdentityReference:"), rt.BytesToNSData(identityReference))
 	return nfpc
 }
 
@@ -140,30 +147,35 @@ func (nfpc *NEFilterProviderConfiguration) WithFilterPacketProviderBundleIdentif
 
 // FilterBrowsers reports whether if true, the filter plugin will be allowed to filter browser traffic. If false, the filter plugin will not see any browser flows. Defaults to false. At least one of filterBrowsers and filterSockets should be set to true to make the filter take effect.
 func (nfpc *NEFilterProviderConfiguration) FilterBrowsers() bool {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[bool](objref.IDOf(nfpc), objc.RegisterName("filterBrowsers"))
 	return _r
 }
 
 // FilterSockets reports whether if true, the filter plugin will be allowed to filter socket traffic. If false, the filter plugin will not see any socket flows. Defaults to false. At least one of filterBrowsers and filterSockets should be set to true to make the filter take effect.
 func (nfpc *NEFilterProviderConfiguration) FilterSockets() bool {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[bool](objref.IDOf(nfpc), objc.RegisterName("filterSockets"))
 	return _r
 }
 
 // FilterPackets reports whether if true, a NEFilterPacketProvider will be instantiated and will be allowed to filter packets.
 func (nfpc *NEFilterProviderConfiguration) FilterPackets() bool {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[bool](objref.IDOf(nfpc), objc.RegisterName("filterPackets"))
 	return _r
 }
 
 // VendorConfiguration returns an optional dictionary of plugin-specific keys to be passed to the plugin.
-func (nfpc *NEFilterProviderConfiguration) VendorConfiguration() obj.Object {
+func (nfpc *NEFilterProviderConfiguration) VendorConfiguration() map[string]obj.Object {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("vendorConfiguration"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ServerAddress returns the optional address of the server used to support the filter.
 func (nfpc *NEFilterProviderConfiguration) ServerAddress() string {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("serverAddress"))
 	if _r == 0 {
 		return ""
@@ -173,6 +185,7 @@ func (nfpc *NEFilterProviderConfiguration) ServerAddress() string {
 
 // Username returns the optional username associated with the filter.
 func (nfpc *NEFilterProviderConfiguration) Username() string {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
@@ -182,6 +195,7 @@ func (nfpc *NEFilterProviderConfiguration) Username() string {
 
 // Organization returns the optional organization associated with the filter.
 func (nfpc *NEFilterProviderConfiguration) Organization() string {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("organization"))
 	if _r == 0 {
 		return ""
@@ -190,19 +204,22 @@ func (nfpc *NEFilterProviderConfiguration) Organization() string {
 }
 
 // PasswordReference returns the optional password keychain reference associated with the filter.
-func (nfpc *NEFilterProviderConfiguration) PasswordReference() obj.Object {
+func (nfpc *NEFilterProviderConfiguration) PasswordReference() []byte {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("passwordReference"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IdentityReference returns the optional certificate identity keychain reference associated with the filter.
-func (nfpc *NEFilterProviderConfiguration) IdentityReference() obj.Object {
+func (nfpc *NEFilterProviderConfiguration) IdentityReference() []byte {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("identityReference"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FilterDataProviderBundleIdentifier returns a string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
 func (nfpc *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() string {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("filterDataProviderBundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -212,6 +229,7 @@ func (nfpc *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() 
 
 // FilterPacketProviderBundleIdentifier returns a string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
 func (nfpc *NEFilterProviderConfiguration) FilterPacketProviderBundleIdentifier() string {
+	defer runtime.KeepAlive(nfpc)
 	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("filterPacketProviderBundleIdentifier"))
 	if _r == 0 {
 		return ""

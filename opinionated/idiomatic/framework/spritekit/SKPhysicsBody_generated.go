@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func physicsBodyAdopt(id objc.ID) *PhysicsBody {
 
 // Description returns the object's -description text.
 func (pb *PhysicsBody) Description() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pb *PhysicsBody) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pb *PhysicsBody) IsKind(className string) bool {
+	defer runtime.KeepAlive(pb)
 	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pb *PhysicsBody) String() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
@@ -189,31 +196,37 @@ func (pb *PhysicsBody) WithAngularVelocity(angularVelocity float64) *PhysicsBody
 
 // ApplyForce applies a force to the center of gravity of a physics body.
 func (pb *PhysicsBody) ApplyForce(force corefoundation.CGVector) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyForce:"), force)
 }
 
 // ApplyForceAtPoint applies a force to a specific point of a physics body.
 func (pb *PhysicsBody) ApplyForceAtPoint(force corefoundation.CGVector, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyForce:atPoint:"), force, point)
 }
 
 // ApplyTorque applies torque to an object.
 func (pb *PhysicsBody) ApplyTorque(torque float64) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyTorque:"), torque)
 }
 
 // ApplyImpulse applies an impulse to the center of gravity of a physics body.
 func (pb *PhysicsBody) ApplyImpulse(impulse corefoundation.CGVector) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyImpulse:"), impulse)
 }
 
 // ApplyImpulseAtPoint applies an impulse to a specific point of a physics body.
 func (pb *PhysicsBody) ApplyImpulseAtPoint(impulse corefoundation.CGVector, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyImpulse:atPoint:"), impulse, point)
 }
 
 // ApplyAngularImpulse applies an impulse that imparts angular momentum to an object.
 func (pb *PhysicsBody) ApplyAngularImpulse(impulse float64) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("applyAngularImpulse:"), impulse)
 }
 
@@ -221,114 +234,133 @@ func (pb *PhysicsBody) ApplyAngularImpulse(impulse float64) {
 //
 // AllContactedBodies returns the collection as a Go slice.
 func (pb *PhysicsBody) AllContactedBodies() []*PhysicsBody {
+	defer runtime.KeepAlive(pb)
 	_arr := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("allContactedBodies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsBody { return PhysicsBodyFromID(_id) })
 }
 
 // IsDynamic reports whether the object is dynamic.
 func (pb *PhysicsBody) IsDynamic() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isDynamic"))
 	return _r
 }
 
 // UsesPreciseCollisionDetection wraps the corresponding Objective-C method.
 func (pb *PhysicsBody) UsesPreciseCollisionDetection() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("usesPreciseCollisionDetection"))
 	return _r
 }
 
 // AllowsRotation wraps the corresponding Objective-C method.
 func (pb *PhysicsBody) AllowsRotation() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("allowsRotation"))
 	return _r
 }
 
 // Pinned wraps the corresponding Objective-C method.
 func (pb *PhysicsBody) Pinned() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("pinned"))
 	return _r
 }
 
 // IsResting reports whether if the physics simulation has determined that this body is at rest it may set the resting property to true. Resting bodies do not participate in the simulation until some collision with a non-resting object, or an impulse is applied, that unrests it. If all bodies in the world are resting then the simulation as a whole is "at rest".
 func (pb *PhysicsBody) IsResting() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isResting"))
 	return _r
 }
 
 // Friction determines the 'roughness' for the surface of the physics body (0.0 - 1.0). Defaults to 0.2
 func (pb *PhysicsBody) Friction() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("friction"))
 	return _r
 }
 
 // Charge specifies the charge on the body. Charge determines the degree to which a body is affected by electric and magnetic fields. Note that this is a unitless quantity, it is up to the developer to set charge and field strength appropriately. Defaults to 0.0
 func (pb *PhysicsBody) Charge() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("charge"))
 	return _r
 }
 
 // Restitution determines the 'bounciness' of the physics body (0.0 - 1.0). Defaults to 0.2
 func (pb *PhysicsBody) Restitution() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("restitution"))
 	return _r
 }
 
 // LinearDamping returns optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Used in conjunction with per frame impulses, an object can be made to move at a constant speed. For example, if an object 64 points in size and default density and a linearDamping of 25 will slide across the screen in a few seconds if an impulse of magnitude 10 is applied every update.
 func (pb *PhysicsBody) LinearDamping() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("linearDamping"))
 	return _r
 }
 
 // AngularDamping returns optionally reduce the body's angular velocity each frame to simulate rotational friction. (0.0 - 1.0). Defaults to 0.1
 func (pb *PhysicsBody) AngularDamping() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularDamping"))
 	return _r
 }
 
 // Density returns the density of the body. The unit is arbitrary, as long as the relative densities are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
 func (pb *PhysicsBody) Density() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("density"))
 	return _r
 }
 
 // Mass returns the mass of the body. The unit is arbitrary, as long as the relative masses are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
 func (pb *PhysicsBody) Mass() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("mass"))
 	return _r
 }
 
 // Area returns the area of the body. The unit is arbitrary, as long as the relative areas are consistent throughout the application.
 func (pb *PhysicsBody) Area() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("area"))
 	return _r
 }
 
 // AffectedByGravity reports whether bodies are affected by field forces such as gravity if this property is set and the field's category mask is set appropriately. The default value is true. If this is set a force is applied to the object based on the mass. Set the field force vector in the scene to modify the strength of the force.
 func (pb *PhysicsBody) AffectedByGravity() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("affectedByGravity"))
 	return _r
 }
 
 // FieldBitMask defines what logical 'categories' of fields this body responds to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
 func (pb *PhysicsBody) FieldBitMask() uint32 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[uint32](objref.IDOf(pb), objc.RegisterName("fieldBitMask"))
 	return _r
 }
 
 // CategoryBitMask defines what logical 'categories' this body belongs to. Defaults to all bits set (all categories).
 func (pb *PhysicsBody) CategoryBitMask() uint32 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[uint32](objref.IDOf(pb), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
 // CollisionBitMask defines what logical 'categories' of bodies this body responds to collisions with. Defaults to all bits set (all categories).
 func (pb *PhysicsBody) CollisionBitMask() uint32 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[uint32](objref.IDOf(pb), objc.RegisterName("collisionBitMask"))
 	return _r
 }
 
 // ContactTestBitMask defines what logical 'categories' of bodies this body generates intersection notifications with. Defaults to all bits cleared (no categories).
 func (pb *PhysicsBody) ContactTestBitMask() uint32 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[uint32](objref.IDOf(pb), objc.RegisterName("contactTestBitMask"))
 	return _r
 }
@@ -337,24 +369,28 @@ func (pb *PhysicsBody) ContactTestBitMask() uint32 {
 //
 // Joints returns the collection as a Go slice.
 func (pb *PhysicsBody) Joints() []*PhysicsJoint {
+	defer runtime.KeepAlive(pb)
 	_arr := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("joints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PhysicsJoint { return PhysicsJointFromID(_id) })
 }
 
 // Node returns the representedObject this physicsBody is currently bound to, or nil if it is not.
 func (pb *PhysicsBody) Node() *Node {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
 // Velocity returns the velocity.
 func (pb *PhysicsBody) Velocity() corefoundation.CGVector {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pb), objc.RegisterName("velocity"))
 	return _r
 }
 
 // AngularVelocity returns the angular velocity.
 func (pb *PhysicsBody) AngularVelocity() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularVelocity"))
 	return _r
 }

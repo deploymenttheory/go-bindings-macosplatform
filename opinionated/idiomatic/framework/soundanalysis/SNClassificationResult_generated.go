@@ -5,6 +5,8 @@
 package soundanalysis
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func classificationResultAdopt(id objc.ID) *ClassificationResult {
 
 // Description returns the object's -description text.
 func (cr *ClassificationResult) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *ClassificationResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *ClassificationResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *ClassificationResult) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
@@ -75,6 +82,7 @@ func NewClassificationResult() *ClassificationResult {
 
 // ClassificationForIdentifier returns the classification for an identifier.
 func (cr *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("classificationForIdentifier:"), purego.NSString(identifier))
 	return ClassificationFromID(_r)
 }
@@ -83,12 +91,14 @@ func (cr *ClassificationResult) ClassificationForIdentifier(identifier string) *
 //
 // Classifications returns the collection as a Go slice.
 func (cr *ClassificationResult) Classifications() []*Classification {
+	defer runtime.KeepAlive(cr)
 	_arr := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("classifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Classification { return ClassificationFromID(_id) })
 }
 
 // TimeRange returns the time range in the client-provided audio stream to which this classification result corresponds Each CMTime contains of a value (audio frame count) and timescale (client sample rate). This enables the client to precisely identify the frame range in the original audio stream to which this result corresponds. Time ranges will often be in the past compared to the frame count of the most recent audio buffer provided to the analyzer, due to the inherent audio buffering operations required to deliver a full block of audio to an MLModel.
 func (cr *ClassificationResult) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(cr), objc.RegisterName("timeRange"))
 	return _r
 }

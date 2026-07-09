@@ -5,14 +5,18 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // BurnForDevice creates an autoreleased burn object. Once a burn is created with this method, the object is ready to write data to the disc.
 func BurnForDevice(device *Device) *Burn {
+	defer runtime.KeepAlive(device)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRBurn")), objc.RegisterName("burnForDevice:"), objref.IDOf(device))
 	return BurnFromID(_r)
 }
@@ -24,8 +28,8 @@ func LayoutForImageFile(path string) obj.Object {
 }
 
 // ArrayOfCDTextBlocksFromPacks parses raw CD-Text data from a disc into DRCDTextBlock objects. This method can be used to parse any data blob containing CD-Text PACKs, such as the result of +[DRDevice readCDText], or the data returned by the IOKit ioctl DKIOCCDREADTOC with format=5. The NSData should be sized to fit the exact number of PACKs.  Each PACK occupies 18 bytes, and the 4-byte header from a READ TOC command may optionally be included.
-func ArrayOfCDTextBlocksFromPacks(packs obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("DRCDTextBlock")), objc.RegisterName("arrayOfCDTextBlocksFromPacks:"), objref.IDOf(packs))
+func ArrayOfCDTextBlocksFromPacks(packs []byte) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRCDTextBlock")), objc.RegisterName("arrayOfCDTextBlocksFromPacks:"), rt.BytesToNSData(packs))
 	return obj.Wrap(_r)
 }
 
@@ -55,6 +59,7 @@ func DeviceForIORegistryEntryPath(path string) *Device {
 
 // EraseForDevice creates and returns an erase object. An erase object created with this method is ready to erase media.
 func EraseForDevice(device *Device) *Erase {
+	defer runtime.KeepAlive(device)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRErase")), objc.RegisterName("eraseForDevice:"), objref.IDOf(device))
 	return EraseFromID(_r)
 }
@@ -66,31 +71,35 @@ func FileWithPath(path string) *File {
 }
 
 // VirtualFileWithNameData creates a virtual file object This type of DRFile burns the data passed in to disc, creating a file with the passed in name.
-func VirtualFileWithNameData(name string, data obj.Object) *File {
-	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("virtualFileWithName:data:"), purego.NSString(name), objref.IDOf(data))
+func VirtualFileWithNameData(name string, data []byte) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("virtualFileWithName:data:"), purego.NSString(name), rt.BytesToNSData(data))
 	return FileFromID(_r)
 }
 
 // VirtualFileWithNameDataProducer creates a virtual file object This type of DRFile burns the data produced to the output disc, creating a file with the passed in name.
 func VirtualFileWithNameDataProducer(name string, producer obj.Object) *File {
+	defer runtime.KeepAlive(producer)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("virtualFileWithName:dataProducer:"), purego.NSString(name), objref.IDOf(producer))
 	return FileFromID(_r)
 }
 
 // HardLinkPointingToInFilesystem creates a hard link to another file on the output disc.
 func HardLinkPointingToInFilesystem(original *File, filesystem string) *File {
+	defer runtime.KeepAlive(original)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("hardLinkPointingTo:inFilesystem:"), objref.IDOf(original), purego.NSString(filesystem))
 	return FileFromID(_r)
 }
 
 // SymLinkPointingToInFilesystem creates a symbolic link to another file on the output disc.
 func SymLinkPointingToInFilesystem(original *FSObject, filesystem string) *File {
+	defer runtime.KeepAlive(original)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("symLinkPointingTo:inFilesystem:"), objref.IDOf(original), purego.NSString(filesystem))
 	return FileFromID(_r)
 }
 
 // FinderAliasPointingToInFilesystem creates a Finder alias to another file on the output disc.
 func FinderAliasPointingToInFilesystem(original *FSObject, filesystem string) *File {
+	defer runtime.KeepAlive(original)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("finderAliasPointingTo:inFilesystem:"), objref.IDOf(original), purego.NSString(filesystem))
 	return FileFromID(_r)
 }
@@ -120,8 +129,8 @@ func MsfWithFrames(frames int) *MSF {
 }
 
 // MsfWithString creates an msf object initialized to the value represented by string
-func MsfWithString(string_ string) *MSF {
-	_r := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("msfWithString:"), purego.NSString(string_))
+func MsfWithString(str string) *MSF {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("msfWithString:"), purego.NSString(str))
 	return MSFFromID(_r)
 }
 
@@ -133,6 +142,8 @@ func CurrentRunLoopCenter() *NotificationCenter {
 
 // TrackForAudioOfLengthProducer wraps the corresponding Objective-C method.
 func TrackForAudioOfLengthProducer(length *MSF, producer obj.Object) *Track {
+	defer runtime.KeepAlive(length)
+	defer runtime.KeepAlive(producer)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("trackForAudioOfLength:producer:"), objref.IDOf(length), objref.IDOf(producer))
 	return TrackFromID(_r)
 }
@@ -145,6 +156,7 @@ func TrackForAudioFile(path string) *Track {
 
 // TrackForRootFolder creates a DRTrack capable of burning a folder to disc. Additional track properties can be set controlling the various filesystems to be generated. See the documentation for
 func TrackForRootFolder(rootFolder *Folder) *Track {
+	defer runtime.KeepAlive(rootFolder)
 	_r := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("trackForRootFolder:"), objref.IDOf(rootFolder))
 	return TrackFromID(_r)
 }

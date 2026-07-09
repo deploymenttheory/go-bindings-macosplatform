@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func callRecordFilterAdopt(id objc.ID) *CallRecordFilter {
 
 // Description returns the object's -description text.
 func (crf *CallRecordFilter) Description() string {
+	defer runtime.KeepAlive(crf)
 	return rt.Description(objref.IDOf(crf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (crf *CallRecordFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(crf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(crf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (crf *CallRecordFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(crf)
 	return rt.IsKind(objref.IDOf(crf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (crf *CallRecordFilter) String() string {
+	defer runtime.KeepAlive(crf)
 	return rt.Description(objref.IDOf(crf))
 }
 
@@ -77,18 +84,21 @@ func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants []*
 //
 // Participants returns the collection as a Go slice.
 func (crf *CallRecordFilter) Participants() []*Person {
+	defer runtime.KeepAlive(crf)
 	_arr := objc.Send[objc.ID](objref.IDOf(crf), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // CallTypes returns the call types.
 func (crf *CallRecordFilter) CallTypes() CallRecordTypeOptions {
+	defer runtime.KeepAlive(crf)
 	_r := objc.Send[CallRecordTypeOptions](objref.IDOf(crf), objc.RegisterName("callTypes"))
 	return _r
 }
 
 // CallCapability returns the call capability.
 func (crf *CallRecordFilter) CallCapability() CallCapability {
+	defer runtime.KeepAlive(crf)
 	_r := objc.Send[CallCapability](objref.IDOf(crf), objc.RegisterName("callCapability"))
 	return _r
 }

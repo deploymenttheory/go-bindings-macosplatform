@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func vertexDescriptorAdopt(id objc.ID) *VertexDescriptor {
 
 // Description returns the object's -description text.
 func (vd *VertexDescriptor) Description() string {
+	defer runtime.KeepAlive(vd)
 	return rt.Description(objref.IDOf(vd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vd *VertexDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vd *VertexDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vd)
 	return rt.IsKind(objref.IDOf(vd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vd *VertexDescriptor) String() string {
+	defer runtime.KeepAlive(vd)
 	return rt.Description(objref.IDOf(vd))
 }
 
 // NewVertexDescriptorWithVertexDescriptor creates a new vertex descriptor by performing a deep copy of the specified vertex descriptor.
 func NewVertexDescriptorWithVertexDescriptor(vertexDescriptor *VertexDescriptor) *VertexDescriptor {
+	defer runtime.KeepAlive(vertexDescriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVertexDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 	return vertexDescriptorAdopt(_id)
@@ -89,32 +97,39 @@ func (vd *VertexDescriptor) WithLayouts(items ...*VertexBufferLayout) *VertexDes
 
 // AttributeNamed returns the vertex attribute with the specified name in the vertex descriptor.
 func (vd *VertexDescriptor) AttributeNamed(name string) *VertexAttribute {
+	defer runtime.KeepAlive(vd)
 	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("attributeNamed:"), purego.NSString(name))
 	return VertexAttributeFromID(_r)
 }
 
 // AddOrReplaceAttribute adds the specified vertex attribute to the vertex descriptor, replacing any existing attribute with the same name.
 func (vd *VertexDescriptor) AddOrReplaceAttribute(attribute *VertexAttribute) {
+	defer runtime.KeepAlive(vd)
+	defer runtime.KeepAlive(attribute)
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("addOrReplaceAttribute:"), objref.IDOf(attribute))
 }
 
 // RemoveAttributeNamed remove the named attribute if it exists
 func (vd *VertexDescriptor) RemoveAttributeNamed(name string) {
+	defer runtime.KeepAlive(vd)
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("removeAttributeNamed:"), purego.NSString(name))
 }
 
 // Reset resets a vertex descriptor to its default state.
 func (vd *VertexDescriptor) Reset() {
+	defer runtime.KeepAlive(vd)
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("reset"))
 }
 
 // SetPackedStrides sets the stride for each vertex layout to the minimum value to pack vertex data together in a single buffer.
 func (vd *VertexDescriptor) SetPackedStrides() {
+	defer runtime.KeepAlive(vd)
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("setPackedStrides"))
 }
 
 // SetPackedOffsets sets the offset for each vertex attribute to the minimum value to pack vertex data together in a single buffer.
 func (vd *VertexDescriptor) SetPackedOffsets() {
+	defer runtime.KeepAlive(vd)
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("setPackedOffsets"))
 }
 
@@ -122,6 +137,7 @@ func (vd *VertexDescriptor) SetPackedOffsets() {
 //
 // Attributes returns the collection as a Go slice.
 func (vd *VertexDescriptor) Attributes() []*VertexAttribute {
+	defer runtime.KeepAlive(vd)
 	_arr := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VertexAttribute { return VertexAttributeFromID(_id) })
 }
@@ -130,6 +146,7 @@ func (vd *VertexDescriptor) Attributes() []*VertexAttribute {
 //
 // Layouts returns the collection as a Go slice.
 func (vd *VertexDescriptor) Layouts() []*VertexBufferLayout {
+	defer runtime.KeepAlive(vd)
 	_arr := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("layouts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VertexBufferLayout { return VertexBufferLayoutFromID(_id) })
 }

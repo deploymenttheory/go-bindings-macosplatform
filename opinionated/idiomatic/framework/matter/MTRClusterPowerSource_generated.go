@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterPowerSourceAdopt(id objc.ID) *MTRClusterPowerSource {
 
 // NewMTRClusterPowerSourceWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterPowerSourceWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPowerSource {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPowerSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterPowerSourceAdopt(_id)
@@ -53,231 +59,307 @@ func NewMTRClusterPowerSourceWithDeviceEndpointIDQueue(device *MTRDevice, endpoi
 
 // NewMTRClusterPowerSourceWithDeviceEndpointQueue creates a new MTRClusterPowerSource.
 func NewMTRClusterPowerSourceWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterPowerSource {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPowerSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterPowerSourceAdopt(_id)
 }
 
 // ReadAttributeStatusWithParams reads attribute status with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeStatusWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeStatusWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOrderWithParams reads attribute order with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeOrderWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeOrderWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeOrderWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDescriptionWithParams reads attribute description with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeDescriptionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredAssessedInputVoltageWithParams reads attribute wired assessed input voltage with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedInputVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedInputVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredAssessedInputVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredAssessedInputFrequencyWithParams reads attribute wired assessed input frequency with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedInputFrequencyWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedInputFrequencyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredAssessedInputFrequencyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredCurrentTypeWithParams reads attribute wired current type with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredCurrentTypeWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredCurrentTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredCurrentTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredAssessedCurrentWithParams reads attribute wired assessed current with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredAssessedCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredNominalVoltageWithParams reads attribute wired nominal voltage with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredNominalVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredNominalVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredNominalVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredMaximumCurrentWithParams reads attribute wired maximum current with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredMaximumCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredMaximumCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredMaximumCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWiredPresentWithParams reads attribute wired present with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeWiredPresentWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeWiredPresentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredPresentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveWiredFaultsWithParams reads attribute active wired faults with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeActiveWiredFaultsWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeActiveWiredFaultsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeActiveWiredFaultsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatVoltageWithParams reads attribute bat voltage with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatPercentRemainingWithParams reads attribute bat percent remaining with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatPercentRemainingWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatPercentRemainingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatPercentRemainingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatTimeRemainingWithParams reads attribute bat time remaining with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatTimeRemainingWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatTimeRemainingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatTimeRemainingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatChargeLevelWithParams reads attribute bat charge level with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatChargeLevelWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatChargeLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatChargeLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatReplacementNeededWithParams reads attribute bat replacement needed with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatReplacementNeededWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatReplacementNeededWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatReplacementNeededWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatReplaceabilityWithParams reads attribute bat replaceability with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatReplaceabilityWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatReplaceabilityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatReplaceabilityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatPresentWithParams reads attribute bat present with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatPresentWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatPresentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatPresentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveBatFaultsWithParams reads attribute active bat faults with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeActiveBatFaultsWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeActiveBatFaultsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeActiveBatFaultsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatReplacementDescriptionWithParams reads attribute bat replacement description with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatReplacementDescriptionWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatReplacementDescriptionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatReplacementDescriptionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatCommonDesignationWithParams reads attribute bat common designation with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatCommonDesignationWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatCommonDesignationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatCommonDesignationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatANSIDesignationWithParams reads attribute bat ansi designation with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatANSIDesignationWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatANSIDesignationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatANSIDesignationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatIECDesignationWithParams reads attribute bat iec designation with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatIECDesignationWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatIECDesignationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatIECDesignationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatApprovedChemistryWithParams reads attribute bat approved chemistry with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatApprovedChemistryWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatApprovedChemistryWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatApprovedChemistryWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatCapacityWithParams reads attribute bat capacity with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatCapacityWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatCapacityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatCapacityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatQuantityWithParams reads attribute bat quantity with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatQuantityWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatQuantityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatQuantityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatChargeStateWithParams reads attribute bat charge state with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatChargeStateWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatChargeStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatChargeStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatTimeToFullChargeWithParams reads attribute bat time to full charge with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatTimeToFullChargeWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatTimeToFullChargeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatTimeToFullChargeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatFunctionalWhileChargingWithParams reads attribute bat functional while charging with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatFunctionalWhileChargingWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatFunctionalWhileChargingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatFunctionalWhileChargingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBatChargingCurrentWithParams reads attribute bat charging current with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeBatChargingCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeBatChargingCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatChargingCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveBatChargeFaultsWithParams reads attribute active bat charge faults with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeActiveBatChargeFaultsWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeActiveBatChargeFaultsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeActiveBatChargeFaultsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeEndpointListWithParams reads attribute endpoint list with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeEndpointListWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeEndpointListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeEndpointListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcps *MTRClusterPowerSource) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcps *MTRClusterPowerSource) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcps)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterPowerSource)(nil)

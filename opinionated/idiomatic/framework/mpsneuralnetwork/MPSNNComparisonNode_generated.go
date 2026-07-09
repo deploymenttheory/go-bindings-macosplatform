@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -131,6 +133,7 @@ func (ncn *NNComparisonNode) WithLabel(label string) *NNComparisonNode {
 
 // ComparisonType returns the comparison type to set on the underlying kernel.  Defaults to MPSNNComparisonTypeEqual.
 func (ncn *NNComparisonNode) ComparisonType() NNComparisonType {
+	defer runtime.KeepAlive(ncn)
 	_r := objc.Send[NNComparisonType](objref.IDOf(ncn), objc.RegisterName("comparisonType"))
 	return _r
 }

@@ -182,14 +182,14 @@ func ShowPreferencesForExtensionWithIdentifier(ctx context.Context, identifier s
 // DispatchMessageWithNameToExtensionWithIdentifierUserInfo sends a message to a Safari app extension, launching Safari if necessary.
 //
 // DispatchMessageWithNameToExtensionWithIdentifierUserInfo blocks until the operation completes or ctx is cancelled.
-func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Context, messageName string, identifier string, userInfo obj.Object) error {
+func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Context, messageName string, identifier string, userInfo map[string]obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("dispatchMessageWithName:toExtensionWithIdentifier:userInfo:completionHandler:"), purego.NSString(messageName), purego.NSString(identifier), objref.IDOf(userInfo), _block)
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("dispatchMessageWithName:toExtensionWithIdentifier:userInfo:completionHandler:"), purego.NSString(messageName), purego.NSString(identifier), rt.MapToDict(userInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err

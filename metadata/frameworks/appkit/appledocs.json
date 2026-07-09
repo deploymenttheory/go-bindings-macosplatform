@@ -20818,8 +20818,8 @@
         "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadge/itemcount"
       },
       "stringValue": {
-        "doc": "The string representation of the badge when it displays.",
-        "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadge/stringvalue-fc9f"
+        "doc": "The string representation of the badge as it would appear when the badge is displayed.",
+        "url": "https://developer.apple.com/documentation/appkit/nsmenuitembadge/stringvalue-32sbt"
       },
       "type": {
         "doc": "The type of items the badge displays.",
@@ -21503,7 +21503,7 @@
       },
       "accessBehavior": {
         "doc": "The current pasteboard access behavior. The user can customize this behavior per-app in System Settings for any app that has triggered a pasteboard access alert in the past.",
-        "url": "https://developer.apple.com/documentation/appkit/nspasteboard/accessbehavior-86972"
+        "url": "https://developer.apple.com/documentation/appkit/nspasteboard/accessbehavior-9k4t4"
       },
       "changeCount": {
         "doc": "The receiver’s change count.",
@@ -26357,7 +26357,7 @@
       },
       "badge": {
         "doc": "A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.",
-        "url": "https://developer.apple.com/documentation/appkit/nstoolbaritem/badge-2b38p"
+        "url": "https://developer.apple.com/documentation/appkit/nstoolbaritem/badge-17r3r"
       },
       "bordered": {
         "doc": "A Boolean value that indicates whether the toolbar item has a bordered style.",

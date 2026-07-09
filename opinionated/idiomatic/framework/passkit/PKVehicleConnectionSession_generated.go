@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func vehicleConnectionSessionAdopt(id objc.ID) *VehicleConnectionSession {
 
 // Description returns the object's -description text.
 func (vcs *VehicleConnectionSession) Description() string {
+	defer runtime.KeepAlive(vcs)
 	return rt.Description(objref.IDOf(vcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcs *VehicleConnectionSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcs *VehicleConnectionSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcs)
 	return rt.IsKind(objref.IDOf(vcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcs *VehicleConnectionSession) String() string {
+	defer runtime.KeepAlive(vcs)
 	return rt.Description(objref.IDOf(vcs))
 }
 
@@ -74,9 +80,10 @@ func NewVehicleConnectionSession() *VehicleConnectionSession {
 }
 
 // SendData sends data.
-func (vcs *VehicleConnectionSession) SendData(message obj.Object) error {
+func (vcs *VehicleConnectionSession) SendData(message []byte) error {
+	defer runtime.KeepAlive(vcs)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(vcs), objc.RegisterName("sendData:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(vcs), objc.RegisterName("sendData:error:"), rt.BytesToNSData(message), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,11 +92,13 @@ func (vcs *VehicleConnectionSession) SendData(message obj.Object) error {
 
 // Invalidate wraps the corresponding Objective-C method.
 func (vcs *VehicleConnectionSession) Invalidate() {
+	defer runtime.KeepAlive(vcs)
 	objc.Send[objc.ID](objref.IDOf(vcs), objc.RegisterName("invalidate"))
 }
 
 // ConnectionStatus returns the connection status.
 func (vcs *VehicleConnectionSession) ConnectionStatus() VehicleConnectionSessionConnectionState {
+	defer runtime.KeepAlive(vcs)
 	_r := objc.Send[VehicleConnectionSessionConnectionState](objref.IDOf(vcs), objc.RegisterName("connectionStatus"))
 	return _r
 }

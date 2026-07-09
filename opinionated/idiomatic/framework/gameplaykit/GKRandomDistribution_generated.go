@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,63 +51,75 @@ func randomDistributionAdopt(id objc.ID) *RandomDistribution {
 
 // Description returns the object's -description text.
 func (rd *RandomDistribution) Description() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rd *RandomDistribution) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rd *RandomDistribution) IsKind(className string) bool {
+	defer runtime.KeepAlive(rd)
 	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rd *RandomDistribution) String() string {
+	defer runtime.KeepAlive(rd)
 	return rt.Description(objref.IDOf(rd))
 }
 
 // NextInt returns generates and returns a new random integer within the bounds of the distribution.
 func (rd *RandomDistribution) NextInt() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("nextInt"))
 	return _r
 }
 
 // NextIntWithUpperBound generates and returns a new random integer within the bounds of the distribution and less than the specified limit.
 func (rd *RandomDistribution) NextIntWithUpperBound(upperBound int) int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("nextIntWithUpperBound:"), upperBound)
 	return _r
 }
 
 // NextUniform returns generates and returns a new random floating-point value within the characteristics of the distribution.
 func (rd *RandomDistribution) NextUniform() float32 {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[float32](objref.IDOf(rd), objc.RegisterName("nextUniform"))
 	return _r
 }
 
 // NextBool reports whether generates and returns a new random Boolean value within the characteristics of the distribution.
 func (rd *RandomDistribution) NextBool() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("nextBool"))
 	return _r
 }
 
 // LowestValue returns the lowest value the distribution will output.
 func (rd *RandomDistribution) LowestValue() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("lowestValue"))
 	return _r
 }
 
 // HighestValue returns the highest value the distribution will output.
 func (rd *RandomDistribution) HighestValue() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("highestValue"))
 	return _r
 }
 
 // NumberOfPossibleOutcomes returns the number of unique possible outcomes, depending on the distribution type this is not always highest - lowest + 1.
 func (rd *RandomDistribution) NumberOfPossibleOutcomes() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("numberOfPossibleOutcomes"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -103,24 +104,28 @@ func (gsod *GraphStencilOpDescriptor) WithPaddingConstant(paddingConstant float3
 
 // ReductionMode returns the reduction mode to use within the stencil window. Default value: `MPSGraphReductionModeSum`.
 func (gsod *GraphStencilOpDescriptor) ReductionMode() GraphReductionMode {
+	defer runtime.KeepAlive(gsod)
 	_r := objc.Send[GraphReductionMode](objref.IDOf(gsod), objc.RegisterName("reductionMode"))
 	return _r
 }
 
 // BoundaryMode returns the property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
 func (gsod *GraphStencilOpDescriptor) BoundaryMode() GraphPaddingMode {
+	defer runtime.KeepAlive(gsod)
 	_r := objc.Send[GraphPaddingMode](objref.IDOf(gsod), objc.RegisterName("boundaryMode"))
 	return _r
 }
 
 // PaddingStyle returns the property that defines what kind of padding to apply to the stencil operation. Default value: `MPSGraphPaddingStyleExplicit`.
 func (gsod *GraphStencilOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	defer runtime.KeepAlive(gsod)
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gsod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
 // PaddingConstant returns the padding value for `boundaryMode = MPSGraphPaddingModeConstant`. Default value: 0.
 func (gsod *GraphStencilOpDescriptor) PaddingConstant() float32 {
+	defer runtime.KeepAlive(gsod)
 	_r := objc.Send[float32](objref.IDOf(gsod), objc.RegisterName("paddingConstant"))
 	return _r
 }

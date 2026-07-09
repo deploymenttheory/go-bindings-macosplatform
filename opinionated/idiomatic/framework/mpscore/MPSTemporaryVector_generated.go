@@ -5,6 +5,8 @@
 package mpscore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (tv *TemporaryVector) WithReadCount(readCount int) *TemporaryVector {
 
 // ReadCount returns the number of times a temporary vector may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryVector objects must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryVector is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryVector objects prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrix kernels to read the MPSTemporaryVector additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryVector with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryVector does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryVector is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 func (tv *TemporaryVector) ReadCount() int {
+	defer runtime.KeepAlive(tv)
 	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("readCount"))
 	return _r
 }

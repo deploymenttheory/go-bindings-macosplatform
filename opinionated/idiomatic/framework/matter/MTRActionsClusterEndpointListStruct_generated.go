@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActionsClusterEndpointListStructAdopt(id objc.ID) *MTRActionsClusterEndp
 
 // Description returns the object's -description text.
 func (macels *MTRActionsClusterEndpointListStruct) Description() string {
+	defer runtime.KeepAlive(macels)
 	return rt.Description(objref.IDOf(macels))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macels *MTRActionsClusterEndpointListStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macels)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macels), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macels *MTRActionsClusterEndpointListStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(macels)
 	return rt.IsKind(objref.IDOf(macels), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macels *MTRActionsClusterEndpointListStruct) String() string {
+	defer runtime.KeepAlive(macels)
 	return rt.Description(objref.IDOf(macels))
 }
 
@@ -72,6 +80,7 @@ func NewMTRActionsClusterEndpointListStruct() *MTRActionsClusterEndpointListStru
 
 // WithEndpointListID sets the endpoint list ID.
 func (macels *MTRActionsClusterEndpointListStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterEndpointListStruct {
+	defer runtime.KeepAlive(endpointListID)
 	objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return macels
 }
@@ -84,18 +93,21 @@ func (macels *MTRActionsClusterEndpointListStruct) WithName(name string) *MTRAct
 
 // WithType sets the type.
 func (macels *MTRActionsClusterEndpointListStruct) WithType(type_ obj.Object) *MTRActionsClusterEndpointListStruct {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return macels
 }
 
 // EndpointListID returns the endpoint list ID.
-func (macels *MTRActionsClusterEndpointListStruct) EndpointListID() obj.Object {
+func (macels *MTRActionsClusterEndpointListStruct) EndpointListID() *foundation.Number {
+	defer runtime.KeepAlive(macels)
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("endpointListID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (macels *MTRActionsClusterEndpointListStruct) Name() string {
+	defer runtime.KeepAlive(macels)
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -104,18 +116,22 @@ func (macels *MTRActionsClusterEndpointListStruct) Name() string {
 }
 
 // Type returns the type.
-func (macels *MTRActionsClusterEndpointListStruct) Type() obj.Object {
+func (macels *MTRActionsClusterEndpointListStruct) Type() *foundation.Number {
+	defer runtime.KeepAlive(macels)
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoints returns the endpoints.
 func (macels *MTRActionsClusterEndpointListStruct) Endpoints() obj.Object {
+	defer runtime.KeepAlive(macels)
 	_r := objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("endpoints"))
 	return obj.Wrap(_r)
 }
 
 // SetEndpoints wraps the corresponding Objective-C method.
 func (macels *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints obj.Object) {
+	defer runtime.KeepAlive(macels)
+	defer runtime.KeepAlive(endpoints)
 	objc.Send[objc.ID](objref.IDOf(macels), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }

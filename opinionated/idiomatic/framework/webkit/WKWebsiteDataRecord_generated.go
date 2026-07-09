@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKWebsiteDataRecordAdopt(id objc.ID) *WKWebsiteDataRecord {
 
 // Description returns the object's -description text.
 func (wwdr *WKWebsiteDataRecord) Description() string {
+	defer runtime.KeepAlive(wwdr)
 	return rt.Description(objref.IDOf(wwdr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwdr *WKWebsiteDataRecord) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwdr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwdr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwdr *WKWebsiteDataRecord) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwdr)
 	return rt.IsKind(objref.IDOf(wwdr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwdr *WKWebsiteDataRecord) String() string {
+	defer runtime.KeepAlive(wwdr)
 	return rt.Description(objref.IDOf(wwdr))
 }
 
@@ -80,6 +87,7 @@ func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
 
 // DisplayName returns the display name for the data record. This is usually the domain name.
 func (wwdr *WKWebsiteDataRecord) DisplayName() string {
+	defer runtime.KeepAlive(wwdr)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -95,12 +103,14 @@ func (wwdr *WKWebsiteDataRecord) DisplayName() string {
 }
 
 // DataTypes returns the various types of website data that exist for this data record.
-func (wwdr *WKWebsiteDataRecord) DataTypes() obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (wwdr *WKWebsiteDataRecord) DataTypes() []string {
+	defer runtime.KeepAlive(wwdr)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []string {
 			_r := objc.Send[objc.ID](objref.IDOf(wwdr), objc.RegisterName("dataTypes"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 		}()
 	})
 	return _mainthread0

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,24 +55,28 @@ func NewTextureReferenceType() *TextureReferenceType {
 
 // TextureDataType returns the texture data type.
 func (trt *TextureReferenceType) TextureDataType() DataType {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[DataType](objref.IDOf(trt), objc.RegisterName("textureDataType"))
 	return _r
 }
 
 // TextureType returns the texture type.
 func (trt *TextureReferenceType) TextureType() TextureType {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[TextureType](objref.IDOf(trt), objc.RegisterName("textureType"))
 	return _r
 }
 
 // Access returns the access.
 func (trt *TextureReferenceType) Access() BindingAccess {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[BindingAccess](objref.IDOf(trt), objc.RegisterName("access"))
 	return _r
 }
 
 // IsDepthTexture reports whether the object is depth texture.
 func (trt *TextureReferenceType) IsDepthTexture() bool {
+	defer runtime.KeepAlive(trt)
 	_r := objc.Send[bool](objref.IDOf(trt), objc.RegisterName("isDepthTexture"))
 	return _r
 }

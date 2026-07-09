@@ -5,9 +5,11 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,20 +50,25 @@ func boatReservationAdopt(id objc.ID) *BoatReservation {
 }
 
 // NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip creates a boat reservation with the specified contents and attributes.
-func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, boatTrip *BoatTrip) *BoatReservation {
+func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBoatTrip(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, reservedSeat *Seat, boatTrip *BoatTrip) *BoatReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservedSeat)
+	defer runtime.KeepAlive(boatTrip)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INBoatReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:boatTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(boatTrip))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:boatTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(reservedSeat), objref.IDOf(boatTrip))
 	return boatReservationAdopt(_id)
 }
 
 // ReservedSeat returns the reserved seat.
 func (br *BoatReservation) ReservedSeat() *Seat {
+	defer runtime.KeepAlive(br)
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // BoatTrip returns the boat trip.
 func (br *BoatReservation) BoatTrip() *BoatTrip {
+	defer runtime.KeepAlive(br)
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("boatTrip"))
 	return BoatTripFromID(_r)
 }

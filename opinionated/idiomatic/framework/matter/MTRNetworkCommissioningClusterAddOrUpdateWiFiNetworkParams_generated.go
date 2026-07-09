@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt(id objc.ID)
 
 // Description returns the object's -description text.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Description() string {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	return rt.Description(objref.IDOf(mnccaouwfnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mnccaouwfnp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mnccaouwfnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	return rt.IsKind(objref.IDOf(mnccaouwfnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) String() string {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	return rt.Description(objref.IDOf(mnccaouwfnp))
 }
 
@@ -71,61 +79,69 @@ func NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams() *MTRNetwork
 }
 
 // WithSsid sets the ssid.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithSsid(ssid []byte) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setSsid:"), rt.BytesToNSData(ssid))
 	return mnccaouwfnp
 }
 
 // WithCredentials sets the credentials.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithCredentials(credentials obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithCredentials(credentials []byte) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setCredentials:"), rt.BytesToNSData(credentials))
 	return mnccaouwfnp
 }
 
 // WithBreadcrumb sets the breadcrumb.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	defer runtime.KeepAlive(breadcrumb)
 	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccaouwfnp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mnccaouwfnp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mnccaouwfnp
 }
 
 // Ssid returns the ssid.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() obj.Object {
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() []byte {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("ssid"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Credentials returns the credentials.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() obj.Object {
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() []byte {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("credentials"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Breadcrumb returns the breadcrumb.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() obj.Object {
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() *foundation.Number {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("breadcrumb"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() obj.Object {
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() obj.Object {
+func (mnccaouwfnp *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mnccaouwfnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccaouwfnp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

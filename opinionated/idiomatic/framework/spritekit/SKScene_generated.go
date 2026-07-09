@@ -5,10 +5,14 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,6 +82,7 @@ func (s *Scene) WithScaleMode(scaleMode SceneScaleMode) *Scene {
 
 // WithCamera sets the camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
 func (s *Scene) WithCamera(camera *CameraNode) *Scene {
+	defer runtime.KeepAlive(camera)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	})
@@ -86,6 +91,7 @@ func (s *Scene) WithCamera(camera *CameraNode) *Scene {
 
 // WithListener sets a node used to determine the position of the listener for positional audio in the scene.
 func (s *Scene) WithListener(listener NodeProvider) *Scene {
+	defer runtime.KeepAlive(listener)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setListener:"), objref.IDOf(listener))
 	})
@@ -94,9 +100,22 @@ func (s *Scene) WithListener(listener NodeProvider) *Scene {
 
 // WithBackgroundColor sets the background color of the scene.
 func (s *Scene) WithBackgroundColor(backgroundColor obj.Object) *Scene {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
+	return s
+}
+
+// WithDelegate sets a delegate to be called during the animation loop.
+func (s *Scene) WithDelegate(delegate SceneDelegate) *Scene {
+	_shim := newSceneDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(s), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(s), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return s
 }
 
@@ -110,6 +129,7 @@ func (s *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
 
 // WithFilter sets the Core Image filter to apply.
 func (s *Scene) WithFilter(filter obj.Object) *Scene {
+	defer runtime.KeepAlive(filter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	})
@@ -150,6 +170,7 @@ func (s *Scene) WithBlendMode(blendMode BlendMode) *Scene {
 
 // WithShader sets a custom shader that is called when the effect node is blended into the parent’s framebuffer.
 func (s *Scene) WithShader(shader *Shader) *Scene {
+	defer runtime.KeepAlive(shader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	})
@@ -246,6 +267,7 @@ func (s *Scene) WithName(name string) *Scene {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (s *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -254,6 +276,7 @@ func (s *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (s *Scene) WithUserData(userData obj.Object) *Scene {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -262,6 +285,7 @@ func (s *Scene) WithUserData(userData obj.Object) *Scene {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (s *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -278,9 +302,9 @@ func (s *Scene) WithConstraints(items ...*Constraint) *Scene {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (s *Scene) WithAttributeValues(attributeValues obj.Object) *Scene {
+func (s *Scene) WithAttributeValues(attributeValues map[string]*AttributeValue) *Scene {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return s
 }
@@ -327,6 +351,7 @@ func (s *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect)
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (s *Scene) WithAccessibilityParent(accessibilityParent obj.Object) *Scene {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -359,6 +384,7 @@ func (s *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
 
 // SceneDidLoad tells you when the scene is presented.
 func (s *Scene) SceneDidLoad() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sceneDidLoad"))
 	})
@@ -367,6 +393,7 @@ func (s *Scene) SceneDidLoad() {
 
 // ConvertPointFromView converts a point from view coordinates to scene coordinates.
 func (s *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -380,6 +407,7 @@ func (s *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundatio
 
 // ConvertPointToView converts a point from scene coordinates to view coordinates.
 func (s *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -393,6 +421,7 @@ func (s *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.
 
 // Update tells your app to perform any app-specific logic to update your scene.
 func (s *Scene) Update(currentTime float64) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("update:"), currentTime)
 	})
@@ -401,6 +430,7 @@ func (s *Scene) Update(currentTime float64) {
 
 // DidEvaluateActions tells your app to peform any necessary logic after scene actions are evaluated.
 func (s *Scene) DidEvaluateActions() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didEvaluateActions"))
 	})
@@ -409,6 +439,7 @@ func (s *Scene) DidEvaluateActions() {
 
 // DidSimulatePhysics tells your app to peform any necessary logic after physics simulations are performed.
 func (s *Scene) DidSimulatePhysics() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didSimulatePhysics"))
 	})
@@ -417,6 +448,7 @@ func (s *Scene) DidSimulatePhysics() {
 
 // DidApplyConstraints tells your app to peform any necessary logic after constraints are applied.
 func (s *Scene) DidApplyConstraints() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didApplyConstraints"))
 	})
@@ -425,6 +457,7 @@ func (s *Scene) DidApplyConstraints() {
 
 // DidFinishUpdate tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
 func (s *Scene) DidFinishUpdate() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didFinishUpdate"))
 	})
@@ -433,6 +466,8 @@ func (s *Scene) DidFinishUpdate() {
 
 // DidMoveToView tells you when the scene is presented by a view.
 func (s *Scene) DidMoveToView(view *View) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didMoveToView:"), objref.IDOf(view))
 	})
@@ -441,6 +476,8 @@ func (s *Scene) DidMoveToView(view *View) {
 
 // WillMoveFromView tells you when the scene is about to be removed from a view.
 func (s *Scene) WillMoveFromView(view *View) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("willMoveFromView:"), objref.IDOf(view))
 	})
@@ -449,6 +486,7 @@ func (s *Scene) WillMoveFromView(view *View) {
 
 // DidChangeSize tells you when the scene’s size has changed.
 func (s *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didChangeSize:"), oldSize)
 	})
@@ -457,6 +495,7 @@ func (s *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
 
 // Size returns the size.
 func (s *Scene) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -470,6 +509,7 @@ func (s *Scene) Size() corefoundation.CGSize {
 
 // ScaleMode returns used to determine how to scale the scene to match the SKView it is being displayed in.
 func (s *Scene) ScaleMode() SceneScaleMode {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 SceneScaleMode
 	purego.Main(func() {
 		_mainthread0 = func() SceneScaleMode {
@@ -483,6 +523,7 @@ func (s *Scene) ScaleMode() SceneScaleMode {
 
 // Camera returns the camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
 func (s *Scene) Camera() *CameraNode {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *CameraNode
 	purego.Main(func() {
 		_mainthread0 = func() *CameraNode {
@@ -496,6 +537,7 @@ func (s *Scene) Camera() *CameraNode {
 
 // Listener returns the node that is currently the listener for positional audio coming from SKAudioNodes
 func (s *Scene) Listener() *Node {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *Node
 	purego.Main(func() {
 		_mainthread0 = func() *Node {
@@ -509,6 +551,7 @@ func (s *Scene) Listener() *Node {
 
 // AudioEngine returns the audio engine.
 func (s *Scene) AudioEngine() obj.Object {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -522,6 +565,7 @@ func (s *Scene) AudioEngine() obj.Object {
 
 // BackgroundColor returns background color, defaults to gray
 func (s *Scene) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -535,6 +579,7 @@ func (s *Scene) BackgroundColor() obj.Object {
 
 // AnchorPoint returns used to choose the origin of the scene's coordinate system
 func (s *Scene) AnchorPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -548,6 +593,7 @@ func (s *Scene) AnchorPoint() corefoundation.CGPoint {
 
 // PhysicsWorld returns physics simulation functionality
 func (s *Scene) PhysicsWorld() *PhysicsWorld {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *PhysicsWorld
 	purego.Main(func() {
 		_mainthread0 = func() *PhysicsWorld {
@@ -561,6 +607,7 @@ func (s *Scene) PhysicsWorld() *PhysicsWorld {
 
 // View returns the SKView this scene is currently presented in, or nil if it is not being presented.
 func (s *Scene) View() *View {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {

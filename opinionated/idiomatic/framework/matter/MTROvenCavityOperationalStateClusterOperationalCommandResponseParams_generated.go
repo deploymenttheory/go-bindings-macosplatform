@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTROvenCavityOperationalStateClusterOperationalCommandResponseParamsAdopt(i
 
 // Description returns the object's -description text.
 func (mocoscocrp *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) Description() string {
+	defer runtime.KeepAlive(mocoscocrp)
 	return rt.Description(objref.IDOf(mocoscocrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mocoscocrp *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mocoscocrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mocoscocrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mocoscocrp *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mocoscocrp)
 	return rt.IsKind(objref.IDOf(mocoscocrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mocoscocrp *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) String() string {
+	defer runtime.KeepAlive(mocoscocrp)
 	return rt.Description(objref.IDOf(mocoscocrp))
 }
 
-// NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError initialize an MTROvenCavityOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
+// NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWithResponseValue initialize an MTROvenCavityOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROvenCavityOperationalStateClusterOperationalCommandResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +86,14 @@ func NewMTROvenCavityOperationalStateClusterOperationalCommandResponseParamsWith
 
 // WithCommandResponseState sets the command response state.
 func (mocoscocrp *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams {
+	defer runtime.KeepAlive(commandResponseState)
 	objc.Send[objc.ID](objref.IDOf(mocoscocrp), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
 	return mocoscocrp
 }
 
 // CommandResponseState returns the command response state.
 func (mocoscocrp *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	defer runtime.KeepAlive(mocoscocrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscocrp), objc.RegisterName("commandResponseState"))
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_r)
 }

@@ -67,8 +67,8 @@ func CBIdentityAuthorityDefaultIdentityAuthority() *CBIdentityAuthority {
 }
 
 // Returns an identity authority specified by a given Core Services Identity authority object.
-func CBIdentityAuthorityIdentityAuthorityWithCSIdentityAuthority(cSIdentityAuthority unsafe.Pointer) *CBIdentityAuthority {
-	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentityAuthority), _cBIdentityAuthoritySelIdentityAuthorityWithCSIdentityAuthority, cSIdentityAuthority)
+func CBIdentityAuthorityIdentityAuthorityWithCSIdentityAuthority(csIdentityAuthority unsafe.Pointer) *CBIdentityAuthority {
+	_ret := objc.Send[objc.ID](objc.ID(_clsCBIdentityAuthority), _cBIdentityAuthoritySelIdentityAuthorityWithCSIdentityAuthority, csIdentityAuthority)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

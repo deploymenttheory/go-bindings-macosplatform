@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,24 +54,28 @@ func NewMTRTestClusterClusterTestEventEvent() *MTRTestClusterClusterTestEventEve
 
 // WithArg1 sets the arg1.
 func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	defer runtime.KeepAlive(arg1)
 	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtcctee
 }
 
 // WithArg2 sets the arg2.
 func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	defer runtime.KeepAlive(arg2)
 	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mtcctee
 }
 
 // WithArg3 sets the arg3.
 func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	defer runtime.KeepAlive(arg3)
 	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 	return mtcctee
 }
 
 // WithArg4 sets the arg4.
 func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent {
+	defer runtime.KeepAlive(arg4)
 	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 	return mtcctee
 }

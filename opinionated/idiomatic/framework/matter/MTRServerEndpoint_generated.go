@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,27 +48,33 @@ func mTRServerEndpointAdopt(id objc.ID) *MTRServerEndpoint {
 
 // Description returns the object's -description text.
 func (mse *MTRServerEndpoint) Description() string {
+	defer runtime.KeepAlive(mse)
 	return rt.Description(objref.IDOf(mse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mse *MTRServerEndpoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mse *MTRServerEndpoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(mse)
 	return rt.IsKind(objref.IDOf(mse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mse *MTRServerEndpoint) String() string {
+	defer runtime.KeepAlive(mse)
 	return rt.Description(objref.IDOf(mse))
 }
 
 // NewMTRServerEndpointWithEndpointIDDeviceTypes the provided endpointID must be in the range 1-65535.  The list of device types provided must be nonempty (but may include vendor-specific device types).
 func NewMTRServerEndpointWithEndpointIDDeviceTypes(endpointID obj.Object, deviceTypes []*MTRDeviceTypeRevision) *MTRServerEndpoint {
+	defer runtime.KeepAlive(endpointID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRServerEndpoint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEndpointID:deviceTypes:"), objref.IDOf(endpointID), purego.SliceToNSArray(deviceTypes, func(_v *MTRDeviceTypeRevision) objc.ID { return objref.IDOf(_v) }))
 	return mTRServerEndpointAdopt(_id)
@@ -73,30 +82,38 @@ func NewMTRServerEndpointWithEndpointIDDeviceTypes(endpointID obj.Object, device
 
 // AddAccessGrant add an access grant to the endpoint.  If the same access grant is added multiple times, it will be treated as if it were added once (and removing it once will remove it).
 func (mse *MTRServerEndpoint) AddAccessGrant(accessGrant *MTRAccessGrant) {
+	defer runtime.KeepAlive(mse)
+	defer runtime.KeepAlive(accessGrant)
 	objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("addAccessGrant:"), objref.IDOf(accessGrant))
 }
 
 // RemoveAccessGrant remove an access grant from the endpoint.
 func (mse *MTRServerEndpoint) RemoveAccessGrant(accessGrant *MTRAccessGrant) {
+	defer runtime.KeepAlive(mse)
+	defer runtime.KeepAlive(accessGrant)
 	objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("removeAccessGrant:"), objref.IDOf(accessGrant))
 }
 
 // AddServerCluster add a server cluster to the endpoint.  This can only be done before the endpoint has been added to a controller. The cluster must not have the same cluster ID as another cluster on this endpoint. The cluster must not already be added to another endpoint.
 func (mse *MTRServerEndpoint) AddServerCluster(serverCluster *MTRServerCluster) bool {
+	defer runtime.KeepAlive(mse)
+	defer runtime.KeepAlive(serverCluster)
 	_r := objc.Send[bool](objref.IDOf(mse), objc.RegisterName("addServerCluster:"), objref.IDOf(serverCluster))
 	return _r
 }
 
 // EndpointID returns the endpoint ID.
-func (mse *MTRServerEndpoint) EndpointID() obj.Object {
+func (mse *MTRServerEndpoint) EndpointID() *foundation.Number {
+	defer runtime.KeepAlive(mse)
 	_r := objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("endpointID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DeviceTypes returns the device types.
 //
 // DeviceTypes returns the collection as a Go slice.
 func (mse *MTRServerEndpoint) DeviceTypes() []*MTRDeviceTypeRevision {
+	defer runtime.KeepAlive(mse)
 	_arr := objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("deviceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
@@ -105,6 +122,7 @@ func (mse *MTRServerEndpoint) DeviceTypes() []*MTRDeviceTypeRevision {
 //
 // AccessGrants returns the collection as a Go slice.
 func (mse *MTRServerEndpoint) AccessGrants() []*MTRAccessGrant {
+	defer runtime.KeepAlive(mse)
 	_arr := objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("accessGrants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRAccessGrant { return MTRAccessGrantFromID(_id) })
 }
@@ -113,6 +131,7 @@ func (mse *MTRServerEndpoint) AccessGrants() []*MTRAccessGrant {
 //
 // ServerClusters returns the collection as a Go slice.
 func (mse *MTRServerEndpoint) ServerClusters() []*MTRServerCluster {
+	defer runtime.KeepAlive(mse)
 	_arr := objc.Send[objc.ID](objref.IDOf(mse), objc.RegisterName("serverClusters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRServerCluster { return MTRServerClusterFromID(_id) })
 }

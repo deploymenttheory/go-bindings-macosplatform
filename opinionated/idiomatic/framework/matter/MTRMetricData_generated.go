@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMetricDataAdopt(id objc.ID) *MTRMetricData {
 
 // Description returns the object's -description text.
 func (mmd *MTRMetricData) Description() string {
+	defer runtime.KeepAlive(mmd)
 	return rt.Description(objref.IDOf(mmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmd *MTRMetricData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmd *MTRMetricData) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmd)
 	return rt.IsKind(objref.IDOf(mmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmd *MTRMetricData) String() string {
+	defer runtime.KeepAlive(mmd)
 	return rt.Description(objref.IDOf(mmd))
 }
 
@@ -71,19 +79,22 @@ func NewMTRMetricData() *MTRMetricData {
 }
 
 // Value returns value for the metric data. The value may be nil depending on the event emitted.
-func (mmd *MTRMetricData) Value() obj.Object {
+func (mmd *MTRMetricData) Value() *foundation.Number {
+	defer runtime.KeepAlive(mmd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmd), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ErrorCode returns error code for the metric data. This value, when not nil, holds the error code value of the operation associated with the event. Interpretation of the error code value dependents on the metric being emitted.
-func (mmd *MTRMetricData) ErrorCode() obj.Object {
+func (mmd *MTRMetricData) ErrorCode() *foundation.Number {
+	defer runtime.KeepAlive(mmd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmd), objc.RegisterName("errorCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns duration of event associated with the metric. This value may be nil depending on the event emitted. When not nil, the value of duration is of type NSTimeInterval.
-func (mmd *MTRMetricData) Duration() obj.Object {
+func (mmd *MTRMetricData) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mmd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmd), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,11 +5,14 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -52,6 +55,7 @@ func savePanelAdopt(id objc.ID) *SavePanel {
 
 // WithIdentifier sets sets and returns the identifier.
 func (sp *SavePanel) WithIdentifier(identifier obj.Object) *SavePanel {
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	})
@@ -85,6 +89,7 @@ func (sp *SavePanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *SavePa
 
 // WithCurrentContentType sets NSSavePanel:The current type. If set to nil, resets to the first allowed content type. Returns nil if allowedContentTypes is empty. NSOpenPanel: Not used.
 func (sp *SavePanel) WithCurrentContentType(currentContentType obj.Object) *SavePanel {
+	defer runtime.KeepAlive(currentContentType)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setCurrentContentType:"), objref.IDOf(currentContentType))
 	})
@@ -93,6 +98,7 @@ func (sp *SavePanel) WithCurrentContentType(currentContentType obj.Object) *Save
 
 // WithAccessoryView sets the custom accessory view for the current app.
 func (sp *SavePanel) WithAccessoryView(accessoryView ViewProvider) *SavePanel {
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -304,9 +310,22 @@ func (sp *SavePanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (sp *SavePanel) WithContentView(contentView ViewProvider) *SavePanel {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return sp
+}
+
+// WithDelegate sets the window’s delegate.
+func (sp *SavePanel) WithDelegate(delegate WindowDelegate) *SavePanel {
+	_shim := newWindowDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sp), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sp), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return sp
 }
 
@@ -376,6 +395,7 @@ func (sp *SavePanel) WithReleasedWhenClosed(releasedWhenClosed bool) *SavePanel 
 
 // WithBackgroundColor sets the color of the window’s background.
 func (sp *SavePanel) WithBackgroundColor(backgroundColor *Color) *SavePanel {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -416,6 +436,7 @@ func (sp *SavePanel) WithCanHide(canHide bool) *SavePanel {
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (sp *SavePanel) WithMiniwindowImage(miniwindowImage *Image) *SavePanel {
+	defer runtime.KeepAlive(miniwindowImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	})
@@ -552,6 +573,7 @@ func (sp *SavePanel) WithAnimationBehavior(animationBehavior WindowAnimationBeha
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (sp *SavePanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *SavePanel {
+	defer runtime.KeepAlive(frameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	})
@@ -608,6 +630,7 @@ func (sp *SavePanel) WithMaxFullScreenContentSize(maxFullScreenContentSize coref
 
 // WithWindowController sets the window’s window controller.
 func (sp *SavePanel) WithWindowController(windowController *WindowController) *SavePanel {
+	defer runtime.KeepAlive(windowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	})
@@ -616,6 +639,7 @@ func (sp *SavePanel) WithWindowController(windowController *WindowController) *S
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (sp *SavePanel) WithParentWindow(parentWindow WindowProvider) *SavePanel {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -624,6 +648,7 @@ func (sp *SavePanel) WithParentWindow(parentWindow WindowProvider) *SavePanel {
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (sp *SavePanel) WithAppearanceSource(appearanceSource obj.Object) *SavePanel {
+	defer runtime.KeepAlive(appearanceSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	})
@@ -632,6 +657,7 @@ func (sp *SavePanel) WithAppearanceSource(appearanceSource obj.Object) *SavePane
 
 // WithColorSpace sets the window’s color space.
 func (sp *SavePanel) WithColorSpace(colorSpace *ColorSpace) *SavePanel {
+	defer runtime.KeepAlive(colorSpace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	})
@@ -648,6 +674,7 @@ func (sp *SavePanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarS
 
 // WithContentViewController sets the main content view controller for the window.
 func (sp *SavePanel) WithContentViewController(contentViewController ViewControllerProvider) *SavePanel {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -656,6 +683,7 @@ func (sp *SavePanel) WithContentViewController(contentViewController ViewControl
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (sp *SavePanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *SavePanel {
+	defer runtime.KeepAlive(initialFirstResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	})
@@ -664,6 +692,7 @@ func (sp *SavePanel) WithInitialFirstResponder(initialFirstResponder ViewProvide
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (sp *SavePanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *SavePanel {
+	defer runtime.KeepAlive(defaultButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	})
@@ -680,6 +709,7 @@ func (sp *SavePanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop
 
 // WithToolbar sets the window’s toolbar.
 func (sp *SavePanel) WithToolbar(toolbar *Toolbar) *SavePanel {
+	defer runtime.KeepAlive(toolbar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	})
@@ -704,6 +734,7 @@ func (sp *SavePanel) WithTabbingMode(tabbingMode WindowTabbingMode) *SavePanel {
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (sp *SavePanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *SavePanel {
+	defer runtime.KeepAlive(tabbingIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	})
@@ -784,6 +815,7 @@ func (sp *SavePanel) WithRestorationClass(restorationClass unsafe.Pointer) *Save
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sp *SavePanel) WithNextResponder(nextResponder ResponderProvider) *SavePanel {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -792,6 +824,7 @@ func (sp *SavePanel) WithNextResponder(nextResponder ResponderProvider) *SavePan
 
 // WithMenu sets returns the responder’s menu.
 func (sp *SavePanel) WithMenu(menu *Menu) *SavePanel {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -800,6 +833,7 @@ func (sp *SavePanel) WithMenu(menu *Menu) *SavePanel {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sp *SavePanel) WithUserActivity(userActivity obj.Object) *SavePanel {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -808,6 +842,7 @@ func (sp *SavePanel) WithUserActivity(userActivity obj.Object) *SavePanel {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sp *SavePanel) WithTouchBar(touchBar *TouchBar) *SavePanel {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -816,6 +851,7 @@ func (sp *SavePanel) WithTouchBar(touchBar *TouchBar) *SavePanel {
 
 // ValidateVisibleColumns validates and reloads the browser columns visible in the panel.
 func (sp *SavePanel) ValidateVisibleColumns() {
+	defer runtime.KeepAlive(sp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("validateVisibleColumns"))
 	})
@@ -824,6 +860,8 @@ func (sp *SavePanel) ValidateVisibleColumns() {
 
 // Ok the action method that the panel calls when the user clicks the OK button.
 func (sp *SavePanel) Ok(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("ok:"), objref.IDOf(sender))
 	})
@@ -832,6 +870,8 @@ func (sp *SavePanel) Ok(sender obj.Object) {
 
 // Cancel the action method that the panel calls when the user clicks the Cancel button.
 func (sp *SavePanel) Cancel(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("cancel:"), objref.IDOf(sender))
 	})
@@ -840,6 +880,8 @@ func (sp *SavePanel) Cancel(sender obj.Object) {
 
 // BeginSheetModalForWindowCompletionHandler presents the panel as a sheet modal to the specified window.
 func (sp *SavePanel) BeginSheetModalForWindowCompletionHandler(window *Window, handler func(int)) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(window)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("beginSheetModalForWindow:completionHandler:"), objref.IDOf(window), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 	})
@@ -848,6 +890,7 @@ func (sp *SavePanel) BeginSheetModalForWindowCompletionHandler(window *Window, h
 
 // BeginWithCompletionHandler presents the panel as a modeless window.
 func (sp *SavePanel) BeginWithCompletionHandler(handler func(int)) {
+	defer runtime.KeepAlive(sp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("beginWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 	})
@@ -856,6 +899,7 @@ func (sp *SavePanel) BeginWithCompletionHandler(handler func(int)) {
 
 // RunModal returns displays the panel and begins its event loop with the current working (or last-selected) directory as the default starting point.
 func (sp *SavePanel) RunModal() int {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -868,12 +912,13 @@ func (sp *SavePanel) RunModal() int {
 }
 
 // URL returns `NSSavePanel`: Returns the URL to save the file at. A file may already exist at `url` if the user choose to overwrite it. `NSOpenPanel`: Returns the single filename selected by the user. Note: if -allowsMultipleSelection is set, you should use the -URLs on NSOpenPanel instead.
-func (sp *SavePanel) URL() obj.Object {
-	var _mainthread0 obj.Object
+func (sp *SavePanel) URL() string {
+	defer runtime.KeepAlive(sp)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("URL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -881,12 +926,13 @@ func (sp *SavePanel) URL() obj.Object {
 }
 
 // Identifier sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
-func (sp *SavePanel) Identifier() obj.Object {
-	var _mainthread0 obj.Object
+func (sp *SavePanel) Identifier() *foundation.String {
+	defer runtime.KeepAlive(sp)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("identifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -894,12 +940,13 @@ func (sp *SavePanel) Identifier() obj.Object {
 }
 
 // DirectoryURL returns `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
-func (sp *SavePanel) DirectoryURL() obj.Object {
-	var _mainthread0 obj.Object
+func (sp *SavePanel) DirectoryURL() string {
+	defer runtime.KeepAlive(sp)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("directoryURL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -910,6 +957,7 @@ func (sp *SavePanel) DirectoryURL() obj.Object {
 //
 // AllowedContentTypes returns the collection as a Go slice.
 func (sp *SavePanel) AllowedContentTypes() []obj.Object {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -922,6 +970,7 @@ func (sp *SavePanel) AllowedContentTypes() []obj.Object {
 
 // AllowsOtherFileTypes reports whether `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
 func (sp *SavePanel) AllowsOtherFileTypes() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -935,6 +984,7 @@ func (sp *SavePanel) AllowsOtherFileTypes() bool {
 
 // CurrentContentType returns `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
 func (sp *SavePanel) CurrentContentType() obj.Object {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -948,6 +998,7 @@ func (sp *SavePanel) CurrentContentType() obj.Object {
 
 // AccessoryView sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
 func (sp *SavePanel) AccessoryView() *View {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -961,6 +1012,7 @@ func (sp *SavePanel) AccessoryView() *View {
 
 // IsExpanded reports whether `NSSavePanel`: Returns `YES` if the panel is expanded. Defaults to `NO`. Persists in the user defaults. `NSOpenPanel`: Not used.
 func (sp *SavePanel) IsExpanded() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -974,6 +1026,7 @@ func (sp *SavePanel) IsExpanded() bool {
 
 // CanCreateDirectories reports whether `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
 func (sp *SavePanel) CanCreateDirectories() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -987,6 +1040,7 @@ func (sp *SavePanel) CanCreateDirectories() bool {
 
 // CanSelectHiddenExtension reports whether `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
 func (sp *SavePanel) CanSelectHiddenExtension() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1000,6 +1054,7 @@ func (sp *SavePanel) CanSelectHiddenExtension() bool {
 
 // IsExtensionHidden reports whether `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (sp *SavePanel) IsExtensionHidden() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1013,6 +1068,7 @@ func (sp *SavePanel) IsExtensionHidden() bool {
 
 // TreatsFilePackagesAsDirectories reports whether `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
 func (sp *SavePanel) TreatsFilePackagesAsDirectories() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1026,6 +1082,7 @@ func (sp *SavePanel) TreatsFilePackagesAsDirectories() bool {
 
 // Prompt returns `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
 func (sp *SavePanel) Prompt() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1042,6 +1099,7 @@ func (sp *SavePanel) Prompt() string {
 
 // NameFieldLabel returns `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
 func (sp *SavePanel) NameFieldLabel() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1058,6 +1116,7 @@ func (sp *SavePanel) NameFieldLabel() string {
 
 // NameFieldStringValue returns `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
 func (sp *SavePanel) NameFieldStringValue() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1074,6 +1133,7 @@ func (sp *SavePanel) NameFieldStringValue() string {
 
 // Message returns `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
 func (sp *SavePanel) Message() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1090,6 +1150,7 @@ func (sp *SavePanel) Message() string {
 
 // ShowsHiddenFiles reports whether `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
 func (sp *SavePanel) ShowsHiddenFiles() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1103,6 +1164,7 @@ func (sp *SavePanel) ShowsHiddenFiles() bool {
 
 // ShowsTagField reports whether `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
 func (sp *SavePanel) ShowsTagField() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1118,6 +1180,7 @@ func (sp *SavePanel) ShowsTagField() bool {
 //
 // TagNames returns the collection as a Go slice.
 func (sp *SavePanel) TagNames() []string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -1130,6 +1193,7 @@ func (sp *SavePanel) TagNames() []string {
 
 // ShowsContentTypes reports whether `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
 func (sp *SavePanel) ShowsContentTypes() bool {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1143,6 +1207,7 @@ func (sp *SavePanel) ShowsContentTypes() bool {
 
 // Filename returns the filename.
 func (sp *SavePanel) Filename() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1159,6 +1224,7 @@ func (sp *SavePanel) Filename() string {
 
 // Directory returns the directory.
 func (sp *SavePanel) Directory() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1175,6 +1241,7 @@ func (sp *SavePanel) Directory() string {
 
 // SetDirectory wraps the corresponding Objective-C method.
 func (sp *SavePanel) SetDirectory(path string) {
+	defer runtime.KeepAlive(sp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setDirectory:"), purego.NSString(path))
 	})
@@ -1183,6 +1250,7 @@ func (sp *SavePanel) SetDirectory(path string) {
 
 // RequiredFileType returns the required file type.
 func (sp *SavePanel) RequiredFileType() string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1199,6 +1267,7 @@ func (sp *SavePanel) RequiredFileType() string {
 
 // SetRequiredFileType wraps the corresponding Objective-C method.
 func (sp *SavePanel) SetRequiredFileType(type_ string) {
+	defer runtime.KeepAlive(sp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setRequiredFileType:"), purego.NSString(type_))
 	})
@@ -1207,6 +1276,7 @@ func (sp *SavePanel) SetRequiredFileType(type_ string) {
 
 // RunModalForDirectoryFile runs modal for directory file.
 func (sp *SavePanel) RunModalForDirectoryFile(path string, name string) int {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1220,6 +1290,8 @@ func (sp *SavePanel) RunModalForDirectoryFile(path string, name string) int {
 
 // SelectText selects text.
 func (sp *SavePanel) SelectText(sender obj.Object) {
+	defer runtime.KeepAlive(sp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("selectText:"), objref.IDOf(sender))
 	})
@@ -1230,6 +1302,7 @@ func (sp *SavePanel) SelectText(sender obj.Object) {
 //
 // AllowedFileTypes returns the collection as a Go slice.
 func (sp *SavePanel) AllowedFileTypes() []string {
+	defer runtime.KeepAlive(sp)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {

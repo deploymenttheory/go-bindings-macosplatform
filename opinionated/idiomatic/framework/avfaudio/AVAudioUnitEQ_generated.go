@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -68,12 +70,14 @@ func (aue *AudioUnitEQ) WithBypass(bypass bool) *AudioUnitEQ {
 //
 // Bands returns the collection as a Go slice.
 func (aue *AudioUnitEQ) Bands() []*AudioUnitEQFilterParameters {
+	defer runtime.KeepAlive(aue)
 	_arr := objc.Send[objc.ID](objref.IDOf(aue), objc.RegisterName("bands"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioUnitEQFilterParameters { return AudioUnitEQFilterParametersFromID(_id) })
 }
 
 // GlobalGain returns overall gain adjustment applied to the signal. Range:     -96 -> 24 Default:   0 Unit:      dB
 func (aue *AudioUnitEQ) GlobalGain() float32 {
+	defer runtime.KeepAlive(aue)
 	_r := objc.Send[float32](objref.IDOf(aue), objc.RegisterName("globalGain"))
 	return _r
 }

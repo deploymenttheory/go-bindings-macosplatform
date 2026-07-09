@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewAudiogramSample() *AudiogramSample {
 //
 // SensitivityPoints returns the collection as a Go slice.
 func (as *AudiogramSample) SensitivityPoints() []*AudiogramSensitivityPoint {
+	defer runtime.KeepAlive(as)
 	_arr := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("sensitivityPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudiogramSensitivityPoint { return AudiogramSensitivityPointFromID(_id) })
 }

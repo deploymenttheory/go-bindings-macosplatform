@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func volumeAdopt(id objc.ID) *Volume {
 
 // Description returns the object's -description text.
 func (v_ *Volume) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *Volume) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *Volume) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *Volume) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // NewVolumeWithVolumeIDVolumeName creates a volume with the given identifier and name.
 func NewVolumeWithVolumeIDVolumeName(volumeID *VolumeIdentifier, volumeName *FileName) *Volume {
+	defer runtime.KeepAlive(volumeID)
+	defer runtime.KeepAlive(volumeName)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("FSVolume")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVolumeID:volumeName:"), objref.IDOf(volumeID), objref.IDOf(volumeName))
 	return volumeAdopt(_id)
@@ -75,18 +84,21 @@ func NewVolumeWithVolumeIDVolumeName(volumeID *VolumeIdentifier, volumeName *Fil
 
 // WithName sets the name of the volume.
 func (v_ *Volume) WithName(name *FileName) *Volume {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setName:"), objref.IDOf(name))
 	return v_
 }
 
 // VolumeID returns an identifier that uniquely identifies the volume.
 func (v_ *Volume) VolumeID() *VolumeIdentifier {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("volumeID"))
 	return VolumeIdentifierFromID(_r)
 }
 
 // Name returns the name of the volume.
 func (v_ *Volume) Name() *FileName {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("name"))
 	return FileNameFromID(_r)
 }

@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -77,6 +79,7 @@ func (mav *MarkerAnnotationView) WithSubtitleVisibility(subtitleVisibility Featu
 
 // WithMarkerTintColor sets the background color of the marker balloon.
 func (mav *MarkerAnnotationView) WithMarkerTintColor(markerTintColor obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(markerTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setMarkerTintColor:"), objref.IDOf(markerTintColor))
 	})
@@ -85,6 +88,7 @@ func (mav *MarkerAnnotationView) WithMarkerTintColor(markerTintColor obj.Object)
 
 // WithGlyphTintColor sets the color to apply to the glyph text or image.
 func (mav *MarkerAnnotationView) WithGlyphTintColor(glyphTintColor obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(glyphTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphTintColor:"), objref.IDOf(glyphTintColor))
 	})
@@ -101,6 +105,7 @@ func (mav *MarkerAnnotationView) WithGlyphText(glyphText string) *MarkerAnnotati
 
 // WithGlyphImage sets an image to display in the marker balloon.
 func (mav *MarkerAnnotationView) WithGlyphImage(glyphImage obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(glyphImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setGlyphImage:"), objref.IDOf(glyphImage))
 	})
@@ -109,6 +114,7 @@ func (mav *MarkerAnnotationView) WithGlyphImage(glyphImage obj.Object) *MarkerAn
 
 // WithSelectedGlyphImage sets an image to display when the user selects the marker.
 func (mav *MarkerAnnotationView) WithSelectedGlyphImage(selectedGlyphImage obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(selectedGlyphImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setSelectedGlyphImage:"), objref.IDOf(selectedGlyphImage))
 	})
@@ -125,6 +131,7 @@ func (mav *MarkerAnnotationView) WithAnimatesWhenAdded(animatesWhenAdded bool) *
 
 // WithImage sets the image the annotation view displays.
 func (mav *MarkerAnnotationView) WithImage(image obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -205,6 +212,7 @@ func (mav *MarkerAnnotationView) WithCanShowCallout(canShowCallout bool) *Marker
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (mav *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(leftCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	})
@@ -213,6 +221,7 @@ func (mav *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccesso
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (mav *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(rightCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	})
@@ -221,6 +230,7 @@ func (mav *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAcces
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (mav *MarkerAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *MarkerAnnotationView {
+	defer runtime.KeepAlive(detailCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	})
@@ -285,6 +295,7 @@ func (mav *MarkerAnnotationView) WithCollisionMode(collisionMode AnnotationViewC
 
 // TitleVisibility returns the title visibility.
 func (mav *MarkerAnnotationView) TitleVisibility() FeatureVisibility {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 FeatureVisibility
 	purego.Main(func() {
 		_mainthread0 = func() FeatureVisibility {
@@ -298,6 +309,7 @@ func (mav *MarkerAnnotationView) TitleVisibility() FeatureVisibility {
 
 // SubtitleVisibility returns the subtitle visibility.
 func (mav *MarkerAnnotationView) SubtitleVisibility() FeatureVisibility {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 FeatureVisibility
 	purego.Main(func() {
 		_mainthread0 = func() FeatureVisibility {
@@ -311,6 +323,7 @@ func (mav *MarkerAnnotationView) SubtitleVisibility() FeatureVisibility {
 
 // MarkerTintColor returns the marker tint color.
 func (mav *MarkerAnnotationView) MarkerTintColor() obj.Object {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -324,6 +337,7 @@ func (mav *MarkerAnnotationView) MarkerTintColor() obj.Object {
 
 // GlyphTintColor returns the glyph tint color.
 func (mav *MarkerAnnotationView) GlyphTintColor() obj.Object {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -337,6 +351,7 @@ func (mav *MarkerAnnotationView) GlyphTintColor() obj.Object {
 
 // GlyphText returns the glyph text.
 func (mav *MarkerAnnotationView) GlyphText() string {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -353,6 +368,7 @@ func (mav *MarkerAnnotationView) GlyphText() string {
 
 // GlyphImage returns the glyph image.
 func (mav *MarkerAnnotationView) GlyphImage() obj.Object {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -366,6 +382,7 @@ func (mav *MarkerAnnotationView) GlyphImage() obj.Object {
 
 // SelectedGlyphImage returns the selected glyph image.
 func (mav *MarkerAnnotationView) SelectedGlyphImage() obj.Object {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -379,6 +396,7 @@ func (mav *MarkerAnnotationView) SelectedGlyphImage() obj.Object {
 
 // AnimatesWhenAdded wraps the corresponding Objective-C method.
 func (mav *MarkerAnnotationView) AnimatesWhenAdded() bool {
+	defer runtime.KeepAlive(mav)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

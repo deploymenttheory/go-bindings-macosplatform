@@ -5,6 +5,8 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,9 +49,11 @@ func mutableDescriptorAdopt(id objc.ID) *MutableDescriptor {
 }
 
 // NewMutableDescriptorWithTypeValue creates a mutable descriptor with a specified value.
-func NewMutableDescriptorWithTypeValue(uUID *UUID, value obj.Object) *MutableDescriptor {
+func NewMutableDescriptorWithTypeValue(uuid *UUID, value obj.Object) *MutableDescriptor {
+	defer runtime.KeepAlive(uuid)
+	defer runtime.KeepAlive(value)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:value:"), objref.IDOf(uUID), objref.IDOf(value))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:value:"), objref.IDOf(uuid), objref.IDOf(value))
 	return mutableDescriptorAdopt(_id)
 }
 

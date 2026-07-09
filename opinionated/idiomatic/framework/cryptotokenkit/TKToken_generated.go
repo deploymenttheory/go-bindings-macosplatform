@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,34 @@ func tokenAdopt(id objc.ID) *Token {
 
 // Description returns the object's -description text.
 func (t *Token) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Token) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Token) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Token) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // NewTokenWithTokenDriverInstanceID initializes a token with the driver you specify.
 func NewTokenWithTokenDriverInstanceID(tokenDriver *TokenDriver, instanceID obj.Object) *Token {
+	defer runtime.KeepAlive(tokenDriver)
+	defer runtime.KeepAlive(instanceID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKToken")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTokenDriver:instanceID:"), objref.IDOf(tokenDriver), objref.IDOf(instanceID))
 	return tokenAdopt(_id)
@@ -77,18 +86,21 @@ func NewTokenWithTokenDriverInstanceID(tokenDriver *TokenDriver, instanceID obj.
 
 // TokenDriver returns the token driver.
 func (t *Token) TokenDriver() *TokenDriver {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tokenDriver"))
 	return TokenDriverFromID(_r)
 }
 
 // Configuration returns token configuration associated with this token instance.
 func (t *Token) Configuration() *TokenConfiguration {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("configuration"))
 	return TokenConfigurationFromID(_r)
 }
 
 // KeychainContents returns keychain contents (certificate and key items) representing this token.
 func (t *Token) KeychainContents() *TokenKeychainContents {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("keychainContents"))
 	return TokenKeychainContentsFromID(_r)
 }

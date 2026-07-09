@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,71 +50,83 @@ func mTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) Description() string {
+	defer runtime.KeepAlive(msupcaurp)
 	return rt.Description(objref.IDOf(msupcaurp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msupcaurp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msupcaurp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(msupcaurp)
 	return rt.IsKind(objref.IDOf(msupcaurp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) String() string {
+	defer runtime.KeepAlive(msupcaurp)
 	return rt.Description(objref.IDOf(msupcaurp))
 }
 
 // WithUpdateToken sets the update token.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken []byte) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setUpdateToken:"), rt.BytesToNSData(updateToken))
 	return msupcaurp
 }
 
 // WithNewVersion sets the new version.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	defer runtime.KeepAlive(newVersion)
 	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
 	return msupcaurp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return msupcaurp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return msupcaurp
 }
 
 // UpdateToken returns the update token.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) UpdateToken() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) UpdateToken() []byte {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("updateToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // NewVersion returns the new version.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) NewVersion() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) NewVersion() *foundation.Number {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("getNewVersion"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (msupcaurp *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(msupcaurp)
 	_r := objc.Send[objc.ID](objref.IDOf(msupcaurp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams marks MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams — and, by embedding promotion, its

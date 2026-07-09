@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func wKWebExtensionDataRecordAdopt(id objc.ID) *WKWebExtensionDataRecord {
 
 // Description returns the object's -description text.
 func (wwedr *WKWebExtensionDataRecord) Description() string {
+	defer runtime.KeepAlive(wwedr)
 	return rt.Description(objref.IDOf(wwedr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwedr *WKWebExtensionDataRecord) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwedr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwedr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwedr *WKWebExtensionDataRecord) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwedr)
 	return rt.IsKind(objref.IDOf(wwedr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwedr *WKWebExtensionDataRecord) String() string {
+	defer runtime.KeepAlive(wwedr)
 	return rt.Description(objref.IDOf(wwedr))
 }
 
@@ -77,11 +85,12 @@ func NewWKWebExtensionDataRecord() *WKWebExtensionDataRecord {
 }
 
 // SizeInBytesOfTypes retrieves the size in bytes of the specific data types in this data record.
-func (wwedr *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes obj.Object) int {
+func (wwedr *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes []*foundation.String) int {
+	defer runtime.KeepAlive(wwedr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
-			_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("sizeInBytesOfTypes:"), objref.IDOf(dataTypes))
+			_r := objc.Send[int](objref.IDOf(wwedr), objc.RegisterName("sizeInBytesOfTypes:"), rt.SliceToNSSet(dataTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 			return _r
 		}()
 	})
@@ -91,6 +100,7 @@ func (wwedr *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes obj.Object) 
 
 // DisplayName returns the display name for the web extension to which this data record belongs.
 func (wwedr *WKWebExtensionDataRecord) DisplayName() string {
+	defer runtime.KeepAlive(wwedr)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -107,6 +117,7 @@ func (wwedr *WKWebExtensionDataRecord) DisplayName() string {
 
 // UniqueIdentifier returns unique identifier for the web extension context to which this data record belongs.
 func (wwedr *WKWebExtensionDataRecord) UniqueIdentifier() string {
+	defer runtime.KeepAlive(wwedr)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -122,12 +133,14 @@ func (wwedr *WKWebExtensionDataRecord) UniqueIdentifier() string {
 }
 
 // ContainedDataTypes returns the set of data types contained in this data record.
-func (wwedr *WKWebExtensionDataRecord) ContainedDataTypes() obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (wwedr *WKWebExtensionDataRecord) ContainedDataTypes() []*foundation.String {
+	defer runtime.KeepAlive(wwedr)
+	var _mainthread0 []*foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(wwedr), objc.RegisterName("containedDataTypes"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -136,6 +149,7 @@ func (wwedr *WKWebExtensionDataRecord) ContainedDataTypes() obj.Object {
 
 // Errors returns an array of errors that may have occurred when either calculating or deleting storage.
 func (wwedr *WKWebExtensionDataRecord) Errors() []obj.Object {
+	defer runtime.KeepAlive(wwedr)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -149,6 +163,7 @@ func (wwedr *WKWebExtensionDataRecord) Errors() []obj.Object {
 
 // TotalSizeInBytes returns the total size in bytes of all data types contained in this data record.
 func (wwedr *WKWebExtensionDataRecord) TotalSizeInBytes() int {
+	defer runtime.KeepAlive(wwedr)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

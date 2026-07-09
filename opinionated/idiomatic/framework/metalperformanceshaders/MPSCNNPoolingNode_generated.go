@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func cNNPoolingNodeAdopt(id objc.ID) *CNNPoolingNode {
 
 // NewCNNPoolingNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY init a node representing a MPSCNNPooling kernel
 func NewCNNPoolingNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(sourceNode obj.Object, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int) *CNNPoolingNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:"), objref.IDOf(sourceNode), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
 	return cNNPoolingNodeAdopt(_id)
@@ -55,6 +58,7 @@ func NewCNNPoolingNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPi
 
 // NewCNNPoolingNodeWithSourceFilterSizeStride convenience initializer for MPSCNNPooling nodes with square kernels
 func NewCNNPoolingNodeWithSourceFilterSizeStride(sourceNode obj.Object, size int, stride int) *CNNPoolingNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:stride:"), objref.IDOf(sourceNode), size, stride)
 	return cNNPoolingNodeAdopt(_id)
@@ -62,6 +66,7 @@ func NewCNNPoolingNodeWithSourceFilterSizeStride(sourceNode obj.Object, size int
 
 // NewCNNPoolingNodeWithSourceFilterSize convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels
 func NewCNNPoolingNodeWithSourceFilterSize(sourceNode obj.Object, size int) *CNNPoolingNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:filterSize:"), objref.IDOf(sourceNode), size)
 	return cNNPoolingNodeAdopt(_id)
@@ -75,24 +80,28 @@ func (cpn *CNNPoolingNode) WithLabel(label string) *CNNPoolingNode {
 
 // KernelWidth returns the kernel width.
 func (cpn *CNNPoolingNode) KernelWidth() int {
+	defer runtime.KeepAlive(cpn)
 	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the kernel height.
 func (cpn *CNNPoolingNode) KernelHeight() int {
+	defer runtime.KeepAlive(cpn)
 	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInPixelsX returns the stride in pixels x.
 func (cpn *CNNPoolingNode) StrideInPixelsX() int {
+	defer runtime.KeepAlive(cpn)
 	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
 // StrideInPixelsY returns the stride in pixels y.
 func (cpn *CNNPoolingNode) StrideInPixelsY() int {
+	defer runtime.KeepAlive(cpn)
 	_r := objc.Send[int](objref.IDOf(cpn), objc.RegisterName("strideInPixelsY"))
 	return _r
 }

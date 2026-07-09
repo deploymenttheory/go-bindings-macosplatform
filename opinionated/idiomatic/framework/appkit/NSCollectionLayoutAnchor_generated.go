@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func collectionLayoutAnchorAdopt(id objc.ID) *CollectionLayoutAnchor {
 
 // Description returns the object's -description text.
 func (cla *CollectionLayoutAnchor) Description() string {
+	defer runtime.KeepAlive(cla)
 	return rt.Description(objref.IDOf(cla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cla *CollectionLayoutAnchor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cla)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cla *CollectionLayoutAnchor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cla)
 	return rt.IsKind(objref.IDOf(cla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cla *CollectionLayoutAnchor) String() string {
+	defer runtime.KeepAlive(cla)
 	return rt.Description(objref.IDOf(cla))
 }
 
@@ -81,6 +88,7 @@ func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
 
 // Edges returns the edges.
 func (cla *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
+	defer runtime.KeepAlive(cla)
 	var _mainthread0 DirectionalRectEdge
 	purego.Main(func() {
 		_mainthread0 = func() DirectionalRectEdge {
@@ -94,6 +102,7 @@ func (cla *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
 
 // Offset returns the offset.
 func (cla *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(cla)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -107,6 +116,7 @@ func (cla *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
 
 // IsAbsoluteOffset reports whether the object is absolute offset.
 func (cla *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
+	defer runtime.KeepAlive(cla)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -120,6 +130,7 @@ func (cla *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
 
 // IsFractionalOffset reports whether the object is fractional offset.
 func (cla *CollectionLayoutAnchor) IsFractionalOffset() bool {
+	defer runtime.KeepAlive(cla)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,9 +5,12 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +51,8 @@ func tokenKeychainKeyAdopt(id objc.ID) *TokenKeychainKey {
 
 // NewTokenKeychainKeyWithCertificateObjectID initializes a token keychain key with data from the specified certificate reference and a given object ID.
 func NewTokenKeychainKeyWithCertificateObjectID(certificateRef obj.Object, objectID obj.Object) *TokenKeychainKey {
+	defer runtime.KeepAlive(certificateRef)
+	defer runtime.KeepAlive(objectID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainKey")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), objref.IDOf(certificateRef), objref.IDOf(objectID))
 	return tokenKeychainKeyAdopt(_id)
@@ -60,8 +65,8 @@ func (tkk *TokenKeychainKey) WithKeyType(keyType string) *TokenKeychainKey {
 }
 
 // WithApplicationTag sets the private tag data.
-func (tkk *TokenKeychainKey) WithApplicationTag(applicationTag obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setApplicationTag:"), objref.IDOf(applicationTag))
+func (tkk *TokenKeychainKey) WithApplicationTag(applicationTag []byte) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setApplicationTag:"), rt.BytesToNSData(applicationTag))
 	return tkk
 }
 
@@ -72,14 +77,14 @@ func (tkk *TokenKeychainKey) WithKeySizeInBits(keySizeInBits int) *TokenKeychain
 }
 
 // WithPublicKeyData sets the public key data.
-func (tkk *TokenKeychainKey) WithPublicKeyData(publicKeyData obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setPublicKeyData:"), objref.IDOf(publicKeyData))
+func (tkk *TokenKeychainKey) WithPublicKeyData(publicKeyData []byte) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setPublicKeyData:"), rt.BytesToNSData(publicKeyData))
 	return tkk
 }
 
 // WithPublicKeyHash sets the SHA1 hash of the raw public key.
-func (tkk *TokenKeychainKey) WithPublicKeyHash(publicKeyHash obj.Object) *TokenKeychainKey {
-	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setPublicKeyHash:"), objref.IDOf(publicKeyHash))
+func (tkk *TokenKeychainKey) WithPublicKeyHash(publicKeyHash []byte) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setPublicKeyHash:"), rt.BytesToNSData(publicKeyHash))
 	return tkk
 }
 
@@ -115,12 +120,14 @@ func (tkk *TokenKeychainKey) WithLabel(label string) *TokenKeychainKey {
 
 // WithConstraints sets access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 func (tkk *TokenKeychainKey) WithConstraints(constraints obj.Object) *TokenKeychainKey {
+	defer runtime.KeepAlive(constraints)
 	objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 	return tkk
 }
 
 // KeyType returns type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
 func (tkk *TokenKeychainKey) KeyType() string {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("keyType"))
 	if _r == 0 {
 		return ""
@@ -129,49 +136,57 @@ func (tkk *TokenKeychainKey) KeyType() string {
 }
 
 // ApplicationTag represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
-func (tkk *TokenKeychainKey) ApplicationTag() obj.Object {
+func (tkk *TokenKeychainKey) ApplicationTag() []byte {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("applicationTag"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // KeySizeInBits indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
 func (tkk *TokenKeychainKey) KeySizeInBits() int {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[int](objref.IDOf(tkk), objc.RegisterName("keySizeInBits"))
 	return _r
 }
 
 // PublicKeyData contains raw public key data for this private key.
-func (tkk *TokenKeychainKey) PublicKeyData() obj.Object {
+func (tkk *TokenKeychainKey) PublicKeyData() []byte {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("publicKeyData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PublicKeyHash returns SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
-func (tkk *TokenKeychainKey) PublicKeyHash() obj.Object {
+func (tkk *TokenKeychainKey) PublicKeyHash() []byte {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[objc.ID](objref.IDOf(tkk), objc.RegisterName("publicKeyHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CanDecrypt reports whether this key can be used to decrypt data. The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
 func (tkk *TokenKeychainKey) CanDecrypt() bool {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("canDecrypt"))
 	return _r
 }
 
 // CanSign reports whether this key can be used to create a digital signature. The property is an equivalent to kSecAttrCanSign in SecItem.h
 func (tkk *TokenKeychainKey) CanSign() bool {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("canSign"))
 	return _r
 }
 
 // CanPerformKeyExchange reports whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
 func (tkk *TokenKeychainKey) CanPerformKeyExchange() bool {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("canPerformKeyExchange"))
 	return _r
 }
 
 // IsSuitableForLogin reports whether this key can be used for login in to the system.
 func (tkk *TokenKeychainKey) IsSuitableForLogin() bool {
+	defer runtime.KeepAlive(tkk)
 	_r := objc.Send[bool](objref.IDOf(tkk), objc.RegisterName("isSuitableForLogin"))
 	return _r
 }

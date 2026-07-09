@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func convolutionDescriptorAdopt(id objc.ID) *ConvolutionDescriptor {
 
 // Description returns the object's -description text.
 func (cd *ConvolutionDescriptor) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *ConvolutionDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *ConvolutionDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *ConvolutionDescriptor) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
@@ -74,90 +81,105 @@ func NewConvolutionDescriptor() *ConvolutionDescriptor {
 
 // ConvolutionType returns the type of convolution.
 func (cd *ConvolutionDescriptor) ConvolutionType() ConvolutionType {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[ConvolutionType](objref.IDOf(cd), objc.RegisterName("convolutionType"))
 	return _r
 }
 
 // KernelWidth returns the convolution kernel size in x.
 func (cd *ConvolutionDescriptor) KernelWidth() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the convolution kernel size in y.
 func (cd *ConvolutionDescriptor) KernelHeight() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // InputFeatureChannelCount returns number of channels in the input tensor
 func (cd *ConvolutionDescriptor) InputFeatureChannelCount() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("inputFeatureChannelCount"))
 	return _r
 }
 
 // OutputFeatureChannelCount returns number of channels in the output tensor
 func (cd *ConvolutionDescriptor) OutputFeatureChannelCount() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("outputFeatureChannelCount"))
 	return _r
 }
 
 // StrideInX returns the stride of the kernel in x.
 func (cd *ConvolutionDescriptor) StrideInX() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY returns the stride of the kernel in y.
 func (cd *ConvolutionDescriptor) StrideInY() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("strideInY"))
 	return _r
 }
 
 // DilationRateInX returns the dilation rate i.e. stride of elements in the kernel in x.
 func (cd *ConvolutionDescriptor) DilationRateInX() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
 // DilationRateInY returns the dilation rate i.e. stride of elements in the kernel in y.
 func (cd *ConvolutionDescriptor) DilationRateInY() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
 // GroupCount returns number of blocked connections from input channels to output channels
 func (cd *ConvolutionDescriptor) GroupCount() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("groupCount"))
 	return _r
 }
 
 // PaddingPolicy returns the padding policy to use.
 func (cd *ConvolutionDescriptor) PaddingPolicy() PaddingPolicy {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[PaddingPolicy](objref.IDOf(cd), objc.RegisterName("paddingPolicy"))
 	return _r
 }
 
 // PaddingSizeInX returns the pooling size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
 func (cd *ConvolutionDescriptor) PaddingSizeInX() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("paddingSizeInX"))
 	return _r
 }
 
 // PaddingSizeInY returns the pooling size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
 func (cd *ConvolutionDescriptor) PaddingSizeInY() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("paddingSizeInY"))
 	return _r
 }
 
 // IsConvolutionTranspose reports whether a flag to indicate if this is a convolution transpose
 func (cd *ConvolutionDescriptor) IsConvolutionTranspose() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isConvolutionTranspose"))
 	return _r
 }
 
 // UsesDepthwiseConvolution reports whether a flag to indicate depthwise convolution
 func (cd *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("usesDepthwiseConvolution"))
 	return _r
 }

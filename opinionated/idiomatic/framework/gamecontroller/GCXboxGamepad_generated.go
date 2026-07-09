@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,30 +62,35 @@ func (xg *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.
 
 // PaddleButton1 returns some Xbox controller variants can support up to four additional buttons.
 func (xg *XboxGamepad) PaddleButton1() *ControllerButtonInput {
+	defer runtime.KeepAlive(xg)
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton1"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // PaddleButton2 returns the paddle button2.
 func (xg *XboxGamepad) PaddleButton2() *ControllerButtonInput {
+	defer runtime.KeepAlive(xg)
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton2"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // PaddleButton3 returns the paddle button3.
 func (xg *XboxGamepad) PaddleButton3() *ControllerButtonInput {
+	defer runtime.KeepAlive(xg)
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton3"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // PaddleButton4 returns the paddle button4.
 func (xg *XboxGamepad) PaddleButton4() *ControllerButtonInput {
+	defer runtime.KeepAlive(xg)
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton4"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonShare returns some Xbox controller variants feature a Share button.
 func (xg *XboxGamepad) ButtonShare() *ControllerButtonInput {
+	defer runtime.KeepAlive(xg)
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("buttonShare"))
 	return ControllerButtonInputFromID(_r)
 }

@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -49,22 +51,27 @@ func detectionAdopt(id objc.ID) *Detection {
 
 // Description returns the object's -description text.
 func (d *Detection) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Detection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Detection) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Detection) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -77,36 +84,42 @@ func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremed
 
 // Time returns the presentation time of the frame in which the detection occurred.
 func (d *Detection) Time() coremedia.CMTime {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(d), objc.RegisterName("time"))
 	return _r
 }
 
 // DetectionType returns the type of object that was detected (face, torso, cat, dog, etc.)
 func (d *Detection) DetectionType() DetectionType {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[DetectionType](objref.IDOf(d), objc.RegisterName("detectionType"))
 	return _r
 }
 
 // NormalizedRect returns the rectangle within the image where the object occurs, normalized such that (0.0, 0.0) is the top-left and (1.0, 1.0) is the bottom-right.
 func (d *Detection) NormalizedRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(d), objc.RegisterName("normalizedRect"))
 	return _r
 }
 
 // FocusDisparity returns the disparity to use in order to focus on the object. If the disparity is unknown, use the class method to find it: `disparityInNormalizedRect:sourceDisparity:detectionType:priorDisparity:`.
 func (d *Detection) FocusDisparity() float32 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float32](objref.IDOf(d), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
 // DetectionID returns an unique identifier assigned by the cinematic script to all detections of the same subject and detection type across time. If you build a custom detection track, the detectionID will be assigned when you add it to the script.
 func (d *Detection) DetectionID() int64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionID"))
 	return _r
 }
 
 // DetectionGroupID returns an unique identifier assigned by the cinematic script to all detections of the same subject and related detection types across time. For example, the face/torso detections of the same person are assigned the same detectionGroupID.
 func (d *Detection) DetectionGroupID() int64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("detectionGroupID"))
 	return _r
 }

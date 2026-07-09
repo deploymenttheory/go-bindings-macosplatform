@@ -5,6 +5,8 @@
 package mpsrayintersector
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -96,36 +98,42 @@ func (ias *InstanceAccelerationStructure) WithUsage(usage AccelerationStructureU
 //
 // AccelerationStructures returns the collection as a Go slice.
 func (ias *InstanceAccelerationStructure) AccelerationStructures() []*PolygonAccelerationStructure {
+	defer runtime.KeepAlive(ias)
 	_arr := objc.Send[objc.ID](objref.IDOf(ias), objc.RegisterName("accelerationStructures"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonAccelerationStructure { return PolygonAccelerationStructureFromID(_id) })
 }
 
 // InstanceBufferOffset returns offset, in bytes, into the instance buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (ias *InstanceAccelerationStructure) InstanceBufferOffset() int {
+	defer runtime.KeepAlive(ias)
 	_r := objc.Send[int](objref.IDOf(ias), objc.RegisterName("instanceBufferOffset"))
 	return _r
 }
 
 // TransformBufferOffset returns offset, in bytes, into the transform buffer. Defaults to 0 bytes. Must be aligned to the stride of the transform type.
 func (ias *InstanceAccelerationStructure) TransformBufferOffset() int {
+	defer runtime.KeepAlive(ias)
 	_r := objc.Send[int](objref.IDOf(ias), objc.RegisterName("transformBufferOffset"))
 	return _r
 }
 
 // TransformType returns instance transform type. Defaults to MPSTransformTypeFloat4x4. Changes to this property require rebuilding the acceleration structure.
 func (ias *InstanceAccelerationStructure) TransformType() TransformType {
+	defer runtime.KeepAlive(ias)
 	_r := objc.Send[TransformType](objref.IDOf(ias), objc.RegisterName("transformType"))
 	return _r
 }
 
 // MaskBufferOffset returns offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (ias *InstanceAccelerationStructure) MaskBufferOffset() int {
+	defer runtime.KeepAlive(ias)
 	_r := objc.Send[int](objref.IDOf(ias), objc.RegisterName("maskBufferOffset"))
 	return _r
 }
 
 // InstanceCount returns number of instances. Changes to this property require rebuilding the acceleration structure.
 func (ias *InstanceAccelerationStructure) InstanceCount() int {
+	defer runtime.KeepAlive(ias)
 	_r := objc.Send[int](objref.IDOf(ias), objc.RegisterName("instanceCount"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func bufferLayoutDescriptorAdopt(id objc.ID) *BufferLayoutDescriptor {
 
 // Description returns the object's -description text.
 func (bld *BufferLayoutDescriptor) Description() string {
+	defer runtime.KeepAlive(bld)
 	return rt.Description(objref.IDOf(bld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bld *BufferLayoutDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bld *BufferLayoutDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(bld)
 	return rt.IsKind(objref.IDOf(bld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bld *BufferLayoutDescriptor) String() string {
+	defer runtime.KeepAlive(bld)
 	return rt.Description(objref.IDOf(bld))
 }
 
@@ -92,18 +99,21 @@ func (bld *BufferLayoutDescriptor) WithStepRate(stepRate int) *BufferLayoutDescr
 
 // Stride returns the stride.
 func (bld *BufferLayoutDescriptor) Stride() int {
+	defer runtime.KeepAlive(bld)
 	_r := objc.Send[int](objref.IDOf(bld), objc.RegisterName("stride"))
 	return _r
 }
 
 // StepFunction returns the step function.
 func (bld *BufferLayoutDescriptor) StepFunction() StepFunction {
+	defer runtime.KeepAlive(bld)
 	_r := objc.Send[StepFunction](objref.IDOf(bld), objc.RegisterName("stepFunction"))
 	return _r
 }
 
 // StepRate returns the step rate.
 func (bld *BufferLayoutDescriptor) StepRate() int {
+	defer runtime.KeepAlive(bld)
 	_r := objc.Send[int](objref.IDOf(bld), objc.RegisterName("stepRate"))
 	return _r
 }

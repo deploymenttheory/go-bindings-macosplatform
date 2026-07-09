@@ -50,7 +50,7 @@ func (o *HKAttachmentStore) InitWithHealthStore(healthStore *HKHealthStore) *HKA
 }
 
 // Adds an attachment to the specified object.
-func (o *HKAttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(object *HKObject, name *foundation.NSString, contentType *uniformtypeidentifiers.UTType, uRL *foundation.NSURL, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*HKAttachment, unsafe.Pointer)) {
+func (o *HKAttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompletion(object *HKObject, name *foundation.NSString, contentType *uniformtypeidentifiers.UTType, url *foundation.NSURL, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*HKAttachment, unsafe.Pointer)) {
 	var __block_completion objc.Block
 	if completion != nil {
 		__block_completion = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -61,7 +61,7 @@ func (o *HKAttachmentStore) AddAttachmentToObjectNameContentTypeURLMetadataCompl
 		})
 		defer __block_completion.Release()
 	}
-	o.Ptr().Send(_hKAttachmentStoreSelAddAttachmentToObjectNameContentTypeURLMetadataCompletion, object.Ptr(), name.Ptr(), contentType.Ptr(), uRL.Ptr(), metadata.Ptr(), __block_completion)
+	o.Ptr().Send(_hKAttachmentStoreSelAddAttachmentToObjectNameContentTypeURLMetadataCompletion, object.Ptr(), name.Ptr(), contentType.Ptr(), url.Ptr(), metadata.Ptr(), __block_completion)
 }
 
 // Removes the specified attachment.

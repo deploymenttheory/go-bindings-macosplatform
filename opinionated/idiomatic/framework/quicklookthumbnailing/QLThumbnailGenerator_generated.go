@@ -6,6 +6,7 @@ package quicklookthumbnailing
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func thumbnailGeneratorAdopt(id objc.ID) *ThumbnailGenerator {
 
 // Description returns the object's -description text.
 func (tg *ThumbnailGenerator) Description() string {
+	defer runtime.KeepAlive(tg)
 	return rt.Description(objref.IDOf(tg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tg *ThumbnailGenerator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tg *ThumbnailGenerator) IsKind(className string) bool {
+	defer runtime.KeepAlive(tg)
 	return rt.IsKind(objref.IDOf(tg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tg *ThumbnailGenerator) String() string {
+	defer runtime.KeepAlive(tg)
 	return rt.Description(objref.IDOf(tg))
 }
 
@@ -79,6 +85,8 @@ func NewThumbnailGenerator() *ThumbnailGenerator {
 //
 // GenerateBestRepresentationForRequest blocks until the operation completes or ctx is cancelled.
 func (tg *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *ThumbnailGenerationRequest) (result *ThumbnailRepresentation, err error) {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *ThumbnailRepresentation
 		err error
@@ -102,6 +110,8 @@ func (tg *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.C
 
 // CancelRequest cancels the generation of a thumbnail for a given request.
 func (tg *ThumbnailGenerator) CancelRequest(request *ThumbnailGenerationRequest) {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("cancelRequest:"), objref.IDOf(request))
 }
 
@@ -109,6 +119,9 @@ func (tg *ThumbnailGenerator) CancelRequest(request *ThumbnailGenerationRequest)
 //
 // SaveBestRepresentationForRequestToFileAtURLAsContentType blocks until the operation completes or ctx is cancelled.
 func (tg *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType obj.Object) error {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(contentType)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -128,6 +141,8 @@ func (tg *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsConte
 //
 // SaveBestRepresentationForRequestToFileAtURLWithContentType blocks until the operation completes or ctx is cancelled.
 func (tg *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *ThumbnailGenerationRequest, fileURL string, contentType string) error {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(request)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

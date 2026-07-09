@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func uSBControllerConfigurationAdopt(id objc.ID) *USBControllerConfiguration {
 
 // Description returns the object's -description text.
 func (ucc *USBControllerConfiguration) Description() string {
+	defer runtime.KeepAlive(ucc)
 	return rt.Description(objref.IDOf(ucc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ucc *USBControllerConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ucc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ucc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ucc *USBControllerConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(ucc)
 	return rt.IsKind(objref.IDOf(ucc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ucc *USBControllerConfiguration) String() string {
+	defer runtime.KeepAlive(ucc)
 	return rt.Description(objref.IDOf(ucc))
 }
 
 // USBDevices returns the USB devices.
 func (ucc *USBControllerConfiguration) USBDevices() []obj.Object {
+	defer runtime.KeepAlive(ucc)
 	_r := objc.Send[objc.ID](objref.IDOf(ucc), objc.RegisterName("usbDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetUSBDevices wraps the corresponding Objective-C method.
 func (ucc *USBControllerConfiguration) SetUSBDevices(usbDevices []obj.Object) {
+	defer runtime.KeepAlive(ucc)
 	objc.Send[objc.ID](objref.IDOf(ucc), objc.RegisterName("setUsbDevices:"), purego.SliceToNSArray(usbDevices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,8 +62,8 @@ func (nohs *NEDNSOverHTTPSSettings) WithServerURL(serverURL string) *NEDNSOverHT
 }
 
 // WithIdentityReference sets a persistent keychain reference to a keychain item containing the certificate and private key components of the DNS client credential.
-func (nohs *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference obj.Object) *NEDNSOverHTTPSSettings {
-	objc.Send[objc.ID](objref.IDOf(nohs), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+func (nohs *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference []byte) *NEDNSOverHTTPSSettings {
+	objc.Send[objc.ID](objref.IDOf(nohs), objc.RegisterName("setIdentityReference:"), rt.BytesToNSData(identityReference))
 	return nohs
 }
 
@@ -98,15 +100,17 @@ func (nohs *NEDNSOverHTTPSSettings) WithAllowFailover(allowFailover bool) *NEDNS
 }
 
 // ServerURL returns the URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
-func (nohs *NEDNSOverHTTPSSettings) ServerURL() obj.Object {
+func (nohs *NEDNSOverHTTPSSettings) ServerURL() string {
+	defer runtime.KeepAlive(nohs)
 	_r := objc.Send[objc.ID](objref.IDOf(nohs), objc.RegisterName("serverURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IdentityReference returns the optional certificate identity keychain reference to use as a TLS client certificate.
-func (nohs *NEDNSOverHTTPSSettings) IdentityReference() obj.Object {
+func (nohs *NEDNSOverHTTPSSettings) IdentityReference() []byte {
+	defer runtime.KeepAlive(nohs)
 	_r := objc.Send[objc.ID](objref.IDOf(nohs), objc.RegisterName("identityReference"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ NEDNSSettingsProvider = (*NEDNSOverHTTPSSettings)(nil)

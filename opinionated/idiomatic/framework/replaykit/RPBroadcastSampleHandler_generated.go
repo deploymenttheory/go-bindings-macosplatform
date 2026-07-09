@@ -5,11 +5,14 @@
 package replaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,38 +58,47 @@ func NewBroadcastSampleHandler() *BroadcastSampleHandler {
 }
 
 // BroadcastStartedWithSetupInfo perform any required actions after starting a live broadcast.
-func (bsh *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastStartedWithSetupInfo:"), objref.IDOf(setupInfo))
+func (bsh *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo map[string]*foundation.Object) {
+	defer runtime.KeepAlive(bsh)
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastStartedWithSetupInfo:"), rt.MapToDict(setupInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *foundation.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // BroadcastPaused perform any required actions after a live broadcast is paused.
 func (bsh *BroadcastSampleHandler) BroadcastPaused() {
+	defer runtime.KeepAlive(bsh)
 	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastPaused"))
 }
 
 // BroadcastResumed perform any required actions after a live broadcast is resumed.
 func (bsh *BroadcastSampleHandler) BroadcastResumed() {
+	defer runtime.KeepAlive(bsh)
 	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastResumed"))
 }
 
 // BroadcastFinished perform any required actions after a live broadcast is finished.
 func (bsh *BroadcastSampleHandler) BroadcastFinished() {
+	defer runtime.KeepAlive(bsh)
 	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastFinished"))
 }
 
 // BroadcastAnnotatedWithApplicationInfo perform any required actions after starting a live broadcast.
 func (bsh *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object) {
+	defer runtime.KeepAlive(bsh)
+	defer runtime.KeepAlive(applicationInfo)
 	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("broadcastAnnotatedWithApplicationInfo:"), objref.IDOf(applicationInfo))
 }
 
 // ProcessSampleBufferWithType processes video and audio data as it becomes available during a live broadcast.
 func (bsh *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType) {
+	defer runtime.KeepAlive(bsh)
+	defer runtime.KeepAlive(sampleBuffer)
 	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("processSampleBuffer:withType:"), objref.IDOf(sampleBuffer), sampleBufferType)
 }
 
 // FinishBroadcastWithError stops the broadcast and passes an error back to the broadcasting app.
-func (bsh *BroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("finishBroadcastWithError:"), error_)
+func (bsh *BroadcastSampleHandler) FinishBroadcastWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(bsh)
+	objc.Send[objc.ID](objref.IDOf(bsh), objc.RegisterName("finishBroadcastWithError:"), err)
 }
 
 var _ BroadcastHandlerProvider = (*BroadcastSampleHandler)(nil)

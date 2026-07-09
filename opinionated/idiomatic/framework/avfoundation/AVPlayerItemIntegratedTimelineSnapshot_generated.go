@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +51,27 @@ func playerItemIntegratedTimelineSnapshotAdopt(id objc.ID) *PlayerItemIntegrated
 
 // Description returns the object's -description text.
 func (piits *PlayerItemIntegratedTimelineSnapshot) Description() string {
+	defer runtime.KeepAlive(piits)
 	return rt.Description(objref.IDOf(piits))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piits *PlayerItemIntegratedTimelineSnapshot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piits)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piits), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piits *PlayerItemIntegratedTimelineSnapshot) IsKind(className string) bool {
+	defer runtime.KeepAlive(piits)
 	return rt.IsKind(objref.IDOf(piits), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piits *PlayerItemIntegratedTimelineSnapshot) String() string {
+	defer runtime.KeepAlive(piits)
 	return rt.Description(objref.IDOf(piits))
 }
 
@@ -75,12 +83,14 @@ func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnap
 
 // Duration returns the duration totaling the primary item and scheduled interstitial events. This property returns the duration totaling the primary item and scheduled interstitial events and taking into account the interstitial event's playoutLimit and resumption offset. Before loading the duration of the primary item, the value of this property is kCMTimeInvalid. For livestreams, this value will be kCMTimeIndefinite.
 func (piits *PlayerItemIntegratedTimelineSnapshot) Duration() coremedia.CMTime {
+	defer runtime.KeepAlive(piits)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(piits), objc.RegisterName("duration"))
 	return _r
 }
 
 // CurrentSegment returns the current AVPlayerItemSegment playback is traversing.
 func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
+	defer runtime.KeepAlive(piits)
 	_r := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("currentSegment"))
 	return PlayerItemSegmentFromID(_r)
 }
@@ -89,18 +99,21 @@ func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemS
 //
 // Segments returns the collection as a Go slice.
 func (piits *PlayerItemIntegratedTimelineSnapshot) Segments() []*PlayerItemSegment {
+	defer runtime.KeepAlive(piits)
 	_arr := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemSegment { return PlayerItemSegmentFromID(_id) })
 }
 
 // CurrentTime returns the current time on the integrated timeline when the snapshot was taken. Returns the current time on the integrated timeline when the snapshot was taken. CurrentTime will not change as playback progresses.
 func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentTime() coremedia.CMTime {
+	defer runtime.KeepAlive(piits)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(piits), objc.RegisterName("currentTime"))
 	return _r
 }
 
 // CurrentDate returns the  current date when the snapshot was taken, or nil if playback is not mapped to any date.
-func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentDate() obj.Object {
+func (piits *PlayerItemIntegratedTimelineSnapshot) CurrentDate() time.Time {
+	defer runtime.KeepAlive(piits)
 	_r := objc.Send[objc.ID](objref.IDOf(piits), objc.RegisterName("currentDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

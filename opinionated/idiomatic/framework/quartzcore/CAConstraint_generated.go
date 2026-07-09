@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func constraintAdopt(id objc.ID) *Constraint {
 
 // Description returns the object's -description text.
 func (c *Constraint) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Constraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Constraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Constraint) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -75,12 +82,14 @@ func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr ConstraintAtt
 
 // Attribute returns the attribute.
 func (c *Constraint) Attribute() ConstraintAttribute {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ConstraintAttribute](objref.IDOf(c), objc.RegisterName("attribute"))
 	return _r
 }
 
 // SourceName returns the source name.
 func (c *Constraint) SourceName() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sourceName"))
 	if _r == 0 {
 		return ""
@@ -90,18 +99,21 @@ func (c *Constraint) SourceName() string {
 
 // SourceAttribute returns the source attribute.
 func (c *Constraint) SourceAttribute() ConstraintAttribute {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[ConstraintAttribute](objref.IDOf(c), objc.RegisterName("sourceAttribute"))
 	return _r
 }
 
 // Scale returns the scale.
 func (c *Constraint) Scale() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("scale"))
 	return _r
 }
 
 // Offset returns the offset.
 func (c *Constraint) Offset() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("offset"))
 	return _r
 }

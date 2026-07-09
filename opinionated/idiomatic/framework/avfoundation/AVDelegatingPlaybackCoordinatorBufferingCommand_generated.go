@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,14 +57,16 @@ func NewDelegatingPlaybackCoordinatorBufferingCommand() *DelegatingPlaybackCoord
 
 // AnticipatedPlaybackRate returns the rate to prepare playback for. The command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
 func (dpcbc *DelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRate() float32 {
+	defer runtime.KeepAlive(dpcbc)
 	_r := objc.Send[float32](objref.IDOf(dpcbc), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
 }
 
 // CompletionDueDate returns communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
-func (dpcbc *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() obj.Object {
+func (dpcbc *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() time.Time {
+	defer runtime.KeepAlive(dpcbc)
 	_r := objc.Send[objc.ID](objref.IDOf(dpcbc), objc.RegisterName("completionDueDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)

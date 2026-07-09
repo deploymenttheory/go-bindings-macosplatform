@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func depthStencilDescriptorAdopt(id objc.ID) *DepthStencilDescriptor {
 
 // Description returns the object's -description text.
 func (dsd *DepthStencilDescriptor) Description() string {
+	defer runtime.KeepAlive(dsd)
 	return rt.Description(objref.IDOf(dsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dsd *DepthStencilDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dsd *DepthStencilDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(dsd)
 	return rt.IsKind(objref.IDOf(dsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dsd *DepthStencilDescriptor) String() string {
+	defer runtime.KeepAlive(dsd)
 	return rt.Description(objref.IDOf(dsd))
 }
 
@@ -86,12 +93,14 @@ func (dsd *DepthStencilDescriptor) WithDepthWriteEnabled(depthWriteEnabled bool)
 
 // WithFrontFaceStencil sets the stencil descriptor for front-facing primitives.
 func (dsd *DepthStencilDescriptor) WithFrontFaceStencil(frontFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
+	defer runtime.KeepAlive(frontFaceStencil)
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setFrontFaceStencil:"), objref.IDOf(frontFaceStencil))
 	return dsd
 }
 
 // WithBackFaceStencil sets the stencil descriptor for back-facing primitives.
 func (dsd *DepthStencilDescriptor) WithBackFaceStencil(backFaceStencil *StencilDescriptor) *DepthStencilDescriptor {
+	defer runtime.KeepAlive(backFaceStencil)
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setBackFaceStencil:"), objref.IDOf(backFaceStencil))
 	return dsd
 }
@@ -104,30 +113,35 @@ func (dsd *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescript
 
 // DepthCompareFunction returns the depth compare function.
 func (dsd *DepthStencilDescriptor) DepthCompareFunction() CompareFunction {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[CompareFunction](objref.IDOf(dsd), objc.RegisterName("depthCompareFunction"))
 	return _r
 }
 
 // IsDepthWriteEnabled reports whether the object is depth write enabled.
 func (dsd *DepthStencilDescriptor) IsDepthWriteEnabled() bool {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[bool](objref.IDOf(dsd), objc.RegisterName("isDepthWriteEnabled"))
 	return _r
 }
 
 // FrontFaceStencil returns the front face stencil.
 func (dsd *DepthStencilDescriptor) FrontFaceStencil() *StencilDescriptor {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("frontFaceStencil"))
 	return StencilDescriptorFromID(_r)
 }
 
 // BackFaceStencil returns the back face stencil.
 func (dsd *DepthStencilDescriptor) BackFaceStencil() *StencilDescriptor {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("backFaceStencil"))
 	return StencilDescriptorFromID(_r)
 }
 
 // Label returns a string to help identify the created object.
 func (dsd *DepthStencilDescriptor) Label() string {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func cNNLogSoftMaxNodeAdopt(id objc.ID) *CNNLogSoftMaxNode {
 
 // NewCNNLogSoftMaxNodeWithSource init a node representing a MPSCNNLogSoftMax kernel
 func NewCNNLogSoftMaxNodeWithSource(sourceNode obj.Object) *CNNLogSoftMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNLogSoftMaxNodeAdopt(_id)

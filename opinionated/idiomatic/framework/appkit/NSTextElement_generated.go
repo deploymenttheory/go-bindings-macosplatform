@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func textElementAdopt(id objc.ID) *TextElement {
 
 // Description returns the object's -description text.
 func (te *TextElement) Description() string {
+	defer runtime.KeepAlive(te)
 	return rt.Description(objref.IDOf(te))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (te *TextElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(te)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(te), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (te *TextElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(te)
 	return rt.IsKind(objref.IDOf(te), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (te *TextElement) String() string {
+	defer runtime.KeepAlive(te)
 	return rt.Description(objref.IDOf(te))
 }
 
 // NewTextElementWithTextContentManager creates a new text element with the content manager you provide.
 func NewTextElementWithTextContentManager(textContentManager *TextContentManager) *TextElement {
+	defer runtime.KeepAlive(textContentManager)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextElement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextContentManager:"), objref.IDOf(textContentManager))
 	return textElementAdopt(_id)
@@ -77,24 +85,28 @@ func NewTextElementWithTextContentManager(textContentManager *TextContentManager
 
 // WithTextContentManager sets the value that represents the current content manager.
 func (te *TextElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement {
+	defer runtime.KeepAlive(textContentManager)
 	objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
 	return te
 }
 
 // WithElementRange sets a range value that represents the range of the element inside the document.
 func (te *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
+	defer runtime.KeepAlive(elementRange)
 	objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
 	return te
 }
 
 // TextContentManager returns the text content manager.
 func (te *TextElement) TextContentManager() *TextContentManager {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
 // ElementRange returns the element range.
 func (te *TextElement) ElementRange() *TextRange {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("elementRange"))
 	return TextRangeFromID(_r)
 }
@@ -103,18 +115,21 @@ func (te *TextElement) ElementRange() *TextRange {
 //
 // ChildElements returns the collection as a Go slice.
 func (te *TextElement) ChildElements() []*TextElement {
+	defer runtime.KeepAlive(te)
 	_arr := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("childElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextElement { return TextElementFromID(_id) })
 }
 
 // ParentElement returns the parent element.
 func (te *TextElement) ParentElement() *TextElement {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("parentElement"))
 	return TextElementFromID(_r)
 }
 
 // IsRepresentedElement reports whether the object is represented element.
 func (te *TextElement) IsRepresentedElement() bool {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[bool](objref.IDOf(te), objc.RegisterName("isRepresentedElement"))
 	return _r
 }

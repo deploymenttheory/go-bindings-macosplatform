@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func videoCompositionLayerInstructionAdopt(id objc.ID) *VideoCompositionLayerIns
 
 // Description returns the object's -description text.
 func (vcli *VideoCompositionLayerInstruction) Description() string {
+	defer runtime.KeepAlive(vcli)
 	return rt.Description(objref.IDOf(vcli))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcli *VideoCompositionLayerInstruction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcli)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcli), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcli *VideoCompositionLayerInstruction) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcli)
 	return rt.IsKind(objref.IDOf(vcli), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcli *VideoCompositionLayerInstruction) String() string {
+	defer runtime.KeepAlive(vcli)
 	return rt.Description(objref.IDOf(vcli))
 }
 

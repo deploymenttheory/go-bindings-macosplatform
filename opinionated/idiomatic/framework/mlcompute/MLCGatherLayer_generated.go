@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (gl *GatherLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLa
 
 // Dimension returns the dimension along which to index
 func (gl *GatherLayer) Dimension() int {
+	defer runtime.KeepAlive(gl)
 	_r := objc.Send[int](objref.IDOf(gl), objc.RegisterName("dimension"))
 	return _r
 }

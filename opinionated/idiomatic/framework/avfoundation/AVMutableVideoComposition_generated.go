@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -88,11 +89,12 @@ func (mvc *MutableVideoComposition) WithRenderScale(renderScale float32) *Mutabl
 
 // WithAnimationTool sets a video composition tool to use with Core Animation in offline rendering.
 func (mvc *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition {
+	defer runtime.KeepAlive(animationTool)
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setAnimationTool:"), objref.IDOf(animationTool))
 	return mvc
 }
 
-// WithSourceSampleDataTrackIDs sets the identifiers of source sample data tracks in the composition that the object requires to compose frames.
+// WithSourceSampleDataTrackIDs sets the identifiers of source sample data tracks in the composition that the compositor requires to compose frames.
 func (mvc *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setSourceSampleDataTrackIDs:"), _arr)
@@ -119,17 +121,21 @@ func (mvc *MutableVideoComposition) WithColorTransferFunction(colorTransferFunct
 
 // WithPerFrameHDRDisplayMetadataPolicy sets configures the policy for display of HDR display metadata on the rendered frame.
 func (mvc *MutableVideoComposition) WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) *MutableVideoComposition {
+	defer runtime.KeepAlive(perFrameHDRDisplayMetadataPolicy)
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:"), objref.IDOf(perFrameHDRDisplayMetadataPolicy))
 	return mvc
 }
 
 // SetInstructions wraps the corresponding Objective-C method.
 func (mvc *MutableVideoComposition) SetInstructions(instructions []obj.Object) {
+	defer runtime.KeepAlive(mvc)
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setInstructions:"), purego.SliceToNSArray(instructions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetOutputBufferDescription wraps the corresponding Objective-C method.
 func (mvc *MutableVideoComposition) SetOutputBufferDescription(outputBufferDescription obj.Object) {
+	defer runtime.KeepAlive(mvc)
+	defer runtime.KeepAlive(outputBufferDescription)
 	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setOutputBufferDescription:"), objref.IDOf(outputBufferDescription))
 }
 

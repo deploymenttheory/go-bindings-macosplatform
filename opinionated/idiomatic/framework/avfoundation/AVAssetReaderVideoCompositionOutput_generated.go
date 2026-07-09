@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,14 +50,15 @@ func assetReaderVideoCompositionOutputAdopt(id objc.ID) *AssetReaderVideoComposi
 }
 
 // NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings creates an object that reads composited video frames from the specified video tracks.
-func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks []*AssetTrack, videoSettings obj.Object) *AssetReaderVideoCompositionOutput {
+func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks []*AssetTrack, videoSettings map[string]obj.Object) *AssetReaderVideoCompositionOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderVideoCompositionOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoTracks:videoSettings:"), purego.SliceToNSArray(videoTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), objref.IDOf(videoSettings))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVideoTracks:videoSettings:"), purego.SliceToNSArray(videoTracks, func(_v *AssetTrack) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(videoSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return assetReaderVideoCompositionOutputAdopt(_id)
 }
 
 // WithVideoComposition sets the video composition to use for the output.
 func (arvco *AssetReaderVideoCompositionOutput) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput {
+	defer runtime.KeepAlive(videoComposition)
 	objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return arvco
 }
@@ -75,18 +79,21 @@ func (arvco *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(support
 //
 // VideoTracks returns the collection as a Go slice.
 func (arvco *AssetReaderVideoCompositionOutput) VideoTracks() []*AssetTrack {
+	defer runtime.KeepAlive(arvco)
 	_arr := objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("videoTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
 // VideoSettings returns the video settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by AVVideoSettings.h.  A value of nil indicates that the receiver will return video frames in a convenient uncompressed format, with properties determined according to the properties of the receiver's video tracks.
-func (arvco *AssetReaderVideoCompositionOutput) VideoSettings() obj.Object {
+func (arvco *AssetReaderVideoCompositionOutput) VideoSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(arvco)
 	_r := objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("videoSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VideoComposition returns the composition of video used by the receiver. The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.
 func (arvco *AssetReaderVideoCompositionOutput) VideoComposition() *VideoComposition {
+	defer runtime.KeepAlive(arvco)
 	_r := objc.Send[objc.ID](objref.IDOf(arvco), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }

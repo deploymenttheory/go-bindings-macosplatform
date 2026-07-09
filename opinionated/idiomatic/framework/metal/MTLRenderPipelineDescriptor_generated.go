@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPipelineDescriptorAdopt(id objc.ID) *RenderPipelineDescriptor {
 
 // Description returns the object's -description text.
 func (rpd *RenderPipelineDescriptor) Description() string {
+	defer runtime.KeepAlive(rpd)
 	return rt.Description(objref.IDOf(rpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpd *RenderPipelineDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpd *RenderPipelineDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpd)
 	return rt.IsKind(objref.IDOf(rpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpd *RenderPipelineDescriptor) String() string {
+	defer runtime.KeepAlive(rpd)
 	return rt.Description(objref.IDOf(rpd))
 }
 
@@ -80,6 +87,7 @@ func (rpd *RenderPipelineDescriptor) WithLabel(label string) *RenderPipelineDesc
 
 // WithVertexDescriptor sets the organization of vertex data in an attribute’s argument table.
 func (rpd *RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *RenderPipelineDescriptor {
+	defer runtime.KeepAlive(vertexDescriptor)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setVertexDescriptor:"), objref.IDOf(vertexDescriptor))
 	return rpd
 }
@@ -188,12 +196,14 @@ func (rpd *RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIn
 
 // WithVertexLinkedFunctions sets functions that you can specify as function arguments for the vertex shader when encoding commands that use the pipeline.
 func (rpd *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
+	defer runtime.KeepAlive(vertexLinkedFunctions)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setVertexLinkedFunctions:"), objref.IDOf(vertexLinkedFunctions))
 	return rpd
 }
 
 // WithFragmentLinkedFunctions sets functions that you can specify as function arguments for the fragment shader when encoding commands that use the pipeline.
 func (rpd *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
+	defer runtime.KeepAlive(fragmentLinkedFunctions)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setFragmentLinkedFunctions:"), objref.IDOf(fragmentLinkedFunctions))
 	return rpd
 }
@@ -230,11 +240,13 @@ func (rpd *RenderPipelineDescriptor) WithShaderValidation(shaderValidation Shade
 
 // Reset specifies the default rendering pipeline state values for the descriptor.
 func (rpd *RenderPipelineDescriptor) Reset() {
+	defer runtime.KeepAlive(rpd)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("reset"))
 }
 
 // Label returns the label.
 func (rpd *RenderPipelineDescriptor) Label() string {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -244,201 +256,235 @@ func (rpd *RenderPipelineDescriptor) Label() string {
 
 // VertexDescriptor returns the vertex descriptor.
 func (rpd *RenderPipelineDescriptor) VertexDescriptor() *VertexDescriptor {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
 // SampleCount returns the sample count.
 func (rpd *RenderPipelineDescriptor) SampleCount() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("sampleCount"))
 	return _r
 }
 
 // RasterSampleCount returns the raster sample count.
 func (rpd *RenderPipelineDescriptor) RasterSampleCount() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
 // IsAlphaToCoverageEnabled reports whether the object is alpha to coverage enabled.
 func (rpd *RenderPipelineDescriptor) IsAlphaToCoverageEnabled() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isAlphaToCoverageEnabled"))
 	return _r
 }
 
 // IsAlphaToOneEnabled reports whether the object is alpha to one enabled.
 func (rpd *RenderPipelineDescriptor) IsAlphaToOneEnabled() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isAlphaToOneEnabled"))
 	return _r
 }
 
 // IsRasterizationEnabled reports whether the object is rasterization enabled.
 func (rpd *RenderPipelineDescriptor) IsRasterizationEnabled() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isRasterizationEnabled"))
 	return _r
 }
 
 // MaxVertexAmplificationCount returns the max vertex amplification count.
 func (rpd *RenderPipelineDescriptor) MaxVertexAmplificationCount() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("maxVertexAmplificationCount"))
 	return _r
 }
 
 // ColorAttachments returns the color attachments.
 func (rpd *RenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("colorAttachments"))
 	return RenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
 // DepthAttachmentPixelFormat returns the depth attachment pixel format.
 func (rpd *RenderPipelineDescriptor) DepthAttachmentPixelFormat() PixelFormat {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[PixelFormat](objref.IDOf(rpd), objc.RegisterName("depthAttachmentPixelFormat"))
 	return _r
 }
 
 // StencilAttachmentPixelFormat returns the stencil attachment pixel format.
 func (rpd *RenderPipelineDescriptor) StencilAttachmentPixelFormat() PixelFormat {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[PixelFormat](objref.IDOf(rpd), objc.RegisterName("stencilAttachmentPixelFormat"))
 	return _r
 }
 
 // InputPrimitiveTopology returns the input primitive topology.
 func (rpd *RenderPipelineDescriptor) InputPrimitiveTopology() PrimitiveTopologyClass {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[PrimitiveTopologyClass](objref.IDOf(rpd), objc.RegisterName("inputPrimitiveTopology"))
 	return _r
 }
 
 // TessellationPartitionMode returns the tessellation partition mode.
 func (rpd *RenderPipelineDescriptor) TessellationPartitionMode() TessellationPartitionMode {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[TessellationPartitionMode](objref.IDOf(rpd), objc.RegisterName("tessellationPartitionMode"))
 	return _r
 }
 
 // MaxTessellationFactor returns the max tessellation factor.
 func (rpd *RenderPipelineDescriptor) MaxTessellationFactor() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("maxTessellationFactor"))
 	return _r
 }
 
 // IsTessellationFactorScaleEnabled reports whether the object is tessellation factor scale enabled.
 func (rpd *RenderPipelineDescriptor) IsTessellationFactorScaleEnabled() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isTessellationFactorScaleEnabled"))
 	return _r
 }
 
 // TessellationFactorFormat returns the tessellation factor format.
 func (rpd *RenderPipelineDescriptor) TessellationFactorFormat() TessellationFactorFormat {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[TessellationFactorFormat](objref.IDOf(rpd), objc.RegisterName("tessellationFactorFormat"))
 	return _r
 }
 
 // TessellationControlPointIndexType returns the tessellation control point index type.
 func (rpd *RenderPipelineDescriptor) TessellationControlPointIndexType() TessellationControlPointIndexType {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[TessellationControlPointIndexType](objref.IDOf(rpd), objc.RegisterName("tessellationControlPointIndexType"))
 	return _r
 }
 
 // TessellationFactorStepFunction returns the tessellation factor step function.
 func (rpd *RenderPipelineDescriptor) TessellationFactorStepFunction() TessellationFactorStepFunction {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[TessellationFactorStepFunction](objref.IDOf(rpd), objc.RegisterName("tessellationFactorStepFunction"))
 	return _r
 }
 
 // TessellationOutputWindingOrder returns the tessellation output winding order.
 func (rpd *RenderPipelineDescriptor) TessellationOutputWindingOrder() Winding {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[Winding](objref.IDOf(rpd), objc.RegisterName("tessellationOutputWindingOrder"))
 	return _r
 }
 
 // VertexBuffers returns the vertex buffers.
 func (rpd *RenderPipelineDescriptor) VertexBuffers() *PipelineBufferDescriptorArray {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("vertexBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
 // FragmentBuffers returns the fragment buffers.
 func (rpd *RenderPipelineDescriptor) FragmentBuffers() *PipelineBufferDescriptorArray {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("fragmentBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
 // SupportIndirectCommandBuffers wraps the corresponding Objective-C method.
 func (rpd *RenderPipelineDescriptor) SupportIndirectCommandBuffers() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("supportIndirectCommandBuffers"))
 	return _r
 }
 
 // BinaryArchives returns the set of MTLBinaryArchive to search for compiled code when creating the pipeline state. Accelerate pipeline state creation by providing archives of compiled code such that no compilation needs to happen on the fast path.
 func (rpd *RenderPipelineDescriptor) BinaryArchives() []obj.Object {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("binaryArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryArchives wraps the corresponding Objective-C method.
 func (rpd *RenderPipelineDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	defer runtime.KeepAlive(rpd)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VertexPreloadedLibraries returns the set of MTLDynamicLibrary to use to resolve external symbols for the vertexFunction before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use vertexPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
 func (rpd *RenderPipelineDescriptor) VertexPreloadedLibraries() []obj.Object {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("vertexPreloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetVertexPreloadedLibraries wraps the corresponding Objective-C method.
 func (rpd *RenderPipelineDescriptor) SetVertexPreloadedLibraries(vertexPreloadedLibraries []obj.Object) {
+	defer runtime.KeepAlive(rpd)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setVertexPreloadedLibraries:"), purego.SliceToNSArray(vertexPreloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FragmentPreloadedLibraries returns the set of MTLDynamicLibrary to use to resolve external symbols for the fragmentFunction before considering symbols from dependent MTLDynamicLibrary. Typical workflows use the libraries property of MTLCompileOptions to record dependent libraries at compile time without having to use fragmentPreloadedLibraries. This property can be used to override symbols from dependent libraries for experimentation or evaluating alternative implementations. It can also be used to provide dynamic libraries that are dynamically created (for example, from source) that have no stable installName that can be used to automatically load from the file system.
 func (rpd *RenderPipelineDescriptor) FragmentPreloadedLibraries() []obj.Object {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("fragmentPreloadedLibraries"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFragmentPreloadedLibraries wraps the corresponding Objective-C method.
 func (rpd *RenderPipelineDescriptor) SetFragmentPreloadedLibraries(fragmentPreloadedLibraries []obj.Object) {
+	defer runtime.KeepAlive(rpd)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setFragmentPreloadedLibraries:"), purego.SliceToNSArray(fragmentPreloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VertexLinkedFunctions returns the set of functions to be linked with the pipeline state and accessed from the vertex function.
 func (rpd *RenderPipelineDescriptor) VertexLinkedFunctions() *LinkedFunctions {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("vertexLinkedFunctions"))
 	return LinkedFunctionsFromID(_r)
 }
 
 // FragmentLinkedFunctions returns the set of functions to be linked with the pipeline state and accessed from the fragment function.
 func (rpd *RenderPipelineDescriptor) FragmentLinkedFunctions() *LinkedFunctions {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("fragmentLinkedFunctions"))
 	return LinkedFunctionsFromID(_r)
 }
 
 // SupportAddingVertexBinaryFunctions reports whether this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (rpd *RenderPipelineDescriptor) SupportAddingVertexBinaryFunctions() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("supportAddingVertexBinaryFunctions"))
 	return _r
 }
 
 // SupportAddingFragmentBinaryFunctions reports whether this flag makes this pipeline support creating a new pipeline by adding binary functions.
 func (rpd *RenderPipelineDescriptor) SupportAddingFragmentBinaryFunctions() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("supportAddingFragmentBinaryFunctions"))
 	return _r
 }
 
 // MaxVertexCallStackDepth returns the maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
 func (rpd *RenderPipelineDescriptor) MaxVertexCallStackDepth() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("maxVertexCallStackDepth"))
 	return _r
 }
 
 // MaxFragmentCallStackDepth returns the maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
 func (rpd *RenderPipelineDescriptor) MaxFragmentCallStackDepth() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("maxFragmentCallStackDepth"))
 	return _r
 }
 
 // ShaderValidation returns toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
 func (rpd *RenderPipelineDescriptor) ShaderValidation() ShaderValidation {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[ShaderValidation](objref.IDOf(rpd), objc.RegisterName("shaderValidation"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func brailleTableAdopt(id objc.ID) *BrailleTable {
 
 // Description returns the object's -description text.
 func (bt *BrailleTable) Description() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bt *BrailleTable) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bt *BrailleTable) IsKind(className string) bool {
+	defer runtime.KeepAlive(bt)
 	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bt *BrailleTable) String() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
@@ -75,6 +83,7 @@ func NewBrailleTableWithIdentifier(identifier string) *BrailleTable {
 
 // Identifier returns a unique string that identifies this table.
 func (bt *BrailleTable) Identifier() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -84,6 +93,7 @@ func (bt *BrailleTable) Identifier() string {
 
 // LocalizedName returns the localized name of this table for user display.
 func (bt *BrailleTable) LocalizedName() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -93,6 +103,7 @@ func (bt *BrailleTable) LocalizedName() string {
 
 // ProviderIdentifier returns the identifier of the provider of this table.
 func (bt *BrailleTable) ProviderIdentifier() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("providerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -102,6 +113,7 @@ func (bt *BrailleTable) ProviderIdentifier() string {
 
 // LocalizedProviderName returns the localized name of the provider of this table for user display.
 func (bt *BrailleTable) LocalizedProviderName() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("localizedProviderName"))
 	if _r == 0 {
 		return ""
@@ -111,6 +123,7 @@ func (bt *BrailleTable) LocalizedProviderName() string {
 
 // Language returns the 3-character code from ISO 639-2 for the language this Braille table pertains to.
 func (bt *BrailleTable) Language() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
@@ -119,13 +132,16 @@ func (bt *BrailleTable) Language() string {
 }
 
 // Locales returns all locales this table supports.
-func (bt *BrailleTable) Locales() obj.Object {
+// The order of the returned elements is unspecified.
+func (bt *BrailleTable) Locales() []*foundation.Locale {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("locales"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Locale { return foundation.LocaleFromID(_id) })
 }
 
 // IsEightDot reports whether this table makes use of eight dots as opposed to six dots.
 func (bt *BrailleTable) IsEightDot() bool {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[bool](objref.IDOf(bt), objc.RegisterName("isEightDot"))
 	return _r
 }

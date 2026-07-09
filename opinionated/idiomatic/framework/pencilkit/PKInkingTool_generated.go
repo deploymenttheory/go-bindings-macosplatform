@@ -5,7 +5,10 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,8 @@ func inkingToolAdopt(id objc.ID) *InkingTool {
 
 // NewInkingToolWithInkTypeColorWidth creates a new InkingTool.
 func NewInkingToolWithInkTypeColorWidth(type_ obj.Object, color obj.Object, width float64) *InkingTool {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:"), objref.IDOf(type_), objref.IDOf(color), width)
 	return inkingToolAdopt(_id)
@@ -55,6 +60,8 @@ func NewInkingToolWithInkTypeColorWidth(type_ obj.Object, color obj.Object, widt
 
 // NewInkingToolWithInkTypeColorWidthAzimuth creates a new InkingTool.
 func NewInkingToolWithInkTypeColorWidthAzimuth(type_ obj.Object, color obj.Object, width float64, angle float64) *InkingTool {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:azimuth:"), objref.IDOf(type_), objref.IDOf(color), width, angle)
 	return inkingToolAdopt(_id)
@@ -62,6 +69,8 @@ func NewInkingToolWithInkTypeColorWidthAzimuth(type_ obj.Object, color obj.Objec
 
 // NewInkingToolWithInkTypeColor creates a new InkingTool.
 func NewInkingToolWithInkTypeColor(type_ obj.Object, color obj.Object) *InkingTool {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), objref.IDOf(type_), objref.IDOf(color))
 	return inkingToolAdopt(_id)
@@ -69,43 +78,50 @@ func NewInkingToolWithInkTypeColor(type_ obj.Object, color obj.Object) *InkingTo
 
 // NewInkingToolWithInkWidth create a new inking tool for the provided ink.
 func NewInkingToolWithInkWidth(ink *Ink, width float64) *InkingTool {
+	defer runtime.KeepAlive(ink)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:width:"), objref.IDOf(ink), width)
 	return inkingToolAdopt(_id)
 }
 
 // InkType returns the type of ink, eg. pen, pencil...
-func (it *InkingTool) InkType() obj.Object {
+func (it *InkingTool) InkType() *foundation.String {
+	defer runtime.KeepAlive(it)
 	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("inkType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Color returns the color.
 func (it *InkingTool) Color() obj.Object {
+	defer runtime.KeepAlive(it)
 	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // Width returns the base width of the ink.
 func (it *InkingTool) Width() float64 {
+	defer runtime.KeepAlive(it)
 	_r := objc.Send[float64](objref.IDOf(it), objc.RegisterName("width"))
 	return _r
 }
 
 // Azimuth returns the base angle of the ink.
 func (it *InkingTool) Azimuth() float64 {
+	defer runtime.KeepAlive(it)
 	_r := objc.Send[float64](objref.IDOf(it), objc.RegisterName("azimuth"))
 	return _r
 }
 
 // Ink returns the ink that this tool will create strokes with.
 func (it *InkingTool) Ink() *Ink {
+	defer runtime.KeepAlive(it)
 	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("ink"))
 	return InkFromID(_r)
 }
 
 // RequiredContentVersion returns the PencilKit version required to use this inking tool.
 func (it *InkingTool) RequiredContentVersion() ContentVersion {
+	defer runtime.KeepAlive(it)
 	_r := objc.Send[ContentVersion](objref.IDOf(it), objc.RegisterName("requiredContentVersion"))
 	return _r
 }

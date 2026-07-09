@@ -5,8 +5,11 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,27 +51,33 @@ func extensionStreamCustomClockConfigurationAdopt(id objc.ID) *ExtensionStreamCu
 
 // Description returns the object's -description text.
 func (esccc *ExtensionStreamCustomClockConfiguration) Description() string {
+	defer runtime.KeepAlive(esccc)
 	return rt.Description(objref.IDOf(esccc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (esccc *ExtensionStreamCustomClockConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(esccc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(esccc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (esccc *ExtensionStreamCustomClockConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(esccc)
 	return rt.IsKind(objref.IDOf(esccc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (esccc *ExtensionStreamCustomClockConfiguration) String() string {
+	defer runtime.KeepAlive(esccc)
 	return rt.Description(objref.IDOf(esccc))
 }
 
 // NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing creates a custom clock configuration.
 func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier obj.Object, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {
+	defer runtime.KeepAlive(sourceIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:"), purego.NSString(clockName), objref.IDOf(sourceIdentifier), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
 	return extensionStreamCustomClockConfigurationAdopt(_id)
@@ -76,6 +85,7 @@ func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetT
 
 // ClockName returns the name of the clock.
 func (esccc *ExtensionStreamCustomClockConfiguration) ClockName() string {
+	defer runtime.KeepAlive(esccc)
 	_r := objc.Send[objc.ID](objref.IDOf(esccc), objc.RegisterName("clockName"))
 	if _r == 0 {
 		return ""
@@ -84,25 +94,29 @@ func (esccc *ExtensionStreamCustomClockConfiguration) ClockName() string {
 }
 
 // SourceIdentifier returns the identifier of the entity driving the clock. An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
-func (esccc *ExtensionStreamCustomClockConfiguration) SourceIdentifier() obj.Object {
+func (esccc *ExtensionStreamCustomClockConfiguration) SourceIdentifier() *foundation.UUID {
+	defer runtime.KeepAlive(esccc)
 	_r := objc.Send[objc.ID](objref.IDOf(esccc), objc.RegisterName("sourceIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // TimeCallMinimumInterval returns if the clock is queried for its current time more often than this interval, an interpolated value will be returned.
 func (esccc *ExtensionStreamCustomClockConfiguration) TimeCallMinimumInterval() coremedia.CMTime {
+	defer runtime.KeepAlive(esccc)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(esccc), objc.RegisterName("getTimeCallMinimumInterval"))
 	return _r
 }
 
 // NumberOfEventsForRateSmoothing returns the number of events to use for rate smoothing; will be > 0.
 func (esccc *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
+	defer runtime.KeepAlive(esccc)
 	_r := objc.Send[uint32](objref.IDOf(esccc), objc.RegisterName("numberOfEventsForRateSmoothing"))
 	return _r
 }
 
 // NumberOfAveragesForRateSmoothing returns the number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
 func (esccc *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
+	defer runtime.KeepAlive(esccc)
 	_r := objc.Send[uint32](objref.IDOf(esccc), objc.RegisterName("numberOfAveragesForRateSmoothing"))
 	return _r
 }

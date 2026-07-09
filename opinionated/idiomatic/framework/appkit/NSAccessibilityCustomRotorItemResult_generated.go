@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func accessibilityCustomRotorItemResultAdopt(id objc.ID) *AccessibilityCustomRot
 
 // Description returns the object's -description text.
 func (acrir *AccessibilityCustomRotorItemResult) Description() string {
+	defer runtime.KeepAlive(acrir)
 	return rt.Description(objref.IDOf(acrir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (acrir *AccessibilityCustomRotorItemResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(acrir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(acrir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (acrir *AccessibilityCustomRotorItemResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(acrir)
 	return rt.IsKind(objref.IDOf(acrir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (acrir *AccessibilityCustomRotorItemResult) String() string {
+	defer runtime.KeepAlive(acrir)
 	return rt.Description(objref.IDOf(acrir))
 }
 
 // NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel creates an item result with a given item load token and custom label. Use this initializer if the application has not yet loaded the element backing the item result.
 func NewAccessibilityCustomRotorItemResultWithItemLoadingTokenCustomLabel(itemLoadingToken obj.Object, customLabel string) *AccessibilityCustomRotorItemResult {
+	defer runtime.KeepAlive(itemLoadingToken)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAccessibilityCustomRotorItemResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemLoadingToken:customLabel:"), objref.IDOf(itemLoadingToken), purego.NSString(customLabel))
 	return accessibilityCustomRotorItemResultAdopt(_id)
@@ -88,18 +96,21 @@ func (acrir *AccessibilityCustomRotorItemResult) WithCustomLabel(customLabel str
 
 // ItemLoadingToken provide an item load token if the application has not yet loaded the element backing the item result. Application can use the token to determine which item to return.
 func (acrir *AccessibilityCustomRotorItemResult) ItemLoadingToken() obj.Object {
+	defer runtime.KeepAlive(acrir)
 	_r := objc.Send[objc.ID](objref.IDOf(acrir), objc.RegisterName("itemLoadingToken"))
 	return obj.Wrap(_r)
 }
 
 // TargetRange returns for text-based elements such as an NSTextView, this is an NSRange that specifies the area of interest. If the target range has NSNotFound for the location, the search should begin from the first or last character of the text element, depending on the search direction.
 func (acrir *AccessibilityCustomRotorItemResult) TargetRange() foundation.NSRange {
+	defer runtime.KeepAlive(acrir)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(acrir), objc.RegisterName("targetRange"))
 	return _r
 }
 
 // CustomLabel returns a localized label that can be used instead of the default item label to describe the item result.
 func (acrir *AccessibilityCustomRotorItemResult) CustomLabel() string {
+	defer runtime.KeepAlive(acrir)
 	_r := objc.Send[objc.ID](objref.IDOf(acrir), objc.RegisterName("customLabel"))
 	if _r == 0 {
 		return ""

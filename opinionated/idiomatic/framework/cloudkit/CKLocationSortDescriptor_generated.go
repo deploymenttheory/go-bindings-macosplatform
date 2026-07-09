@@ -5,6 +5,7 @@
 package cloudkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func locationSortDescriptorAdopt(id objc.ID) *LocationSortDescriptor {
 
 // Description returns the object's -description text.
 func (lsd *LocationSortDescriptor) Description() string {
+	defer runtime.KeepAlive(lsd)
 	return rt.Description(objref.IDOf(lsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lsd *LocationSortDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lsd *LocationSortDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(lsd)
 	return rt.IsKind(objref.IDOf(lsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lsd *LocationSortDescriptor) String() string {
+	defer runtime.KeepAlive(lsd)
 	return rt.Description(objref.IDOf(lsd))
 }
 
@@ -77,6 +83,7 @@ func NewLocationSortDescriptorWithKeyRelativeLocation(key string, relativeLocati
 
 // NewLocationSortDescriptorWithCoder creates a location sort descriptor from a serialized instance.
 func NewLocationSortDescriptorWithCoder(aDecoder obj.Object) *LocationSortDescriptor {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return locationSortDescriptorAdopt(_id)

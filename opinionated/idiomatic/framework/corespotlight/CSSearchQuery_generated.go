@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -52,27 +53,33 @@ func searchQueryAdopt(id objc.ID) *SearchQuery {
 
 // Description returns the object's -description text.
 func (sq *SearchQuery) Description() string {
+	defer runtime.KeepAlive(sq)
 	return rt.Description(objref.IDOf(sq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sq *SearchQuery) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sq)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sq *SearchQuery) IsKind(className string) bool {
+	defer runtime.KeepAlive(sq)
 	return rt.IsKind(objref.IDOf(sq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sq *SearchQuery) String() string {
+	defer runtime.KeepAlive(sq)
 	return rt.Description(objref.IDOf(sq))
 }
 
 // NewSearchQueryWithQueryStringQueryContext initializes and returns a query object with the specified query string and query context.
 func NewSearchQueryWithQueryStringQueryContext(queryString string, queryContext *SearchQueryContext) *SearchQuery {
+	defer runtime.KeepAlive(queryContext)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchQuery")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryString:queryContext:"), purego.NSString(queryString), objref.IDOf(queryContext))
 	return searchQueryAdopt(_id)
@@ -100,22 +107,26 @@ func (sq *SearchQuery) WithProtectionClasses(items ...obj.Object) *SearchQuery {
 
 // Start starts searching the index for items that match the current query string and parameters.
 func (sq *SearchQuery) Start() {
+	defer runtime.KeepAlive(sq)
 	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("start"))
 }
 
 // Cancel cancels the current query operation.
 func (sq *SearchQuery) Cancel() {
+	defer runtime.KeepAlive(sq)
 	objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("cancel"))
 }
 
 // IsCancelled reports whether the object is cancelled.
 func (sq *SearchQuery) IsCancelled() bool {
+	defer runtime.KeepAlive(sq)
 	_r := objc.Send[bool](objref.IDOf(sq), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // FoundItemCount returns the found item count.
 func (sq *SearchQuery) FoundItemCount() int {
+	defer runtime.KeepAlive(sq)
 	_r := objc.Send[int](objref.IDOf(sq), objc.RegisterName("foundItemCount"))
 	return _r
 }
@@ -124,6 +135,7 @@ func (sq *SearchQuery) FoundItemCount() int {
 //
 // Set blocks until the operation completes or ctx is cancelled.
 func (sq *SearchQuery) Set(ctx context.Context) error {
+	defer runtime.KeepAlive(sq)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -143,6 +155,7 @@ func (sq *SearchQuery) Set(ctx context.Context) error {
 //
 // ProtectionClasses returns the collection as a Go slice.
 func (sq *SearchQuery) ProtectionClasses() []obj.Object {
+	defer runtime.KeepAlive(sq)
 	_arr := objc.Send[objc.ID](objref.IDOf(sq), objc.RegisterName("protectionClasses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

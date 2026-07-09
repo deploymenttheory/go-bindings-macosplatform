@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterUnitTestingAdopt(id objc.ID) *MTRBaseClusterUnitTesting {
 
 // NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterUnitTesting {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterUnitTesting")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterUnitTestingAdopt(_id)
@@ -58,6 +62,8 @@ func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *MTRBaseDevice
 //
 // TestSpecificWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestSpecificResponseParams
 		err error
@@ -83,6 +89,7 @@ func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx con
 //
 // TestSpecificWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val *MTRUnitTestingClusterTestSpecificResponseParams
 		err error
@@ -108,6 +115,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.C
 //
 // TestAddArgumentsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams) (result *MTRUnitTestingClusterTestAddArgumentsResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestAddArgumentsResponseParams
 		err error
@@ -133,6 +142,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx
 //
 // TestSimpleArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams) (result *MTRUnitTestingClusterTestSimpleArgumentResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestSimpleArgumentResponseParams
 		err error
@@ -158,6 +169,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompl
 //
 // TestStructArrayArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (result *MTRUnitTestingClusterTestStructArrayArgumentResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
 		err error
@@ -183,6 +196,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParams
 //
 // TestStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -208,6 +223,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompl
 //
 // TestNestedStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -233,6 +250,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParam
 //
 // TestListStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -258,6 +277,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsC
 //
 // TestListInt8UArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -283,6 +304,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsCo
 //
 // TestNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -308,6 +331,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithP
 //
 // TestListNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -333,6 +358,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestW
 //
 // TestListInt8UReverseRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams) (result *MTRUnitTestingClusterTestListInt8UReverseResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestListInt8UReverseResponseParams
 		err error
@@ -358,6 +385,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsCom
 //
 // TestEnumsRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams) (result *MTRUnitTestingClusterTestEnumsResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestEnumsResponseParams
 		err error
@@ -383,6 +412,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx
 //
 // TestNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
 		err error
@@ -408,6 +439,7 @@ func (mbcut *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsCom
 //
 // TestNullableOptionalRequestWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
 		err error
@@ -433,6 +465,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletio
 //
 // TestComplexNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (result *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -458,6 +492,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithPa
 //
 // SimpleStructEchoRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams) (result *MTRUnitTestingClusterSimpleStructResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStructResponseParams
 		err error
@@ -483,6 +519,8 @@ func (mbcut *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsComplet
 //
 // TestEmitTestEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams) (result *MTRUnitTestingClusterTestEmitTestEventResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestEmitTestEventResponseParams
 		err error
@@ -508,6 +546,8 @@ func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsComple
 //
 // TestEmitTestFabricScopedEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
 		err error
@@ -533,6 +573,7 @@ func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWith
 //
 // ReadAttributeBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +599,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx c
 //
 // SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +626,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubsc
 //
 // ReadAttributeBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +652,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx c
 //
 // SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubsc
 //
 // ReadAttributeBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +705,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx 
 //
 // SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +732,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubs
 //
 // ReadAttributeBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +758,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx 
 //
 // SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +785,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubs
 //
 // ReadAttributeBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -758,6 +811,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx 
 //
 // SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +838,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubs
 //
 // ReadAttributeInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +864,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx con
 //
 // SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,6 +891,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscri
 //
 // ReadAttributeInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -858,6 +917,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx co
 //
 // SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -883,6 +944,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscr
 //
 // ReadAttributeInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -908,6 +970,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx co
 //
 // SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -933,6 +997,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscr
 //
 // ReadAttributeInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -958,6 +1023,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx co
 //
 // SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -983,6 +1050,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscr
 //
 // ReadAttributeInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1008,6 +1076,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx co
 //
 // SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1033,6 +1103,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscr
 //
 // ReadAttributeInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1058,6 +1129,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx co
 //
 // SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1083,6 +1156,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscr
 //
 // ReadAttributeInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1108,6 +1182,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx co
 //
 // SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1133,6 +1209,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscr
 //
 // ReadAttributeInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1158,6 +1235,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx co
 //
 // SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1183,6 +1262,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscr
 //
 // ReadAttributeInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1208,6 +1288,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx con
 //
 // SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1233,6 +1315,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscri
 //
 // ReadAttributeInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1258,6 +1341,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx co
 //
 // SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1283,6 +1368,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscr
 //
 // ReadAttributeInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1308,6 +1394,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx co
 //
 // SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1333,6 +1421,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscr
 //
 // ReadAttributeInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1358,6 +1447,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx co
 //
 // SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1383,6 +1474,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscr
 //
 // ReadAttributeInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1408,6 +1500,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx co
 //
 // SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1433,6 +1527,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscr
 //
 // ReadAttributeInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1458,6 +1553,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx co
 //
 // SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1483,6 +1580,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscr
 //
 // ReadAttributeInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1508,6 +1606,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx co
 //
 // SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1533,6 +1633,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscr
 //
 // ReadAttributeInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1558,6 +1659,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx co
 //
 // SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1583,6 +1686,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscr
 //
 // ReadAttributeEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1608,6 +1712,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx con
 //
 // SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1633,6 +1739,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscri
 //
 // ReadAttributeEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1658,6 +1765,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx co
 //
 // SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1683,6 +1792,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscr
 //
 // ReadAttributeFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1708,6 +1818,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(c
 //
 // SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1733,6 +1845,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsS
 //
 // ReadAttributeFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1758,6 +1871,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(c
 //
 // SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1783,6 +1898,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsS
 //
 // ReadAttributeOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1808,6 +1924,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(c
 //
 // SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1833,6 +1951,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsS
 //
 // ReadAttributeListInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1858,6 +1977,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx
 //
 // SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1883,6 +2004,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSub
 //
 // ReadAttributeListOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1908,6 +2030,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompleti
 //
 // SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1933,6 +2057,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithPar
 //
 // ReadAttributeListStructOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1958,6 +2083,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCo
 //
 // SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1983,6 +2110,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringW
 //
 // ReadAttributeLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2008,6 +2136,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompleti
 //
 // SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2033,6 +2163,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithPar
 //
 // ReadAttributeCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val string
 		err error
@@ -2058,6 +2189,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ct
 //
 // SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -2083,6 +2216,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSu
 //
 // ReadAttributeLongCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val string
 		err error
@@ -2108,6 +2242,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletio
 //
 // SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -2133,6 +2269,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithPara
 //
 // ReadAttributeEpochUsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2158,6 +2295,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx c
 //
 // SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2183,6 +2322,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubsc
 //
 // ReadAttributeEpochSWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2208,6 +2348,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx co
 //
 // SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2233,6 +2375,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscr
 //
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2258,6 +2401,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeVendorIDWithCompletion(ctx 
 //
 // SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2283,6 +2428,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIDWithParamsSubs
 //
 // ReadAttributeListNullablesAndOptionalsStructWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2308,6 +2454,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsSt
 //
 // SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2333,6 +2481,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOption
 //
 // ReadAttributeEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2358,6 +2507,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx 
 //
 // SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2383,6 +2534,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubs
 //
 // ReadAttributeStructAttrWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -2408,6 +2560,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ct
 //
 // SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -2433,6 +2587,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSu
 //
 // ReadAttributeRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2458,6 +2613,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCom
 //
 // SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2483,6 +2640,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWi
 //
 // ReadAttributeRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2508,6 +2666,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCom
 //
 // SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2533,6 +2693,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWi
 //
 // ReadAttributeRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2558,6 +2719,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCo
 //
 // SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2583,6 +2746,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uW
 //
 // ReadAttributeRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2608,6 +2772,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCo
 //
 // SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2633,6 +2799,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sW
 //
 // ReadAttributeListLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2658,6 +2825,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithComp
 //
 // SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2683,6 +2852,8 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWit
 //
 // ReadAttributeListFabricScopedWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2708,6 +2879,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsC
 //
 // SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2733,6 +2906,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithPa
 //
 // ReadAttributeTimedWriteBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2758,6 +2932,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithComple
 //
 // SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2783,6 +2959,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithP
 //
 // ReadAttributeGeneralErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2808,6 +2985,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithComp
 //
 // SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2833,6 +3012,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWit
 //
 // ReadAttributeClusterErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2858,6 +3038,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithComp
 //
 // SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2883,6 +3065,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWit
 //
 // ReadAttributeUnsupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2908,6 +3091,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(c
 //
 // SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2933,6 +3118,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsS
 //
 // ReadAttributeNullableBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2958,6 +3144,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompleti
 //
 // SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2983,6 +3171,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithPar
 //
 // ReadAttributeNullableBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3008,6 +3197,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompleti
 //
 // SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3033,6 +3224,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithPar
 //
 // ReadAttributeNullableBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3058,6 +3250,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithComplet
 //
 // SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3083,6 +3277,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithPa
 //
 // ReadAttributeNullableBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3108,6 +3303,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithComplet
 //
 // SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3133,6 +3330,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithPa
 //
 // ReadAttributeNullableBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3158,6 +3356,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithComplet
 //
 // SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3183,6 +3383,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithPa
 //
 // ReadAttributeNullableInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3208,6 +3409,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion
 //
 // SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3233,6 +3436,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParam
 //
 // ReadAttributeNullableInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3258,6 +3462,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletio
 //
 // SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3283,6 +3489,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithPara
 //
 // ReadAttributeNullableInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3308,6 +3515,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletio
 //
 // SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3333,6 +3542,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithPara
 //
 // ReadAttributeNullableInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3358,6 +3568,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletio
 //
 // SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3383,6 +3595,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithPara
 //
 // ReadAttributeNullableInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3408,6 +3621,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletio
 //
 // SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3433,6 +3648,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithPara
 //
 // ReadAttributeNullableInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3458,6 +3674,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletio
 //
 // SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3483,6 +3701,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithPara
 //
 // ReadAttributeNullableInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3508,6 +3727,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletio
 //
 // SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3533,6 +3754,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithPara
 //
 // ReadAttributeNullableInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3558,6 +3780,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletio
 //
 // SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3583,6 +3807,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithPara
 //
 // ReadAttributeNullableInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3608,6 +3833,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion
 //
 // SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3633,6 +3860,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParam
 //
 // ReadAttributeNullableInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3658,6 +3886,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletio
 //
 // SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3683,6 +3913,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithPara
 //
 // ReadAttributeNullableInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3708,6 +3939,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletio
 //
 // SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3733,6 +3966,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithPara
 //
 // ReadAttributeNullableInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3758,6 +3992,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletio
 //
 // SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3783,6 +4019,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithPara
 //
 // ReadAttributeNullableInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3808,6 +4045,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletio
 //
 // SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3833,6 +4072,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithPara
 //
 // ReadAttributeNullableInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3858,6 +4098,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletio
 //
 // SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3883,6 +4125,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithPara
 //
 // ReadAttributeNullableInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3908,6 +4151,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletio
 //
 // SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3933,6 +4178,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithPara
 //
 // ReadAttributeNullableInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3958,6 +4204,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletio
 //
 // SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3983,6 +4231,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithPara
 //
 // ReadAttributeNullableEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4008,6 +4257,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion
 //
 // SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4033,6 +4284,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParam
 //
 // ReadAttributeNullableEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4058,6 +4310,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletio
 //
 // SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4083,6 +4337,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithPara
 //
 // ReadAttributeNullableFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4108,6 +4363,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithComp
 //
 // SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4133,6 +4390,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWit
 //
 // ReadAttributeNullableFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4158,6 +4416,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithComp
 //
 // SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4183,6 +4443,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWit
 //
 // ReadAttributeNullableOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4208,6 +4469,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithComp
 //
 // SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4233,6 +4496,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWit
 //
 // ReadAttributeNullableCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val string
 		err error
@@ -4258,6 +4522,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompl
 //
 // SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -4283,6 +4549,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWith
 //
 // ReadAttributeNullableEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4308,6 +4575,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithComplet
 //
 // SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4333,6 +4602,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithPa
 //
 // ReadAttributeNullableStructWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -4358,6 +4628,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletio
 //
 // SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRUnitTestingClusterSimpleStruct, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStruct
 		err error
@@ -4383,6 +4655,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithPara
 //
 // ReadAttributeNullableRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4408,6 +4681,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8
 //
 // SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4433,6 +4708,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 //
 // ReadAttributeNullableRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4458,6 +4734,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8
 //
 // SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4483,6 +4761,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 //
 // ReadAttributeNullableRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4508,6 +4787,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt1
 //
 // SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4533,6 +4814,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 //
 // ReadAttributeNullableRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4558,6 +4840,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt1
 //
 // SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4583,6 +4867,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 //
 // ReadAttributeWriteOnlyInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4608,6 +4893,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletio
 //
 // SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4633,6 +4920,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithPara
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4658,6 +4946,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithCom
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4683,6 +4973,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWi
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4708,6 +4999,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithComp
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4733,6 +5026,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWit
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4758,6 +5052,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4783,6 +5079,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParam
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4808,6 +5105,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ct
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4833,6 +5132,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSu
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4858,6 +5158,8 @@ func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompleti
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcut)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

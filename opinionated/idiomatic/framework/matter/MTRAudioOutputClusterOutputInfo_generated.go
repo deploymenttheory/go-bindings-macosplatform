@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRAudioOutputClusterOutputInfo() *MTRAudioOutputClusterOutputInfo {
 
 // WithIndex sets the index.
 func (maocoi *MTRAudioOutputClusterOutputInfo) WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfo {
+	defer runtime.KeepAlive(index)
 	objc.Send[objc.ID](objref.IDOf(maocoi), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocoi
 }
 
 // WithOutputType sets the output type.
 func (maocoi *MTRAudioOutputClusterOutputInfo) WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfo {
+	defer runtime.KeepAlive(outputType)
 	objc.Send[objc.ID](objref.IDOf(maocoi), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 	return maocoi
 }

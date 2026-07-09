@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,9 +64,9 @@ func NewSocketPortWithTCPPort(port uint16) *SocketPort {
 }
 
 // NewSocketPortWithProtocolFamilySocketTypeProtocolAddress creates a new SocketPort.
-func NewSocketPortWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *Data) *SocketPort {
+func NewSocketPortWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address []byte) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, objref.IDOf(address))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, rt.BytesToNSData(address))
 	return socketPortAdopt(_id)
 }
 
@@ -83,9 +85,9 @@ func NewSocketPortRemoteWithTCPPortHost(port uint16, hostName string) *SocketPor
 }
 
 // NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress creates a new SocketPort.
-func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *Data) *SocketPort {
+func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address []byte) *SocketPort {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, objref.IDOf(address))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, rt.BytesToNSData(address))
 	return socketPortAdopt(_id)
 }
 
@@ -96,37 +98,42 @@ func (sp *SocketPort) WithObservationInfo(observationInfo unsafe.Pointer) *Socke
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sp *SocketPort) WithScriptingProperties(scriptingProperties obj.Object) *SocketPort {
-	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sp *SocketPort) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SocketPort {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sp
 }
 
 // ProtocolFamily returns the protocol family.
 func (sp *SocketPort) ProtocolFamily() int {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
 // SocketType returns the socket type.
 func (sp *SocketPort) SocketType() int {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socketType"))
 	return _r
 }
 
 // Protocol returns the protocol.
 func (sp *SocketPort) Protocol() int {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocol"))
 	return _r
 }
 
 // Address returns the address.
-func (sp *SocketPort) Address() *Data {
+func (sp *SocketPort) Address() []byte {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("address"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Socket returns the socket.
 func (sp *SocketPort) Socket() int {
+	defer runtime.KeepAlive(sp)
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socket"))
 	return _r
 }

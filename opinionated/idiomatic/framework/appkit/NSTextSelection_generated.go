@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textSelectionAdopt(id objc.ID) *TextSelection {
 
 // Description returns the object's -description text.
 func (ts *TextSelection) Description() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ts *TextSelection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ts *TextSelection) IsKind(className string) bool {
+	defer runtime.KeepAlive(ts)
 	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ts *TextSelection) String() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
@@ -75,6 +82,7 @@ func NewTextSelectionWithRangesAffinityGranularity(textRanges []*TextRange, affi
 
 // NewTextSelectionWithCoder creates a test selection from data in an unarchiver.
 func NewTextSelectionWithCoder(coder obj.Object) *TextSelection {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textSelectionAdopt(_id)
@@ -82,6 +90,7 @@ func NewTextSelectionWithCoder(coder obj.Object) *TextSelection {
 
 // NewTextSelectionWithRangeAffinityGranularity creates a new text selection with the range, selection affinity, and granularity you provide.
 func NewTextSelectionWithRangeAffinityGranularity(range_ *TextRange, affinity TextSelectionAffinity, granularity TextSelectionGranularity) *TextSelection {
+	defer runtime.KeepAlive(range_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextSelection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRange:affinity:granularity:"), objref.IDOf(range_), affinity, granularity)
 	return textSelectionAdopt(_id)
@@ -101,12 +110,14 @@ func (ts *TextSelection) WithLogical(logical bool) *TextSelection {
 
 // WithTypingAttributes sets the template attributes the framework uses for characters that replace the contents of this selection.
 func (ts *TextSelection) WithTypingAttributes(typingAttributes obj.Object) *TextSelection {
+	defer runtime.KeepAlive(typingAttributes)
 	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
 	return ts
 }
 
 // TextSelectionWithTextRanges creates a subselection of the current text selection with the ranges you specify.
 func (ts *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *TextSelection {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("textSelectionWithTextRanges:"), purego.SliceToNSArray(textRanges, func(_v *TextRange) objc.ID { return objref.IDOf(_v) }))
 	return TextSelectionFromID(_r)
 }
@@ -115,42 +126,49 @@ func (ts *TextSelection) TextSelectionWithTextRanges(textRanges []*TextRange) *T
 //
 // TextRanges returns the collection as a Go slice.
 func (ts *TextSelection) TextRanges() []*TextRange {
+	defer runtime.KeepAlive(ts)
 	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("textRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
 // Granularity returns the granularity.
 func (ts *TextSelection) Granularity() TextSelectionGranularity {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[TextSelectionGranularity](objref.IDOf(ts), objc.RegisterName("granularity"))
 	return _r
 }
 
 // Affinity returns the affinity.
 func (ts *TextSelection) Affinity() TextSelectionAffinity {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[TextSelectionAffinity](objref.IDOf(ts), objc.RegisterName("affinity"))
 	return _r
 }
 
 // IsTransient reports whether the object is transient.
 func (ts *TextSelection) IsTransient() bool {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isTransient"))
 	return _r
 }
 
 // AnchorPositionOffset returns the anchor position offset.
 func (ts *TextSelection) AnchorPositionOffset() float64 {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("anchorPositionOffset"))
 	return _r
 }
 
 // IsLogical reports whether the object is logical.
 func (ts *TextSelection) IsLogical() bool {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("isLogical"))
 	return _r
 }
 
 // TypingAttributes returns the typing attributes.
 func (ts *TextSelection) TypingAttributes() obj.Object {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("typingAttributes"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func NewControllerLiveInput() *ControllerLiveInput {
 
 // Capture returns a snapshot of the physical device inputs.
 func (cli *ControllerLiveInput) Capture() *ControllerInputState {
+	defer runtime.KeepAlive(cli)
 	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("capture"))
 	return ControllerInputStateFromID(_r)
 }
 
 // NextInputState returns the next device input state from the queue.
 func (cli *ControllerLiveInput) NextInputState() *ControllerInputState {
+	defer runtime.KeepAlive(cli)
 	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("nextInputState"))
 	return ControllerInputStateFromID(_r)
 }
 
 // UnmappedInput get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
 func (cli *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
+	defer runtime.KeepAlive(cli)
 	_r := objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("unmappedInput"))
 	return ControllerLiveInputFromID(_r)
 }

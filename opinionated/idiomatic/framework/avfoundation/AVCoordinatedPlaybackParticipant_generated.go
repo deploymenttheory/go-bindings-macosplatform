@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func coordinatedPlaybackParticipantAdopt(id objc.ID) *CoordinatedPlaybackPartici
 
 // Description returns the object's -description text.
 func (cpp *CoordinatedPlaybackParticipant) Description() string {
+	defer runtime.KeepAlive(cpp)
 	return rt.Description(objref.IDOf(cpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpp *CoordinatedPlaybackParticipant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpp *CoordinatedPlaybackParticipant) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpp)
 	return rt.IsKind(objref.IDOf(cpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpp *CoordinatedPlaybackParticipant) String() string {
+	defer runtime.KeepAlive(cpp)
 	return rt.Description(objref.IDOf(cpp))
 }
 
@@ -76,18 +84,21 @@ func NewCoordinatedPlaybackParticipant() *CoordinatedPlaybackParticipant {
 //
 // SuspensionReasons returns the collection as a Go slice.
 func (cpp *CoordinatedPlaybackParticipant) SuspensionReasons() []obj.Object {
+	defer runtime.KeepAlive(cpp)
 	_arr := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("suspensionReasons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsReadyToPlay reports whether the participant is ready to play.
 func (cpp *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
+	defer runtime.KeepAlive(cpp)
 	_r := objc.Send[bool](objref.IDOf(cpp), objc.RegisterName("isReadyToPlay"))
 	return _r
 }
 
 // Identifier returns a unique id for the participant. Use this identifier to distinguish participants.
-func (cpp *CoordinatedPlaybackParticipant) Identifier() obj.Object {
+func (cpp *CoordinatedPlaybackParticipant) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(cpp)
 	_r := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }

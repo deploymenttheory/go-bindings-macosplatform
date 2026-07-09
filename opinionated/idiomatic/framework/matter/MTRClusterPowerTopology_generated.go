@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,51 +51,68 @@ func mTRClusterPowerTopologyAdopt(id objc.ID) *MTRClusterPowerTopology {
 
 // NewMTRClusterPowerTopologyWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterPowerTopologyWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPowerTopology {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPowerTopology")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterPowerTopologyAdopt(_id)
 }
 
 // ReadAttributeAvailableEndpointsWithParams reads attribute available endpoints with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeAvailableEndpointsWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeAvailableEndpointsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeAvailableEndpointsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveEndpointsWithParams reads attribute active endpoints with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeActiveEndpointsWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeActiveEndpointsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeActiveEndpointsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcpt *MTRClusterPowerTopology) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcpt *MTRClusterPowerTopology) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpt)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpt), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterPowerTopology)(nil)

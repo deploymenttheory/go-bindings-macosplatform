@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func addressAnnotationAdopt(id objc.ID) *AddressAnnotation {
 
 // Description returns the object's -description text.
 func (aa *AddressAnnotation) Description() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aa *AddressAnnotation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aa *AddressAnnotation) IsKind(className string) bool {
+	defer runtime.KeepAlive(aa)
 	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aa *AddressAnnotation) String() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 

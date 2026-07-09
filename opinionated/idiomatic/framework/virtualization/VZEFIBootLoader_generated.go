@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewEFIBootLoader() *EFIBootLoader {
 
 // WithVariableStore sets the boot loader’s EFI variable store.
 func (ebl *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
+	defer runtime.KeepAlive(variableStore)
 	objc.Send[objc.ID](objref.IDOf(ebl), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
 	return ebl
 }
 
 // VariableStore returns the variable store.
 func (ebl *EFIBootLoader) VariableStore() *EFIVariableStore {
+	defer runtime.KeepAlive(ebl)
 	_r := objc.Send[objc.ID](objref.IDOf(ebl), objc.RegisterName("variableStore"))
 	return EFIVariableStoreFromID(_r)
 }

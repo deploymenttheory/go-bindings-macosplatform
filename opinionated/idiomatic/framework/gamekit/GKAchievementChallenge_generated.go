@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewAchievementChallenge() *AchievementChallenge {
 
 // Achievement returns the achievement.
 func (ac *AchievementChallenge) Achievement() *Achievement {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("achievement"))
 	return AchievementFromID(_r)
 }

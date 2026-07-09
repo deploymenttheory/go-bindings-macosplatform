@@ -5,8 +5,11 @@
 package intentsui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func editVoiceShortcutViewControllerAdopt(id objc.ID) *EditVoiceShortcutViewCont
 
 // Description returns the object's -description text.
 func (evsvc *EditVoiceShortcutViewController) Description() string {
+	defer runtime.KeepAlive(evsvc)
 	return rt.Description(objref.IDOf(evsvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (evsvc *EditVoiceShortcutViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(evsvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(evsvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (evsvc *EditVoiceShortcutViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(evsvc)
 	return rt.IsKind(objref.IDOf(evsvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (evsvc *EditVoiceShortcutViewController) String() string {
+	defer runtime.KeepAlive(evsvc)
 	return rt.Description(objref.IDOf(evsvc))
 }
 
 // NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a view controller with the shortcut to edit or remove.
 func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut obj.Object) *EditVoiceShortcutViewController {
+	defer runtime.KeepAlive(voiceShortcut)
 	var _mainthread0 *EditVoiceShortcutViewController
 	purego.Main(func() {
 		_mainthread0 = func() *EditVoiceShortcutViewController {
@@ -77,4 +86,16 @@ func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut obj.Objec
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the object that retrieves notifications from the view controller.
+func (evsvc *EditVoiceShortcutViewController) WithDelegate(delegate EditVoiceShortcutViewControllerDelegate) *EditVoiceShortcutViewController {
+	_shim := newEditVoiceShortcutViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(evsvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(evsvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return evsvc
 }

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterPM25ConcentrationMeasurementAdopt(id objc.ID) *MTRBaseCluster
 
 // NewMTRBaseClusterPM25ConcentrationMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterPM25ConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterPM25ConcentrationMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterPM25ConcentrationMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterPM25ConcentrationMeasurementAdopt(_id)
@@ -58,6 +62,7 @@ func NewMTRBaseClusterPM25ConcentrationMeasurementWithDeviceEndpointIDQueue(devi
 //
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -83,6 +88,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMeasuredV
 //
 // SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +115,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMeas
 //
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMinMeasur
 //
 // SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +168,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMinM
 //
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +194,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMaxMeasur
 //
 // SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +221,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMaxM
 //
 // ReadAttributePeakMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributePeakMeasu
 //
 // SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributePeak
 //
 // ReadAttributePeakMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +300,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributePeakMeasu
 //
 // SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +327,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributePeak
 //
 // ReadAttributeAverageMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAverageMe
 //
 // SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAver
 //
 // ReadAttributeAverageMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -383,6 +406,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAverageMe
 //
 // SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,6 +433,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAver
 //
 // ReadAttributeUncertaintyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeUncertain
 //
 // SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeUnce
 //
 // ReadAttributeMeasurementUnitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,6 +512,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMeasureme
 //
 // SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -508,6 +539,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMeas
 //
 // ReadAttributeMeasurementMediumWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,6 +565,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeMeasureme
 //
 // SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +592,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeMeas
 //
 // ReadAttributeLevelValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +618,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeLevelValu
 //
 // SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +645,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeLeve
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +671,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeGenerated
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +698,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeGene
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +724,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAcceptedC
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +751,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAcce
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +777,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeAttribute
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -758,6 +804,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeAttr
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +830,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeFeatureMa
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +857,7 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeFeat
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,6 +883,8 @@ func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) ReadAttributeClusterRe
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcpcm *MTRBaseClusterPM25ConcentrationMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcpcm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

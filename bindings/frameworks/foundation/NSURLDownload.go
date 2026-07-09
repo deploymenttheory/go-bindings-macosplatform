@@ -40,8 +40,8 @@ func NSURLDownloadFromID(id objc.ID) *NSURLDownload {
 }
 
 // Returns whether a URL download object can resume a download that was decoded with the specified MIME type.
-func NSURLDownloadCanResumeDownloadDecodedWithEncodingMIMEType(mIMEType *NSString) bool {
-	_ret := objc.Send[bool](objc.ID(_clsNSURLDownload), _nSURLDownloadSelCanResumeDownloadDecodedWithEncodingMIMEType, mIMEType.Ptr())
+func NSURLDownloadCanResumeDownloadDecodedWithEncodingMIMEType(mimeType *NSString) bool {
+	_ret := objc.Send[bool](objc.ID(_clsNSURLDownload), _nSURLDownloadSelCanResumeDownloadDecodedWithEncodingMIMEType, mimeType.Ptr())
 	return _ret
 }
 

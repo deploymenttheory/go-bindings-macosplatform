@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,22 +50,24 @@ func dateRangeMetadataGroupAdopt(id objc.ID) *DateRangeMetadataGroup {
 }
 
 // NewDateRangeMetadataGroupWithItemsStartDateEndDate initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items.
-func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items []*MetadataItem, startDate obj.Object, endDate obj.Object) *DateRangeMetadataGroup {
+func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items []*MetadataItem, startDate time.Time, endDate time.Time) *DateRangeMetadataGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVDateRangeMetadataGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:startDate:endDate:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startDate), objref.IDOf(endDate))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:startDate:endDate:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate))
 	return dateRangeMetadataGroupAdopt(_id)
 }
 
 // StartDate returns the start date.
-func (drmg *DateRangeMetadataGroup) StartDate() obj.Object {
+func (drmg *DateRangeMetadataGroup) StartDate() time.Time {
+	defer runtime.KeepAlive(drmg)
 	_r := objc.Send[objc.ID](objref.IDOf(drmg), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (drmg *DateRangeMetadataGroup) EndDate() obj.Object {
+func (drmg *DateRangeMetadataGroup) EndDate() time.Time {
+	defer runtime.KeepAlive(drmg)
 	_r := objc.Send[objc.ID](objref.IDOf(drmg), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // isDateRangeMetadataGroup marks DateRangeMetadataGroup — and, by embedding promotion, its

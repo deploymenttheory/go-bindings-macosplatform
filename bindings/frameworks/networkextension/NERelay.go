@@ -58,8 +58,8 @@ func (o *NERelay) HTTP3RelayURL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *NERelay) SetHTTP3RelayURL(hTTP3RelayURL *foundation.NSURL) {
-	o.Ptr().Send(_nERelaySelSetHTTP3RelayURL, hTTP3RelayURL.Ptr())
+func (o *NERelay) SetHTTP3RelayURL(http3RelayURL *foundation.NSURL) {
+	o.Ptr().Send(_nERelaySelSetHTTP3RelayURL, http3RelayURL.Ptr())
 }
 
 // @property HTTP2RelayURL @discussion The URL of the relay accessible over HTTP/2.
@@ -71,8 +71,8 @@ func (o *NERelay) HTTP2RelayURL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *NERelay) SetHTTP2RelayURL(hTTP2RelayURL *foundation.NSURL) {
-	o.Ptr().Send(_nERelaySelSetHTTP2RelayURL, hTTP2RelayURL.Ptr())
+func (o *NERelay) SetHTTP2RelayURL(http2RelayURL *foundation.NSURL) {
+	o.Ptr().Send(_nERelaySelSetHTTP2RelayURL, http2RelayURL.Ptr())
 }
 
 // @property dnsOverHTTPSURL @discussion The URL of a DNS-over-HTTPS (DoH) resolver accessible via the relay.

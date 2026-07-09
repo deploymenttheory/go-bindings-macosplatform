@@ -5,6 +5,7 @@
 package soundanalysis
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func classifySoundRequestAdopt(id objc.ID) *ClassifySoundRequest {
 
 // Description returns the object's -description text.
 func (csr *ClassifySoundRequest) Description() string {
+	defer runtime.KeepAlive(csr)
 	return rt.Description(objref.IDOf(csr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (csr *ClassifySoundRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(csr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(csr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (csr *ClassifySoundRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(csr)
 	return rt.IsKind(objref.IDOf(csr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (csr *ClassifySoundRequest) String() string {
+	defer runtime.KeepAlive(csr)
 	return rt.Description(objref.IDOf(csr))
 }
 
-// NewClassifySoundRequestWithMLModelError creates a request that uses a custom sound classification model.
-func NewClassifySoundRequestWithMLModelError(mlModel obj.Object) (result *ClassifySoundRequest, err error) {
+// NewClassifySoundRequestWithMLModel creates a request that uses a custom sound classification model.
+func NewClassifySoundRequestWithMLModel(mlModel obj.Object) (result *ClassifySoundRequest, err error) {
+	defer runtime.KeepAlive(mlModel)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNClassifySoundRequest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMLModel:error:"), objref.IDOf(mlModel), unsafe.Pointer(&_nsErr))
@@ -81,8 +88,9 @@ func NewClassifySoundRequestWithMLModelError(mlModel obj.Object) (result *Classi
 	return classifySoundRequestAdopt(_id), nil
 }
 
-// NewClassifySoundRequestWithClassifierIdentifierError creates a request that uses the framework’s built-in sound classification model.
-func NewClassifySoundRequestWithClassifierIdentifierError(classifierIdentifier obj.Object) (result *ClassifySoundRequest, err error) {
+// NewClassifySoundRequestWithClassifierIdentifier creates a request that uses the framework’s built-in sound classification model.
+func NewClassifySoundRequestWithClassifierIdentifier(classifierIdentifier obj.Object) (result *ClassifySoundRequest, err error) {
+	defer runtime.KeepAlive(classifierIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNClassifySoundRequest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithClassifierIdentifier:error:"), objref.IDOf(classifierIdentifier), unsafe.Pointer(&_nsErr))
@@ -106,18 +114,21 @@ func (csr *ClassifySoundRequest) WithWindowDuration(windowDuration coremedia.CMT
 
 // OverlapFactor returns the overlap factor of the windows of audio data provided to the classifier, if the model operates on fixed audio block sizes. When performing audio analysis on fixed audio block sizes, it is common for the analysis windows to overlap by some factor. Without overlapping the analysis windows (when the overlap factor is 0.0), a sound might be split across two analysis windows, which could negatively affect classification performance. Overlapping the analysis windows by 50% ensures each sound will fall near the center of at least one analysis window. The supported range is [0.0, 1.0), and the default value is 0.5. Increasing the overlap factor increases computational complexity, so values greater than 0.5 should be used with care.
 func (csr *ClassifySoundRequest) OverlapFactor() float64 {
+	defer runtime.KeepAlive(csr)
 	_r := objc.Send[float64](objref.IDOf(csr), objc.RegisterName("overlapFactor"))
 	return _r
 }
 
 // WindowDuration returns the duration of a single analysis window. When performing classification over an audio stream, a classifier computes each classification result based on a single 'analysis window' of audio. Analysis windows are uniformly-sized time intervals, where the size of any given window is considered that window's 'duration'. Some classifiers can operate over analysis windows which conform to one of several different duration options. Larger window durations allow classification to execute less frequently over larger contexts of audio, potentially improving classification performance. Smaller window durations allow classification to execute more frequently over smaller contexts of audio, producing results with sharper time resolution. Depending on the use-case, a larger or smaller window may be preferable. When configuring the window duration, it is important to respect the capabilities of the classifier. A classifier's supported window durations can be discovered using the `windowDurationConstraint` property. If an unsupported window duration is selected, the window duration will be automatically rounded down to the nearest supported value if possible, else rounded up.
 func (csr *ClassifySoundRequest) WindowDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(csr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(csr), objc.RegisterName("windowDuration"))
 	return _r
 }
 
 // WindowDurationConstraint returns the constraints governing permitted analysis window durations. The analysis window duration is controlled using the `windowDuration` property. If an analysis window duration is selected which does not meet the necessary constraints, it will automatically be adjusted to meet these constraints (see `windowDuration` for more information regarding how this adjustment will be applied).
 func (csr *ClassifySoundRequest) WindowDurationConstraint() *TimeDurationConstraint {
+	defer runtime.KeepAlive(csr)
 	_r := objc.Send[objc.ID](objref.IDOf(csr), objc.RegisterName("windowDurationConstraint"))
 	return TimeDurationConstraintFromID(_r)
 }
@@ -126,6 +137,7 @@ func (csr *ClassifySoundRequest) WindowDurationConstraint() *TimeDurationConstra
 //
 // KnownClassifications returns the collection as a Go slice.
 func (csr *ClassifySoundRequest) KnownClassifications() []string {
+	defer runtime.KeepAlive(csr)
 	_arr := objc.Send[objc.ID](objref.IDOf(csr), objc.RegisterName("knownClassifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

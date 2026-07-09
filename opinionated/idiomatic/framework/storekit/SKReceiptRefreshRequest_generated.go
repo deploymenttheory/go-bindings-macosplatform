@@ -5,9 +5,13 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,16 +51,27 @@ func receiptRefreshRequestAdopt(id objc.ID) *ReceiptRefreshRequest {
 }
 
 // NewReceiptRefreshRequestWithReceiptProperties creates a receipt refresh request with optional properties.
-func NewReceiptRefreshRequestWithReceiptProperties(properties obj.Object) *ReceiptRefreshRequest {
+func NewReceiptRefreshRequestWithReceiptProperties(properties map[string]obj.Object) *ReceiptRefreshRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReceiptRefreshRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), objref.IDOf(properties))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiptProperties:"), rt.MapToDict(properties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return receiptRefreshRequestAdopt(_id)
 }
 
+// WithDelegate sets the delegate of the request object.
+func (rrr *ReceiptRefreshRequest) WithDelegate(delegate RequestDelegate) *ReceiptRefreshRequest {
+	_shim := newRequestDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(rrr), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(rrr), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return rrr
+}
+
 // ReceiptProperties returns the receipt properties.
-func (rrr *ReceiptRefreshRequest) ReceiptProperties() obj.Object {
+func (rrr *ReceiptRefreshRequest) ReceiptProperties() map[string]obj.Object {
+	defer runtime.KeepAlive(rrr)
 	_r := objc.Send[objc.ID](objref.IDOf(rrr), objc.RegisterName("receiptProperties"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ RequestProvider = (*ReceiptRefreshRequest)(nil)

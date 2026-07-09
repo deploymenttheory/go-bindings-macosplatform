@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewAsynchronousFetchResult() *AsynchronousFetchResult {
 
 // FetchRequest returns the fetch request.
 func (afr *AsynchronousFetchResult) FetchRequest() obj.Object {
+	defer runtime.KeepAlive(afr)
 	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
 // FinalResult returns the final result.
 func (afr *AsynchronousFetchResult) FinalResult() []obj.Object {
+	defer runtime.KeepAlive(afr)
 	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("finalResult"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -145,18 +147,21 @@ func (cdg *CNNDropoutGradient) WithLabel(label string) *CNNDropoutGradient {
 
 // KeepProbability returns the probability that each element in the input is kept. The valid range is (0.0f, 1.0f).
 func (cdg *CNNDropoutGradient) KeepProbability() float32 {
+	defer runtime.KeepAlive(cdg)
 	_r := objc.Send[float32](objref.IDOf(cdg), objc.RegisterName("keepProbability"))
 	return _r
 }
 
 // Seed returns the seed used to generate random numbers.
 func (cdg *CNNDropoutGradient) Seed() int {
+	defer runtime.KeepAlive(cdg)
 	_r := objc.Send[int](objref.IDOf(cdg), objc.RegisterName("seed"))
 	return _r
 }
 
 // MaskStrideInPixels returns the mask stride in the x, y, and x dimensions, which allows for the broadcasting the mask data. The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0.
 func (cdg *CNNDropoutGradient) MaskStrideInPixels() metal.MTLSize {
+	defer runtime.KeepAlive(cdg)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cdg), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }

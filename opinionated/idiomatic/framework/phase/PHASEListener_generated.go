@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,6 +50,7 @@ func listenerAdopt(id objc.ID) *Listener {
 
 // NewListenerWithEngine creates a listener with the given engine.
 func NewListenerWithEngine(engine *Engine) *Listener {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEListener")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
 	return listenerAdopt(_id)
@@ -80,12 +82,14 @@ func (l *Listener) WithWorldTransform(worldTransform unsafe.Pointer) *Listener {
 
 // Gain returns linear gain scalar.
 func (l *Listener) Gain() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("gain"))
 	return _r
 }
 
 // AutomaticHeadTrackingFlags returns a combination of flags to express automatic headtracking behaviors for this listener.
 func (l *Listener) AutomaticHeadTrackingFlags() AutomaticHeadTrackingFlags {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[AutomaticHeadTrackingFlags](objref.IDOf(l), objc.RegisterName("automaticHeadTrackingFlags"))
 	return _r
 }

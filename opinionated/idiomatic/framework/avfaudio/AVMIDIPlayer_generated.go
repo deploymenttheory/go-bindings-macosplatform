@@ -5,6 +5,7 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,32 @@ func mIDIPlayerAdopt(id objc.ID) *MIDIPlayer {
 
 // Description returns the object's -description text.
 func (mp *MIDIPlayer) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MIDIPlayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MIDIPlayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MIDIPlayer) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
-// NewMIDIPlayerWithContentsOfURLSoundBankURLError creates a player to play a MIDI file with the specified soundbank.
-func NewMIDIPlayerWithContentsOfURLSoundBankURLError(inURL string, bankURL string) (result *MIDIPlayer, err error) {
+// NewMIDIPlayerWithContentsOfURLSoundBankURL creates a player to play a MIDI file with the specified soundbank.
+func NewMIDIPlayerWithContentsOfURLSoundBankURL(inURL string, bankURL string) (result *MIDIPlayer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIPlayer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:soundBankURL:error:"), rt.FileURL(inURL), rt.FileURL(bankURL), unsafe.Pointer(&_nsErr))
@@ -80,11 +86,11 @@ func NewMIDIPlayerWithContentsOfURLSoundBankURLError(inURL string, bankURL strin
 	return mIDIPlayerAdopt(_id), nil
 }
 
-// NewMIDIPlayerWithDataSoundBankURLError creates a player to play MIDI data with the specified soundbank.
-func NewMIDIPlayerWithDataSoundBankURLError(data obj.Object, bankURL string) (result *MIDIPlayer, err error) {
+// NewMIDIPlayerWithDataSoundBankURL creates a player to play MIDI data with the specified soundbank.
+func NewMIDIPlayerWithDataSoundBankURL(data []byte, bankURL string) (result *MIDIPlayer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIPlayer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:soundBankURL:error:"), objref.IDOf(data), rt.FileURL(bankURL), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:soundBankURL:error:"), rt.BytesToNSData(data), rt.FileURL(bankURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -105,39 +111,46 @@ func (mp *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
 
 // PrepareToPlay prepares the player to play the sequence by prerolling all events.
 func (mp *MIDIPlayer) PrepareToPlay() {
+	defer runtime.KeepAlive(mp)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("prepareToPlay"))
 }
 
 // Play plays the MIDI sequence.
 func (mp *MIDIPlayer) Play(completionHandler func()) {
+	defer runtime.KeepAlive(mp)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("play:"), completionHandler)
 }
 
 // Stop stops playing the sequence.
 func (mp *MIDIPlayer) Stop() {
+	defer runtime.KeepAlive(mp)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("stop"))
 }
 
 // Duration returns the length of the currently loaded file in seconds.
 func (mp *MIDIPlayer) Duration() float64 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("duration"))
 	return _r
 }
 
 // IsPlaying reports whether the player is playing
 func (mp *MIDIPlayer) IsPlaying() bool {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[bool](objref.IDOf(mp), objc.RegisterName("isPlaying"))
 	return _r
 }
 
 // Rate returns the playback rate of the player 1.0 is normal playback rate.  Rate must be > 0.0.
 func (mp *MIDIPlayer) Rate() float32 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float32](objref.IDOf(mp), objc.RegisterName("rate"))
 	return _r
 }
 
 // CurrentPosition returns the current playback position in seconds Setting this positions the player to the specified time.  No range checking on the time value is done. This can be set while the player is playing, in which case playback will resume at the new time.
 func (mp *MIDIPlayer) CurrentPosition() float64 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("currentPosition"))
 	return _r
 }

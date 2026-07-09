@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func addIdentityDocumentMetadataAdopt(id objc.ID) *AddIdentityDocumentMetadata {
 
 // NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates the identity document metadata with parameters that the issuer’s server configures to indicate the specific product instance to provision.
 func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType AddIdentityDocumentType, preview *AddPassMetadataPreview) *AddIdentityDocumentMetadata {
+	defer runtime.KeepAlive(preview)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAddIdentityDocumentMetadata")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), purego.NSString(templateIdentifier), purego.NSString(issuingCountryCode), documentType, objref.IDOf(preview))
 	return addIdentityDocumentMetadataAdopt(_id)
@@ -60,6 +63,7 @@ func (aidm *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverE
 
 // Preview returns the preview.
 func (aidm *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
+	defer runtime.KeepAlive(aidm)
 	_r := objc.Send[objc.ID](objref.IDOf(aidm), objc.RegisterName("preview"))
 	return AddPassMetadataPreviewFromID(_r)
 }

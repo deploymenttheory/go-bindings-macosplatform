@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThreadNetworkDirectoryClusterAddNetworkParamsAdopt(id objc.ID) *MTRThrea
 
 // Description returns the object's -description text.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) Description() string {
+	defer runtime.KeepAlive(mtndcanp)
 	return rt.Description(objref.IDOf(mtndcanp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndcanp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndcanp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndcanp)
 	return rt.IsKind(objref.IDOf(mtndcanp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) String() string {
+	defer runtime.KeepAlive(mtndcanp)
 	return rt.Description(objref.IDOf(mtndcanp))
 }
 
@@ -71,37 +79,42 @@ func NewMTRThreadNetworkDirectoryClusterAddNetworkParams() *MTRThreadNetworkDire
 }
 
 // WithOperationalDataset sets the operational dataset.
-func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterAddNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
+func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithOperationalDataset(operationalDataset []byte) *MTRThreadNetworkDirectoryClusterAddNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("setOperationalDataset:"), rt.BytesToNSData(operationalDataset))
 	return mtndcanp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadNetworkDirectoryClusterAddNetworkParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtndcanp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadNetworkDirectoryClusterAddNetworkParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtndcanp
 }
 
 // OperationalDataset returns the operational dataset.
-func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) OperationalDataset() obj.Object {
+func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) OperationalDataset() []byte {
+	defer runtime.KeepAlive(mtndcanp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("operationalDataset"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) TimedInvokeTimeoutMs() obj.Object {
+func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mtndcanp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) ServerSideProcessingTimeout() obj.Object {
+func (mtndcanp *MTRThreadNetworkDirectoryClusterAddNetworkParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mtndcanp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcanp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

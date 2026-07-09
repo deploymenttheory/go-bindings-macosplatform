@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func histogramBucketAdopt(id objc.ID) *HistogramBucket {
 
 // Description returns the object's -description text.
 func (hb *HistogramBucket) Description() string {
+	defer runtime.KeepAlive(hb)
 	return rt.Description(objref.IDOf(hb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hb *HistogramBucket) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hb *HistogramBucket) IsKind(className string) bool {
+	defer runtime.KeepAlive(hb)
 	return rt.IsKind(objref.IDOf(hb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hb *HistogramBucket) String() string {
+	defer runtime.KeepAlive(hb)
 	return rt.Description(objref.IDOf(hb))
 }
 
@@ -74,18 +81,21 @@ func NewHistogramBucket() *HistogramBucket {
 
 // BucketStart returns an NSMeasurement representing the start of a histogram bucket.
 func (hb *HistogramBucket) BucketStart() obj.Object {
+	defer runtime.KeepAlive(hb)
 	_r := objc.Send[objc.ID](objref.IDOf(hb), objc.RegisterName("bucketStart"))
 	return obj.Wrap(_r)
 }
 
 // BucketEnd returns an NSMeasurement representing the end of a histogram bucket.
 func (hb *HistogramBucket) BucketEnd() obj.Object {
+	defer runtime.KeepAlive(hb)
 	_r := objc.Send[objc.ID](objref.IDOf(hb), objc.RegisterName("bucketEnd"))
 	return obj.Wrap(_r)
 }
 
 // BucketCount returns an NSUInteger representing the number of samples in this histogram bucket.
 func (hb *HistogramBucket) BucketCount() int {
+	defer runtime.KeepAlive(hb)
 	_r := objc.Send[int](objref.IDOf(hb), objc.RegisterName("bucketCount"))
 	return _r
 }

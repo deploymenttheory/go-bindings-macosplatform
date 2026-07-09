@@ -1868,7 +1868,7 @@
       },
       "paddingPolicy": {
         "doc": "The padding policy.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/paddingpolicy-61tq3"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcconvolutiondescriptor/paddingpolicy-7drfq"
       },
       "paddingSizeInX": {
         "doc": "The pooling size in x, left and right, to use if the padding policy is to use padding size.",
@@ -1948,7 +1948,7 @@
       },
       "embeddingDimension": {
         "doc": "The dimension of embedding vectors.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingdimension-3u8w7"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/embeddingdimension-1u9g"
       },
       "init(embeddingCount:embeddingDimension:)": {
         "doc": "Creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.",
@@ -1960,11 +1960,11 @@
       },
       "maximumNorm": {
         "doc": "A float value that, if set, causes the layer to renormalize the selected embedding vectors to have an Lp norm less than this value.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/maximumnorm-4mrjj"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/maximumnorm-17u0k"
       },
       "pNorm": {
         "doc": "The p of the Lp norm.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/pnorm-8mto8"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcembeddingdescriptor/pnorm-8vhw1"
       },
       "paddingIndex": {
         "doc": "An unsigned integer value that, if set, causes the layer to initialize the embedding vector at that index to zero.",
@@ -2540,7 +2540,7 @@
       },
       "paddingPolicy": {
         "doc": "The padding policy.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/paddingpolicy-7p8a2"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcpoolingdescriptor/paddingpolicy-1e6rg"
       },
       "paddingSizeInX": {
         "doc": "The padding size in x, left and right, to use if the padding policy is to use padding size.",
@@ -2616,7 +2616,7 @@
       },
       "shape": {
         "doc": "An array that contains the size of each dimension.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/shape-8k50y"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcreshapelayer/shape-840ax"
       }
     },
     "MLCSGDOptimizer": {
@@ -2642,7 +2642,7 @@
     "MLCSliceLayer": {
       "end": {
         "doc": "The end vector.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/end-9xw91"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/end-8z0wi"
       },
       "init(start:end:stride:)": {
         "doc": "Creates a slice layer with the start, end, and stride you specify.",
@@ -2654,7 +2654,7 @@
       },
       "stride": {
         "doc": "The stride vector.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/stride-84fhb"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcslicelayer/stride-8dnpu"
       }
     },
     "MLCSoftmaxLayer": {
@@ -2760,7 +2760,7 @@
     "MLCTensorDescriptor": {
       "batchSizePerSequenceStep": {
         "doc": "The batch size for each sequence.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/batchsizepersequencestep-55mp8"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/batchsizepersequencestep-6iz59"
       },
       "dataType": {
         "doc": "The tensor data type.",
@@ -2788,7 +2788,7 @@
       },
       "shape": {
         "doc": "An array that contains the size in each dimension.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/shape-7i1rw"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctensordescriptor/shape-91vng"
       },
       "sortedSequences": {
         "doc": "A Boolean that indicates whether you provided the sequence lengths sorted in descending order.",
@@ -2838,7 +2838,7 @@
     "MLCTransposeLayer": {
       "dimensions": {
         "doc": "An array that contains an input axis source for each output axis, which represents the ordering of dimensions.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlctransposelayer/dimensions-1d5nw"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlctransposelayer/dimensions-71ed6"
       },
       "init(dimensions:)": {
         "doc": "Creates a transpose layer with the dimensions you specify.",
@@ -2864,7 +2864,7 @@
       },
       "shape": {
         "doc": "An array that contains the dimensions of the result tensor.",
-        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/shape-61n1u"
+        "url": "https://developer.apple.com/documentation/mlcompute/mlcupsamplelayer/shape-7j6sf"
       }
     },
     "MLCYOLOLossDescriptor": {

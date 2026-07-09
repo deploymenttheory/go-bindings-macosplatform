@@ -110,8 +110,8 @@ func NSURLComponentsComponentsWithURLResolvingAgainstBaseURL(url *NSURL, resolve
 }
 
 // Creates a URL components object by parsing a URL in string form.
-func (o *NSURLComponents) InitWithString(uRLString *NSString) *NSURLComponents {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithString, uRLString.Ptr())
+func (o *NSURLComponents) InitWithString(urlString *NSString) *NSURLComponents {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithString, urlString.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -119,8 +119,8 @@ func (o *NSURLComponents) InitWithString(uRLString *NSString) *NSURLComponents {
 }
 
 // Returns a URL components object by parsing a URL in string form.
-func NSURLComponentsComponentsWithString(uRLString *NSString) *NSURLComponents {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithString, uRLString.Ptr())
+func NSURLComponentsComponentsWithString(urlString *NSString) *NSURLComponents {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithString, urlString.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -128,8 +128,8 @@ func NSURLComponentsComponentsWithString(uRLString *NSString) *NSURLComponents {
 }
 
 // Creates a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
-func (o *NSURLComponents) InitWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
-	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
+func (o *NSURLComponents) InitWithStringEncodingInvalidCharacters(urlString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
+	_ret := objc.Send[objc.ID](o.Ptr(), _nSURLComponentsSelInitWithStringEncodingInvalidCharacters, urlString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -137,8 +137,8 @@ func (o *NSURLComponents) InitWithStringEncodingInvalidCharacters(uRLString *NSS
 }
 
 // Returns a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
-func NSURLComponentsComponentsWithStringEncodingInvalidCharacters(uRLString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithStringEncodingInvalidCharacters, uRLString.Ptr(), encodingInvalidCharacters)
+func NSURLComponentsComponentsWithStringEncodingInvalidCharacters(urlString *NSString, encodingInvalidCharacters bool) *NSURLComponents {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSURLComponents), _nSURLComponentsSelComponentsWithStringEncodingInvalidCharacters, urlString.Ptr(), encodingInvalidCharacters)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

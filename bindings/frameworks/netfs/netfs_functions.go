@@ -23,15 +23,15 @@ func NetFSCopyURLForRemountingVolume(localPathURL unsafe.Pointer) unsafe.Pointer
 	return _fnNetFSCopyURLForRemountingVolume(localPathURL)
 }
 
-func NetFSMountURLAsync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, open_options unsafe.Pointer, mount_options unsafe.Pointer, requestID unsafe.Pointer, dispatchq *foundation.NSObject, mount_report func(int, unsafe.Pointer, unsafe.Pointer)) int {
-	var __block_mount_report objc.Block
-	if mount_report != nil {
-		__block_mount_report = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 unsafe.Pointer, blockParam2 unsafe.Pointer) {
-			mount_report(blockParam0, blockParam1, blockParam2)
+func NetFSMountURLAsync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, openOptions unsafe.Pointer, mountOptions unsafe.Pointer, requestID unsafe.Pointer, dispatchq *foundation.NSObject, mountReport func(int, unsafe.Pointer, unsafe.Pointer)) int {
+	var __block_mountReport objc.Block
+	if mountReport != nil {
+		__block_mountReport = objc.NewBlock(func(_ objc.Block, blockParam0 int, blockParam1 unsafe.Pointer, blockParam2 unsafe.Pointer) {
+			mountReport(blockParam0, blockParam1, blockParam2)
 		})
-		defer __block_mount_report.Release()
+		defer __block_mountReport.Release()
 	}
-	return _fnNetFSMountURLAsync(url, mountpath, user, passwd, open_options, mount_options, requestID, dispatchq.Ptr(), __block_mount_report)
+	return _fnNetFSMountURLAsync(url, mountpath, user, passwd, openOptions, mountOptions, requestID, dispatchq.Ptr(), __block_mountReport)
 }
 
 func NetFSMountURLCancel(requestID unsafe.Pointer) int {
@@ -42,6 +42,6 @@ func NetFSMountURLProbe(hostname unsafe.Pointer) unsafe.Pointer {
 	return _fnNetFSMountURLProbe(hostname)
 }
 
-func NetFSMountURLSync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, open_options unsafe.Pointer, mount_options unsafe.Pointer, mountpoints unsafe.Pointer) int {
-	return _fnNetFSMountURLSync(url, mountpath, user, passwd, open_options, mount_options, mountpoints)
+func NetFSMountURLSync(url unsafe.Pointer, mountpath unsafe.Pointer, user unsafe.Pointer, passwd unsafe.Pointer, openOptions unsafe.Pointer, mountOptions unsafe.Pointer, mountpoints unsafe.Pointer) int {
+	return _fnNetFSMountURLSync(url, mountpath, user, passwd, openOptions, mountOptions, mountpoints)
 }

@@ -5,9 +5,12 @@
 package addressbook
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,40 +50,45 @@ func personAdopt(id objc.ID) *Person {
 }
 
 // NewPersonWithVCardRepresentation creates a new Person.
-func NewPersonWithVCardRepresentation(vCardData obj.Object) *Person {
+func NewPersonWithVCardRepresentation(vCardData []byte) *Person {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVCardRepresentation:"), objref.IDOf(vCardData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVCardRepresentation:"), rt.BytesToNSData(vCardData))
 	return personAdopt(_id)
 }
 
 // ParentGroups returns an array of the address book groups that this person belongs to.
 func (p *Person) ParentGroups() obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("parentGroups"))
 	return obj.Wrap(_r)
 }
 
 // LinkedPeople returns the array of all person records that are linked to the person this record represents.
 func (p *Person) LinkedPeople() obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("linkedPeople"))
 	return obj.Wrap(_r)
 }
 
 // VCardRepresentation returns the vCard representation of the person record as a data object in vCard format.
-func (p *Person) VCardRepresentation() obj.Object {
+func (p *Person) VCardRepresentation() []byte {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("vCardRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SetImageData sets the image for this person to the given data.
-func (p *Person) SetImageData(data obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("setImageData:"), objref.IDOf(data))
+func (p *Person) SetImageData(data []byte) bool {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("setImageData:"), rt.BytesToNSData(data))
 	return _r
 }
 
 // ImageData returns data that contains a picture of this person.
-func (p *Person) ImageData() obj.Object {
+func (p *Person) ImageData() []byte {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("imageData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ RecordProvider = (*Person)(nil)

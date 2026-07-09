@@ -5,11 +5,15 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -63,6 +67,7 @@ func NewTextWithFrame(frameRect corefoundation.CGRect) *Text {
 
 // NewTextWithCoder creates a new Text.
 func NewTextWithCoder(coder obj.Object) *Text {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *Text
 	purego.Main(func() {
 		_mainthread0 = func() *Text {
@@ -75,10 +80,22 @@ func NewTextWithCoder(coder obj.Object) *Text {
 }
 
 // WithString sets the characters of the receiver’s text.
-func (t *Text) WithString(string_ string) *Text {
+func (t *Text) WithString(str string) *Text {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(string_))
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), purego.NSString(str))
 	})
+	return t
+}
+
+// WithDelegate sets the receiver’s delegate.
+func (t *Text) WithDelegate(delegate TextDelegate) *Text {
+	_shim := newTextDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(t), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return t
 }
 
@@ -140,6 +157,7 @@ func (t *Text) WithDrawsBackground(drawsBackground bool) *Text {
 
 // WithBackgroundColor sets the receiver’s background color to a given color.
 func (t *Text) WithBackgroundColor(backgroundColor *Color) *Text {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -156,6 +174,7 @@ func (t *Text) WithSelectedRange(selectedRange foundation.NSRange) *Text {
 
 // WithFont sets the font of all the receiver’s text.
 func (t *Text) WithFont(font *Font) *Text {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -164,6 +183,7 @@ func (t *Text) WithFont(font *Font) *Text {
 
 // WithTextColor sets the text color of all characters in the receiver.
 func (t *Text) WithTextColor(textColor *Color) *Text {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -357,6 +377,7 @@ func (t *Text) WithWantsLayer(wantsLayer bool) *Text {
 
 // WithLayer sets the layer.
 func (t *Text) WithLayer(layer obj.Object) *Text {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -406,6 +427,7 @@ func (t *Text) WithBackgroundFilters(items ...obj.Object) *Text {
 
 // WithCompositingFilter sets the compositing filter.
 func (t *Text) WithCompositingFilter(compositingFilter obj.Object) *Text {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -423,6 +445,7 @@ func (t *Text) WithContentFilters(items ...obj.Object) *Text {
 
 // WithShadow sets the shadow.
 func (t *Text) WithShadow(shadow *Shadow) *Text {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -471,6 +494,7 @@ func (t *Text) WithPreparedContentRect(preparedContentRect corefoundation.CGRect
 
 // WithNextKeyView sets the next key view.
 func (t *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -520,6 +544,7 @@ func (t *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (t *Text) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -576,6 +601,7 @@ func (t *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRa
 
 // WithPressureConfiguration sets the pressure configuration.
 func (t *Text) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -584,6 +610,7 @@ func (t *Text) WithPressureConfiguration(pressureConfiguration *PressureConfigur
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (t *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -592,6 +619,7 @@ func (t *Text) WithNextResponder(nextResponder ResponderProvider) *Text {
 
 // WithMenu sets returns the responder’s menu.
 func (t *Text) WithMenu(menu *Menu) *Text {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -600,6 +628,7 @@ func (t *Text) WithMenu(menu *Menu) *Text {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (t *Text) WithUserActivity(userActivity obj.Object) *Text {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -608,6 +637,7 @@ func (t *Text) WithUserActivity(userActivity obj.Object) *Text {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (t *Text) WithTouchBar(touchBar *TouchBar) *Text {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -615,36 +645,40 @@ func (t *Text) WithTouchBar(touchBar *TouchBar) *Text {
 }
 
 // ReplaceCharactersInRangeWithString replaces the characters in the given range with those in the given string.
-func (t *Text) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, string_ string) {
+func (t *Text) ReplaceCharactersInRangeWithString(range_ foundation.NSRange, str string) {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(string_))
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withString:"), range_, purego.NSString(str))
 	})
 
 }
 
 // ReplaceCharactersInRangeWithRTF replaces the characters in the given range with RTF text interpreted from the given RTF data.
-func (t *Text) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData obj.Object) {
+func (t *Text) ReplaceCharactersInRangeWithRTF(range_ foundation.NSRange, rtfData []byte) {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTF:"), range_, objref.IDOf(rtfData))
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTF:"), range_, rt.BytesToNSData(rtfData))
 	})
 
 }
 
 // ReplaceCharactersInRangeWithRTFD replaces the characters in the given range with RTFD text interpreted from the given RTFD data.
-func (t *Text) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData obj.Object) {
+func (t *Text) ReplaceCharactersInRangeWithRTFD(range_ foundation.NSRange, rtfdData []byte) {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTFD:"), range_, objref.IDOf(rtfdData))
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("replaceCharactersInRange:withRTFD:"), range_, rt.BytesToNSData(rtfdData))
 	})
 
 }
 
 // RTFFromRange returns an NSData object that contains an RTF stream corresponding to the characters and attributes within aRange, omitting any attachment characters and attributes.
-func (t *Text) RTFFromRange(range_ foundation.NSRange) obj.Object {
-	var _mainthread0 obj.Object
+func (t *Text) RTFFromRange(range_ foundation.NSRange) []byte {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 []byte
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []byte {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFFromRange:"), range_)
-			return obj.Wrap(_r)
+			return rt.NSDataToBytes(_r)
 		}()
 	})
 	return _mainthread0
@@ -652,12 +686,13 @@ func (t *Text) RTFFromRange(range_ foundation.NSRange) obj.Object {
 }
 
 // RTFDFromRange returns an NSData object that contains an RTFD stream corresponding to the characters and attributes within aRange.
-func (t *Text) RTFDFromRange(range_ foundation.NSRange) obj.Object {
-	var _mainthread0 obj.Object
+func (t *Text) RTFDFromRange(range_ foundation.NSRange) []byte {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 []byte
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []byte {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("RTFDFromRange:"), range_)
-			return obj.Wrap(_r)
+			return rt.NSDataToBytes(_r)
 		}()
 	})
 	return _mainthread0
@@ -666,6 +701,7 @@ func (t *Text) RTFDFromRange(range_ foundation.NSRange) obj.Object {
 
 // WriteRTFDToFileAtomically writes the receiver’s text as RTF with attachments to a file or directory at path.
 func (t *Text) WriteRTFDToFileAtomically(path string, flag bool) bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -679,6 +715,7 @@ func (t *Text) WriteRTFDToFileAtomically(path string, flag bool) bool {
 
 // ReadRTFDFromFile attempts to read the RTFD file at the specified path.
 func (t *Text) ReadRTFDFromFile(path string) bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -692,6 +729,7 @@ func (t *Text) ReadRTFDFromFile(path string) bool {
 
 // ScrollRangeToVisible scrolls the receiver in its enclosing scroll view so the first characters of aRange are visible.
 func (t *Text) ScrollRangeToVisible(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("scrollRangeToVisible:"), range_)
 	})
@@ -700,6 +738,8 @@ func (t *Text) ScrollRangeToVisible(range_ foundation.NSRange) {
 
 // SetTextColorRange sets the text color of characters within the specified range to the specified color.
 func (t *Text) SetTextColorRange(color *Color, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTextColor:range:"), objref.IDOf(color), range_)
 	})
@@ -708,6 +748,8 @@ func (t *Text) SetTextColorRange(color *Color, range_ foundation.NSRange) {
 
 // SetFontRange sets the font of characters within aRange to aFont.
 func (t *Text) SetFontRange(font *Font, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:range:"), objref.IDOf(font), range_)
 	})
@@ -716,6 +758,7 @@ func (t *Text) SetFontRange(font *Font, range_ foundation.NSRange) {
 
 // SizeToFit resizes the receiver to fit its text.
 func (t *Text) SizeToFit() {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("sizeToFit"))
 	})
@@ -724,6 +767,8 @@ func (t *Text) SizeToFit() {
 
 // Copy this action method copies the selected text onto the general pasteboard, in as many formats as the receiver supports.
 func (t *Text) Copy(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copy:"), objref.IDOf(sender))
 	})
@@ -732,6 +777,8 @@ func (t *Text) Copy(sender obj.Object) {
 
 // CopyFont this action method copies the font information for the first character of the selection (or for the insertion point) onto the font pasteboard, as NSFontPboardType.
 func (t *Text) CopyFont(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyFont:"), objref.IDOf(sender))
 	})
@@ -740,6 +787,8 @@ func (t *Text) CopyFont(sender obj.Object) {
 
 // CopyRuler this action method copies the paragraph style information for first selected paragraph onto the ruler pasteboard, as NSRulerPboardType, and expands the selection to paragraph boundaries.
 func (t *Text) CopyRuler(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("copyRuler:"), objref.IDOf(sender))
 	})
@@ -748,6 +797,8 @@ func (t *Text) CopyRuler(sender obj.Object) {
 
 // Cut this action method deletes the selected text and places it onto the general pasteboard, in as many formats as the receiver supports.
 func (t *Text) Cut(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cut:"), objref.IDOf(sender))
 	})
@@ -756,6 +807,8 @@ func (t *Text) Cut(sender obj.Object) {
 
 // Delete this action method deletes the selected text.
 func (t *Text) Delete(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("delete:"), objref.IDOf(sender))
 	})
@@ -764,6 +817,8 @@ func (t *Text) Delete(sender obj.Object) {
 
 // Paste this action method pastes text from the general pasteboard at the insertion point or over the selection.
 func (t *Text) Paste(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("paste:"), objref.IDOf(sender))
 	})
@@ -772,6 +827,8 @@ func (t *Text) Paste(sender obj.Object) {
 
 // PasteFont this action method pastes font information from the font pasteboard onto the selected text or insertion point of a rich text object, or over all text of a plain text object.
 func (t *Text) PasteFont(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
 	})
@@ -780,6 +837,8 @@ func (t *Text) PasteFont(sender obj.Object) {
 
 // PasteRuler this action method pastes paragraph style information from the ruler pasteboard onto the selected paragraphs of a rich text object.
 func (t *Text) PasteRuler(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("pasteRuler:"), objref.IDOf(sender))
 	})
@@ -788,6 +847,8 @@ func (t *Text) PasteRuler(sender obj.Object) {
 
 // SelectAll this action method selects all of the receiver’s text.
 func (t *Text) SelectAll(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 	})
@@ -796,6 +857,8 @@ func (t *Text) SelectAll(sender obj.Object) {
 
 // ChangeFont this action method changes the font of the selection for a rich text object, or of all text for a plain text object.
 func (t *Text) ChangeFont(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("changeFont:"), objref.IDOf(sender))
 	})
@@ -804,6 +867,8 @@ func (t *Text) ChangeFont(sender obj.Object) {
 
 // AlignLeft this action method applies left alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (t *Text) AlignLeft(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
 	})
@@ -812,6 +877,8 @@ func (t *Text) AlignLeft(sender obj.Object) {
 
 // AlignRight this action method applies right alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (t *Text) AlignRight(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignRight:"), objref.IDOf(sender))
 	})
@@ -820,6 +887,8 @@ func (t *Text) AlignRight(sender obj.Object) {
 
 // AlignCenter this action method applies center alignment to selected paragraphs (or all text if the receiver is a plain text object).
 func (t *Text) AlignCenter(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
 	})
@@ -828,6 +897,8 @@ func (t *Text) AlignCenter(sender obj.Object) {
 
 // Subscript this action method applies a subscript attribute to selected text (or all text if the receiver is a plain text object), lowering its baseline offset by a predefined amount.
 func (t *Text) Subscript(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subscript:"), objref.IDOf(sender))
 	})
@@ -836,6 +907,8 @@ func (t *Text) Subscript(sender obj.Object) {
 
 // Superscript this action method applies a superscript attribute to selected text (or all text if the receiver is a plain text object), raising its baseline offset by a predefined amount.
 func (t *Text) Superscript(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("superscript:"), objref.IDOf(sender))
 	})
@@ -844,6 +917,8 @@ func (t *Text) Superscript(sender obj.Object) {
 
 // Underline adds the underline attribute to the selected text attributes if absent; removes the attribute if present.
 func (t *Text) Underline(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("underline:"), objref.IDOf(sender))
 	})
@@ -852,6 +927,8 @@ func (t *Text) Underline(sender obj.Object) {
 
 // Unscript this action method removes any superscripting or subscripting from selected text (or all text if the receiver is a plain text object).
 func (t *Text) Unscript(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("unscript:"), objref.IDOf(sender))
 	})
@@ -860,6 +937,8 @@ func (t *Text) Unscript(sender obj.Object) {
 
 // ShowGuessPanel this action method opens the Spelling panel, allowing the user to make a correction during spell checking.
 func (t *Text) ShowGuessPanel(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 	})
@@ -868,6 +947,8 @@ func (t *Text) ShowGuessPanel(sender obj.Object) {
 
 // CheckSpelling this action method searches for a misspelled word in the receiver’s text.
 func (t *Text) CheckSpelling(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 	})
@@ -876,6 +957,8 @@ func (t *Text) CheckSpelling(sender obj.Object) {
 
 // ToggleRuler this action method shows or hides the ruler, if the receiver is enclosed in a scroll view.
 func (t *Text) ToggleRuler(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
 	})
@@ -884,6 +967,7 @@ func (t *Text) ToggleRuler(sender obj.Object) {
 
 // String returns the string.
 func (t *Text) String() string {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -900,6 +984,7 @@ func (t *Text) String() string {
 
 // IsEditable reports whether the object is editable.
 func (t *Text) IsEditable() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -913,6 +998,7 @@ func (t *Text) IsEditable() bool {
 
 // IsSelectable reports whether the object is selectable.
 func (t *Text) IsSelectable() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -926,6 +1012,7 @@ func (t *Text) IsSelectable() bool {
 
 // IsRichText reports whether the object is rich text.
 func (t *Text) IsRichText() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -939,6 +1026,7 @@ func (t *Text) IsRichText() bool {
 
 // ImportsGraphics wraps the corresponding Objective-C method.
 func (t *Text) ImportsGraphics() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -952,6 +1040,7 @@ func (t *Text) ImportsGraphics() bool {
 
 // IsFieldEditor reports whether the object is field editor.
 func (t *Text) IsFieldEditor() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -965,6 +1054,7 @@ func (t *Text) IsFieldEditor() bool {
 
 // UsesFontPanel wraps the corresponding Objective-C method.
 func (t *Text) UsesFontPanel() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -978,6 +1068,7 @@ func (t *Text) UsesFontPanel() bool {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (t *Text) DrawsBackground() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -991,6 +1082,7 @@ func (t *Text) DrawsBackground() bool {
 
 // BackgroundColor returns the background color.
 func (t *Text) BackgroundColor() *Color {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1004,6 +1096,7 @@ func (t *Text) BackgroundColor() *Color {
 
 // IsRulerVisible reports whether the object is ruler visible.
 func (t *Text) IsRulerVisible() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1017,6 +1110,7 @@ func (t *Text) IsRulerVisible() bool {
 
 // SelectedRange returns the selected range.
 func (t *Text) SelectedRange() foundation.NSRange {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1030,6 +1124,7 @@ func (t *Text) SelectedRange() foundation.NSRange {
 
 // Font returns the font.
 func (t *Text) Font() *Font {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -1043,6 +1138,7 @@ func (t *Text) Font() *Font {
 
 // TextColor returns the text color.
 func (t *Text) TextColor() *Color {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1056,6 +1152,7 @@ func (t *Text) TextColor() *Color {
 
 // Alignment returns the alignment.
 func (t *Text) Alignment() TextAlignment {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 TextAlignment
 	purego.Main(func() {
 		_mainthread0 = func() TextAlignment {
@@ -1069,6 +1166,7 @@ func (t *Text) Alignment() TextAlignment {
 
 // BaseWritingDirection returns the base writing direction.
 func (t *Text) BaseWritingDirection() WritingDirection {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 WritingDirection
 	purego.Main(func() {
 		_mainthread0 = func() WritingDirection {
@@ -1082,6 +1180,7 @@ func (t *Text) BaseWritingDirection() WritingDirection {
 
 // MaxSize returns the max size.
 func (t *Text) MaxSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1095,6 +1194,7 @@ func (t *Text) MaxSize() corefoundation.CGSize {
 
 // MinSize returns the min size.
 func (t *Text) MinSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1108,6 +1208,7 @@ func (t *Text) MinSize() corefoundation.CGSize {
 
 // IsHorizontallyResizable reports whether the object is horizontally resizable.
 func (t *Text) IsHorizontallyResizable() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1121,6 +1222,7 @@ func (t *Text) IsHorizontallyResizable() bool {
 
 // IsVerticallyResizable reports whether the object is vertically resizable.
 func (t *Text) IsVerticallyResizable() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,44 +50,64 @@ func capturePhotoOutputReadinessCoordinatorAdopt(id objc.ID) *CapturePhotoOutput
 
 // Description returns the object's -description text.
 func (cporc *CapturePhotoOutputReadinessCoordinator) Description() string {
+	defer runtime.KeepAlive(cporc)
 	return rt.Description(objref.IDOf(cporc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cporc *CapturePhotoOutputReadinessCoordinator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cporc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cporc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cporc *CapturePhotoOutputReadinessCoordinator) IsKind(className string) bool {
+	defer runtime.KeepAlive(cporc)
 	return rt.IsKind(objref.IDOf(cporc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cporc *CapturePhotoOutputReadinessCoordinator) String() string {
+	defer runtime.KeepAlive(cporc)
 	return rt.Description(objref.IDOf(cporc))
 }
 
 // NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput creates an object that helps coordinate user interface changes with a photo output that runs on a background queue.
 func NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput(photoOutput *CapturePhotoOutput) *CapturePhotoOutputReadinessCoordinator {
+	defer runtime.KeepAlive(photoOutput)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoOutputReadinessCoordinator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPhotoOutput:"), objref.IDOf(photoOutput))
 	return capturePhotoOutputReadinessCoordinatorAdopt(_id)
 }
 
+// WithDelegate sets the coordinator’s delegate object.
+func (cporc *CapturePhotoOutputReadinessCoordinator) WithDelegate(delegate CapturePhotoOutputReadinessCoordinatorDelegate) *CapturePhotoOutputReadinessCoordinator {
+	_shim := newCapturePhotoOutputReadinessCoordinatorDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cporc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cporc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cporc
+}
+
 // StartTrackingCaptureRequestUsingPhotoSettings tracks a capture request that uses the specified photo settings.
 func (cporc *CapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *CapturePhotoSettings) {
+	defer runtime.KeepAlive(cporc)
+	defer runtime.KeepAlive(settings)
 	objc.Send[objc.ID](objref.IDOf(cporc), objc.RegisterName("startTrackingCaptureRequestUsingPhotoSettings:"), objref.IDOf(settings))
 }
 
 // StopTrackingCaptureRequestUsingPhotoSettingsUniqueID stop tracking the capture request represented by the specified photo setting’s unique identifier.
 func (cporc *CapturePhotoOutputReadinessCoordinator) StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64) {
+	defer runtime.KeepAlive(cporc)
 	objc.Send[objc.ID](objref.IDOf(cporc), objc.RegisterName("stopTrackingCaptureRequestUsingPhotoSettingsUniqueID:"), settingsUniqueID)
 }
 
 // CaptureReadiness returns a value specifying whether the coordinator's photo output is ready to respond to new capture requests in a timely manner. The value incorporates the photo output's captureReadiness and any requests registered using -startTrackingCaptureRequestUsingPhotoSettings:. The value is updated before calling the -readinessCoordinator:captureReadinessDidChange: callback. See AVCapturePhotoOutput's captureReadiness documentation for a discussion of how to update shutter availability and appearance based on the captureReadiness value. This property is key-value observable and all change notifications are delivered on the main queue, allowing UI updates to be done directly in the callback.
 func (cporc *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() CapturePhotoOutputCaptureReadiness {
+	defer runtime.KeepAlive(cporc)
 	_r := objc.Send[CapturePhotoOutputCaptureReadiness](objref.IDOf(cporc), objc.RegisterName("captureReadiness"))
 	return _r
 }

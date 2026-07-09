@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func notificationSettingsAdopt(id objc.ID) *NotificationSettings {
 
 // Description returns the object's -description text.
 func (ns *NotificationSettings) Description() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ns *NotificationSettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ns *NotificationSettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(ns)
 	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ns *NotificationSettings) String() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
@@ -74,72 +81,84 @@ func NewNotificationSettings() *NotificationSettings {
 
 // AuthorizationStatus returns the authorization status.
 func (ns *NotificationSettings) AuthorizationStatus() AuthorizationStatus {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(ns), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
 // SoundSetting returns the sound setting.
 func (ns *NotificationSettings) SoundSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("soundSetting"))
 	return _r
 }
 
 // BadgeSetting returns the badge setting.
 func (ns *NotificationSettings) BadgeSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("badgeSetting"))
 	return _r
 }
 
 // AlertSetting returns the alert setting.
 func (ns *NotificationSettings) AlertSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("alertSetting"))
 	return _r
 }
 
 // NotificationCenterSetting returns the notification center setting.
 func (ns *NotificationSettings) NotificationCenterSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("notificationCenterSetting"))
 	return _r
 }
 
 // LockScreenSetting returns the lock screen setting.
 func (ns *NotificationSettings) LockScreenSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("lockScreenSetting"))
 	return _r
 }
 
 // ShowPreviewsSetting returns the show previews setting.
 func (ns *NotificationSettings) ShowPreviewsSetting() ShowPreviewsSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[ShowPreviewsSetting](objref.IDOf(ns), objc.RegisterName("showPreviewsSetting"))
 	return _r
 }
 
 // CriticalAlertSetting returns the critical alert setting.
 func (ns *NotificationSettings) CriticalAlertSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("criticalAlertSetting"))
 	return _r
 }
 
 // ProvidesAppNotificationSettings wraps the corresponding Objective-C method.
 func (ns *NotificationSettings) ProvidesAppNotificationSettings() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("providesAppNotificationSettings"))
 	return _r
 }
 
 // TimeSensitiveSetting returns the time sensitive setting.
 func (ns *NotificationSettings) TimeSensitiveSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("timeSensitiveSetting"))
 	return _r
 }
 
 // ScheduledDeliverySetting returns the scheduled delivery setting.
 func (ns *NotificationSettings) ScheduledDeliverySetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("scheduledDeliverySetting"))
 	return _r
 }
 
 // DirectMessagesSetting returns the direct messages setting.
 func (ns *NotificationSettings) DirectMessagesSetting() NotificationSetting {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("directMessagesSetting"))
 	return _r
 }

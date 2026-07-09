@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func mapSnapshotOptionsAdopt(id objc.ID) *MapSnapshotOptions {
 
 // Description returns the object's -description text.
 func (mso *MapSnapshotOptions) Description() string {
+	defer runtime.KeepAlive(mso)
 	return rt.Description(objref.IDOf(mso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mso *MapSnapshotOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mso *MapSnapshotOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(mso)
 	return rt.IsKind(objref.IDOf(mso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mso *MapSnapshotOptions) String() string {
+	defer runtime.KeepAlive(mso)
 	return rt.Description(objref.IDOf(mso))
 }
 
@@ -75,12 +82,14 @@ func NewMapSnapshotOptions() *MapSnapshotOptions {
 
 // WithPreferredConfiguration sets the preferred configuration.
 func (mso *MapSnapshotOptions) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapSnapshotOptions {
+	defer runtime.KeepAlive(preferredConfiguration)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
 	return mso
 }
 
 // WithCamera sets the camera.
 func (mso *MapSnapshotOptions) WithCamera(camera *MapCamera) *MapSnapshotOptions {
+	defer runtime.KeepAlive(camera)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return mso
 }
@@ -93,6 +102,7 @@ func (mso *MapSnapshotOptions) WithMapType(mapType MapType) *MapSnapshotOptions 
 
 // WithPointOfInterestFilter sets the point of interest filter.
 func (mso *MapSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapSnapshotOptions {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return mso
 }
@@ -117,54 +127,63 @@ func (mso *MapSnapshotOptions) WithSize(size corefoundation.CGSize) *MapSnapshot
 
 // WithAppearance sets the appearance.
 func (mso *MapSnapshotOptions) WithAppearance(appearance obj.Object) *MapSnapshotOptions {
+	defer runtime.KeepAlive(appearance)
 	objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 	return mso
 }
 
 // PreferredConfiguration returns the preferred configuration.
 func (mso *MapSnapshotOptions) PreferredConfiguration() *MapConfiguration {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("preferredConfiguration"))
 	return MapConfigurationFromID(_r)
 }
 
 // Camera returns the camera.
 func (mso *MapSnapshotOptions) Camera() *MapCamera {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("camera"))
 	return MapCameraFromID(_r)
 }
 
 // MapType returns the map type.
 func (mso *MapSnapshotOptions) MapType() MapType {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[MapType](objref.IDOf(mso), objc.RegisterName("mapType"))
 	return _r
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (mso *MapSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
 // ShowsPointsOfInterest wraps the corresponding Objective-C method.
 func (mso *MapSnapshotOptions) ShowsPointsOfInterest() bool {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[bool](objref.IDOf(mso), objc.RegisterName("showsPointsOfInterest"))
 	return _r
 }
 
 // ShowsBuildings wraps the corresponding Objective-C method.
 func (mso *MapSnapshotOptions) ShowsBuildings() bool {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[bool](objref.IDOf(mso), objc.RegisterName("showsBuildings"))
 	return _r
 }
 
 // Size returns the size.
 func (mso *MapSnapshotOptions) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(mso), objc.RegisterName("size"))
 	return _r
 }
 
 // Appearance returns the appearance.
 func (mso *MapSnapshotOptions) Appearance() obj.Object {
+	defer runtime.KeepAlive(mso)
 	_r := objc.Send[objc.ID](objref.IDOf(mso), objc.RegisterName("appearance"))
 	return obj.Wrap(_r)
 }

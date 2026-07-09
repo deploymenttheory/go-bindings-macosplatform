@@ -5,8 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +51,27 @@ func toolbarAdopt(id objc.ID) *Toolbar {
 
 // Description returns the object's -description text.
 func (t *Toolbar) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Toolbar) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Toolbar) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Toolbar) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -80,6 +89,7 @@ func NewToolbar() *Toolbar {
 
 // NewToolbarWithIdentifier creates a newly allocated toolbar with the specified identifier.
 func NewToolbarWithIdentifier(identifier obj.Object) *Toolbar {
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 *Toolbar
 	purego.Main(func() {
 		_mainthread0 = func() *Toolbar {
@@ -89,6 +99,18 @@ func NewToolbarWithIdentifier(identifier obj.Object) *Toolbar {
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the object you use to customize the toolbar contents and configuration.
+func (t *Toolbar) WithDelegate(delegate ToolbarDelegate) *Toolbar {
+	_shim := newToolbarDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(t), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(t), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return t
 }
 
 // WithVisible sets a Boolean value that indicates whether the toolbar is visible.
@@ -109,6 +131,7 @@ func (t *Toolbar) WithDisplayMode(displayMode ToolbarDisplayMode) *Toolbar {
 
 // WithSelectedItemIdentifier sets the identifier of the toolbar’s currently selected item.
 func (t *Toolbar) WithSelectedItemIdentifier(selectedItemIdentifier obj.Object) *Toolbar {
+	defer runtime.KeepAlive(selectedItemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSelectedItemIdentifier:"), objref.IDOf(selectedItemIdentifier))
 	})
@@ -141,9 +164,9 @@ func (t *Toolbar) WithItemIdentifiers(items ...obj.Object) *Toolbar {
 }
 
 // WithCenteredItemIdentifiers sets the set of custom items to display in the center of the toolbar.
-func (t *Toolbar) WithCenteredItemIdentifiers(centeredItemIdentifiers obj.Object) *Toolbar {
+func (t *Toolbar) WithCenteredItemIdentifiers(centeredItemIdentifiers []*foundation.String) *Toolbar {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifiers:"), objref.IDOf(centeredItemIdentifiers))
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifiers:"), rt.SliceToNSSet(centeredItemIdentifiers, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	})
 	return t
 }
@@ -174,6 +197,7 @@ func (t *Toolbar) WithSizeMode(sizeMode ToolbarSizeMode) *Toolbar {
 
 // WithCenteredItemIdentifier sets the item to display in the center of the toolbar.
 func (t *Toolbar) WithCenteredItemIdentifier(centeredItemIdentifier obj.Object) *Toolbar {
+	defer runtime.KeepAlive(centeredItemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCenteredItemIdentifier:"), objref.IDOf(centeredItemIdentifier))
 	})
@@ -182,6 +206,7 @@ func (t *Toolbar) WithCenteredItemIdentifier(centeredItemIdentifier obj.Object) 
 
 // WithFullScreenAccessoryView sets the toolbar’s full screen accessory view.
 func (t *Toolbar) WithFullScreenAccessoryView(fullScreenAccessoryView ViewProvider) *Toolbar {
+	defer runtime.KeepAlive(fullScreenAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFullScreenAccessoryView:"), objref.IDOf(fullScreenAccessoryView))
 	})
@@ -214,6 +239,8 @@ func (t *Toolbar) WithShowsBaselineSeparator(showsBaselineSeparator bool) *Toolb
 
 // InsertItemWithItemIdentifierAtIndex inserts an item into the toolbar at the specified index.
 func (t *Toolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier obj.Object, index int) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(itemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("insertItemWithItemIdentifier:atIndex:"), objref.IDOf(itemIdentifier), index)
 	})
@@ -222,6 +249,7 @@ func (t *Toolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier obj.Object,
 
 // RemoveItemAtIndex removes the item at the specified index in the toolbar.
 func (t *Toolbar) RemoveItemAtIndex(index int) {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("removeItemAtIndex:"), index)
 	})
@@ -230,6 +258,8 @@ func (t *Toolbar) RemoveItemAtIndex(index int) {
 
 // RemoveItemWithItemIdentifier removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
 func (t *Toolbar) RemoveItemWithItemIdentifier(itemIdentifier obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(itemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("removeItemWithItemIdentifier:"), objref.IDOf(itemIdentifier))
 	})
@@ -238,6 +268,8 @@ func (t *Toolbar) RemoveItemWithItemIdentifier(itemIdentifier obj.Object) {
 
 // RunCustomizationPalette displays the toolbar’s customization palette and handles any user-initiated customizations.
 func (t *Toolbar) RunCustomizationPalette(sender obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("runCustomizationPalette:"), objref.IDOf(sender))
 	})
@@ -246,6 +278,7 @@ func (t *Toolbar) RunCustomizationPalette(sender obj.Object) {
 
 // ValidateVisibleItems validates the toolbar’s visible items during a window update.
 func (t *Toolbar) ValidateVisibleItems() {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("validateVisibleItems"))
 	})
@@ -254,6 +287,7 @@ func (t *Toolbar) ValidateVisibleItems() {
 
 // IsVisible reports whether toggles the visibility of the toolbar. This property may be modified by the user in toolbars with `allowsUserCustomization` enabled. This property is key value observable on macOS 14.0 and higher.
 func (t *Toolbar) IsVisible() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -267,6 +301,7 @@ func (t *Toolbar) IsVisible() bool {
 
 // CustomizationPaletteIsRunning reports whether the customization palette is currently running. On macOS 15.0 and above this property is key value observable.
 func (t *Toolbar) CustomizationPaletteIsRunning() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -280,6 +315,7 @@ func (t *Toolbar) CustomizationPaletteIsRunning() bool {
 
 // DisplayMode returns the current display mode of items in the toolbar. In toolbars with `allowsDisplayModeCustomization` enabled this is a user modifiable property. This property is key value observable.
 func (t *Toolbar) DisplayMode() ToolbarDisplayMode {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 ToolbarDisplayMode
 	purego.Main(func() {
 		_mainthread0 = func() ToolbarDisplayMode {
@@ -292,12 +328,13 @@ func (t *Toolbar) DisplayMode() ToolbarDisplayMode {
 }
 
 // SelectedItemIdentifier sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
-func (t *Toolbar) SelectedItemIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (t *Toolbar) SelectedItemIdentifier() *foundation.String {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("selectedItemIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -306,6 +343,7 @@ func (t *Toolbar) SelectedItemIdentifier() obj.Object {
 
 // AllowsUserCustomization reports whether this flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used. The default value is false, but can be changed at any time. For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.
 func (t *Toolbar) AllowsUserCustomization() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -319,6 +357,7 @@ func (t *Toolbar) AllowsUserCustomization() bool {
 
 // AllowsDisplayModeCustomization reports whether the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user's selection will be persisted using the toolbar's `identifier` when `autosavesConfiguration` is enabled. The default is true for apps linked on macOS 15.0 and above.
 func (t *Toolbar) AllowsDisplayModeCustomization() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -331,12 +370,13 @@ func (t *Toolbar) AllowsDisplayModeCustomization() bool {
 }
 
 // Identifier returns all toolbars with the same name will share the same display attributes, and item order. If a toolbar autosaves its configuration, the item identifier will be used as the autosave name.
-func (t *Toolbar) Identifier() obj.Object {
-	var _mainthread0 obj.Object
+func (t *Toolbar) Identifier() *foundation.String {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -347,6 +387,7 @@ func (t *Toolbar) Identifier() obj.Object {
 //
 // Items returns the collection as a Go slice.
 func (t *Toolbar) Items() []*ToolbarItem {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 []*ToolbarItem
 	purego.Main(func() {
 		_mainthread0 = func() []*ToolbarItem {
@@ -361,6 +402,7 @@ func (t *Toolbar) Items() []*ToolbarItem {
 //
 // VisibleItems returns the collection as a Go slice.
 func (t *Toolbar) VisibleItems() []*ToolbarItem {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 []*ToolbarItem
 	purego.Main(func() {
 		_mainthread0 = func() []*ToolbarItem {
@@ -375,6 +417,7 @@ func (t *Toolbar) VisibleItems() []*ToolbarItem {
 //
 // ItemIdentifiers returns the collection as a Go slice.
 func (t *Toolbar) ItemIdentifiers() []obj.Object {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -386,12 +429,14 @@ func (t *Toolbar) ItemIdentifiers() []obj.Object {
 }
 
 // CenteredItemIdentifiers returns items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
-func (t *Toolbar) CenteredItemIdentifiers() obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (t *Toolbar) CenteredItemIdentifiers() []*foundation.String {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 []*foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifiers"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -400,6 +445,7 @@ func (t *Toolbar) CenteredItemIdentifiers() obj.Object {
 
 // AutosavesConfiguration reports whether if `autosavesConfiguration` is true, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to true. Setting this to false means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is false.
 func (t *Toolbar) AutosavesConfiguration() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -413,6 +459,7 @@ func (t *Toolbar) AutosavesConfiguration() bool {
 
 // AllowsExtensionItems reports whether when true, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is false.
 func (t *Toolbar) AllowsExtensionItems() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -425,15 +472,17 @@ func (t *Toolbar) AllowsExtensionItems() bool {
 }
 
 // SetConfigurationFromDictionary specifies the new configuration details for the toolbar.
-func (t *Toolbar) SetConfigurationFromDictionary(configDict obj.Object) {
+func (t *Toolbar) SetConfigurationFromDictionary(configDict map[string]obj.Object) {
+	defer runtime.KeepAlive(t)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setConfigurationFromDictionary:"), objref.IDOf(configDict))
+		objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setConfigurationFromDictionary:"), rt.MapToDict(configDict, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // SizeMode returns the size mode.
 func (t *Toolbar) SizeMode() ToolbarSizeMode {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 ToolbarSizeMode
 	purego.Main(func() {
 		_mainthread0 = func() ToolbarSizeMode {
@@ -446,12 +495,13 @@ func (t *Toolbar) SizeMode() ToolbarSizeMode {
 }
 
 // CenteredItemIdentifier returns the centered item identifier.
-func (t *Toolbar) CenteredItemIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (t *Toolbar) CenteredItemIdentifier() *foundation.String {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -460,6 +510,7 @@ func (t *Toolbar) CenteredItemIdentifier() obj.Object {
 
 // FullScreenAccessoryView returns the full screen accessory view.
 func (t *Toolbar) FullScreenAccessoryView() *View {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -473,6 +524,7 @@ func (t *Toolbar) FullScreenAccessoryView() *View {
 
 // FullScreenAccessoryViewMinHeight returns the full screen accessory view min height.
 func (t *Toolbar) FullScreenAccessoryViewMinHeight() float64 {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -486,6 +538,7 @@ func (t *Toolbar) FullScreenAccessoryViewMinHeight() float64 {
 
 // FullScreenAccessoryViewMaxHeight returns the full screen accessory view max height.
 func (t *Toolbar) FullScreenAccessoryViewMaxHeight() float64 {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -499,6 +552,7 @@ func (t *Toolbar) FullScreenAccessoryViewMaxHeight() float64 {
 
 // ShowsBaselineSeparator wraps the corresponding Objective-C method.
 func (t *Toolbar) ShowsBaselineSeparator() bool {
+	defer runtime.KeepAlive(t)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -511,12 +565,13 @@ func (t *Toolbar) ShowsBaselineSeparator() bool {
 }
 
 // ConfigurationDictionary returns the configuration dictionary.
-func (t *Toolbar) ConfigurationDictionary() obj.Object {
-	var _mainthread0 obj.Object
+func (t *Toolbar) ConfigurationDictionary() map[string]obj.Object {
+	defer runtime.KeepAlive(t)
+	var _mainthread0 map[string]obj.Object
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() map[string]obj.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("configurationDictionary"))
-			return obj.Wrap(_r)
+			return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 		}()
 	})
 	return _mainthread0

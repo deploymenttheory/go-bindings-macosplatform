@@ -5,9 +5,11 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,16 +49,19 @@ func smartCardTokenAdopt(id objc.ID) *SmartCardToken {
 }
 
 // NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver initializes a smart card token with the specified smart card, application identifier, and token driver.
-func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *SmartCard, aID obj.Object, instanceID string, tokenDriver *SmartCardTokenDriver) *SmartCardToken {
+func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *SmartCard, aid []byte, instanceID string, tokenDriver *SmartCardTokenDriver) *SmartCardToken {
+	defer runtime.KeepAlive(smartCard)
+	defer runtime.KeepAlive(tokenDriver)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSmartCardToken")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSmartCard:AID:instanceID:tokenDriver:"), objref.IDOf(smartCard), objref.IDOf(aID), purego.NSString(instanceID), objref.IDOf(tokenDriver))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSmartCard:AID:instanceID:tokenDriver:"), objref.IDOf(smartCard), rt.BytesToNSData(aid), purego.NSString(instanceID), objref.IDOf(tokenDriver))
 	return smartCardTokenAdopt(_id)
 }
 
 // AID returns this is AID which is specified in extension's plist NSExtensionAttributes as
-func (sct *SmartCardToken) AID() obj.Object {
+func (sct *SmartCardToken) AID() []byte {
+	defer runtime.KeepAlive(sct)
 	_r := objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("AID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ TokenProvider = (*SmartCardToken)(nil)

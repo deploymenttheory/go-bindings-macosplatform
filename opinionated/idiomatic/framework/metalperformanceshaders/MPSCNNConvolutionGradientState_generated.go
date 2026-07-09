@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func (ccgs *CNNConvolutionGradientState) WithLabel(label string) *CNNConvolution
 
 // Convolution returns the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
 func (ccgs *CNNConvolutionGradientState) Convolution() obj.Object {
+	defer runtime.KeepAlive(ccgs)
 	_r := objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("convolution"))
 	return obj.Wrap(_r)
 }

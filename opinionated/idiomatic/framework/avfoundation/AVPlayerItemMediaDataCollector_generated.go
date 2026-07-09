@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func playerItemMediaDataCollectorAdopt(id objc.ID) *PlayerItemMediaDataCollector
 
 // Description returns the object's -description text.
 func (pimdc *PlayerItemMediaDataCollector) Description() string {
+	defer runtime.KeepAlive(pimdc)
 	return rt.Description(objref.IDOf(pimdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pimdc *PlayerItemMediaDataCollector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pimdc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pimdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pimdc *PlayerItemMediaDataCollector) IsKind(className string) bool {
+	defer runtime.KeepAlive(pimdc)
 	return rt.IsKind(objref.IDOf(pimdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pimdc *PlayerItemMediaDataCollector) String() string {
+	defer runtime.KeepAlive(pimdc)
 	return rt.Description(objref.IDOf(pimdc))
 }
 

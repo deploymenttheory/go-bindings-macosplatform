@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func qCCompositionPickerViewAdopt(id objc.ID) *QCCompositionPickerView {
 
 // Description returns the object's -description text.
 func (qcpv *QCCompositionPickerView) Description() string {
+	defer runtime.KeepAlive(qcpv)
 	return rt.Description(objref.IDOf(qcpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qcpv *QCCompositionPickerView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qcpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qcpv *QCCompositionPickerView) IsKind(className string) bool {
+	defer runtime.KeepAlive(qcpv)
 	return rt.IsKind(objref.IDOf(qcpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qcpv *QCCompositionPickerView) String() string {
+	defer runtime.KeepAlive(qcpv)
 	return rt.Description(objref.IDOf(qcpv))
 }
 
@@ -81,6 +88,8 @@ func NewQCCompositionPickerView() *QCCompositionPickerView {
 
 // SetCompositionsFromRepositoryWithProtocolAndAttributes sets the compositions in the composition picker view to those that match the specified criteria.
 func (qcpv *QCCompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(attributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
 	})
@@ -89,6 +98,7 @@ func (qcpv *QCCompositionPickerView) SetCompositionsFromRepositoryWithProtocolAn
 
 // Compositions returns the list of compositions that are currently in the composition picker view.
 func (qcpv *QCCompositionPickerView) Compositions() obj.Object {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -102,6 +112,8 @@ func (qcpv *QCCompositionPickerView) Compositions() obj.Object {
 
 // SetDelegate sets the composition picker view delegate.
 func (qcpv *QCCompositionPickerView) SetDelegate(delegate obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -110,6 +122,7 @@ func (qcpv *QCCompositionPickerView) SetDelegate(delegate obj.Object) {
 
 // Delegate returns retrieves the composition picker view delegate.
 func (qcpv *QCCompositionPickerView) Delegate() obj.Object {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -123,6 +136,7 @@ func (qcpv *QCCompositionPickerView) Delegate() obj.Object {
 
 // SetShowsCompositionNames enables the display of composition names in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetShowsCompositionNames(flag bool) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setShowsCompositionNames:"), flag)
 	})
@@ -131,6 +145,7 @@ func (qcpv *QCCompositionPickerView) SetShowsCompositionNames(flag bool) {
 
 // ShowsCompositionNames reports whether retrieves whether composition names can be shown in the composition picker view.
 func (qcpv *QCCompositionPickerView) ShowsCompositionNames() bool {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -144,6 +159,7 @@ func (qcpv *QCCompositionPickerView) ShowsCompositionNames() bool {
 
 // SetAllowsEmptySelection sets whether to allow an empty selection in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetAllowsEmptySelection(flag bool) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setAllowsEmptySelection:"), flag)
 	})
@@ -152,6 +168,7 @@ func (qcpv *QCCompositionPickerView) SetAllowsEmptySelection(flag bool) {
 
 // AllowsEmptySelection reports whether retrieves the empty-selection state of the composition picker view.
 func (qcpv *QCCompositionPickerView) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -165,6 +182,7 @@ func (qcpv *QCCompositionPickerView) AllowsEmptySelection() bool {
 
 // SetCompositionAspectRatio sets the aspect ratio used to display compositions in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetCompositionAspectRatio(ratio corefoundation.CGSize) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setCompositionAspectRatio:"), ratio)
 	})
@@ -173,6 +191,7 @@ func (qcpv *QCCompositionPickerView) SetCompositionAspectRatio(ratio corefoundat
 
 // CompositionAspectRatio returns retrieves the aspect ratio used to display compositions in the composition picker view.
 func (qcpv *QCCompositionPickerView) CompositionAspectRatio() corefoundation.CGSize {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -186,6 +205,8 @@ func (qcpv *QCCompositionPickerView) CompositionAspectRatio() corefoundation.CGS
 
 // SetDefaultValueForInputKey sets the default value to use for a composition input parameter.
 func (qcpv *QCCompositionPickerView) SetDefaultValueForInputKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(value)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
 	})
@@ -194,6 +215,7 @@ func (qcpv *QCCompositionPickerView) SetDefaultValueForInputKey(value obj.Object
 
 // ResetDefaultInputValues clears all previously set default values for composition input parameters.
 func (qcpv *QCCompositionPickerView) ResetDefaultInputValues() {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("resetDefaultInputValues"))
 	})
@@ -202,6 +224,8 @@ func (qcpv *QCCompositionPickerView) ResetDefaultInputValues() {
 
 // SetSelectedComposition sets a composition as selected in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetSelectedComposition(composition *QCComposition) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(composition)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
 	})
@@ -210,6 +234,7 @@ func (qcpv *QCCompositionPickerView) SetSelectedComposition(composition *QCCompo
 
 // SelectedComposition returns the composition that is currently selected in the composition picker view.
 func (qcpv *QCCompositionPickerView) SelectedComposition() *QCComposition {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 *QCComposition
 	purego.Main(func() {
 		_mainthread0 = func() *QCComposition {
@@ -223,6 +248,8 @@ func (qcpv *QCCompositionPickerView) SelectedComposition() *QCComposition {
 
 // StartAnimation starts animating the composition in the composition picker view.
 func (qcpv *QCCompositionPickerView) StartAnimation(sender obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 	})
@@ -231,6 +258,8 @@ func (qcpv *QCCompositionPickerView) StartAnimation(sender obj.Object) {
 
 // StopAnimation stops animating the composition that is currently animating in the composition picker view.
 func (qcpv *QCCompositionPickerView) StopAnimation(sender obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 	})
@@ -239,6 +268,7 @@ func (qcpv *QCCompositionPickerView) StopAnimation(sender obj.Object) {
 
 // IsAnimating reports whether the composition picker view is currently animating its composition.
 func (qcpv *QCCompositionPickerView) IsAnimating() bool {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -252,6 +282,7 @@ func (qcpv *QCCompositionPickerView) IsAnimating() bool {
 
 // SetMaxAnimationFrameRate sets the maximum frame rate for animating compositions.
 func (qcpv *QCCompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
 	})
@@ -260,6 +291,7 @@ func (qcpv *QCCompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
 
 // MaxAnimationFrameRate returns retrieves the maximum frame rate for animating compositions.
 func (qcpv *QCCompositionPickerView) MaxAnimationFrameRate() float32 {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -273,6 +305,8 @@ func (qcpv *QCCompositionPickerView) MaxAnimationFrameRate() float32 {
 
 // SetBackgroundColor sets the background color for the composition picker view.
 func (qcpv *QCCompositionPickerView) SetBackgroundColor(color obj.Object) {
+	defer runtime.KeepAlive(qcpv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 	})
@@ -281,6 +315,7 @@ func (qcpv *QCCompositionPickerView) SetBackgroundColor(color obj.Object) {
 
 // BackgroundColor returns the background color of the composition picker view.
 func (qcpv *QCCompositionPickerView) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -294,6 +329,7 @@ func (qcpv *QCCompositionPickerView) BackgroundColor() obj.Object {
 
 // SetDrawsBackground sets whether the composition picker view draws its background.
 func (qcpv *QCCompositionPickerView) SetDrawsBackground(flag bool) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setDrawsBackground:"), flag)
 	})
@@ -302,6 +338,7 @@ func (qcpv *QCCompositionPickerView) SetDrawsBackground(flag bool) {
 
 // DrawsBackground reports whether the composition picker view draws its background.
 func (qcpv *QCCompositionPickerView) DrawsBackground() bool {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -315,6 +352,7 @@ func (qcpv *QCCompositionPickerView) DrawsBackground() bool {
 
 // NumberOfColumns returns retrieves the number of columns in the composition picker view.
 func (qcpv *QCCompositionPickerView) NumberOfColumns() int {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -328,6 +366,7 @@ func (qcpv *QCCompositionPickerView) NumberOfColumns() int {
 
 // SetNumberOfColumns sets the number of columns in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetNumberOfColumns(columns int) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setNumberOfColumns:"), columns)
 	})
@@ -336,6 +375,7 @@ func (qcpv *QCCompositionPickerView) SetNumberOfColumns(columns int) {
 
 // NumberOfRows returns retrieves the number of rows in the composition picker view.
 func (qcpv *QCCompositionPickerView) NumberOfRows() int {
+	defer runtime.KeepAlive(qcpv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -349,6 +389,7 @@ func (qcpv *QCCompositionPickerView) NumberOfRows() int {
 
 // SetNumberOfRows sets the number of rows in the composition picker view.
 func (qcpv *QCCompositionPickerView) SetNumberOfRows(rows int) {
+	defer runtime.KeepAlive(qcpv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qcpv), objc.RegisterName("setNumberOfRows:"), rows)
 	})

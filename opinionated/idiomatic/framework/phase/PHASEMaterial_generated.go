@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func materialAdopt(id objc.ID) *Material {
 
 // Description returns the object's -description text.
 func (m *Material) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Material) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Material) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Material) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // NewMaterialWithEnginePreset creates a material with the given preset.
 func NewMaterialWithEnginePreset(engine *Engine, preset MaterialPreset) *Material {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMaterial")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:preset:"), objref.IDOf(engine), preset)
 	return materialAdopt(_id)

@@ -5,6 +5,8 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func environmentStateAdopt(id objc.ID) *EnvironmentState {
 
 // Description returns the object's -description text.
 func (es *EnvironmentState) Description() string {
+	defer runtime.KeepAlive(es)
 	return rt.Description(objref.IDOf(es))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (es *EnvironmentState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(es)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(es), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (es *EnvironmentState) IsKind(className string) bool {
+	defer runtime.KeepAlive(es)
 	return rt.IsKind(objref.IDOf(es), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (es *EnvironmentState) String() string {
+	defer runtime.KeepAlive(es)
 	return rt.Description(objref.IDOf(es))
 }
 
@@ -72,12 +79,14 @@ func NewEnvironmentState() *EnvironmentState {
 
 // Biometry returns information about biometric authentication (Touch ID, Face ID or Optic ID).
 func (es *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("biometry"))
 	return EnvironmentMechanismBiometryFromID(_r)
 }
 
 // UserPassword returns information about local user password (on macOS) or passcode (on embedded platforms).
 func (es *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
+	defer runtime.KeepAlive(es)
 	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("userPassword"))
 	return EnvironmentMechanismUserPasswordFromID(_r)
 }
@@ -86,6 +95,7 @@ func (es *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
 //
 // Companions returns the collection as a Go slice.
 func (es *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
+	defer runtime.KeepAlive(es)
 	_arr := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("companions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanismCompanion { return EnvironmentMechanismCompanionFromID(_id) })
 }
@@ -94,6 +104,7 @@ func (es *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
 //
 // AllMechanisms returns the collection as a Go slice.
 func (es *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {
+	defer runtime.KeepAlive(es)
 	_arr := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("allMechanisms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanism { return EnvironmentMechanismFromID(_id) })
 }

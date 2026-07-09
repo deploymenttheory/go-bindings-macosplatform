@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func consoleDeviceAdopt(id objc.ID) *ConsoleDevice {
 
 // Description returns the object's -description text.
 func (cd *ConsoleDevice) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *ConsoleDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *ConsoleDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *ConsoleDevice) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 

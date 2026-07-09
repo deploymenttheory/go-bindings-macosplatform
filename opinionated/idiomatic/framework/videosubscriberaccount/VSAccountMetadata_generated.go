@@ -5,6 +5,9 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func vSAccountMetadataAdopt(id objc.ID) *VSAccountMetadata {
 
 // Description returns the object's -description text.
 func (vam *VSAccountMetadata) Description() string {
+	defer runtime.KeepAlive(vam)
 	return rt.Description(objref.IDOf(vam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vam *VSAccountMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vam *VSAccountMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(vam)
 	return rt.IsKind(objref.IDOf(vam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vam *VSAccountMetadata) String() string {
+	defer runtime.KeepAlive(vam)
 	return rt.Description(objref.IDOf(vam))
 }
 
@@ -74,6 +82,7 @@ func NewVSAccountMetadata() *VSAccountMetadata {
 
 // AccountProviderIdentifier returns a value that uniquely identifies the account provider. You may use this value to brand your app.
 func (vam *VSAccountMetadata) AccountProviderIdentifier() string {
+	defer runtime.KeepAlive(vam)
 	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("accountProviderIdentifier"))
 	if _r == 0 {
 		return ""
@@ -82,19 +91,22 @@ func (vam *VSAccountMetadata) AccountProviderIdentifier() string {
 }
 
 // AuthenticationExpirationDate specifies when the user might need to re-authenticate with the account provider. The value might be nil if the user is not currently authenticated.
-func (vam *VSAccountMetadata) AuthenticationExpirationDate() obj.Object {
+func (vam *VSAccountMetadata) AuthenticationExpirationDate() time.Time {
+	defer runtime.KeepAlive(vam)
 	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("authenticationExpirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // VerificationData returns an opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
-func (vam *VSAccountMetadata) VerificationData() obj.Object {
+func (vam *VSAccountMetadata) VerificationData() []byte {
+	defer runtime.KeepAlive(vam)
 	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("verificationData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SAMLAttributeQueryResponse returns the SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
 func (vam *VSAccountMetadata) SAMLAttributeQueryResponse() string {
+	defer runtime.KeepAlive(vam)
 	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("SAMLAttributeQueryResponse"))
 	if _r == 0 {
 		return ""
@@ -104,6 +116,7 @@ func (vam *VSAccountMetadata) SAMLAttributeQueryResponse() string {
 
 // AccountProviderResponse returns the response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
 func (vam *VSAccountMetadata) AccountProviderResponse() *VSAccountProviderResponse {
+	defer runtime.KeepAlive(vam)
 	_r := objc.Send[objc.ID](objref.IDOf(vam), objc.RegisterName("accountProviderResponse"))
 	return VSAccountProviderResponseFromID(_r)
 }

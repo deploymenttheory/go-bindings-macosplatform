@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,6 +59,7 @@ func NewISO8601DateFormatter() *ISO8601DateFormatter {
 
 // WithTimeZone sets the time zone.
 func (idf *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return idf
 }
@@ -73,14 +77,15 @@ func (idf *ISO8601DateFormatter) WithObservationInfo(observationInfo unsafe.Poin
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (idf *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ISO8601DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (idf *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ISO8601DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return idf
 }
 
 // StringFromDate wraps the corresponding Objective-C method.
-func (idf *ISO8601DateFormatter) StringFromDate(date *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
+func (idf *ISO8601DateFormatter) StringFromDate(date time.Time) string {
+	defer runtime.KeepAlive(idf)
+	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("stringFromDate:"), rt.TimeToNSDate(date))
 	if _r == 0 {
 		return ""
 	}
@@ -88,19 +93,22 @@ func (idf *ISO8601DateFormatter) StringFromDate(date *Date) string {
 }
 
 // DateFromString wraps the corresponding Objective-C method.
-func (idf *ISO8601DateFormatter) DateFromString(string_ string) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("dateFromString:"), purego.NSString(string_))
-	return DateFromID(_r)
+func (idf *ISO8601DateFormatter) DateFromString(str string) time.Time {
+	defer runtime.KeepAlive(idf)
+	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("dateFromString:"), purego.NSString(str))
+	return rt.NSDateToTime(_r)
 }
 
 // TimeZone returns the time zone.
 func (idf *ISO8601DateFormatter) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(idf)
 	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // FormatOptions returns the format options.
 func (idf *ISO8601DateFormatter) FormatOptions() ISO8601DateFormatOptions {
+	defer runtime.KeepAlive(idf)
 	_r := objc.Send[ISO8601DateFormatOptions](objref.IDOf(idf), objc.RegisterName("formatOptions"))
 	return _r
 }

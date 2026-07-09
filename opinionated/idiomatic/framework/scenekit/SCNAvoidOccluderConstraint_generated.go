@@ -5,8 +5,11 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,8 +52,19 @@ func NewAvoidOccluderConstraint() *AvoidOccluderConstraint {
 	return avoidOccluderConstraintAdopt(_id)
 }
 
+// WithDelegate sets the receiver's delegate
+func (aoc *AvoidOccluderConstraint) WithDelegate(delegate AvoidOccluderConstraintDelegate) *AvoidOccluderConstraint {
+	_shim := newAvoidOccluderConstraintDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(aoc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(aoc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return aoc
+}
+
 // WithTarget sets defines the target node
 func (aoc *AvoidOccluderConstraint) WithTarget(target NodeProvider) *AvoidOccluderConstraint {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return aoc
 }
@@ -87,18 +101,21 @@ func (aoc *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccl
 
 // Target defines the target node
 func (aoc *AvoidOccluderConstraint) Target() *Node {
+	defer runtime.KeepAlive(aoc)
 	_r := objc.Send[objc.ID](objref.IDOf(aoc), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
 // OccluderCategoryBitMask defines the category of node to consider as occluder. Defaults to 1.
 func (aoc *AvoidOccluderConstraint) OccluderCategoryBitMask() int {
+	defer runtime.KeepAlive(aoc)
 	_r := objc.Send[int](objref.IDOf(aoc), objc.RegisterName("occluderCategoryBitMask"))
 	return _r
 }
 
 // Bias defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
 func (aoc *AvoidOccluderConstraint) Bias() float64 {
+	defer runtime.KeepAlive(aoc)
 	_r := objc.Send[float64](objref.IDOf(aoc), objc.RegisterName("bias"))
 	return _r
 }

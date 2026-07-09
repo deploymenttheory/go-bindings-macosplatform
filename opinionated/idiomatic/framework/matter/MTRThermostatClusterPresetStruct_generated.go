@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterPresetStructAdopt(id objc.ID) *MTRThermostatClusterPres
 
 // Description returns the object's -description text.
 func (mtcps *MTRThermostatClusterPresetStruct) Description() string {
+	defer runtime.KeepAlive(mtcps)
 	return rt.Description(objref.IDOf(mtcps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcps *MTRThermostatClusterPresetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcps *MTRThermostatClusterPresetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcps)
 	return rt.IsKind(objref.IDOf(mtcps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcps *MTRThermostatClusterPresetStruct) String() string {
+	defer runtime.KeepAlive(mtcps)
 	return rt.Description(objref.IDOf(mtcps))
 }
 
@@ -71,13 +79,14 @@ func NewMTRThermostatClusterPresetStruct() *MTRThermostatClusterPresetStruct {
 }
 
 // WithPresetHandle sets the preset handle.
-func (mtcps *MTRThermostatClusterPresetStruct) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterPresetStruct {
-	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
+func (mtcps *MTRThermostatClusterPresetStruct) WithPresetHandle(presetHandle []byte) *MTRThermostatClusterPresetStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setPresetHandle:"), rt.BytesToNSData(presetHandle))
 	return mtcps
 }
 
 // WithPresetScenario sets the preset scenario.
 func (mtcps *MTRThermostatClusterPresetStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetStruct {
+	defer runtime.KeepAlive(presetScenario)
 	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
 	return mtcps
 }
@@ -90,36 +99,42 @@ func (mtcps *MTRThermostatClusterPresetStruct) WithName(name string) *MTRThermos
 
 // WithCoolingSetpoint sets the cooling setpoint.
 func (mtcps *MTRThermostatClusterPresetStruct) WithCoolingSetpoint(coolingSetpoint obj.Object) *MTRThermostatClusterPresetStruct {
+	defer runtime.KeepAlive(coolingSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setCoolingSetpoint:"), objref.IDOf(coolingSetpoint))
 	return mtcps
 }
 
 // WithHeatingSetpoint sets the heating setpoint.
 func (mtcps *MTRThermostatClusterPresetStruct) WithHeatingSetpoint(heatingSetpoint obj.Object) *MTRThermostatClusterPresetStruct {
+	defer runtime.KeepAlive(heatingSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setHeatingSetpoint:"), objref.IDOf(heatingSetpoint))
 	return mtcps
 }
 
 // WithBuiltIn sets the built in.
 func (mtcps *MTRThermostatClusterPresetStruct) WithBuiltIn(builtIn obj.Object) *MTRThermostatClusterPresetStruct {
+	defer runtime.KeepAlive(builtIn)
 	objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("setBuiltIn:"), objref.IDOf(builtIn))
 	return mtcps
 }
 
 // PresetHandle returns the preset handle.
-func (mtcps *MTRThermostatClusterPresetStruct) PresetHandle() obj.Object {
+func (mtcps *MTRThermostatClusterPresetStruct) PresetHandle() []byte {
+	defer runtime.KeepAlive(mtcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("presetHandle"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PresetScenario returns the preset scenario.
-func (mtcps *MTRThermostatClusterPresetStruct) PresetScenario() obj.Object {
+func (mtcps *MTRThermostatClusterPresetStruct) PresetScenario() *foundation.Number {
+	defer runtime.KeepAlive(mtcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("presetScenario"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mtcps *MTRThermostatClusterPresetStruct) Name() string {
+	defer runtime.KeepAlive(mtcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -128,19 +143,22 @@ func (mtcps *MTRThermostatClusterPresetStruct) Name() string {
 }
 
 // CoolingSetpoint returns the cooling setpoint.
-func (mtcps *MTRThermostatClusterPresetStruct) CoolingSetpoint() obj.Object {
+func (mtcps *MTRThermostatClusterPresetStruct) CoolingSetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("coolingSetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // HeatingSetpoint returns the heating setpoint.
-func (mtcps *MTRThermostatClusterPresetStruct) HeatingSetpoint() obj.Object {
+func (mtcps *MTRThermostatClusterPresetStruct) HeatingSetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("heatingSetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // BuiltIn returns the built in.
-func (mtcps *MTRThermostatClusterPresetStruct) BuiltIn() obj.Object {
+func (mtcps *MTRThermostatClusterPresetStruct) BuiltIn() *foundation.Number {
+	defer runtime.KeepAlive(mtcps)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcps), objc.RegisterName("builtIn"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

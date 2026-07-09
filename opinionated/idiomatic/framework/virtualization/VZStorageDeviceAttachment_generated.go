@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func storageDeviceAttachmentAdopt(id objc.ID) *StorageDeviceAttachment {
 
 // Description returns the object's -description text.
 func (sda *StorageDeviceAttachment) Description() string {
+	defer runtime.KeepAlive(sda)
 	return rt.Description(objref.IDOf(sda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sda *StorageDeviceAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sda)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sda *StorageDeviceAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(sda)
 	return rt.IsKind(objref.IDOf(sda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sda *StorageDeviceAttachment) String() string {
+	defer runtime.KeepAlive(sda)
 	return rt.Description(objref.IDOf(sda))
 }
 

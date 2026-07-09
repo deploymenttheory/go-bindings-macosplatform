@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func vertexAttributeDataAdopt(id objc.ID) *VertexAttributeData {
 
 // Description returns the object's -description text.
 func (vad *VertexAttributeData) Description() string {
+	defer runtime.KeepAlive(vad)
 	return rt.Description(objref.IDOf(vad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vad *VertexAttributeData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vad *VertexAttributeData) IsKind(className string) bool {
+	defer runtime.KeepAlive(vad)
 	return rt.IsKind(objref.IDOf(vad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vad *VertexAttributeData) String() string {
+	defer runtime.KeepAlive(vad)
 	return rt.Description(objref.IDOf(vad))
 }
 
@@ -76,6 +82,7 @@ func NewVertexAttributeData() *VertexAttributeData {
 
 // WithMap sets the map.
 func (vad *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData {
+	defer runtime.KeepAlive(map_)
 	objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("setMap:"), objref.IDOf(map_))
 	return vad
 }
@@ -106,24 +113,28 @@ func (vad *VertexAttributeData) WithBufferSize(bufferSize int) *VertexAttributeD
 
 // Map returns the map.
 func (vad *VertexAttributeData) Map() *MeshBufferMap {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[objc.ID](objref.IDOf(vad), objc.RegisterName("map"))
 	return MeshBufferMapFromID(_r)
 }
 
 // Stride returns the stride.
 func (vad *VertexAttributeData) Stride() int {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("stride"))
 	return _r
 }
 
 // Format returns the format.
 func (vad *VertexAttributeData) Format() VertexFormat {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[VertexFormat](objref.IDOf(vad), objc.RegisterName("format"))
 	return _r
 }
 
 // BufferSize returns the buffer size.
 func (vad *VertexAttributeData) BufferSize() int {
+	defer runtime.KeepAlive(vad)
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("bufferSize"))
 	return _r
 }

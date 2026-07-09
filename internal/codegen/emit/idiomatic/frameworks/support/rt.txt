@@ -13,6 +13,7 @@ package rt
 import (
 	"context"
 	"sync"
+	"time"
 	"unsafe"
 
 	ebipurego "github.com/ebitengine/purego"
@@ -23,11 +24,18 @@ import (
 
 var (
 	clsNSData              = objc.GetClass("NSData")
+	clsNSDate              = objc.GetClass("NSDate")
 	clsNSMutableDictionary = objc.GetClass("NSMutableDictionary")
 	clsNSMutableSet        = objc.GetClass("NSMutableSet")
 	clsNSURL               = objc.GetClass("NSURL")
 
 	selFileURLWithPath = objc.RegisterName("fileURLWithPath:")
+	selIsFileURL       = objc.RegisterName("isFileURL")
+	selPath            = objc.RegisterName("path")
+	selAbsoluteString  = objc.RegisterName("absoluteString")
+
+	selDateWithTimeIntervalSince1970 = objc.RegisterName("dateWithTimeIntervalSince1970:")
+	selTimeIntervalSince1970         = objc.RegisterName("timeIntervalSince1970")
 
 	selDataWithBytesLength = objc.RegisterName("dataWithBytes:length:")
 	selData                = objc.RegisterName("data")
@@ -86,6 +94,44 @@ func AwaitValue[T any](ctx context.Context, start func(done func(T, error))) (T,
 // code accepts a Go string and calls this to build the URL.
 func FileURL(path string) objc.ID {
 	return objc.Send[objc.ID](objc.ID(clsNSURL), selFileURLWithPath, purego.NSString(path))
+}
+
+// URLString returns the Go string form of an NSURL: the filesystem path for a
+// file URL (so it round-trips through FileURL), the absolute URL string for
+// anything else, and "" for nil.
+func URLString(id objc.ID) string {
+	if id == 0 {
+		return ""
+	}
+	if objc.Send[bool](id, selIsFileURL) {
+		return purego.GoString(objc.Send[objc.ID](id, selPath))
+	}
+	return purego.GoString(objc.Send[objc.ID](id, selAbsoluteString))
+}
+
+// ── NSDate <-> time.Time ─────────────────────────────────────────────────────
+
+// NSDateToTime converts an NSDate to a Go time.Time (the zero time.Time for
+// nil). NSDate stores seconds as a float64, so values keep sub-microsecond —
+// not full nanosecond — precision.
+func NSDateToTime(id objc.ID) time.Time {
+	if id == 0 {
+		return time.Time{}
+	}
+	sec := objc.Send[float64](id, selTimeIntervalSince1970)
+	whole := int64(sec)
+	nanos := int64((sec - float64(whole)) * 1e9)
+	return time.Unix(whole, nanos)
+}
+
+// TimeToNSDate builds an autoreleased NSDate from a Go time.Time. The zero
+// time.Time yields a nil NSDate, so it round-trips with NSDateToTime.
+func TimeToNSDate(t time.Time) objc.ID {
+	if t.IsZero() {
+		return 0
+	}
+	sec := float64(t.Unix()) + float64(t.Nanosecond())/1e9
+	return objc.Send[objc.ID](objc.ID(clsNSDate), selDateWithTimeIntervalSince1970, sec)
 }
 
 // ── Not-found convention ─────────────────────────────────────────────────────

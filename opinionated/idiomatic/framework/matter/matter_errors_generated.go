@@ -8,17 +8,62 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
+// ErrCodeAccessDenied matches the Matter error MTRErrorCodeAccessDenied.
+var ErrCodeAccessDenied = errkit.New("MTRErrorDomain", 17)
+
+// ErrCodeAccessRestricted matches the Matter error MTRInteractionErrorCodeAccessRestricted.
+var ErrCodeAccessRestricted = errkit.New("MTRInteractionErrorDomain", 157)
+
+// ErrCodeBufferTooSmall matches the Matter error MTRErrorCodeBufferTooSmall.
+var ErrCodeBufferTooSmall = errkit.New("MTRErrorDomain", 10)
+
+// ErrCodeBusy matches the Matter error MTRErrorCodeBusy.
+var ErrCodeBusy = errkit.New("MTRErrorDomain", 18)
+
+// ErrCodeCancelled matches the Matter error MTRErrorCodeCancelled.
+var ErrCodeCancelled = errkit.New("MTRErrorDomain", 16)
+
+// ErrCodeConstraintError matches the Matter error MTRInteractionErrorCodeConstraintError.
+var ErrCodeConstraintError = errkit.New("MTRInteractionErrorDomain", 135)
+
+// ErrCodeDNSSDUnauthorized matches the Matter error MTRErrorCodeDNSSDUnauthorized.
+var ErrCodeDNSSDUnauthorized = errkit.New("MTRErrorDomain", 15)
+
+// ErrCodeDataVersionMismatch matches the Matter error MTRInteractionErrorCodeDataVersionMismatch.
+var ErrCodeDataVersionMismatch = errkit.New("MTRInteractionErrorDomain", 146)
+
+// ErrCodeFabricExists matches the Matter error MTRErrorCodeFabricExists.
+var ErrCodeFabricExists = errkit.New("MTRErrorDomain", 11)
+
+// ErrCodeFailsafeRequired matches the Matter error MTRInteractionErrorCodeFailsafeRequired.
+var ErrCodeFailsafeRequired = errkit.New("MTRInteractionErrorDomain", 202)
+
+// ErrCodeFailure matches the Matter error MTRInteractionErrorCodeFailure.
+var ErrCodeFailure = errkit.New("MTRInteractionErrorDomain", 1)
+
 // ErrCodeGeneralError matches the Matter error MTRErrorCodeGeneralError.
 var ErrCodeGeneralError = errkit.New("MTRErrorDomain", 1)
 
-// ErrCodeInvalidStringLength matches the Matter error MTRErrorCodeInvalidStringLength.
-var ErrCodeInvalidStringLength = errkit.New("MTRErrorDomain", 2)
+// ErrCodeIntegrityCheckFailed matches the Matter error MTRErrorCodeIntegrityCheckFailed.
+var ErrCodeIntegrityCheckFailed = errkit.New("MTRErrorDomain", 8)
 
-// ErrCodeInvalidIntegerValue matches the Matter error MTRErrorCodeInvalidIntegerValue.
-var ErrCodeInvalidIntegerValue = errkit.New("MTRErrorDomain", 3)
+// ErrCodeInvalidAction matches the Matter error MTRInteractionErrorCodeInvalidAction.
+var ErrCodeInvalidAction = errkit.New("MTRInteractionErrorDomain", 128)
 
 // ErrCodeInvalidArgument matches the Matter error MTRErrorCodeInvalidArgument.
 var ErrCodeInvalidArgument = errkit.New("MTRErrorDomain", 4)
+
+// ErrCodeInvalidCommand matches the Matter error MTRInteractionErrorCodeInvalidCommand.
+var ErrCodeInvalidCommand = errkit.New("MTRInteractionErrorDomain", 133)
+
+// ErrCodeInvalidDataType matches the Matter error MTRInteractionErrorCodeInvalidDataType.
+var ErrCodeInvalidDataType = errkit.New("MTRInteractionErrorDomain", 141)
+
+// ErrCodeInvalidInState matches the Matter error MTRInteractionErrorCodeInvalidInState.
+var ErrCodeInvalidInState = errkit.New("MTRInteractionErrorDomain", 203)
+
+// ErrCodeInvalidIntegerValue matches the Matter error MTRErrorCodeInvalidIntegerValue.
+var ErrCodeInvalidIntegerValue = errkit.New("MTRErrorDomain", 3)
 
 // ErrCodeInvalidMessageLength matches the Matter error MTRErrorCodeInvalidMessageLength.
 var ErrCodeInvalidMessageLength = errkit.New("MTRErrorDomain", 5)
@@ -26,23 +71,29 @@ var ErrCodeInvalidMessageLength = errkit.New("MTRErrorDomain", 5)
 // ErrCodeInvalidState matches the Matter error MTRErrorCodeInvalidState.
 var ErrCodeInvalidState = errkit.New("MTRErrorDomain", 6)
 
-// ErrCodeWrongAddressType matches the Matter error MTRErrorCodeWrongAddressType.
-var ErrCodeWrongAddressType = errkit.New("MTRErrorDomain", 7)
+// ErrCodeInvalidStringLength matches the Matter error MTRErrorCodeInvalidStringLength.
+var ErrCodeInvalidStringLength = errkit.New("MTRErrorDomain", 2)
 
-// ErrCodeIntegrityCheckFailed matches the Matter error MTRErrorCodeIntegrityCheckFailed.
-var ErrCodeIntegrityCheckFailed = errkit.New("MTRErrorDomain", 8)
+// ErrCodeInvalidSubscription matches the Matter error MTRInteractionErrorCodeInvalidSubscription.
+var ErrCodeInvalidSubscription = errkit.New("MTRInteractionErrorDomain", 125)
 
-// ErrCodeTimeout matches the Matter error MTRErrorCodeTimeout.
-var ErrCodeTimeout = errkit.New("MTRErrorDomain", 9)
+// ErrCodeNeedsTimedInteraction matches the Matter error MTRInteractionErrorCodeNeedsTimedInteraction.
+var ErrCodeNeedsTimedInteraction = errkit.New("MTRInteractionErrorDomain", 198)
 
-// ErrCodeBufferTooSmall matches the Matter error MTRErrorCodeBufferTooSmall.
-var ErrCodeBufferTooSmall = errkit.New("MTRErrorDomain", 10)
+// ErrCodeNoCommandResponse matches the Matter error MTRInteractionErrorCodeNoCommandResponse.
+var ErrCodeNoCommandResponse = errkit.New("MTRInteractionErrorDomain", 204)
 
-// ErrCodeFabricExists matches the Matter error MTRErrorCodeFabricExists.
-var ErrCodeFabricExists = errkit.New("MTRErrorDomain", 11)
+// ErrCodeNoUpstreamSubscription matches the Matter error MTRInteractionErrorCodeNoUpstreamSubscription.
+var ErrCodeNoUpstreamSubscription = errkit.New("MTRInteractionErrorDomain", 197)
 
-// ErrCodeUnknownSchema matches the Matter error MTRErrorCodeUnknownSchema.
-var ErrCodeUnknownSchema = errkit.New("MTRErrorDomain", 12)
+// ErrCodeNotFound matches the Matter error MTRErrorCodeNotFound.
+var ErrCodeNotFound = errkit.New("MTRErrorDomain", 19)
+
+// ErrCodePathsExhausted matches the Matter error MTRInteractionErrorCodePathsExhausted.
+var ErrCodePathsExhausted = errkit.New("MTRInteractionErrorDomain", 200)
+
+// ErrCodeResourceExhausted matches the Matter error MTRInteractionErrorCodeResourceExhausted.
+var ErrCodeResourceExhausted = errkit.New("MTRInteractionErrorDomain", 137)
 
 // ErrCodeSchemaMismatch matches the Matter error MTRErrorCodeSchemaMismatch.
 var ErrCodeSchemaMismatch = errkit.New("MTRErrorDomain", 13)
@@ -50,92 +101,41 @@ var ErrCodeSchemaMismatch = errkit.New("MTRErrorDomain", 13)
 // ErrCodeTLVDecodeFailed matches the Matter error MTRErrorCodeTLVDecodeFailed.
 var ErrCodeTLVDecodeFailed = errkit.New("MTRErrorDomain", 14)
 
-// ErrCodeDNSSDUnauthorized matches the Matter error MTRErrorCodeDNSSDUnauthorized.
-var ErrCodeDNSSDUnauthorized = errkit.New("MTRErrorDomain", 15)
+// ErrCodeTimedRequestMismatch matches the Matter error MTRInteractionErrorCodeTimedRequestMismatch.
+var ErrCodeTimedRequestMismatch = errkit.New("MTRInteractionErrorDomain", 201)
 
-// ErrCodeCancelled matches the Matter error MTRErrorCodeCancelled.
-var ErrCodeCancelled = errkit.New("MTRErrorDomain", 16)
+// ErrCodeTimeout matches the Matter error MTRErrorCodeTimeout.
+var ErrCodeTimeout = errkit.New("MTRErrorDomain", 9)
 
-// ErrCodeAccessDenied matches the Matter error MTRErrorCodeAccessDenied.
-var ErrCodeAccessDenied = errkit.New("MTRErrorDomain", 17)
-
-// ErrCodeBusy matches the Matter error MTRErrorCodeBusy.
-var ErrCodeBusy = errkit.New("MTRErrorDomain", 18)
-
-// ErrCodeNotFound matches the Matter error MTRErrorCodeNotFound.
-var ErrCodeNotFound = errkit.New("MTRErrorDomain", 19)
-
-// ErrCodeFailure matches the Matter error MTRInteractionErrorCodeFailure.
-var ErrCodeFailure = errkit.New("MTRInteractionErrorDomain", 1)
-
-// ErrCodeInvalidSubscription matches the Matter error MTRInteractionErrorCodeInvalidSubscription.
-var ErrCodeInvalidSubscription = errkit.New("MTRInteractionErrorDomain", 125)
-
-// ErrCodeUnsupportedAccess matches the Matter error MTRInteractionErrorCodeUnsupportedAccess.
-var ErrCodeUnsupportedAccess = errkit.New("MTRInteractionErrorDomain", 126)
-
-// ErrCodeUnsupportedEndpoint matches the Matter error MTRInteractionErrorCodeUnsupportedEndpoint.
-var ErrCodeUnsupportedEndpoint = errkit.New("MTRInteractionErrorDomain", 127)
-
-// ErrCodeInvalidAction matches the Matter error MTRInteractionErrorCodeInvalidAction.
-var ErrCodeInvalidAction = errkit.New("MTRInteractionErrorDomain", 128)
-
-// ErrCodeUnsupportedCommand matches the Matter error MTRInteractionErrorCodeUnsupportedCommand.
-var ErrCodeUnsupportedCommand = errkit.New("MTRInteractionErrorDomain", 129)
-
-// ErrCodeInvalidCommand matches the Matter error MTRInteractionErrorCodeInvalidCommand.
-var ErrCodeInvalidCommand = errkit.New("MTRInteractionErrorDomain", 133)
-
-// ErrCodeUnsupportedAttribute matches the Matter error MTRInteractionErrorCodeUnsupportedAttribute.
-var ErrCodeUnsupportedAttribute = errkit.New("MTRInteractionErrorDomain", 134)
-
-// ErrCodeConstraintError matches the Matter error MTRInteractionErrorCodeConstraintError.
-var ErrCodeConstraintError = errkit.New("MTRInteractionErrorDomain", 135)
-
-// ErrCodeUnsupportedWrite matches the Matter error MTRInteractionErrorCodeUnsupportedWrite.
-var ErrCodeUnsupportedWrite = errkit.New("MTRInteractionErrorDomain", 136)
-
-// ErrCodeResourceExhausted matches the Matter error MTRInteractionErrorCodeResourceExhausted.
-var ErrCodeResourceExhausted = errkit.New("MTRInteractionErrorDomain", 137)
+// ErrCodeUnknownSchema matches the Matter error MTRErrorCodeUnknownSchema.
+var ErrCodeUnknownSchema = errkit.New("MTRErrorDomain", 12)
 
 // ErrCodeUnreportableAttribute matches the Matter error MTRInteractionErrorCodeUnreportableAttribute.
 var ErrCodeUnreportableAttribute = errkit.New("MTRInteractionErrorDomain", 140)
 
-// ErrCodeInvalidDataType matches the Matter error MTRInteractionErrorCodeInvalidDataType.
-var ErrCodeInvalidDataType = errkit.New("MTRInteractionErrorDomain", 141)
+// ErrCodeUnsupportedAccess matches the Matter error MTRInteractionErrorCodeUnsupportedAccess.
+var ErrCodeUnsupportedAccess = errkit.New("MTRInteractionErrorDomain", 126)
 
-// ErrCodeUnsupportedRead matches the Matter error MTRInteractionErrorCodeUnsupportedRead.
-var ErrCodeUnsupportedRead = errkit.New("MTRInteractionErrorDomain", 143)
-
-// ErrCodeDataVersionMismatch matches the Matter error MTRInteractionErrorCodeDataVersionMismatch.
-var ErrCodeDataVersionMismatch = errkit.New("MTRInteractionErrorDomain", 146)
-
-// ErrCodeAccessRestricted matches the Matter error MTRInteractionErrorCodeAccessRestricted.
-var ErrCodeAccessRestricted = errkit.New("MTRInteractionErrorDomain", 157)
+// ErrCodeUnsupportedAttribute matches the Matter error MTRInteractionErrorCodeUnsupportedAttribute.
+var ErrCodeUnsupportedAttribute = errkit.New("MTRInteractionErrorDomain", 134)
 
 // ErrCodeUnsupportedCluster matches the Matter error MTRInteractionErrorCodeUnsupportedCluster.
 var ErrCodeUnsupportedCluster = errkit.New("MTRInteractionErrorDomain", 195)
 
-// ErrCodeNoUpstreamSubscription matches the Matter error MTRInteractionErrorCodeNoUpstreamSubscription.
-var ErrCodeNoUpstreamSubscription = errkit.New("MTRInteractionErrorDomain", 197)
+// ErrCodeUnsupportedCommand matches the Matter error MTRInteractionErrorCodeUnsupportedCommand.
+var ErrCodeUnsupportedCommand = errkit.New("MTRInteractionErrorDomain", 129)
 
-// ErrCodeNeedsTimedInteraction matches the Matter error MTRInteractionErrorCodeNeedsTimedInteraction.
-var ErrCodeNeedsTimedInteraction = errkit.New("MTRInteractionErrorDomain", 198)
+// ErrCodeUnsupportedEndpoint matches the Matter error MTRInteractionErrorCodeUnsupportedEndpoint.
+var ErrCodeUnsupportedEndpoint = errkit.New("MTRInteractionErrorDomain", 127)
 
 // ErrCodeUnsupportedEvent matches the Matter error MTRInteractionErrorCodeUnsupportedEvent.
 var ErrCodeUnsupportedEvent = errkit.New("MTRInteractionErrorDomain", 199)
 
-// ErrCodePathsExhausted matches the Matter error MTRInteractionErrorCodePathsExhausted.
-var ErrCodePathsExhausted = errkit.New("MTRInteractionErrorDomain", 200)
+// ErrCodeUnsupportedRead matches the Matter error MTRInteractionErrorCodeUnsupportedRead.
+var ErrCodeUnsupportedRead = errkit.New("MTRInteractionErrorDomain", 143)
 
-// ErrCodeTimedRequestMismatch matches the Matter error MTRInteractionErrorCodeTimedRequestMismatch.
-var ErrCodeTimedRequestMismatch = errkit.New("MTRInteractionErrorDomain", 201)
+// ErrCodeUnsupportedWrite matches the Matter error MTRInteractionErrorCodeUnsupportedWrite.
+var ErrCodeUnsupportedWrite = errkit.New("MTRInteractionErrorDomain", 136)
 
-// ErrCodeFailsafeRequired matches the Matter error MTRInteractionErrorCodeFailsafeRequired.
-var ErrCodeFailsafeRequired = errkit.New("MTRInteractionErrorDomain", 202)
-
-// ErrCodeInvalidInState matches the Matter error MTRInteractionErrorCodeInvalidInState.
-var ErrCodeInvalidInState = errkit.New("MTRInteractionErrorDomain", 203)
-
-// ErrCodeNoCommandResponse matches the Matter error MTRInteractionErrorCodeNoCommandResponse.
-var ErrCodeNoCommandResponse = errkit.New("MTRInteractionErrorDomain", 204)
+// ErrCodeWrongAddressType matches the Matter error MTRErrorCodeWrongAddressType.
+var ErrCodeWrongAddressType = errkit.New("MTRErrorDomain", 7)

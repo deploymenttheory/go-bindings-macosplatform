@@ -5,6 +5,8 @@
 package classkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,12 +56,14 @@ func NewProgressReportingCapabilityWithKindDetails(kind ProgressReportingCapabil
 
 // Kind returns the kind of progress reporting capability
 func (prc *ProgressReportingCapability) Kind() ProgressReportingCapabilityKind {
+	defer runtime.KeepAlive(prc)
 	_r := objc.Send[ProgressReportingCapabilityKind](objref.IDOf(prc), objc.RegisterName("kind"))
 	return _r
 }
 
 // Details returns progress reporting details
 func (prc *ProgressReportingCapability) Details() string {
+	defer runtime.KeepAlive(prc)
 	_r := objc.Send[objc.ID](objref.IDOf(prc), objc.RegisterName("details"))
 	if _r == 0 {
 		return ""

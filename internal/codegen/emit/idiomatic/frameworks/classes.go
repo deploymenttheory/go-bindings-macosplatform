@@ -5,11 +5,11 @@ package idiofw
 import (
 	"bytes"
 	"fmt"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"io"
 	"maps"
 	"slices"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
@@ -186,10 +186,11 @@ func emitClassFile(
 
 	// The wrapper struct already provides Description/IsEqual/IsKind (so it can be
 	// used as an obj.Object) and embeds objref.Handle (which promotes a field
-	// named Handle). Drop any generated method or setter that would redeclare one
-	// of those names.
+	// named Handle and the lifecycle method Release). Drop any generated method
+	// or setter that would redeclare one of those names.
 	objMethodNames := map[string]bool{
 		"Description": true, "IsEqual": true, "IsKind": true, "Handle": true,
+		"Release": true,
 	}
 	methods = slices.DeleteFunc(
 		methods,
@@ -220,7 +221,10 @@ func emitClassFile(
 	// Drop anything a hand-authored file in this package already declares, so the
 	// human's version wins (no duplicate-method compile error).
 	if len(handFuncs) > 0 {
-		ctors = slices.DeleteFunc(ctors, func(c constructorModel) bool { return handFuncs[c.goName] })
+		ctors = slices.DeleteFunc(
+			ctors,
+			func(c constructorModel) bool { return handFuncs[c.goName] },
+		)
 	}
 	if len(handMethods) > 0 {
 		withMethods = slices.DeleteFunc(
@@ -293,7 +297,14 @@ func emitClassFile(
 		}
 	}
 	render.Must(&body, "class_header", classHeaderView{
-		DocComment:   buildClassDoc(goTypeName, className, isAbstract, subLinks, baseType, class.Doc),
+		DocComment: buildClassDoc(
+			goTypeName,
+			className,
+			isAbstract,
+			subLinks,
+			baseType,
+			class.Doc,
+		),
 		GoTypeName:   goTypeName,
 		RecvVar:      receiverName(goTypeName),
 		ClassName:    className,
@@ -361,9 +372,11 @@ func emitClassFile(
 
 	imports := classFileImports(ctors, withMethods, methods, providerImports, embedsRoot)
 	if className == "NSMutableDictionary" {
-		// The dictionary augment helpers (Set/SetString/Get) use obj, which a
-		// non-root class would not otherwise import.
+		// The dictionary augment helpers (Set/SetString/Get) use obj (which a
+		// non-root class would not otherwise import) and keep their object
+		// arguments alive across the send via runtime.KeepAlive.
 		imports["obj"] = objImportPath
+		imports["runtime"] = "runtime"
 	}
 
 	// ── Write output ───────────────────────────────────────────────────────────
@@ -398,12 +411,14 @@ func classFileImports(
 		"purego": pureobjcImportPath,
 	}
 	if embedsRoot {
-		// Only a root defines Description/IsEqual/IsKind/String, which use rt; its
+		// Only a root defines Description/IsEqual/IsKind/String, which use rt (and
+		// keep their receiver alive across the send via runtime.KeepAlive); its
 		// IsEqual also names obj.Object. A subclass promotes that surface from its
 		// embedded base and names obj only when one of its own constructs does
 		// (recorded in that construct's extraImports below).
 		imports["rt"] = rtImportPath
 		imports["obj"] = objImportPath
+		imports["runtime"] = "runtime"
 	}
 	for _, c := range ctors {
 		maps.Copy(imports, c.extraImports)
@@ -424,9 +439,10 @@ func classFileImports(
 
 // isReservedMemberName reports whether a generated Go method or setter name
 // collides with a name the wrapper already provides through embedding: the
-// obj.Object surface (Description/IsEqual/IsKind) or the objref.Handle field.
-// Such a member is dropped — the embedded base supplies it, promoted to every
-// subclass (spec edge case #14, E13).
+// obj.Object surface (Description/IsEqual/IsKind), the objref.Handle field, or
+// the lifecycle method Release the Handle promotes. Such a member is dropped —
+// the embedded base supplies it, promoted to every subclass (spec edge case
+// #14, E13).
 //
 // "String" is deliberately NOT reserved here: the synthesized fmt stringer only
 // returns -description, but a genuine same-named property carries distinct data
@@ -436,7 +452,7 @@ func classFileImports(
 // a subclass's emitted String() simply shadows the promoted one.
 func isReservedMemberName(name string) bool {
 	switch name {
-	case "Description", "IsEqual", "IsKind", "Handle":
+	case "Description", "IsEqual", "IsKind", "Handle", "Release":
 		return true
 	}
 	return false

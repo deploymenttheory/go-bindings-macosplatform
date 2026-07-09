@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func cNNNeuronELUNodeAdopt(id objc.ID) *CNNNeuronELUNode {
 
 // NewCNNNeuronELUNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronELUNodeWithSource(sourceNode obj.Object) *CNNNeuronELUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronELUNodeAdopt(_id)
@@ -55,6 +58,7 @@ func NewCNNNeuronELUNodeWithSource(sourceNode obj.Object) *CNNNeuronELUNode {
 
 // NewCNNNeuronELUNodeWithSourceA creates a new CNNNeuronELUNode.
 func NewCNNNeuronELUNodeWithSourceA(sourceNode obj.Object, a float32) *CNNNeuronELUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:"), objref.IDOf(sourceNode), a)
 	return cNNNeuronELUNodeAdopt(_id)

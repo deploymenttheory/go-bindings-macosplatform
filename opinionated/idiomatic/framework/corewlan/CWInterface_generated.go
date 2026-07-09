@@ -5,6 +5,7 @@
 package corewlan
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func interfaceAdopt(id objc.ID) *Interface {
 
 // Description returns the object's -description text.
 func (i *Interface) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Interface) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Interface) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Interface) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
@@ -78,30 +84,36 @@ func NewInterfaceWithInterfaceName(name string) *Interface {
 
 // PowerOn reports whether the interface power state is set to “ON”.
 func (i *Interface) PowerOn() bool {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("powerOn"))
 	return _r
 }
 
 // SupportedWLANChannels returns an array of channels supported by the interface for the active country code.
-func (i *Interface) SupportedWLANChannels() obj.Object {
+// The order of the returned elements is unspecified.
+func (i *Interface) SupportedWLANChannels() []*Channel {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("supportedWLANChannels"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Channel { return ChannelFromID(_id) })
 }
 
 // WlanChannel returns the current channel for the interface.
 func (i *Interface) WlanChannel() *Channel {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("wlanChannel"))
 	return ChannelFromID(_r)
 }
 
 // ActivePHYMode returns the current active PHY modes for the interface.
 func (i *Interface) ActivePHYMode() PHYMode {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[PHYMode](objref.IDOf(i), objc.RegisterName("activePHYMode"))
 	return _r
 }
 
 // Ssid returns the current service set identifier (SSID) for the interface, encoded as a string.
 func (i *Interface) Ssid() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("ssid"))
 	if _r == 0 {
 		return ""
@@ -110,13 +122,15 @@ func (i *Interface) Ssid() string {
 }
 
 // SsidData returns the current service set identifier (SSID) for the interface, returned as data.
-func (i *Interface) SsidData() obj.Object {
+func (i *Interface) SsidData() []byte {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("ssidData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Bssid returns the current basic service set identifier (BSSID) for the interface, returned as a UTF-8 string.
 func (i *Interface) Bssid() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("bssid"))
 	if _r == 0 {
 		return ""
@@ -126,30 +140,35 @@ func (i *Interface) Bssid() string {
 
 // RssiValue returns the current aggregate received signal strength indication (RSSI) measurement (dBm) for the interface.
 func (i *Interface) RssiValue() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("rssiValue"))
 	return _r
 }
 
 // NoiseMeasurement returns the current aggregate noise measurement (dBm) for the interface.
 func (i *Interface) NoiseMeasurement() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("noiseMeasurement"))
 	return _r
 }
 
 // Security returns the current security mode for the interface.
 func (i *Interface) Security() Security {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[Security](objref.IDOf(i), objc.RegisterName("security"))
 	return _r
 }
 
 // TransmitRate returns the current transmit rate (Mbps) for the interface.
 func (i *Interface) TransmitRate() float64 {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[float64](objref.IDOf(i), objc.RegisterName("transmitRate"))
 	return _r
 }
 
 // CountryCode returns the current country code (ISO/IEC 3166-1:1997) for the interface.
 func (i *Interface) CountryCode() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
@@ -159,18 +178,21 @@ func (i *Interface) CountryCode() string {
 
 // InterfaceMode returns the current mode for the interface.
 func (i *Interface) InterfaceMode() InterfaceMode {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[InterfaceMode](objref.IDOf(i), objc.RegisterName("interfaceMode"))
 	return _r
 }
 
 // TransmitPower returns the current transmit power (mW) for the interface.
 func (i *Interface) TransmitPower() int {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("transmitPower"))
 	return _r
 }
 
 // HardwareAddress returns the hardware media access control (MAC) address for the interface, returned as a UTF-8 string.
 func (i *Interface) HardwareAddress() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("hardwareAddress"))
 	if _r == 0 {
 		return ""
@@ -180,24 +202,29 @@ func (i *Interface) HardwareAddress() string {
 
 // ServiceActive reports whether the interface has its corresponding network service enabled.
 func (i *Interface) ServiceActive() bool {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("serviceActive"))
 	return _r
 }
 
 // CachedScanResults returns the networks currently in the scan cache for the WLAN interface.
-func (i *Interface) CachedScanResults() obj.Object {
+// The order of the returned elements is unspecified.
+func (i *Interface) CachedScanResults() []*Network {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("cachedScanResults"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Network { return NetworkFromID(_id) })
 }
 
 // Configuration returns the current configuration for the given WLAN interface.
 func (i *Interface) Configuration() *Configuration {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("configuration"))
 	return ConfigurationFromID(_r)
 }
 
 // SetPower sets the interface power state.
 func (i *Interface) SetPower(power bool) error {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("setPower:error:"), power, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -208,6 +235,8 @@ func (i *Interface) SetPower(power bool) error {
 
 // SetWLANChannel sets the interface channel.
 func (i *Interface) SetWLANChannel(channel *Channel) error {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(channel)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("setWLANChannel:error:"), objref.IDOf(channel), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -217,9 +246,10 @@ func (i *Interface) SetWLANChannel(channel *Channel) error {
 }
 
 // SetPairwiseMasterKey sets the interface pairwise primary key (PMK).
-func (i *Interface) SetPairwiseMasterKey(key obj.Object) error {
+func (i *Interface) SetPairwiseMasterKey(key []byte) error {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("setPairwiseMasterKey:error:"), objref.IDOf(key), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("setPairwiseMasterKey:error:"), rt.BytesToNSData(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -227,57 +257,68 @@ func (i *Interface) SetPairwiseMasterKey(key obj.Object) error {
 }
 
 // SetWEPKeyFlagsIndex sets the interface WEP key.
-func (i *Interface) SetWEPKeyFlagsIndex(key obj.Object, flags CipherKeyFlags, index int) error {
+func (i *Interface) SetWEPKeyFlagsIndex(key []byte, flags CipherKeyFlags, index int) error {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("setWEPKey:flags:index:error:"), objref.IDOf(key), flags, index, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("setWEPKey:flags:index:error:"), rt.BytesToNSData(key), flags, index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// ScanForNetworksWithSSIDError scans for networks.
-func (i *Interface) ScanForNetworksWithSSIDError(ssid obj.Object) (result obj.Object, err error) {
+// ScanForNetworksWithSSID scans for networks.
+// The order of the returned elements is unspecified.
+func (i *Interface) ScanForNetworksWithSSID(ssid []byte) (result []*Network, err error) {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("scanForNetworksWithSSID:error:"), objref.IDOf(ssid), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("scanForNetworksWithSSID:error:"), rt.BytesToNSData(ssid), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Network { return NetworkFromID(_id) }), nil
 }
 
-// ScanForNetworksWithSSIDIncludeHiddenError scans for networks with the SSID you specify, optionally including hidden networks.
-func (i *Interface) ScanForNetworksWithSSIDIncludeHiddenError(ssid obj.Object, includeHidden bool) (result obj.Object, err error) {
+// ScanForNetworksWithSSIDIncludeHidden scans for networks with the SSID you specify, optionally including hidden networks.
+// The order of the returned elements is unspecified.
+func (i *Interface) ScanForNetworksWithSSIDIncludeHidden(ssid []byte, includeHidden bool) (result []*Network, err error) {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("scanForNetworksWithSSID:includeHidden:error:"), objref.IDOf(ssid), includeHidden, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("scanForNetworksWithSSID:includeHidden:error:"), rt.BytesToNSData(ssid), includeHidden, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Network { return NetworkFromID(_id) }), nil
 }
 
-// ScanForNetworksWithNameError scans for networks.
-func (i *Interface) ScanForNetworksWithNameError(networkName string) (result obj.Object, err error) {
+// ScanForNetworksWithName scans for networks.
+// The order of the returned elements is unspecified.
+func (i *Interface) ScanForNetworksWithName(networkName string) (result []*Network, err error) {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("scanForNetworksWithName:error:"), purego.NSString(networkName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Network { return NetworkFromID(_id) }), nil
 }
 
-// ScanForNetworksWithNameIncludeHiddenError scans for networks with the name you specify, optionally including hidden networks.
-func (i *Interface) ScanForNetworksWithNameIncludeHiddenError(networkName string, includeHidden bool) (result obj.Object, err error) {
+// ScanForNetworksWithNameIncludeHidden scans for networks with the name you specify, optionally including hidden networks.
+// The order of the returned elements is unspecified.
+func (i *Interface) ScanForNetworksWithNameIncludeHidden(networkName string, includeHidden bool) (result []*Network, err error) {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("scanForNetworksWithName:includeHidden:error:"), purego.NSString(networkName), includeHidden, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Network { return NetworkFromID(_id) }), nil
 }
 
 // AssociateToNetworkPassword associates to a given network using the given network passphrase.
 func (i *Interface) AssociateToNetworkPassword(network *Network, password string) error {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(network)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("associateToNetwork:password:error:"), objref.IDOf(network), purego.NSString(password), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -288,11 +329,15 @@ func (i *Interface) AssociateToNetworkPassword(network *Network, password string
 
 // Disassociate disassociates from the current network.
 func (i *Interface) Disassociate() {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("disassociate"))
 }
 
 // AssociateToEnterpriseNetworkIdentityUsernamePassword connects to the given enterprise network.
 func (i *Interface) AssociateToEnterpriseNetworkIdentityUsernamePassword(network *Network, identity obj.Object, username string, password string) error {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(network)
+	defer runtime.KeepAlive(identity)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("associateToEnterpriseNetwork:identity:username:password:error:"), objref.IDOf(network), objref.IDOf(identity), purego.NSString(username), purego.NSString(password), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -302,9 +347,10 @@ func (i *Interface) AssociateToEnterpriseNetworkIdentityUsernamePassword(network
 }
 
 // StartIBSSModeWithSSIDSecurityChannelPassword creates a computer-to-computer (ad-hoc) network with the given network name, security type, and password on the specified channel.
-func (i *Interface) StartIBSSModeWithSSIDSecurityChannelPassword(ssidData obj.Object, security IBSSModeSecurity, channel int, password string) error {
+func (i *Interface) StartIBSSModeWithSSIDSecurityChannelPassword(ssidData []byte, security IBSSModeSecurity, channel int, password string) error {
+	defer runtime.KeepAlive(i)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("startIBSSModeWithSSID:security:channel:password:error:"), objref.IDOf(ssidData), security, channel, purego.NSString(password), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("startIBSSModeWithSSID:security:channel:password:error:"), rt.BytesToNSData(ssidData), security, channel, purego.NSString(password), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -313,6 +359,9 @@ func (i *Interface) StartIBSSModeWithSSIDSecurityChannelPassword(ssidData obj.Ob
 
 // CommitConfigurationAuthorization commit a configuration for the given WLAN interface.
 func (i *Interface) CommitConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(configuration)
+	defer runtime.KeepAlive(authorization)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(i), objc.RegisterName("commitConfiguration:authorization:error:"), objref.IDOf(configuration), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -323,6 +372,7 @@ func (i *Interface) CommitConfigurationAuthorization(configuration *Configuratio
 
 // InterfaceName returns the BSD name of the Wi-Fi interface (e.g. "en0").
 func (i *Interface) InterfaceName() string {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("interfaceName"))
 	if _r == 0 {
 		return ""

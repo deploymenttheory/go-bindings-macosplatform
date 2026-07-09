@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,30 +52,35 @@ func mTRUnitTestingClusterBooleanResponseParamsAdopt(id objc.ID) *MTRUnitTesting
 
 // Description returns the object's -description text.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) Description() string {
+	defer runtime.KeepAlive(mutcbrp)
 	return rt.Description(objref.IDOf(mutcbrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutcbrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutcbrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutcbrp)
 	return rt.IsKind(objref.IDOf(mutcbrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) String() string {
+	defer runtime.KeepAlive(mutcbrp)
 	return rt.Description(objref.IDOf(mutcbrp))
 }
 
-// NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterBooleanResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+// NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValue initialize an MTRUnitTestingClusterBooleanResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterBooleanResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,26 +89,30 @@ func NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError(respons
 
 // WithValue sets the value.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterBooleanResponseParams {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mutcbrp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mutcbrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterBooleanResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mutcbrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mutcbrp
 }
 
 // Value returns the value.
-func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) Value() obj.Object {
+func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) Value() *foundation.Number {
+	defer runtime.KeepAlive(mutcbrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcbrp), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mutcbrp *MTRUnitTestingClusterBooleanResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mutcbrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcbrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterBooleanResponseParams marks MTRUnitTestingClusterBooleanResponseParams — and, by embedding promotion, its

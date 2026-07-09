@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func getReservationDetailsIntentAdopt(id objc.ID) *GetReservationDetailsIntent {
 
 // NewGetReservationDetailsIntentWithReservationContainerReferenceReservationItemReferences creates an intent that describes the reservation.
 func NewGetReservationDetailsIntentWithReservationContainerReferenceReservationItemReferences(reservationContainerReference *SpeakableString, reservationItemReferences []*SpeakableString) *GetReservationDetailsIntent {
+	defer runtime.KeepAlive(reservationContainerReference)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INGetReservationDetailsIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReservationContainerReference:reservationItemReferences:"), objref.IDOf(reservationContainerReference), purego.SliceToNSArray(reservationItemReferences, func(_v *SpeakableString) objc.ID { return objref.IDOf(_v) }))
 	return getReservationDetailsIntentAdopt(_id)
@@ -60,12 +63,14 @@ func (grdi *GetReservationDetailsIntent) WithSuggestedInvocationPhrase(suggested
 
 // WithDonationMetadata sets the donation metadata.
 func (grdi *GetReservationDetailsIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return grdi
 }
 
 // ReservationContainerReference returns the reservation container reference.
 func (grdi *GetReservationDetailsIntent) ReservationContainerReference() *SpeakableString {
+	defer runtime.KeepAlive(grdi)
 	_r := objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("reservationContainerReference"))
 	return SpeakableStringFromID(_r)
 }
@@ -74,6 +79,7 @@ func (grdi *GetReservationDetailsIntent) ReservationContainerReference() *Speaka
 //
 // ReservationItemReferences returns the collection as a Go slice.
 func (grdi *GetReservationDetailsIntent) ReservationItemReferences() []*SpeakableString {
+	defer runtime.KeepAlive(grdi)
 	_arr := objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("reservationItemReferences"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeakableString { return SpeakableStringFromID(_id) })
 }

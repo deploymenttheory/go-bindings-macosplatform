@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func extensionViewControllerAdopt(id objc.ID) *ExtensionViewController {
 
 // Description returns the object's -description text.
 func (evc *ExtensionViewController) Description() string {
+	defer runtime.KeepAlive(evc)
 	return rt.Description(objref.IDOf(evc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (evc *ExtensionViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(evc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(evc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (evc *ExtensionViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(evc)
 	return rt.IsKind(objref.IDOf(evc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (evc *ExtensionViewController) String() string {
+	defer runtime.KeepAlive(evc)
 	return rt.Description(objref.IDOf(evc))
 }
 

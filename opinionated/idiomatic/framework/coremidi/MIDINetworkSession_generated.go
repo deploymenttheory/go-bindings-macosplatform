@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func networkSessionAdopt(id objc.ID) *NetworkSession {
 
 // Description returns the object's -description text.
 func (ns *NetworkSession) Description() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ns *NetworkSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ns *NetworkSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(ns)
 	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ns *NetworkSession) String() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
@@ -85,67 +92,84 @@ func (ns *NetworkSession) WithConnectionPolicy(connectionPolicy NetworkConnectio
 }
 
 // Contacts returns the array of network hosts.
-func (ns *NetworkSession) Contacts() obj.Object {
+// The order of the returned elements is unspecified.
+func (ns *NetworkSession) Contacts() []*NetworkHost {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("contacts"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *NetworkHost { return NetworkHostFromID(_id) })
 }
 
 // AddContact adds a host as a contact.
 func (ns *NetworkSession) AddContact(contact *NetworkHost) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(contact)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("addContact:"), objref.IDOf(contact))
 	return _r
 }
 
 // RemoveContact removes a host as a contact.
 func (ns *NetworkSession) RemoveContact(contact *NetworkHost) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(contact)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("removeContact:"), objref.IDOf(contact))
 	return _r
 }
 
 // Connections returns the session’s set of MIDI network connections.
-func (ns *NetworkSession) Connections() obj.Object {
+// The order of the returned elements is unspecified.
+func (ns *NetworkSession) Connections() []*NetworkConnection {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("connections"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *NetworkConnection { return NetworkConnectionFromID(_id) })
 }
 
 // AddConnection adds a new connection to this session.
 func (ns *NetworkSession) AddConnection(connection *NetworkConnection) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(connection)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("addConnection:"), objref.IDOf(connection))
 	return _r
 }
 
 // RemoveConnection removes a connection from this session.
 func (ns *NetworkSession) RemoveConnection(connection *NetworkConnection) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(connection)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("removeConnection:"), objref.IDOf(connection))
 	return _r
 }
 
 // SourceEndpoint returns the session’s source endpoint.
 func (ns *NetworkSession) SourceEndpoint() int {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("sourceEndpoint"))
 	return _r
 }
 
 // DestinationEndpoint returns the session’s destination endpoint.
 func (ns *NetworkSession) DestinationEndpoint() int {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("destinationEndpoint"))
 	return _r
 }
 
 // IsEnabled reports whether the object is enabled.
 func (ns *NetworkSession) IsEnabled() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // NetworkPort returns the network port.
 func (ns *NetworkSession) NetworkPort() int {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("networkPort"))
 	return _r
 }
 
 // NetworkName returns the network name.
 func (ns *NetworkSession) NetworkName() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
@@ -155,6 +179,7 @@ func (ns *NetworkSession) NetworkName() string {
 
 // LocalName returns the local name.
 func (ns *NetworkSession) LocalName() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("localName"))
 	if _r == 0 {
 		return ""
@@ -164,6 +189,7 @@ func (ns *NetworkSession) LocalName() string {
 
 // ConnectionPolicy returns the connection policy.
 func (ns *NetworkSession) ConnectionPolicy() NetworkConnectionPolicy {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NetworkConnectionPolicy](objref.IDOf(ns), objc.RegisterName("connectionPolicy"))
 	return _r
 }

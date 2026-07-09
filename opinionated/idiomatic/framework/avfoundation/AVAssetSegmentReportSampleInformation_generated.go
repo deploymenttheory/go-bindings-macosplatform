@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func assetSegmentReportSampleInformationAdopt(id objc.ID) *AssetSegmentReportSam
 
 // Description returns the object's -description text.
 func (asrsi *AssetSegmentReportSampleInformation) Description() string {
+	defer runtime.KeepAlive(asrsi)
 	return rt.Description(objref.IDOf(asrsi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asrsi *AssetSegmentReportSampleInformation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asrsi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asrsi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asrsi *AssetSegmentReportSampleInformation) IsKind(className string) bool {
+	defer runtime.KeepAlive(asrsi)
 	return rt.IsKind(objref.IDOf(asrsi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asrsi *AssetSegmentReportSampleInformation) String() string {
+	defer runtime.KeepAlive(asrsi)
 	return rt.Description(objref.IDOf(asrsi))
 }
 
@@ -75,24 +82,28 @@ func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformati
 
 // PresentationTimeStamp returns the presentation timestamp (PTS) of the sample. This timestamp may be different from the earliestPresentationTimeStamp if the video is encoded using frame reordering.
 func (asrsi *AssetSegmentReportSampleInformation) PresentationTimeStamp() coremedia.CMTime {
+	defer runtime.KeepAlive(asrsi)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(asrsi), objc.RegisterName("presentationTimeStamp"))
 	return _r
 }
 
 // Offset returns the offset of the sample in the segment.
 func (asrsi *AssetSegmentReportSampleInformation) Offset() int {
+	defer runtime.KeepAlive(asrsi)
 	_r := objc.Send[int](objref.IDOf(asrsi), objc.RegisterName("offset"))
 	return _r
 }
 
 // Length returns the length of the sample.
 func (asrsi *AssetSegmentReportSampleInformation) Length() int {
+	defer runtime.KeepAlive(asrsi)
 	_r := objc.Send[int](objref.IDOf(asrsi), objc.RegisterName("length"))
 	return _r
 }
 
 // IsSyncSample reports whether the sample is a sync sample.
 func (asrsi *AssetSegmentReportSampleInformation) IsSyncSample() bool {
+	defer runtime.KeepAlive(asrsi)
 	_r := objc.Send[bool](objref.IDOf(asrsi), objc.RegisterName("isSyncSample"))
 	return _r
 }

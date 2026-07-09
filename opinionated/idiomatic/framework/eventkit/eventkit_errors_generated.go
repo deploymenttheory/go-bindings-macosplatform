@@ -8,68 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrEventNotMutable matches the EventKit error EKErrorEventNotMutable.
-var ErrEventNotMutable = errkit.New("EKErrorDomain", 0)
-
-// ErrNoCalendar matches the EventKit error EKErrorNoCalendar.
-var ErrNoCalendar = errkit.New("EKErrorDomain", 1)
-
-// ErrNoStartDate matches the EventKit error EKErrorNoStartDate.
-var ErrNoStartDate = errkit.New("EKErrorDomain", 2)
-
-// ErrNoEndDate matches the EventKit error EKErrorNoEndDate.
-var ErrNoEndDate = errkit.New("EKErrorDomain", 3)
-
-// ErrDatesInverted matches the EventKit error EKErrorDatesInverted.
-var ErrDatesInverted = errkit.New("EKErrorDomain", 4)
-
-// ErrInternalFailure matches the EventKit error EKErrorInternalFailure.
-var ErrInternalFailure = errkit.New("EKErrorDomain", 5)
-
-// ErrCalendarReadOnly matches the EventKit error EKErrorCalendarReadOnly.
-var ErrCalendarReadOnly = errkit.New("EKErrorDomain", 6)
-
-// ErrDurationGreaterThanRecurrence matches the EventKit error EKErrorDurationGreaterThanRecurrence.
-var ErrDurationGreaterThanRecurrence = errkit.New("EKErrorDomain", 7)
-
 // ErrAlarmGreaterThanRecurrence matches the EventKit error EKErrorAlarmGreaterThanRecurrence.
 var ErrAlarmGreaterThanRecurrence = errkit.New("EKErrorDomain", 8)
-
-// ErrStartDateTooFarInFuture matches the EventKit error EKErrorStartDateTooFarInFuture.
-var ErrStartDateTooFarInFuture = errkit.New("EKErrorDomain", 9)
-
-// ErrStartDateCollidesWithOtherOccurrence matches the EventKit error EKErrorStartDateCollidesWithOtherOccurrence.
-var ErrStartDateCollidesWithOtherOccurrence = errkit.New("EKErrorDomain", 10)
-
-// ErrObjectBelongsToDifferentStore matches the EventKit error EKErrorObjectBelongsToDifferentStore.
-var ErrObjectBelongsToDifferentStore = errkit.New("EKErrorDomain", 11)
-
-// ErrInvitesCannotBeMoved matches the EventKit error EKErrorInvitesCannotBeMoved.
-var ErrInvitesCannotBeMoved = errkit.New("EKErrorDomain", 12)
-
-// ErrInvalidSpan matches the EventKit error EKErrorInvalidSpan.
-var ErrInvalidSpan = errkit.New("EKErrorDomain", 13)
-
-// ErrCalendarHasNoSource matches the EventKit error EKErrorCalendarHasNoSource.
-var ErrCalendarHasNoSource = errkit.New("EKErrorDomain", 14)
-
-// ErrCalendarSourceCannotBeModified matches the EventKit error EKErrorCalendarSourceCannotBeModified.
-var ErrCalendarSourceCannotBeModified = errkit.New("EKErrorDomain", 15)
-
-// ErrCalendarIsImmutable matches the EventKit error EKErrorCalendarIsImmutable.
-var ErrCalendarIsImmutable = errkit.New("EKErrorDomain", 16)
-
-// ErrSourceDoesNotAllowCalendarAddDelete matches the EventKit error EKErrorSourceDoesNotAllowCalendarAddDelete.
-var ErrSourceDoesNotAllowCalendarAddDelete = errkit.New("EKErrorDomain", 17)
-
-// ErrRecurringReminderRequiresDueDate matches the EventKit error EKErrorRecurringReminderRequiresDueDate.
-var ErrRecurringReminderRequiresDueDate = errkit.New("EKErrorDomain", 18)
-
-// ErrStructuredLocationsNotSupported matches the EventKit error EKErrorStructuredLocationsNotSupported.
-var ErrStructuredLocationsNotSupported = errkit.New("EKErrorDomain", 19)
-
-// ErrReminderLocationsNotSupported matches the EventKit error EKErrorReminderLocationsNotSupported.
-var ErrReminderLocationsNotSupported = errkit.New("EKErrorDomain", 20)
 
 // ErrAlarmProximityNotSupported matches the EventKit error EKErrorAlarmProximityNotSupported.
 var ErrAlarmProximityNotSupported = errkit.New("EKErrorDomain", 21)
@@ -80,35 +20,56 @@ var ErrCalendarDoesNotAllowEvents = errkit.New("EKErrorDomain", 22)
 // ErrCalendarDoesNotAllowReminders matches the EventKit error EKErrorCalendarDoesNotAllowReminders.
 var ErrCalendarDoesNotAllowReminders = errkit.New("EKErrorDomain", 23)
 
-// ErrSourceDoesNotAllowReminders matches the EventKit error EKErrorSourceDoesNotAllowReminders.
-var ErrSourceDoesNotAllowReminders = errkit.New("EKErrorDomain", 24)
+// ErrCalendarHasNoSource matches the EventKit error EKErrorCalendarHasNoSource.
+var ErrCalendarHasNoSource = errkit.New("EKErrorDomain", 14)
 
-// ErrSourceDoesNotAllowEvents matches the EventKit error EKErrorSourceDoesNotAllowEvents.
-var ErrSourceDoesNotAllowEvents = errkit.New("EKErrorDomain", 25)
+// ErrCalendarIsImmutable matches the EventKit error EKErrorCalendarIsImmutable.
+var ErrCalendarIsImmutable = errkit.New("EKErrorDomain", 16)
 
-// ErrPriorityIsInvalid matches the EventKit error EKErrorPriorityIsInvalid.
-var ErrPriorityIsInvalid = errkit.New("EKErrorDomain", 26)
+// ErrCalendarReadOnly matches the EventKit error EKErrorCalendarReadOnly.
+var ErrCalendarReadOnly = errkit.New("EKErrorDomain", 6)
 
-// ErrInvalidEntityType matches the EventKit error EKErrorInvalidEntityType.
-var ErrInvalidEntityType = errkit.New("EKErrorDomain", 27)
+// ErrCalendarSourceCannotBeModified matches the EventKit error EKErrorCalendarSourceCannotBeModified.
+var ErrCalendarSourceCannotBeModified = errkit.New("EKErrorDomain", 15)
 
-// ErrProcedureAlarmsNotMutable matches the EventKit error EKErrorProcedureAlarmsNotMutable.
-var ErrProcedureAlarmsNotMutable = errkit.New("EKErrorDomain", 28)
+// ErrDatesInverted matches the EventKit error EKErrorDatesInverted.
+var ErrDatesInverted = errkit.New("EKErrorDomain", 4)
+
+// ErrDurationGreaterThanRecurrence matches the EventKit error EKErrorDurationGreaterThanRecurrence.
+var ErrDurationGreaterThanRecurrence = errkit.New("EKErrorDomain", 7)
+
+// ErrEventNotMutable matches the EventKit error EKErrorEventNotMutable.
+var ErrEventNotMutable = errkit.New("EKErrorDomain", 0)
 
 // ErrEventStoreNotAuthorized matches the EventKit error EKErrorEventStoreNotAuthorized.
 var ErrEventStoreNotAuthorized = errkit.New("EKErrorDomain", 29)
 
-// ErrOSNotSupported matches the EventKit error EKErrorOSNotSupported.
-var ErrOSNotSupported = errkit.New("EKErrorDomain", 30)
+// ErrInternalFailure matches the EventKit error EKErrorInternalFailure.
+var ErrInternalFailure = errkit.New("EKErrorDomain", 5)
+
+// ErrInvalidEntityType matches the EventKit error EKErrorInvalidEntityType.
+var ErrInvalidEntityType = errkit.New("EKErrorDomain", 27)
 
 // ErrInvalidInviteReplyCalendar matches the EventKit error EKErrorInvalidInviteReplyCalendar.
 var ErrInvalidInviteReplyCalendar = errkit.New("EKErrorDomain", 31)
 
-// ErrNotificationsCollectionFlagNotSet matches the EventKit error EKErrorNotificationsCollectionFlagNotSet.
-var ErrNotificationsCollectionFlagNotSet = errkit.New("EKErrorDomain", 32)
+// ErrInvalidSpan matches the EventKit error EKErrorInvalidSpan.
+var ErrInvalidSpan = errkit.New("EKErrorDomain", 13)
 
-// ErrSourceMismatch matches the EventKit error EKErrorSourceMismatch.
-var ErrSourceMismatch = errkit.New("EKErrorDomain", 33)
+// ErrInvitesCannotBeMoved matches the EventKit error EKErrorInvitesCannotBeMoved.
+var ErrInvitesCannotBeMoved = errkit.New("EKErrorDomain", 12)
+
+// ErrLast matches the EventKit error EKErrorLast.
+var ErrLast = errkit.New("EKErrorDomain", 37)
+
+// ErrNoCalendar matches the EventKit error EKErrorNoCalendar.
+var ErrNoCalendar = errkit.New("EKErrorDomain", 1)
+
+// ErrNoEndDate matches the EventKit error EKErrorNoEndDate.
+var ErrNoEndDate = errkit.New("EKErrorDomain", 3)
+
+// ErrNoStartDate matches the EventKit error EKErrorNoStartDate.
+var ErrNoStartDate = errkit.New("EKErrorDomain", 2)
 
 // ErrNotificationCollectionMismatch matches the EventKit error EKErrorNotificationCollectionMismatch.
 var ErrNotificationCollectionMismatch = errkit.New("EKErrorDomain", 34)
@@ -116,8 +77,47 @@ var ErrNotificationCollectionMismatch = errkit.New("EKErrorDomain", 34)
 // ErrNotificationSavedWithoutCollection matches the EventKit error EKErrorNotificationSavedWithoutCollection.
 var ErrNotificationSavedWithoutCollection = errkit.New("EKErrorDomain", 35)
 
+// ErrNotificationsCollectionFlagNotSet matches the EventKit error EKErrorNotificationsCollectionFlagNotSet.
+var ErrNotificationsCollectionFlagNotSet = errkit.New("EKErrorDomain", 32)
+
+// ErrOSNotSupported matches the EventKit error EKErrorOSNotSupported.
+var ErrOSNotSupported = errkit.New("EKErrorDomain", 30)
+
+// ErrObjectBelongsToDifferentStore matches the EventKit error EKErrorObjectBelongsToDifferentStore.
+var ErrObjectBelongsToDifferentStore = errkit.New("EKErrorDomain", 11)
+
+// ErrPriorityIsInvalid matches the EventKit error EKErrorPriorityIsInvalid.
+var ErrPriorityIsInvalid = errkit.New("EKErrorDomain", 26)
+
+// ErrProcedureAlarmsNotMutable matches the EventKit error EKErrorProcedureAlarmsNotMutable.
+var ErrProcedureAlarmsNotMutable = errkit.New("EKErrorDomain", 28)
+
+// ErrRecurringReminderRequiresDueDate matches the EventKit error EKErrorRecurringReminderRequiresDueDate.
+var ErrRecurringReminderRequiresDueDate = errkit.New("EKErrorDomain", 18)
+
 // ErrReminderAlarmContainsEmailOrUrl matches the EventKit error EKErrorReminderAlarmContainsEmailOrUrl.
 var ErrReminderAlarmContainsEmailOrUrl = errkit.New("EKErrorDomain", 36)
 
-// ErrLast matches the EventKit error EKErrorLast.
-var ErrLast = errkit.New("EKErrorDomain", 37)
+// ErrReminderLocationsNotSupported matches the EventKit error EKErrorReminderLocationsNotSupported.
+var ErrReminderLocationsNotSupported = errkit.New("EKErrorDomain", 20)
+
+// ErrSourceDoesNotAllowCalendarAddDelete matches the EventKit error EKErrorSourceDoesNotAllowCalendarAddDelete.
+var ErrSourceDoesNotAllowCalendarAddDelete = errkit.New("EKErrorDomain", 17)
+
+// ErrSourceDoesNotAllowEvents matches the EventKit error EKErrorSourceDoesNotAllowEvents.
+var ErrSourceDoesNotAllowEvents = errkit.New("EKErrorDomain", 25)
+
+// ErrSourceDoesNotAllowReminders matches the EventKit error EKErrorSourceDoesNotAllowReminders.
+var ErrSourceDoesNotAllowReminders = errkit.New("EKErrorDomain", 24)
+
+// ErrSourceMismatch matches the EventKit error EKErrorSourceMismatch.
+var ErrSourceMismatch = errkit.New("EKErrorDomain", 33)
+
+// ErrStartDateCollidesWithOtherOccurrence matches the EventKit error EKErrorStartDateCollidesWithOtherOccurrence.
+var ErrStartDateCollidesWithOtherOccurrence = errkit.New("EKErrorDomain", 10)
+
+// ErrStartDateTooFarInFuture matches the EventKit error EKErrorStartDateTooFarInFuture.
+var ErrStartDateTooFarInFuture = errkit.New("EKErrorDomain", 9)
+
+// ErrStructuredLocationsNotSupported matches the EventKit error EKErrorStructuredLocationsNotSupported.
+var ErrStructuredLocationsNotSupported = errkit.New("EKErrorDomain", 19)

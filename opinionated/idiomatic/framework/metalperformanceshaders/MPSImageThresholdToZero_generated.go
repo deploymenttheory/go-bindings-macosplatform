@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -73,6 +75,7 @@ func (ittz *ImageThresholdToZero) WithLabel(label string) *ImageThresholdToZero 
 
 // ThresholdValue returns the threshold value used to init the threshold filter
 func (ittz *ImageThresholdToZero) ThresholdValue() float32 {
+	defer runtime.KeepAlive(ittz)
 	_r := objc.Send[float32](objref.IDOf(ittz), objc.RegisterName("thresholdValue"))
 	return _r
 }

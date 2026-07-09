@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,7 @@ func windowControllerAdopt(id objc.ID) *WindowController {
 
 // NewWindowControllerWithWindow returns a window controller initialized with a given window.
 func NewWindowControllerWithWindow(window *Window) *WindowController {
+	defer runtime.KeepAlive(window)
 	var _mainthread0 *WindowController
 	purego.Main(func() {
 		_mainthread0 = func() *WindowController {
@@ -61,6 +65,7 @@ func NewWindowControllerWithWindow(window *Window) *WindowController {
 
 // NewWindowControllerWithCoder creates a new WindowController.
 func NewWindowControllerWithCoder(coder obj.Object) *WindowController {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *WindowController
 	purego.Main(func() {
 		_mainthread0 = func() *WindowController {
@@ -74,6 +79,7 @@ func NewWindowControllerWithCoder(coder obj.Object) *WindowController {
 
 // NewWindowControllerWithWindowNibName returns a window controller initialized with a nib file.
 func NewWindowControllerWithWindowNibName(windowNibName obj.Object) *WindowController {
+	defer runtime.KeepAlive(windowNibName)
 	var _mainthread0 *WindowController
 	purego.Main(func() {
 		_mainthread0 = func() *WindowController {
@@ -87,6 +93,8 @@ func NewWindowControllerWithWindowNibName(windowNibName obj.Object) *WindowContr
 
 // NewWindowControllerWithWindowNibNameOwner returns a window controller initialized with a nib file and a specified owner for that nib file.
 func NewWindowControllerWithWindowNibNameOwner(windowNibName obj.Object, owner obj.Object) *WindowController {
+	defer runtime.KeepAlive(windowNibName)
+	defer runtime.KeepAlive(owner)
 	var _mainthread0 *WindowController
 	purego.Main(func() {
 		_mainthread0 = func() *WindowController {
@@ -100,6 +108,7 @@ func NewWindowControllerWithWindowNibNameOwner(windowNibName obj.Object, owner o
 
 // NewWindowControllerWithWindowNibPathOwner returns a window controller initialized with a nib file at an absolute path and a specified owner.
 func NewWindowControllerWithWindowNibPathOwner(windowNibPath string, owner obj.Object) *WindowController {
+	defer runtime.KeepAlive(owner)
 	var _mainthread0 *WindowController
 	purego.Main(func() {
 		_mainthread0 = func() *WindowController {
@@ -113,6 +122,7 @@ func NewWindowControllerWithWindowNibPathOwner(windowNibPath string, owner obj.O
 
 // WithWindowFrameAutosaveName sets the name under which the frame rectangle of the window owned by the receiver is stored in the defaults database.
 func (wc *WindowController) WithWindowFrameAutosaveName(windowFrameAutosaveName obj.Object) *WindowController {
+	defer runtime.KeepAlive(windowFrameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setWindowFrameAutosaveName:"), objref.IDOf(windowFrameAutosaveName))
 	})
@@ -129,6 +139,7 @@ func (wc *WindowController) WithShouldCascadeWindows(shouldCascadeWindows bool) 
 
 // WithDocument sets the document associated with the window controller.
 func (wc *WindowController) WithDocument(document obj.Object) *WindowController {
+	defer runtime.KeepAlive(document)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setDocument:"), objref.IDOf(document))
 	})
@@ -145,6 +156,7 @@ func (wc *WindowController) WithShouldCloseDocument(shouldCloseDocument bool) *W
 
 // WithContentViewController sets the view controller for the window’s content view.
 func (wc *WindowController) WithContentViewController(contentViewController ViewControllerProvider) *WindowController {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -153,6 +165,7 @@ func (wc *WindowController) WithContentViewController(contentViewController View
 
 // WithWindow sets the window owned by the receiver.
 func (wc *WindowController) WithWindow(window WindowProvider) *WindowController {
+	defer runtime.KeepAlive(window)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setWindow:"), objref.IDOf(window))
 	})
@@ -161,6 +174,7 @@ func (wc *WindowController) WithWindow(window WindowProvider) *WindowController 
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (wc *WindowController) WithNextResponder(nextResponder ResponderProvider) *WindowController {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -169,6 +183,7 @@ func (wc *WindowController) WithNextResponder(nextResponder ResponderProvider) *
 
 // WithMenu sets returns the responder’s menu.
 func (wc *WindowController) WithMenu(menu *Menu) *WindowController {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -177,6 +192,7 @@ func (wc *WindowController) WithMenu(menu *Menu) *WindowController {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (wc *WindowController) WithUserActivity(userActivity obj.Object) *WindowController {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -185,6 +201,7 @@ func (wc *WindowController) WithUserActivity(userActivity obj.Object) *WindowCon
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (wc *WindowController) WithTouchBar(touchBar *TouchBar) *WindowController {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -193,6 +210,7 @@ func (wc *WindowController) WithTouchBar(touchBar *TouchBar) *WindowController {
 
 // SetDocumentEdited sets the document edited flag for the window controller.
 func (wc *WindowController) SetDocumentEdited(dirtyFlag bool) {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setDocumentEdited:"), dirtyFlag)
 	})
@@ -201,6 +219,7 @@ func (wc *WindowController) SetDocumentEdited(dirtyFlag bool) {
 
 // SynchronizeWindowTitleWithDocumentName synchronizes the displayed window title and the represented filename with the information in the associated document.
 func (wc *WindowController) SynchronizeWindowTitleWithDocumentName() {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("synchronizeWindowTitleWithDocumentName"))
 	})
@@ -209,6 +228,7 @@ func (wc *WindowController) SynchronizeWindowTitleWithDocumentName() {
 
 // WindowTitleForDocumentDisplayName returns the window title to be used for a given document display name.
 func (wc *WindowController) WindowTitleForDocumentDisplayName(displayName string) string {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -225,6 +245,7 @@ func (wc *WindowController) WindowTitleForDocumentDisplayName(displayName string
 
 // WindowWillLoad sent before the window owned by the receiver is loaded.
 func (wc *WindowController) WindowWillLoad() {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowWillLoad"))
 	})
@@ -233,6 +254,7 @@ func (wc *WindowController) WindowWillLoad() {
 
 // WindowDidLoad sent after the window owned by the receiver has been loaded.
 func (wc *WindowController) WindowDidLoad() {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowDidLoad"))
 	})
@@ -241,6 +263,7 @@ func (wc *WindowController) WindowDidLoad() {
 
 // LoadWindow loads the receiver’s window from the nib file.
 func (wc *WindowController) LoadWindow() {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("loadWindow"))
 	})
@@ -249,6 +272,7 @@ func (wc *WindowController) LoadWindow() {
 
 // Close closes the window if it was loaded.
 func (wc *WindowController) Close() {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("close"))
 	})
@@ -257,6 +281,8 @@ func (wc *WindowController) Close() {
 
 // ShowWindow displays the window associated with the receiver.
 func (wc *WindowController) ShowWindow(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("showWindow:"), objref.IDOf(sender))
 	})
@@ -264,12 +290,13 @@ func (wc *WindowController) ShowWindow(sender obj.Object) {
 }
 
 // WindowNibName returns the window nib name.
-func (wc *WindowController) WindowNibName() obj.Object {
-	var _mainthread0 obj.Object
+func (wc *WindowController) WindowNibName() *foundation.String {
+	defer runtime.KeepAlive(wc)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowNibName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -278,6 +305,7 @@ func (wc *WindowController) WindowNibName() obj.Object {
 
 // WindowNibPath returns the window nib path.
 func (wc *WindowController) WindowNibPath() string {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -294,6 +322,7 @@ func (wc *WindowController) WindowNibPath() string {
 
 // Owner returns the owner.
 func (wc *WindowController) Owner() obj.Object {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -306,12 +335,13 @@ func (wc *WindowController) Owner() obj.Object {
 }
 
 // WindowFrameAutosaveName returns the window frame autosave name.
-func (wc *WindowController) WindowFrameAutosaveName() obj.Object {
-	var _mainthread0 obj.Object
+func (wc *WindowController) WindowFrameAutosaveName() *foundation.String {
+	defer runtime.KeepAlive(wc)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowFrameAutosaveName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -320,6 +350,7 @@ func (wc *WindowController) WindowFrameAutosaveName() obj.Object {
 
 // ShouldCascadeWindows wraps the corresponding Objective-C method.
 func (wc *WindowController) ShouldCascadeWindows() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -333,6 +364,7 @@ func (wc *WindowController) ShouldCascadeWindows() bool {
 
 // PreviewRepresentableActivityItems returns the preview representable activity items.
 func (wc *WindowController) PreviewRepresentableActivityItems() []obj.Object {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -346,6 +378,7 @@ func (wc *WindowController) PreviewRepresentableActivityItems() []obj.Object {
 
 // SetPreviewRepresentableActivityItems wraps the corresponding Objective-C method.
 func (wc *WindowController) SetPreviewRepresentableActivityItems(previewRepresentableActivityItems []obj.Object) {
+	defer runtime.KeepAlive(wc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setPreviewRepresentableActivityItems:"), purego.SliceToNSArray(previewRepresentableActivityItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -354,6 +387,7 @@ func (wc *WindowController) SetPreviewRepresentableActivityItems(previewRepresen
 
 // Document returns the document.
 func (wc *WindowController) Document() obj.Object {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -367,6 +401,7 @@ func (wc *WindowController) Document() obj.Object {
 
 // ShouldCloseDocument wraps the corresponding Objective-C method.
 func (wc *WindowController) ShouldCloseDocument() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -380,6 +415,7 @@ func (wc *WindowController) ShouldCloseDocument() bool {
 
 // ContentViewController returns the content view controller.
 func (wc *WindowController) ContentViewController() *ViewController {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -393,6 +429,7 @@ func (wc *WindowController) ContentViewController() *ViewController {
 
 // Window returns the window.
 func (wc *WindowController) Window() *Window {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -406,6 +443,7 @@ func (wc *WindowController) Window() *Window {
 
 // IsWindowLoaded reports whether the object is window loaded.
 func (wc *WindowController) IsWindowLoaded() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -419,6 +457,7 @@ func (wc *WindowController) IsWindowLoaded() bool {
 
 // Storyboard returns the storyboard.
 func (wc *WindowController) Storyboard() *Storyboard {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 *Storyboard
 	purego.Main(func() {
 		_mainthread0 = func() *Storyboard {
@@ -432,6 +471,8 @@ func (wc *WindowController) Storyboard() *Storyboard {
 
 // DismissController dismisses the window controller.
 func (wc *WindowController) DismissController(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("dismissController:"), objref.IDOf(sender))
 	})

@@ -448,8 +448,8 @@
         "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/currentprotocol"
       },
       "send(ins:p1:p2:data:le:)": {
-        "doc": "Asynchronously sends an APDU command to the smart card.",
-        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/send(ins:p1:p2:data:le:)-6dore"
+        "doc": "Synchronously sends an APDU command to the smart card.",
+        "url": "https://developer.apple.com/documentation/cryptotokenkit/tksmartcard/send(ins:p1:p2:data:le:)-1kbga"
       },
       "send(ins:p1:p2:data:le:reply:)": {
         "doc": "Asynchronously transmits an APDU command to the card, returning the response in a completion handler.",

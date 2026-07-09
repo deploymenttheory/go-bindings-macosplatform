@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,18 +56,21 @@ func NewHorizonObservation() *HorizonObservation {
 
 // TransformForImageWidthHeight creates an affine transform for the specified image width and height.
 func (ho *HorizonObservation) TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ho), objc.RegisterName("transformForImageWidth:height:"), width, height)
 	return _r
 }
 
 // Transform returns transform applied to the detected horizon in image coordinates. This is the transform in image coordinates and not a normalized transform.
 func (ho *HorizonObservation) Transform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ho), objc.RegisterName("transform"))
 	return _r
 }
 
 // Angle returns angle of the observed horizon.
 func (ho *HorizonObservation) Angle() float64 {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[float64](objref.IDOf(ho), objc.RegisterName("angle"))
 	return _r
 }

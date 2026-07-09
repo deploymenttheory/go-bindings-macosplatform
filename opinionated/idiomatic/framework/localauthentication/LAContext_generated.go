@@ -5,10 +5,12 @@
 package localauthentication
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func contextAdopt(id objc.ID) *Context {
 
 // Description returns the object's -description text.
 func (c *Context) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Context) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Context) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Context) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -83,6 +90,7 @@ func (c *Context) WithLocalizedFallbackTitle(localizedFallbackTitle string) *Con
 
 // WithMaxBiometryFailures sets the number of biometric authentication failures after which the context falls back to another mechanism.
 func (c *Context) WithMaxBiometryFailures(maxBiometryFailures obj.Object) *Context {
+	defer runtime.KeepAlive(maxBiometryFailures)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMaxBiometryFailures:"), objref.IDOf(maxBiometryFailures))
 	return c
 }
@@ -113,6 +121,7 @@ func (c *Context) WithInteractionNotAllowed(interactionNotAllowed bool) *Context
 
 // CanEvaluatePolicy assesses whether authentication can proceed for a given policy.
 func (c *Context) CanEvaluatePolicy(policy Policy) error {
+	defer runtime.KeepAlive(c)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("canEvaluatePolicy:error:"), policy, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -123,23 +132,27 @@ func (c *Context) CanEvaluatePolicy(policy Policy) error {
 
 // Invalidate invalidates the authentication context.
 func (c *Context) Invalidate() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("invalidate"))
 }
 
 // SetCredentialType sets an application-provided credential to be used when evaluating authentication.
-func (c *Context) SetCredentialType(credential obj.Object, type_ CredentialType) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("setCredential:type:"), objref.IDOf(credential), type_)
+func (c *Context) SetCredentialType(credential []byte, type_ CredentialType) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("setCredential:type:"), rt.BytesToNSData(credential), type_)
 	return _r
 }
 
 // IsCredentialSet returns a Boolean value indicating whether the specified credential type is set.
 func (c *Context) IsCredentialSet(type_ CredentialType) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isCredentialSet:"), type_)
 	return _r
 }
 
 // LocalizedFallbackTitle returns fallback button title. Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.
 func (c *Context) LocalizedFallbackTitle() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedFallbackTitle"))
 	if _r == 0 {
 		return ""
@@ -148,13 +161,15 @@ func (c *Context) LocalizedFallbackTitle() string {
 }
 
 // MaxBiometryFailures returns this property is deprecated and setting it has no effect.
-func (c *Context) MaxBiometryFailures() obj.Object {
+func (c *Context) MaxBiometryFailures() *foundation.Number {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("maxBiometryFailures"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LocalizedCancelTitle returns cancel button title. Allows cancel button title customization. A default title "Cancel" is used when this property is left nil or is set to empty string.
 func (c *Context) LocalizedCancelTitle() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedCancelTitle"))
 	if _r == 0 {
 		return ""
@@ -164,12 +179,14 @@ func (c *Context) LocalizedCancelTitle() string {
 
 // TouchIDAuthenticationAllowableReuseDuration returns time interval for accepting a successful Touch ID or Face ID device unlock (on the lock screen) from the past. This property can be set with a time interval in seconds. If the device was successfully unlocked by biometry within this time interval, then biometric authentication on this context will succeed automatically and the reply block will be called without prompting user for Touch ID or Face ID. The default value is 0, meaning that no previous biometric unlock can be reused. This property is meant only for reusing biometric matches from the device lock screen. It does not allow reusing previous biometric matches in application or between applications. The maximum supported interval is 5 minutes and setting the value beyond 5 minutes does not increase the accepted interval.
 func (c *Context) TouchIDAuthenticationAllowableReuseDuration() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("touchIDAuthenticationAllowableReuseDuration"))
 	return _r
 }
 
 // LocalizedReason returns allows setting the default localized authentication reason on context. A localized string from this property is displayed in the authentication UI if the caller didn't specify its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property is ignored if the authentication reason was provided by caller.
 func (c *Context) LocalizedReason() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedReason"))
 	if _r == 0 {
 		return ""
@@ -179,24 +196,28 @@ func (c *Context) LocalizedReason() string {
 
 // InteractionNotAllowed reports whether allows running authentication in non-interactive mode. If the context is used in a keychain query by the means of kSecUseAuthenticationContext, then setting this property to true has the same effect as passing kSecUseNoAuthenticationUI in the query, i.e. the keychain call will eventually fail with errSecInteractionNotAllowed instead of displaying the authentication UI. If this property is used with a LocalAuthentication evaluation, it will eventually fail with LAErrorNotInteractive instead of displaying the authentication UI.
 func (c *Context) InteractionNotAllowed() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("interactionNotAllowed"))
 	return _r
 }
 
 // BiometryType indicates the type of the biometry supported by the device.
 func (c *Context) BiometryType() BiometryType {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[BiometryType](objref.IDOf(c), objc.RegisterName("biometryType"))
 	return _r
 }
 
 // EvaluatedPolicyDomainState contains policy domain state. This property is set only when evaluatePolicy is called and succesful Touch ID or Face ID authentication was performed, or when canEvaluatePolicy succeeds for a biometric policy. It stays nil for all other cases. If biometric database was modified (fingers or faces were removed or added), evaluatedPolicyDomainState data will change. Nature of such database changes cannot be determined but comparing data of evaluatedPolicyDomainState after different evaluatePolicy will reveal the fact database was changed between calls.
-func (c *Context) EvaluatedPolicyDomainState() obj.Object {
+func (c *Context) EvaluatedPolicyDomainState() []byte {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("evaluatedPolicyDomainState"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DomainState contains authentication domain state.
 func (c *Context) DomainState() *DomainState {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("domainState"))
 	return DomainStateFromID(_r)
 }

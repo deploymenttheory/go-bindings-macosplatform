@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func openGLLayerAdopt(id objc.ID) *OpenGLLayer {
 
 // Description returns the object's -description text.
 func (ogl *OpenGLLayer) Description() string {
+	defer runtime.KeepAlive(ogl)
 	return rt.Description(objref.IDOf(ogl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ogl *OpenGLLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ogl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ogl *OpenGLLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ogl)
 	return rt.IsKind(objref.IDOf(ogl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ogl *OpenGLLayer) String() string {
+	defer runtime.KeepAlive(ogl)
 	return rt.Description(objref.IDOf(ogl))
 }
 
@@ -74,48 +81,57 @@ func NewOpenGLLayer() *OpenGLLayer {
 
 // WithView sets returns the view associated with the layer.
 func (ogl *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
+	defer runtime.KeepAlive(view)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setView:"), objref.IDOf(view))
 	return ogl
 }
 
 // WithOpenGLPixelFormat sets provides access to the layer’s associated OpenGL pixel format.
 func (ogl *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
+	defer runtime.KeepAlive(openGLPixelFormat)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
 	return ogl
 }
 
 // WithOpenGLContext sets the layer’s OpenGL context.
 func (ogl *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
+	defer runtime.KeepAlive(openGLContext)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 	return ogl
 }
 
 // OpenGLPixelFormatForDisplayMask returns the OpenGL pixel format suitable for the specified displays.
 func (ogl *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLPixelFormatForDisplayMask:"), mask)
 	return OpenGLPixelFormatFromID(_r)
 }
 
 // OpenGLContextForPixelFormat returns the OpenGL context to use for the requested pixel format.
 func (ogl *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(pixelFormat)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLContextForPixelFormat:"), objref.IDOf(pixelFormat))
 	return OpenGLContextFromID(_r)
 }
 
 // View returns the view.
 func (ogl *OpenGLLayer) View() *View {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
 // OpenGLPixelFormat returns the open gl pixel format.
 func (ogl *OpenGLLayer) OpenGLPixelFormat() *OpenGLPixelFormat {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLPixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
 // OpenGLContext returns the open gl context.
 func (ogl *OpenGLLayer) OpenGLContext() *OpenGLContext {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLContext"))
 	return OpenGLContextFromID(_r)
 }

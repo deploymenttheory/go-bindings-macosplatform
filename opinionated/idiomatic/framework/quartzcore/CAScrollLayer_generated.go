@@ -5,10 +5,15 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,6 +60,7 @@ func NewScrollLayer() *ScrollLayer {
 
 // WithScrollMode sets defines the axes in which the layer may be scrolled.
 func (sl *ScrollLayer) WithScrollMode(scrollMode obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(scrollMode)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setScrollMode:"), objref.IDOf(scrollMode))
 	return sl
 }
@@ -122,6 +128,7 @@ func (sl *ScrollLayer) WithSublayers(items ...LayerProvider) *ScrollLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (sl *ScrollLayer) WithMask(mask LayerProvider) *ScrollLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return sl
 }
@@ -134,6 +141,7 @@ func (sl *ScrollLayer) WithMasksToBounds(masksToBounds bool) *ScrollLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (sl *ScrollLayer) WithContents(contents obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return sl
 }
@@ -146,6 +154,7 @@ func (sl *ScrollLayer) WithContentsRect(contentsRect corefoundation.CGRect) *Scr
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (sl *ScrollLayer) WithContentsGravity(contentsGravity obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return sl
 }
@@ -164,6 +173,7 @@ func (sl *ScrollLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) 
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (sl *ScrollLayer) WithContentsFormat(contentsFormat obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return sl
 }
@@ -176,12 +186,14 @@ func (sl *ScrollLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamic
 
 // WithToneMapMode sets the tone map mode.
 func (sl *ScrollLayer) WithToneMapMode(toneMapMode obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return sl
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (sl *ScrollLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return sl
 }
@@ -194,12 +206,14 @@ func (sl *ScrollLayer) WithContentsHeadroom(contentsHeadroom float64) *ScrollLay
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (sl *ScrollLayer) WithMinificationFilter(minificationFilter obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return sl
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (sl *ScrollLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return sl
 }
@@ -242,6 +256,7 @@ func (sl *ScrollLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (sl *ScrollLayer) WithBackgroundColor(backgroundColor obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return sl
 }
@@ -260,6 +275,7 @@ func (sl *ScrollLayer) WithMaskedCorners(maskedCorners CornerMask) *ScrollLayer 
 
 // WithCornerCurve sets the corner curve.
 func (sl *ScrollLayer) WithCornerCurve(cornerCurve obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return sl
 }
@@ -272,6 +288,7 @@ func (sl *ScrollLayer) WithBorderWidth(borderWidth float64) *ScrollLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (sl *ScrollLayer) WithBorderColor(borderColor obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return sl
 }
@@ -290,6 +307,7 @@ func (sl *ScrollLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ScrollLa
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (sl *ScrollLayer) WithCompositingFilter(compositingFilter obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sl
 }
@@ -308,6 +326,7 @@ func (sl *ScrollLayer) WithRasterizationScale(rasterizationScale float64) *Scrol
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (sl *ScrollLayer) WithShadowColor(shadowColor obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return sl
 }
@@ -332,6 +351,7 @@ func (sl *ScrollLayer) WithShadowRadius(shadowRadius float64) *ScrollLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (sl *ScrollLayer) WithShadowPath(shadowPath obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return sl
 }
@@ -343,8 +363,8 @@ func (sl *ScrollLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (sl *ScrollLayer) WithActions(actions obj.Object) *ScrollLayer {
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (sl *ScrollLayer) WithActions(actions map[string]obj.Object) *ScrollLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sl
 }
 
@@ -354,8 +374,19 @@ func (sl *ScrollLayer) WithName(name string) *ScrollLayer {
 	return sl
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (sl *ScrollLayer) WithDelegate(delegate LayerDelegate) *ScrollLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return sl
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (sl *ScrollLayer) WithStyle(style obj.Object) *ScrollLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return sl
 }
@@ -369,18 +400,21 @@ func (sl *ScrollLayer) WithConstraints(items ...*Constraint) *ScrollLayer {
 
 // ScrollToPoint changes the origin of the receiver to the specified point.
 func (sl *ScrollLayer) ScrollToPoint(p corefoundation.CGPoint) {
+	defer runtime.KeepAlive(sl)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollToPoint:"), p)
 }
 
 // ScrollToRect scroll the contents of the receiver to ensure that the rectangle is visible.
 func (sl *ScrollLayer) ScrollToRect(r corefoundation.CGRect) {
+	defer runtime.KeepAlive(sl)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollToRect:"), r)
 }
 
 // ScrollMode returns the scroll mode.
-func (sl *ScrollLayer) ScrollMode() obj.Object {
+func (sl *ScrollLayer) ScrollMode() *foundation.String {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollMode"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ LayerProvider = (*ScrollLayer)(nil)

@@ -5,9 +5,12 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,8 +62,8 @@ func (nots *NEDNSOverTLSSettings) WithServerName(serverName string) *NEDNSOverTL
 }
 
 // WithIdentityReference sets a persistent keychain reference to a keychain item containing the certificate and private key components of the DNS client credential.
-func (nots *NEDNSOverTLSSettings) WithIdentityReference(identityReference obj.Object) *NEDNSOverTLSSettings {
-	objc.Send[objc.ID](objref.IDOf(nots), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+func (nots *NEDNSOverTLSSettings) WithIdentityReference(identityReference []byte) *NEDNSOverTLSSettings {
+	objc.Send[objc.ID](objref.IDOf(nots), objc.RegisterName("setIdentityReference:"), rt.BytesToNSData(identityReference))
 	return nots
 }
 
@@ -98,6 +101,7 @@ func (nots *NEDNSOverTLSSettings) WithAllowFailover(allowFailover bool) *NEDNSOv
 
 // ServerName returns the name of the server to use for TLS certificate validation.
 func (nots *NEDNSOverTLSSettings) ServerName() string {
+	defer runtime.KeepAlive(nots)
 	_r := objc.Send[objc.ID](objref.IDOf(nots), objc.RegisterName("serverName"))
 	if _r == 0 {
 		return ""
@@ -106,9 +110,10 @@ func (nots *NEDNSOverTLSSettings) ServerName() string {
 }
 
 // IdentityReference returns the optional certificate identity keychain reference to use as a TLS client certificate.
-func (nots *NEDNSOverTLSSettings) IdentityReference() obj.Object {
+func (nots *NEDNSOverTLSSettings) IdentityReference() []byte {
+	defer runtime.KeepAlive(nots)
 	_r := objc.Send[objc.ID](objref.IDOf(nots), objc.RegisterName("identityReference"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ NEDNSSettingsProvider = (*NEDNSOverTLSSettings)(nil)

@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func octreeNodeAdopt(id objc.ID) *OctreeNode {
 
 // Description returns the object's -description text.
 func (on *OctreeNode) Description() string {
+	defer runtime.KeepAlive(on)
 	return rt.Description(objref.IDOf(on))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (on *OctreeNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(on)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(on), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (on *OctreeNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(on)
 	return rt.IsKind(objref.IDOf(on), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (on *OctreeNode) String() string {
+	defer runtime.KeepAlive(on)
 	return rt.Description(objref.IDOf(on))
 }
 

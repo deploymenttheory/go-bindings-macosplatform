@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,12 +57,14 @@ func NewAppleScriptAction() *AppleScriptAction {
 
 // WithScript sets an OSAScript object representing the receiver’s script containing the on run command handler.
 func (asa *AppleScriptAction) WithScript(script obj.Object) *AppleScriptAction {
+	defer runtime.KeepAlive(script)
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setScript:"), objref.IDOf(script))
 	return asa
 }
 
 // WithParameters sets the action’s parameters.
 func (asa *AppleScriptAction) WithParameters(parameters obj.Object) *AppleScriptAction {
+	defer runtime.KeepAlive(parameters)
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return asa
 }
@@ -92,6 +95,7 @@ func (asa *AppleScriptAction) WithOutput(output unsafe.Pointer) *AppleScriptActi
 
 // Script returns the script.
 func (asa *AppleScriptAction) Script() obj.Object {
+	defer runtime.KeepAlive(asa)
 	_r := objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("script"))
 	return obj.Wrap(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRColorControlClusterStepHueParamsAdopt(id objc.ID) *MTRColorControlCluste
 
 // Description returns the object's -description text.
 func (mcccshp *MTRColorControlClusterStepHueParams) Description() string {
+	defer runtime.KeepAlive(mcccshp)
 	return rt.Description(objref.IDOf(mcccshp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccshp *MTRColorControlClusterStepHueParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccshp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccshp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccshp *MTRColorControlClusterStepHueParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccshp)
 	return rt.IsKind(objref.IDOf(mcccshp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccshp *MTRColorControlClusterStepHueParams) String() string {
+	defer runtime.KeepAlive(mcccshp)
 	return rt.Description(objref.IDOf(mcccshp))
 }
 
@@ -72,84 +80,98 @@ func NewMTRColorControlClusterStepHueParams() *MTRColorControlClusterStepHuePara
 
 // WithStepMode sets the step mode.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithStepMode(stepMode obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(stepMode)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 	return mcccshp
 }
 
 // WithStepSize sets the step size.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithStepSize(stepSize obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(stepSize)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 	return mcccshp
 }
 
 // WithTransitionTime sets the transition time.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(transitionTime)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccshp
 }
 
 // WithOptionsMask sets the options mask.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccshp
 }
 
 // WithOptionsOverride sets the options override.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccshp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccshp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mcccshp *MTRColorControlClusterStepHueParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStepHueParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccshp
 }
 
 // StepMode returns the step mode.
-func (mcccshp *MTRColorControlClusterStepHueParams) StepMode() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) StepMode() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("stepMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StepSize returns the step size.
-func (mcccshp *MTRColorControlClusterStepHueParams) StepSize() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) StepSize() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("stepSize"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TransitionTime returns the transition time.
-func (mcccshp *MTRColorControlClusterStepHueParams) TransitionTime() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) TransitionTime() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("transitionTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsMask returns the options mask.
-func (mcccshp *MTRColorControlClusterStepHueParams) OptionsMask() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mcccshp *MTRColorControlClusterStepHueParams) OptionsOverride() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccshp *MTRColorControlClusterStepHueParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccshp *MTRColorControlClusterStepHueParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccshp *MTRColorControlClusterStepHueParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccshp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccshp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

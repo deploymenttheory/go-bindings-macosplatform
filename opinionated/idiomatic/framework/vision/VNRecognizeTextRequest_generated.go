@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -122,6 +123,7 @@ func (rtr *RecognizeTextRequest) WithRevision(revision int) *RecognizeTextReques
 //
 // SupportedRecognitionLanguages returns the collection as a Go slice.
 func (rtr *RecognizeTextRequest) SupportedRecognitionLanguages() (result []string, err error) {
+	defer runtime.KeepAlive(rtr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("supportedRecognitionLanguagesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -134,6 +136,7 @@ func (rtr *RecognizeTextRequest) SupportedRecognitionLanguages() (result []strin
 //
 // RecognitionLanguages returns the collection as a Go slice.
 func (rtr *RecognizeTextRequest) RecognitionLanguages() []string {
+	defer runtime.KeepAlive(rtr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("recognitionLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -142,30 +145,35 @@ func (rtr *RecognizeTextRequest) RecognitionLanguages() []string {
 //
 // CustomWords returns the collection as a Go slice.
 func (rtr *RecognizeTextRequest) CustomWords() []string {
+	defer runtime.KeepAlive(rtr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("customWords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // RecognitionLevel returns the recognition level selects which techniques will be used during the text recognition. There are trade-offs between performance and accuracy.
 func (rtr *RecognizeTextRequest) RecognitionLevel() RequestTextRecognitionLevel {
+	defer runtime.KeepAlive(rtr)
 	_r := objc.Send[RequestTextRecognitionLevel](objref.IDOf(rtr), objc.RegisterName("recognitionLevel"))
 	return _r
 }
 
 // UsesLanguageCorrection reports whether language correction should be applied during the recognition process. Disabling this will return the raw recognition results providing performance benefits but less accurate results.
 func (rtr *RecognizeTextRequest) UsesLanguageCorrection() bool {
+	defer runtime.KeepAlive(rtr)
 	_r := objc.Send[bool](objref.IDOf(rtr), objc.RegisterName("usesLanguageCorrection"))
 	return _r
 }
 
 // AutomaticallyDetectsLanguage reports whether language detection will try to automatically identify the script/langauge during the detection and use the appropiate model for recognition and language correction. This can be particularly helpful, if the nature of the content is unkown and with this flag being set it will for instance determine if text is latin vs chinese so you don't have to pick the language model in the first case. But as the language correction cannot always guarantee the correct detection, it is advisable to set the languages, if you have domain knowledge of what language to expect. The default value is false. Also note that this feature is only available since VNRecognizeTextRequestRevision3 and is a no-op before that.
 func (rtr *RecognizeTextRequest) AutomaticallyDetectsLanguage() bool {
+	defer runtime.KeepAlive(rtr)
 	_r := objc.Send[bool](objref.IDOf(rtr), objc.RegisterName("automaticallyDetectsLanguage"))
 	return _r
 }
 
 // MinimumTextHeight returns the minimum text height.
 func (rtr *RecognizeTextRequest) MinimumTextHeight() float32 {
+	defer runtime.KeepAlive(rtr)
 	_r := objc.Send[float32](objref.IDOf(rtr), objc.RegisterName("minimumTextHeight"))
 	return _r
 }

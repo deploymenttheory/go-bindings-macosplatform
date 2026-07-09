@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,84 +54,98 @@ func NewMTRThreadNetworkDiagnosticsClusterNeighborTable() *MTRThreadNetworkDiagn
 
 // WithExtAddress sets the ext address.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(extAddress)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setExtAddress:"), objref.IDOf(extAddress))
 	return mtndcnt
 }
 
 // WithAge sets the age.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(age)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setAge:"), objref.IDOf(age))
 	return mtndcnt
 }
 
 // WithRloc16 sets the rloc16.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(rloc16)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setRloc16:"), objref.IDOf(rloc16))
 	return mtndcnt
 }
 
 // WithLinkFrameCounter sets the link frame counter.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLinkFrameCounter(linkFrameCounter obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(linkFrameCounter)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setLinkFrameCounter:"), objref.IDOf(linkFrameCounter))
 	return mtndcnt
 }
 
 // WithMleFrameCounter sets the mle frame counter.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMleFrameCounter(mleFrameCounter obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(mleFrameCounter)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setMleFrameCounter:"), objref.IDOf(mleFrameCounter))
 	return mtndcnt
 }
 
 // WithLqi sets the lqi.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLqi(lqi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(lqi)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
 	return mtndcnt
 }
 
 // WithAverageRssi sets the average rssi.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAverageRssi(averageRssi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(averageRssi)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setAverageRssi:"), objref.IDOf(averageRssi))
 	return mtndcnt
 }
 
 // WithLastRssi sets the last rssi.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLastRssi(lastRssi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(lastRssi)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setLastRssi:"), objref.IDOf(lastRssi))
 	return mtndcnt
 }
 
 // WithFrameErrorRate sets the frame error rate.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFrameErrorRate(frameErrorRate obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(frameErrorRate)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setFrameErrorRate:"), objref.IDOf(frameErrorRate))
 	return mtndcnt
 }
 
 // WithMessageErrorRate sets the message error rate.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMessageErrorRate(messageErrorRate obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(messageErrorRate)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setMessageErrorRate:"), objref.IDOf(messageErrorRate))
 	return mtndcnt
 }
 
 // WithRxOnWhenIdle sets the rx on when idle.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRxOnWhenIdle(rxOnWhenIdle obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(rxOnWhenIdle)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setRxOnWhenIdle:"), objref.IDOf(rxOnWhenIdle))
 	return mtndcnt
 }
 
 // WithFullThreadDevice sets the full thread device.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullThreadDevice(fullThreadDevice obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(fullThreadDevice)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setFullThreadDevice:"), objref.IDOf(fullThreadDevice))
 	return mtndcnt
 }
 
 // WithFullNetworkData sets the full network data.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullNetworkData(fullNetworkData obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(fullNetworkData)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setFullNetworkData:"), objref.IDOf(fullNetworkData))
 	return mtndcnt
 }
 
 // WithIsChild sets the is child.
 func (mtndcnt *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithIsChild(isChild obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	defer runtime.KeepAlive(isChild)
 	objc.Send[objc.ID](objref.IDOf(mtndcnt), objc.RegisterName("setIsChild:"), objref.IDOf(isChild))
 	return mtndcnt
 }

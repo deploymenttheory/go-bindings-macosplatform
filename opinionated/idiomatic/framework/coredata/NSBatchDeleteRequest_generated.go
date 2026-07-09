@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func batchDeleteRequestAdopt(id objc.ID) *BatchDeleteRequest {
 
 // NewBatchDeleteRequestWithFetchRequest creates a request that deletes the results of the specified fetch request.
 func NewBatchDeleteRequestWithFetchRequest(fetch obj.Object) *BatchDeleteRequest {
+	defer runtime.KeepAlive(fetch)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchDeleteRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:"), objref.IDOf(fetch))
 	return batchDeleteRequestAdopt(_id)
@@ -75,12 +78,14 @@ func (bdr *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvid
 
 // ResultType returns the result type.
 func (bdr *BatchDeleteRequest) ResultType() BatchDeleteRequestResultType {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(bdr), objc.RegisterName("resultType"))
 	return _r
 }
 
 // FetchRequest returns the fetch request.
 func (bdr *BatchDeleteRequest) FetchRequest() obj.Object {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }

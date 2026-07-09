@@ -5,6 +5,9 @@
 package eventkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,19 +63,20 @@ func (e *Event) WithAllDay(allDay bool) *Event {
 }
 
 // WithStartDate sets the start date of the event.
-func (e *Event) WithStartDate(startDate obj.Object) *Event {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+func (e *Event) WithStartDate(startDate time.Time) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setStartDate:"), rt.TimeToNSDate(startDate))
 	return e
 }
 
 // WithEndDate sets the end date for the event.
-func (e *Event) WithEndDate(endDate obj.Object) *Event {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+func (e *Event) WithEndDate(endDate time.Time) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setEndDate:"), rt.TimeToNSDate(endDate))
 	return e
 }
 
 // WithStructuredLocation sets the event’s location with a potential geocoordinate.
 func (e *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *Event {
+	defer runtime.KeepAlive(structuredLocation)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setStructuredLocation:"), objref.IDOf(structuredLocation))
 	return e
 }
@@ -85,6 +89,7 @@ func (e *Event) WithAvailability(availability EventAvailability) *Event {
 
 // WithCalendar sets the calendar for the calendar item.
 func (e *Event) WithCalendar(calendar *Calendar) *Event {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return e
 }
@@ -108,13 +113,14 @@ func (e *Event) WithNotes(notes string) *Event {
 }
 
 // WithURL sets the URL for the calendar item.
-func (e *Event) WithURL(uRL string) *Event {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (e *Event) WithURL(url string) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return e
 }
 
 // WithTimeZone sets the time zone for the calendar item.
 func (e *Event) WithTimeZone(timeZone obj.Object) *Event {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return e
 }
@@ -135,6 +141,7 @@ func (e *Event) WithRecurrenceRules(items ...*RecurrenceRule) *Event {
 
 // EventIdentifier returns a unique identifier for this event. This identifier can be used to look the event up using [EKEventStore eventWithIdentifier:]. You can use this not only to simply fetch the event, but also to validate the event has not been deleted out from under you when you get an external change notification via the EKEventStore database changed notification. If eventWithIdentifier: returns nil, the event was deleted. Please note that if you change the calendar of an event, this ID will likely change. It is currently also possible for the ID to change due to a sync operation. For example, if a user moved an event on a different client to another calendar, we'd see it as a completely new event here. This may be nil for events that have not been saved.
 func (e *Event) EventIdentifier() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("eventIdentifier"))
 	if _r == 0 {
 		return ""
@@ -144,60 +151,70 @@ func (e *Event) EventIdentifier() string {
 
 // IsAllDay reports whether indicates this event is an 'all day' event.
 func (e *Event) IsAllDay() bool {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isAllDay"))
 	return _r
 }
 
 // StartDate returns the start date for the event. This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
-func (e *Event) StartDate() obj.Object {
+func (e *Event) StartDate() time.Time {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (e *Event) EndDate() obj.Object {
+func (e *Event) EndDate() time.Time {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StructuredLocation returns allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
 func (e *Event) StructuredLocation() *StructuredLocation {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("structuredLocation"))
 	return StructuredLocationFromID(_r)
 }
 
 // Organizer returns the organizer of this event, or nil.
 func (e *Event) Organizer() *Participant {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("organizer"))
 	return ParticipantFromID(_r)
 }
 
 // Availability returns the availability setting for this event. The availability setting is used by CalDAV and Exchange servers to indicate how the time should be treated for scheduling. If the calendar the event is currently in does not support event availability, EKEventAvailabilityNotSupported is returned.
 func (e *Event) Availability() EventAvailability {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventAvailability](objref.IDOf(e), objc.RegisterName("availability"))
 	return _r
 }
 
 // Status returns the status of the event. While the status offers four different values in the EKEventStatus enumeration, in practice, the only actionable and reliable status is canceled. Any other status should be considered informational at best. You cannot set this property. If you wish to cancel an event, you should simply remove it using removeEvent:.
 func (e *Event) Status() EventStatus {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventStatus](objref.IDOf(e), objc.RegisterName("status"))
 	return _r
 }
 
 // IsDetached reports whether this event is detached from a recurring series. If this EKEvent is an instance of a repeating event, and an attribute of this EKEvent has been changed from the default value generated by the repeating event, isDetached will return true. If the EKEvent is unchanged from its default state, or is not a repeating event, isDetached returns false.
 func (e *Event) IsDetached() bool {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isDetached"))
 	return _r
 }
 
 // OccurrenceDate returns the occurrence date of an event if it is part of a recurring series. This is only set if the event is part of a recurring series. It returns the date on which this event was originally scheduled to occur. For occurrences that are unmodified from the recurring series, this is the same as the start date. This value will remain the same even if the event has been detached and its start date has changed. Floating events (such as all-day events) are currently returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set startDate.
-func (e *Event) OccurrenceDate() obj.Object {
+func (e *Event) OccurrenceDate() time.Time {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("occurrenceDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // BirthdayContactIdentifier specifies the contact identifier of the person this event was created for. This property is only valid for events in the built-in Birthdays calendar. It specifies the contact identifier (for use with the Contacts framework) of the person this event was created for. For any other type of event, this property returns nil.
 func (e *Event) BirthdayContactIdentifier() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("birthdayContactIdentifier"))
 	if _r == 0 {
 		return ""
@@ -207,6 +224,7 @@ func (e *Event) BirthdayContactIdentifier() string {
 
 // BirthdayPersonUniqueID specifies the address book unique ID of the person this event was created for. This property is only valid for events in the built-in Birthdays calendar. It specifies the Address Book unique ID of the person this event was created for. For any other type of event, this property returns nil.
 func (e *Event) BirthdayPersonUniqueID() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("birthdayPersonUniqueID"))
 	if _r == 0 {
 		return ""

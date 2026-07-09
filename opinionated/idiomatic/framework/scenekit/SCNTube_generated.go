@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -96,6 +98,7 @@ func (t *Tube) WithMaterials(items ...*Material) *Tube {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (t *Tube) WithFirstMaterial(firstMaterial *Material) *Tube {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return t
 }
@@ -109,6 +112,7 @@ func (t *Tube) WithLevelsOfDetail(items ...*LevelOfDetail) *Tube {
 
 // WithTessellator sets the tessellator.
 func (t *Tube) WithTessellator(tessellator *GeometryTessellator) *Tube {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return t
 }
@@ -127,42 +131,49 @@ func (t *Tube) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (t *Tube) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tube {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return t
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (t *Tube) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Tube {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return t
 }
 
 // InnerRadius returns the inner radius of the tube. Animatable. If the value is less than or equal to 0, or if it is greater than or equal to the outer radius, then the geometry is empty. The default value is 0.25.
 func (t *Tube) InnerRadius() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("innerRadius"))
 	return _r
 }
 
 // OuterRadius returns the outer radius of the tube. Animatable. If the value is less than or equal to 0, or if it is less than or equal to the inner radius, then the geometry is empty. The default value is 0.5.
 func (t *Tube) OuterRadius() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("outerRadius"))
 	return _r
 }
 
 // Height returns the height of the tube. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (t *Tube) Height() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("height"))
 	return _r
 }
 
 // RadialSegmentCount returns the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (t *Tube) RadialSegmentCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("radialSegmentCount"))
 	return _r
 }
 
 // HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (t *Tube) HeightSegmentCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("heightSegmentCount"))
 	return _r
 }

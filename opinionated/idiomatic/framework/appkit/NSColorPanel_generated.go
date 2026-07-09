@@ -5,11 +5,13 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -64,6 +66,7 @@ func NewColorPanel() *ColorPanel {
 
 // WithAccessoryView sets the accessory view.
 func (cp *ColorPanel) WithAccessoryView(accessoryView ViewProvider) *ColorPanel {
+	defer runtime.KeepAlive(accessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	})
@@ -96,6 +99,7 @@ func (cp *ColorPanel) WithMode(mode ColorPanelMode) *ColorPanel {
 
 // WithColor sets the color of the receiver.
 func (cp *ColorPanel) WithColor(color *Color) *ColorPanel {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -209,9 +213,22 @@ func (cp *ColorPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) 
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (cp *ColorPanel) WithContentView(contentView ViewProvider) *ColorPanel {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return cp
+}
+
+// WithDelegate sets the window’s delegate.
+func (cp *ColorPanel) WithDelegate(delegate WindowDelegate) *ColorPanel {
+	_shim := newWindowDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cp), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cp), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return cp
 }
 
@@ -281,6 +298,7 @@ func (cp *ColorPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPane
 
 // WithBackgroundColor sets the color of the window’s background.
 func (cp *ColorPanel) WithBackgroundColor(backgroundColor *Color) *ColorPanel {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -321,6 +339,7 @@ func (cp *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (cp *ColorPanel) WithMiniwindowImage(miniwindowImage *Image) *ColorPanel {
+	defer runtime.KeepAlive(miniwindowImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	})
@@ -457,6 +476,7 @@ func (cp *ColorPanel) WithAnimationBehavior(animationBehavior WindowAnimationBeh
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (cp *ColorPanel) WithFrameAutosaveName(frameAutosaveName obj.Object) *ColorPanel {
+	defer runtime.KeepAlive(frameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	})
@@ -513,6 +533,7 @@ func (cp *ColorPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize core
 
 // WithWindowController sets the window’s window controller.
 func (cp *ColorPanel) WithWindowController(windowController *WindowController) *ColorPanel {
+	defer runtime.KeepAlive(windowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	})
@@ -521,6 +542,7 @@ func (cp *ColorPanel) WithWindowController(windowController *WindowController) *
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (cp *ColorPanel) WithParentWindow(parentWindow WindowProvider) *ColorPanel {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -529,6 +551,7 @@ func (cp *ColorPanel) WithParentWindow(parentWindow WindowProvider) *ColorPanel 
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (cp *ColorPanel) WithAppearanceSource(appearanceSource obj.Object) *ColorPanel {
+	defer runtime.KeepAlive(appearanceSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	})
@@ -537,6 +560,7 @@ func (cp *ColorPanel) WithAppearanceSource(appearanceSource obj.Object) *ColorPa
 
 // WithColorSpace sets the window’s color space.
 func (cp *ColorPanel) WithColorSpace(colorSpace *ColorSpace) *ColorPanel {
+	defer runtime.KeepAlive(colorSpace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	})
@@ -553,6 +577,7 @@ func (cp *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle Titlebar
 
 // WithContentViewController sets the main content view controller for the window.
 func (cp *ColorPanel) WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -561,6 +586,7 @@ func (cp *ColorPanel) WithContentViewController(contentViewController ViewContro
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (cp *ColorPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel {
+	defer runtime.KeepAlive(initialFirstResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	})
@@ -569,6 +595,7 @@ func (cp *ColorPanel) WithInitialFirstResponder(initialFirstResponder ViewProvid
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (cp *ColorPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel {
+	defer runtime.KeepAlive(defaultButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	})
@@ -585,6 +612,7 @@ func (cp *ColorPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoo
 
 // WithToolbar sets the window’s toolbar.
 func (cp *ColorPanel) WithToolbar(toolbar *Toolbar) *ColorPanel {
+	defer runtime.KeepAlive(toolbar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	})
@@ -609,6 +637,7 @@ func (cp *ColorPanel) WithTabbingMode(tabbingMode WindowTabbingMode) *ColorPanel
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (cp *ColorPanel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *ColorPanel {
+	defer runtime.KeepAlive(tabbingIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	})
@@ -689,6 +718,7 @@ func (cp *ColorPanel) WithRestorationClass(restorationClass unsafe.Pointer) *Col
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cp *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorPanel {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -697,6 +727,7 @@ func (cp *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorP
 
 // WithMenu sets returns the responder’s menu.
 func (cp *ColorPanel) WithMenu(menu *Menu) *ColorPanel {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -705,6 +736,7 @@ func (cp *ColorPanel) WithMenu(menu *Menu) *ColorPanel {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cp *ColorPanel) WithUserActivity(userActivity obj.Object) *ColorPanel {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -713,6 +745,7 @@ func (cp *ColorPanel) WithUserActivity(userActivity obj.Object) *ColorPanel {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cp *ColorPanel) WithTouchBar(touchBar *TouchBar) *ColorPanel {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -721,6 +754,8 @@ func (cp *ColorPanel) WithTouchBar(touchBar *TouchBar) *ColorPanel {
 
 // SetTarget sets the target of the receiver.
 func (cp *ColorPanel) SetTarget(target obj.Object) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -729,6 +764,8 @@ func (cp *ColorPanel) SetTarget(target obj.Object) {
 
 // AttachColorList adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
 func (cp *ColorPanel) AttachColorList(colorList *ColorList) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(colorList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
 	})
@@ -737,6 +774,8 @@ func (cp *ColorPanel) AttachColorList(colorList *ColorList) {
 
 // DetachColorList removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
 func (cp *ColorPanel) DetachColorList(colorList *ColorList) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(colorList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
 	})
@@ -745,6 +784,7 @@ func (cp *ColorPanel) DetachColorList(colorList *ColorList) {
 
 // AccessoryView returns the accessory view.
 func (cp *ColorPanel) AccessoryView() *View {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -758,6 +798,7 @@ func (cp *ColorPanel) AccessoryView() *View {
 
 // IsContinuous reports whether the object is continuous.
 func (cp *ColorPanel) IsContinuous() bool {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -771,6 +812,7 @@ func (cp *ColorPanel) IsContinuous() bool {
 
 // ShowsAlpha wraps the corresponding Objective-C method.
 func (cp *ColorPanel) ShowsAlpha() bool {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -784,6 +826,7 @@ func (cp *ColorPanel) ShowsAlpha() bool {
 
 // Mode returns the mode.
 func (cp *ColorPanel) Mode() ColorPanelMode {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 ColorPanelMode
 	purego.Main(func() {
 		_mainthread0 = func() ColorPanelMode {
@@ -797,6 +840,7 @@ func (cp *ColorPanel) Mode() ColorPanelMode {
 
 // Color returns the color.
 func (cp *ColorPanel) Color() *Color {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -810,6 +854,7 @@ func (cp *ColorPanel) Color() *Color {
 
 // Alpha returns the alpha.
 func (cp *ColorPanel) Alpha() float64 {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -823,6 +868,7 @@ func (cp *ColorPanel) Alpha() float64 {
 
 // MaximumLinearExposure returns the maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
 func (cp *ColorPanel) MaximumLinearExposure() float64 {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

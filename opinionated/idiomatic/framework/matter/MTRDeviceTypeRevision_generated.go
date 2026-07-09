@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,27 +48,34 @@ func mTRDeviceTypeRevisionAdopt(id objc.ID) *MTRDeviceTypeRevision {
 
 // Description returns the object's -description text.
 func (mdtr *MTRDeviceTypeRevision) Description() string {
+	defer runtime.KeepAlive(mdtr)
 	return rt.Description(objref.IDOf(mdtr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdtr *MTRDeviceTypeRevision) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdtr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdtr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdtr *MTRDeviceTypeRevision) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdtr)
 	return rt.IsKind(objref.IDOf(mdtr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdtr *MTRDeviceTypeRevision) String() string {
+	defer runtime.KeepAlive(mdtr)
 	return rt.Description(objref.IDOf(mdtr))
 }
 
 // NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision the provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
 func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID obj.Object, revision obj.Object) *MTRDeviceTypeRevision {
+	defer runtime.KeepAlive(deviceTypeID)
+	defer runtime.KeepAlive(revision)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeID:revision:"), objref.IDOf(deviceTypeID), objref.IDOf(revision))
 	return mTRDeviceTypeRevisionAdopt(_id)
@@ -73,25 +83,29 @@ func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID obj.Object, r
 
 // NewMTRDeviceTypeRevisionWithDeviceTypeStruct initializes the receiver based on the values in the specified struct.
 func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *MTRDescriptorClusterDeviceTypeStruct) *MTRDeviceTypeRevision {
+	defer runtime.KeepAlive(deviceTypeStruct)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeStruct:"), objref.IDOf(deviceTypeStruct))
 	return mTRDeviceTypeRevisionAdopt(_id)
 }
 
 // DeviceTypeID returns the device type ID.
-func (mdtr *MTRDeviceTypeRevision) DeviceTypeID() obj.Object {
+func (mdtr *MTRDeviceTypeRevision) DeviceTypeID() *foundation.Number {
+	defer runtime.KeepAlive(mdtr)
 	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("deviceTypeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DeviceTypeRevision returns the device type revision.
-func (mdtr *MTRDeviceTypeRevision) DeviceTypeRevision() obj.Object {
+func (mdtr *MTRDeviceTypeRevision) DeviceTypeRevision() *foundation.Number {
+	defer runtime.KeepAlive(mdtr)
 	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("deviceTypeRevision"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TypeInformation returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
 func (mdtr *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
+	defer runtime.KeepAlive(mdtr)
 	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("typeInformation"))
 	return MTRDeviceTypeFromID(_r)
 }

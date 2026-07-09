@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEModeClusterModeTagStructAdopt(id objc.ID) *MTREnergyEVSEModeCl
 
 // Description returns the object's -description text.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) Description() string {
+	defer runtime.KeepAlive(meemcmts)
 	return rt.Description(objref.IDOf(meemcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meemcmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meemcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(meemcmts)
 	return rt.IsKind(objref.IDOf(meemcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) String() string {
+	defer runtime.KeepAlive(meemcmts)
 	return rt.Description(objref.IDOf(meemcmts))
 }
 
@@ -72,24 +80,28 @@ func NewMTREnergyEVSEModeClusterModeTagStruct() *MTREnergyEVSEModeClusterModeTag
 
 // WithMfgCode sets the mfg code.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return meemcmts
 }
 
 // WithValue sets the value.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return meemcmts
 }
 
 // MfgCode returns the mfg code.
-func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() obj.Object {
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(meemcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) Value() obj.Object {
+func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(meemcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,7 @@
 package corewlan
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func wiFiClientAdopt(id objc.ID) *WiFiClient {
 
 // Description returns the object's -description text.
 func (wfc *WiFiClient) Description() string {
+	defer runtime.KeepAlive(wfc)
 	return rt.Description(objref.IDOf(wfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wfc *WiFiClient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wfc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wfc *WiFiClient) IsKind(className string) bool {
+	defer runtime.KeepAlive(wfc)
 	return rt.IsKind(objref.IDOf(wfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wfc *WiFiClient) String() string {
+	defer runtime.KeepAlive(wfc)
 	return rt.Description(objref.IDOf(wfc))
 }
 
@@ -77,12 +83,14 @@ func NewWiFiClient() *WiFiClient {
 
 // WithDelegate sets an object that provides Wi-Fi event handling.
 func (wfc *WiFiClient) WithDelegate(delegate obj.Object) *WiFiClient {
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return wfc
 }
 
 // Interface returns the default Wi-Fi interface.
 func (wfc *WiFiClient) Interface() *Interface {
+	defer runtime.KeepAlive(wfc)
 	_r := objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
 }
@@ -91,12 +99,14 @@ func (wfc *WiFiClient) Interface() *Interface {
 //
 // InterfaceNames returns the collection as a Go slice.
 func (wfc *WiFiClient) InterfaceNames() []string {
+	defer runtime.KeepAlive(wfc)
 	_arr := objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("interfaceNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // InterfaceWithName returns the Wi-Fi interface with the given name.
 func (wfc *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
+	defer runtime.KeepAlive(wfc)
 	_r := objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("interfaceWithName:"), purego.NSString(interfaceName))
 	return InterfaceFromID(_r)
 }
@@ -105,12 +115,14 @@ func (wfc *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
 //
 // Interfaces returns the collection as a Go slice.
 func (wfc *WiFiClient) Interfaces() []*Interface {
+	defer runtime.KeepAlive(wfc)
 	_arr := objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("interfaces"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Interface { return InterfaceFromID(_id) })
 }
 
 // StartMonitoringEventWithType register for specific Wi-Fi event notifications.
 func (wfc *WiFiClient) StartMonitoringEventWithType(type_ EventType) error {
+	defer runtime.KeepAlive(wfc)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("startMonitoringEventWithType:error:"), type_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -121,6 +133,7 @@ func (wfc *WiFiClient) StartMonitoringEventWithType(type_ EventType) error {
 
 // StopMonitoringEventWithType unregister for specific Wi-Fi event notifications.
 func (wfc *WiFiClient) StopMonitoringEventWithType(type_ EventType) error {
+	defer runtime.KeepAlive(wfc)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("stopMonitoringEventWithType:error:"), type_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -133,6 +146,7 @@ func (wfc *WiFiClient) StopMonitoringEventWithType(type_ EventType) error {
 //
 // StopMonitoringAllEventsAndReturnError returns an error if the operation did not succeed.
 func (wfc *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
+	defer runtime.KeepAlive(wfc)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(wfc), objc.RegisterName("stopMonitoringAllEventsAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -143,6 +157,7 @@ func (wfc *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
 
 // Delegate sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
 func (wfc *WiFiClient) Delegate() obj.Object {
+	defer runtime.KeepAlive(wfc)
 	_r := objc.Send[objc.ID](objref.IDOf(wfc), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }

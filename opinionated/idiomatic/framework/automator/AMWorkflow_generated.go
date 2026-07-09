@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func workflowAdopt(id objc.ID) *Workflow {
 
 // Description returns the object's -description text.
 func (w *Workflow) Description() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (w *Workflow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (w *Workflow) IsKind(className string) bool {
+	defer runtime.KeepAlive(w)
 	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (w *Workflow) String() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
@@ -75,8 +81,8 @@ func NewWorkflow() *Workflow {
 	return workflowAdopt(_id)
 }
 
-// NewWorkflowWithContentsOfURLError creates and initializes a workflow based on the contents of the specified file.
-func NewWorkflowWithContentsOfURLError(fileURL string) (result *Workflow, err error) {
+// NewWorkflowWithContentsOfURL creates and initializes a workflow based on the contents of the specified file.
+func NewWorkflowWithContentsOfURL(fileURL string) (result *Workflow, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AMWorkflow")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
@@ -88,12 +94,14 @@ func NewWorkflowWithContentsOfURLError(fileURL string) (result *Workflow, err er
 
 // WithInput sets the input data that is passed to the first action in the workflow.
 func (w *Workflow) WithInput(input obj.Object) *Workflow {
+	defer runtime.KeepAlive(input)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setInput:"), objref.IDOf(input))
 	return w
 }
 
 // WriteToURL writes the workflow to the specified file.
 func (w *Workflow) WriteToURL(fileURL string) error {
+	defer runtime.KeepAlive(w)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(w), objc.RegisterName("writeToURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -104,52 +112,65 @@ func (w *Workflow) WriteToURL(fileURL string) error {
 
 // SetValueForVariableWithName sets the value of the workflow variable with the specified name.
 func (w *Workflow) SetValueForVariableWithName(value obj.Object, variableName string) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("setValue:forVariableWithName:"), objref.IDOf(value), purego.NSString(variableName))
 	return _r
 }
 
 // ValueForVariableWithName returns the value of the workflow variable with the specified name.
 func (w *Workflow) ValueForVariableWithName(variableName string) obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("valueForVariableWithName:"), purego.NSString(variableName))
 	return obj.Wrap(_r)
 }
 
 // AddAction adds the specified action at the end of the receiving workflow.
 func (w *Workflow) AddAction(action *Action) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(action)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("addAction:"), objref.IDOf(action))
 }
 
 // RemoveAction removes the specified action from the workflow.
 func (w *Workflow) RemoveAction(action *Action) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(action)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("removeAction:"), objref.IDOf(action))
 }
 
 // InsertActionAtIndex inserts the specified action at the specified position of the receiving workflow.
 func (w *Workflow) InsertActionAtIndex(action *Action, index int) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(action)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("insertAction:atIndex:"), objref.IDOf(action), index)
 }
 
 // MoveActionAtIndexToIndex moves the action from the specified start position to the specified end position in the receiving workflow.
 func (w *Workflow) MoveActionAtIndexToIndex(startIndex int, endIndex int) {
+	defer runtime.KeepAlive(w)
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("moveActionAtIndex:toIndex:"), startIndex, endIndex)
 }
 
 // FileURL returns the file URL.
-func (w *Workflow) FileURL() obj.Object {
+func (w *Workflow) FileURL() string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("fileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Actions returns the actions.
 //
 // Actions returns the collection as a Go slice.
 func (w *Workflow) Actions() []*Action {
+	defer runtime.KeepAlive(w)
 	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Action { return ActionFromID(_id) })
 }
 
 // Input returns the input.
 func (w *Workflow) Input() obj.Object {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("input"))
 	return obj.Wrap(_r)
 }

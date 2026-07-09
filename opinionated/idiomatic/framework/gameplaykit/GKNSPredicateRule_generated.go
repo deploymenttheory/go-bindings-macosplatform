@@ -5,7 +5,10 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,7 @@ func nSPredicateRuleAdopt(id objc.ID) *NSPredicateRule {
 
 // NewNSPredicateRuleWithPredicate initializes a rule with the specified predicate.
 func NewNSPredicateRuleWithPredicate(predicate obj.Object) *NSPredicateRule {
+	defer runtime.KeepAlive(predicate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNSPredicateRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:"), objref.IDOf(predicate))
 	return nSPredicateRuleAdopt(_id)
@@ -60,9 +64,10 @@ func (npr *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {
 }
 
 // Predicate returns the NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem:
-func (npr *NSPredicateRule) Predicate() obj.Object {
+func (npr *NSPredicateRule) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(npr)
 	_r := objc.Send[objc.ID](objref.IDOf(npr), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 var _ RuleProvider = (*NSPredicateRule)(nil)

@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterAccessControlAdopt(id objc.ID) *MTRClusterAccessControl {
 
 // NewMTRClusterAccessControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterAccessControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterAccessControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterAccessControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterAccessControlAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterAccessControlWithDeviceEndpointIDQueue(device *MTRDevice, endp
 
 // NewMTRClusterAccessControlWithDeviceEndpointQueue creates a new MTRClusterAccessControl.
 func NewMTRClusterAccessControlWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterAccessControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterAccessControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterAccessControlAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterAccessControlWithDeviceEndpointQueue(device *MTRDevice, endpoi
 //
 // ReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcac *MTRClusterAccessControl) ReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRAccessControlClusterReviewFabricRestrictionsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRAccessControlClusterReviewFabricRestrictionsResponseParams, err error) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRAccessControlClusterReviewFabricRestrictionsResponseParams
 		err error
@@ -87,95 +97,129 @@ func (mcac *MTRClusterAccessControl) ReviewFabricRestrictionsWithParamsExpectedV
 }
 
 // ReadAttributeACLWithParams reads attribute ACL with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeACLWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeACLWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeACLWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACLWithValueExpectedValueInterval writes attribute ACL with value expected value interval.
-func (mcac *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcac *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACLWithValueExpectedValueIntervalParams writes attribute ACL with value expected value interval params.
-func (mcac *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcac *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeExtensionWithParams reads attribute extension with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeExtensionWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeExtensionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeExtensionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeExtensionWithValueExpectedValueInterval writes attribute extension with value expected value interval.
-func (mcac *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcac *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeExtensionWithValueExpectedValueIntervalParams writes attribute extension with value expected value interval params.
-func (mcac *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcac *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSubjectsPerAccessControlEntryWithParams reads attribute subjects per access control entry with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeSubjectsPerAccessControlEntryWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeSubjectsPerAccessControlEntryWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeSubjectsPerAccessControlEntryWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTargetsPerAccessControlEntryWithParams reads attribute targets per access control entry with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeTargetsPerAccessControlEntryWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeTargetsPerAccessControlEntryWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeTargetsPerAccessControlEntryWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAccessControlEntriesPerFabricWithParams reads attribute access control entries per fabric with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeAccessControlEntriesPerFabricWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeAccessControlEntriesPerFabricWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAccessControlEntriesPerFabricWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCommissioningARLWithParams reads attribute commissioning arl with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeCommissioningARLWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeCommissioningARLWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeCommissioningARLWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeARLWithParams reads attribute arl with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeARLWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeARLWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeARLWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcac *MTRClusterAccessControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcac *MTRClusterAccessControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcac)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterAccessControl)(nil)

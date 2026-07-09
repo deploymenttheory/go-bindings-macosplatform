@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func addPaymentPassRequestAdopt(id objc.ID) *AddPaymentPassRequest {
 
 // Description returns the object's -description text.
 func (appr *AddPaymentPassRequest) Description() string {
+	defer runtime.KeepAlive(appr)
 	return rt.Description(objref.IDOf(appr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (appr *AddPaymentPassRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(appr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(appr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (appr *AddPaymentPassRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(appr)
 	return rt.IsKind(objref.IDOf(appr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (appr *AddPaymentPassRequest) String() string {
+	defer runtime.KeepAlive(appr)
 	return rt.Description(objref.IDOf(appr))
 }
 
@@ -73,49 +80,53 @@ func NewAddPaymentPassRequest() *AddPaymentPassRequest {
 }
 
 // WithEncryptedPassData sets an encrypted JSON file containing the sensitive information needed to add a card to Apple Pay.
-func (appr *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setEncryptedPassData:"), objref.IDOf(encryptedPassData))
+func (appr *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData []byte) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setEncryptedPassData:"), rt.BytesToNSData(encryptedPassData))
 	return appr
 }
 
 // WithActivationData sets the request’s activation data.
-func (appr *AddPaymentPassRequest) WithActivationData(activationData obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setActivationData:"), objref.IDOf(activationData))
+func (appr *AddPaymentPassRequest) WithActivationData(activationData []byte) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setActivationData:"), rt.BytesToNSData(activationData))
 	return appr
 }
 
 // WithEphemeralPublicKey sets the ephemeral public key used by elliptic curve cryptography (ECC).
-func (appr *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setEphemeralPublicKey:"), objref.IDOf(ephemeralPublicKey))
+func (appr *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey []byte) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setEphemeralPublicKey:"), rt.BytesToNSData(ephemeralPublicKey))
 	return appr
 }
 
 // WithWrappedKey sets the wrapped key.
-func (appr *AddPaymentPassRequest) WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest {
-	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
+func (appr *AddPaymentPassRequest) WithWrappedKey(wrappedKey []byte) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("setWrappedKey:"), rt.BytesToNSData(wrappedKey))
 	return appr
 }
 
 // EncryptedPassData returns the encrypted pass data.
-func (appr *AddPaymentPassRequest) EncryptedPassData() obj.Object {
+func (appr *AddPaymentPassRequest) EncryptedPassData() []byte {
+	defer runtime.KeepAlive(appr)
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("encryptedPassData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ActivationData returns the activation data.
-func (appr *AddPaymentPassRequest) ActivationData() obj.Object {
+func (appr *AddPaymentPassRequest) ActivationData() []byte {
+	defer runtime.KeepAlive(appr)
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("activationData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // EphemeralPublicKey returns the ephemeral public key.
-func (appr *AddPaymentPassRequest) EphemeralPublicKey() obj.Object {
+func (appr *AddPaymentPassRequest) EphemeralPublicKey() []byte {
+	defer runtime.KeepAlive(appr)
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("ephemeralPublicKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // WrappedKey returns the wrapped key.
-func (appr *AddPaymentPassRequest) WrappedKey() obj.Object {
+func (appr *AddPaymentPassRequest) WrappedKey() []byte {
+	defer runtime.KeepAlive(appr)
 	_r := objc.Send[objc.ID](objref.IDOf(appr), objc.RegisterName("wrappedKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

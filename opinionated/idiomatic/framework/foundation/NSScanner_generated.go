@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,23 +50,27 @@ func scannerAdopt(id objc.ID) *Scanner {
 
 // Description returns the object's -description text.
 func (s *Scanner) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Scanner) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Scanner) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // NewScannerWithString creates a new Scanner.
-func NewScannerWithString(string_ string) *Scanner {
+func NewScannerWithString(str string) *Scanner {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return scannerAdopt(_id)
 }
 
@@ -77,6 +82,7 @@ func (s *Scanner) WithScanLocation(scanLocation int) *Scanner {
 
 // WithCharactersToBeSkipped sets the characters to be skipped.
 func (s *Scanner) WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner {
+	defer runtime.KeepAlive(charactersToBeSkipped)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCharactersToBeSkipped:"), objref.IDOf(charactersToBeSkipped))
 	return s
 }
@@ -89,6 +95,7 @@ func (s *Scanner) WithCaseSensitive(caseSensitive bool) *Scanner {
 
 // WithLocale sets the locale.
 func (s *Scanner) WithLocale(locale obj.Object) *Scanner {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return s
 }
@@ -100,13 +107,14 @@ func (s *Scanner) WithObservationInfo(observationInfo unsafe.Pointer) *Scanner {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (s *Scanner) WithScriptingProperties(scriptingProperties obj.Object) *Scanner {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (s *Scanner) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Scanner {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return s
 }
 
 // String returns the string.
 func (s *Scanner) String() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""
@@ -116,30 +124,35 @@ func (s *Scanner) String() string {
 
 // ScanLocation returns the scan location.
 func (s *Scanner) ScanLocation() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("scanLocation"))
 	return _r
 }
 
 // CharactersToBeSkipped returns the characters to be skipped.
 func (s *Scanner) CharactersToBeSkipped() *CharacterSet {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("charactersToBeSkipped"))
 	return CharacterSetFromID(_r)
 }
 
 // CaseSensitive wraps the corresponding Objective-C method.
 func (s *Scanner) CaseSensitive() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("caseSensitive"))
 	return _r
 }
 
 // Locale returns the locale.
 func (s *Scanner) Locale() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
 // ScanInt wraps the corresponding Objective-C method.
 func (s *Scanner) ScanInt() (ok bool, result int32) {
+	defer runtime.KeepAlive(s)
 	var _out0 int32
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanInt:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -147,6 +160,7 @@ func (s *Scanner) ScanInt() (ok bool, result int32) {
 
 // ScanInteger wraps the corresponding Objective-C method.
 func (s *Scanner) ScanInteger() (ok bool, result int64) {
+	defer runtime.KeepAlive(s)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanInteger:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -154,6 +168,7 @@ func (s *Scanner) ScanInteger() (ok bool, result int64) {
 
 // ScanLongLong wraps the corresponding Objective-C method.
 func (s *Scanner) ScanLongLong() (ok bool, result int64) {
+	defer runtime.KeepAlive(s)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanLongLong:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -161,6 +176,7 @@ func (s *Scanner) ScanLongLong() (ok bool, result int64) {
 
 // ScanUnsignedLongLong wraps the corresponding Objective-C method.
 func (s *Scanner) ScanUnsignedLongLong() (ok bool, result uint64) {
+	defer runtime.KeepAlive(s)
 	var _out0 uint64
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUnsignedLongLong:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -168,6 +184,7 @@ func (s *Scanner) ScanUnsignedLongLong() (ok bool, result uint64) {
 
 // ScanFloat wraps the corresponding Objective-C method.
 func (s *Scanner) ScanFloat() (ok bool, result float32) {
+	defer runtime.KeepAlive(s)
 	var _out0 float32
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanFloat:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -175,6 +192,7 @@ func (s *Scanner) ScanFloat() (ok bool, result float32) {
 
 // ScanDouble wraps the corresponding Objective-C method.
 func (s *Scanner) ScanDouble() (ok bool, result float64) {
+	defer runtime.KeepAlive(s)
 	var _out0 float64
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanDouble:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -182,6 +200,7 @@ func (s *Scanner) ScanDouble() (ok bool, result float64) {
 
 // ScanHexInt wraps the corresponding Objective-C method.
 func (s *Scanner) ScanHexInt() (ok bool, result uint32) {
+	defer runtime.KeepAlive(s)
 	var _out0 uint32
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexInt:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -189,6 +208,7 @@ func (s *Scanner) ScanHexInt() (ok bool, result uint32) {
 
 // ScanHexLongLong wraps the corresponding Objective-C method.
 func (s *Scanner) ScanHexLongLong() (ok bool, result uint64) {
+	defer runtime.KeepAlive(s)
 	var _out0 uint64
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexLongLong:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -196,6 +216,7 @@ func (s *Scanner) ScanHexLongLong() (ok bool, result uint64) {
 
 // ScanHexFloat wraps the corresponding Objective-C method.
 func (s *Scanner) ScanHexFloat() (ok bool, result float32) {
+	defer runtime.KeepAlive(s)
 	var _out0 float32
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexFloat:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -203,37 +224,45 @@ func (s *Scanner) ScanHexFloat() (ok bool, result float32) {
 
 // ScanHexDouble wraps the corresponding Objective-C method.
 func (s *Scanner) ScanHexDouble() (ok bool, result float64) {
+	defer runtime.KeepAlive(s)
 	var _out0 float64
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanHexDouble:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // ScanStringIntoString wraps the corresponding Objective-C method.
-func (s *Scanner) ScanStringIntoString(string_ string, result string) bool {
-	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanString:intoString:"), purego.NSString(string_), purego.NSString(result))
+func (s *Scanner) ScanStringIntoString(str string, result string) bool {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanString:intoString:"), purego.NSString(str), purego.NSString(result))
 	return _r
 }
 
 // ScanCharactersFromSetIntoString wraps the corresponding Objective-C method.
 func (s *Scanner) ScanCharactersFromSetIntoString(set *CharacterSet, result string) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(set)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanCharactersFromSet:intoString:"), objref.IDOf(set), purego.NSString(result))
 	return _r
 }
 
 // ScanUpToStringIntoString wraps the corresponding Objective-C method.
-func (s *Scanner) ScanUpToStringIntoString(string_ string, result string) bool {
-	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUpToString:intoString:"), purego.NSString(string_), purego.NSString(result))
+func (s *Scanner) ScanUpToStringIntoString(str string, result string) bool {
+	defer runtime.KeepAlive(s)
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUpToString:intoString:"), purego.NSString(str), purego.NSString(result))
 	return _r
 }
 
 // ScanUpToCharactersFromSetIntoString wraps the corresponding Objective-C method.
 func (s *Scanner) ScanUpToCharactersFromSetIntoString(set *CharacterSet, result string) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(set)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("scanUpToCharactersFromSet:intoString:"), objref.IDOf(set), purego.NSString(result))
 	return _r
 }
 
 // IsAtEnd reports whether the object is at end.
 func (s *Scanner) IsAtEnd() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isAtEnd"))
 	return _r
 }

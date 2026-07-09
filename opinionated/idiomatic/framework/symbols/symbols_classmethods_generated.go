@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
 )
@@ -131,6 +133,7 @@ func OptionsWithSpeed(speed float64) *SymbolEffectOptions {
 
 // OptionsWithRepeatBehavior convenience initializer setting a preferred repeat behavior.
 func OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
+	defer runtime.KeepAlive(behavior)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptions")), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
 	return SymbolEffectOptionsFromID(_r)
 }
@@ -197,6 +200,7 @@ func ReplaceOffUpTransition() *SymbolReplaceContentTransition {
 
 // MagicTransitionWithFallback convenience initializer for a MagicReplace content transition with a configured Replace fallback.
 func MagicTransitionWithFallback(fallback *SymbolReplaceContentTransition) *SymbolMagicReplaceContentTransition {
+	defer runtime.KeepAlive(fallback)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("magicTransitionWithFallback:"), objref.IDOf(fallback))
 	return SymbolMagicReplaceContentTransitionFromID(_r)
 }

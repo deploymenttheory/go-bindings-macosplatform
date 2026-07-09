@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func transcriptionSegmentAdopt(id objc.ID) *TranscriptionSegment {
 
 // Description returns the object's -description text.
 func (ts *TranscriptionSegment) Description() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ts *TranscriptionSegment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ts *TranscriptionSegment) IsKind(className string) bool {
+	defer runtime.KeepAlive(ts)
 	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ts *TranscriptionSegment) String() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
@@ -75,6 +82,7 @@ func NewTranscriptionSegment() *TranscriptionSegment {
 
 // Substring returns the string representation of the utterance in the transcription segment.
 func (ts *TranscriptionSegment) Substring() string {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("substring"))
 	if _r == 0 {
 		return ""
@@ -84,24 +92,28 @@ func (ts *TranscriptionSegment) Substring() string {
 
 // SubstringRange returns the range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the “SFTranscription/formattedString“ property of the “SFTranscription“ object containing this segment.
 func (ts *TranscriptionSegment) SubstringRange() foundation.NSRange {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ts), objc.RegisterName("substringRange"))
 	return _r
 }
 
 // Timestamp returns the start time of the segment in the processed audio stream. The “timestamp“ is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
 func (ts *TranscriptionSegment) Timestamp() float64 {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("timestamp"))
 	return _r
 }
 
 // Duration returns the number of seconds it took for the user to speak the utterance represented by the segment. The “duration“ contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the “SFSpeechRecognizer“ sets “duration“ to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
 func (ts *TranscriptionSegment) Duration() float64 {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[float64](objref.IDOf(ts), objc.RegisterName("duration"))
 	return _r
 }
 
 // Confidence returns the level of confidence the speech recognizer has in its recognition of the speech transcribed for the segment. This property reflects the overall confidence in the recognition of the entire phrase. The value is `0` if there was no recognition, and it is closer to `1` when there is a high certainty that a transcription matches the user's speech exactly. For example, a confidence value of `0.94` represents a very high confidence level, and is more likely to be correct than a transcription with a confidence value of `0.72`.
 func (ts *TranscriptionSegment) Confidence() float32 {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[float32](objref.IDOf(ts), objc.RegisterName("confidence"))
 	return _r
 }
@@ -110,12 +122,14 @@ func (ts *TranscriptionSegment) Confidence() float32 {
 //
 // AlternativeSubstrings returns the collection as a Go slice.
 func (ts *TranscriptionSegment) AlternativeSubstrings() []string {
+	defer runtime.KeepAlive(ts)
 	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("alternativeSubstrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // VoiceAnalytics returns an analysis of the transcription segment's vocal properties.
 func (ts *TranscriptionSegment) VoiceAnalytics() *VoiceAnalytics {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("voiceAnalytics"))
 	return VoiceAnalyticsFromID(_r)
 }

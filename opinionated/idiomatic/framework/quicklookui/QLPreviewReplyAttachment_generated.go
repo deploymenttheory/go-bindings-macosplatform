@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,40 +49,48 @@ func previewReplyAttachmentAdopt(id objc.ID) *PreviewReplyAttachment {
 
 // Description returns the object's -description text.
 func (pra *PreviewReplyAttachment) Description() string {
+	defer runtime.KeepAlive(pra)
 	return rt.Description(objref.IDOf(pra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pra *PreviewReplyAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pra)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pra *PreviewReplyAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(pra)
 	return rt.IsKind(objref.IDOf(pra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pra *PreviewReplyAttachment) String() string {
+	defer runtime.KeepAlive(pra)
 	return rt.Description(objref.IDOf(pra))
 }
 
 // NewPreviewReplyAttachmentWithDataContentType creates a preview reply attachment with the specified type.
-func NewPreviewReplyAttachmentWithDataContentType(data obj.Object, contentType obj.Object) *PreviewReplyAttachment {
+func NewPreviewReplyAttachmentWithDataContentType(data []byte, contentType obj.Object) *PreviewReplyAttachment {
+	defer runtime.KeepAlive(contentType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("QLPreviewReplyAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:contentType:"), objref.IDOf(data), objref.IDOf(contentType))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:contentType:"), rt.BytesToNSData(data), objref.IDOf(contentType))
 	return previewReplyAttachmentAdopt(_id)
 }
 
 // Data returns the data content of an html preview
-func (pra *PreviewReplyAttachment) Data() obj.Object {
+func (pra *PreviewReplyAttachment) Data() []byte {
+	defer runtime.KeepAlive(pra)
 	_r := objc.Send[objc.ID](objref.IDOf(pra), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ContentType returns the content type of the attachment for an html preview
 func (pra *PreviewReplyAttachment) ContentType() obj.Object {
+	defer runtime.KeepAlive(pra)
 	_r := objc.Send[objc.ID](objref.IDOf(pra), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }

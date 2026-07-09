@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func matchedPlayersAdopt(id objc.ID) *MatchedPlayers {
 
 // Description returns the object's -description text.
 func (mp *MatchedPlayers) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MatchedPlayers) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MatchedPlayers) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MatchedPlayers) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
@@ -76,12 +83,14 @@ func NewMatchedPlayers() *MatchedPlayers {
 //
 // Players returns the collection as a Go slice.
 func (mp *MatchedPlayers) Players() []*Player {
+	defer runtime.KeepAlive(mp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // PlayerProperties returns the player properties.
 func (mp *MatchedPlayers) PlayerProperties() obj.Object {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)
 }

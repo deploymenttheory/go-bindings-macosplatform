@@ -232,12 +232,12 @@ func AESetObjectCallbacks(myCompareProc unsafe.Pointer, myCountProc unsafe.Point
 var _fnAEStreamCreateEvent func(int, int, int, unsafe.Pointer, int, int16, int) objc.ID
 
 // AEStreamCreateEvent calls the AE framework function AEStreamCreateEvent.
-func AEStreamCreateEvent(clazz int, id_ int, targetType int, targetData unsafe.Pointer, targetLength int, returnID int16, transactionID int) obj.Object {
+func AEStreamCreateEvent(clazz int, identifier int, targetType int, targetData unsafe.Pointer, targetLength int, returnID int16, transactionID int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAEStreamCreateEvent == nil {
 		ebipurego.RegisterLibFunc(&_fnAEStreamCreateEvent, _lib, "AEStreamCreateEvent")
 	}
-	_ret := _fnAEStreamCreateEvent(clazz, id_, targetType, targetData, targetLength, returnID, transactionID)
+	_ret := _fnAEStreamCreateEvent(clazz, identifier, targetType, targetData, targetLength, returnID, transactionID)
 	return obj.Wrap(_ret)
 }
 

@@ -7,8 +7,9 @@ package healthkit
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -16,13 +17,13 @@ import (
 var _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity func(objc.ID) objc.ID
 
 // HKAppleSleepingBreathingDisturbancesClassificationForQuantity calls the HealthKit framework function HKAppleSleepingBreathingDisturbancesClassificationForQuantity.
-func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *Quantity) obj.Object {
+func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *Quantity) *foundation.Number {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity == nil {
 		ebipurego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity, _lib, "HKAppleSleepingBreathingDisturbancesClassificationForQuantity")
 	}
 	_ret := _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity(objref.IDOf(value))
-	return obj.Wrap(_ret)
+	return foundation.NumberFromID(_ret)
 }
 
 var _fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification func(AppleSleepingBreathingDisturbancesClassification) objc.ID
@@ -77,23 +78,23 @@ func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification App
 var _fnHKCategoryValueSleepAnalysisAsleepValues func() objc.ID
 
 // HKCategoryValueSleepAnalysisAsleepValues calls the HealthKit framework function HKCategoryValueSleepAnalysisAsleepValues.
-func HKCategoryValueSleepAnalysisAsleepValues() obj.Object {
+func HKCategoryValueSleepAnalysisAsleepValues() []*foundation.Number {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHKCategoryValueSleepAnalysisAsleepValues == nil {
 		ebipurego.RegisterLibFunc(&_fnHKCategoryValueSleepAnalysisAsleepValues, _lib, "HKCategoryValueSleepAnalysisAsleepValues")
 	}
 	_ret := _fnHKCategoryValueSleepAnalysisAsleepValues()
-	return obj.Wrap(_ret)
+	return rt.NSSetToSlice(_ret, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 var _fnHKStateOfMindValenceClassificationForValence func(float64) objc.ID
 
 // HKStateOfMindValenceClassificationForValence calls the HealthKit framework function HKStateOfMindValenceClassificationForValence.
-func HKStateOfMindValenceClassificationForValence(valence float64) obj.Object {
+func HKStateOfMindValenceClassificationForValence(valence float64) *foundation.Number {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHKStateOfMindValenceClassificationForValence == nil {
 		ebipurego.RegisterLibFunc(&_fnHKStateOfMindValenceClassificationForValence, _lib, "HKStateOfMindValenceClassificationForValence")
 	}
 	_ret := _fnHKStateOfMindValenceClassificationForValence(valence)
-	return obj.Wrap(_ret)
+	return foundation.NumberFromID(_ret)
 }

@@ -5,9 +5,11 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,9 +53,10 @@ func NewMTRCommandPath() *MTRCommandPath {
 }
 
 // Command returns the command.
-func (mcp *MTRCommandPath) Command() obj.Object {
+func (mcp *MTRCommandPath) Command() *foundation.Number {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("command"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 var _ MTRClusterPathProvider = (*MTRCommandPath)(nil)

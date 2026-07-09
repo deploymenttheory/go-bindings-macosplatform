@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRVCCleanModeClusterModeTagStructAdopt(id objc.ID) *MTRRVCCleanModeCluste
 
 // Description returns the object's -description text.
 func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) Description() string {
+	defer runtime.KeepAlive(mcmcmts)
 	return rt.Description(objref.IDOf(mcmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcmcmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcmcmts)
 	return rt.IsKind(objref.IDOf(mcmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) String() string {
+	defer runtime.KeepAlive(mcmcmts)
 	return rt.Description(objref.IDOf(mcmcmts))
 }
 
@@ -72,24 +80,28 @@ func NewMTRRVCCleanModeClusterModeTagStruct() *MTRRVCCleanModeClusterModeTagStru
 
 // WithMfgCode sets the mfg code.
 func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mcmcmts
 }
 
 // WithValue sets the value.
 func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRVCCleanModeClusterModeTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mcmcmts
 }
 
 // MfgCode returns the mfg code.
-func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) MfgCode() obj.Object {
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(mcmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) Value() obj.Object {
+func (mcmcmts *MTRRVCCleanModeClusterModeTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(mcmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mcmcmts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

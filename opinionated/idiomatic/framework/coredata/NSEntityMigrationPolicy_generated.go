@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func entityMigrationPolicyAdopt(id objc.ID) *EntityMigrationPolicy {
 
 // Description returns the object's -description text.
 func (emp *EntityMigrationPolicy) Description() string {
+	defer runtime.KeepAlive(emp)
 	return rt.Description(objref.IDOf(emp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (emp *EntityMigrationPolicy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(emp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (emp *EntityMigrationPolicy) IsKind(className string) bool {
+	defer runtime.KeepAlive(emp)
 	return rt.IsKind(objref.IDOf(emp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (emp *EntityMigrationPolicy) String() string {
+	defer runtime.KeepAlive(emp)
 	return rt.Description(objref.IDOf(emp))
 }
 
@@ -77,6 +83,9 @@ func NewEntityMigrationPolicy() *EntityMigrationPolicy {
 
 // BeginEntityMappingManager sets up state information before the start of a given entity mapping.
 func (emp *EntityMigrationPolicy) BeginEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("beginEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +96,10 @@ func (emp *EntityMigrationPolicy) BeginEntityMappingManager(mapping *EntityMappi
 
 // CreateDestinationInstancesForSourceInstanceEntityMappingManager creates the destination instance(s) for a given source instance.
 func (emp *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManager(sInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(sInstance)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("createDestinationInstancesForSourceInstance:entityMapping:manager:error:"), objref.IDOf(sInstance), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,6 +110,9 @@ func (emp *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEnt
 
 // EndInstanceCreationForEntityMappingManager indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.
 func (emp *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("endInstanceCreationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -107,6 +123,10 @@ func (emp *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManager(map
 
 // CreateRelationshipsForDestinationInstanceEntityMappingManager constructs the relationships between the newly-created destination instances.
 func (emp *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManager(dInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(dInstance)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("createRelationshipsForDestinationInstance:entityMapping:manager:error:"), objref.IDOf(dInstance), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -117,6 +137,9 @@ func (emp *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntit
 
 // EndRelationshipCreationForEntityMappingManager indicates the end of the relationship creation stage for the specified entity mapping.
 func (emp *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("endRelationshipCreationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -127,6 +150,9 @@ func (emp *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager
 
 // PerformCustomValidationForEntityMappingManager provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.
 func (emp *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("performCustomValidationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -137,6 +163,9 @@ func (emp *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManager
 
 // EndEntityMappingManager performs cleanup at the end of the migration, from any phase of the mapping.
 func (emp *EntityMigrationPolicy) EndEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	defer runtime.KeepAlive(emp)
+	defer runtime.KeepAlive(mapping)
+	defer runtime.KeepAlive(manager)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(emp), objc.RegisterName("endEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

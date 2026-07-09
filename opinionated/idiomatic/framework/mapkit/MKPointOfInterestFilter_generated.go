@@ -5,7 +5,10 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func pointOfInterestFilterAdopt(id objc.ID) *PointOfInterestFilter {
 
 // Description returns the object's -description text.
 func (poif *PointOfInterestFilter) Description() string {
+	defer runtime.KeepAlive(poif)
 	return rt.Description(objref.IDOf(poif))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (poif *PointOfInterestFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(poif)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(poif), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (poif *PointOfInterestFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(poif)
 	return rt.IsKind(objref.IDOf(poif), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (poif *PointOfInterestFilter) String() string {
+	defer runtime.KeepAlive(poif)
 	return rt.Description(objref.IDOf(poif))
 }
 
 // NewPointOfInterestFilterIncludingCategories initialize the point of interest filter with a list of categories to include.
-func NewPointOfInterestFilterIncludingCategories(categories []obj.Object) *PointOfInterestFilter {
+func NewPointOfInterestFilterIncludingCategories(categories []*foundation.String) *PointOfInterestFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingCategories:"), purego.SliceToNSArray(categories, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingCategories:"), purego.SliceToNSArray(categories, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return pointOfInterestFilterAdopt(_id)
 }
 
 // NewPointOfInterestFilterExcludingCategories initialize the point of interest filter with a list of categories to exclude.
-func NewPointOfInterestFilterExcludingCategories(categories []obj.Object) *PointOfInterestFilter {
+func NewPointOfInterestFilterExcludingCategories(categories []*foundation.String) *PointOfInterestFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPointOfInterestFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingCategories:"), purego.SliceToNSArray(categories, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingCategories:"), purego.SliceToNSArray(categories, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return pointOfInterestFilterAdopt(_id)
 }
 
 // IncludesCategory returns a Boolean value indicating whether the filter includes the point of interest category.
 func (poif *PointOfInterestFilter) IncludesCategory(category obj.Object) bool {
+	defer runtime.KeepAlive(poif)
+	defer runtime.KeepAlive(category)
 	_r := objc.Send[bool](objref.IDOf(poif), objc.RegisterName("includesCategory:"), objref.IDOf(category))
 	return _r
 }
 
 // ExcludesCategory returns a Boolean value indicating whether the filter excludes the point of interest category.
 func (poif *PointOfInterestFilter) ExcludesCategory(category obj.Object) bool {
+	defer runtime.KeepAlive(poif)
+	defer runtime.KeepAlive(category)
 	_r := objc.Send[bool](objref.IDOf(poif), objc.RegisterName("excludesCategory:"), objref.IDOf(category))
 	return _r
 }

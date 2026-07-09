@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,8 +62,8 @@ func (mp *MessagePort) WithObservationInfo(observationInfo unsafe.Pointer) *Mess
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mp *MessagePort) WithScriptingProperties(scriptingProperties obj.Object) *MessagePort {
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mp *MessagePort) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MessagePort {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mp
 }
 

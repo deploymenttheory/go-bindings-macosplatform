@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKDeviceBrowserViewAdopt(id objc.ID) *IKDeviceBrowserView {
 
 // Description returns the object's -description text.
 func (idbv *IKDeviceBrowserView) Description() string {
+	defer runtime.KeepAlive(idbv)
 	return rt.Description(objref.IDOf(idbv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (idbv *IKDeviceBrowserView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(idbv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(idbv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (idbv *IKDeviceBrowserView) IsKind(className string) bool {
+	defer runtime.KeepAlive(idbv)
 	return rt.IsKind(objref.IDOf(idbv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (idbv *IKDeviceBrowserView) String() string {
+	defer runtime.KeepAlive(idbv)
 	return rt.Description(objref.IDOf(idbv))
 }
 
@@ -80,6 +87,7 @@ func NewIKDeviceBrowserView() *IKDeviceBrowserView {
 
 // WithDelegate sets specifies the delegate object.
 func (idbv *IKDeviceBrowserView) WithDelegate(delegate obj.Object) *IKDeviceBrowserView {
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	})
@@ -120,6 +128,7 @@ func (idbv *IKDeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScan
 
 // WithMode sets specifies the browser display mode.
 func (idbv *IKDeviceBrowserView) WithMode(mode obj.Object) *IKDeviceBrowserView {
+	defer runtime.KeepAlive(mode)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(idbv), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	})
@@ -128,6 +137,7 @@ func (idbv *IKDeviceBrowserView) WithMode(mode obj.Object) *IKDeviceBrowserView 
 
 // Delegate returns delegate of the IKDeviceBrowserView.
 func (idbv *IKDeviceBrowserView) Delegate() obj.Object {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -141,6 +151,7 @@ func (idbv *IKDeviceBrowserView) Delegate() obj.Object {
 
 // DisplaysLocalCameras reports whether for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
 func (idbv *IKDeviceBrowserView) DisplaysLocalCameras() bool {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -154,6 +165,7 @@ func (idbv *IKDeviceBrowserView) DisplaysLocalCameras() bool {
 
 // DisplaysNetworkCameras reports whether for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
 func (idbv *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -167,6 +179,7 @@ func (idbv *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
 
 // DisplaysLocalScanners reports whether for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
 func (idbv *IKDeviceBrowserView) DisplaysLocalScanners() bool {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -180,6 +193,7 @@ func (idbv *IKDeviceBrowserView) DisplaysLocalScanners() bool {
 
 // DisplaysNetworkScanners reports whether for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
 func (idbv *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -193,6 +207,7 @@ func (idbv *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
 
 // Mode returns one of the supported display modes (table, outline, or icon mode).
 func (idbv *IKDeviceBrowserView) Mode() obj.Object {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -206,6 +221,7 @@ func (idbv *IKDeviceBrowserView) Mode() obj.Object {
 
 // SelectedDevice returns user selected device (ICCameraDevice or ICScannerDevice).
 func (idbv *IKDeviceBrowserView) SelectedDevice() obj.Object {
+	defer runtime.KeepAlive(idbv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

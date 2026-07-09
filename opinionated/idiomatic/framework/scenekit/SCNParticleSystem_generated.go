@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func particleSystemAdopt(id objc.ID) *ParticleSystem {
 
 // Description returns the object's -description text.
 func (ps *ParticleSystem) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *ParticleSystem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *ParticleSystem) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *ParticleSystem) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
@@ -122,6 +129,7 @@ func (ps *ParticleSystem) WithWarmupDuration(warmupDuration float64) *ParticleSy
 
 // WithEmitterShape sets the shape of the region of space where the system spawns new particles.
 func (ps *ParticleSystem) WithEmitterShape(emitterShape GeometryProvider) *ParticleSystem {
+	defer runtime.KeepAlive(emitterShape)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setEmitterShape:"), objref.IDOf(emitterShape))
 	return ps
 }
@@ -200,24 +208,28 @@ func (ps *ParticleSystem) WithParticleLifeSpanVariation(particleLifeSpanVariatio
 
 // WithSystemSpawnedOnDying sets another particle system to be added to the scene when a particle dies.
 func (ps *ParticleSystem) WithSystemSpawnedOnDying(systemSpawnedOnDying *ParticleSystem) *ParticleSystem {
+	defer runtime.KeepAlive(systemSpawnedOnDying)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setSystemSpawnedOnDying:"), objref.IDOf(systemSpawnedOnDying))
 	return ps
 }
 
 // WithSystemSpawnedOnCollision sets another particle system to be added to the scene when a particle collides with scene geometry.
 func (ps *ParticleSystem) WithSystemSpawnedOnCollision(systemSpawnedOnCollision *ParticleSystem) *ParticleSystem {
+	defer runtime.KeepAlive(systemSpawnedOnCollision)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setSystemSpawnedOnCollision:"), objref.IDOf(systemSpawnedOnCollision))
 	return ps
 }
 
 // WithSystemSpawnedOnLiving sets another particle system to be added to the scene for each living particle in the system.
 func (ps *ParticleSystem) WithSystemSpawnedOnLiving(systemSpawnedOnLiving *ParticleSystem) *ParticleSystem {
+	defer runtime.KeepAlive(systemSpawnedOnLiving)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setSystemSpawnedOnLiving:"), objref.IDOf(systemSpawnedOnLiving))
 	return ps
 }
 
 // WithParticleImage sets the texture image SceneKit uses to render each particle.
 func (ps *ParticleSystem) WithParticleImage(particleImage obj.Object) *ParticleSystem {
+	defer runtime.KeepAlive(particleImage)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setParticleImage:"), objref.IDOf(particleImage))
 	return ps
 }
@@ -266,6 +278,7 @@ func (ps *ParticleSystem) WithImageSequenceAnimationMode(imageSequenceAnimationM
 
 // WithParticleColor sets the color of newly spawned particles. Animatable.
 func (ps *ParticleSystem) WithParticleColor(particleColor obj.Object) *ParticleSystem {
+	defer runtime.KeepAlive(particleColor)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setParticleColor:"), objref.IDOf(particleColor))
 	return ps
 }
@@ -429,291 +442,340 @@ func (ps *ParticleSystem) WithWritesToDepthBuffer(writesToDepthBuffer bool) *Par
 
 // WithPropertyControllers sets a dictionary that optionally associates particle properties with objects that animate a property’s value for each particle.
 func (ps *ParticleSystem) WithPropertyControllers(propertyControllers obj.Object) *ParticleSystem {
+	defer runtime.KeepAlive(propertyControllers)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setPropertyControllers:"), objref.IDOf(propertyControllers))
 	return ps
 }
 
 // Reset returns the particle system to its initial state.
 func (ps *ParticleSystem) Reset() {
+	defer runtime.KeepAlive(ps)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("reset"))
 }
 
 // RemoveModifiersOfStage removes particle modifier blocks for the specified stage of the particle simulation.
 func (ps *ParticleSystem) RemoveModifiersOfStage(stage ParticleModifierStage) {
+	defer runtime.KeepAlive(ps)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("removeModifiersOfStage:"), stage)
 }
 
 // RemoveAllModifiers removes all particle modifier blocks associated with the particle system.
 func (ps *ParticleSystem) RemoveAllModifiers() {
+	defer runtime.KeepAlive(ps)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("removeAllModifiers"))
 }
 
 // EmissionDuration returns the emission duration.
 func (ps *ParticleSystem) EmissionDuration() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("emissionDuration"))
 	return _r
 }
 
 // EmissionDurationVariation returns the emission duration variation.
 func (ps *ParticleSystem) EmissionDurationVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("emissionDurationVariation"))
 	return _r
 }
 
 // IdleDuration returns the idle duration.
 func (ps *ParticleSystem) IdleDuration() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("idleDuration"))
 	return _r
 }
 
 // IdleDurationVariation returns the idle duration variation.
 func (ps *ParticleSystem) IdleDurationVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("idleDurationVariation"))
 	return _r
 }
 
 // Loops wraps the corresponding Objective-C method.
 func (ps *ParticleSystem) Loops() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("loops"))
 	return _r
 }
 
 // BirthRate returns the birth rate.
 func (ps *ParticleSystem) BirthRate() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("birthRate"))
 	return _r
 }
 
 // BirthRateVariation returns the birth rate variation.
 func (ps *ParticleSystem) BirthRateVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("birthRateVariation"))
 	return _r
 }
 
 // WarmupDuration returns the warmup duration.
 func (ps *ParticleSystem) WarmupDuration() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("warmupDuration"))
 	return _r
 }
 
 // EmitterShape returns the emitter shape.
 func (ps *ParticleSystem) EmitterShape() *Geometry {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("emitterShape"))
 	return GeometryFromID(_r)
 }
 
 // BirthLocation returns the birth location.
 func (ps *ParticleSystem) BirthLocation() ParticleBirthLocation {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ParticleBirthLocation](objref.IDOf(ps), objc.RegisterName("birthLocation"))
 	return _r
 }
 
 // BirthDirection returns the birth direction.
 func (ps *ParticleSystem) BirthDirection() ParticleBirthDirection {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ParticleBirthDirection](objref.IDOf(ps), objc.RegisterName("birthDirection"))
 	return _r
 }
 
 // SpreadingAngle returns the spreading angle.
 func (ps *ParticleSystem) SpreadingAngle() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("spreadingAngle"))
 	return _r
 }
 
 // IsLocal reports whether the object is local.
 func (ps *ParticleSystem) IsLocal() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isLocal"))
 	return _r
 }
 
 // ParticleAngle returns the particle angle.
 func (ps *ParticleSystem) ParticleAngle() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngle"))
 	return _r
 }
 
 // ParticleAngleVariation returns the particle angle variation.
 func (ps *ParticleSystem) ParticleAngleVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngleVariation"))
 	return _r
 }
 
 // ParticleVelocity returns the particle velocity.
 func (ps *ParticleSystem) ParticleVelocity() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleVelocity"))
 	return _r
 }
 
 // ParticleVelocityVariation returns the particle velocity variation.
 func (ps *ParticleSystem) ParticleVelocityVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleVelocityVariation"))
 	return _r
 }
 
 // ParticleAngularVelocity returns the particle angular velocity.
 func (ps *ParticleSystem) ParticleAngularVelocity() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngularVelocity"))
 	return _r
 }
 
 // ParticleAngularVelocityVariation returns the particle angular velocity variation.
 func (ps *ParticleSystem) ParticleAngularVelocityVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngularVelocityVariation"))
 	return _r
 }
 
 // ParticleLifeSpan returns the particle life span.
 func (ps *ParticleSystem) ParticleLifeSpan() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleLifeSpan"))
 	return _r
 }
 
 // ParticleLifeSpanVariation returns the particle life span variation.
 func (ps *ParticleSystem) ParticleLifeSpanVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleLifeSpanVariation"))
 	return _r
 }
 
 // SystemSpawnedOnDying returns the system spawned on dying.
 func (ps *ParticleSystem) SystemSpawnedOnDying() *ParticleSystem {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("systemSpawnedOnDying"))
 	return ParticleSystemFromID(_r)
 }
 
 // SystemSpawnedOnCollision returns the system spawned on collision.
 func (ps *ParticleSystem) SystemSpawnedOnCollision() *ParticleSystem {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("systemSpawnedOnCollision"))
 	return ParticleSystemFromID(_r)
 }
 
 // SystemSpawnedOnLiving returns the system spawned on living.
 func (ps *ParticleSystem) SystemSpawnedOnLiving() *ParticleSystem {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("systemSpawnedOnLiving"))
 	return ParticleSystemFromID(_r)
 }
 
 // ParticleImage returns the particle image.
 func (ps *ParticleSystem) ParticleImage() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("particleImage"))
 	return obj.Wrap(_r)
 }
 
 // ImageSequenceColumnCount returns the image sequence column count.
 func (ps *ParticleSystem) ImageSequenceColumnCount() int {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("imageSequenceColumnCount"))
 	return _r
 }
 
 // ImageSequenceRowCount returns the image sequence row count.
 func (ps *ParticleSystem) ImageSequenceRowCount() int {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("imageSequenceRowCount"))
 	return _r
 }
 
 // ImageSequenceInitialFrame returns the image sequence initial frame.
 func (ps *ParticleSystem) ImageSequenceInitialFrame() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceInitialFrame"))
 	return _r
 }
 
 // ImageSequenceInitialFrameVariation returns the image sequence initial frame variation.
 func (ps *ParticleSystem) ImageSequenceInitialFrameVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceInitialFrameVariation"))
 	return _r
 }
 
 // ImageSequenceFrameRate returns the image sequence frame rate.
 func (ps *ParticleSystem) ImageSequenceFrameRate() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceFrameRate"))
 	return _r
 }
 
 // ImageSequenceFrameRateVariation returns the image sequence frame rate variation.
 func (ps *ParticleSystem) ImageSequenceFrameRateVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceFrameRateVariation"))
 	return _r
 }
 
 // ImageSequenceAnimationMode returns the image sequence animation mode.
 func (ps *ParticleSystem) ImageSequenceAnimationMode() ParticleImageSequenceAnimationMode {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ParticleImageSequenceAnimationMode](objref.IDOf(ps), objc.RegisterName("imageSequenceAnimationMode"))
 	return _r
 }
 
 // ParticleColor returns the particle color.
 func (ps *ParticleSystem) ParticleColor() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("particleColor"))
 	return obj.Wrap(_r)
 }
 
 // ParticleSize returns the particle size.
 func (ps *ParticleSystem) ParticleSize() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleSize"))
 	return _r
 }
 
 // ParticleSizeVariation returns the particle size variation.
 func (ps *ParticleSystem) ParticleSizeVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleSizeVariation"))
 	return _r
 }
 
 // ParticleIntensity returns the particle intensity.
 func (ps *ParticleSystem) ParticleIntensity() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleIntensity"))
 	return _r
 }
 
 // ParticleIntensityVariation returns the particle intensity variation.
 func (ps *ParticleSystem) ParticleIntensityVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleIntensityVariation"))
 	return _r
 }
 
 // BlendMode returns the blend mode.
 func (ps *ParticleSystem) BlendMode() ParticleBlendMode {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ParticleBlendMode](objref.IDOf(ps), objc.RegisterName("blendMode"))
 	return _r
 }
 
 // IsBlackPassEnabled reports whether the object is black pass enabled.
 func (ps *ParticleSystem) IsBlackPassEnabled() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isBlackPassEnabled"))
 	return _r
 }
 
 // OrientationMode returns the orientation mode.
 func (ps *ParticleSystem) OrientationMode() ParticleOrientationMode {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ParticleOrientationMode](objref.IDOf(ps), objc.RegisterName("orientationMode"))
 	return _r
 }
 
 // SortingMode returns the sorting mode.
 func (ps *ParticleSystem) SortingMode() ParticleSortingMode {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[ParticleSortingMode](objref.IDOf(ps), objc.RegisterName("sortingMode"))
 	return _r
 }
 
 // IsLightingEnabled reports whether the object is lighting enabled.
 func (ps *ParticleSystem) IsLightingEnabled() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isLightingEnabled"))
 	return _r
 }
 
 // AffectedByGravity wraps the corresponding Objective-C method.
 func (ps *ParticleSystem) AffectedByGravity() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("affectedByGravity"))
 	return _r
 }
 
 // AffectedByPhysicsFields wraps the corresponding Objective-C method.
 func (ps *ParticleSystem) AffectedByPhysicsFields() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("affectedByPhysicsFields"))
 	return _r
 }
 
 // ParticleDiesOnCollision wraps the corresponding Objective-C method.
 func (ps *ParticleSystem) ParticleDiesOnCollision() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("particleDiesOnCollision"))
 	return _r
 }
@@ -722,90 +784,105 @@ func (ps *ParticleSystem) ParticleDiesOnCollision() bool {
 //
 // ColliderNodes returns the collection as a Go slice.
 func (ps *ParticleSystem) ColliderNodes() []*Node {
+	defer runtime.KeepAlive(ps)
 	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("colliderNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
 // ParticleMass returns the particle mass.
 func (ps *ParticleSystem) ParticleMass() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleMass"))
 	return _r
 }
 
 // ParticleMassVariation returns the particle mass variation.
 func (ps *ParticleSystem) ParticleMassVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleMassVariation"))
 	return _r
 }
 
 // ParticleBounce returns the particle bounce.
 func (ps *ParticleSystem) ParticleBounce() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleBounce"))
 	return _r
 }
 
 // ParticleBounceVariation returns the particle bounce variation.
 func (ps *ParticleSystem) ParticleBounceVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleBounceVariation"))
 	return _r
 }
 
 // ParticleFriction returns the particle friction.
 func (ps *ParticleSystem) ParticleFriction() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleFriction"))
 	return _r
 }
 
 // ParticleFrictionVariation returns the particle friction variation.
 func (ps *ParticleSystem) ParticleFrictionVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleFrictionVariation"))
 	return _r
 }
 
 // ParticleCharge returns the particle charge.
 func (ps *ParticleSystem) ParticleCharge() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleCharge"))
 	return _r
 }
 
 // ParticleChargeVariation returns the particle charge variation.
 func (ps *ParticleSystem) ParticleChargeVariation() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleChargeVariation"))
 	return _r
 }
 
 // DampingFactor returns the damping factor.
 func (ps *ParticleSystem) DampingFactor() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("dampingFactor"))
 	return _r
 }
 
 // SpeedFactor returns the speed factor.
 func (ps *ParticleSystem) SpeedFactor() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("speedFactor"))
 	return _r
 }
 
 // StretchFactor returns the stretch factor.
 func (ps *ParticleSystem) StretchFactor() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("stretchFactor"))
 	return _r
 }
 
 // FresnelExponent returns the fresnel exponent.
 func (ps *ParticleSystem) FresnelExponent() float64 {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("fresnelExponent"))
 	return _r
 }
 
 // WritesToDepthBuffer reports whether the receiver writes to the depth buffer when rendered. Defaults to false.
 func (ps *ParticleSystem) WritesToDepthBuffer() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("writesToDepthBuffer"))
 	return _r
 }
 
 // PropertyControllers returns the property controllers.
 func (ps *ParticleSystem) PropertyControllers() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("propertyControllers"))
 	return obj.Wrap(_r)
 }

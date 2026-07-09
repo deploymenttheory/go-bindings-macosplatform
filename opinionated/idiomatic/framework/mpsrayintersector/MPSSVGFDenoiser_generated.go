@@ -5,6 +5,8 @@
 package mpsrayintersector
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func sVGFDenoiserAdopt(id objc.ID) *SVGFDenoiser {
 
 // Description returns the object's -description text.
 func (sd *SVGFDenoiser) Description() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sd *SVGFDenoiser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sd *SVGFDenoiser) IsKind(className string) bool {
+	defer runtime.KeepAlive(sd)
 	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sd *SVGFDenoiser) String() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
@@ -78,22 +85,26 @@ func (sd *SVGFDenoiser) WithBilateralFilterIterations(bilateralFilterIterations 
 
 // ClearTemporalHistory clear the temporal history. Reprojection and temporal accumulation will restart on the next call to encodeToCommandBuffer:
 func (sd *SVGFDenoiser) ClearTemporalHistory() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("clearTemporalHistory"))
 }
 
 // ReleaseTemporaryTextures return any temporary textures to the texture allocator. Also clears the temporal history. This should be called before resizing the source texture(s).
 func (sd *SVGFDenoiser) ReleaseTemporaryTextures() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("releaseTemporaryTextures"))
 }
 
 // Svgf returns the underlying MPSSVGF kernels object which will be used for denoising. Use this object to customize the denoising process.
 func (sd *SVGFDenoiser) Svgf() *SVGF {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("svgf"))
 	return SVGFFromID(_r)
 }
 
 // BilateralFilterIterations returns the number of bilateral filter iterations to run. More iterations will improve quality at the cost of performance. Defaults to 5. Must be at least 1.
 func (sd *SVGFDenoiser) BilateralFilterIterations() int {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[int](objref.IDOf(sd), objc.RegisterName("bilateralFilterIterations"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func hostCIPortStateMachineAdopt(id objc.ID) *HostCIPortStateMachine {
 
 // Description returns the object's -description text.
 func (hcpsm *HostCIPortStateMachine) Description() string {
+	defer runtime.KeepAlive(hcpsm)
 	return rt.Description(objref.IDOf(hcpsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hcpsm *HostCIPortStateMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hcpsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hcpsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hcpsm *HostCIPortStateMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(hcpsm)
 	return rt.IsKind(objref.IDOf(hcpsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hcpsm *HostCIPortStateMachine) String() string {
+	defer runtime.KeepAlive(hcpsm)
 	return rt.Description(objref.IDOf(hcpsm))
 }
 
-// NewHostCIPortStateMachineWithInterfacePortNumberError initializes an IOUSBHostCIPortStateMachine object The IOUSBHostCIPortStateMachine defaults to the IOUSBHostCIPortStateOff state.
-func NewHostCIPortStateMachineWithInterfacePortNumberError(interface_ *HostControllerInterface, portNumber int) (result *HostCIPortStateMachine, err error) {
+// NewHostCIPortStateMachineWithInterfacePortNumber initializes an IOUSBHostCIPortStateMachine object The IOUSBHostCIPortStateMachine defaults to the IOUSBHostCIPortStateOff state.
+func NewHostCIPortStateMachineWithInterfacePortNumber(interface_ *HostControllerInterface, portNumber int) (result *HostCIPortStateMachine, err error) {
+	defer runtime.KeepAlive(interface_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIPortStateMachine")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:portNumber:error:"), objref.IDOf(interface_), portNumber, unsafe.Pointer(&_nsErr))
@@ -100,6 +107,7 @@ func (hcpsm *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPo
 
 // UpdateLinkStateSpeedInhibitLinkStateChange updates link state speed inhibit link state change.
 func (hcpsm *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChange(linkState HostCILinkState, speed HostCIDeviceSpeed, inhibitLinkStateChange bool) error {
+	defer runtime.KeepAlive(hcpsm)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("updateLinkState:speed:inhibitLinkStateChange:error:"), linkState, speed, inhibitLinkStateChange, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -110,54 +118,63 @@ func (hcpsm *HostCIPortStateMachine) UpdateLinkStateSpeedInhibitLinkStateChange(
 
 // PortNumber returns the port number.
 func (hcpsm *HostCIPortStateMachine) PortNumber() int {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[int](objref.IDOf(hcpsm), objc.RegisterName("portNumber"))
 	return _r
 }
 
 // PortState returns the port state.
 func (hcpsm *HostCIPortStateMachine) PortState() HostCIPortState {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[HostCIPortState](objref.IDOf(hcpsm), objc.RegisterName("portState"))
 	return _r
 }
 
 // PortStatus returns the port status.
 func (hcpsm *HostCIPortStateMachine) PortStatus() uint32 {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[uint32](objref.IDOf(hcpsm), objc.RegisterName("portStatus"))
 	return _r
 }
 
 // ControllerInterface returns the controller interface.
 func (hcpsm *HostCIPortStateMachine) ControllerInterface() *HostControllerInterface {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[objc.ID](objref.IDOf(hcpsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }
 
 // Powered reports whether set the powered state of the port Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command. As part of successfully processing this command the powered property must be set to true. Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to false.
 func (hcpsm *HostCIPortStateMachine) Powered() bool {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("powered"))
 	return _r
 }
 
 // Connected reports whether set the connection state of the port The connected property cannot be set for an unpowered port, and will read back as false, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0. For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
 func (hcpsm *HostCIPortStateMachine) Connected() bool {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("connected"))
 	return _r
 }
 
 // Overcurrent reports whether set the overcurrent state of the port The overcurrent property cannot be set for an unpowered port, and will read back as false, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0. For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
 func (hcpsm *HostCIPortStateMachine) Overcurrent() bool {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[bool](objref.IDOf(hcpsm), objc.RegisterName("overcurrent"))
 	return _r
 }
 
 // LinkState returns the link state.
 func (hcpsm *HostCIPortStateMachine) LinkState() HostCILinkState {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[HostCILinkState](objref.IDOf(hcpsm), objc.RegisterName("linkState"))
 	return _r
 }
 
 // Speed returns the speed.
 func (hcpsm *HostCIPortStateMachine) Speed() HostCIDeviceSpeed {
+	defer runtime.KeepAlive(hcpsm)
 	_r := objc.Send[HostCIDeviceSpeed](objref.IDOf(hcpsm), objc.RegisterName("speed"))
 	return _r
 }

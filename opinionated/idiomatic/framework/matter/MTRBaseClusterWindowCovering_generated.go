@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterWindowCoveringAdopt(id objc.ID) *MTRBaseClusterWindowCovering
 
 // NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWindowCovering {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWindowCovering")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterWindowCoveringAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue(device *MTRBaseDev
 
 // NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue creates a new MTRBaseClusterWindowCovering.
 func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterWindowCovering {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWindowCovering")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterWindowCoveringAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevic
 //
 // ReadAttributeTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx c
 //
 // SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubsc
 //
 // ReadAttributePhysicalClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftW
 //
 // SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 //
 // ReadAttributePhysicalClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltW
 //
 // SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 //
 // ReadAttributeCurrentPositionLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithC
 //
 // SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 //
 // ReadAttributeCurrentPositionTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithC
 //
 // SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 //
 // ReadAttributeNumberOfActuationsLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWi
 //
 // SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsL
 //
 // ReadAttributeNumberOfActuationsTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWi
 //
 // SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsT
 //
 // ReadAttributeConfigStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompleti
 //
 // SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithPar
 //
 // ReadAttributeCurrentPositionLiftPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPerce
 //
 // SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 //
 // ReadAttributeCurrentPositionTiltPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPerce
 //
 // SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 //
 // ReadAttributeOperationalStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCom
 //
 // SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +654,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWi
 //
 // ReadAttributeTargetPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +680,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercen
 //
 // SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +707,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftP
 //
 // ReadAttributeTargetPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +733,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercen
 //
 // SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +760,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltP
 //
 // ReadAttributeEndProductTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +786,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithComple
 //
 // SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +813,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithP
 //
 // ReadAttributeCurrentPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +839,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPerce
 //
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +866,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 //
 // ReadAttributeCurrentPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +892,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPerce
 //
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +919,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 //
 // ReadAttributeInstalledOpenLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +945,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWi
 //
 // SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +972,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitL
 //
 // ReadAttributeInstalledClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +998,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift
 //
 // SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1025,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 //
 // ReadAttributeInstalledOpenLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1051,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWi
 //
 // SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1078,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitT
 //
 // ReadAttributeInstalledClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1104,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt
 //
 // SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1131,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 //
 // ReadAttributeModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1157,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx c
 //
 // SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1184,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubsc
 //
 // ReadAttributeSafetyStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1210,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompleti
 //
 // SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1237,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithPar
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1263,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWith
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1290,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandLis
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1316,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithC
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1343,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandList
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1369,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithComplet
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1396,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithPa
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1422,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1449,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParam
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1475,8 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompl
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1502,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWith
 //
 // ReadAttributeType blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1528,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context
 //
 // SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1557,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinInterval
 //
 // ReadAttributePhysicalClosedLimitLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1583,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(
 //
 // SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1612,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 //
 // ReadAttributePhysicalClosedLimitTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1638,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(
 //
 // SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1667,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimit
 //
 // ReadAttributeCurrentPositionLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1693,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx 
 //
 // SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1722,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 //
 // ReadAttributeCurrentPositionTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1748,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx 
 //
 // SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1777,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 //
 // ReadAttributeNumberOfActuationsLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1803,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(c
 //
 // SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1832,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsL
 //
 // ReadAttributeNumberOfActuationsTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1858,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(c
 //
 // SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1887,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsT
 //
 // ReadAttributeConfigStatus blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1913,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context
 //
 // SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1942,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMin
 //
 // ReadAttributeCurrentPositionLiftPercentage blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1968,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPerce
 //
 // SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1865,6 +1997,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 //
 // ReadAttributeCurrentPositionTiltPercentage blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,6 +2023,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPerce
 //
 // SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1915,6 +2052,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 //
 // ReadAttributeOperationalStatus blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1940,6 +2078,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx co
 //
 // SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1965,6 +2107,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWi
 //
 // ReadAttributeTargetPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1990,6 +2133,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercen
 //
 // SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2015,6 +2162,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftP
 //
 // ReadAttributeTargetPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2040,6 +2188,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercen
 //
 // SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2065,6 +2217,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltP
 //
 // ReadAttributeEndProductType blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2090,6 +2243,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx conte
 //
 // SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2115,6 +2272,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithM
 //
 // ReadAttributeCurrentPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2140,6 +2298,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPerce
 //
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2165,6 +2327,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLift
 //
 // ReadAttributeCurrentPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,6 +2353,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPerce
 //
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2215,6 +2382,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTilt
 //
 // ReadAttributeInstalledOpenLimitLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2240,6 +2408,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(c
 //
 // SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2265,6 +2437,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitL
 //
 // ReadAttributeInstalledClosedLimitLift blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2290,6 +2463,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift
 //
 // SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2315,6 +2492,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 //
 // ReadAttributeInstalledOpenLimitTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2340,6 +2518,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(c
 //
 // SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2365,6 +2547,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitT
 //
 // ReadAttributeInstalledClosedLimitTilt blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2390,6 +2573,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt
 //
 // SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2415,6 +2602,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimi
 //
 // ReadAttributeMode blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2440,6 +2628,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context
 //
 // SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2465,6 +2657,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinInterval
 //
 // ReadAttributeSafetyStatus blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2490,6 +2683,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context
 //
 // SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2515,6 +2712,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMin
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2540,6 +2738,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2565,6 +2767,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandLis
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2590,6 +2793,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx 
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2615,6 +2822,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandList
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2640,6 +2848,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx contex
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2665,6 +2877,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMi
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2690,6 +2903,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.C
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2715,6 +2932,7 @@ func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIn
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2740,6 +2958,10 @@ func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx cont
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

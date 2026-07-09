@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +52,27 @@ func fileVersionAdopt(id objc.ID) *FileVersion {
 
 // Description returns the object's -description text.
 func (fv *FileVersion) Description() string {
+	defer runtime.KeepAlive(fv)
 	return rt.Description(objref.IDOf(fv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fv *FileVersion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fv *FileVersion) IsKind(className string) bool {
+	defer runtime.KeepAlive(fv)
 	return rt.IsKind(objref.IDOf(fv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fv *FileVersion) String() string {
+	defer runtime.KeepAlive(fv)
 	return rt.Description(objref.IDOf(fv))
 }
 
@@ -94,25 +101,27 @@ func (fv *FileVersion) WithObservationInfo(observationInfo unsafe.Pointer) *File
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (fv *FileVersion) WithScriptingProperties(scriptingProperties obj.Object) *FileVersion {
-	objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (fv *FileVersion) WithScriptingProperties(scriptingProperties map[string]obj.Object) *FileVersion {
+	objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return fv
 }
 
-// ReplaceItemAtURLOptionsError replace the contents of the specified file with the contents of the current version’s file.
-func (fv *FileVersion) ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (result *URL, err error) {
+// ReplaceItemAtURL replace the contents of the specified file with the contents of the current version’s file.
+func (fv *FileVersion) ReplaceItemAtURL(url string, options FileVersionReplacingOptions) (result string, err error) {
+	defer runtime.KeepAlive(fv)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("replaceItemAtURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return URLFromID(_r), nil
+	return rt.URLString(_r), nil
 }
 
 // RemoveAndReturnError remove this version object and its associated file from the version store.
 //
 // RemoveAndReturnError returns an error if the operation did not succeed.
 func (fv *FileVersion) RemoveAndReturnError() error {
+	defer runtime.KeepAlive(fv)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(fv), objc.RegisterName("removeAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -122,13 +131,15 @@ func (fv *FileVersion) RemoveAndReturnError() error {
 }
 
 // URL returns the URL.
-func (fv *FileVersion) URL() *URL {
+func (fv *FileVersion) URL() string {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("URL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // LocalizedName returns the localized name.
 func (fv *FileVersion) LocalizedName() string {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -138,6 +149,7 @@ func (fv *FileVersion) LocalizedName() string {
 
 // LocalizedNameOfSavingComputer returns the localized name of saving computer.
 func (fv *FileVersion) LocalizedNameOfSavingComputer() string {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("localizedNameOfSavingComputer"))
 	if _r == 0 {
 		return ""
@@ -147,42 +159,49 @@ func (fv *FileVersion) LocalizedNameOfSavingComputer() string {
 
 // OriginatorNameComponents returns the originator name components.
 func (fv *FileVersion) OriginatorNameComponents() *PersonNameComponents {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("originatorNameComponents"))
 	return PersonNameComponentsFromID(_r)
 }
 
 // ModificationDate returns the modification date.
-func (fv *FileVersion) ModificationDate() *Date {
+func (fv *FileVersion) ModificationDate() time.Time {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("modificationDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IsConflict reports whether the object is conflict.
 func (fv *FileVersion) IsConflict() bool {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isConflict"))
 	return _r
 }
 
 // IsResolved reports whether the object is resolved.
 func (fv *FileVersion) IsResolved() bool {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isResolved"))
 	return _r
 }
 
 // IsDiscardable reports whether the object is discardable.
 func (fv *FileVersion) IsDiscardable() bool {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("isDiscardable"))
 	return _r
 }
 
 // HasLocalContents reports whether the object has local contents.
 func (fv *FileVersion) HasLocalContents() bool {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("hasLocalContents"))
 	return _r
 }
 
 // HasThumbnail reports whether the object has thumbnail.
 func (fv *FileVersion) HasThumbnail() bool {
+	defer runtime.KeepAlive(fv)
 	_r := objc.Send[bool](objref.IDOf(fv), objc.RegisterName("hasThumbnail"))
 	return _r
 }

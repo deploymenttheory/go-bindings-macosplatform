@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelDescriptionAdopt(id objc.ID) *ModelDescription {
 
 // Description returns the object's -description text.
 func (md *ModelDescription) Description() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (md *ModelDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (md *ModelDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(md)
 	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (md *ModelDescription) String() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
@@ -73,25 +80,29 @@ func NewModelDescription() *ModelDescription {
 }
 
 // InputDescriptionsByName returns description of the inputs to the model
-func (md *ModelDescription) InputDescriptionsByName() obj.Object {
+func (md *ModelDescription) InputDescriptionsByName() map[string]*FeatureDescription {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("inputDescriptionsByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *FeatureDescription { return FeatureDescriptionFromID(_id) })
 }
 
 // OutputDescriptionsByName returns description of the outputs from the model
-func (md *ModelDescription) OutputDescriptionsByName() obj.Object {
+func (md *ModelDescription) OutputDescriptionsByName() map[string]*FeatureDescription {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("outputDescriptionsByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *FeatureDescription { return FeatureDescriptionFromID(_id) })
 }
 
 // StateDescriptionsByName returns description of the state features.
-func (md *ModelDescription) StateDescriptionsByName() obj.Object {
+func (md *ModelDescription) StateDescriptionsByName() map[string]*FeatureDescription {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("stateDescriptionsByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *FeatureDescription { return FeatureDescriptionFromID(_id) })
 }
 
 // PredictedFeatureName returns name of the primary target / predicted output feature in the output descriptions
 func (md *ModelDescription) PredictedFeatureName() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("predictedFeatureName"))
 	if _r == 0 {
 		return ""
@@ -101,6 +112,7 @@ func (md *ModelDescription) PredictedFeatureName() string {
 
 // PredictedProbabilitiesName returns key for all predicted probabilities stored as a MLFeatureTypeDictionary in the output descriptions
 func (md *ModelDescription) PredictedProbabilitiesName() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("predictedProbabilitiesName"))
 	if _r == 0 {
 		return ""
@@ -110,30 +122,35 @@ func (md *ModelDescription) PredictedProbabilitiesName() string {
 
 // Metadata returns optional metadata describing the model
 func (md *ModelDescription) Metadata() obj.Object {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
 
 // ClassLabels returns array to map a class index to the corresponding label, which is either Number or String. The property is populated from the classLabels entry specified in the model's protobuf message. When the model is a pipeline, which contains one or more sub models, the property value is calculated as follows. 1. If the pipeline model's proto message specifies predictedFeatureName parameter, use classLabels property value of the sub model with the output feature with the name. 2. Otherwise, if the pipeline model has only one sub model with non-nil classLabels property, use the property value. 3. Otherwise, the property is nil.
 func (md *ModelDescription) ClassLabels() []obj.Object {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("classLabels"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsUpdatable reports whether the object is updatable.
 func (md *ModelDescription) IsUpdatable() bool {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("isUpdatable"))
 	return _r
 }
 
 // TrainingInputDescriptionsByName returns the training input descriptions by name.
-func (md *ModelDescription) TrainingInputDescriptionsByName() obj.Object {
+func (md *ModelDescription) TrainingInputDescriptionsByName() map[string]*FeatureDescription {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("trainingInputDescriptionsByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *FeatureDescription { return FeatureDescriptionFromID(_id) })
 }
 
 // ParameterDescriptionsByKey returns the parameter descriptions by key.
 func (md *ModelDescription) ParameterDescriptionsByKey() obj.Object {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("parameterDescriptionsByKey"))
 	return obj.Wrap(_r)
 }

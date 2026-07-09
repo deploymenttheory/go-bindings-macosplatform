@@ -9,5933 +9,5933 @@ import (
 )
 
 // The structure that describes an instruction or data cache element.
-type Hv_cache_type_t int64
+type CacheType int64
 
 const (
 	// Data or unified cache
-	HV_CACHE_TYPE_DATA Hv_cache_type_t = 0
+	CacheTypeData CacheType = 0
 	// Instruction cache
-	HV_CACHE_TYPE_INSTRUCTION Hv_cache_type_t = 1
+	CacheTypeInstruction CacheType = 1
 )
 
-// String returns the Hv_cache_type_t constant's name, or its numeric form when the
+// String returns the CacheType constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_cache_type_t) String() string {
+func (e CacheType) String() string {
 	switch e {
-	case HV_CACHE_TYPE_DATA:
-		return "HV_CACHE_TYPE_DATA"
-	case HV_CACHE_TYPE_INSTRUCTION:
-		return "HV_CACHE_TYPE_INSTRUCTION"
+	case CacheTypeData:
+		return "CacheTypeData"
+	case CacheTypeInstruction:
+		return "CacheTypeInstruction"
 	default:
-		return fmt.Sprintf("Hv_cache_type_t(%d)", int64(e))
+		return fmt.Sprintf("CacheType(%d)", int64(e))
 	}
 }
 
 // The type that describes the event that triggered a guest exit to the host.
-type Hv_exit_reason_t int64
+type ExitReason int64
 
 const (
 	// asynchronous exit requested explicitly by hv_vcpus_exit() call
-	HV_EXIT_REASON_CANCELED Hv_exit_reason_t = 0
+	ExitReasonCanceled ExitReason = 0
 	// synchronous exception to a higher EL triggered by the guest
-	HV_EXIT_REASON_EXCEPTION Hv_exit_reason_t = 1
+	ExitReasonException ExitReason = 1
 	// ARM Generic VTimer became pending since the last hv_vcpu_run() call returned. The caller is expected to make the interrupt corresponding to the VTimer pending in the guest's interrupt controller. This exit automatically sets the VTimer mask. The VCPU will not exit with this status again until after the mask is cleared with hv_vcpu_set_vtimer_mask(), which should be called during a trap of the EOI for the guest's VTimer interrupt handler.
-	HV_EXIT_REASON_VTIMER_ACTIVATED Hv_exit_reason_t = 2
+	ExitReasonVtimerActivated ExitReason = 2
 	// Unable to determine exit reason: this should not happen under normal operation.
-	HV_EXIT_REASON_UNKNOWN Hv_exit_reason_t = 3
+	ExitReasonUnknown ExitReason = 3
 )
 
-// String returns the Hv_exit_reason_t constant's name, or its numeric form when the
+// String returns the ExitReason constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_exit_reason_t) String() string {
+func (e ExitReason) String() string {
 	switch e {
-	case HV_EXIT_REASON_CANCELED:
-		return "HV_EXIT_REASON_CANCELED"
-	case HV_EXIT_REASON_EXCEPTION:
-		return "HV_EXIT_REASON_EXCEPTION"
-	case HV_EXIT_REASON_VTIMER_ACTIVATED:
-		return "HV_EXIT_REASON_VTIMER_ACTIVATED"
-	case HV_EXIT_REASON_UNKNOWN:
-		return "HV_EXIT_REASON_UNKNOWN"
+	case ExitReasonCanceled:
+		return "ExitReasonCanceled"
+	case ExitReasonException:
+		return "ExitReasonException"
+	case ExitReasonVtimerActivated:
+		return "ExitReasonVtimerActivated"
+	case ExitReasonUnknown:
+		return "ExitReasonUnknown"
 	default:
-		return fmt.Sprintf("Hv_exit_reason_t(%d)", int64(e))
+		return fmt.Sprintf("ExitReason(%d)", int64(e))
 	}
 }
 
 // The type that defines feature registers.
-type Hv_feature_reg_t int64
+type FeatureReg int64
 
 const (
-	HV_FEATURE_REG_ID_AA64DFR0_EL1  Hv_feature_reg_t = 0
-	HV_FEATURE_REG_ID_AA64DFR1_EL1  Hv_feature_reg_t = 1
-	HV_FEATURE_REG_ID_AA64ISAR0_EL1 Hv_feature_reg_t = 2
-	HV_FEATURE_REG_ID_AA64ISAR1_EL1 Hv_feature_reg_t = 3
-	HV_FEATURE_REG_ID_AA64MMFR0_EL1 Hv_feature_reg_t = 4
-	HV_FEATURE_REG_ID_AA64MMFR1_EL1 Hv_feature_reg_t = 5
-	HV_FEATURE_REG_ID_AA64MMFR2_EL1 Hv_feature_reg_t = 6
-	HV_FEATURE_REG_ID_AA64PFR0_EL1  Hv_feature_reg_t = 7
-	HV_FEATURE_REG_ID_AA64PFR1_EL1  Hv_feature_reg_t = 8
-	HV_FEATURE_REG_CTR_EL0          Hv_feature_reg_t = 9
-	HV_FEATURE_REG_CLIDR_EL1        Hv_feature_reg_t = 10
-	HV_FEATURE_REG_DCZID_EL0        Hv_feature_reg_t = 11
-	HV_FEATURE_REG_ID_AA64SMFR0_EL1 Hv_feature_reg_t = 12
-	HV_FEATURE_REG_ID_AA64ZFR0_EL1  Hv_feature_reg_t = 13
+	FeatureRegIDAa64dfr0EL1  FeatureReg = 0
+	FeatureRegIDAa64dfr1EL1  FeatureReg = 1
+	FeatureRegIDAa64isar0EL1 FeatureReg = 2
+	FeatureRegIDAa64isar1EL1 FeatureReg = 3
+	FeatureRegIDAa64mmfr0EL1 FeatureReg = 4
+	FeatureRegIDAa64mmfr1EL1 FeatureReg = 5
+	FeatureRegIDAa64mmfr2EL1 FeatureReg = 6
+	FeatureRegIDAa64pfr0EL1  FeatureReg = 7
+	FeatureRegIDAa64pfr1EL1  FeatureReg = 8
+	FeatureRegCtrEl0         FeatureReg = 9
+	FeatureRegClidrEL1       FeatureReg = 10
+	FeatureRegDczidEl0       FeatureReg = 11
+	FeatureRegIDAa64smfr0EL1 FeatureReg = 12
+	FeatureRegIDAa64zfr0EL1  FeatureReg = 13
 )
 
-// String returns the Hv_feature_reg_t constant's name, or its numeric form when the
+// String returns the FeatureReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_feature_reg_t) String() string {
+func (e FeatureReg) String() string {
 	switch e {
-	case HV_FEATURE_REG_ID_AA64DFR0_EL1:
-		return "HV_FEATURE_REG_ID_AA64DFR0_EL1"
-	case HV_FEATURE_REG_ID_AA64DFR1_EL1:
-		return "HV_FEATURE_REG_ID_AA64DFR1_EL1"
-	case HV_FEATURE_REG_ID_AA64ISAR0_EL1:
-		return "HV_FEATURE_REG_ID_AA64ISAR0_EL1"
-	case HV_FEATURE_REG_ID_AA64ISAR1_EL1:
-		return "HV_FEATURE_REG_ID_AA64ISAR1_EL1"
-	case HV_FEATURE_REG_ID_AA64MMFR0_EL1:
-		return "HV_FEATURE_REG_ID_AA64MMFR0_EL1"
-	case HV_FEATURE_REG_ID_AA64MMFR1_EL1:
-		return "HV_FEATURE_REG_ID_AA64MMFR1_EL1"
-	case HV_FEATURE_REG_ID_AA64MMFR2_EL1:
-		return "HV_FEATURE_REG_ID_AA64MMFR2_EL1"
-	case HV_FEATURE_REG_ID_AA64PFR0_EL1:
-		return "HV_FEATURE_REG_ID_AA64PFR0_EL1"
-	case HV_FEATURE_REG_ID_AA64PFR1_EL1:
-		return "HV_FEATURE_REG_ID_AA64PFR1_EL1"
-	case HV_FEATURE_REG_CTR_EL0:
-		return "HV_FEATURE_REG_CTR_EL0"
-	case HV_FEATURE_REG_CLIDR_EL1:
-		return "HV_FEATURE_REG_CLIDR_EL1"
-	case HV_FEATURE_REG_DCZID_EL0:
-		return "HV_FEATURE_REG_DCZID_EL0"
-	case HV_FEATURE_REG_ID_AA64SMFR0_EL1:
-		return "HV_FEATURE_REG_ID_AA64SMFR0_EL1"
-	case HV_FEATURE_REG_ID_AA64ZFR0_EL1:
-		return "HV_FEATURE_REG_ID_AA64ZFR0_EL1"
+	case FeatureRegIDAa64dfr0EL1:
+		return "FeatureRegIDAa64dfr0EL1"
+	case FeatureRegIDAa64dfr1EL1:
+		return "FeatureRegIDAa64dfr1EL1"
+	case FeatureRegIDAa64isar0EL1:
+		return "FeatureRegIDAa64isar0EL1"
+	case FeatureRegIDAa64isar1EL1:
+		return "FeatureRegIDAa64isar1EL1"
+	case FeatureRegIDAa64mmfr0EL1:
+		return "FeatureRegIDAa64mmfr0EL1"
+	case FeatureRegIDAa64mmfr1EL1:
+		return "FeatureRegIDAa64mmfr1EL1"
+	case FeatureRegIDAa64mmfr2EL1:
+		return "FeatureRegIDAa64mmfr2EL1"
+	case FeatureRegIDAa64pfr0EL1:
+		return "FeatureRegIDAa64pfr0EL1"
+	case FeatureRegIDAa64pfr1EL1:
+		return "FeatureRegIDAa64pfr1EL1"
+	case FeatureRegCtrEl0:
+		return "FeatureRegCtrEl0"
+	case FeatureRegClidrEL1:
+		return "FeatureRegClidrEL1"
+	case FeatureRegDczidEl0:
+		return "FeatureRegDczidEl0"
+	case FeatureRegIDAa64smfr0EL1:
+		return "FeatureRegIDAa64smfr0EL1"
+	case FeatureRegIDAa64zfr0EL1:
+		return "FeatureRegIDAa64zfr0EL1"
 	default:
-		return fmt.Sprintf("Hv_feature_reg_t(%d)", int64(e))
+		return fmt.Sprintf("FeatureReg(%d)", int64(e))
 	}
 }
 
-type Hv_gic_distributor_reg_t int64
+type GICDistributorReg int64
 
 const (
-	HV_GIC_DISTRIBUTOR_REG_GICD_CTLR          Hv_gic_distributor_reg_t = 0
-	HV_GIC_DISTRIBUTOR_REG_GICD_TYPER         Hv_gic_distributor_reg_t = 4
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR0      Hv_gic_distributor_reg_t = 128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR1      Hv_gic_distributor_reg_t = 132
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR2      Hv_gic_distributor_reg_t = 136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR3      Hv_gic_distributor_reg_t = 140
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR4      Hv_gic_distributor_reg_t = 144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR5      Hv_gic_distributor_reg_t = 148
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR6      Hv_gic_distributor_reg_t = 152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR7      Hv_gic_distributor_reg_t = 156
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR8      Hv_gic_distributor_reg_t = 160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR9      Hv_gic_distributor_reg_t = 164
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR10     Hv_gic_distributor_reg_t = 168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR11     Hv_gic_distributor_reg_t = 172
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR12     Hv_gic_distributor_reg_t = 176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR13     Hv_gic_distributor_reg_t = 180
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR14     Hv_gic_distributor_reg_t = 184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR15     Hv_gic_distributor_reg_t = 188
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR16     Hv_gic_distributor_reg_t = 192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR17     Hv_gic_distributor_reg_t = 196
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR18     Hv_gic_distributor_reg_t = 200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR19     Hv_gic_distributor_reg_t = 204
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR20     Hv_gic_distributor_reg_t = 208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR21     Hv_gic_distributor_reg_t = 212
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR22     Hv_gic_distributor_reg_t = 216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR23     Hv_gic_distributor_reg_t = 220
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR24     Hv_gic_distributor_reg_t = 224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR25     Hv_gic_distributor_reg_t = 228
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR26     Hv_gic_distributor_reg_t = 232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR27     Hv_gic_distributor_reg_t = 236
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR28     Hv_gic_distributor_reg_t = 240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR29     Hv_gic_distributor_reg_t = 244
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR30     Hv_gic_distributor_reg_t = 248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR31     Hv_gic_distributor_reg_t = 252
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER0    Hv_gic_distributor_reg_t = 256
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER1    Hv_gic_distributor_reg_t = 260
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER2    Hv_gic_distributor_reg_t = 264
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER3    Hv_gic_distributor_reg_t = 268
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER4    Hv_gic_distributor_reg_t = 272
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER5    Hv_gic_distributor_reg_t = 276
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER6    Hv_gic_distributor_reg_t = 280
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER7    Hv_gic_distributor_reg_t = 284
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER8    Hv_gic_distributor_reg_t = 288
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER9    Hv_gic_distributor_reg_t = 292
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER10   Hv_gic_distributor_reg_t = 296
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER11   Hv_gic_distributor_reg_t = 300
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER12   Hv_gic_distributor_reg_t = 304
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER13   Hv_gic_distributor_reg_t = 308
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER14   Hv_gic_distributor_reg_t = 312
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER15   Hv_gic_distributor_reg_t = 316
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER16   Hv_gic_distributor_reg_t = 320
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER17   Hv_gic_distributor_reg_t = 324
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER18   Hv_gic_distributor_reg_t = 328
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER19   Hv_gic_distributor_reg_t = 332
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER20   Hv_gic_distributor_reg_t = 336
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER21   Hv_gic_distributor_reg_t = 340
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER22   Hv_gic_distributor_reg_t = 344
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER23   Hv_gic_distributor_reg_t = 348
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER24   Hv_gic_distributor_reg_t = 352
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER25   Hv_gic_distributor_reg_t = 356
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER26   Hv_gic_distributor_reg_t = 360
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER27   Hv_gic_distributor_reg_t = 364
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER28   Hv_gic_distributor_reg_t = 368
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER29   Hv_gic_distributor_reg_t = 372
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER30   Hv_gic_distributor_reg_t = 376
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER31   Hv_gic_distributor_reg_t = 380
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER0    Hv_gic_distributor_reg_t = 384
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER1    Hv_gic_distributor_reg_t = 388
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER2    Hv_gic_distributor_reg_t = 392
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER3    Hv_gic_distributor_reg_t = 396
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER4    Hv_gic_distributor_reg_t = 400
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER5    Hv_gic_distributor_reg_t = 404
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER6    Hv_gic_distributor_reg_t = 408
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER7    Hv_gic_distributor_reg_t = 412
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER8    Hv_gic_distributor_reg_t = 416
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER9    Hv_gic_distributor_reg_t = 420
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER10   Hv_gic_distributor_reg_t = 424
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER11   Hv_gic_distributor_reg_t = 428
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER12   Hv_gic_distributor_reg_t = 432
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER13   Hv_gic_distributor_reg_t = 436
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER14   Hv_gic_distributor_reg_t = 440
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER15   Hv_gic_distributor_reg_t = 444
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER16   Hv_gic_distributor_reg_t = 448
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER17   Hv_gic_distributor_reg_t = 452
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER18   Hv_gic_distributor_reg_t = 456
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER19   Hv_gic_distributor_reg_t = 460
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER20   Hv_gic_distributor_reg_t = 464
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER21   Hv_gic_distributor_reg_t = 468
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER22   Hv_gic_distributor_reg_t = 472
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER23   Hv_gic_distributor_reg_t = 476
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER24   Hv_gic_distributor_reg_t = 480
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER25   Hv_gic_distributor_reg_t = 484
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER26   Hv_gic_distributor_reg_t = 488
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER27   Hv_gic_distributor_reg_t = 492
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER28   Hv_gic_distributor_reg_t = 496
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER29   Hv_gic_distributor_reg_t = 500
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER30   Hv_gic_distributor_reg_t = 504
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER31   Hv_gic_distributor_reg_t = 508
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR0      Hv_gic_distributor_reg_t = 512
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR1      Hv_gic_distributor_reg_t = 516
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR2      Hv_gic_distributor_reg_t = 520
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR3      Hv_gic_distributor_reg_t = 524
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR4      Hv_gic_distributor_reg_t = 528
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR5      Hv_gic_distributor_reg_t = 532
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR6      Hv_gic_distributor_reg_t = 536
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR7      Hv_gic_distributor_reg_t = 540
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR8      Hv_gic_distributor_reg_t = 544
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR9      Hv_gic_distributor_reg_t = 548
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR10     Hv_gic_distributor_reg_t = 552
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR11     Hv_gic_distributor_reg_t = 556
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR12     Hv_gic_distributor_reg_t = 560
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR13     Hv_gic_distributor_reg_t = 564
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR14     Hv_gic_distributor_reg_t = 568
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR15     Hv_gic_distributor_reg_t = 572
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR16     Hv_gic_distributor_reg_t = 576
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR17     Hv_gic_distributor_reg_t = 580
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR18     Hv_gic_distributor_reg_t = 584
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR19     Hv_gic_distributor_reg_t = 588
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR20     Hv_gic_distributor_reg_t = 592
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR21     Hv_gic_distributor_reg_t = 596
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR22     Hv_gic_distributor_reg_t = 600
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR23     Hv_gic_distributor_reg_t = 604
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR24     Hv_gic_distributor_reg_t = 608
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR25     Hv_gic_distributor_reg_t = 612
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR26     Hv_gic_distributor_reg_t = 616
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR27     Hv_gic_distributor_reg_t = 620
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR28     Hv_gic_distributor_reg_t = 624
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR29     Hv_gic_distributor_reg_t = 628
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR30     Hv_gic_distributor_reg_t = 632
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR31     Hv_gic_distributor_reg_t = 636
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR0      Hv_gic_distributor_reg_t = 640
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR1      Hv_gic_distributor_reg_t = 644
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR2      Hv_gic_distributor_reg_t = 648
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR3      Hv_gic_distributor_reg_t = 652
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR4      Hv_gic_distributor_reg_t = 656
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR5      Hv_gic_distributor_reg_t = 660
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR6      Hv_gic_distributor_reg_t = 664
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR7      Hv_gic_distributor_reg_t = 668
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR8      Hv_gic_distributor_reg_t = 672
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR9      Hv_gic_distributor_reg_t = 676
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR10     Hv_gic_distributor_reg_t = 680
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR11     Hv_gic_distributor_reg_t = 684
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR12     Hv_gic_distributor_reg_t = 688
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR13     Hv_gic_distributor_reg_t = 692
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR14     Hv_gic_distributor_reg_t = 696
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR15     Hv_gic_distributor_reg_t = 700
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR16     Hv_gic_distributor_reg_t = 704
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR17     Hv_gic_distributor_reg_t = 708
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR18     Hv_gic_distributor_reg_t = 712
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR19     Hv_gic_distributor_reg_t = 716
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR20     Hv_gic_distributor_reg_t = 720
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR21     Hv_gic_distributor_reg_t = 724
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR22     Hv_gic_distributor_reg_t = 728
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR23     Hv_gic_distributor_reg_t = 732
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR24     Hv_gic_distributor_reg_t = 736
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR25     Hv_gic_distributor_reg_t = 740
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR26     Hv_gic_distributor_reg_t = 744
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR27     Hv_gic_distributor_reg_t = 748
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR28     Hv_gic_distributor_reg_t = 752
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR29     Hv_gic_distributor_reg_t = 756
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR30     Hv_gic_distributor_reg_t = 760
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR31     Hv_gic_distributor_reg_t = 764
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER0    Hv_gic_distributor_reg_t = 768
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER1    Hv_gic_distributor_reg_t = 772
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER2    Hv_gic_distributor_reg_t = 776
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER3    Hv_gic_distributor_reg_t = 780
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER4    Hv_gic_distributor_reg_t = 784
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER5    Hv_gic_distributor_reg_t = 788
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER6    Hv_gic_distributor_reg_t = 792
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER7    Hv_gic_distributor_reg_t = 796
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER8    Hv_gic_distributor_reg_t = 800
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER9    Hv_gic_distributor_reg_t = 804
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER10   Hv_gic_distributor_reg_t = 808
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER11   Hv_gic_distributor_reg_t = 812
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER12   Hv_gic_distributor_reg_t = 816
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER13   Hv_gic_distributor_reg_t = 820
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER14   Hv_gic_distributor_reg_t = 824
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER15   Hv_gic_distributor_reg_t = 828
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER16   Hv_gic_distributor_reg_t = 832
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER17   Hv_gic_distributor_reg_t = 836
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER18   Hv_gic_distributor_reg_t = 840
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER19   Hv_gic_distributor_reg_t = 844
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER20   Hv_gic_distributor_reg_t = 848
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER21   Hv_gic_distributor_reg_t = 852
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER22   Hv_gic_distributor_reg_t = 856
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER23   Hv_gic_distributor_reg_t = 860
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER24   Hv_gic_distributor_reg_t = 864
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER25   Hv_gic_distributor_reg_t = 868
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER26   Hv_gic_distributor_reg_t = 872
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER27   Hv_gic_distributor_reg_t = 876
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER28   Hv_gic_distributor_reg_t = 880
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER29   Hv_gic_distributor_reg_t = 884
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER30   Hv_gic_distributor_reg_t = 888
-	HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER31   Hv_gic_distributor_reg_t = 892
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER0    Hv_gic_distributor_reg_t = 896
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER1    Hv_gic_distributor_reg_t = 900
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER2    Hv_gic_distributor_reg_t = 904
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER3    Hv_gic_distributor_reg_t = 908
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER4    Hv_gic_distributor_reg_t = 912
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER5    Hv_gic_distributor_reg_t = 916
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER6    Hv_gic_distributor_reg_t = 920
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER7    Hv_gic_distributor_reg_t = 924
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER8    Hv_gic_distributor_reg_t = 928
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER9    Hv_gic_distributor_reg_t = 932
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER10   Hv_gic_distributor_reg_t = 936
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER11   Hv_gic_distributor_reg_t = 940
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER12   Hv_gic_distributor_reg_t = 944
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER13   Hv_gic_distributor_reg_t = 948
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER14   Hv_gic_distributor_reg_t = 952
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER15   Hv_gic_distributor_reg_t = 956
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER16   Hv_gic_distributor_reg_t = 960
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER17   Hv_gic_distributor_reg_t = 964
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER18   Hv_gic_distributor_reg_t = 968
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER19   Hv_gic_distributor_reg_t = 972
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER20   Hv_gic_distributor_reg_t = 976
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER21   Hv_gic_distributor_reg_t = 980
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER22   Hv_gic_distributor_reg_t = 984
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER23   Hv_gic_distributor_reg_t = 988
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER24   Hv_gic_distributor_reg_t = 992
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER25   Hv_gic_distributor_reg_t = 996
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER26   Hv_gic_distributor_reg_t = 1000
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER27   Hv_gic_distributor_reg_t = 1004
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER28   Hv_gic_distributor_reg_t = 1008
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER29   Hv_gic_distributor_reg_t = 1012
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER30   Hv_gic_distributor_reg_t = 1016
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER31   Hv_gic_distributor_reg_t = 1020
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR0   Hv_gic_distributor_reg_t = 1024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR1   Hv_gic_distributor_reg_t = 1028
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR2   Hv_gic_distributor_reg_t = 1032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR3   Hv_gic_distributor_reg_t = 1036
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR4   Hv_gic_distributor_reg_t = 1040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR5   Hv_gic_distributor_reg_t = 1044
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR6   Hv_gic_distributor_reg_t = 1048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR7   Hv_gic_distributor_reg_t = 1052
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR8   Hv_gic_distributor_reg_t = 1056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR9   Hv_gic_distributor_reg_t = 1060
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR10  Hv_gic_distributor_reg_t = 1064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR11  Hv_gic_distributor_reg_t = 1068
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR12  Hv_gic_distributor_reg_t = 1072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR13  Hv_gic_distributor_reg_t = 1076
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR14  Hv_gic_distributor_reg_t = 1080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR15  Hv_gic_distributor_reg_t = 1084
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR16  Hv_gic_distributor_reg_t = 1088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR17  Hv_gic_distributor_reg_t = 1092
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR18  Hv_gic_distributor_reg_t = 1096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR19  Hv_gic_distributor_reg_t = 1100
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR20  Hv_gic_distributor_reg_t = 1104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR21  Hv_gic_distributor_reg_t = 1108
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR22  Hv_gic_distributor_reg_t = 1112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR23  Hv_gic_distributor_reg_t = 1116
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR24  Hv_gic_distributor_reg_t = 1120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR25  Hv_gic_distributor_reg_t = 1124
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR26  Hv_gic_distributor_reg_t = 1128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR27  Hv_gic_distributor_reg_t = 1132
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR28  Hv_gic_distributor_reg_t = 1136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR29  Hv_gic_distributor_reg_t = 1140
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR30  Hv_gic_distributor_reg_t = 1144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR31  Hv_gic_distributor_reg_t = 1148
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR32  Hv_gic_distributor_reg_t = 1152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR33  Hv_gic_distributor_reg_t = 1156
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR34  Hv_gic_distributor_reg_t = 1160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR35  Hv_gic_distributor_reg_t = 1164
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR36  Hv_gic_distributor_reg_t = 1168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR37  Hv_gic_distributor_reg_t = 1172
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR38  Hv_gic_distributor_reg_t = 1176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR39  Hv_gic_distributor_reg_t = 1180
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR40  Hv_gic_distributor_reg_t = 1184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR41  Hv_gic_distributor_reg_t = 1188
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR42  Hv_gic_distributor_reg_t = 1192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR43  Hv_gic_distributor_reg_t = 1196
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR44  Hv_gic_distributor_reg_t = 1200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR45  Hv_gic_distributor_reg_t = 1204
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR46  Hv_gic_distributor_reg_t = 1208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR47  Hv_gic_distributor_reg_t = 1212
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR48  Hv_gic_distributor_reg_t = 1216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR49  Hv_gic_distributor_reg_t = 1220
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR50  Hv_gic_distributor_reg_t = 1224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR51  Hv_gic_distributor_reg_t = 1228
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR52  Hv_gic_distributor_reg_t = 1232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR53  Hv_gic_distributor_reg_t = 1236
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR54  Hv_gic_distributor_reg_t = 1240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR55  Hv_gic_distributor_reg_t = 1244
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR56  Hv_gic_distributor_reg_t = 1248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR57  Hv_gic_distributor_reg_t = 1252
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR58  Hv_gic_distributor_reg_t = 1256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR59  Hv_gic_distributor_reg_t = 1260
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR60  Hv_gic_distributor_reg_t = 1264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR61  Hv_gic_distributor_reg_t = 1268
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR62  Hv_gic_distributor_reg_t = 1272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR63  Hv_gic_distributor_reg_t = 1276
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR64  Hv_gic_distributor_reg_t = 1280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR65  Hv_gic_distributor_reg_t = 1284
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR66  Hv_gic_distributor_reg_t = 1288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR67  Hv_gic_distributor_reg_t = 1292
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR68  Hv_gic_distributor_reg_t = 1296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR69  Hv_gic_distributor_reg_t = 1300
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR70  Hv_gic_distributor_reg_t = 1304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR71  Hv_gic_distributor_reg_t = 1308
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR72  Hv_gic_distributor_reg_t = 1312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR73  Hv_gic_distributor_reg_t = 1316
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR74  Hv_gic_distributor_reg_t = 1320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR75  Hv_gic_distributor_reg_t = 1324
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR76  Hv_gic_distributor_reg_t = 1328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR77  Hv_gic_distributor_reg_t = 1332
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR78  Hv_gic_distributor_reg_t = 1336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR79  Hv_gic_distributor_reg_t = 1340
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR80  Hv_gic_distributor_reg_t = 1344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR81  Hv_gic_distributor_reg_t = 1348
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR82  Hv_gic_distributor_reg_t = 1352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR83  Hv_gic_distributor_reg_t = 1356
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR84  Hv_gic_distributor_reg_t = 1360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR85  Hv_gic_distributor_reg_t = 1364
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR86  Hv_gic_distributor_reg_t = 1368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR87  Hv_gic_distributor_reg_t = 1372
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR88  Hv_gic_distributor_reg_t = 1376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR89  Hv_gic_distributor_reg_t = 1380
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR90  Hv_gic_distributor_reg_t = 1384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR91  Hv_gic_distributor_reg_t = 1388
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR92  Hv_gic_distributor_reg_t = 1392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR93  Hv_gic_distributor_reg_t = 1396
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR94  Hv_gic_distributor_reg_t = 1400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR95  Hv_gic_distributor_reg_t = 1404
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR96  Hv_gic_distributor_reg_t = 1408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR97  Hv_gic_distributor_reg_t = 1412
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR98  Hv_gic_distributor_reg_t = 1416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR99  Hv_gic_distributor_reg_t = 1420
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR100 Hv_gic_distributor_reg_t = 1424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR101 Hv_gic_distributor_reg_t = 1428
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR102 Hv_gic_distributor_reg_t = 1432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR103 Hv_gic_distributor_reg_t = 1436
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR104 Hv_gic_distributor_reg_t = 1440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR105 Hv_gic_distributor_reg_t = 1444
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR106 Hv_gic_distributor_reg_t = 1448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR107 Hv_gic_distributor_reg_t = 1452
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR108 Hv_gic_distributor_reg_t = 1456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR109 Hv_gic_distributor_reg_t = 1460
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR110 Hv_gic_distributor_reg_t = 1464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR111 Hv_gic_distributor_reg_t = 1468
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR112 Hv_gic_distributor_reg_t = 1472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR113 Hv_gic_distributor_reg_t = 1476
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR114 Hv_gic_distributor_reg_t = 1480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR115 Hv_gic_distributor_reg_t = 1484
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR116 Hv_gic_distributor_reg_t = 1488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR117 Hv_gic_distributor_reg_t = 1492
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR118 Hv_gic_distributor_reg_t = 1496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR119 Hv_gic_distributor_reg_t = 1500
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR120 Hv_gic_distributor_reg_t = 1504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR121 Hv_gic_distributor_reg_t = 1508
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR122 Hv_gic_distributor_reg_t = 1512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR123 Hv_gic_distributor_reg_t = 1516
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR124 Hv_gic_distributor_reg_t = 1520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR125 Hv_gic_distributor_reg_t = 1524
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR126 Hv_gic_distributor_reg_t = 1528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR127 Hv_gic_distributor_reg_t = 1532
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR128 Hv_gic_distributor_reg_t = 1536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR129 Hv_gic_distributor_reg_t = 1540
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR130 Hv_gic_distributor_reg_t = 1544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR131 Hv_gic_distributor_reg_t = 1548
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR132 Hv_gic_distributor_reg_t = 1552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR133 Hv_gic_distributor_reg_t = 1556
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR134 Hv_gic_distributor_reg_t = 1560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR135 Hv_gic_distributor_reg_t = 1564
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR136 Hv_gic_distributor_reg_t = 1568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR137 Hv_gic_distributor_reg_t = 1572
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR138 Hv_gic_distributor_reg_t = 1576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR139 Hv_gic_distributor_reg_t = 1580
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR140 Hv_gic_distributor_reg_t = 1584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR141 Hv_gic_distributor_reg_t = 1588
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR142 Hv_gic_distributor_reg_t = 1592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR143 Hv_gic_distributor_reg_t = 1596
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR144 Hv_gic_distributor_reg_t = 1600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR145 Hv_gic_distributor_reg_t = 1604
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR146 Hv_gic_distributor_reg_t = 1608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR147 Hv_gic_distributor_reg_t = 1612
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR148 Hv_gic_distributor_reg_t = 1616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR149 Hv_gic_distributor_reg_t = 1620
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR150 Hv_gic_distributor_reg_t = 1624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR151 Hv_gic_distributor_reg_t = 1628
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR152 Hv_gic_distributor_reg_t = 1632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR153 Hv_gic_distributor_reg_t = 1636
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR154 Hv_gic_distributor_reg_t = 1640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR155 Hv_gic_distributor_reg_t = 1644
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR156 Hv_gic_distributor_reg_t = 1648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR157 Hv_gic_distributor_reg_t = 1652
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR158 Hv_gic_distributor_reg_t = 1656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR159 Hv_gic_distributor_reg_t = 1660
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR160 Hv_gic_distributor_reg_t = 1664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR161 Hv_gic_distributor_reg_t = 1668
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR162 Hv_gic_distributor_reg_t = 1672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR163 Hv_gic_distributor_reg_t = 1676
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR164 Hv_gic_distributor_reg_t = 1680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR165 Hv_gic_distributor_reg_t = 1684
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR166 Hv_gic_distributor_reg_t = 1688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR167 Hv_gic_distributor_reg_t = 1692
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR168 Hv_gic_distributor_reg_t = 1696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR169 Hv_gic_distributor_reg_t = 1700
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR170 Hv_gic_distributor_reg_t = 1704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR171 Hv_gic_distributor_reg_t = 1708
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR172 Hv_gic_distributor_reg_t = 1712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR173 Hv_gic_distributor_reg_t = 1716
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR174 Hv_gic_distributor_reg_t = 1720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR175 Hv_gic_distributor_reg_t = 1724
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR176 Hv_gic_distributor_reg_t = 1728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR177 Hv_gic_distributor_reg_t = 1732
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR178 Hv_gic_distributor_reg_t = 1736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR179 Hv_gic_distributor_reg_t = 1740
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR180 Hv_gic_distributor_reg_t = 1744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR181 Hv_gic_distributor_reg_t = 1748
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR182 Hv_gic_distributor_reg_t = 1752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR183 Hv_gic_distributor_reg_t = 1756
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR184 Hv_gic_distributor_reg_t = 1760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR185 Hv_gic_distributor_reg_t = 1764
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR186 Hv_gic_distributor_reg_t = 1768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR187 Hv_gic_distributor_reg_t = 1772
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR188 Hv_gic_distributor_reg_t = 1776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR189 Hv_gic_distributor_reg_t = 1780
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR190 Hv_gic_distributor_reg_t = 1784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR191 Hv_gic_distributor_reg_t = 1788
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR192 Hv_gic_distributor_reg_t = 1792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR193 Hv_gic_distributor_reg_t = 1796
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR194 Hv_gic_distributor_reg_t = 1800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR195 Hv_gic_distributor_reg_t = 1804
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR196 Hv_gic_distributor_reg_t = 1808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR197 Hv_gic_distributor_reg_t = 1812
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR198 Hv_gic_distributor_reg_t = 1816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR199 Hv_gic_distributor_reg_t = 1820
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR200 Hv_gic_distributor_reg_t = 1824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR201 Hv_gic_distributor_reg_t = 1828
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR202 Hv_gic_distributor_reg_t = 1832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR203 Hv_gic_distributor_reg_t = 1836
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR204 Hv_gic_distributor_reg_t = 1840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR205 Hv_gic_distributor_reg_t = 1844
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR206 Hv_gic_distributor_reg_t = 1848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR207 Hv_gic_distributor_reg_t = 1852
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR208 Hv_gic_distributor_reg_t = 1856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR209 Hv_gic_distributor_reg_t = 1860
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR210 Hv_gic_distributor_reg_t = 1864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR211 Hv_gic_distributor_reg_t = 1868
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR212 Hv_gic_distributor_reg_t = 1872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR213 Hv_gic_distributor_reg_t = 1876
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR214 Hv_gic_distributor_reg_t = 1880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR215 Hv_gic_distributor_reg_t = 1884
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR216 Hv_gic_distributor_reg_t = 1888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR217 Hv_gic_distributor_reg_t = 1892
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR218 Hv_gic_distributor_reg_t = 1896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR219 Hv_gic_distributor_reg_t = 1900
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR220 Hv_gic_distributor_reg_t = 1904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR221 Hv_gic_distributor_reg_t = 1908
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR222 Hv_gic_distributor_reg_t = 1912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR223 Hv_gic_distributor_reg_t = 1916
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR224 Hv_gic_distributor_reg_t = 1920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR225 Hv_gic_distributor_reg_t = 1924
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR226 Hv_gic_distributor_reg_t = 1928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR227 Hv_gic_distributor_reg_t = 1932
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR228 Hv_gic_distributor_reg_t = 1936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR229 Hv_gic_distributor_reg_t = 1940
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR230 Hv_gic_distributor_reg_t = 1944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR231 Hv_gic_distributor_reg_t = 1948
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR232 Hv_gic_distributor_reg_t = 1952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR233 Hv_gic_distributor_reg_t = 1956
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR234 Hv_gic_distributor_reg_t = 1960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR235 Hv_gic_distributor_reg_t = 1964
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR236 Hv_gic_distributor_reg_t = 1968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR237 Hv_gic_distributor_reg_t = 1972
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR238 Hv_gic_distributor_reg_t = 1976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR239 Hv_gic_distributor_reg_t = 1980
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR240 Hv_gic_distributor_reg_t = 1984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR241 Hv_gic_distributor_reg_t = 1988
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR242 Hv_gic_distributor_reg_t = 1992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR243 Hv_gic_distributor_reg_t = 1996
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR244 Hv_gic_distributor_reg_t = 2000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR245 Hv_gic_distributor_reg_t = 2004
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR246 Hv_gic_distributor_reg_t = 2008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR247 Hv_gic_distributor_reg_t = 2012
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR248 Hv_gic_distributor_reg_t = 2016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR249 Hv_gic_distributor_reg_t = 2020
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR250 Hv_gic_distributor_reg_t = 2024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR251 Hv_gic_distributor_reg_t = 2028
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR252 Hv_gic_distributor_reg_t = 2032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR253 Hv_gic_distributor_reg_t = 2036
-	HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR254 Hv_gic_distributor_reg_t = 2040
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR0        Hv_gic_distributor_reg_t = 3072
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR1        Hv_gic_distributor_reg_t = 3076
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR2        Hv_gic_distributor_reg_t = 3080
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR3        Hv_gic_distributor_reg_t = 3084
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR4        Hv_gic_distributor_reg_t = 3088
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR5        Hv_gic_distributor_reg_t = 3092
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR6        Hv_gic_distributor_reg_t = 3096
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR7        Hv_gic_distributor_reg_t = 3100
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR8        Hv_gic_distributor_reg_t = 3104
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR9        Hv_gic_distributor_reg_t = 3108
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR10       Hv_gic_distributor_reg_t = 3112
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR11       Hv_gic_distributor_reg_t = 3116
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR12       Hv_gic_distributor_reg_t = 3120
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR13       Hv_gic_distributor_reg_t = 3124
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR14       Hv_gic_distributor_reg_t = 3128
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR15       Hv_gic_distributor_reg_t = 3132
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR16       Hv_gic_distributor_reg_t = 3136
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR17       Hv_gic_distributor_reg_t = 3140
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR18       Hv_gic_distributor_reg_t = 3144
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR19       Hv_gic_distributor_reg_t = 3148
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR20       Hv_gic_distributor_reg_t = 3152
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR21       Hv_gic_distributor_reg_t = 3156
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR22       Hv_gic_distributor_reg_t = 3160
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR23       Hv_gic_distributor_reg_t = 3164
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR24       Hv_gic_distributor_reg_t = 3168
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR25       Hv_gic_distributor_reg_t = 3172
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR26       Hv_gic_distributor_reg_t = 3176
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR27       Hv_gic_distributor_reg_t = 3180
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR28       Hv_gic_distributor_reg_t = 3184
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR29       Hv_gic_distributor_reg_t = 3188
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR30       Hv_gic_distributor_reg_t = 3192
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR31       Hv_gic_distributor_reg_t = 3196
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR32       Hv_gic_distributor_reg_t = 3200
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR33       Hv_gic_distributor_reg_t = 3204
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR34       Hv_gic_distributor_reg_t = 3208
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR35       Hv_gic_distributor_reg_t = 3212
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR36       Hv_gic_distributor_reg_t = 3216
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR37       Hv_gic_distributor_reg_t = 3220
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR38       Hv_gic_distributor_reg_t = 3224
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR39       Hv_gic_distributor_reg_t = 3228
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR40       Hv_gic_distributor_reg_t = 3232
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR41       Hv_gic_distributor_reg_t = 3236
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR42       Hv_gic_distributor_reg_t = 3240
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR43       Hv_gic_distributor_reg_t = 3244
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR44       Hv_gic_distributor_reg_t = 3248
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR45       Hv_gic_distributor_reg_t = 3252
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR46       Hv_gic_distributor_reg_t = 3256
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR47       Hv_gic_distributor_reg_t = 3260
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR48       Hv_gic_distributor_reg_t = 3264
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR49       Hv_gic_distributor_reg_t = 3268
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR50       Hv_gic_distributor_reg_t = 3272
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR51       Hv_gic_distributor_reg_t = 3276
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR52       Hv_gic_distributor_reg_t = 3280
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR53       Hv_gic_distributor_reg_t = 3284
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR54       Hv_gic_distributor_reg_t = 3288
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR55       Hv_gic_distributor_reg_t = 3292
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR56       Hv_gic_distributor_reg_t = 3296
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR57       Hv_gic_distributor_reg_t = 3300
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR58       Hv_gic_distributor_reg_t = 3304
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR59       Hv_gic_distributor_reg_t = 3308
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR60       Hv_gic_distributor_reg_t = 3312
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR61       Hv_gic_distributor_reg_t = 3316
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR62       Hv_gic_distributor_reg_t = 3320
-	HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR63       Hv_gic_distributor_reg_t = 3324
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER32     Hv_gic_distributor_reg_t = 24832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER33     Hv_gic_distributor_reg_t = 24840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER34     Hv_gic_distributor_reg_t = 24848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER35     Hv_gic_distributor_reg_t = 24856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER36     Hv_gic_distributor_reg_t = 24864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER37     Hv_gic_distributor_reg_t = 24872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER38     Hv_gic_distributor_reg_t = 24880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER39     Hv_gic_distributor_reg_t = 24888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER40     Hv_gic_distributor_reg_t = 24896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER41     Hv_gic_distributor_reg_t = 24904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER42     Hv_gic_distributor_reg_t = 24912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER43     Hv_gic_distributor_reg_t = 24920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER44     Hv_gic_distributor_reg_t = 24928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER45     Hv_gic_distributor_reg_t = 24936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER46     Hv_gic_distributor_reg_t = 24944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER47     Hv_gic_distributor_reg_t = 24952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER48     Hv_gic_distributor_reg_t = 24960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER49     Hv_gic_distributor_reg_t = 24968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER50     Hv_gic_distributor_reg_t = 24976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER51     Hv_gic_distributor_reg_t = 24984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER52     Hv_gic_distributor_reg_t = 24992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER53     Hv_gic_distributor_reg_t = 25000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER54     Hv_gic_distributor_reg_t = 25008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER55     Hv_gic_distributor_reg_t = 25016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER56     Hv_gic_distributor_reg_t = 25024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER57     Hv_gic_distributor_reg_t = 25032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER58     Hv_gic_distributor_reg_t = 25040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER59     Hv_gic_distributor_reg_t = 25048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER60     Hv_gic_distributor_reg_t = 25056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER61     Hv_gic_distributor_reg_t = 25064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER62     Hv_gic_distributor_reg_t = 25072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER63     Hv_gic_distributor_reg_t = 25080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER64     Hv_gic_distributor_reg_t = 25088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER65     Hv_gic_distributor_reg_t = 25096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER66     Hv_gic_distributor_reg_t = 25104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER67     Hv_gic_distributor_reg_t = 25112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER68     Hv_gic_distributor_reg_t = 25120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER69     Hv_gic_distributor_reg_t = 25128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER70     Hv_gic_distributor_reg_t = 25136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER71     Hv_gic_distributor_reg_t = 25144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER72     Hv_gic_distributor_reg_t = 25152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER73     Hv_gic_distributor_reg_t = 25160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER74     Hv_gic_distributor_reg_t = 25168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER75     Hv_gic_distributor_reg_t = 25176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER76     Hv_gic_distributor_reg_t = 25184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER77     Hv_gic_distributor_reg_t = 25192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER78     Hv_gic_distributor_reg_t = 25200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER79     Hv_gic_distributor_reg_t = 25208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER80     Hv_gic_distributor_reg_t = 25216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER81     Hv_gic_distributor_reg_t = 25224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER82     Hv_gic_distributor_reg_t = 25232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER83     Hv_gic_distributor_reg_t = 25240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER84     Hv_gic_distributor_reg_t = 25248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER85     Hv_gic_distributor_reg_t = 25256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER86     Hv_gic_distributor_reg_t = 25264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER87     Hv_gic_distributor_reg_t = 25272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER88     Hv_gic_distributor_reg_t = 25280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER89     Hv_gic_distributor_reg_t = 25288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER90     Hv_gic_distributor_reg_t = 25296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER91     Hv_gic_distributor_reg_t = 25304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER92     Hv_gic_distributor_reg_t = 25312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER93     Hv_gic_distributor_reg_t = 25320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER94     Hv_gic_distributor_reg_t = 25328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER95     Hv_gic_distributor_reg_t = 25336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER96     Hv_gic_distributor_reg_t = 25344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER97     Hv_gic_distributor_reg_t = 25352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER98     Hv_gic_distributor_reg_t = 25360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER99     Hv_gic_distributor_reg_t = 25368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER100    Hv_gic_distributor_reg_t = 25376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER101    Hv_gic_distributor_reg_t = 25384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER102    Hv_gic_distributor_reg_t = 25392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER103    Hv_gic_distributor_reg_t = 25400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER104    Hv_gic_distributor_reg_t = 25408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER105    Hv_gic_distributor_reg_t = 25416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER106    Hv_gic_distributor_reg_t = 25424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER107    Hv_gic_distributor_reg_t = 25432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER108    Hv_gic_distributor_reg_t = 25440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER109    Hv_gic_distributor_reg_t = 25448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER110    Hv_gic_distributor_reg_t = 25456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER111    Hv_gic_distributor_reg_t = 25464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER112    Hv_gic_distributor_reg_t = 25472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER113    Hv_gic_distributor_reg_t = 25480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER114    Hv_gic_distributor_reg_t = 25488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER115    Hv_gic_distributor_reg_t = 25496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER116    Hv_gic_distributor_reg_t = 25504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER117    Hv_gic_distributor_reg_t = 25512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER118    Hv_gic_distributor_reg_t = 25520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER119    Hv_gic_distributor_reg_t = 25528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER120    Hv_gic_distributor_reg_t = 25536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER121    Hv_gic_distributor_reg_t = 25544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER122    Hv_gic_distributor_reg_t = 25552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER123    Hv_gic_distributor_reg_t = 25560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER124    Hv_gic_distributor_reg_t = 25568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER125    Hv_gic_distributor_reg_t = 25576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER126    Hv_gic_distributor_reg_t = 25584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER127    Hv_gic_distributor_reg_t = 25592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER128    Hv_gic_distributor_reg_t = 25600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER129    Hv_gic_distributor_reg_t = 25608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER130    Hv_gic_distributor_reg_t = 25616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER131    Hv_gic_distributor_reg_t = 25624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER132    Hv_gic_distributor_reg_t = 25632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER133    Hv_gic_distributor_reg_t = 25640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER134    Hv_gic_distributor_reg_t = 25648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER135    Hv_gic_distributor_reg_t = 25656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER136    Hv_gic_distributor_reg_t = 25664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER137    Hv_gic_distributor_reg_t = 25672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER138    Hv_gic_distributor_reg_t = 25680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER139    Hv_gic_distributor_reg_t = 25688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER140    Hv_gic_distributor_reg_t = 25696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER141    Hv_gic_distributor_reg_t = 25704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER142    Hv_gic_distributor_reg_t = 25712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER143    Hv_gic_distributor_reg_t = 25720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER144    Hv_gic_distributor_reg_t = 25728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER145    Hv_gic_distributor_reg_t = 25736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER146    Hv_gic_distributor_reg_t = 25744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER147    Hv_gic_distributor_reg_t = 25752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER148    Hv_gic_distributor_reg_t = 25760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER149    Hv_gic_distributor_reg_t = 25768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER150    Hv_gic_distributor_reg_t = 25776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER151    Hv_gic_distributor_reg_t = 25784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER152    Hv_gic_distributor_reg_t = 25792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER153    Hv_gic_distributor_reg_t = 25800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER154    Hv_gic_distributor_reg_t = 25808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER155    Hv_gic_distributor_reg_t = 25816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER156    Hv_gic_distributor_reg_t = 25824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER157    Hv_gic_distributor_reg_t = 25832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER158    Hv_gic_distributor_reg_t = 25840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER159    Hv_gic_distributor_reg_t = 25848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER160    Hv_gic_distributor_reg_t = 25856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER161    Hv_gic_distributor_reg_t = 25864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER162    Hv_gic_distributor_reg_t = 25872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER163    Hv_gic_distributor_reg_t = 25880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER164    Hv_gic_distributor_reg_t = 25888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER165    Hv_gic_distributor_reg_t = 25896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER166    Hv_gic_distributor_reg_t = 25904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER167    Hv_gic_distributor_reg_t = 25912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER168    Hv_gic_distributor_reg_t = 25920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER169    Hv_gic_distributor_reg_t = 25928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER170    Hv_gic_distributor_reg_t = 25936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER171    Hv_gic_distributor_reg_t = 25944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER172    Hv_gic_distributor_reg_t = 25952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER173    Hv_gic_distributor_reg_t = 25960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER174    Hv_gic_distributor_reg_t = 25968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER175    Hv_gic_distributor_reg_t = 25976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER176    Hv_gic_distributor_reg_t = 25984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER177    Hv_gic_distributor_reg_t = 25992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER178    Hv_gic_distributor_reg_t = 26000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER179    Hv_gic_distributor_reg_t = 26008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER180    Hv_gic_distributor_reg_t = 26016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER181    Hv_gic_distributor_reg_t = 26024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER182    Hv_gic_distributor_reg_t = 26032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER183    Hv_gic_distributor_reg_t = 26040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER184    Hv_gic_distributor_reg_t = 26048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER185    Hv_gic_distributor_reg_t = 26056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER186    Hv_gic_distributor_reg_t = 26064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER187    Hv_gic_distributor_reg_t = 26072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER188    Hv_gic_distributor_reg_t = 26080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER189    Hv_gic_distributor_reg_t = 26088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER190    Hv_gic_distributor_reg_t = 26096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER191    Hv_gic_distributor_reg_t = 26104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER192    Hv_gic_distributor_reg_t = 26112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER193    Hv_gic_distributor_reg_t = 26120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER194    Hv_gic_distributor_reg_t = 26128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER195    Hv_gic_distributor_reg_t = 26136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER196    Hv_gic_distributor_reg_t = 26144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER197    Hv_gic_distributor_reg_t = 26152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER198    Hv_gic_distributor_reg_t = 26160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER199    Hv_gic_distributor_reg_t = 26168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER200    Hv_gic_distributor_reg_t = 26176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER201    Hv_gic_distributor_reg_t = 26184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER202    Hv_gic_distributor_reg_t = 26192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER203    Hv_gic_distributor_reg_t = 26200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER204    Hv_gic_distributor_reg_t = 26208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER205    Hv_gic_distributor_reg_t = 26216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER206    Hv_gic_distributor_reg_t = 26224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER207    Hv_gic_distributor_reg_t = 26232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER208    Hv_gic_distributor_reg_t = 26240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER209    Hv_gic_distributor_reg_t = 26248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER210    Hv_gic_distributor_reg_t = 26256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER211    Hv_gic_distributor_reg_t = 26264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER212    Hv_gic_distributor_reg_t = 26272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER213    Hv_gic_distributor_reg_t = 26280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER214    Hv_gic_distributor_reg_t = 26288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER215    Hv_gic_distributor_reg_t = 26296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER216    Hv_gic_distributor_reg_t = 26304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER217    Hv_gic_distributor_reg_t = 26312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER218    Hv_gic_distributor_reg_t = 26320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER219    Hv_gic_distributor_reg_t = 26328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER220    Hv_gic_distributor_reg_t = 26336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER221    Hv_gic_distributor_reg_t = 26344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER222    Hv_gic_distributor_reg_t = 26352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER223    Hv_gic_distributor_reg_t = 26360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER224    Hv_gic_distributor_reg_t = 26368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER225    Hv_gic_distributor_reg_t = 26376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER226    Hv_gic_distributor_reg_t = 26384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER227    Hv_gic_distributor_reg_t = 26392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER228    Hv_gic_distributor_reg_t = 26400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER229    Hv_gic_distributor_reg_t = 26408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER230    Hv_gic_distributor_reg_t = 26416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER231    Hv_gic_distributor_reg_t = 26424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER232    Hv_gic_distributor_reg_t = 26432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER233    Hv_gic_distributor_reg_t = 26440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER234    Hv_gic_distributor_reg_t = 26448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER235    Hv_gic_distributor_reg_t = 26456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER236    Hv_gic_distributor_reg_t = 26464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER237    Hv_gic_distributor_reg_t = 26472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER238    Hv_gic_distributor_reg_t = 26480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER239    Hv_gic_distributor_reg_t = 26488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER240    Hv_gic_distributor_reg_t = 26496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER241    Hv_gic_distributor_reg_t = 26504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER242    Hv_gic_distributor_reg_t = 26512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER243    Hv_gic_distributor_reg_t = 26520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER244    Hv_gic_distributor_reg_t = 26528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER245    Hv_gic_distributor_reg_t = 26536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER246    Hv_gic_distributor_reg_t = 26544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER247    Hv_gic_distributor_reg_t = 26552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER248    Hv_gic_distributor_reg_t = 26560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER249    Hv_gic_distributor_reg_t = 26568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER250    Hv_gic_distributor_reg_t = 26576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER251    Hv_gic_distributor_reg_t = 26584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER252    Hv_gic_distributor_reg_t = 26592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER253    Hv_gic_distributor_reg_t = 26600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER254    Hv_gic_distributor_reg_t = 26608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER255    Hv_gic_distributor_reg_t = 26616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER256    Hv_gic_distributor_reg_t = 26624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER257    Hv_gic_distributor_reg_t = 26632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER258    Hv_gic_distributor_reg_t = 26640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER259    Hv_gic_distributor_reg_t = 26648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER260    Hv_gic_distributor_reg_t = 26656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER261    Hv_gic_distributor_reg_t = 26664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER262    Hv_gic_distributor_reg_t = 26672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER263    Hv_gic_distributor_reg_t = 26680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER264    Hv_gic_distributor_reg_t = 26688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER265    Hv_gic_distributor_reg_t = 26696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER266    Hv_gic_distributor_reg_t = 26704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER267    Hv_gic_distributor_reg_t = 26712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER268    Hv_gic_distributor_reg_t = 26720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER269    Hv_gic_distributor_reg_t = 26728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER270    Hv_gic_distributor_reg_t = 26736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER271    Hv_gic_distributor_reg_t = 26744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER272    Hv_gic_distributor_reg_t = 26752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER273    Hv_gic_distributor_reg_t = 26760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER274    Hv_gic_distributor_reg_t = 26768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER275    Hv_gic_distributor_reg_t = 26776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER276    Hv_gic_distributor_reg_t = 26784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER277    Hv_gic_distributor_reg_t = 26792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER278    Hv_gic_distributor_reg_t = 26800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER279    Hv_gic_distributor_reg_t = 26808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER280    Hv_gic_distributor_reg_t = 26816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER281    Hv_gic_distributor_reg_t = 26824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER282    Hv_gic_distributor_reg_t = 26832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER283    Hv_gic_distributor_reg_t = 26840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER284    Hv_gic_distributor_reg_t = 26848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER285    Hv_gic_distributor_reg_t = 26856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER286    Hv_gic_distributor_reg_t = 26864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER287    Hv_gic_distributor_reg_t = 26872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER288    Hv_gic_distributor_reg_t = 26880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER289    Hv_gic_distributor_reg_t = 26888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER290    Hv_gic_distributor_reg_t = 26896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER291    Hv_gic_distributor_reg_t = 26904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER292    Hv_gic_distributor_reg_t = 26912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER293    Hv_gic_distributor_reg_t = 26920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER294    Hv_gic_distributor_reg_t = 26928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER295    Hv_gic_distributor_reg_t = 26936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER296    Hv_gic_distributor_reg_t = 26944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER297    Hv_gic_distributor_reg_t = 26952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER298    Hv_gic_distributor_reg_t = 26960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER299    Hv_gic_distributor_reg_t = 26968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER300    Hv_gic_distributor_reg_t = 26976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER301    Hv_gic_distributor_reg_t = 26984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER302    Hv_gic_distributor_reg_t = 26992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER303    Hv_gic_distributor_reg_t = 27000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER304    Hv_gic_distributor_reg_t = 27008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER305    Hv_gic_distributor_reg_t = 27016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER306    Hv_gic_distributor_reg_t = 27024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER307    Hv_gic_distributor_reg_t = 27032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER308    Hv_gic_distributor_reg_t = 27040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER309    Hv_gic_distributor_reg_t = 27048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER310    Hv_gic_distributor_reg_t = 27056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER311    Hv_gic_distributor_reg_t = 27064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER312    Hv_gic_distributor_reg_t = 27072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER313    Hv_gic_distributor_reg_t = 27080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER314    Hv_gic_distributor_reg_t = 27088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER315    Hv_gic_distributor_reg_t = 27096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER316    Hv_gic_distributor_reg_t = 27104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER317    Hv_gic_distributor_reg_t = 27112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER318    Hv_gic_distributor_reg_t = 27120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER319    Hv_gic_distributor_reg_t = 27128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER320    Hv_gic_distributor_reg_t = 27136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER321    Hv_gic_distributor_reg_t = 27144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER322    Hv_gic_distributor_reg_t = 27152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER323    Hv_gic_distributor_reg_t = 27160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER324    Hv_gic_distributor_reg_t = 27168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER325    Hv_gic_distributor_reg_t = 27176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER326    Hv_gic_distributor_reg_t = 27184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER327    Hv_gic_distributor_reg_t = 27192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER328    Hv_gic_distributor_reg_t = 27200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER329    Hv_gic_distributor_reg_t = 27208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER330    Hv_gic_distributor_reg_t = 27216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER331    Hv_gic_distributor_reg_t = 27224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER332    Hv_gic_distributor_reg_t = 27232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER333    Hv_gic_distributor_reg_t = 27240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER334    Hv_gic_distributor_reg_t = 27248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER335    Hv_gic_distributor_reg_t = 27256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER336    Hv_gic_distributor_reg_t = 27264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER337    Hv_gic_distributor_reg_t = 27272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER338    Hv_gic_distributor_reg_t = 27280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER339    Hv_gic_distributor_reg_t = 27288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER340    Hv_gic_distributor_reg_t = 27296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER341    Hv_gic_distributor_reg_t = 27304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER342    Hv_gic_distributor_reg_t = 27312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER343    Hv_gic_distributor_reg_t = 27320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER344    Hv_gic_distributor_reg_t = 27328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER345    Hv_gic_distributor_reg_t = 27336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER346    Hv_gic_distributor_reg_t = 27344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER347    Hv_gic_distributor_reg_t = 27352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER348    Hv_gic_distributor_reg_t = 27360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER349    Hv_gic_distributor_reg_t = 27368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER350    Hv_gic_distributor_reg_t = 27376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER351    Hv_gic_distributor_reg_t = 27384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER352    Hv_gic_distributor_reg_t = 27392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER353    Hv_gic_distributor_reg_t = 27400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER354    Hv_gic_distributor_reg_t = 27408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER355    Hv_gic_distributor_reg_t = 27416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER356    Hv_gic_distributor_reg_t = 27424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER357    Hv_gic_distributor_reg_t = 27432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER358    Hv_gic_distributor_reg_t = 27440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER359    Hv_gic_distributor_reg_t = 27448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER360    Hv_gic_distributor_reg_t = 27456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER361    Hv_gic_distributor_reg_t = 27464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER362    Hv_gic_distributor_reg_t = 27472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER363    Hv_gic_distributor_reg_t = 27480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER364    Hv_gic_distributor_reg_t = 27488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER365    Hv_gic_distributor_reg_t = 27496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER366    Hv_gic_distributor_reg_t = 27504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER367    Hv_gic_distributor_reg_t = 27512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER368    Hv_gic_distributor_reg_t = 27520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER369    Hv_gic_distributor_reg_t = 27528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER370    Hv_gic_distributor_reg_t = 27536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER371    Hv_gic_distributor_reg_t = 27544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER372    Hv_gic_distributor_reg_t = 27552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER373    Hv_gic_distributor_reg_t = 27560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER374    Hv_gic_distributor_reg_t = 27568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER375    Hv_gic_distributor_reg_t = 27576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER376    Hv_gic_distributor_reg_t = 27584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER377    Hv_gic_distributor_reg_t = 27592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER378    Hv_gic_distributor_reg_t = 27600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER379    Hv_gic_distributor_reg_t = 27608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER380    Hv_gic_distributor_reg_t = 27616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER381    Hv_gic_distributor_reg_t = 27624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER382    Hv_gic_distributor_reg_t = 27632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER383    Hv_gic_distributor_reg_t = 27640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER384    Hv_gic_distributor_reg_t = 27648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER385    Hv_gic_distributor_reg_t = 27656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER386    Hv_gic_distributor_reg_t = 27664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER387    Hv_gic_distributor_reg_t = 27672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER388    Hv_gic_distributor_reg_t = 27680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER389    Hv_gic_distributor_reg_t = 27688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER390    Hv_gic_distributor_reg_t = 27696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER391    Hv_gic_distributor_reg_t = 27704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER392    Hv_gic_distributor_reg_t = 27712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER393    Hv_gic_distributor_reg_t = 27720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER394    Hv_gic_distributor_reg_t = 27728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER395    Hv_gic_distributor_reg_t = 27736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER396    Hv_gic_distributor_reg_t = 27744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER397    Hv_gic_distributor_reg_t = 27752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER398    Hv_gic_distributor_reg_t = 27760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER399    Hv_gic_distributor_reg_t = 27768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER400    Hv_gic_distributor_reg_t = 27776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER401    Hv_gic_distributor_reg_t = 27784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER402    Hv_gic_distributor_reg_t = 27792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER403    Hv_gic_distributor_reg_t = 27800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER404    Hv_gic_distributor_reg_t = 27808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER405    Hv_gic_distributor_reg_t = 27816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER406    Hv_gic_distributor_reg_t = 27824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER407    Hv_gic_distributor_reg_t = 27832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER408    Hv_gic_distributor_reg_t = 27840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER409    Hv_gic_distributor_reg_t = 27848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER410    Hv_gic_distributor_reg_t = 27856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER411    Hv_gic_distributor_reg_t = 27864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER412    Hv_gic_distributor_reg_t = 27872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER413    Hv_gic_distributor_reg_t = 27880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER414    Hv_gic_distributor_reg_t = 27888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER415    Hv_gic_distributor_reg_t = 27896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER416    Hv_gic_distributor_reg_t = 27904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER417    Hv_gic_distributor_reg_t = 27912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER418    Hv_gic_distributor_reg_t = 27920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER419    Hv_gic_distributor_reg_t = 27928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER420    Hv_gic_distributor_reg_t = 27936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER421    Hv_gic_distributor_reg_t = 27944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER422    Hv_gic_distributor_reg_t = 27952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER423    Hv_gic_distributor_reg_t = 27960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER424    Hv_gic_distributor_reg_t = 27968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER425    Hv_gic_distributor_reg_t = 27976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER426    Hv_gic_distributor_reg_t = 27984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER427    Hv_gic_distributor_reg_t = 27992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER428    Hv_gic_distributor_reg_t = 28000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER429    Hv_gic_distributor_reg_t = 28008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER430    Hv_gic_distributor_reg_t = 28016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER431    Hv_gic_distributor_reg_t = 28024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER432    Hv_gic_distributor_reg_t = 28032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER433    Hv_gic_distributor_reg_t = 28040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER434    Hv_gic_distributor_reg_t = 28048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER435    Hv_gic_distributor_reg_t = 28056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER436    Hv_gic_distributor_reg_t = 28064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER437    Hv_gic_distributor_reg_t = 28072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER438    Hv_gic_distributor_reg_t = 28080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER439    Hv_gic_distributor_reg_t = 28088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER440    Hv_gic_distributor_reg_t = 28096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER441    Hv_gic_distributor_reg_t = 28104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER442    Hv_gic_distributor_reg_t = 28112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER443    Hv_gic_distributor_reg_t = 28120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER444    Hv_gic_distributor_reg_t = 28128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER445    Hv_gic_distributor_reg_t = 28136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER446    Hv_gic_distributor_reg_t = 28144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER447    Hv_gic_distributor_reg_t = 28152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER448    Hv_gic_distributor_reg_t = 28160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER449    Hv_gic_distributor_reg_t = 28168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER450    Hv_gic_distributor_reg_t = 28176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER451    Hv_gic_distributor_reg_t = 28184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER452    Hv_gic_distributor_reg_t = 28192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER453    Hv_gic_distributor_reg_t = 28200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER454    Hv_gic_distributor_reg_t = 28208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER455    Hv_gic_distributor_reg_t = 28216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER456    Hv_gic_distributor_reg_t = 28224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER457    Hv_gic_distributor_reg_t = 28232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER458    Hv_gic_distributor_reg_t = 28240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER459    Hv_gic_distributor_reg_t = 28248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER460    Hv_gic_distributor_reg_t = 28256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER461    Hv_gic_distributor_reg_t = 28264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER462    Hv_gic_distributor_reg_t = 28272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER463    Hv_gic_distributor_reg_t = 28280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER464    Hv_gic_distributor_reg_t = 28288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER465    Hv_gic_distributor_reg_t = 28296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER466    Hv_gic_distributor_reg_t = 28304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER467    Hv_gic_distributor_reg_t = 28312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER468    Hv_gic_distributor_reg_t = 28320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER469    Hv_gic_distributor_reg_t = 28328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER470    Hv_gic_distributor_reg_t = 28336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER471    Hv_gic_distributor_reg_t = 28344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER472    Hv_gic_distributor_reg_t = 28352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER473    Hv_gic_distributor_reg_t = 28360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER474    Hv_gic_distributor_reg_t = 28368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER475    Hv_gic_distributor_reg_t = 28376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER476    Hv_gic_distributor_reg_t = 28384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER477    Hv_gic_distributor_reg_t = 28392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER478    Hv_gic_distributor_reg_t = 28400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER479    Hv_gic_distributor_reg_t = 28408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER480    Hv_gic_distributor_reg_t = 28416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER481    Hv_gic_distributor_reg_t = 28424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER482    Hv_gic_distributor_reg_t = 28432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER483    Hv_gic_distributor_reg_t = 28440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER484    Hv_gic_distributor_reg_t = 28448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER485    Hv_gic_distributor_reg_t = 28456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER486    Hv_gic_distributor_reg_t = 28464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER487    Hv_gic_distributor_reg_t = 28472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER488    Hv_gic_distributor_reg_t = 28480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER489    Hv_gic_distributor_reg_t = 28488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER490    Hv_gic_distributor_reg_t = 28496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER491    Hv_gic_distributor_reg_t = 28504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER492    Hv_gic_distributor_reg_t = 28512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER493    Hv_gic_distributor_reg_t = 28520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER494    Hv_gic_distributor_reg_t = 28528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER495    Hv_gic_distributor_reg_t = 28536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER496    Hv_gic_distributor_reg_t = 28544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER497    Hv_gic_distributor_reg_t = 28552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER498    Hv_gic_distributor_reg_t = 28560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER499    Hv_gic_distributor_reg_t = 28568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER500    Hv_gic_distributor_reg_t = 28576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER501    Hv_gic_distributor_reg_t = 28584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER502    Hv_gic_distributor_reg_t = 28592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER503    Hv_gic_distributor_reg_t = 28600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER504    Hv_gic_distributor_reg_t = 28608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER505    Hv_gic_distributor_reg_t = 28616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER506    Hv_gic_distributor_reg_t = 28624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER507    Hv_gic_distributor_reg_t = 28632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER508    Hv_gic_distributor_reg_t = 28640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER509    Hv_gic_distributor_reg_t = 28648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER510    Hv_gic_distributor_reg_t = 28656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER511    Hv_gic_distributor_reg_t = 28664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER512    Hv_gic_distributor_reg_t = 28672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER513    Hv_gic_distributor_reg_t = 28680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER514    Hv_gic_distributor_reg_t = 28688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER515    Hv_gic_distributor_reg_t = 28696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER516    Hv_gic_distributor_reg_t = 28704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER517    Hv_gic_distributor_reg_t = 28712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER518    Hv_gic_distributor_reg_t = 28720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER519    Hv_gic_distributor_reg_t = 28728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER520    Hv_gic_distributor_reg_t = 28736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER521    Hv_gic_distributor_reg_t = 28744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER522    Hv_gic_distributor_reg_t = 28752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER523    Hv_gic_distributor_reg_t = 28760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER524    Hv_gic_distributor_reg_t = 28768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER525    Hv_gic_distributor_reg_t = 28776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER526    Hv_gic_distributor_reg_t = 28784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER527    Hv_gic_distributor_reg_t = 28792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER528    Hv_gic_distributor_reg_t = 28800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER529    Hv_gic_distributor_reg_t = 28808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER530    Hv_gic_distributor_reg_t = 28816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER531    Hv_gic_distributor_reg_t = 28824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER532    Hv_gic_distributor_reg_t = 28832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER533    Hv_gic_distributor_reg_t = 28840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER534    Hv_gic_distributor_reg_t = 28848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER535    Hv_gic_distributor_reg_t = 28856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER536    Hv_gic_distributor_reg_t = 28864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER537    Hv_gic_distributor_reg_t = 28872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER538    Hv_gic_distributor_reg_t = 28880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER539    Hv_gic_distributor_reg_t = 28888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER540    Hv_gic_distributor_reg_t = 28896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER541    Hv_gic_distributor_reg_t = 28904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER542    Hv_gic_distributor_reg_t = 28912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER543    Hv_gic_distributor_reg_t = 28920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER544    Hv_gic_distributor_reg_t = 28928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER545    Hv_gic_distributor_reg_t = 28936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER546    Hv_gic_distributor_reg_t = 28944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER547    Hv_gic_distributor_reg_t = 28952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER548    Hv_gic_distributor_reg_t = 28960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER549    Hv_gic_distributor_reg_t = 28968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER550    Hv_gic_distributor_reg_t = 28976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER551    Hv_gic_distributor_reg_t = 28984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER552    Hv_gic_distributor_reg_t = 28992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER553    Hv_gic_distributor_reg_t = 29000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER554    Hv_gic_distributor_reg_t = 29008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER555    Hv_gic_distributor_reg_t = 29016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER556    Hv_gic_distributor_reg_t = 29024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER557    Hv_gic_distributor_reg_t = 29032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER558    Hv_gic_distributor_reg_t = 29040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER559    Hv_gic_distributor_reg_t = 29048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER560    Hv_gic_distributor_reg_t = 29056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER561    Hv_gic_distributor_reg_t = 29064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER562    Hv_gic_distributor_reg_t = 29072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER563    Hv_gic_distributor_reg_t = 29080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER564    Hv_gic_distributor_reg_t = 29088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER565    Hv_gic_distributor_reg_t = 29096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER566    Hv_gic_distributor_reg_t = 29104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER567    Hv_gic_distributor_reg_t = 29112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER568    Hv_gic_distributor_reg_t = 29120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER569    Hv_gic_distributor_reg_t = 29128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER570    Hv_gic_distributor_reg_t = 29136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER571    Hv_gic_distributor_reg_t = 29144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER572    Hv_gic_distributor_reg_t = 29152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER573    Hv_gic_distributor_reg_t = 29160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER574    Hv_gic_distributor_reg_t = 29168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER575    Hv_gic_distributor_reg_t = 29176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER576    Hv_gic_distributor_reg_t = 29184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER577    Hv_gic_distributor_reg_t = 29192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER578    Hv_gic_distributor_reg_t = 29200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER579    Hv_gic_distributor_reg_t = 29208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER580    Hv_gic_distributor_reg_t = 29216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER581    Hv_gic_distributor_reg_t = 29224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER582    Hv_gic_distributor_reg_t = 29232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER583    Hv_gic_distributor_reg_t = 29240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER584    Hv_gic_distributor_reg_t = 29248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER585    Hv_gic_distributor_reg_t = 29256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER586    Hv_gic_distributor_reg_t = 29264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER587    Hv_gic_distributor_reg_t = 29272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER588    Hv_gic_distributor_reg_t = 29280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER589    Hv_gic_distributor_reg_t = 29288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER590    Hv_gic_distributor_reg_t = 29296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER591    Hv_gic_distributor_reg_t = 29304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER592    Hv_gic_distributor_reg_t = 29312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER593    Hv_gic_distributor_reg_t = 29320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER594    Hv_gic_distributor_reg_t = 29328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER595    Hv_gic_distributor_reg_t = 29336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER596    Hv_gic_distributor_reg_t = 29344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER597    Hv_gic_distributor_reg_t = 29352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER598    Hv_gic_distributor_reg_t = 29360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER599    Hv_gic_distributor_reg_t = 29368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER600    Hv_gic_distributor_reg_t = 29376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER601    Hv_gic_distributor_reg_t = 29384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER602    Hv_gic_distributor_reg_t = 29392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER603    Hv_gic_distributor_reg_t = 29400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER604    Hv_gic_distributor_reg_t = 29408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER605    Hv_gic_distributor_reg_t = 29416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER606    Hv_gic_distributor_reg_t = 29424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER607    Hv_gic_distributor_reg_t = 29432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER608    Hv_gic_distributor_reg_t = 29440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER609    Hv_gic_distributor_reg_t = 29448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER610    Hv_gic_distributor_reg_t = 29456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER611    Hv_gic_distributor_reg_t = 29464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER612    Hv_gic_distributor_reg_t = 29472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER613    Hv_gic_distributor_reg_t = 29480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER614    Hv_gic_distributor_reg_t = 29488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER615    Hv_gic_distributor_reg_t = 29496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER616    Hv_gic_distributor_reg_t = 29504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER617    Hv_gic_distributor_reg_t = 29512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER618    Hv_gic_distributor_reg_t = 29520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER619    Hv_gic_distributor_reg_t = 29528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER620    Hv_gic_distributor_reg_t = 29536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER621    Hv_gic_distributor_reg_t = 29544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER622    Hv_gic_distributor_reg_t = 29552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER623    Hv_gic_distributor_reg_t = 29560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER624    Hv_gic_distributor_reg_t = 29568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER625    Hv_gic_distributor_reg_t = 29576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER626    Hv_gic_distributor_reg_t = 29584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER627    Hv_gic_distributor_reg_t = 29592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER628    Hv_gic_distributor_reg_t = 29600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER629    Hv_gic_distributor_reg_t = 29608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER630    Hv_gic_distributor_reg_t = 29616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER631    Hv_gic_distributor_reg_t = 29624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER632    Hv_gic_distributor_reg_t = 29632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER633    Hv_gic_distributor_reg_t = 29640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER634    Hv_gic_distributor_reg_t = 29648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER635    Hv_gic_distributor_reg_t = 29656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER636    Hv_gic_distributor_reg_t = 29664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER637    Hv_gic_distributor_reg_t = 29672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER638    Hv_gic_distributor_reg_t = 29680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER639    Hv_gic_distributor_reg_t = 29688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER640    Hv_gic_distributor_reg_t = 29696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER641    Hv_gic_distributor_reg_t = 29704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER642    Hv_gic_distributor_reg_t = 29712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER643    Hv_gic_distributor_reg_t = 29720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER644    Hv_gic_distributor_reg_t = 29728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER645    Hv_gic_distributor_reg_t = 29736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER646    Hv_gic_distributor_reg_t = 29744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER647    Hv_gic_distributor_reg_t = 29752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER648    Hv_gic_distributor_reg_t = 29760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER649    Hv_gic_distributor_reg_t = 29768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER650    Hv_gic_distributor_reg_t = 29776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER651    Hv_gic_distributor_reg_t = 29784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER652    Hv_gic_distributor_reg_t = 29792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER653    Hv_gic_distributor_reg_t = 29800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER654    Hv_gic_distributor_reg_t = 29808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER655    Hv_gic_distributor_reg_t = 29816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER656    Hv_gic_distributor_reg_t = 29824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER657    Hv_gic_distributor_reg_t = 29832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER658    Hv_gic_distributor_reg_t = 29840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER659    Hv_gic_distributor_reg_t = 29848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER660    Hv_gic_distributor_reg_t = 29856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER661    Hv_gic_distributor_reg_t = 29864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER662    Hv_gic_distributor_reg_t = 29872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER663    Hv_gic_distributor_reg_t = 29880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER664    Hv_gic_distributor_reg_t = 29888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER665    Hv_gic_distributor_reg_t = 29896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER666    Hv_gic_distributor_reg_t = 29904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER667    Hv_gic_distributor_reg_t = 29912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER668    Hv_gic_distributor_reg_t = 29920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER669    Hv_gic_distributor_reg_t = 29928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER670    Hv_gic_distributor_reg_t = 29936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER671    Hv_gic_distributor_reg_t = 29944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER672    Hv_gic_distributor_reg_t = 29952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER673    Hv_gic_distributor_reg_t = 29960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER674    Hv_gic_distributor_reg_t = 29968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER675    Hv_gic_distributor_reg_t = 29976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER676    Hv_gic_distributor_reg_t = 29984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER677    Hv_gic_distributor_reg_t = 29992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER678    Hv_gic_distributor_reg_t = 30000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER679    Hv_gic_distributor_reg_t = 30008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER680    Hv_gic_distributor_reg_t = 30016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER681    Hv_gic_distributor_reg_t = 30024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER682    Hv_gic_distributor_reg_t = 30032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER683    Hv_gic_distributor_reg_t = 30040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER684    Hv_gic_distributor_reg_t = 30048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER685    Hv_gic_distributor_reg_t = 30056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER686    Hv_gic_distributor_reg_t = 30064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER687    Hv_gic_distributor_reg_t = 30072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER688    Hv_gic_distributor_reg_t = 30080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER689    Hv_gic_distributor_reg_t = 30088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER690    Hv_gic_distributor_reg_t = 30096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER691    Hv_gic_distributor_reg_t = 30104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER692    Hv_gic_distributor_reg_t = 30112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER693    Hv_gic_distributor_reg_t = 30120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER694    Hv_gic_distributor_reg_t = 30128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER695    Hv_gic_distributor_reg_t = 30136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER696    Hv_gic_distributor_reg_t = 30144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER697    Hv_gic_distributor_reg_t = 30152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER698    Hv_gic_distributor_reg_t = 30160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER699    Hv_gic_distributor_reg_t = 30168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER700    Hv_gic_distributor_reg_t = 30176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER701    Hv_gic_distributor_reg_t = 30184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER702    Hv_gic_distributor_reg_t = 30192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER703    Hv_gic_distributor_reg_t = 30200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER704    Hv_gic_distributor_reg_t = 30208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER705    Hv_gic_distributor_reg_t = 30216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER706    Hv_gic_distributor_reg_t = 30224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER707    Hv_gic_distributor_reg_t = 30232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER708    Hv_gic_distributor_reg_t = 30240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER709    Hv_gic_distributor_reg_t = 30248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER710    Hv_gic_distributor_reg_t = 30256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER711    Hv_gic_distributor_reg_t = 30264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER712    Hv_gic_distributor_reg_t = 30272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER713    Hv_gic_distributor_reg_t = 30280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER714    Hv_gic_distributor_reg_t = 30288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER715    Hv_gic_distributor_reg_t = 30296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER716    Hv_gic_distributor_reg_t = 30304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER717    Hv_gic_distributor_reg_t = 30312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER718    Hv_gic_distributor_reg_t = 30320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER719    Hv_gic_distributor_reg_t = 30328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER720    Hv_gic_distributor_reg_t = 30336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER721    Hv_gic_distributor_reg_t = 30344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER722    Hv_gic_distributor_reg_t = 30352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER723    Hv_gic_distributor_reg_t = 30360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER724    Hv_gic_distributor_reg_t = 30368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER725    Hv_gic_distributor_reg_t = 30376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER726    Hv_gic_distributor_reg_t = 30384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER727    Hv_gic_distributor_reg_t = 30392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER728    Hv_gic_distributor_reg_t = 30400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER729    Hv_gic_distributor_reg_t = 30408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER730    Hv_gic_distributor_reg_t = 30416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER731    Hv_gic_distributor_reg_t = 30424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER732    Hv_gic_distributor_reg_t = 30432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER733    Hv_gic_distributor_reg_t = 30440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER734    Hv_gic_distributor_reg_t = 30448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER735    Hv_gic_distributor_reg_t = 30456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER736    Hv_gic_distributor_reg_t = 30464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER737    Hv_gic_distributor_reg_t = 30472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER738    Hv_gic_distributor_reg_t = 30480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER739    Hv_gic_distributor_reg_t = 30488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER740    Hv_gic_distributor_reg_t = 30496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER741    Hv_gic_distributor_reg_t = 30504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER742    Hv_gic_distributor_reg_t = 30512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER743    Hv_gic_distributor_reg_t = 30520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER744    Hv_gic_distributor_reg_t = 30528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER745    Hv_gic_distributor_reg_t = 30536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER746    Hv_gic_distributor_reg_t = 30544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER747    Hv_gic_distributor_reg_t = 30552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER748    Hv_gic_distributor_reg_t = 30560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER749    Hv_gic_distributor_reg_t = 30568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER750    Hv_gic_distributor_reg_t = 30576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER751    Hv_gic_distributor_reg_t = 30584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER752    Hv_gic_distributor_reg_t = 30592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER753    Hv_gic_distributor_reg_t = 30600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER754    Hv_gic_distributor_reg_t = 30608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER755    Hv_gic_distributor_reg_t = 30616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER756    Hv_gic_distributor_reg_t = 30624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER757    Hv_gic_distributor_reg_t = 30632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER758    Hv_gic_distributor_reg_t = 30640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER759    Hv_gic_distributor_reg_t = 30648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER760    Hv_gic_distributor_reg_t = 30656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER761    Hv_gic_distributor_reg_t = 30664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER762    Hv_gic_distributor_reg_t = 30672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER763    Hv_gic_distributor_reg_t = 30680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER764    Hv_gic_distributor_reg_t = 30688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER765    Hv_gic_distributor_reg_t = 30696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER766    Hv_gic_distributor_reg_t = 30704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER767    Hv_gic_distributor_reg_t = 30712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER768    Hv_gic_distributor_reg_t = 30720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER769    Hv_gic_distributor_reg_t = 30728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER770    Hv_gic_distributor_reg_t = 30736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER771    Hv_gic_distributor_reg_t = 30744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER772    Hv_gic_distributor_reg_t = 30752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER773    Hv_gic_distributor_reg_t = 30760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER774    Hv_gic_distributor_reg_t = 30768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER775    Hv_gic_distributor_reg_t = 30776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER776    Hv_gic_distributor_reg_t = 30784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER777    Hv_gic_distributor_reg_t = 30792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER778    Hv_gic_distributor_reg_t = 30800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER779    Hv_gic_distributor_reg_t = 30808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER780    Hv_gic_distributor_reg_t = 30816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER781    Hv_gic_distributor_reg_t = 30824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER782    Hv_gic_distributor_reg_t = 30832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER783    Hv_gic_distributor_reg_t = 30840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER784    Hv_gic_distributor_reg_t = 30848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER785    Hv_gic_distributor_reg_t = 30856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER786    Hv_gic_distributor_reg_t = 30864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER787    Hv_gic_distributor_reg_t = 30872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER788    Hv_gic_distributor_reg_t = 30880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER789    Hv_gic_distributor_reg_t = 30888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER790    Hv_gic_distributor_reg_t = 30896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER791    Hv_gic_distributor_reg_t = 30904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER792    Hv_gic_distributor_reg_t = 30912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER793    Hv_gic_distributor_reg_t = 30920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER794    Hv_gic_distributor_reg_t = 30928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER795    Hv_gic_distributor_reg_t = 30936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER796    Hv_gic_distributor_reg_t = 30944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER797    Hv_gic_distributor_reg_t = 30952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER798    Hv_gic_distributor_reg_t = 30960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER799    Hv_gic_distributor_reg_t = 30968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER800    Hv_gic_distributor_reg_t = 30976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER801    Hv_gic_distributor_reg_t = 30984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER802    Hv_gic_distributor_reg_t = 30992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER803    Hv_gic_distributor_reg_t = 31000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER804    Hv_gic_distributor_reg_t = 31008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER805    Hv_gic_distributor_reg_t = 31016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER806    Hv_gic_distributor_reg_t = 31024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER807    Hv_gic_distributor_reg_t = 31032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER808    Hv_gic_distributor_reg_t = 31040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER809    Hv_gic_distributor_reg_t = 31048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER810    Hv_gic_distributor_reg_t = 31056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER811    Hv_gic_distributor_reg_t = 31064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER812    Hv_gic_distributor_reg_t = 31072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER813    Hv_gic_distributor_reg_t = 31080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER814    Hv_gic_distributor_reg_t = 31088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER815    Hv_gic_distributor_reg_t = 31096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER816    Hv_gic_distributor_reg_t = 31104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER817    Hv_gic_distributor_reg_t = 31112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER818    Hv_gic_distributor_reg_t = 31120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER819    Hv_gic_distributor_reg_t = 31128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER820    Hv_gic_distributor_reg_t = 31136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER821    Hv_gic_distributor_reg_t = 31144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER822    Hv_gic_distributor_reg_t = 31152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER823    Hv_gic_distributor_reg_t = 31160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER824    Hv_gic_distributor_reg_t = 31168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER825    Hv_gic_distributor_reg_t = 31176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER826    Hv_gic_distributor_reg_t = 31184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER827    Hv_gic_distributor_reg_t = 31192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER828    Hv_gic_distributor_reg_t = 31200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER829    Hv_gic_distributor_reg_t = 31208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER830    Hv_gic_distributor_reg_t = 31216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER831    Hv_gic_distributor_reg_t = 31224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER832    Hv_gic_distributor_reg_t = 31232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER833    Hv_gic_distributor_reg_t = 31240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER834    Hv_gic_distributor_reg_t = 31248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER835    Hv_gic_distributor_reg_t = 31256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER836    Hv_gic_distributor_reg_t = 31264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER837    Hv_gic_distributor_reg_t = 31272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER838    Hv_gic_distributor_reg_t = 31280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER839    Hv_gic_distributor_reg_t = 31288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER840    Hv_gic_distributor_reg_t = 31296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER841    Hv_gic_distributor_reg_t = 31304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER842    Hv_gic_distributor_reg_t = 31312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER843    Hv_gic_distributor_reg_t = 31320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER844    Hv_gic_distributor_reg_t = 31328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER845    Hv_gic_distributor_reg_t = 31336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER846    Hv_gic_distributor_reg_t = 31344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER847    Hv_gic_distributor_reg_t = 31352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER848    Hv_gic_distributor_reg_t = 31360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER849    Hv_gic_distributor_reg_t = 31368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER850    Hv_gic_distributor_reg_t = 31376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER851    Hv_gic_distributor_reg_t = 31384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER852    Hv_gic_distributor_reg_t = 31392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER853    Hv_gic_distributor_reg_t = 31400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER854    Hv_gic_distributor_reg_t = 31408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER855    Hv_gic_distributor_reg_t = 31416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER856    Hv_gic_distributor_reg_t = 31424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER857    Hv_gic_distributor_reg_t = 31432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER858    Hv_gic_distributor_reg_t = 31440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER859    Hv_gic_distributor_reg_t = 31448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER860    Hv_gic_distributor_reg_t = 31456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER861    Hv_gic_distributor_reg_t = 31464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER862    Hv_gic_distributor_reg_t = 31472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER863    Hv_gic_distributor_reg_t = 31480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER864    Hv_gic_distributor_reg_t = 31488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER865    Hv_gic_distributor_reg_t = 31496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER866    Hv_gic_distributor_reg_t = 31504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER867    Hv_gic_distributor_reg_t = 31512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER868    Hv_gic_distributor_reg_t = 31520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER869    Hv_gic_distributor_reg_t = 31528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER870    Hv_gic_distributor_reg_t = 31536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER871    Hv_gic_distributor_reg_t = 31544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER872    Hv_gic_distributor_reg_t = 31552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER873    Hv_gic_distributor_reg_t = 31560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER874    Hv_gic_distributor_reg_t = 31568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER875    Hv_gic_distributor_reg_t = 31576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER876    Hv_gic_distributor_reg_t = 31584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER877    Hv_gic_distributor_reg_t = 31592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER878    Hv_gic_distributor_reg_t = 31600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER879    Hv_gic_distributor_reg_t = 31608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER880    Hv_gic_distributor_reg_t = 31616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER881    Hv_gic_distributor_reg_t = 31624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER882    Hv_gic_distributor_reg_t = 31632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER883    Hv_gic_distributor_reg_t = 31640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER884    Hv_gic_distributor_reg_t = 31648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER885    Hv_gic_distributor_reg_t = 31656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER886    Hv_gic_distributor_reg_t = 31664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER887    Hv_gic_distributor_reg_t = 31672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER888    Hv_gic_distributor_reg_t = 31680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER889    Hv_gic_distributor_reg_t = 31688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER890    Hv_gic_distributor_reg_t = 31696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER891    Hv_gic_distributor_reg_t = 31704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER892    Hv_gic_distributor_reg_t = 31712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER893    Hv_gic_distributor_reg_t = 31720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER894    Hv_gic_distributor_reg_t = 31728
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER895    Hv_gic_distributor_reg_t = 31736
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER896    Hv_gic_distributor_reg_t = 31744
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER897    Hv_gic_distributor_reg_t = 31752
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER898    Hv_gic_distributor_reg_t = 31760
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER899    Hv_gic_distributor_reg_t = 31768
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER900    Hv_gic_distributor_reg_t = 31776
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER901    Hv_gic_distributor_reg_t = 31784
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER902    Hv_gic_distributor_reg_t = 31792
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER903    Hv_gic_distributor_reg_t = 31800
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER904    Hv_gic_distributor_reg_t = 31808
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER905    Hv_gic_distributor_reg_t = 31816
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER906    Hv_gic_distributor_reg_t = 31824
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER907    Hv_gic_distributor_reg_t = 31832
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER908    Hv_gic_distributor_reg_t = 31840
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER909    Hv_gic_distributor_reg_t = 31848
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER910    Hv_gic_distributor_reg_t = 31856
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER911    Hv_gic_distributor_reg_t = 31864
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER912    Hv_gic_distributor_reg_t = 31872
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER913    Hv_gic_distributor_reg_t = 31880
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER914    Hv_gic_distributor_reg_t = 31888
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER915    Hv_gic_distributor_reg_t = 31896
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER916    Hv_gic_distributor_reg_t = 31904
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER917    Hv_gic_distributor_reg_t = 31912
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER918    Hv_gic_distributor_reg_t = 31920
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER919    Hv_gic_distributor_reg_t = 31928
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER920    Hv_gic_distributor_reg_t = 31936
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER921    Hv_gic_distributor_reg_t = 31944
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER922    Hv_gic_distributor_reg_t = 31952
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER923    Hv_gic_distributor_reg_t = 31960
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER924    Hv_gic_distributor_reg_t = 31968
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER925    Hv_gic_distributor_reg_t = 31976
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER926    Hv_gic_distributor_reg_t = 31984
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER927    Hv_gic_distributor_reg_t = 31992
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER928    Hv_gic_distributor_reg_t = 32000
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER929    Hv_gic_distributor_reg_t = 32008
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER930    Hv_gic_distributor_reg_t = 32016
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER931    Hv_gic_distributor_reg_t = 32024
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER932    Hv_gic_distributor_reg_t = 32032
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER933    Hv_gic_distributor_reg_t = 32040
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER934    Hv_gic_distributor_reg_t = 32048
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER935    Hv_gic_distributor_reg_t = 32056
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER936    Hv_gic_distributor_reg_t = 32064
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER937    Hv_gic_distributor_reg_t = 32072
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER938    Hv_gic_distributor_reg_t = 32080
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER939    Hv_gic_distributor_reg_t = 32088
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER940    Hv_gic_distributor_reg_t = 32096
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER941    Hv_gic_distributor_reg_t = 32104
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER942    Hv_gic_distributor_reg_t = 32112
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER943    Hv_gic_distributor_reg_t = 32120
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER944    Hv_gic_distributor_reg_t = 32128
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER945    Hv_gic_distributor_reg_t = 32136
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER946    Hv_gic_distributor_reg_t = 32144
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER947    Hv_gic_distributor_reg_t = 32152
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER948    Hv_gic_distributor_reg_t = 32160
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER949    Hv_gic_distributor_reg_t = 32168
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER950    Hv_gic_distributor_reg_t = 32176
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER951    Hv_gic_distributor_reg_t = 32184
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER952    Hv_gic_distributor_reg_t = 32192
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER953    Hv_gic_distributor_reg_t = 32200
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER954    Hv_gic_distributor_reg_t = 32208
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER955    Hv_gic_distributor_reg_t = 32216
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER956    Hv_gic_distributor_reg_t = 32224
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER957    Hv_gic_distributor_reg_t = 32232
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER958    Hv_gic_distributor_reg_t = 32240
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER959    Hv_gic_distributor_reg_t = 32248
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER960    Hv_gic_distributor_reg_t = 32256
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER961    Hv_gic_distributor_reg_t = 32264
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER962    Hv_gic_distributor_reg_t = 32272
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER963    Hv_gic_distributor_reg_t = 32280
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER964    Hv_gic_distributor_reg_t = 32288
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER965    Hv_gic_distributor_reg_t = 32296
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER966    Hv_gic_distributor_reg_t = 32304
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER967    Hv_gic_distributor_reg_t = 32312
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER968    Hv_gic_distributor_reg_t = 32320
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER969    Hv_gic_distributor_reg_t = 32328
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER970    Hv_gic_distributor_reg_t = 32336
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER971    Hv_gic_distributor_reg_t = 32344
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER972    Hv_gic_distributor_reg_t = 32352
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER973    Hv_gic_distributor_reg_t = 32360
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER974    Hv_gic_distributor_reg_t = 32368
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER975    Hv_gic_distributor_reg_t = 32376
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER976    Hv_gic_distributor_reg_t = 32384
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER977    Hv_gic_distributor_reg_t = 32392
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER978    Hv_gic_distributor_reg_t = 32400
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER979    Hv_gic_distributor_reg_t = 32408
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER980    Hv_gic_distributor_reg_t = 32416
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER981    Hv_gic_distributor_reg_t = 32424
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER982    Hv_gic_distributor_reg_t = 32432
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER983    Hv_gic_distributor_reg_t = 32440
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER984    Hv_gic_distributor_reg_t = 32448
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER985    Hv_gic_distributor_reg_t = 32456
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER986    Hv_gic_distributor_reg_t = 32464
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER987    Hv_gic_distributor_reg_t = 32472
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER988    Hv_gic_distributor_reg_t = 32480
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER989    Hv_gic_distributor_reg_t = 32488
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER990    Hv_gic_distributor_reg_t = 32496
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER991    Hv_gic_distributor_reg_t = 32504
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER992    Hv_gic_distributor_reg_t = 32512
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER993    Hv_gic_distributor_reg_t = 32520
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER994    Hv_gic_distributor_reg_t = 32528
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER995    Hv_gic_distributor_reg_t = 32536
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER996    Hv_gic_distributor_reg_t = 32544
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER997    Hv_gic_distributor_reg_t = 32552
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER998    Hv_gic_distributor_reg_t = 32560
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER999    Hv_gic_distributor_reg_t = 32568
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1000   Hv_gic_distributor_reg_t = 32576
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1001   Hv_gic_distributor_reg_t = 32584
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1002   Hv_gic_distributor_reg_t = 32592
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1003   Hv_gic_distributor_reg_t = 32600
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1004   Hv_gic_distributor_reg_t = 32608
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1005   Hv_gic_distributor_reg_t = 32616
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1006   Hv_gic_distributor_reg_t = 32624
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1007   Hv_gic_distributor_reg_t = 32632
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1008   Hv_gic_distributor_reg_t = 32640
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1009   Hv_gic_distributor_reg_t = 32648
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1010   Hv_gic_distributor_reg_t = 32656
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1011   Hv_gic_distributor_reg_t = 32664
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1012   Hv_gic_distributor_reg_t = 32672
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1013   Hv_gic_distributor_reg_t = 32680
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1014   Hv_gic_distributor_reg_t = 32688
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1015   Hv_gic_distributor_reg_t = 32696
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1016   Hv_gic_distributor_reg_t = 32704
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1017   Hv_gic_distributor_reg_t = 32712
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1018   Hv_gic_distributor_reg_t = 32720
-	HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1019   Hv_gic_distributor_reg_t = 32728
-	HV_GIC_DISTRIBUTOR_REG_GICD_PIDR2         Hv_gic_distributor_reg_t = 65512
+	GICDistributorRegCtlr          GICDistributorReg = 0
+	GICDistributorRegTyper         GICDistributorReg = 4
+	GICDistributorRegIgroupr0      GICDistributorReg = 128
+	GICDistributorRegIgroupr1      GICDistributorReg = 132
+	GICDistributorRegIgroupr2      GICDistributorReg = 136
+	GICDistributorRegIgroupr3      GICDistributorReg = 140
+	GICDistributorRegIgroupr4      GICDistributorReg = 144
+	GICDistributorRegIgroupr5      GICDistributorReg = 148
+	GICDistributorRegIgroupr6      GICDistributorReg = 152
+	GICDistributorRegIgroupr7      GICDistributorReg = 156
+	GICDistributorRegIgroupr8      GICDistributorReg = 160
+	GICDistributorRegIgroupr9      GICDistributorReg = 164
+	GICDistributorRegIgroupr10     GICDistributorReg = 168
+	GICDistributorRegIgroupr11     GICDistributorReg = 172
+	GICDistributorRegIgroupr12     GICDistributorReg = 176
+	GICDistributorRegIgroupr13     GICDistributorReg = 180
+	GICDistributorRegIgroupr14     GICDistributorReg = 184
+	GICDistributorRegIgroupr15     GICDistributorReg = 188
+	GICDistributorRegIgroupr16     GICDistributorReg = 192
+	GICDistributorRegIgroupr17     GICDistributorReg = 196
+	GICDistributorRegIgroupr18     GICDistributorReg = 200
+	GICDistributorRegIgroupr19     GICDistributorReg = 204
+	GICDistributorRegIgroupr20     GICDistributorReg = 208
+	GICDistributorRegIgroupr21     GICDistributorReg = 212
+	GICDistributorRegIgroupr22     GICDistributorReg = 216
+	GICDistributorRegIgroupr23     GICDistributorReg = 220
+	GICDistributorRegIgroupr24     GICDistributorReg = 224
+	GICDistributorRegIgroupr25     GICDistributorReg = 228
+	GICDistributorRegIgroupr26     GICDistributorReg = 232
+	GICDistributorRegIgroupr27     GICDistributorReg = 236
+	GICDistributorRegIgroupr28     GICDistributorReg = 240
+	GICDistributorRegIgroupr29     GICDistributorReg = 244
+	GICDistributorRegIgroupr30     GICDistributorReg = 248
+	GICDistributorRegIgroupr31     GICDistributorReg = 252
+	GICDistributorRegIsenabler0    GICDistributorReg = 256
+	GICDistributorRegIsenabler1    GICDistributorReg = 260
+	GICDistributorRegIsenabler2    GICDistributorReg = 264
+	GICDistributorRegIsenabler3    GICDistributorReg = 268
+	GICDistributorRegIsenabler4    GICDistributorReg = 272
+	GICDistributorRegIsenabler5    GICDistributorReg = 276
+	GICDistributorRegIsenabler6    GICDistributorReg = 280
+	GICDistributorRegIsenabler7    GICDistributorReg = 284
+	GICDistributorRegIsenabler8    GICDistributorReg = 288
+	GICDistributorRegIsenabler9    GICDistributorReg = 292
+	GICDistributorRegIsenabler10   GICDistributorReg = 296
+	GICDistributorRegIsenabler11   GICDistributorReg = 300
+	GICDistributorRegIsenabler12   GICDistributorReg = 304
+	GICDistributorRegIsenabler13   GICDistributorReg = 308
+	GICDistributorRegIsenabler14   GICDistributorReg = 312
+	GICDistributorRegIsenabler15   GICDistributorReg = 316
+	GICDistributorRegIsenabler16   GICDistributorReg = 320
+	GICDistributorRegIsenabler17   GICDistributorReg = 324
+	GICDistributorRegIsenabler18   GICDistributorReg = 328
+	GICDistributorRegIsenabler19   GICDistributorReg = 332
+	GICDistributorRegIsenabler20   GICDistributorReg = 336
+	GICDistributorRegIsenabler21   GICDistributorReg = 340
+	GICDistributorRegIsenabler22   GICDistributorReg = 344
+	GICDistributorRegIsenabler23   GICDistributorReg = 348
+	GICDistributorRegIsenabler24   GICDistributorReg = 352
+	GICDistributorRegIsenabler25   GICDistributorReg = 356
+	GICDistributorRegIsenabler26   GICDistributorReg = 360
+	GICDistributorRegIsenabler27   GICDistributorReg = 364
+	GICDistributorRegIsenabler28   GICDistributorReg = 368
+	GICDistributorRegIsenabler29   GICDistributorReg = 372
+	GICDistributorRegIsenabler30   GICDistributorReg = 376
+	GICDistributorRegIsenabler31   GICDistributorReg = 380
+	GICDistributorRegIcenabler0    GICDistributorReg = 384
+	GICDistributorRegIcenabler1    GICDistributorReg = 388
+	GICDistributorRegIcenabler2    GICDistributorReg = 392
+	GICDistributorRegIcenabler3    GICDistributorReg = 396
+	GICDistributorRegIcenabler4    GICDistributorReg = 400
+	GICDistributorRegIcenabler5    GICDistributorReg = 404
+	GICDistributorRegIcenabler6    GICDistributorReg = 408
+	GICDistributorRegIcenabler7    GICDistributorReg = 412
+	GICDistributorRegIcenabler8    GICDistributorReg = 416
+	GICDistributorRegIcenabler9    GICDistributorReg = 420
+	GICDistributorRegIcenabler10   GICDistributorReg = 424
+	GICDistributorRegIcenabler11   GICDistributorReg = 428
+	GICDistributorRegIcenabler12   GICDistributorReg = 432
+	GICDistributorRegIcenabler13   GICDistributorReg = 436
+	GICDistributorRegIcenabler14   GICDistributorReg = 440
+	GICDistributorRegIcenabler15   GICDistributorReg = 444
+	GICDistributorRegIcenabler16   GICDistributorReg = 448
+	GICDistributorRegIcenabler17   GICDistributorReg = 452
+	GICDistributorRegIcenabler18   GICDistributorReg = 456
+	GICDistributorRegIcenabler19   GICDistributorReg = 460
+	GICDistributorRegIcenabler20   GICDistributorReg = 464
+	GICDistributorRegIcenabler21   GICDistributorReg = 468
+	GICDistributorRegIcenabler22   GICDistributorReg = 472
+	GICDistributorRegIcenabler23   GICDistributorReg = 476
+	GICDistributorRegIcenabler24   GICDistributorReg = 480
+	GICDistributorRegIcenabler25   GICDistributorReg = 484
+	GICDistributorRegIcenabler26   GICDistributorReg = 488
+	GICDistributorRegIcenabler27   GICDistributorReg = 492
+	GICDistributorRegIcenabler28   GICDistributorReg = 496
+	GICDistributorRegIcenabler29   GICDistributorReg = 500
+	GICDistributorRegIcenabler30   GICDistributorReg = 504
+	GICDistributorRegIcenabler31   GICDistributorReg = 508
+	GICDistributorRegIspendr0      GICDistributorReg = 512
+	GICDistributorRegIspendr1      GICDistributorReg = 516
+	GICDistributorRegIspendr2      GICDistributorReg = 520
+	GICDistributorRegIspendr3      GICDistributorReg = 524
+	GICDistributorRegIspendr4      GICDistributorReg = 528
+	GICDistributorRegIspendr5      GICDistributorReg = 532
+	GICDistributorRegIspendr6      GICDistributorReg = 536
+	GICDistributorRegIspendr7      GICDistributorReg = 540
+	GICDistributorRegIspendr8      GICDistributorReg = 544
+	GICDistributorRegIspendr9      GICDistributorReg = 548
+	GICDistributorRegIspendr10     GICDistributorReg = 552
+	GICDistributorRegIspendr11     GICDistributorReg = 556
+	GICDistributorRegIspendr12     GICDistributorReg = 560
+	GICDistributorRegIspendr13     GICDistributorReg = 564
+	GICDistributorRegIspendr14     GICDistributorReg = 568
+	GICDistributorRegIspendr15     GICDistributorReg = 572
+	GICDistributorRegIspendr16     GICDistributorReg = 576
+	GICDistributorRegIspendr17     GICDistributorReg = 580
+	GICDistributorRegIspendr18     GICDistributorReg = 584
+	GICDistributorRegIspendr19     GICDistributorReg = 588
+	GICDistributorRegIspendr20     GICDistributorReg = 592
+	GICDistributorRegIspendr21     GICDistributorReg = 596
+	GICDistributorRegIspendr22     GICDistributorReg = 600
+	GICDistributorRegIspendr23     GICDistributorReg = 604
+	GICDistributorRegIspendr24     GICDistributorReg = 608
+	GICDistributorRegIspendr25     GICDistributorReg = 612
+	GICDistributorRegIspendr26     GICDistributorReg = 616
+	GICDistributorRegIspendr27     GICDistributorReg = 620
+	GICDistributorRegIspendr28     GICDistributorReg = 624
+	GICDistributorRegIspendr29     GICDistributorReg = 628
+	GICDistributorRegIspendr30     GICDistributorReg = 632
+	GICDistributorRegIspendr31     GICDistributorReg = 636
+	GICDistributorRegIcpendr0      GICDistributorReg = 640
+	GICDistributorRegIcpendr1      GICDistributorReg = 644
+	GICDistributorRegIcpendr2      GICDistributorReg = 648
+	GICDistributorRegIcpendr3      GICDistributorReg = 652
+	GICDistributorRegIcpendr4      GICDistributorReg = 656
+	GICDistributorRegIcpendr5      GICDistributorReg = 660
+	GICDistributorRegIcpendr6      GICDistributorReg = 664
+	GICDistributorRegIcpendr7      GICDistributorReg = 668
+	GICDistributorRegIcpendr8      GICDistributorReg = 672
+	GICDistributorRegIcpendr9      GICDistributorReg = 676
+	GICDistributorRegIcpendr10     GICDistributorReg = 680
+	GICDistributorRegIcpendr11     GICDistributorReg = 684
+	GICDistributorRegIcpendr12     GICDistributorReg = 688
+	GICDistributorRegIcpendr13     GICDistributorReg = 692
+	GICDistributorRegIcpendr14     GICDistributorReg = 696
+	GICDistributorRegIcpendr15     GICDistributorReg = 700
+	GICDistributorRegIcpendr16     GICDistributorReg = 704
+	GICDistributorRegIcpendr17     GICDistributorReg = 708
+	GICDistributorRegIcpendr18     GICDistributorReg = 712
+	GICDistributorRegIcpendr19     GICDistributorReg = 716
+	GICDistributorRegIcpendr20     GICDistributorReg = 720
+	GICDistributorRegIcpendr21     GICDistributorReg = 724
+	GICDistributorRegIcpendr22     GICDistributorReg = 728
+	GICDistributorRegIcpendr23     GICDistributorReg = 732
+	GICDistributorRegIcpendr24     GICDistributorReg = 736
+	GICDistributorRegIcpendr25     GICDistributorReg = 740
+	GICDistributorRegIcpendr26     GICDistributorReg = 744
+	GICDistributorRegIcpendr27     GICDistributorReg = 748
+	GICDistributorRegIcpendr28     GICDistributorReg = 752
+	GICDistributorRegIcpendr29     GICDistributorReg = 756
+	GICDistributorRegIcpendr30     GICDistributorReg = 760
+	GICDistributorRegIcpendr31     GICDistributorReg = 764
+	GICDistributorRegIsactiver0    GICDistributorReg = 768
+	GICDistributorRegIsactiver1    GICDistributorReg = 772
+	GICDistributorRegIsactiver2    GICDistributorReg = 776
+	GICDistributorRegIsactiver3    GICDistributorReg = 780
+	GICDistributorRegIsactiver4    GICDistributorReg = 784
+	GICDistributorRegIsactiver5    GICDistributorReg = 788
+	GICDistributorRegIsactiver6    GICDistributorReg = 792
+	GICDistributorRegIsactiver7    GICDistributorReg = 796
+	GICDistributorRegIsactiver8    GICDistributorReg = 800
+	GICDistributorRegIsactiver9    GICDistributorReg = 804
+	GICDistributorRegIsactiver10   GICDistributorReg = 808
+	GICDistributorRegIsactiver11   GICDistributorReg = 812
+	GICDistributorRegIsactiver12   GICDistributorReg = 816
+	GICDistributorRegIsactiver13   GICDistributorReg = 820
+	GICDistributorRegIsactiver14   GICDistributorReg = 824
+	GICDistributorRegIsactiver15   GICDistributorReg = 828
+	GICDistributorRegIsactiver16   GICDistributorReg = 832
+	GICDistributorRegIsactiver17   GICDistributorReg = 836
+	GICDistributorRegIsactiver18   GICDistributorReg = 840
+	GICDistributorRegIsactiver19   GICDistributorReg = 844
+	GICDistributorRegIsactiver20   GICDistributorReg = 848
+	GICDistributorRegIsactiver21   GICDistributorReg = 852
+	GICDistributorRegIsactiver22   GICDistributorReg = 856
+	GICDistributorRegIsactiver23   GICDistributorReg = 860
+	GICDistributorRegIsactiver24   GICDistributorReg = 864
+	GICDistributorRegIsactiver25   GICDistributorReg = 868
+	GICDistributorRegIsactiver26   GICDistributorReg = 872
+	GICDistributorRegIsactiver27   GICDistributorReg = 876
+	GICDistributorRegIsactiver28   GICDistributorReg = 880
+	GICDistributorRegIsactiver29   GICDistributorReg = 884
+	GICDistributorRegIsactiver30   GICDistributorReg = 888
+	GICDistributorRegIsactiver31   GICDistributorReg = 892
+	GICDistributorRegIcactiver0    GICDistributorReg = 896
+	GICDistributorRegIcactiver1    GICDistributorReg = 900
+	GICDistributorRegIcactiver2    GICDistributorReg = 904
+	GICDistributorRegIcactiver3    GICDistributorReg = 908
+	GICDistributorRegIcactiver4    GICDistributorReg = 912
+	GICDistributorRegIcactiver5    GICDistributorReg = 916
+	GICDistributorRegIcactiver6    GICDistributorReg = 920
+	GICDistributorRegIcactiver7    GICDistributorReg = 924
+	GICDistributorRegIcactiver8    GICDistributorReg = 928
+	GICDistributorRegIcactiver9    GICDistributorReg = 932
+	GICDistributorRegIcactiver10   GICDistributorReg = 936
+	GICDistributorRegIcactiver11   GICDistributorReg = 940
+	GICDistributorRegIcactiver12   GICDistributorReg = 944
+	GICDistributorRegIcactiver13   GICDistributorReg = 948
+	GICDistributorRegIcactiver14   GICDistributorReg = 952
+	GICDistributorRegIcactiver15   GICDistributorReg = 956
+	GICDistributorRegIcactiver16   GICDistributorReg = 960
+	GICDistributorRegIcactiver17   GICDistributorReg = 964
+	GICDistributorRegIcactiver18   GICDistributorReg = 968
+	GICDistributorRegIcactiver19   GICDistributorReg = 972
+	GICDistributorRegIcactiver20   GICDistributorReg = 976
+	GICDistributorRegIcactiver21   GICDistributorReg = 980
+	GICDistributorRegIcactiver22   GICDistributorReg = 984
+	GICDistributorRegIcactiver23   GICDistributorReg = 988
+	GICDistributorRegIcactiver24   GICDistributorReg = 992
+	GICDistributorRegIcactiver25   GICDistributorReg = 996
+	GICDistributorRegIcactiver26   GICDistributorReg = 1000
+	GICDistributorRegIcactiver27   GICDistributorReg = 1004
+	GICDistributorRegIcactiver28   GICDistributorReg = 1008
+	GICDistributorRegIcactiver29   GICDistributorReg = 1012
+	GICDistributorRegIcactiver30   GICDistributorReg = 1016
+	GICDistributorRegIcactiver31   GICDistributorReg = 1020
+	GICDistributorRegIpriorityr0   GICDistributorReg = 1024
+	GICDistributorRegIpriorityr1   GICDistributorReg = 1028
+	GICDistributorRegIpriorityr2   GICDistributorReg = 1032
+	GICDistributorRegIpriorityr3   GICDistributorReg = 1036
+	GICDistributorRegIpriorityr4   GICDistributorReg = 1040
+	GICDistributorRegIpriorityr5   GICDistributorReg = 1044
+	GICDistributorRegIpriorityr6   GICDistributorReg = 1048
+	GICDistributorRegIpriorityr7   GICDistributorReg = 1052
+	GICDistributorRegIpriorityr8   GICDistributorReg = 1056
+	GICDistributorRegIpriorityr9   GICDistributorReg = 1060
+	GICDistributorRegIpriorityr10  GICDistributorReg = 1064
+	GICDistributorRegIpriorityr11  GICDistributorReg = 1068
+	GICDistributorRegIpriorityr12  GICDistributorReg = 1072
+	GICDistributorRegIpriorityr13  GICDistributorReg = 1076
+	GICDistributorRegIpriorityr14  GICDistributorReg = 1080
+	GICDistributorRegIpriorityr15  GICDistributorReg = 1084
+	GICDistributorRegIpriorityr16  GICDistributorReg = 1088
+	GICDistributorRegIpriorityr17  GICDistributorReg = 1092
+	GICDistributorRegIpriorityr18  GICDistributorReg = 1096
+	GICDistributorRegIpriorityr19  GICDistributorReg = 1100
+	GICDistributorRegIpriorityr20  GICDistributorReg = 1104
+	GICDistributorRegIpriorityr21  GICDistributorReg = 1108
+	GICDistributorRegIpriorityr22  GICDistributorReg = 1112
+	GICDistributorRegIpriorityr23  GICDistributorReg = 1116
+	GICDistributorRegIpriorityr24  GICDistributorReg = 1120
+	GICDistributorRegIpriorityr25  GICDistributorReg = 1124
+	GICDistributorRegIpriorityr26  GICDistributorReg = 1128
+	GICDistributorRegIpriorityr27  GICDistributorReg = 1132
+	GICDistributorRegIpriorityr28  GICDistributorReg = 1136
+	GICDistributorRegIpriorityr29  GICDistributorReg = 1140
+	GICDistributorRegIpriorityr30  GICDistributorReg = 1144
+	GICDistributorRegIpriorityr31  GICDistributorReg = 1148
+	GICDistributorRegIpriorityr32  GICDistributorReg = 1152
+	GICDistributorRegIpriorityr33  GICDistributorReg = 1156
+	GICDistributorRegIpriorityr34  GICDistributorReg = 1160
+	GICDistributorRegIpriorityr35  GICDistributorReg = 1164
+	GICDistributorRegIpriorityr36  GICDistributorReg = 1168
+	GICDistributorRegIpriorityr37  GICDistributorReg = 1172
+	GICDistributorRegIpriorityr38  GICDistributorReg = 1176
+	GICDistributorRegIpriorityr39  GICDistributorReg = 1180
+	GICDistributorRegIpriorityr40  GICDistributorReg = 1184
+	GICDistributorRegIpriorityr41  GICDistributorReg = 1188
+	GICDistributorRegIpriorityr42  GICDistributorReg = 1192
+	GICDistributorRegIpriorityr43  GICDistributorReg = 1196
+	GICDistributorRegIpriorityr44  GICDistributorReg = 1200
+	GICDistributorRegIpriorityr45  GICDistributorReg = 1204
+	GICDistributorRegIpriorityr46  GICDistributorReg = 1208
+	GICDistributorRegIpriorityr47  GICDistributorReg = 1212
+	GICDistributorRegIpriorityr48  GICDistributorReg = 1216
+	GICDistributorRegIpriorityr49  GICDistributorReg = 1220
+	GICDistributorRegIpriorityr50  GICDistributorReg = 1224
+	GICDistributorRegIpriorityr51  GICDistributorReg = 1228
+	GICDistributorRegIpriorityr52  GICDistributorReg = 1232
+	GICDistributorRegIpriorityr53  GICDistributorReg = 1236
+	GICDistributorRegIpriorityr54  GICDistributorReg = 1240
+	GICDistributorRegIpriorityr55  GICDistributorReg = 1244
+	GICDistributorRegIpriorityr56  GICDistributorReg = 1248
+	GICDistributorRegIpriorityr57  GICDistributorReg = 1252
+	GICDistributorRegIpriorityr58  GICDistributorReg = 1256
+	GICDistributorRegIpriorityr59  GICDistributorReg = 1260
+	GICDistributorRegIpriorityr60  GICDistributorReg = 1264
+	GICDistributorRegIpriorityr61  GICDistributorReg = 1268
+	GICDistributorRegIpriorityr62  GICDistributorReg = 1272
+	GICDistributorRegIpriorityr63  GICDistributorReg = 1276
+	GICDistributorRegIpriorityr64  GICDistributorReg = 1280
+	GICDistributorRegIpriorityr65  GICDistributorReg = 1284
+	GICDistributorRegIpriorityr66  GICDistributorReg = 1288
+	GICDistributorRegIpriorityr67  GICDistributorReg = 1292
+	GICDistributorRegIpriorityr68  GICDistributorReg = 1296
+	GICDistributorRegIpriorityr69  GICDistributorReg = 1300
+	GICDistributorRegIpriorityr70  GICDistributorReg = 1304
+	GICDistributorRegIpriorityr71  GICDistributorReg = 1308
+	GICDistributorRegIpriorityr72  GICDistributorReg = 1312
+	GICDistributorRegIpriorityr73  GICDistributorReg = 1316
+	GICDistributorRegIpriorityr74  GICDistributorReg = 1320
+	GICDistributorRegIpriorityr75  GICDistributorReg = 1324
+	GICDistributorRegIpriorityr76  GICDistributorReg = 1328
+	GICDistributorRegIpriorityr77  GICDistributorReg = 1332
+	GICDistributorRegIpriorityr78  GICDistributorReg = 1336
+	GICDistributorRegIpriorityr79  GICDistributorReg = 1340
+	GICDistributorRegIpriorityr80  GICDistributorReg = 1344
+	GICDistributorRegIpriorityr81  GICDistributorReg = 1348
+	GICDistributorRegIpriorityr82  GICDistributorReg = 1352
+	GICDistributorRegIpriorityr83  GICDistributorReg = 1356
+	GICDistributorRegIpriorityr84  GICDistributorReg = 1360
+	GICDistributorRegIpriorityr85  GICDistributorReg = 1364
+	GICDistributorRegIpriorityr86  GICDistributorReg = 1368
+	GICDistributorRegIpriorityr87  GICDistributorReg = 1372
+	GICDistributorRegIpriorityr88  GICDistributorReg = 1376
+	GICDistributorRegIpriorityr89  GICDistributorReg = 1380
+	GICDistributorRegIpriorityr90  GICDistributorReg = 1384
+	GICDistributorRegIpriorityr91  GICDistributorReg = 1388
+	GICDistributorRegIpriorityr92  GICDistributorReg = 1392
+	GICDistributorRegIpriorityr93  GICDistributorReg = 1396
+	GICDistributorRegIpriorityr94  GICDistributorReg = 1400
+	GICDistributorRegIpriorityr95  GICDistributorReg = 1404
+	GICDistributorRegIpriorityr96  GICDistributorReg = 1408
+	GICDistributorRegIpriorityr97  GICDistributorReg = 1412
+	GICDistributorRegIpriorityr98  GICDistributorReg = 1416
+	GICDistributorRegIpriorityr99  GICDistributorReg = 1420
+	GICDistributorRegIpriorityr100 GICDistributorReg = 1424
+	GICDistributorRegIpriorityr101 GICDistributorReg = 1428
+	GICDistributorRegIpriorityr102 GICDistributorReg = 1432
+	GICDistributorRegIpriorityr103 GICDistributorReg = 1436
+	GICDistributorRegIpriorityr104 GICDistributorReg = 1440
+	GICDistributorRegIpriorityr105 GICDistributorReg = 1444
+	GICDistributorRegIpriorityr106 GICDistributorReg = 1448
+	GICDistributorRegIpriorityr107 GICDistributorReg = 1452
+	GICDistributorRegIpriorityr108 GICDistributorReg = 1456
+	GICDistributorRegIpriorityr109 GICDistributorReg = 1460
+	GICDistributorRegIpriorityr110 GICDistributorReg = 1464
+	GICDistributorRegIpriorityr111 GICDistributorReg = 1468
+	GICDistributorRegIpriorityr112 GICDistributorReg = 1472
+	GICDistributorRegIpriorityr113 GICDistributorReg = 1476
+	GICDistributorRegIpriorityr114 GICDistributorReg = 1480
+	GICDistributorRegIpriorityr115 GICDistributorReg = 1484
+	GICDistributorRegIpriorityr116 GICDistributorReg = 1488
+	GICDistributorRegIpriorityr117 GICDistributorReg = 1492
+	GICDistributorRegIpriorityr118 GICDistributorReg = 1496
+	GICDistributorRegIpriorityr119 GICDistributorReg = 1500
+	GICDistributorRegIpriorityr120 GICDistributorReg = 1504
+	GICDistributorRegIpriorityr121 GICDistributorReg = 1508
+	GICDistributorRegIpriorityr122 GICDistributorReg = 1512
+	GICDistributorRegIpriorityr123 GICDistributorReg = 1516
+	GICDistributorRegIpriorityr124 GICDistributorReg = 1520
+	GICDistributorRegIpriorityr125 GICDistributorReg = 1524
+	GICDistributorRegIpriorityr126 GICDistributorReg = 1528
+	GICDistributorRegIpriorityr127 GICDistributorReg = 1532
+	GICDistributorRegIpriorityr128 GICDistributorReg = 1536
+	GICDistributorRegIpriorityr129 GICDistributorReg = 1540
+	GICDistributorRegIpriorityr130 GICDistributorReg = 1544
+	GICDistributorRegIpriorityr131 GICDistributorReg = 1548
+	GICDistributorRegIpriorityr132 GICDistributorReg = 1552
+	GICDistributorRegIpriorityr133 GICDistributorReg = 1556
+	GICDistributorRegIpriorityr134 GICDistributorReg = 1560
+	GICDistributorRegIpriorityr135 GICDistributorReg = 1564
+	GICDistributorRegIpriorityr136 GICDistributorReg = 1568
+	GICDistributorRegIpriorityr137 GICDistributorReg = 1572
+	GICDistributorRegIpriorityr138 GICDistributorReg = 1576
+	GICDistributorRegIpriorityr139 GICDistributorReg = 1580
+	GICDistributorRegIpriorityr140 GICDistributorReg = 1584
+	GICDistributorRegIpriorityr141 GICDistributorReg = 1588
+	GICDistributorRegIpriorityr142 GICDistributorReg = 1592
+	GICDistributorRegIpriorityr143 GICDistributorReg = 1596
+	GICDistributorRegIpriorityr144 GICDistributorReg = 1600
+	GICDistributorRegIpriorityr145 GICDistributorReg = 1604
+	GICDistributorRegIpriorityr146 GICDistributorReg = 1608
+	GICDistributorRegIpriorityr147 GICDistributorReg = 1612
+	GICDistributorRegIpriorityr148 GICDistributorReg = 1616
+	GICDistributorRegIpriorityr149 GICDistributorReg = 1620
+	GICDistributorRegIpriorityr150 GICDistributorReg = 1624
+	GICDistributorRegIpriorityr151 GICDistributorReg = 1628
+	GICDistributorRegIpriorityr152 GICDistributorReg = 1632
+	GICDistributorRegIpriorityr153 GICDistributorReg = 1636
+	GICDistributorRegIpriorityr154 GICDistributorReg = 1640
+	GICDistributorRegIpriorityr155 GICDistributorReg = 1644
+	GICDistributorRegIpriorityr156 GICDistributorReg = 1648
+	GICDistributorRegIpriorityr157 GICDistributorReg = 1652
+	GICDistributorRegIpriorityr158 GICDistributorReg = 1656
+	GICDistributorRegIpriorityr159 GICDistributorReg = 1660
+	GICDistributorRegIpriorityr160 GICDistributorReg = 1664
+	GICDistributorRegIpriorityr161 GICDistributorReg = 1668
+	GICDistributorRegIpriorityr162 GICDistributorReg = 1672
+	GICDistributorRegIpriorityr163 GICDistributorReg = 1676
+	GICDistributorRegIpriorityr164 GICDistributorReg = 1680
+	GICDistributorRegIpriorityr165 GICDistributorReg = 1684
+	GICDistributorRegIpriorityr166 GICDistributorReg = 1688
+	GICDistributorRegIpriorityr167 GICDistributorReg = 1692
+	GICDistributorRegIpriorityr168 GICDistributorReg = 1696
+	GICDistributorRegIpriorityr169 GICDistributorReg = 1700
+	GICDistributorRegIpriorityr170 GICDistributorReg = 1704
+	GICDistributorRegIpriorityr171 GICDistributorReg = 1708
+	GICDistributorRegIpriorityr172 GICDistributorReg = 1712
+	GICDistributorRegIpriorityr173 GICDistributorReg = 1716
+	GICDistributorRegIpriorityr174 GICDistributorReg = 1720
+	GICDistributorRegIpriorityr175 GICDistributorReg = 1724
+	GICDistributorRegIpriorityr176 GICDistributorReg = 1728
+	GICDistributorRegIpriorityr177 GICDistributorReg = 1732
+	GICDistributorRegIpriorityr178 GICDistributorReg = 1736
+	GICDistributorRegIpriorityr179 GICDistributorReg = 1740
+	GICDistributorRegIpriorityr180 GICDistributorReg = 1744
+	GICDistributorRegIpriorityr181 GICDistributorReg = 1748
+	GICDistributorRegIpriorityr182 GICDistributorReg = 1752
+	GICDistributorRegIpriorityr183 GICDistributorReg = 1756
+	GICDistributorRegIpriorityr184 GICDistributorReg = 1760
+	GICDistributorRegIpriorityr185 GICDistributorReg = 1764
+	GICDistributorRegIpriorityr186 GICDistributorReg = 1768
+	GICDistributorRegIpriorityr187 GICDistributorReg = 1772
+	GICDistributorRegIpriorityr188 GICDistributorReg = 1776
+	GICDistributorRegIpriorityr189 GICDistributorReg = 1780
+	GICDistributorRegIpriorityr190 GICDistributorReg = 1784
+	GICDistributorRegIpriorityr191 GICDistributorReg = 1788
+	GICDistributorRegIpriorityr192 GICDistributorReg = 1792
+	GICDistributorRegIpriorityr193 GICDistributorReg = 1796
+	GICDistributorRegIpriorityr194 GICDistributorReg = 1800
+	GICDistributorRegIpriorityr195 GICDistributorReg = 1804
+	GICDistributorRegIpriorityr196 GICDistributorReg = 1808
+	GICDistributorRegIpriorityr197 GICDistributorReg = 1812
+	GICDistributorRegIpriorityr198 GICDistributorReg = 1816
+	GICDistributorRegIpriorityr199 GICDistributorReg = 1820
+	GICDistributorRegIpriorityr200 GICDistributorReg = 1824
+	GICDistributorRegIpriorityr201 GICDistributorReg = 1828
+	GICDistributorRegIpriorityr202 GICDistributorReg = 1832
+	GICDistributorRegIpriorityr203 GICDistributorReg = 1836
+	GICDistributorRegIpriorityr204 GICDistributorReg = 1840
+	GICDistributorRegIpriorityr205 GICDistributorReg = 1844
+	GICDistributorRegIpriorityr206 GICDistributorReg = 1848
+	GICDistributorRegIpriorityr207 GICDistributorReg = 1852
+	GICDistributorRegIpriorityr208 GICDistributorReg = 1856
+	GICDistributorRegIpriorityr209 GICDistributorReg = 1860
+	GICDistributorRegIpriorityr210 GICDistributorReg = 1864
+	GICDistributorRegIpriorityr211 GICDistributorReg = 1868
+	GICDistributorRegIpriorityr212 GICDistributorReg = 1872
+	GICDistributorRegIpriorityr213 GICDistributorReg = 1876
+	GICDistributorRegIpriorityr214 GICDistributorReg = 1880
+	GICDistributorRegIpriorityr215 GICDistributorReg = 1884
+	GICDistributorRegIpriorityr216 GICDistributorReg = 1888
+	GICDistributorRegIpriorityr217 GICDistributorReg = 1892
+	GICDistributorRegIpriorityr218 GICDistributorReg = 1896
+	GICDistributorRegIpriorityr219 GICDistributorReg = 1900
+	GICDistributorRegIpriorityr220 GICDistributorReg = 1904
+	GICDistributorRegIpriorityr221 GICDistributorReg = 1908
+	GICDistributorRegIpriorityr222 GICDistributorReg = 1912
+	GICDistributorRegIpriorityr223 GICDistributorReg = 1916
+	GICDistributorRegIpriorityr224 GICDistributorReg = 1920
+	GICDistributorRegIpriorityr225 GICDistributorReg = 1924
+	GICDistributorRegIpriorityr226 GICDistributorReg = 1928
+	GICDistributorRegIpriorityr227 GICDistributorReg = 1932
+	GICDistributorRegIpriorityr228 GICDistributorReg = 1936
+	GICDistributorRegIpriorityr229 GICDistributorReg = 1940
+	GICDistributorRegIpriorityr230 GICDistributorReg = 1944
+	GICDistributorRegIpriorityr231 GICDistributorReg = 1948
+	GICDistributorRegIpriorityr232 GICDistributorReg = 1952
+	GICDistributorRegIpriorityr233 GICDistributorReg = 1956
+	GICDistributorRegIpriorityr234 GICDistributorReg = 1960
+	GICDistributorRegIpriorityr235 GICDistributorReg = 1964
+	GICDistributorRegIpriorityr236 GICDistributorReg = 1968
+	GICDistributorRegIpriorityr237 GICDistributorReg = 1972
+	GICDistributorRegIpriorityr238 GICDistributorReg = 1976
+	GICDistributorRegIpriorityr239 GICDistributorReg = 1980
+	GICDistributorRegIpriorityr240 GICDistributorReg = 1984
+	GICDistributorRegIpriorityr241 GICDistributorReg = 1988
+	GICDistributorRegIpriorityr242 GICDistributorReg = 1992
+	GICDistributorRegIpriorityr243 GICDistributorReg = 1996
+	GICDistributorRegIpriorityr244 GICDistributorReg = 2000
+	GICDistributorRegIpriorityr245 GICDistributorReg = 2004
+	GICDistributorRegIpriorityr246 GICDistributorReg = 2008
+	GICDistributorRegIpriorityr247 GICDistributorReg = 2012
+	GICDistributorRegIpriorityr248 GICDistributorReg = 2016
+	GICDistributorRegIpriorityr249 GICDistributorReg = 2020
+	GICDistributorRegIpriorityr250 GICDistributorReg = 2024
+	GICDistributorRegIpriorityr251 GICDistributorReg = 2028
+	GICDistributorRegIpriorityr252 GICDistributorReg = 2032
+	GICDistributorRegIpriorityr253 GICDistributorReg = 2036
+	GICDistributorRegIpriorityr254 GICDistributorReg = 2040
+	GICDistributorRegIcfgr0        GICDistributorReg = 3072
+	GICDistributorRegIcfgr1        GICDistributorReg = 3076
+	GICDistributorRegIcfgr2        GICDistributorReg = 3080
+	GICDistributorRegIcfgr3        GICDistributorReg = 3084
+	GICDistributorRegIcfgr4        GICDistributorReg = 3088
+	GICDistributorRegIcfgr5        GICDistributorReg = 3092
+	GICDistributorRegIcfgr6        GICDistributorReg = 3096
+	GICDistributorRegIcfgr7        GICDistributorReg = 3100
+	GICDistributorRegIcfgr8        GICDistributorReg = 3104
+	GICDistributorRegIcfgr9        GICDistributorReg = 3108
+	GICDistributorRegIcfgr10       GICDistributorReg = 3112
+	GICDistributorRegIcfgr11       GICDistributorReg = 3116
+	GICDistributorRegIcfgr12       GICDistributorReg = 3120
+	GICDistributorRegIcfgr13       GICDistributorReg = 3124
+	GICDistributorRegIcfgr14       GICDistributorReg = 3128
+	GICDistributorRegIcfgr15       GICDistributorReg = 3132
+	GICDistributorRegIcfgr16       GICDistributorReg = 3136
+	GICDistributorRegIcfgr17       GICDistributorReg = 3140
+	GICDistributorRegIcfgr18       GICDistributorReg = 3144
+	GICDistributorRegIcfgr19       GICDistributorReg = 3148
+	GICDistributorRegIcfgr20       GICDistributorReg = 3152
+	GICDistributorRegIcfgr21       GICDistributorReg = 3156
+	GICDistributorRegIcfgr22       GICDistributorReg = 3160
+	GICDistributorRegIcfgr23       GICDistributorReg = 3164
+	GICDistributorRegIcfgr24       GICDistributorReg = 3168
+	GICDistributorRegIcfgr25       GICDistributorReg = 3172
+	GICDistributorRegIcfgr26       GICDistributorReg = 3176
+	GICDistributorRegIcfgr27       GICDistributorReg = 3180
+	GICDistributorRegIcfgr28       GICDistributorReg = 3184
+	GICDistributorRegIcfgr29       GICDistributorReg = 3188
+	GICDistributorRegIcfgr30       GICDistributorReg = 3192
+	GICDistributorRegIcfgr31       GICDistributorReg = 3196
+	GICDistributorRegIcfgr32       GICDistributorReg = 3200
+	GICDistributorRegIcfgr33       GICDistributorReg = 3204
+	GICDistributorRegIcfgr34       GICDistributorReg = 3208
+	GICDistributorRegIcfgr35       GICDistributorReg = 3212
+	GICDistributorRegIcfgr36       GICDistributorReg = 3216
+	GICDistributorRegIcfgr37       GICDistributorReg = 3220
+	GICDistributorRegIcfgr38       GICDistributorReg = 3224
+	GICDistributorRegIcfgr39       GICDistributorReg = 3228
+	GICDistributorRegIcfgr40       GICDistributorReg = 3232
+	GICDistributorRegIcfgr41       GICDistributorReg = 3236
+	GICDistributorRegIcfgr42       GICDistributorReg = 3240
+	GICDistributorRegIcfgr43       GICDistributorReg = 3244
+	GICDistributorRegIcfgr44       GICDistributorReg = 3248
+	GICDistributorRegIcfgr45       GICDistributorReg = 3252
+	GICDistributorRegIcfgr46       GICDistributorReg = 3256
+	GICDistributorRegIcfgr47       GICDistributorReg = 3260
+	GICDistributorRegIcfgr48       GICDistributorReg = 3264
+	GICDistributorRegIcfgr49       GICDistributorReg = 3268
+	GICDistributorRegIcfgr50       GICDistributorReg = 3272
+	GICDistributorRegIcfgr51       GICDistributorReg = 3276
+	GICDistributorRegIcfgr52       GICDistributorReg = 3280
+	GICDistributorRegIcfgr53       GICDistributorReg = 3284
+	GICDistributorRegIcfgr54       GICDistributorReg = 3288
+	GICDistributorRegIcfgr55       GICDistributorReg = 3292
+	GICDistributorRegIcfgr56       GICDistributorReg = 3296
+	GICDistributorRegIcfgr57       GICDistributorReg = 3300
+	GICDistributorRegIcfgr58       GICDistributorReg = 3304
+	GICDistributorRegIcfgr59       GICDistributorReg = 3308
+	GICDistributorRegIcfgr60       GICDistributorReg = 3312
+	GICDistributorRegIcfgr61       GICDistributorReg = 3316
+	GICDistributorRegIcfgr62       GICDistributorReg = 3320
+	GICDistributorRegIcfgr63       GICDistributorReg = 3324
+	GICDistributorRegIrouter32     GICDistributorReg = 24832
+	GICDistributorRegIrouter33     GICDistributorReg = 24840
+	GICDistributorRegIrouter34     GICDistributorReg = 24848
+	GICDistributorRegIrouter35     GICDistributorReg = 24856
+	GICDistributorRegIrouter36     GICDistributorReg = 24864
+	GICDistributorRegIrouter37     GICDistributorReg = 24872
+	GICDistributorRegIrouter38     GICDistributorReg = 24880
+	GICDistributorRegIrouter39     GICDistributorReg = 24888
+	GICDistributorRegIrouter40     GICDistributorReg = 24896
+	GICDistributorRegIrouter41     GICDistributorReg = 24904
+	GICDistributorRegIrouter42     GICDistributorReg = 24912
+	GICDistributorRegIrouter43     GICDistributorReg = 24920
+	GICDistributorRegIrouter44     GICDistributorReg = 24928
+	GICDistributorRegIrouter45     GICDistributorReg = 24936
+	GICDistributorRegIrouter46     GICDistributorReg = 24944
+	GICDistributorRegIrouter47     GICDistributorReg = 24952
+	GICDistributorRegIrouter48     GICDistributorReg = 24960
+	GICDistributorRegIrouter49     GICDistributorReg = 24968
+	GICDistributorRegIrouter50     GICDistributorReg = 24976
+	GICDistributorRegIrouter51     GICDistributorReg = 24984
+	GICDistributorRegIrouter52     GICDistributorReg = 24992
+	GICDistributorRegIrouter53     GICDistributorReg = 25000
+	GICDistributorRegIrouter54     GICDistributorReg = 25008
+	GICDistributorRegIrouter55     GICDistributorReg = 25016
+	GICDistributorRegIrouter56     GICDistributorReg = 25024
+	GICDistributorRegIrouter57     GICDistributorReg = 25032
+	GICDistributorRegIrouter58     GICDistributorReg = 25040
+	GICDistributorRegIrouter59     GICDistributorReg = 25048
+	GICDistributorRegIrouter60     GICDistributorReg = 25056
+	GICDistributorRegIrouter61     GICDistributorReg = 25064
+	GICDistributorRegIrouter62     GICDistributorReg = 25072
+	GICDistributorRegIrouter63     GICDistributorReg = 25080
+	GICDistributorRegIrouter64     GICDistributorReg = 25088
+	GICDistributorRegIrouter65     GICDistributorReg = 25096
+	GICDistributorRegIrouter66     GICDistributorReg = 25104
+	GICDistributorRegIrouter67     GICDistributorReg = 25112
+	GICDistributorRegIrouter68     GICDistributorReg = 25120
+	GICDistributorRegIrouter69     GICDistributorReg = 25128
+	GICDistributorRegIrouter70     GICDistributorReg = 25136
+	GICDistributorRegIrouter71     GICDistributorReg = 25144
+	GICDistributorRegIrouter72     GICDistributorReg = 25152
+	GICDistributorRegIrouter73     GICDistributorReg = 25160
+	GICDistributorRegIrouter74     GICDistributorReg = 25168
+	GICDistributorRegIrouter75     GICDistributorReg = 25176
+	GICDistributorRegIrouter76     GICDistributorReg = 25184
+	GICDistributorRegIrouter77     GICDistributorReg = 25192
+	GICDistributorRegIrouter78     GICDistributorReg = 25200
+	GICDistributorRegIrouter79     GICDistributorReg = 25208
+	GICDistributorRegIrouter80     GICDistributorReg = 25216
+	GICDistributorRegIrouter81     GICDistributorReg = 25224
+	GICDistributorRegIrouter82     GICDistributorReg = 25232
+	GICDistributorRegIrouter83     GICDistributorReg = 25240
+	GICDistributorRegIrouter84     GICDistributorReg = 25248
+	GICDistributorRegIrouter85     GICDistributorReg = 25256
+	GICDistributorRegIrouter86     GICDistributorReg = 25264
+	GICDistributorRegIrouter87     GICDistributorReg = 25272
+	GICDistributorRegIrouter88     GICDistributorReg = 25280
+	GICDistributorRegIrouter89     GICDistributorReg = 25288
+	GICDistributorRegIrouter90     GICDistributorReg = 25296
+	GICDistributorRegIrouter91     GICDistributorReg = 25304
+	GICDistributorRegIrouter92     GICDistributorReg = 25312
+	GICDistributorRegIrouter93     GICDistributorReg = 25320
+	GICDistributorRegIrouter94     GICDistributorReg = 25328
+	GICDistributorRegIrouter95     GICDistributorReg = 25336
+	GICDistributorRegIrouter96     GICDistributorReg = 25344
+	GICDistributorRegIrouter97     GICDistributorReg = 25352
+	GICDistributorRegIrouter98     GICDistributorReg = 25360
+	GICDistributorRegIrouter99     GICDistributorReg = 25368
+	GICDistributorRegIrouter100    GICDistributorReg = 25376
+	GICDistributorRegIrouter101    GICDistributorReg = 25384
+	GICDistributorRegIrouter102    GICDistributorReg = 25392
+	GICDistributorRegIrouter103    GICDistributorReg = 25400
+	GICDistributorRegIrouter104    GICDistributorReg = 25408
+	GICDistributorRegIrouter105    GICDistributorReg = 25416
+	GICDistributorRegIrouter106    GICDistributorReg = 25424
+	GICDistributorRegIrouter107    GICDistributorReg = 25432
+	GICDistributorRegIrouter108    GICDistributorReg = 25440
+	GICDistributorRegIrouter109    GICDistributorReg = 25448
+	GICDistributorRegIrouter110    GICDistributorReg = 25456
+	GICDistributorRegIrouter111    GICDistributorReg = 25464
+	GICDistributorRegIrouter112    GICDistributorReg = 25472
+	GICDistributorRegIrouter113    GICDistributorReg = 25480
+	GICDistributorRegIrouter114    GICDistributorReg = 25488
+	GICDistributorRegIrouter115    GICDistributorReg = 25496
+	GICDistributorRegIrouter116    GICDistributorReg = 25504
+	GICDistributorRegIrouter117    GICDistributorReg = 25512
+	GICDistributorRegIrouter118    GICDistributorReg = 25520
+	GICDistributorRegIrouter119    GICDistributorReg = 25528
+	GICDistributorRegIrouter120    GICDistributorReg = 25536
+	GICDistributorRegIrouter121    GICDistributorReg = 25544
+	GICDistributorRegIrouter122    GICDistributorReg = 25552
+	GICDistributorRegIrouter123    GICDistributorReg = 25560
+	GICDistributorRegIrouter124    GICDistributorReg = 25568
+	GICDistributorRegIrouter125    GICDistributorReg = 25576
+	GICDistributorRegIrouter126    GICDistributorReg = 25584
+	GICDistributorRegIrouter127    GICDistributorReg = 25592
+	GICDistributorRegIrouter128    GICDistributorReg = 25600
+	GICDistributorRegIrouter129    GICDistributorReg = 25608
+	GICDistributorRegIrouter130    GICDistributorReg = 25616
+	GICDistributorRegIrouter131    GICDistributorReg = 25624
+	GICDistributorRegIrouter132    GICDistributorReg = 25632
+	GICDistributorRegIrouter133    GICDistributorReg = 25640
+	GICDistributorRegIrouter134    GICDistributorReg = 25648
+	GICDistributorRegIrouter135    GICDistributorReg = 25656
+	GICDistributorRegIrouter136    GICDistributorReg = 25664
+	GICDistributorRegIrouter137    GICDistributorReg = 25672
+	GICDistributorRegIrouter138    GICDistributorReg = 25680
+	GICDistributorRegIrouter139    GICDistributorReg = 25688
+	GICDistributorRegIrouter140    GICDistributorReg = 25696
+	GICDistributorRegIrouter141    GICDistributorReg = 25704
+	GICDistributorRegIrouter142    GICDistributorReg = 25712
+	GICDistributorRegIrouter143    GICDistributorReg = 25720
+	GICDistributorRegIrouter144    GICDistributorReg = 25728
+	GICDistributorRegIrouter145    GICDistributorReg = 25736
+	GICDistributorRegIrouter146    GICDistributorReg = 25744
+	GICDistributorRegIrouter147    GICDistributorReg = 25752
+	GICDistributorRegIrouter148    GICDistributorReg = 25760
+	GICDistributorRegIrouter149    GICDistributorReg = 25768
+	GICDistributorRegIrouter150    GICDistributorReg = 25776
+	GICDistributorRegIrouter151    GICDistributorReg = 25784
+	GICDistributorRegIrouter152    GICDistributorReg = 25792
+	GICDistributorRegIrouter153    GICDistributorReg = 25800
+	GICDistributorRegIrouter154    GICDistributorReg = 25808
+	GICDistributorRegIrouter155    GICDistributorReg = 25816
+	GICDistributorRegIrouter156    GICDistributorReg = 25824
+	GICDistributorRegIrouter157    GICDistributorReg = 25832
+	GICDistributorRegIrouter158    GICDistributorReg = 25840
+	GICDistributorRegIrouter159    GICDistributorReg = 25848
+	GICDistributorRegIrouter160    GICDistributorReg = 25856
+	GICDistributorRegIrouter161    GICDistributorReg = 25864
+	GICDistributorRegIrouter162    GICDistributorReg = 25872
+	GICDistributorRegIrouter163    GICDistributorReg = 25880
+	GICDistributorRegIrouter164    GICDistributorReg = 25888
+	GICDistributorRegIrouter165    GICDistributorReg = 25896
+	GICDistributorRegIrouter166    GICDistributorReg = 25904
+	GICDistributorRegIrouter167    GICDistributorReg = 25912
+	GICDistributorRegIrouter168    GICDistributorReg = 25920
+	GICDistributorRegIrouter169    GICDistributorReg = 25928
+	GICDistributorRegIrouter170    GICDistributorReg = 25936
+	GICDistributorRegIrouter171    GICDistributorReg = 25944
+	GICDistributorRegIrouter172    GICDistributorReg = 25952
+	GICDistributorRegIrouter173    GICDistributorReg = 25960
+	GICDistributorRegIrouter174    GICDistributorReg = 25968
+	GICDistributorRegIrouter175    GICDistributorReg = 25976
+	GICDistributorRegIrouter176    GICDistributorReg = 25984
+	GICDistributorRegIrouter177    GICDistributorReg = 25992
+	GICDistributorRegIrouter178    GICDistributorReg = 26000
+	GICDistributorRegIrouter179    GICDistributorReg = 26008
+	GICDistributorRegIrouter180    GICDistributorReg = 26016
+	GICDistributorRegIrouter181    GICDistributorReg = 26024
+	GICDistributorRegIrouter182    GICDistributorReg = 26032
+	GICDistributorRegIrouter183    GICDistributorReg = 26040
+	GICDistributorRegIrouter184    GICDistributorReg = 26048
+	GICDistributorRegIrouter185    GICDistributorReg = 26056
+	GICDistributorRegIrouter186    GICDistributorReg = 26064
+	GICDistributorRegIrouter187    GICDistributorReg = 26072
+	GICDistributorRegIrouter188    GICDistributorReg = 26080
+	GICDistributorRegIrouter189    GICDistributorReg = 26088
+	GICDistributorRegIrouter190    GICDistributorReg = 26096
+	GICDistributorRegIrouter191    GICDistributorReg = 26104
+	GICDistributorRegIrouter192    GICDistributorReg = 26112
+	GICDistributorRegIrouter193    GICDistributorReg = 26120
+	GICDistributorRegIrouter194    GICDistributorReg = 26128
+	GICDistributorRegIrouter195    GICDistributorReg = 26136
+	GICDistributorRegIrouter196    GICDistributorReg = 26144
+	GICDistributorRegIrouter197    GICDistributorReg = 26152
+	GICDistributorRegIrouter198    GICDistributorReg = 26160
+	GICDistributorRegIrouter199    GICDistributorReg = 26168
+	GICDistributorRegIrouter200    GICDistributorReg = 26176
+	GICDistributorRegIrouter201    GICDistributorReg = 26184
+	GICDistributorRegIrouter202    GICDistributorReg = 26192
+	GICDistributorRegIrouter203    GICDistributorReg = 26200
+	GICDistributorRegIrouter204    GICDistributorReg = 26208
+	GICDistributorRegIrouter205    GICDistributorReg = 26216
+	GICDistributorRegIrouter206    GICDistributorReg = 26224
+	GICDistributorRegIrouter207    GICDistributorReg = 26232
+	GICDistributorRegIrouter208    GICDistributorReg = 26240
+	GICDistributorRegIrouter209    GICDistributorReg = 26248
+	GICDistributorRegIrouter210    GICDistributorReg = 26256
+	GICDistributorRegIrouter211    GICDistributorReg = 26264
+	GICDistributorRegIrouter212    GICDistributorReg = 26272
+	GICDistributorRegIrouter213    GICDistributorReg = 26280
+	GICDistributorRegIrouter214    GICDistributorReg = 26288
+	GICDistributorRegIrouter215    GICDistributorReg = 26296
+	GICDistributorRegIrouter216    GICDistributorReg = 26304
+	GICDistributorRegIrouter217    GICDistributorReg = 26312
+	GICDistributorRegIrouter218    GICDistributorReg = 26320
+	GICDistributorRegIrouter219    GICDistributorReg = 26328
+	GICDistributorRegIrouter220    GICDistributorReg = 26336
+	GICDistributorRegIrouter221    GICDistributorReg = 26344
+	GICDistributorRegIrouter222    GICDistributorReg = 26352
+	GICDistributorRegIrouter223    GICDistributorReg = 26360
+	GICDistributorRegIrouter224    GICDistributorReg = 26368
+	GICDistributorRegIrouter225    GICDistributorReg = 26376
+	GICDistributorRegIrouter226    GICDistributorReg = 26384
+	GICDistributorRegIrouter227    GICDistributorReg = 26392
+	GICDistributorRegIrouter228    GICDistributorReg = 26400
+	GICDistributorRegIrouter229    GICDistributorReg = 26408
+	GICDistributorRegIrouter230    GICDistributorReg = 26416
+	GICDistributorRegIrouter231    GICDistributorReg = 26424
+	GICDistributorRegIrouter232    GICDistributorReg = 26432
+	GICDistributorRegIrouter233    GICDistributorReg = 26440
+	GICDistributorRegIrouter234    GICDistributorReg = 26448
+	GICDistributorRegIrouter235    GICDistributorReg = 26456
+	GICDistributorRegIrouter236    GICDistributorReg = 26464
+	GICDistributorRegIrouter237    GICDistributorReg = 26472
+	GICDistributorRegIrouter238    GICDistributorReg = 26480
+	GICDistributorRegIrouter239    GICDistributorReg = 26488
+	GICDistributorRegIrouter240    GICDistributorReg = 26496
+	GICDistributorRegIrouter241    GICDistributorReg = 26504
+	GICDistributorRegIrouter242    GICDistributorReg = 26512
+	GICDistributorRegIrouter243    GICDistributorReg = 26520
+	GICDistributorRegIrouter244    GICDistributorReg = 26528
+	GICDistributorRegIrouter245    GICDistributorReg = 26536
+	GICDistributorRegIrouter246    GICDistributorReg = 26544
+	GICDistributorRegIrouter247    GICDistributorReg = 26552
+	GICDistributorRegIrouter248    GICDistributorReg = 26560
+	GICDistributorRegIrouter249    GICDistributorReg = 26568
+	GICDistributorRegIrouter250    GICDistributorReg = 26576
+	GICDistributorRegIrouter251    GICDistributorReg = 26584
+	GICDistributorRegIrouter252    GICDistributorReg = 26592
+	GICDistributorRegIrouter253    GICDistributorReg = 26600
+	GICDistributorRegIrouter254    GICDistributorReg = 26608
+	GICDistributorRegIrouter255    GICDistributorReg = 26616
+	GICDistributorRegIrouter256    GICDistributorReg = 26624
+	GICDistributorRegIrouter257    GICDistributorReg = 26632
+	GICDistributorRegIrouter258    GICDistributorReg = 26640
+	GICDistributorRegIrouter259    GICDistributorReg = 26648
+	GICDistributorRegIrouter260    GICDistributorReg = 26656
+	GICDistributorRegIrouter261    GICDistributorReg = 26664
+	GICDistributorRegIrouter262    GICDistributorReg = 26672
+	GICDistributorRegIrouter263    GICDistributorReg = 26680
+	GICDistributorRegIrouter264    GICDistributorReg = 26688
+	GICDistributorRegIrouter265    GICDistributorReg = 26696
+	GICDistributorRegIrouter266    GICDistributorReg = 26704
+	GICDistributorRegIrouter267    GICDistributorReg = 26712
+	GICDistributorRegIrouter268    GICDistributorReg = 26720
+	GICDistributorRegIrouter269    GICDistributorReg = 26728
+	GICDistributorRegIrouter270    GICDistributorReg = 26736
+	GICDistributorRegIrouter271    GICDistributorReg = 26744
+	GICDistributorRegIrouter272    GICDistributorReg = 26752
+	GICDistributorRegIrouter273    GICDistributorReg = 26760
+	GICDistributorRegIrouter274    GICDistributorReg = 26768
+	GICDistributorRegIrouter275    GICDistributorReg = 26776
+	GICDistributorRegIrouter276    GICDistributorReg = 26784
+	GICDistributorRegIrouter277    GICDistributorReg = 26792
+	GICDistributorRegIrouter278    GICDistributorReg = 26800
+	GICDistributorRegIrouter279    GICDistributorReg = 26808
+	GICDistributorRegIrouter280    GICDistributorReg = 26816
+	GICDistributorRegIrouter281    GICDistributorReg = 26824
+	GICDistributorRegIrouter282    GICDistributorReg = 26832
+	GICDistributorRegIrouter283    GICDistributorReg = 26840
+	GICDistributorRegIrouter284    GICDistributorReg = 26848
+	GICDistributorRegIrouter285    GICDistributorReg = 26856
+	GICDistributorRegIrouter286    GICDistributorReg = 26864
+	GICDistributorRegIrouter287    GICDistributorReg = 26872
+	GICDistributorRegIrouter288    GICDistributorReg = 26880
+	GICDistributorRegIrouter289    GICDistributorReg = 26888
+	GICDistributorRegIrouter290    GICDistributorReg = 26896
+	GICDistributorRegIrouter291    GICDistributorReg = 26904
+	GICDistributorRegIrouter292    GICDistributorReg = 26912
+	GICDistributorRegIrouter293    GICDistributorReg = 26920
+	GICDistributorRegIrouter294    GICDistributorReg = 26928
+	GICDistributorRegIrouter295    GICDistributorReg = 26936
+	GICDistributorRegIrouter296    GICDistributorReg = 26944
+	GICDistributorRegIrouter297    GICDistributorReg = 26952
+	GICDistributorRegIrouter298    GICDistributorReg = 26960
+	GICDistributorRegIrouter299    GICDistributorReg = 26968
+	GICDistributorRegIrouter300    GICDistributorReg = 26976
+	GICDistributorRegIrouter301    GICDistributorReg = 26984
+	GICDistributorRegIrouter302    GICDistributorReg = 26992
+	GICDistributorRegIrouter303    GICDistributorReg = 27000
+	GICDistributorRegIrouter304    GICDistributorReg = 27008
+	GICDistributorRegIrouter305    GICDistributorReg = 27016
+	GICDistributorRegIrouter306    GICDistributorReg = 27024
+	GICDistributorRegIrouter307    GICDistributorReg = 27032
+	GICDistributorRegIrouter308    GICDistributorReg = 27040
+	GICDistributorRegIrouter309    GICDistributorReg = 27048
+	GICDistributorRegIrouter310    GICDistributorReg = 27056
+	GICDistributorRegIrouter311    GICDistributorReg = 27064
+	GICDistributorRegIrouter312    GICDistributorReg = 27072
+	GICDistributorRegIrouter313    GICDistributorReg = 27080
+	GICDistributorRegIrouter314    GICDistributorReg = 27088
+	GICDistributorRegIrouter315    GICDistributorReg = 27096
+	GICDistributorRegIrouter316    GICDistributorReg = 27104
+	GICDistributorRegIrouter317    GICDistributorReg = 27112
+	GICDistributorRegIrouter318    GICDistributorReg = 27120
+	GICDistributorRegIrouter319    GICDistributorReg = 27128
+	GICDistributorRegIrouter320    GICDistributorReg = 27136
+	GICDistributorRegIrouter321    GICDistributorReg = 27144
+	GICDistributorRegIrouter322    GICDistributorReg = 27152
+	GICDistributorRegIrouter323    GICDistributorReg = 27160
+	GICDistributorRegIrouter324    GICDistributorReg = 27168
+	GICDistributorRegIrouter325    GICDistributorReg = 27176
+	GICDistributorRegIrouter326    GICDistributorReg = 27184
+	GICDistributorRegIrouter327    GICDistributorReg = 27192
+	GICDistributorRegIrouter328    GICDistributorReg = 27200
+	GICDistributorRegIrouter329    GICDistributorReg = 27208
+	GICDistributorRegIrouter330    GICDistributorReg = 27216
+	GICDistributorRegIrouter331    GICDistributorReg = 27224
+	GICDistributorRegIrouter332    GICDistributorReg = 27232
+	GICDistributorRegIrouter333    GICDistributorReg = 27240
+	GICDistributorRegIrouter334    GICDistributorReg = 27248
+	GICDistributorRegIrouter335    GICDistributorReg = 27256
+	GICDistributorRegIrouter336    GICDistributorReg = 27264
+	GICDistributorRegIrouter337    GICDistributorReg = 27272
+	GICDistributorRegIrouter338    GICDistributorReg = 27280
+	GICDistributorRegIrouter339    GICDistributorReg = 27288
+	GICDistributorRegIrouter340    GICDistributorReg = 27296
+	GICDistributorRegIrouter341    GICDistributorReg = 27304
+	GICDistributorRegIrouter342    GICDistributorReg = 27312
+	GICDistributorRegIrouter343    GICDistributorReg = 27320
+	GICDistributorRegIrouter344    GICDistributorReg = 27328
+	GICDistributorRegIrouter345    GICDistributorReg = 27336
+	GICDistributorRegIrouter346    GICDistributorReg = 27344
+	GICDistributorRegIrouter347    GICDistributorReg = 27352
+	GICDistributorRegIrouter348    GICDistributorReg = 27360
+	GICDistributorRegIrouter349    GICDistributorReg = 27368
+	GICDistributorRegIrouter350    GICDistributorReg = 27376
+	GICDistributorRegIrouter351    GICDistributorReg = 27384
+	GICDistributorRegIrouter352    GICDistributorReg = 27392
+	GICDistributorRegIrouter353    GICDistributorReg = 27400
+	GICDistributorRegIrouter354    GICDistributorReg = 27408
+	GICDistributorRegIrouter355    GICDistributorReg = 27416
+	GICDistributorRegIrouter356    GICDistributorReg = 27424
+	GICDistributorRegIrouter357    GICDistributorReg = 27432
+	GICDistributorRegIrouter358    GICDistributorReg = 27440
+	GICDistributorRegIrouter359    GICDistributorReg = 27448
+	GICDistributorRegIrouter360    GICDistributorReg = 27456
+	GICDistributorRegIrouter361    GICDistributorReg = 27464
+	GICDistributorRegIrouter362    GICDistributorReg = 27472
+	GICDistributorRegIrouter363    GICDistributorReg = 27480
+	GICDistributorRegIrouter364    GICDistributorReg = 27488
+	GICDistributorRegIrouter365    GICDistributorReg = 27496
+	GICDistributorRegIrouter366    GICDistributorReg = 27504
+	GICDistributorRegIrouter367    GICDistributorReg = 27512
+	GICDistributorRegIrouter368    GICDistributorReg = 27520
+	GICDistributorRegIrouter369    GICDistributorReg = 27528
+	GICDistributorRegIrouter370    GICDistributorReg = 27536
+	GICDistributorRegIrouter371    GICDistributorReg = 27544
+	GICDistributorRegIrouter372    GICDistributorReg = 27552
+	GICDistributorRegIrouter373    GICDistributorReg = 27560
+	GICDistributorRegIrouter374    GICDistributorReg = 27568
+	GICDistributorRegIrouter375    GICDistributorReg = 27576
+	GICDistributorRegIrouter376    GICDistributorReg = 27584
+	GICDistributorRegIrouter377    GICDistributorReg = 27592
+	GICDistributorRegIrouter378    GICDistributorReg = 27600
+	GICDistributorRegIrouter379    GICDistributorReg = 27608
+	GICDistributorRegIrouter380    GICDistributorReg = 27616
+	GICDistributorRegIrouter381    GICDistributorReg = 27624
+	GICDistributorRegIrouter382    GICDistributorReg = 27632
+	GICDistributorRegIrouter383    GICDistributorReg = 27640
+	GICDistributorRegIrouter384    GICDistributorReg = 27648
+	GICDistributorRegIrouter385    GICDistributorReg = 27656
+	GICDistributorRegIrouter386    GICDistributorReg = 27664
+	GICDistributorRegIrouter387    GICDistributorReg = 27672
+	GICDistributorRegIrouter388    GICDistributorReg = 27680
+	GICDistributorRegIrouter389    GICDistributorReg = 27688
+	GICDistributorRegIrouter390    GICDistributorReg = 27696
+	GICDistributorRegIrouter391    GICDistributorReg = 27704
+	GICDistributorRegIrouter392    GICDistributorReg = 27712
+	GICDistributorRegIrouter393    GICDistributorReg = 27720
+	GICDistributorRegIrouter394    GICDistributorReg = 27728
+	GICDistributorRegIrouter395    GICDistributorReg = 27736
+	GICDistributorRegIrouter396    GICDistributorReg = 27744
+	GICDistributorRegIrouter397    GICDistributorReg = 27752
+	GICDistributorRegIrouter398    GICDistributorReg = 27760
+	GICDistributorRegIrouter399    GICDistributorReg = 27768
+	GICDistributorRegIrouter400    GICDistributorReg = 27776
+	GICDistributorRegIrouter401    GICDistributorReg = 27784
+	GICDistributorRegIrouter402    GICDistributorReg = 27792
+	GICDistributorRegIrouter403    GICDistributorReg = 27800
+	GICDistributorRegIrouter404    GICDistributorReg = 27808
+	GICDistributorRegIrouter405    GICDistributorReg = 27816
+	GICDistributorRegIrouter406    GICDistributorReg = 27824
+	GICDistributorRegIrouter407    GICDistributorReg = 27832
+	GICDistributorRegIrouter408    GICDistributorReg = 27840
+	GICDistributorRegIrouter409    GICDistributorReg = 27848
+	GICDistributorRegIrouter410    GICDistributorReg = 27856
+	GICDistributorRegIrouter411    GICDistributorReg = 27864
+	GICDistributorRegIrouter412    GICDistributorReg = 27872
+	GICDistributorRegIrouter413    GICDistributorReg = 27880
+	GICDistributorRegIrouter414    GICDistributorReg = 27888
+	GICDistributorRegIrouter415    GICDistributorReg = 27896
+	GICDistributorRegIrouter416    GICDistributorReg = 27904
+	GICDistributorRegIrouter417    GICDistributorReg = 27912
+	GICDistributorRegIrouter418    GICDistributorReg = 27920
+	GICDistributorRegIrouter419    GICDistributorReg = 27928
+	GICDistributorRegIrouter420    GICDistributorReg = 27936
+	GICDistributorRegIrouter421    GICDistributorReg = 27944
+	GICDistributorRegIrouter422    GICDistributorReg = 27952
+	GICDistributorRegIrouter423    GICDistributorReg = 27960
+	GICDistributorRegIrouter424    GICDistributorReg = 27968
+	GICDistributorRegIrouter425    GICDistributorReg = 27976
+	GICDistributorRegIrouter426    GICDistributorReg = 27984
+	GICDistributorRegIrouter427    GICDistributorReg = 27992
+	GICDistributorRegIrouter428    GICDistributorReg = 28000
+	GICDistributorRegIrouter429    GICDistributorReg = 28008
+	GICDistributorRegIrouter430    GICDistributorReg = 28016
+	GICDistributorRegIrouter431    GICDistributorReg = 28024
+	GICDistributorRegIrouter432    GICDistributorReg = 28032
+	GICDistributorRegIrouter433    GICDistributorReg = 28040
+	GICDistributorRegIrouter434    GICDistributorReg = 28048
+	GICDistributorRegIrouter435    GICDistributorReg = 28056
+	GICDistributorRegIrouter436    GICDistributorReg = 28064
+	GICDistributorRegIrouter437    GICDistributorReg = 28072
+	GICDistributorRegIrouter438    GICDistributorReg = 28080
+	GICDistributorRegIrouter439    GICDistributorReg = 28088
+	GICDistributorRegIrouter440    GICDistributorReg = 28096
+	GICDistributorRegIrouter441    GICDistributorReg = 28104
+	GICDistributorRegIrouter442    GICDistributorReg = 28112
+	GICDistributorRegIrouter443    GICDistributorReg = 28120
+	GICDistributorRegIrouter444    GICDistributorReg = 28128
+	GICDistributorRegIrouter445    GICDistributorReg = 28136
+	GICDistributorRegIrouter446    GICDistributorReg = 28144
+	GICDistributorRegIrouter447    GICDistributorReg = 28152
+	GICDistributorRegIrouter448    GICDistributorReg = 28160
+	GICDistributorRegIrouter449    GICDistributorReg = 28168
+	GICDistributorRegIrouter450    GICDistributorReg = 28176
+	GICDistributorRegIrouter451    GICDistributorReg = 28184
+	GICDistributorRegIrouter452    GICDistributorReg = 28192
+	GICDistributorRegIrouter453    GICDistributorReg = 28200
+	GICDistributorRegIrouter454    GICDistributorReg = 28208
+	GICDistributorRegIrouter455    GICDistributorReg = 28216
+	GICDistributorRegIrouter456    GICDistributorReg = 28224
+	GICDistributorRegIrouter457    GICDistributorReg = 28232
+	GICDistributorRegIrouter458    GICDistributorReg = 28240
+	GICDistributorRegIrouter459    GICDistributorReg = 28248
+	GICDistributorRegIrouter460    GICDistributorReg = 28256
+	GICDistributorRegIrouter461    GICDistributorReg = 28264
+	GICDistributorRegIrouter462    GICDistributorReg = 28272
+	GICDistributorRegIrouter463    GICDistributorReg = 28280
+	GICDistributorRegIrouter464    GICDistributorReg = 28288
+	GICDistributorRegIrouter465    GICDistributorReg = 28296
+	GICDistributorRegIrouter466    GICDistributorReg = 28304
+	GICDistributorRegIrouter467    GICDistributorReg = 28312
+	GICDistributorRegIrouter468    GICDistributorReg = 28320
+	GICDistributorRegIrouter469    GICDistributorReg = 28328
+	GICDistributorRegIrouter470    GICDistributorReg = 28336
+	GICDistributorRegIrouter471    GICDistributorReg = 28344
+	GICDistributorRegIrouter472    GICDistributorReg = 28352
+	GICDistributorRegIrouter473    GICDistributorReg = 28360
+	GICDistributorRegIrouter474    GICDistributorReg = 28368
+	GICDistributorRegIrouter475    GICDistributorReg = 28376
+	GICDistributorRegIrouter476    GICDistributorReg = 28384
+	GICDistributorRegIrouter477    GICDistributorReg = 28392
+	GICDistributorRegIrouter478    GICDistributorReg = 28400
+	GICDistributorRegIrouter479    GICDistributorReg = 28408
+	GICDistributorRegIrouter480    GICDistributorReg = 28416
+	GICDistributorRegIrouter481    GICDistributorReg = 28424
+	GICDistributorRegIrouter482    GICDistributorReg = 28432
+	GICDistributorRegIrouter483    GICDistributorReg = 28440
+	GICDistributorRegIrouter484    GICDistributorReg = 28448
+	GICDistributorRegIrouter485    GICDistributorReg = 28456
+	GICDistributorRegIrouter486    GICDistributorReg = 28464
+	GICDistributorRegIrouter487    GICDistributorReg = 28472
+	GICDistributorRegIrouter488    GICDistributorReg = 28480
+	GICDistributorRegIrouter489    GICDistributorReg = 28488
+	GICDistributorRegIrouter490    GICDistributorReg = 28496
+	GICDistributorRegIrouter491    GICDistributorReg = 28504
+	GICDistributorRegIrouter492    GICDistributorReg = 28512
+	GICDistributorRegIrouter493    GICDistributorReg = 28520
+	GICDistributorRegIrouter494    GICDistributorReg = 28528
+	GICDistributorRegIrouter495    GICDistributorReg = 28536
+	GICDistributorRegIrouter496    GICDistributorReg = 28544
+	GICDistributorRegIrouter497    GICDistributorReg = 28552
+	GICDistributorRegIrouter498    GICDistributorReg = 28560
+	GICDistributorRegIrouter499    GICDistributorReg = 28568
+	GICDistributorRegIrouter500    GICDistributorReg = 28576
+	GICDistributorRegIrouter501    GICDistributorReg = 28584
+	GICDistributorRegIrouter502    GICDistributorReg = 28592
+	GICDistributorRegIrouter503    GICDistributorReg = 28600
+	GICDistributorRegIrouter504    GICDistributorReg = 28608
+	GICDistributorRegIrouter505    GICDistributorReg = 28616
+	GICDistributorRegIrouter506    GICDistributorReg = 28624
+	GICDistributorRegIrouter507    GICDistributorReg = 28632
+	GICDistributorRegIrouter508    GICDistributorReg = 28640
+	GICDistributorRegIrouter509    GICDistributorReg = 28648
+	GICDistributorRegIrouter510    GICDistributorReg = 28656
+	GICDistributorRegIrouter511    GICDistributorReg = 28664
+	GICDistributorRegIrouter512    GICDistributorReg = 28672
+	GICDistributorRegIrouter513    GICDistributorReg = 28680
+	GICDistributorRegIrouter514    GICDistributorReg = 28688
+	GICDistributorRegIrouter515    GICDistributorReg = 28696
+	GICDistributorRegIrouter516    GICDistributorReg = 28704
+	GICDistributorRegIrouter517    GICDistributorReg = 28712
+	GICDistributorRegIrouter518    GICDistributorReg = 28720
+	GICDistributorRegIrouter519    GICDistributorReg = 28728
+	GICDistributorRegIrouter520    GICDistributorReg = 28736
+	GICDistributorRegIrouter521    GICDistributorReg = 28744
+	GICDistributorRegIrouter522    GICDistributorReg = 28752
+	GICDistributorRegIrouter523    GICDistributorReg = 28760
+	GICDistributorRegIrouter524    GICDistributorReg = 28768
+	GICDistributorRegIrouter525    GICDistributorReg = 28776
+	GICDistributorRegIrouter526    GICDistributorReg = 28784
+	GICDistributorRegIrouter527    GICDistributorReg = 28792
+	GICDistributorRegIrouter528    GICDistributorReg = 28800
+	GICDistributorRegIrouter529    GICDistributorReg = 28808
+	GICDistributorRegIrouter530    GICDistributorReg = 28816
+	GICDistributorRegIrouter531    GICDistributorReg = 28824
+	GICDistributorRegIrouter532    GICDistributorReg = 28832
+	GICDistributorRegIrouter533    GICDistributorReg = 28840
+	GICDistributorRegIrouter534    GICDistributorReg = 28848
+	GICDistributorRegIrouter535    GICDistributorReg = 28856
+	GICDistributorRegIrouter536    GICDistributorReg = 28864
+	GICDistributorRegIrouter537    GICDistributorReg = 28872
+	GICDistributorRegIrouter538    GICDistributorReg = 28880
+	GICDistributorRegIrouter539    GICDistributorReg = 28888
+	GICDistributorRegIrouter540    GICDistributorReg = 28896
+	GICDistributorRegIrouter541    GICDistributorReg = 28904
+	GICDistributorRegIrouter542    GICDistributorReg = 28912
+	GICDistributorRegIrouter543    GICDistributorReg = 28920
+	GICDistributorRegIrouter544    GICDistributorReg = 28928
+	GICDistributorRegIrouter545    GICDistributorReg = 28936
+	GICDistributorRegIrouter546    GICDistributorReg = 28944
+	GICDistributorRegIrouter547    GICDistributorReg = 28952
+	GICDistributorRegIrouter548    GICDistributorReg = 28960
+	GICDistributorRegIrouter549    GICDistributorReg = 28968
+	GICDistributorRegIrouter550    GICDistributorReg = 28976
+	GICDistributorRegIrouter551    GICDistributorReg = 28984
+	GICDistributorRegIrouter552    GICDistributorReg = 28992
+	GICDistributorRegIrouter553    GICDistributorReg = 29000
+	GICDistributorRegIrouter554    GICDistributorReg = 29008
+	GICDistributorRegIrouter555    GICDistributorReg = 29016
+	GICDistributorRegIrouter556    GICDistributorReg = 29024
+	GICDistributorRegIrouter557    GICDistributorReg = 29032
+	GICDistributorRegIrouter558    GICDistributorReg = 29040
+	GICDistributorRegIrouter559    GICDistributorReg = 29048
+	GICDistributorRegIrouter560    GICDistributorReg = 29056
+	GICDistributorRegIrouter561    GICDistributorReg = 29064
+	GICDistributorRegIrouter562    GICDistributorReg = 29072
+	GICDistributorRegIrouter563    GICDistributorReg = 29080
+	GICDistributorRegIrouter564    GICDistributorReg = 29088
+	GICDistributorRegIrouter565    GICDistributorReg = 29096
+	GICDistributorRegIrouter566    GICDistributorReg = 29104
+	GICDistributorRegIrouter567    GICDistributorReg = 29112
+	GICDistributorRegIrouter568    GICDistributorReg = 29120
+	GICDistributorRegIrouter569    GICDistributorReg = 29128
+	GICDistributorRegIrouter570    GICDistributorReg = 29136
+	GICDistributorRegIrouter571    GICDistributorReg = 29144
+	GICDistributorRegIrouter572    GICDistributorReg = 29152
+	GICDistributorRegIrouter573    GICDistributorReg = 29160
+	GICDistributorRegIrouter574    GICDistributorReg = 29168
+	GICDistributorRegIrouter575    GICDistributorReg = 29176
+	GICDistributorRegIrouter576    GICDistributorReg = 29184
+	GICDistributorRegIrouter577    GICDistributorReg = 29192
+	GICDistributorRegIrouter578    GICDistributorReg = 29200
+	GICDistributorRegIrouter579    GICDistributorReg = 29208
+	GICDistributorRegIrouter580    GICDistributorReg = 29216
+	GICDistributorRegIrouter581    GICDistributorReg = 29224
+	GICDistributorRegIrouter582    GICDistributorReg = 29232
+	GICDistributorRegIrouter583    GICDistributorReg = 29240
+	GICDistributorRegIrouter584    GICDistributorReg = 29248
+	GICDistributorRegIrouter585    GICDistributorReg = 29256
+	GICDistributorRegIrouter586    GICDistributorReg = 29264
+	GICDistributorRegIrouter587    GICDistributorReg = 29272
+	GICDistributorRegIrouter588    GICDistributorReg = 29280
+	GICDistributorRegIrouter589    GICDistributorReg = 29288
+	GICDistributorRegIrouter590    GICDistributorReg = 29296
+	GICDistributorRegIrouter591    GICDistributorReg = 29304
+	GICDistributorRegIrouter592    GICDistributorReg = 29312
+	GICDistributorRegIrouter593    GICDistributorReg = 29320
+	GICDistributorRegIrouter594    GICDistributorReg = 29328
+	GICDistributorRegIrouter595    GICDistributorReg = 29336
+	GICDistributorRegIrouter596    GICDistributorReg = 29344
+	GICDistributorRegIrouter597    GICDistributorReg = 29352
+	GICDistributorRegIrouter598    GICDistributorReg = 29360
+	GICDistributorRegIrouter599    GICDistributorReg = 29368
+	GICDistributorRegIrouter600    GICDistributorReg = 29376
+	GICDistributorRegIrouter601    GICDistributorReg = 29384
+	GICDistributorRegIrouter602    GICDistributorReg = 29392
+	GICDistributorRegIrouter603    GICDistributorReg = 29400
+	GICDistributorRegIrouter604    GICDistributorReg = 29408
+	GICDistributorRegIrouter605    GICDistributorReg = 29416
+	GICDistributorRegIrouter606    GICDistributorReg = 29424
+	GICDistributorRegIrouter607    GICDistributorReg = 29432
+	GICDistributorRegIrouter608    GICDistributorReg = 29440
+	GICDistributorRegIrouter609    GICDistributorReg = 29448
+	GICDistributorRegIrouter610    GICDistributorReg = 29456
+	GICDistributorRegIrouter611    GICDistributorReg = 29464
+	GICDistributorRegIrouter612    GICDistributorReg = 29472
+	GICDistributorRegIrouter613    GICDistributorReg = 29480
+	GICDistributorRegIrouter614    GICDistributorReg = 29488
+	GICDistributorRegIrouter615    GICDistributorReg = 29496
+	GICDistributorRegIrouter616    GICDistributorReg = 29504
+	GICDistributorRegIrouter617    GICDistributorReg = 29512
+	GICDistributorRegIrouter618    GICDistributorReg = 29520
+	GICDistributorRegIrouter619    GICDistributorReg = 29528
+	GICDistributorRegIrouter620    GICDistributorReg = 29536
+	GICDistributorRegIrouter621    GICDistributorReg = 29544
+	GICDistributorRegIrouter622    GICDistributorReg = 29552
+	GICDistributorRegIrouter623    GICDistributorReg = 29560
+	GICDistributorRegIrouter624    GICDistributorReg = 29568
+	GICDistributorRegIrouter625    GICDistributorReg = 29576
+	GICDistributorRegIrouter626    GICDistributorReg = 29584
+	GICDistributorRegIrouter627    GICDistributorReg = 29592
+	GICDistributorRegIrouter628    GICDistributorReg = 29600
+	GICDistributorRegIrouter629    GICDistributorReg = 29608
+	GICDistributorRegIrouter630    GICDistributorReg = 29616
+	GICDistributorRegIrouter631    GICDistributorReg = 29624
+	GICDistributorRegIrouter632    GICDistributorReg = 29632
+	GICDistributorRegIrouter633    GICDistributorReg = 29640
+	GICDistributorRegIrouter634    GICDistributorReg = 29648
+	GICDistributorRegIrouter635    GICDistributorReg = 29656
+	GICDistributorRegIrouter636    GICDistributorReg = 29664
+	GICDistributorRegIrouter637    GICDistributorReg = 29672
+	GICDistributorRegIrouter638    GICDistributorReg = 29680
+	GICDistributorRegIrouter639    GICDistributorReg = 29688
+	GICDistributorRegIrouter640    GICDistributorReg = 29696
+	GICDistributorRegIrouter641    GICDistributorReg = 29704
+	GICDistributorRegIrouter642    GICDistributorReg = 29712
+	GICDistributorRegIrouter643    GICDistributorReg = 29720
+	GICDistributorRegIrouter644    GICDistributorReg = 29728
+	GICDistributorRegIrouter645    GICDistributorReg = 29736
+	GICDistributorRegIrouter646    GICDistributorReg = 29744
+	GICDistributorRegIrouter647    GICDistributorReg = 29752
+	GICDistributorRegIrouter648    GICDistributorReg = 29760
+	GICDistributorRegIrouter649    GICDistributorReg = 29768
+	GICDistributorRegIrouter650    GICDistributorReg = 29776
+	GICDistributorRegIrouter651    GICDistributorReg = 29784
+	GICDistributorRegIrouter652    GICDistributorReg = 29792
+	GICDistributorRegIrouter653    GICDistributorReg = 29800
+	GICDistributorRegIrouter654    GICDistributorReg = 29808
+	GICDistributorRegIrouter655    GICDistributorReg = 29816
+	GICDistributorRegIrouter656    GICDistributorReg = 29824
+	GICDistributorRegIrouter657    GICDistributorReg = 29832
+	GICDistributorRegIrouter658    GICDistributorReg = 29840
+	GICDistributorRegIrouter659    GICDistributorReg = 29848
+	GICDistributorRegIrouter660    GICDistributorReg = 29856
+	GICDistributorRegIrouter661    GICDistributorReg = 29864
+	GICDistributorRegIrouter662    GICDistributorReg = 29872
+	GICDistributorRegIrouter663    GICDistributorReg = 29880
+	GICDistributorRegIrouter664    GICDistributorReg = 29888
+	GICDistributorRegIrouter665    GICDistributorReg = 29896
+	GICDistributorRegIrouter666    GICDistributorReg = 29904
+	GICDistributorRegIrouter667    GICDistributorReg = 29912
+	GICDistributorRegIrouter668    GICDistributorReg = 29920
+	GICDistributorRegIrouter669    GICDistributorReg = 29928
+	GICDistributorRegIrouter670    GICDistributorReg = 29936
+	GICDistributorRegIrouter671    GICDistributorReg = 29944
+	GICDistributorRegIrouter672    GICDistributorReg = 29952
+	GICDistributorRegIrouter673    GICDistributorReg = 29960
+	GICDistributorRegIrouter674    GICDistributorReg = 29968
+	GICDistributorRegIrouter675    GICDistributorReg = 29976
+	GICDistributorRegIrouter676    GICDistributorReg = 29984
+	GICDistributorRegIrouter677    GICDistributorReg = 29992
+	GICDistributorRegIrouter678    GICDistributorReg = 30000
+	GICDistributorRegIrouter679    GICDistributorReg = 30008
+	GICDistributorRegIrouter680    GICDistributorReg = 30016
+	GICDistributorRegIrouter681    GICDistributorReg = 30024
+	GICDistributorRegIrouter682    GICDistributorReg = 30032
+	GICDistributorRegIrouter683    GICDistributorReg = 30040
+	GICDistributorRegIrouter684    GICDistributorReg = 30048
+	GICDistributorRegIrouter685    GICDistributorReg = 30056
+	GICDistributorRegIrouter686    GICDistributorReg = 30064
+	GICDistributorRegIrouter687    GICDistributorReg = 30072
+	GICDistributorRegIrouter688    GICDistributorReg = 30080
+	GICDistributorRegIrouter689    GICDistributorReg = 30088
+	GICDistributorRegIrouter690    GICDistributorReg = 30096
+	GICDistributorRegIrouter691    GICDistributorReg = 30104
+	GICDistributorRegIrouter692    GICDistributorReg = 30112
+	GICDistributorRegIrouter693    GICDistributorReg = 30120
+	GICDistributorRegIrouter694    GICDistributorReg = 30128
+	GICDistributorRegIrouter695    GICDistributorReg = 30136
+	GICDistributorRegIrouter696    GICDistributorReg = 30144
+	GICDistributorRegIrouter697    GICDistributorReg = 30152
+	GICDistributorRegIrouter698    GICDistributorReg = 30160
+	GICDistributorRegIrouter699    GICDistributorReg = 30168
+	GICDistributorRegIrouter700    GICDistributorReg = 30176
+	GICDistributorRegIrouter701    GICDistributorReg = 30184
+	GICDistributorRegIrouter702    GICDistributorReg = 30192
+	GICDistributorRegIrouter703    GICDistributorReg = 30200
+	GICDistributorRegIrouter704    GICDistributorReg = 30208
+	GICDistributorRegIrouter705    GICDistributorReg = 30216
+	GICDistributorRegIrouter706    GICDistributorReg = 30224
+	GICDistributorRegIrouter707    GICDistributorReg = 30232
+	GICDistributorRegIrouter708    GICDistributorReg = 30240
+	GICDistributorRegIrouter709    GICDistributorReg = 30248
+	GICDistributorRegIrouter710    GICDistributorReg = 30256
+	GICDistributorRegIrouter711    GICDistributorReg = 30264
+	GICDistributorRegIrouter712    GICDistributorReg = 30272
+	GICDistributorRegIrouter713    GICDistributorReg = 30280
+	GICDistributorRegIrouter714    GICDistributorReg = 30288
+	GICDistributorRegIrouter715    GICDistributorReg = 30296
+	GICDistributorRegIrouter716    GICDistributorReg = 30304
+	GICDistributorRegIrouter717    GICDistributorReg = 30312
+	GICDistributorRegIrouter718    GICDistributorReg = 30320
+	GICDistributorRegIrouter719    GICDistributorReg = 30328
+	GICDistributorRegIrouter720    GICDistributorReg = 30336
+	GICDistributorRegIrouter721    GICDistributorReg = 30344
+	GICDistributorRegIrouter722    GICDistributorReg = 30352
+	GICDistributorRegIrouter723    GICDistributorReg = 30360
+	GICDistributorRegIrouter724    GICDistributorReg = 30368
+	GICDistributorRegIrouter725    GICDistributorReg = 30376
+	GICDistributorRegIrouter726    GICDistributorReg = 30384
+	GICDistributorRegIrouter727    GICDistributorReg = 30392
+	GICDistributorRegIrouter728    GICDistributorReg = 30400
+	GICDistributorRegIrouter729    GICDistributorReg = 30408
+	GICDistributorRegIrouter730    GICDistributorReg = 30416
+	GICDistributorRegIrouter731    GICDistributorReg = 30424
+	GICDistributorRegIrouter732    GICDistributorReg = 30432
+	GICDistributorRegIrouter733    GICDistributorReg = 30440
+	GICDistributorRegIrouter734    GICDistributorReg = 30448
+	GICDistributorRegIrouter735    GICDistributorReg = 30456
+	GICDistributorRegIrouter736    GICDistributorReg = 30464
+	GICDistributorRegIrouter737    GICDistributorReg = 30472
+	GICDistributorRegIrouter738    GICDistributorReg = 30480
+	GICDistributorRegIrouter739    GICDistributorReg = 30488
+	GICDistributorRegIrouter740    GICDistributorReg = 30496
+	GICDistributorRegIrouter741    GICDistributorReg = 30504
+	GICDistributorRegIrouter742    GICDistributorReg = 30512
+	GICDistributorRegIrouter743    GICDistributorReg = 30520
+	GICDistributorRegIrouter744    GICDistributorReg = 30528
+	GICDistributorRegIrouter745    GICDistributorReg = 30536
+	GICDistributorRegIrouter746    GICDistributorReg = 30544
+	GICDistributorRegIrouter747    GICDistributorReg = 30552
+	GICDistributorRegIrouter748    GICDistributorReg = 30560
+	GICDistributorRegIrouter749    GICDistributorReg = 30568
+	GICDistributorRegIrouter750    GICDistributorReg = 30576
+	GICDistributorRegIrouter751    GICDistributorReg = 30584
+	GICDistributorRegIrouter752    GICDistributorReg = 30592
+	GICDistributorRegIrouter753    GICDistributorReg = 30600
+	GICDistributorRegIrouter754    GICDistributorReg = 30608
+	GICDistributorRegIrouter755    GICDistributorReg = 30616
+	GICDistributorRegIrouter756    GICDistributorReg = 30624
+	GICDistributorRegIrouter757    GICDistributorReg = 30632
+	GICDistributorRegIrouter758    GICDistributorReg = 30640
+	GICDistributorRegIrouter759    GICDistributorReg = 30648
+	GICDistributorRegIrouter760    GICDistributorReg = 30656
+	GICDistributorRegIrouter761    GICDistributorReg = 30664
+	GICDistributorRegIrouter762    GICDistributorReg = 30672
+	GICDistributorRegIrouter763    GICDistributorReg = 30680
+	GICDistributorRegIrouter764    GICDistributorReg = 30688
+	GICDistributorRegIrouter765    GICDistributorReg = 30696
+	GICDistributorRegIrouter766    GICDistributorReg = 30704
+	GICDistributorRegIrouter767    GICDistributorReg = 30712
+	GICDistributorRegIrouter768    GICDistributorReg = 30720
+	GICDistributorRegIrouter769    GICDistributorReg = 30728
+	GICDistributorRegIrouter770    GICDistributorReg = 30736
+	GICDistributorRegIrouter771    GICDistributorReg = 30744
+	GICDistributorRegIrouter772    GICDistributorReg = 30752
+	GICDistributorRegIrouter773    GICDistributorReg = 30760
+	GICDistributorRegIrouter774    GICDistributorReg = 30768
+	GICDistributorRegIrouter775    GICDistributorReg = 30776
+	GICDistributorRegIrouter776    GICDistributorReg = 30784
+	GICDistributorRegIrouter777    GICDistributorReg = 30792
+	GICDistributorRegIrouter778    GICDistributorReg = 30800
+	GICDistributorRegIrouter779    GICDistributorReg = 30808
+	GICDistributorRegIrouter780    GICDistributorReg = 30816
+	GICDistributorRegIrouter781    GICDistributorReg = 30824
+	GICDistributorRegIrouter782    GICDistributorReg = 30832
+	GICDistributorRegIrouter783    GICDistributorReg = 30840
+	GICDistributorRegIrouter784    GICDistributorReg = 30848
+	GICDistributorRegIrouter785    GICDistributorReg = 30856
+	GICDistributorRegIrouter786    GICDistributorReg = 30864
+	GICDistributorRegIrouter787    GICDistributorReg = 30872
+	GICDistributorRegIrouter788    GICDistributorReg = 30880
+	GICDistributorRegIrouter789    GICDistributorReg = 30888
+	GICDistributorRegIrouter790    GICDistributorReg = 30896
+	GICDistributorRegIrouter791    GICDistributorReg = 30904
+	GICDistributorRegIrouter792    GICDistributorReg = 30912
+	GICDistributorRegIrouter793    GICDistributorReg = 30920
+	GICDistributorRegIrouter794    GICDistributorReg = 30928
+	GICDistributorRegIrouter795    GICDistributorReg = 30936
+	GICDistributorRegIrouter796    GICDistributorReg = 30944
+	GICDistributorRegIrouter797    GICDistributorReg = 30952
+	GICDistributorRegIrouter798    GICDistributorReg = 30960
+	GICDistributorRegIrouter799    GICDistributorReg = 30968
+	GICDistributorRegIrouter800    GICDistributorReg = 30976
+	GICDistributorRegIrouter801    GICDistributorReg = 30984
+	GICDistributorRegIrouter802    GICDistributorReg = 30992
+	GICDistributorRegIrouter803    GICDistributorReg = 31000
+	GICDistributorRegIrouter804    GICDistributorReg = 31008
+	GICDistributorRegIrouter805    GICDistributorReg = 31016
+	GICDistributorRegIrouter806    GICDistributorReg = 31024
+	GICDistributorRegIrouter807    GICDistributorReg = 31032
+	GICDistributorRegIrouter808    GICDistributorReg = 31040
+	GICDistributorRegIrouter809    GICDistributorReg = 31048
+	GICDistributorRegIrouter810    GICDistributorReg = 31056
+	GICDistributorRegIrouter811    GICDistributorReg = 31064
+	GICDistributorRegIrouter812    GICDistributorReg = 31072
+	GICDistributorRegIrouter813    GICDistributorReg = 31080
+	GICDistributorRegIrouter814    GICDistributorReg = 31088
+	GICDistributorRegIrouter815    GICDistributorReg = 31096
+	GICDistributorRegIrouter816    GICDistributorReg = 31104
+	GICDistributorRegIrouter817    GICDistributorReg = 31112
+	GICDistributorRegIrouter818    GICDistributorReg = 31120
+	GICDistributorRegIrouter819    GICDistributorReg = 31128
+	GICDistributorRegIrouter820    GICDistributorReg = 31136
+	GICDistributorRegIrouter821    GICDistributorReg = 31144
+	GICDistributorRegIrouter822    GICDistributorReg = 31152
+	GICDistributorRegIrouter823    GICDistributorReg = 31160
+	GICDistributorRegIrouter824    GICDistributorReg = 31168
+	GICDistributorRegIrouter825    GICDistributorReg = 31176
+	GICDistributorRegIrouter826    GICDistributorReg = 31184
+	GICDistributorRegIrouter827    GICDistributorReg = 31192
+	GICDistributorRegIrouter828    GICDistributorReg = 31200
+	GICDistributorRegIrouter829    GICDistributorReg = 31208
+	GICDistributorRegIrouter830    GICDistributorReg = 31216
+	GICDistributorRegIrouter831    GICDistributorReg = 31224
+	GICDistributorRegIrouter832    GICDistributorReg = 31232
+	GICDistributorRegIrouter833    GICDistributorReg = 31240
+	GICDistributorRegIrouter834    GICDistributorReg = 31248
+	GICDistributorRegIrouter835    GICDistributorReg = 31256
+	GICDistributorRegIrouter836    GICDistributorReg = 31264
+	GICDistributorRegIrouter837    GICDistributorReg = 31272
+	GICDistributorRegIrouter838    GICDistributorReg = 31280
+	GICDistributorRegIrouter839    GICDistributorReg = 31288
+	GICDistributorRegIrouter840    GICDistributorReg = 31296
+	GICDistributorRegIrouter841    GICDistributorReg = 31304
+	GICDistributorRegIrouter842    GICDistributorReg = 31312
+	GICDistributorRegIrouter843    GICDistributorReg = 31320
+	GICDistributorRegIrouter844    GICDistributorReg = 31328
+	GICDistributorRegIrouter845    GICDistributorReg = 31336
+	GICDistributorRegIrouter846    GICDistributorReg = 31344
+	GICDistributorRegIrouter847    GICDistributorReg = 31352
+	GICDistributorRegIrouter848    GICDistributorReg = 31360
+	GICDistributorRegIrouter849    GICDistributorReg = 31368
+	GICDistributorRegIrouter850    GICDistributorReg = 31376
+	GICDistributorRegIrouter851    GICDistributorReg = 31384
+	GICDistributorRegIrouter852    GICDistributorReg = 31392
+	GICDistributorRegIrouter853    GICDistributorReg = 31400
+	GICDistributorRegIrouter854    GICDistributorReg = 31408
+	GICDistributorRegIrouter855    GICDistributorReg = 31416
+	GICDistributorRegIrouter856    GICDistributorReg = 31424
+	GICDistributorRegIrouter857    GICDistributorReg = 31432
+	GICDistributorRegIrouter858    GICDistributorReg = 31440
+	GICDistributorRegIrouter859    GICDistributorReg = 31448
+	GICDistributorRegIrouter860    GICDistributorReg = 31456
+	GICDistributorRegIrouter861    GICDistributorReg = 31464
+	GICDistributorRegIrouter862    GICDistributorReg = 31472
+	GICDistributorRegIrouter863    GICDistributorReg = 31480
+	GICDistributorRegIrouter864    GICDistributorReg = 31488
+	GICDistributorRegIrouter865    GICDistributorReg = 31496
+	GICDistributorRegIrouter866    GICDistributorReg = 31504
+	GICDistributorRegIrouter867    GICDistributorReg = 31512
+	GICDistributorRegIrouter868    GICDistributorReg = 31520
+	GICDistributorRegIrouter869    GICDistributorReg = 31528
+	GICDistributorRegIrouter870    GICDistributorReg = 31536
+	GICDistributorRegIrouter871    GICDistributorReg = 31544
+	GICDistributorRegIrouter872    GICDistributorReg = 31552
+	GICDistributorRegIrouter873    GICDistributorReg = 31560
+	GICDistributorRegIrouter874    GICDistributorReg = 31568
+	GICDistributorRegIrouter875    GICDistributorReg = 31576
+	GICDistributorRegIrouter876    GICDistributorReg = 31584
+	GICDistributorRegIrouter877    GICDistributorReg = 31592
+	GICDistributorRegIrouter878    GICDistributorReg = 31600
+	GICDistributorRegIrouter879    GICDistributorReg = 31608
+	GICDistributorRegIrouter880    GICDistributorReg = 31616
+	GICDistributorRegIrouter881    GICDistributorReg = 31624
+	GICDistributorRegIrouter882    GICDistributorReg = 31632
+	GICDistributorRegIrouter883    GICDistributorReg = 31640
+	GICDistributorRegIrouter884    GICDistributorReg = 31648
+	GICDistributorRegIrouter885    GICDistributorReg = 31656
+	GICDistributorRegIrouter886    GICDistributorReg = 31664
+	GICDistributorRegIrouter887    GICDistributorReg = 31672
+	GICDistributorRegIrouter888    GICDistributorReg = 31680
+	GICDistributorRegIrouter889    GICDistributorReg = 31688
+	GICDistributorRegIrouter890    GICDistributorReg = 31696
+	GICDistributorRegIrouter891    GICDistributorReg = 31704
+	GICDistributorRegIrouter892    GICDistributorReg = 31712
+	GICDistributorRegIrouter893    GICDistributorReg = 31720
+	GICDistributorRegIrouter894    GICDistributorReg = 31728
+	GICDistributorRegIrouter895    GICDistributorReg = 31736
+	GICDistributorRegIrouter896    GICDistributorReg = 31744
+	GICDistributorRegIrouter897    GICDistributorReg = 31752
+	GICDistributorRegIrouter898    GICDistributorReg = 31760
+	GICDistributorRegIrouter899    GICDistributorReg = 31768
+	GICDistributorRegIrouter900    GICDistributorReg = 31776
+	GICDistributorRegIrouter901    GICDistributorReg = 31784
+	GICDistributorRegIrouter902    GICDistributorReg = 31792
+	GICDistributorRegIrouter903    GICDistributorReg = 31800
+	GICDistributorRegIrouter904    GICDistributorReg = 31808
+	GICDistributorRegIrouter905    GICDistributorReg = 31816
+	GICDistributorRegIrouter906    GICDistributorReg = 31824
+	GICDistributorRegIrouter907    GICDistributorReg = 31832
+	GICDistributorRegIrouter908    GICDistributorReg = 31840
+	GICDistributorRegIrouter909    GICDistributorReg = 31848
+	GICDistributorRegIrouter910    GICDistributorReg = 31856
+	GICDistributorRegIrouter911    GICDistributorReg = 31864
+	GICDistributorRegIrouter912    GICDistributorReg = 31872
+	GICDistributorRegIrouter913    GICDistributorReg = 31880
+	GICDistributorRegIrouter914    GICDistributorReg = 31888
+	GICDistributorRegIrouter915    GICDistributorReg = 31896
+	GICDistributorRegIrouter916    GICDistributorReg = 31904
+	GICDistributorRegIrouter917    GICDistributorReg = 31912
+	GICDistributorRegIrouter918    GICDistributorReg = 31920
+	GICDistributorRegIrouter919    GICDistributorReg = 31928
+	GICDistributorRegIrouter920    GICDistributorReg = 31936
+	GICDistributorRegIrouter921    GICDistributorReg = 31944
+	GICDistributorRegIrouter922    GICDistributorReg = 31952
+	GICDistributorRegIrouter923    GICDistributorReg = 31960
+	GICDistributorRegIrouter924    GICDistributorReg = 31968
+	GICDistributorRegIrouter925    GICDistributorReg = 31976
+	GICDistributorRegIrouter926    GICDistributorReg = 31984
+	GICDistributorRegIrouter927    GICDistributorReg = 31992
+	GICDistributorRegIrouter928    GICDistributorReg = 32000
+	GICDistributorRegIrouter929    GICDistributorReg = 32008
+	GICDistributorRegIrouter930    GICDistributorReg = 32016
+	GICDistributorRegIrouter931    GICDistributorReg = 32024
+	GICDistributorRegIrouter932    GICDistributorReg = 32032
+	GICDistributorRegIrouter933    GICDistributorReg = 32040
+	GICDistributorRegIrouter934    GICDistributorReg = 32048
+	GICDistributorRegIrouter935    GICDistributorReg = 32056
+	GICDistributorRegIrouter936    GICDistributorReg = 32064
+	GICDistributorRegIrouter937    GICDistributorReg = 32072
+	GICDistributorRegIrouter938    GICDistributorReg = 32080
+	GICDistributorRegIrouter939    GICDistributorReg = 32088
+	GICDistributorRegIrouter940    GICDistributorReg = 32096
+	GICDistributorRegIrouter941    GICDistributorReg = 32104
+	GICDistributorRegIrouter942    GICDistributorReg = 32112
+	GICDistributorRegIrouter943    GICDistributorReg = 32120
+	GICDistributorRegIrouter944    GICDistributorReg = 32128
+	GICDistributorRegIrouter945    GICDistributorReg = 32136
+	GICDistributorRegIrouter946    GICDistributorReg = 32144
+	GICDistributorRegIrouter947    GICDistributorReg = 32152
+	GICDistributorRegIrouter948    GICDistributorReg = 32160
+	GICDistributorRegIrouter949    GICDistributorReg = 32168
+	GICDistributorRegIrouter950    GICDistributorReg = 32176
+	GICDistributorRegIrouter951    GICDistributorReg = 32184
+	GICDistributorRegIrouter952    GICDistributorReg = 32192
+	GICDistributorRegIrouter953    GICDistributorReg = 32200
+	GICDistributorRegIrouter954    GICDistributorReg = 32208
+	GICDistributorRegIrouter955    GICDistributorReg = 32216
+	GICDistributorRegIrouter956    GICDistributorReg = 32224
+	GICDistributorRegIrouter957    GICDistributorReg = 32232
+	GICDistributorRegIrouter958    GICDistributorReg = 32240
+	GICDistributorRegIrouter959    GICDistributorReg = 32248
+	GICDistributorRegIrouter960    GICDistributorReg = 32256
+	GICDistributorRegIrouter961    GICDistributorReg = 32264
+	GICDistributorRegIrouter962    GICDistributorReg = 32272
+	GICDistributorRegIrouter963    GICDistributorReg = 32280
+	GICDistributorRegIrouter964    GICDistributorReg = 32288
+	GICDistributorRegIrouter965    GICDistributorReg = 32296
+	GICDistributorRegIrouter966    GICDistributorReg = 32304
+	GICDistributorRegIrouter967    GICDistributorReg = 32312
+	GICDistributorRegIrouter968    GICDistributorReg = 32320
+	GICDistributorRegIrouter969    GICDistributorReg = 32328
+	GICDistributorRegIrouter970    GICDistributorReg = 32336
+	GICDistributorRegIrouter971    GICDistributorReg = 32344
+	GICDistributorRegIrouter972    GICDistributorReg = 32352
+	GICDistributorRegIrouter973    GICDistributorReg = 32360
+	GICDistributorRegIrouter974    GICDistributorReg = 32368
+	GICDistributorRegIrouter975    GICDistributorReg = 32376
+	GICDistributorRegIrouter976    GICDistributorReg = 32384
+	GICDistributorRegIrouter977    GICDistributorReg = 32392
+	GICDistributorRegIrouter978    GICDistributorReg = 32400
+	GICDistributorRegIrouter979    GICDistributorReg = 32408
+	GICDistributorRegIrouter980    GICDistributorReg = 32416
+	GICDistributorRegIrouter981    GICDistributorReg = 32424
+	GICDistributorRegIrouter982    GICDistributorReg = 32432
+	GICDistributorRegIrouter983    GICDistributorReg = 32440
+	GICDistributorRegIrouter984    GICDistributorReg = 32448
+	GICDistributorRegIrouter985    GICDistributorReg = 32456
+	GICDistributorRegIrouter986    GICDistributorReg = 32464
+	GICDistributorRegIrouter987    GICDistributorReg = 32472
+	GICDistributorRegIrouter988    GICDistributorReg = 32480
+	GICDistributorRegIrouter989    GICDistributorReg = 32488
+	GICDistributorRegIrouter990    GICDistributorReg = 32496
+	GICDistributorRegIrouter991    GICDistributorReg = 32504
+	GICDistributorRegIrouter992    GICDistributorReg = 32512
+	GICDistributorRegIrouter993    GICDistributorReg = 32520
+	GICDistributorRegIrouter994    GICDistributorReg = 32528
+	GICDistributorRegIrouter995    GICDistributorReg = 32536
+	GICDistributorRegIrouter996    GICDistributorReg = 32544
+	GICDistributorRegIrouter997    GICDistributorReg = 32552
+	GICDistributorRegIrouter998    GICDistributorReg = 32560
+	GICDistributorRegIrouter999    GICDistributorReg = 32568
+	GICDistributorRegIrouter1000   GICDistributorReg = 32576
+	GICDistributorRegIrouter1001   GICDistributorReg = 32584
+	GICDistributorRegIrouter1002   GICDistributorReg = 32592
+	GICDistributorRegIrouter1003   GICDistributorReg = 32600
+	GICDistributorRegIrouter1004   GICDistributorReg = 32608
+	GICDistributorRegIrouter1005   GICDistributorReg = 32616
+	GICDistributorRegIrouter1006   GICDistributorReg = 32624
+	GICDistributorRegIrouter1007   GICDistributorReg = 32632
+	GICDistributorRegIrouter1008   GICDistributorReg = 32640
+	GICDistributorRegIrouter1009   GICDistributorReg = 32648
+	GICDistributorRegIrouter1010   GICDistributorReg = 32656
+	GICDistributorRegIrouter1011   GICDistributorReg = 32664
+	GICDistributorRegIrouter1012   GICDistributorReg = 32672
+	GICDistributorRegIrouter1013   GICDistributorReg = 32680
+	GICDistributorRegIrouter1014   GICDistributorReg = 32688
+	GICDistributorRegIrouter1015   GICDistributorReg = 32696
+	GICDistributorRegIrouter1016   GICDistributorReg = 32704
+	GICDistributorRegIrouter1017   GICDistributorReg = 32712
+	GICDistributorRegIrouter1018   GICDistributorReg = 32720
+	GICDistributorRegIrouter1019   GICDistributorReg = 32728
+	GICDistributorRegPidr2         GICDistributorReg = 65512
 )
 
-// String returns the Hv_gic_distributor_reg_t constant's name, or its numeric form when the
+// String returns the GICDistributorReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_distributor_reg_t) String() string {
+func (e GICDistributorReg) String() string {
 	switch e {
-	case HV_GIC_DISTRIBUTOR_REG_GICD_CTLR:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_CTLR"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_TYPER:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_TYPER"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IGROUPR31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISENABLER31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICENABLER31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISPENDR31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICPENDR31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ISACTIVER31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICACTIVER31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR32:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR32"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR33:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR33"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR34:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR34"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR35:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR35"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR36:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR36"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR37:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR37"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR38:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR38"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR39:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR39"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR40:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR40"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR41:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR41"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR42:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR42"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR43:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR43"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR44:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR44"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR45:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR45"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR46:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR46"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR47:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR47"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR48:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR48"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR49:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR49"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR50:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR50"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR51:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR51"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR52:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR52"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR53:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR53"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR54:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR54"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR55:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR55"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR56:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR56"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR57:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR57"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR58:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR58"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR59:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR59"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR60:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR60"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR61:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR61"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR62:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR62"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR63:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR63"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR64:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR64"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR65:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR65"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR66:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR66"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR67:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR67"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR68:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR68"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR69:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR69"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR70:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR70"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR71:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR71"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR72:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR72"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR73:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR73"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR74:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR74"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR75:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR75"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR76:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR76"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR77:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR77"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR78:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR78"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR79:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR79"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR80:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR80"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR81:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR81"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR82:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR82"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR83:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR83"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR84:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR84"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR85:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR85"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR86:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR86"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR87:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR87"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR88:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR88"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR89:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR89"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR90:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR90"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR91:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR91"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR92:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR92"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR93:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR93"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR94:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR94"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR95:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR95"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR96:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR96"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR97:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR97"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR98:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR98"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR99:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR99"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR100:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR100"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR101:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR101"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR102:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR102"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR103:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR103"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR104:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR104"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR105:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR105"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR106:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR106"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR107:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR107"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR108:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR108"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR109:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR109"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR110:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR110"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR111:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR111"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR112:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR112"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR113:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR113"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR114:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR114"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR115:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR115"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR116:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR116"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR117:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR117"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR118:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR118"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR119:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR119"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR120:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR120"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR121:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR121"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR122:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR122"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR123:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR123"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR124:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR124"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR125:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR125"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR126:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR126"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR127:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR127"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR128:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR128"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR129:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR129"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR130:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR130"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR131:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR131"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR132:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR132"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR133:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR133"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR134:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR134"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR135:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR135"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR136:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR136"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR137:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR137"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR138:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR138"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR139:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR139"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR140:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR140"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR141:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR141"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR142:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR142"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR143:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR143"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR144:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR144"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR145:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR145"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR146:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR146"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR147:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR147"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR148:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR148"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR149:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR149"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR150:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR150"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR151:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR151"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR152:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR152"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR153:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR153"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR154:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR154"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR155:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR155"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR156:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR156"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR157:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR157"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR158:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR158"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR159:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR159"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR160:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR160"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR161:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR161"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR162:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR162"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR163:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR163"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR164:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR164"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR165:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR165"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR166:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR166"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR167:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR167"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR168:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR168"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR169:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR169"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR170:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR170"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR171:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR171"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR172:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR172"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR173:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR173"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR174:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR174"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR175:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR175"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR176:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR176"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR177:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR177"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR178:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR178"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR179:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR179"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR180:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR180"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR181:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR181"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR182:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR182"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR183:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR183"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR184:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR184"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR185:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR185"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR186:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR186"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR187:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR187"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR188:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR188"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR189:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR189"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR190:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR190"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR191:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR191"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR192:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR192"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR193:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR193"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR194:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR194"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR195:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR195"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR196:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR196"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR197:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR197"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR198:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR198"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR199:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR199"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR200:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR200"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR201:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR201"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR202:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR202"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR203:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR203"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR204:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR204"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR205:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR205"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR206:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR206"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR207:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR207"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR208:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR208"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR209:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR209"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR210:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR210"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR211:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR211"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR212:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR212"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR213:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR213"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR214:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR214"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR215:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR215"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR216:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR216"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR217:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR217"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR218:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR218"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR219:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR219"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR220:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR220"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR221:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR221"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR222:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR222"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR223:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR223"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR224:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR224"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR225:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR225"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR226:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR226"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR227:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR227"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR228:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR228"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR229:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR229"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR230:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR230"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR231:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR231"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR232:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR232"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR233:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR233"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR234:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR234"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR235:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR235"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR236:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR236"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR237:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR237"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR238:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR238"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR239:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR239"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR240:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR240"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR241:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR241"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR242:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR242"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR243:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR243"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR244:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR244"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR245:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR245"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR246:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR246"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR247:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR247"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR248:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR248"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR249:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR249"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR250:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR250"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR251:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR251"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR252:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR252"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR253:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR253"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR254:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IPRIORITYR254"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR0:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR0"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR1:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR1"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR2"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR3:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR3"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR4:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR4"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR5:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR5"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR6:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR6"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR7:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR7"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR8:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR8"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR9:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR9"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR10:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR10"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR11:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR11"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR12:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR12"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR13:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR13"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR14:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR14"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR15:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR15"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR16:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR16"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR17:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR17"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR18:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR18"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR19:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR19"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR20:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR20"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR21:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR21"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR22:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR22"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR23:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR23"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR24:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR24"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR25:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR25"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR26:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR26"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR27:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR27"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR28:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR28"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR29:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR29"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR30:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR30"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR31:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR31"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR32:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR32"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR33:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR33"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR34:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR34"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR35:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR35"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR36:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR36"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR37:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR37"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR38:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR38"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR39:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR39"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR40:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR40"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR41:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR41"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR42:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR42"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR43:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR43"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR44:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR44"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR45:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR45"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR46:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR46"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR47:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR47"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR48:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR48"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR49:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR49"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR50:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR50"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR51:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR51"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR52:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR52"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR53:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR53"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR54:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR54"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR55:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR55"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR56:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR56"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR57:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR57"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR58:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR58"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR59:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR59"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR60:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR60"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR61:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR61"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR62:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR62"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR63:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_ICFGR63"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER32:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER32"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER33:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER33"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER34:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER34"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER35:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER35"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER36:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER36"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER37:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER37"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER38:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER38"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER39:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER39"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER40:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER40"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER41:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER41"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER42:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER42"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER43:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER43"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER44:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER44"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER45:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER45"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER46:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER46"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER47:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER47"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER48:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER48"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER49:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER49"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER50:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER50"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER51:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER51"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER52:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER52"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER53:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER53"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER54:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER54"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER55:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER55"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER56:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER56"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER57:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER57"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER58:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER58"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER59:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER59"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER60:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER60"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER61:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER61"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER62:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER62"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER63:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER63"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER64:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER64"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER65:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER65"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER66:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER66"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER67:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER67"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER68:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER68"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER69:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER69"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER70:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER70"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER71:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER71"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER72:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER72"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER73:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER73"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER74:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER74"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER75:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER75"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER76:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER76"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER77:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER77"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER78:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER78"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER79:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER79"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER80:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER80"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER81:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER81"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER82:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER82"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER83:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER83"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER84:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER84"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER85:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER85"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER86:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER86"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER87:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER87"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER88:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER88"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER89:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER89"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER90:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER90"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER91:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER91"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER92:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER92"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER93:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER93"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER94:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER94"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER95:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER95"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER96:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER96"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER97:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER97"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER98:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER98"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER99:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER99"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER100:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER100"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER101:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER101"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER102:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER102"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER103:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER103"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER104:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER104"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER105:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER105"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER106:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER106"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER107:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER107"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER108:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER108"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER109:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER109"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER110:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER110"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER111:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER111"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER112:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER112"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER113:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER113"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER114:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER114"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER115:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER115"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER116:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER116"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER117:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER117"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER118:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER118"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER119:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER119"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER120:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER120"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER121:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER121"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER122:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER122"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER123:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER123"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER124:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER124"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER125:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER125"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER126:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER126"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER127:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER127"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER128:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER128"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER129:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER129"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER130:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER130"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER131:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER131"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER132:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER132"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER133:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER133"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER134:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER134"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER135:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER135"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER136:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER136"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER137:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER137"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER138:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER138"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER139:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER139"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER140:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER140"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER141:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER141"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER142:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER142"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER143:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER143"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER144:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER144"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER145:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER145"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER146:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER146"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER147:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER147"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER148:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER148"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER149:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER149"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER150:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER150"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER151:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER151"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER152:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER152"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER153:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER153"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER154:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER154"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER155:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER155"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER156:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER156"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER157:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER157"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER158:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER158"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER159:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER159"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER160:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER160"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER161:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER161"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER162:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER162"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER163:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER163"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER164:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER164"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER165:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER165"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER166:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER166"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER167:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER167"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER168:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER168"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER169:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER169"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER170:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER170"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER171:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER171"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER172:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER172"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER173:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER173"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER174:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER174"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER175:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER175"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER176:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER176"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER177:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER177"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER178:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER178"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER179:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER179"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER180:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER180"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER181:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER181"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER182:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER182"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER183:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER183"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER184:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER184"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER185:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER185"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER186:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER186"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER187:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER187"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER188:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER188"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER189:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER189"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER190:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER190"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER191:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER191"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER192:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER192"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER193:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER193"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER194:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER194"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER195:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER195"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER196:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER196"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER197:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER197"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER198:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER198"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER199:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER199"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER200:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER200"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER201:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER201"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER202:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER202"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER203:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER203"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER204:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER204"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER205:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER205"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER206:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER206"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER207:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER207"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER208:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER208"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER209:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER209"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER210:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER210"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER211:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER211"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER212:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER212"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER213:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER213"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER214:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER214"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER215:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER215"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER216:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER216"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER217:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER217"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER218:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER218"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER219:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER219"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER220:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER220"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER221:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER221"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER222:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER222"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER223:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER223"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER224:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER224"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER225:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER225"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER226:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER226"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER227:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER227"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER228:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER228"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER229:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER229"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER230:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER230"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER231:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER231"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER232:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER232"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER233:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER233"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER234:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER234"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER235:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER235"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER236:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER236"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER237:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER237"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER238:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER238"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER239:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER239"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER240:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER240"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER241:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER241"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER242:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER242"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER243:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER243"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER244:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER244"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER245:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER245"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER246:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER246"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER247:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER247"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER248:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER248"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER249:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER249"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER250:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER250"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER251:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER251"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER252:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER252"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER253:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER253"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER254:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER254"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER255:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER255"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER256:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER256"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER257:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER257"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER258:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER258"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER259:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER259"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER260:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER260"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER261:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER261"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER262:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER262"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER263:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER263"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER264:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER264"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER265:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER265"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER266:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER266"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER267:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER267"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER268:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER268"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER269:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER269"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER270:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER270"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER271:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER271"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER272:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER272"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER273:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER273"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER274:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER274"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER275:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER275"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER276:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER276"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER277:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER277"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER278:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER278"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER279:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER279"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER280:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER280"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER281:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER281"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER282:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER282"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER283:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER283"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER284:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER284"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER285:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER285"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER286:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER286"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER287:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER287"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER288:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER288"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER289:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER289"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER290:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER290"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER291:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER291"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER292:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER292"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER293:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER293"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER294:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER294"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER295:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER295"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER296:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER296"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER297:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER297"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER298:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER298"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER299:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER299"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER300:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER300"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER301:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER301"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER302:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER302"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER303:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER303"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER304:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER304"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER305:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER305"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER306:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER306"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER307:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER307"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER308:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER308"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER309:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER309"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER310:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER310"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER311:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER311"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER312:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER312"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER313:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER313"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER314:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER314"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER315:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER315"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER316:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER316"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER317:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER317"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER318:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER318"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER319:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER319"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER320:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER320"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER321:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER321"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER322:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER322"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER323:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER323"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER324:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER324"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER325:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER325"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER326:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER326"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER327:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER327"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER328:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER328"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER329:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER329"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER330:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER330"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER331:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER331"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER332:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER332"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER333:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER333"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER334:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER334"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER335:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER335"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER336:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER336"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER337:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER337"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER338:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER338"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER339:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER339"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER340:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER340"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER341:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER341"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER342:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER342"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER343:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER343"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER344:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER344"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER345:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER345"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER346:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER346"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER347:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER347"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER348:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER348"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER349:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER349"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER350:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER350"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER351:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER351"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER352:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER352"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER353:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER353"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER354:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER354"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER355:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER355"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER356:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER356"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER357:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER357"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER358:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER358"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER359:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER359"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER360:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER360"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER361:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER361"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER362:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER362"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER363:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER363"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER364:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER364"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER365:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER365"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER366:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER366"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER367:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER367"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER368:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER368"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER369:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER369"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER370:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER370"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER371:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER371"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER372:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER372"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER373:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER373"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER374:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER374"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER375:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER375"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER376:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER376"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER377:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER377"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER378:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER378"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER379:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER379"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER380:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER380"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER381:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER381"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER382:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER382"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER383:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER383"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER384:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER384"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER385:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER385"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER386:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER386"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER387:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER387"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER388:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER388"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER389:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER389"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER390:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER390"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER391:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER391"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER392:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER392"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER393:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER393"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER394:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER394"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER395:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER395"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER396:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER396"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER397:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER397"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER398:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER398"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER399:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER399"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER400:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER400"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER401:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER401"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER402:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER402"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER403:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER403"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER404:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER404"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER405:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER405"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER406:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER406"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER407:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER407"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER408:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER408"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER409:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER409"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER410:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER410"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER411:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER411"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER412:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER412"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER413:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER413"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER414:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER414"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER415:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER415"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER416:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER416"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER417:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER417"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER418:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER418"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER419:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER419"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER420:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER420"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER421:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER421"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER422:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER422"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER423:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER423"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER424:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER424"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER425:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER425"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER426:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER426"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER427:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER427"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER428:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER428"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER429:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER429"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER430:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER430"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER431:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER431"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER432:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER432"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER433:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER433"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER434:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER434"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER435:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER435"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER436:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER436"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER437:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER437"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER438:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER438"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER439:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER439"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER440:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER440"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER441:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER441"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER442:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER442"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER443:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER443"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER444:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER444"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER445:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER445"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER446:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER446"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER447:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER447"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER448:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER448"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER449:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER449"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER450:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER450"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER451:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER451"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER452:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER452"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER453:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER453"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER454:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER454"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER455:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER455"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER456:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER456"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER457:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER457"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER458:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER458"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER459:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER459"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER460:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER460"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER461:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER461"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER462:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER462"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER463:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER463"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER464:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER464"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER465:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER465"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER466:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER466"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER467:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER467"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER468:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER468"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER469:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER469"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER470:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER470"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER471:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER471"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER472:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER472"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER473:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER473"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER474:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER474"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER475:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER475"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER476:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER476"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER477:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER477"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER478:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER478"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER479:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER479"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER480:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER480"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER481:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER481"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER482:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER482"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER483:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER483"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER484:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER484"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER485:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER485"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER486:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER486"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER487:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER487"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER488:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER488"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER489:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER489"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER490:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER490"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER491:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER491"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER492:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER492"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER493:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER493"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER494:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER494"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER495:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER495"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER496:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER496"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER497:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER497"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER498:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER498"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER499:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER499"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER500:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER500"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER501:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER501"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER502:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER502"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER503:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER503"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER504:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER504"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER505:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER505"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER506:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER506"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER507:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER507"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER508:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER508"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER509:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER509"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER510:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER510"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER511:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER511"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER512:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER512"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER513:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER513"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER514:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER514"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER515:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER515"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER516:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER516"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER517:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER517"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER518:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER518"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER519:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER519"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER520:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER520"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER521:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER521"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER522:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER522"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER523:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER523"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER524:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER524"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER525:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER525"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER526:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER526"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER527:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER527"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER528:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER528"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER529:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER529"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER530:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER530"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER531:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER531"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER532:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER532"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER533:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER533"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER534:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER534"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER535:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER535"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER536:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER536"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER537:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER537"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER538:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER538"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER539:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER539"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER540:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER540"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER541:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER541"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER542:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER542"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER543:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER543"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER544:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER544"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER545:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER545"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER546:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER546"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER547:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER547"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER548:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER548"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER549:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER549"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER550:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER550"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER551:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER551"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER552:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER552"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER553:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER553"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER554:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER554"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER555:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER555"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER556:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER556"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER557:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER557"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER558:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER558"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER559:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER559"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER560:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER560"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER561:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER561"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER562:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER562"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER563:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER563"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER564:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER564"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER565:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER565"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER566:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER566"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER567:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER567"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER568:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER568"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER569:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER569"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER570:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER570"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER571:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER571"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER572:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER572"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER573:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER573"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER574:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER574"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER575:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER575"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER576:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER576"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER577:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER577"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER578:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER578"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER579:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER579"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER580:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER580"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER581:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER581"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER582:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER582"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER583:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER583"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER584:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER584"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER585:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER585"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER586:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER586"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER587:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER587"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER588:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER588"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER589:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER589"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER590:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER590"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER591:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER591"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER592:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER592"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER593:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER593"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER594:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER594"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER595:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER595"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER596:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER596"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER597:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER597"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER598:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER598"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER599:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER599"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER600:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER600"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER601:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER601"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER602:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER602"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER603:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER603"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER604:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER604"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER605:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER605"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER606:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER606"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER607:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER607"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER608:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER608"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER609:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER609"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER610:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER610"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER611:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER611"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER612:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER612"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER613:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER613"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER614:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER614"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER615:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER615"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER616:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER616"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER617:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER617"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER618:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER618"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER619:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER619"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER620:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER620"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER621:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER621"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER622:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER622"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER623:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER623"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER624:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER624"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER625:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER625"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER626:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER626"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER627:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER627"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER628:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER628"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER629:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER629"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER630:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER630"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER631:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER631"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER632:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER632"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER633:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER633"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER634:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER634"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER635:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER635"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER636:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER636"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER637:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER637"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER638:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER638"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER639:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER639"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER640:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER640"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER641:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER641"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER642:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER642"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER643:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER643"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER644:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER644"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER645:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER645"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER646:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER646"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER647:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER647"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER648:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER648"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER649:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER649"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER650:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER650"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER651:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER651"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER652:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER652"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER653:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER653"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER654:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER654"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER655:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER655"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER656:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER656"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER657:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER657"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER658:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER658"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER659:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER659"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER660:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER660"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER661:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER661"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER662:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER662"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER663:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER663"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER664:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER664"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER665:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER665"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER666:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER666"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER667:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER667"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER668:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER668"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER669:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER669"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER670:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER670"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER671:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER671"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER672:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER672"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER673:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER673"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER674:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER674"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER675:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER675"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER676:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER676"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER677:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER677"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER678:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER678"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER679:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER679"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER680:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER680"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER681:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER681"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER682:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER682"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER683:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER683"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER684:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER684"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER685:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER685"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER686:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER686"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER687:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER687"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER688:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER688"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER689:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER689"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER690:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER690"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER691:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER691"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER692:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER692"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER693:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER693"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER694:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER694"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER695:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER695"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER696:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER696"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER697:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER697"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER698:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER698"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER699:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER699"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER700:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER700"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER701:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER701"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER702:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER702"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER703:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER703"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER704:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER704"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER705:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER705"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER706:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER706"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER707:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER707"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER708:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER708"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER709:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER709"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER710:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER710"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER711:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER711"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER712:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER712"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER713:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER713"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER714:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER714"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER715:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER715"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER716:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER716"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER717:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER717"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER718:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER718"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER719:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER719"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER720:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER720"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER721:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER721"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER722:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER722"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER723:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER723"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER724:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER724"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER725:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER725"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER726:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER726"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER727:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER727"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER728:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER728"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER729:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER729"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER730:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER730"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER731:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER731"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER732:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER732"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER733:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER733"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER734:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER734"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER735:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER735"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER736:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER736"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER737:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER737"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER738:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER738"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER739:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER739"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER740:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER740"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER741:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER741"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER742:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER742"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER743:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER743"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER744:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER744"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER745:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER745"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER746:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER746"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER747:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER747"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER748:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER748"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER749:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER749"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER750:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER750"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER751:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER751"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER752:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER752"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER753:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER753"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER754:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER754"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER755:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER755"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER756:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER756"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER757:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER757"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER758:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER758"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER759:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER759"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER760:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER760"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER761:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER761"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER762:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER762"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER763:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER763"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER764:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER764"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER765:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER765"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER766:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER766"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER767:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER767"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER768:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER768"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER769:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER769"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER770:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER770"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER771:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER771"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER772:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER772"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER773:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER773"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER774:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER774"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER775:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER775"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER776:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER776"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER777:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER777"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER778:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER778"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER779:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER779"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER780:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER780"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER781:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER781"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER782:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER782"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER783:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER783"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER784:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER784"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER785:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER785"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER786:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER786"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER787:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER787"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER788:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER788"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER789:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER789"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER790:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER790"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER791:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER791"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER792:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER792"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER793:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER793"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER794:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER794"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER795:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER795"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER796:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER796"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER797:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER797"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER798:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER798"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER799:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER799"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER800:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER800"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER801:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER801"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER802:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER802"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER803:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER803"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER804:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER804"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER805:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER805"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER806:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER806"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER807:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER807"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER808:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER808"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER809:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER809"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER810:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER810"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER811:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER811"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER812:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER812"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER813:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER813"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER814:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER814"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER815:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER815"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER816:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER816"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER817:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER817"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER818:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER818"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER819:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER819"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER820:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER820"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER821:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER821"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER822:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER822"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER823:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER823"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER824:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER824"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER825:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER825"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER826:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER826"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER827:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER827"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER828:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER828"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER829:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER829"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER830:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER830"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER831:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER831"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER832:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER832"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER833:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER833"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER834:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER834"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER835:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER835"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER836:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER836"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER837:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER837"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER838:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER838"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER839:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER839"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER840:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER840"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER841:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER841"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER842:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER842"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER843:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER843"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER844:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER844"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER845:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER845"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER846:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER846"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER847:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER847"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER848:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER848"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER849:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER849"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER850:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER850"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER851:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER851"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER852:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER852"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER853:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER853"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER854:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER854"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER855:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER855"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER856:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER856"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER857:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER857"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER858:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER858"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER859:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER859"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER860:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER860"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER861:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER861"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER862:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER862"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER863:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER863"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER864:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER864"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER865:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER865"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER866:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER866"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER867:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER867"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER868:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER868"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER869:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER869"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER870:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER870"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER871:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER871"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER872:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER872"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER873:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER873"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER874:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER874"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER875:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER875"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER876:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER876"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER877:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER877"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER878:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER878"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER879:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER879"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER880:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER880"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER881:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER881"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER882:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER882"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER883:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER883"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER884:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER884"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER885:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER885"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER886:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER886"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER887:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER887"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER888:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER888"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER889:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER889"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER890:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER890"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER891:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER891"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER892:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER892"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER893:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER893"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER894:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER894"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER895:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER895"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER896:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER896"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER897:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER897"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER898:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER898"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER899:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER899"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER900:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER900"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER901:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER901"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER902:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER902"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER903:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER903"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER904:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER904"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER905:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER905"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER906:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER906"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER907:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER907"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER908:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER908"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER909:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER909"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER910:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER910"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER911:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER911"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER912:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER912"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER913:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER913"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER914:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER914"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER915:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER915"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER916:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER916"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER917:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER917"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER918:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER918"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER919:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER919"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER920:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER920"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER921:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER921"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER922:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER922"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER923:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER923"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER924:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER924"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER925:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER925"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER926:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER926"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER927:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER927"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER928:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER928"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER929:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER929"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER930:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER930"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER931:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER931"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER932:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER932"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER933:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER933"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER934:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER934"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER935:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER935"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER936:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER936"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER937:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER937"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER938:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER938"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER939:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER939"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER940:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER940"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER941:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER941"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER942:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER942"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER943:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER943"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER944:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER944"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER945:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER945"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER946:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER946"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER947:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER947"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER948:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER948"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER949:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER949"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER950:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER950"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER951:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER951"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER952:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER952"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER953:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER953"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER954:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER954"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER955:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER955"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER956:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER956"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER957:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER957"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER958:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER958"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER959:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER959"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER960:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER960"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER961:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER961"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER962:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER962"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER963:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER963"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER964:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER964"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER965:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER965"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER966:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER966"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER967:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER967"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER968:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER968"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER969:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER969"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER970:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER970"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER971:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER971"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER972:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER972"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER973:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER973"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER974:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER974"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER975:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER975"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER976:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER976"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER977:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER977"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER978:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER978"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER979:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER979"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER980:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER980"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER981:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER981"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER982:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER982"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER983:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER983"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER984:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER984"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER985:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER985"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER986:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER986"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER987:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER987"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER988:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER988"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER989:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER989"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER990:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER990"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER991:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER991"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER992:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER992"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER993:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER993"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER994:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER994"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER995:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER995"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER996:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER996"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER997:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER997"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER998:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER998"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER999:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER999"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1000:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1000"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1001:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1001"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1002:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1002"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1003:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1003"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1004:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1004"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1005:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1005"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1006:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1006"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1007:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1007"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1008:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1008"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1009:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1009"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1010:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1010"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1011:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1011"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1012:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1012"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1013:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1013"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1014:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1014"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1015:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1015"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1016:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1016"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1017:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1017"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1018:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1018"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1019:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_IROUTER1019"
-	case HV_GIC_DISTRIBUTOR_REG_GICD_PIDR2:
-		return "HV_GIC_DISTRIBUTOR_REG_GICD_PIDR2"
+	case GICDistributorRegCtlr:
+		return "GICDistributorRegCtlr"
+	case GICDistributorRegTyper:
+		return "GICDistributorRegTyper"
+	case GICDistributorRegIgroupr0:
+		return "GICDistributorRegIgroupr0"
+	case GICDistributorRegIgroupr1:
+		return "GICDistributorRegIgroupr1"
+	case GICDistributorRegIgroupr2:
+		return "GICDistributorRegIgroupr2"
+	case GICDistributorRegIgroupr3:
+		return "GICDistributorRegIgroupr3"
+	case GICDistributorRegIgroupr4:
+		return "GICDistributorRegIgroupr4"
+	case GICDistributorRegIgroupr5:
+		return "GICDistributorRegIgroupr5"
+	case GICDistributorRegIgroupr6:
+		return "GICDistributorRegIgroupr6"
+	case GICDistributorRegIgroupr7:
+		return "GICDistributorRegIgroupr7"
+	case GICDistributorRegIgroupr8:
+		return "GICDistributorRegIgroupr8"
+	case GICDistributorRegIgroupr9:
+		return "GICDistributorRegIgroupr9"
+	case GICDistributorRegIgroupr10:
+		return "GICDistributorRegIgroupr10"
+	case GICDistributorRegIgroupr11:
+		return "GICDistributorRegIgroupr11"
+	case GICDistributorRegIgroupr12:
+		return "GICDistributorRegIgroupr12"
+	case GICDistributorRegIgroupr13:
+		return "GICDistributorRegIgroupr13"
+	case GICDistributorRegIgroupr14:
+		return "GICDistributorRegIgroupr14"
+	case GICDistributorRegIgroupr15:
+		return "GICDistributorRegIgroupr15"
+	case GICDistributorRegIgroupr16:
+		return "GICDistributorRegIgroupr16"
+	case GICDistributorRegIgroupr17:
+		return "GICDistributorRegIgroupr17"
+	case GICDistributorRegIgroupr18:
+		return "GICDistributorRegIgroupr18"
+	case GICDistributorRegIgroupr19:
+		return "GICDistributorRegIgroupr19"
+	case GICDistributorRegIgroupr20:
+		return "GICDistributorRegIgroupr20"
+	case GICDistributorRegIgroupr21:
+		return "GICDistributorRegIgroupr21"
+	case GICDistributorRegIgroupr22:
+		return "GICDistributorRegIgroupr22"
+	case GICDistributorRegIgroupr23:
+		return "GICDistributorRegIgroupr23"
+	case GICDistributorRegIgroupr24:
+		return "GICDistributorRegIgroupr24"
+	case GICDistributorRegIgroupr25:
+		return "GICDistributorRegIgroupr25"
+	case GICDistributorRegIgroupr26:
+		return "GICDistributorRegIgroupr26"
+	case GICDistributorRegIgroupr27:
+		return "GICDistributorRegIgroupr27"
+	case GICDistributorRegIgroupr28:
+		return "GICDistributorRegIgroupr28"
+	case GICDistributorRegIgroupr29:
+		return "GICDistributorRegIgroupr29"
+	case GICDistributorRegIgroupr30:
+		return "GICDistributorRegIgroupr30"
+	case GICDistributorRegIgroupr31:
+		return "GICDistributorRegIgroupr31"
+	case GICDistributorRegIsenabler0:
+		return "GICDistributorRegIsenabler0"
+	case GICDistributorRegIsenabler1:
+		return "GICDistributorRegIsenabler1"
+	case GICDistributorRegIsenabler2:
+		return "GICDistributorRegIsenabler2"
+	case GICDistributorRegIsenabler3:
+		return "GICDistributorRegIsenabler3"
+	case GICDistributorRegIsenabler4:
+		return "GICDistributorRegIsenabler4"
+	case GICDistributorRegIsenabler5:
+		return "GICDistributorRegIsenabler5"
+	case GICDistributorRegIsenabler6:
+		return "GICDistributorRegIsenabler6"
+	case GICDistributorRegIsenabler7:
+		return "GICDistributorRegIsenabler7"
+	case GICDistributorRegIsenabler8:
+		return "GICDistributorRegIsenabler8"
+	case GICDistributorRegIsenabler9:
+		return "GICDistributorRegIsenabler9"
+	case GICDistributorRegIsenabler10:
+		return "GICDistributorRegIsenabler10"
+	case GICDistributorRegIsenabler11:
+		return "GICDistributorRegIsenabler11"
+	case GICDistributorRegIsenabler12:
+		return "GICDistributorRegIsenabler12"
+	case GICDistributorRegIsenabler13:
+		return "GICDistributorRegIsenabler13"
+	case GICDistributorRegIsenabler14:
+		return "GICDistributorRegIsenabler14"
+	case GICDistributorRegIsenabler15:
+		return "GICDistributorRegIsenabler15"
+	case GICDistributorRegIsenabler16:
+		return "GICDistributorRegIsenabler16"
+	case GICDistributorRegIsenabler17:
+		return "GICDistributorRegIsenabler17"
+	case GICDistributorRegIsenabler18:
+		return "GICDistributorRegIsenabler18"
+	case GICDistributorRegIsenabler19:
+		return "GICDistributorRegIsenabler19"
+	case GICDistributorRegIsenabler20:
+		return "GICDistributorRegIsenabler20"
+	case GICDistributorRegIsenabler21:
+		return "GICDistributorRegIsenabler21"
+	case GICDistributorRegIsenabler22:
+		return "GICDistributorRegIsenabler22"
+	case GICDistributorRegIsenabler23:
+		return "GICDistributorRegIsenabler23"
+	case GICDistributorRegIsenabler24:
+		return "GICDistributorRegIsenabler24"
+	case GICDistributorRegIsenabler25:
+		return "GICDistributorRegIsenabler25"
+	case GICDistributorRegIsenabler26:
+		return "GICDistributorRegIsenabler26"
+	case GICDistributorRegIsenabler27:
+		return "GICDistributorRegIsenabler27"
+	case GICDistributorRegIsenabler28:
+		return "GICDistributorRegIsenabler28"
+	case GICDistributorRegIsenabler29:
+		return "GICDistributorRegIsenabler29"
+	case GICDistributorRegIsenabler30:
+		return "GICDistributorRegIsenabler30"
+	case GICDistributorRegIsenabler31:
+		return "GICDistributorRegIsenabler31"
+	case GICDistributorRegIcenabler0:
+		return "GICDistributorRegIcenabler0"
+	case GICDistributorRegIcenabler1:
+		return "GICDistributorRegIcenabler1"
+	case GICDistributorRegIcenabler2:
+		return "GICDistributorRegIcenabler2"
+	case GICDistributorRegIcenabler3:
+		return "GICDistributorRegIcenabler3"
+	case GICDistributorRegIcenabler4:
+		return "GICDistributorRegIcenabler4"
+	case GICDistributorRegIcenabler5:
+		return "GICDistributorRegIcenabler5"
+	case GICDistributorRegIcenabler6:
+		return "GICDistributorRegIcenabler6"
+	case GICDistributorRegIcenabler7:
+		return "GICDistributorRegIcenabler7"
+	case GICDistributorRegIcenabler8:
+		return "GICDistributorRegIcenabler8"
+	case GICDistributorRegIcenabler9:
+		return "GICDistributorRegIcenabler9"
+	case GICDistributorRegIcenabler10:
+		return "GICDistributorRegIcenabler10"
+	case GICDistributorRegIcenabler11:
+		return "GICDistributorRegIcenabler11"
+	case GICDistributorRegIcenabler12:
+		return "GICDistributorRegIcenabler12"
+	case GICDistributorRegIcenabler13:
+		return "GICDistributorRegIcenabler13"
+	case GICDistributorRegIcenabler14:
+		return "GICDistributorRegIcenabler14"
+	case GICDistributorRegIcenabler15:
+		return "GICDistributorRegIcenabler15"
+	case GICDistributorRegIcenabler16:
+		return "GICDistributorRegIcenabler16"
+	case GICDistributorRegIcenabler17:
+		return "GICDistributorRegIcenabler17"
+	case GICDistributorRegIcenabler18:
+		return "GICDistributorRegIcenabler18"
+	case GICDistributorRegIcenabler19:
+		return "GICDistributorRegIcenabler19"
+	case GICDistributorRegIcenabler20:
+		return "GICDistributorRegIcenabler20"
+	case GICDistributorRegIcenabler21:
+		return "GICDistributorRegIcenabler21"
+	case GICDistributorRegIcenabler22:
+		return "GICDistributorRegIcenabler22"
+	case GICDistributorRegIcenabler23:
+		return "GICDistributorRegIcenabler23"
+	case GICDistributorRegIcenabler24:
+		return "GICDistributorRegIcenabler24"
+	case GICDistributorRegIcenabler25:
+		return "GICDistributorRegIcenabler25"
+	case GICDistributorRegIcenabler26:
+		return "GICDistributorRegIcenabler26"
+	case GICDistributorRegIcenabler27:
+		return "GICDistributorRegIcenabler27"
+	case GICDistributorRegIcenabler28:
+		return "GICDistributorRegIcenabler28"
+	case GICDistributorRegIcenabler29:
+		return "GICDistributorRegIcenabler29"
+	case GICDistributorRegIcenabler30:
+		return "GICDistributorRegIcenabler30"
+	case GICDistributorRegIcenabler31:
+		return "GICDistributorRegIcenabler31"
+	case GICDistributorRegIspendr0:
+		return "GICDistributorRegIspendr0"
+	case GICDistributorRegIspendr1:
+		return "GICDistributorRegIspendr1"
+	case GICDistributorRegIspendr2:
+		return "GICDistributorRegIspendr2"
+	case GICDistributorRegIspendr3:
+		return "GICDistributorRegIspendr3"
+	case GICDistributorRegIspendr4:
+		return "GICDistributorRegIspendr4"
+	case GICDistributorRegIspendr5:
+		return "GICDistributorRegIspendr5"
+	case GICDistributorRegIspendr6:
+		return "GICDistributorRegIspendr6"
+	case GICDistributorRegIspendr7:
+		return "GICDistributorRegIspendr7"
+	case GICDistributorRegIspendr8:
+		return "GICDistributorRegIspendr8"
+	case GICDistributorRegIspendr9:
+		return "GICDistributorRegIspendr9"
+	case GICDistributorRegIspendr10:
+		return "GICDistributorRegIspendr10"
+	case GICDistributorRegIspendr11:
+		return "GICDistributorRegIspendr11"
+	case GICDistributorRegIspendr12:
+		return "GICDistributorRegIspendr12"
+	case GICDistributorRegIspendr13:
+		return "GICDistributorRegIspendr13"
+	case GICDistributorRegIspendr14:
+		return "GICDistributorRegIspendr14"
+	case GICDistributorRegIspendr15:
+		return "GICDistributorRegIspendr15"
+	case GICDistributorRegIspendr16:
+		return "GICDistributorRegIspendr16"
+	case GICDistributorRegIspendr17:
+		return "GICDistributorRegIspendr17"
+	case GICDistributorRegIspendr18:
+		return "GICDistributorRegIspendr18"
+	case GICDistributorRegIspendr19:
+		return "GICDistributorRegIspendr19"
+	case GICDistributorRegIspendr20:
+		return "GICDistributorRegIspendr20"
+	case GICDistributorRegIspendr21:
+		return "GICDistributorRegIspendr21"
+	case GICDistributorRegIspendr22:
+		return "GICDistributorRegIspendr22"
+	case GICDistributorRegIspendr23:
+		return "GICDistributorRegIspendr23"
+	case GICDistributorRegIspendr24:
+		return "GICDistributorRegIspendr24"
+	case GICDistributorRegIspendr25:
+		return "GICDistributorRegIspendr25"
+	case GICDistributorRegIspendr26:
+		return "GICDistributorRegIspendr26"
+	case GICDistributorRegIspendr27:
+		return "GICDistributorRegIspendr27"
+	case GICDistributorRegIspendr28:
+		return "GICDistributorRegIspendr28"
+	case GICDistributorRegIspendr29:
+		return "GICDistributorRegIspendr29"
+	case GICDistributorRegIspendr30:
+		return "GICDistributorRegIspendr30"
+	case GICDistributorRegIspendr31:
+		return "GICDistributorRegIspendr31"
+	case GICDistributorRegIcpendr0:
+		return "GICDistributorRegIcpendr0"
+	case GICDistributorRegIcpendr1:
+		return "GICDistributorRegIcpendr1"
+	case GICDistributorRegIcpendr2:
+		return "GICDistributorRegIcpendr2"
+	case GICDistributorRegIcpendr3:
+		return "GICDistributorRegIcpendr3"
+	case GICDistributorRegIcpendr4:
+		return "GICDistributorRegIcpendr4"
+	case GICDistributorRegIcpendr5:
+		return "GICDistributorRegIcpendr5"
+	case GICDistributorRegIcpendr6:
+		return "GICDistributorRegIcpendr6"
+	case GICDistributorRegIcpendr7:
+		return "GICDistributorRegIcpendr7"
+	case GICDistributorRegIcpendr8:
+		return "GICDistributorRegIcpendr8"
+	case GICDistributorRegIcpendr9:
+		return "GICDistributorRegIcpendr9"
+	case GICDistributorRegIcpendr10:
+		return "GICDistributorRegIcpendr10"
+	case GICDistributorRegIcpendr11:
+		return "GICDistributorRegIcpendr11"
+	case GICDistributorRegIcpendr12:
+		return "GICDistributorRegIcpendr12"
+	case GICDistributorRegIcpendr13:
+		return "GICDistributorRegIcpendr13"
+	case GICDistributorRegIcpendr14:
+		return "GICDistributorRegIcpendr14"
+	case GICDistributorRegIcpendr15:
+		return "GICDistributorRegIcpendr15"
+	case GICDistributorRegIcpendr16:
+		return "GICDistributorRegIcpendr16"
+	case GICDistributorRegIcpendr17:
+		return "GICDistributorRegIcpendr17"
+	case GICDistributorRegIcpendr18:
+		return "GICDistributorRegIcpendr18"
+	case GICDistributorRegIcpendr19:
+		return "GICDistributorRegIcpendr19"
+	case GICDistributorRegIcpendr20:
+		return "GICDistributorRegIcpendr20"
+	case GICDistributorRegIcpendr21:
+		return "GICDistributorRegIcpendr21"
+	case GICDistributorRegIcpendr22:
+		return "GICDistributorRegIcpendr22"
+	case GICDistributorRegIcpendr23:
+		return "GICDistributorRegIcpendr23"
+	case GICDistributorRegIcpendr24:
+		return "GICDistributorRegIcpendr24"
+	case GICDistributorRegIcpendr25:
+		return "GICDistributorRegIcpendr25"
+	case GICDistributorRegIcpendr26:
+		return "GICDistributorRegIcpendr26"
+	case GICDistributorRegIcpendr27:
+		return "GICDistributorRegIcpendr27"
+	case GICDistributorRegIcpendr28:
+		return "GICDistributorRegIcpendr28"
+	case GICDistributorRegIcpendr29:
+		return "GICDistributorRegIcpendr29"
+	case GICDistributorRegIcpendr30:
+		return "GICDistributorRegIcpendr30"
+	case GICDistributorRegIcpendr31:
+		return "GICDistributorRegIcpendr31"
+	case GICDistributorRegIsactiver0:
+		return "GICDistributorRegIsactiver0"
+	case GICDistributorRegIsactiver1:
+		return "GICDistributorRegIsactiver1"
+	case GICDistributorRegIsactiver2:
+		return "GICDistributorRegIsactiver2"
+	case GICDistributorRegIsactiver3:
+		return "GICDistributorRegIsactiver3"
+	case GICDistributorRegIsactiver4:
+		return "GICDistributorRegIsactiver4"
+	case GICDistributorRegIsactiver5:
+		return "GICDistributorRegIsactiver5"
+	case GICDistributorRegIsactiver6:
+		return "GICDistributorRegIsactiver6"
+	case GICDistributorRegIsactiver7:
+		return "GICDistributorRegIsactiver7"
+	case GICDistributorRegIsactiver8:
+		return "GICDistributorRegIsactiver8"
+	case GICDistributorRegIsactiver9:
+		return "GICDistributorRegIsactiver9"
+	case GICDistributorRegIsactiver10:
+		return "GICDistributorRegIsactiver10"
+	case GICDistributorRegIsactiver11:
+		return "GICDistributorRegIsactiver11"
+	case GICDistributorRegIsactiver12:
+		return "GICDistributorRegIsactiver12"
+	case GICDistributorRegIsactiver13:
+		return "GICDistributorRegIsactiver13"
+	case GICDistributorRegIsactiver14:
+		return "GICDistributorRegIsactiver14"
+	case GICDistributorRegIsactiver15:
+		return "GICDistributorRegIsactiver15"
+	case GICDistributorRegIsactiver16:
+		return "GICDistributorRegIsactiver16"
+	case GICDistributorRegIsactiver17:
+		return "GICDistributorRegIsactiver17"
+	case GICDistributorRegIsactiver18:
+		return "GICDistributorRegIsactiver18"
+	case GICDistributorRegIsactiver19:
+		return "GICDistributorRegIsactiver19"
+	case GICDistributorRegIsactiver20:
+		return "GICDistributorRegIsactiver20"
+	case GICDistributorRegIsactiver21:
+		return "GICDistributorRegIsactiver21"
+	case GICDistributorRegIsactiver22:
+		return "GICDistributorRegIsactiver22"
+	case GICDistributorRegIsactiver23:
+		return "GICDistributorRegIsactiver23"
+	case GICDistributorRegIsactiver24:
+		return "GICDistributorRegIsactiver24"
+	case GICDistributorRegIsactiver25:
+		return "GICDistributorRegIsactiver25"
+	case GICDistributorRegIsactiver26:
+		return "GICDistributorRegIsactiver26"
+	case GICDistributorRegIsactiver27:
+		return "GICDistributorRegIsactiver27"
+	case GICDistributorRegIsactiver28:
+		return "GICDistributorRegIsactiver28"
+	case GICDistributorRegIsactiver29:
+		return "GICDistributorRegIsactiver29"
+	case GICDistributorRegIsactiver30:
+		return "GICDistributorRegIsactiver30"
+	case GICDistributorRegIsactiver31:
+		return "GICDistributorRegIsactiver31"
+	case GICDistributorRegIcactiver0:
+		return "GICDistributorRegIcactiver0"
+	case GICDistributorRegIcactiver1:
+		return "GICDistributorRegIcactiver1"
+	case GICDistributorRegIcactiver2:
+		return "GICDistributorRegIcactiver2"
+	case GICDistributorRegIcactiver3:
+		return "GICDistributorRegIcactiver3"
+	case GICDistributorRegIcactiver4:
+		return "GICDistributorRegIcactiver4"
+	case GICDistributorRegIcactiver5:
+		return "GICDistributorRegIcactiver5"
+	case GICDistributorRegIcactiver6:
+		return "GICDistributorRegIcactiver6"
+	case GICDistributorRegIcactiver7:
+		return "GICDistributorRegIcactiver7"
+	case GICDistributorRegIcactiver8:
+		return "GICDistributorRegIcactiver8"
+	case GICDistributorRegIcactiver9:
+		return "GICDistributorRegIcactiver9"
+	case GICDistributorRegIcactiver10:
+		return "GICDistributorRegIcactiver10"
+	case GICDistributorRegIcactiver11:
+		return "GICDistributorRegIcactiver11"
+	case GICDistributorRegIcactiver12:
+		return "GICDistributorRegIcactiver12"
+	case GICDistributorRegIcactiver13:
+		return "GICDistributorRegIcactiver13"
+	case GICDistributorRegIcactiver14:
+		return "GICDistributorRegIcactiver14"
+	case GICDistributorRegIcactiver15:
+		return "GICDistributorRegIcactiver15"
+	case GICDistributorRegIcactiver16:
+		return "GICDistributorRegIcactiver16"
+	case GICDistributorRegIcactiver17:
+		return "GICDistributorRegIcactiver17"
+	case GICDistributorRegIcactiver18:
+		return "GICDistributorRegIcactiver18"
+	case GICDistributorRegIcactiver19:
+		return "GICDistributorRegIcactiver19"
+	case GICDistributorRegIcactiver20:
+		return "GICDistributorRegIcactiver20"
+	case GICDistributorRegIcactiver21:
+		return "GICDistributorRegIcactiver21"
+	case GICDistributorRegIcactiver22:
+		return "GICDistributorRegIcactiver22"
+	case GICDistributorRegIcactiver23:
+		return "GICDistributorRegIcactiver23"
+	case GICDistributorRegIcactiver24:
+		return "GICDistributorRegIcactiver24"
+	case GICDistributorRegIcactiver25:
+		return "GICDistributorRegIcactiver25"
+	case GICDistributorRegIcactiver26:
+		return "GICDistributorRegIcactiver26"
+	case GICDistributorRegIcactiver27:
+		return "GICDistributorRegIcactiver27"
+	case GICDistributorRegIcactiver28:
+		return "GICDistributorRegIcactiver28"
+	case GICDistributorRegIcactiver29:
+		return "GICDistributorRegIcactiver29"
+	case GICDistributorRegIcactiver30:
+		return "GICDistributorRegIcactiver30"
+	case GICDistributorRegIcactiver31:
+		return "GICDistributorRegIcactiver31"
+	case GICDistributorRegIpriorityr0:
+		return "GICDistributorRegIpriorityr0"
+	case GICDistributorRegIpriorityr1:
+		return "GICDistributorRegIpriorityr1"
+	case GICDistributorRegIpriorityr2:
+		return "GICDistributorRegIpriorityr2"
+	case GICDistributorRegIpriorityr3:
+		return "GICDistributorRegIpriorityr3"
+	case GICDistributorRegIpriorityr4:
+		return "GICDistributorRegIpriorityr4"
+	case GICDistributorRegIpriorityr5:
+		return "GICDistributorRegIpriorityr5"
+	case GICDistributorRegIpriorityr6:
+		return "GICDistributorRegIpriorityr6"
+	case GICDistributorRegIpriorityr7:
+		return "GICDistributorRegIpriorityr7"
+	case GICDistributorRegIpriorityr8:
+		return "GICDistributorRegIpriorityr8"
+	case GICDistributorRegIpriorityr9:
+		return "GICDistributorRegIpriorityr9"
+	case GICDistributorRegIpriorityr10:
+		return "GICDistributorRegIpriorityr10"
+	case GICDistributorRegIpriorityr11:
+		return "GICDistributorRegIpriorityr11"
+	case GICDistributorRegIpriorityr12:
+		return "GICDistributorRegIpriorityr12"
+	case GICDistributorRegIpriorityr13:
+		return "GICDistributorRegIpriorityr13"
+	case GICDistributorRegIpriorityr14:
+		return "GICDistributorRegIpriorityr14"
+	case GICDistributorRegIpriorityr15:
+		return "GICDistributorRegIpriorityr15"
+	case GICDistributorRegIpriorityr16:
+		return "GICDistributorRegIpriorityr16"
+	case GICDistributorRegIpriorityr17:
+		return "GICDistributorRegIpriorityr17"
+	case GICDistributorRegIpriorityr18:
+		return "GICDistributorRegIpriorityr18"
+	case GICDistributorRegIpriorityr19:
+		return "GICDistributorRegIpriorityr19"
+	case GICDistributorRegIpriorityr20:
+		return "GICDistributorRegIpriorityr20"
+	case GICDistributorRegIpriorityr21:
+		return "GICDistributorRegIpriorityr21"
+	case GICDistributorRegIpriorityr22:
+		return "GICDistributorRegIpriorityr22"
+	case GICDistributorRegIpriorityr23:
+		return "GICDistributorRegIpriorityr23"
+	case GICDistributorRegIpriorityr24:
+		return "GICDistributorRegIpriorityr24"
+	case GICDistributorRegIpriorityr25:
+		return "GICDistributorRegIpriorityr25"
+	case GICDistributorRegIpriorityr26:
+		return "GICDistributorRegIpriorityr26"
+	case GICDistributorRegIpriorityr27:
+		return "GICDistributorRegIpriorityr27"
+	case GICDistributorRegIpriorityr28:
+		return "GICDistributorRegIpriorityr28"
+	case GICDistributorRegIpriorityr29:
+		return "GICDistributorRegIpriorityr29"
+	case GICDistributorRegIpriorityr30:
+		return "GICDistributorRegIpriorityr30"
+	case GICDistributorRegIpriorityr31:
+		return "GICDistributorRegIpriorityr31"
+	case GICDistributorRegIpriorityr32:
+		return "GICDistributorRegIpriorityr32"
+	case GICDistributorRegIpriorityr33:
+		return "GICDistributorRegIpriorityr33"
+	case GICDistributorRegIpriorityr34:
+		return "GICDistributorRegIpriorityr34"
+	case GICDistributorRegIpriorityr35:
+		return "GICDistributorRegIpriorityr35"
+	case GICDistributorRegIpriorityr36:
+		return "GICDistributorRegIpriorityr36"
+	case GICDistributorRegIpriorityr37:
+		return "GICDistributorRegIpriorityr37"
+	case GICDistributorRegIpriorityr38:
+		return "GICDistributorRegIpriorityr38"
+	case GICDistributorRegIpriorityr39:
+		return "GICDistributorRegIpriorityr39"
+	case GICDistributorRegIpriorityr40:
+		return "GICDistributorRegIpriorityr40"
+	case GICDistributorRegIpriorityr41:
+		return "GICDistributorRegIpriorityr41"
+	case GICDistributorRegIpriorityr42:
+		return "GICDistributorRegIpriorityr42"
+	case GICDistributorRegIpriorityr43:
+		return "GICDistributorRegIpriorityr43"
+	case GICDistributorRegIpriorityr44:
+		return "GICDistributorRegIpriorityr44"
+	case GICDistributorRegIpriorityr45:
+		return "GICDistributorRegIpriorityr45"
+	case GICDistributorRegIpriorityr46:
+		return "GICDistributorRegIpriorityr46"
+	case GICDistributorRegIpriorityr47:
+		return "GICDistributorRegIpriorityr47"
+	case GICDistributorRegIpriorityr48:
+		return "GICDistributorRegIpriorityr48"
+	case GICDistributorRegIpriorityr49:
+		return "GICDistributorRegIpriorityr49"
+	case GICDistributorRegIpriorityr50:
+		return "GICDistributorRegIpriorityr50"
+	case GICDistributorRegIpriorityr51:
+		return "GICDistributorRegIpriorityr51"
+	case GICDistributorRegIpriorityr52:
+		return "GICDistributorRegIpriorityr52"
+	case GICDistributorRegIpriorityr53:
+		return "GICDistributorRegIpriorityr53"
+	case GICDistributorRegIpriorityr54:
+		return "GICDistributorRegIpriorityr54"
+	case GICDistributorRegIpriorityr55:
+		return "GICDistributorRegIpriorityr55"
+	case GICDistributorRegIpriorityr56:
+		return "GICDistributorRegIpriorityr56"
+	case GICDistributorRegIpriorityr57:
+		return "GICDistributorRegIpriorityr57"
+	case GICDistributorRegIpriorityr58:
+		return "GICDistributorRegIpriorityr58"
+	case GICDistributorRegIpriorityr59:
+		return "GICDistributorRegIpriorityr59"
+	case GICDistributorRegIpriorityr60:
+		return "GICDistributorRegIpriorityr60"
+	case GICDistributorRegIpriorityr61:
+		return "GICDistributorRegIpriorityr61"
+	case GICDistributorRegIpriorityr62:
+		return "GICDistributorRegIpriorityr62"
+	case GICDistributorRegIpriorityr63:
+		return "GICDistributorRegIpriorityr63"
+	case GICDistributorRegIpriorityr64:
+		return "GICDistributorRegIpriorityr64"
+	case GICDistributorRegIpriorityr65:
+		return "GICDistributorRegIpriorityr65"
+	case GICDistributorRegIpriorityr66:
+		return "GICDistributorRegIpriorityr66"
+	case GICDistributorRegIpriorityr67:
+		return "GICDistributorRegIpriorityr67"
+	case GICDistributorRegIpriorityr68:
+		return "GICDistributorRegIpriorityr68"
+	case GICDistributorRegIpriorityr69:
+		return "GICDistributorRegIpriorityr69"
+	case GICDistributorRegIpriorityr70:
+		return "GICDistributorRegIpriorityr70"
+	case GICDistributorRegIpriorityr71:
+		return "GICDistributorRegIpriorityr71"
+	case GICDistributorRegIpriorityr72:
+		return "GICDistributorRegIpriorityr72"
+	case GICDistributorRegIpriorityr73:
+		return "GICDistributorRegIpriorityr73"
+	case GICDistributorRegIpriorityr74:
+		return "GICDistributorRegIpriorityr74"
+	case GICDistributorRegIpriorityr75:
+		return "GICDistributorRegIpriorityr75"
+	case GICDistributorRegIpriorityr76:
+		return "GICDistributorRegIpriorityr76"
+	case GICDistributorRegIpriorityr77:
+		return "GICDistributorRegIpriorityr77"
+	case GICDistributorRegIpriorityr78:
+		return "GICDistributorRegIpriorityr78"
+	case GICDistributorRegIpriorityr79:
+		return "GICDistributorRegIpriorityr79"
+	case GICDistributorRegIpriorityr80:
+		return "GICDistributorRegIpriorityr80"
+	case GICDistributorRegIpriorityr81:
+		return "GICDistributorRegIpriorityr81"
+	case GICDistributorRegIpriorityr82:
+		return "GICDistributorRegIpriorityr82"
+	case GICDistributorRegIpriorityr83:
+		return "GICDistributorRegIpriorityr83"
+	case GICDistributorRegIpriorityr84:
+		return "GICDistributorRegIpriorityr84"
+	case GICDistributorRegIpriorityr85:
+		return "GICDistributorRegIpriorityr85"
+	case GICDistributorRegIpriorityr86:
+		return "GICDistributorRegIpriorityr86"
+	case GICDistributorRegIpriorityr87:
+		return "GICDistributorRegIpriorityr87"
+	case GICDistributorRegIpriorityr88:
+		return "GICDistributorRegIpriorityr88"
+	case GICDistributorRegIpriorityr89:
+		return "GICDistributorRegIpriorityr89"
+	case GICDistributorRegIpriorityr90:
+		return "GICDistributorRegIpriorityr90"
+	case GICDistributorRegIpriorityr91:
+		return "GICDistributorRegIpriorityr91"
+	case GICDistributorRegIpriorityr92:
+		return "GICDistributorRegIpriorityr92"
+	case GICDistributorRegIpriorityr93:
+		return "GICDistributorRegIpriorityr93"
+	case GICDistributorRegIpriorityr94:
+		return "GICDistributorRegIpriorityr94"
+	case GICDistributorRegIpriorityr95:
+		return "GICDistributorRegIpriorityr95"
+	case GICDistributorRegIpriorityr96:
+		return "GICDistributorRegIpriorityr96"
+	case GICDistributorRegIpriorityr97:
+		return "GICDistributorRegIpriorityr97"
+	case GICDistributorRegIpriorityr98:
+		return "GICDistributorRegIpriorityr98"
+	case GICDistributorRegIpriorityr99:
+		return "GICDistributorRegIpriorityr99"
+	case GICDistributorRegIpriorityr100:
+		return "GICDistributorRegIpriorityr100"
+	case GICDistributorRegIpriorityr101:
+		return "GICDistributorRegIpriorityr101"
+	case GICDistributorRegIpriorityr102:
+		return "GICDistributorRegIpriorityr102"
+	case GICDistributorRegIpriorityr103:
+		return "GICDistributorRegIpriorityr103"
+	case GICDistributorRegIpriorityr104:
+		return "GICDistributorRegIpriorityr104"
+	case GICDistributorRegIpriorityr105:
+		return "GICDistributorRegIpriorityr105"
+	case GICDistributorRegIpriorityr106:
+		return "GICDistributorRegIpriorityr106"
+	case GICDistributorRegIpriorityr107:
+		return "GICDistributorRegIpriorityr107"
+	case GICDistributorRegIpriorityr108:
+		return "GICDistributorRegIpriorityr108"
+	case GICDistributorRegIpriorityr109:
+		return "GICDistributorRegIpriorityr109"
+	case GICDistributorRegIpriorityr110:
+		return "GICDistributorRegIpriorityr110"
+	case GICDistributorRegIpriorityr111:
+		return "GICDistributorRegIpriorityr111"
+	case GICDistributorRegIpriorityr112:
+		return "GICDistributorRegIpriorityr112"
+	case GICDistributorRegIpriorityr113:
+		return "GICDistributorRegIpriorityr113"
+	case GICDistributorRegIpriorityr114:
+		return "GICDistributorRegIpriorityr114"
+	case GICDistributorRegIpriorityr115:
+		return "GICDistributorRegIpriorityr115"
+	case GICDistributorRegIpriorityr116:
+		return "GICDistributorRegIpriorityr116"
+	case GICDistributorRegIpriorityr117:
+		return "GICDistributorRegIpriorityr117"
+	case GICDistributorRegIpriorityr118:
+		return "GICDistributorRegIpriorityr118"
+	case GICDistributorRegIpriorityr119:
+		return "GICDistributorRegIpriorityr119"
+	case GICDistributorRegIpriorityr120:
+		return "GICDistributorRegIpriorityr120"
+	case GICDistributorRegIpriorityr121:
+		return "GICDistributorRegIpriorityr121"
+	case GICDistributorRegIpriorityr122:
+		return "GICDistributorRegIpriorityr122"
+	case GICDistributorRegIpriorityr123:
+		return "GICDistributorRegIpriorityr123"
+	case GICDistributorRegIpriorityr124:
+		return "GICDistributorRegIpriorityr124"
+	case GICDistributorRegIpriorityr125:
+		return "GICDistributorRegIpriorityr125"
+	case GICDistributorRegIpriorityr126:
+		return "GICDistributorRegIpriorityr126"
+	case GICDistributorRegIpriorityr127:
+		return "GICDistributorRegIpriorityr127"
+	case GICDistributorRegIpriorityr128:
+		return "GICDistributorRegIpriorityr128"
+	case GICDistributorRegIpriorityr129:
+		return "GICDistributorRegIpriorityr129"
+	case GICDistributorRegIpriorityr130:
+		return "GICDistributorRegIpriorityr130"
+	case GICDistributorRegIpriorityr131:
+		return "GICDistributorRegIpriorityr131"
+	case GICDistributorRegIpriorityr132:
+		return "GICDistributorRegIpriorityr132"
+	case GICDistributorRegIpriorityr133:
+		return "GICDistributorRegIpriorityr133"
+	case GICDistributorRegIpriorityr134:
+		return "GICDistributorRegIpriorityr134"
+	case GICDistributorRegIpriorityr135:
+		return "GICDistributorRegIpriorityr135"
+	case GICDistributorRegIpriorityr136:
+		return "GICDistributorRegIpriorityr136"
+	case GICDistributorRegIpriorityr137:
+		return "GICDistributorRegIpriorityr137"
+	case GICDistributorRegIpriorityr138:
+		return "GICDistributorRegIpriorityr138"
+	case GICDistributorRegIpriorityr139:
+		return "GICDistributorRegIpriorityr139"
+	case GICDistributorRegIpriorityr140:
+		return "GICDistributorRegIpriorityr140"
+	case GICDistributorRegIpriorityr141:
+		return "GICDistributorRegIpriorityr141"
+	case GICDistributorRegIpriorityr142:
+		return "GICDistributorRegIpriorityr142"
+	case GICDistributorRegIpriorityr143:
+		return "GICDistributorRegIpriorityr143"
+	case GICDistributorRegIpriorityr144:
+		return "GICDistributorRegIpriorityr144"
+	case GICDistributorRegIpriorityr145:
+		return "GICDistributorRegIpriorityr145"
+	case GICDistributorRegIpriorityr146:
+		return "GICDistributorRegIpriorityr146"
+	case GICDistributorRegIpriorityr147:
+		return "GICDistributorRegIpriorityr147"
+	case GICDistributorRegIpriorityr148:
+		return "GICDistributorRegIpriorityr148"
+	case GICDistributorRegIpriorityr149:
+		return "GICDistributorRegIpriorityr149"
+	case GICDistributorRegIpriorityr150:
+		return "GICDistributorRegIpriorityr150"
+	case GICDistributorRegIpriorityr151:
+		return "GICDistributorRegIpriorityr151"
+	case GICDistributorRegIpriorityr152:
+		return "GICDistributorRegIpriorityr152"
+	case GICDistributorRegIpriorityr153:
+		return "GICDistributorRegIpriorityr153"
+	case GICDistributorRegIpriorityr154:
+		return "GICDistributorRegIpriorityr154"
+	case GICDistributorRegIpriorityr155:
+		return "GICDistributorRegIpriorityr155"
+	case GICDistributorRegIpriorityr156:
+		return "GICDistributorRegIpriorityr156"
+	case GICDistributorRegIpriorityr157:
+		return "GICDistributorRegIpriorityr157"
+	case GICDistributorRegIpriorityr158:
+		return "GICDistributorRegIpriorityr158"
+	case GICDistributorRegIpriorityr159:
+		return "GICDistributorRegIpriorityr159"
+	case GICDistributorRegIpriorityr160:
+		return "GICDistributorRegIpriorityr160"
+	case GICDistributorRegIpriorityr161:
+		return "GICDistributorRegIpriorityr161"
+	case GICDistributorRegIpriorityr162:
+		return "GICDistributorRegIpriorityr162"
+	case GICDistributorRegIpriorityr163:
+		return "GICDistributorRegIpriorityr163"
+	case GICDistributorRegIpriorityr164:
+		return "GICDistributorRegIpriorityr164"
+	case GICDistributorRegIpriorityr165:
+		return "GICDistributorRegIpriorityr165"
+	case GICDistributorRegIpriorityr166:
+		return "GICDistributorRegIpriorityr166"
+	case GICDistributorRegIpriorityr167:
+		return "GICDistributorRegIpriorityr167"
+	case GICDistributorRegIpriorityr168:
+		return "GICDistributorRegIpriorityr168"
+	case GICDistributorRegIpriorityr169:
+		return "GICDistributorRegIpriorityr169"
+	case GICDistributorRegIpriorityr170:
+		return "GICDistributorRegIpriorityr170"
+	case GICDistributorRegIpriorityr171:
+		return "GICDistributorRegIpriorityr171"
+	case GICDistributorRegIpriorityr172:
+		return "GICDistributorRegIpriorityr172"
+	case GICDistributorRegIpriorityr173:
+		return "GICDistributorRegIpriorityr173"
+	case GICDistributorRegIpriorityr174:
+		return "GICDistributorRegIpriorityr174"
+	case GICDistributorRegIpriorityr175:
+		return "GICDistributorRegIpriorityr175"
+	case GICDistributorRegIpriorityr176:
+		return "GICDistributorRegIpriorityr176"
+	case GICDistributorRegIpriorityr177:
+		return "GICDistributorRegIpriorityr177"
+	case GICDistributorRegIpriorityr178:
+		return "GICDistributorRegIpriorityr178"
+	case GICDistributorRegIpriorityr179:
+		return "GICDistributorRegIpriorityr179"
+	case GICDistributorRegIpriorityr180:
+		return "GICDistributorRegIpriorityr180"
+	case GICDistributorRegIpriorityr181:
+		return "GICDistributorRegIpriorityr181"
+	case GICDistributorRegIpriorityr182:
+		return "GICDistributorRegIpriorityr182"
+	case GICDistributorRegIpriorityr183:
+		return "GICDistributorRegIpriorityr183"
+	case GICDistributorRegIpriorityr184:
+		return "GICDistributorRegIpriorityr184"
+	case GICDistributorRegIpriorityr185:
+		return "GICDistributorRegIpriorityr185"
+	case GICDistributorRegIpriorityr186:
+		return "GICDistributorRegIpriorityr186"
+	case GICDistributorRegIpriorityr187:
+		return "GICDistributorRegIpriorityr187"
+	case GICDistributorRegIpriorityr188:
+		return "GICDistributorRegIpriorityr188"
+	case GICDistributorRegIpriorityr189:
+		return "GICDistributorRegIpriorityr189"
+	case GICDistributorRegIpriorityr190:
+		return "GICDistributorRegIpriorityr190"
+	case GICDistributorRegIpriorityr191:
+		return "GICDistributorRegIpriorityr191"
+	case GICDistributorRegIpriorityr192:
+		return "GICDistributorRegIpriorityr192"
+	case GICDistributorRegIpriorityr193:
+		return "GICDistributorRegIpriorityr193"
+	case GICDistributorRegIpriorityr194:
+		return "GICDistributorRegIpriorityr194"
+	case GICDistributorRegIpriorityr195:
+		return "GICDistributorRegIpriorityr195"
+	case GICDistributorRegIpriorityr196:
+		return "GICDistributorRegIpriorityr196"
+	case GICDistributorRegIpriorityr197:
+		return "GICDistributorRegIpriorityr197"
+	case GICDistributorRegIpriorityr198:
+		return "GICDistributorRegIpriorityr198"
+	case GICDistributorRegIpriorityr199:
+		return "GICDistributorRegIpriorityr199"
+	case GICDistributorRegIpriorityr200:
+		return "GICDistributorRegIpriorityr200"
+	case GICDistributorRegIpriorityr201:
+		return "GICDistributorRegIpriorityr201"
+	case GICDistributorRegIpriorityr202:
+		return "GICDistributorRegIpriorityr202"
+	case GICDistributorRegIpriorityr203:
+		return "GICDistributorRegIpriorityr203"
+	case GICDistributorRegIpriorityr204:
+		return "GICDistributorRegIpriorityr204"
+	case GICDistributorRegIpriorityr205:
+		return "GICDistributorRegIpriorityr205"
+	case GICDistributorRegIpriorityr206:
+		return "GICDistributorRegIpriorityr206"
+	case GICDistributorRegIpriorityr207:
+		return "GICDistributorRegIpriorityr207"
+	case GICDistributorRegIpriorityr208:
+		return "GICDistributorRegIpriorityr208"
+	case GICDistributorRegIpriorityr209:
+		return "GICDistributorRegIpriorityr209"
+	case GICDistributorRegIpriorityr210:
+		return "GICDistributorRegIpriorityr210"
+	case GICDistributorRegIpriorityr211:
+		return "GICDistributorRegIpriorityr211"
+	case GICDistributorRegIpriorityr212:
+		return "GICDistributorRegIpriorityr212"
+	case GICDistributorRegIpriorityr213:
+		return "GICDistributorRegIpriorityr213"
+	case GICDistributorRegIpriorityr214:
+		return "GICDistributorRegIpriorityr214"
+	case GICDistributorRegIpriorityr215:
+		return "GICDistributorRegIpriorityr215"
+	case GICDistributorRegIpriorityr216:
+		return "GICDistributorRegIpriorityr216"
+	case GICDistributorRegIpriorityr217:
+		return "GICDistributorRegIpriorityr217"
+	case GICDistributorRegIpriorityr218:
+		return "GICDistributorRegIpriorityr218"
+	case GICDistributorRegIpriorityr219:
+		return "GICDistributorRegIpriorityr219"
+	case GICDistributorRegIpriorityr220:
+		return "GICDistributorRegIpriorityr220"
+	case GICDistributorRegIpriorityr221:
+		return "GICDistributorRegIpriorityr221"
+	case GICDistributorRegIpriorityr222:
+		return "GICDistributorRegIpriorityr222"
+	case GICDistributorRegIpriorityr223:
+		return "GICDistributorRegIpriorityr223"
+	case GICDistributorRegIpriorityr224:
+		return "GICDistributorRegIpriorityr224"
+	case GICDistributorRegIpriorityr225:
+		return "GICDistributorRegIpriorityr225"
+	case GICDistributorRegIpriorityr226:
+		return "GICDistributorRegIpriorityr226"
+	case GICDistributorRegIpriorityr227:
+		return "GICDistributorRegIpriorityr227"
+	case GICDistributorRegIpriorityr228:
+		return "GICDistributorRegIpriorityr228"
+	case GICDistributorRegIpriorityr229:
+		return "GICDistributorRegIpriorityr229"
+	case GICDistributorRegIpriorityr230:
+		return "GICDistributorRegIpriorityr230"
+	case GICDistributorRegIpriorityr231:
+		return "GICDistributorRegIpriorityr231"
+	case GICDistributorRegIpriorityr232:
+		return "GICDistributorRegIpriorityr232"
+	case GICDistributorRegIpriorityr233:
+		return "GICDistributorRegIpriorityr233"
+	case GICDistributorRegIpriorityr234:
+		return "GICDistributorRegIpriorityr234"
+	case GICDistributorRegIpriorityr235:
+		return "GICDistributorRegIpriorityr235"
+	case GICDistributorRegIpriorityr236:
+		return "GICDistributorRegIpriorityr236"
+	case GICDistributorRegIpriorityr237:
+		return "GICDistributorRegIpriorityr237"
+	case GICDistributorRegIpriorityr238:
+		return "GICDistributorRegIpriorityr238"
+	case GICDistributorRegIpriorityr239:
+		return "GICDistributorRegIpriorityr239"
+	case GICDistributorRegIpriorityr240:
+		return "GICDistributorRegIpriorityr240"
+	case GICDistributorRegIpriorityr241:
+		return "GICDistributorRegIpriorityr241"
+	case GICDistributorRegIpriorityr242:
+		return "GICDistributorRegIpriorityr242"
+	case GICDistributorRegIpriorityr243:
+		return "GICDistributorRegIpriorityr243"
+	case GICDistributorRegIpriorityr244:
+		return "GICDistributorRegIpriorityr244"
+	case GICDistributorRegIpriorityr245:
+		return "GICDistributorRegIpriorityr245"
+	case GICDistributorRegIpriorityr246:
+		return "GICDistributorRegIpriorityr246"
+	case GICDistributorRegIpriorityr247:
+		return "GICDistributorRegIpriorityr247"
+	case GICDistributorRegIpriorityr248:
+		return "GICDistributorRegIpriorityr248"
+	case GICDistributorRegIpriorityr249:
+		return "GICDistributorRegIpriorityr249"
+	case GICDistributorRegIpriorityr250:
+		return "GICDistributorRegIpriorityr250"
+	case GICDistributorRegIpriorityr251:
+		return "GICDistributorRegIpriorityr251"
+	case GICDistributorRegIpriorityr252:
+		return "GICDistributorRegIpriorityr252"
+	case GICDistributorRegIpriorityr253:
+		return "GICDistributorRegIpriorityr253"
+	case GICDistributorRegIpriorityr254:
+		return "GICDistributorRegIpriorityr254"
+	case GICDistributorRegIcfgr0:
+		return "GICDistributorRegIcfgr0"
+	case GICDistributorRegIcfgr1:
+		return "GICDistributorRegIcfgr1"
+	case GICDistributorRegIcfgr2:
+		return "GICDistributorRegIcfgr2"
+	case GICDistributorRegIcfgr3:
+		return "GICDistributorRegIcfgr3"
+	case GICDistributorRegIcfgr4:
+		return "GICDistributorRegIcfgr4"
+	case GICDistributorRegIcfgr5:
+		return "GICDistributorRegIcfgr5"
+	case GICDistributorRegIcfgr6:
+		return "GICDistributorRegIcfgr6"
+	case GICDistributorRegIcfgr7:
+		return "GICDistributorRegIcfgr7"
+	case GICDistributorRegIcfgr8:
+		return "GICDistributorRegIcfgr8"
+	case GICDistributorRegIcfgr9:
+		return "GICDistributorRegIcfgr9"
+	case GICDistributorRegIcfgr10:
+		return "GICDistributorRegIcfgr10"
+	case GICDistributorRegIcfgr11:
+		return "GICDistributorRegIcfgr11"
+	case GICDistributorRegIcfgr12:
+		return "GICDistributorRegIcfgr12"
+	case GICDistributorRegIcfgr13:
+		return "GICDistributorRegIcfgr13"
+	case GICDistributorRegIcfgr14:
+		return "GICDistributorRegIcfgr14"
+	case GICDistributorRegIcfgr15:
+		return "GICDistributorRegIcfgr15"
+	case GICDistributorRegIcfgr16:
+		return "GICDistributorRegIcfgr16"
+	case GICDistributorRegIcfgr17:
+		return "GICDistributorRegIcfgr17"
+	case GICDistributorRegIcfgr18:
+		return "GICDistributorRegIcfgr18"
+	case GICDistributorRegIcfgr19:
+		return "GICDistributorRegIcfgr19"
+	case GICDistributorRegIcfgr20:
+		return "GICDistributorRegIcfgr20"
+	case GICDistributorRegIcfgr21:
+		return "GICDistributorRegIcfgr21"
+	case GICDistributorRegIcfgr22:
+		return "GICDistributorRegIcfgr22"
+	case GICDistributorRegIcfgr23:
+		return "GICDistributorRegIcfgr23"
+	case GICDistributorRegIcfgr24:
+		return "GICDistributorRegIcfgr24"
+	case GICDistributorRegIcfgr25:
+		return "GICDistributorRegIcfgr25"
+	case GICDistributorRegIcfgr26:
+		return "GICDistributorRegIcfgr26"
+	case GICDistributorRegIcfgr27:
+		return "GICDistributorRegIcfgr27"
+	case GICDistributorRegIcfgr28:
+		return "GICDistributorRegIcfgr28"
+	case GICDistributorRegIcfgr29:
+		return "GICDistributorRegIcfgr29"
+	case GICDistributorRegIcfgr30:
+		return "GICDistributorRegIcfgr30"
+	case GICDistributorRegIcfgr31:
+		return "GICDistributorRegIcfgr31"
+	case GICDistributorRegIcfgr32:
+		return "GICDistributorRegIcfgr32"
+	case GICDistributorRegIcfgr33:
+		return "GICDistributorRegIcfgr33"
+	case GICDistributorRegIcfgr34:
+		return "GICDistributorRegIcfgr34"
+	case GICDistributorRegIcfgr35:
+		return "GICDistributorRegIcfgr35"
+	case GICDistributorRegIcfgr36:
+		return "GICDistributorRegIcfgr36"
+	case GICDistributorRegIcfgr37:
+		return "GICDistributorRegIcfgr37"
+	case GICDistributorRegIcfgr38:
+		return "GICDistributorRegIcfgr38"
+	case GICDistributorRegIcfgr39:
+		return "GICDistributorRegIcfgr39"
+	case GICDistributorRegIcfgr40:
+		return "GICDistributorRegIcfgr40"
+	case GICDistributorRegIcfgr41:
+		return "GICDistributorRegIcfgr41"
+	case GICDistributorRegIcfgr42:
+		return "GICDistributorRegIcfgr42"
+	case GICDistributorRegIcfgr43:
+		return "GICDistributorRegIcfgr43"
+	case GICDistributorRegIcfgr44:
+		return "GICDistributorRegIcfgr44"
+	case GICDistributorRegIcfgr45:
+		return "GICDistributorRegIcfgr45"
+	case GICDistributorRegIcfgr46:
+		return "GICDistributorRegIcfgr46"
+	case GICDistributorRegIcfgr47:
+		return "GICDistributorRegIcfgr47"
+	case GICDistributorRegIcfgr48:
+		return "GICDistributorRegIcfgr48"
+	case GICDistributorRegIcfgr49:
+		return "GICDistributorRegIcfgr49"
+	case GICDistributorRegIcfgr50:
+		return "GICDistributorRegIcfgr50"
+	case GICDistributorRegIcfgr51:
+		return "GICDistributorRegIcfgr51"
+	case GICDistributorRegIcfgr52:
+		return "GICDistributorRegIcfgr52"
+	case GICDistributorRegIcfgr53:
+		return "GICDistributorRegIcfgr53"
+	case GICDistributorRegIcfgr54:
+		return "GICDistributorRegIcfgr54"
+	case GICDistributorRegIcfgr55:
+		return "GICDistributorRegIcfgr55"
+	case GICDistributorRegIcfgr56:
+		return "GICDistributorRegIcfgr56"
+	case GICDistributorRegIcfgr57:
+		return "GICDistributorRegIcfgr57"
+	case GICDistributorRegIcfgr58:
+		return "GICDistributorRegIcfgr58"
+	case GICDistributorRegIcfgr59:
+		return "GICDistributorRegIcfgr59"
+	case GICDistributorRegIcfgr60:
+		return "GICDistributorRegIcfgr60"
+	case GICDistributorRegIcfgr61:
+		return "GICDistributorRegIcfgr61"
+	case GICDistributorRegIcfgr62:
+		return "GICDistributorRegIcfgr62"
+	case GICDistributorRegIcfgr63:
+		return "GICDistributorRegIcfgr63"
+	case GICDistributorRegIrouter32:
+		return "GICDistributorRegIrouter32"
+	case GICDistributorRegIrouter33:
+		return "GICDistributorRegIrouter33"
+	case GICDistributorRegIrouter34:
+		return "GICDistributorRegIrouter34"
+	case GICDistributorRegIrouter35:
+		return "GICDistributorRegIrouter35"
+	case GICDistributorRegIrouter36:
+		return "GICDistributorRegIrouter36"
+	case GICDistributorRegIrouter37:
+		return "GICDistributorRegIrouter37"
+	case GICDistributorRegIrouter38:
+		return "GICDistributorRegIrouter38"
+	case GICDistributorRegIrouter39:
+		return "GICDistributorRegIrouter39"
+	case GICDistributorRegIrouter40:
+		return "GICDistributorRegIrouter40"
+	case GICDistributorRegIrouter41:
+		return "GICDistributorRegIrouter41"
+	case GICDistributorRegIrouter42:
+		return "GICDistributorRegIrouter42"
+	case GICDistributorRegIrouter43:
+		return "GICDistributorRegIrouter43"
+	case GICDistributorRegIrouter44:
+		return "GICDistributorRegIrouter44"
+	case GICDistributorRegIrouter45:
+		return "GICDistributorRegIrouter45"
+	case GICDistributorRegIrouter46:
+		return "GICDistributorRegIrouter46"
+	case GICDistributorRegIrouter47:
+		return "GICDistributorRegIrouter47"
+	case GICDistributorRegIrouter48:
+		return "GICDistributorRegIrouter48"
+	case GICDistributorRegIrouter49:
+		return "GICDistributorRegIrouter49"
+	case GICDistributorRegIrouter50:
+		return "GICDistributorRegIrouter50"
+	case GICDistributorRegIrouter51:
+		return "GICDistributorRegIrouter51"
+	case GICDistributorRegIrouter52:
+		return "GICDistributorRegIrouter52"
+	case GICDistributorRegIrouter53:
+		return "GICDistributorRegIrouter53"
+	case GICDistributorRegIrouter54:
+		return "GICDistributorRegIrouter54"
+	case GICDistributorRegIrouter55:
+		return "GICDistributorRegIrouter55"
+	case GICDistributorRegIrouter56:
+		return "GICDistributorRegIrouter56"
+	case GICDistributorRegIrouter57:
+		return "GICDistributorRegIrouter57"
+	case GICDistributorRegIrouter58:
+		return "GICDistributorRegIrouter58"
+	case GICDistributorRegIrouter59:
+		return "GICDistributorRegIrouter59"
+	case GICDistributorRegIrouter60:
+		return "GICDistributorRegIrouter60"
+	case GICDistributorRegIrouter61:
+		return "GICDistributorRegIrouter61"
+	case GICDistributorRegIrouter62:
+		return "GICDistributorRegIrouter62"
+	case GICDistributorRegIrouter63:
+		return "GICDistributorRegIrouter63"
+	case GICDistributorRegIrouter64:
+		return "GICDistributorRegIrouter64"
+	case GICDistributorRegIrouter65:
+		return "GICDistributorRegIrouter65"
+	case GICDistributorRegIrouter66:
+		return "GICDistributorRegIrouter66"
+	case GICDistributorRegIrouter67:
+		return "GICDistributorRegIrouter67"
+	case GICDistributorRegIrouter68:
+		return "GICDistributorRegIrouter68"
+	case GICDistributorRegIrouter69:
+		return "GICDistributorRegIrouter69"
+	case GICDistributorRegIrouter70:
+		return "GICDistributorRegIrouter70"
+	case GICDistributorRegIrouter71:
+		return "GICDistributorRegIrouter71"
+	case GICDistributorRegIrouter72:
+		return "GICDistributorRegIrouter72"
+	case GICDistributorRegIrouter73:
+		return "GICDistributorRegIrouter73"
+	case GICDistributorRegIrouter74:
+		return "GICDistributorRegIrouter74"
+	case GICDistributorRegIrouter75:
+		return "GICDistributorRegIrouter75"
+	case GICDistributorRegIrouter76:
+		return "GICDistributorRegIrouter76"
+	case GICDistributorRegIrouter77:
+		return "GICDistributorRegIrouter77"
+	case GICDistributorRegIrouter78:
+		return "GICDistributorRegIrouter78"
+	case GICDistributorRegIrouter79:
+		return "GICDistributorRegIrouter79"
+	case GICDistributorRegIrouter80:
+		return "GICDistributorRegIrouter80"
+	case GICDistributorRegIrouter81:
+		return "GICDistributorRegIrouter81"
+	case GICDistributorRegIrouter82:
+		return "GICDistributorRegIrouter82"
+	case GICDistributorRegIrouter83:
+		return "GICDistributorRegIrouter83"
+	case GICDistributorRegIrouter84:
+		return "GICDistributorRegIrouter84"
+	case GICDistributorRegIrouter85:
+		return "GICDistributorRegIrouter85"
+	case GICDistributorRegIrouter86:
+		return "GICDistributorRegIrouter86"
+	case GICDistributorRegIrouter87:
+		return "GICDistributorRegIrouter87"
+	case GICDistributorRegIrouter88:
+		return "GICDistributorRegIrouter88"
+	case GICDistributorRegIrouter89:
+		return "GICDistributorRegIrouter89"
+	case GICDistributorRegIrouter90:
+		return "GICDistributorRegIrouter90"
+	case GICDistributorRegIrouter91:
+		return "GICDistributorRegIrouter91"
+	case GICDistributorRegIrouter92:
+		return "GICDistributorRegIrouter92"
+	case GICDistributorRegIrouter93:
+		return "GICDistributorRegIrouter93"
+	case GICDistributorRegIrouter94:
+		return "GICDistributorRegIrouter94"
+	case GICDistributorRegIrouter95:
+		return "GICDistributorRegIrouter95"
+	case GICDistributorRegIrouter96:
+		return "GICDistributorRegIrouter96"
+	case GICDistributorRegIrouter97:
+		return "GICDistributorRegIrouter97"
+	case GICDistributorRegIrouter98:
+		return "GICDistributorRegIrouter98"
+	case GICDistributorRegIrouter99:
+		return "GICDistributorRegIrouter99"
+	case GICDistributorRegIrouter100:
+		return "GICDistributorRegIrouter100"
+	case GICDistributorRegIrouter101:
+		return "GICDistributorRegIrouter101"
+	case GICDistributorRegIrouter102:
+		return "GICDistributorRegIrouter102"
+	case GICDistributorRegIrouter103:
+		return "GICDistributorRegIrouter103"
+	case GICDistributorRegIrouter104:
+		return "GICDistributorRegIrouter104"
+	case GICDistributorRegIrouter105:
+		return "GICDistributorRegIrouter105"
+	case GICDistributorRegIrouter106:
+		return "GICDistributorRegIrouter106"
+	case GICDistributorRegIrouter107:
+		return "GICDistributorRegIrouter107"
+	case GICDistributorRegIrouter108:
+		return "GICDistributorRegIrouter108"
+	case GICDistributorRegIrouter109:
+		return "GICDistributorRegIrouter109"
+	case GICDistributorRegIrouter110:
+		return "GICDistributorRegIrouter110"
+	case GICDistributorRegIrouter111:
+		return "GICDistributorRegIrouter111"
+	case GICDistributorRegIrouter112:
+		return "GICDistributorRegIrouter112"
+	case GICDistributorRegIrouter113:
+		return "GICDistributorRegIrouter113"
+	case GICDistributorRegIrouter114:
+		return "GICDistributorRegIrouter114"
+	case GICDistributorRegIrouter115:
+		return "GICDistributorRegIrouter115"
+	case GICDistributorRegIrouter116:
+		return "GICDistributorRegIrouter116"
+	case GICDistributorRegIrouter117:
+		return "GICDistributorRegIrouter117"
+	case GICDistributorRegIrouter118:
+		return "GICDistributorRegIrouter118"
+	case GICDistributorRegIrouter119:
+		return "GICDistributorRegIrouter119"
+	case GICDistributorRegIrouter120:
+		return "GICDistributorRegIrouter120"
+	case GICDistributorRegIrouter121:
+		return "GICDistributorRegIrouter121"
+	case GICDistributorRegIrouter122:
+		return "GICDistributorRegIrouter122"
+	case GICDistributorRegIrouter123:
+		return "GICDistributorRegIrouter123"
+	case GICDistributorRegIrouter124:
+		return "GICDistributorRegIrouter124"
+	case GICDistributorRegIrouter125:
+		return "GICDistributorRegIrouter125"
+	case GICDistributorRegIrouter126:
+		return "GICDistributorRegIrouter126"
+	case GICDistributorRegIrouter127:
+		return "GICDistributorRegIrouter127"
+	case GICDistributorRegIrouter128:
+		return "GICDistributorRegIrouter128"
+	case GICDistributorRegIrouter129:
+		return "GICDistributorRegIrouter129"
+	case GICDistributorRegIrouter130:
+		return "GICDistributorRegIrouter130"
+	case GICDistributorRegIrouter131:
+		return "GICDistributorRegIrouter131"
+	case GICDistributorRegIrouter132:
+		return "GICDistributorRegIrouter132"
+	case GICDistributorRegIrouter133:
+		return "GICDistributorRegIrouter133"
+	case GICDistributorRegIrouter134:
+		return "GICDistributorRegIrouter134"
+	case GICDistributorRegIrouter135:
+		return "GICDistributorRegIrouter135"
+	case GICDistributorRegIrouter136:
+		return "GICDistributorRegIrouter136"
+	case GICDistributorRegIrouter137:
+		return "GICDistributorRegIrouter137"
+	case GICDistributorRegIrouter138:
+		return "GICDistributorRegIrouter138"
+	case GICDistributorRegIrouter139:
+		return "GICDistributorRegIrouter139"
+	case GICDistributorRegIrouter140:
+		return "GICDistributorRegIrouter140"
+	case GICDistributorRegIrouter141:
+		return "GICDistributorRegIrouter141"
+	case GICDistributorRegIrouter142:
+		return "GICDistributorRegIrouter142"
+	case GICDistributorRegIrouter143:
+		return "GICDistributorRegIrouter143"
+	case GICDistributorRegIrouter144:
+		return "GICDistributorRegIrouter144"
+	case GICDistributorRegIrouter145:
+		return "GICDistributorRegIrouter145"
+	case GICDistributorRegIrouter146:
+		return "GICDistributorRegIrouter146"
+	case GICDistributorRegIrouter147:
+		return "GICDistributorRegIrouter147"
+	case GICDistributorRegIrouter148:
+		return "GICDistributorRegIrouter148"
+	case GICDistributorRegIrouter149:
+		return "GICDistributorRegIrouter149"
+	case GICDistributorRegIrouter150:
+		return "GICDistributorRegIrouter150"
+	case GICDistributorRegIrouter151:
+		return "GICDistributorRegIrouter151"
+	case GICDistributorRegIrouter152:
+		return "GICDistributorRegIrouter152"
+	case GICDistributorRegIrouter153:
+		return "GICDistributorRegIrouter153"
+	case GICDistributorRegIrouter154:
+		return "GICDistributorRegIrouter154"
+	case GICDistributorRegIrouter155:
+		return "GICDistributorRegIrouter155"
+	case GICDistributorRegIrouter156:
+		return "GICDistributorRegIrouter156"
+	case GICDistributorRegIrouter157:
+		return "GICDistributorRegIrouter157"
+	case GICDistributorRegIrouter158:
+		return "GICDistributorRegIrouter158"
+	case GICDistributorRegIrouter159:
+		return "GICDistributorRegIrouter159"
+	case GICDistributorRegIrouter160:
+		return "GICDistributorRegIrouter160"
+	case GICDistributorRegIrouter161:
+		return "GICDistributorRegIrouter161"
+	case GICDistributorRegIrouter162:
+		return "GICDistributorRegIrouter162"
+	case GICDistributorRegIrouter163:
+		return "GICDistributorRegIrouter163"
+	case GICDistributorRegIrouter164:
+		return "GICDistributorRegIrouter164"
+	case GICDistributorRegIrouter165:
+		return "GICDistributorRegIrouter165"
+	case GICDistributorRegIrouter166:
+		return "GICDistributorRegIrouter166"
+	case GICDistributorRegIrouter167:
+		return "GICDistributorRegIrouter167"
+	case GICDistributorRegIrouter168:
+		return "GICDistributorRegIrouter168"
+	case GICDistributorRegIrouter169:
+		return "GICDistributorRegIrouter169"
+	case GICDistributorRegIrouter170:
+		return "GICDistributorRegIrouter170"
+	case GICDistributorRegIrouter171:
+		return "GICDistributorRegIrouter171"
+	case GICDistributorRegIrouter172:
+		return "GICDistributorRegIrouter172"
+	case GICDistributorRegIrouter173:
+		return "GICDistributorRegIrouter173"
+	case GICDistributorRegIrouter174:
+		return "GICDistributorRegIrouter174"
+	case GICDistributorRegIrouter175:
+		return "GICDistributorRegIrouter175"
+	case GICDistributorRegIrouter176:
+		return "GICDistributorRegIrouter176"
+	case GICDistributorRegIrouter177:
+		return "GICDistributorRegIrouter177"
+	case GICDistributorRegIrouter178:
+		return "GICDistributorRegIrouter178"
+	case GICDistributorRegIrouter179:
+		return "GICDistributorRegIrouter179"
+	case GICDistributorRegIrouter180:
+		return "GICDistributorRegIrouter180"
+	case GICDistributorRegIrouter181:
+		return "GICDistributorRegIrouter181"
+	case GICDistributorRegIrouter182:
+		return "GICDistributorRegIrouter182"
+	case GICDistributorRegIrouter183:
+		return "GICDistributorRegIrouter183"
+	case GICDistributorRegIrouter184:
+		return "GICDistributorRegIrouter184"
+	case GICDistributorRegIrouter185:
+		return "GICDistributorRegIrouter185"
+	case GICDistributorRegIrouter186:
+		return "GICDistributorRegIrouter186"
+	case GICDistributorRegIrouter187:
+		return "GICDistributorRegIrouter187"
+	case GICDistributorRegIrouter188:
+		return "GICDistributorRegIrouter188"
+	case GICDistributorRegIrouter189:
+		return "GICDistributorRegIrouter189"
+	case GICDistributorRegIrouter190:
+		return "GICDistributorRegIrouter190"
+	case GICDistributorRegIrouter191:
+		return "GICDistributorRegIrouter191"
+	case GICDistributorRegIrouter192:
+		return "GICDistributorRegIrouter192"
+	case GICDistributorRegIrouter193:
+		return "GICDistributorRegIrouter193"
+	case GICDistributorRegIrouter194:
+		return "GICDistributorRegIrouter194"
+	case GICDistributorRegIrouter195:
+		return "GICDistributorRegIrouter195"
+	case GICDistributorRegIrouter196:
+		return "GICDistributorRegIrouter196"
+	case GICDistributorRegIrouter197:
+		return "GICDistributorRegIrouter197"
+	case GICDistributorRegIrouter198:
+		return "GICDistributorRegIrouter198"
+	case GICDistributorRegIrouter199:
+		return "GICDistributorRegIrouter199"
+	case GICDistributorRegIrouter200:
+		return "GICDistributorRegIrouter200"
+	case GICDistributorRegIrouter201:
+		return "GICDistributorRegIrouter201"
+	case GICDistributorRegIrouter202:
+		return "GICDistributorRegIrouter202"
+	case GICDistributorRegIrouter203:
+		return "GICDistributorRegIrouter203"
+	case GICDistributorRegIrouter204:
+		return "GICDistributorRegIrouter204"
+	case GICDistributorRegIrouter205:
+		return "GICDistributorRegIrouter205"
+	case GICDistributorRegIrouter206:
+		return "GICDistributorRegIrouter206"
+	case GICDistributorRegIrouter207:
+		return "GICDistributorRegIrouter207"
+	case GICDistributorRegIrouter208:
+		return "GICDistributorRegIrouter208"
+	case GICDistributorRegIrouter209:
+		return "GICDistributorRegIrouter209"
+	case GICDistributorRegIrouter210:
+		return "GICDistributorRegIrouter210"
+	case GICDistributorRegIrouter211:
+		return "GICDistributorRegIrouter211"
+	case GICDistributorRegIrouter212:
+		return "GICDistributorRegIrouter212"
+	case GICDistributorRegIrouter213:
+		return "GICDistributorRegIrouter213"
+	case GICDistributorRegIrouter214:
+		return "GICDistributorRegIrouter214"
+	case GICDistributorRegIrouter215:
+		return "GICDistributorRegIrouter215"
+	case GICDistributorRegIrouter216:
+		return "GICDistributorRegIrouter216"
+	case GICDistributorRegIrouter217:
+		return "GICDistributorRegIrouter217"
+	case GICDistributorRegIrouter218:
+		return "GICDistributorRegIrouter218"
+	case GICDistributorRegIrouter219:
+		return "GICDistributorRegIrouter219"
+	case GICDistributorRegIrouter220:
+		return "GICDistributorRegIrouter220"
+	case GICDistributorRegIrouter221:
+		return "GICDistributorRegIrouter221"
+	case GICDistributorRegIrouter222:
+		return "GICDistributorRegIrouter222"
+	case GICDistributorRegIrouter223:
+		return "GICDistributorRegIrouter223"
+	case GICDistributorRegIrouter224:
+		return "GICDistributorRegIrouter224"
+	case GICDistributorRegIrouter225:
+		return "GICDistributorRegIrouter225"
+	case GICDistributorRegIrouter226:
+		return "GICDistributorRegIrouter226"
+	case GICDistributorRegIrouter227:
+		return "GICDistributorRegIrouter227"
+	case GICDistributorRegIrouter228:
+		return "GICDistributorRegIrouter228"
+	case GICDistributorRegIrouter229:
+		return "GICDistributorRegIrouter229"
+	case GICDistributorRegIrouter230:
+		return "GICDistributorRegIrouter230"
+	case GICDistributorRegIrouter231:
+		return "GICDistributorRegIrouter231"
+	case GICDistributorRegIrouter232:
+		return "GICDistributorRegIrouter232"
+	case GICDistributorRegIrouter233:
+		return "GICDistributorRegIrouter233"
+	case GICDistributorRegIrouter234:
+		return "GICDistributorRegIrouter234"
+	case GICDistributorRegIrouter235:
+		return "GICDistributorRegIrouter235"
+	case GICDistributorRegIrouter236:
+		return "GICDistributorRegIrouter236"
+	case GICDistributorRegIrouter237:
+		return "GICDistributorRegIrouter237"
+	case GICDistributorRegIrouter238:
+		return "GICDistributorRegIrouter238"
+	case GICDistributorRegIrouter239:
+		return "GICDistributorRegIrouter239"
+	case GICDistributorRegIrouter240:
+		return "GICDistributorRegIrouter240"
+	case GICDistributorRegIrouter241:
+		return "GICDistributorRegIrouter241"
+	case GICDistributorRegIrouter242:
+		return "GICDistributorRegIrouter242"
+	case GICDistributorRegIrouter243:
+		return "GICDistributorRegIrouter243"
+	case GICDistributorRegIrouter244:
+		return "GICDistributorRegIrouter244"
+	case GICDistributorRegIrouter245:
+		return "GICDistributorRegIrouter245"
+	case GICDistributorRegIrouter246:
+		return "GICDistributorRegIrouter246"
+	case GICDistributorRegIrouter247:
+		return "GICDistributorRegIrouter247"
+	case GICDistributorRegIrouter248:
+		return "GICDistributorRegIrouter248"
+	case GICDistributorRegIrouter249:
+		return "GICDistributorRegIrouter249"
+	case GICDistributorRegIrouter250:
+		return "GICDistributorRegIrouter250"
+	case GICDistributorRegIrouter251:
+		return "GICDistributorRegIrouter251"
+	case GICDistributorRegIrouter252:
+		return "GICDistributorRegIrouter252"
+	case GICDistributorRegIrouter253:
+		return "GICDistributorRegIrouter253"
+	case GICDistributorRegIrouter254:
+		return "GICDistributorRegIrouter254"
+	case GICDistributorRegIrouter255:
+		return "GICDistributorRegIrouter255"
+	case GICDistributorRegIrouter256:
+		return "GICDistributorRegIrouter256"
+	case GICDistributorRegIrouter257:
+		return "GICDistributorRegIrouter257"
+	case GICDistributorRegIrouter258:
+		return "GICDistributorRegIrouter258"
+	case GICDistributorRegIrouter259:
+		return "GICDistributorRegIrouter259"
+	case GICDistributorRegIrouter260:
+		return "GICDistributorRegIrouter260"
+	case GICDistributorRegIrouter261:
+		return "GICDistributorRegIrouter261"
+	case GICDistributorRegIrouter262:
+		return "GICDistributorRegIrouter262"
+	case GICDistributorRegIrouter263:
+		return "GICDistributorRegIrouter263"
+	case GICDistributorRegIrouter264:
+		return "GICDistributorRegIrouter264"
+	case GICDistributorRegIrouter265:
+		return "GICDistributorRegIrouter265"
+	case GICDistributorRegIrouter266:
+		return "GICDistributorRegIrouter266"
+	case GICDistributorRegIrouter267:
+		return "GICDistributorRegIrouter267"
+	case GICDistributorRegIrouter268:
+		return "GICDistributorRegIrouter268"
+	case GICDistributorRegIrouter269:
+		return "GICDistributorRegIrouter269"
+	case GICDistributorRegIrouter270:
+		return "GICDistributorRegIrouter270"
+	case GICDistributorRegIrouter271:
+		return "GICDistributorRegIrouter271"
+	case GICDistributorRegIrouter272:
+		return "GICDistributorRegIrouter272"
+	case GICDistributorRegIrouter273:
+		return "GICDistributorRegIrouter273"
+	case GICDistributorRegIrouter274:
+		return "GICDistributorRegIrouter274"
+	case GICDistributorRegIrouter275:
+		return "GICDistributorRegIrouter275"
+	case GICDistributorRegIrouter276:
+		return "GICDistributorRegIrouter276"
+	case GICDistributorRegIrouter277:
+		return "GICDistributorRegIrouter277"
+	case GICDistributorRegIrouter278:
+		return "GICDistributorRegIrouter278"
+	case GICDistributorRegIrouter279:
+		return "GICDistributorRegIrouter279"
+	case GICDistributorRegIrouter280:
+		return "GICDistributorRegIrouter280"
+	case GICDistributorRegIrouter281:
+		return "GICDistributorRegIrouter281"
+	case GICDistributorRegIrouter282:
+		return "GICDistributorRegIrouter282"
+	case GICDistributorRegIrouter283:
+		return "GICDistributorRegIrouter283"
+	case GICDistributorRegIrouter284:
+		return "GICDistributorRegIrouter284"
+	case GICDistributorRegIrouter285:
+		return "GICDistributorRegIrouter285"
+	case GICDistributorRegIrouter286:
+		return "GICDistributorRegIrouter286"
+	case GICDistributorRegIrouter287:
+		return "GICDistributorRegIrouter287"
+	case GICDistributorRegIrouter288:
+		return "GICDistributorRegIrouter288"
+	case GICDistributorRegIrouter289:
+		return "GICDistributorRegIrouter289"
+	case GICDistributorRegIrouter290:
+		return "GICDistributorRegIrouter290"
+	case GICDistributorRegIrouter291:
+		return "GICDistributorRegIrouter291"
+	case GICDistributorRegIrouter292:
+		return "GICDistributorRegIrouter292"
+	case GICDistributorRegIrouter293:
+		return "GICDistributorRegIrouter293"
+	case GICDistributorRegIrouter294:
+		return "GICDistributorRegIrouter294"
+	case GICDistributorRegIrouter295:
+		return "GICDistributorRegIrouter295"
+	case GICDistributorRegIrouter296:
+		return "GICDistributorRegIrouter296"
+	case GICDistributorRegIrouter297:
+		return "GICDistributorRegIrouter297"
+	case GICDistributorRegIrouter298:
+		return "GICDistributorRegIrouter298"
+	case GICDistributorRegIrouter299:
+		return "GICDistributorRegIrouter299"
+	case GICDistributorRegIrouter300:
+		return "GICDistributorRegIrouter300"
+	case GICDistributorRegIrouter301:
+		return "GICDistributorRegIrouter301"
+	case GICDistributorRegIrouter302:
+		return "GICDistributorRegIrouter302"
+	case GICDistributorRegIrouter303:
+		return "GICDistributorRegIrouter303"
+	case GICDistributorRegIrouter304:
+		return "GICDistributorRegIrouter304"
+	case GICDistributorRegIrouter305:
+		return "GICDistributorRegIrouter305"
+	case GICDistributorRegIrouter306:
+		return "GICDistributorRegIrouter306"
+	case GICDistributorRegIrouter307:
+		return "GICDistributorRegIrouter307"
+	case GICDistributorRegIrouter308:
+		return "GICDistributorRegIrouter308"
+	case GICDistributorRegIrouter309:
+		return "GICDistributorRegIrouter309"
+	case GICDistributorRegIrouter310:
+		return "GICDistributorRegIrouter310"
+	case GICDistributorRegIrouter311:
+		return "GICDistributorRegIrouter311"
+	case GICDistributorRegIrouter312:
+		return "GICDistributorRegIrouter312"
+	case GICDistributorRegIrouter313:
+		return "GICDistributorRegIrouter313"
+	case GICDistributorRegIrouter314:
+		return "GICDistributorRegIrouter314"
+	case GICDistributorRegIrouter315:
+		return "GICDistributorRegIrouter315"
+	case GICDistributorRegIrouter316:
+		return "GICDistributorRegIrouter316"
+	case GICDistributorRegIrouter317:
+		return "GICDistributorRegIrouter317"
+	case GICDistributorRegIrouter318:
+		return "GICDistributorRegIrouter318"
+	case GICDistributorRegIrouter319:
+		return "GICDistributorRegIrouter319"
+	case GICDistributorRegIrouter320:
+		return "GICDistributorRegIrouter320"
+	case GICDistributorRegIrouter321:
+		return "GICDistributorRegIrouter321"
+	case GICDistributorRegIrouter322:
+		return "GICDistributorRegIrouter322"
+	case GICDistributorRegIrouter323:
+		return "GICDistributorRegIrouter323"
+	case GICDistributorRegIrouter324:
+		return "GICDistributorRegIrouter324"
+	case GICDistributorRegIrouter325:
+		return "GICDistributorRegIrouter325"
+	case GICDistributorRegIrouter326:
+		return "GICDistributorRegIrouter326"
+	case GICDistributorRegIrouter327:
+		return "GICDistributorRegIrouter327"
+	case GICDistributorRegIrouter328:
+		return "GICDistributorRegIrouter328"
+	case GICDistributorRegIrouter329:
+		return "GICDistributorRegIrouter329"
+	case GICDistributorRegIrouter330:
+		return "GICDistributorRegIrouter330"
+	case GICDistributorRegIrouter331:
+		return "GICDistributorRegIrouter331"
+	case GICDistributorRegIrouter332:
+		return "GICDistributorRegIrouter332"
+	case GICDistributorRegIrouter333:
+		return "GICDistributorRegIrouter333"
+	case GICDistributorRegIrouter334:
+		return "GICDistributorRegIrouter334"
+	case GICDistributorRegIrouter335:
+		return "GICDistributorRegIrouter335"
+	case GICDistributorRegIrouter336:
+		return "GICDistributorRegIrouter336"
+	case GICDistributorRegIrouter337:
+		return "GICDistributorRegIrouter337"
+	case GICDistributorRegIrouter338:
+		return "GICDistributorRegIrouter338"
+	case GICDistributorRegIrouter339:
+		return "GICDistributorRegIrouter339"
+	case GICDistributorRegIrouter340:
+		return "GICDistributorRegIrouter340"
+	case GICDistributorRegIrouter341:
+		return "GICDistributorRegIrouter341"
+	case GICDistributorRegIrouter342:
+		return "GICDistributorRegIrouter342"
+	case GICDistributorRegIrouter343:
+		return "GICDistributorRegIrouter343"
+	case GICDistributorRegIrouter344:
+		return "GICDistributorRegIrouter344"
+	case GICDistributorRegIrouter345:
+		return "GICDistributorRegIrouter345"
+	case GICDistributorRegIrouter346:
+		return "GICDistributorRegIrouter346"
+	case GICDistributorRegIrouter347:
+		return "GICDistributorRegIrouter347"
+	case GICDistributorRegIrouter348:
+		return "GICDistributorRegIrouter348"
+	case GICDistributorRegIrouter349:
+		return "GICDistributorRegIrouter349"
+	case GICDistributorRegIrouter350:
+		return "GICDistributorRegIrouter350"
+	case GICDistributorRegIrouter351:
+		return "GICDistributorRegIrouter351"
+	case GICDistributorRegIrouter352:
+		return "GICDistributorRegIrouter352"
+	case GICDistributorRegIrouter353:
+		return "GICDistributorRegIrouter353"
+	case GICDistributorRegIrouter354:
+		return "GICDistributorRegIrouter354"
+	case GICDistributorRegIrouter355:
+		return "GICDistributorRegIrouter355"
+	case GICDistributorRegIrouter356:
+		return "GICDistributorRegIrouter356"
+	case GICDistributorRegIrouter357:
+		return "GICDistributorRegIrouter357"
+	case GICDistributorRegIrouter358:
+		return "GICDistributorRegIrouter358"
+	case GICDistributorRegIrouter359:
+		return "GICDistributorRegIrouter359"
+	case GICDistributorRegIrouter360:
+		return "GICDistributorRegIrouter360"
+	case GICDistributorRegIrouter361:
+		return "GICDistributorRegIrouter361"
+	case GICDistributorRegIrouter362:
+		return "GICDistributorRegIrouter362"
+	case GICDistributorRegIrouter363:
+		return "GICDistributorRegIrouter363"
+	case GICDistributorRegIrouter364:
+		return "GICDistributorRegIrouter364"
+	case GICDistributorRegIrouter365:
+		return "GICDistributorRegIrouter365"
+	case GICDistributorRegIrouter366:
+		return "GICDistributorRegIrouter366"
+	case GICDistributorRegIrouter367:
+		return "GICDistributorRegIrouter367"
+	case GICDistributorRegIrouter368:
+		return "GICDistributorRegIrouter368"
+	case GICDistributorRegIrouter369:
+		return "GICDistributorRegIrouter369"
+	case GICDistributorRegIrouter370:
+		return "GICDistributorRegIrouter370"
+	case GICDistributorRegIrouter371:
+		return "GICDistributorRegIrouter371"
+	case GICDistributorRegIrouter372:
+		return "GICDistributorRegIrouter372"
+	case GICDistributorRegIrouter373:
+		return "GICDistributorRegIrouter373"
+	case GICDistributorRegIrouter374:
+		return "GICDistributorRegIrouter374"
+	case GICDistributorRegIrouter375:
+		return "GICDistributorRegIrouter375"
+	case GICDistributorRegIrouter376:
+		return "GICDistributorRegIrouter376"
+	case GICDistributorRegIrouter377:
+		return "GICDistributorRegIrouter377"
+	case GICDistributorRegIrouter378:
+		return "GICDistributorRegIrouter378"
+	case GICDistributorRegIrouter379:
+		return "GICDistributorRegIrouter379"
+	case GICDistributorRegIrouter380:
+		return "GICDistributorRegIrouter380"
+	case GICDistributorRegIrouter381:
+		return "GICDistributorRegIrouter381"
+	case GICDistributorRegIrouter382:
+		return "GICDistributorRegIrouter382"
+	case GICDistributorRegIrouter383:
+		return "GICDistributorRegIrouter383"
+	case GICDistributorRegIrouter384:
+		return "GICDistributorRegIrouter384"
+	case GICDistributorRegIrouter385:
+		return "GICDistributorRegIrouter385"
+	case GICDistributorRegIrouter386:
+		return "GICDistributorRegIrouter386"
+	case GICDistributorRegIrouter387:
+		return "GICDistributorRegIrouter387"
+	case GICDistributorRegIrouter388:
+		return "GICDistributorRegIrouter388"
+	case GICDistributorRegIrouter389:
+		return "GICDistributorRegIrouter389"
+	case GICDistributorRegIrouter390:
+		return "GICDistributorRegIrouter390"
+	case GICDistributorRegIrouter391:
+		return "GICDistributorRegIrouter391"
+	case GICDistributorRegIrouter392:
+		return "GICDistributorRegIrouter392"
+	case GICDistributorRegIrouter393:
+		return "GICDistributorRegIrouter393"
+	case GICDistributorRegIrouter394:
+		return "GICDistributorRegIrouter394"
+	case GICDistributorRegIrouter395:
+		return "GICDistributorRegIrouter395"
+	case GICDistributorRegIrouter396:
+		return "GICDistributorRegIrouter396"
+	case GICDistributorRegIrouter397:
+		return "GICDistributorRegIrouter397"
+	case GICDistributorRegIrouter398:
+		return "GICDistributorRegIrouter398"
+	case GICDistributorRegIrouter399:
+		return "GICDistributorRegIrouter399"
+	case GICDistributorRegIrouter400:
+		return "GICDistributorRegIrouter400"
+	case GICDistributorRegIrouter401:
+		return "GICDistributorRegIrouter401"
+	case GICDistributorRegIrouter402:
+		return "GICDistributorRegIrouter402"
+	case GICDistributorRegIrouter403:
+		return "GICDistributorRegIrouter403"
+	case GICDistributorRegIrouter404:
+		return "GICDistributorRegIrouter404"
+	case GICDistributorRegIrouter405:
+		return "GICDistributorRegIrouter405"
+	case GICDistributorRegIrouter406:
+		return "GICDistributorRegIrouter406"
+	case GICDistributorRegIrouter407:
+		return "GICDistributorRegIrouter407"
+	case GICDistributorRegIrouter408:
+		return "GICDistributorRegIrouter408"
+	case GICDistributorRegIrouter409:
+		return "GICDistributorRegIrouter409"
+	case GICDistributorRegIrouter410:
+		return "GICDistributorRegIrouter410"
+	case GICDistributorRegIrouter411:
+		return "GICDistributorRegIrouter411"
+	case GICDistributorRegIrouter412:
+		return "GICDistributorRegIrouter412"
+	case GICDistributorRegIrouter413:
+		return "GICDistributorRegIrouter413"
+	case GICDistributorRegIrouter414:
+		return "GICDistributorRegIrouter414"
+	case GICDistributorRegIrouter415:
+		return "GICDistributorRegIrouter415"
+	case GICDistributorRegIrouter416:
+		return "GICDistributorRegIrouter416"
+	case GICDistributorRegIrouter417:
+		return "GICDistributorRegIrouter417"
+	case GICDistributorRegIrouter418:
+		return "GICDistributorRegIrouter418"
+	case GICDistributorRegIrouter419:
+		return "GICDistributorRegIrouter419"
+	case GICDistributorRegIrouter420:
+		return "GICDistributorRegIrouter420"
+	case GICDistributorRegIrouter421:
+		return "GICDistributorRegIrouter421"
+	case GICDistributorRegIrouter422:
+		return "GICDistributorRegIrouter422"
+	case GICDistributorRegIrouter423:
+		return "GICDistributorRegIrouter423"
+	case GICDistributorRegIrouter424:
+		return "GICDistributorRegIrouter424"
+	case GICDistributorRegIrouter425:
+		return "GICDistributorRegIrouter425"
+	case GICDistributorRegIrouter426:
+		return "GICDistributorRegIrouter426"
+	case GICDistributorRegIrouter427:
+		return "GICDistributorRegIrouter427"
+	case GICDistributorRegIrouter428:
+		return "GICDistributorRegIrouter428"
+	case GICDistributorRegIrouter429:
+		return "GICDistributorRegIrouter429"
+	case GICDistributorRegIrouter430:
+		return "GICDistributorRegIrouter430"
+	case GICDistributorRegIrouter431:
+		return "GICDistributorRegIrouter431"
+	case GICDistributorRegIrouter432:
+		return "GICDistributorRegIrouter432"
+	case GICDistributorRegIrouter433:
+		return "GICDistributorRegIrouter433"
+	case GICDistributorRegIrouter434:
+		return "GICDistributorRegIrouter434"
+	case GICDistributorRegIrouter435:
+		return "GICDistributorRegIrouter435"
+	case GICDistributorRegIrouter436:
+		return "GICDistributorRegIrouter436"
+	case GICDistributorRegIrouter437:
+		return "GICDistributorRegIrouter437"
+	case GICDistributorRegIrouter438:
+		return "GICDistributorRegIrouter438"
+	case GICDistributorRegIrouter439:
+		return "GICDistributorRegIrouter439"
+	case GICDistributorRegIrouter440:
+		return "GICDistributorRegIrouter440"
+	case GICDistributorRegIrouter441:
+		return "GICDistributorRegIrouter441"
+	case GICDistributorRegIrouter442:
+		return "GICDistributorRegIrouter442"
+	case GICDistributorRegIrouter443:
+		return "GICDistributorRegIrouter443"
+	case GICDistributorRegIrouter444:
+		return "GICDistributorRegIrouter444"
+	case GICDistributorRegIrouter445:
+		return "GICDistributorRegIrouter445"
+	case GICDistributorRegIrouter446:
+		return "GICDistributorRegIrouter446"
+	case GICDistributorRegIrouter447:
+		return "GICDistributorRegIrouter447"
+	case GICDistributorRegIrouter448:
+		return "GICDistributorRegIrouter448"
+	case GICDistributorRegIrouter449:
+		return "GICDistributorRegIrouter449"
+	case GICDistributorRegIrouter450:
+		return "GICDistributorRegIrouter450"
+	case GICDistributorRegIrouter451:
+		return "GICDistributorRegIrouter451"
+	case GICDistributorRegIrouter452:
+		return "GICDistributorRegIrouter452"
+	case GICDistributorRegIrouter453:
+		return "GICDistributorRegIrouter453"
+	case GICDistributorRegIrouter454:
+		return "GICDistributorRegIrouter454"
+	case GICDistributorRegIrouter455:
+		return "GICDistributorRegIrouter455"
+	case GICDistributorRegIrouter456:
+		return "GICDistributorRegIrouter456"
+	case GICDistributorRegIrouter457:
+		return "GICDistributorRegIrouter457"
+	case GICDistributorRegIrouter458:
+		return "GICDistributorRegIrouter458"
+	case GICDistributorRegIrouter459:
+		return "GICDistributorRegIrouter459"
+	case GICDistributorRegIrouter460:
+		return "GICDistributorRegIrouter460"
+	case GICDistributorRegIrouter461:
+		return "GICDistributorRegIrouter461"
+	case GICDistributorRegIrouter462:
+		return "GICDistributorRegIrouter462"
+	case GICDistributorRegIrouter463:
+		return "GICDistributorRegIrouter463"
+	case GICDistributorRegIrouter464:
+		return "GICDistributorRegIrouter464"
+	case GICDistributorRegIrouter465:
+		return "GICDistributorRegIrouter465"
+	case GICDistributorRegIrouter466:
+		return "GICDistributorRegIrouter466"
+	case GICDistributorRegIrouter467:
+		return "GICDistributorRegIrouter467"
+	case GICDistributorRegIrouter468:
+		return "GICDistributorRegIrouter468"
+	case GICDistributorRegIrouter469:
+		return "GICDistributorRegIrouter469"
+	case GICDistributorRegIrouter470:
+		return "GICDistributorRegIrouter470"
+	case GICDistributorRegIrouter471:
+		return "GICDistributorRegIrouter471"
+	case GICDistributorRegIrouter472:
+		return "GICDistributorRegIrouter472"
+	case GICDistributorRegIrouter473:
+		return "GICDistributorRegIrouter473"
+	case GICDistributorRegIrouter474:
+		return "GICDistributorRegIrouter474"
+	case GICDistributorRegIrouter475:
+		return "GICDistributorRegIrouter475"
+	case GICDistributorRegIrouter476:
+		return "GICDistributorRegIrouter476"
+	case GICDistributorRegIrouter477:
+		return "GICDistributorRegIrouter477"
+	case GICDistributorRegIrouter478:
+		return "GICDistributorRegIrouter478"
+	case GICDistributorRegIrouter479:
+		return "GICDistributorRegIrouter479"
+	case GICDistributorRegIrouter480:
+		return "GICDistributorRegIrouter480"
+	case GICDistributorRegIrouter481:
+		return "GICDistributorRegIrouter481"
+	case GICDistributorRegIrouter482:
+		return "GICDistributorRegIrouter482"
+	case GICDistributorRegIrouter483:
+		return "GICDistributorRegIrouter483"
+	case GICDistributorRegIrouter484:
+		return "GICDistributorRegIrouter484"
+	case GICDistributorRegIrouter485:
+		return "GICDistributorRegIrouter485"
+	case GICDistributorRegIrouter486:
+		return "GICDistributorRegIrouter486"
+	case GICDistributorRegIrouter487:
+		return "GICDistributorRegIrouter487"
+	case GICDistributorRegIrouter488:
+		return "GICDistributorRegIrouter488"
+	case GICDistributorRegIrouter489:
+		return "GICDistributorRegIrouter489"
+	case GICDistributorRegIrouter490:
+		return "GICDistributorRegIrouter490"
+	case GICDistributorRegIrouter491:
+		return "GICDistributorRegIrouter491"
+	case GICDistributorRegIrouter492:
+		return "GICDistributorRegIrouter492"
+	case GICDistributorRegIrouter493:
+		return "GICDistributorRegIrouter493"
+	case GICDistributorRegIrouter494:
+		return "GICDistributorRegIrouter494"
+	case GICDistributorRegIrouter495:
+		return "GICDistributorRegIrouter495"
+	case GICDistributorRegIrouter496:
+		return "GICDistributorRegIrouter496"
+	case GICDistributorRegIrouter497:
+		return "GICDistributorRegIrouter497"
+	case GICDistributorRegIrouter498:
+		return "GICDistributorRegIrouter498"
+	case GICDistributorRegIrouter499:
+		return "GICDistributorRegIrouter499"
+	case GICDistributorRegIrouter500:
+		return "GICDistributorRegIrouter500"
+	case GICDistributorRegIrouter501:
+		return "GICDistributorRegIrouter501"
+	case GICDistributorRegIrouter502:
+		return "GICDistributorRegIrouter502"
+	case GICDistributorRegIrouter503:
+		return "GICDistributorRegIrouter503"
+	case GICDistributorRegIrouter504:
+		return "GICDistributorRegIrouter504"
+	case GICDistributorRegIrouter505:
+		return "GICDistributorRegIrouter505"
+	case GICDistributorRegIrouter506:
+		return "GICDistributorRegIrouter506"
+	case GICDistributorRegIrouter507:
+		return "GICDistributorRegIrouter507"
+	case GICDistributorRegIrouter508:
+		return "GICDistributorRegIrouter508"
+	case GICDistributorRegIrouter509:
+		return "GICDistributorRegIrouter509"
+	case GICDistributorRegIrouter510:
+		return "GICDistributorRegIrouter510"
+	case GICDistributorRegIrouter511:
+		return "GICDistributorRegIrouter511"
+	case GICDistributorRegIrouter512:
+		return "GICDistributorRegIrouter512"
+	case GICDistributorRegIrouter513:
+		return "GICDistributorRegIrouter513"
+	case GICDistributorRegIrouter514:
+		return "GICDistributorRegIrouter514"
+	case GICDistributorRegIrouter515:
+		return "GICDistributorRegIrouter515"
+	case GICDistributorRegIrouter516:
+		return "GICDistributorRegIrouter516"
+	case GICDistributorRegIrouter517:
+		return "GICDistributorRegIrouter517"
+	case GICDistributorRegIrouter518:
+		return "GICDistributorRegIrouter518"
+	case GICDistributorRegIrouter519:
+		return "GICDistributorRegIrouter519"
+	case GICDistributorRegIrouter520:
+		return "GICDistributorRegIrouter520"
+	case GICDistributorRegIrouter521:
+		return "GICDistributorRegIrouter521"
+	case GICDistributorRegIrouter522:
+		return "GICDistributorRegIrouter522"
+	case GICDistributorRegIrouter523:
+		return "GICDistributorRegIrouter523"
+	case GICDistributorRegIrouter524:
+		return "GICDistributorRegIrouter524"
+	case GICDistributorRegIrouter525:
+		return "GICDistributorRegIrouter525"
+	case GICDistributorRegIrouter526:
+		return "GICDistributorRegIrouter526"
+	case GICDistributorRegIrouter527:
+		return "GICDistributorRegIrouter527"
+	case GICDistributorRegIrouter528:
+		return "GICDistributorRegIrouter528"
+	case GICDistributorRegIrouter529:
+		return "GICDistributorRegIrouter529"
+	case GICDistributorRegIrouter530:
+		return "GICDistributorRegIrouter530"
+	case GICDistributorRegIrouter531:
+		return "GICDistributorRegIrouter531"
+	case GICDistributorRegIrouter532:
+		return "GICDistributorRegIrouter532"
+	case GICDistributorRegIrouter533:
+		return "GICDistributorRegIrouter533"
+	case GICDistributorRegIrouter534:
+		return "GICDistributorRegIrouter534"
+	case GICDistributorRegIrouter535:
+		return "GICDistributorRegIrouter535"
+	case GICDistributorRegIrouter536:
+		return "GICDistributorRegIrouter536"
+	case GICDistributorRegIrouter537:
+		return "GICDistributorRegIrouter537"
+	case GICDistributorRegIrouter538:
+		return "GICDistributorRegIrouter538"
+	case GICDistributorRegIrouter539:
+		return "GICDistributorRegIrouter539"
+	case GICDistributorRegIrouter540:
+		return "GICDistributorRegIrouter540"
+	case GICDistributorRegIrouter541:
+		return "GICDistributorRegIrouter541"
+	case GICDistributorRegIrouter542:
+		return "GICDistributorRegIrouter542"
+	case GICDistributorRegIrouter543:
+		return "GICDistributorRegIrouter543"
+	case GICDistributorRegIrouter544:
+		return "GICDistributorRegIrouter544"
+	case GICDistributorRegIrouter545:
+		return "GICDistributorRegIrouter545"
+	case GICDistributorRegIrouter546:
+		return "GICDistributorRegIrouter546"
+	case GICDistributorRegIrouter547:
+		return "GICDistributorRegIrouter547"
+	case GICDistributorRegIrouter548:
+		return "GICDistributorRegIrouter548"
+	case GICDistributorRegIrouter549:
+		return "GICDistributorRegIrouter549"
+	case GICDistributorRegIrouter550:
+		return "GICDistributorRegIrouter550"
+	case GICDistributorRegIrouter551:
+		return "GICDistributorRegIrouter551"
+	case GICDistributorRegIrouter552:
+		return "GICDistributorRegIrouter552"
+	case GICDistributorRegIrouter553:
+		return "GICDistributorRegIrouter553"
+	case GICDistributorRegIrouter554:
+		return "GICDistributorRegIrouter554"
+	case GICDistributorRegIrouter555:
+		return "GICDistributorRegIrouter555"
+	case GICDistributorRegIrouter556:
+		return "GICDistributorRegIrouter556"
+	case GICDistributorRegIrouter557:
+		return "GICDistributorRegIrouter557"
+	case GICDistributorRegIrouter558:
+		return "GICDistributorRegIrouter558"
+	case GICDistributorRegIrouter559:
+		return "GICDistributorRegIrouter559"
+	case GICDistributorRegIrouter560:
+		return "GICDistributorRegIrouter560"
+	case GICDistributorRegIrouter561:
+		return "GICDistributorRegIrouter561"
+	case GICDistributorRegIrouter562:
+		return "GICDistributorRegIrouter562"
+	case GICDistributorRegIrouter563:
+		return "GICDistributorRegIrouter563"
+	case GICDistributorRegIrouter564:
+		return "GICDistributorRegIrouter564"
+	case GICDistributorRegIrouter565:
+		return "GICDistributorRegIrouter565"
+	case GICDistributorRegIrouter566:
+		return "GICDistributorRegIrouter566"
+	case GICDistributorRegIrouter567:
+		return "GICDistributorRegIrouter567"
+	case GICDistributorRegIrouter568:
+		return "GICDistributorRegIrouter568"
+	case GICDistributorRegIrouter569:
+		return "GICDistributorRegIrouter569"
+	case GICDistributorRegIrouter570:
+		return "GICDistributorRegIrouter570"
+	case GICDistributorRegIrouter571:
+		return "GICDistributorRegIrouter571"
+	case GICDistributorRegIrouter572:
+		return "GICDistributorRegIrouter572"
+	case GICDistributorRegIrouter573:
+		return "GICDistributorRegIrouter573"
+	case GICDistributorRegIrouter574:
+		return "GICDistributorRegIrouter574"
+	case GICDistributorRegIrouter575:
+		return "GICDistributorRegIrouter575"
+	case GICDistributorRegIrouter576:
+		return "GICDistributorRegIrouter576"
+	case GICDistributorRegIrouter577:
+		return "GICDistributorRegIrouter577"
+	case GICDistributorRegIrouter578:
+		return "GICDistributorRegIrouter578"
+	case GICDistributorRegIrouter579:
+		return "GICDistributorRegIrouter579"
+	case GICDistributorRegIrouter580:
+		return "GICDistributorRegIrouter580"
+	case GICDistributorRegIrouter581:
+		return "GICDistributorRegIrouter581"
+	case GICDistributorRegIrouter582:
+		return "GICDistributorRegIrouter582"
+	case GICDistributorRegIrouter583:
+		return "GICDistributorRegIrouter583"
+	case GICDistributorRegIrouter584:
+		return "GICDistributorRegIrouter584"
+	case GICDistributorRegIrouter585:
+		return "GICDistributorRegIrouter585"
+	case GICDistributorRegIrouter586:
+		return "GICDistributorRegIrouter586"
+	case GICDistributorRegIrouter587:
+		return "GICDistributorRegIrouter587"
+	case GICDistributorRegIrouter588:
+		return "GICDistributorRegIrouter588"
+	case GICDistributorRegIrouter589:
+		return "GICDistributorRegIrouter589"
+	case GICDistributorRegIrouter590:
+		return "GICDistributorRegIrouter590"
+	case GICDistributorRegIrouter591:
+		return "GICDistributorRegIrouter591"
+	case GICDistributorRegIrouter592:
+		return "GICDistributorRegIrouter592"
+	case GICDistributorRegIrouter593:
+		return "GICDistributorRegIrouter593"
+	case GICDistributorRegIrouter594:
+		return "GICDistributorRegIrouter594"
+	case GICDistributorRegIrouter595:
+		return "GICDistributorRegIrouter595"
+	case GICDistributorRegIrouter596:
+		return "GICDistributorRegIrouter596"
+	case GICDistributorRegIrouter597:
+		return "GICDistributorRegIrouter597"
+	case GICDistributorRegIrouter598:
+		return "GICDistributorRegIrouter598"
+	case GICDistributorRegIrouter599:
+		return "GICDistributorRegIrouter599"
+	case GICDistributorRegIrouter600:
+		return "GICDistributorRegIrouter600"
+	case GICDistributorRegIrouter601:
+		return "GICDistributorRegIrouter601"
+	case GICDistributorRegIrouter602:
+		return "GICDistributorRegIrouter602"
+	case GICDistributorRegIrouter603:
+		return "GICDistributorRegIrouter603"
+	case GICDistributorRegIrouter604:
+		return "GICDistributorRegIrouter604"
+	case GICDistributorRegIrouter605:
+		return "GICDistributorRegIrouter605"
+	case GICDistributorRegIrouter606:
+		return "GICDistributorRegIrouter606"
+	case GICDistributorRegIrouter607:
+		return "GICDistributorRegIrouter607"
+	case GICDistributorRegIrouter608:
+		return "GICDistributorRegIrouter608"
+	case GICDistributorRegIrouter609:
+		return "GICDistributorRegIrouter609"
+	case GICDistributorRegIrouter610:
+		return "GICDistributorRegIrouter610"
+	case GICDistributorRegIrouter611:
+		return "GICDistributorRegIrouter611"
+	case GICDistributorRegIrouter612:
+		return "GICDistributorRegIrouter612"
+	case GICDistributorRegIrouter613:
+		return "GICDistributorRegIrouter613"
+	case GICDistributorRegIrouter614:
+		return "GICDistributorRegIrouter614"
+	case GICDistributorRegIrouter615:
+		return "GICDistributorRegIrouter615"
+	case GICDistributorRegIrouter616:
+		return "GICDistributorRegIrouter616"
+	case GICDistributorRegIrouter617:
+		return "GICDistributorRegIrouter617"
+	case GICDistributorRegIrouter618:
+		return "GICDistributorRegIrouter618"
+	case GICDistributorRegIrouter619:
+		return "GICDistributorRegIrouter619"
+	case GICDistributorRegIrouter620:
+		return "GICDistributorRegIrouter620"
+	case GICDistributorRegIrouter621:
+		return "GICDistributorRegIrouter621"
+	case GICDistributorRegIrouter622:
+		return "GICDistributorRegIrouter622"
+	case GICDistributorRegIrouter623:
+		return "GICDistributorRegIrouter623"
+	case GICDistributorRegIrouter624:
+		return "GICDistributorRegIrouter624"
+	case GICDistributorRegIrouter625:
+		return "GICDistributorRegIrouter625"
+	case GICDistributorRegIrouter626:
+		return "GICDistributorRegIrouter626"
+	case GICDistributorRegIrouter627:
+		return "GICDistributorRegIrouter627"
+	case GICDistributorRegIrouter628:
+		return "GICDistributorRegIrouter628"
+	case GICDistributorRegIrouter629:
+		return "GICDistributorRegIrouter629"
+	case GICDistributorRegIrouter630:
+		return "GICDistributorRegIrouter630"
+	case GICDistributorRegIrouter631:
+		return "GICDistributorRegIrouter631"
+	case GICDistributorRegIrouter632:
+		return "GICDistributorRegIrouter632"
+	case GICDistributorRegIrouter633:
+		return "GICDistributorRegIrouter633"
+	case GICDistributorRegIrouter634:
+		return "GICDistributorRegIrouter634"
+	case GICDistributorRegIrouter635:
+		return "GICDistributorRegIrouter635"
+	case GICDistributorRegIrouter636:
+		return "GICDistributorRegIrouter636"
+	case GICDistributorRegIrouter637:
+		return "GICDistributorRegIrouter637"
+	case GICDistributorRegIrouter638:
+		return "GICDistributorRegIrouter638"
+	case GICDistributorRegIrouter639:
+		return "GICDistributorRegIrouter639"
+	case GICDistributorRegIrouter640:
+		return "GICDistributorRegIrouter640"
+	case GICDistributorRegIrouter641:
+		return "GICDistributorRegIrouter641"
+	case GICDistributorRegIrouter642:
+		return "GICDistributorRegIrouter642"
+	case GICDistributorRegIrouter643:
+		return "GICDistributorRegIrouter643"
+	case GICDistributorRegIrouter644:
+		return "GICDistributorRegIrouter644"
+	case GICDistributorRegIrouter645:
+		return "GICDistributorRegIrouter645"
+	case GICDistributorRegIrouter646:
+		return "GICDistributorRegIrouter646"
+	case GICDistributorRegIrouter647:
+		return "GICDistributorRegIrouter647"
+	case GICDistributorRegIrouter648:
+		return "GICDistributorRegIrouter648"
+	case GICDistributorRegIrouter649:
+		return "GICDistributorRegIrouter649"
+	case GICDistributorRegIrouter650:
+		return "GICDistributorRegIrouter650"
+	case GICDistributorRegIrouter651:
+		return "GICDistributorRegIrouter651"
+	case GICDistributorRegIrouter652:
+		return "GICDistributorRegIrouter652"
+	case GICDistributorRegIrouter653:
+		return "GICDistributorRegIrouter653"
+	case GICDistributorRegIrouter654:
+		return "GICDistributorRegIrouter654"
+	case GICDistributorRegIrouter655:
+		return "GICDistributorRegIrouter655"
+	case GICDistributorRegIrouter656:
+		return "GICDistributorRegIrouter656"
+	case GICDistributorRegIrouter657:
+		return "GICDistributorRegIrouter657"
+	case GICDistributorRegIrouter658:
+		return "GICDistributorRegIrouter658"
+	case GICDistributorRegIrouter659:
+		return "GICDistributorRegIrouter659"
+	case GICDistributorRegIrouter660:
+		return "GICDistributorRegIrouter660"
+	case GICDistributorRegIrouter661:
+		return "GICDistributorRegIrouter661"
+	case GICDistributorRegIrouter662:
+		return "GICDistributorRegIrouter662"
+	case GICDistributorRegIrouter663:
+		return "GICDistributorRegIrouter663"
+	case GICDistributorRegIrouter664:
+		return "GICDistributorRegIrouter664"
+	case GICDistributorRegIrouter665:
+		return "GICDistributorRegIrouter665"
+	case GICDistributorRegIrouter666:
+		return "GICDistributorRegIrouter666"
+	case GICDistributorRegIrouter667:
+		return "GICDistributorRegIrouter667"
+	case GICDistributorRegIrouter668:
+		return "GICDistributorRegIrouter668"
+	case GICDistributorRegIrouter669:
+		return "GICDistributorRegIrouter669"
+	case GICDistributorRegIrouter670:
+		return "GICDistributorRegIrouter670"
+	case GICDistributorRegIrouter671:
+		return "GICDistributorRegIrouter671"
+	case GICDistributorRegIrouter672:
+		return "GICDistributorRegIrouter672"
+	case GICDistributorRegIrouter673:
+		return "GICDistributorRegIrouter673"
+	case GICDistributorRegIrouter674:
+		return "GICDistributorRegIrouter674"
+	case GICDistributorRegIrouter675:
+		return "GICDistributorRegIrouter675"
+	case GICDistributorRegIrouter676:
+		return "GICDistributorRegIrouter676"
+	case GICDistributorRegIrouter677:
+		return "GICDistributorRegIrouter677"
+	case GICDistributorRegIrouter678:
+		return "GICDistributorRegIrouter678"
+	case GICDistributorRegIrouter679:
+		return "GICDistributorRegIrouter679"
+	case GICDistributorRegIrouter680:
+		return "GICDistributorRegIrouter680"
+	case GICDistributorRegIrouter681:
+		return "GICDistributorRegIrouter681"
+	case GICDistributorRegIrouter682:
+		return "GICDistributorRegIrouter682"
+	case GICDistributorRegIrouter683:
+		return "GICDistributorRegIrouter683"
+	case GICDistributorRegIrouter684:
+		return "GICDistributorRegIrouter684"
+	case GICDistributorRegIrouter685:
+		return "GICDistributorRegIrouter685"
+	case GICDistributorRegIrouter686:
+		return "GICDistributorRegIrouter686"
+	case GICDistributorRegIrouter687:
+		return "GICDistributorRegIrouter687"
+	case GICDistributorRegIrouter688:
+		return "GICDistributorRegIrouter688"
+	case GICDistributorRegIrouter689:
+		return "GICDistributorRegIrouter689"
+	case GICDistributorRegIrouter690:
+		return "GICDistributorRegIrouter690"
+	case GICDistributorRegIrouter691:
+		return "GICDistributorRegIrouter691"
+	case GICDistributorRegIrouter692:
+		return "GICDistributorRegIrouter692"
+	case GICDistributorRegIrouter693:
+		return "GICDistributorRegIrouter693"
+	case GICDistributorRegIrouter694:
+		return "GICDistributorRegIrouter694"
+	case GICDistributorRegIrouter695:
+		return "GICDistributorRegIrouter695"
+	case GICDistributorRegIrouter696:
+		return "GICDistributorRegIrouter696"
+	case GICDistributorRegIrouter697:
+		return "GICDistributorRegIrouter697"
+	case GICDistributorRegIrouter698:
+		return "GICDistributorRegIrouter698"
+	case GICDistributorRegIrouter699:
+		return "GICDistributorRegIrouter699"
+	case GICDistributorRegIrouter700:
+		return "GICDistributorRegIrouter700"
+	case GICDistributorRegIrouter701:
+		return "GICDistributorRegIrouter701"
+	case GICDistributorRegIrouter702:
+		return "GICDistributorRegIrouter702"
+	case GICDistributorRegIrouter703:
+		return "GICDistributorRegIrouter703"
+	case GICDistributorRegIrouter704:
+		return "GICDistributorRegIrouter704"
+	case GICDistributorRegIrouter705:
+		return "GICDistributorRegIrouter705"
+	case GICDistributorRegIrouter706:
+		return "GICDistributorRegIrouter706"
+	case GICDistributorRegIrouter707:
+		return "GICDistributorRegIrouter707"
+	case GICDistributorRegIrouter708:
+		return "GICDistributorRegIrouter708"
+	case GICDistributorRegIrouter709:
+		return "GICDistributorRegIrouter709"
+	case GICDistributorRegIrouter710:
+		return "GICDistributorRegIrouter710"
+	case GICDistributorRegIrouter711:
+		return "GICDistributorRegIrouter711"
+	case GICDistributorRegIrouter712:
+		return "GICDistributorRegIrouter712"
+	case GICDistributorRegIrouter713:
+		return "GICDistributorRegIrouter713"
+	case GICDistributorRegIrouter714:
+		return "GICDistributorRegIrouter714"
+	case GICDistributorRegIrouter715:
+		return "GICDistributorRegIrouter715"
+	case GICDistributorRegIrouter716:
+		return "GICDistributorRegIrouter716"
+	case GICDistributorRegIrouter717:
+		return "GICDistributorRegIrouter717"
+	case GICDistributorRegIrouter718:
+		return "GICDistributorRegIrouter718"
+	case GICDistributorRegIrouter719:
+		return "GICDistributorRegIrouter719"
+	case GICDistributorRegIrouter720:
+		return "GICDistributorRegIrouter720"
+	case GICDistributorRegIrouter721:
+		return "GICDistributorRegIrouter721"
+	case GICDistributorRegIrouter722:
+		return "GICDistributorRegIrouter722"
+	case GICDistributorRegIrouter723:
+		return "GICDistributorRegIrouter723"
+	case GICDistributorRegIrouter724:
+		return "GICDistributorRegIrouter724"
+	case GICDistributorRegIrouter725:
+		return "GICDistributorRegIrouter725"
+	case GICDistributorRegIrouter726:
+		return "GICDistributorRegIrouter726"
+	case GICDistributorRegIrouter727:
+		return "GICDistributorRegIrouter727"
+	case GICDistributorRegIrouter728:
+		return "GICDistributorRegIrouter728"
+	case GICDistributorRegIrouter729:
+		return "GICDistributorRegIrouter729"
+	case GICDistributorRegIrouter730:
+		return "GICDistributorRegIrouter730"
+	case GICDistributorRegIrouter731:
+		return "GICDistributorRegIrouter731"
+	case GICDistributorRegIrouter732:
+		return "GICDistributorRegIrouter732"
+	case GICDistributorRegIrouter733:
+		return "GICDistributorRegIrouter733"
+	case GICDistributorRegIrouter734:
+		return "GICDistributorRegIrouter734"
+	case GICDistributorRegIrouter735:
+		return "GICDistributorRegIrouter735"
+	case GICDistributorRegIrouter736:
+		return "GICDistributorRegIrouter736"
+	case GICDistributorRegIrouter737:
+		return "GICDistributorRegIrouter737"
+	case GICDistributorRegIrouter738:
+		return "GICDistributorRegIrouter738"
+	case GICDistributorRegIrouter739:
+		return "GICDistributorRegIrouter739"
+	case GICDistributorRegIrouter740:
+		return "GICDistributorRegIrouter740"
+	case GICDistributorRegIrouter741:
+		return "GICDistributorRegIrouter741"
+	case GICDistributorRegIrouter742:
+		return "GICDistributorRegIrouter742"
+	case GICDistributorRegIrouter743:
+		return "GICDistributorRegIrouter743"
+	case GICDistributorRegIrouter744:
+		return "GICDistributorRegIrouter744"
+	case GICDistributorRegIrouter745:
+		return "GICDistributorRegIrouter745"
+	case GICDistributorRegIrouter746:
+		return "GICDistributorRegIrouter746"
+	case GICDistributorRegIrouter747:
+		return "GICDistributorRegIrouter747"
+	case GICDistributorRegIrouter748:
+		return "GICDistributorRegIrouter748"
+	case GICDistributorRegIrouter749:
+		return "GICDistributorRegIrouter749"
+	case GICDistributorRegIrouter750:
+		return "GICDistributorRegIrouter750"
+	case GICDistributorRegIrouter751:
+		return "GICDistributorRegIrouter751"
+	case GICDistributorRegIrouter752:
+		return "GICDistributorRegIrouter752"
+	case GICDistributorRegIrouter753:
+		return "GICDistributorRegIrouter753"
+	case GICDistributorRegIrouter754:
+		return "GICDistributorRegIrouter754"
+	case GICDistributorRegIrouter755:
+		return "GICDistributorRegIrouter755"
+	case GICDistributorRegIrouter756:
+		return "GICDistributorRegIrouter756"
+	case GICDistributorRegIrouter757:
+		return "GICDistributorRegIrouter757"
+	case GICDistributorRegIrouter758:
+		return "GICDistributorRegIrouter758"
+	case GICDistributorRegIrouter759:
+		return "GICDistributorRegIrouter759"
+	case GICDistributorRegIrouter760:
+		return "GICDistributorRegIrouter760"
+	case GICDistributorRegIrouter761:
+		return "GICDistributorRegIrouter761"
+	case GICDistributorRegIrouter762:
+		return "GICDistributorRegIrouter762"
+	case GICDistributorRegIrouter763:
+		return "GICDistributorRegIrouter763"
+	case GICDistributorRegIrouter764:
+		return "GICDistributorRegIrouter764"
+	case GICDistributorRegIrouter765:
+		return "GICDistributorRegIrouter765"
+	case GICDistributorRegIrouter766:
+		return "GICDistributorRegIrouter766"
+	case GICDistributorRegIrouter767:
+		return "GICDistributorRegIrouter767"
+	case GICDistributorRegIrouter768:
+		return "GICDistributorRegIrouter768"
+	case GICDistributorRegIrouter769:
+		return "GICDistributorRegIrouter769"
+	case GICDistributorRegIrouter770:
+		return "GICDistributorRegIrouter770"
+	case GICDistributorRegIrouter771:
+		return "GICDistributorRegIrouter771"
+	case GICDistributorRegIrouter772:
+		return "GICDistributorRegIrouter772"
+	case GICDistributorRegIrouter773:
+		return "GICDistributorRegIrouter773"
+	case GICDistributorRegIrouter774:
+		return "GICDistributorRegIrouter774"
+	case GICDistributorRegIrouter775:
+		return "GICDistributorRegIrouter775"
+	case GICDistributorRegIrouter776:
+		return "GICDistributorRegIrouter776"
+	case GICDistributorRegIrouter777:
+		return "GICDistributorRegIrouter777"
+	case GICDistributorRegIrouter778:
+		return "GICDistributorRegIrouter778"
+	case GICDistributorRegIrouter779:
+		return "GICDistributorRegIrouter779"
+	case GICDistributorRegIrouter780:
+		return "GICDistributorRegIrouter780"
+	case GICDistributorRegIrouter781:
+		return "GICDistributorRegIrouter781"
+	case GICDistributorRegIrouter782:
+		return "GICDistributorRegIrouter782"
+	case GICDistributorRegIrouter783:
+		return "GICDistributorRegIrouter783"
+	case GICDistributorRegIrouter784:
+		return "GICDistributorRegIrouter784"
+	case GICDistributorRegIrouter785:
+		return "GICDistributorRegIrouter785"
+	case GICDistributorRegIrouter786:
+		return "GICDistributorRegIrouter786"
+	case GICDistributorRegIrouter787:
+		return "GICDistributorRegIrouter787"
+	case GICDistributorRegIrouter788:
+		return "GICDistributorRegIrouter788"
+	case GICDistributorRegIrouter789:
+		return "GICDistributorRegIrouter789"
+	case GICDistributorRegIrouter790:
+		return "GICDistributorRegIrouter790"
+	case GICDistributorRegIrouter791:
+		return "GICDistributorRegIrouter791"
+	case GICDistributorRegIrouter792:
+		return "GICDistributorRegIrouter792"
+	case GICDistributorRegIrouter793:
+		return "GICDistributorRegIrouter793"
+	case GICDistributorRegIrouter794:
+		return "GICDistributorRegIrouter794"
+	case GICDistributorRegIrouter795:
+		return "GICDistributorRegIrouter795"
+	case GICDistributorRegIrouter796:
+		return "GICDistributorRegIrouter796"
+	case GICDistributorRegIrouter797:
+		return "GICDistributorRegIrouter797"
+	case GICDistributorRegIrouter798:
+		return "GICDistributorRegIrouter798"
+	case GICDistributorRegIrouter799:
+		return "GICDistributorRegIrouter799"
+	case GICDistributorRegIrouter800:
+		return "GICDistributorRegIrouter800"
+	case GICDistributorRegIrouter801:
+		return "GICDistributorRegIrouter801"
+	case GICDistributorRegIrouter802:
+		return "GICDistributorRegIrouter802"
+	case GICDistributorRegIrouter803:
+		return "GICDistributorRegIrouter803"
+	case GICDistributorRegIrouter804:
+		return "GICDistributorRegIrouter804"
+	case GICDistributorRegIrouter805:
+		return "GICDistributorRegIrouter805"
+	case GICDistributorRegIrouter806:
+		return "GICDistributorRegIrouter806"
+	case GICDistributorRegIrouter807:
+		return "GICDistributorRegIrouter807"
+	case GICDistributorRegIrouter808:
+		return "GICDistributorRegIrouter808"
+	case GICDistributorRegIrouter809:
+		return "GICDistributorRegIrouter809"
+	case GICDistributorRegIrouter810:
+		return "GICDistributorRegIrouter810"
+	case GICDistributorRegIrouter811:
+		return "GICDistributorRegIrouter811"
+	case GICDistributorRegIrouter812:
+		return "GICDistributorRegIrouter812"
+	case GICDistributorRegIrouter813:
+		return "GICDistributorRegIrouter813"
+	case GICDistributorRegIrouter814:
+		return "GICDistributorRegIrouter814"
+	case GICDistributorRegIrouter815:
+		return "GICDistributorRegIrouter815"
+	case GICDistributorRegIrouter816:
+		return "GICDistributorRegIrouter816"
+	case GICDistributorRegIrouter817:
+		return "GICDistributorRegIrouter817"
+	case GICDistributorRegIrouter818:
+		return "GICDistributorRegIrouter818"
+	case GICDistributorRegIrouter819:
+		return "GICDistributorRegIrouter819"
+	case GICDistributorRegIrouter820:
+		return "GICDistributorRegIrouter820"
+	case GICDistributorRegIrouter821:
+		return "GICDistributorRegIrouter821"
+	case GICDistributorRegIrouter822:
+		return "GICDistributorRegIrouter822"
+	case GICDistributorRegIrouter823:
+		return "GICDistributorRegIrouter823"
+	case GICDistributorRegIrouter824:
+		return "GICDistributorRegIrouter824"
+	case GICDistributorRegIrouter825:
+		return "GICDistributorRegIrouter825"
+	case GICDistributorRegIrouter826:
+		return "GICDistributorRegIrouter826"
+	case GICDistributorRegIrouter827:
+		return "GICDistributorRegIrouter827"
+	case GICDistributorRegIrouter828:
+		return "GICDistributorRegIrouter828"
+	case GICDistributorRegIrouter829:
+		return "GICDistributorRegIrouter829"
+	case GICDistributorRegIrouter830:
+		return "GICDistributorRegIrouter830"
+	case GICDistributorRegIrouter831:
+		return "GICDistributorRegIrouter831"
+	case GICDistributorRegIrouter832:
+		return "GICDistributorRegIrouter832"
+	case GICDistributorRegIrouter833:
+		return "GICDistributorRegIrouter833"
+	case GICDistributorRegIrouter834:
+		return "GICDistributorRegIrouter834"
+	case GICDistributorRegIrouter835:
+		return "GICDistributorRegIrouter835"
+	case GICDistributorRegIrouter836:
+		return "GICDistributorRegIrouter836"
+	case GICDistributorRegIrouter837:
+		return "GICDistributorRegIrouter837"
+	case GICDistributorRegIrouter838:
+		return "GICDistributorRegIrouter838"
+	case GICDistributorRegIrouter839:
+		return "GICDistributorRegIrouter839"
+	case GICDistributorRegIrouter840:
+		return "GICDistributorRegIrouter840"
+	case GICDistributorRegIrouter841:
+		return "GICDistributorRegIrouter841"
+	case GICDistributorRegIrouter842:
+		return "GICDistributorRegIrouter842"
+	case GICDistributorRegIrouter843:
+		return "GICDistributorRegIrouter843"
+	case GICDistributorRegIrouter844:
+		return "GICDistributorRegIrouter844"
+	case GICDistributorRegIrouter845:
+		return "GICDistributorRegIrouter845"
+	case GICDistributorRegIrouter846:
+		return "GICDistributorRegIrouter846"
+	case GICDistributorRegIrouter847:
+		return "GICDistributorRegIrouter847"
+	case GICDistributorRegIrouter848:
+		return "GICDistributorRegIrouter848"
+	case GICDistributorRegIrouter849:
+		return "GICDistributorRegIrouter849"
+	case GICDistributorRegIrouter850:
+		return "GICDistributorRegIrouter850"
+	case GICDistributorRegIrouter851:
+		return "GICDistributorRegIrouter851"
+	case GICDistributorRegIrouter852:
+		return "GICDistributorRegIrouter852"
+	case GICDistributorRegIrouter853:
+		return "GICDistributorRegIrouter853"
+	case GICDistributorRegIrouter854:
+		return "GICDistributorRegIrouter854"
+	case GICDistributorRegIrouter855:
+		return "GICDistributorRegIrouter855"
+	case GICDistributorRegIrouter856:
+		return "GICDistributorRegIrouter856"
+	case GICDistributorRegIrouter857:
+		return "GICDistributorRegIrouter857"
+	case GICDistributorRegIrouter858:
+		return "GICDistributorRegIrouter858"
+	case GICDistributorRegIrouter859:
+		return "GICDistributorRegIrouter859"
+	case GICDistributorRegIrouter860:
+		return "GICDistributorRegIrouter860"
+	case GICDistributorRegIrouter861:
+		return "GICDistributorRegIrouter861"
+	case GICDistributorRegIrouter862:
+		return "GICDistributorRegIrouter862"
+	case GICDistributorRegIrouter863:
+		return "GICDistributorRegIrouter863"
+	case GICDistributorRegIrouter864:
+		return "GICDistributorRegIrouter864"
+	case GICDistributorRegIrouter865:
+		return "GICDistributorRegIrouter865"
+	case GICDistributorRegIrouter866:
+		return "GICDistributorRegIrouter866"
+	case GICDistributorRegIrouter867:
+		return "GICDistributorRegIrouter867"
+	case GICDistributorRegIrouter868:
+		return "GICDistributorRegIrouter868"
+	case GICDistributorRegIrouter869:
+		return "GICDistributorRegIrouter869"
+	case GICDistributorRegIrouter870:
+		return "GICDistributorRegIrouter870"
+	case GICDistributorRegIrouter871:
+		return "GICDistributorRegIrouter871"
+	case GICDistributorRegIrouter872:
+		return "GICDistributorRegIrouter872"
+	case GICDistributorRegIrouter873:
+		return "GICDistributorRegIrouter873"
+	case GICDistributorRegIrouter874:
+		return "GICDistributorRegIrouter874"
+	case GICDistributorRegIrouter875:
+		return "GICDistributorRegIrouter875"
+	case GICDistributorRegIrouter876:
+		return "GICDistributorRegIrouter876"
+	case GICDistributorRegIrouter877:
+		return "GICDistributorRegIrouter877"
+	case GICDistributorRegIrouter878:
+		return "GICDistributorRegIrouter878"
+	case GICDistributorRegIrouter879:
+		return "GICDistributorRegIrouter879"
+	case GICDistributorRegIrouter880:
+		return "GICDistributorRegIrouter880"
+	case GICDistributorRegIrouter881:
+		return "GICDistributorRegIrouter881"
+	case GICDistributorRegIrouter882:
+		return "GICDistributorRegIrouter882"
+	case GICDistributorRegIrouter883:
+		return "GICDistributorRegIrouter883"
+	case GICDistributorRegIrouter884:
+		return "GICDistributorRegIrouter884"
+	case GICDistributorRegIrouter885:
+		return "GICDistributorRegIrouter885"
+	case GICDistributorRegIrouter886:
+		return "GICDistributorRegIrouter886"
+	case GICDistributorRegIrouter887:
+		return "GICDistributorRegIrouter887"
+	case GICDistributorRegIrouter888:
+		return "GICDistributorRegIrouter888"
+	case GICDistributorRegIrouter889:
+		return "GICDistributorRegIrouter889"
+	case GICDistributorRegIrouter890:
+		return "GICDistributorRegIrouter890"
+	case GICDistributorRegIrouter891:
+		return "GICDistributorRegIrouter891"
+	case GICDistributorRegIrouter892:
+		return "GICDistributorRegIrouter892"
+	case GICDistributorRegIrouter893:
+		return "GICDistributorRegIrouter893"
+	case GICDistributorRegIrouter894:
+		return "GICDistributorRegIrouter894"
+	case GICDistributorRegIrouter895:
+		return "GICDistributorRegIrouter895"
+	case GICDistributorRegIrouter896:
+		return "GICDistributorRegIrouter896"
+	case GICDistributorRegIrouter897:
+		return "GICDistributorRegIrouter897"
+	case GICDistributorRegIrouter898:
+		return "GICDistributorRegIrouter898"
+	case GICDistributorRegIrouter899:
+		return "GICDistributorRegIrouter899"
+	case GICDistributorRegIrouter900:
+		return "GICDistributorRegIrouter900"
+	case GICDistributorRegIrouter901:
+		return "GICDistributorRegIrouter901"
+	case GICDistributorRegIrouter902:
+		return "GICDistributorRegIrouter902"
+	case GICDistributorRegIrouter903:
+		return "GICDistributorRegIrouter903"
+	case GICDistributorRegIrouter904:
+		return "GICDistributorRegIrouter904"
+	case GICDistributorRegIrouter905:
+		return "GICDistributorRegIrouter905"
+	case GICDistributorRegIrouter906:
+		return "GICDistributorRegIrouter906"
+	case GICDistributorRegIrouter907:
+		return "GICDistributorRegIrouter907"
+	case GICDistributorRegIrouter908:
+		return "GICDistributorRegIrouter908"
+	case GICDistributorRegIrouter909:
+		return "GICDistributorRegIrouter909"
+	case GICDistributorRegIrouter910:
+		return "GICDistributorRegIrouter910"
+	case GICDistributorRegIrouter911:
+		return "GICDistributorRegIrouter911"
+	case GICDistributorRegIrouter912:
+		return "GICDistributorRegIrouter912"
+	case GICDistributorRegIrouter913:
+		return "GICDistributorRegIrouter913"
+	case GICDistributorRegIrouter914:
+		return "GICDistributorRegIrouter914"
+	case GICDistributorRegIrouter915:
+		return "GICDistributorRegIrouter915"
+	case GICDistributorRegIrouter916:
+		return "GICDistributorRegIrouter916"
+	case GICDistributorRegIrouter917:
+		return "GICDistributorRegIrouter917"
+	case GICDistributorRegIrouter918:
+		return "GICDistributorRegIrouter918"
+	case GICDistributorRegIrouter919:
+		return "GICDistributorRegIrouter919"
+	case GICDistributorRegIrouter920:
+		return "GICDistributorRegIrouter920"
+	case GICDistributorRegIrouter921:
+		return "GICDistributorRegIrouter921"
+	case GICDistributorRegIrouter922:
+		return "GICDistributorRegIrouter922"
+	case GICDistributorRegIrouter923:
+		return "GICDistributorRegIrouter923"
+	case GICDistributorRegIrouter924:
+		return "GICDistributorRegIrouter924"
+	case GICDistributorRegIrouter925:
+		return "GICDistributorRegIrouter925"
+	case GICDistributorRegIrouter926:
+		return "GICDistributorRegIrouter926"
+	case GICDistributorRegIrouter927:
+		return "GICDistributorRegIrouter927"
+	case GICDistributorRegIrouter928:
+		return "GICDistributorRegIrouter928"
+	case GICDistributorRegIrouter929:
+		return "GICDistributorRegIrouter929"
+	case GICDistributorRegIrouter930:
+		return "GICDistributorRegIrouter930"
+	case GICDistributorRegIrouter931:
+		return "GICDistributorRegIrouter931"
+	case GICDistributorRegIrouter932:
+		return "GICDistributorRegIrouter932"
+	case GICDistributorRegIrouter933:
+		return "GICDistributorRegIrouter933"
+	case GICDistributorRegIrouter934:
+		return "GICDistributorRegIrouter934"
+	case GICDistributorRegIrouter935:
+		return "GICDistributorRegIrouter935"
+	case GICDistributorRegIrouter936:
+		return "GICDistributorRegIrouter936"
+	case GICDistributorRegIrouter937:
+		return "GICDistributorRegIrouter937"
+	case GICDistributorRegIrouter938:
+		return "GICDistributorRegIrouter938"
+	case GICDistributorRegIrouter939:
+		return "GICDistributorRegIrouter939"
+	case GICDistributorRegIrouter940:
+		return "GICDistributorRegIrouter940"
+	case GICDistributorRegIrouter941:
+		return "GICDistributorRegIrouter941"
+	case GICDistributorRegIrouter942:
+		return "GICDistributorRegIrouter942"
+	case GICDistributorRegIrouter943:
+		return "GICDistributorRegIrouter943"
+	case GICDistributorRegIrouter944:
+		return "GICDistributorRegIrouter944"
+	case GICDistributorRegIrouter945:
+		return "GICDistributorRegIrouter945"
+	case GICDistributorRegIrouter946:
+		return "GICDistributorRegIrouter946"
+	case GICDistributorRegIrouter947:
+		return "GICDistributorRegIrouter947"
+	case GICDistributorRegIrouter948:
+		return "GICDistributorRegIrouter948"
+	case GICDistributorRegIrouter949:
+		return "GICDistributorRegIrouter949"
+	case GICDistributorRegIrouter950:
+		return "GICDistributorRegIrouter950"
+	case GICDistributorRegIrouter951:
+		return "GICDistributorRegIrouter951"
+	case GICDistributorRegIrouter952:
+		return "GICDistributorRegIrouter952"
+	case GICDistributorRegIrouter953:
+		return "GICDistributorRegIrouter953"
+	case GICDistributorRegIrouter954:
+		return "GICDistributorRegIrouter954"
+	case GICDistributorRegIrouter955:
+		return "GICDistributorRegIrouter955"
+	case GICDistributorRegIrouter956:
+		return "GICDistributorRegIrouter956"
+	case GICDistributorRegIrouter957:
+		return "GICDistributorRegIrouter957"
+	case GICDistributorRegIrouter958:
+		return "GICDistributorRegIrouter958"
+	case GICDistributorRegIrouter959:
+		return "GICDistributorRegIrouter959"
+	case GICDistributorRegIrouter960:
+		return "GICDistributorRegIrouter960"
+	case GICDistributorRegIrouter961:
+		return "GICDistributorRegIrouter961"
+	case GICDistributorRegIrouter962:
+		return "GICDistributorRegIrouter962"
+	case GICDistributorRegIrouter963:
+		return "GICDistributorRegIrouter963"
+	case GICDistributorRegIrouter964:
+		return "GICDistributorRegIrouter964"
+	case GICDistributorRegIrouter965:
+		return "GICDistributorRegIrouter965"
+	case GICDistributorRegIrouter966:
+		return "GICDistributorRegIrouter966"
+	case GICDistributorRegIrouter967:
+		return "GICDistributorRegIrouter967"
+	case GICDistributorRegIrouter968:
+		return "GICDistributorRegIrouter968"
+	case GICDistributorRegIrouter969:
+		return "GICDistributorRegIrouter969"
+	case GICDistributorRegIrouter970:
+		return "GICDistributorRegIrouter970"
+	case GICDistributorRegIrouter971:
+		return "GICDistributorRegIrouter971"
+	case GICDistributorRegIrouter972:
+		return "GICDistributorRegIrouter972"
+	case GICDistributorRegIrouter973:
+		return "GICDistributorRegIrouter973"
+	case GICDistributorRegIrouter974:
+		return "GICDistributorRegIrouter974"
+	case GICDistributorRegIrouter975:
+		return "GICDistributorRegIrouter975"
+	case GICDistributorRegIrouter976:
+		return "GICDistributorRegIrouter976"
+	case GICDistributorRegIrouter977:
+		return "GICDistributorRegIrouter977"
+	case GICDistributorRegIrouter978:
+		return "GICDistributorRegIrouter978"
+	case GICDistributorRegIrouter979:
+		return "GICDistributorRegIrouter979"
+	case GICDistributorRegIrouter980:
+		return "GICDistributorRegIrouter980"
+	case GICDistributorRegIrouter981:
+		return "GICDistributorRegIrouter981"
+	case GICDistributorRegIrouter982:
+		return "GICDistributorRegIrouter982"
+	case GICDistributorRegIrouter983:
+		return "GICDistributorRegIrouter983"
+	case GICDistributorRegIrouter984:
+		return "GICDistributorRegIrouter984"
+	case GICDistributorRegIrouter985:
+		return "GICDistributorRegIrouter985"
+	case GICDistributorRegIrouter986:
+		return "GICDistributorRegIrouter986"
+	case GICDistributorRegIrouter987:
+		return "GICDistributorRegIrouter987"
+	case GICDistributorRegIrouter988:
+		return "GICDistributorRegIrouter988"
+	case GICDistributorRegIrouter989:
+		return "GICDistributorRegIrouter989"
+	case GICDistributorRegIrouter990:
+		return "GICDistributorRegIrouter990"
+	case GICDistributorRegIrouter991:
+		return "GICDistributorRegIrouter991"
+	case GICDistributorRegIrouter992:
+		return "GICDistributorRegIrouter992"
+	case GICDistributorRegIrouter993:
+		return "GICDistributorRegIrouter993"
+	case GICDistributorRegIrouter994:
+		return "GICDistributorRegIrouter994"
+	case GICDistributorRegIrouter995:
+		return "GICDistributorRegIrouter995"
+	case GICDistributorRegIrouter996:
+		return "GICDistributorRegIrouter996"
+	case GICDistributorRegIrouter997:
+		return "GICDistributorRegIrouter997"
+	case GICDistributorRegIrouter998:
+		return "GICDistributorRegIrouter998"
+	case GICDistributorRegIrouter999:
+		return "GICDistributorRegIrouter999"
+	case GICDistributorRegIrouter1000:
+		return "GICDistributorRegIrouter1000"
+	case GICDistributorRegIrouter1001:
+		return "GICDistributorRegIrouter1001"
+	case GICDistributorRegIrouter1002:
+		return "GICDistributorRegIrouter1002"
+	case GICDistributorRegIrouter1003:
+		return "GICDistributorRegIrouter1003"
+	case GICDistributorRegIrouter1004:
+		return "GICDistributorRegIrouter1004"
+	case GICDistributorRegIrouter1005:
+		return "GICDistributorRegIrouter1005"
+	case GICDistributorRegIrouter1006:
+		return "GICDistributorRegIrouter1006"
+	case GICDistributorRegIrouter1007:
+		return "GICDistributorRegIrouter1007"
+	case GICDistributorRegIrouter1008:
+		return "GICDistributorRegIrouter1008"
+	case GICDistributorRegIrouter1009:
+		return "GICDistributorRegIrouter1009"
+	case GICDistributorRegIrouter1010:
+		return "GICDistributorRegIrouter1010"
+	case GICDistributorRegIrouter1011:
+		return "GICDistributorRegIrouter1011"
+	case GICDistributorRegIrouter1012:
+		return "GICDistributorRegIrouter1012"
+	case GICDistributorRegIrouter1013:
+		return "GICDistributorRegIrouter1013"
+	case GICDistributorRegIrouter1014:
+		return "GICDistributorRegIrouter1014"
+	case GICDistributorRegIrouter1015:
+		return "GICDistributorRegIrouter1015"
+	case GICDistributorRegIrouter1016:
+		return "GICDistributorRegIrouter1016"
+	case GICDistributorRegIrouter1017:
+		return "GICDistributorRegIrouter1017"
+	case GICDistributorRegIrouter1018:
+		return "GICDistributorRegIrouter1018"
+	case GICDistributorRegIrouter1019:
+		return "GICDistributorRegIrouter1019"
+	case GICDistributorRegPidr2:
+		return "GICDistributorRegPidr2"
 	default:
-		return fmt.Sprintf("Hv_gic_distributor_reg_t(%d)", int64(e))
+		return fmt.Sprintf("GICDistributorReg(%d)", int64(e))
 	}
 }
 
-type Hv_gic_icc_reg_t int64
+type GICIccReg int64
 
 const (
-	HV_GIC_ICC_REG_PMR_EL1     Hv_gic_icc_reg_t = 49712
-	HV_GIC_ICC_REG_BPR0_EL1    Hv_gic_icc_reg_t = 50755
-	HV_GIC_ICC_REG_AP0R0_EL1   Hv_gic_icc_reg_t = 50756
-	HV_GIC_ICC_REG_AP1R0_EL1   Hv_gic_icc_reg_t = 50760
-	HV_GIC_ICC_REG_RPR_EL1     Hv_gic_icc_reg_t = 50779
-	HV_GIC_ICC_REG_BPR1_EL1    Hv_gic_icc_reg_t = 50787
-	HV_GIC_ICC_REG_CTLR_EL1    Hv_gic_icc_reg_t = 50788
-	HV_GIC_ICC_REG_SRE_EL1     Hv_gic_icc_reg_t = 50789
-	HV_GIC_ICC_REG_IGRPEN0_EL1 Hv_gic_icc_reg_t = 50790
-	HV_GIC_ICC_REG_IGRPEN1_EL1 Hv_gic_icc_reg_t = 50791
-	HV_GIC_ICC_REG_SRE_EL2     Hv_gic_icc_reg_t = 58957
+	GICIccRegPmrEL1     GICIccReg = 49712
+	GICIccRegBpr0EL1    GICIccReg = 50755
+	GICIccRegAp0r0EL1   GICIccReg = 50756
+	GICIccRegAp1r0EL1   GICIccReg = 50760
+	GICIccRegRprEL1     GICIccReg = 50779
+	GICIccRegBpr1EL1    GICIccReg = 50787
+	GICIccRegCtlrEL1    GICIccReg = 50788
+	GICIccRegSreEL1     GICIccReg = 50789
+	GICIccRegIgrpen0EL1 GICIccReg = 50790
+	GICIccRegIgrpen1EL1 GICIccReg = 50791
+	GICIccRegSreEL2     GICIccReg = 58957
 )
 
-// String returns the Hv_gic_icc_reg_t constant's name, or its numeric form when the
+// String returns the GICIccReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_icc_reg_t) String() string {
+func (e GICIccReg) String() string {
 	switch e {
-	case HV_GIC_ICC_REG_PMR_EL1:
-		return "HV_GIC_ICC_REG_PMR_EL1"
-	case HV_GIC_ICC_REG_BPR0_EL1:
-		return "HV_GIC_ICC_REG_BPR0_EL1"
-	case HV_GIC_ICC_REG_AP0R0_EL1:
-		return "HV_GIC_ICC_REG_AP0R0_EL1"
-	case HV_GIC_ICC_REG_AP1R0_EL1:
-		return "HV_GIC_ICC_REG_AP1R0_EL1"
-	case HV_GIC_ICC_REG_RPR_EL1:
-		return "HV_GIC_ICC_REG_RPR_EL1"
-	case HV_GIC_ICC_REG_BPR1_EL1:
-		return "HV_GIC_ICC_REG_BPR1_EL1"
-	case HV_GIC_ICC_REG_CTLR_EL1:
-		return "HV_GIC_ICC_REG_CTLR_EL1"
-	case HV_GIC_ICC_REG_SRE_EL1:
-		return "HV_GIC_ICC_REG_SRE_EL1"
-	case HV_GIC_ICC_REG_IGRPEN0_EL1:
-		return "HV_GIC_ICC_REG_IGRPEN0_EL1"
-	case HV_GIC_ICC_REG_IGRPEN1_EL1:
-		return "HV_GIC_ICC_REG_IGRPEN1_EL1"
-	case HV_GIC_ICC_REG_SRE_EL2:
-		return "HV_GIC_ICC_REG_SRE_EL2"
+	case GICIccRegPmrEL1:
+		return "GICIccRegPmrEL1"
+	case GICIccRegBpr0EL1:
+		return "GICIccRegBpr0EL1"
+	case GICIccRegAp0r0EL1:
+		return "GICIccRegAp0r0EL1"
+	case GICIccRegAp1r0EL1:
+		return "GICIccRegAp1r0EL1"
+	case GICIccRegRprEL1:
+		return "GICIccRegRprEL1"
+	case GICIccRegBpr1EL1:
+		return "GICIccRegBpr1EL1"
+	case GICIccRegCtlrEL1:
+		return "GICIccRegCtlrEL1"
+	case GICIccRegSreEL1:
+		return "GICIccRegSreEL1"
+	case GICIccRegIgrpen0EL1:
+		return "GICIccRegIgrpen0EL1"
+	case GICIccRegIgrpen1EL1:
+		return "GICIccRegIgrpen1EL1"
+	case GICIccRegSreEL2:
+		return "GICIccRegSreEL2"
 	default:
-		return fmt.Sprintf("Hv_gic_icc_reg_t(%d)", int64(e))
+		return fmt.Sprintf("GICIccReg(%d)", int64(e))
 	}
 }
 
-type Hv_gic_ich_reg_t int64
+type GICIchReg int64
 
 const (
-	HV_GIC_ICH_REG_AP0R0_EL2 Hv_gic_ich_reg_t = 58944
-	HV_GIC_ICH_REG_AP1R0_EL2 Hv_gic_ich_reg_t = 58952
-	HV_GIC_ICH_REG_HCR_EL2   Hv_gic_ich_reg_t = 58968
-	HV_GIC_ICH_REG_VTR_EL2   Hv_gic_ich_reg_t = 58969
-	HV_GIC_ICH_REG_MISR_EL2  Hv_gic_ich_reg_t = 58970
-	HV_GIC_ICH_REG_EISR_EL2  Hv_gic_ich_reg_t = 58971
-	HV_GIC_ICH_REG_ELRSR_EL2 Hv_gic_ich_reg_t = 58973
-	HV_GIC_ICH_REG_VMCR_EL2  Hv_gic_ich_reg_t = 58975
-	HV_GIC_ICH_REG_LR0_EL2   Hv_gic_ich_reg_t = 58976
-	HV_GIC_ICH_REG_LR1_EL2   Hv_gic_ich_reg_t = 58977
-	HV_GIC_ICH_REG_LR2_EL2   Hv_gic_ich_reg_t = 58978
-	HV_GIC_ICH_REG_LR3_EL2   Hv_gic_ich_reg_t = 58979
-	HV_GIC_ICH_REG_LR4_EL2   Hv_gic_ich_reg_t = 58980
-	HV_GIC_ICH_REG_LR5_EL2   Hv_gic_ich_reg_t = 58981
-	HV_GIC_ICH_REG_LR6_EL2   Hv_gic_ich_reg_t = 58982
-	HV_GIC_ICH_REG_LR7_EL2   Hv_gic_ich_reg_t = 58983
-	HV_GIC_ICH_REG_LR8_EL2   Hv_gic_ich_reg_t = 58984
-	HV_GIC_ICH_REG_LR9_EL2   Hv_gic_ich_reg_t = 58985
-	HV_GIC_ICH_REG_LR10_EL2  Hv_gic_ich_reg_t = 58986
-	HV_GIC_ICH_REG_LR11_EL2  Hv_gic_ich_reg_t = 58987
-	HV_GIC_ICH_REG_LR12_EL2  Hv_gic_ich_reg_t = 58988
-	HV_GIC_ICH_REG_LR13_EL2  Hv_gic_ich_reg_t = 58989
-	HV_GIC_ICH_REG_LR14_EL2  Hv_gic_ich_reg_t = 58990
-	HV_GIC_ICH_REG_LR15_EL2  Hv_gic_ich_reg_t = 58991
+	GICIchRegAp0r0EL2 GICIchReg = 58944
+	GICIchRegAp1r0EL2 GICIchReg = 58952
+	GICIchRegHcrEL2   GICIchReg = 58968
+	GICIchRegVtrEL2   GICIchReg = 58969
+	GICIchRegMisrEL2  GICIchReg = 58970
+	GICIchRegEisrEL2  GICIchReg = 58971
+	GICIchRegElrsrEL2 GICIchReg = 58973
+	GICIchRegVmcrEL2  GICIchReg = 58975
+	GICIchRegLr0EL2   GICIchReg = 58976
+	GICIchRegLr1EL2   GICIchReg = 58977
+	GICIchRegLr2EL2   GICIchReg = 58978
+	GICIchRegLr3EL2   GICIchReg = 58979
+	GICIchRegLr4EL2   GICIchReg = 58980
+	GICIchRegLr5EL2   GICIchReg = 58981
+	GICIchRegLr6EL2   GICIchReg = 58982
+	GICIchRegLr7EL2   GICIchReg = 58983
+	GICIchRegLr8EL2   GICIchReg = 58984
+	GICIchRegLr9EL2   GICIchReg = 58985
+	GICIchRegLr10EL2  GICIchReg = 58986
+	GICIchRegLr11EL2  GICIchReg = 58987
+	GICIchRegLr12EL2  GICIchReg = 58988
+	GICIchRegLr13EL2  GICIchReg = 58989
+	GICIchRegLr14EL2  GICIchReg = 58990
+	GICIchRegLr15EL2  GICIchReg = 58991
 )
 
-// String returns the Hv_gic_ich_reg_t constant's name, or its numeric form when the
+// String returns the GICIchReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_ich_reg_t) String() string {
+func (e GICIchReg) String() string {
 	switch e {
-	case HV_GIC_ICH_REG_AP0R0_EL2:
-		return "HV_GIC_ICH_REG_AP0R0_EL2"
-	case HV_GIC_ICH_REG_AP1R0_EL2:
-		return "HV_GIC_ICH_REG_AP1R0_EL2"
-	case HV_GIC_ICH_REG_HCR_EL2:
-		return "HV_GIC_ICH_REG_HCR_EL2"
-	case HV_GIC_ICH_REG_VTR_EL2:
-		return "HV_GIC_ICH_REG_VTR_EL2"
-	case HV_GIC_ICH_REG_MISR_EL2:
-		return "HV_GIC_ICH_REG_MISR_EL2"
-	case HV_GIC_ICH_REG_EISR_EL2:
-		return "HV_GIC_ICH_REG_EISR_EL2"
-	case HV_GIC_ICH_REG_ELRSR_EL2:
-		return "HV_GIC_ICH_REG_ELRSR_EL2"
-	case HV_GIC_ICH_REG_VMCR_EL2:
-		return "HV_GIC_ICH_REG_VMCR_EL2"
-	case HV_GIC_ICH_REG_LR0_EL2:
-		return "HV_GIC_ICH_REG_LR0_EL2"
-	case HV_GIC_ICH_REG_LR1_EL2:
-		return "HV_GIC_ICH_REG_LR1_EL2"
-	case HV_GIC_ICH_REG_LR2_EL2:
-		return "HV_GIC_ICH_REG_LR2_EL2"
-	case HV_GIC_ICH_REG_LR3_EL2:
-		return "HV_GIC_ICH_REG_LR3_EL2"
-	case HV_GIC_ICH_REG_LR4_EL2:
-		return "HV_GIC_ICH_REG_LR4_EL2"
-	case HV_GIC_ICH_REG_LR5_EL2:
-		return "HV_GIC_ICH_REG_LR5_EL2"
-	case HV_GIC_ICH_REG_LR6_EL2:
-		return "HV_GIC_ICH_REG_LR6_EL2"
-	case HV_GIC_ICH_REG_LR7_EL2:
-		return "HV_GIC_ICH_REG_LR7_EL2"
-	case HV_GIC_ICH_REG_LR8_EL2:
-		return "HV_GIC_ICH_REG_LR8_EL2"
-	case HV_GIC_ICH_REG_LR9_EL2:
-		return "HV_GIC_ICH_REG_LR9_EL2"
-	case HV_GIC_ICH_REG_LR10_EL2:
-		return "HV_GIC_ICH_REG_LR10_EL2"
-	case HV_GIC_ICH_REG_LR11_EL2:
-		return "HV_GIC_ICH_REG_LR11_EL2"
-	case HV_GIC_ICH_REG_LR12_EL2:
-		return "HV_GIC_ICH_REG_LR12_EL2"
-	case HV_GIC_ICH_REG_LR13_EL2:
-		return "HV_GIC_ICH_REG_LR13_EL2"
-	case HV_GIC_ICH_REG_LR14_EL2:
-		return "HV_GIC_ICH_REG_LR14_EL2"
-	case HV_GIC_ICH_REG_LR15_EL2:
-		return "HV_GIC_ICH_REG_LR15_EL2"
+	case GICIchRegAp0r0EL2:
+		return "GICIchRegAp0r0EL2"
+	case GICIchRegAp1r0EL2:
+		return "GICIchRegAp1r0EL2"
+	case GICIchRegHcrEL2:
+		return "GICIchRegHcrEL2"
+	case GICIchRegVtrEL2:
+		return "GICIchRegVtrEL2"
+	case GICIchRegMisrEL2:
+		return "GICIchRegMisrEL2"
+	case GICIchRegEisrEL2:
+		return "GICIchRegEisrEL2"
+	case GICIchRegElrsrEL2:
+		return "GICIchRegElrsrEL2"
+	case GICIchRegVmcrEL2:
+		return "GICIchRegVmcrEL2"
+	case GICIchRegLr0EL2:
+		return "GICIchRegLr0EL2"
+	case GICIchRegLr1EL2:
+		return "GICIchRegLr1EL2"
+	case GICIchRegLr2EL2:
+		return "GICIchRegLr2EL2"
+	case GICIchRegLr3EL2:
+		return "GICIchRegLr3EL2"
+	case GICIchRegLr4EL2:
+		return "GICIchRegLr4EL2"
+	case GICIchRegLr5EL2:
+		return "GICIchRegLr5EL2"
+	case GICIchRegLr6EL2:
+		return "GICIchRegLr6EL2"
+	case GICIchRegLr7EL2:
+		return "GICIchRegLr7EL2"
+	case GICIchRegLr8EL2:
+		return "GICIchRegLr8EL2"
+	case GICIchRegLr9EL2:
+		return "GICIchRegLr9EL2"
+	case GICIchRegLr10EL2:
+		return "GICIchRegLr10EL2"
+	case GICIchRegLr11EL2:
+		return "GICIchRegLr11EL2"
+	case GICIchRegLr12EL2:
+		return "GICIchRegLr12EL2"
+	case GICIchRegLr13EL2:
+		return "GICIchRegLr13EL2"
+	case GICIchRegLr14EL2:
+		return "GICIchRegLr14EL2"
+	case GICIchRegLr15EL2:
+		return "GICIchRegLr15EL2"
 	default:
-		return fmt.Sprintf("Hv_gic_ich_reg_t(%d)", int64(e))
+		return fmt.Sprintf("GICIchReg(%d)", int64(e))
 	}
 }
 
-type Hv_gic_icv_reg_t int64
+type GICIcvReg int64
 
 const (
-	HV_GIC_ICV_REG_PMR_EL1     Hv_gic_icv_reg_t = 49712
-	HV_GIC_ICV_REG_BPR0_EL1    Hv_gic_icv_reg_t = 50755
-	HV_GIC_ICV_REG_AP0R0_EL1   Hv_gic_icv_reg_t = 50756
-	HV_GIC_ICV_REG_AP1R0_EL1   Hv_gic_icv_reg_t = 50760
-	HV_GIC_ICV_REG_RPR_EL1     Hv_gic_icv_reg_t = 50779
-	HV_GIC_ICV_REG_BPR1_EL1    Hv_gic_icv_reg_t = 50787
-	HV_GIC_ICV_REG_CTLR_EL1    Hv_gic_icv_reg_t = 50788
-	HV_GIC_ICV_REG_SRE_EL1     Hv_gic_icv_reg_t = 50789
-	HV_GIC_ICV_REG_IGRPEN0_EL1 Hv_gic_icv_reg_t = 50790
-	HV_GIC_ICV_REG_IGRPEN1_EL1 Hv_gic_icv_reg_t = 50791
+	GICIcvRegPmrEL1     GICIcvReg = 49712
+	GICIcvRegBpr0EL1    GICIcvReg = 50755
+	GICIcvRegAp0r0EL1   GICIcvReg = 50756
+	GICIcvRegAp1r0EL1   GICIcvReg = 50760
+	GICIcvRegRprEL1     GICIcvReg = 50779
+	GICIcvRegBpr1EL1    GICIcvReg = 50787
+	GICIcvRegCtlrEL1    GICIcvReg = 50788
+	GICIcvRegSreEL1     GICIcvReg = 50789
+	GICIcvRegIgrpen0EL1 GICIcvReg = 50790
+	GICIcvRegIgrpen1EL1 GICIcvReg = 50791
 )
 
-// String returns the Hv_gic_icv_reg_t constant's name, or its numeric form when the
+// String returns the GICIcvReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_icv_reg_t) String() string {
+func (e GICIcvReg) String() string {
 	switch e {
-	case HV_GIC_ICV_REG_PMR_EL1:
-		return "HV_GIC_ICV_REG_PMR_EL1"
-	case HV_GIC_ICV_REG_BPR0_EL1:
-		return "HV_GIC_ICV_REG_BPR0_EL1"
-	case HV_GIC_ICV_REG_AP0R0_EL1:
-		return "HV_GIC_ICV_REG_AP0R0_EL1"
-	case HV_GIC_ICV_REG_AP1R0_EL1:
-		return "HV_GIC_ICV_REG_AP1R0_EL1"
-	case HV_GIC_ICV_REG_RPR_EL1:
-		return "HV_GIC_ICV_REG_RPR_EL1"
-	case HV_GIC_ICV_REG_BPR1_EL1:
-		return "HV_GIC_ICV_REG_BPR1_EL1"
-	case HV_GIC_ICV_REG_CTLR_EL1:
-		return "HV_GIC_ICV_REG_CTLR_EL1"
-	case HV_GIC_ICV_REG_SRE_EL1:
-		return "HV_GIC_ICV_REG_SRE_EL1"
-	case HV_GIC_ICV_REG_IGRPEN0_EL1:
-		return "HV_GIC_ICV_REG_IGRPEN0_EL1"
-	case HV_GIC_ICV_REG_IGRPEN1_EL1:
-		return "HV_GIC_ICV_REG_IGRPEN1_EL1"
+	case GICIcvRegPmrEL1:
+		return "GICIcvRegPmrEL1"
+	case GICIcvRegBpr0EL1:
+		return "GICIcvRegBpr0EL1"
+	case GICIcvRegAp0r0EL1:
+		return "GICIcvRegAp0r0EL1"
+	case GICIcvRegAp1r0EL1:
+		return "GICIcvRegAp1r0EL1"
+	case GICIcvRegRprEL1:
+		return "GICIcvRegRprEL1"
+	case GICIcvRegBpr1EL1:
+		return "GICIcvRegBpr1EL1"
+	case GICIcvRegCtlrEL1:
+		return "GICIcvRegCtlrEL1"
+	case GICIcvRegSreEL1:
+		return "GICIcvRegSreEL1"
+	case GICIcvRegIgrpen0EL1:
+		return "GICIcvRegIgrpen0EL1"
+	case GICIcvRegIgrpen1EL1:
+		return "GICIcvRegIgrpen1EL1"
 	default:
-		return fmt.Sprintf("Hv_gic_icv_reg_t(%d)", int64(e))
+		return fmt.Sprintf("GICIcvReg(%d)", int64(e))
 	}
 }
 
-type Hv_gic_intid_t int64
+type GICIntid int64
 
 const (
-	HV_GIC_INT_PERFORMANCE_MONITOR Hv_gic_intid_t = 23
-	HV_GIC_INT_MAINTENANCE         Hv_gic_intid_t = 25
-	HV_GIC_INT_EL2_PHYSICAL_TIMER  Hv_gic_intid_t = 26
-	HV_GIC_INT_EL1_VIRTUAL_TIMER   Hv_gic_intid_t = 27
-	HV_GIC_INT_EL1_PHYSICAL_TIMER  Hv_gic_intid_t = 30
+	GICIntidPerformanceMonitor GICIntid = 23
+	GICIntidMaintenance        GICIntid = 25
+	GICIntidEL2PhysicalTimer   GICIntid = 26
+	GICIntidEL1VirtualTimer    GICIntid = 27
+	GICIntidEL1PhysicalTimer   GICIntid = 30
 )
 
-// String returns the Hv_gic_intid_t constant's name, or its numeric form when the
+// String returns the GICIntid constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_intid_t) String() string {
+func (e GICIntid) String() string {
 	switch e {
-	case HV_GIC_INT_PERFORMANCE_MONITOR:
-		return "HV_GIC_INT_PERFORMANCE_MONITOR"
-	case HV_GIC_INT_MAINTENANCE:
-		return "HV_GIC_INT_MAINTENANCE"
-	case HV_GIC_INT_EL2_PHYSICAL_TIMER:
-		return "HV_GIC_INT_EL2_PHYSICAL_TIMER"
-	case HV_GIC_INT_EL1_VIRTUAL_TIMER:
-		return "HV_GIC_INT_EL1_VIRTUAL_TIMER"
-	case HV_GIC_INT_EL1_PHYSICAL_TIMER:
-		return "HV_GIC_INT_EL1_PHYSICAL_TIMER"
+	case GICIntidPerformanceMonitor:
+		return "GICIntidPerformanceMonitor"
+	case GICIntidMaintenance:
+		return "GICIntidMaintenance"
+	case GICIntidEL2PhysicalTimer:
+		return "GICIntidEL2PhysicalTimer"
+	case GICIntidEL1VirtualTimer:
+		return "GICIntidEL1VirtualTimer"
+	case GICIntidEL1PhysicalTimer:
+		return "GICIntidEL1PhysicalTimer"
 	default:
-		return fmt.Sprintf("Hv_gic_intid_t(%d)", int64(e))
+		return fmt.Sprintf("GICIntid(%d)", int64(e))
 	}
 }
 
-type Hv_gic_msi_reg_t int64
+type GICMSIReg int64
 
 const (
-	HV_GIC_REG_GICM_TYPER       Hv_gic_msi_reg_t = 8
-	HV_GIC_REG_GICM_SET_SPI_NSR Hv_gic_msi_reg_t = 64
+	GICMSIRegTyper     GICMSIReg = 8
+	GICMSIRegSetSpiNsr GICMSIReg = 64
 )
 
-// String returns the Hv_gic_msi_reg_t constant's name, or its numeric form when the
+// String returns the GICMSIReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_msi_reg_t) String() string {
+func (e GICMSIReg) String() string {
 	switch e {
-	case HV_GIC_REG_GICM_TYPER:
-		return "HV_GIC_REG_GICM_TYPER"
-	case HV_GIC_REG_GICM_SET_SPI_NSR:
-		return "HV_GIC_REG_GICM_SET_SPI_NSR"
+	case GICMSIRegTyper:
+		return "GICMSIRegTyper"
+	case GICMSIRegSetSpiNsr:
+		return "GICMSIRegSetSpiNsr"
 	default:
-		return fmt.Sprintf("Hv_gic_msi_reg_t(%d)", int64(e))
+		return fmt.Sprintf("GICMSIReg(%d)", int64(e))
 	}
 }
 
-type Hv_gic_redistributor_reg_t int64
+type GICRedistributorReg int64
 
 const (
-	HV_GIC_REDISTRIBUTOR_REG_GICR_TYPER       Hv_gic_redistributor_reg_t = 8
-	HV_GIC_REDISTRIBUTOR_REG_GICR_PIDR2       Hv_gic_redistributor_reg_t = 65512
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IGROUPR0    Hv_gic_redistributor_reg_t = 65664
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ISENABLER0  Hv_gic_redistributor_reg_t = 65792
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ICENABLER0  Hv_gic_redistributor_reg_t = 65920
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ISPENDR0    Hv_gic_redistributor_reg_t = 66048
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ICPENDR0    Hv_gic_redistributor_reg_t = 66176
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ISACTIVER0  Hv_gic_redistributor_reg_t = 66304
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ICACTIVER0  Hv_gic_redistributor_reg_t = 66432
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR0 Hv_gic_redistributor_reg_t = 66560
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR1 Hv_gic_redistributor_reg_t = 66564
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR2 Hv_gic_redistributor_reg_t = 66568
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR3 Hv_gic_redistributor_reg_t = 66572
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR4 Hv_gic_redistributor_reg_t = 66576
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR5 Hv_gic_redistributor_reg_t = 66580
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR6 Hv_gic_redistributor_reg_t = 66584
-	HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR7 Hv_gic_redistributor_reg_t = 66588
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR0      Hv_gic_redistributor_reg_t = 68608
-	HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR1      Hv_gic_redistributor_reg_t = 68612
+	GICRedistributorRegTyper       GICRedistributorReg = 8
+	GICRedistributorRegPidr2       GICRedistributorReg = 65512
+	GICRedistributorRegIgroupr0    GICRedistributorReg = 65664
+	GICRedistributorRegIsenabler0  GICRedistributorReg = 65792
+	GICRedistributorRegIcenabler0  GICRedistributorReg = 65920
+	GICRedistributorRegIspendr0    GICRedistributorReg = 66048
+	GICRedistributorRegIcpendr0    GICRedistributorReg = 66176
+	GICRedistributorRegIsactiver0  GICRedistributorReg = 66304
+	GICRedistributorRegIcactiver0  GICRedistributorReg = 66432
+	GICRedistributorRegIpriorityr0 GICRedistributorReg = 66560
+	GICRedistributorRegIpriorityr1 GICRedistributorReg = 66564
+	GICRedistributorRegIpriorityr2 GICRedistributorReg = 66568
+	GICRedistributorRegIpriorityr3 GICRedistributorReg = 66572
+	GICRedistributorRegIpriorityr4 GICRedistributorReg = 66576
+	GICRedistributorRegIpriorityr5 GICRedistributorReg = 66580
+	GICRedistributorRegIpriorityr6 GICRedistributorReg = 66584
+	GICRedistributorRegIpriorityr7 GICRedistributorReg = 66588
+	GICRedistributorRegIcfgr0      GICRedistributorReg = 68608
+	GICRedistributorRegIcfgr1      GICRedistributorReg = 68612
 )
 
-// String returns the Hv_gic_redistributor_reg_t constant's name, or its numeric form when the
+// String returns the GICRedistributorReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_gic_redistributor_reg_t) String() string {
+func (e GICRedistributorReg) String() string {
 	switch e {
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_TYPER:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_TYPER"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_PIDR2:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_PIDR2"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IGROUPR0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IGROUPR0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ISENABLER0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ISENABLER0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ICENABLER0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ICENABLER0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ISPENDR0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ISPENDR0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ICPENDR0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ICPENDR0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ISACTIVER0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ISACTIVER0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ICACTIVER0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ICACTIVER0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR1:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR1"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR2:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR2"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR3:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR3"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR4:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR4"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR5:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR5"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR6:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR6"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR7:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_IPRIORITYR7"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR0:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR0"
-	case HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR1:
-		return "HV_GIC_REDISTRIBUTOR_REG_GICR_ICFGR1"
+	case GICRedistributorRegTyper:
+		return "GICRedistributorRegTyper"
+	case GICRedistributorRegPidr2:
+		return "GICRedistributorRegPidr2"
+	case GICRedistributorRegIgroupr0:
+		return "GICRedistributorRegIgroupr0"
+	case GICRedistributorRegIsenabler0:
+		return "GICRedistributorRegIsenabler0"
+	case GICRedistributorRegIcenabler0:
+		return "GICRedistributorRegIcenabler0"
+	case GICRedistributorRegIspendr0:
+		return "GICRedistributorRegIspendr0"
+	case GICRedistributorRegIcpendr0:
+		return "GICRedistributorRegIcpendr0"
+	case GICRedistributorRegIsactiver0:
+		return "GICRedistributorRegIsactiver0"
+	case GICRedistributorRegIcactiver0:
+		return "GICRedistributorRegIcactiver0"
+	case GICRedistributorRegIpriorityr0:
+		return "GICRedistributorRegIpriorityr0"
+	case GICRedistributorRegIpriorityr1:
+		return "GICRedistributorRegIpriorityr1"
+	case GICRedistributorRegIpriorityr2:
+		return "GICRedistributorRegIpriorityr2"
+	case GICRedistributorRegIpriorityr3:
+		return "GICRedistributorRegIpriorityr3"
+	case GICRedistributorRegIpriorityr4:
+		return "GICRedistributorRegIpriorityr4"
+	case GICRedistributorRegIpriorityr5:
+		return "GICRedistributorRegIpriorityr5"
+	case GICRedistributorRegIpriorityr6:
+		return "GICRedistributorRegIpriorityr6"
+	case GICRedistributorRegIpriorityr7:
+		return "GICRedistributorRegIpriorityr7"
+	case GICRedistributorRegIcfgr0:
+		return "GICRedistributorRegIcfgr0"
+	case GICRedistributorRegIcfgr1:
+		return "GICRedistributorRegIcfgr1"
 	default:
-		return fmt.Sprintf("Hv_gic_redistributor_reg_t(%d)", int64(e))
+		return fmt.Sprintf("GICRedistributorReg(%d)", int64(e))
 	}
 }
 
 // The type that defines the vCPU’s interrupts.
-type Hv_interrupt_type_t int64
+type InterruptType int64
 
 const (
 	// Corresponds to an ARM IRQ .
-	HV_INTERRUPT_TYPE_IRQ Hv_interrupt_type_t = 0
+	InterruptTypeIrq InterruptType = 0
 	// Corresponds to an ARM FIQ.
-	HV_INTERRUPT_TYPE_FIQ Hv_interrupt_type_t = 1
+	InterruptTypeFiq InterruptType = 1
 )
 
-// String returns the Hv_interrupt_type_t constant's name, or its numeric form when the
+// String returns the InterruptType constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_interrupt_type_t) String() string {
+func (e InterruptType) String() string {
 	switch e {
-	case HV_INTERRUPT_TYPE_IRQ:
-		return "HV_INTERRUPT_TYPE_IRQ"
-	case HV_INTERRUPT_TYPE_FIQ:
-		return "HV_INTERRUPT_TYPE_FIQ"
+	case InterruptTypeIrq:
+		return "InterruptTypeIrq"
+	case InterruptTypeFiq:
+		return "InterruptTypeFiq"
 	default:
-		return fmt.Sprintf("Hv_interrupt_type_t(%d)", int64(e))
+		return fmt.Sprintf("InterruptType(%d)", int64(e))
 	}
 }
 
-type Hv_ipa_granule_t int64
+type IPAGranule int64
 
 const (
-	HV_IPA_GRANULE_4KB  Hv_ipa_granule_t = 0
-	HV_IPA_GRANULE_16KB Hv_ipa_granule_t = 1
+	IPAGranule4kb  IPAGranule = 0
+	IPAGranule16kb IPAGranule = 1
 )
 
-// String returns the Hv_ipa_granule_t constant's name, or its numeric form when the
+// String returns the IPAGranule constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_ipa_granule_t) String() string {
+func (e IPAGranule) String() string {
 	switch e {
-	case HV_IPA_GRANULE_4KB:
-		return "HV_IPA_GRANULE_4KB"
-	case HV_IPA_GRANULE_16KB:
-		return "HV_IPA_GRANULE_16KB"
+	case IPAGranule4kb:
+		return "IPAGranule4kb"
+	case IPAGranule16kb:
+		return "IPAGranule16kb"
 	default:
-		return fmt.Sprintf("Hv_ipa_granule_t(%d)", int64(e))
+		return fmt.Sprintf("IPAGranule(%d)", int64(e))
 	}
 }
 
 // The type that defines general registers.
-type Hv_reg_t int64
+type Reg int64
 
 const (
-	HV_REG_X0   Hv_reg_t = 0
-	HV_REG_X1   Hv_reg_t = 1
-	HV_REG_X2   Hv_reg_t = 2
-	HV_REG_X3   Hv_reg_t = 3
-	HV_REG_X4   Hv_reg_t = 4
-	HV_REG_X5   Hv_reg_t = 5
-	HV_REG_X6   Hv_reg_t = 6
-	HV_REG_X7   Hv_reg_t = 7
-	HV_REG_X8   Hv_reg_t = 8
-	HV_REG_X9   Hv_reg_t = 9
-	HV_REG_X10  Hv_reg_t = 10
-	HV_REG_X11  Hv_reg_t = 11
-	HV_REG_X12  Hv_reg_t = 12
-	HV_REG_X13  Hv_reg_t = 13
-	HV_REG_X14  Hv_reg_t = 14
-	HV_REG_X15  Hv_reg_t = 15
-	HV_REG_X16  Hv_reg_t = 16
-	HV_REG_X17  Hv_reg_t = 17
-	HV_REG_X18  Hv_reg_t = 18
-	HV_REG_X19  Hv_reg_t = 19
-	HV_REG_X20  Hv_reg_t = 20
-	HV_REG_X21  Hv_reg_t = 21
-	HV_REG_X22  Hv_reg_t = 22
-	HV_REG_X23  Hv_reg_t = 23
-	HV_REG_X24  Hv_reg_t = 24
-	HV_REG_X25  Hv_reg_t = 25
-	HV_REG_X26  Hv_reg_t = 26
-	HV_REG_X27  Hv_reg_t = 27
-	HV_REG_X28  Hv_reg_t = 28
-	HV_REG_X29  Hv_reg_t = 29
-	HV_REG_FP   Hv_reg_t = 29
-	HV_REG_X30  Hv_reg_t = 30
-	HV_REG_LR   Hv_reg_t = 30
-	HV_REG_PC   Hv_reg_t = 31
-	HV_REG_FPCR Hv_reg_t = 32
-	HV_REG_FPSR Hv_reg_t = 33
-	HV_REG_CPSR Hv_reg_t = 34
+	RegX0   Reg = 0
+	RegX1   Reg = 1
+	RegX2   Reg = 2
+	RegX3   Reg = 3
+	RegX4   Reg = 4
+	RegX5   Reg = 5
+	RegX6   Reg = 6
+	RegX7   Reg = 7
+	RegX8   Reg = 8
+	RegX9   Reg = 9
+	RegX10  Reg = 10
+	RegX11  Reg = 11
+	RegX12  Reg = 12
+	RegX13  Reg = 13
+	RegX14  Reg = 14
+	RegX15  Reg = 15
+	RegX16  Reg = 16
+	RegX17  Reg = 17
+	RegX18  Reg = 18
+	RegX19  Reg = 19
+	RegX20  Reg = 20
+	RegX21  Reg = 21
+	RegX22  Reg = 22
+	RegX23  Reg = 23
+	RegX24  Reg = 24
+	RegX25  Reg = 25
+	RegX26  Reg = 26
+	RegX27  Reg = 27
+	RegX28  Reg = 28
+	RegX29  Reg = 29
+	RegFP   Reg = 29
+	RegX30  Reg = 30
+	RegLr   Reg = 30
+	RegPc   Reg = 31
+	RegFpcr Reg = 32
+	RegFpsr Reg = 33
+	RegCpsr Reg = 34
 )
 
-// String returns the Hv_reg_t constant's name, or its numeric form when the
+// String returns the Reg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_reg_t) String() string {
+func (e Reg) String() string {
 	switch e {
-	case HV_REG_X0:
-		return "HV_REG_X0"
-	case HV_REG_X1:
-		return "HV_REG_X1"
-	case HV_REG_X2:
-		return "HV_REG_X2"
-	case HV_REG_X3:
-		return "HV_REG_X3"
-	case HV_REG_X4:
-		return "HV_REG_X4"
-	case HV_REG_X5:
-		return "HV_REG_X5"
-	case HV_REG_X6:
-		return "HV_REG_X6"
-	case HV_REG_X7:
-		return "HV_REG_X7"
-	case HV_REG_X8:
-		return "HV_REG_X8"
-	case HV_REG_X9:
-		return "HV_REG_X9"
-	case HV_REG_X10:
-		return "HV_REG_X10"
-	case HV_REG_X11:
-		return "HV_REG_X11"
-	case HV_REG_X12:
-		return "HV_REG_X12"
-	case HV_REG_X13:
-		return "HV_REG_X13"
-	case HV_REG_X14:
-		return "HV_REG_X14"
-	case HV_REG_X15:
-		return "HV_REG_X15"
-	case HV_REG_X16:
-		return "HV_REG_X16"
-	case HV_REG_X17:
-		return "HV_REG_X17"
-	case HV_REG_X18:
-		return "HV_REG_X18"
-	case HV_REG_X19:
-		return "HV_REG_X19"
-	case HV_REG_X20:
-		return "HV_REG_X20"
-	case HV_REG_X21:
-		return "HV_REG_X21"
-	case HV_REG_X22:
-		return "HV_REG_X22"
-	case HV_REG_X23:
-		return "HV_REG_X23"
-	case HV_REG_X24:
-		return "HV_REG_X24"
-	case HV_REG_X25:
-		return "HV_REG_X25"
-	case HV_REG_X26:
-		return "HV_REG_X26"
-	case HV_REG_X27:
-		return "HV_REG_X27"
-	case HV_REG_X28:
-		return "HV_REG_X28"
-	case HV_REG_X29:
-		return "HV_REG_X29"
-	case HV_REG_X30:
-		return "HV_REG_X30"
-	case HV_REG_PC:
-		return "HV_REG_PC"
-	case HV_REG_FPCR:
-		return "HV_REG_FPCR"
-	case HV_REG_FPSR:
-		return "HV_REG_FPSR"
-	case HV_REG_CPSR:
-		return "HV_REG_CPSR"
+	case RegX0:
+		return "RegX0"
+	case RegX1:
+		return "RegX1"
+	case RegX2:
+		return "RegX2"
+	case RegX3:
+		return "RegX3"
+	case RegX4:
+		return "RegX4"
+	case RegX5:
+		return "RegX5"
+	case RegX6:
+		return "RegX6"
+	case RegX7:
+		return "RegX7"
+	case RegX8:
+		return "RegX8"
+	case RegX9:
+		return "RegX9"
+	case RegX10:
+		return "RegX10"
+	case RegX11:
+		return "RegX11"
+	case RegX12:
+		return "RegX12"
+	case RegX13:
+		return "RegX13"
+	case RegX14:
+		return "RegX14"
+	case RegX15:
+		return "RegX15"
+	case RegX16:
+		return "RegX16"
+	case RegX17:
+		return "RegX17"
+	case RegX18:
+		return "RegX18"
+	case RegX19:
+		return "RegX19"
+	case RegX20:
+		return "RegX20"
+	case RegX21:
+		return "RegX21"
+	case RegX22:
+		return "RegX22"
+	case RegX23:
+		return "RegX23"
+	case RegX24:
+		return "RegX24"
+	case RegX25:
+		return "RegX25"
+	case RegX26:
+		return "RegX26"
+	case RegX27:
+		return "RegX27"
+	case RegX28:
+		return "RegX28"
+	case RegX29:
+		return "RegX29"
+	case RegX30:
+		return "RegX30"
+	case RegPc:
+		return "RegPc"
+	case RegFpcr:
+		return "RegFpcr"
+	case RegFpsr:
+		return "RegFpsr"
+	case RegCpsr:
+		return "RegCpsr"
 	default:
-		return fmt.Sprintf("Hv_reg_t(%d)", int64(e))
+		return fmt.Sprintf("Reg(%d)", int64(e))
 	}
 }
 
 // The type that defines SIMD and floating-point registers.
-type Hv_simd_fp_reg_t int64
+type SIMDFPReg int64
 
 const (
-	HV_SIMD_FP_REG_Q0  Hv_simd_fp_reg_t = 0
-	HV_SIMD_FP_REG_Q1  Hv_simd_fp_reg_t = 1
-	HV_SIMD_FP_REG_Q2  Hv_simd_fp_reg_t = 2
-	HV_SIMD_FP_REG_Q3  Hv_simd_fp_reg_t = 3
-	HV_SIMD_FP_REG_Q4  Hv_simd_fp_reg_t = 4
-	HV_SIMD_FP_REG_Q5  Hv_simd_fp_reg_t = 5
-	HV_SIMD_FP_REG_Q6  Hv_simd_fp_reg_t = 6
-	HV_SIMD_FP_REG_Q7  Hv_simd_fp_reg_t = 7
-	HV_SIMD_FP_REG_Q8  Hv_simd_fp_reg_t = 8
-	HV_SIMD_FP_REG_Q9  Hv_simd_fp_reg_t = 9
-	HV_SIMD_FP_REG_Q10 Hv_simd_fp_reg_t = 10
-	HV_SIMD_FP_REG_Q11 Hv_simd_fp_reg_t = 11
-	HV_SIMD_FP_REG_Q12 Hv_simd_fp_reg_t = 12
-	HV_SIMD_FP_REG_Q13 Hv_simd_fp_reg_t = 13
-	HV_SIMD_FP_REG_Q14 Hv_simd_fp_reg_t = 14
-	HV_SIMD_FP_REG_Q15 Hv_simd_fp_reg_t = 15
-	HV_SIMD_FP_REG_Q16 Hv_simd_fp_reg_t = 16
-	HV_SIMD_FP_REG_Q17 Hv_simd_fp_reg_t = 17
-	HV_SIMD_FP_REG_Q18 Hv_simd_fp_reg_t = 18
-	HV_SIMD_FP_REG_Q19 Hv_simd_fp_reg_t = 19
-	HV_SIMD_FP_REG_Q20 Hv_simd_fp_reg_t = 20
-	HV_SIMD_FP_REG_Q21 Hv_simd_fp_reg_t = 21
-	HV_SIMD_FP_REG_Q22 Hv_simd_fp_reg_t = 22
-	HV_SIMD_FP_REG_Q23 Hv_simd_fp_reg_t = 23
-	HV_SIMD_FP_REG_Q24 Hv_simd_fp_reg_t = 24
-	HV_SIMD_FP_REG_Q25 Hv_simd_fp_reg_t = 25
-	HV_SIMD_FP_REG_Q26 Hv_simd_fp_reg_t = 26
-	HV_SIMD_FP_REG_Q27 Hv_simd_fp_reg_t = 27
-	HV_SIMD_FP_REG_Q28 Hv_simd_fp_reg_t = 28
-	HV_SIMD_FP_REG_Q29 Hv_simd_fp_reg_t = 29
-	HV_SIMD_FP_REG_Q30 Hv_simd_fp_reg_t = 30
-	HV_SIMD_FP_REG_Q31 Hv_simd_fp_reg_t = 31
+	SIMDFPRegQ0  SIMDFPReg = 0
+	SIMDFPRegQ1  SIMDFPReg = 1
+	SIMDFPRegQ2  SIMDFPReg = 2
+	SIMDFPRegQ3  SIMDFPReg = 3
+	SIMDFPRegQ4  SIMDFPReg = 4
+	SIMDFPRegQ5  SIMDFPReg = 5
+	SIMDFPRegQ6  SIMDFPReg = 6
+	SIMDFPRegQ7  SIMDFPReg = 7
+	SIMDFPRegQ8  SIMDFPReg = 8
+	SIMDFPRegQ9  SIMDFPReg = 9
+	SIMDFPRegQ10 SIMDFPReg = 10
+	SIMDFPRegQ11 SIMDFPReg = 11
+	SIMDFPRegQ12 SIMDFPReg = 12
+	SIMDFPRegQ13 SIMDFPReg = 13
+	SIMDFPRegQ14 SIMDFPReg = 14
+	SIMDFPRegQ15 SIMDFPReg = 15
+	SIMDFPRegQ16 SIMDFPReg = 16
+	SIMDFPRegQ17 SIMDFPReg = 17
+	SIMDFPRegQ18 SIMDFPReg = 18
+	SIMDFPRegQ19 SIMDFPReg = 19
+	SIMDFPRegQ20 SIMDFPReg = 20
+	SIMDFPRegQ21 SIMDFPReg = 21
+	SIMDFPRegQ22 SIMDFPReg = 22
+	SIMDFPRegQ23 SIMDFPReg = 23
+	SIMDFPRegQ24 SIMDFPReg = 24
+	SIMDFPRegQ25 SIMDFPReg = 25
+	SIMDFPRegQ26 SIMDFPReg = 26
+	SIMDFPRegQ27 SIMDFPReg = 27
+	SIMDFPRegQ28 SIMDFPReg = 28
+	SIMDFPRegQ29 SIMDFPReg = 29
+	SIMDFPRegQ30 SIMDFPReg = 30
+	SIMDFPRegQ31 SIMDFPReg = 31
 )
 
-// String returns the Hv_simd_fp_reg_t constant's name, or its numeric form when the
+// String returns the SIMDFPReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_simd_fp_reg_t) String() string {
+func (e SIMDFPReg) String() string {
 	switch e {
-	case HV_SIMD_FP_REG_Q0:
-		return "HV_SIMD_FP_REG_Q0"
-	case HV_SIMD_FP_REG_Q1:
-		return "HV_SIMD_FP_REG_Q1"
-	case HV_SIMD_FP_REG_Q2:
-		return "HV_SIMD_FP_REG_Q2"
-	case HV_SIMD_FP_REG_Q3:
-		return "HV_SIMD_FP_REG_Q3"
-	case HV_SIMD_FP_REG_Q4:
-		return "HV_SIMD_FP_REG_Q4"
-	case HV_SIMD_FP_REG_Q5:
-		return "HV_SIMD_FP_REG_Q5"
-	case HV_SIMD_FP_REG_Q6:
-		return "HV_SIMD_FP_REG_Q6"
-	case HV_SIMD_FP_REG_Q7:
-		return "HV_SIMD_FP_REG_Q7"
-	case HV_SIMD_FP_REG_Q8:
-		return "HV_SIMD_FP_REG_Q8"
-	case HV_SIMD_FP_REG_Q9:
-		return "HV_SIMD_FP_REG_Q9"
-	case HV_SIMD_FP_REG_Q10:
-		return "HV_SIMD_FP_REG_Q10"
-	case HV_SIMD_FP_REG_Q11:
-		return "HV_SIMD_FP_REG_Q11"
-	case HV_SIMD_FP_REG_Q12:
-		return "HV_SIMD_FP_REG_Q12"
-	case HV_SIMD_FP_REG_Q13:
-		return "HV_SIMD_FP_REG_Q13"
-	case HV_SIMD_FP_REG_Q14:
-		return "HV_SIMD_FP_REG_Q14"
-	case HV_SIMD_FP_REG_Q15:
-		return "HV_SIMD_FP_REG_Q15"
-	case HV_SIMD_FP_REG_Q16:
-		return "HV_SIMD_FP_REG_Q16"
-	case HV_SIMD_FP_REG_Q17:
-		return "HV_SIMD_FP_REG_Q17"
-	case HV_SIMD_FP_REG_Q18:
-		return "HV_SIMD_FP_REG_Q18"
-	case HV_SIMD_FP_REG_Q19:
-		return "HV_SIMD_FP_REG_Q19"
-	case HV_SIMD_FP_REG_Q20:
-		return "HV_SIMD_FP_REG_Q20"
-	case HV_SIMD_FP_REG_Q21:
-		return "HV_SIMD_FP_REG_Q21"
-	case HV_SIMD_FP_REG_Q22:
-		return "HV_SIMD_FP_REG_Q22"
-	case HV_SIMD_FP_REG_Q23:
-		return "HV_SIMD_FP_REG_Q23"
-	case HV_SIMD_FP_REG_Q24:
-		return "HV_SIMD_FP_REG_Q24"
-	case HV_SIMD_FP_REG_Q25:
-		return "HV_SIMD_FP_REG_Q25"
-	case HV_SIMD_FP_REG_Q26:
-		return "HV_SIMD_FP_REG_Q26"
-	case HV_SIMD_FP_REG_Q27:
-		return "HV_SIMD_FP_REG_Q27"
-	case HV_SIMD_FP_REG_Q28:
-		return "HV_SIMD_FP_REG_Q28"
-	case HV_SIMD_FP_REG_Q29:
-		return "HV_SIMD_FP_REG_Q29"
-	case HV_SIMD_FP_REG_Q30:
-		return "HV_SIMD_FP_REG_Q30"
-	case HV_SIMD_FP_REG_Q31:
-		return "HV_SIMD_FP_REG_Q31"
+	case SIMDFPRegQ0:
+		return "SIMDFPRegQ0"
+	case SIMDFPRegQ1:
+		return "SIMDFPRegQ1"
+	case SIMDFPRegQ2:
+		return "SIMDFPRegQ2"
+	case SIMDFPRegQ3:
+		return "SIMDFPRegQ3"
+	case SIMDFPRegQ4:
+		return "SIMDFPRegQ4"
+	case SIMDFPRegQ5:
+		return "SIMDFPRegQ5"
+	case SIMDFPRegQ6:
+		return "SIMDFPRegQ6"
+	case SIMDFPRegQ7:
+		return "SIMDFPRegQ7"
+	case SIMDFPRegQ8:
+		return "SIMDFPRegQ8"
+	case SIMDFPRegQ9:
+		return "SIMDFPRegQ9"
+	case SIMDFPRegQ10:
+		return "SIMDFPRegQ10"
+	case SIMDFPRegQ11:
+		return "SIMDFPRegQ11"
+	case SIMDFPRegQ12:
+		return "SIMDFPRegQ12"
+	case SIMDFPRegQ13:
+		return "SIMDFPRegQ13"
+	case SIMDFPRegQ14:
+		return "SIMDFPRegQ14"
+	case SIMDFPRegQ15:
+		return "SIMDFPRegQ15"
+	case SIMDFPRegQ16:
+		return "SIMDFPRegQ16"
+	case SIMDFPRegQ17:
+		return "SIMDFPRegQ17"
+	case SIMDFPRegQ18:
+		return "SIMDFPRegQ18"
+	case SIMDFPRegQ19:
+		return "SIMDFPRegQ19"
+	case SIMDFPRegQ20:
+		return "SIMDFPRegQ20"
+	case SIMDFPRegQ21:
+		return "SIMDFPRegQ21"
+	case SIMDFPRegQ22:
+		return "SIMDFPRegQ22"
+	case SIMDFPRegQ23:
+		return "SIMDFPRegQ23"
+	case SIMDFPRegQ24:
+		return "SIMDFPRegQ24"
+	case SIMDFPRegQ25:
+		return "SIMDFPRegQ25"
+	case SIMDFPRegQ26:
+		return "SIMDFPRegQ26"
+	case SIMDFPRegQ27:
+		return "SIMDFPRegQ27"
+	case SIMDFPRegQ28:
+		return "SIMDFPRegQ28"
+	case SIMDFPRegQ29:
+		return "SIMDFPRegQ29"
+	case SIMDFPRegQ30:
+		return "SIMDFPRegQ30"
+	case SIMDFPRegQ31:
+		return "SIMDFPRegQ31"
 	default:
-		return fmt.Sprintf("Hv_simd_fp_reg_t(%d)", int64(e))
+		return fmt.Sprintf("SIMDFPReg(%d)", int64(e))
 	}
 }
 
-type Hv_sme_p_reg_t int64
+type SMEPReg int64
 
 const (
-	HV_SME_P_REG_0  Hv_sme_p_reg_t = 0
-	HV_SME_P_REG_1  Hv_sme_p_reg_t = 1
-	HV_SME_P_REG_2  Hv_sme_p_reg_t = 2
-	HV_SME_P_REG_3  Hv_sme_p_reg_t = 3
-	HV_SME_P_REG_4  Hv_sme_p_reg_t = 4
-	HV_SME_P_REG_5  Hv_sme_p_reg_t = 5
-	HV_SME_P_REG_6  Hv_sme_p_reg_t = 6
-	HV_SME_P_REG_7  Hv_sme_p_reg_t = 7
-	HV_SME_P_REG_8  Hv_sme_p_reg_t = 8
-	HV_SME_P_REG_9  Hv_sme_p_reg_t = 9
-	HV_SME_P_REG_10 Hv_sme_p_reg_t = 10
-	HV_SME_P_REG_11 Hv_sme_p_reg_t = 11
-	HV_SME_P_REG_12 Hv_sme_p_reg_t = 12
-	HV_SME_P_REG_13 Hv_sme_p_reg_t = 13
-	HV_SME_P_REG_14 Hv_sme_p_reg_t = 14
-	HV_SME_P_REG_15 Hv_sme_p_reg_t = 15
+	SMEPReg0  SMEPReg = 0
+	SMEPReg1  SMEPReg = 1
+	SMEPReg2  SMEPReg = 2
+	SMEPReg3  SMEPReg = 3
+	SMEPReg4  SMEPReg = 4
+	SMEPReg5  SMEPReg = 5
+	SMEPReg6  SMEPReg = 6
+	SMEPReg7  SMEPReg = 7
+	SMEPReg8  SMEPReg = 8
+	SMEPReg9  SMEPReg = 9
+	SMEPReg10 SMEPReg = 10
+	SMEPReg11 SMEPReg = 11
+	SMEPReg12 SMEPReg = 12
+	SMEPReg13 SMEPReg = 13
+	SMEPReg14 SMEPReg = 14
+	SMEPReg15 SMEPReg = 15
 )
 
-// String returns the Hv_sme_p_reg_t constant's name, or its numeric form when the
+// String returns the SMEPReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_sme_p_reg_t) String() string {
+func (e SMEPReg) String() string {
 	switch e {
-	case HV_SME_P_REG_0:
-		return "HV_SME_P_REG_0"
-	case HV_SME_P_REG_1:
-		return "HV_SME_P_REG_1"
-	case HV_SME_P_REG_2:
-		return "HV_SME_P_REG_2"
-	case HV_SME_P_REG_3:
-		return "HV_SME_P_REG_3"
-	case HV_SME_P_REG_4:
-		return "HV_SME_P_REG_4"
-	case HV_SME_P_REG_5:
-		return "HV_SME_P_REG_5"
-	case HV_SME_P_REG_6:
-		return "HV_SME_P_REG_6"
-	case HV_SME_P_REG_7:
-		return "HV_SME_P_REG_7"
-	case HV_SME_P_REG_8:
-		return "HV_SME_P_REG_8"
-	case HV_SME_P_REG_9:
-		return "HV_SME_P_REG_9"
-	case HV_SME_P_REG_10:
-		return "HV_SME_P_REG_10"
-	case HV_SME_P_REG_11:
-		return "HV_SME_P_REG_11"
-	case HV_SME_P_REG_12:
-		return "HV_SME_P_REG_12"
-	case HV_SME_P_REG_13:
-		return "HV_SME_P_REG_13"
-	case HV_SME_P_REG_14:
-		return "HV_SME_P_REG_14"
-	case HV_SME_P_REG_15:
-		return "HV_SME_P_REG_15"
+	case SMEPReg0:
+		return "SMEPReg0"
+	case SMEPReg1:
+		return "SMEPReg1"
+	case SMEPReg2:
+		return "SMEPReg2"
+	case SMEPReg3:
+		return "SMEPReg3"
+	case SMEPReg4:
+		return "SMEPReg4"
+	case SMEPReg5:
+		return "SMEPReg5"
+	case SMEPReg6:
+		return "SMEPReg6"
+	case SMEPReg7:
+		return "SMEPReg7"
+	case SMEPReg8:
+		return "SMEPReg8"
+	case SMEPReg9:
+		return "SMEPReg9"
+	case SMEPReg10:
+		return "SMEPReg10"
+	case SMEPReg11:
+		return "SMEPReg11"
+	case SMEPReg12:
+		return "SMEPReg12"
+	case SMEPReg13:
+		return "SMEPReg13"
+	case SMEPReg14:
+		return "SMEPReg14"
+	case SMEPReg15:
+		return "SMEPReg15"
 	default:
-		return fmt.Sprintf("Hv_sme_p_reg_t(%d)", int64(e))
+		return fmt.Sprintf("SMEPReg(%d)", int64(e))
 	}
 }
 
-type Hv_sme_z_reg_t int64
+type SMEZReg int64
 
 const (
-	HV_SME_Z_REG_0  Hv_sme_z_reg_t = 0
-	HV_SME_Z_REG_1  Hv_sme_z_reg_t = 1
-	HV_SME_Z_REG_2  Hv_sme_z_reg_t = 2
-	HV_SME_Z_REG_3  Hv_sme_z_reg_t = 3
-	HV_SME_Z_REG_4  Hv_sme_z_reg_t = 4
-	HV_SME_Z_REG_5  Hv_sme_z_reg_t = 5
-	HV_SME_Z_REG_6  Hv_sme_z_reg_t = 6
-	HV_SME_Z_REG_7  Hv_sme_z_reg_t = 7
-	HV_SME_Z_REG_8  Hv_sme_z_reg_t = 8
-	HV_SME_Z_REG_9  Hv_sme_z_reg_t = 9
-	HV_SME_Z_REG_10 Hv_sme_z_reg_t = 10
-	HV_SME_Z_REG_11 Hv_sme_z_reg_t = 11
-	HV_SME_Z_REG_12 Hv_sme_z_reg_t = 12
-	HV_SME_Z_REG_13 Hv_sme_z_reg_t = 13
-	HV_SME_Z_REG_14 Hv_sme_z_reg_t = 14
-	HV_SME_Z_REG_15 Hv_sme_z_reg_t = 15
-	HV_SME_Z_REG_16 Hv_sme_z_reg_t = 16
-	HV_SME_Z_REG_17 Hv_sme_z_reg_t = 17
-	HV_SME_Z_REG_18 Hv_sme_z_reg_t = 18
-	HV_SME_Z_REG_19 Hv_sme_z_reg_t = 19
-	HV_SME_Z_REG_20 Hv_sme_z_reg_t = 20
-	HV_SME_Z_REG_21 Hv_sme_z_reg_t = 21
-	HV_SME_Z_REG_22 Hv_sme_z_reg_t = 22
-	HV_SME_Z_REG_23 Hv_sme_z_reg_t = 23
-	HV_SME_Z_REG_24 Hv_sme_z_reg_t = 24
-	HV_SME_Z_REG_25 Hv_sme_z_reg_t = 25
-	HV_SME_Z_REG_26 Hv_sme_z_reg_t = 26
-	HV_SME_Z_REG_27 Hv_sme_z_reg_t = 27
-	HV_SME_Z_REG_28 Hv_sme_z_reg_t = 28
-	HV_SME_Z_REG_29 Hv_sme_z_reg_t = 29
-	HV_SME_Z_REG_30 Hv_sme_z_reg_t = 30
-	HV_SME_Z_REG_31 Hv_sme_z_reg_t = 31
+	SMEZReg0  SMEZReg = 0
+	SMEZReg1  SMEZReg = 1
+	SMEZReg2  SMEZReg = 2
+	SMEZReg3  SMEZReg = 3
+	SMEZReg4  SMEZReg = 4
+	SMEZReg5  SMEZReg = 5
+	SMEZReg6  SMEZReg = 6
+	SMEZReg7  SMEZReg = 7
+	SMEZReg8  SMEZReg = 8
+	SMEZReg9  SMEZReg = 9
+	SMEZReg10 SMEZReg = 10
+	SMEZReg11 SMEZReg = 11
+	SMEZReg12 SMEZReg = 12
+	SMEZReg13 SMEZReg = 13
+	SMEZReg14 SMEZReg = 14
+	SMEZReg15 SMEZReg = 15
+	SMEZReg16 SMEZReg = 16
+	SMEZReg17 SMEZReg = 17
+	SMEZReg18 SMEZReg = 18
+	SMEZReg19 SMEZReg = 19
+	SMEZReg20 SMEZReg = 20
+	SMEZReg21 SMEZReg = 21
+	SMEZReg22 SMEZReg = 22
+	SMEZReg23 SMEZReg = 23
+	SMEZReg24 SMEZReg = 24
+	SMEZReg25 SMEZReg = 25
+	SMEZReg26 SMEZReg = 26
+	SMEZReg27 SMEZReg = 27
+	SMEZReg28 SMEZReg = 28
+	SMEZReg29 SMEZReg = 29
+	SMEZReg30 SMEZReg = 30
+	SMEZReg31 SMEZReg = 31
 )
 
-// String returns the Hv_sme_z_reg_t constant's name, or its numeric form when the
+// String returns the SMEZReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_sme_z_reg_t) String() string {
+func (e SMEZReg) String() string {
 	switch e {
-	case HV_SME_Z_REG_0:
-		return "HV_SME_Z_REG_0"
-	case HV_SME_Z_REG_1:
-		return "HV_SME_Z_REG_1"
-	case HV_SME_Z_REG_2:
-		return "HV_SME_Z_REG_2"
-	case HV_SME_Z_REG_3:
-		return "HV_SME_Z_REG_3"
-	case HV_SME_Z_REG_4:
-		return "HV_SME_Z_REG_4"
-	case HV_SME_Z_REG_5:
-		return "HV_SME_Z_REG_5"
-	case HV_SME_Z_REG_6:
-		return "HV_SME_Z_REG_6"
-	case HV_SME_Z_REG_7:
-		return "HV_SME_Z_REG_7"
-	case HV_SME_Z_REG_8:
-		return "HV_SME_Z_REG_8"
-	case HV_SME_Z_REG_9:
-		return "HV_SME_Z_REG_9"
-	case HV_SME_Z_REG_10:
-		return "HV_SME_Z_REG_10"
-	case HV_SME_Z_REG_11:
-		return "HV_SME_Z_REG_11"
-	case HV_SME_Z_REG_12:
-		return "HV_SME_Z_REG_12"
-	case HV_SME_Z_REG_13:
-		return "HV_SME_Z_REG_13"
-	case HV_SME_Z_REG_14:
-		return "HV_SME_Z_REG_14"
-	case HV_SME_Z_REG_15:
-		return "HV_SME_Z_REG_15"
-	case HV_SME_Z_REG_16:
-		return "HV_SME_Z_REG_16"
-	case HV_SME_Z_REG_17:
-		return "HV_SME_Z_REG_17"
-	case HV_SME_Z_REG_18:
-		return "HV_SME_Z_REG_18"
-	case HV_SME_Z_REG_19:
-		return "HV_SME_Z_REG_19"
-	case HV_SME_Z_REG_20:
-		return "HV_SME_Z_REG_20"
-	case HV_SME_Z_REG_21:
-		return "HV_SME_Z_REG_21"
-	case HV_SME_Z_REG_22:
-		return "HV_SME_Z_REG_22"
-	case HV_SME_Z_REG_23:
-		return "HV_SME_Z_REG_23"
-	case HV_SME_Z_REG_24:
-		return "HV_SME_Z_REG_24"
-	case HV_SME_Z_REG_25:
-		return "HV_SME_Z_REG_25"
-	case HV_SME_Z_REG_26:
-		return "HV_SME_Z_REG_26"
-	case HV_SME_Z_REG_27:
-		return "HV_SME_Z_REG_27"
-	case HV_SME_Z_REG_28:
-		return "HV_SME_Z_REG_28"
-	case HV_SME_Z_REG_29:
-		return "HV_SME_Z_REG_29"
-	case HV_SME_Z_REG_30:
-		return "HV_SME_Z_REG_30"
-	case HV_SME_Z_REG_31:
-		return "HV_SME_Z_REG_31"
+	case SMEZReg0:
+		return "SMEZReg0"
+	case SMEZReg1:
+		return "SMEZReg1"
+	case SMEZReg2:
+		return "SMEZReg2"
+	case SMEZReg3:
+		return "SMEZReg3"
+	case SMEZReg4:
+		return "SMEZReg4"
+	case SMEZReg5:
+		return "SMEZReg5"
+	case SMEZReg6:
+		return "SMEZReg6"
+	case SMEZReg7:
+		return "SMEZReg7"
+	case SMEZReg8:
+		return "SMEZReg8"
+	case SMEZReg9:
+		return "SMEZReg9"
+	case SMEZReg10:
+		return "SMEZReg10"
+	case SMEZReg11:
+		return "SMEZReg11"
+	case SMEZReg12:
+		return "SMEZReg12"
+	case SMEZReg13:
+		return "SMEZReg13"
+	case SMEZReg14:
+		return "SMEZReg14"
+	case SMEZReg15:
+		return "SMEZReg15"
+	case SMEZReg16:
+		return "SMEZReg16"
+	case SMEZReg17:
+		return "SMEZReg17"
+	case SMEZReg18:
+		return "SMEZReg18"
+	case SMEZReg19:
+		return "SMEZReg19"
+	case SMEZReg20:
+		return "SMEZReg20"
+	case SMEZReg21:
+		return "SMEZReg21"
+	case SMEZReg22:
+		return "SMEZReg22"
+	case SMEZReg23:
+		return "SMEZReg23"
+	case SMEZReg24:
+		return "SMEZReg24"
+	case SMEZReg25:
+		return "SMEZReg25"
+	case SMEZReg26:
+		return "SMEZReg26"
+	case SMEZReg27:
+		return "SMEZReg27"
+	case SMEZReg28:
+		return "SMEZReg28"
+	case SMEZReg29:
+		return "SMEZReg29"
+	case SMEZReg30:
+		return "SMEZReg30"
+	case SMEZReg31:
+		return "SMEZReg31"
 	default:
-		return fmt.Sprintf("Hv_sme_z_reg_t(%d)", int64(e))
+		return fmt.Sprintf("SMEZReg(%d)", int64(e))
 	}
 }
 
 // The type of system registers.
-type Hv_sys_reg_t int64
+type SysReg int64
 
 const (
-	HV_SYS_REG_DBGBVR0_EL1      Hv_sys_reg_t = 32772
-	HV_SYS_REG_DBGBCR0_EL1      Hv_sys_reg_t = 32773
-	HV_SYS_REG_DBGWVR0_EL1      Hv_sys_reg_t = 32774
-	HV_SYS_REG_DBGWCR0_EL1      Hv_sys_reg_t = 32775
-	HV_SYS_REG_DBGBVR1_EL1      Hv_sys_reg_t = 32780
-	HV_SYS_REG_DBGBCR1_EL1      Hv_sys_reg_t = 32781
-	HV_SYS_REG_DBGWVR1_EL1      Hv_sys_reg_t = 32782
-	HV_SYS_REG_DBGWCR1_EL1      Hv_sys_reg_t = 32783
-	HV_SYS_REG_MDCCINT_EL1      Hv_sys_reg_t = 32784
-	HV_SYS_REG_MDSCR_EL1        Hv_sys_reg_t = 32786
-	HV_SYS_REG_DBGBVR2_EL1      Hv_sys_reg_t = 32788
-	HV_SYS_REG_DBGBCR2_EL1      Hv_sys_reg_t = 32789
-	HV_SYS_REG_DBGWVR2_EL1      Hv_sys_reg_t = 32790
-	HV_SYS_REG_DBGWCR2_EL1      Hv_sys_reg_t = 32791
-	HV_SYS_REG_DBGBVR3_EL1      Hv_sys_reg_t = 32796
-	HV_SYS_REG_DBGBCR3_EL1      Hv_sys_reg_t = 32797
-	HV_SYS_REG_DBGWVR3_EL1      Hv_sys_reg_t = 32798
-	HV_SYS_REG_DBGWCR3_EL1      Hv_sys_reg_t = 32799
-	HV_SYS_REG_DBGBVR4_EL1      Hv_sys_reg_t = 32804
-	HV_SYS_REG_DBGBCR4_EL1      Hv_sys_reg_t = 32805
-	HV_SYS_REG_DBGWVR4_EL1      Hv_sys_reg_t = 32806
-	HV_SYS_REG_DBGWCR4_EL1      Hv_sys_reg_t = 32807
-	HV_SYS_REG_DBGBVR5_EL1      Hv_sys_reg_t = 32812
-	HV_SYS_REG_DBGBCR5_EL1      Hv_sys_reg_t = 32813
-	HV_SYS_REG_DBGWVR5_EL1      Hv_sys_reg_t = 32814
-	HV_SYS_REG_DBGWCR5_EL1      Hv_sys_reg_t = 32815
-	HV_SYS_REG_DBGBVR6_EL1      Hv_sys_reg_t = 32820
-	HV_SYS_REG_DBGBCR6_EL1      Hv_sys_reg_t = 32821
-	HV_SYS_REG_DBGWVR6_EL1      Hv_sys_reg_t = 32822
-	HV_SYS_REG_DBGWCR6_EL1      Hv_sys_reg_t = 32823
-	HV_SYS_REG_DBGBVR7_EL1      Hv_sys_reg_t = 32828
-	HV_SYS_REG_DBGBCR7_EL1      Hv_sys_reg_t = 32829
-	HV_SYS_REG_DBGWVR7_EL1      Hv_sys_reg_t = 32830
-	HV_SYS_REG_DBGWCR7_EL1      Hv_sys_reg_t = 32831
-	HV_SYS_REG_DBGBVR8_EL1      Hv_sys_reg_t = 32836
-	HV_SYS_REG_DBGBCR8_EL1      Hv_sys_reg_t = 32837
-	HV_SYS_REG_DBGWVR8_EL1      Hv_sys_reg_t = 32838
-	HV_SYS_REG_DBGWCR8_EL1      Hv_sys_reg_t = 32839
-	HV_SYS_REG_DBGBVR9_EL1      Hv_sys_reg_t = 32844
-	HV_SYS_REG_DBGBCR9_EL1      Hv_sys_reg_t = 32845
-	HV_SYS_REG_DBGWVR9_EL1      Hv_sys_reg_t = 32846
-	HV_SYS_REG_DBGWCR9_EL1      Hv_sys_reg_t = 32847
-	HV_SYS_REG_DBGBVR10_EL1     Hv_sys_reg_t = 32852
-	HV_SYS_REG_DBGBCR10_EL1     Hv_sys_reg_t = 32853
-	HV_SYS_REG_DBGWVR10_EL1     Hv_sys_reg_t = 32854
-	HV_SYS_REG_DBGWCR10_EL1     Hv_sys_reg_t = 32855
-	HV_SYS_REG_DBGBVR11_EL1     Hv_sys_reg_t = 32860
-	HV_SYS_REG_DBGBCR11_EL1     Hv_sys_reg_t = 32861
-	HV_SYS_REG_DBGWVR11_EL1     Hv_sys_reg_t = 32862
-	HV_SYS_REG_DBGWCR11_EL1     Hv_sys_reg_t = 32863
-	HV_SYS_REG_DBGBVR12_EL1     Hv_sys_reg_t = 32868
-	HV_SYS_REG_DBGBCR12_EL1     Hv_sys_reg_t = 32869
-	HV_SYS_REG_DBGWVR12_EL1     Hv_sys_reg_t = 32870
-	HV_SYS_REG_DBGWCR12_EL1     Hv_sys_reg_t = 32871
-	HV_SYS_REG_DBGBVR13_EL1     Hv_sys_reg_t = 32876
-	HV_SYS_REG_DBGBCR13_EL1     Hv_sys_reg_t = 32877
-	HV_SYS_REG_DBGWVR13_EL1     Hv_sys_reg_t = 32878
-	HV_SYS_REG_DBGWCR13_EL1     Hv_sys_reg_t = 32879
-	HV_SYS_REG_DBGBVR14_EL1     Hv_sys_reg_t = 32884
-	HV_SYS_REG_DBGBCR14_EL1     Hv_sys_reg_t = 32885
-	HV_SYS_REG_DBGWVR14_EL1     Hv_sys_reg_t = 32886
-	HV_SYS_REG_DBGWCR14_EL1     Hv_sys_reg_t = 32887
-	HV_SYS_REG_DBGBVR15_EL1     Hv_sys_reg_t = 32892
-	HV_SYS_REG_DBGBCR15_EL1     Hv_sys_reg_t = 32893
-	HV_SYS_REG_DBGWVR15_EL1     Hv_sys_reg_t = 32894
-	HV_SYS_REG_DBGWCR15_EL1     Hv_sys_reg_t = 32895
-	HV_SYS_REG_MIDR_EL1         Hv_sys_reg_t = 49152
-	HV_SYS_REG_MPIDR_EL1        Hv_sys_reg_t = 49157
-	HV_SYS_REG_ID_AA64PFR0_EL1  Hv_sys_reg_t = 49184
-	HV_SYS_REG_ID_AA64PFR1_EL1  Hv_sys_reg_t = 49185
-	HV_SYS_REG_ID_AA64ZFR0_EL1  Hv_sys_reg_t = 49188
-	HV_SYS_REG_ID_AA64SMFR0_EL1 Hv_sys_reg_t = 49189
-	HV_SYS_REG_ID_AA64DFR0_EL1  Hv_sys_reg_t = 49192
-	HV_SYS_REG_ID_AA64DFR1_EL1  Hv_sys_reg_t = 49193
-	HV_SYS_REG_ID_AA64ISAR0_EL1 Hv_sys_reg_t = 49200
-	HV_SYS_REG_ID_AA64ISAR1_EL1 Hv_sys_reg_t = 49201
-	HV_SYS_REG_ID_AA64MMFR0_EL1 Hv_sys_reg_t = 49208
-	HV_SYS_REG_ID_AA64MMFR1_EL1 Hv_sys_reg_t = 49209
-	HV_SYS_REG_ID_AA64MMFR2_EL1 Hv_sys_reg_t = 49210
-	HV_SYS_REG_SCTLR_EL1        Hv_sys_reg_t = 49280
+	SysRegDbgbvr0EL1     SysReg = 32772
+	SysRegDbgbcr0EL1     SysReg = 32773
+	SysRegDbgwvr0EL1     SysReg = 32774
+	SysRegDbgwcr0EL1     SysReg = 32775
+	SysRegDbgbvr1EL1     SysReg = 32780
+	SysRegDbgbcr1EL1     SysReg = 32781
+	SysRegDbgwvr1EL1     SysReg = 32782
+	SysRegDbgwcr1EL1     SysReg = 32783
+	SysRegMdccintEL1     SysReg = 32784
+	SysRegMdscrEL1       SysReg = 32786
+	SysRegDbgbvr2EL1     SysReg = 32788
+	SysRegDbgbcr2EL1     SysReg = 32789
+	SysRegDbgwvr2EL1     SysReg = 32790
+	SysRegDbgwcr2EL1     SysReg = 32791
+	SysRegDbgbvr3EL1     SysReg = 32796
+	SysRegDbgbcr3EL1     SysReg = 32797
+	SysRegDbgwvr3EL1     SysReg = 32798
+	SysRegDbgwcr3EL1     SysReg = 32799
+	SysRegDbgbvr4EL1     SysReg = 32804
+	SysRegDbgbcr4EL1     SysReg = 32805
+	SysRegDbgwvr4EL1     SysReg = 32806
+	SysRegDbgwcr4EL1     SysReg = 32807
+	SysRegDbgbvr5EL1     SysReg = 32812
+	SysRegDbgbcr5EL1     SysReg = 32813
+	SysRegDbgwvr5EL1     SysReg = 32814
+	SysRegDbgwcr5EL1     SysReg = 32815
+	SysRegDbgbvr6EL1     SysReg = 32820
+	SysRegDbgbcr6EL1     SysReg = 32821
+	SysRegDbgwvr6EL1     SysReg = 32822
+	SysRegDbgwcr6EL1     SysReg = 32823
+	SysRegDbgbvr7EL1     SysReg = 32828
+	SysRegDbgbcr7EL1     SysReg = 32829
+	SysRegDbgwvr7EL1     SysReg = 32830
+	SysRegDbgwcr7EL1     SysReg = 32831
+	SysRegDbgbvr8EL1     SysReg = 32836
+	SysRegDbgbcr8EL1     SysReg = 32837
+	SysRegDbgwvr8EL1     SysReg = 32838
+	SysRegDbgwcr8EL1     SysReg = 32839
+	SysRegDbgbvr9EL1     SysReg = 32844
+	SysRegDbgbcr9EL1     SysReg = 32845
+	SysRegDbgwvr9EL1     SysReg = 32846
+	SysRegDbgwcr9EL1     SysReg = 32847
+	SysRegDbgbvr10EL1    SysReg = 32852
+	SysRegDbgbcr10EL1    SysReg = 32853
+	SysRegDbgwvr10EL1    SysReg = 32854
+	SysRegDbgwcr10EL1    SysReg = 32855
+	SysRegDbgbvr11EL1    SysReg = 32860
+	SysRegDbgbcr11EL1    SysReg = 32861
+	SysRegDbgwvr11EL1    SysReg = 32862
+	SysRegDbgwcr11EL1    SysReg = 32863
+	SysRegDbgbvr12EL1    SysReg = 32868
+	SysRegDbgbcr12EL1    SysReg = 32869
+	SysRegDbgwvr12EL1    SysReg = 32870
+	SysRegDbgwcr12EL1    SysReg = 32871
+	SysRegDbgbvr13EL1    SysReg = 32876
+	SysRegDbgbcr13EL1    SysReg = 32877
+	SysRegDbgwvr13EL1    SysReg = 32878
+	SysRegDbgwcr13EL1    SysReg = 32879
+	SysRegDbgbvr14EL1    SysReg = 32884
+	SysRegDbgbcr14EL1    SysReg = 32885
+	SysRegDbgwvr14EL1    SysReg = 32886
+	SysRegDbgwcr14EL1    SysReg = 32887
+	SysRegDbgbvr15EL1    SysReg = 32892
+	SysRegDbgbcr15EL1    SysReg = 32893
+	SysRegDbgwvr15EL1    SysReg = 32894
+	SysRegDbgwcr15EL1    SysReg = 32895
+	SysRegMidrEL1        SysReg = 49152
+	SysRegMpidrEL1       SysReg = 49157
+	SysRegIDAa64pfr0EL1  SysReg = 49184
+	SysRegIDAa64pfr1EL1  SysReg = 49185
+	SysRegIDAa64zfr0EL1  SysReg = 49188
+	SysRegIDAa64smfr0EL1 SysReg = 49189
+	SysRegIDAa64dfr0EL1  SysReg = 49192
+	SysRegIDAa64dfr1EL1  SysReg = 49193
+	SysRegIDAa64isar0EL1 SysReg = 49200
+	SysRegIDAa64isar1EL1 SysReg = 49201
+	SysRegIDAa64mmfr0EL1 SysReg = 49208
+	SysRegIDAa64mmfr1EL1 SysReg = 49209
+	SysRegIDAa64mmfr2EL1 SysReg = 49210
+	SysRegSctlrEL1       SysReg = 49280
 	// The ACTLR_EL1 register This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
-	HV_SYS_REG_ACTLR_EL1      Hv_sys_reg_t = 49281
-	HV_SYS_REG_CPACR_EL1      Hv_sys_reg_t = 49282
-	HV_SYS_REG_SMPRI_EL1      Hv_sys_reg_t = 49300
-	HV_SYS_REG_SMCR_EL1       Hv_sys_reg_t = 49302
-	HV_SYS_REG_TTBR0_EL1      Hv_sys_reg_t = 49408
-	HV_SYS_REG_TTBR1_EL1      Hv_sys_reg_t = 49409
-	HV_SYS_REG_TCR_EL1        Hv_sys_reg_t = 49410
-	HV_SYS_REG_APIAKEYLO_EL1  Hv_sys_reg_t = 49416
-	HV_SYS_REG_APIAKEYHI_EL1  Hv_sys_reg_t = 49417
-	HV_SYS_REG_APIBKEYLO_EL1  Hv_sys_reg_t = 49418
-	HV_SYS_REG_APIBKEYHI_EL1  Hv_sys_reg_t = 49419
-	HV_SYS_REG_APDAKEYLO_EL1  Hv_sys_reg_t = 49424
-	HV_SYS_REG_APDAKEYHI_EL1  Hv_sys_reg_t = 49425
-	HV_SYS_REG_APDBKEYLO_EL1  Hv_sys_reg_t = 49426
-	HV_SYS_REG_APDBKEYHI_EL1  Hv_sys_reg_t = 49427
-	HV_SYS_REG_APGAKEYLO_EL1  Hv_sys_reg_t = 49432
-	HV_SYS_REG_APGAKEYHI_EL1  Hv_sys_reg_t = 49433
-	HV_SYS_REG_SPSR_EL1       Hv_sys_reg_t = 49664
-	HV_SYS_REG_ELR_EL1        Hv_sys_reg_t = 49665
-	HV_SYS_REG_SP_EL0         Hv_sys_reg_t = 49672
-	HV_SYS_REG_AFSR0_EL1      Hv_sys_reg_t = 49800
-	HV_SYS_REG_AFSR1_EL1      Hv_sys_reg_t = 49801
-	HV_SYS_REG_ESR_EL1        Hv_sys_reg_t = 49808
-	HV_SYS_REG_FAR_EL1        Hv_sys_reg_t = 49920
-	HV_SYS_REG_PAR_EL1        Hv_sys_reg_t = 50080
-	HV_SYS_REG_MAIR_EL1       Hv_sys_reg_t = 50448
-	HV_SYS_REG_AMAIR_EL1      Hv_sys_reg_t = 50456
-	HV_SYS_REG_VBAR_EL1       Hv_sys_reg_t = 50688
-	HV_SYS_REG_CONTEXTIDR_EL1 Hv_sys_reg_t = 50817
-	HV_SYS_REG_TPIDR_EL1      Hv_sys_reg_t = 50820
-	HV_SYS_REG_SCXTNUM_EL1    Hv_sys_reg_t = 50823
-	HV_SYS_REG_CNTKCTL_EL1    Hv_sys_reg_t = 50952
-	HV_SYS_REG_CSSELR_EL1     Hv_sys_reg_t = 53248
-	HV_SYS_REG_TPIDR_EL0      Hv_sys_reg_t = 56962
-	HV_SYS_REG_TPIDRRO_EL0    Hv_sys_reg_t = 56963
-	HV_SYS_REG_TPIDR2_EL0     Hv_sys_reg_t = 56965
-	HV_SYS_REG_SCXTNUM_EL0    Hv_sys_reg_t = 56967
-	HV_SYS_REG_CNTV_CTL_EL0   Hv_sys_reg_t = 57113
-	HV_SYS_REG_CNTV_CVAL_EL0  Hv_sys_reg_t = 57114
-	HV_SYS_REG_SP_EL1         Hv_sys_reg_t = 57864
-	HV_SYS_REG_CNTP_CTL_EL0   Hv_sys_reg_t = 57105
-	HV_SYS_REG_CNTP_CVAL_EL0  Hv_sys_reg_t = 57106
-	HV_SYS_REG_CNTP_TVAL_EL0  Hv_sys_reg_t = 57104
-	HV_SYS_REG_CNTHCTL_EL2    Hv_sys_reg_t = 59144
-	HV_SYS_REG_CNTHP_CTL_EL2  Hv_sys_reg_t = 59153
-	HV_SYS_REG_CNTHP_CVAL_EL2 Hv_sys_reg_t = 59154
-	HV_SYS_REG_CNTHP_TVAL_EL2 Hv_sys_reg_t = 59152
-	HV_SYS_REG_CNTVOFF_EL2    Hv_sys_reg_t = 59139
-	HV_SYS_REG_CPTR_EL2       Hv_sys_reg_t = 57482
-	HV_SYS_REG_ELR_EL2        Hv_sys_reg_t = 57857
-	HV_SYS_REG_ESR_EL2        Hv_sys_reg_t = 58000
-	HV_SYS_REG_FAR_EL2        Hv_sys_reg_t = 58112
-	HV_SYS_REG_HCR_EL2        Hv_sys_reg_t = 57480
-	HV_SYS_REG_HPFAR_EL2      Hv_sys_reg_t = 58116
-	HV_SYS_REG_MAIR_EL2       Hv_sys_reg_t = 58640
-	HV_SYS_REG_MDCR_EL2       Hv_sys_reg_t = 57481
-	HV_SYS_REG_SCTLR_EL2      Hv_sys_reg_t = 57472
-	HV_SYS_REG_SPSR_EL2       Hv_sys_reg_t = 57856
-	HV_SYS_REG_SP_EL2         Hv_sys_reg_t = 61960
-	HV_SYS_REG_TCR_EL2        Hv_sys_reg_t = 57602
-	HV_SYS_REG_TPIDR_EL2      Hv_sys_reg_t = 59010
-	HV_SYS_REG_TTBR0_EL2      Hv_sys_reg_t = 57600
-	HV_SYS_REG_TTBR1_EL2      Hv_sys_reg_t = 57601
-	HV_SYS_REG_VBAR_EL2       Hv_sys_reg_t = 58880
-	HV_SYS_REG_VMPIDR_EL2     Hv_sys_reg_t = 57349
-	HV_SYS_REG_VPIDR_EL2      Hv_sys_reg_t = 57344
-	HV_SYS_REG_VTCR_EL2       Hv_sys_reg_t = 57610
-	HV_SYS_REG_VTTBR_EL2      Hv_sys_reg_t = 57608
+	SysRegActlrEL1      SysReg = 49281
+	SysRegCpacrEL1      SysReg = 49282
+	SysRegSmpriEL1      SysReg = 49300
+	SysRegSmcrEL1       SysReg = 49302
+	SysRegTtbr0EL1      SysReg = 49408
+	SysRegTtbr1EL1      SysReg = 49409
+	SysRegTcrEL1        SysReg = 49410
+	SysRegApiakeyloEL1  SysReg = 49416
+	SysRegApiakeyhiEL1  SysReg = 49417
+	SysRegApibkeyloEL1  SysReg = 49418
+	SysRegApibkeyhiEL1  SysReg = 49419
+	SysRegApdakeyloEL1  SysReg = 49424
+	SysRegApdakeyhiEL1  SysReg = 49425
+	SysRegApdbkeyloEL1  SysReg = 49426
+	SysRegApdbkeyhiEL1  SysReg = 49427
+	SysRegApgakeyloEL1  SysReg = 49432
+	SysRegApgakeyhiEL1  SysReg = 49433
+	SysRegSpsrEL1       SysReg = 49664
+	SysRegElrEL1        SysReg = 49665
+	SysRegSpEl0         SysReg = 49672
+	SysRegAfsr0EL1      SysReg = 49800
+	SysRegAfsr1EL1      SysReg = 49801
+	SysRegEsrEL1        SysReg = 49808
+	SysRegFarEL1        SysReg = 49920
+	SysRegParEL1        SysReg = 50080
+	SysRegMairEL1       SysReg = 50448
+	SysRegAmairEL1      SysReg = 50456
+	SysRegVbarEL1       SysReg = 50688
+	SysRegContextidrEL1 SysReg = 50817
+	SysRegTpidrEL1      SysReg = 50820
+	SysRegScxtnumEL1    SysReg = 50823
+	SysRegCntkctlEL1    SysReg = 50952
+	SysRegCsselrEL1     SysReg = 53248
+	SysRegTpidrEl0      SysReg = 56962
+	SysRegTpidrroEl0    SysReg = 56963
+	SysRegTpidr2El0     SysReg = 56965
+	SysRegScxtnumEl0    SysReg = 56967
+	SysRegCntvCtlEl0    SysReg = 57113
+	SysRegCntvCvalEl0   SysReg = 57114
+	SysRegSpEL1         SysReg = 57864
+	SysRegCntpCtlEl0    SysReg = 57105
+	SysRegCntpCvalEl0   SysReg = 57106
+	SysRegCntpTvalEl0   SysReg = 57104
+	SysRegCnthctlEL2    SysReg = 59144
+	SysRegCnthpCtlEL2   SysReg = 59153
+	SysRegCnthpCvalEL2  SysReg = 59154
+	SysRegCnthpTvalEL2  SysReg = 59152
+	SysRegCntvoffEL2    SysReg = 59139
+	SysRegCptrEL2       SysReg = 57482
+	SysRegElrEL2        SysReg = 57857
+	SysRegEsrEL2        SysReg = 58000
+	SysRegFarEL2        SysReg = 58112
+	SysRegHcrEL2        SysReg = 57480
+	SysRegHpfarEL2      SysReg = 58116
+	SysRegMairEL2       SysReg = 58640
+	SysRegMdcrEL2       SysReg = 57481
+	SysRegSctlrEL2      SysReg = 57472
+	SysRegSpsrEL2       SysReg = 57856
+	SysRegSpEL2         SysReg = 61960
+	SysRegTcrEL2        SysReg = 57602
+	SysRegTpidrEL2      SysReg = 59010
+	SysRegTtbr0EL2      SysReg = 57600
+	SysRegTtbr1EL2      SysReg = 57601
+	SysRegVbarEL2       SysReg = 58880
+	SysRegVmpidrEL2     SysReg = 57349
+	SysRegVpidrEL2      SysReg = 57344
+	SysRegVtcrEL2       SysReg = 57610
+	SysRegVttbrEL2      SysReg = 57608
 )
 
-// String returns the Hv_sys_reg_t constant's name, or its numeric form when the
+// String returns the SysReg constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Hv_sys_reg_t) String() string {
+func (e SysReg) String() string {
 	switch e {
-	case HV_SYS_REG_DBGBVR0_EL1:
-		return "HV_SYS_REG_DBGBVR0_EL1"
-	case HV_SYS_REG_DBGBCR0_EL1:
-		return "HV_SYS_REG_DBGBCR0_EL1"
-	case HV_SYS_REG_DBGWVR0_EL1:
-		return "HV_SYS_REG_DBGWVR0_EL1"
-	case HV_SYS_REG_DBGWCR0_EL1:
-		return "HV_SYS_REG_DBGWCR0_EL1"
-	case HV_SYS_REG_DBGBVR1_EL1:
-		return "HV_SYS_REG_DBGBVR1_EL1"
-	case HV_SYS_REG_DBGBCR1_EL1:
-		return "HV_SYS_REG_DBGBCR1_EL1"
-	case HV_SYS_REG_DBGWVR1_EL1:
-		return "HV_SYS_REG_DBGWVR1_EL1"
-	case HV_SYS_REG_DBGWCR1_EL1:
-		return "HV_SYS_REG_DBGWCR1_EL1"
-	case HV_SYS_REG_MDCCINT_EL1:
-		return "HV_SYS_REG_MDCCINT_EL1"
-	case HV_SYS_REG_MDSCR_EL1:
-		return "HV_SYS_REG_MDSCR_EL1"
-	case HV_SYS_REG_DBGBVR2_EL1:
-		return "HV_SYS_REG_DBGBVR2_EL1"
-	case HV_SYS_REG_DBGBCR2_EL1:
-		return "HV_SYS_REG_DBGBCR2_EL1"
-	case HV_SYS_REG_DBGWVR2_EL1:
-		return "HV_SYS_REG_DBGWVR2_EL1"
-	case HV_SYS_REG_DBGWCR2_EL1:
-		return "HV_SYS_REG_DBGWCR2_EL1"
-	case HV_SYS_REG_DBGBVR3_EL1:
-		return "HV_SYS_REG_DBGBVR3_EL1"
-	case HV_SYS_REG_DBGBCR3_EL1:
-		return "HV_SYS_REG_DBGBCR3_EL1"
-	case HV_SYS_REG_DBGWVR3_EL1:
-		return "HV_SYS_REG_DBGWVR3_EL1"
-	case HV_SYS_REG_DBGWCR3_EL1:
-		return "HV_SYS_REG_DBGWCR3_EL1"
-	case HV_SYS_REG_DBGBVR4_EL1:
-		return "HV_SYS_REG_DBGBVR4_EL1"
-	case HV_SYS_REG_DBGBCR4_EL1:
-		return "HV_SYS_REG_DBGBCR4_EL1"
-	case HV_SYS_REG_DBGWVR4_EL1:
-		return "HV_SYS_REG_DBGWVR4_EL1"
-	case HV_SYS_REG_DBGWCR4_EL1:
-		return "HV_SYS_REG_DBGWCR4_EL1"
-	case HV_SYS_REG_DBGBVR5_EL1:
-		return "HV_SYS_REG_DBGBVR5_EL1"
-	case HV_SYS_REG_DBGBCR5_EL1:
-		return "HV_SYS_REG_DBGBCR5_EL1"
-	case HV_SYS_REG_DBGWVR5_EL1:
-		return "HV_SYS_REG_DBGWVR5_EL1"
-	case HV_SYS_REG_DBGWCR5_EL1:
-		return "HV_SYS_REG_DBGWCR5_EL1"
-	case HV_SYS_REG_DBGBVR6_EL1:
-		return "HV_SYS_REG_DBGBVR6_EL1"
-	case HV_SYS_REG_DBGBCR6_EL1:
-		return "HV_SYS_REG_DBGBCR6_EL1"
-	case HV_SYS_REG_DBGWVR6_EL1:
-		return "HV_SYS_REG_DBGWVR6_EL1"
-	case HV_SYS_REG_DBGWCR6_EL1:
-		return "HV_SYS_REG_DBGWCR6_EL1"
-	case HV_SYS_REG_DBGBVR7_EL1:
-		return "HV_SYS_REG_DBGBVR7_EL1"
-	case HV_SYS_REG_DBGBCR7_EL1:
-		return "HV_SYS_REG_DBGBCR7_EL1"
-	case HV_SYS_REG_DBGWVR7_EL1:
-		return "HV_SYS_REG_DBGWVR7_EL1"
-	case HV_SYS_REG_DBGWCR7_EL1:
-		return "HV_SYS_REG_DBGWCR7_EL1"
-	case HV_SYS_REG_DBGBVR8_EL1:
-		return "HV_SYS_REG_DBGBVR8_EL1"
-	case HV_SYS_REG_DBGBCR8_EL1:
-		return "HV_SYS_REG_DBGBCR8_EL1"
-	case HV_SYS_REG_DBGWVR8_EL1:
-		return "HV_SYS_REG_DBGWVR8_EL1"
-	case HV_SYS_REG_DBGWCR8_EL1:
-		return "HV_SYS_REG_DBGWCR8_EL1"
-	case HV_SYS_REG_DBGBVR9_EL1:
-		return "HV_SYS_REG_DBGBVR9_EL1"
-	case HV_SYS_REG_DBGBCR9_EL1:
-		return "HV_SYS_REG_DBGBCR9_EL1"
-	case HV_SYS_REG_DBGWVR9_EL1:
-		return "HV_SYS_REG_DBGWVR9_EL1"
-	case HV_SYS_REG_DBGWCR9_EL1:
-		return "HV_SYS_REG_DBGWCR9_EL1"
-	case HV_SYS_REG_DBGBVR10_EL1:
-		return "HV_SYS_REG_DBGBVR10_EL1"
-	case HV_SYS_REG_DBGBCR10_EL1:
-		return "HV_SYS_REG_DBGBCR10_EL1"
-	case HV_SYS_REG_DBGWVR10_EL1:
-		return "HV_SYS_REG_DBGWVR10_EL1"
-	case HV_SYS_REG_DBGWCR10_EL1:
-		return "HV_SYS_REG_DBGWCR10_EL1"
-	case HV_SYS_REG_DBGBVR11_EL1:
-		return "HV_SYS_REG_DBGBVR11_EL1"
-	case HV_SYS_REG_DBGBCR11_EL1:
-		return "HV_SYS_REG_DBGBCR11_EL1"
-	case HV_SYS_REG_DBGWVR11_EL1:
-		return "HV_SYS_REG_DBGWVR11_EL1"
-	case HV_SYS_REG_DBGWCR11_EL1:
-		return "HV_SYS_REG_DBGWCR11_EL1"
-	case HV_SYS_REG_DBGBVR12_EL1:
-		return "HV_SYS_REG_DBGBVR12_EL1"
-	case HV_SYS_REG_DBGBCR12_EL1:
-		return "HV_SYS_REG_DBGBCR12_EL1"
-	case HV_SYS_REG_DBGWVR12_EL1:
-		return "HV_SYS_REG_DBGWVR12_EL1"
-	case HV_SYS_REG_DBGWCR12_EL1:
-		return "HV_SYS_REG_DBGWCR12_EL1"
-	case HV_SYS_REG_DBGBVR13_EL1:
-		return "HV_SYS_REG_DBGBVR13_EL1"
-	case HV_SYS_REG_DBGBCR13_EL1:
-		return "HV_SYS_REG_DBGBCR13_EL1"
-	case HV_SYS_REG_DBGWVR13_EL1:
-		return "HV_SYS_REG_DBGWVR13_EL1"
-	case HV_SYS_REG_DBGWCR13_EL1:
-		return "HV_SYS_REG_DBGWCR13_EL1"
-	case HV_SYS_REG_DBGBVR14_EL1:
-		return "HV_SYS_REG_DBGBVR14_EL1"
-	case HV_SYS_REG_DBGBCR14_EL1:
-		return "HV_SYS_REG_DBGBCR14_EL1"
-	case HV_SYS_REG_DBGWVR14_EL1:
-		return "HV_SYS_REG_DBGWVR14_EL1"
-	case HV_SYS_REG_DBGWCR14_EL1:
-		return "HV_SYS_REG_DBGWCR14_EL1"
-	case HV_SYS_REG_DBGBVR15_EL1:
-		return "HV_SYS_REG_DBGBVR15_EL1"
-	case HV_SYS_REG_DBGBCR15_EL1:
-		return "HV_SYS_REG_DBGBCR15_EL1"
-	case HV_SYS_REG_DBGWVR15_EL1:
-		return "HV_SYS_REG_DBGWVR15_EL1"
-	case HV_SYS_REG_DBGWCR15_EL1:
-		return "HV_SYS_REG_DBGWCR15_EL1"
-	case HV_SYS_REG_MIDR_EL1:
-		return "HV_SYS_REG_MIDR_EL1"
-	case HV_SYS_REG_MPIDR_EL1:
-		return "HV_SYS_REG_MPIDR_EL1"
-	case HV_SYS_REG_ID_AA64PFR0_EL1:
-		return "HV_SYS_REG_ID_AA64PFR0_EL1"
-	case HV_SYS_REG_ID_AA64PFR1_EL1:
-		return "HV_SYS_REG_ID_AA64PFR1_EL1"
-	case HV_SYS_REG_ID_AA64ZFR0_EL1:
-		return "HV_SYS_REG_ID_AA64ZFR0_EL1"
-	case HV_SYS_REG_ID_AA64SMFR0_EL1:
-		return "HV_SYS_REG_ID_AA64SMFR0_EL1"
-	case HV_SYS_REG_ID_AA64DFR0_EL1:
-		return "HV_SYS_REG_ID_AA64DFR0_EL1"
-	case HV_SYS_REG_ID_AA64DFR1_EL1:
-		return "HV_SYS_REG_ID_AA64DFR1_EL1"
-	case HV_SYS_REG_ID_AA64ISAR0_EL1:
-		return "HV_SYS_REG_ID_AA64ISAR0_EL1"
-	case HV_SYS_REG_ID_AA64ISAR1_EL1:
-		return "HV_SYS_REG_ID_AA64ISAR1_EL1"
-	case HV_SYS_REG_ID_AA64MMFR0_EL1:
-		return "HV_SYS_REG_ID_AA64MMFR0_EL1"
-	case HV_SYS_REG_ID_AA64MMFR1_EL1:
-		return "HV_SYS_REG_ID_AA64MMFR1_EL1"
-	case HV_SYS_REG_ID_AA64MMFR2_EL1:
-		return "HV_SYS_REG_ID_AA64MMFR2_EL1"
-	case HV_SYS_REG_SCTLR_EL1:
-		return "HV_SYS_REG_SCTLR_EL1"
-	case HV_SYS_REG_ACTLR_EL1:
-		return "HV_SYS_REG_ACTLR_EL1"
-	case HV_SYS_REG_CPACR_EL1:
-		return "HV_SYS_REG_CPACR_EL1"
-	case HV_SYS_REG_SMPRI_EL1:
-		return "HV_SYS_REG_SMPRI_EL1"
-	case HV_SYS_REG_SMCR_EL1:
-		return "HV_SYS_REG_SMCR_EL1"
-	case HV_SYS_REG_TTBR0_EL1:
-		return "HV_SYS_REG_TTBR0_EL1"
-	case HV_SYS_REG_TTBR1_EL1:
-		return "HV_SYS_REG_TTBR1_EL1"
-	case HV_SYS_REG_TCR_EL1:
-		return "HV_SYS_REG_TCR_EL1"
-	case HV_SYS_REG_APIAKEYLO_EL1:
-		return "HV_SYS_REG_APIAKEYLO_EL1"
-	case HV_SYS_REG_APIAKEYHI_EL1:
-		return "HV_SYS_REG_APIAKEYHI_EL1"
-	case HV_SYS_REG_APIBKEYLO_EL1:
-		return "HV_SYS_REG_APIBKEYLO_EL1"
-	case HV_SYS_REG_APIBKEYHI_EL1:
-		return "HV_SYS_REG_APIBKEYHI_EL1"
-	case HV_SYS_REG_APDAKEYLO_EL1:
-		return "HV_SYS_REG_APDAKEYLO_EL1"
-	case HV_SYS_REG_APDAKEYHI_EL1:
-		return "HV_SYS_REG_APDAKEYHI_EL1"
-	case HV_SYS_REG_APDBKEYLO_EL1:
-		return "HV_SYS_REG_APDBKEYLO_EL1"
-	case HV_SYS_REG_APDBKEYHI_EL1:
-		return "HV_SYS_REG_APDBKEYHI_EL1"
-	case HV_SYS_REG_APGAKEYLO_EL1:
-		return "HV_SYS_REG_APGAKEYLO_EL1"
-	case HV_SYS_REG_APGAKEYHI_EL1:
-		return "HV_SYS_REG_APGAKEYHI_EL1"
-	case HV_SYS_REG_SPSR_EL1:
-		return "HV_SYS_REG_SPSR_EL1"
-	case HV_SYS_REG_ELR_EL1:
-		return "HV_SYS_REG_ELR_EL1"
-	case HV_SYS_REG_SP_EL0:
-		return "HV_SYS_REG_SP_EL0"
-	case HV_SYS_REG_AFSR0_EL1:
-		return "HV_SYS_REG_AFSR0_EL1"
-	case HV_SYS_REG_AFSR1_EL1:
-		return "HV_SYS_REG_AFSR1_EL1"
-	case HV_SYS_REG_ESR_EL1:
-		return "HV_SYS_REG_ESR_EL1"
-	case HV_SYS_REG_FAR_EL1:
-		return "HV_SYS_REG_FAR_EL1"
-	case HV_SYS_REG_PAR_EL1:
-		return "HV_SYS_REG_PAR_EL1"
-	case HV_SYS_REG_MAIR_EL1:
-		return "HV_SYS_REG_MAIR_EL1"
-	case HV_SYS_REG_AMAIR_EL1:
-		return "HV_SYS_REG_AMAIR_EL1"
-	case HV_SYS_REG_VBAR_EL1:
-		return "HV_SYS_REG_VBAR_EL1"
-	case HV_SYS_REG_CONTEXTIDR_EL1:
-		return "HV_SYS_REG_CONTEXTIDR_EL1"
-	case HV_SYS_REG_TPIDR_EL1:
-		return "HV_SYS_REG_TPIDR_EL1"
-	case HV_SYS_REG_SCXTNUM_EL1:
-		return "HV_SYS_REG_SCXTNUM_EL1"
-	case HV_SYS_REG_CNTKCTL_EL1:
-		return "HV_SYS_REG_CNTKCTL_EL1"
-	case HV_SYS_REG_CSSELR_EL1:
-		return "HV_SYS_REG_CSSELR_EL1"
-	case HV_SYS_REG_TPIDR_EL0:
-		return "HV_SYS_REG_TPIDR_EL0"
-	case HV_SYS_REG_TPIDRRO_EL0:
-		return "HV_SYS_REG_TPIDRRO_EL0"
-	case HV_SYS_REG_TPIDR2_EL0:
-		return "HV_SYS_REG_TPIDR2_EL0"
-	case HV_SYS_REG_SCXTNUM_EL0:
-		return "HV_SYS_REG_SCXTNUM_EL0"
-	case HV_SYS_REG_CNTV_CTL_EL0:
-		return "HV_SYS_REG_CNTV_CTL_EL0"
-	case HV_SYS_REG_CNTV_CVAL_EL0:
-		return "HV_SYS_REG_CNTV_CVAL_EL0"
-	case HV_SYS_REG_SP_EL1:
-		return "HV_SYS_REG_SP_EL1"
-	case HV_SYS_REG_CNTP_CTL_EL0:
-		return "HV_SYS_REG_CNTP_CTL_EL0"
-	case HV_SYS_REG_CNTP_CVAL_EL0:
-		return "HV_SYS_REG_CNTP_CVAL_EL0"
-	case HV_SYS_REG_CNTP_TVAL_EL0:
-		return "HV_SYS_REG_CNTP_TVAL_EL0"
-	case HV_SYS_REG_CNTHCTL_EL2:
-		return "HV_SYS_REG_CNTHCTL_EL2"
-	case HV_SYS_REG_CNTHP_CTL_EL2:
-		return "HV_SYS_REG_CNTHP_CTL_EL2"
-	case HV_SYS_REG_CNTHP_CVAL_EL2:
-		return "HV_SYS_REG_CNTHP_CVAL_EL2"
-	case HV_SYS_REG_CNTHP_TVAL_EL2:
-		return "HV_SYS_REG_CNTHP_TVAL_EL2"
-	case HV_SYS_REG_CNTVOFF_EL2:
-		return "HV_SYS_REG_CNTVOFF_EL2"
-	case HV_SYS_REG_CPTR_EL2:
-		return "HV_SYS_REG_CPTR_EL2"
-	case HV_SYS_REG_ELR_EL2:
-		return "HV_SYS_REG_ELR_EL2"
-	case HV_SYS_REG_ESR_EL2:
-		return "HV_SYS_REG_ESR_EL2"
-	case HV_SYS_REG_FAR_EL2:
-		return "HV_SYS_REG_FAR_EL2"
-	case HV_SYS_REG_HCR_EL2:
-		return "HV_SYS_REG_HCR_EL2"
-	case HV_SYS_REG_HPFAR_EL2:
-		return "HV_SYS_REG_HPFAR_EL2"
-	case HV_SYS_REG_MAIR_EL2:
-		return "HV_SYS_REG_MAIR_EL2"
-	case HV_SYS_REG_MDCR_EL2:
-		return "HV_SYS_REG_MDCR_EL2"
-	case HV_SYS_REG_SCTLR_EL2:
-		return "HV_SYS_REG_SCTLR_EL2"
-	case HV_SYS_REG_SPSR_EL2:
-		return "HV_SYS_REG_SPSR_EL2"
-	case HV_SYS_REG_SP_EL2:
-		return "HV_SYS_REG_SP_EL2"
-	case HV_SYS_REG_TCR_EL2:
-		return "HV_SYS_REG_TCR_EL2"
-	case HV_SYS_REG_TPIDR_EL2:
-		return "HV_SYS_REG_TPIDR_EL2"
-	case HV_SYS_REG_TTBR0_EL2:
-		return "HV_SYS_REG_TTBR0_EL2"
-	case HV_SYS_REG_TTBR1_EL2:
-		return "HV_SYS_REG_TTBR1_EL2"
-	case HV_SYS_REG_VBAR_EL2:
-		return "HV_SYS_REG_VBAR_EL2"
-	case HV_SYS_REG_VMPIDR_EL2:
-		return "HV_SYS_REG_VMPIDR_EL2"
-	case HV_SYS_REG_VPIDR_EL2:
-		return "HV_SYS_REG_VPIDR_EL2"
-	case HV_SYS_REG_VTCR_EL2:
-		return "HV_SYS_REG_VTCR_EL2"
-	case HV_SYS_REG_VTTBR_EL2:
-		return "HV_SYS_REG_VTTBR_EL2"
+	case SysRegDbgbvr0EL1:
+		return "SysRegDbgbvr0EL1"
+	case SysRegDbgbcr0EL1:
+		return "SysRegDbgbcr0EL1"
+	case SysRegDbgwvr0EL1:
+		return "SysRegDbgwvr0EL1"
+	case SysRegDbgwcr0EL1:
+		return "SysRegDbgwcr0EL1"
+	case SysRegDbgbvr1EL1:
+		return "SysRegDbgbvr1EL1"
+	case SysRegDbgbcr1EL1:
+		return "SysRegDbgbcr1EL1"
+	case SysRegDbgwvr1EL1:
+		return "SysRegDbgwvr1EL1"
+	case SysRegDbgwcr1EL1:
+		return "SysRegDbgwcr1EL1"
+	case SysRegMdccintEL1:
+		return "SysRegMdccintEL1"
+	case SysRegMdscrEL1:
+		return "SysRegMdscrEL1"
+	case SysRegDbgbvr2EL1:
+		return "SysRegDbgbvr2EL1"
+	case SysRegDbgbcr2EL1:
+		return "SysRegDbgbcr2EL1"
+	case SysRegDbgwvr2EL1:
+		return "SysRegDbgwvr2EL1"
+	case SysRegDbgwcr2EL1:
+		return "SysRegDbgwcr2EL1"
+	case SysRegDbgbvr3EL1:
+		return "SysRegDbgbvr3EL1"
+	case SysRegDbgbcr3EL1:
+		return "SysRegDbgbcr3EL1"
+	case SysRegDbgwvr3EL1:
+		return "SysRegDbgwvr3EL1"
+	case SysRegDbgwcr3EL1:
+		return "SysRegDbgwcr3EL1"
+	case SysRegDbgbvr4EL1:
+		return "SysRegDbgbvr4EL1"
+	case SysRegDbgbcr4EL1:
+		return "SysRegDbgbcr4EL1"
+	case SysRegDbgwvr4EL1:
+		return "SysRegDbgwvr4EL1"
+	case SysRegDbgwcr4EL1:
+		return "SysRegDbgwcr4EL1"
+	case SysRegDbgbvr5EL1:
+		return "SysRegDbgbvr5EL1"
+	case SysRegDbgbcr5EL1:
+		return "SysRegDbgbcr5EL1"
+	case SysRegDbgwvr5EL1:
+		return "SysRegDbgwvr5EL1"
+	case SysRegDbgwcr5EL1:
+		return "SysRegDbgwcr5EL1"
+	case SysRegDbgbvr6EL1:
+		return "SysRegDbgbvr6EL1"
+	case SysRegDbgbcr6EL1:
+		return "SysRegDbgbcr6EL1"
+	case SysRegDbgwvr6EL1:
+		return "SysRegDbgwvr6EL1"
+	case SysRegDbgwcr6EL1:
+		return "SysRegDbgwcr6EL1"
+	case SysRegDbgbvr7EL1:
+		return "SysRegDbgbvr7EL1"
+	case SysRegDbgbcr7EL1:
+		return "SysRegDbgbcr7EL1"
+	case SysRegDbgwvr7EL1:
+		return "SysRegDbgwvr7EL1"
+	case SysRegDbgwcr7EL1:
+		return "SysRegDbgwcr7EL1"
+	case SysRegDbgbvr8EL1:
+		return "SysRegDbgbvr8EL1"
+	case SysRegDbgbcr8EL1:
+		return "SysRegDbgbcr8EL1"
+	case SysRegDbgwvr8EL1:
+		return "SysRegDbgwvr8EL1"
+	case SysRegDbgwcr8EL1:
+		return "SysRegDbgwcr8EL1"
+	case SysRegDbgbvr9EL1:
+		return "SysRegDbgbvr9EL1"
+	case SysRegDbgbcr9EL1:
+		return "SysRegDbgbcr9EL1"
+	case SysRegDbgwvr9EL1:
+		return "SysRegDbgwvr9EL1"
+	case SysRegDbgwcr9EL1:
+		return "SysRegDbgwcr9EL1"
+	case SysRegDbgbvr10EL1:
+		return "SysRegDbgbvr10EL1"
+	case SysRegDbgbcr10EL1:
+		return "SysRegDbgbcr10EL1"
+	case SysRegDbgwvr10EL1:
+		return "SysRegDbgwvr10EL1"
+	case SysRegDbgwcr10EL1:
+		return "SysRegDbgwcr10EL1"
+	case SysRegDbgbvr11EL1:
+		return "SysRegDbgbvr11EL1"
+	case SysRegDbgbcr11EL1:
+		return "SysRegDbgbcr11EL1"
+	case SysRegDbgwvr11EL1:
+		return "SysRegDbgwvr11EL1"
+	case SysRegDbgwcr11EL1:
+		return "SysRegDbgwcr11EL1"
+	case SysRegDbgbvr12EL1:
+		return "SysRegDbgbvr12EL1"
+	case SysRegDbgbcr12EL1:
+		return "SysRegDbgbcr12EL1"
+	case SysRegDbgwvr12EL1:
+		return "SysRegDbgwvr12EL1"
+	case SysRegDbgwcr12EL1:
+		return "SysRegDbgwcr12EL1"
+	case SysRegDbgbvr13EL1:
+		return "SysRegDbgbvr13EL1"
+	case SysRegDbgbcr13EL1:
+		return "SysRegDbgbcr13EL1"
+	case SysRegDbgwvr13EL1:
+		return "SysRegDbgwvr13EL1"
+	case SysRegDbgwcr13EL1:
+		return "SysRegDbgwcr13EL1"
+	case SysRegDbgbvr14EL1:
+		return "SysRegDbgbvr14EL1"
+	case SysRegDbgbcr14EL1:
+		return "SysRegDbgbcr14EL1"
+	case SysRegDbgwvr14EL1:
+		return "SysRegDbgwvr14EL1"
+	case SysRegDbgwcr14EL1:
+		return "SysRegDbgwcr14EL1"
+	case SysRegDbgbvr15EL1:
+		return "SysRegDbgbvr15EL1"
+	case SysRegDbgbcr15EL1:
+		return "SysRegDbgbcr15EL1"
+	case SysRegDbgwvr15EL1:
+		return "SysRegDbgwvr15EL1"
+	case SysRegDbgwcr15EL1:
+		return "SysRegDbgwcr15EL1"
+	case SysRegMidrEL1:
+		return "SysRegMidrEL1"
+	case SysRegMpidrEL1:
+		return "SysRegMpidrEL1"
+	case SysRegIDAa64pfr0EL1:
+		return "SysRegIDAa64pfr0EL1"
+	case SysRegIDAa64pfr1EL1:
+		return "SysRegIDAa64pfr1EL1"
+	case SysRegIDAa64zfr0EL1:
+		return "SysRegIDAa64zfr0EL1"
+	case SysRegIDAa64smfr0EL1:
+		return "SysRegIDAa64smfr0EL1"
+	case SysRegIDAa64dfr0EL1:
+		return "SysRegIDAa64dfr0EL1"
+	case SysRegIDAa64dfr1EL1:
+		return "SysRegIDAa64dfr1EL1"
+	case SysRegIDAa64isar0EL1:
+		return "SysRegIDAa64isar0EL1"
+	case SysRegIDAa64isar1EL1:
+		return "SysRegIDAa64isar1EL1"
+	case SysRegIDAa64mmfr0EL1:
+		return "SysRegIDAa64mmfr0EL1"
+	case SysRegIDAa64mmfr1EL1:
+		return "SysRegIDAa64mmfr1EL1"
+	case SysRegIDAa64mmfr2EL1:
+		return "SysRegIDAa64mmfr2EL1"
+	case SysRegSctlrEL1:
+		return "SysRegSctlrEL1"
+	case SysRegActlrEL1:
+		return "SysRegActlrEL1"
+	case SysRegCpacrEL1:
+		return "SysRegCpacrEL1"
+	case SysRegSmpriEL1:
+		return "SysRegSmpriEL1"
+	case SysRegSmcrEL1:
+		return "SysRegSmcrEL1"
+	case SysRegTtbr0EL1:
+		return "SysRegTtbr0EL1"
+	case SysRegTtbr1EL1:
+		return "SysRegTtbr1EL1"
+	case SysRegTcrEL1:
+		return "SysRegTcrEL1"
+	case SysRegApiakeyloEL1:
+		return "SysRegApiakeyloEL1"
+	case SysRegApiakeyhiEL1:
+		return "SysRegApiakeyhiEL1"
+	case SysRegApibkeyloEL1:
+		return "SysRegApibkeyloEL1"
+	case SysRegApibkeyhiEL1:
+		return "SysRegApibkeyhiEL1"
+	case SysRegApdakeyloEL1:
+		return "SysRegApdakeyloEL1"
+	case SysRegApdakeyhiEL1:
+		return "SysRegApdakeyhiEL1"
+	case SysRegApdbkeyloEL1:
+		return "SysRegApdbkeyloEL1"
+	case SysRegApdbkeyhiEL1:
+		return "SysRegApdbkeyhiEL1"
+	case SysRegApgakeyloEL1:
+		return "SysRegApgakeyloEL1"
+	case SysRegApgakeyhiEL1:
+		return "SysRegApgakeyhiEL1"
+	case SysRegSpsrEL1:
+		return "SysRegSpsrEL1"
+	case SysRegElrEL1:
+		return "SysRegElrEL1"
+	case SysRegSpEl0:
+		return "SysRegSpEl0"
+	case SysRegAfsr0EL1:
+		return "SysRegAfsr0EL1"
+	case SysRegAfsr1EL1:
+		return "SysRegAfsr1EL1"
+	case SysRegEsrEL1:
+		return "SysRegEsrEL1"
+	case SysRegFarEL1:
+		return "SysRegFarEL1"
+	case SysRegParEL1:
+		return "SysRegParEL1"
+	case SysRegMairEL1:
+		return "SysRegMairEL1"
+	case SysRegAmairEL1:
+		return "SysRegAmairEL1"
+	case SysRegVbarEL1:
+		return "SysRegVbarEL1"
+	case SysRegContextidrEL1:
+		return "SysRegContextidrEL1"
+	case SysRegTpidrEL1:
+		return "SysRegTpidrEL1"
+	case SysRegScxtnumEL1:
+		return "SysRegScxtnumEL1"
+	case SysRegCntkctlEL1:
+		return "SysRegCntkctlEL1"
+	case SysRegCsselrEL1:
+		return "SysRegCsselrEL1"
+	case SysRegTpidrEl0:
+		return "SysRegTpidrEl0"
+	case SysRegTpidrroEl0:
+		return "SysRegTpidrroEl0"
+	case SysRegTpidr2El0:
+		return "SysRegTpidr2El0"
+	case SysRegScxtnumEl0:
+		return "SysRegScxtnumEl0"
+	case SysRegCntvCtlEl0:
+		return "SysRegCntvCtlEl0"
+	case SysRegCntvCvalEl0:
+		return "SysRegCntvCvalEl0"
+	case SysRegSpEL1:
+		return "SysRegSpEL1"
+	case SysRegCntpCtlEl0:
+		return "SysRegCntpCtlEl0"
+	case SysRegCntpCvalEl0:
+		return "SysRegCntpCvalEl0"
+	case SysRegCntpTvalEl0:
+		return "SysRegCntpTvalEl0"
+	case SysRegCnthctlEL2:
+		return "SysRegCnthctlEL2"
+	case SysRegCnthpCtlEL2:
+		return "SysRegCnthpCtlEL2"
+	case SysRegCnthpCvalEL2:
+		return "SysRegCnthpCvalEL2"
+	case SysRegCnthpTvalEL2:
+		return "SysRegCnthpTvalEL2"
+	case SysRegCntvoffEL2:
+		return "SysRegCntvoffEL2"
+	case SysRegCptrEL2:
+		return "SysRegCptrEL2"
+	case SysRegElrEL2:
+		return "SysRegElrEL2"
+	case SysRegEsrEL2:
+		return "SysRegEsrEL2"
+	case SysRegFarEL2:
+		return "SysRegFarEL2"
+	case SysRegHcrEL2:
+		return "SysRegHcrEL2"
+	case SysRegHpfarEL2:
+		return "SysRegHpfarEL2"
+	case SysRegMairEL2:
+		return "SysRegMairEL2"
+	case SysRegMdcrEL2:
+		return "SysRegMdcrEL2"
+	case SysRegSctlrEL2:
+		return "SysRegSctlrEL2"
+	case SysRegSpsrEL2:
+		return "SysRegSpsrEL2"
+	case SysRegSpEL2:
+		return "SysRegSpEL2"
+	case SysRegTcrEL2:
+		return "SysRegTcrEL2"
+	case SysRegTpidrEL2:
+		return "SysRegTpidrEL2"
+	case SysRegTtbr0EL2:
+		return "SysRegTtbr0EL2"
+	case SysRegTtbr1EL2:
+		return "SysRegTtbr1EL2"
+	case SysRegVbarEL2:
+		return "SysRegVbarEL2"
+	case SysRegVmpidrEL2:
+		return "SysRegVmpidrEL2"
+	case SysRegVpidrEL2:
+		return "SysRegVpidrEL2"
+	case SysRegVtcrEL2:
+		return "SysRegVtcrEL2"
+	case SysRegVttbrEL2:
+		return "SysRegVttbrEL2"
 	default:
-		return fmt.Sprintf("Hv_sys_reg_t(%d)", int64(e))
+		return fmt.Sprintf("SysReg(%d)", int64(e))
 	}
 }

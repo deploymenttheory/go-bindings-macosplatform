@@ -5,9 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -232,6 +234,7 @@ func (die *DOMHTMLImageElement) WithTextContent(textContent string) *DOMHTMLImag
 
 // Name returns the name.
 func (die *DOMHTMLImageElement) Name() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -241,6 +244,7 @@ func (die *DOMHTMLImageElement) Name() string {
 
 // Align returns the align.
 func (die *DOMHTMLImageElement) Align() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -250,6 +254,7 @@ func (die *DOMHTMLImageElement) Align() string {
 
 // Alt returns the alt.
 func (die *DOMHTMLImageElement) Alt() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("alt"))
 	if _r == 0 {
 		return ""
@@ -259,6 +264,7 @@ func (die *DOMHTMLImageElement) Alt() string {
 
 // Border returns the border.
 func (die *DOMHTMLImageElement) Border() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("border"))
 	if _r == 0 {
 		return ""
@@ -268,24 +274,28 @@ func (die *DOMHTMLImageElement) Border() string {
 
 // Height returns the height.
 func (die *DOMHTMLImageElement) Height() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("height"))
 	return _r
 }
 
 // Hspace returns the hspace.
 func (die *DOMHTMLImageElement) Hspace() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("hspace"))
 	return _r
 }
 
 // IsMap reports whether the object is map.
 func (die *DOMHTMLImageElement) IsMap() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("isMap"))
 	return _r
 }
 
 // LongDesc returns the long desc.
 func (die *DOMHTMLImageElement) LongDesc() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("longDesc"))
 	if _r == 0 {
 		return ""
@@ -295,6 +305,7 @@ func (die *DOMHTMLImageElement) LongDesc() string {
 
 // Src returns the src.
 func (die *DOMHTMLImageElement) Src() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("src"))
 	if _r == 0 {
 		return ""
@@ -304,6 +315,7 @@ func (die *DOMHTMLImageElement) Src() string {
 
 // UseMap returns the use map.
 func (die *DOMHTMLImageElement) UseMap() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("useMap"))
 	if _r == 0 {
 		return ""
@@ -313,24 +325,28 @@ func (die *DOMHTMLImageElement) UseMap() string {
 
 // Vspace returns the vspace.
 func (die *DOMHTMLImageElement) Vspace() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("vspace"))
 	return _r
 }
 
 // Width returns the width.
 func (die *DOMHTMLImageElement) Width() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("width"))
 	return _r
 }
 
 // Complete wraps the corresponding Objective-C method.
 func (die *DOMHTMLImageElement) Complete() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("complete"))
 	return _r
 }
 
 // Lowsrc returns the lowsrc.
 func (die *DOMHTMLImageElement) Lowsrc() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("lowsrc"))
 	if _r == 0 {
 		return ""
@@ -340,30 +356,35 @@ func (die *DOMHTMLImageElement) Lowsrc() string {
 
 // NaturalHeight returns the natural height.
 func (die *DOMHTMLImageElement) NaturalHeight() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("naturalHeight"))
 	return _r
 }
 
 // NaturalWidth returns the natural width.
 func (die *DOMHTMLImageElement) NaturalWidth() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("naturalWidth"))
 	return _r
 }
 
 // X returns the x.
 func (die *DOMHTMLImageElement) X() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("x"))
 	return _r
 }
 
 // Y returns the y.
 func (die *DOMHTMLImageElement) Y() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("y"))
 	return _r
 }
 
 // AltDisplayString returns the alt display string.
 func (die *DOMHTMLImageElement) AltDisplayString() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("altDisplayString"))
 	if _r == 0 {
 		return ""
@@ -372,9 +393,10 @@ func (die *DOMHTMLImageElement) AltDisplayString() string {
 }
 
 // AbsoluteImageURL returns the absolute image URL.
-func (die *DOMHTMLImageElement) AbsoluteImageURL() obj.Object {
+func (die *DOMHTMLImageElement) AbsoluteImageURL() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("absoluteImageURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ DOMHTMLElementProvider = (*DOMHTMLImageElement)(nil)

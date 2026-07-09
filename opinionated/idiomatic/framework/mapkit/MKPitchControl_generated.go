@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pitchControlAdopt(id objc.ID) *PitchControl {
 
 // Description returns the object's -description text.
 func (pc *PitchControl) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PitchControl) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PitchControl) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PitchControl) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -80,6 +87,7 @@ func NewPitchControl() *PitchControl {
 
 // WithMapView sets the map view associated with this control.
 func (pc *PitchControl) WithMapView(mapView *MapView) *PitchControl {
+	defer runtime.KeepAlive(mapView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	})
@@ -88,6 +96,7 @@ func (pc *PitchControl) WithMapView(mapView *MapView) *PitchControl {
 
 // MapView returns the map view.
 func (pc *PitchControl) MapView() *MapView {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 *MapView
 	purego.Main(func() {
 		_mainthread0 = func() *MapView {

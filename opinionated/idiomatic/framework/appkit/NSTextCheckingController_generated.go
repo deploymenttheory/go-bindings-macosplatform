@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func textCheckingControllerAdopt(id objc.ID) *TextCheckingController {
 
 // Description returns the object's -description text.
 func (tcc *TextCheckingController) Description() string {
+	defer runtime.KeepAlive(tcc)
 	return rt.Description(objref.IDOf(tcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tcc *TextCheckingController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tcc *TextCheckingController) IsKind(className string) bool {
+	defer runtime.KeepAlive(tcc)
 	return rt.IsKind(objref.IDOf(tcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tcc *TextCheckingController) String() string {
+	defer runtime.KeepAlive(tcc)
 	return rt.Description(objref.IDOf(tcc))
 }
 
@@ -79,71 +86,93 @@ func (tcc *TextCheckingController) WithSpellCheckerDocumentTag(spellCheckerDocum
 
 // Invalidate wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) Invalidate() {
+	defer runtime.KeepAlive(tcc)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("invalidate"))
 }
 
 // DidChangeTextInRange wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) DidChangeTextInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(tcc)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("didChangeTextInRange:"), range_)
 }
 
 // InsertedTextInRange wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) InsertedTextInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(tcc)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("insertedTextInRange:"), range_)
 }
 
 // DidChangeSelectedRange wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) DidChangeSelectedRange() {
+	defer runtime.KeepAlive(tcc)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("didChangeSelectedRange"))
 }
 
 // ConsiderTextCheckingForRange wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) ConsiderTextCheckingForRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(tcc)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("considerTextCheckingForRange:"), range_)
 }
 
 // CheckTextInRangeTypesOptions wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("checkTextInRange:types:options:"), range_, checkingTypes, objref.IDOf(options))
 }
 
 // CheckTextInSelection wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) CheckTextInSelection(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("checkTextInSelection:"), objref.IDOf(sender))
 }
 
 // CheckTextInDocument wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) CheckTextInDocument(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("checkTextInDocument:"), objref.IDOf(sender))
 }
 
 // OrderFrontSubstitutionsPanel wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) OrderFrontSubstitutionsPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("orderFrontSubstitutionsPanel:"), objref.IDOf(sender))
 }
 
 // CheckSpelling wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) CheckSpelling(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 }
 
 // ShowGuessPanel shows guess panel.
 func (tcc *TextCheckingController) ShowGuessPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 }
 
 // ChangeSpelling wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) ChangeSpelling(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("changeSpelling:"), objref.IDOf(sender))
 }
 
 // IgnoreSpelling wraps the corresponding Objective-C method.
 func (tcc *TextCheckingController) IgnoreSpelling(sender obj.Object) {
+	defer runtime.KeepAlive(tcc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("ignoreSpelling:"), objref.IDOf(sender))
 }
 
 // UpdateCandidates updates candidates.
 func (tcc *TextCheckingController) UpdateCandidates() {
+	defer runtime.KeepAlive(tcc)
 	objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("updateCandidates"))
 }
 
@@ -151,12 +180,14 @@ func (tcc *TextCheckingController) UpdateCandidates() {
 //
 // ValidAnnotations returns the collection as a Go slice.
 func (tcc *TextCheckingController) ValidAnnotations() []obj.Object {
+	defer runtime.KeepAlive(tcc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tcc), objc.RegisterName("validAnnotations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SpellCheckerDocumentTag returns the spell checker document tag.
 func (tcc *TextCheckingController) SpellCheckerDocumentTag() int {
+	defer runtime.KeepAlive(tcc)
 	_r := objc.Send[int](objref.IDOf(tcc), objc.RegisterName("spellCheckerDocumentTag"))
 	return _r
 }

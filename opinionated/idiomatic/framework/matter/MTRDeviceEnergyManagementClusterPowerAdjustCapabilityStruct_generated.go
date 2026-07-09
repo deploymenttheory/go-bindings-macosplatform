@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Description() string {
+	defer runtime.KeepAlive(mdemcpacs)
 	return rt.Description(objref.IDOf(mdemcpacs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcpacs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcpacs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcpacs)
 	return rt.IsKind(objref.IDOf(mdemcpacs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) String() string {
+	defer runtime.KeepAlive(mdemcpacs)
 	return rt.Description(objref.IDOf(mdemcpacs))
 }
 
@@ -72,23 +80,28 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct() *MTRDevice
 
 // WithCause sets the cause.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct {
+	defer runtime.KeepAlive(cause)
 	objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcpacs
 }
 
 // PowerAdjustCapability returns the power adjust capability.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) PowerAdjustCapability() obj.Object {
+	defer runtime.KeepAlive(mdemcpacs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("powerAdjustCapability"))
 	return obj.Wrap(_r)
 }
 
 // SetPowerAdjustCapability wraps the corresponding Objective-C method.
 func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAdjustCapability(powerAdjustCapability obj.Object) {
+	defer runtime.KeepAlive(mdemcpacs)
+	defer runtime.KeepAlive(powerAdjustCapability)
 	objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("setPowerAdjustCapability:"), objref.IDOf(powerAdjustCapability))
 }
 
 // Cause returns the cause.
-func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() obj.Object {
+func (mdemcpacs *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpacs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpacs), objc.RegisterName("cause"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

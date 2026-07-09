@@ -6,6 +6,8 @@ package healthkit
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,34 +53,45 @@ func quantitySeriesSampleBuilderAdopt(id objc.ID) *QuantitySeriesSampleBuilder {
 
 // Description returns the object's -description text.
 func (qssb *QuantitySeriesSampleBuilder) Description() string {
+	defer runtime.KeepAlive(qssb)
 	return rt.Description(objref.IDOf(qssb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qssb *QuantitySeriesSampleBuilder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qssb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qssb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qssb *QuantitySeriesSampleBuilder) IsKind(className string) bool {
+	defer runtime.KeepAlive(qssb)
 	return rt.IsKind(objref.IDOf(qssb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qssb *QuantitySeriesSampleBuilder) String() string {
+	defer runtime.KeepAlive(qssb)
 	return rt.Description(objref.IDOf(qssb))
 }
 
 // NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice creates a new quantity series builder.
-func NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice(healthStore *HealthStore, quantityType *QuantityType, startDate obj.Object, device *Device) *QuantitySeriesSampleBuilder {
+func NewQuantitySeriesSampleBuilderWithHealthStoreQuantityTypeStartDateDevice(healthStore *HealthStore, quantityType *QuantityType, startDate time.Time, device *Device) *QuantitySeriesSampleBuilder {
+	defer runtime.KeepAlive(healthStore)
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQuantitySeriesSampleBuilder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:quantityType:startDate:device:"), objref.IDOf(healthStore), objref.IDOf(quantityType), objref.IDOf(startDate), objref.IDOf(device))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:quantityType:startDate:device:"), objref.IDOf(healthStore), objref.IDOf(quantityType), rt.TimeToNSDate(startDate), objref.IDOf(device))
 	return quantitySeriesSampleBuilderAdopt(_id)
 }
 
 // InsertQuantityDateInterval adds a new quantity to the series with the provided date interval.
 func (qssb *QuantitySeriesSampleBuilder) InsertQuantityDateInterval(quantity *Quantity, dateInterval obj.Object) error {
+	defer runtime.KeepAlive(qssb)
+	defer runtime.KeepAlive(quantity)
+	defer runtime.KeepAlive(dateInterval)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(qssb), objc.RegisterName("insertQuantity:dateInterval:error:"), objref.IDOf(quantity), objref.IDOf(dateInterval), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -88,9 +101,11 @@ func (qssb *QuantitySeriesSampleBuilder) InsertQuantityDateInterval(quantity *Qu
 }
 
 // InsertQuantityDate adds a new quantity to the series at the provided date and time.
-func (qssb *QuantitySeriesSampleBuilder) InsertQuantityDate(quantity *Quantity, date obj.Object) error {
+func (qssb *QuantitySeriesSampleBuilder) InsertQuantityDate(quantity *Quantity, date time.Time) error {
+	defer runtime.KeepAlive(qssb)
+	defer runtime.KeepAlive(quantity)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(qssb), objc.RegisterName("insertQuantity:date:error:"), objref.IDOf(quantity), objref.IDOf(date), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(qssb), objc.RegisterName("insertQuantity:date:error:"), objref.IDOf(quantity), rt.TimeToNSDate(date), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -100,7 +115,8 @@ func (qssb *QuantitySeriesSampleBuilder) InsertQuantityDate(quantity *Quantity, 
 // FinishSeriesWithMetadataEndDateCompletion finalizes the series with the provided end date, and returns the resulting quantity samples.
 //
 // FinishSeriesWithMetadataEndDateCompletion blocks until the operation completes or ctx is cancelled.
-func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata obj.Object, endDate obj.Object) (result obj.Object, err error) {
+func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompletion(ctx context.Context, metadata map[string]obj.Object, endDate time.Time) (result obj.Object, err error) {
+	defer runtime.KeepAlive(qssb)
 	type _result struct {
 		val obj.Object
 		err error
@@ -112,7 +128,7 @@ func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("finishSeriesWithMetadata:endDate:completion:"), objref.IDOf(metadata), objref.IDOf(endDate), _block)
+	objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("finishSeriesWithMetadata:endDate:completion:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.TimeToNSDate(endDate), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -125,7 +141,8 @@ func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataEndDateCompleti
 // FinishSeriesWithMetadataCompletion finalizes the series and returns the resulting quantity samples.
 //
 // FinishSeriesWithMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx context.Context, metadata obj.Object) (result obj.Object, err error) {
+func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx context.Context, metadata map[string]obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(qssb)
 	type _result struct {
 		val obj.Object
 		err error
@@ -137,7 +154,7 @@ func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("finishSeriesWithMetadata:completion:"), objref.IDOf(metadata), _block)
+	objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("finishSeriesWithMetadata:completion:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -149,23 +166,27 @@ func (qssb *QuantitySeriesSampleBuilder) FinishSeriesWithMetadataCompletion(ctx 
 
 // Discard discards all previously collected data and invalidates the builder.
 func (qssb *QuantitySeriesSampleBuilder) Discard() {
+	defer runtime.KeepAlive(qssb)
 	objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("discard"))
 }
 
 // QuantityType returns the quantity type.
 func (qssb *QuantitySeriesSampleBuilder) QuantityType() *QuantityType {
+	defer runtime.KeepAlive(qssb)
 	_r := objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
 // StartDate returns the start date.
-func (qssb *QuantitySeriesSampleBuilder) StartDate() obj.Object {
+func (qssb *QuantitySeriesSampleBuilder) StartDate() time.Time {
+	defer runtime.KeepAlive(qssb)
 	_r := objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Device returns the device.
 func (qssb *QuantitySeriesSampleBuilder) Device() *Device {
+	defer runtime.KeepAlive(qssb)
 	_r := objc.Send[objc.ID](objref.IDOf(qssb), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }

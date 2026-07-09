@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accessibilityCustomRotorAdopt(id objc.ID) *AccessibilityCustomRotor {
 
 // Description returns the object's -description text.
 func (acr *AccessibilityCustomRotor) Description() string {
+	defer runtime.KeepAlive(acr)
 	return rt.Description(objref.IDOf(acr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (acr *AccessibilityCustomRotor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(acr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(acr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (acr *AccessibilityCustomRotor) IsKind(className string) bool {
+	defer runtime.KeepAlive(acr)
 	return rt.IsKind(objref.IDOf(acr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (acr *AccessibilityCustomRotor) String() string {
+	defer runtime.KeepAlive(acr)
 	return rt.Description(objref.IDOf(acr))
 }
 
@@ -86,12 +93,14 @@ func (acr *AccessibilityCustomRotor) WithLabel(label string) *AccessibilityCusto
 
 // Type returns the rotor type to provide results for.
 func (acr *AccessibilityCustomRotor) Type() AccessibilityCustomRotorType {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[AccessibilityCustomRotorType](objref.IDOf(acr), objc.RegisterName("type"))
 	return _r
 }
 
 // Label returns the localized label assistive technologies will use to describe the custom rotor.
 func (acr *AccessibilityCustomRotor) Label() string {
+	defer runtime.KeepAlive(acr)
 	_r := objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

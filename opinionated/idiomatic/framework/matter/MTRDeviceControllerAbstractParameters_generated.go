@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTRDeviceControllerAbstractParametersAdopt(id objc.ID) *MTRDeviceController
 
 // Description returns the object's -description text.
 func (mdcap *MTRDeviceControllerAbstractParameters) Description() string {
+	defer runtime.KeepAlive(mdcap)
 	return rt.Description(objref.IDOf(mdcap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdcap *MTRDeviceControllerAbstractParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdcap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdcap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdcap *MTRDeviceControllerAbstractParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdcap)
 	return rt.IsKind(objref.IDOf(mdcap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdcap *MTRDeviceControllerAbstractParameters) String() string {
+	defer runtime.KeepAlive(mdcap)
 	return rt.Description(objref.IDOf(mdcap))
 }
 
@@ -74,6 +81,7 @@ func (mdcap *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSusp
 
 // StartSuspended wraps the corresponding Objective-C method.
 func (mdcap *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
+	defer runtime.KeepAlive(mdcap)
 	_r := objc.Send[bool](objref.IDOf(mdcap), objc.RegisterName("startSuspended"))
 	return _r
 }

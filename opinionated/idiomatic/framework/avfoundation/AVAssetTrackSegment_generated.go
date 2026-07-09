@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,33 +52,40 @@ func assetTrackSegmentAdopt(id objc.ID) *AssetTrackSegment {
 
 // Description returns the object's -description text.
 func (ats *AssetTrackSegment) Description() string {
+	defer runtime.KeepAlive(ats)
 	return rt.Description(objref.IDOf(ats))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ats *AssetTrackSegment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ats)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ats), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ats *AssetTrackSegment) IsKind(className string) bool {
+	defer runtime.KeepAlive(ats)
 	return rt.IsKind(objref.IDOf(ats), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ats *AssetTrackSegment) String() string {
+	defer runtime.KeepAlive(ats)
 	return rt.Description(objref.IDOf(ats))
 }
 
 // TimeMapping returns the time mapping.
 func (ats *AssetTrackSegment) TimeMapping() coremedia.CMTimeMapping {
+	defer runtime.KeepAlive(ats)
 	_r := objc.Send[coremedia.CMTimeMapping](objref.IDOf(ats), objc.RegisterName("timeMapping"))
 	return _r
 }
 
 // IsEmpty reports whether the object is empty.
 func (ats *AssetTrackSegment) IsEmpty() bool {
+	defer runtime.KeepAlive(ats)
 	_r := objc.Send[bool](objref.IDOf(ats), objc.RegisterName("isEmpty"))
 	return _r
 }

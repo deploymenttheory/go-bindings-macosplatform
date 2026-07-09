@@ -10,6 +10,6 @@ type ClBufferRegion struct {
 }
 
 type ClImageFormat struct {
-	Image_channel_order     uint32
-	Image_channel_data_type uint32
+	ImageChannelOrder    uint32
+	ImageChannelDataType uint32
 }

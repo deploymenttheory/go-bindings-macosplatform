@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +52,27 @@ func scoreAdopt(id objc.ID) *Score {
 
 // Description returns the object's -description text.
 func (s *Score) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Score) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Score) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Score) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -78,6 +85,7 @@ func NewScoreWithLeaderboardIdentifier(identifier string) *Score {
 
 // NewScoreWithLeaderboardIdentifierPlayer returns an initialized score object for the specified leaderboard and player.
 func NewScoreWithLeaderboardIdentifierPlayer(identifier string, player *Player) *Score {
+	defer runtime.KeepAlive(player)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardIdentifier:player:"), purego.NSString(identifier), objref.IDOf(player))
 	return scoreAdopt(_id)
@@ -129,12 +137,14 @@ func (s *Score) WithCategory(category string) *Score {
 
 // Value returns the score value as a 64bit integer.
 func (s *Score) Value() int64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int64](objref.IDOf(s), objc.RegisterName("value"))
 	return _r
 }
 
 // FormattedValue returns the score formatted as a string, localized with a label
 func (s *Score) FormattedValue() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("formattedValue"))
 	if _r == 0 {
 		return ""
@@ -144,6 +154,7 @@ func (s *Score) FormattedValue() string {
 
 // LeaderboardIdentifier returns leaderboard identifier (required)
 func (s *Score) LeaderboardIdentifier() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("leaderboardIdentifier"))
 	if _r == 0 {
 		return ""
@@ -153,30 +164,35 @@ func (s *Score) LeaderboardIdentifier() string {
 
 // Context returns optional additional context that allows a game to store and retrieve additional data associated with the store.  Default value of zero is returned if no value is set.
 func (s *Score) Context() uint64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[uint64](objref.IDOf(s), objc.RegisterName("context"))
 	return _r
 }
 
 // Date returns the date this score was recorded. A newly initialized, unsubmitted GKScore records the current date at init time.
-func (s *Score) Date() obj.Object {
+func (s *Score) Date() time.Time {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Player returns the player that recorded the score.
 func (s *Score) Player() *Player {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // Rank returns the rank of the player within the leaderboard, only valid when returned from GKLeaderboard
 func (s *Score) Rank() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("rank"))
 	return _r
 }
 
 // ShouldSetDefaultLeaderboard reports whether convenience property to make the leaderboard associated with this GKScore, the default leaderboard for this player. Default value is false. If true, reporting that score will make the category this score belongs to, the default leaderboard for this user
 func (s *Score) ShouldSetDefaultLeaderboard() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("shouldSetDefaultLeaderboard"))
 	return _r
 }
@@ -185,6 +201,7 @@ func (s *Score) ShouldSetDefaultLeaderboard() bool {
 //
 // ReportScore blocks until the operation completes or ctx is cancelled.
 func (s *Score) ReportScore(ctx context.Context) error {
+	defer runtime.KeepAlive(s)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -202,6 +219,7 @@ func (s *Score) ReportScore(ctx context.Context) error {
 
 // Category returns the category.
 func (s *Score) Category() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
@@ -211,6 +229,7 @@ func (s *Score) Category() string {
 
 // PlayerID returns the player ID.
 func (s *Score) PlayerID() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
@@ -220,5 +239,6 @@ func (s *Score) PlayerID() string {
 
 // IssueChallengeToPlayersMessage issues a score challenge to a set of players.
 func (s *Score) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }

@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func challengeDefinitionAdopt(id objc.ID) *ChallengeDefinition {
 
 // Description returns the object's -description text.
 func (cd *ChallengeDefinition) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *ChallengeDefinition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *ChallengeDefinition) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *ChallengeDefinition) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
@@ -74,6 +81,7 @@ func NewChallengeDefinition() *ChallengeDefinition {
 
 // Identifier returns the developer defined identifier for a given challenge definition.
 func (cd *ChallengeDefinition) Identifier() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (cd *ChallengeDefinition) Identifier() string {
 
 // GroupIdentifier returns the group identifier for the challenge definition, if one exists.
 func (cd *ChallengeDefinition) GroupIdentifier() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (cd *ChallengeDefinition) GroupIdentifier() string {
 
 // Title returns a short title for the challenge definition.
 func (cd *ChallengeDefinition) Title() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -101,6 +111,7 @@ func (cd *ChallengeDefinition) Title() string {
 
 // Details returns a more detailed description of the challenge definition.
 func (cd *ChallengeDefinition) Details() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("details"))
 	if _r == 0 {
 		return ""
@@ -112,24 +123,28 @@ func (cd *ChallengeDefinition) Details() string {
 //
 // DurationOptions returns the collection as a Go slice.
 func (cd *ChallengeDefinition) DurationOptions() []obj.Object {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("durationOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsRepeatable reports whether indicates if a challenge can be attempted more than once.
 func (cd *ChallengeDefinition) IsRepeatable() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isRepeatable"))
 	return _r
 }
 
 // Leaderboard returns scores submitted to this leaderboard will also be submitted as scores in this challenge.
 func (cd *ChallengeDefinition) Leaderboard() *Leaderboard {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("leaderboard"))
 	return LeaderboardFromID(_r)
 }
 
 // ReleaseState returns the release state of the challenge definition in App Store Connect.
 func (cd *ChallengeDefinition) ReleaseState() ReleaseState {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[ReleaseState](objref.IDOf(cd), objc.RegisterName("releaseState"))
 	return _r
 }

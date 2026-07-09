@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -28,12 +29,16 @@ func CanExportFileExtension(extension string) bool {
 
 // LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap creates a light probe representing the shading environment at a specific point in a scene.
 func LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize int, transform *Transform, lightsToConsider []*Light, objectsToConsider []*Object, reflectiveCubemap *Texture, irradianceCubemap *Texture) *LightProbe {
+	defer runtime.KeepAlive(transform)
+	defer runtime.KeepAlive(reflectiveCubemap)
+	defer runtime.KeepAlive(irradianceCubemap)
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLLightProbe")), objc.RegisterName("lightProbeWithTextureSize:forLocation:lightsToConsider:objectsToConsider:reflectiveCubemap:irradianceCubemap:"), textureSize, objref.IDOf(transform), purego.SliceToNSArray(lightsToConsider, func(_v *Light) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reflectiveCubemap), objref.IDOf(irradianceCubemap))
 	return LightProbeFromID(_r)
 }
 
 // NewSubdividedMeshSubmeshIndexSubdivisionLevels creates a new mesh by subdividing the specified mesh.
 func NewSubdividedMeshSubmeshIndexSubdivisionLevels(mesh *Mesh, submeshIndex int, subdivisionLevels int) *Mesh {
+	defer runtime.KeepAlive(mesh)
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLMesh")), objc.RegisterName("newSubdividedMesh:submeshIndex:subdivisionLevels:"), objref.IDOf(mesh), submeshIndex, subdivisionLevels)
 	return MeshFromID(_r)
 }
@@ -46,6 +51,7 @@ func TextureNamed(name string) *Texture {
 
 // TextureNamedBundle loads the texture with the specified filename from the specified bundle.
 func TextureNamedBundle(name string, bundleOrNil obj.Object) *Texture {
+	defer runtime.KeepAlive(bundleOrNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureNamed:bundle:"), purego.NSString(name), objref.IDOf(bundleOrNil))
 	return TextureFromID(_r)
 }
@@ -58,18 +64,21 @@ func TextureCubeWithImagesNamed(names []string) *Texture {
 
 // TextureCubeWithImagesNamedBundle loads a cube texture from the specified image files in the specified bundle.
 func TextureCubeWithImagesNamedBundle(names []string, bundleOrNil obj.Object) *Texture {
+	defer runtime.KeepAlive(bundleOrNil)
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureCubeWithImagesNamed:bundle:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(bundleOrNil))
 	return TextureFromID(_r)
 }
 
 // IrradianceTextureCubeWithTextureNameDimensions generates an irradiance texture from the specified reflectance cube texture.
 func IrradianceTextureCubeWithTextureNameDimensions(texture *Texture, name string, dimensions unsafe.Pointer) *Texture {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:"), objref.IDOf(texture), purego.NSString(name), dimensions)
 	return TextureFromID(_r)
 }
 
 // IrradianceTextureCubeWithTextureNameDimensionsRoughness generates an irradiance texture from the specified reflectance cube texture, assuming a surface of the specified roughness.
 func IrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *Texture, name string, dimensions unsafe.Pointer, roughness float32) *Texture {
+	defer runtime.KeepAlive(texture)
 	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("irradianceTextureCubeWithTexture:name:dimensions:roughness:"), objref.IDOf(texture), purego.NSString(name), dimensions, roughness)
 	return TextureFromID(_r)
 }

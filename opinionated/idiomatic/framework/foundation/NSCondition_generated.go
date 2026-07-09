@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func conditionAdopt(id objc.ID) *Condition {
 
 // Description returns the object's -description text.
 func (c *Condition) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Condition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Condition) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Condition) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -76,6 +83,7 @@ func NewCondition() *Condition {
 
 // WithName sets the name of the condition.
 func (c *Condition) WithName(name StringProvider) *Condition {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), objref.IDOf(name))
 	return c
 }
@@ -87,34 +95,39 @@ func (c *Condition) WithObservationInfo(observationInfo unsafe.Pointer) *Conditi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (c *Condition) WithScriptingProperties(scriptingProperties obj.Object) *Condition {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (c *Condition) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Condition {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return c
 }
 
 // Wait blocks the current thread until the condition is signaled.
 func (c *Condition) Wait() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("wait"))
 }
 
 // WaitUntilDate blocks the current thread until the condition is signaled or the specified time limit is reached.
-func (c *Condition) WaitUntilDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("waitUntilDate:"), objref.IDOf(limit))
+func (c *Condition) WaitUntilDate(limit time.Time) bool {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("waitUntilDate:"), rt.TimeToNSDate(limit))
 	return _r
 }
 
 // Signal signals the condition, waking up one thread waiting on it.
 func (c *Condition) Signal() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("signal"))
 }
 
 // Broadcast signals the condition, waking up all threads waiting on it.
 func (c *Condition) Broadcast() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("broadcast"))
 }
 
 // Name returns the name.
 func (c *Condition) Name() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

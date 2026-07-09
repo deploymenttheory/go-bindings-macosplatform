@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewBatchDeleteResult() *BatchDeleteResult {
 
 // Result returns the result.
 func (bdr *BatchDeleteResult) Result() obj.Object {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType returns the result type.
 func (bdr *BatchDeleteResult) ResultType() BatchDeleteRequestResultType {
+	defer runtime.KeepAlive(bdr)
 	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(bdr), objc.RegisterName("resultType"))
 	return _r
 }

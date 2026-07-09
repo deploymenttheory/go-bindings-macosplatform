@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func webDataSourceAdopt(id objc.ID) *WebDataSource {
 
 // Description returns the object's -description text.
 func (wds *WebDataSource) Description() string {
+	defer runtime.KeepAlive(wds)
 	return rt.Description(objref.IDOf(wds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wds *WebDataSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wds *WebDataSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(wds)
 	return rt.IsKind(objref.IDOf(wds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wds *WebDataSource) String() string {
+	defer runtime.KeepAlive(wds)
 	return rt.Description(objref.IDOf(wds))
 }
 
@@ -74,48 +82,57 @@ func NewWebDataSource() *WebDataSource {
 
 // NewWebDataSourceWithRequest initializes a data source with a URL request.
 func NewWebDataSourceWithRequest(request obj.Object) *WebDataSource {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("WebDataSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return webDataSourceAdopt(_id)
 }
 
 // SubresourceForURL returns a subresource for the given URL.
-func (wds *WebDataSource) SubresourceForURL(uRL string) *WebResource {
-	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("subresourceForURL:"), rt.FileURL(uRL))
+func (wds *WebDataSource) SubresourceForURL(url string) *WebResource {
+	defer runtime.KeepAlive(wds)
+	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("subresourceForURL:"), rt.FileURL(url))
 	return WebResourceFromID(_r)
 }
 
 // AddSubresource adds a resource to the data source’s list of subresources.
 func (wds *WebDataSource) AddSubresource(subresource *WebResource) {
+	defer runtime.KeepAlive(wds)
+	defer runtime.KeepAlive(subresource)
 	objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("addSubresource:"), objref.IDOf(subresource))
 }
 
 // Data returns the raw data associated with the datasource.  Returns nil if the datasource hasn't loaded any data. The data will be incomplete until the datasource has completely loaded.
-func (wds *WebDataSource) Data() obj.Object {
+func (wds *WebDataSource) Data() []byte {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // WebFrame returns the frame that represents this data source.
 func (wds *WebDataSource) WebFrame() *WebFrame {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("webFrame"))
 	return WebFrameFromID(_r)
 }
 
 // Request returns the request that was used to create this datasource.
-func (wds *WebDataSource) Request() obj.Object {
+func (wds *WebDataSource) Request() *foundation.MutableURLRequest {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("request"))
-	return obj.Wrap(_r)
+	return foundation.MutableURLRequestFromID(_r)
 }
 
 // Response returns the NSURLResponse for the data source.
-func (wds *WebDataSource) Response() obj.Object {
+func (wds *WebDataSource) Response() *foundation.URLResponse {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("response"))
-	return obj.Wrap(_r)
+	return foundation.URLResponseFromID(_r)
 }
 
 // TextEncodingName returns either the override encoding, as set on the WebView for this dataSource or the encoding from the response.
 func (wds *WebDataSource) TextEncodingName() string {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("textEncodingName"))
 	if _r == 0 {
 		return ""
@@ -125,12 +142,14 @@ func (wds *WebDataSource) TextEncodingName() string {
 
 // IsLoading reports whether there are any pending loads.
 func (wds *WebDataSource) IsLoading() bool {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[bool](objref.IDOf(wds), objc.RegisterName("isLoading"))
 	return _r
 }
 
 // PageTitle returns the page title or nil.
 func (wds *WebDataSource) PageTitle() string {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("pageTitle"))
 	if _r == 0 {
 		return ""
@@ -139,25 +158,29 @@ func (wds *WebDataSource) PageTitle() string {
 }
 
 // UnreachableURL returns the unreachableURL for which this dataSource is showing alternate content, or nil. This will be non-nil only for dataSources created by calls to the WebFrame method loadAlternateHTMLString:baseURL:forUnreachableURL:.
-func (wds *WebDataSource) UnreachableURL() obj.Object {
+func (wds *WebDataSource) UnreachableURL() string {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("unreachableURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // WebArchive returns a WebArchive representing the data source, its subresources and child frames.
 func (wds *WebDataSource) WebArchive() *WebArchive {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("webArchive"))
 	return WebArchiveFromID(_r)
 }
 
 // MainResource returns a WebResource representing the data source.
 func (wds *WebDataSource) MainResource() *WebResource {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("mainResource"))
 	return WebResourceFromID(_r)
 }
 
 // Subresources returns all the subresources associated with the data source.
 func (wds *WebDataSource) Subresources() obj.Object {
+	defer runtime.KeepAlive(wds)
 	_r := objc.Send[objc.ID](objref.IDOf(wds), objc.RegisterName("subresources"))
 	return obj.Wrap(_r)
 }

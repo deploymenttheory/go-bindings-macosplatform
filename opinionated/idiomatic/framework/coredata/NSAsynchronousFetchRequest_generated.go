@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func asynchronousFetchRequestAdopt(id objc.ID) *AsynchronousFetchRequest {
 
 // NewAsynchronousFetchRequestWithFetchRequestCompletionBlock initializes a new asynchronous fetch request configured with the provided fetch request and completion block.
 func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request obj.Object, blk func(obj.Object)) *AsynchronousFetchRequest {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAsynchronousFetchRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:completionBlock:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { blk(obj.Wrap(_b0)) }))
 	return asynchronousFetchRequestAdopt(_id)
@@ -68,12 +71,14 @@ func (afr *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStore
 
 // FetchRequest returns the fetch request.
 func (afr *AsynchronousFetchRequest) FetchRequest() obj.Object {
+	defer runtime.KeepAlive(afr)
 	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
 // EstimatedResultCount returns the estimated result count.
 func (afr *AsynchronousFetchRequest) EstimatedResultCount() int {
+	defer runtime.KeepAlive(afr)
 	_r := objc.Send[int](objref.IDOf(afr), objc.RegisterName("estimatedResultCount"))
 	return _r
 }

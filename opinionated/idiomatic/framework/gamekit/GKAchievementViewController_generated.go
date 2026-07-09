@@ -7,6 +7,7 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,6 +56,30 @@ func NewAchievementViewController() *AchievementViewController {
 		}()
 	})
 	return _mainthread0
+}
+
+// WithAchievementDelegate sets the achievement view controller’s delegate.
+func (avc *AchievementViewController) WithAchievementDelegate(achievementDelegate AchievementViewControllerDelegate) *AchievementViewController {
+	_shim := newAchievementViewControllerDelegateShim(achievementDelegate)
+	_sel := objc.RegisterName("setAchievementDelegate:")
+	shim.Associate(objref.IDOf(avc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return avc
+}
+
+// WithGameCenterDelegate sets the view controller’s delegate.
+func (avc *AchievementViewController) WithGameCenterDelegate(gameCenterDelegate GameCenterControllerDelegate) *AchievementViewController {
+	_shim := newGameCenterControllerDelegateShim(gameCenterDelegate)
+	_sel := objc.RegisterName("setGameCenterDelegate:")
+	shim.Associate(objref.IDOf(avc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return avc
 }
 
 // WithViewState sets the view state.

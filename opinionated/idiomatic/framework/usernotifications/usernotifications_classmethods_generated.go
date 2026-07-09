@@ -5,6 +5,7 @@
 package usernotifications
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -17,6 +18,7 @@ import (
 
 // TriggerWithDateMatchingComponentsRepeats creates a calendar trigger using the date components parameter.
 func TriggerWithDateMatchingComponentsRepeats(dateComponents obj.Object, repeats bool) *CalendarNotificationTrigger {
+	defer runtime.KeepAlive(dateComponents)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNCalendarNotificationTrigger")), objc.RegisterName("triggerWithDateMatchingComponents:repeats:"), objref.IDOf(dateComponents), repeats)
 	return CalendarNotificationTriggerFromID(_r)
 }
@@ -29,6 +31,7 @@ func ActionWithIdentifierTitleOptions(identifier string, title string, options N
 
 // ActionWithIdentifierTitleOptionsIcon creates an action object by using the specified title, options, and icon.
 func ActionWithIdentifierTitleOptionsIcon(identifier string, title string, options NotificationActionOptions, icon *NotificationActionIcon) *NotificationAction {
+	defer runtime.KeepAlive(icon)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAction")), objc.RegisterName("actionWithIdentifier:title:options:icon:"), purego.NSString(identifier), purego.NSString(title), options, objref.IDOf(icon))
 	return NotificationActionFromID(_r)
 }
@@ -45,10 +48,11 @@ func IconWithSystemImageName(systemImageName string) *NotificationActionIcon {
 	return NotificationActionIconFromID(_r)
 }
 
-// AttachmentWithIdentifierURLOptionsError creates an attachment object from the specified file and options.
-func AttachmentWithIdentifierURLOptionsError(identifier string, uRL string, options obj.Object) (result *NotificationAttachment, err error) {
+// AttachmentWithIdentifierURLOptions creates an attachment object from the specified file and options.
+func AttachmentWithIdentifierURLOptions(identifier string, url string, options obj.Object) (result *NotificationAttachment, err error) {
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttachment")), objc.RegisterName("attachmentWithIdentifier:URL:options:error:"), purego.NSString(identifier), rt.FileURL(uRL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttachment")), objc.RegisterName("attachmentWithIdentifier:URL:options:error:"), purego.NSString(identifier), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -57,6 +61,8 @@ func AttachmentWithIdentifierURLOptionsError(identifier string, uRL string, opti
 
 // ContextWithSendMessageIntentAttributedContent wraps the corresponding Objective-C method.
 func ContextWithSendMessageIntentAttributedContent(sendMessageIntent obj.Object, attributedContent obj.Object) *NotificationAttributedMessageContext {
+	defer runtime.KeepAlive(sendMessageIntent)
+	defer runtime.KeepAlive(attributedContent)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttributedMessageContext")), objc.RegisterName("contextWithSendMessageIntent:attributedContent:"), objref.IDOf(sendMessageIntent), objref.IDOf(attributedContent))
 	return NotificationAttributedMessageContextFromID(_r)
 }
@@ -81,6 +87,8 @@ func CategoryWithIdentifierActionsIntentIdentifiersHiddenPreviewsBodyPlaceholder
 
 // RequestWithIdentifierContentTrigger creates a notification request object that you use to schedule a notification.
 func RequestWithIdentifierContentTrigger(identifier string, content *NotificationContent, trigger *NotificationTrigger) *NotificationRequest {
+	defer runtime.KeepAlive(content)
+	defer runtime.KeepAlive(trigger)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationRequest")), objc.RegisterName("requestWithIdentifier:content:trigger:"), purego.NSString(identifier), objref.IDOf(content), objref.IDOf(trigger))
 	return NotificationRequestFromID(_r)
 }
@@ -93,12 +101,14 @@ func DefaultCriticalSoundWithAudioVolume(volume float32) *NotificationSound {
 
 // SoundNamed creates a sound object that represents a custom sound file.
 func SoundNamed(name obj.Object) *NotificationSound {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("soundNamed:"), objref.IDOf(name))
 	return NotificationSoundFromID(_r)
 }
 
 // CriticalSoundNamedWithAudioVolume creates a custom sound object for critical alerts with the volume you specify.
 func CriticalSoundNamedWithAudioVolume(name obj.Object, volume float32) *NotificationSound {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNNotificationSound")), objc.RegisterName("criticalSoundNamed:withAudioVolume:"), objref.IDOf(name), volume)
 	return NotificationSoundFromID(_r)
 }
@@ -117,6 +127,7 @@ func ActionWithIdentifierTitleOptionsTextInputButtonTitleTextInputPlaceholder(id
 
 // ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder creates an action object with an icon that accepts text input from the user.
 func ActionWithIdentifierTitleOptionsIconTextInputButtonTitleTextInputPlaceholder(identifier string, title string, options NotificationActionOptions, icon *NotificationActionIcon, textInputButtonTitle string, textInputPlaceholder string) *TextInputNotificationAction {
+	defer runtime.KeepAlive(icon)
 	_r := objc.Send[objc.ID](objc.ID(_class("UNTextInputNotificationAction")), objc.RegisterName("actionWithIdentifier:title:options:icon:textInputButtonTitle:textInputPlaceholder:"), purego.NSString(identifier), purego.NSString(title), options, objref.IDOf(icon), purego.NSString(textInputButtonTitle), purego.NSString(textInputPlaceholder))
 	return TextInputNotificationActionFromID(_r)
 }

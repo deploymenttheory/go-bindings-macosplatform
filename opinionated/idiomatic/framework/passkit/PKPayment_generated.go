@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func paymentAdopt(id objc.ID) *Payment {
 
 // Description returns the object's -description text.
 func (p *Payment) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Payment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Payment) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Payment) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -74,24 +81,28 @@ func NewPayment() *Payment {
 
 // Token returns the token.
 func (p *Payment) Token() *PaymentToken {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("token"))
 	return PaymentTokenFromID(_r)
 }
 
 // BillingContact returns the billing contact.
 func (p *Payment) BillingContact() *Contact {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("billingContact"))
 	return ContactFromID(_r)
 }
 
 // ShippingContact returns the shipping contact.
 func (p *Payment) ShippingContact() *Contact {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("shippingContact"))
 	return ContactFromID(_r)
 }
 
 // ShippingMethod returns the shipping method.
 func (p *Payment) ShippingMethod() *ShippingMethod {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("shippingMethod"))
 	return ShippingMethodFromID(_r)
 }

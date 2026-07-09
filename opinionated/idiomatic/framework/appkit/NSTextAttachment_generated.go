@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,42 +51,48 @@ func textAttachmentAdopt(id objc.ID) *TextAttachment {
 
 // Description returns the object's -description text.
 func (ta *TextAttachment) Description() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ta *TextAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ta *TextAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(ta)
 	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ta *TextAttachment) String() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // NewTextAttachmentWithDataOfType creates a text attachment object with the specified data.
-func NewTextAttachmentWithDataOfType(contentData obj.Object, uti string) *TextAttachment {
+func NewTextAttachmentWithDataOfType(contentData []byte, uti string) *TextAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextAttachment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:ofType:"), objref.IDOf(contentData), purego.NSString(uti))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:ofType:"), rt.BytesToNSData(contentData), purego.NSString(uti))
 	return textAttachmentAdopt(_id)
 }
 
 // NewTextAttachmentWithFileWrapper creates a text attachment object to contain the specified file wrapper.
 func NewTextAttachmentWithFileWrapper(fileWrapper obj.Object) *TextAttachment {
+	defer runtime.KeepAlive(fileWrapper)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileWrapper:"), objref.IDOf(fileWrapper))
 	return textAttachmentAdopt(_id)
 }
 
 // WithContents sets the contents for the text attachment.
-func (ta *TextAttachment) WithContents(contents obj.Object) *TextAttachment {
-	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("setContents:"), objref.IDOf(contents))
+func (ta *TextAttachment) WithContents(contents []byte) *TextAttachment {
+	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("setContents:"), rt.BytesToNSData(contents))
 	return ta
 }
 
@@ -95,6 +104,7 @@ func (ta *TextAttachment) WithFileType(fileType string) *TextAttachment {
 
 // WithImage sets an instance of the relevant image class that represents the contents of the text attachment object.
 func (ta *TextAttachment) WithImage(image *Image) *TextAttachment {
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return ta
 }
@@ -107,6 +117,7 @@ func (ta *TextAttachment) WithBounds(bounds corefoundation.CGRect) *TextAttachme
 
 // WithFileWrapper sets the text attachment’s file wrapper.
 func (ta *TextAttachment) WithFileWrapper(fileWrapper obj.Object) *TextAttachment {
+	defer runtime.KeepAlive(fileWrapper)
 	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("setFileWrapper:"), objref.IDOf(fileWrapper))
 	return ta
 }
@@ -124,13 +135,15 @@ func (ta *TextAttachment) WithAllowsTextAttachmentView(allowsTextAttachmentView 
 }
 
 // Contents returns the contents.
-func (ta *TextAttachment) Contents() obj.Object {
+func (ta *TextAttachment) Contents() []byte {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("contents"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FileType returns the file type.
 func (ta *TextAttachment) FileType() string {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("fileType"))
 	if _r == 0 {
 		return ""
@@ -140,36 +153,42 @@ func (ta *TextAttachment) FileType() string {
 
 // Image returns the image.
 func (ta *TextAttachment) Image() *Image {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // Bounds returns the bounds.
 func (ta *TextAttachment) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ta), objc.RegisterName("bounds"))
 	return _r
 }
 
 // FileWrapper returns the file wrapper.
-func (ta *TextAttachment) FileWrapper() obj.Object {
+func (ta *TextAttachment) FileWrapper() *foundation.FileWrapper {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("fileWrapper"))
-	return obj.Wrap(_r)
+	return foundation.FileWrapperFromID(_r)
 }
 
 // LineLayoutPadding returns the line layout padding.
 func (ta *TextAttachment) LineLayoutPadding() float64 {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[float64](objref.IDOf(ta), objc.RegisterName("lineLayoutPadding"))
 	return _r
 }
 
 // AllowsTextAttachmentView wraps the corresponding Objective-C method.
 func (ta *TextAttachment) AllowsTextAttachmentView() bool {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[bool](objref.IDOf(ta), objc.RegisterName("allowsTextAttachmentView"))
 	return _r
 }
 
 // UsesTextAttachmentView wraps the corresponding Objective-C method.
 func (ta *TextAttachment) UsesTextAttachmentView() bool {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[bool](objref.IDOf(ta), objc.RegisterName("usesTextAttachmentView"))
 	return _r
 }

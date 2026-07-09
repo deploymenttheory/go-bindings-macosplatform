@@ -5,6 +5,7 @@
 package shazamkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func signatureGeneratorAdopt(id objc.ID) *SignatureGenerator {
 
 // Description returns the object's -description text.
 func (sg *SignatureGenerator) Description() string {
+	defer runtime.KeepAlive(sg)
 	return rt.Description(objref.IDOf(sg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sg *SignatureGenerator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sg *SignatureGenerator) IsKind(className string) bool {
+	defer runtime.KeepAlive(sg)
 	return rt.IsKind(objref.IDOf(sg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sg *SignatureGenerator) String() string {
+	defer runtime.KeepAlive(sg)
 	return rt.Description(objref.IDOf(sg))
 }
 
@@ -77,6 +83,9 @@ func NewSignatureGenerator() *SignatureGenerator {
 
 // AppendBufferAtTime adds audio to the generator.
 func (sg *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error {
+	defer runtime.KeepAlive(sg)
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(time_)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(sg), objc.RegisterName("appendBuffer:atTime:error:"), objref.IDOf(buffer), objref.IDOf(time_), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +96,7 @@ func (sg *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Ob
 
 // Signature returns converts the audio buffer into a signature.
 func (sg *SignatureGenerator) Signature() *Signature {
+	defer runtime.KeepAlive(sg)
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("signature"))
 	return SignatureFromID(_r)
 }

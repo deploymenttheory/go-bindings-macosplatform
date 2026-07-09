@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func materialAdopt(id objc.ID) *Material {
 
 // Description returns the object's -description text.
 func (m *Material) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Material) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Material) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Material) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // NewMaterialWithNameScatteringFunction initializes a material
 func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *ScatteringFunction) *Material {
+	defer runtime.KeepAlive(scatteringFunction)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterial")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:scatteringFunction:"), purego.NSString(name), objref.IDOf(scatteringFunction))
 	return materialAdopt(_id)
@@ -82,6 +90,7 @@ func (m *Material) WithName(name string) *Material {
 
 // WithBaseMaterial sets another material object from which this material’s properties are derived.
 func (m *Material) WithBaseMaterial(baseMaterial *Material) *Material {
+	defer runtime.KeepAlive(baseMaterial)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setBaseMaterial:"), objref.IDOf(baseMaterial))
 	return m
 }
@@ -94,39 +103,48 @@ func (m *Material) WithMaterialFace(materialFace MaterialFace) *Material {
 
 // SetProperty adds a new material property to or replaces an existing material property in the material.
 func (m *Material) SetProperty(property *MaterialProperty) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(property)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setProperty:"), objref.IDOf(property))
 }
 
 // RemoveProperty removes the specified material property from the material.
 func (m *Material) RemoveProperty(property *MaterialProperty) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(property)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeProperty:"), objref.IDOf(property))
 }
 
 // PropertyNamed returns the material property with the specified name.
 func (m *Material) PropertyNamed(name string) *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("propertyNamed:"), purego.NSString(name))
 	return MaterialPropertyFromID(_r)
 }
 
 // PropertyWithSemantic returns the material property for the specified material semantic.
 func (m *Material) PropertyWithSemantic(semantic MaterialSemantic) *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("propertyWithSemantic:"), semantic)
 	return MaterialPropertyFromID(_r)
 }
 
 // PropertiesWithSemantic returns the complete list of material properties that match the specified material semantic.
 func (m *Material) PropertiesWithSemantic(semantic MaterialSemantic) []*MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("propertiesWithSemantic:"), semantic)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
 
 // RemoveAllProperties removes all material properties from the material.
 func (m *Material) RemoveAllProperties() {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("removeAllProperties"))
 }
 
 // ObjectAtIndexedSubscript returns the material property at the specified index in the material, for use with subscript syntax.
 func (m *Material) ObjectAtIndexedSubscript(idx int) *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	errkit.CheckIndex(idx, m.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return MaterialPropertyFromID(_r)
@@ -134,18 +152,21 @@ func (m *Material) ObjectAtIndexedSubscript(idx int) *MaterialProperty {
 
 // ObjectForKeyedSubscript returns the material property with the specified name, for use with subscript syntax.
 func (m *Material) ObjectForKeyedSubscript(name string) *MaterialProperty {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(name))
 	return MaterialPropertyFromID(_r)
 }
 
 // ScatteringFunction returns the scattering function.
 func (m *Material) ScatteringFunction() *ScatteringFunction {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("scatteringFunction"))
 	return ScatteringFunctionFromID(_r)
 }
 
 // Name returns the name.
 func (m *Material) Name() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -155,18 +176,21 @@ func (m *Material) Name() string {
 
 // BaseMaterial returns the base material.
 func (m *Material) BaseMaterial() *Material {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("baseMaterial"))
 	return MaterialFromID(_r)
 }
 
 // Count returns the count.
 func (m *Material) Count() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("count"))
 	return _r
 }
 
 // MaterialFace returns the material face.
 func (m *Material) MaterialFace() MaterialFace {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[MaterialFace](objref.IDOf(m), objc.RegisterName("materialFace"))
 	return _r
 }

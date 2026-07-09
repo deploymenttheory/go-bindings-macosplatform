@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioSourceAdopt(id objc.ID) *AudioSource {
 
 // Description returns the object's -description text.
 func (as *AudioSource) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *AudioSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *AudioSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *AudioSource) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
@@ -118,41 +125,48 @@ func (as *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
 
 // Load loads audio data from the source and prepares it for playing.
 func (as *AudioSource) Load() {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("load"))
 }
 
 // IsPositional reports whether marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to true. shouldStream must be set to false in order to get positional audio (see shouldStream).
 func (as *AudioSource) IsPositional() bool {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isPositional"))
 	return _r
 }
 
 // Volume returns the default volume for this audio buffer. Default is 1.0 (full volume).
 func (as *AudioSource) Volume() float32 {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("volume"))
 	return _r
 }
 
 // Rate returns the default rate for this audio buffer. Default is 1.0 (original rate of the audio source).
 func (as *AudioSource) Rate() float32 {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("rate"))
 	return _r
 }
 
 // ReverbBlend returns the default reverbBlend for this audio buffer. Default is 0.0 (no sound is sent to the reverb).
 func (as *AudioSource) ReverbBlend() float32 {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("reverbBlend"))
 	return _r
 }
 
 // Loops reports whether the audio source should loop or not. Defaults to false.
 func (as *AudioSource) Loops() bool {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("loops"))
 	return _r
 }
 
 // ShouldStream reports whether the audio source should be streamed or not. Defaults to false.
 func (as *AudioSource) ShouldStream() bool {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("shouldStream"))
 	return _r
 }

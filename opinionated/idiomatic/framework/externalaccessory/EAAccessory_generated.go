@@ -5,6 +5,7 @@
 package externalaccessory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func accessoryAdopt(id objc.ID) *Accessory {
 
 // Description returns the object's -description text.
 func (a *Accessory) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Accessory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Accessory) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Accessory) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -82,18 +88,21 @@ func (a *Accessory) WithDelegate(delegate unsafe.Pointer) *Accessory {
 
 // IsConnected reports whether the object is connected.
 func (a *Accessory) IsConnected() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isConnected"))
 	return _r
 }
 
 // ConnectionID returns the connection ID.
 func (a *Accessory) ConnectionID() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("connectionID"))
 	return _r
 }
 
 // DockType returns the dock type.
 func (a *Accessory) DockType() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("dockType"))
 	if _r == 0 {
 		return ""

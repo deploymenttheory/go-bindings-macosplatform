@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func webAuthenticationSessionWebBrowserSessionManagerAdopt(id objc.ID) *WebAuthe
 
 // Description returns the object's -description text.
 func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) Description() string {
+	defer runtime.KeepAlive(waswbsm)
 	return rt.Description(objref.IDOf(waswbsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(waswbsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(waswbsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(waswbsm)
 	return rt.IsKind(objref.IDOf(waswbsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) String() string {
+	defer runtime.KeepAlive(waswbsm)
 	return rt.Description(objref.IDOf(waswbsm))
 }
 
@@ -74,6 +81,7 @@ func NewWebAuthenticationSessionWebBrowserSessionManager() *WebAuthenticationSes
 
 // WasLaunchedByAuthenticationServices wraps the corresponding Objective-C method.
 func (waswbsm *WebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthenticationServices() bool {
+	defer runtime.KeepAlive(waswbsm)
 	_r := objc.Send[bool](objref.IDOf(waswbsm), objc.RegisterName("wasLaunchedByAuthenticationServices"))
 	return _r
 }

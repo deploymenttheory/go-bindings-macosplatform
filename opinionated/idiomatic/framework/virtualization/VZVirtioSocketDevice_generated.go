@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -56,11 +57,14 @@ func NewVirtioSocketDevice() *VirtioSocketDevice {
 
 // SetSocketListenerForPort configures an object to monitor the specified port for new connections.
 func (vsd *VirtioSocketDevice) SetSocketListenerForPort(listener *VirtioSocketListener, port uint32) {
+	defer runtime.KeepAlive(vsd)
+	defer runtime.KeepAlive(listener)
 	objc.Send[objc.ID](objref.IDOf(vsd), objc.RegisterName("setSocketListener:forPort:"), objref.IDOf(listener), port)
 }
 
 // RemoveSocketListenerForPort removes the listener object from the specfied port.
 func (vsd *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
+	defer runtime.KeepAlive(vsd)
 	objc.Send[objc.ID](objref.IDOf(vsd), objc.RegisterName("removeSocketListenerForPort:"), port)
 }
 
@@ -68,6 +72,7 @@ func (vsd *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
 //
 // ConnectToPort blocks until the operation completes or ctx is cancelled.
 func (vsd *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (result *VirtioSocketConnection, err error) {
+	defer runtime.KeepAlive(vsd)
 	type _result struct {
 		val *VirtioSocketConnection
 		err error

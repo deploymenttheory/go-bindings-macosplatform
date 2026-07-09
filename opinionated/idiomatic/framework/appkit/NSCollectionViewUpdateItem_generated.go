@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func collectionViewUpdateItemAdopt(id objc.ID) *CollectionViewUpdateItem {
 
 // Description returns the object's -description text.
 func (cvui *CollectionViewUpdateItem) Description() string {
+	defer runtime.KeepAlive(cvui)
 	return rt.Description(objref.IDOf(cvui))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvui *CollectionViewUpdateItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvui)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvui), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvui *CollectionViewUpdateItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvui)
 	return rt.IsKind(objref.IDOf(cvui), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvui *CollectionViewUpdateItem) String() string {
+	defer runtime.KeepAlive(cvui)
 	return rt.Description(objref.IDOf(cvui))
 }
 
@@ -79,12 +87,13 @@ func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
 }
 
 // IndexPathBeforeUpdate returns the index path before update.
-func (cvui *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
-	var _mainthread0 obj.Object
+func (cvui *CollectionViewUpdateItem) IndexPathBeforeUpdate() *foundation.IndexPath {
+	defer runtime.KeepAlive(cvui)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathBeforeUpdate"))
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -92,12 +101,13 @@ func (cvui *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
 }
 
 // IndexPathAfterUpdate returns the index path after update.
-func (cvui *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
-	var _mainthread0 obj.Object
+func (cvui *CollectionViewUpdateItem) IndexPathAfterUpdate() *foundation.IndexPath {
+	defer runtime.KeepAlive(cvui)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathAfterUpdate"))
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -106,6 +116,7 @@ func (cvui *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
 
 // UpdateAction returns the update action.
 func (cvui *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
+	defer runtime.KeepAlive(cvui)
 	var _mainthread0 CollectionUpdateAction
 	purego.Main(func() {
 		_mainthread0 = func() CollectionUpdateAction {

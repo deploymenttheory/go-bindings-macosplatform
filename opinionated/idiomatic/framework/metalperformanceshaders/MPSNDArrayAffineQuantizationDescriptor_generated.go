@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -69,18 +71,21 @@ func (naaqd *NDArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicit
 
 // HasZeroPoint reports whether if yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
 func (naaqd *NDArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
+	defer runtime.KeepAlive(naaqd)
 	_r := objc.Send[bool](objref.IDOf(naaqd), objc.RegisterName("hasZeroPoint"))
 	return _r
 }
 
 // HasMinValue reports whether if yes then offset is used. See MPSNDArrayQuantizationScheme.
 func (naaqd *NDArrayAffineQuantizationDescriptor) HasMinValue() bool {
+	defer runtime.KeepAlive(naaqd)
 	_r := objc.Send[bool](objref.IDOf(naaqd), objc.RegisterName("hasMinValue"))
 	return _r
 }
 
 // ImplicitZeroPoint reports whether if true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
 func (naaqd *NDArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
+	defer runtime.KeepAlive(naaqd)
 	_r := objc.Send[bool](objref.IDOf(naaqd), objc.RegisterName("implicitZeroPoint"))
 	return _r
 }

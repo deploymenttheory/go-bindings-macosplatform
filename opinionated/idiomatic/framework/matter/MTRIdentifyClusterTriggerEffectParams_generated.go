@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRIdentifyClusterTriggerEffectParamsAdopt(id objc.ID) *MTRIdentifyClusterT
 
 // Description returns the object's -description text.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) Description() string {
+	defer runtime.KeepAlive(mictep)
 	return rt.Description(objref.IDOf(mictep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mictep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mictep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mictep)
 	return rt.IsKind(objref.IDOf(mictep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) String() string {
+	defer runtime.KeepAlive(mictep)
 	return rt.Description(objref.IDOf(mictep))
 }
 
@@ -72,48 +80,56 @@ func NewMTRIdentifyClusterTriggerEffectParams() *MTRIdentifyClusterTriggerEffect
 
 // WithEffectIdentifier sets the effect identifier.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) WithEffectIdentifier(effectIdentifier obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	defer runtime.KeepAlive(effectIdentifier)
 	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
 	return mictep
 }
 
 // WithEffectVariant sets the effect variant.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) WithEffectVariant(effectVariant obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	defer runtime.KeepAlive(effectVariant)
 	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
 	return mictep
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mictep
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRIdentifyClusterTriggerEffectParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mictep
 }
 
 // EffectIdentifier returns the effect identifier.
-func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectIdentifier() obj.Object {
+func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectIdentifier() *foundation.Number {
+	defer runtime.KeepAlive(mictep)
 	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("effectIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EffectVariant returns the effect variant.
-func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectVariant() obj.Object {
+func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectVariant() *foundation.Number {
+	defer runtime.KeepAlive(mictep)
 	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("effectVariant"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mictep *MTRIdentifyClusterTriggerEffectParams) TimedInvokeTimeoutMs() obj.Object {
+func (mictep *MTRIdentifyClusterTriggerEffectParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mictep)
 	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mictep *MTRIdentifyClusterTriggerEffectParams) ServerSideProcessingTimeout() obj.Object {
+func (mictep *MTRIdentifyClusterTriggerEffectParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mictep)
 	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,7 +5,10 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func contentSharingPickerAdopt(id objc.ID) *ContentSharingPicker {
 
 // Description returns the object's -description text.
 func (csp *ContentSharingPicker) Description() string {
+	defer runtime.KeepAlive(csp)
 	return rt.Description(objref.IDOf(csp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (csp *ContentSharingPicker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(csp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(csp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (csp *ContentSharingPicker) IsKind(className string) bool {
+	defer runtime.KeepAlive(csp)
 	return rt.IsKind(objref.IDOf(csp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (csp *ContentSharingPicker) String() string {
+	defer runtime.KeepAlive(csp)
 	return rt.Description(objref.IDOf(csp))
 }
 
@@ -74,12 +82,14 @@ func NewContentSharingPicker() *ContentSharingPicker {
 
 // WithDefaultConfiguration sets the default configuration to use for the content capture picker.
 func (csp *ContentSharingPicker) WithDefaultConfiguration(defaultConfiguration obj.Object) *ContentSharingPicker {
+	defer runtime.KeepAlive(defaultConfiguration)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setDefaultConfiguration:"), objref.IDOf(defaultConfiguration))
 	return csp
 }
 
 // WithMaximumStreamCount sets the maximum number of streams the content capture picker allows.
 func (csp *ContentSharingPicker) WithMaximumStreamCount(maximumStreamCount obj.Object) *ContentSharingPicker {
+	defer runtime.KeepAlive(maximumStreamCount)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setMaximumStreamCount:"), objref.IDOf(maximumStreamCount))
 	return csp
 }
@@ -92,43 +102,55 @@ func (csp *ContentSharingPicker) WithActive(active bool) *ContentSharingPicker {
 
 // SetConfigurationForStream sets the configuration for the content capture picker for a capture stream, providing allowed selection modes and content excluded from selection.
 func (csp *ContentSharingPicker) SetConfigurationForStream(pickerConfig obj.Object, stream *Stream) {
+	defer runtime.KeepAlive(csp)
+	defer runtime.KeepAlive(pickerConfig)
+	defer runtime.KeepAlive(stream)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("setConfiguration:forStream:"), objref.IDOf(pickerConfig), objref.IDOf(stream))
 }
 
 // Present displays the picker with no active selection for capture.
 func (csp *ContentSharingPicker) Present() {
+	defer runtime.KeepAlive(csp)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("present"))
 }
 
 // PresentPickerUsingContentStyle displays the picker for a single type of capture selection.
 func (csp *ContentSharingPicker) PresentPickerUsingContentStyle(contentStyle ShareableContentStyle) {
+	defer runtime.KeepAlive(csp)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("presentPickerUsingContentStyle:"), contentStyle)
 }
 
 // PresentPickerForStream displays the picker with an already running capture stream.
 func (csp *ContentSharingPicker) PresentPickerForStream(stream *Stream) {
+	defer runtime.KeepAlive(csp)
+	defer runtime.KeepAlive(stream)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("presentPickerForStream:"), objref.IDOf(stream))
 }
 
 // PresentPickerForStreamUsingContentStyle displays the picker with an existing capture stream, allowing for a single type of capture selection.
 func (csp *ContentSharingPicker) PresentPickerForStreamUsingContentStyle(stream *Stream, contentStyle ShareableContentStyle) {
+	defer runtime.KeepAlive(csp)
+	defer runtime.KeepAlive(stream)
 	objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("presentPickerForStream:usingContentStyle:"), objref.IDOf(stream), contentStyle)
 }
 
 // DefaultConfiguration returns defaultConfiguration for the content sharing picker. If a stream does not have a configuration, the default configuration will be used.
 func (csp *ContentSharingPicker) DefaultConfiguration() obj.Object {
+	defer runtime.KeepAlive(csp)
 	_r := objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("defaultConfiguration"))
 	return obj.Wrap(_r)
 }
 
 // MaximumStreamCount returns maximumStreamCount An integer value that, if set, limits when Control Center will show the UI to present a picker with no associated stream. If set to 0, Control Center will never ever show UI to present a picker without an associated stream.
-func (csp *ContentSharingPicker) MaximumStreamCount() obj.Object {
+func (csp *ContentSharingPicker) MaximumStreamCount() *foundation.Number {
+	defer runtime.KeepAlive(csp)
 	_r := objc.Send[objc.ID](objref.IDOf(csp), objc.RegisterName("maximumStreamCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsActive reports whether active A picker needs to be marked as active for its UI to appear. If `startPickingContent` is called and the picker is not marked as active, the picker will not appear.
 func (csp *ContentSharingPicker) IsActive() bool {
+	defer runtime.KeepAlive(csp)
 	_r := objc.Send[bool](objref.IDOf(csp), objc.RegisterName("isActive"))
 	return _r
 }

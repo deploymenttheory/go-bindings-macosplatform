@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -95,6 +97,7 @@ func (ackpc *AddCarKeyPassConfiguration) WithLocalizedDescription(localizedDescr
 
 // Password returns the password.
 func (ackpc *AddCarKeyPassConfiguration) Password() string {
+	defer runtime.KeepAlive(ackpc)
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""
@@ -104,12 +107,14 @@ func (ackpc *AddCarKeyPassConfiguration) Password() string {
 
 // SupportedRadioTechnologies returns the supported radio technologies.
 func (ackpc *AddCarKeyPassConfiguration) SupportedRadioTechnologies() RadioTechnology {
+	defer runtime.KeepAlive(ackpc)
 	_r := objc.Send[RadioTechnology](objref.IDOf(ackpc), objc.RegisterName("supportedRadioTechnologies"))
 	return _r
 }
 
 // ManufacturerIdentifier returns the manufacturer identifier.
 func (ackpc *AddCarKeyPassConfiguration) ManufacturerIdentifier() string {
+	defer runtime.KeepAlive(ackpc)
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("manufacturerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -119,6 +124,7 @@ func (ackpc *AddCarKeyPassConfiguration) ManufacturerIdentifier() string {
 
 // ProvisioningTemplateIdentifier returns the provisioning template identifier.
 func (ackpc *AddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() string {
+	defer runtime.KeepAlive(ackpc)
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {
 		return ""
@@ -128,6 +134,7 @@ func (ackpc *AddCarKeyPassConfiguration) ProvisioningTemplateIdentifier() string
 
 // ProductPlanIdentifier returns the product plan identifier.
 func (ackpc *AddCarKeyPassConfiguration) ProductPlanIdentifier() string {
+	defer runtime.KeepAlive(ackpc)
 	_r := objc.Send[objc.ID](objref.IDOf(ackpc), objc.RegisterName("productPlanIdentifier"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func virtioBlockDeviceConfigurationAdopt(id objc.ID) *VirtioBlockDeviceConfigura
 
 // NewVirtioBlockDeviceConfigurationWithAttachment creates a block device configuration object that uses the specified storage medium.
 func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *VirtioBlockDeviceConfiguration {
+	defer runtime.KeepAlive(attachment)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
 	return virtioBlockDeviceConfigurationAdopt(_id)
@@ -60,6 +63,7 @@ func (vbdc *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDevic
 
 // BlockDeviceIdentifier returns the block device identifier.
 func (vbdc *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
+	defer runtime.KeepAlive(vbdc)
 	_r := objc.Send[objc.ID](objref.IDOf(vbdc), objc.RegisterName("blockDeviceIdentifier"))
 	if _r == 0 {
 		return ""

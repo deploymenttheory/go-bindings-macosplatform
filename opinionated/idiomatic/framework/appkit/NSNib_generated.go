@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,36 +49,44 @@ func nibAdopt(id objc.ID) *Nib {
 
 // Description returns the object's -description text.
 func (n *Nib) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Nib) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Nib) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Nib) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // NewNibWithNibNamedBundle returns an NSNib object initialized to the nib file in the specified bundle.
 func NewNibWithNibNamedBundle(nibName obj.Object, bundle obj.Object) *Nib {
+	defer runtime.KeepAlive(nibName)
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibNamed:bundle:"), objref.IDOf(nibName), objref.IDOf(bundle))
 	return nibAdopt(_id)
 }
 
 // NewNibWithNibDataBundle initializes an instance with nib data and specified bundle for locating resources.
-func NewNibWithNibDataBundle(nibData obj.Object, bundle obj.Object) *Nib {
+func NewNibWithNibDataBundle(nibData []byte, bundle obj.Object) *Nib {
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNib")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibData:bundle:"), objref.IDOf(nibData), objref.IDOf(bundle))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNibData:bundle:"), rt.BytesToNSData(nibData), objref.IDOf(bundle))
 	return nibAdopt(_id)
 }
 
@@ -89,18 +99,26 @@ func NewNibWithContentsOfURL(nibFileURL string) *Nib {
 
 // InstantiateWithOwnerTopLevelObjects instantiates objects in the nib file with the specified owner.
 func (n *Nib) InstantiateWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(owner)
+	defer runtime.KeepAlive(topLevelObjects)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("instantiateWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
 	return _r
 }
 
 // InstantiateNibWithExternalNameTable unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
 func (n *Nib) InstantiateNibWithExternalNameTable(externalNameTable obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(externalNameTable)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("instantiateNibWithExternalNameTable:"), objref.IDOf(externalNameTable))
 	return _r
 }
 
 // InstantiateNibWithOwnerTopLevelObjects unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
 func (n *Nib) InstantiateNibWithOwnerTopLevelObjects(owner obj.Object, topLevelObjects obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(owner)
+	defer runtime.KeepAlive(topLevelObjects)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("instantiateNibWithOwner:topLevelObjects:"), objref.IDOf(owner), objref.IDOf(topLevelObjects))
 	return _r
 }

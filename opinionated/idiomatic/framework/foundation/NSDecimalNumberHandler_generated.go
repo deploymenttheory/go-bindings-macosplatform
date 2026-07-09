@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func decimalNumberHandlerAdopt(id objc.ID) *DecimalNumberHandler {
 
 // Description returns the object's -description text.
 func (dnh *DecimalNumberHandler) Description() string {
+	defer runtime.KeepAlive(dnh)
 	return rt.Description(objref.IDOf(dnh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dnh *DecimalNumberHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dnh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dnh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dnh *DecimalNumberHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(dnh)
 	return rt.IsKind(objref.IDOf(dnh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dnh *DecimalNumberHandler) String() string {
+	defer runtime.KeepAlive(dnh)
 	return rt.Description(objref.IDOf(dnh))
 }
 
@@ -82,7 +88,7 @@ func (dnh *DecimalNumberHandler) WithObservationInfo(observationInfo unsafe.Poin
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dnh *DecimalNumberHandler) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler {
-	objc.Send[objc.ID](objref.IDOf(dnh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dnh *DecimalNumberHandler) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DecimalNumberHandler {
+	objc.Send[objc.ID](objref.IDOf(dnh), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dnh
 }

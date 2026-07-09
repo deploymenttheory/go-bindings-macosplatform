@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,18 +73,21 @@ func (gfd *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool)
 
 // Inverse reports whether a Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
 func (gfd *GraphFFTDescriptor) Inverse() bool {
+	defer runtime.KeepAlive(gfd)
 	_r := objc.Send[bool](objref.IDOf(gfd), objc.RegisterName("inverse"))
 	return _r
 }
 
 // ScalingMode returns the scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
 func (gfd *GraphFFTDescriptor) ScalingMode() GraphFFTScalingMode {
+	defer runtime.KeepAlive(gfd)
 	_r := objc.Send[GraphFFTScalingMode](objref.IDOf(gfd), objc.RegisterName("scalingMode"))
 	return _r
 }
 
 // RoundToOddHermitean reports whether a parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
 func (gfd *GraphFFTDescriptor) RoundToOddHermitean() bool {
+	defer runtime.KeepAlive(gfd)
 	_r := objc.Send[bool](objref.IDOf(gfd), objc.RegisterName("roundToOddHermitean"))
 	return _r
 }

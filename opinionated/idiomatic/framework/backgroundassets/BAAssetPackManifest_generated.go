@@ -5,6 +5,7 @@
 package backgroundassets
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,41 +51,46 @@ func assetPackManifestAdopt(id objc.ID) *AssetPackManifest {
 
 // Description returns the object's -description text.
 func (apm *AssetPackManifest) Description() string {
+	defer runtime.KeepAlive(apm)
 	return rt.Description(objref.IDOf(apm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apm *AssetPackManifest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apm *AssetPackManifest) IsKind(className string) bool {
+	defer runtime.KeepAlive(apm)
 	return rt.IsKind(objref.IDOf(apm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apm *AssetPackManifest) String() string {
+	defer runtime.KeepAlive(apm)
 	return rt.Description(objref.IDOf(apm))
 }
 
-// NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
-func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL string, applicationGroupIdentifier string) (result *AssetPackManifest, err error) {
+// NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifier initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
+func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifier(url string, applicationGroupIdentifier string) (result *AssetPackManifest, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManifest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:"), rt.FileURL(uRL), purego.NSString(applicationGroupIdentifier), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:"), rt.FileURL(url), purego.NSString(applicationGroupIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return assetPackManifestAdopt(_id), nil
 }
 
-// NewAssetPackManifestFromDataApplicationGroupIdentifierError initializes a representation of a manifest in memory from JSON-encoded data.
-func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data obj.Object, applicationGroupIdentifier string) (result *AssetPackManifest, err error) {
+// NewAssetPackManifestFromDataApplicationGroupIdentifier initializes a representation of a manifest in memory from JSON-encoded data.
+func NewAssetPackManifestFromDataApplicationGroupIdentifier(data []byte, applicationGroupIdentifier string) (result *AssetPackManifest, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManifest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromData:applicationGroupIdentifier:error:"), objref.IDOf(data), purego.NSString(applicationGroupIdentifier), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromData:applicationGroupIdentifier:error:"), rt.BytesToNSData(data), purego.NSString(applicationGroupIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -92,19 +98,25 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data obj.Object
 }
 
 // AllDownloads creates download objects for every asset pack in this manifest.
-func (apm *AssetPackManifest) AllDownloads() obj.Object {
+// The order of the returned elements is unspecified.
+func (apm *AssetPackManifest) AllDownloads() []*Download {
+	defer runtime.KeepAlive(apm)
 	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("allDownloads"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
 // AllDownloadsForContentRequest creates download objects for every asset pack in this manifest.
-func (apm *AssetPackManifest) AllDownloadsForContentRequest(contentRequest ContentRequest) obj.Object {
+// The order of the returned elements is unspecified.
+func (apm *AssetPackManifest) AllDownloadsForContentRequest(contentRequest ContentRequest) []*Download {
+	defer runtime.KeepAlive(apm)
 	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("allDownloadsForContentRequest:"), contentRequest)
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
 // AssetPacks returns the asset packs that are available to download.
-func (apm *AssetPackManifest) AssetPacks() obj.Object {
+// The order of the returned elements is unspecified.
+func (apm *AssetPackManifest) AssetPacks() []*AssetPack {
+	defer runtime.KeepAlive(apm)
 	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("assetPacks"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *AssetPack { return AssetPackFromID(_id) })
 }

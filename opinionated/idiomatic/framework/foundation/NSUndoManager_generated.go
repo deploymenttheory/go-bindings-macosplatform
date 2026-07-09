@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func undoManagerAdopt(id objc.ID) *UndoManager {
 
 // Description returns the object's -description text.
 func (um *UndoManager) Description() string {
+	defer runtime.KeepAlive(um)
 	return rt.Description(objref.IDOf(um))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (um *UndoManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(um), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (um *UndoManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(um)
 	return rt.IsKind(objref.IDOf(um), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (um *UndoManager) String() string {
+	defer runtime.KeepAlive(um)
 	return rt.Description(objref.IDOf(um))
 }
 
@@ -112,13 +118,14 @@ func (um *UndoManager) WithObservationInfo(observationInfo unsafe.Pointer) *Undo
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (um *UndoManager) WithScriptingProperties(scriptingProperties obj.Object) *UndoManager {
-	objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (um *UndoManager) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UndoManager {
+	objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return um
 }
 
 // BeginUndoGrouping marks the beginning of an undo group. All individual undo operations before a subsequent “endUndoGrouping“ message are grouped together and reversed by a later “undo“ message. By default undo groups are begun automatically at the start of the event loop, but you can begin your own undo groups with this method, and nest them within other groups. This method posts an “NSUndoManagerCheckpointNotification“ unless a top-level undo is in progress. It posts an “NSUndoManagerDidOpenUndoGroupNotification“ if a new group was successfully created.
 func (um *UndoManager) BeginUndoGrouping() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("beginUndoGrouping"))
 	})
@@ -127,6 +134,7 @@ func (um *UndoManager) BeginUndoGrouping() {
 
 // EndUndoGrouping marks the end of an undo group. All individual undo operations back to the matching “beginUndoGrouping“ message are grouped together and reversed by a later “undo“ or “undoNestedGroup“ message. Undo groups can be nested, thus providing functionality similar to nested transactions. Raises an “NSInternalInconsistencyException“ if there’s no “beginUndoGrouping“ message in effect. This method posts an “NSUndoManagerCheckpointNotification“ and an “NSUndoManagerDidCloseUndoGroupNotification“ just before the group is closed.
 func (um *UndoManager) EndUndoGrouping() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("endUndoGrouping"))
 	})
@@ -135,6 +143,7 @@ func (um *UndoManager) EndUndoGrouping() {
 
 // DisableUndoRegistration disables the recording of undo operations, whether by “registerUndoWithTarget:selector:object:“ or by invocation-based undo. This method can be invoked multiple times by multiple clients. The “enableUndoRegistration“ method must be invoked an equal number of times to re-enable undo registration.
 func (um *UndoManager) DisableUndoRegistration() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("disableUndoRegistration"))
 	})
@@ -143,6 +152,7 @@ func (um *UndoManager) DisableUndoRegistration() {
 
 // EnableUndoRegistration enables the recording of undo operations. Because undo registration is enabled by default, this is used to balance a prior “disableUndoRegistration“. Undo registration isn’t actually re-enabled until an enable message balances the last disable message in effect. Raises an NSInternalInconsistencyException if invoked while no disableUndoRegistration() message is in effect.
 func (um *UndoManager) EnableUndoRegistration() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("enableUndoRegistration"))
 	})
@@ -151,6 +161,7 @@ func (um *UndoManager) EnableUndoRegistration() {
 
 // Undo closes the top-level undo group if necessary and invokes “undoNestedGroup“. This method also invokes “endUndoGrouping“ if the nesting level is 1. Raises an “NSInternalInconsistencyException“ if more than one undo group is open (that is, if the last group isn’t at the top level). This method posts an “NSUndoManagerCheckpointNotification“.
 func (um *UndoManager) Undo() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("undo"))
 	})
@@ -159,6 +170,7 @@ func (um *UndoManager) Undo() {
 
 // Redo performs the operations in the last group on the redo stack, if there are any, recording them on the undo stack as a single group. Raises an “NSInternalInconsistencyException“ if the method is invoked during an undo operation. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillRedoChangeNotification“ before it performs the redo operation, and it posts the “NSUndoManagerDidRedoChangeNotification“ after it performs the redo operation.
 func (um *UndoManager) Redo() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("redo"))
 	})
@@ -167,6 +179,7 @@ func (um *UndoManager) Redo() {
 
 // UndoNestedGroup performs the undo operations in the last undo group (whether top-level or nested), recording the operations on the redo stack as a single group. Raises an “NSInternalInconsistencyException“ if any undo operations have been registered since the last “enableUndoRegistration“ message. This method posts an “NSUndoManagerCheckpointNotification“ and “NSUndoManagerWillUndoChangeNotification“ before it performs the undo operation, and it posts an “NSUndoManagerDidUndoChangeNotification“ after it performs the undo operation.
 func (um *UndoManager) UndoNestedGroup() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("undoNestedGroup"))
 	})
@@ -175,6 +188,7 @@ func (um *UndoManager) UndoNestedGroup() {
 
 // RemoveAllActions clears the undo and redo stacks and re-enables the receiver.
 func (um *UndoManager) RemoveAllActions() {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("removeAllActions"))
 	})
@@ -183,6 +197,8 @@ func (um *UndoManager) RemoveAllActions() {
 
 // RemoveAllActionsWithTarget clears the undo and redo stacks of all operations involving the specified target as the recipient of the undo message. Doesn't re-enable the receiver if it's disabled. - Parameter target: The recepient of the undo mesages to be removed.
 func (um *UndoManager) RemoveAllActionsWithTarget(target obj.Object) {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("removeAllActionsWithTarget:"), objref.IDOf(target))
 	})
@@ -191,6 +207,8 @@ func (um *UndoManager) RemoveAllActionsWithTarget(target obj.Object) {
 
 // PrepareWithInvocationTarget prepares the undo manager for invocation-based undo with the given target as the subject of the next undo operation. For example, when called as: [[undoManager prepareWithInvocationTarget:target] setFont:oldFont color:oldColor] When undo is called, the specified target will be called with [target setFont:oldFont color:oldColor] - Parameter target: The target of the undo operation. The undo manager maintains a weak reference to `target`. - Returns:  A proxy object that forwards messages to the undo manager for recording as undo actions.
 func (um *UndoManager) PrepareWithInvocationTarget(target obj.Object) obj.Object {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(target)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -204,6 +222,8 @@ func (um *UndoManager) PrepareWithInvocationTarget(target obj.Object) obj.Object
 
 // RegisterUndoWithTargetHandler records a single undo operation for a given target so that when the manager performs an undo, it executes the specified block.
 func (um *UndoManager) RegisterUndoWithTargetHandler(target obj.Object, undoHandler func(obj.Object)) {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("registerUndoWithTarget:handler:"), objref.IDOf(target), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { undoHandler(obj.Wrap(_b0)) }))
 	})
@@ -212,6 +232,7 @@ func (um *UndoManager) RegisterUndoWithTargetHandler(target obj.Object, undoHand
 
 // SetActionIsDiscardable sets whether the next undo or redo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the “NSUndoManagerGroupIsDiscardableKey“ in the `userInfo` dictionary of the “NSUndoManagerWillCloseUndoGroupNotification“. - Parameter discardable: Specifies if the action is discardable. YES if the next undo or redo action can be discarded; NO otherwise.
 func (um *UndoManager) SetActionIsDiscardable(discardable bool) {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setActionIsDiscardable:"), discardable)
 	})
@@ -220,6 +241,7 @@ func (um *UndoManager) SetActionIsDiscardable(discardable bool) {
 
 // SetActionName sets the name of the action associated with the Undo or Redo command. If `actionName` is an empty string, the undo manager removes the action name currently associated with the menu command. - Parameter actionName: The name of the action.
 func (um *UndoManager) SetActionName(actionName string) {
+	defer runtime.KeepAlive(um)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setActionName:"), purego.NSString(actionName))
 	})
@@ -228,6 +250,8 @@ func (um *UndoManager) SetActionName(actionName string) {
 
 // UndoActionUserInfoValueForKey get a value from the undo action's user info - Parameter key: Which value should be retrieved
 func (um *UndoManager) UndoActionUserInfoValueForKey(key *String) obj.Object {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(key)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -241,6 +265,8 @@ func (um *UndoManager) UndoActionUserInfoValueForKey(key *String) obj.Object {
 
 // RedoActionUserInfoValueForKey get a value from the redo action's user info - Parameter key: Which value should be retrieved
 func (um *UndoManager) RedoActionUserInfoValueForKey(key *String) obj.Object {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(key)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -254,6 +280,9 @@ func (um *UndoManager) RedoActionUserInfoValueForKey(key *String) obj.Object {
 
 // SetActionUserInfoValueForKey set user info for the Undo or Redo command. - Parameter info: Value to be saved in the user info - Parameter key: Key at which the object should be saved
 func (um *UndoManager) SetActionUserInfoValueForKey(info obj.Object, key *String) {
+	defer runtime.KeepAlive(um)
+	defer runtime.KeepAlive(info)
+	defer runtime.KeepAlive(key)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setActionUserInfoValue:forKey:"), objref.IDOf(info), objref.IDOf(key))
 	})
@@ -262,6 +291,7 @@ func (um *UndoManager) SetActionUserInfoValueForKey(info obj.Object, key *String
 
 // UndoMenuTitleForUndoActionName returns the complete, localized title of the Undo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “undoMenuItemTitle“. - Parameter actionName: The name of the undo action. - Returns: The localized title of the undo menu item.
 func (um *UndoManager) UndoMenuTitleForUndoActionName(actionName string) string {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -278,6 +308,7 @@ func (um *UndoManager) UndoMenuTitleForUndoActionName(actionName string) string 
 
 // RedoMenuTitleForUndoActionName returns the complete, localized title of the Redo menu command for the action identified by the given name. Override this method if you want to customize the localization behaviour. This method is invoked by “redoMenuItemTitle“. - Parameter actionName: The name of the redo action. - Returns: The localized title of the redo menu item.
 func (um *UndoManager) RedoMenuTitleForUndoActionName(actionName string) string {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -294,6 +325,7 @@ func (um *UndoManager) RedoMenuTitleForUndoActionName(actionName string) string 
 
 // GroupingLevel returns the number of nested undo groups (or redo groups, if Redo was invoked last) in the current event loop. An integer indicating the number of nested groups. If `0` is returned, there is no open undo or redo group.
 func (um *UndoManager) GroupingLevel() int {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -307,6 +339,7 @@ func (um *UndoManager) GroupingLevel() int {
 
 // IsUndoRegistrationEnabled reports whether the recording of undo operations is enabled.
 func (um *UndoManager) IsUndoRegistrationEnabled() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -320,6 +353,7 @@ func (um *UndoManager) IsUndoRegistrationEnabled() bool {
 
 // GroupsByEvent reports whether the receiver automatically creates undo groups around each pass of the run loop. If `true`, the receiver automatically creates undo groups around each pass of the run loop. The default is `true`. If you turn automatic grouping off, you must close groups explicitly before invoking either “undo“ or “undoNestedGroup“.
 func (um *UndoManager) GroupsByEvent() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -333,6 +367,7 @@ func (um *UndoManager) GroupsByEvent() bool {
 
 // LevelsOfUndo returns the maximum number of top-level undo groups the receiver holds. An integer specifying the number of undo groups. A limit of 0 indicates no limit, so old undo groups are never dropped. When ending an undo group results in the number of groups exceeding this limit, the oldest groups are dropped from the stack. The default is 0. If you change the limit to a level below the prior limit, old undo groups are immediately dropped.
 func (um *UndoManager) LevelsOfUndo() int {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -348,6 +383,7 @@ func (um *UndoManager) LevelsOfUndo() int {
 //
 // RunLoopModes returns the collection as a Go slice.
 func (um *UndoManager) RunLoopModes() []*String {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 []*String
 	purego.Main(func() {
 		_mainthread0 = func() []*String {
@@ -360,6 +396,7 @@ func (um *UndoManager) RunLoopModes() []*String {
 
 // CanUndo reports whether the receiver has any actions to undo. The return value does not mean you can safely invoke “undo“ or “undoNestedGroup“ — you may have to close open undo groups first.
 func (um *UndoManager) CanUndo() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -373,6 +410,7 @@ func (um *UndoManager) CanUndo() bool {
 
 // CanRedo reports whether the receiver has any actions to redo. Because any undo operation registered clears the redo stack, this method posts an NSUndoManagerCheckpointNotification to allow clients to apply their pending operations before testing the redo stack.
 func (um *UndoManager) CanRedo() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -386,6 +424,7 @@ func (um *UndoManager) CanRedo() bool {
 
 // UndoCount returns how many times `undo` can be invoked before there are no more actions left to be undone
 func (um *UndoManager) UndoCount() int {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -399,6 +438,7 @@ func (um *UndoManager) UndoCount() int {
 
 // RedoCount returns how many times `redo` can be invoked before there are no more actions left to be redone
 func (um *UndoManager) RedoCount() int {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -412,6 +452,7 @@ func (um *UndoManager) RedoCount() int {
 
 // IsUndoing reports whether the receiver is in the process of performing its “undo“ or “undoNestedGroup“ method.
 func (um *UndoManager) IsUndoing() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -425,6 +466,7 @@ func (um *UndoManager) IsUndoing() bool {
 
 // IsRedoing reports whether the receiver is in the process of performing its “redo“ method.
 func (um *UndoManager) IsRedoing() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -438,6 +480,7 @@ func (um *UndoManager) IsRedoing() bool {
 
 // UndoActionIsDiscardable reports whether the next undo action is discardable. Specifies that the latest undo action may be safely discarded when a document can not be saved for any reason. These are typically actions that don’t affect persistent state. An example might be an undo action that changes the viewable area of a document.
 func (um *UndoManager) UndoActionIsDiscardable() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -451,6 +494,7 @@ func (um *UndoManager) UndoActionIsDiscardable() bool {
 
 // RedoActionIsDiscardable reports whether the next redo action is discardable. Specifies that the latest redo action may be safely discarded when a document can not be saved for any reason. These are typically actions that don’t affect persistent state. An example might be an redo action that changes the viewable area of a document.
 func (um *UndoManager) RedoActionIsDiscardable() bool {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -464,6 +508,7 @@ func (um *UndoManager) RedoActionIsDiscardable() bool {
 
 // UndoActionName returns the name identifying the undo action. The undo action name. Returns an empty string if no action name has been assigned or if there is nothing to undo. For example, if the menu title is “Undo Delete,” the string returned is “Delete.”
 func (um *UndoManager) UndoActionName() string {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -480,6 +525,7 @@ func (um *UndoManager) UndoActionName() string {
 
 // RedoActionName returns the name identifying the redo action. The redo action name. Returns an empty string if no action name has been assigned or if there is nothing to redo. For example, if the menu title is “Redo Delete,” the string returned is “Delete.”
 func (um *UndoManager) RedoActionName() string {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -496,6 +542,7 @@ func (um *UndoManager) RedoActionName() string {
 
 // UndoMenuItemTitle returns the complete title of the Undo menu command, for example, “Undo Paste.” Returns “Undo” if no action name has been assigned or nil if there is nothing to undo.
 func (um *UndoManager) UndoMenuItemTitle() string {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -512,6 +559,7 @@ func (um *UndoManager) UndoMenuItemTitle() string {
 
 // RedoMenuItemTitle returns the complete title of the Redo menu command, for example, “Redo Paste.” Returns “Redo” if no action name has been assigned or nil if there is nothing to redo.
 func (um *UndoManager) RedoMenuItemTitle() string {
+	defer runtime.KeepAlive(um)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

@@ -36,8 +36,8 @@ func EKVirtualConferenceDescriptorFromID(id objc.ID) *EKVirtualConferenceDescrip
 }
 
 // Creates an object that describes a virtual conference, including a name and URL to join the conference.
-func (o *EKVirtualConferenceDescriptor) InitWithTitleURLDescriptorsConferenceDetails(title *foundation.NSString, uRLDescriptors *foundation.NSArray[*EKVirtualConferenceURLDescriptor], conferenceDetails *foundation.NSString) *EKVirtualConferenceDescriptor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceDescriptorSelInitWithTitleURLDescriptorsConferenceDetails, title.Ptr(), uRLDescriptors.Ptr(), conferenceDetails.Ptr())
+func (o *EKVirtualConferenceDescriptor) InitWithTitleURLDescriptorsConferenceDetails(title *foundation.NSString, urlDescriptors *foundation.NSArray[*EKVirtualConferenceURLDescriptor], conferenceDetails *foundation.NSString) *EKVirtualConferenceDescriptor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _eKVirtualConferenceDescriptorSelInitWithTitleURLDescriptorsConferenceDetails, title.Ptr(), urlDescriptors.Ptr(), conferenceDetails.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

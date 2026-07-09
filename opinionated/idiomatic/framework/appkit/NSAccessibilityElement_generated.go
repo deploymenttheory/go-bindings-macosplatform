@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func accessibilityElementAdopt(id objc.ID) *AccessibilityElement {
 
 // Description returns the object's -description text.
 func (ae *AccessibilityElement) Description() string {
+	defer runtime.KeepAlive(ae)
 	return rt.Description(objref.IDOf(ae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ae *AccessibilityElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ae *AccessibilityElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(ae)
 	return rt.IsKind(objref.IDOf(ae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ae *AccessibilityElement) String() string {
+	defer runtime.KeepAlive(ae)
 	return rt.Description(objref.IDOf(ae))
 }
 
@@ -81,11 +88,14 @@ func (ae *AccessibilityElement) WithAccessibilityFrameInParentSpace(accessibilit
 
 // AccessibilityAddChildElement wraps the corresponding Objective-C method.
 func (ae *AccessibilityElement) AccessibilityAddChildElement(childElement *AccessibilityElement) {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(childElement)
 	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("accessibilityAddChildElement:"), objref.IDOf(childElement))
 }
 
 // AccessibilityFrameInParentSpace returns the accessibility frame in parent space.
 func (ae *AccessibilityElement) AccessibilityFrameInParentSpace() corefoundation.CGRect {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ae), objc.RegisterName("accessibilityFrameInParentSpace"))
 	return _r
 }

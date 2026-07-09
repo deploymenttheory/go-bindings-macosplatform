@@ -5,6 +5,8 @@
 package mpsndarray
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func arrayGradientStateAdopt(id objc.ID) *ArrayGradientState {
 
 // Description returns the object's -description text.
 func (ags *ArrayGradientState) Description() string {
+	defer runtime.KeepAlive(ags)
 	return rt.Description(objref.IDOf(ags))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ags *ArrayGradientState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ags)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ags), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ags *ArrayGradientState) IsKind(className string) bool {
+	defer runtime.KeepAlive(ags)
 	return rt.IsKind(objref.IDOf(ags), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ags *ArrayGradientState) String() string {
+	defer runtime.KeepAlive(ags)
 	return rt.Description(objref.IDOf(ags))
 }
 

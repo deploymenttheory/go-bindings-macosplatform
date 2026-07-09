@@ -154,9 +154,9 @@ func (o *NSPathControl) URL() *foundation.NSURL {
 	return _mainthread0
 }
 
-func (o *NSPathControl) SetURL(uRL *foundation.NSURL) {
+func (o *NSPathControl) SetURL(url *foundation.NSURL) {
 	purego.Main(func() {
-		o.Ptr().Send(_nSPathControlSelSetURL, uRL.Ptr())
+		o.Ptr().Send(_nSPathControlSelSetURL, url.Ptr())
 	})
 }
 

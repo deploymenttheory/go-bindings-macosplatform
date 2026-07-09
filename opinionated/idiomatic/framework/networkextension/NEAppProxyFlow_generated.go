@@ -6,10 +6,12 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -53,27 +55,33 @@ func nEAppProxyFlowAdopt(id objc.ID) *NEAppProxyFlow {
 
 // Description returns the object's -description text.
 func (napf *NEAppProxyFlow) Description() string {
+	defer runtime.KeepAlive(napf)
 	return rt.Description(objref.IDOf(napf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (napf *NEAppProxyFlow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(napf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(napf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (napf *NEAppProxyFlow) IsKind(className string) bool {
+	defer runtime.KeepAlive(napf)
 	return rt.IsKind(objref.IDOf(napf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (napf *NEAppProxyFlow) String() string {
+	defer runtime.KeepAlive(napf)
 	return rt.Description(objref.IDOf(napf))
 }
 
 // WithNetworkInterface sets the network interface, if any, used by this flow.
 func (napf *NEAppProxyFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow {
+	defer runtime.KeepAlive(networkInterface)
 	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return napf
 }
@@ -82,6 +90,8 @@ func (napf *NEAppProxyFlow) WithNetworkInterface(networkInterface obj.Object) *N
 //
 // OpenWithLocalFlowEndpoint blocks until the operation completes or ctx is cancelled.
 func (napf *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error {
+	defer runtime.KeepAlive(napf)
+	defer runtime.KeepAlive(localEndpoint)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -101,6 +111,8 @@ func (napf *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, local
 //
 // OpenWithLocalEndpoint blocks until the operation completes or ctx is cancelled.
 func (napf *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error {
+	defer runtime.KeepAlive(napf)
+	defer runtime.KeepAlive(localEndpoint)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -117,34 +129,41 @@ func (napf *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndp
 }
 
 // CloseReadWithError close the flow for further read operations.
-func (napf *NEAppProxyFlow) CloseReadWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("closeReadWithError:"), error_)
+func (napf *NEAppProxyFlow) CloseReadWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(napf)
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("closeReadWithError:"), err)
 }
 
 // CloseWriteWithError close the flow for further write operations.
-func (napf *NEAppProxyFlow) CloseWriteWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("closeWriteWithError:"), error_)
+func (napf *NEAppProxyFlow) CloseWriteWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(napf)
+	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("closeWriteWithError:"), err)
 }
 
 // SetMetadata sets the flow’s metadata for use by proxy providers.
 func (napf *NEAppProxyFlow) SetMetadata(parameters obj.Object) {
+	defer runtime.KeepAlive(napf)
+	defer runtime.KeepAlive(parameters)
 	objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("setMetadata:"), objref.IDOf(parameters))
 }
 
 // MetaData returns an NEFlowMetaData object containing meta data for the flow.
 func (napf *NEAppProxyFlow) MetaData() *NEFlowMetaData {
+	defer runtime.KeepAlive(napf)
 	_r := objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("metaData"))
 	return NEFlowMetaDataFromID(_r)
 }
 
 // NetworkInterface returns an nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
-func (napf *NEAppProxyFlow) NetworkInterface() obj.Object {
+func (napf *NEAppProxyFlow) NetworkInterface() *foundation.Object {
+	defer runtime.KeepAlive(napf)
 	_r := objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("networkInterface"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // RemoteHostname returns if the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
 func (napf *NEAppProxyFlow) RemoteHostname() string {
+	defer runtime.KeepAlive(napf)
 	_r := objc.Send[objc.ID](objref.IDOf(napf), objc.RegisterName("remoteHostname"))
 	if _r == 0 {
 		return ""
@@ -154,6 +173,7 @@ func (napf *NEAppProxyFlow) RemoteHostname() string {
 
 // IsBound reports whether the flow was bound by the application to a specific interface (contained in the networkInterface property).
 func (napf *NEAppProxyFlow) IsBound() bool {
+	defer runtime.KeepAlive(napf)
 	_r := objc.Send[bool](objref.IDOf(napf), objc.RegisterName("isBound"))
 	return _r
 }

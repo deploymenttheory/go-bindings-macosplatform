@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterResumedEventAdopt(id objc.ID) *MTRDeviceEne
 
 // Description returns the object's -description text.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) Description() string {
+	defer runtime.KeepAlive(mdemcre)
 	return rt.Description(objref.IDOf(mdemcre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcre)
 	return rt.IsKind(objref.IDOf(mdemcre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) String() string {
+	defer runtime.KeepAlive(mdemcre)
 	return rt.Description(objref.IDOf(mdemcre))
 }
 
@@ -72,12 +80,14 @@ func NewMTRDeviceEnergyManagementClusterResumedEvent() *MTRDeviceEnergyManagemen
 
 // WithCause sets the cause.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent {
+	defer runtime.KeepAlive(cause)
 	objc.Send[objc.ID](objref.IDOf(mdemcre), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcre
 }
 
 // Cause returns the cause.
-func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) Cause() obj.Object {
+func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) Cause() *foundation.Number {
+	defer runtime.KeepAlive(mdemcre)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcre), objc.RegisterName("cause"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

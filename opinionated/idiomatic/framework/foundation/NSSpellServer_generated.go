@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func spellServerAdopt(id objc.ID) *SpellServer {
 
 // Description returns the object's -description text.
 func (ss *SpellServer) Description() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ss *SpellServer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ss *SpellServer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ss)
 	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ss *SpellServer) String() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
@@ -74,6 +81,16 @@ func NewSpellServer() *SpellServer {
 	return spellServerAdopt(_id)
 }
 
+// WithDelegate sets returns the receiver’s delegate.
+func (ss *SpellServer) WithDelegate(delegate SpellServerDelegate) *SpellServer {
+	_shim := newSpellServerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ss), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ss), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ss
+}
+
 // WithObservationInfo sets the observation info.
 func (ss *SpellServer) WithObservationInfo(observationInfo unsafe.Pointer) *SpellServer {
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setObservationInfo:"), observationInfo)
@@ -81,24 +98,27 @@ func (ss *SpellServer) WithObservationInfo(observationInfo unsafe.Pointer) *Spel
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ss *SpellServer) WithScriptingProperties(scriptingProperties obj.Object) *SpellServer {
-	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ss *SpellServer) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SpellServer {
+	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ss
 }
 
 // RegisterLanguageByVendor notifies the receiver of a language your spelling checker can check.
 func (ss *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("registerLanguage:byVendor:"), purego.NSString(language), purego.NSString(vendor))
 	return _r
 }
 
 // IsWordInUserDictionariesCaseSensitive indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
 func (ss *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isWordInUserDictionaries:caseSensitive:"), purego.NSString(word), flag)
 	return _r
 }
 
 // Run causes the receiver to start listening for spell-checking requests.
 func (ss *SpellServer) Run() {
+	defer runtime.KeepAlive(ss)
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("run"))
 }

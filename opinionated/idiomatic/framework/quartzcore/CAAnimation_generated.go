@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,28 +52,44 @@ func animationAdopt(id objc.ID) *Animation {
 
 // Description returns the object's -description text.
 func (a *Animation) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Animation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Animation) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Animation) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (a *Animation) WithTimingFunction(timingFunction *MediaTimingFunction) *Animation {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return a
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (a *Animation) WithDelegate(delegate AnimationDelegate) *Animation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(a), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(a), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return a
 }
 
@@ -82,18 +101,21 @@ func (a *Animation) WithRemovedOnCompletion(removedOnCompletion bool) *Animation
 
 // ShouldArchiveValueForKey specifies whether the value of the property for a given key is archived.
 func (a *Animation) ShouldArchiveValueForKey(key string) bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
 	return _r
 }
 
 // TimingFunction returns the timing function.
 func (a *Animation) TimingFunction() *MediaTimingFunction {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("timingFunction"))
 	return MediaTimingFunctionFromID(_r)
 }
 
 // IsRemovedOnCompletion reports whether the object is removed on completion.
 func (a *Animation) IsRemovedOnCompletion() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRemovedOnCompletion"))
 	return _r
 }

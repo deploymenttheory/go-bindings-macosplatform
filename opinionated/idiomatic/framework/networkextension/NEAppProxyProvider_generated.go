@@ -6,12 +6,14 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,14 +61,15 @@ func (napp *NEAppProxyProvider) WithReasserting(reasserting bool) *NEAppProxyPro
 // StartProxyWithOptions start the network proxy.
 //
 // StartProxyWithOptions blocks until the operation completes or ctx is cancelled.
-func (napp *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options obj.Object) error {
+func (napp *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options map[string]obj.Object) error {
+	defer runtime.KeepAlive(napp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(napp), objc.RegisterName("startProxyWithOptions:completionHandler:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(napp), objc.RegisterName("startProxyWithOptions:completionHandler:"), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -79,6 +82,7 @@ func (napp *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, optio
 //
 // StopProxyWithReason blocks until the operation completes or ctx is cancelled.
 func (napp *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
+	defer runtime.KeepAlive(napp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -93,24 +97,32 @@ func (napp *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason 
 }
 
 // CancelProxyWithError stop the network proxy from the App Proxy Provider.
-func (napp *NEAppProxyProvider) CancelProxyWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(napp), objc.RegisterName("cancelProxyWithError:"), error_)
+func (napp *NEAppProxyProvider) CancelProxyWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(napp)
+	objc.Send[objc.ID](objref.IDOf(napp), objc.RegisterName("cancelProxyWithError:"), err)
 }
 
 // HandleNewFlow handle a new flow of network data.
 func (napp *NEAppProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
+	defer runtime.KeepAlive(napp)
+	defer runtime.KeepAlive(flow)
 	_r := objc.Send[bool](objref.IDOf(napp), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return _r
 }
 
 // HandleNewUDPFlowInitialRemoteFlowEndpoint this function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
 func (napp *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
+	defer runtime.KeepAlive(napp)
+	defer runtime.KeepAlive(flow)
+	defer runtime.KeepAlive(remoteEndpoint)
 	_r := objc.Send[bool](objref.IDOf(napp), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
 	return _r
 }
 
 // HandleNewUDPFlowInitialRemoteEndpoint handle a new UDP flow of network data.
 func (napp *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool {
+	defer runtime.KeepAlive(napp)
+	defer runtime.KeepAlive(flow)
 	_r := objc.Send[bool](objref.IDOf(napp), objc.RegisterName("handleNewUDPFlow:initialRemoteEndpoint:"), objref.IDOf(flow), remoteEndpoint)
 	return _r
 }

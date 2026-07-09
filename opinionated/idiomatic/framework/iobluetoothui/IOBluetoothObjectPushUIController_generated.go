@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func bluetoothObjectPushUIControllerAdopt(id objc.ID) *BluetoothObjectPushUICont
 
 // Description returns the object's -description text.
 func (bopuc *BluetoothObjectPushUIController) Description() string {
+	defer runtime.KeepAlive(bopuc)
 	return rt.Description(objref.IDOf(bopuc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bopuc *BluetoothObjectPushUIController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bopuc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bopuc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bopuc *BluetoothObjectPushUIController) IsKind(className string) bool {
+	defer runtime.KeepAlive(bopuc)
 	return rt.IsKind(objref.IDOf(bopuc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bopuc *BluetoothObjectPushUIController) String() string {
+	defer runtime.KeepAlive(bopuc)
 	return rt.Description(objref.IDOf(bopuc))
 }
 
 // NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate creates and returns a new IOBluetoothObjectPush object
 func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice obj.Object, inFiles obj.Object, inDelegate obj.Object) *BluetoothObjectPushUIController {
+	defer runtime.KeepAlive(inDevice)
+	defer runtime.KeepAlive(inFiles)
+	defer runtime.KeepAlive(inDelegate)
 	var _mainthread0 *BluetoothObjectPushUIController
 	purego.Main(func() {
 		_mainthread0 = func() *BluetoothObjectPushUIController {
@@ -81,6 +91,7 @@ func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDel
 
 // RunModal runs the transfer UI panel in a modal session
 func (bopuc *BluetoothObjectPushUIController) RunModal() {
+	defer runtime.KeepAlive(bopuc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runModal"))
 	})
@@ -89,6 +100,7 @@ func (bopuc *BluetoothObjectPushUIController) RunModal() {
 
 // RunPanel runs the transfer UI as a panel with no modal session
 func (bopuc *BluetoothObjectPushUIController) RunPanel() {
+	defer runtime.KeepAlive(bopuc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("runPanel"))
 	})
@@ -97,6 +109,7 @@ func (bopuc *BluetoothObjectPushUIController) RunPanel() {
 
 // Stop stops the transfer UI
 func (bopuc *BluetoothObjectPushUIController) Stop() {
+	defer runtime.KeepAlive(bopuc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("stop"))
 	})
@@ -105,6 +118,7 @@ func (bopuc *BluetoothObjectPushUIController) Stop() {
 
 // SetTitle sets the title of the panel when not run as a sheet.
 func (bopuc *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
+	defer runtime.KeepAlive(bopuc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 	})
@@ -113,6 +127,7 @@ func (bopuc *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
 
 // Title returns the title of the transfer panel.
 func (bopuc *BluetoothObjectPushUIController) Title() string {
+	defer runtime.KeepAlive(bopuc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -129,6 +144,8 @@ func (bopuc *BluetoothObjectPushUIController) Title() string {
 
 // SetIconImage manually sets the icon used in the panel.
 func (bopuc *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
+	defer runtime.KeepAlive(bopuc)
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setIconImage:"), objref.IDOf(image))
 	})
@@ -137,6 +154,7 @@ func (bopuc *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
 
 // Device gets the object representing the remote target device in the transfer.
 func (bopuc *BluetoothObjectPushUIController) Device() obj.Object {
+	defer runtime.KeepAlive(bopuc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -150,6 +168,7 @@ func (bopuc *BluetoothObjectPushUIController) Device() obj.Object {
 
 // IsTransferInProgress reports whether gets state of the transfer
 func (bopuc *BluetoothObjectPushUIController) IsTransferInProgress() bool {
+	defer runtime.KeepAlive(bopuc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

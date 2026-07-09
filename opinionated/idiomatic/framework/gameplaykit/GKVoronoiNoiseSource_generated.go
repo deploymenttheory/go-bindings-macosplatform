@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -78,24 +80,28 @@ func (vns *VoronoiNoiseSource) WithSeed(seed int32) *VoronoiNoiseSource {
 
 // Frequency returns the frequency.
 func (vns *VoronoiNoiseSource) Frequency() float64 {
+	defer runtime.KeepAlive(vns)
 	_r := objc.Send[float64](objref.IDOf(vns), objc.RegisterName("frequency"))
 	return _r
 }
 
 // Displacement returns the displacement.
 func (vns *VoronoiNoiseSource) Displacement() float64 {
+	defer runtime.KeepAlive(vns)
 	_r := objc.Send[float64](objref.IDOf(vns), objc.RegisterName("displacement"))
 	return _r
 }
 
 // IsDistanceEnabled reports whether the object is distance enabled.
 func (vns *VoronoiNoiseSource) IsDistanceEnabled() bool {
+	defer runtime.KeepAlive(vns)
 	_r := objc.Send[bool](objref.IDOf(vns), objc.RegisterName("isDistanceEnabled"))
 	return _r
 }
 
 // Seed returns the seed.
 func (vns *VoronoiNoiseSource) Seed() int32 {
+	defer runtime.KeepAlive(vns)
 	_r := objc.Send[int32](objref.IDOf(vns), objc.RegisterName("seed"))
 	return _r
 }

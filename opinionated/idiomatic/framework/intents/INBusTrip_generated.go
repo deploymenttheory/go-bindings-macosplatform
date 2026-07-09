@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func busTripAdopt(id objc.ID) *BusTrip {
 
 // Description returns the object's -description text.
 func (bt *BusTrip) Description() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bt *BusTrip) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bt *BusTrip) IsKind(className string) bool {
+	defer runtime.KeepAlive(bt)
 	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bt *BusTrip) String() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform creates a bus trip with the specified contents and attributes.
 func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform(provider string, busName string, busNumber string, tripDuration *DateComponentsRange, departureBusStopLocation obj.Object, departurePlatform string, arrivalBusStopLocation obj.Object, arrivalPlatform string) *BusTrip {
+	defer runtime.KeepAlive(tripDuration)
+	defer runtime.KeepAlive(departureBusStopLocation)
+	defer runtime.KeepAlive(arrivalBusStopLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INBusTrip")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:busName:busNumber:tripDuration:departureBusStopLocation:departurePlatform:arrivalBusStopLocation:arrivalPlatform:"), purego.NSString(provider), purego.NSString(busName), purego.NSString(busNumber), objref.IDOf(tripDuration), objref.IDOf(departureBusStopLocation), purego.NSString(departurePlatform), objref.IDOf(arrivalBusStopLocation), purego.NSString(arrivalPlatform))
 	return busTripAdopt(_id)
@@ -75,6 +85,7 @@ func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationD
 
 // Provider returns the provider.
 func (bt *BusTrip) Provider() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("provider"))
 	if _r == 0 {
 		return ""
@@ -84,6 +95,7 @@ func (bt *BusTrip) Provider() string {
 
 // BusName returns the bus name.
 func (bt *BusTrip) BusName() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("busName"))
 	if _r == 0 {
 		return ""
@@ -93,6 +105,7 @@ func (bt *BusTrip) BusName() string {
 
 // BusNumber returns the bus number.
 func (bt *BusTrip) BusNumber() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("busNumber"))
 	if _r == 0 {
 		return ""
@@ -102,18 +115,21 @@ func (bt *BusTrip) BusNumber() string {
 
 // TripDuration returns the trip duration.
 func (bt *BusTrip) TripDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureBusStopLocation returns the departure bus stop location.
 func (bt *BusTrip) DepartureBusStopLocation() obj.Object {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departureBusStopLocation"))
 	return obj.Wrap(_r)
 }
 
 // DeparturePlatform returns the departure platform.
 func (bt *BusTrip) DeparturePlatform() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
 		return ""
@@ -123,12 +139,14 @@ func (bt *BusTrip) DeparturePlatform() string {
 
 // ArrivalBusStopLocation returns the arrival bus stop location.
 func (bt *BusTrip) ArrivalBusStopLocation() obj.Object {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalBusStopLocation"))
 	return obj.Wrap(_r)
 }
 
 // ArrivalPlatform returns the arrival platform.
 func (bt *BusTrip) ArrivalPlatform() string {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {
 		return ""

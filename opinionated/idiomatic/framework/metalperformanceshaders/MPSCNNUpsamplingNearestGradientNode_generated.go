@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,9 @@ func cNNUpsamplingNearestGradientNodeAdopt(id objc.ID) *CNNUpsamplingNearestGrad
 
 // NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY a node to represent the gradient calculation for nearest upsampling training. [forwardFilter gradientFilterWithSources:] is a more convient way to do this.
 func NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingNearestGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), scaleFactorX, scaleFactorY)
 	return cNNUpsamplingNearestGradientNodeAdopt(_id)
@@ -61,12 +66,14 @@ func (cungn *CNNUpsamplingNearestGradientNode) WithLabel(label string) *CNNUpsam
 
 // ScaleFactorX returns the scale factor x.
 func (cungn *CNNUpsamplingNearestGradientNode) ScaleFactorX() float64 {
+	defer runtime.KeepAlive(cungn)
 	_r := objc.Send[float64](objref.IDOf(cungn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY returns the scale factor y.
 func (cungn *CNNUpsamplingNearestGradientNode) ScaleFactorY() float64 {
+	defer runtime.KeepAlive(cungn)
 	_r := objc.Send[float64](objref.IDOf(cungn), objc.RegisterName("scaleFactorY"))
 	return _r
 }

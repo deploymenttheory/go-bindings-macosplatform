@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func techniqueAdopt(id objc.ID) *Technique {
 
 // Description returns the object's -description text.
 func (t *Technique) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Technique) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Technique) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Technique) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -74,12 +81,15 @@ func NewTechnique() *Technique {
 
 // ObjectForKeyedSubscript returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
 func (t *Technique) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the dictionary representation of the technique.
-func (t *Technique) DictionaryRepresentation() obj.Object {
+func (t *Technique) DictionaryRepresentation() map[string]obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("dictionaryRepresentation"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

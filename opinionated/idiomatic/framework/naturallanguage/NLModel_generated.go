@@ -5,7 +5,10 @@
 package naturallanguage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func modelAdopt(id objc.ID) *Model {
 
 // Description returns the object's -description text.
 func (m *Model) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Model) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Model) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Model) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -73,8 +81,9 @@ func NewModel() *Model {
 }
 
 // PredictedLabelForString predicts a label for the given input string.
-func (m *Model) PredictedLabelForString(string_ string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("predictedLabelForString:"), purego.NSString(string_))
+func (m *Model) PredictedLabelForString(str string) string {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("predictedLabelForString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -83,24 +92,28 @@ func (m *Model) PredictedLabelForString(string_ string) string {
 
 // PredictedLabelsForTokens predicts a label for each string in the given array.
 func (m *Model) PredictedLabelsForTokens(tokens []string) []string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("predictedLabelsForTokens:"), purego.SliceToNSArray(tokens, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // PredictedLabelHypothesesForStringMaximumCount predicts multiple possible labels for the given input string.
-func (m *Model) PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("predictedLabelHypothesesForString:maximumCount:"), purego.NSString(string_), maximumCount)
-	return obj.Wrap(_r)
+func (m *Model) PredictedLabelHypothesesForStringMaximumCount(str string, maximumCount int) map[string]*foundation.Number {
+	defer runtime.KeepAlive(m)
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("predictedLabelHypothesesForString:maximumCount:"), purego.NSString(str), maximumCount)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // PredictedLabelHypothesesForTokensMaximumCount predicts multiple possible labels for each string in the given array.
 func (m *Model) PredictedLabelHypothesesForTokensMaximumCount(tokens []string, maximumCount int) []obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("predictedLabelHypothesesForTokens:maximumCount:"), purego.SliceToNSArray(tokens, func(_v string) objc.ID { return purego.NSString(_v) }), maximumCount)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Configuration returns the configuration.
 func (m *Model) Configuration() *ModelConfiguration {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("configuration"))
 	return ModelConfigurationFromID(_r)
 }

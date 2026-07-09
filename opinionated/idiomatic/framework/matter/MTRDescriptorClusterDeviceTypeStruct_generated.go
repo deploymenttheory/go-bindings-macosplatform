@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRDescriptorClusterDeviceTypeStructAdopt(id objc.ID) *MTRDescriptorCluster
 
 // Description returns the object's -description text.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) Description() string {
+	defer runtime.KeepAlive(mdcdts)
 	return rt.Description(objref.IDOf(mdcdts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdcdts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdcdts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdcdts)
 	return rt.IsKind(objref.IDOf(mdcdts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) String() string {
+	defer runtime.KeepAlive(mdcdts)
 	return rt.Description(objref.IDOf(mdcdts))
 }
 
 // WithDeviceType sets the device type.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceTypeStruct {
+	defer runtime.KeepAlive(deviceType)
 	objc.Send[objc.ID](objref.IDOf(mdcdts), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return mdcdts
 }
 
 // WithType sets the type.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) WithType(type_ obj.Object) *MTRDescriptorClusterDeviceTypeStruct {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mdcdts), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mdcdts
 }
 
 // WithRevision sets the revision.
 func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceTypeStruct {
+	defer runtime.KeepAlive(revision)
 	objc.Send[objc.ID](objref.IDOf(mdcdts), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 	return mdcdts
 }
 
 // DeviceType returns the device type.
-func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) DeviceType() obj.Object {
+func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) DeviceType() *foundation.Number {
+	defer runtime.KeepAlive(mdcdts)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcdts), objc.RegisterName("deviceType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Type returns the type.
-func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) Type() obj.Object {
+func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) Type() *foundation.Number {
+	defer runtime.KeepAlive(mdcdts)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcdts), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Revision returns the revision.
-func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) Revision() obj.Object {
+func (mdcdts *MTRDescriptorClusterDeviceTypeStruct) Revision() *foundation.Number {
+	defer runtime.KeepAlive(mdcdts)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcdts), objc.RegisterName("revision"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRDescriptorClusterDeviceTypeStruct marks MTRDescriptorClusterDeviceTypeStruct — and, by embedding promotion, its

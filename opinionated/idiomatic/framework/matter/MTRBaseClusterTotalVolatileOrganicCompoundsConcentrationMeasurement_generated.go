@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAdopt(id
 
 // NewMTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementAdopt(_id)
@@ -58,6 +62,7 @@ func NewMTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithD
 //
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -83,6 +88,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +115,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +168,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +194,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +221,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributePeakMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributePeakMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +300,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +327,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeAverageMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeAverageMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -383,6 +406,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,6 +433,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeUncertaintyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeMeasurementUnitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,6 +512,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -508,6 +539,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeMeasurementMediumWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,6 +565,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +592,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeLevelValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +618,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +645,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +671,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +698,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +724,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +751,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +777,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -758,6 +804,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +830,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +857,7 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,6 +883,8 @@ func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasure
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctvoccm *MTRBaseClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctvoccm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

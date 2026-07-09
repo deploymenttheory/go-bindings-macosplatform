@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -90,6 +92,7 @@ func (t *Torus) WithMaterials(items ...*Material) *Torus {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (t *Torus) WithFirstMaterial(firstMaterial *Material) *Torus {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return t
 }
@@ -103,6 +106,7 @@ func (t *Torus) WithLevelsOfDetail(items ...*LevelOfDetail) *Torus {
 
 // WithTessellator sets the tessellator.
 func (t *Torus) WithTessellator(tessellator *GeometryTessellator) *Torus {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return t
 }
@@ -121,36 +125,42 @@ func (t *Torus) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tor
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (t *Torus) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return t
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (t *Torus) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return t
 }
 
 // RingRadius returns the radius of the torus ring. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (t *Torus) RingRadius() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("ringRadius"))
 	return _r
 }
 
 // PipeRadius returns the radius of the torus pipe. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.25.
 func (t *Torus) PipeRadius() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("pipeRadius"))
 	return _r
 }
 
 // RingSegmentCount returns the number of subdivisions of the ring. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (t *Torus) RingSegmentCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("ringSegmentCount"))
 	return _r
 }
 
 // PipeSegmentCount returns the number of subdivisions of the pipe. Animatable. If the value is less than 3, the behavior is undefined. The default value is 24.
 func (t *Torus) PipeSegmentCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("pipeSegmentCount"))
 	return _r
 }

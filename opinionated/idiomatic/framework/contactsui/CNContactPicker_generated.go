@@ -5,8 +5,11 @@
 package contactsui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func contactPickerAdopt(id objc.ID) *ContactPicker {
 
 // Description returns the object's -description text.
 func (cp *ContactPicker) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *ContactPicker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *ContactPicker) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *ContactPicker) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
@@ -79,8 +87,19 @@ func (cp *ContactPicker) WithDisplayedKeys(items ...obj.Object) *ContactPicker {
 	return cp
 }
 
+// WithDelegate sets the picker delegate to be notified when the user chooses a contact.
+func (cp *ContactPicker) WithDelegate(delegate ContactPickerDelegate) *ContactPicker {
+	_shim := newContactPickerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cp), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cp), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cp
+}
+
 // Close closes the popover.
 func (cp *ContactPicker) Close() {
+	defer runtime.KeepAlive(cp)
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("close"))
 }
 
@@ -88,6 +107,7 @@ func (cp *ContactPicker) Close() {
 //
 // DisplayedKeys returns the collection as a Go slice.
 func (cp *ContactPicker) DisplayedKeys() []string {
+	defer runtime.KeepAlive(cp)
 	_arr := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("displayedKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

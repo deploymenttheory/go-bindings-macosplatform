@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func functionConstantAdopt(id objc.ID) *FunctionConstant {
 
 // Description returns the object's -description text.
 func (fc *FunctionConstant) Description() string {
+	defer runtime.KeepAlive(fc)
 	return rt.Description(objref.IDOf(fc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fc *FunctionConstant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fc *FunctionConstant) IsKind(className string) bool {
+	defer runtime.KeepAlive(fc)
 	return rt.IsKind(objref.IDOf(fc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fc *FunctionConstant) String() string {
+	defer runtime.KeepAlive(fc)
 	return rt.Description(objref.IDOf(fc))
 }
 
@@ -74,6 +81,7 @@ func NewFunctionConstant() *FunctionConstant {
 
 // Name returns the name.
 func (fc *FunctionConstant) Name() string {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,18 +91,21 @@ func (fc *FunctionConstant) Name() string {
 
 // Type returns the type.
 func (fc *FunctionConstant) Type() DataType {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[DataType](objref.IDOf(fc), objc.RegisterName("type"))
 	return _r
 }
 
 // Index returns the index.
 func (fc *FunctionConstant) Index() int {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[int](objref.IDOf(fc), objc.RegisterName("index"))
 	return _r
 }
 
 // Required wraps the corresponding Objective-C method.
 func (fc *FunctionConstant) Required() bool {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[bool](objref.IDOf(fc), objc.RegisterName("required"))
 	return _r
 }

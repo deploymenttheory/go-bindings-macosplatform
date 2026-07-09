@@ -5,7 +5,10 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func pickerResultAdopt(id objc.ID) *PickerResult {
 
 // Description returns the object's -description text.
 func (pr *PickerResult) Description() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pr *PickerResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pr *PickerResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(pr)
 	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pr *PickerResult) String() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
@@ -71,13 +79,15 @@ func NewPickerResult() *PickerResult {
 }
 
 // ItemProvider returns representations of the selected asset.
-func (pr *PickerResult) ItemProvider() obj.Object {
+func (pr *PickerResult) ItemProvider() *foundation.ItemProvider {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("itemProvider"))
-	return obj.Wrap(_r)
+	return foundation.ItemProviderFromID(_r)
 }
 
 // AssetIdentifier returns the local identifier of the selected asset.
 func (pr *PickerResult) AssetIdentifier() string {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("assetIdentifier"))
 	if _r == 0 {
 		return ""

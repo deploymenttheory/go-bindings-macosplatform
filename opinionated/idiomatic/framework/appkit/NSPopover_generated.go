@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -61,6 +64,7 @@ func NewPopover() *Popover {
 
 // NewPopoverWithCoder creates a new Popover.
 func NewPopoverWithCoder(coder obj.Object) *Popover {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *Popover
 	purego.Main(func() {
 		_mainthread0 = func() *Popover {
@@ -72,8 +76,21 @@ func NewPopoverWithCoder(coder obj.Object) *Popover {
 	return _mainthread0
 }
 
+// WithDelegate sets the delegate of the popover.
+func (p *Popover) WithDelegate(delegate PopoverDelegate) *Popover {
+	_shim := newPopoverDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(p), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return p
+}
+
 // WithAppearance sets the appearance of the popover.
 func (p *Popover) WithAppearance(appearance *Appearance) *Popover {
+	defer runtime.KeepAlive(appearance)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 	})
@@ -98,6 +115,7 @@ func (p *Popover) WithAnimates(animates bool) *Popover {
 
 // WithContentViewController sets the view controller that manages the content of the popover.
 func (p *Popover) WithContentViewController(contentViewController ViewControllerProvider) *Popover {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -130,6 +148,7 @@ func (p *Popover) WithHasFullSizeContent(hasFullSizeContent bool) *Popover {
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (p *Popover) WithNextResponder(nextResponder ResponderProvider) *Popover {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -138,6 +157,7 @@ func (p *Popover) WithNextResponder(nextResponder ResponderProvider) *Popover {
 
 // WithMenu sets returns the responder’s menu.
 func (p *Popover) WithMenu(menu *Menu) *Popover {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -146,6 +166,7 @@ func (p *Popover) WithMenu(menu *Menu) *Popover {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (p *Popover) WithUserActivity(userActivity obj.Object) *Popover {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -154,6 +175,7 @@ func (p *Popover) WithUserActivity(userActivity obj.Object) *Popover {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (p *Popover) WithTouchBar(touchBar *TouchBar) *Popover {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -162,6 +184,8 @@ func (p *Popover) WithTouchBar(touchBar *TouchBar) *Popover {
 
 // ShowRelativeToToolbarItem shows the popover anchored to the specified toolbar item.
 func (p *Popover) ShowRelativeToToolbarItem(toolbarItem *ToolbarItem) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(toolbarItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("showRelativeToToolbarItem:"), objref.IDOf(toolbarItem))
 	})
@@ -170,6 +194,8 @@ func (p *Popover) ShowRelativeToToolbarItem(toolbarItem *ToolbarItem) {
 
 // PerformClose attempts to close the popover.
 func (p *Popover) PerformClose(sender obj.Object) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("performClose:"), objref.IDOf(sender))
 	})
@@ -178,6 +204,7 @@ func (p *Popover) PerformClose(sender obj.Object) {
 
 // Close forces the popover to close without consulting its delegate.
 func (p *Popover) Close() {
+	defer runtime.KeepAlive(p)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("close"))
 	})
@@ -186,6 +213,7 @@ func (p *Popover) Close() {
 
 // Appearance returns the appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance. If nil is set, nil will be returned, and the effective appearance will return to the default. To prevent conflicts with the previous appearance property, this is only available for apps that target 10.10 and higher.
 func (p *Popover) Appearance() *Appearance {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 *Appearance
 	purego.Main(func() {
 		_mainthread0 = func() *Appearance {
@@ -199,6 +227,7 @@ func (p *Popover) Appearance() *Appearance {
 
 // EffectiveAppearance returns the effective appearance.
 func (p *Popover) EffectiveAppearance() *Appearance {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 *Appearance
 	purego.Main(func() {
 		_mainthread0 = func() *Appearance {
@@ -212,6 +241,7 @@ func (p *Popover) EffectiveAppearance() *Appearance {
 
 // Behavior returns the behavior.
 func (p *Popover) Behavior() PopoverBehavior {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 PopoverBehavior
 	purego.Main(func() {
 		_mainthread0 = func() PopoverBehavior {
@@ -225,6 +255,7 @@ func (p *Popover) Behavior() PopoverBehavior {
 
 // Animates wraps the corresponding Objective-C method.
 func (p *Popover) Animates() bool {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -238,6 +269,7 @@ func (p *Popover) Animates() bool {
 
 // ContentViewController returns the content view controller.
 func (p *Popover) ContentViewController() *ViewController {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -251,6 +283,7 @@ func (p *Popover) ContentViewController() *ViewController {
 
 // ContentSize returns the content size.
 func (p *Popover) ContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -264,6 +297,7 @@ func (p *Popover) ContentSize() corefoundation.CGSize {
 
 // IsShown reports whether the object is shown.
 func (p *Popover) IsShown() bool {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -277,6 +311,7 @@ func (p *Popover) IsShown() bool {
 
 // IsDetached reports whether returns \c true if the window is detached to an implicitly created detached window, \c false otherwise. This method does not apply when the popover is detached to a window returned with \c -detachableWindowForPopover:.
 func (p *Popover) IsDetached() bool {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -290,6 +325,7 @@ func (p *Popover) IsDetached() bool {
 
 // PositioningRect returns the positioning rect.
 func (p *Popover) PositioningRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -303,6 +339,7 @@ func (p *Popover) PositioningRect() corefoundation.CGRect {
 
 // HasFullSizeContent reports whether the object has full size content.
 func (p *Popover) HasFullSizeContent() bool {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

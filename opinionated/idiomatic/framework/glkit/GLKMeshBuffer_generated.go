@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func meshBufferAdopt(id objc.ID) *MeshBuffer {
 
 // Description returns the object's -description text.
 func (mb *MeshBuffer) Description() string {
+	defer runtime.KeepAlive(mb)
 	return rt.Description(objref.IDOf(mb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mb *MeshBuffer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mb *MeshBuffer) IsKind(className string) bool {
+	defer runtime.KeepAlive(mb)
 	return rt.IsKind(objref.IDOf(mb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mb *MeshBuffer) String() string {
+	defer runtime.KeepAlive(mb)
 	return rt.Description(objref.IDOf(mb))
 }
 
@@ -72,24 +79,28 @@ func NewMeshBuffer() *MeshBuffer {
 
 // Length returns size in bytes of the buffer allocation
 func (mb *MeshBuffer) Length() int {
+	defer runtime.KeepAlive(mb)
 	_r := objc.Send[int](objref.IDOf(mb), objc.RegisterName("length"))
 	return _r
 }
 
 // Allocator returns allocator object used to create this buffer. This allcoator used for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer)
 func (mb *MeshBuffer) Allocator() *MeshBufferAllocator {
+	defer runtime.KeepAlive(mb)
 	_r := objc.Send[objc.ID](objref.IDOf(mb), objc.RegisterName("allocator"))
 	return MeshBufferAllocatorFromID(_r)
 }
 
 // GlBufferName returns glBufferName for buffer object backing vertex/index data Many GLKMeshBuffers may reference the same OpenGL buffer object, but each with its own offset.  (i.e. Many GLKMeshBuffers may be suballocated from a single OpenGL buffer object)
 func (mb *MeshBuffer) GlBufferName() uint32 {
+	defer runtime.KeepAlive(mb)
 	_r := objc.Send[uint32](objref.IDOf(mb), objc.RegisterName("glBufferName"))
 	return _r
 }
 
 // Offset returns byte offset of the data within the OpenGL buffer
 func (mb *MeshBuffer) Offset() int {
+	defer runtime.KeepAlive(mb)
 	_r := objc.Send[int](objref.IDOf(mb), objc.RegisterName("offset"))
 	return _r
 }

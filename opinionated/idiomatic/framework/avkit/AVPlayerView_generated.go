@@ -5,9 +5,13 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -48,22 +52,27 @@ func playerViewAdopt(id objc.ID) *PlayerView {
 
 // Description returns the object's -description text.
 func (pv *PlayerView) Description() string {
+	defer runtime.KeepAlive(pv)
 	return rt.Description(objref.IDOf(pv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pv *PlayerView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pv *PlayerView) IsKind(className string) bool {
+	defer runtime.KeepAlive(pv)
 	return rt.IsKind(objref.IDOf(pv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pv *PlayerView) String() string {
+	defer runtime.KeepAlive(pv)
 	return rt.Description(objref.IDOf(pv))
 }
 
@@ -81,6 +90,7 @@ func NewPlayerView() *PlayerView {
 
 // WithPlayer sets the player instance that provides the media content for the view.
 func (pv *PlayerView) WithPlayer(player obj.Object) *PlayerView {
+	defer runtime.KeepAlive(player)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	})
@@ -97,6 +107,7 @@ func (pv *PlayerView) WithControlsStyle(controlsStyle PlayerViewControlsStyle) *
 
 // WithVideoGravity sets a value that determines how the player view displays video content within its bounds.
 func (pv *PlayerView) WithVideoGravity(videoGravity obj.Object) *PlayerView {
+	defer runtime.KeepAlive(videoGravity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 	})
@@ -108,6 +119,18 @@ func (pv *PlayerView) WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCente
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setUpdatesNowPlayingInfoCenter:"), updatesNowPlayingInfoCenter)
 	})
+	return pv
+}
+
+// WithDelegate sets the player view’s delegate object.
+func (pv *PlayerView) WithDelegate(delegate PlayerViewDelegate) *PlayerView {
+	_shim := newPlayerViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return pv
 }
 
@@ -178,6 +201,7 @@ func (pv *PlayerView) WithShowsSharingServiceButton(showsSharingServiceButton bo
 
 // WithActionPopUpButtonMenu sets an action pop-up button menu that the player view displays.
 func (pv *PlayerView) WithActionPopUpButtonMenu(actionPopUpButtonMenu obj.Object) *PlayerView {
+	defer runtime.KeepAlive(actionPopUpButtonMenu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setActionPopUpButtonMenu:"), objref.IDOf(actionPopUpButtonMenu))
 	})
@@ -208,8 +232,22 @@ func (pv *PlayerView) WithAllowsPictureInPicturePlayback(allowsPictureInPictureP
 	return pv
 }
 
+// WithPictureInPictureDelegate sets the Picture in Picture delegate object.
+func (pv *PlayerView) WithPictureInPictureDelegate(pictureInPictureDelegate PlayerViewPictureInPictureDelegate) *PlayerView {
+	_shim := newPlayerViewPictureInPictureDelegateShim(pictureInPictureDelegate)
+	_sel := objc.RegisterName("setPictureInPictureDelegate:")
+	shim.Associate(objref.IDOf(pv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pv
+}
+
 // SelectSpeed selects a specified playback speed.
 func (pv *PlayerView) SelectSpeed(speed *PlaybackSpeed) {
+	defer runtime.KeepAlive(pv)
+	defer runtime.KeepAlive(speed)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("selectSpeed:"), objref.IDOf(speed))
 	})
@@ -218,6 +256,7 @@ func (pv *PlayerView) SelectSpeed(speed *PlaybackSpeed) {
 
 // SetMagnificationCenteredAtPoint scales the video’s view by a specified factor, and centers the result on a specified point.
 func (pv *PlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(pv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
 	})
@@ -226,6 +265,7 @@ func (pv *PlayerView) SetMagnificationCenteredAtPoint(magnification float64, poi
 
 // Player returns the player from which to source the media content for the view.
 func (pv *PlayerView) Player() obj.Object {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -239,6 +279,7 @@ func (pv *PlayerView) Player() obj.Object {
 
 // ControlsStyle returns the style of the playback controls pane currently associated with the view. After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
 func (pv *PlayerView) ControlsStyle() PlayerViewControlsStyle {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 PlayerViewControlsStyle
 	purego.Main(func() {
 		_mainthread0 = func() PlayerViewControlsStyle {
@@ -251,12 +292,13 @@ func (pv *PlayerView) ControlsStyle() PlayerViewControlsStyle {
 }
 
 // VideoGravity returns a string defining how the video is displayed within an AVPlayerLayer bounds rect. Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
-func (pv *PlayerView) VideoGravity() obj.Object {
-	var _mainthread0 obj.Object
+func (pv *PlayerView) VideoGravity() *foundation.String {
+	defer runtime.KeepAlive(pv)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("videoGravity"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -265,6 +307,7 @@ func (pv *PlayerView) VideoGravity() obj.Object {
 
 // IsReadyForDisplay reports whether boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
 func (pv *PlayerView) IsReadyForDisplay() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -278,6 +321,7 @@ func (pv *PlayerView) IsReadyForDisplay() bool {
 
 // VideoBounds returns the current size and position of the video image as displayed within the receiver's view's bounds.
 func (pv *PlayerView) VideoBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -291,6 +335,7 @@ func (pv *PlayerView) VideoBounds() corefoundation.CGRect {
 
 // ContentOverlayView returns use the content overlay view to add additional custom views between the video content and the controls.
 func (pv *PlayerView) ContentOverlayView() obj.Object {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -304,6 +349,7 @@ func (pv *PlayerView) ContentOverlayView() obj.Object {
 
 // UpdatesNowPlayingInfoCenter reports whether the now playing info center should be updated. Default is true.
 func (pv *PlayerView) UpdatesNowPlayingInfoCenter() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -319,6 +365,7 @@ func (pv *PlayerView) UpdatesNowPlayingInfoCenter() bool {
 //
 // Speeds returns the collection as a Go slice.
 func (pv *PlayerView) Speeds() []*PlaybackSpeed {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 []*PlaybackSpeed
 	purego.Main(func() {
 		_mainthread0 = func() []*PlaybackSpeed {
@@ -331,6 +378,7 @@ func (pv *PlayerView) Speeds() []*PlaybackSpeed {
 
 // SelectedSpeed returns the currently selected playback speed. Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
 func (pv *PlayerView) SelectedSpeed() *PlaybackSpeed {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 *PlaybackSpeed
 	purego.Main(func() {
 		_mainthread0 = func() *PlaybackSpeed {
@@ -344,6 +392,7 @@ func (pv *PlayerView) SelectedSpeed() *PlaybackSpeed {
 
 // AllowsVideoFrameAnalysis reports whether when set to true, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is true.
 func (pv *PlayerView) AllowsVideoFrameAnalysis() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -357,6 +406,7 @@ func (pv *PlayerView) AllowsVideoFrameAnalysis() bool {
 
 // VideoFrameAnalysisTypes returns the types of items AVPlayerView looks for in a paused video frame.
 func (pv *PlayerView) VideoFrameAnalysisTypes() VideoFrameAnalysisType {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 VideoFrameAnalysisType
 	purego.Main(func() {
 		_mainthread0 = func() VideoFrameAnalysisType {
@@ -370,6 +420,7 @@ func (pv *PlayerView) VideoFrameAnalysisTypes() VideoFrameAnalysisType {
 
 // AllowsMagnification reports whether the magnify gesture will change the video's view magnification. The default value is false. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is false. This behavior matches the behavior of NSScrollView.
 func (pv *PlayerView) AllowsMagnification() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -383,6 +434,7 @@ func (pv *PlayerView) AllowsMagnification() bool {
 
 // Magnification returns the factor by which the video's view is currently scaled. The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
 func (pv *PlayerView) Magnification() float64 {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -396,6 +448,7 @@ func (pv *PlayerView) Magnification() float64 {
 
 // PreferredDisplayDynamicRange describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
 func (pv *PlayerView) PreferredDisplayDynamicRange() DisplayDynamicRange {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 DisplayDynamicRange
 	purego.Main(func() {
 		_mainthread0 = func() DisplayDynamicRange {
@@ -409,6 +462,7 @@ func (pv *PlayerView) PreferredDisplayDynamicRange() DisplayDynamicRange {
 
 // ShowsFrameSteppingButtons reports whether replace scanning controls in the playback UI with frame stepping buttons. Default is false.
 func (pv *PlayerView) ShowsFrameSteppingButtons() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -422,6 +476,7 @@ func (pv *PlayerView) ShowsFrameSteppingButtons() bool {
 
 // ShowsSharingServiceButton reports whether the controls pane will show a sharing service button when the current player item can be shared. Default is false.
 func (pv *PlayerView) ShowsSharingServiceButton() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -435,6 +490,7 @@ func (pv *PlayerView) ShowsSharingServiceButton() bool {
 
 // ActionPopUpButtonMenu returns clients can set this property in order to show an action pop up button. Default is nil.
 func (pv *PlayerView) ActionPopUpButtonMenu() obj.Object {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -448,6 +504,7 @@ func (pv *PlayerView) ActionPopUpButtonMenu() obj.Object {
 
 // ShowsFullScreenToggleButton reports whether the controls pane will show a full screen toggle button. Default is false.
 func (pv *PlayerView) ShowsFullScreenToggleButton() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -461,6 +518,7 @@ func (pv *PlayerView) ShowsFullScreenToggleButton() bool {
 
 // ShowsTimecodes reports whether if timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is false.
 func (pv *PlayerView) ShowsTimecodes() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -474,6 +532,7 @@ func (pv *PlayerView) ShowsTimecodes() bool {
 
 // CanBeginTrimming reports whether the current media can be trimmed.
 func (pv *PlayerView) CanBeginTrimming() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -487,6 +546,7 @@ func (pv *PlayerView) CanBeginTrimming() bool {
 
 // FlashChapterNumberChapterTitle displays the chapter number and title in the player view for a brief moment.
 func (pv *PlayerView) FlashChapterNumberChapterTitle(chapterNumber int, chapterTitle string) {
+	defer runtime.KeepAlive(pv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pv), objc.RegisterName("flashChapterNumber:chapterTitle:"), chapterNumber, purego.NSString(chapterTitle))
 	})
@@ -495,6 +555,7 @@ func (pv *PlayerView) FlashChapterNumberChapterTitle(chapterNumber int, chapterT
 
 // AllowsPictureInPicturePlayback reports whether the receiver allows Picture in Picture playback. Default is false.
 func (pv *PlayerView) AllowsPictureInPicturePlayback() bool {
+	defer runtime.KeepAlive(pv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

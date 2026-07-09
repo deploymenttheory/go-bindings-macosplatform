@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTROTAHeaderParserAdopt(id objc.ID) *MTROTAHeaderParser {
 
 // Description returns the object's -description text.
 func (mhp *MTROTAHeaderParser) Description() string {
+	defer runtime.KeepAlive(mhp)
 	return rt.Description(objref.IDOf(mhp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mhp *MTROTAHeaderParser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mhp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mhp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mhp *MTROTAHeaderParser) IsKind(className string) bool {
+	defer runtime.KeepAlive(mhp)
 	return rt.IsKind(objref.IDOf(mhp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mhp *MTROTAHeaderParser) String() string {
+	defer runtime.KeepAlive(mhp)
 	return rt.Description(objref.IDOf(mhp))
 }
 

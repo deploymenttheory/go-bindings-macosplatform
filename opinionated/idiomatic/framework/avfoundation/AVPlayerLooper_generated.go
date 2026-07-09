@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,34 @@ func playerLooperAdopt(id objc.ID) *PlayerLooper {
 
 // Description returns the object's -description text.
 func (pl *PlayerLooper) Description() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pl *PlayerLooper) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pl *PlayerLooper) IsKind(className string) bool {
+	defer runtime.KeepAlive(pl)
 	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pl *PlayerLooper) String() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
 // NewPlayerLooperWithPlayerTemplateItemTimeRange creates a player looper that continuously plays the specified time range of a player item.
 func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *QueuePlayer, itemToLoop *PlayerItem, loopRange coremedia.CMTimeRange) *PlayerLooper {
+	defer runtime.KeepAlive(player)
+	defer runtime.KeepAlive(itemToLoop)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:"), objref.IDOf(player), objref.IDOf(itemToLoop), loopRange)
 	return playerLooperAdopt(_id)
@@ -76,6 +85,8 @@ func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *QueuePlayer, itemToL
 
 // NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering creates a player looper that continuously plays the full duration of a player item while adhering to the specified ordering of existing items in the queue.
 func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player *QueuePlayer, itemToLoop *PlayerItem, loopRange coremedia.CMTimeRange, itemOrdering PlayerLooperItemOrdering) *PlayerLooper {
+	defer runtime.KeepAlive(player)
+	defer runtime.KeepAlive(itemToLoop)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:existingItemsOrdering:"), objref.IDOf(player), objref.IDOf(itemToLoop), loopRange, itemOrdering)
 	return playerLooperAdopt(_id)
@@ -83,17 +94,20 @@ func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player 
 
 // DisableLooping disables looping for the player queue.
 func (pl *PlayerLooper) DisableLooping() {
+	defer runtime.KeepAlive(pl)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("disableLooping"))
 }
 
 // Status returns the ability of the receiver to be used for looping playback. The value of this property is an AVPlayerLooperStatus that indicates whether the receiver is ready for looping playback. When the value of this property is AVPlayerStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. This property is key value observable.
 func (pl *PlayerLooper) Status() PlayerLooperStatus {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[PlayerLooperStatus](objref.IDOf(pl), objc.RegisterName("status"))
 	return _r
 }
 
 // LoopCount returns number of times the specified AVPlayerItem has been played Starts at 0 and increments when the player starts playback of the AVPlayerItem again. This property is key value observable.
 func (pl *PlayerLooper) LoopCount() int {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("loopCount"))
 	return _r
 }
@@ -102,6 +116,7 @@ func (pl *PlayerLooper) LoopCount() int {
 //
 // LoopingPlayerItems returns the collection as a Go slice.
 func (pl *PlayerLooper) LoopingPlayerItems() []*PlayerItem {
+	defer runtime.KeepAlive(pl)
 	_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("loopingPlayerItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }

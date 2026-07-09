@@ -156,8 +156,8 @@ func (o *EKCalendarItem) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *EKCalendarItem) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_eKCalendarItemSelSetURL, uRL.Ptr())
+func (o *EKCalendarItem) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_eKCalendarItemSelSetURL, url.Ptr())
 }
 
 func (o *EKCalendarItem) LastModifiedDate() *foundation.NSDate {

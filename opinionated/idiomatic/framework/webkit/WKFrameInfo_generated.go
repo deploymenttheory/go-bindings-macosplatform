@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func wKFrameInfoAdopt(id objc.ID) *WKFrameInfo {
 
 // Description returns the object's -description text.
 func (wfi *WKFrameInfo) Description() string {
+	defer runtime.KeepAlive(wfi)
 	return rt.Description(objref.IDOf(wfi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wfi *WKFrameInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wfi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wfi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wfi *WKFrameInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(wfi)
 	return rt.IsKind(objref.IDOf(wfi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wfi *WKFrameInfo) String() string {
+	defer runtime.KeepAlive(wfi)
 	return rt.Description(objref.IDOf(wfi))
 }
 
@@ -80,6 +88,7 @@ func NewWKFrameInfo() *WKFrameInfo {
 
 // IsMainFrame reports whether the frame is the main frame or a subframe.
 func (wfi *WKFrameInfo) IsMainFrame() bool {
+	defer runtime.KeepAlive(wfi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -92,12 +101,13 @@ func (wfi *WKFrameInfo) IsMainFrame() bool {
 }
 
 // Request returns the frame's current request.
-func (wfi *WKFrameInfo) Request() obj.Object {
-	var _mainthread0 obj.Object
+func (wfi *WKFrameInfo) Request() *foundation.URLRequest {
+	defer runtime.KeepAlive(wfi)
+	var _mainthread0 *foundation.URLRequest
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.URLRequest {
 			_r := objc.Send[objc.ID](objref.IDOf(wfi), objc.RegisterName("request"))
-			return obj.Wrap(_r)
+			return foundation.URLRequestFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -106,6 +116,7 @@ func (wfi *WKFrameInfo) Request() obj.Object {
 
 // SecurityOrigin returns the frame's current security origin.
 func (wfi *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
+	defer runtime.KeepAlive(wfi)
 	var _mainthread0 *WKSecurityOrigin
 	purego.Main(func() {
 		_mainthread0 = func() *WKSecurityOrigin {
@@ -119,6 +130,7 @@ func (wfi *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
 
 // WebView returns the web view of the webpage that contains this frame.
 func (wfi *WKFrameInfo) WebView() *WKWebView {
+	defer runtime.KeepAlive(wfi)
 	var _mainthread0 *WKWebView
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebView {

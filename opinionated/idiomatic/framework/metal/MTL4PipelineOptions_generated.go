@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4PipelineOptionsAdopt(id objc.ID) *MTL4PipelineOptions {
 
 // Description returns the object's -description text.
 func (mpo *MTL4PipelineOptions) Description() string {
+	defer runtime.KeepAlive(mpo)
 	return rt.Description(objref.IDOf(mpo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpo *MTL4PipelineOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpo *MTL4PipelineOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpo)
 	return rt.IsKind(objref.IDOf(mpo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpo *MTL4PipelineOptions) String() string {
+	defer runtime.KeepAlive(mpo)
 	return rt.Description(objref.IDOf(mpo))
 }
 
@@ -86,12 +93,14 @@ func (mpo *MTL4PipelineOptions) WithShaderReflection(shaderReflection MTL4Shader
 
 // ShaderValidation returns controls whether to enable or disable Metal Shader Validation for the pipeline.
 func (mpo *MTL4PipelineOptions) ShaderValidation() ShaderValidation {
+	defer runtime.KeepAlive(mpo)
 	_r := objc.Send[ShaderValidation](objref.IDOf(mpo), objc.RegisterName("shaderValidation"))
 	return _r
 }
 
 // ShaderReflection returns controls whether to include Metal shader reflection in this pipeline.
 func (mpo *MTL4PipelineOptions) ShaderReflection() MTL4ShaderReflection {
+	defer runtime.KeepAlive(mpo)
 	_r := objc.Send[MTL4ShaderReflection](objref.IDOf(mpo), objc.RegisterName("shaderReflection"))
 	return _r
 }

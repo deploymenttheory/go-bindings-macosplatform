@@ -37,15 +37,15 @@ type XColor struct {
 }
 
 type XExtCodes struct {
-	Extension    int
-	Major_opcode int
-	First_event  int
-	First_error  int
+	Extension   int
+	MajorOpcode int
+	FirstEvent  int
+	FirstError  int
 }
 
 type XFontSetExtents struct {
-	Max_ink_extent     XRectangle
-	Max_logical_extent XRectangle
+	MaxInkExtent     XRectangle
+	MaxLogicalExtent XRectangle
 }
 
 type XIMPreeditCaretCallbackStruct struct {
@@ -55,20 +55,20 @@ type XIMPreeditCaretCallbackStruct struct {
 }
 
 type XKeyboardControl struct {
-	Key_click_percent int
-	Bell_percent      int
-	Bell_pitch        int
-	Bell_duration     int
-	Led               int
-	Led_mode          int
-	Key               int
-	Auto_repeat_mode  int
+	KeyClickPercent int
+	BellPercent     int
+	BellPitch       int
+	BellDuration    int
+	Led             int
+	LedMode         int
+	Key             int
+	AutoRepeatMode  int
 }
 
 type XPixmapFormatValues struct {
-	Depth          int
-	Bits_per_pixel int
-	Scanline_pad   int
+	Depth        int
+	BitsPerPixel int
+	ScanlinePad  int
 }
 
 type XPoint struct {

@@ -8,67 +8,67 @@ import (
 	"fmt"
 )
 
-type Tk_Anchor int64
+type Anchor int64
 
 const (
-	TK_ANCHOR_N      Tk_Anchor = 0
-	TK_ANCHOR_NE     Tk_Anchor = 1
-	TK_ANCHOR_E      Tk_Anchor = 2
-	TK_ANCHOR_SE     Tk_Anchor = 3
-	TK_ANCHOR_S      Tk_Anchor = 4
-	TK_ANCHOR_SW     Tk_Anchor = 5
-	TK_ANCHOR_W      Tk_Anchor = 6
-	TK_ANCHOR_NW     Tk_Anchor = 7
-	TK_ANCHOR_CENTER Tk_Anchor = 8
+	AnchorN      Anchor = 0
+	AnchorNe     Anchor = 1
+	AnchorE      Anchor = 2
+	AnchorSe     Anchor = 3
+	AnchorS      Anchor = 4
+	AnchorSw     Anchor = 5
+	AnchorW      Anchor = 6
+	AnchorNw     Anchor = 7
+	AnchorCenter Anchor = 8
 )
 
-// String returns the Tk_Anchor constant's name, or its numeric form when the
+// String returns the Anchor constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tk_Anchor) String() string {
+func (e Anchor) String() string {
 	switch e {
-	case TK_ANCHOR_N:
-		return "TK_ANCHOR_N"
-	case TK_ANCHOR_NE:
-		return "TK_ANCHOR_NE"
-	case TK_ANCHOR_E:
-		return "TK_ANCHOR_E"
-	case TK_ANCHOR_SE:
-		return "TK_ANCHOR_SE"
-	case TK_ANCHOR_S:
-		return "TK_ANCHOR_S"
-	case TK_ANCHOR_SW:
-		return "TK_ANCHOR_SW"
-	case TK_ANCHOR_W:
-		return "TK_ANCHOR_W"
-	case TK_ANCHOR_NW:
-		return "TK_ANCHOR_NW"
-	case TK_ANCHOR_CENTER:
-		return "TK_ANCHOR_CENTER"
+	case AnchorN:
+		return "AnchorN"
+	case AnchorNe:
+		return "AnchorNe"
+	case AnchorE:
+		return "AnchorE"
+	case AnchorSe:
+		return "AnchorSe"
+	case AnchorS:
+		return "AnchorS"
+	case AnchorSw:
+		return "AnchorSw"
+	case AnchorW:
+		return "AnchorW"
+	case AnchorNw:
+		return "AnchorNw"
+	case AnchorCenter:
+		return "AnchorCenter"
 	default:
-		return fmt.Sprintf("Tk_Anchor(%d)", int64(e))
+		return fmt.Sprintf("Anchor(%d)", int64(e))
 	}
 }
 
-type Tk_Justify int64
+type Justify int64
 
 const (
-	TK_JUSTIFY_LEFT   Tk_Justify = 0
-	TK_JUSTIFY_RIGHT  Tk_Justify = 1
-	TK_JUSTIFY_CENTER Tk_Justify = 2
+	JustifyLeft   Justify = 0
+	JustifyRight  Justify = 1
+	JustifyCenter Justify = 2
 )
 
-// String returns the Tk_Justify constant's name, or its numeric form when the
+// String returns the Justify constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tk_Justify) String() string {
+func (e Justify) String() string {
 	switch e {
-	case TK_JUSTIFY_LEFT:
-		return "TK_JUSTIFY_LEFT"
-	case TK_JUSTIFY_RIGHT:
-		return "TK_JUSTIFY_RIGHT"
-	case TK_JUSTIFY_CENTER:
-		return "TK_JUSTIFY_CENTER"
+	case JustifyLeft:
+		return "JustifyLeft"
+	case JustifyRight:
+		return "JustifyRight"
+	case JustifyCenter:
+		return "JustifyCenter"
 	default:
-		return fmt.Sprintf("Tk_Justify(%d)", int64(e))
+		return fmt.Sprintf("Justify(%d)", int64(e))
 	}
 }
 

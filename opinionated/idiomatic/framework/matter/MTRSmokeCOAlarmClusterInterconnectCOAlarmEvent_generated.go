@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSmokeCOAlarmClusterInterconnectCOAlarmEventAdopt(id objc.ID) *MTRSmokeCO
 
 // Description returns the object's -description text.
 func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) Description() string {
+	defer runtime.KeepAlive(mscacicae)
 	return rt.Description(objref.IDOf(mscacicae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscacicae)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscacicae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscacicae)
 	return rt.IsKind(objref.IDOf(mscacicae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) String() string {
+	defer runtime.KeepAlive(mscacicae)
 	return rt.Description(objref.IDOf(mscacicae))
 }
 
@@ -72,12 +80,14 @@ func NewMTRSmokeCOAlarmClusterInterconnectCOAlarmEvent() *MTRSmokeCOAlarmCluster
 
 // WithAlarmSeverityLevel sets the alarm severity level.
 func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent {
+	defer runtime.KeepAlive(alarmSeverityLevel)
 	objc.Send[objc.ID](objref.IDOf(mscacicae), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 	return mscacicae
 }
 
 // AlarmSeverityLevel returns the alarm severity level.
-func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) AlarmSeverityLevel() obj.Object {
+func (mscacicae *MTRSmokeCOAlarmClusterInterconnectCOAlarmEvent) AlarmSeverityLevel() *foundation.Number {
+	defer runtime.KeepAlive(mscacicae)
 	_r := objc.Send[objc.ID](objref.IDOf(mscacicae), objc.RegisterName("alarmSeverityLevel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

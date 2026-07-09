@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetResourceRequestOptionsAdopt(id objc.ID) *AssetResourceRequestOptions {
 
 // Description returns the object's -description text.
 func (arro *AssetResourceRequestOptions) Description() string {
+	defer runtime.KeepAlive(arro)
 	return rt.Description(objref.IDOf(arro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arro *AssetResourceRequestOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arro *AssetResourceRequestOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(arro)
 	return rt.IsKind(objref.IDOf(arro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arro *AssetResourceRequestOptions) String() string {
+	defer runtime.KeepAlive(arro)
 	return rt.Description(objref.IDOf(arro))
 }
 
@@ -86,6 +93,7 @@ func (arro *AssetResourceRequestOptions) WithProgressHandler(progressHandler fun
 
 // IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (arro *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
+	defer runtime.KeepAlive(arro)
 	_r := objc.Send[bool](objref.IDOf(arro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }

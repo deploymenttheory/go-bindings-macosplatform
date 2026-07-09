@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -153,6 +155,7 @@ func (dfse *DOMHTMLFieldSetElement) WithTextContent(textContent string) *DOMHTML
 
 // Form returns the form.
 func (dfse *DOMHTMLFieldSetElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(dfse)
 	_r := objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }

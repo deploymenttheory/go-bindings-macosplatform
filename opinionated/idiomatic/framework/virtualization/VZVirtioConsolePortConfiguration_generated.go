@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (vcpc *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *Virti
 
 // WithAttachment sets the serial port attachment.
 func (vcpc *VirtioConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(vcpc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return vcpc
 }
 
 // Name returns the console port's name. The default behavior is to not use a name unless set.
 func (vcpc *VirtioConsolePortConfiguration) Name() string {
+	defer runtime.KeepAlive(vcpc)
 	_r := objc.Send[objc.ID](objref.IDOf(vcpc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -80,6 +84,7 @@ func (vcpc *VirtioConsolePortConfiguration) Name() string {
 
 // IsConsole reports whether the console port may be marked for use as the system console. The default is false.
 func (vcpc *VirtioConsolePortConfiguration) IsConsole() bool {
+	defer runtime.KeepAlive(vcpc)
 	_r := objc.Send[bool](objref.IDOf(vcpc), objc.RegisterName("isConsole"))
 	return _r
 }

@@ -5,9 +5,11 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,6 +56,7 @@ func NewProjectTextElement() *ProjectTextElement {
 
 // Text returns unformatted, raw string for the text element
 func (pte *ProjectTextElement) Text() string {
+	defer runtime.KeepAlive(pte)
 	_r := objc.Send[objc.ID](objref.IDOf(pte), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -62,13 +65,15 @@ func (pte *ProjectTextElement) Text() string {
 }
 
 // AttributedText returns if the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
-func (pte *ProjectTextElement) AttributedText() obj.Object {
+func (pte *ProjectTextElement) AttributedText() *foundation.AttributedString {
+	defer runtime.KeepAlive(pte)
 	_r := objc.Send[objc.ID](objref.IDOf(pte), objc.RegisterName("attributedText"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // TextElementType returns the text element type.
 func (pte *ProjectTextElement) TextElementType() ProjectTextElementType {
+	defer runtime.KeepAlive(pte)
 	_r := objc.Send[ProjectTextElementType](objref.IDOf(pte), objc.RegisterName("textElementType"))
 	return _r
 }

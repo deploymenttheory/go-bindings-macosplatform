@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func safariWindowAdopt(id objc.ID) *SafariWindow {
 
 // Description returns the object's -description text.
 func (sw *SafariWindow) Description() string {
+	defer runtime.KeepAlive(sw)
 	return rt.Description(objref.IDOf(sw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sw *SafariWindow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sw *SafariWindow) IsKind(className string) bool {
+	defer runtime.KeepAlive(sw)
 	return rt.IsKind(objref.IDOf(sw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sw *SafariWindow) String() string {
+	defer runtime.KeepAlive(sw)
 	return rt.Description(objref.IDOf(sw))
 }
 
@@ -78,6 +84,7 @@ func NewSafariWindow() *SafariWindow {
 //
 // GetActiveTab blocks until the operation completes or ctx is cancelled.
 func (sw *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, err error) {
+	defer runtime.KeepAlive(sw)
 	type _result struct {
 		val *SafariTab
 		err error
@@ -102,6 +109,7 @@ func (sw *SafariWindow) GetActiveTab(ctx context.Context) (result *SafariTab, er
 //
 // GetAllTabs blocks until the operation completes or ctx is cancelled.
 func (sw *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(sw)
 	type _result struct {
 		val obj.Object
 		err error
@@ -126,6 +134,7 @@ func (sw *SafariWindow) GetAllTabs(ctx context.Context) (result obj.Object, err 
 //
 // OpenTabWithURLMakeActiveIfPossible blocks until the operation completes or ctx is cancelled.
 func (sw *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (result *SafariTab, err error) {
+	defer runtime.KeepAlive(sw)
 	type _result struct {
 		val *SafariTab
 		err error
@@ -150,6 +159,7 @@ func (sw *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, 
 //
 // GetToolbarItem blocks until the operation completes or ctx is cancelled.
 func (sw *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolbarItem, err error) {
+	defer runtime.KeepAlive(sw)
 	type _result struct {
 		val *SafariToolbarItem
 		err error
@@ -172,5 +182,6 @@ func (sw *SafariWindow) GetToolbarItem(ctx context.Context) (result *SafariToolb
 
 // Close closes this window.
 func (sw *SafariWindow) Close() {
+	defer runtime.KeepAlive(sw)
 	objc.Send[objc.ID](objref.IDOf(sw), objc.RegisterName("close"))
 }

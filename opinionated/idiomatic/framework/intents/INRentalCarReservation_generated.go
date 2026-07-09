@@ -5,6 +5,9 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,39 +51,53 @@ func rentalCarReservationAdopt(id objc.ID) *RentalCarReservation {
 }
 
 // NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation creates a rental car reservation with the specified contents and attributes.
-func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, rentalCar *RentalCar, rentalDuration *DateComponentsRange, pickupLocation obj.Object, dropOffLocation obj.Object) *RentalCarReservation {
+func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, rentalCar *RentalCar, rentalDuration *DateComponentsRange, pickupLocation obj.Object, dropOffLocation obj.Object) *RentalCarReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(rentalCar)
+	defer runtime.KeepAlive(rentalDuration)
+	defer runtime.KeepAlive(pickupLocation)
+	defer runtime.KeepAlive(dropOffLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRentalCarReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(rentalCar), objref.IDOf(rentalDuration), objref.IDOf(pickupLocation), objref.IDOf(dropOffLocation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(rentalCar), objref.IDOf(rentalDuration), objref.IDOf(pickupLocation), objref.IDOf(dropOffLocation))
 	return rentalCarReservationAdopt(_id)
 }
 
 // NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation creates a new rental car reservation with the specified contents and attributes.
-func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, rentalCar *RentalCar, rentalDuration *DateComponentsRange, pickupLocation obj.Object, dropOffLocation obj.Object) *RentalCarReservation {
+func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsRentalCarRentalDurationPickupLocationDropOffLocation(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, rentalCar *RentalCar, rentalDuration *DateComponentsRange, pickupLocation obj.Object, dropOffLocation obj.Object) *RentalCarReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(rentalCar)
+	defer runtime.KeepAlive(rentalDuration)
+	defer runtime.KeepAlive(pickupLocation)
+	defer runtime.KeepAlive(dropOffLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRentalCarReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(rentalCar), objref.IDOf(rentalDuration), objref.IDOf(pickupLocation), objref.IDOf(dropOffLocation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:rentalCar:rentalDuration:pickupLocation:dropOffLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(rentalCar), objref.IDOf(rentalDuration), objref.IDOf(pickupLocation), objref.IDOf(dropOffLocation))
 	return rentalCarReservationAdopt(_id)
 }
 
 // RentalCar returns the rental car.
 func (rcr *RentalCarReservation) RentalCar() *RentalCar {
+	defer runtime.KeepAlive(rcr)
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("rentalCar"))
 	return RentalCarFromID(_r)
 }
 
 // RentalDuration returns the rental duration.
 func (rcr *RentalCarReservation) RentalDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(rcr)
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("rentalDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // PickupLocation returns the pickup location.
 func (rcr *RentalCarReservation) PickupLocation() obj.Object {
+	defer runtime.KeepAlive(rcr)
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("pickupLocation"))
 	return obj.Wrap(_r)
 }
 
 // DropOffLocation returns the drop off location.
 func (rcr *RentalCarReservation) DropOffLocation() obj.Object {
+	defer runtime.KeepAlive(rcr)
 	_r := objc.Send[objc.ID](objref.IDOf(rcr), objc.RegisterName("dropOffLocation"))
 	return obj.Wrap(_r)
 }

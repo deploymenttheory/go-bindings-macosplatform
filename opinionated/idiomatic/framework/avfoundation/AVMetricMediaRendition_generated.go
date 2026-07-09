@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func metricMediaRenditionAdopt(id objc.ID) *MetricMediaRendition {
 
 // Description returns the object's -description text.
 func (mmr *MetricMediaRendition) Description() string {
+	defer runtime.KeepAlive(mmr)
 	return rt.Description(objref.IDOf(mmr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmr *MetricMediaRendition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmr *MetricMediaRendition) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmr)
 	return rt.IsKind(objref.IDOf(mmr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmr *MetricMediaRendition) String() string {
+	defer runtime.KeepAlive(mmr)
 	return rt.Description(objref.IDOf(mmr))
 }
 
@@ -72,6 +79,7 @@ func NewMetricMediaRendition() *MetricMediaRendition {
 
 // StableID provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
 func (mmr *MetricMediaRendition) StableID() string {
+	defer runtime.KeepAlive(mmr)
 	_r := objc.Send[objc.ID](objref.IDOf(mmr), objc.RegisterName("stableID"))
 	if _r == 0 {
 		return ""
@@ -80,7 +88,8 @@ func (mmr *MetricMediaRendition) StableID() string {
 }
 
 // URL provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
-func (mmr *MetricMediaRendition) URL() obj.Object {
+func (mmr *MetricMediaRendition) URL() string {
+	defer runtime.KeepAlive(mmr)
 	_r := objc.Send[objc.ID](objref.IDOf(mmr), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

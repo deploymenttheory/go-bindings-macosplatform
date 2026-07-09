@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,8 +50,10 @@ func recognizedPointsObservationAdopt(id objc.ID) *RecognizedPointsObservation {
 	return x
 }
 
-// RecognizedPointForKeyError retrieves a recognized point for a key.
-func (rpo *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey obj.Object) (result *RecognizedPoint, err error) {
+// RecognizedPointForKey retrieves a recognized point for a key.
+func (rpo *RecognizedPointsObservation) RecognizedPointForKey(pointKey obj.Object) (result *RecognizedPoint, err error) {
+	defer runtime.KeepAlive(rpo)
+	defer runtime.KeepAlive(pointKey)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("recognizedPointForKey:error:"), objref.IDOf(pointKey), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -59,8 +62,10 @@ func (rpo *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey obj.
 	return RecognizedPointFromID(_r), nil
 }
 
-// RecognizedPointsForGroupKeyError retrieves the recognized points for a key.
-func (rpo *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey obj.Object) (result obj.Object, err error) {
+// RecognizedPointsForGroupKey retrieves the recognized points for a key.
+func (rpo *RecognizedPointsObservation) RecognizedPointsForGroupKey(groupKey obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(rpo)
+	defer runtime.KeepAlive(groupKey)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("recognizedPointsForGroupKey:error:"), objref.IDOf(groupKey), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -69,8 +74,9 @@ func (rpo *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKe
 	return obj.Wrap(_r), nil
 }
 
-// KeypointsMultiArrayAndReturnError retrieves the grouping of normalized point coordinates and confidence scores in a format compatible with Core ML.
-func (rpo *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (result obj.Object, err error) {
+// KeypointsMultiArray retrieves the grouping of normalized point coordinates and confidence scores in a format compatible with Core ML.
+func (rpo *RecognizedPointsObservation) KeypointsMultiArray() (result obj.Object, err error) {
+	defer runtime.KeepAlive(rpo)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("keypointsMultiArrayAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -83,6 +89,7 @@ func (rpo *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (res
 //
 // AvailableKeys returns the collection as a Go slice.
 func (rpo *RecognizedPointsObservation) AvailableKeys() []obj.Object {
+	defer runtime.KeepAlive(rpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("availableKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -91,6 +98,7 @@ func (rpo *RecognizedPointsObservation) AvailableKeys() []obj.Object {
 //
 // AvailableGroupKeys returns the collection as a Go slice.
 func (rpo *RecognizedPointsObservation) AvailableGroupKeys() []obj.Object {
+	defer runtime.KeepAlive(rpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpo), objc.RegisterName("availableGroupKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

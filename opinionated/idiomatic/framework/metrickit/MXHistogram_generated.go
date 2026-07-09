@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func histogramAdopt(id objc.ID) *Histogram {
 
 // Description returns the object's -description text.
 func (h *Histogram) Description() string {
+	defer runtime.KeepAlive(h)
 	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (h *Histogram) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(h)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (h *Histogram) IsKind(className string) bool {
+	defer runtime.KeepAlive(h)
 	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (h *Histogram) String() string {
+	defer runtime.KeepAlive(h)
 	return rt.Description(objref.IDOf(h))
 }
 
@@ -74,12 +81,14 @@ func NewHistogram() *Histogram {
 
 // TotalBucketCount returns the number of buckets contained within this histogram. This value can never be negative.
 func (h *Histogram) TotalBucketCount() int {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[int](objref.IDOf(h), objc.RegisterName("totalBucketCount"))
 	return _r
 }
 
 // BucketEnumerator returns an NSEnumerator that can be used to enumerate the buckets of this histogram.
 func (h *Histogram) BucketEnumerator() obj.Object {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("bucketEnumerator"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func symbolContentTransitionAdopt(id objc.ID) *SymbolContentTransition {
 
 // Description returns the object's -description text.
 func (sct *SymbolContentTransition) Description() string {
+	defer runtime.KeepAlive(sct)
 	return rt.Description(objref.IDOf(sct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sct *SymbolContentTransition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sct)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sct *SymbolContentTransition) IsKind(className string) bool {
+	defer runtime.KeepAlive(sct)
 	return rt.IsKind(objref.IDOf(sct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sct *SymbolContentTransition) String() string {
+	defer runtime.KeepAlive(sct)
 	return rt.Description(objref.IDOf(sct))
 }
 

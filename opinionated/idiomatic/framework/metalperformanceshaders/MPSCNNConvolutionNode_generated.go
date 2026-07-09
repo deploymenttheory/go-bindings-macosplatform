@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func (ccn *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
 
 // ConvolutionGradientState returns a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
 func (ccn *CNNConvolutionNode) ConvolutionGradientState() obj.Object {
+	defer runtime.KeepAlive(ccn)
 	_r := objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("convolutionGradientState"))
 	return obj.Wrap(_r)
 }

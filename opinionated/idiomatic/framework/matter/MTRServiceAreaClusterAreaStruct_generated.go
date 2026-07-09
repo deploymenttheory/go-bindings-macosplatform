@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRServiceAreaClusterAreaStructAdopt(id objc.ID) *MTRServiceAreaClusterArea
 
 // Description returns the object's -description text.
 func (msacas *MTRServiceAreaClusterAreaStruct) Description() string {
+	defer runtime.KeepAlive(msacas)
 	return rt.Description(objref.IDOf(msacas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msacas *MTRServiceAreaClusterAreaStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msacas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msacas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msacas *MTRServiceAreaClusterAreaStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(msacas)
 	return rt.IsKind(objref.IDOf(msacas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msacas *MTRServiceAreaClusterAreaStruct) String() string {
+	defer runtime.KeepAlive(msacas)
 	return rt.Description(objref.IDOf(msacas))
 }
 
@@ -72,36 +80,42 @@ func NewMTRServiceAreaClusterAreaStruct() *MTRServiceAreaClusterAreaStruct {
 
 // WithAreaID sets the area ID.
 func (msacas *MTRServiceAreaClusterAreaStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterAreaStruct {
+	defer runtime.KeepAlive(areaID)
 	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 	return msacas
 }
 
 // WithMapID sets the map ID.
 func (msacas *MTRServiceAreaClusterAreaStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterAreaStruct {
+	defer runtime.KeepAlive(mapID)
 	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
 	return msacas
 }
 
 // WithAreaInfo sets the area info.
 func (msacas *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct {
+	defer runtime.KeepAlive(areaInfo)
 	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setAreaInfo:"), objref.IDOf(areaInfo))
 	return msacas
 }
 
 // AreaID returns the area ID.
-func (msacas *MTRServiceAreaClusterAreaStruct) AreaID() obj.Object {
+func (msacas *MTRServiceAreaClusterAreaStruct) AreaID() *foundation.Number {
+	defer runtime.KeepAlive(msacas)
 	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("areaID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MapID returns the map ID.
-func (msacas *MTRServiceAreaClusterAreaStruct) MapID() obj.Object {
+func (msacas *MTRServiceAreaClusterAreaStruct) MapID() *foundation.Number {
+	defer runtime.KeepAlive(msacas)
 	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("mapID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AreaInfo returns the area info.
 func (msacas *MTRServiceAreaClusterAreaStruct) AreaInfo() *MTRServiceAreaClusterAreaInfoStruct {
+	defer runtime.KeepAlive(msacas)
 	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("areaInfo"))
 	return MTRServiceAreaClusterAreaInfoStructFromID(_r)
 }

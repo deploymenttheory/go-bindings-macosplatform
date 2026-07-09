@@ -8,17 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
+// ErrConfigurationUpdatesNotSupported matches the AutomaticAssessmentConfiguration error AEAssessmentErrorConfigurationUpdatesNotSupported.
+var ErrConfigurationUpdatesNotSupported = errkit.New("AEAssessmentErrorDomain", 4)
+
+// ErrMultipleParticipantsNotSupported matches the AutomaticAssessmentConfiguration error AEAssessmentErrorMultipleParticipantsNotSupported.
+var ErrMultipleParticipantsNotSupported = errkit.New("AEAssessmentErrorDomain", 3)
+
+// ErrRequiredParticipantsNotAvailable matches the AutomaticAssessmentConfiguration error AEAssessmentErrorRequiredParticipantsNotAvailable.
+var ErrRequiredParticipantsNotAvailable = errkit.New("AEAssessmentErrorDomain", 5)
+
 // ErrUnknown matches the AutomaticAssessmentConfiguration error AEAssessmentErrorUnknown.
 var ErrUnknown = errkit.New("AEAssessmentErrorDomain", 1)
 
 // ErrUnsupportedPlatform matches the AutomaticAssessmentConfiguration error AEAssessmentErrorUnsupportedPlatform.
 var ErrUnsupportedPlatform = errkit.New("AEAssessmentErrorDomain", 2)
-
-// ErrMultipleParticipantsNotSupported matches the AutomaticAssessmentConfiguration error AEAssessmentErrorMultipleParticipantsNotSupported.
-var ErrMultipleParticipantsNotSupported = errkit.New("AEAssessmentErrorDomain", 3)
-
-// ErrConfigurationUpdatesNotSupported matches the AutomaticAssessmentConfiguration error AEAssessmentErrorConfigurationUpdatesNotSupported.
-var ErrConfigurationUpdatesNotSupported = errkit.New("AEAssessmentErrorDomain", 4)
-
-// ErrRequiredParticipantsNotAvailable matches the AutomaticAssessmentConfiguration error AEAssessmentErrorRequiredParticipantsNotAvailable.
-var ErrRequiredParticipantsNotAvailable = errkit.New("AEAssessmentErrorDomain", 5)

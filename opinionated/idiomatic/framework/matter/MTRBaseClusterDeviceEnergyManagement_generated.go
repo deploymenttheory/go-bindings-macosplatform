@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterDeviceEnergyManagementAdopt(id objc.ID) *MTRBaseClusterDevice
 
 // NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterDeviceEnergyManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterDeviceEnergyManagementAdopt(_id)
@@ -60,6 +64,7 @@ func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MT
 //
 // ReadAttributeESATypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -85,6 +90,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESATypeWithComp
 //
 // SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +117,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESATypeWit
 //
 // ReadAttributeESACanGenerateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +143,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESACanGenerateW
 //
 // SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGenerateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +170,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESACanGene
 //
 // ReadAttributeESAStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +196,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeESAStateWithCom
 //
 // SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +223,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeESAStateWi
 //
 // ReadAttributeAbsMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +249,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWith
 //
 // SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMinPowe
 //
 // ReadAttributeAbsMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +302,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWith
 //
 // SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowerWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAbsMaxPowe
 //
 // ReadAttributePowerAdjustmentCapabilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithCompletion(ctx context.Context) (result *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
 		err error
@@ -335,6 +355,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributePowerAdjustment
 //
 // SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjustmentCapabilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
 		err error
@@ -360,6 +382,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributePowerAdjus
 //
 // ReadAttributeForecastWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCompletion(ctx context.Context) (result *MTRDeviceEnergyManagementClusterForecastStruct, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterForecastStruct
 		err error
@@ -385,6 +408,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeForecastWithCom
 //
 // SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRDeviceEnergyManagementClusterForecastStruct, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRDeviceEnergyManagementClusterForecastStruct
 		err error
@@ -410,6 +435,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeForecastWi
 //
 // ReadAttributeOptOutStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +461,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeOptOutStateWith
 //
 // SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +488,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeOptOutStat
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,6 +514,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeGeneratedComman
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,6 +541,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeGeneratedC
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -535,6 +567,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAcceptedCommand
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -560,6 +594,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAcceptedCo
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -585,6 +620,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeAttributeListWi
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -610,6 +647,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeAttributeL
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -635,6 +673,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithC
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -660,6 +700,7 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeFeatureMap
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
 	type _result struct {
 		val obj.Object
 		err error
@@ -685,6 +726,8 @@ func (mbcdem *MTRBaseClusterDeviceEnergyManagement) ReadAttributeClusterRevision
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcdem *MTRBaseClusterDeviceEnergyManagement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcdem)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

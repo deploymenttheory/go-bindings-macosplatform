@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioUnitComponentAdopt(id objc.ID) *AudioUnitComponent {
 
 // Description returns the object's -description text.
 func (auc *AudioUnitComponent) Description() string {
+	defer runtime.KeepAlive(auc)
 	return rt.Description(objref.IDOf(auc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (auc *AudioUnitComponent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(auc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(auc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (auc *AudioUnitComponent) IsKind(className string) bool {
+	defer runtime.KeepAlive(auc)
 	return rt.IsKind(objref.IDOf(auc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (auc *AudioUnitComponent) String() string {
+	defer runtime.KeepAlive(auc)
 	return rt.Description(objref.IDOf(auc))
 }
 
@@ -81,12 +88,14 @@ func (auc *AudioUnitComponent) WithUserTagNames(items ...obj.Object) *AudioUnitC
 
 // SupportsNumberInputChannelsOutputChannels gets a Boolean value that indicates whether the audio unit component supports the specified number of input and output channels.
 func (auc *AudioUnitComponent) SupportsNumberInputChannelsOutputChannels(numInputChannels int, numOutputChannels int) bool {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[bool](objref.IDOf(auc), objc.RegisterName("supportsNumberInputChannels:outputChannels:"), numInputChannels, numOutputChannels)
 	return _r
 }
 
 // Name returns the name of an audio component
 func (auc *AudioUnitComponent) Name() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -96,6 +105,7 @@ func (auc *AudioUnitComponent) Name() string {
 
 // TypeName returns standard audio component types returned as strings
 func (auc *AudioUnitComponent) TypeName() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("typeName"))
 	if _r == 0 {
 		return ""
@@ -105,6 +115,7 @@ func (auc *AudioUnitComponent) TypeName() string {
 
 // LocalizedTypeName returns localized string of typeName for display
 func (auc *AudioUnitComponent) LocalizedTypeName() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("localizedTypeName"))
 	if _r == 0 {
 		return ""
@@ -114,6 +125,7 @@ func (auc *AudioUnitComponent) LocalizedTypeName() string {
 
 // ManufacturerName returns the manufacturer name, extracted from the manufacturer key defined in Info.plist dictionary
 func (auc *AudioUnitComponent) ManufacturerName() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("manufacturerName"))
 	if _r == 0 {
 		return ""
@@ -123,6 +135,7 @@ func (auc *AudioUnitComponent) ManufacturerName() string {
 
 // VersionString returns version number as string
 func (auc *AudioUnitComponent) VersionString() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("versionString"))
 	if _r == 0 {
 		return ""
@@ -131,39 +144,45 @@ func (auc *AudioUnitComponent) VersionString() string {
 }
 
 // ComponentURL returns URL representing location of component
-func (auc *AudioUnitComponent) ComponentURL() obj.Object {
+func (auc *AudioUnitComponent) ComponentURL() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("componentURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // AvailableArchitectures returns NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
 //
 // AvailableArchitectures returns the collection as a Go slice.
 func (auc *AudioUnitComponent) AvailableArchitectures() []obj.Object {
+	defer runtime.KeepAlive(auc)
 	_arr := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("availableArchitectures"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsSandboxSafe reports whether on OSX, true if the AudioComponent can be loaded into a sandboxed process otherwise false. On iOS, this is always true.
 func (auc *AudioUnitComponent) IsSandboxSafe() bool {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[bool](objref.IDOf(auc), objc.RegisterName("isSandboxSafe"))
 	return _r
 }
 
 // HasMIDIInput reports whether audioComponent has midi input.
 func (auc *AudioUnitComponent) HasMIDIInput() bool {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[bool](objref.IDOf(auc), objc.RegisterName("hasMIDIInput"))
 	return _r
 }
 
 // HasMIDIOutput reports whether audioComponent has midi output.
 func (auc *AudioUnitComponent) HasMIDIOutput() bool {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[bool](objref.IDOf(auc), objc.RegisterName("hasMIDIOutput"))
 	return _r
 }
 
 // AudioComponent returns the audioComponent that can be used in AudioComponent APIs.
 func (auc *AudioUnitComponent) AudioComponent() obj.Object {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("audioComponent"))
 	return obj.Wrap(_r)
 }
@@ -172,6 +191,7 @@ func (auc *AudioUnitComponent) AudioComponent() obj.Object {
 //
 // UserTagNames returns the collection as a Go slice.
 func (auc *AudioUnitComponent) UserTagNames() []string {
+	defer runtime.KeepAlive(auc)
 	_arr := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("userTagNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -180,42 +200,49 @@ func (auc *AudioUnitComponent) UserTagNames() []string {
 //
 // AllTagNames returns the collection as a Go slice.
 func (auc *AudioUnitComponent) AllTagNames() []string {
+	defer runtime.KeepAlive(auc)
 	_arr := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("allTagNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AudioComponentDescription returns description of the audio component that can be used in AudioComponent APIs.
 func (auc *AudioUnitComponent) AudioComponentDescription() obj.Object {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("audioComponentDescription"))
 	return obj.Wrap(_r)
 }
 
 // IconURL returns a URL that will specify the location of an icon file that can be used when presenting UI for this audio component.
-func (auc *AudioUnitComponent) IconURL() obj.Object {
+func (auc *AudioUnitComponent) IconURL() string {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("iconURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Icon returns the icon.
 func (auc *AudioUnitComponent) Icon() obj.Object {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("icon"))
 	return obj.Wrap(_r)
 }
 
 // PassesAUVal reports whether the AudioComponent has passed the AU validation tests.
 func (auc *AudioUnitComponent) PassesAUVal() bool {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[bool](objref.IDOf(auc), objc.RegisterName("passesAUVal"))
 	return _r
 }
 
 // HasCustomView reports whether the AudioComponent provides custom view.
 func (auc *AudioUnitComponent) HasCustomView() bool {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[bool](objref.IDOf(auc), objc.RegisterName("hasCustomView"))
 	return _r
 }
 
 // ConfigurationDictionary returns a NSDictionary that contains information describing the capabilities of the AudioComponent. The specific information depends on the type and the keys are defined in AudioUnitProperties.h
-func (auc *AudioUnitComponent) ConfigurationDictionary() obj.Object {
+func (auc *AudioUnitComponent) ConfigurationDictionary() map[string]obj.Object {
+	defer runtime.KeepAlive(auc)
 	_r := objc.Send[objc.ID](objref.IDOf(auc), objc.RegisterName("configurationDictionary"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

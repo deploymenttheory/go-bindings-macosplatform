@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func labeledValueAdopt(id objc.ID) *LabeledValue {
 
 // Description returns the object's -description text.
 func (lv *LabeledValue) Description() string {
+	defer runtime.KeepAlive(lv)
 	return rt.Description(objref.IDOf(lv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lv *LabeledValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lv *LabeledValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(lv)
 	return rt.IsKind(objref.IDOf(lv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lv *LabeledValue) String() string {
+	defer runtime.KeepAlive(lv)
 	return rt.Description(objref.IDOf(lv))
 }
 
 // NewLabeledValueWithLabelValue returns a new labeled value identifier.
 func NewLabeledValueWithLabelValue(label string, value obj.Object) *LabeledValue {
+	defer runtime.KeepAlive(value)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CNLabeledValue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLabel:value:"), purego.NSString(label), objref.IDOf(value))
 	return labeledValueAdopt(_id)
@@ -75,24 +83,30 @@ func NewLabeledValueWithLabelValue(label string, value obj.Object) *LabeledValue
 
 // LabeledValueBySettingLabel returns a labeled value object with an existing value and identifier.
 func (lv *LabeledValue) LabeledValueBySettingLabel(label string) obj.Object {
+	defer runtime.KeepAlive(lv)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("labeledValueBySettingLabel:"), purego.NSString(label))
 	return obj.Wrap(_r)
 }
 
 // LabeledValueBySettingValue returns a new value for an existing label and identifier.
 func (lv *LabeledValue) LabeledValueBySettingValue(value obj.Object) obj.Object {
+	defer runtime.KeepAlive(lv)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("labeledValueBySettingValue:"), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
 // LabeledValueBySettingLabelValue returns a labeled value object with the specified label and value with the existing identifier.
 func (lv *LabeledValue) LabeledValueBySettingLabelValue(label string, value obj.Object) obj.Object {
+	defer runtime.KeepAlive(lv)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("labeledValueBySettingLabel:value:"), purego.NSString(label), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
 
 // Identifier returns the identifier is unique among contacts on the device. It can be saved and used for finding labeled values next application launch.
 func (lv *LabeledValue) Identifier() string {
+	defer runtime.KeepAlive(lv)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -102,6 +116,7 @@ func (lv *LabeledValue) Identifier() string {
 
 // Label returns the label.
 func (lv *LabeledValue) Label() string {
+	defer runtime.KeepAlive(lv)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -111,6 +126,7 @@ func (lv *LabeledValue) Label() string {
 
 // Value returns the value.
 func (lv *LabeledValue) Value() obj.Object {
+	defer runtime.KeepAlive(lv)
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }

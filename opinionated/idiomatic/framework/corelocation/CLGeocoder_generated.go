@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func geocoderAdopt(id objc.ID) *Geocoder {
 
 // Description returns the object's -description text.
 func (g *Geocoder) Description() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (g *Geocoder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (g *Geocoder) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (g *Geocoder) String() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
@@ -74,11 +81,13 @@ func NewGeocoder() *Geocoder {
 
 // CancelGeocode cancels a pending geocoding request.
 func (g *Geocoder) CancelGeocode() {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("cancelGeocode"))
 }
 
 // IsGeocoding reports whether the object is geocoding.
 func (g *Geocoder) IsGeocoding() bool {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("isGeocoding"))
 	return _r
 }

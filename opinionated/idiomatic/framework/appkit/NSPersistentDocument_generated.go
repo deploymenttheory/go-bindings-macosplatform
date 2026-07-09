@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -64,6 +66,7 @@ func NewPersistentDocument() *PersistentDocument {
 
 // WithManagedObjectContext sets the managed object context for the document.
 func (pd *PersistentDocument) WithManagedObjectContext(managedObjectContext obj.Object) *PersistentDocument {
+	defer runtime.KeepAlive(managedObjectContext)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	})
@@ -87,9 +90,9 @@ func (pd *PersistentDocument) WithFileURL(fileURL string) *PersistentDocument {
 }
 
 // WithFileModificationDate sets the last-known modification date of the document’s on-disk representation.
-func (pd *PersistentDocument) WithFileModificationDate(fileModificationDate obj.Object) *PersistentDocument {
+func (pd *PersistentDocument) WithFileModificationDate(fileModificationDate time.Time) *PersistentDocument {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setFileModificationDate:"), objref.IDOf(fileModificationDate))
+		objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setFileModificationDate:"), rt.TimeToNSDate(fileModificationDate))
 	})
 	return pd
 }
@@ -112,6 +115,7 @@ func (pd *PersistentDocument) WithAutosavedContentsFileURL(autosavedContentsFile
 
 // WithPrintInfo sets the printing information associated with the document.
 func (pd *PersistentDocument) WithPrintInfo(printInfo *PrintInfo) *PersistentDocument {
+	defer runtime.KeepAlive(printInfo)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
 	})
@@ -120,6 +124,7 @@ func (pd *PersistentDocument) WithPrintInfo(printInfo *PrintInfo) *PersistentDoc
 
 // WithUndoManager sets the object that the document uses to support undo/redo operations.
 func (pd *PersistentDocument) WithUndoManager(undoManager obj.Object) *PersistentDocument {
+	defer runtime.KeepAlive(undoManager)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
 	})
@@ -144,6 +149,7 @@ func (pd *PersistentDocument) WithDisplayName(displayName string) *PersistentDoc
 
 // WithUserActivity sets an object that encapsulates a user activity the document supports.
 func (pd *PersistentDocument) WithUserActivity(userActivity obj.Object) *PersistentDocument {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -159,12 +165,13 @@ func (pd *PersistentDocument) WithLastComponentOfFileName(lastComponentOfFileNam
 }
 
 // ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions configures the receiver’s persistent store coordinator with the appropriate stores for a given URL.
-func (pd *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions(url string, fileType string, configuration string, storeOptions obj.Object) error {
+func (pd *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptions(url string, fileType string, configuration string, storeOptions map[string]obj.Object) error {
+	defer runtime.KeepAlive(pd)
 	var _mainthread0 error
 	purego.Main(func() {
 		_mainthread0 = func() error {
 			var _nsErr uintptr
-			_ = objc.Send[bool](objref.IDOf(pd), objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error:"), rt.FileURL(url), purego.NSString(fileType), purego.NSString(configuration), objref.IDOf(storeOptions), unsafe.Pointer(&_nsErr))
+			_ = objc.Send[bool](objref.IDOf(pd), objc.RegisterName("configurePersistentStoreCoordinatorForURL:ofType:modelConfiguration:storeOptions:error:"), rt.FileURL(url), purego.NSString(fileType), purego.NSString(configuration), rt.MapToDict(storeOptions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 			if _nsErr != 0 {
 				return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 			}
@@ -177,6 +184,7 @@ func (pd *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeMod
 
 // PersistentStoreTypeForFileType returns the type of persistent store associated with the specified file type.
 func (pd *PersistentDocument) PersistentStoreTypeForFileType(fileType string) string {
+	defer runtime.KeepAlive(pd)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -193,6 +201,7 @@ func (pd *PersistentDocument) PersistentStoreTypeForFileType(fileType string) st
 
 // ManagedObjectContext returns the managed object context.
 func (pd *PersistentDocument) ManagedObjectContext() obj.Object {
+	defer runtime.KeepAlive(pd)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -206,6 +215,7 @@ func (pd *PersistentDocument) ManagedObjectContext() obj.Object {
 
 // ManagedObjectModel returns the managed object model.
 func (pd *PersistentDocument) ManagedObjectModel() obj.Object {
+	defer runtime.KeepAlive(pd)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -219,6 +229,7 @@ func (pd *PersistentDocument) ManagedObjectModel() obj.Object {
 
 // ConfigurePersistentStoreCoordinatorForURLOfType configures the receiver’s persistent store coordinator for a given URL and document type.
 func (pd *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfType(url string, fileType string) error {
+	defer runtime.KeepAlive(pd)
 	var _mainthread0 error
 	purego.Main(func() {
 		_mainthread0 = func() error {

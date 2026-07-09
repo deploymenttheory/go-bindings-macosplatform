@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,6 +52,7 @@ func audioNodeAdopt(id objc.ID) *AudioNode {
 
 // NewAudioNodeWithAVAudioNode initializes an audio node from an AVFoundation audio node.
 func NewAudioNodeWithAVAudioNode(node obj.Object) *AudioNode {
+	defer runtime.KeepAlive(node)
 	var _mainthread0 *AudioNode
 	purego.Main(func() {
 		_mainthread0 = func() *AudioNode {
@@ -63,6 +66,7 @@ func NewAudioNodeWithAVAudioNode(node obj.Object) *AudioNode {
 
 // NewAudioNodeWithCoder tells you when to initialize an audio node that has been unarchived.
 func NewAudioNodeWithCoder(aDecoder obj.Object) *AudioNode {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *AudioNode
 	purego.Main(func() {
 		_mainthread0 = func() *AudioNode {
@@ -102,6 +106,7 @@ func NewAudioNodeWithURL(url string) *AudioNode {
 
 // WithAvAudioNode sets the audio node’s current audio asset.
 func (an *AudioNode) WithAvAudioNode(avAudioNode obj.Object) *AudioNode {
+	defer runtime.KeepAlive(avAudioNode)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAvAudioNode:"), objref.IDOf(avAudioNode))
 	})
@@ -214,6 +219,7 @@ func (an *AudioNode) WithName(name string) *AudioNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (an *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -222,6 +228,7 @@ func (an *AudioNode) WithPhysicsBody(physicsBody *PhysicsBody) *AudioNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (an *AudioNode) WithUserData(userData obj.Object) *AudioNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -230,6 +237,7 @@ func (an *AudioNode) WithUserData(userData obj.Object) *AudioNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (an *AudioNode) WithReachConstraints(reachConstraints *ReachConstraints) *AudioNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -246,9 +254,9 @@ func (an *AudioNode) WithConstraints(items ...*Constraint) *AudioNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (an *AudioNode) WithAttributeValues(attributeValues obj.Object) *AudioNode {
+func (an *AudioNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *AudioNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return an
 }
@@ -295,6 +303,7 @@ func (an *AudioNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CG
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (an *AudioNode) WithAccessibilityParent(accessibilityParent obj.Object) *AudioNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(an), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -327,6 +336,7 @@ func (an *AudioNode) WithAccessibilityEnabled(accessibilityEnabled bool) *AudioN
 
 // AvAudioNode sets or gets the current AVAudioNode used by this instance.
 func (an *AudioNode) AvAudioNode() obj.Object {
+	defer runtime.KeepAlive(an)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -340,6 +350,7 @@ func (an *AudioNode) AvAudioNode() obj.Object {
 
 // AutoplayLooped reports whether the node is to automatically play sound when added to a scene. If autoplaysLooped is false, the node and its sound must be explicitly scheduled and played using the scene's engine. If true, the node will automatically play sound when added to a scene. Defaults to true.
 func (an *AudioNode) AutoplayLooped() bool {
+	defer runtime.KeepAlive(an)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -353,6 +364,7 @@ func (an *AudioNode) AutoplayLooped() bool {
 
 // IsPositional reports whether marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the scene's current listener node.
 func (an *AudioNode) IsPositional() bool {
+	defer runtime.KeepAlive(an)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

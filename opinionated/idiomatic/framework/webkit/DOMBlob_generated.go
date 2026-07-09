@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func dOMBlobAdopt(id objc.ID) *DOMBlob {
 
 // Size returns the size.
 func (db *DOMBlob) Size() uint64 {
+	defer runtime.KeepAlive(db)
 	_r := objc.Send[uint64](objref.IDOf(db), objc.RegisterName("size"))
 	return _r
 }

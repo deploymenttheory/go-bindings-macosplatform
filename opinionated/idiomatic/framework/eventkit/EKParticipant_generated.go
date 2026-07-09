@@ -5,9 +5,13 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,18 +58,22 @@ func NewParticipant() *Participant {
 
 // ABPersonInAddressBook returns the address book record that represents the participant.
 func (p *Participant) ABPersonInAddressBook(addressBook obj.Object) obj.Object {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(addressBook)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("ABPersonInAddressBook:"), objref.IDOf(addressBook))
 	return obj.Wrap(_r)
 }
 
 // URL returns URL representing this participant.
-func (p *Participant) URL() obj.Object {
+func (p *Participant) URL() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Name returns name of this participant.
 func (p *Participant) Name() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -75,32 +83,37 @@ func (p *Participant) Name() string {
 
 // ParticipantStatus returns the status of the attendee. Returns the status of the attendee as a EKParticipantStatus value.
 func (p *Participant) ParticipantStatus() ParticipantStatus {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[ParticipantStatus](objref.IDOf(p), objc.RegisterName("participantStatus"))
 	return _r
 }
 
 // ParticipantRole returns the role of the attendee. Returns the role of the attendee as a EKParticipantRole value.
 func (p *Participant) ParticipantRole() ParticipantRole {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[ParticipantRole](objref.IDOf(p), objc.RegisterName("participantRole"))
 	return _r
 }
 
 // ParticipantType returns the type of the attendee. Returns the type of the attendee as a EKParticipantType value.
 func (p *Participant) ParticipantType() ParticipantType {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[ParticipantType](objref.IDOf(p), objc.RegisterName("participantType"))
 	return _r
 }
 
 // IsCurrentUser reports whether a boolean indicating whether this participant represents the owner of this account.
 func (p *Participant) IsCurrentUser() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCurrentUser"))
 	return _r
 }
 
 // ContactPredicate returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
-func (p *Participant) ContactPredicate() obj.Object {
+func (p *Participant) ContactPredicate() *foundation.Predicate {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contactPredicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 var _ ObjectProvider = (*Participant)(nil)

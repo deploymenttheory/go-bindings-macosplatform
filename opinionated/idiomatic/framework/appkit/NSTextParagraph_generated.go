@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,7 @@ func textParagraphAdopt(id objc.ID) *TextParagraph {
 
 // NewTextParagraphWithAttributedString creates a new paragraph with the attributed string you provide.
 func NewTextParagraphWithAttributedString(attributedString obj.Object) *TextParagraph {
+	defer runtime.KeepAlive(attributedString)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextParagraph")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), objref.IDOf(attributedString))
 	return textParagraphAdopt(_id)
@@ -55,30 +59,35 @@ func NewTextParagraphWithAttributedString(attributedString obj.Object) *TextPara
 
 // WithTextContentManager sets the value that represents the current content manager.
 func (tp *TextParagraph) WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph {
+	defer runtime.KeepAlive(textContentManager)
 	objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
 	return tp
 }
 
 // WithElementRange sets a range value that represents the range of the element inside the document.
 func (tp *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagraph {
+	defer runtime.KeepAlive(elementRange)
 	objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
 	return tp
 }
 
 // AttributedString returns the attributed string.
-func (tp *TextParagraph) AttributedString() obj.Object {
+func (tp *TextParagraph) AttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("attributedString"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // ParagraphContentRange returns the paragraph content range.
 func (tp *TextParagraph) ParagraphContentRange() *TextRange {
+	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphContentRange"))
 	return TextRangeFromID(_r)
 }
 
 // ParagraphSeparatorRange returns the paragraph separator range.
 func (tp *TextParagraph) ParagraphSeparatorRange() *TextRange {
+	defer runtime.KeepAlive(tp)
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphSeparatorRange"))
 	return TextRangeFromID(_r)
 }

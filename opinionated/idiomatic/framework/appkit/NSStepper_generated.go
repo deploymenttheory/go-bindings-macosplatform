@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -102,6 +104,7 @@ func (s *Stepper) WithAutorepeat(autorepeat bool) *Stepper {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (s *Stepper) WithTarget(target obj.Object) *Stepper {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -166,6 +169,7 @@ func (s *Stepper) WithControlSize(controlSize ControlSize) *Stepper {
 
 // WithFormatter sets the receiver’s formatter.
 func (s *Stepper) WithFormatter(formatter obj.Object) *Stepper {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -174,6 +178,7 @@ func (s *Stepper) WithFormatter(formatter obj.Object) *Stepper {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (s *Stepper) WithObjectValue(objectValue obj.Object) *Stepper {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -190,6 +195,7 @@ func (s *Stepper) WithStringValue(stringValue string) *Stepper {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (s *Stepper) WithAttributedStringValue(attributedStringValue obj.Object) *Stepper {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -230,6 +236,7 @@ func (s *Stepper) WithDoubleValue(doubleValue float64) *Stepper {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (s *Stepper) WithFont(font *Font) *Stepper {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -278,6 +285,7 @@ func (s *Stepper) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Ste
 
 // WithCell sets the cell.
 func (s *Stepper) WithCell(cell CellProvider) *Stepper {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -423,6 +431,7 @@ func (s *Stepper) WithWantsLayer(wantsLayer bool) *Stepper {
 
 // WithLayer sets the layer.
 func (s *Stepper) WithLayer(layer obj.Object) *Stepper {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -472,6 +481,7 @@ func (s *Stepper) WithBackgroundFilters(items ...obj.Object) *Stepper {
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Stepper) WithCompositingFilter(compositingFilter obj.Object) *Stepper {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -489,6 +499,7 @@ func (s *Stepper) WithContentFilters(items ...obj.Object) *Stepper {
 
 // WithShadow sets the shadow.
 func (s *Stepper) WithShadow(shadow *Shadow) *Stepper {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -537,6 +548,7 @@ func (s *Stepper) WithPreparedContentRect(preparedContentRect corefoundation.CGR
 
 // WithNextKeyView sets the next key view.
 func (s *Stepper) WithNextKeyView(nextKeyView ViewProvider) *Stepper {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -586,6 +598,7 @@ func (s *Stepper) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Stepper) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Stepper {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -642,6 +655,7 @@ func (s *Stepper) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Stepper) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Stepper {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -650,6 +664,7 @@ func (s *Stepper) WithPressureConfiguration(pressureConfiguration *PressureConfi
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Stepper) WithNextResponder(nextResponder ResponderProvider) *Stepper {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -658,6 +673,7 @@ func (s *Stepper) WithNextResponder(nextResponder ResponderProvider) *Stepper {
 
 // WithMenu sets returns the responder’s menu.
 func (s *Stepper) WithMenu(menu *Menu) *Stepper {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -666,6 +682,7 @@ func (s *Stepper) WithMenu(menu *Menu) *Stepper {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Stepper) WithUserActivity(userActivity obj.Object) *Stepper {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -674,6 +691,7 @@ func (s *Stepper) WithUserActivity(userActivity obj.Object) *Stepper {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Stepper) WithTouchBar(touchBar *TouchBar) *Stepper {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -682,6 +700,7 @@ func (s *Stepper) WithTouchBar(touchBar *TouchBar) *Stepper {
 
 // MinValue returns the min value.
 func (s *Stepper) MinValue() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -695,6 +714,7 @@ func (s *Stepper) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (s *Stepper) MaxValue() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -708,6 +728,7 @@ func (s *Stepper) MaxValue() float64 {
 
 // Increment returns the increment.
 func (s *Stepper) Increment() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -721,6 +742,7 @@ func (s *Stepper) Increment() float64 {
 
 // ValueWraps wraps the corresponding Objective-C method.
 func (s *Stepper) ValueWraps() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -734,6 +756,7 @@ func (s *Stepper) ValueWraps() bool {
 
 // Autorepeat wraps the corresponding Objective-C method.
 func (s *Stepper) Autorepeat() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

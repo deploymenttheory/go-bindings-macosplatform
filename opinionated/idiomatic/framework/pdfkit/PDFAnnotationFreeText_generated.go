@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -58,6 +59,7 @@ func NewAnnotationFreeText() *AnnotationFreeText {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (aft *AnnotationFreeText) WithPage(page *Page) *AnnotationFreeText {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return aft
 }
@@ -142,18 +144,21 @@ func (aft *AnnotationFreeText) WithMouseUpAction(mouseUpAction unsafe.Pointer) *
 
 // WithFont sets the font the annotation uses to display text.
 func (aft *AnnotationFreeText) WithFont(font obj.Object) *AnnotationFreeText {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return aft
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (aft *AnnotationFreeText) WithFontColor(fontColor obj.Object) *AnnotationFreeText {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return aft
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (aft *AnnotationFreeText) WithInteriorColor(interiorColor obj.Object) *AnnotationFreeText {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return aft
 }
@@ -203,6 +208,7 @@ func (aft *AnnotationFreeText) WithMarkupType(markupType MarkupType) *Annotation
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (aft *AnnotationFreeText) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationFreeText {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return aft
 }
@@ -301,13 +307,14 @@ func (aft *AnnotationFreeText) WithOpen(open bool) *AnnotationFreeText {
 
 // WithDestination sets the destination for a link annotation.
 func (aft *AnnotationFreeText) WithDestination(destination *Destination) *AnnotationFreeText {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return aft
 }
 
 // WithURL sets a URL for a link annotation.
-func (aft *AnnotationFreeText) WithURL(uRL string) *AnnotationFreeText {
-	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (aft *AnnotationFreeText) WithURL(url string) *AnnotationFreeText {
+	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return aft
 }
 
@@ -325,6 +332,7 @@ func (aft *AnnotationFreeText) WithCaption(caption string) *AnnotationFreeText {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (aft *AnnotationFreeText) WithBackgroundColor(backgroundColor obj.Object) *AnnotationFreeText {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(aft), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return aft
 }

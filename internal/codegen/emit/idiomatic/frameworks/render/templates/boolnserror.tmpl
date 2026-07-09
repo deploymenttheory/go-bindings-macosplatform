@@ -8,6 +8,9 @@
 {{define "boolnserror"}}{{if .DocComment}}{{.DocComment}}//
 {{end}}// {{.GoName}} returns an error if the operation did not succeed.
 func {{.Recv}}{{.GoName}}() error {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 {{- if .MainThread}}
 var _mainthread0 error
 purego.Main(func() {

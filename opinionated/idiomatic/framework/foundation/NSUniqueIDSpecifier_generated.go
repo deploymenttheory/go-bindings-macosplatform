@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func uniqueIDSpecifierAdopt(id objc.ID) *UniqueIDSpecifier {
 
 // NewUniqueIDSpecifierWithCoder creates a new UniqueIDSpecifier.
 func NewUniqueIDSpecifierWithCoder(inCoder *Coder) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUniqueIDSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return uniqueIDSpecifierAdopt(_id)
@@ -57,6 +60,9 @@ func NewUniqueIDSpecifierWithCoder(inCoder *Coder) *UniqueIDSpecifier {
 
 // NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID returns an NSUniqueIDSpecifier object, initialized with the given arguments.
 func NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqueID(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, uniqueID obj.Object) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
+	defer runtime.KeepAlive(uniqueID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUniqueIDSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:uniqueID:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), objref.IDOf(uniqueID))
 	return uniqueIDSpecifierAdopt(_id)
@@ -64,18 +70,21 @@ func NewUniqueIDSpecifierWithContainerClassDescriptionContainerSpecifierKeyUniqu
 
 // WithUniqueID sets returns the ID encapsulated by the receiver.
 func (uis *UniqueIDSpecifier) WithUniqueID(uniqueID obj.Object) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(uniqueID)
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setUniqueID:"), objref.IDOf(uniqueID))
 	return uis
 }
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (uis *UniqueIDSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return uis
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (uis *UniqueIDSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return uis
 }
@@ -94,12 +103,14 @@ func (uis *UniqueIDSpecifier) WithContainerIsRangeContainerObject(containerIsRan
 
 // WithKey sets sets the key of the receiver.
 func (uis *UniqueIDSpecifier) WithKey(key StringProvider) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return uis
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (uis *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *UniqueIDSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return uis
 }
@@ -117,13 +128,14 @@ func (uis *UniqueIDSpecifier) WithObservationInfo(observationInfo unsafe.Pointer
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uis *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *UniqueIDSpecifier {
-	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uis *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UniqueIDSpecifier {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uis
 }
 
 // UniqueID returns the unique ID.
 func (uis *UniqueIDSpecifier) UniqueID() obj.Object {
+	defer runtime.KeepAlive(uis)
 	_r := objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("uniqueID"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func nEDNSSettingsAdopt(id objc.ID) *NEDNSSettings {
 
 // Description returns the object's -description text.
 func (ns *NEDNSSettings) Description() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ns *NEDNSSettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ns *NEDNSSettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(ns)
 	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ns *NEDNSSettings) String() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
@@ -109,6 +116,7 @@ func (ns *NEDNSSettings) WithAllowFailover(allowFailover bool) *NEDNSSettings {
 
 // DNSProtocol returns the DNS protocol used by the settings.
 func (ns *NEDNSSettings) DNSProtocol() NEDNSProtocol {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NEDNSProtocol](objref.IDOf(ns), objc.RegisterName("dnsProtocol"))
 	return _r
 }
@@ -117,6 +125,7 @@ func (ns *NEDNSSettings) DNSProtocol() NEDNSProtocol {
 //
 // Servers returns the collection as a Go slice.
 func (ns *NEDNSSettings) Servers() []string {
+	defer runtime.KeepAlive(ns)
 	_arr := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("servers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -125,12 +134,14 @@ func (ns *NEDNSSettings) Servers() []string {
 //
 // SearchDomains returns the collection as a Go slice.
 func (ns *NEDNSSettings) SearchDomains() []string {
+	defer runtime.KeepAlive(ns)
 	_arr := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("searchDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DomainName returns a string containing the DNS domain.
 func (ns *NEDNSSettings) DomainName() string {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("domainName"))
 	if _r == 0 {
 		return ""
@@ -142,18 +153,21 @@ func (ns *NEDNSSettings) DomainName() string {
 //
 // MatchDomains returns the collection as a Go slice.
 func (ns *NEDNSSettings) MatchDomains() []string {
+	defer runtime.KeepAlive(ns)
 	_arr := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("matchDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // MatchDomainsNoSearch reports whether a boolean indicating if the match domains should be appended to the search domain list. Default is false (match domains will be appended to the search domain list).
 func (ns *NEDNSSettings) MatchDomainsNoSearch() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("matchDomainsNoSearch"))
 	return _r
 }
 
 // AllowFailover reports whether a boolean indicating if failover to the default system resolver is permitted on resolution failure.
 func (ns *NEDNSSettings) AllowFailover() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("allowFailover"))
 	return _r
 }

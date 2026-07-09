@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func vertexAttributeAdopt(id objc.ID) *VertexAttribute {
 
 // Description returns the object's -description text.
 func (va *VertexAttribute) Description() string {
+	defer runtime.KeepAlive(va)
 	return rt.Description(objref.IDOf(va))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (va *VertexAttribute) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(va), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (va *VertexAttribute) IsKind(className string) bool {
+	defer runtime.KeepAlive(va)
 	return rt.IsKind(objref.IDOf(va), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (va *VertexAttribute) String() string {
+	defer runtime.KeepAlive(va)
 	return rt.Description(objref.IDOf(va))
 }
 
@@ -119,6 +125,7 @@ func (va *VertexAttribute) WithInitializationValue(initializationValue unsafe.Po
 
 // Name returns identifying name of the attribute derived from model file, or one of the predefined MDLVertexAttribute strings
 func (va *VertexAttribute) Name() string {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -128,24 +135,28 @@ func (va *VertexAttribute) Name() string {
 
 // Format returns format (including number of components) of the attribute If the value is MDLVertexFormatInvalid.   Other values of this object will be ignored when setting the MDLVertexDescriptor object in a Mesh. The initial value is MDLVertexFormatInvalid.
 func (va *VertexAttribute) Format() VertexFormat {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[VertexFormat](objref.IDOf(va), objc.RegisterName("format"))
 	return _r
 }
 
 // Offset returns offset in bytes of the attrbute in each element of the vertex buffer
 func (va *VertexAttribute) Offset() int {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("offset"))
 	return _r
 }
 
 // BufferIndex returns index of the buffer in mesh's vertexBuffer array in which this attribute resides
 func (va *VertexAttribute) BufferIndex() int {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("bufferIndex"))
 	return _r
 }
 
 // Time returns the time the attribute is intended for. morph targets would store their times here
 func (va *VertexAttribute) Time() float64 {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[float64](objref.IDOf(va), objc.RegisterName("time"))
 	return _r
 }

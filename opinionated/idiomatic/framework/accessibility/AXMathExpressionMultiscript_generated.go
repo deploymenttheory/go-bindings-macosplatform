@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func mathExpressionMultiscriptAdopt(id objc.ID) *MathExpressionMultiscript {
 
 // NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions creates a new MathExpressionMultiscript.
 func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions(baseExpression *MathExpression, prescriptExpressions []*MathExpressionSubSuperscript, postscriptExpressions []*MathExpressionSubSuperscript) *MathExpressionMultiscript {
+	defer runtime.KeepAlive(baseExpression)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionMultiscript")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:prescriptExpressions:postscriptExpressions:"), objref.IDOf(baseExpression), purego.SliceToNSArray(prescriptExpressions, func(_v *MathExpressionSubSuperscript) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(postscriptExpressions, func(_v *MathExpressionSubSuperscript) objc.ID { return objref.IDOf(_v) }))
 	return mathExpressionMultiscriptAdopt(_id)
@@ -52,6 +55,7 @@ func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscrip
 
 // BaseExpression returns the base expression.
 func (mem *MathExpressionMultiscript) BaseExpression() *MathExpression {
+	defer runtime.KeepAlive(mem)
 	_r := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
@@ -60,6 +64,7 @@ func (mem *MathExpressionMultiscript) BaseExpression() *MathExpression {
 //
 // PrescriptExpressions returns the collection as a Go slice.
 func (mem *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
+	defer runtime.KeepAlive(mem)
 	_arr := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("prescriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
@@ -68,6 +73,7 @@ func (mem *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSu
 //
 // PostscriptExpressions returns the collection as a Go slice.
 func (mem *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {
+	defer runtime.KeepAlive(mem)
 	_arr := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("postscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }

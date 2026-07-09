@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func videoPerformanceMetricsAdopt(id objc.ID) *VideoPerformanceMetrics {
 
 // Description returns the object's -description text.
 func (vpm *VideoPerformanceMetrics) Description() string {
+	defer runtime.KeepAlive(vpm)
 	return rt.Description(objref.IDOf(vpm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vpm *VideoPerformanceMetrics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vpm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vpm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vpm *VideoPerformanceMetrics) IsKind(className string) bool {
+	defer runtime.KeepAlive(vpm)
 	return rt.IsKind(objref.IDOf(vpm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vpm *VideoPerformanceMetrics) String() string {
+	defer runtime.KeepAlive(vpm)
 	return rt.Description(objref.IDOf(vpm))
 }
 
@@ -74,30 +81,35 @@ func NewVideoPerformanceMetrics() *VideoPerformanceMetrics {
 
 // TotalNumberOfFrames returns [SPI] The total number of frames that would have been displayed if no frames are dropped.
 func (vpm *VideoPerformanceMetrics) TotalNumberOfFrames() int {
+	defer runtime.KeepAlive(vpm)
 	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("totalNumberOfFrames"))
 	return _r
 }
 
 // NumberOfDroppedFrames returns [SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
 func (vpm *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
+	defer runtime.KeepAlive(vpm)
 	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("numberOfDroppedFrames"))
 	return _r
 }
 
 // NumberOfCorruptedFrames returns [SPI] The total number of corrupted frames that have been detected.
 func (vpm *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
+	defer runtime.KeepAlive(vpm)
 	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("numberOfCorruptedFrames"))
 	return _r
 }
 
 // NumberOfFramesDisplayedUsingOptimizedCompositing returns [SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
 func (vpm *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
+	defer runtime.KeepAlive(vpm)
 	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("numberOfFramesDisplayedUsingOptimizedCompositing"))
 	return _r
 }
 
 // TotalAccumulatedFrameDelay returns [SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
 func (vpm *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
+	defer runtime.KeepAlive(vpm)
 	_r := objc.Send[float64](objref.IDOf(vpm), objc.RegisterName("totalAccumulatedFrameDelay"))
 	return _r
 }

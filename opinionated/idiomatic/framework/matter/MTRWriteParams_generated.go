@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWriteParamsAdopt(id objc.ID) *MTRWriteParams {
 
 // Description returns the object's -description text.
 func (mwp *MTRWriteParams) Description() string {
+	defer runtime.KeepAlive(mwp)
 	return rt.Description(objref.IDOf(mwp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwp *MTRWriteParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwp *MTRWriteParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwp)
 	return rt.IsKind(objref.IDOf(mwp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwp *MTRWriteParams) String() string {
+	defer runtime.KeepAlive(mwp)
 	return rt.Description(objref.IDOf(mwp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRWriteParams() *MTRWriteParams {
 
 // WithTimedWriteTimeout sets controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
 func (mwp *MTRWriteParams) WithTimedWriteTimeout(timedWriteTimeout obj.Object) *MTRWriteParams {
+	defer runtime.KeepAlive(timedWriteTimeout)
 	objc.Send[objc.ID](objref.IDOf(mwp), objc.RegisterName("setTimedWriteTimeout:"), objref.IDOf(timedWriteTimeout))
 	return mwp
 }
 
 // WithDataVersion sets sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
 func (mwp *MTRWriteParams) WithDataVersion(dataVersion obj.Object) *MTRWriteParams {
+	defer runtime.KeepAlive(dataVersion)
 	objc.Send[objc.ID](objref.IDOf(mwp), objc.RegisterName("setDataVersion:"), objref.IDOf(dataVersion))
 	return mwp
 }
 
 // TimedWriteTimeout returns controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
-func (mwp *MTRWriteParams) TimedWriteTimeout() obj.Object {
+func (mwp *MTRWriteParams) TimedWriteTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mwp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwp), objc.RegisterName("timedWriteTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DataVersion sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
-func (mwp *MTRWriteParams) DataVersion() obj.Object {
+func (mwp *MTRWriteParams) DataVersion() *foundation.Number {
+	defer runtime.KeepAlive(mwp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwp), objc.RegisterName("dataVersion"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

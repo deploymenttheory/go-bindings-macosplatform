@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,6 +63,7 @@ func NewPinAnnotationView() *PinAnnotationView {
 
 // WithPinTintColor sets the color of the pin head.
 func (pav *PinAnnotationView) WithPinTintColor(pinTintColor obj.Object) *PinAnnotationView {
+	defer runtime.KeepAlive(pinTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setPinTintColor:"), objref.IDOf(pinTintColor))
 	})
@@ -85,6 +88,7 @@ func (pav *PinAnnotationView) WithPinColor(pinColor PinAnnotationColor) *PinAnno
 
 // WithImage sets the image the annotation view displays.
 func (pav *PinAnnotationView) WithImage(image obj.Object) *PinAnnotationView {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -165,6 +169,7 @@ func (pav *PinAnnotationView) WithCanShowCallout(canShowCallout bool) *PinAnnota
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (pav *PinAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *PinAnnotationView {
+	defer runtime.KeepAlive(leftCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	})
@@ -173,6 +178,7 @@ func (pav *PinAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryV
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (pav *PinAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *PinAnnotationView {
+	defer runtime.KeepAlive(rightCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	})
@@ -181,6 +187,7 @@ func (pav *PinAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessor
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (pav *PinAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *PinAnnotationView {
+	defer runtime.KeepAlive(detailCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	})
@@ -245,6 +252,7 @@ func (pav *PinAnnotationView) WithCollisionMode(collisionMode AnnotationViewColl
 
 // PinTintColor returns the pin tint color.
 func (pav *PinAnnotationView) PinTintColor() obj.Object {
+	defer runtime.KeepAlive(pav)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -258,6 +266,7 @@ func (pav *PinAnnotationView) PinTintColor() obj.Object {
 
 // AnimatesDrop wraps the corresponding Objective-C method.
 func (pav *PinAnnotationView) AnimatesDrop() bool {
+	defer runtime.KeepAlive(pav)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -271,6 +280,7 @@ func (pav *PinAnnotationView) AnimatesDrop() bool {
 
 // PinColor returns the pin color.
 func (pav *PinAnnotationView) PinColor() PinAnnotationColor {
+	defer runtime.KeepAlive(pav)
 	var _mainthread0 PinAnnotationColor
 	purego.Main(func() {
 		_mainthread0 = func() PinAnnotationColor {

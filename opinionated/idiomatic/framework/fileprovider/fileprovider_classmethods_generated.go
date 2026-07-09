@@ -6,6 +6,7 @@ package fileprovider
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -17,13 +18,14 @@ import (
 )
 
 // BeforeFirstSyncComponent returns version component exposed by the system to denote a state that predates a version returned by the provider. In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in the completion handler of that call didn't match the item template passed by the system, the system will try to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying those content back to the disk, which will cause the system to send the new disk version to the extension, by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in the template of the `createItemBasedOnTemplate` call. This constant is used by the system to represent that specific version that was communicated by the system to the extension but does not have a corresponding version assigned by the extension.
-func BeforeFirstSyncComponent() obj.Object {
+func BeforeFirstSyncComponent() []byte {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderItemVersion")), objc.RegisterName("beforeFirstSyncComponent"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ManagerForDomain returns a newly created file provider manager for the specified domain.
 func ManagerForDomain(domain *FileProviderDomain) *FileProviderManager {
+	defer runtime.KeepAlive(domain)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("managerForDomain:"), objref.IDOf(domain))
 	return FileProviderManagerFromID(_r)
 }
@@ -32,6 +34,7 @@ func ManagerForDomain(domain *FileProviderDomain) *FileProviderManager {
 //
 // AddDomain blocks until the operation completes or ctx is cancelled.
 func AddDomain(ctx context.Context, domain *FileProviderDomain) error {
+	defer runtime.KeepAlive(domain)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -51,6 +54,7 @@ func AddDomain(ctx context.Context, domain *FileProviderDomain) error {
 //
 // RemoveDomain blocks until the operation completes or ctx is cancelled.
 func RemoveDomain(ctx context.Context, domain *FileProviderDomain) error {
+	defer runtime.KeepAlive(domain)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -114,6 +118,7 @@ func RemoveAllDomains(ctx context.Context) error {
 //
 // ImportDomainFromDirectoryAtURL blocks until the operation completes or ctx is cancelled.
 func ImportDomainFromDirectoryAtURL(ctx context.Context, domain *FileProviderDomain, url string) error {
+	defer runtime.KeepAlive(domain)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

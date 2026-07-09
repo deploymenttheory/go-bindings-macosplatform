@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -86,6 +88,7 @@ func (b *Box) WithTitle(title string) *Box {
 
 // WithTitleFont sets the font object used to draw the receiver’s title.
 func (b *Box) WithTitleFont(titleFont *Font) *Box {
+	defer runtime.KeepAlive(titleFont)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
 	})
@@ -102,6 +105,7 @@ func (b *Box) WithContentViewMargins(contentViewMargins corefoundation.CGSize) *
 
 // WithContentView sets the receiver’s content view.
 func (b *Box) WithContentView(contentView ViewProvider) *Box {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
@@ -134,6 +138,7 @@ func (b *Box) WithCornerRadius(cornerRadius float64) *Box {
 
 // WithBorderColor sets the color of the receiver’s border when the receiver is a custom box with a simple line border.
 func (b *Box) WithBorderColor(borderColor *Color) *Box {
+	defer runtime.KeepAlive(borderColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	})
@@ -142,6 +147,7 @@ func (b *Box) WithBorderColor(borderColor *Color) *Box {
 
 // WithFillColor sets the color of the receiver’s background when the receiver is a custom box with a simple line border.
 func (b *Box) WithFillColor(fillColor *Color) *Box {
+	defer runtime.KeepAlive(fillColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	})
@@ -295,6 +301,7 @@ func (b *Box) WithWantsLayer(wantsLayer bool) *Box {
 
 // WithLayer sets the layer.
 func (b *Box) WithLayer(layer obj.Object) *Box {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -344,6 +351,7 @@ func (b *Box) WithBackgroundFilters(items ...obj.Object) *Box {
 
 // WithCompositingFilter sets the compositing filter.
 func (b *Box) WithCompositingFilter(compositingFilter obj.Object) *Box {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -361,6 +369,7 @@ func (b *Box) WithContentFilters(items ...obj.Object) *Box {
 
 // WithShadow sets the shadow.
 func (b *Box) WithShadow(shadow *Shadow) *Box {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -409,6 +418,7 @@ func (b *Box) WithPreparedContentRect(preparedContentRect corefoundation.CGRect)
 
 // WithNextKeyView sets the next key view.
 func (b *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -458,6 +468,7 @@ func (b *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetr
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (b *Box) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -514,6 +525,7 @@ func (b *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRan
 
 // WithPressureConfiguration sets the pressure configuration.
 func (b *Box) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -522,6 +534,7 @@ func (b *Box) WithPressureConfiguration(pressureConfiguration *PressureConfigura
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (b *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -530,6 +543,7 @@ func (b *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
 
 // WithMenu sets returns the responder’s menu.
 func (b *Box) WithMenu(menu *Menu) *Box {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -538,6 +552,7 @@ func (b *Box) WithMenu(menu *Menu) *Box {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (b *Box) WithUserActivity(userActivity obj.Object) *Box {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -546,6 +561,7 @@ func (b *Box) WithUserActivity(userActivity obj.Object) *Box {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (b *Box) WithTouchBar(touchBar *TouchBar) *Box {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -554,6 +570,7 @@ func (b *Box) WithTouchBar(touchBar *TouchBar) *Box {
 
 // SizeToFit resizes and moves the receiver’s content view so it just encloses its subviews.
 func (b *Box) SizeToFit() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sizeToFit"))
 	})
@@ -562,6 +579,7 @@ func (b *Box) SizeToFit() {
 
 // SetFrameFromContentFrame places the receiver so its content view lies on the specified frame.
 func (b *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameFromContentFrame:"), contentFrame)
 	})
@@ -570,6 +588,7 @@ func (b *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
 
 // BoxType returns the box type.
 func (b *Box) BoxType() BoxType {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 BoxType
 	purego.Main(func() {
 		_mainthread0 = func() BoxType {
@@ -583,6 +602,7 @@ func (b *Box) BoxType() BoxType {
 
 // TitlePosition returns the title position.
 func (b *Box) TitlePosition() TitlePosition {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 TitlePosition
 	purego.Main(func() {
 		_mainthread0 = func() TitlePosition {
@@ -596,6 +616,7 @@ func (b *Box) TitlePosition() TitlePosition {
 
 // Title returns the title.
 func (b *Box) Title() string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -612,6 +633,7 @@ func (b *Box) Title() string {
 
 // TitleFont returns the title font.
 func (b *Box) TitleFont() *Font {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -625,6 +647,7 @@ func (b *Box) TitleFont() *Font {
 
 // BorderRect returns the border rect.
 func (b *Box) BorderRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -638,6 +661,7 @@ func (b *Box) BorderRect() corefoundation.CGRect {
 
 // TitleRect returns the title rect.
 func (b *Box) TitleRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -651,6 +675,7 @@ func (b *Box) TitleRect() corefoundation.CGRect {
 
 // TitleCell returns the title cell.
 func (b *Box) TitleCell() obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -664,6 +689,7 @@ func (b *Box) TitleCell() obj.Object {
 
 // ContentViewMargins returns the content view margins.
 func (b *Box) ContentViewMargins() corefoundation.CGSize {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -677,6 +703,7 @@ func (b *Box) ContentViewMargins() corefoundation.CGSize {
 
 // ContentView returns the content view.
 func (b *Box) ContentView() *View {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -690,6 +717,7 @@ func (b *Box) ContentView() *View {
 
 // IsTransparent reports whether the object is transparent.
 func (b *Box) IsTransparent() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -703,6 +731,7 @@ func (b *Box) IsTransparent() bool {
 
 // BorderWidth returns the border width.
 func (b *Box) BorderWidth() float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -716,6 +745,7 @@ func (b *Box) BorderWidth() float64 {
 
 // CornerRadius returns the corner radius.
 func (b *Box) CornerRadius() float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -729,6 +759,7 @@ func (b *Box) CornerRadius() float64 {
 
 // BorderColor returns the border color.
 func (b *Box) BorderColor() *Color {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -742,6 +773,7 @@ func (b *Box) BorderColor() *Color {
 
 // FillColor returns the fill color.
 func (b *Box) FillColor() *Color {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -755,6 +787,7 @@ func (b *Box) FillColor() *Color {
 
 // SetTitleWithMnemonic sets the title of the receiver with a character denoted as an access key.
 func (b *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 	})
@@ -763,6 +796,7 @@ func (b *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
 
 // BorderType returns the border type.
 func (b *Box) BorderType() BorderType {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 BorderType
 	purego.Main(func() {
 		_mainthread0 = func() BorderType {

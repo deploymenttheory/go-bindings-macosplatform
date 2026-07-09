@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -161,42 +163,49 @@ func (nlg *NNLossGradient) WithLabel(label string) *NNLossGradient {
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (nlg *NNLossGradient) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[bool](objref.IDOf(nlg), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // NumberOfClasses returns the number of classes.
 func (nlg *NNLossGradient) NumberOfClasses() int {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[int](objref.IDOf(nlg), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // Weight returns the weight.
 func (nlg *NNLossGradient) Weight() float32 {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing.
 func (nlg *NNLossGradient) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon returns the epsilon.
 func (nlg *NNLossGradient) Epsilon() float32 {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta.
 func (nlg *NNLossGradient) Delta() float32 {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("delta"))
 	return _r
 }
 
 // ComputeLabelGradients reports whether the computeLabelGradients property is used to control whether the loss gradient filter computes gradients for the primary (predictions) or secondary (labels) source image from the forward pass. Default: false.
 func (nlg *NNLossGradient) ComputeLabelGradients() bool {
+	defer runtime.KeepAlive(nlg)
 	_r := objc.Send[bool](objref.IDOf(nlg), objc.RegisterName("computeLabelGradients"))
 	return _r
 }

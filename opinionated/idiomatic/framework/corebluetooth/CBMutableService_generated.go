@@ -5,6 +5,8 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -46,9 +48,10 @@ func mutableServiceAdopt(id objc.ID) *MutableService {
 }
 
 // NewMutableServiceWithTypePrimary creates a newly initialized mutable service specified by UUID and service type.
-func NewMutableServiceWithTypePrimary(uUID *UUID, isPrimary bool) *MutableService {
+func NewMutableServiceWithTypePrimary(uuid *UUID, isPrimary bool) *MutableService {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableService")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:primary:"), objref.IDOf(uUID), isPrimary)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:primary:"), objref.IDOf(uuid), isPrimary)
 	return mutableServiceAdopt(_id)
 }
 

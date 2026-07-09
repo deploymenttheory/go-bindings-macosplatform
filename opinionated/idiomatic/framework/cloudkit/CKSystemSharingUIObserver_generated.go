@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,33 @@ func systemSharingUIObserverAdopt(id objc.ID) *SystemSharingUIObserver {
 
 // Description returns the object's -description text.
 func (ssuo *SystemSharingUIObserver) Description() string {
+	defer runtime.KeepAlive(ssuo)
 	return rt.Description(objref.IDOf(ssuo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssuo *SystemSharingUIObserver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssuo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssuo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssuo *SystemSharingUIObserver) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssuo)
 	return rt.IsKind(objref.IDOf(ssuo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssuo *SystemSharingUIObserver) String() string {
+	defer runtime.KeepAlive(ssuo)
 	return rt.Description(objref.IDOf(ssuo))
 }
 
 // NewSystemSharingUIObserverWithContainer creates and initializes an observer using the provided container.
 func NewSystemSharingUIObserverWithContainer(container *Container) *SystemSharingUIObserver {
+	defer runtime.KeepAlive(container)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSystemSharingUIObserver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainer:"), objref.IDOf(container))
 	return systemSharingUIObserverAdopt(_id)
@@ -80,6 +87,7 @@ func NewSystemSharingUIObserverWithContainer(container *Container) *SystemSharin
 //
 // SetSystemSharingUIDidStopSharingBlock blocks until the operation completes or ctx is cancelled.
 func (ssuo *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (result *RecordID, err error) {
+	defer runtime.KeepAlive(ssuo)
 	type _result struct {
 		val *RecordID
 		err error

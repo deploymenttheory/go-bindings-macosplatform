@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterRVCOperationalStateAdopt(id objc.ID) *MTRBaseClusterRVCOperat
 
 // NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterRVCOperationalState {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterRVCOperationalState")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterRVCOperationalStateAdopt(_id)
@@ -58,6 +62,8 @@ func NewMTRBaseClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *MTRBa
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterPauseParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -83,6 +89,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) PauseWithParamsCompletion(ctx c
 //
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -108,6 +115,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) PauseWithCompletion(ctx context
 //
 // ResumeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterResumeParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -133,6 +142,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ResumeWithParamsCompletion(ctx 
 //
 // ResumeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ResumeWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -158,6 +168,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ResumeWithCompletion(ctx contex
 //
 // GoHomeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) GoHomeWithParamsCompletion(ctx context.Context, params *MTRRVCOperationalStateClusterGoHomeParams) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -183,6 +195,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) GoHomeWithParamsCompletion(ctx 
 //
 // GoHomeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) GoHomeWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterOperationalCommandResponseParams, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -208,6 +221,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) GoHomeWithCompletion(ctx contex
 //
 // ReadAttributePhaseListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributePhaseListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributePhaseListWithCompl
 //
 // SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributePhaseListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributePhaseListWith
 //
 // ReadAttributeCurrentPhaseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeCurrentPhaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +300,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeCurrentPhaseWithCo
 //
 // SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeCurrentPhaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +327,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeCurrentPhaseW
 //
 // ReadAttributeCountdownTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeCountdownTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeCountdownTimeWithC
 //
 // SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeCountdownTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeCountdownTime
 //
 // ReadAttributeOperationalStateListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -383,6 +406,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateLi
 //
 // SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,6 +433,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalSt
 //
 // ReadAttributeOperationalStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalStateWi
 //
 // SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalSt
 //
 // ReadAttributeOperationalErrorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalErrorWithCompletion(ctx context.Context) (result *MTRRVCOperationalStateClusterErrorStateStruct, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterErrorStateStruct
 		err error
@@ -483,6 +512,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeOperationalErrorWi
 //
 // SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalErrorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRRVCOperationalStateClusterErrorStateStruct, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRRVCOperationalStateClusterErrorStateStruct
 		err error
@@ -508,6 +539,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeOperationalEr
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,6 +565,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeGeneratedCommandLi
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +592,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeGeneratedComm
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +618,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeAcceptedCommandLis
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +645,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeAcceptedComma
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +671,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeAttributeListWithC
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +698,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeAttributeList
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +724,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeFeatureMapWithComp
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +751,7 @@ func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeFeatureMapWit
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +777,8 @@ func (mbcros *MTRBaseClusterRVCOperationalState) ReadAttributeClusterRevisionWit
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcros *MTRBaseClusterRVCOperationalState) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcros)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

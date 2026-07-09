@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func physicsFieldAdopt(id objc.ID) *PhysicsField {
 
 // Description returns the object's -description text.
 func (pf *PhysicsField) Description() string {
+	defer runtime.KeepAlive(pf)
 	return rt.Description(objref.IDOf(pf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pf *PhysicsField) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pf *PhysicsField) IsKind(className string) bool {
+	defer runtime.KeepAlive(pf)
 	return rt.IsKind(objref.IDOf(pf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pf *PhysicsField) String() string {
+	defer runtime.KeepAlive(pf)
 	return rt.Description(objref.IDOf(pf))
 }
 
@@ -122,48 +129,56 @@ func (pf *PhysicsField) WithCategoryBitMask(categoryBitMask int) *PhysicsField {
 
 // Strength returns the strength.
 func (pf *PhysicsField) Strength() float64 {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[float64](objref.IDOf(pf), objc.RegisterName("strength"))
 	return _r
 }
 
 // FalloffExponent returns the falloff exponent.
 func (pf *PhysicsField) FalloffExponent() float64 {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[float64](objref.IDOf(pf), objc.RegisterName("falloffExponent"))
 	return _r
 }
 
 // MinimumDistance returns the minimum distance.
 func (pf *PhysicsField) MinimumDistance() float64 {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[float64](objref.IDOf(pf), objc.RegisterName("minimumDistance"))
 	return _r
 }
 
 // IsActive reports whether the object is active.
 func (pf *PhysicsField) IsActive() bool {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("isActive"))
 	return _r
 }
 
 // IsExclusive reports whether the object is exclusive.
 func (pf *PhysicsField) IsExclusive() bool {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("isExclusive"))
 	return _r
 }
 
 // UsesEllipsoidalExtent wraps the corresponding Objective-C method.
 func (pf *PhysicsField) UsesEllipsoidalExtent() bool {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesEllipsoidalExtent"))
 	return _r
 }
 
 // Scope returns the scope.
 func (pf *PhysicsField) Scope() PhysicsFieldScope {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[PhysicsFieldScope](objref.IDOf(pf), objc.RegisterName("scope"))
 	return _r
 }
 
 // CategoryBitMask determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
 func (pf *PhysicsField) CategoryBitMask() int {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[int](objref.IDOf(pf), objc.RegisterName("categoryBitMask"))
 	return _r
 }

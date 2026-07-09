@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func collectionViewLayoutAttributesAdopt(id objc.ID) *CollectionViewLayoutAttrib
 
 // Description returns the object's -description text.
 func (cvla *CollectionViewLayoutAttributes) Description() string {
+	defer runtime.KeepAlive(cvla)
 	return rt.Description(objref.IDOf(cvla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvla *CollectionViewLayoutAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvla)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvla *CollectionViewLayoutAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvla)
 	return rt.IsKind(objref.IDOf(cvla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvla *CollectionViewLayoutAttributes) String() string {
+	defer runtime.KeepAlive(cvla)
 	return rt.Description(objref.IDOf(cvla))
 }
 
@@ -121,6 +129,7 @@ func (cvla *CollectionViewLayoutAttributes) WithHidden(hidden bool) *CollectionV
 
 // WithIndexPath sets the index path of the element.
 func (cvla *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(indexPath)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("setIndexPath:"), objref.IDOf(indexPath))
 	})
@@ -129,6 +138,7 @@ func (cvla *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) 
 
 // Frame returns the frame.
 func (cvla *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -142,6 +152,7 @@ func (cvla *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
 
 // Size returns the size.
 func (cvla *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -155,6 +166,7 @@ func (cvla *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
 
 // Alpha returns the alpha.
 func (cvla *CollectionViewLayoutAttributes) Alpha() float64 {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -168,6 +180,7 @@ func (cvla *CollectionViewLayoutAttributes) Alpha() float64 {
 
 // ZIndex returns the z index.
 func (cvla *CollectionViewLayoutAttributes) ZIndex() int {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -181,6 +194,7 @@ func (cvla *CollectionViewLayoutAttributes) ZIndex() int {
 
 // IsHidden reports whether the object is hidden.
 func (cvla *CollectionViewLayoutAttributes) IsHidden() bool {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -193,12 +207,13 @@ func (cvla *CollectionViewLayoutAttributes) IsHidden() bool {
 }
 
 // IndexPath returns the index path.
-func (cvla *CollectionViewLayoutAttributes) IndexPath() obj.Object {
-	var _mainthread0 obj.Object
+func (cvla *CollectionViewLayoutAttributes) IndexPath() *foundation.IndexPath {
+	defer runtime.KeepAlive(cvla)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("indexPath"))
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -207,6 +222,7 @@ func (cvla *CollectionViewLayoutAttributes) IndexPath() obj.Object {
 
 // RepresentedElementCategory returns the represented element category.
 func (cvla *CollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 CollectionElementCategory
 	purego.Main(func() {
 		_mainthread0 = func() CollectionElementCategory {
@@ -220,6 +236,7 @@ func (cvla *CollectionViewLayoutAttributes) RepresentedElementCategory() Collect
 
 // RepresentedElementKind returns the represented element kind.
 func (cvla *CollectionViewLayoutAttributes) RepresentedElementKind() string {
+	defer runtime.KeepAlive(cvla)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

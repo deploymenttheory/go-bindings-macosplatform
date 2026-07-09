@@ -5,7 +5,10 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,65 +52,84 @@ func behaviorAdopt(id objc.ID) *Behavior {
 
 // Description returns the object's -description text.
 func (b *Behavior) Description() string {
+	defer runtime.KeepAlive(b)
 	return rt.Description(objref.IDOf(b))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (b *Behavior) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(b), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (b *Behavior) IsKind(className string) bool {
+	defer runtime.KeepAlive(b)
 	return rt.IsKind(objref.IDOf(b), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (b *Behavior) String() string {
+	defer runtime.KeepAlive(b)
 	return rt.Description(objref.IDOf(b))
 }
 
 // SetWeightForGoal sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
 func (b *Behavior) SetWeightForGoal(weight float32, goal *Goal) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(goal)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWeight:forGoal:"), weight, objref.IDOf(goal))
 }
 
 // WeightForGoal returns the weight for the specified goal’s influence on agents.
 func (b *Behavior) WeightForGoal(goal *Goal) float32 {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(goal)
 	_r := objc.Send[float32](objref.IDOf(b), objc.RegisterName("weightForGoal:"), objref.IDOf(goal))
 	return _r
 }
 
 // RemoveGoal removes the specified goal from the behavior.
 func (b *Behavior) RemoveGoal(goal *Goal) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(goal)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("removeGoal:"), objref.IDOf(goal))
 }
 
 // RemoveAllGoals removes all goals from the behavior.
 func (b *Behavior) RemoveAllGoals() {
+	defer runtime.KeepAlive(b)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("removeAllGoals"))
 }
 
 // ObjectAtIndexedSubscript returns the goal at the specified index in the behavior’s list of goals.
 func (b *Behavior) ObjectAtIndexedSubscript(idx int) *Goal {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return GoalFromID(_r)
 }
 
 // SetObjectForKeyedSubscript sets the weight for the goal specified by subscript syntax.
 func (b *Behavior) SetObjectForKeyedSubscript(weight obj.Object, goal *Goal) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(weight)
+	defer runtime.KeepAlive(goal)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(weight), objref.IDOf(goal))
 }
 
 // ObjectForKeyedSubscript returns the weight associated with the goal specified by subscript syntax.
-func (b *Behavior) ObjectForKeyedSubscript(goal *Goal) obj.Object {
+func (b *Behavior) ObjectForKeyedSubscript(goal *Goal) *foundation.Number {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(goal)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(goal))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GoalCount returns the goal count.
 func (b *Behavior) GoalCount() int {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("goalCount"))
 	return _r
 }

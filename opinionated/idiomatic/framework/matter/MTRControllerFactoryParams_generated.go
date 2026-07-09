@@ -5,9 +5,13 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -70,6 +74,16 @@ func (mcfp *MTRControllerFactoryParams) WithCdCerts(items ...obj.Object) *MTRCon
 	return mcfp
 }
 
+// WithOtaProviderDelegate sets the ota provider delegate.
+func (mcfp *MTRControllerFactoryParams) WithOtaProviderDelegate(otaProviderDelegate MTROTAProviderDelegate) *MTRControllerFactoryParams {
+	_shim := newMTROTAProviderDelegateShim(otaProviderDelegate)
+	_sel := objc.RegisterName("setOtaProviderDelegate:")
+	shim.Associate(objref.IDOf(mcfp), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(mcfp), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return mcfp
+}
+
 // WithProductAttestationAuthorityCertificates sets the product attestation authority certificates.
 func (mcfp *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -86,6 +100,7 @@ func (mcfp *MTRControllerFactoryParams) WithCertificationDeclarationCertificates
 
 // WithPort sets the port.
 func (mcfp *MTRControllerFactoryParams) WithPort(port obj.Object) *MTRControllerFactoryParams {
+	defer runtime.KeepAlive(port)
 	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setPort:"), objref.IDOf(port))
 	return mcfp
 }
@@ -98,6 +113,7 @@ func (mcfp *MTRControllerFactoryParams) WithShouldStartServer(shouldStartServer 
 
 // StartServer wraps the corresponding Objective-C method.
 func (mcfp *MTRControllerFactoryParams) StartServer() bool {
+	defer runtime.KeepAlive(mcfp)
 	_r := objc.Send[bool](objref.IDOf(mcfp), objc.RegisterName("startServer"))
 	return _r
 }
@@ -105,17 +121,19 @@ func (mcfp *MTRControllerFactoryParams) StartServer() bool {
 // PaaCerts returns the paa certs.
 //
 // PaaCerts returns the collection as a Go slice.
-func (mcfp *MTRControllerFactoryParams) PaaCerts() []obj.Object {
+func (mcfp *MTRControllerFactoryParams) PaaCerts() [][]byte {
+	defer runtime.KeepAlive(mcfp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("paaCerts"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // CdCerts returns the cd certs.
 //
 // CdCerts returns the collection as a Go slice.
-func (mcfp *MTRControllerFactoryParams) CdCerts() []obj.Object {
+func (mcfp *MTRControllerFactoryParams) CdCerts() [][]byte {
+	defer runtime.KeepAlive(mcfp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("cdCerts"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 var _ MTRDeviceControllerFactoryParamsProvider = (*MTRControllerFactoryParams)(nil)

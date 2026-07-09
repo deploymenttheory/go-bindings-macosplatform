@@ -264,12 +264,12 @@ func DADiskUnmount(disk obj.Object, options int, callback unsafe.Pointer, contex
 var _fnDADissenterCreate func(objc.ID, int, objc.ID) objc.ID
 
 // DADissenterCreate calls the DiskArbitration framework function DADissenterCreate.
-func DADissenterCreate(allocator obj.Object, status int, string_ obj.Object) obj.Object {
+func DADissenterCreate(allocator obj.Object, status int, str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnDADissenterCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnDADissenterCreate, _lib, "DADissenterCreate")
 	}
-	_ret := _fnDADissenterCreate(objref.IDOf(allocator), status, objref.IDOf(string_))
+	_ret := _fnDADissenterCreate(objref.IDOf(allocator), status, objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 

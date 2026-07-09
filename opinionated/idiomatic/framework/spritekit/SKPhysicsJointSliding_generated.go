@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,30 +73,35 @@ func (pjs *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float6
 
 // WithBodyA sets the first body connected by the joint.
 func (pjs *PhysicsJointSliding) WithBodyA(bodyA *PhysicsBody) *PhysicsJointSliding {
+	defer runtime.KeepAlive(bodyA)
 	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return pjs
 }
 
 // WithBodyB sets the second body connected by the joint.
 func (pjs *PhysicsJointSliding) WithBodyB(bodyB *PhysicsBody) *PhysicsJointSliding {
+	defer runtime.KeepAlive(bodyB)
 	objc.Send[objc.ID](objref.IDOf(pjs), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return pjs
 }
 
 // ShouldEnableLimits wraps the corresponding Objective-C method.
 func (pjs *PhysicsJointSliding) ShouldEnableLimits() bool {
+	defer runtime.KeepAlive(pjs)
 	_r := objc.Send[bool](objref.IDOf(pjs), objc.RegisterName("shouldEnableLimits"))
 	return _r
 }
 
 // LowerDistanceLimit returns the lower distance limit.
 func (pjs *PhysicsJointSliding) LowerDistanceLimit() float64 {
+	defer runtime.KeepAlive(pjs)
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("lowerDistanceLimit"))
 	return _r
 }
 
 // UpperDistanceLimit returns the upper distance limit.
 func (pjs *PhysicsJointSliding) UpperDistanceLimit() float64 {
+	defer runtime.KeepAlive(pjs)
 	_r := objc.Send[float64](objref.IDOf(pjs), objc.RegisterName("upperDistanceLimit"))
 	return _r
 }

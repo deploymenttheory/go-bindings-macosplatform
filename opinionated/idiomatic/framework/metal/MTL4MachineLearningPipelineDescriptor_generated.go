@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,6 +56,7 @@ func NewMTL4MachineLearningPipelineDescriptor() *MTL4MachineLearningPipelineDesc
 
 // WithMachineLearningFunctionDescriptor sets assigns the function that the machine learning pipeline you create from this descriptor executes.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor {
+	defer runtime.KeepAlive(machineLearningFunctionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setMachineLearningFunctionDescriptor:"), objref.IDOf(machineLearningFunctionDescriptor))
 	return mmlpd
 }
@@ -66,33 +69,40 @@ func (mmlpd *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL
 
 // WithOptions sets provides compile-time options when you build the pipeline.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return mmlpd
 }
 
 // SetInputDimensionsAtBufferIndex sets the dimension of an input tensor at a buffer index.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *TensorExtents, bufferIndex int) {
+	defer runtime.KeepAlive(mmlpd)
+	defer runtime.KeepAlive(dimensions)
 	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setInputDimensions:atBufferIndex:"), objref.IDOf(dimensions), bufferIndex)
 }
 
 // SetInputDimensionsWithRange sets the dimensions of multiple input tensors on a range of buffer bindings.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions []*TensorExtents, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mmlpd)
 	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setInputDimensions:withRange:"), purego.SliceToNSArray(dimensions, func(_v *TensorExtents) objc.ID { return objref.IDOf(_v) }), range_)
 }
 
 // InputDimensionsAtBufferIndex obtains the dimensions of the input tensor at bufferIndex if set, nil otherwise.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {
+	defer runtime.KeepAlive(mmlpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("inputDimensionsAtBufferIndex:"), bufferIndex)
 	return TensorExtentsFromID(_r)
 }
 
 // Reset resets the descriptor to its default values.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) Reset() {
+	defer runtime.KeepAlive(mmlpd)
 	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("reset"))
 }
 
 // MachineLearningFunctionDescriptor returns assigns the function that the machine learning pipeline you create from this descriptor executes.
 func (mmlpd *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(mmlpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("machineLearningFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }

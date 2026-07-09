@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRMediaInputClusterShowInputStatusParamsAdopt(id objc.ID) *MTRMediaInputCl
 
 // Description returns the object's -description text.
 func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) Description() string {
+	defer runtime.KeepAlive(mmicsisp)
 	return rt.Description(objref.IDOf(mmicsisp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmicsisp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmicsisp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmicsisp)
 	return rt.IsKind(objref.IDOf(mmicsisp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) String() string {
+	defer runtime.KeepAlive(mmicsisp)
 	return rt.Description(objref.IDOf(mmicsisp))
 }
 
@@ -72,24 +80,28 @@ func NewMTRMediaInputClusterShowInputStatusParams() *MTRMediaInputClusterShowInp
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaInputClusterShowInputStatusParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmicsisp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmicsisp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaInputClusterShowInputStatusParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mmicsisp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mmicsisp
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmicsisp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmicsisp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) ServerSideProcessingTimeout() obj.Object {
+func (mmicsisp *MTRMediaInputClusterShowInputStatusParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mmicsisp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmicsisp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

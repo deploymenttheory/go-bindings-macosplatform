@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func audioUnitTimeEffectAdopt(id objc.ID) *AudioUnitTimeEffect {
 
 // NewAudioUnitTimeEffectWithAudioComponentDescription creates a time effect audio unit with the specified description.
 func NewAudioUnitTimeEffectWithAudioComponentDescription(audioComponentDescription obj.Object) *AudioUnitTimeEffect {
+	defer runtime.KeepAlive(audioComponentDescription)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitTimeEffect")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), objref.IDOf(audioComponentDescription))
 	return audioUnitTimeEffectAdopt(_id)
@@ -61,6 +64,7 @@ func (aute *AudioUnitTimeEffect) WithBypass(bypass bool) *AudioUnitTimeEffect {
 
 // Bypass wraps the corresponding Objective-C method.
 func (aute *AudioUnitTimeEffect) Bypass() bool {
+	defer runtime.KeepAlive(aute)
 	_r := objc.Send[bool](objref.IDOf(aute), objc.RegisterName("bypass"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func dOMUIEventAdopt(id objc.ID) *DOMUIEvent {
 
 // NewDOMUIEventUIEventCanBubbleCancelableViewDetail creates a new DOMUIEvent.
 func NewDOMUIEventUIEventCanBubbleCancelableViewDetail(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, detail int) *DOMUIEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMUIEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUIEvent:canBubble:cancelable:view:detail:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), detail)
 	return dOMUIEventAdopt(_id)
@@ -52,6 +55,7 @@ func NewDOMUIEventUIEventCanBubbleCancelableViewDetail(type_ string, canBubble b
 
 // NewDOMUIEventUIEvent creates a new DOMUIEvent.
 func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, detail int) *DOMUIEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMUIEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUIEvent:::::"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), detail)
 	return dOMUIEventAdopt(_id)
@@ -71,54 +75,63 @@ func (de *DOMUIEvent) WithCancelBubble(cancelBubble bool) *DOMUIEvent {
 
 // View returns the view.
 func (de *DOMUIEvent) View() *DOMAbstractView {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("view"))
 	return DOMAbstractViewFromID(_r)
 }
 
 // Detail returns the detail.
 func (de *DOMUIEvent) Detail() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("detail"))
 	return _r
 }
 
 // KeyCode returns the key code.
 func (de *DOMUIEvent) KeyCode() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("keyCode"))
 	return _r
 }
 
 // CharCode returns the char code.
 func (de *DOMUIEvent) CharCode() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("charCode"))
 	return _r
 }
 
 // LayerX returns the layer x.
 func (de *DOMUIEvent) LayerX() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("layerX"))
 	return _r
 }
 
 // LayerY returns the layer y.
 func (de *DOMUIEvent) LayerY() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("layerY"))
 	return _r
 }
 
 // PageX returns the page x.
 func (de *DOMUIEvent) PageX() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("pageX"))
 	return _r
 }
 
 // PageY returns the page y.
 func (de *DOMUIEvent) PageY() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("pageY"))
 	return _r
 }
 
 // Which returns the which.
 func (de *DOMUIEvent) Which() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("which"))
 	return _r
 }

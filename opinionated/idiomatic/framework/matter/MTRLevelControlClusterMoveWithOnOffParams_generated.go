@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRLevelControlClusterMoveWithOnOffParamsAdopt(id objc.ID) *MTRLevelControl
 
 // Description returns the object's -description text.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) Description() string {
+	defer runtime.KeepAlive(mlccmwoop)
 	return rt.Description(objref.IDOf(mlccmwoop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mlccmwoop)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mlccmwoop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mlccmwoop)
 	return rt.IsKind(objref.IDOf(mlccmwoop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) String() string {
+	defer runtime.KeepAlive(mlccmwoop)
 	return rt.Description(objref.IDOf(mlccmwoop))
 }
 
@@ -72,72 +80,84 @@ func NewMTRLevelControlClusterMoveWithOnOffParams() *MTRLevelControlClusterMoveW
 
 // WithMoveMode sets the move mode.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	defer runtime.KeepAlive(moveMode)
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return mlccmwoop
 }
 
 // WithRate sets the rate.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	defer runtime.KeepAlive(rate)
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return mlccmwoop
 }
 
 // WithOptionsMask sets the options mask.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mlccmwoop
 }
 
 // WithOptionsOverride sets the options override.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mlccmwoop
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mlccmwoop
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mlccmwoop
 }
 
 // MoveMode returns the move mode.
-func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() obj.Object {
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() *foundation.Number {
+	defer runtime.KeepAlive(mlccmwoop)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("moveMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Rate returns the rate.
-func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) Rate() obj.Object {
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) Rate() *foundation.Number {
+	defer runtime.KeepAlive(mlccmwoop)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("rate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsMask returns the options mask.
-func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() obj.Object {
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mlccmwoop)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() obj.Object {
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mlccmwoop)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() obj.Object {
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mlccmwoop)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() obj.Object {
+func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mlccmwoop)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

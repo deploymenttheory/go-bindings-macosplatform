@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,22 +48,27 @@ func movieAdopt(id objc.ID) *Movie {
 
 // Description returns the object's -description text.
 func (m *Movie) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Movie) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Movie) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Movie) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -74,6 +80,7 @@ func NewMovie() *Movie {
 
 // NewMovieWithCoder creates a new Movie.
 func NewMovieWithCoder(coder obj.Object) *Movie {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMovie")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return movieAdopt(_id)

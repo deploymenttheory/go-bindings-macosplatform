@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,6 +66,7 @@ func (cgngs *CNNGroupNormalizationGradientState) WithLabel(label string) *CNNGro
 
 // GroupNormalization returns the MPSCNNGroupNormalization object that created this state object.
 func (cgngs *CNNGroupNormalizationGradientState) GroupNormalization() obj.Object {
+	defer runtime.KeepAlive(cgngs)
 	_r := objc.Send[objc.ID](objref.IDOf(cgngs), objc.RegisterName("groupNormalization"))
 	return obj.Wrap(_r)
 }

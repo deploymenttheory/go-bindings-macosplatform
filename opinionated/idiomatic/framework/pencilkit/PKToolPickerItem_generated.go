@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func toolPickerItemAdopt(id objc.ID) *ToolPickerItem {
 
 // Description returns the object's -description text.
 func (tpi *ToolPickerItem) Description() string {
+	defer runtime.KeepAlive(tpi)
 	return rt.Description(objref.IDOf(tpi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tpi *ToolPickerItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tpi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tpi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tpi *ToolPickerItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(tpi)
 	return rt.IsKind(objref.IDOf(tpi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tpi *ToolPickerItem) String() string {
+	defer runtime.KeepAlive(tpi)
 	return rt.Description(objref.IDOf(tpi))
 }
 
 // Identifier returns a string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
 func (tpi *ToolPickerItem) Identifier() string {
+	defer runtime.KeepAlive(tpi)
 	_r := objc.Send[objc.ID](objref.IDOf(tpi), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (tpi *ToolPickerItem) Identifier() string {
 
 // Tool returns the `PKTool` this tool picker item represents.
 func (tpi *ToolPickerItem) Tool() *Tool {
+	defer runtime.KeepAlive(tpi)
 	_r := objc.Send[objc.ID](objref.IDOf(tpi), objc.RegisterName("tool"))
 	return ToolFromID(_r)
 }

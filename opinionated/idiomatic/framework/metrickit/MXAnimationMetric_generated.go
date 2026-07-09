@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewAnimationMetric() *AnimationMetric {
 
 // ScrollHitchTimeRatio returns ratio of time the application spent hitching while scrolling. Scroll hitches are user perceptible animation issues that occur during scrolling. This metric only applies to UIScrollViews. Dimensionless.
 func (am *AnimationMetric) ScrollHitchTimeRatio() obj.Object {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("scrollHitchTimeRatio"))
 	return obj.Wrap(_r)
 }
 
 // HitchTimeRatio returns ratio of time the application spent hitching during tracked animations. Hitches are user perceptible frame delays that can occur during animations and scrolling. This metric incorporates adjustments that optimize for user perception, and typically will be the most accurate representation of what hitches users experience during app usage. This metric is normalized against total animation duration. Many animations are tracked by default. You can track additional animations using the -[NSProcessInfo beginActivityWithOptions:reason:] method with the NSActivityAnimationTrackingEnabled option. Dimensionless.
 func (am *AnimationMetric) HitchTimeRatio() obj.Object {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("hitchTimeRatio"))
 	return obj.Wrap(_r)
 }

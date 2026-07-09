@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,6 +48,9 @@ func cNNDropoutGradientNodeAdopt(id objc.ID) *CNNDropoutGradientNode {
 
 // NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels create a new dropout gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), keepProbability, seed, maskStrideInPixels)
 	return cNNDropoutGradientNodeAdopt(_id)
@@ -59,18 +64,21 @@ func (cdgn *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientN
 
 // KeepProbability returns the keep probability.
 func (cdgn *CNNDropoutGradientNode) KeepProbability() float32 {
+	defer runtime.KeepAlive(cdgn)
 	_r := objc.Send[float32](objref.IDOf(cdgn), objc.RegisterName("keepProbability"))
 	return _r
 }
 
 // Seed returns the seed.
 func (cdgn *CNNDropoutGradientNode) Seed() int {
+	defer runtime.KeepAlive(cdgn)
 	_r := objc.Send[int](objref.IDOf(cdgn), objc.RegisterName("seed"))
 	return _r
 }
 
 // MaskStrideInPixels returns the mask stride in pixels.
 func (cdgn *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
+	defer runtime.KeepAlive(cdgn)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cdgn), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }

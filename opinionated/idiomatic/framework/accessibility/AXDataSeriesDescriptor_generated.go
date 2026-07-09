@@ -5,7 +5,10 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func dataSeriesDescriptorAdopt(id objc.ID) *DataSeriesDescriptor {
 
 // Description returns the object's -description text.
 func (dsd *DataSeriesDescriptor) Description() string {
+	defer runtime.KeepAlive(dsd)
 	return rt.Description(objref.IDOf(dsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dsd *DataSeriesDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dsd *DataSeriesDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(dsd)
 	return rt.IsKind(objref.IDOf(dsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dsd *DataSeriesDescriptor) String() string {
+	defer runtime.KeepAlive(dsd)
 	return rt.Description(objref.IDOf(dsd))
 }
 
@@ -75,6 +83,7 @@ func NewDataSeriesDescriptorWithNameIsContinuousDataPoints(name string, isContin
 
 // NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints creates a data series with the specified attributed name, a Boolean value that indicates whether the series is continuous, and data points.
 func NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints(attributedName obj.Object, isContinuous bool, dataPoints []*DataPoint) *DataSeriesDescriptor {
+	defer runtime.KeepAlive(attributedName)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXDataSeriesDescriptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedName:isContinuous:dataPoints:"), objref.IDOf(attributedName), isContinuous, purego.SliceToNSArray(dataPoints, func(_v *DataPoint) objc.ID { return objref.IDOf(_v) }))
 	return dataSeriesDescriptorAdopt(_id)
@@ -88,6 +97,7 @@ func (dsd *DataSeriesDescriptor) WithName(name string) *DataSeriesDescriptor {
 
 // WithAttributedName sets an attributed version of the data series name.
 func (dsd *DataSeriesDescriptor) WithAttributedName(attributedName obj.Object) *DataSeriesDescriptor {
+	defer runtime.KeepAlive(attributedName)
 	objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("setAttributedName:"), objref.IDOf(attributedName))
 	return dsd
 }
@@ -107,6 +117,7 @@ func (dsd *DataSeriesDescriptor) WithDataPoints(items ...*DataPoint) *DataSeries
 
 // Name returns the name or title of this data series.
 func (dsd *DataSeriesDescriptor) Name() string {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -115,13 +126,15 @@ func (dsd *DataSeriesDescriptor) Name() string {
 }
 
 // AttributedName returns an attributed version of the name of this data series. When set, this will be used instead of `name`.
-func (dsd *DataSeriesDescriptor) AttributedName() obj.Object {
+func (dsd *DataSeriesDescriptor) AttributedName() *foundation.AttributedString {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("attributedName"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // IsContinuous reports whether this data series should be treated as continuous.
 func (dsd *DataSeriesDescriptor) IsContinuous() bool {
+	defer runtime.KeepAlive(dsd)
 	_r := objc.Send[bool](objref.IDOf(dsd), objc.RegisterName("isContinuous"))
 	return _r
 }
@@ -130,6 +143,7 @@ func (dsd *DataSeriesDescriptor) IsContinuous() bool {
 //
 // DataPoints returns the collection as a Go slice.
 func (dsd *DataSeriesDescriptor) DataPoints() []*DataPoint {
+	defer runtime.KeepAlive(dsd)
 	_arr := objc.Send[objc.ID](objref.IDOf(dsd), objc.RegisterName("dataPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DataPoint { return DataPointFromID(_id) })
 }

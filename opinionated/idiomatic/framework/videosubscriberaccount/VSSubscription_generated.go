@@ -5,6 +5,9 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func vSSubscriptionAdopt(id objc.ID) *VSSubscription {
 
 // Description returns the object's -description text.
 func (vs *VSSubscription) Description() string {
+	defer runtime.KeepAlive(vs)
 	return rt.Description(objref.IDOf(vs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vs *VSSubscription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vs *VSSubscription) IsKind(className string) bool {
+	defer runtime.KeepAlive(vs)
 	return rt.IsKind(objref.IDOf(vs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vs *VSSubscription) String() string {
+	defer runtime.KeepAlive(vs)
 	return rt.Description(objref.IDOf(vs))
 }
 
@@ -73,8 +81,8 @@ func NewVSSubscription() *VSSubscription {
 }
 
 // WithExpirationDate sets the date when the user’s subscription expires.
-func (vs *VSSubscription) WithExpirationDate(expirationDate obj.Object) *VSSubscription {
-	objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+func (vs *VSSubscription) WithExpirationDate(expirationDate time.Time) *VSSubscription {
+	objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("setExpirationDate:"), rt.TimeToNSDate(expirationDate))
 	return vs
 }
 
@@ -98,13 +106,15 @@ func (vs *VSSubscription) WithBillingIdentifier(billingIdentifier string) *VSSub
 }
 
 // ExpirationDate returns after this point in time, the subscription will be considered inactive. If the current subscription becomes inactive, the system will behave as though the user is not subscribed at all, i.e. as though the registration center's current subscription had been set to nil. Defaults to distantFuture. Providing a value is useful in a limited number of scenarios, e.g. when the a subscriber decides not to renew their subscription, you should provide an expiration date that corresponds to the point in time when the final billing cycle will end. This might also be useful if the subscription only grants access to content that is time-limited, e.g. a single season of games for a sports league.
-func (vs *VSSubscription) ExpirationDate() obj.Object {
+func (vs *VSSubscription) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(vs)
 	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("expirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AccessLevel describes the level of access the subscriber has to your catalog of content. It is an error to provide a subscription with an unknown access level as the current subscription.  Instead, choose the access level that describes the content that the subscriber can play.
 func (vs *VSSubscription) AccessLevel() VSSubscriptionAccessLevel {
+	defer runtime.KeepAlive(vs)
 	_r := objc.Send[VSSubscriptionAccessLevel](objref.IDOf(vs), objc.RegisterName("accessLevel"))
 	return _r
 }
@@ -113,12 +123,14 @@ func (vs *VSSubscription) AccessLevel() VSSubscriptionAccessLevel {
 //
 // TierIdentifiers returns the collection as a Go slice.
 func (vs *VSSubscription) TierIdentifiers() []string {
+	defer runtime.KeepAlive(vs)
 	_arr := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("tierIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // BillingIdentifier returns identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.
 func (vs *VSSubscription) BillingIdentifier() string {
+	defer runtime.KeepAlive(vs)
 	_r := objc.Send[objc.ID](objref.IDOf(vs), objc.RegisterName("billingIdentifier"))
 	if _r == 0 {
 		return ""

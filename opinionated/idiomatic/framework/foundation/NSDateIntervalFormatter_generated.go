@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,24 +59,28 @@ func NewDateIntervalFormatter() *DateIntervalFormatter {
 
 // WithLocale sets the locale.
 func (dif *DateIntervalFormatter) WithLocale(locale *Locale) *DateIntervalFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return dif
 }
 
 // WithCalendar sets the calendar.
 func (dif *DateIntervalFormatter) WithCalendar(calendar *Calendar) *DateIntervalFormatter {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return dif
 }
 
 // WithTimeZone sets the time zone.
 func (dif *DateIntervalFormatter) WithTimeZone(timeZone *TimeZone) *DateIntervalFormatter {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return dif
 }
 
 // WithDateTemplate sets the date template.
 func (dif *DateIntervalFormatter) WithDateTemplate(dateTemplate StringProvider) *DateIntervalFormatter {
+	defer runtime.KeepAlive(dateTemplate)
 	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setDateTemplate:"), objref.IDOf(dateTemplate))
 	return dif
 }
@@ -97,14 +104,15 @@ func (dif *DateIntervalFormatter) WithObservationInfo(observationInfo unsafe.Poi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dif *DateIntervalFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateIntervalFormatter {
-	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dif *DateIntervalFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DateIntervalFormatter {
+	objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dif
 }
 
 // StringFromDateToDate wraps the corresponding Objective-C method.
-func (dif *DateIntervalFormatter) StringFromDateToDate(fromDate *Date, toDate *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("stringFromDate:toDate:"), objref.IDOf(fromDate), objref.IDOf(toDate))
+func (dif *DateIntervalFormatter) StringFromDateToDate(fromDate time.Time, toDate time.Time) string {
+	defer runtime.KeepAlive(dif)
+	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("stringFromDate:toDate:"), rt.TimeToNSDate(fromDate), rt.TimeToNSDate(toDate))
 	if _r == 0 {
 		return ""
 	}
@@ -113,6 +121,8 @@ func (dif *DateIntervalFormatter) StringFromDateToDate(fromDate *Date, toDate *D
 
 // StringFromDateInterval wraps the corresponding Objective-C method.
 func (dif *DateIntervalFormatter) StringFromDateInterval(dateInterval *DateInterval) string {
+	defer runtime.KeepAlive(dif)
+	defer runtime.KeepAlive(dateInterval)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("stringFromDateInterval:"), objref.IDOf(dateInterval))
 	if _r == 0 {
 		return ""
@@ -122,24 +132,28 @@ func (dif *DateIntervalFormatter) StringFromDateInterval(dateInterval *DateInter
 
 // Locale returns the locale.
 func (dif *DateIntervalFormatter) Locale() *Locale {
+	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
 // Calendar returns the calendar.
 func (dif *DateIntervalFormatter) Calendar() *Calendar {
+	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
 // TimeZone returns the time zone.
 func (dif *DateIntervalFormatter) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // DateTemplate returns the date template.
 func (dif *DateIntervalFormatter) DateTemplate() string {
+	defer runtime.KeepAlive(dif)
 	_r := objc.Send[objc.ID](objref.IDOf(dif), objc.RegisterName("dateTemplate"))
 	if _r == 0 {
 		return ""
@@ -149,12 +163,14 @@ func (dif *DateIntervalFormatter) DateTemplate() string {
 
 // DateStyle returns the date style.
 func (dif *DateIntervalFormatter) DateStyle() DateIntervalFormatterStyle {
+	defer runtime.KeepAlive(dif)
 	_r := objc.Send[DateIntervalFormatterStyle](objref.IDOf(dif), objc.RegisterName("dateStyle"))
 	return _r
 }
 
 // TimeStyle returns the time style.
 func (dif *DateIntervalFormatter) TimeStyle() DateIntervalFormatterStyle {
+	defer runtime.KeepAlive(dif)
 	_r := objc.Send[DateIntervalFormatterStyle](objref.IDOf(dif), objc.RegisterName("timeStyle"))
 	return _r
 }

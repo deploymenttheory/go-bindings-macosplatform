@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -101,12 +103,14 @@ func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) Wi
 
 // BoundingBoxStride returns declares the stride, in bytes, between bounding boxes in the bounding box buffers each entry in `boundingBoxBuffer` references. All keyframes share the same bounding box stride. You are responsible for ensuring this stride is at least 24 bytes and a multiple of 4 bytes. This property defaults to `24` bytes.
 func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
+	defer runtime.KeepAlive(masmbbgd)
 	_r := objc.Send[int](objref.IDOf(masmbbgd), objc.RegisterName("boundingBoxStride"))
 	return _r
 }
 
 // BoundingBoxCount returns declares the number of bounding boxes in each buffer that `boundingBoxBuffer` references. All keyframes share the same bounding box count.
 func (masmbbgd *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
+	defer runtime.KeepAlive(masmbbgd)
 	_r := objc.Send[int](objref.IDOf(masmbbgd), objc.RegisterName("boundingBoxCount"))
 	return _r
 }

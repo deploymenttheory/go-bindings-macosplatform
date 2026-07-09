@@ -5,7 +5,11 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,33 +52,44 @@ func restaurantReservationAdopt(id objc.ID) *RestaurantReservation {
 }
 
 // NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation creates a restaurant reservation with the provided information.
-func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
+func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservationDuration)
+	defer runtime.KeepAlive(partySize)
+	defer runtime.KeepAlive(restaurantLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRestaurantReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
 	return restaurantReservationAdopt(_id)
 }
 
 // NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation creates a new restaurant reservation with the provided information.
-func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
+func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservationDuration)
+	defer runtime.KeepAlive(partySize)
+	defer runtime.KeepAlive(restaurantLocation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INRestaurantReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
 	return restaurantReservationAdopt(_id)
 }
 
 // ReservationDuration returns the reservation duration.
 func (rr *RestaurantReservation) ReservationDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // PartySize returns the party size.
-func (rr *RestaurantReservation) PartySize() obj.Object {
+func (rr *RestaurantReservation) PartySize() *foundation.Number {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("partySize"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RestaurantLocation returns the restaurant location.
 func (rr *RestaurantReservation) RestaurantLocation() obj.Object {
+	defer runtime.KeepAlive(rr)
 	_r := objc.Send[objc.ID](objref.IDOf(rr), objc.RegisterName("restaurantLocation"))
 	return obj.Wrap(_r)
 }

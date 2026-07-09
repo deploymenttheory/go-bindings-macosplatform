@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func propertyMappingAdopt(id objc.ID) *PropertyMapping {
 
 // Description returns the object's -description text.
 func (pm *PropertyMapping) Description() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pm *PropertyMapping) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pm *PropertyMapping) IsKind(className string) bool {
+	defer runtime.KeepAlive(pm)
 	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pm *PropertyMapping) String() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
@@ -80,18 +88,21 @@ func (pm *PropertyMapping) WithName(name string) *PropertyMapping {
 
 // WithValueExpression sets the value expression for the property mapping.
 func (pm *PropertyMapping) WithValueExpression(valueExpression obj.Object) *PropertyMapping {
+	defer runtime.KeepAlive(valueExpression)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
 	return pm
 }
 
 // WithUserInfo sets the user info for the property mapping.
 func (pm *PropertyMapping) WithUserInfo(userInfo obj.Object) *PropertyMapping {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return pm
 }
 
 // Name returns the name.
 func (pm *PropertyMapping) Name() string {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -100,13 +111,15 @@ func (pm *PropertyMapping) Name() string {
 }
 
 // ValueExpression returns the value expression.
-func (pm *PropertyMapping) ValueExpression() obj.Object {
+func (pm *PropertyMapping) ValueExpression() *foundation.Expression {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("valueExpression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 // UserInfo returns the user info.
 func (pm *PropertyMapping) UserInfo() obj.Object {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

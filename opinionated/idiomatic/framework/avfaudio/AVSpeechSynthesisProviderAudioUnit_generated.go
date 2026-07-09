@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func speechSynthesisProviderAudioUnitAdopt(id objc.ID) *SpeechSynthesisProviderA
 
 // Description returns the object's -description text.
 func (sspau *SpeechSynthesisProviderAudioUnit) Description() string {
+	defer runtime.KeepAlive(sspau)
 	return rt.Description(objref.IDOf(sspau))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sspau *SpeechSynthesisProviderAudioUnit) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sspau)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sspau), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sspau *SpeechSynthesisProviderAudioUnit) IsKind(className string) bool {
+	defer runtime.KeepAlive(sspau)
 	return rt.IsKind(objref.IDOf(sspau), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sspau *SpeechSynthesisProviderAudioUnit) String() string {
+	defer runtime.KeepAlive(sspau)
 	return rt.Description(objref.IDOf(sspau))
 }
 
@@ -81,11 +88,14 @@ func (sspau *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*Speech
 
 // SynthesizeSpeechRequest sets the text to synthesize and the voice to use.
 func (sspau *SpeechSynthesisProviderAudioUnit) SynthesizeSpeechRequest(speechRequest *SpeechSynthesisProviderRequest) {
+	defer runtime.KeepAlive(sspau)
+	defer runtime.KeepAlive(speechRequest)
 	objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("synthesizeSpeechRequest:"), objref.IDOf(speechRequest))
 }
 
 // CancelSpeechRequest informs the audio unit to discard the speech request.
 func (sspau *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
+	defer runtime.KeepAlive(sspau)
 	objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("cancelSpeechRequest"))
 }
 
@@ -93,6 +103,7 @@ func (sspau *SpeechSynthesisProviderAudioUnit) CancelSpeechRequest() {
 //
 // SpeechVoices returns the collection as a Go slice.
 func (sspau *SpeechSynthesisProviderAudioUnit) SpeechVoices() []*SpeechSynthesisProviderVoice {
+	defer runtime.KeepAlive(sspau)
 	_arr := objc.Send[objc.ID](objref.IDOf(sspau), objc.RegisterName("speechVoices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeechSynthesisProviderVoice { return SpeechSynthesisProviderVoiceFromID(_id) })
 }

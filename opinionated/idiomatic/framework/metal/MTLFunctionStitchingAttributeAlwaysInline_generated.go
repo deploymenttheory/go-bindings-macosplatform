@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func functionStitchingAttributeAlwaysInlineAdopt(id objc.ID) *FunctionStitchingA
 
 // Description returns the object's -description text.
 func (fsaai *FunctionStitchingAttributeAlwaysInline) Description() string {
+	defer runtime.KeepAlive(fsaai)
 	return rt.Description(objref.IDOf(fsaai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fsaai *FunctionStitchingAttributeAlwaysInline) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fsaai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fsaai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fsaai *FunctionStitchingAttributeAlwaysInline) IsKind(className string) bool {
+	defer runtime.KeepAlive(fsaai)
 	return rt.IsKind(objref.IDOf(fsaai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fsaai *FunctionStitchingAttributeAlwaysInline) String() string {
+	defer runtime.KeepAlive(fsaai)
 	return rt.Description(objref.IDOf(fsaai))
 }
 

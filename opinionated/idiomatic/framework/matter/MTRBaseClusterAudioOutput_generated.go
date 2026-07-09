@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterAudioOutputAdopt(id objc.ID) *MTRBaseClusterAudioOutput {
 
 // NewMTRBaseClusterAudioOutputWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterAudioOutputWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterAudioOutput {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterAudioOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterAudioOutputAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterAudioOutputWithDeviceEndpointIDQueue(device *MTRBaseDevice
 
 // NewMTRBaseClusterAudioOutputWithDeviceEndpointQueue creates a new MTRBaseClusterAudioOutput.
 func NewMTRBaseClusterAudioOutputWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterAudioOutput {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterAudioOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterAudioOutputAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterAudioOutputWithDeviceEndpointQueue(device *MTRBaseDevice, 
 //
 // ReadAttributeOutputListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeOutputListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeOutputListWithCompletion(ct
 //
 // SubscribeAttributeOutputListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeOutputListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeOutputListWithParamsSu
 //
 // ReadAttributeCurrentOutputWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeCurrentOutputWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeCurrentOutputWithCompletion
 //
 // SubscribeAttributeCurrentOutputWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeCurrentOutputWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeCurrentOutputWithParam
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeGeneratedCommandListWithCom
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeGeneratedCommandListWi
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAcceptedCommandListWithComp
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAcceptedCommandListWit
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAttributeListWithCompletion
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAttributeListWithParam
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeFeatureMapWithCompletion(ct
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeFeatureMapWithParamsSu
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeClusterRevisionWithCompleti
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeClusterRevisionWithPar
 //
 // ReadAttributeOutputList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeOutputList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeOutputList(ctx context.Cont
 //
 // SubscribeAttributeOutputListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeOutputListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +497,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeOutputListWithMinInter
 //
 // ReadAttributeCurrentOutput blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeCurrentOutput(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +523,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeCurrentOutput(ctx context.C
 //
 // SubscribeAttributeCurrentOutputWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeCurrentOutputWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +552,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeCurrentOutputWithMinIn
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +578,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeGeneratedCommandList(ctx co
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +607,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeGeneratedCommandListWi
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +633,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAcceptedCommandList(ctx con
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +662,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAcceptedCommandListWit
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +688,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeAttributeList(ctx context.C
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +717,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeAttributeListWithMinIn
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +743,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeFeatureMap(ctx context.Cont
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +772,7 @@ func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeFeatureMapWithMinInter
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +798,10 @@ func (mbcao *MTRBaseClusterAudioOutput) ReadAttributeClusterRevision(ctx context
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcao *MTRBaseClusterAudioOutput) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcao)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

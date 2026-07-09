@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func NewSliderTouchBarItem() *SliderTouchBarItem {
 
 // WithSlider sets the slider displayed by the bar item.
 func (stbi *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
+	defer runtime.KeepAlive(slider)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setSlider:"), objref.IDOf(slider))
 	})
@@ -100,6 +103,7 @@ func (stbi *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
 
 // WithMinimumValueAccessory sets the accessory that appears at the end of the slider with the minimum value.
 func (stbi *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
+	defer runtime.KeepAlive(minimumValueAccessory)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMinimumValueAccessory:"), objref.IDOf(minimumValueAccessory))
 	})
@@ -108,6 +112,7 @@ func (stbi *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory 
 
 // WithMaximumValueAccessory sets the accessory that appears at the end of the slider with the maximum value.
 func (stbi *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
+	defer runtime.KeepAlive(maximumValueAccessory)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setMaximumValueAccessory:"), objref.IDOf(maximumValueAccessory))
 	})
@@ -124,6 +129,7 @@ func (stbi *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth floa
 
 // WithTarget sets an object that is notified when a user interacts with the slider or either of the accessories.
 func (stbi *SliderTouchBarItem) WithTarget(target obj.Object) *SliderTouchBarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -148,6 +154,7 @@ func (stbi *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float3
 
 // Slider returns the slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
 func (stbi *SliderTouchBarItem) Slider() *Slider {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 *Slider
 	purego.Main(func() {
 		_mainthread0 = func() *Slider {
@@ -161,6 +168,7 @@ func (stbi *SliderTouchBarItem) Slider() *Slider {
 
 // DoubleValue returns the double value of the control
 func (stbi *SliderTouchBarItem) DoubleValue() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -174,6 +182,7 @@ func (stbi *SliderTouchBarItem) DoubleValue() float64 {
 
 // MinimumSliderWidth returns the width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
 func (stbi *SliderTouchBarItem) MinimumSliderWidth() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -187,6 +196,7 @@ func (stbi *SliderTouchBarItem) MinimumSliderWidth() float64 {
 
 // MaximumSliderWidth returns the maximum slider width.
 func (stbi *SliderTouchBarItem) MaximumSliderWidth() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -200,6 +210,7 @@ func (stbi *SliderTouchBarItem) MaximumSliderWidth() float64 {
 
 // Label returns the text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
 func (stbi *SliderTouchBarItem) Label() string {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -216,6 +227,7 @@ func (stbi *SliderTouchBarItem) Label() string {
 
 // MinimumValueAccessory returns the accessory that appears on the end of the slider with the minimum value
 func (stbi *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 *SliderAccessory
 	purego.Main(func() {
 		_mainthread0 = func() *SliderAccessory {
@@ -229,6 +241,7 @@ func (stbi *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
 
 // MaximumValueAccessory returns the accessory that appears on the end of the slider with the maximum value
 func (stbi *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 *SliderAccessory
 	purego.Main(func() {
 		_mainthread0 = func() *SliderAccessory {
@@ -242,6 +255,7 @@ func (stbi *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
 
 // ValueAccessoryWidth returns the width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
 func (stbi *SliderTouchBarItem) ValueAccessoryWidth() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -255,6 +269,7 @@ func (stbi *SliderTouchBarItem) ValueAccessoryWidth() float64 {
 
 // Target returns the target of the item, notified when the slider or accessories receive user interaction.
 func (stbi *SliderTouchBarItem) Target() obj.Object {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

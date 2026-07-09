@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -77,6 +79,7 @@ func (cvi *CollectionViewItem) WithHighlightState(highlightState CollectionViewI
 
 // WithImageView sets an image view outlet that you can use to display images.
 func (cvi *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionViewItem {
+	defer runtime.KeepAlive(imageView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
 	})
@@ -85,6 +88,7 @@ func (cvi *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionVi
 
 // WithTextField sets a text field outlet that you can use to display a string.
 func (cvi *CollectionViewItem) WithTextField(textField TextFieldProvider) *CollectionViewItem {
+	defer runtime.KeepAlive(textField)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTextField:"), objref.IDOf(textField))
 	})
@@ -93,6 +97,7 @@ func (cvi *CollectionViewItem) WithTextField(textField TextFieldProvider) *Colle
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (cvi *CollectionViewItem) WithRepresentedObject(representedObject obj.Object) *CollectionViewItem {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -109,6 +114,7 @@ func (cvi *CollectionViewItem) WithTitle(title string) *CollectionViewItem {
 
 // WithView sets the view controller’s primary view.
 func (cvi *CollectionViewItem) WithView(view ViewProvider) *CollectionViewItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -134,6 +140,7 @@ func (cvi *CollectionViewItem) WithChildViewControllers(items ...ViewControllerP
 
 // WithSourceItemView sets the source item view.
 func (cvi *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem {
+	defer runtime.KeepAlive(sourceItemView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	})
@@ -150,6 +157,7 @@ func (cvi *CollectionViewItem) WithPreferredScreenOrigin(preferredScreenOrigin c
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cvi *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -158,6 +166,7 @@ func (cvi *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider
 
 // WithMenu sets returns the responder’s menu.
 func (cvi *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -166,6 +175,7 @@ func (cvi *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cvi *CollectionViewItem) WithUserActivity(userActivity obj.Object) *CollectionViewItem {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -174,6 +184,7 @@ func (cvi *CollectionViewItem) WithUserActivity(userActivity obj.Object) *Collec
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cvi *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewItem {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -182,6 +193,7 @@ func (cvi *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewI
 
 // CollectionView returns the collection view.
 func (cvi *CollectionViewItem) CollectionView() *CollectionView {
+	defer runtime.KeepAlive(cvi)
 	var _mainthread0 *CollectionView
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionView {
@@ -195,6 +207,7 @@ func (cvi *CollectionViewItem) CollectionView() *CollectionView {
 
 // IsSelected reports whether the object is selected.
 func (cvi *CollectionViewItem) IsSelected() bool {
+	defer runtime.KeepAlive(cvi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -208,6 +221,7 @@ func (cvi *CollectionViewItem) IsSelected() bool {
 
 // HighlightState returns the highlight state.
 func (cvi *CollectionViewItem) HighlightState() CollectionViewItemHighlightState {
+	defer runtime.KeepAlive(cvi)
 	var _mainthread0 CollectionViewItemHighlightState
 	purego.Main(func() {
 		_mainthread0 = func() CollectionViewItemHighlightState {
@@ -221,6 +235,7 @@ func (cvi *CollectionViewItem) HighlightState() CollectionViewItemHighlightState
 
 // ImageView returns the image view.
 func (cvi *CollectionViewItem) ImageView() *ImageView {
+	defer runtime.KeepAlive(cvi)
 	var _mainthread0 *ImageView
 	purego.Main(func() {
 		_mainthread0 = func() *ImageView {
@@ -234,6 +249,7 @@ func (cvi *CollectionViewItem) ImageView() *ImageView {
 
 // TextField returns the text field.
 func (cvi *CollectionViewItem) TextField() *TextField {
+	defer runtime.KeepAlive(cvi)
 	var _mainthread0 *TextField
 	purego.Main(func() {
 		_mainthread0 = func() *TextField {
@@ -249,6 +265,7 @@ func (cvi *CollectionViewItem) TextField() *TextField {
 //
 // DraggingImageComponents returns the collection as a Go slice.
 func (cvi *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent {
+	defer runtime.KeepAlive(cvi)
 	var _mainthread0 []*DraggingImageComponent
 	purego.Main(func() {
 		_mainthread0 = func() []*DraggingImageComponent {

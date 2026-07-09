@@ -5,12 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -52,22 +54,27 @@ func captureDeviceAdopt(id objc.ID) *CaptureDevice {
 
 // Description returns the object's -description text.
 func (cd *CaptureDevice) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *CaptureDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *CaptureDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *CaptureDevice) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
@@ -79,6 +86,7 @@ func NewCaptureDevice() *CaptureDevice {
 
 // WithActiveFormat sets the currently active format of the receiver. This property can be used to get or set the currently active device format. -setActiveFormat: throws an NSInvalidArgumentException if set to a format not present in the formats array. -setActiveFormat: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeFormat by key value observing this property. On iOS, use of AVCaptureDevice's setActiveFormat: and AVCaptureSession's setSessionPreset: are mutually exclusive. If you set a capture device's active format, the session to which it is attached changes its preset to AVCaptureSessionPresetInputPriority. Likewise if you set the AVCaptureSession's sessionPreset property, the session assumes control of its input devices, and configures their activeFormat appropriately. Note that audio devices do not expose any user-configurable formats on iOS. To configure audio input on iOS, you should use the AVAudioSession APIs instead (see AVAudioSession.h). The activeFormat, activeVideoMinFrameDuration, and activeVideoMaxFrameDuration properties may be set simultaneously by using AVCaptureSession's begin/commitConfiguration methods: [session beginConfiguration]; // the session to which the receiver's AVCaptureDeviceInput is added. if ( [device lockForConfiguration:&error] ) { [device setActiveFormat:newFormat]; [device setActiveVideoMinFrameDuration:newMinDuration]; [device setActiveVideoMaxFrameDuration:newMaxDuration]; [device unlockForConfiguration]; } [session commitConfiguration]; // The new format and frame rates are applied together in commitConfiguration Note that when configuring a session to use an active format intended for high resolution still photography and applying one or more of the following operations to an AVCaptureVideoDataOutput, the system may not meet the target framerate: zoom, orientation changes, format conversion.
 func (cd *CaptureDevice) WithActiveFormat(activeFormat *CaptureDeviceFormat) *CaptureDevice {
+	defer runtime.KeepAlive(activeFormat)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setActiveFormat:"), objref.IDOf(activeFormat))
 	return cd
 }
@@ -103,6 +111,7 @@ func (cd *CaptureDevice) WithAutoVideoFrameRateEnabled(autoVideoFrameRateEnabled
 
 // WithActiveInputSource sets the currently active input source of the receiver. This property can be used to get or set the currently active device input source. -setActiveInputSource: throws an NSInvalidArgumentException if set to a value not present in the inputSources array. -setActiveInputSource: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeInputSource by key value observing this property.
 func (cd *CaptureDevice) WithActiveInputSource(activeInputSource *CaptureDeviceInputSource) *CaptureDevice {
+	defer runtime.KeepAlive(activeInputSource)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setActiveInputSource:"), objref.IDOf(activeInputSource))
 	return cd
 }
@@ -182,6 +191,8 @@ func (cd *CaptureDevice) WithCenterStageRectOfInterest(centerStageRectOfInterest
 
 // HasMediaType returns a Boolean value that indicates whether the device captures media of a particular type.
 func (cd *CaptureDevice) HasMediaType(mediaType obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(mediaType)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("hasMediaType:"), objref.IDOf(mediaType))
 	return _r
 }
@@ -190,6 +201,7 @@ func (cd *CaptureDevice) HasMediaType(mediaType obj.Object) bool {
 //
 // LockForConfiguration returns an error if the operation did not succeed.
 func (cd *CaptureDevice) LockForConfiguration() error {
+	defer runtime.KeepAlive(cd)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(cd), objc.RegisterName("lockForConfiguration:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -200,17 +212,21 @@ func (cd *CaptureDevice) LockForConfiguration() error {
 
 // UnlockForConfiguration releases exclusive control over device hardware properties.
 func (cd *CaptureDevice) UnlockForConfiguration() {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("unlockForConfiguration"))
 }
 
 // SupportsAVCaptureSessionPreset returns a Boolean value that indicates whether you can use the device with capture session configured with the specified preset.
 func (cd *CaptureDevice) SupportsAVCaptureSessionPreset(preset obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(preset)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("supportsAVCaptureSessionPreset:"), objref.IDOf(preset))
 	return _r
 }
 
 // UniqueID returns an ID unique to the model of device corresponding to the receiver. Every available capture device has a unique ID that persists on one system across device connections and disconnections, application restarts, and reboots of the system itself. Applications can store the value returned by this property to recall or track the status of a specific device in the future.
 func (cd *CaptureDevice) UniqueID() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("uniqueID"))
 	if _r == 0 {
 		return ""
@@ -220,6 +236,7 @@ func (cd *CaptureDevice) UniqueID() string {
 
 // ModelID returns the model ID of the receiver. The value of this property is an identifier unique to all devices of the same model. The value is persistent across device connections and disconnections, and across different systems. For example, the model ID of the camera built in to two identical iPhone models will be the same even though they are different physical devices.
 func (cd *CaptureDevice) ModelID() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("modelID"))
 	if _r == 0 {
 		return ""
@@ -229,6 +246,7 @@ func (cd *CaptureDevice) ModelID() string {
 
 // LocalizedName returns a localized human-readable name for the receiver. This property can be used for displaying the name of a capture device in a user interface.
 func (cd *CaptureDevice) LocalizedName() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -238,6 +256,7 @@ func (cd *CaptureDevice) LocalizedName() string {
 
 // Manufacturer returns the human-readable manufacturer name for the receiver. This property can be used to identify capture devices from a particular manufacturer. All Apple devices return "Apple Inc.". Devices from third party manufacturers may return an empty string.
 func (cd *CaptureDevice) Manufacturer() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("manufacturer"))
 	if _r == 0 {
 		return ""
@@ -247,24 +266,28 @@ func (cd *CaptureDevice) Manufacturer() string {
 
 // TransportType returns the transport type of the receiver (e.g. USB, PCI, etc). This property can be used to discover the transport type of a capture device. Transport types are defined in <IOKit/audio/IOAudioTypes.h> as kIOAudioDeviceTransportType*.
 func (cd *CaptureDevice) TransportType() int32 {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int32](objref.IDOf(cd), objc.RegisterName("transportType"))
 	return _r
 }
 
 // IsConnected reports whether the device is connected and available to the system. The value of this property is a BOOL indicating whether the device represented by the receiver is connected and available for use as a capture device. Clients can key value observe the value of this property to be notified when a device is no longer available. When the value of this property becomes false for a given instance, it will not become true again. If the same physical device again becomes available to the system, it will be represented using a new instance of AVCaptureDevice.
 func (cd *CaptureDevice) IsConnected() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isConnected"))
 	return _r
 }
 
 // IsInUseByAnotherApplication reports whether the device is in use by another application. The value of this property is a BOOL indicating whether the device represented by the receiver is in use by another application. Clients can key value observe the value of this property to be notified when another app starts or stops using this device.
 func (cd *CaptureDevice) IsInUseByAnotherApplication() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isInUseByAnotherApplication"))
 	return _r
 }
 
 // IsSuspended reports whether the device is suspended. The value of this property is a BOOL indicating whether the device represented by the receiver is currently suspended. Some devices disallow data capture due to a feature on the device. For example, isSuspended returns true for the external iSight when its privacy iris is closed, or for the internal iSight on a notebook when the notebook's display is closed. Clients can key value observe the value of this property to be notified when the device becomes suspended or unsuspended.
 func (cd *CaptureDevice) IsSuspended() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isSuspended"))
 	return _r
 }
@@ -273,6 +296,7 @@ func (cd *CaptureDevice) IsSuspended() bool {
 //
 // LinkedDevices returns the collection as a Go slice.
 func (cd *CaptureDevice) LinkedDevices() []*CaptureDevice {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("linkedDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
@@ -281,54 +305,63 @@ func (cd *CaptureDevice) LinkedDevices() []*CaptureDevice {
 //
 // Formats returns the collection as a Go slice.
 func (cd *CaptureDevice) Formats() []*CaptureDeviceFormat {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("formats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDeviceFormat { return CaptureDeviceFormatFromID(_id) })
 }
 
 // ActiveFormat returns the currently active format of the receiver. This property can be used to get or set the currently active device format. -setActiveFormat: throws an NSInvalidArgumentException if set to a format not present in the formats array. -setActiveFormat: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeFormat by key value observing this property. On iOS, use of AVCaptureDevice's setActiveFormat: and AVCaptureSession's setSessionPreset: are mutually exclusive. If you set a capture device's active format, the session to which it is attached changes its preset to AVCaptureSessionPresetInputPriority. Likewise if you set the AVCaptureSession's sessionPreset property, the session assumes control of its input devices, and configures their activeFormat appropriately. Note that audio devices do not expose any user-configurable formats on iOS. To configure audio input on iOS, you should use the AVAudioSession APIs instead (see AVAudioSession.h). The activeFormat, activeVideoMinFrameDuration, and activeVideoMaxFrameDuration properties may be set simultaneously by using AVCaptureSession's begin/commitConfiguration methods: [session beginConfiguration]; // the session to which the receiver's AVCaptureDeviceInput is added. if ( [device lockForConfiguration:&error] ) { [device setActiveFormat:newFormat]; [device setActiveVideoMinFrameDuration:newMinDuration]; [device setActiveVideoMaxFrameDuration:newMaxDuration]; [device unlockForConfiguration]; } [session commitConfiguration]; // The new format and frame rates are applied together in commitConfiguration Note that when configuring a session to use an active format intended for high resolution still photography and applying one or more of the following operations to an AVCaptureVideoDataOutput, the system may not meet the target framerate: zoom, orientation changes, format conversion.
 func (cd *CaptureDevice) ActiveFormat() *CaptureDeviceFormat {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("activeFormat"))
 	return CaptureDeviceFormatFromID(_r)
 }
 
 // ActiveVideoMinFrameDuration returns a property indicating the receiver's current active minimum frame duration (the reciprocal of its max frame rate). An AVCaptureDevice's activeVideoMinFrameDuration property is the reciprocal of its active maximum frame rate. To limit the max frame rate of the capture device, clients may set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Clients may set this property's value to kCMTimeInvalid to return activeVideoMinFrameDuration to its default value for the given activeFormat. -setActiveVideoMinFrameDuration: throws an NSInvalidArgumentException if set to an unsupported value. -setActiveVideoMinFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeVideoMinFrameDuration by key value observing this property. On iOS, the receiver's activeVideoMinFrameDuration resets to its default value under the following conditions: - The receiver's activeFormat changes - The receiver's AVCaptureDeviceInput's session's sessionPreset changes - The receiver's AVCaptureDeviceInput is added to a session When exposureMode is AVCaptureExposureModeCustom, setting the activeVideoMinFrameDuration affects max frame rate, but not exposureDuration. You may use setExposureModeCustomWithDuration:ISO:completionHandler: to set a shorter exposureDuration than your activeVideoMinFrameDuration, if desired. When autoVideoFrameRateEnabled is true, setting activeVideoMinFrameDuration throws an NSInvalidArgumentException.
 func (cd *CaptureDevice) ActiveVideoMinFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("activeVideoMinFrameDuration"))
 	return _r
 }
 
 // ActiveVideoMaxFrameDuration returns a property indicating the receiver's current active maximum frame duration (the reciprocal of its min frame rate). An AVCaptureDevice's activeVideoMaxFrameDuration property is the reciprocal of its active minimum frame rate. To limit the min frame rate of the capture device, clients may set this property to a value supported by the receiver's activeFormat (see AVCaptureDeviceFormat's videoSupportedFrameRateRanges property). Clients may set this property's value to kCMTimeInvalid to return activeVideoMaxFrameDuration to its default value for the given activeFormat. -setActiveVideoMaxFrameDuration: throws an NSInvalidArgumentException if set to an unsupported value. -setActiveVideoMaxFrameDuration: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeVideoMaxFrameDuration by key value observing this property. On iOS, the receiver's activeVideoMaxFrameDuration resets to its default value under the following conditions: - The receiver's activeFormat changes - The receiver's AVCaptureDeviceInput's session's sessionPreset changes - The receiver's AVCaptureDeviceInput is added to a session When exposureMode is AVCaptureExposureModeCustom, frame rate and exposure duration are interrelated. If you call setExposureModeCustomWithDuration:ISO:completionHandler: with an exposureDuration longer than the current activeVideoMaxFrameDuration, the activeVideoMaxFrameDuration will be lengthened to accommodate the longer exposure time. Setting a shorter exposure duration does not automatically change the activeVideoMinFrameDuration or activeVideoMaxFrameDuration. To explicitly increase the frame rate in custom exposure mode, you must set the activeVideoMaxFrameDuration to a shorter value. If your new max frame duration is shorter than the current exposureDuration, the exposureDuration will shorten as well to accommodate the new frame rate. When autoVideoFrameRateEnabled is true, setting activeVideoMaxFrameDuration throws an NSInvalidArgumentException.
 func (cd *CaptureDevice) ActiveVideoMaxFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("activeVideoMaxFrameDuration"))
 	return _r
 }
 
 // IsVideoFrameDurationLocked reports whether the device's video frame rate (expressed as a duration) is currently locked. Returns `true` when an “AVCaptureDeviceInput“ associated with the device has its “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ property set to something other than `kCMTimeInvalid`. See “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ for more information on video frame duration locking.
 func (cd *CaptureDevice) IsVideoFrameDurationLocked() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isVideoFrameDurationLocked"))
 	return _r
 }
 
 // MinSupportedLockedVideoFrameDuration returns the maximum frame rate (expressed as a minimum duration) that can be set on an input associated with this device. `kCMTimeInvalid` is returned when the device or its current configuration does not support locked frame rate. Use “AVCaptureDeviceInput/activeLockedVideoFrameDuration“ to set the locked frame rate on the input.
 func (cd *CaptureDevice) MinSupportedLockedVideoFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("minSupportedLockedVideoFrameDuration"))
 	return _r
 }
 
 // IsFollowingExternalSyncDevice reports whether the device is following an external sync device. See “AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:“ for more information on external sync.
 func (cd *CaptureDevice) IsFollowingExternalSyncDevice() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFollowingExternalSyncDevice"))
 	return _r
 }
 
 // MinSupportedExternalSyncFrameDuration returns the minimum frame duration that can be passed as the `videoFrameDuration` when directing your device input to follow an external sync device. Use this property as the minimum allowable frame duration to pass to “AVCaptureDeviceInput/follow:externalSyncDevice:videoFrameDuration:delegate:“ when you want to follow an external sync device. This property returns `kCMTimeInvalid` when the device's' current configuration does not support external sync device following.
 func (cd *CaptureDevice) MinSupportedExternalSyncFrameDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("minSupportedExternalSyncFrameDuration"))
 	return _r
 }
 
 // IsAutoVideoFrameRateEnabled reports whether the receiver should enable auto video frame rate. When you enable this property, the device automatically adjusts the active frame rate, depending on light level. Under low light conditions, it decreases the frame rate to properly expose the scene. For formats with a maximum frame rate of 30 fps, the device switches the frame rate between 30 - 24. For formats with a maximum frame rate of 60 fps, the device switches the frame rate between 60 - 30 - 24. Setting this property throws an `NSInvalidArgumentException` if the active format's “AVCaptureDeviceFormat/autoVideoFrameRateSupported“ returns `false`. When you change the device's active format, this property resets to its default value of `false`. If you set this property to `true`, frame rate is under device control, and you may not set “activeVideoMinFrameDuration“ or “activeVideoMaxFrameDuration“. Doing so throws an `NSInvalidArgumentException`. - Note: Setting this property to `true` throws an `NSInvalidArgumentException` if “videoFrameDurationLocked“ or “followingExternalSyncDevice“ are `true`.
 func (cd *CaptureDevice) IsAutoVideoFrameRateEnabled() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isAutoVideoFrameRateEnabled"))
 	return _r
 }
@@ -337,59 +370,69 @@ func (cd *CaptureDevice) IsAutoVideoFrameRateEnabled() bool {
 //
 // InputSources returns the collection as a Go slice.
 func (cd *CaptureDevice) InputSources() []*CaptureDeviceInputSource {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("inputSources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDeviceInputSource { return CaptureDeviceInputSourceFromID(_id) })
 }
 
 // ActiveInputSource returns the currently active input source of the receiver. This property can be used to get or set the currently active device input source. -setActiveInputSource: throws an NSInvalidArgumentException if set to a value not present in the inputSources array. -setActiveInputSource: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's activeInputSource by key value observing this property.
 func (cd *CaptureDevice) ActiveInputSource() *CaptureDeviceInputSource {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("activeInputSource"))
 	return CaptureDeviceInputSourceFromID(_r)
 }
 
 // Position returns the position.
 func (cd *CaptureDevice) Position() CaptureDevicePosition {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureDevicePosition](objref.IDOf(cd), objc.RegisterName("position"))
 	return _r
 }
 
 // DeviceType returns the device type.
-func (cd *CaptureDevice) DeviceType() obj.Object {
+func (cd *CaptureDevice) DeviceType() *foundation.String {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("deviceType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions sets the switching behavior of the primary constituent device.
 func (cd *CaptureDevice) SetPrimaryConstituentDeviceSwitchingBehaviorRestrictedSwitchingBehaviorConditions(switchingBehavior CapturePrimaryConstituentDeviceSwitchingBehavior, restrictedSwitchingBehaviorConditions CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:"), switchingBehavior, restrictedSwitchingBehaviorConditions)
 }
 
 // PrimaryConstituentDeviceSwitchingBehavior returns the primaryConstituentDeviceSwitchingBehavior as set by -[AVCaptureDevice setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:]. By default, this property is set to AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto for AVCaptureDevices that support it.  This property is key-value observable.
 func (cd *CaptureDevice) PrimaryConstituentDeviceSwitchingBehavior() CapturePrimaryConstituentDeviceSwitchingBehavior {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CapturePrimaryConstituentDeviceSwitchingBehavior](objref.IDOf(cd), objc.RegisterName("primaryConstituentDeviceSwitchingBehavior"))
 	return _r
 }
 
 // PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions returns the primaryConstituentDeviceRestrictedSwitchingBehaviorConditions as set by -[AVCaptureDevice setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions:]. By default, this propety is set to AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone. This property is key-value observable.
 func (cd *CaptureDevice) PrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions](objref.IDOf(cd), objc.RegisterName("primaryConstituentDeviceRestrictedSwitchingBehaviorConditions"))
 	return _r
 }
 
 // ActivePrimaryConstituentDeviceSwitchingBehavior returns the active constituent device switching behavior. For virtual devices with multiple constituent devices, this property returns the active switching behavior. This is equal to primaryConstituentDeviceSwitchingBehavior except while recording using an AVCaptureMovieFileOutput configured with a different switching behavior (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehavior:restrictedSwitchingBehaviorConditions]). Devices that do not support constituent device switching return AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported. This property is key-value observable.
 func (cd *CaptureDevice) ActivePrimaryConstituentDeviceSwitchingBehavior() CapturePrimaryConstituentDeviceSwitchingBehavior {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CapturePrimaryConstituentDeviceSwitchingBehavior](objref.IDOf(cd), objc.RegisterName("activePrimaryConstituentDeviceSwitchingBehavior"))
 	return _r
 }
 
 // ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions returns the active constituent device restricted  switching behavior. For virtual devices with multiple constituent devices, this property returns the active restricted switching behavior conditions. This is equal to primaryConstituentDeviceRestrictedSwitchingBehaviorConditions except while recording using an AVCaptureMovieFileOutput configured with different restricted switching behavior conditions (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions]). Devices that do not support constituent device switching return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone. This property is key-value observable.
 func (cd *CaptureDevice) ActivePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions() CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions](objref.IDOf(cd), objc.RegisterName("activePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions"))
 	return _r
 }
 
 // ActivePrimaryConstituentDevice returns for virtual devices, this property indicates which constituent device is currently the primary constituent device. The primary constituent device may change when zoom, exposure, or focus changes. This property returns nil for non-virtual devices. On virtual devices this property returns nil until the device is used in a running AVCaptureSession. This property is key-value observable.
 func (cd *CaptureDevice) ActivePrimaryConstituentDevice() *CaptureDevice {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("activePrimaryConstituentDevice"))
 	return CaptureDeviceFromID(_r)
 }
@@ -398,6 +441,7 @@ func (cd *CaptureDevice) ActivePrimaryConstituentDevice() *CaptureDevice {
 //
 // SupportedFallbackPrimaryConstituentDevices returns the collection as a Go slice.
 func (cd *CaptureDevice) SupportedFallbackPrimaryConstituentDevices() []*CaptureDevice {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("supportedFallbackPrimaryConstituentDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
@@ -406,42 +450,49 @@ func (cd *CaptureDevice) SupportedFallbackPrimaryConstituentDevices() []*Capture
 //
 // FallbackPrimaryConstituentDevices returns the collection as a Go slice.
 func (cd *CaptureDevice) FallbackPrimaryConstituentDevices() []*CaptureDevice {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("fallbackPrimaryConstituentDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }
 
 // IsFlashModeSupported returns whether the receiver supports the given flash mode. The receiver's flashMode property can only be set to a certain mode if this method returns YES for that mode.
 func (cd *CaptureDevice) IsFlashModeSupported(flashMode CaptureFlashMode) bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFlashModeSupported:"), flashMode)
 	return _r
 }
 
 // HasFlash reports whether the receiver has a flash. The value of this property is a BOOL indicating whether the receiver has a flash. The receiver's flashMode property can only be set when this property returns true.
 func (cd *CaptureDevice) HasFlash() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("hasFlash"))
 	return _r
 }
 
 // IsFlashAvailable reports whether the receiver's flash is currently available for use. The value of this property is a BOOL indicating whether the receiver's flash is currently available. The flash may become unavailable if, for example, the device overheats and needs to cool off. This property is key-value observable.
 func (cd *CaptureDevice) IsFlashAvailable() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFlashAvailable"))
 	return _r
 }
 
 // FlashMode indicates current mode of the receiver's flash, if it has one. The value of this property is an AVCaptureFlashMode that determines the mode of the receiver's flash, if it has one. -setFlashMode: throws an NSInvalidArgumentException if set to an unsupported value (see -isFlashModeSupported:). -setFlashMode: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's flashMode by key value observing this property. When using AVCapturePhotoOutput, AVCaptureDevice's flashMode property is ignored. You specify flashMode on a per photo basis by setting the AVCapturePhotoSettings.flashMode property.
 func (cd *CaptureDevice) FlashMode() CaptureFlashMode {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureFlashMode](objref.IDOf(cd), objc.RegisterName("flashMode"))
 	return _r
 }
 
 // IsTorchModeSupported returns whether the receiver supports the given torch mode. The receiver's torchMode property can only be set to a certain mode if this method returns YES for that mode.
 func (cd *CaptureDevice) IsTorchModeSupported(torchMode CaptureTorchMode) bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isTorchModeSupported:"), torchMode)
 	return _r
 }
 
 // SetTorchModeOnWithLevel sets the current mode of the receiver's torch to AVCaptureTorchModeOn at the specified level. This method sets the torch mode to AVCaptureTorchModeOn at a specified level. torchLevel must be a value between 0 and 1, or the special value AVCaptureMaxAvailableTorchLevel. The specified value may not be available if the iOS device is too hot. This method throws an NSInvalidArgumentException if set to an unsupported level. If the specified level is valid, but unavailable, the method returns NO with AVErrorTorchLevelUnavailable. -setTorchModeOnWithLevel:error: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's torchMode by key value observing the torchMode property.
 func (cd *CaptureDevice) SetTorchModeOnWithLevel(torchLevel float32) error {
+	defer runtime.KeepAlive(cd)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cd), objc.RegisterName("setTorchModeOnWithLevel:error:"), torchLevel, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -452,332 +503,390 @@ func (cd *CaptureDevice) SetTorchModeOnWithLevel(torchLevel float32) error {
 
 // HasTorch reports whether the receiver has a torch. The value of this property is a BOOL indicating whether the receiver has a torch. The receiver's torchMode property can only be set when this property returns true.
 func (cd *CaptureDevice) HasTorch() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("hasTorch"))
 	return _r
 }
 
 // IsTorchAvailable reports whether the receiver's torch is currently available for use. The value of this property is a BOOL indicating whether the receiver's torch is currently available. The torch may become unavailable if, for example, the device overheats and needs to cool off. This property is key-value observable.
 func (cd *CaptureDevice) IsTorchAvailable() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isTorchAvailable"))
 	return _r
 }
 
 // IsTorchActive reports whether the receiver's torch is currently active. The value of this property is a BOOL indicating whether the receiver's torch is currently active. If the current torchMode is AVCaptureTorchModeAuto and isTorchActive is true, the torch will illuminate once a recording starts (see AVCaptureOutput.h -startRecordingToOutputFileURL:recordingDelegate:). This property is key-value observable.
 func (cd *CaptureDevice) IsTorchActive() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isTorchActive"))
 	return _r
 }
 
 // TorchLevel indicates the receiver's current torch brightness level as a floating point value. The value of this property is a float indicating the receiver's torch level from 0.0 (off) -> 1.0 (full). This property is key-value observable.
 func (cd *CaptureDevice) TorchLevel() float32 {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[float32](objref.IDOf(cd), objc.RegisterName("torchLevel"))
 	return _r
 }
 
 // TorchMode indicates current mode of the receiver's torch, if it has one. The value of this property is an AVCaptureTorchMode that determines the mode of the receiver's torch, if it has one. -setTorchMode: throws an NSInvalidArgumentException if set to an unsupported value (see -isTorchModeSupported:). -setTorchMode: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's torchMode by key value observing this property.
 func (cd *CaptureDevice) TorchMode() CaptureTorchMode {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureTorchMode](objref.IDOf(cd), objc.RegisterName("torchMode"))
 	return _r
 }
 
 // IsFocusModeSupported returns whether the receiver supports the given focus mode. The receiver's focusMode property can only be set to a certain mode if this method returns YES for that mode.
 func (cd *CaptureDevice) IsFocusModeSupported(focusMode CaptureFocusMode) bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFocusModeSupported:"), focusMode)
 	return _r
 }
 
 // DefaultRectForFocusPointOfInterest the default rectangle of interest used for a given focus point of interest. - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest. For example, pass `(0.5, 0.5)` to get the focus rectangle of interest used for the default focus point of interest at `(0.5, 0.5)`. - Note: The particular default rectangle returned depends on the current focus mode. This method returns `CGRectNull` if “focusRectOfInterestSupported“ returns `false`.
 func (cd *CaptureDevice) DefaultRectForFocusPointOfInterest(pointOfInterest corefoundation.CGPoint) corefoundation.CGRect {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cd), objc.RegisterName("defaultRectForFocusPointOfInterest:"), pointOfInterest)
 	return _r
 }
 
 // SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode focus on and start tracking a detected object.
 func (cd *CaptureDevice) SetCinematicVideoTrackingFocusWithDetectedObjectIDFocusMode(detectedObjectID int, focusMode CaptureCinematicVideoFocusMode) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCinematicVideoTrackingFocusWithDetectedObjectID:focusMode:"), detectedObjectID, focusMode)
 }
 
 // SetCinematicVideoTrackingFocusAtPointFocusMode focus on and start tracking an object if it can be detected at the region specified by the point.
 func (cd *CaptureDevice) SetCinematicVideoTrackingFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode CaptureCinematicVideoFocusMode) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCinematicVideoTrackingFocusAtPoint:focusMode:"), point, focusMode)
 }
 
 // SetCinematicVideoFixedFocusAtPointFocusMode fix focus at a distance.
 func (cd *CaptureDevice) SetCinematicVideoFixedFocusAtPointFocusMode(point corefoundation.CGPoint, focusMode CaptureCinematicVideoFocusMode) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCinematicVideoFixedFocusAtPoint:focusMode:"), point, focusMode)
 }
 
 // FocusMode indicates current focus mode of the receiver, if it has one. The value of this property is an AVCaptureFocusMode that determines the receiver's focus mode, if it has one. -setFocusMode: throws an NSInvalidArgumentException if set to an unsupported value (see -isFocusModeSupported:). -setFocusMode: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's focusMode by key value observing this property.
 func (cd *CaptureDevice) FocusMode() CaptureFocusMode {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureFocusMode](objref.IDOf(cd), objc.RegisterName("focusMode"))
 	return _r
 }
 
 // IsFocusPointOfInterestSupported reports whether the receiver supports focus points of interest. The receiver's focusPointOfInterest property can only be set if this property returns true.
 func (cd *CaptureDevice) IsFocusPointOfInterestSupported() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFocusPointOfInterestSupported"))
 	return _r
 }
 
 // FocusPointOfInterest indicates current focus point of interest of the receiver, if it has one. The value of this property is a CGPoint that determines the receiver's focus point of interest, if it has one. A value of (0,0) indicates that the camera should focus on the top left corner of the image, while a value of (1,1) indicates that it should focus on the bottom right. The default value is (0.5,0.5). -setFocusPointOfInterest: throws an NSInvalidArgumentException if isFocusPointOfInterestSupported returns NO. -setFocusPointOfInterest: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's focusPointOfInterest by key value observing this property. Note that setting focusPointOfInterest alone does not initiate a focus operation. After setting focusPointOfInterest, call -setFocusMode: to apply the new point of interest.
 func (cd *CaptureDevice) FocusPointOfInterest() corefoundation.CGPoint {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cd), objc.RegisterName("focusPointOfInterest"))
 	return _r
 }
 
 // IsFocusRectOfInterestSupported reports whether the receiver supports focus rectangles of interest. You may only set the device's “focusRectOfInterest“ property if this property returns `true`.
 func (cd *CaptureDevice) IsFocusRectOfInterestSupported() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isFocusRectOfInterestSupported"))
 	return _r
 }
 
 // MinFocusRectOfInterestSize returns the minimum size you may use when specifying a rectangle of interest. The size returned is in normalized coordinates, and depends on the current “AVCaptureDevice/activeFormat“. If “focusRectOfInterestSupported“ returns `false`, this property returns { 0, 0 }.
 func (cd *CaptureDevice) MinFocusRectOfInterestSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cd), objc.RegisterName("minFocusRectOfInterestSize"))
 	return _r
 }
 
 // FocusRectOfInterest returns the device's current focus rectangle of interest, if it has one. The value of this property is a “CGRect“ determining the device's focus rectangle of interest. Use this as an alternative to setting “focusPointOfInterest“, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the focus, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting “focusRectOfInterest“ throws an `NSInvalidArgumentException` if “focusRectOfInterestSupported“ returns `false`. Setting “focusRectOfInterest“ throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the “minFocusRectOfInterestSize“. Setting “focusRectOfInterest“ throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“. Setting “focusRectOfInterest“ updates the device's “focusPointOfInterest“ to the center of your provided rectangle of interest. If you later set the device's “focusPointOfInterest“, the “focusRectOfInterest“ resets to the default sized rectangle of interest for the new focus point of interest. If you change your “AVCaptureDevice/activeFormat“, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's “focusRectOfInterest“ by key-value observing this property. - Note: Setting “focusRectOfInterest“ alone does not initiate a focus operation. After setting “focusRectOfInterest“, set “focusMode“ to apply the new rectangle of interest.
 func (cd *CaptureDevice) FocusRectOfInterest() corefoundation.CGRect {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cd), objc.RegisterName("focusRectOfInterest"))
 	return _r
 }
 
 // IsAdjustingFocus reports whether the receiver is currently performing a focus scan to adjust focus. The value of this property is a BOOL indicating whether the receiver's camera focus is being automatically adjusted by means of a focus scan, because its focus mode is AVCaptureFocusModeAutoFocus or AVCaptureFocusModeContinuousAutoFocus. Clients can observe the value of this property to determine whether the camera's focus is stable.
 func (cd *CaptureDevice) IsAdjustingFocus() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isAdjustingFocus"))
 	return _r
 }
 
 // MinimumFocusDistance returns a property indicating the minimum focus distance. The minimum focus distance is given in millimeters, -1 if unknown. For virtual cameras (AVCaptureDeviceTypeBuiltInDualCamera, AVCaptureDeviceTypeBuiltInTripleCamera, etc.), the value reported is the smallest minimum focus distance of the auto-focus-capable cameras that it sources.
 func (cd *CaptureDevice) MinimumFocusDistance() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("minimumFocusDistance"))
 	return _r
 }
 
 // IsExposureModeSupported returns whether the receiver supports the given exposure mode. The receiver's exposureMode property can only be set to a certain mode if this method returns YES for that mode.
 func (cd *CaptureDevice) IsExposureModeSupported(exposureMode CaptureExposureMode) bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isExposureModeSupported:"), exposureMode)
 	return _r
 }
 
 // DefaultRectForExposurePointOfInterest the default rectangle of interest used for a given exposure point of interest. - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest. For example, pass `(0.5, 0.5)` to get the exposure rectangle of interest used for the default exposure point of interest at `(0.5, 0.5)`. This method returns `CGRectNull` if “exposureRectOfInterestSupported“ returns `false`.
 func (cd *CaptureDevice) DefaultRectForExposurePointOfInterest(pointOfInterest corefoundation.CGPoint) corefoundation.CGRect {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cd), objc.RegisterName("defaultRectForExposurePointOfInterest:"), pointOfInterest)
 	return _r
 }
 
 // ExposureMode indicates current exposure mode of the receiver, if it has adjustable exposure. The value of this property is an AVCaptureExposureMode that determines the receiver's exposure mode, if it has adjustable exposure. -setExposureMode: throws an NSInvalidArgumentException if set to an unsupported value (see -isExposureModeSupported:). -setExposureMode: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. When using AVCapturePhotoOutput and capturing photos with AVCapturePhotoSettings' photoQualityPrioritization property set to AVCapturePhotoQualityPrioritizationBalanced or higher, the receiver's ISO and exposureDuration values may be overridden when exposing the photo if the scene is dark enough to warrant some form of multi-image fusion to improve quality. To ensure that the receiver's ISO and exposureDuration values are honored while in AVCaptureExposureModeCustom or AVCaptureExposureModeLocked, you must set your AVCapturePhotoSettings.photoQualityPrioritization property to AVCapturePhotoQualityPrioritizationSpeed. The same rule applies if you are using the deprecated AVCapturePhotoSettings.autoStillImageStabilizationEnabled property; you must set it to NO to preserve your custom exposure values in the photo capture. Likewise if you're using AVCaptureStillImageOutput, automaticallyEnablesStillImageStabilizationWhenAvailable must be set to NO to preserve your custom exposure values in a still image capture. Clients can observe automatic changes to the receiver's exposureMode by key value observing this property.
 func (cd *CaptureDevice) ExposureMode() CaptureExposureMode {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureExposureMode](objref.IDOf(cd), objc.RegisterName("exposureMode"))
 	return _r
 }
 
 // IsExposurePointOfInterestSupported reports whether the receiver supports exposure points of interest. The receiver's exposurePointOfInterest property can only be set if this property returns true.
 func (cd *CaptureDevice) IsExposurePointOfInterestSupported() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isExposurePointOfInterestSupported"))
 	return _r
 }
 
 // ExposurePointOfInterest indicates current exposure point of interest of the receiver, if it has one. The value of this property is a CGPoint that determines the receiver's exposure point of interest, if it has adjustable exposure. A value of (0,0) indicates that the camera should adjust exposure based on the top left corner of the image, while a value of (1,1) indicates that it should adjust exposure based on the bottom right corner. The default value is (0.5,0.5). -setExposurePointOfInterest: throws an NSInvalidArgumentException if isExposurePointOfInterestSupported returns NO. -setExposurePointOfInterest: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Note that setting exposurePointOfInterest alone does not initiate an exposure operation. After setting exposurePointOfInterest, call -setExposureMode: to apply the new point of interest.
 func (cd *CaptureDevice) ExposurePointOfInterest() corefoundation.CGPoint {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cd), objc.RegisterName("exposurePointOfInterest"))
 	return _r
 }
 
 // IsExposureRectOfInterestSupported reports whether the device supports exposure rectangles of interest. You may only set the device's “exposureRectOfInterest“ property if this property returns `true`.
 func (cd *CaptureDevice) IsExposureRectOfInterestSupported() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isExposureRectOfInterestSupported"))
 	return _r
 }
 
 // MinExposureRectOfInterestSize returns the minimum size you may use when specifying a rectangle of interest. The size returned is in normalized coordinates, and depends on the current “AVCaptureDevice/activeFormat“. If “exposureRectOfInterestSupported“ returns `false`, this property returns { 0, 0 }.
 func (cd *CaptureDevice) MinExposureRectOfInterestSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cd), objc.RegisterName("minExposureRectOfInterestSize"))
 	return _r
 }
 
 // ExposureRectOfInterest returns the device's current exposure rectangle of interest, if it has one. The value of this property is a “CGRect“ determining the device's exposure rectangle of interest. Use this as an alternative to setting “exposurePointOfInterest“, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the exposure, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting “exposureRectOfInterest“ throws an `NSInvalidArgumentException` if “exposureRectOfInterestSupported“ returns `false`. Setting “exposureRectOfInterest“ throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the “minExposureRectOfInterestSize“. Setting “exposureRectOfInterest“ throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using “AVCaptureDevice/lockForConfiguration:“. Setting “exposureRectOfInterest“ updates the device's “exposurePointOfInterest“ to the center of your provided rectangle of interest. If you later set the device's “exposurePointOfInterest“, the “exposureRectOfInterest“ resets to the default sized rectangle of interest for the new exposure point of interest. If you change your “AVCaptureDevice/activeFormat“, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's “exposureRectOfInterest“ by key-value observing this property. - Note: Setting “exposureRectOfInterest“ alone does not initiate an exposure operation. After setting “exposureRectOfInterest“, set “exposureMode“ to apply the new rectangle of interest.
 func (cd *CaptureDevice) ExposureRectOfInterest() corefoundation.CGRect {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cd), objc.RegisterName("exposureRectOfInterest"))
 	return _r
 }
 
 // IsAdjustingExposure reports whether the receiver is currently adjusting camera exposure. The value of this property is a BOOL indicating whether the receiver's camera exposure is being automatically adjusted because its exposure mode is AVCaptureExposureModeAutoExpose or AVCaptureExposureModeContinuousAutoExposure. Clients can observe the value of this property to determine whether the camera exposure is stable or is being automatically adjusted.
 func (cd *CaptureDevice) IsAdjustingExposure() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isAdjustingExposure"))
 	return _r
 }
 
 // IsWhiteBalanceModeSupported returns whether the receiver supports the given white balance mode. The receiver's whiteBalanceMode property can only be set to a certain mode if this method returns YES for that mode.
 func (cd *CaptureDevice) IsWhiteBalanceModeSupported(whiteBalanceMode CaptureWhiteBalanceMode) bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isWhiteBalanceModeSupported:"), whiteBalanceMode)
 	return _r
 }
 
 // WhiteBalanceMode indicates current white balance mode of the receiver, if it has adjustable white balance. The value of this property is an AVCaptureWhiteBalanceMode that determines the receiver's white balance mode, if it has adjustable white balance. -setWhiteBalanceMode: throws an NSInvalidArgumentException if set to an unsupported value (see -isWhiteBalanceModeSupported:). -setWhiteBalanceMode: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Clients can observe automatic changes to the receiver's whiteBalanceMode by key value observing this property.
 func (cd *CaptureDevice) WhiteBalanceMode() CaptureWhiteBalanceMode {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureWhiteBalanceMode](objref.IDOf(cd), objc.RegisterName("whiteBalanceMode"))
 	return _r
 }
 
 // IsAdjustingWhiteBalance reports whether the receiver is currently adjusting camera white balance. The value of this property is a BOOL indicating whether the receiver's camera white balance is being automatically adjusted because its white balance mode is AVCaptureWhiteBalanceModeAutoWhiteBalance or AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance. Clients can observe the value of this property to determine whether the camera white balance is stable or is being automatically adjusted.
 func (cd *CaptureDevice) IsAdjustingWhiteBalance() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isAdjustingWhiteBalance"))
 	return _r
 }
 
 // DisplayVideoZoomFactorMultiplier returns a multiplier that can be used with the receiver's videoZoomFactor property for displaying a video zoom factor in a user interface. In some system user interfaces, like the macOS Video Effects Menu, the video zoom factor value is displayed in a way most appropriate for visual representation and might differ from the videoZoomFactor property value on the receiver by a fixed ratio. For example, if the videoZoomFactor property value is 1.0 and the displayVideoZoomFactorMultiplier property value is 0.5, then multiplying 1.0 and 0.5 produces 0.5 which can be displayed in the UI. Client applications can key value observe this property to update the display video zoom factor values in their UI to stay consistent with Apple's system UIs.
 func (cd *CaptureDevice) DisplayVideoZoomFactorMultiplier() float64 {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[float64](objref.IDOf(cd), objc.RegisterName("displayVideoZoomFactorMultiplier"))
 	return _r
 }
 
 // SetTransportControlsPlaybackModeSpeed sets both the transport controls playback mode and speed in a single method. A method for setting the receiver's transport controls playback mode and speed. The receiver must be locked for configuration using lockForConfiguration: before clients can set this method, otherwise an NSGenericException is thrown.
 func (cd *CaptureDevice) SetTransportControlsPlaybackModeSpeed(mode CaptureDeviceTransportControlsPlaybackMode, speed float32) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setTransportControlsPlaybackMode:speed:"), mode, speed)
 }
 
 // TransportControlsSupported reports whether the receiver supports transport control commands. For devices with transport controls, such as AVC tape-based camcorders or pro capture devices with RS422 deck control, the value of this property is true. If transport controls are not supported, none of the associated transport control methods and properties are available on the receiver.
 func (cd *CaptureDevice) TransportControlsSupported() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("transportControlsSupported"))
 	return _r
 }
 
 // TransportControlsPlaybackMode returns the receiver's current playback mode. For devices that support transport control, this property may be queried to discover the current playback mode.
 func (cd *CaptureDevice) TransportControlsPlaybackMode() CaptureDeviceTransportControlsPlaybackMode {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureDeviceTransportControlsPlaybackMode](objref.IDOf(cd), objc.RegisterName("transportControlsPlaybackMode"))
 	return _r
 }
 
 // TransportControlsSpeed returns the receiver's current playback speed as a floating point value. For devices that support transport control, this property may be queried to discover the current playback speed of the deck. 0.0 -> stopped. 1.0 -> forward at normal speed. -1.0-> reverse at normal speed. 2.0 -> forward at 2x normal speed. etc.
 func (cd *CaptureDevice) TransportControlsSpeed() float32 {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[float32](objref.IDOf(cd), objc.RegisterName("transportControlsSpeed"))
 	return _r
 }
 
 // ActiveColorSpace returns the active color space.
 func (cd *CaptureDevice) ActiveColorSpace() CaptureColorSpace {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureColorSpace](objref.IDOf(cd), objc.RegisterName("activeColorSpace"))
 	return _r
 }
 
 // IsCenterStageActive reports whether center Stage is currently active on a particular AVCaptureDevice. This readonly property returns true when Center Stage is currently active on the receiver. When active, the camera automatically adjusts to keep people optimally framed within the field of view. The field of view may pan, tighten or widen as needed. Certain restrictions come into play when Center Stage is active: - The device's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor become restricted (see AVCaptureDeviceFormat's videoMinZoomFactorForCenterStage and videoMaxZoomFactorForCenterStage). - The device's activeVideoMinFrameDuration and activeVideoMaxFrameDuration are limited (see AVCaptureDeviceFormat's videoFrameRateRangeForCenterStage). Center Stage may be enabled via user control or application control, depending on the current +AVCaptureDevice.centerStageControlMode. When +AVCaptureDevice.centerStageEnabled is true, a particular AVCaptureDevice instance may return true for this property, depending whether it supports the feature in its current configuration. Some device features are mutually exclusive to Center Stage: - If depth data delivery is enabled on any output, such as AVCaptureDepthDataOutput, or -AVCapturePhotoOutput.depthDataDeliveryEnabled, Center Stage is deactivated. - If geometricDistortionCorrectionSupported is true, geometricDistortionCorrectionEnabled must also be true, or Center Stage is deactivated. This property is key-value observable.
 func (cd *CaptureDevice) IsCenterStageActive() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isCenterStageActive"))
 	return _r
 }
 
 // CenterStageRectOfInterest specifies the effective region within the output pixel buffer that will be used to perform Center Stage framing. Applications that wish to apply additional processing (such as cropping) on top of Center Stage's output can use this property to guide Center Stage's framing. The rectangle's origin is top left and is relative to the coordinate space of the output pixel buffer. The default value of this property is the value CGRectMake(0, 0, 1, 1), where {0,0} represents the top left of the picture area, and {1,1} represents the bottom right on an unrotated picture. This rectangle of interest is applied prior to rotation, mirroring or scaling. Pixels outside of this rectangle of interest will be blackened out. Setting this property has no impact on objects specified in the metadata output. -setCenterStageRectOfInterest: throws an NSGenericException if called without first obtaining exclusive access to the receiver using -lockForConfiguration:. -setCenterStageRectOfInterest: throws an NSInvalidArgumentException if none of the AVCaptureDeviceFormats supported by the receiver support CenterStage. -setCenterStageRectOfInterest: throws an NSInvalidArgumentException if +centerStageEnabled is NO on the AVCaptureDevice class. -setCenterStageRectOfInterest: throws an NSInvalidArgumentException if the provided rectOfInterest goes outside the normalized (0-1) coordinate space.
 func (cd *CaptureDevice) CenterStageRectOfInterest() corefoundation.CGRect {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cd), objc.RegisterName("centerStageRectOfInterest"))
 	return _r
 }
 
 // IsPortraitEffectActive reports whether portrait Effect is currently active for a particular AVCaptureDevice. This readonly property returns true when Portrait Effect is currently active on the receiver. When active, the device blurs the background, simulating a shallow depth of field effect. Certain restrictions come into play when Portrait Effect is active: - The device's activeVideoMinFrameDuration and activeVideoMaxFrameDuration are limited (see AVCaptureDeviceFormat's videoFrameRateRangeForPortraitEffect). Note that when +AVCaptureDevice.portraitEffectEnabled is true, a particular AVCaptureDevice instance may return true for this property, depending whether it supports the feature in its current configuration. This property is key-value observable.
 func (cd *CaptureDevice) IsPortraitEffectActive() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isPortraitEffectActive"))
 	return _r
 }
 
 // PerformEffectForReaction triggers a specified reaction on the video stream. The entries in reactionEffectsInProgress may not reflect one-to-one against calls to this method. Depending on reaction style or resource limits, triggering multiple overlapping reactions of the same type may be coalesced into extending an existing reaction rather than overlaying a new one. The reactionType requested must be one of those listed in availableReactionTypes or an exception will be thrown. Performing a reaction when canPerformReactionEffects is NO is ignored, and VoIP applications are encouraged to transmit and display such reactions outside of the video feed.
 func (cd *CaptureDevice) PerformEffectForReaction(reactionType obj.Object) {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(reactionType)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("performEffectForReaction:"), objref.IDOf(reactionType))
 }
 
 // CanPerformReactionEffects reports whether reactions can be performed on a particular AVCaptureDevice. This requires reactionEffectsEnabled to be true, as well as using a AVCaptureDeviceFormat with reactionEffectsSupported. This readonly property returns true when resources for reactions are available on the device instance. When true, calls to performEffectForReaction: will render on the video feed, otherwise those calls are ignored. It is key-value observable.
 func (cd *CaptureDevice) CanPerformReactionEffects() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("canPerformReactionEffects"))
 	return _r
 }
 
 // AvailableReactionTypes returns a list of reaction types which can be passed to performEffectForReaction. The list may differ between devices, or be affected by changes to active format, and can be key-value observed.
-func (cd *CaptureDevice) AvailableReactionTypes() obj.Object {
+// The order of the returned elements is unspecified.
+func (cd *CaptureDevice) AvailableReactionTypes() []*foundation.String {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("availableReactionTypes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // ReactionEffectsInProgress contains an array of reaction effects that are currently being performed by the device, sorted by timestamp. If observing old and new values in the KVO callback, the reaction effects which are still running in the new array will have kCMTimeInvalid as their endTime property. Reaction effects which have ended will only be in the old array, and will have their endTime property set to the presentation time of the first frame where the reaction effect was no longer present. Reaction effects which are triggered by either a call to performEffectForReaction: or by the automatic gesture detection will be reflected in this array. It is key-value observable to be notified when reaction effects begin or end.
 //
 // ReactionEffectsInProgress returns the collection as a Go slice.
 func (cd *CaptureDevice) ReactionEffectsInProgress() []*CaptureReactionEffectState {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("reactionEffectsInProgress"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureReactionEffectState { return CaptureReactionEffectStateFromID(_id) })
 }
 
 // IsBackgroundReplacementActive reports whether background Replacement is currently active on a particular AVCaptureDevice. This property is key-value observable.
 func (cd *CaptureDevice) IsBackgroundReplacementActive() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isBackgroundReplacementActive"))
 	return _r
 }
 
 // IsContinuityCamera reports whether the object is continuity camera.
 func (cd *CaptureDevice) IsContinuityCamera() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isContinuityCamera"))
 	return _r
 }
 
 // CompanionDeskViewCamera returns the companion desk view camera.
 func (cd *CaptureDevice) CompanionDeskViewCamera() *CaptureDevice {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("companionDeskViewCamera"))
 	return CaptureDeviceFromID(_r)
 }
 
-// SpatialCaptureDiscomfortReasons returns the spatial capture discomfort reasons.
-func (cd *CaptureDevice) SpatialCaptureDiscomfortReasons() obj.Object {
+// SpatialCaptureDiscomfortReasons returns the order of the returned elements is unspecified.
+func (cd *CaptureDevice) SpatialCaptureDiscomfortReasons() []*foundation.String {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("spatialCaptureDiscomfortReasons"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
-// CinematicVideoCaptureSceneMonitoringStatuses returns the cinematic video capture scene monitoring statuses.
-func (cd *CaptureDevice) CinematicVideoCaptureSceneMonitoringStatuses() obj.Object {
+// CinematicVideoCaptureSceneMonitoringStatuses returns the order of the returned elements is unspecified.
+func (cd *CaptureDevice) CinematicVideoCaptureSceneMonitoringStatuses() []*foundation.String {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("cinematicVideoCaptureSceneMonitoringStatuses"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }
 
 // DynamicAspectRatio returns a key-value observable property indicating the current aspect ratio for a device. This property is initialized to the first “AVCaptureAspectRatio“ listed in the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ property. If the activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ is an empty array, this property returns nil.
-func (cd *CaptureDevice) DynamicAspectRatio() obj.Object {
+func (cd *CaptureDevice) DynamicAspectRatio() *foundation.String {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("dynamicAspectRatio"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // DynamicDimensions returns a key-value observable property describing the output dimensions of the video buffer based on the device's dynamic aspect ratio. If the device's activeFormat's “AVCaptureDeviceFormat/supportedDynamicAspectRatios“ is an empty array, this property returns {0,0}.
 func (cd *CaptureDevice) DynamicDimensions() coremedia.CMVideoDimensions {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(cd), objc.RegisterName("dynamicDimensions"))
 	return _r
 }
 
 // SmartFramingMonitor returns the smart framing monitor.
 func (cd *CaptureDevice) SmartFramingMonitor() obj.Object {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("smartFramingMonitor"))
 	return obj.Wrap(_r)
 }
 
 // IsStudioLightActive reports whether studio Light is currently active on a particular AVCaptureDevice. This readonly property returns true when Studio Light is currently active on the receiver. When active, the subject's face is artificially lit to simulate the presence of a studio light near the camera.
 func (cd *CaptureDevice) IsStudioLightActive() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isStudioLightActive"))
 	return _r
 }
 
 // SetCameraLensSmudgeDetectionEnabledDetectionInterval specify whether to enable camera lens smudge detection, and the interval time between each run of detections.
 func (cd *CaptureDevice) SetCameraLensSmudgeDetectionEnabledDetectionInterval(cameraLensSmudgeDetectionEnabled bool, detectionInterval coremedia.CMTime) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCameraLensSmudgeDetectionEnabled:detectionInterval:"), cameraLensSmudgeDetectionEnabled, detectionInterval)
 }
 
 // IsCameraLensSmudgeDetectionEnabled reports whether camera lens smudge detection is enabled. You enable lens smudge detection by calling “setCameraLensSmudgeDetectionEnabled:detectionInterval:“. By default, this property is returns `false`.
 func (cd *CaptureDevice) IsCameraLensSmudgeDetectionEnabled() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("isCameraLensSmudgeDetectionEnabled"))
 	return _r
 }
 
 // CameraLensSmudgeDetectionInterval returns the camera lens smudge detection interval. “cameraLensSmudgeDetectionInterval“ is set by calling “setCameraLensSmudgeDetectionEnabled:detectionInterval:“. By default, this property returns `kCMTimeInvalid`.
 func (cd *CaptureDevice) CameraLensSmudgeDetectionInterval() coremedia.CMTime {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cd), objc.RegisterName("cameraLensSmudgeDetectionInterval"))
 	return _r
 }
 
 // CameraLensSmudgeDetectionStatus returns a value specifying the status of camera lens smudge detection. During initial detection execution, “cameraLensSmudgeDetectionStatus“ returns “AVCaptureCameraLensSmudgeDetectionStatusUnknown“ until the detection result settles. Once a detection result is produced, “cameraLensSmudgeDetectionStatus“ returns the most recent detection result. This property can be key-value observed.
 func (cd *CaptureDevice) CameraLensSmudgeDetectionStatus() CaptureCameraLensSmudgeDetectionStatus {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureCameraLensSmudgeDetectionStatus](objref.IDOf(cd), objc.RegisterName("cameraLensSmudgeDetectionStatus"))
 	return _r
 }

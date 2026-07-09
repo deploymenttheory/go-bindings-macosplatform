@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -95,6 +97,7 @@ func (ngmc *NNGramMatrixCalculation) WithLabel(label string) *NNGramMatrixCalcul
 
 // Alpha returns scaling factor for the output. Default: 1.0f.
 func (ngmc *NNGramMatrixCalculation) Alpha() float32 {
+	defer runtime.KeepAlive(ngmc)
 	_r := objc.Send[float32](objref.IDOf(ngmc), objc.RegisterName("alpha"))
 	return _r
 }

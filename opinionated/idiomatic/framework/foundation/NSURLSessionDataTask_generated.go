@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,8 +51,19 @@ func uRLSessionDataTaskAdopt(id objc.ID) *URLSessionDataTask {
 	return x
 }
 
+// WithDelegate sets the delegate.
+func (usdt *URLSessionDataTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionDataTask {
+	_shim := newURLSessionTaskDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(usdt), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(usdt), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return usdt
+}
+
 // WithEarliestBeginDate sets the earliest begin date.
 func (usdt *URLSessionDataTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask {
+	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usdt
 }
@@ -68,6 +82,7 @@ func (usdt *URLSessionDataTask) WithCountOfBytesClientExpectsToReceive(countOfBy
 
 // WithTaskDescription sets the task description.
 func (usdt *URLSessionDataTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDataTask {
+	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usdt
 }
@@ -91,8 +106,8 @@ func (usdt *URLSessionDataTask) WithObservationInfo(observationInfo unsafe.Point
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (usdt *URLSessionDataTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDataTask {
-	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (usdt *URLSessionDataTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionDataTask {
+	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return usdt
 }
 

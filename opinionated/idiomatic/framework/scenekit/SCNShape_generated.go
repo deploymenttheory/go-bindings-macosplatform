@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewShape() *Shape {
 
 // WithPath sets the two-dimensional path forming the basis of the shape.
 func (s *Shape) WithPath(path obj.Object) *Shape {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return s
 }
@@ -78,6 +81,7 @@ func (s *Shape) WithChamferRadius(chamferRadius float64) *Shape {
 
 // WithChamferProfile sets a path that determines the cross-sectional contour of each chamfered edge.
 func (s *Shape) WithChamferProfile(chamferProfile obj.Object) *Shape {
+	defer runtime.KeepAlive(chamferProfile)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
 	return s
 }
@@ -97,6 +101,7 @@ func (s *Shape) WithMaterials(items ...*Material) *Shape {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (s *Shape) WithFirstMaterial(firstMaterial *Material) *Shape {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return s
 }
@@ -110,6 +115,7 @@ func (s *Shape) WithLevelsOfDetail(items ...*LevelOfDetail) *Shape {
 
 // WithTessellator sets the tessellator.
 func (s *Shape) WithTessellator(tessellator *GeometryTessellator) *Shape {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return s
 }
@@ -128,42 +134,49 @@ func (s *Shape) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sha
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (s *Shape) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Shape {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return s
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (s *Shape) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Shape {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return s
 }
 
 // Path returns the path defining the shape to be rendered. The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
 func (s *Shape) Path() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
 
 // ExtrusionDepth returns the extrusion depth. Animatable. If the value is 0, we get a mono-sided, 2D version of the shape.
 func (s *Shape) ExtrusionDepth() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("extrusionDepth"))
 	return _r
 }
 
 // ChamferMode returns the sides of the text that are chamfered. The default value is SCNChamferModeBoth.
 func (s *Shape) ChamferMode() ChamferMode {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[ChamferMode](objref.IDOf(s), objc.RegisterName("chamferMode"))
 	return _r
 }
 
 // ChamferRadius returns the chamfer radius. Animatable. Values are clamped to the range [0, extrusionDepth / 2]. The default value is 0.
 func (s *Shape) ChamferRadius() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("chamferRadius"))
 	return _r
 }
 
 // ChamferProfile describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
 func (s *Shape) ChamferProfile() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("chamferProfile"))
 	return obj.Wrap(_r)
 }

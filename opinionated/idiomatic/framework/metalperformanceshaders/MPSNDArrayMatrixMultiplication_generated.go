@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,12 +65,14 @@ func (namm *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixM
 
 // Alpha returns the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (namm *NDArrayMatrixMultiplication) Alpha() float64 {
+	defer runtime.KeepAlive(namm)
 	_r := objc.Send[float64](objref.IDOf(namm), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
 func (namm *NDArrayMatrixMultiplication) Beta() float64 {
+	defer runtime.KeepAlive(namm)
 	_r := objc.Send[float64](objref.IDOf(namm), objc.RegisterName("beta"))
 	return _r
 }

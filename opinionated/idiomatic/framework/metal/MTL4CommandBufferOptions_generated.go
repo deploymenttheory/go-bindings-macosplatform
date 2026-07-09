@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4CommandBufferOptionsAdopt(id objc.ID) *MTL4CommandBufferOptions {
 
 // Description returns the object's -description text.
 func (mcbo *MTL4CommandBufferOptions) Description() string {
+	defer runtime.KeepAlive(mcbo)
 	return rt.Description(objref.IDOf(mcbo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcbo *MTL4CommandBufferOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcbo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcbo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcbo *MTL4CommandBufferOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcbo)
 	return rt.IsKind(objref.IDOf(mcbo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcbo *MTL4CommandBufferOptions) String() string {
+	defer runtime.KeepAlive(mcbo)
 	return rt.Description(objref.IDOf(mcbo))
 }
 

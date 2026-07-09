@@ -5,6 +5,7 @@
 package coreml
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func modelAdopt(id objc.ID) *Model {
 
 // Description returns the object's -description text.
 func (m *Model) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Model) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Model) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Model) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -75,8 +81,10 @@ func NewModel() *Model {
 	return modelAdopt(_id)
 }
 
-// ParameterValueForKeyError returns a model parameter value for a key.
-func (m *Model) ParameterValueForKeyError(key *ParameterKey) (result obj.Object, err error) {
+// ParameterValueForKey returns a model parameter value for a key.
+func (m *Model) ParameterValueForKey(key *ParameterKey) (result obj.Object, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(key)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("parameterValueForKey:error:"), objref.IDOf(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,18 +95,21 @@ func (m *Model) ParameterValueForKeyError(key *ParameterKey) (result obj.Object,
 
 // ModelDescription returns a model holds a description of its required inputs and expected outputs.
 func (m *Model) ModelDescription() *ModelDescription {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("modelDescription"))
 	return ModelDescriptionFromID(_r)
 }
 
 // Configuration returns the load-time parameters used to instantiate this MLModel object.
 func (m *Model) Configuration() *ModelConfiguration {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("configuration"))
 	return ModelConfigurationFromID(_r)
 }
 
 // NewState creates a new state object.
 func (m *Model) NewState() *State {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("newState"))
 	return StateFromID(_r)
 }

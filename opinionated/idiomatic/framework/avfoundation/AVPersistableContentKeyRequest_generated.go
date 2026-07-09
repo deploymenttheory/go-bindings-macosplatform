@@ -5,12 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,14 +57,15 @@ func NewPersistableContentKeyRequest() *PersistableContentKeyRequest {
 	return persistableContentKeyRequestAdopt(_id)
 }
 
-// PersistableContentKeyFromKeyVendorResponseOptionsError creates a persistable content key from the content key context data.
-func (pckr *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse obj.Object, options obj.Object) (result obj.Object, err error) {
+// PersistableContentKeyFromKeyVendorResponseOptions creates a persistable content key from the content key context data.
+func (pckr *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptions(keyVendorResponse []byte, options map[string]obj.Object) (result []byte, err error) {
+	defer runtime.KeepAlive(pckr)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(pckr), objc.RegisterName("persistableContentKeyFromKeyVendorResponse:options:error:"), objref.IDOf(keyVendorResponse), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(pckr), objc.RegisterName("persistableContentKeyFromKeyVendorResponse:options:error:"), rt.BytesToNSData(keyVendorResponse), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
 var _ ContentKeyRequestProvider = (*PersistableContentKeyRequest)(nil)

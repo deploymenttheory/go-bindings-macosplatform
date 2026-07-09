@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,6 +57,7 @@ func NewShellScriptAction() *ShellScriptAction {
 
 // WithParameters sets the action’s parameters.
 func (ssa *ShellScriptAction) WithParameters(parameters obj.Object) *ShellScriptAction {
+	defer runtime.KeepAlive(parameters)
 	objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return ssa
 }
@@ -86,12 +88,14 @@ func (ssa *ShellScriptAction) WithOutput(output unsafe.Pointer) *ShellScriptActi
 
 // RemapLineEndings wraps the corresponding Objective-C method.
 func (ssa *ShellScriptAction) RemapLineEndings() bool {
+	defer runtime.KeepAlive(ssa)
 	_r := objc.Send[bool](objref.IDOf(ssa), objc.RegisterName("remapLineEndings"))
 	return _r
 }
 
 // InputFieldSeparator returns the input field separator.
 func (ssa *ShellScriptAction) InputFieldSeparator() string {
+	defer runtime.KeepAlive(ssa)
 	_r := objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("inputFieldSeparator"))
 	if _r == 0 {
 		return ""
@@ -101,6 +105,7 @@ func (ssa *ShellScriptAction) InputFieldSeparator() string {
 
 // OutputFieldSeparator returns the output field separator.
 func (ssa *ShellScriptAction) OutputFieldSeparator() string {
+	defer runtime.KeepAlive(ssa)
 	_r := objc.Send[objc.ID](objref.IDOf(ssa), objc.RegisterName("outputFieldSeparator"))
 	if _r == 0 {
 		return ""

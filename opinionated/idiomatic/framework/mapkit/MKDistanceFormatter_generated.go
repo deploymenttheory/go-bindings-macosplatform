@@ -5,9 +5,11 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +51,27 @@ func distanceFormatterAdopt(id objc.ID) *DistanceFormatter {
 
 // Description returns the object's -description text.
 func (df *DistanceFormatter) Description() string {
+	defer runtime.KeepAlive(df)
 	return rt.Description(objref.IDOf(df))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (df *DistanceFormatter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(df)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(df), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (df *DistanceFormatter) IsKind(className string) bool {
+	defer runtime.KeepAlive(df)
 	return rt.IsKind(objref.IDOf(df), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (df *DistanceFormatter) String() string {
+	defer runtime.KeepAlive(df)
 	return rt.Description(objref.IDOf(df))
 }
 
@@ -76,6 +83,7 @@ func NewDistanceFormatter() *DistanceFormatter {
 
 // WithLocale sets the locale to use when formatting strings.
 func (df *DistanceFormatter) WithLocale(locale obj.Object) *DistanceFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return df
 }
@@ -94,6 +102,7 @@ func (df *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle)
 
 // StringFromDistance creates a string representation of the specified distance.
 func (df *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("stringFromDistance:"), distance)
 	if _r == 0 {
 		return ""
@@ -102,19 +111,22 @@ func (df *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string 
 }
 
 // Locale returns the locale.
-func (df *DistanceFormatter) Locale() obj.Object {
+func (df *DistanceFormatter) Locale() *foundation.Locale {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("locale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }
 
 // Units returns the units.
 func (df *DistanceFormatter) Units() DistanceFormatterUnits {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[DistanceFormatterUnits](objref.IDOf(df), objc.RegisterName("units"))
 	return _r
 }
 
 // UnitStyle returns the unit style.
 func (df *DistanceFormatter) UnitStyle() DistanceFormatterUnitStyle {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[DistanceFormatterUnitStyle](objref.IDOf(df), objc.RegisterName("unitStyle"))
 	return _r
 }

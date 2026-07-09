@@ -6,10 +6,12 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -52,34 +54,51 @@ func textContentManagerAdopt(id objc.ID) *TextContentManager {
 
 // Description returns the object's -description text.
 func (tcm *TextContentManager) Description() string {
+	defer runtime.KeepAlive(tcm)
 	return rt.Description(objref.IDOf(tcm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tcm *TextContentManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tcm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tcm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tcm *TextContentManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(tcm)
 	return rt.IsKind(objref.IDOf(tcm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tcm *TextContentManager) String() string {
+	defer runtime.KeepAlive(tcm)
 	return rt.Description(objref.IDOf(tcm))
 }
 
 // NewTextContentManagerWithCoder creates a new content manager object from data in an unarchiver.
 func NewTextContentManagerWithCoder(coder obj.Object) *TextContentManager {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextContentManager")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textContentManagerAdopt(_id)
 }
 
+// WithDelegate sets the delegate for the content manager object.
+func (tcm *TextContentManager) WithDelegate(delegate TextContentManagerDelegate) *TextContentManager {
+	_shim := newTextContentManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tcm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(tcm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return tcm
+}
+
 // WithPrimaryTextLayoutManager sets the primary text layout manager for this content.
 func (tcm *TextContentManager) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentManager {
+	defer runtime.KeepAlive(primaryTextLayoutManager)
 	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
 	return tcm
 }
@@ -98,11 +117,15 @@ func (tcm *TextContentManager) WithAutomaticallySynchronizesToBackingStore(autom
 
 // AddTextLayoutManager adds the layout manager you provide to the list of layout managers.
 func (tcm *TextContentManager) AddTextLayoutManager(textLayoutManager *TextLayoutManager) {
+	defer runtime.KeepAlive(tcm)
+	defer runtime.KeepAlive(textLayoutManager)
 	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("addTextLayoutManager:"), objref.IDOf(textLayoutManager))
 }
 
 // RemoveTextLayoutManager removes the layout manager you specifiy from the list of layout managers.
 func (tcm *TextContentManager) RemoveTextLayoutManager(textLayoutManager *TextLayoutManager) {
+	defer runtime.KeepAlive(tcm)
+	defer runtime.KeepAlive(textLayoutManager)
 	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("removeTextLayoutManager:"), objref.IDOf(textLayoutManager))
 }
 
@@ -110,6 +133,7 @@ func (tcm *TextContentManager) RemoveTextLayoutManager(textLayoutManager *TextLa
 //
 // SynchronizeTextLayoutManagers blocks until the operation completes or ctx is cancelled.
 func (tcm *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) error {
+	defer runtime.KeepAlive(tcm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -127,6 +151,8 @@ func (tcm *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context
 
 // TextElementsForRange returns an array of text elements that intersect with the range you specify.
 func (tcm *TextContentManager) TextElementsForRange(range_ *TextRange) []*TextElement {
+	defer runtime.KeepAlive(tcm)
+	defer runtime.KeepAlive(range_)
 	_r := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("textElementsForRange:"), objref.IDOf(range_))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextElement { return TextElementFromID(_id) })
 }
@@ -135,6 +161,7 @@ func (tcm *TextContentManager) TextElementsForRange(range_ *TextRange) []*TextEl
 //
 // PerformEditingTransactionUsing blocks until the operation completes or ctx is cancelled.
 func (tcm *TextContentManager) PerformEditingTransactionUsing(ctx context.Context) error {
+	defer runtime.KeepAlive(tcm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -150,6 +177,9 @@ func (tcm *TextContentManager) PerformEditingTransactionUsing(ctx context.Contex
 
 // RecordEditActionInRangeNewTextRange records information about an edit action to the transaction.
 func (tcm *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextRange *TextRange, newTextRange *TextRange) {
+	defer runtime.KeepAlive(tcm)
+	defer runtime.KeepAlive(originalTextRange)
+	defer runtime.KeepAlive(newTextRange)
 	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("recordEditActionInRange:newTextRange:"), objref.IDOf(originalTextRange), objref.IDOf(newTextRange))
 }
 
@@ -157,30 +187,35 @@ func (tcm *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextR
 //
 // TextLayoutManagers returns the collection as a Go slice.
 func (tcm *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
+	defer runtime.KeepAlive(tcm)
 	_arr := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("textLayoutManagers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLayoutManager { return TextLayoutManagerFromID(_id) })
 }
 
 // PrimaryTextLayoutManager returns the primary text layout manager.
 func (tcm *TextContentManager) PrimaryTextLayoutManager() *TextLayoutManager {
+	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("primaryTextLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // HasEditingTransaction reports whether the object has editing transaction.
 func (tcm *TextContentManager) HasEditingTransaction() bool {
+	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("hasEditingTransaction"))
 	return _r
 }
 
 // AutomaticallySynchronizesTextLayoutManagers wraps the corresponding Objective-C method.
 func (tcm *TextContentManager) AutomaticallySynchronizesTextLayoutManagers() bool {
+	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("automaticallySynchronizesTextLayoutManagers"))
 	return _r
 }
 
 // AutomaticallySynchronizesToBackingStore wraps the corresponding Objective-C method.
 func (tcm *TextContentManager) AutomaticallySynchronizesToBackingStore() bool {
+	defer runtime.KeepAlive(tcm)
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("automaticallySynchronizesToBackingStore"))
 	return _r
 }

@@ -5,9 +5,12 @@
 package coremotion
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,42 +57,49 @@ func NewMotionActivity() *MotionActivity {
 
 // Confidence returns the confidence.
 func (ma *MotionActivity) Confidence() MotionActivityConfidence {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[MotionActivityConfidence](objref.IDOf(ma), objc.RegisterName("confidence"))
 	return _r
 }
 
 // StartDate returns the start date.
-func (ma *MotionActivity) StartDate() obj.Object {
+func (ma *MotionActivity) StartDate() time.Time {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Unknown wraps the corresponding Objective-C method.
 func (ma *MotionActivity) Unknown() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("unknown"))
 	return _r
 }
 
 // Stationary wraps the corresponding Objective-C method.
 func (ma *MotionActivity) Stationary() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("stationary"))
 	return _r
 }
 
 // Walking wraps the corresponding Objective-C method.
 func (ma *MotionActivity) Walking() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("walking"))
 	return _r
 }
 
 // Running wraps the corresponding Objective-C method.
 func (ma *MotionActivity) Running() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("running"))
 	return _r
 }
 
 // Automotive wraps the corresponding Objective-C method.
 func (ma *MotionActivity) Automotive() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("automotive"))
 	return _r
 }

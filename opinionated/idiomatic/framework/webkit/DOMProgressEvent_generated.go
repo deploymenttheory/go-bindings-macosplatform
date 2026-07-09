@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,18 +65,21 @@ func (dpe *DOMProgressEvent) WithCancelBubble(cancelBubble bool) *DOMProgressEve
 
 // LengthComputable wraps the corresponding Objective-C method.
 func (dpe *DOMProgressEvent) LengthComputable() bool {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[bool](objref.IDOf(dpe), objc.RegisterName("lengthComputable"))
 	return _r
 }
 
 // Loaded returns the loaded.
 func (dpe *DOMProgressEvent) Loaded() uint64 {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[uint64](objref.IDOf(dpe), objc.RegisterName("loaded"))
 	return _r
 }
 
 // Total returns the total.
 func (dpe *DOMProgressEvent) Total() uint64 {
+	defer runtime.KeepAlive(dpe)
 	_r := objc.Send[uint64](objref.IDOf(dpe), objc.RegisterName("total"))
 	return _r
 }

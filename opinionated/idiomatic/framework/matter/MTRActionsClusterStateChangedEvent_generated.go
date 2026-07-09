@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActionsClusterStateChangedEventAdopt(id objc.ID) *MTRActionsClusterState
 
 // Description returns the object's -description text.
 func (macsce *MTRActionsClusterStateChangedEvent) Description() string {
+	defer runtime.KeepAlive(macsce)
 	return rt.Description(objref.IDOf(macsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macsce *MTRActionsClusterStateChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macsce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macsce *MTRActionsClusterStateChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(macsce)
 	return rt.IsKind(objref.IDOf(macsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macsce *MTRActionsClusterStateChangedEvent) String() string {
+	defer runtime.KeepAlive(macsce)
 	return rt.Description(objref.IDOf(macsce))
 }
 
@@ -72,36 +80,42 @@ func NewMTRActionsClusterStateChangedEvent() *MTRActionsClusterStateChangedEvent
 
 // WithActionID sets the action ID.
 func (macsce *MTRActionsClusterStateChangedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterStateChangedEvent {
+	defer runtime.KeepAlive(actionID)
 	objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macsce
 }
 
 // WithInvokeID sets the invoke ID.
 func (macsce *MTRActionsClusterStateChangedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStateChangedEvent {
+	defer runtime.KeepAlive(invokeID)
 	objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macsce
 }
 
 // WithNewState sets the new state.
 func (macsce *MTRActionsClusterStateChangedEvent) WithNewState(newState obj.Object) *MTRActionsClusterStateChangedEvent {
+	defer runtime.KeepAlive(newState)
 	objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return macsce
 }
 
 // ActionID returns the action ID.
-func (macsce *MTRActionsClusterStateChangedEvent) ActionID() obj.Object {
+func (macsce *MTRActionsClusterStateChangedEvent) ActionID() *foundation.Number {
+	defer runtime.KeepAlive(macsce)
 	_r := objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("actionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // InvokeID returns the invoke ID.
-func (macsce *MTRActionsClusterStateChangedEvent) InvokeID() obj.Object {
+func (macsce *MTRActionsClusterStateChangedEvent) InvokeID() *foundation.Number {
+	defer runtime.KeepAlive(macsce)
 	_r := objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("invokeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NewState returns the new state.
-func (macsce *MTRActionsClusterStateChangedEvent) NewState() obj.Object {
+func (macsce *MTRActionsClusterStateChangedEvent) NewState() *foundation.Number {
+	defer runtime.KeepAlive(macsce)
 	_r := objc.Send[objc.ID](objref.IDOf(macsce), objc.RegisterName("getNewState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

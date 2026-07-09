@@ -5,6 +5,8 @@
 package systemextensions
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func systemExtensionPropertiesAdopt(id objc.ID) *SystemExtensionProperties {
 
 // Description returns the object's -description text.
 func (sep *SystemExtensionProperties) Description() string {
+	defer runtime.KeepAlive(sep)
 	return rt.Description(objref.IDOf(sep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sep *SystemExtensionProperties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sep *SystemExtensionProperties) IsKind(className string) bool {
+	defer runtime.KeepAlive(sep)
 	return rt.IsKind(objref.IDOf(sep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sep *SystemExtensionProperties) String() string {
+	defer runtime.KeepAlive(sep)
 	return rt.Description(objref.IDOf(sep))
 }
 
@@ -73,13 +80,15 @@ func NewSystemExtensionProperties() *SystemExtensionProperties {
 }
 
 // URL returns the file URL locating an indicating the extension bundle these properties were retreived from.
-func (sep *SystemExtensionProperties) URL() obj.Object {
+func (sep *SystemExtensionProperties) URL() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // BundleIdentifier returns the bundle identifier of the extension (CFBundleIdentifier)
 func (sep *SystemExtensionProperties) BundleIdentifier() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (sep *SystemExtensionProperties) BundleIdentifier() string {
 
 // BundleVersion returns the bundle version of the extension (CFBundleVersion)
 func (sep *SystemExtensionProperties) BundleVersion() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("bundleVersion"))
 	if _r == 0 {
 		return ""
@@ -98,6 +108,7 @@ func (sep *SystemExtensionProperties) BundleVersion() string {
 
 // BundleShortVersion returns the bundle short version string of the extension (CFBundleShortVersionString)
 func (sep *SystemExtensionProperties) BundleShortVersion() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("bundleShortVersion"))
 	if _r == 0 {
 		return ""
@@ -107,18 +118,21 @@ func (sep *SystemExtensionProperties) BundleShortVersion() string {
 
 // IsEnabled reports whether returns the enabled state of the extension
 func (sep *SystemExtensionProperties) IsEnabled() bool {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // IsAwaitingUserApproval reports whether an extension is waiting for user approval
 func (sep *SystemExtensionProperties) IsAwaitingUserApproval() bool {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isAwaitingUserApproval"))
 	return _r
 }
 
 // IsUninstalling reports whether returns if an extension is being uninstalled
 func (sep *SystemExtensionProperties) IsUninstalling() bool {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isUninstalling"))
 	return _r
 }

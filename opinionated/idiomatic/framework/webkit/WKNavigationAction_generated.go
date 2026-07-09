@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func wKNavigationActionAdopt(id objc.ID) *WKNavigationAction {
 
 // Description returns the object's -description text.
 func (wna *WKNavigationAction) Description() string {
+	defer runtime.KeepAlive(wna)
 	return rt.Description(objref.IDOf(wna))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wna *WKNavigationAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wna)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wna), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wna *WKNavigationAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(wna)
 	return rt.IsKind(objref.IDOf(wna), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wna *WKNavigationAction) String() string {
+	defer runtime.KeepAlive(wna)
 	return rt.Description(objref.IDOf(wna))
 }
 
@@ -80,6 +88,7 @@ func NewWKNavigationAction() *WKNavigationAction {
 
 // SourceFrame returns the frame requesting the navigation.
 func (wna *WKNavigationAction) SourceFrame() *WKFrameInfo {
+	defer runtime.KeepAlive(wna)
 	var _mainthread0 *WKFrameInfo
 	purego.Main(func() {
 		_mainthread0 = func() *WKFrameInfo {
@@ -93,6 +102,7 @@ func (wna *WKNavigationAction) SourceFrame() *WKFrameInfo {
 
 // TargetFrame returns the target frame, or nil if this is a new window navigation.
 func (wna *WKNavigationAction) TargetFrame() *WKFrameInfo {
+	defer runtime.KeepAlive(wna)
 	var _mainthread0 *WKFrameInfo
 	purego.Main(func() {
 		_mainthread0 = func() *WKFrameInfo {
@@ -106,6 +116,7 @@ func (wna *WKNavigationAction) TargetFrame() *WKFrameInfo {
 
 // NavigationType returns the type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
 func (wna *WKNavigationAction) NavigationType() WKNavigationType {
+	defer runtime.KeepAlive(wna)
 	var _mainthread0 WKNavigationType
 	purego.Main(func() {
 		_mainthread0 = func() WKNavigationType {
@@ -118,12 +129,13 @@ func (wna *WKNavigationAction) NavigationType() WKNavigationType {
 }
 
 // Request returns the navigation's request.
-func (wna *WKNavigationAction) Request() obj.Object {
-	var _mainthread0 obj.Object
+func (wna *WKNavigationAction) Request() *foundation.URLRequest {
+	defer runtime.KeepAlive(wna)
+	var _mainthread0 *foundation.URLRequest
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.URLRequest {
 			_r := objc.Send[objc.ID](objref.IDOf(wna), objc.RegisterName("request"))
-			return obj.Wrap(_r)
+			return foundation.URLRequestFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -132,6 +144,7 @@ func (wna *WKNavigationAction) Request() obj.Object {
 
 // ShouldPerformDownload reports whether the web content used a download attribute to indicate that this should be downloaded.
 func (wna *WKNavigationAction) ShouldPerformDownload() bool {
+	defer runtime.KeepAlive(wna)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -145,6 +158,7 @@ func (wna *WKNavigationAction) ShouldPerformDownload() bool {
 
 // IsContentRuleListRedirect reports whether the navigation is a redirect from a content rule list.
 func (wna *WKNavigationAction) IsContentRuleListRedirect() bool {
+	defer runtime.KeepAlive(wna)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -158,6 +172,7 @@ func (wna *WKNavigationAction) IsContentRuleListRedirect() bool {
 
 // ButtonNumber returns the number of the mouse button causing the navigation to be requested.
 func (wna *WKNavigationAction) ButtonNumber() int {
+	defer runtime.KeepAlive(wna)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

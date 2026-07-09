@@ -5,7 +5,10 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func numericConstraintAdopt(id objc.ID) *NumericConstraint {
 
 // Description returns the object's -description text.
 func (nc *NumericConstraint) Description() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nc *NumericConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nc *NumericConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(nc)
 	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nc *NumericConstraint) String() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
@@ -73,19 +81,22 @@ func NewNumericConstraint() *NumericConstraint {
 }
 
 // MinNumber returns the min number.
-func (nc *NumericConstraint) MinNumber() obj.Object {
+func (nc *NumericConstraint) MinNumber() *foundation.Number {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("minNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxNumber returns the max number.
-func (nc *NumericConstraint) MaxNumber() obj.Object {
+func (nc *NumericConstraint) MaxNumber() *foundation.Number {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("maxNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
-// EnumeratedNumbers returns the enumerated numbers.
-func (nc *NumericConstraint) EnumeratedNumbers() obj.Object {
+// EnumeratedNumbers returns the order of the returned elements is unspecified.
+func (nc *NumericConstraint) EnumeratedNumbers() []*foundation.Number {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("enumeratedNumbers"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }

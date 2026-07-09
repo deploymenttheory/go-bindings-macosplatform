@@ -17,13 +17,13 @@ import (
 // CGColorConversionInfoCreateForToneMapping reports an error if the CoreGraphics framework function CGColorConversionInfoCreateForToneMapping fails.
 var _fnCGColorConversionInfoCreateForToneMapping func(objc.ID, float32, objc.ID, float32, CGToneMapping, objc.ID, unsafe.Pointer) objc.ID
 
-func CGColorConversionInfoCreateForToneMapping(from obj.Object, source_headroom float32, to obj.Object, target_headroom float32, method CGToneMapping, options obj.Object) (obj.Object, error) {
+func CGColorConversionInfoCreateForToneMapping(from obj.Object, sourceHeadroom float32, to obj.Object, targetHeadroom float32, method CGToneMapping, options obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGColorConversionInfoCreateForToneMapping == nil {
 		ebipurego.RegisterLibFunc(&_fnCGColorConversionInfoCreateForToneMapping, _lib, "CGColorConversionInfoCreateForToneMapping")
 	}
 	var _cfErr unsafe.Pointer
-	_r := _fnCGColorConversionInfoCreateForToneMapping(objref.IDOf(from), source_headroom, objref.IDOf(to), target_headroom, method, objref.IDOf(options), unsafe.Pointer(&_cfErr))
+	_r := _fnCGColorConversionInfoCreateForToneMapping(objref.IDOf(from), sourceHeadroom, objref.IDOf(to), targetHeadroom, method, objref.IDOf(options), unsafe.Pointer(&_cfErr))
 	if _cfErr != nil {
 		return nil, errkit.FromCFError(_cfErr)
 	}

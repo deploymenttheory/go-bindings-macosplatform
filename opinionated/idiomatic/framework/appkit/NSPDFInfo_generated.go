@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func pDFInfoAdopt(id objc.ID) *PDFInfo {
 
 // Description returns the object's -description text.
 func (pi *PDFInfo) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *PDFInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *PDFInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *PDFInfo) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
@@ -74,8 +81,8 @@ func NewPDFInfo() *PDFInfo {
 }
 
 // WithURL sets the URL identifying the location at which the PDF file will be created.
-func (pi *PDFInfo) WithURL(uRL string) *PDFInfo {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (pi *PDFInfo) WithURL(url string) *PDFInfo {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return pi
 }
 
@@ -105,13 +112,15 @@ func (pi *PDFInfo) WithPaperSize(paperSize corefoundation.CGSize) *PDFInfo {
 }
 
 // URL returns the URL.
-func (pi *PDFInfo) URL() obj.Object {
+func (pi *PDFInfo) URL() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsFileExtensionHidden reports whether the object is file extension hidden.
 func (pi *PDFInfo) IsFileExtensionHidden() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isFileExtensionHidden"))
 	return _r
 }
@@ -120,24 +129,28 @@ func (pi *PDFInfo) IsFileExtensionHidden() bool {
 //
 // TagNames returns the collection as a Go slice.
 func (pi *PDFInfo) TagNames() []string {
+	defer runtime.KeepAlive(pi)
 	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("tagNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Orientation returns the orientation.
 func (pi *PDFInfo) Orientation() PaperOrientation {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[PaperOrientation](objref.IDOf(pi), objc.RegisterName("orientation"))
 	return _r
 }
 
 // PaperSize returns the paper size.
 func (pi *PDFInfo) PaperSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pi), objc.RegisterName("paperSize"))
 	return _r
 }
 
 // Attributes returns the attributes.
 func (pi *PDFInfo) Attributes() obj.Object {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }

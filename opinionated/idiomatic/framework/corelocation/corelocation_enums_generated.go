@@ -238,3 +238,30 @@ func (e Proximity) String() string {
 		return fmt.Sprintf("Proximity(%d)", int64(e))
 	}
 }
+
+// Constants that reflect the relationship of the current location to the region boundaries.
+type RegionState int64
+
+const (
+	// It is unknown whether the location is inside or outside of the region.
+	RegionStateUnknown RegionState = 0
+	// The location is inside of the given region.
+	RegionStateInside RegionState = 1
+	// The location is outside of the given region.
+	RegionStateOutside RegionState = 2
+)
+
+// String returns the RegionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e RegionState) String() string {
+	switch e {
+	case RegionStateUnknown:
+		return "RegionStateUnknown"
+	case RegionStateInside:
+		return "RegionStateInside"
+	case RegionStateOutside:
+		return "RegionStateOutside"
+	default:
+		return fmt.Sprintf("RegionState(%d)", int64(e))
+	}
+}

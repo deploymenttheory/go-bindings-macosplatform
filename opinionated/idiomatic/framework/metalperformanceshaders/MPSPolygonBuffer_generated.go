@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,22 +48,27 @@ func polygonBufferAdopt(id objc.ID) *PolygonBuffer {
 
 // Description returns the object's -description text.
 func (pb *PolygonBuffer) Description() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pb *PolygonBuffer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pb *PolygonBuffer) IsKind(className string) bool {
+	defer runtime.KeepAlive(pb)
 	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pb *PolygonBuffer) String() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
@@ -74,6 +80,7 @@ func NewPolygonBuffer() *PolygonBuffer {
 
 // NewPolygonBufferWithCoder initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
 func NewPolygonBufferWithCoder(aDecoder obj.Object) *PolygonBuffer {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return polygonBufferAdopt(_id)
@@ -105,30 +112,35 @@ func (pb *PolygonBuffer) WithPolygonCount(polygonCount int) *PolygonBuffer {
 
 // CopyWithZone create a a copy of this polygon buffer Buffer properties of the polygon buffer such as the vertex buffer, instance, buffer, etc. are set to nil. Copy these buffers and assign them to the new polygon buffer or reassign the existing buffers to the new polygon buffer.
 func (pb *PolygonBuffer) CopyWithZone(zone unsafe.Pointer) *PolygonBuffer {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("copyWithZone:"), zone)
 	return PolygonBufferFromID(_r)
 }
 
 // VertexBufferOffset returns offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (pb *PolygonBuffer) VertexBufferOffset() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("vertexBufferOffset"))
 	return _r
 }
 
 // IndexBufferOffset returns offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
 func (pb *PolygonBuffer) IndexBufferOffset() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
 // MaskBufferOffset returns offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
 func (pb *PolygonBuffer) MaskBufferOffset() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("maskBufferOffset"))
 	return _r
 }
 
 // PolygonCount returns number of polygons. Changes to this property require rebuilding the acceleration structure.
 func (pb *PolygonBuffer) PolygonCount() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("polygonCount"))
 	return _r
 }

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func invocationAdopt(id objc.ID) *Invocation {
 
 // Description returns the object's -description text.
 func (i *Invocation) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Invocation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Invocation) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Invocation) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
@@ -76,6 +82,7 @@ func NewInvocation() *Invocation {
 
 // WithTarget sets the receiver’s target, or nil if the receiver has no target.
 func (i *Invocation) WithTarget(target obj.Object) *Invocation {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return i
 }
@@ -87,65 +94,77 @@ func (i *Invocation) WithObservationInfo(observationInfo unsafe.Pointer) *Invoca
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (i *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
-	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (i *Invocation) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Invocation {
+	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return i
 }
 
 // RetainArguments if the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
 func (i *Invocation) RetainArguments() {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("retainArguments"))
 }
 
 // GetReturnValue gets the invocation’s return value.
 func (i *Invocation) GetReturnValue(retLoc unsafe.Pointer) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("getReturnValue:"), retLoc)
 }
 
 // SetReturnValue sets the receiver’s return value.
 func (i *Invocation) SetReturnValue(retLoc unsafe.Pointer) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setReturnValue:"), retLoc)
 }
 
 // GetArgumentAtIndex returns by indirection the receiver’s argument at a specified index.
 func (i *Invocation) GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("getArgument:atIndex:"), argumentLocation, idx)
 }
 
 // SetArgumentAtIndex sets an argument of the receiver.
 func (i *Invocation) SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setArgument:atIndex:"), argumentLocation, idx)
 }
 
 // Invoke sends the receiver’s message (with arguments) to its target and sets the return value.
 func (i *Invocation) Invoke() {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invoke"))
 }
 
 // InvokeWithTarget sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
 func (i *Invocation) InvokeWithTarget(target obj.Object) {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
 }
 
 // InvokeUsingIMP wraps the corresponding Objective-C method.
 func (i *Invocation) InvokeUsingIMP(imp unsafe.Pointer) {
+	defer runtime.KeepAlive(i)
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeUsingIMP:"), imp)
 }
 
 // MethodSignature returns the method signature.
 func (i *Invocation) MethodSignature() *MethodSignature {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("methodSignature"))
 	return MethodSignatureFromID(_r)
 }
 
 // ArgumentsRetained wraps the corresponding Objective-C method.
 func (i *Invocation) ArgumentsRetained() bool {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("argumentsRetained"))
 	return _r
 }
 
 // Target returns the target.
 func (i *Invocation) Target() obj.Object {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }

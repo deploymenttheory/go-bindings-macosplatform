@@ -36,8 +36,8 @@ func MIDIUMPMutableFunctionBlockFromID(id objc.ID) *MIDIUMPMutableFunctionBlock 
 }
 
 // @method		initWithName:direction:firstGroup:totalGroupsSpanned:maxSysEx8Streams:MIDI1Info:UIHint:isEnabled: @brief		The initializer for constructing a Function Block. @param		name					The Function Block name. @param		direction				The directionality of the Function Block. @param		firstGroup				The first UMP Group supported by the Function Block. @param		totalGroupsSpanned		The number of UMP groups spanned by the Function Block. @param		maxSysEx8Streams		The maximum number of simultaneous Sysex8 streams. @param		MIDI1Info				The MIDI 1.0 speed information for the Function Block. @param		UIHint					A UI hint for the Function Block. @param		isEnabled				The enable state of the Function Block. @discussion	This operation will fail if virtual MIDI endpoint creation is not allowed (for example, on iOS, if your app doesn't list 'audio' in UIBackgroundModes).
-func (o *MIDIUMPMutableFunctionBlock) InitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name *foundation.NSString, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint, isEnabled bool) *MIDIUMPMutableFunctionBlock {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableFunctionBlockSelInitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled, name.Ptr(), direction, firstGroup, totalGroupsSpanned, maxSysEx8Streams, mIDI1Info, uIHint, isEnabled)
+func (o *MIDIUMPMutableFunctionBlock) InitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled(name *foundation.NSString, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, totalGroupsSpanned uint8, maxSysEx8Streams uint8, midi1Info MIDIUMPFunctionBlockMIDI1Info, uiHint MIDIUMPFunctionBlockUIHint, isEnabled bool) *MIDIUMPMutableFunctionBlock {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableFunctionBlockSelInitWithNameDirectionFirstGroupTotalGroupsSpannedMaxSysEx8StreamsMIDI1InfoUIHintIsEnabled, name.Ptr(), direction, firstGroup, totalGroupsSpanned, maxSysEx8Streams, midi1Info, uiHint, isEnabled)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -65,9 +65,9 @@ func (o *MIDIUMPMutableFunctionBlock) SetNameError(name *foundation.NSString) (b
 }
 
 // @method       reconfigureWithFirstGroup:direction:MIDI1Info:UIHint:error @brief        Reconfigure a Function Block. @param    firstGroup            The new first Group to use for the Function Block.. @param    direction              The direction of the Function Block: input, output, or bidirectional. @param    MIDI1Info              MIDI 1.0 speed information. @param    UIHint                     A hint for UI about the primary usage of this Function Block. @discussion    If a mutable Function Block has not been registered to a CI device or was registered in a non-static Function Block configuration, the first Group can be changed if the final Group spanned by the Function Block is valid after the Function Block has been relocated. Returns YES if the first Group of the Function Block was changed.
-func (o *MIDIUMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction MIDIUMPFunctionBlockDirection, mIDI1Info MIDIUMPFunctionBlockMIDI1Info, uIHint MIDIUMPFunctionBlockUIHint) (bool, error) {
+func (o *MIDIUMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction MIDIUMPFunctionBlockDirection, midi1Info MIDIUMPFunctionBlockMIDI1Info, uiHint MIDIUMPFunctionBlockUIHint) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _mIDIUMPMutableFunctionBlockSelReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError, firstGroup, direction, mIDI1Info, uIHint, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _mIDIUMPMutableFunctionBlockSelReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError, firstGroup, direction, midi1Info, uiHint, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

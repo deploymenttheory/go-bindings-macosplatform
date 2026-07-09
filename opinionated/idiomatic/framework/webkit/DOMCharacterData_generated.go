@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -69,6 +71,7 @@ func (dcd *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterDa
 
 // SubstringDataLength wraps the corresponding Objective-C method.
 func (dcd *DOMCharacterData) SubstringDataLength(offset int, length int) string {
+	defer runtime.KeepAlive(dcd)
 	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("substringData:length:"), offset, length)
 	if _r == 0 {
 		return ""
@@ -78,26 +81,31 @@ func (dcd *DOMCharacterData) SubstringDataLength(offset int, length int) string 
 
 // AppendData appends data.
 func (dcd *DOMCharacterData) AppendData(data string) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("appendData:"), purego.NSString(data))
 }
 
 // InsertDataData inserts data data.
 func (dcd *DOMCharacterData) InsertDataData(offset int, data string) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("insertData:data:"), offset, purego.NSString(data))
 }
 
 // DeleteDataLength deletes data length.
 func (dcd *DOMCharacterData) DeleteDataLength(offset int, length int) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("deleteData:length:"), offset, length)
 }
 
 // ReplaceDataLengthData replaces data length data.
 func (dcd *DOMCharacterData) ReplaceDataLengthData(offset int, length int, data string) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("replaceData:length:data:"), offset, length, purego.NSString(data))
 }
 
 // Data returns the data.
 func (dcd *DOMCharacterData) Data() string {
+	defer runtime.KeepAlive(dcd)
 	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -107,12 +115,14 @@ func (dcd *DOMCharacterData) Data() string {
 
 // Length returns the length.
 func (dcd *DOMCharacterData) Length() int {
+	defer runtime.KeepAlive(dcd)
 	_r := objc.Send[int](objref.IDOf(dcd), objc.RegisterName("length"))
 	return _r
 }
 
 // SubstringData wraps the corresponding Objective-C method.
 func (dcd *DOMCharacterData) SubstringData(offset int, length int) string {
+	defer runtime.KeepAlive(dcd)
 	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("substringData::"), offset, length)
 	if _r == 0 {
 		return ""
@@ -122,16 +132,19 @@ func (dcd *DOMCharacterData) SubstringData(offset int, length int) string {
 
 // InsertData inserts data.
 func (dcd *DOMCharacterData) InsertData(offset int, data string) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("insertData::"), offset, purego.NSString(data))
 }
 
 // DeleteData deletes data.
 func (dcd *DOMCharacterData) DeleteData(offset int, length int) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("deleteData::"), offset, length)
 }
 
 // ReplaceData replaces data.
 func (dcd *DOMCharacterData) ReplaceData(offset int, length int, data string) {
+	defer runtime.KeepAlive(dcd)
 	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("replaceData:::"), offset, length, purego.NSString(data))
 }
 

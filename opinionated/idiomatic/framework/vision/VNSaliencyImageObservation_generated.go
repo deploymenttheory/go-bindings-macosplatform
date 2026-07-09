@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewSaliencyImageObservation() *SaliencyImageObservation {
 //
 // SalientObjects returns the collection as a Go slice.
 func (sio *SaliencyImageObservation) SalientObjects() []*RectangleObservation {
+	defer runtime.KeepAlive(sio)
 	_arr := objc.Send[objc.ID](objref.IDOf(sio), objc.RegisterName("salientObjects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RectangleObservation { return RectangleObservationFromID(_id) })
 }

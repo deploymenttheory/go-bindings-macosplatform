@@ -7,6 +7,7 @@ package hypervisor
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -27,375 +28,483 @@ func HvGicConfigCreate() obj.Object {
 
 var _fnHvGicConfigSetDistributorBase func(objc.ID, uint64) int32
 
-// HvGicConfigSetDistributorBase calls the Hypervisor framework function hv_gic_config_set_distributor_base.
-func HvGicConfigSetDistributorBase(config obj.Object, distributor_base_address uint64) int {
+// HvGicConfigSetDistributorBase reports an error if the Hypervisor framework function hv_gic_config_set_distributor_base fails.
+func HvGicConfigSetDistributorBase(config obj.Object, distributorBaseAddress uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetDistributorBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetDistributorBase, _lib, "hv_gic_config_set_distributor_base")
 	}
-	return int(_fnHvGicConfigSetDistributorBase(objref.IDOf(config), distributor_base_address))
+	_rc := _fnHvGicConfigSetDistributorBase(objref.IDOf(config), distributorBaseAddress)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicConfigSetMsiInterruptRange func(objc.ID, uint32, uint32) int32
 
-// HvGicConfigSetMsiInterruptRange calls the Hypervisor framework function hv_gic_config_set_msi_interrupt_range.
-func HvGicConfigSetMsiInterruptRange(config obj.Object, msi_intid_base uint32, msi_intid_count uint32) int {
+// HvGicConfigSetMsiInterruptRange reports an error if the Hypervisor framework function hv_gic_config_set_msi_interrupt_range fails.
+func HvGicConfigSetMsiInterruptRange(config obj.Object, msiIntidBase uint32, msiIntidCount uint32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetMsiInterruptRange == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetMsiInterruptRange, _lib, "hv_gic_config_set_msi_interrupt_range")
 	}
-	return int(_fnHvGicConfigSetMsiInterruptRange(objref.IDOf(config), msi_intid_base, msi_intid_count))
+	_rc := _fnHvGicConfigSetMsiInterruptRange(objref.IDOf(config), msiIntidBase, msiIntidCount)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicConfigSetMsiRegionBase func(objc.ID, uint64) int32
 
-// HvGicConfigSetMsiRegionBase calls the Hypervisor framework function hv_gic_config_set_msi_region_base.
-func HvGicConfigSetMsiRegionBase(config obj.Object, msi_region_base_address uint64) int {
+// HvGicConfigSetMsiRegionBase reports an error if the Hypervisor framework function hv_gic_config_set_msi_region_base fails.
+func HvGicConfigSetMsiRegionBase(config obj.Object, msiRegionBaseAddress uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetMsiRegionBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetMsiRegionBase, _lib, "hv_gic_config_set_msi_region_base")
 	}
-	return int(_fnHvGicConfigSetMsiRegionBase(objref.IDOf(config), msi_region_base_address))
+	_rc := _fnHvGicConfigSetMsiRegionBase(objref.IDOf(config), msiRegionBaseAddress)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicConfigSetRedistributorBase func(objc.ID, uint64) int32
 
-// HvGicConfigSetRedistributorBase calls the Hypervisor framework function hv_gic_config_set_redistributor_base.
-func HvGicConfigSetRedistributorBase(config obj.Object, redistributor_base_address uint64) int {
+// HvGicConfigSetRedistributorBase reports an error if the Hypervisor framework function hv_gic_config_set_redistributor_base fails.
+func HvGicConfigSetRedistributorBase(config obj.Object, redistributorBaseAddress uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicConfigSetRedistributorBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetRedistributorBase, _lib, "hv_gic_config_set_redistributor_base")
 	}
-	return int(_fnHvGicConfigSetRedistributorBase(objref.IDOf(config), redistributor_base_address))
+	_rc := _fnHvGicConfigSetRedistributorBase(objref.IDOf(config), redistributorBaseAddress)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicCreate func(objc.ID) int32
 
-// HvGicCreate calls the Hypervisor framework function hv_gic_create.
-func HvGicCreate(gic_config obj.Object) int {
+// HvGicCreate reports an error if the Hypervisor framework function hv_gic_create fails.
+func HvGicCreate(gicConfig obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicCreate, _lib, "hv_gic_create")
 	}
-	return int(_fnHvGicCreate(objref.IDOf(gic_config)))
+	_rc := _fnHvGicCreate(objref.IDOf(gicConfig))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicGetDistributorBaseAlignment func(unsafe.Pointer) int32
 
-// HvGicGetDistributorBaseAlignment calls the Hypervisor framework function hv_gic_get_distributor_base_alignment.
-func HvGicGetDistributorBaseAlignment() (result int, distributor_base_alignment int) {
+// HvGicGetDistributorBaseAlignment reports an error if the Hypervisor framework function hv_gic_get_distributor_base_alignment fails.
+func HvGicGetDistributorBaseAlignment() (distributorBaseAlignment int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetDistributorBaseAlignment == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetDistributorBaseAlignment, _lib, "hv_gic_get_distributor_base_alignment")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetDistributorBaseAlignment(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetDistributorBaseAlignment(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetDistributorReg func(Hv_gic_distributor_reg_t, unsafe.Pointer) int32
+var _fnHvGicGetDistributorReg func(GICDistributorReg, unsafe.Pointer) int32
 
-// HvGicGetDistributorReg calls the Hypervisor framework function hv_gic_get_distributor_reg.
-func HvGicGetDistributorReg(reg Hv_gic_distributor_reg_t) (result int, value uint64) {
+// HvGicGetDistributorReg reports an error if the Hypervisor framework function hv_gic_get_distributor_reg fails.
+func HvGicGetDistributorReg(reg GICDistributorReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetDistributorReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetDistributorReg, _lib, "hv_gic_get_distributor_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetDistributorReg(reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetDistributorReg(reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetDistributorSize func(unsafe.Pointer) int32
 
-// HvGicGetDistributorSize calls the Hypervisor framework function hv_gic_get_distributor_size.
-func HvGicGetDistributorSize() (result int, distributor_size int) {
+// HvGicGetDistributorSize reports an error if the Hypervisor framework function hv_gic_get_distributor_size fails.
+func HvGicGetDistributorSize() (distributorSize int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetDistributorSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetDistributorSize, _lib, "hv_gic_get_distributor_size")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetDistributorSize(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetDistributorSize(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetIccReg func(uint64, Hv_gic_icc_reg_t, unsafe.Pointer) int32
+var _fnHvGicGetIccReg func(uint64, GICIccReg, unsafe.Pointer) int32
 
-// HvGicGetIccReg calls the Hypervisor framework function hv_gic_get_icc_reg.
-func HvGicGetIccReg(vcpu uint64, reg Hv_gic_icc_reg_t) (result int, value uint64) {
+// HvGicGetIccReg reports an error if the Hypervisor framework function hv_gic_get_icc_reg fails.
+func HvGicGetIccReg(vcpu uint64, reg GICIccReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetIccReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetIccReg, _lib, "hv_gic_get_icc_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetIccReg(vcpu, reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetIccReg(vcpu, reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetIchReg func(uint64, Hv_gic_ich_reg_t, unsafe.Pointer) int32
+var _fnHvGicGetIchReg func(uint64, GICIchReg, unsafe.Pointer) int32
 
-// HvGicGetIchReg calls the Hypervisor framework function hv_gic_get_ich_reg.
-func HvGicGetIchReg(vcpu uint64, reg Hv_gic_ich_reg_t) (result int, value uint64) {
+// HvGicGetIchReg reports an error if the Hypervisor framework function hv_gic_get_ich_reg fails.
+func HvGicGetIchReg(vcpu uint64, reg GICIchReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetIchReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetIchReg, _lib, "hv_gic_get_ich_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetIchReg(vcpu, reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetIchReg(vcpu, reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetIcvReg func(uint64, Hv_gic_icv_reg_t, unsafe.Pointer) int32
+var _fnHvGicGetIcvReg func(uint64, GICIcvReg, unsafe.Pointer) int32
 
-// HvGicGetIcvReg calls the Hypervisor framework function hv_gic_get_icv_reg.
-func HvGicGetIcvReg(vcpu uint64, reg Hv_gic_icv_reg_t) (result int, value uint64) {
+// HvGicGetIcvReg reports an error if the Hypervisor framework function hv_gic_get_icv_reg fails.
+func HvGicGetIcvReg(vcpu uint64, reg GICIcvReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetIcvReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetIcvReg, _lib, "hv_gic_get_icv_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetIcvReg(vcpu, reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetIcvReg(vcpu, reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetIntid func(Hv_gic_intid_t, unsafe.Pointer) int32
+var _fnHvGicGetIntid func(GICIntid, unsafe.Pointer) int32
 
-// HvGicGetIntid calls the Hypervisor framework function hv_gic_get_intid.
-func HvGicGetIntid(interrupt Hv_gic_intid_t) (result int, intid uint32) {
+// HvGicGetIntid reports an error if the Hypervisor framework function hv_gic_get_intid fails.
+func HvGicGetIntid(interrupt GICIntid) (intid uint32, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetIntid == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetIntid, _lib, "hv_gic_get_intid")
 	}
 	var _out0 uint32
-	_ret := int(_fnHvGicGetIntid(interrupt, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetIntid(interrupt, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetMsiReg func(Hv_gic_msi_reg_t, unsafe.Pointer) int32
+var _fnHvGicGetMsiReg func(GICMSIReg, unsafe.Pointer) int32
 
-// HvGicGetMsiReg calls the Hypervisor framework function hv_gic_get_msi_reg.
-func HvGicGetMsiReg(reg Hv_gic_msi_reg_t) (result int, value uint64) {
+// HvGicGetMsiReg reports an error if the Hypervisor framework function hv_gic_get_msi_reg fails.
+func HvGicGetMsiReg(reg GICMSIReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetMsiReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetMsiReg, _lib, "hv_gic_get_msi_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetMsiReg(reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetMsiReg(reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetMsiRegionBaseAlignment func(unsafe.Pointer) int32
 
-// HvGicGetMsiRegionBaseAlignment calls the Hypervisor framework function hv_gic_get_msi_region_base_alignment.
-func HvGicGetMsiRegionBaseAlignment() (result int, msi_region_base_alignment int) {
+// HvGicGetMsiRegionBaseAlignment reports an error if the Hypervisor framework function hv_gic_get_msi_region_base_alignment fails.
+func HvGicGetMsiRegionBaseAlignment() (msiRegionBaseAlignment int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetMsiRegionBaseAlignment == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetMsiRegionBaseAlignment, _lib, "hv_gic_get_msi_region_base_alignment")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetMsiRegionBaseAlignment(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetMsiRegionBaseAlignment(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetMsiRegionSize func(unsafe.Pointer) int32
 
-// HvGicGetMsiRegionSize calls the Hypervisor framework function hv_gic_get_msi_region_size.
-func HvGicGetMsiRegionSize() (result int, msi_region_size int) {
+// HvGicGetMsiRegionSize reports an error if the Hypervisor framework function hv_gic_get_msi_region_size fails.
+func HvGicGetMsiRegionSize() (msiRegionSize int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetMsiRegionSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetMsiRegionSize, _lib, "hv_gic_get_msi_region_size")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetMsiRegionSize(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetMsiRegionSize(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetRedistributorBase func(uint64, unsafe.Pointer) int32
 
-// HvGicGetRedistributorBase calls the Hypervisor framework function hv_gic_get_redistributor_base.
-func HvGicGetRedistributorBase(vcpu uint64) (result int, redistributor_base_address uint64) {
+// HvGicGetRedistributorBase reports an error if the Hypervisor framework function hv_gic_get_redistributor_base fails.
+func HvGicGetRedistributorBase(vcpu uint64) (redistributorBaseAddress uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetRedistributorBase == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetRedistributorBase, _lib, "hv_gic_get_redistributor_base")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetRedistributorBase(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetRedistributorBase(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetRedistributorBaseAlignment func(unsafe.Pointer) int32
 
-// HvGicGetRedistributorBaseAlignment calls the Hypervisor framework function hv_gic_get_redistributor_base_alignment.
-func HvGicGetRedistributorBaseAlignment() (result int, redistributor_base_alignment int) {
+// HvGicGetRedistributorBaseAlignment reports an error if the Hypervisor framework function hv_gic_get_redistributor_base_alignment fails.
+func HvGicGetRedistributorBaseAlignment() (redistributorBaseAlignment int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetRedistributorBaseAlignment == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetRedistributorBaseAlignment, _lib, "hv_gic_get_redistributor_base_alignment")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetRedistributorBaseAlignment(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetRedistributorBaseAlignment(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvGicGetRedistributorReg func(uint64, Hv_gic_redistributor_reg_t, unsafe.Pointer) int32
+var _fnHvGicGetRedistributorReg func(uint64, GICRedistributorReg, unsafe.Pointer) int32
 
-// HvGicGetRedistributorReg calls the Hypervisor framework function hv_gic_get_redistributor_reg.
-func HvGicGetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t) (result int, value uint64) {
+// HvGicGetRedistributorReg reports an error if the Hypervisor framework function hv_gic_get_redistributor_reg fails.
+func HvGicGetRedistributorReg(vcpu uint64, reg GICRedistributorReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetRedistributorReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetRedistributorReg, _lib, "hv_gic_get_redistributor_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvGicGetRedistributorReg(vcpu, reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetRedistributorReg(vcpu, reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetRedistributorRegionSize func(unsafe.Pointer) int32
 
-// HvGicGetRedistributorRegionSize calls the Hypervisor framework function hv_gic_get_redistributor_region_size.
-func HvGicGetRedistributorRegionSize() (result int, redistributor_region_size int) {
+// HvGicGetRedistributorRegionSize reports an error if the Hypervisor framework function hv_gic_get_redistributor_region_size fails.
+func HvGicGetRedistributorRegionSize() (redistributorRegionSize int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetRedistributorRegionSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetRedistributorRegionSize, _lib, "hv_gic_get_redistributor_region_size")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetRedistributorRegionSize(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetRedistributorRegionSize(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetRedistributorSize func(unsafe.Pointer) int32
 
-// HvGicGetRedistributorSize calls the Hypervisor framework function hv_gic_get_redistributor_size.
-func HvGicGetRedistributorSize() (result int, redistributor_size int) {
+// HvGicGetRedistributorSize reports an error if the Hypervisor framework function hv_gic_get_redistributor_size fails.
+func HvGicGetRedistributorSize() (redistributorSize int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetRedistributorSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetRedistributorSize, _lib, "hv_gic_get_redistributor_size")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicGetRedistributorSize(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetRedistributorSize(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicGetSpiInterruptRange func(unsafe.Pointer, unsafe.Pointer) int32
 
-// HvGicGetSpiInterruptRange calls the Hypervisor framework function hv_gic_get_spi_interrupt_range.
-func HvGicGetSpiInterruptRange(spi_intid_base unsafe.Pointer) (result int, spi_intid_count uint32) {
+// HvGicGetSpiInterruptRange reports an error if the Hypervisor framework function hv_gic_get_spi_interrupt_range fails.
+func HvGicGetSpiInterruptRange(spiIntidBase unsafe.Pointer) (spiIntidCount uint32, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicGetSpiInterruptRange == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicGetSpiInterruptRange, _lib, "hv_gic_get_spi_interrupt_range")
 	}
 	var _out0 uint32
-	_ret := int(_fnHvGicGetSpiInterruptRange(spi_intid_base, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicGetSpiInterruptRange(spiIntidBase, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvGicReset func() int32
 
-// HvGicReset calls the Hypervisor framework function hv_gic_reset.
-func HvGicReset() int {
+// HvGicReset reports an error if the Hypervisor framework function hv_gic_reset fails.
+func HvGicReset() error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicReset == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicReset, _lib, "hv_gic_reset")
 	}
-	return int(_fnHvGicReset())
+	_rc := _fnHvGicReset()
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicSendMsi func(uint64, uint32) int32
 
-// HvGicSendMsi calls the Hypervisor framework function hv_gic_send_msi.
-func HvGicSendMsi(address uint64, intid uint32) int {
+// HvGicSendMsi reports an error if the Hypervisor framework function hv_gic_send_msi fails.
+func HvGicSendMsi(address uint64, intid uint32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSendMsi == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSendMsi, _lib, "hv_gic_send_msi")
 	}
-	return int(_fnHvGicSendMsi(address, intid))
+	_rc := _fnHvGicSendMsi(address, intid)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvGicSetDistributorReg func(Hv_gic_distributor_reg_t, uint64) int32
+var _fnHvGicSetDistributorReg func(GICDistributorReg, uint64) int32
 
-// HvGicSetDistributorReg calls the Hypervisor framework function hv_gic_set_distributor_reg.
-func HvGicSetDistributorReg(reg Hv_gic_distributor_reg_t, value uint64) int {
+// HvGicSetDistributorReg reports an error if the Hypervisor framework function hv_gic_set_distributor_reg fails.
+func HvGicSetDistributorReg(reg GICDistributorReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetDistributorReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetDistributorReg, _lib, "hv_gic_set_distributor_reg")
 	}
-	return int(_fnHvGicSetDistributorReg(reg, value))
+	_rc := _fnHvGicSetDistributorReg(reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvGicSetIccReg func(uint64, Hv_gic_icc_reg_t, uint64) int32
+var _fnHvGicSetIccReg func(uint64, GICIccReg, uint64) int32
 
-// HvGicSetIccReg calls the Hypervisor framework function hv_gic_set_icc_reg.
-func HvGicSetIccReg(vcpu uint64, reg Hv_gic_icc_reg_t, value uint64) int {
+// HvGicSetIccReg reports an error if the Hypervisor framework function hv_gic_set_icc_reg fails.
+func HvGicSetIccReg(vcpu uint64, reg GICIccReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetIccReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetIccReg, _lib, "hv_gic_set_icc_reg")
 	}
-	return int(_fnHvGicSetIccReg(vcpu, reg, value))
+	_rc := _fnHvGicSetIccReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvGicSetIchReg func(uint64, Hv_gic_ich_reg_t, uint64) int32
+var _fnHvGicSetIchReg func(uint64, GICIchReg, uint64) int32
 
-// HvGicSetIchReg calls the Hypervisor framework function hv_gic_set_ich_reg.
-func HvGicSetIchReg(vcpu uint64, reg Hv_gic_ich_reg_t, value uint64) int {
+// HvGicSetIchReg reports an error if the Hypervisor framework function hv_gic_set_ich_reg fails.
+func HvGicSetIchReg(vcpu uint64, reg GICIchReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetIchReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetIchReg, _lib, "hv_gic_set_ich_reg")
 	}
-	return int(_fnHvGicSetIchReg(vcpu, reg, value))
+	_rc := _fnHvGicSetIchReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvGicSetIcvReg func(uint64, Hv_gic_icv_reg_t, uint64) int32
+var _fnHvGicSetIcvReg func(uint64, GICIcvReg, uint64) int32
 
-// HvGicSetIcvReg calls the Hypervisor framework function hv_gic_set_icv_reg.
-func HvGicSetIcvReg(vcpu uint64, reg Hv_gic_icv_reg_t, value uint64) int {
+// HvGicSetIcvReg reports an error if the Hypervisor framework function hv_gic_set_icv_reg fails.
+func HvGicSetIcvReg(vcpu uint64, reg GICIcvReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetIcvReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetIcvReg, _lib, "hv_gic_set_icv_reg")
 	}
-	return int(_fnHvGicSetIcvReg(vcpu, reg, value))
+	_rc := _fnHvGicSetIcvReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvGicSetMsiReg func(Hv_gic_msi_reg_t, uint64) int32
+var _fnHvGicSetMsiReg func(GICMSIReg, uint64) int32
 
-// HvGicSetMsiReg calls the Hypervisor framework function hv_gic_set_msi_reg.
-func HvGicSetMsiReg(reg Hv_gic_msi_reg_t, value uint64) int {
+// HvGicSetMsiReg reports an error if the Hypervisor framework function hv_gic_set_msi_reg fails.
+func HvGicSetMsiReg(reg GICMSIReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetMsiReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetMsiReg, _lib, "hv_gic_set_msi_reg")
 	}
-	return int(_fnHvGicSetMsiReg(reg, value))
+	_rc := _fnHvGicSetMsiReg(reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvGicSetRedistributorReg func(uint64, Hv_gic_redistributor_reg_t, uint64) int32
+var _fnHvGicSetRedistributorReg func(uint64, GICRedistributorReg, uint64) int32
 
-// HvGicSetRedistributorReg calls the Hypervisor framework function hv_gic_set_redistributor_reg.
-func HvGicSetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t, value uint64) int {
+// HvGicSetRedistributorReg reports an error if the Hypervisor framework function hv_gic_set_redistributor_reg fails.
+func HvGicSetRedistributorReg(vcpu uint64, reg GICRedistributorReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetRedistributorReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetRedistributorReg, _lib, "hv_gic_set_redistributor_reg")
 	}
-	return int(_fnHvGicSetRedistributorReg(vcpu, reg, value))
+	_rc := _fnHvGicSetRedistributorReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicSetSpi func(uint32, bool) int32
 
-// HvGicSetSpi calls the Hypervisor framework function hv_gic_set_spi.
-func HvGicSetSpi(intid uint32, level bool) int {
+// HvGicSetSpi reports an error if the Hypervisor framework function hv_gic_set_spi fails.
+func HvGicSetSpi(intid uint32, level bool) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetSpi == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetSpi, _lib, "hv_gic_set_spi")
 	}
-	return int(_fnHvGicSetSpi(intid, level))
+	_rc := _fnHvGicSetSpi(intid, level)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicSetState func(unsafe.Pointer, int) int32
 
-// HvGicSetState calls the Hypervisor framework function hv_gic_set_state.
-func HvGicSetState(gic_state_data unsafe.Pointer, gic_state_size int) int {
+// HvGicSetState reports an error if the Hypervisor framework function hv_gic_set_state fails.
+func HvGicSetState(gicStateData unsafe.Pointer, gicStateSize int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicSetState == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicSetState, _lib, "hv_gic_set_state")
 	}
-	return int(_fnHvGicSetState(gic_state_data, gic_state_size))
+	_rc := _fnHvGicSetState(gicStateData, gicStateSize)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicStateCreate func() objc.ID
@@ -412,39 +521,49 @@ func HvGicStateCreate() obj.Object {
 
 var _fnHvGicStateGetData func(objc.ID, unsafe.Pointer) int32
 
-// HvGicStateGetData calls the Hypervisor framework function hv_gic_state_get_data.
-func HvGicStateGetData(state obj.Object, gic_state_data unsafe.Pointer) int {
+// HvGicStateGetData reports an error if the Hypervisor framework function hv_gic_state_get_data fails.
+func HvGicStateGetData(state obj.Object, gicStateData unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicStateGetData == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicStateGetData, _lib, "hv_gic_state_get_data")
 	}
-	return int(_fnHvGicStateGetData(objref.IDOf(state), gic_state_data))
+	_rc := _fnHvGicStateGetData(objref.IDOf(state), gicStateData)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvGicStateGetSize func(objc.ID, unsafe.Pointer) int32
 
-// HvGicStateGetSize calls the Hypervisor framework function hv_gic_state_get_size.
-func HvGicStateGetSize(state obj.Object) (result int, gic_state_size int) {
+// HvGicStateGetSize reports an error if the Hypervisor framework function hv_gic_state_get_size fails.
+func HvGicStateGetSize(state obj.Object) (gicStateSize int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvGicStateGetSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvGicStateGetSize, _lib, "hv_gic_state_get_size")
 	}
 	var _out0 int
-	_ret := int(_fnHvGicStateGetSize(objref.IDOf(state), unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvGicStateGetSize(objref.IDOf(state), unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvSmeConfigGetMaxSvlBytes func(unsafe.Pointer) int32
 
-// HvSmeConfigGetMaxSvlBytes calls the Hypervisor framework function hv_sme_config_get_max_svl_bytes.
-func HvSmeConfigGetMaxSvlBytes() (result int, value int) {
+// HvSmeConfigGetMaxSvlBytes reports an error if the Hypervisor framework function hv_sme_config_get_max_svl_bytes fails.
+func HvSmeConfigGetMaxSvlBytes() (value int, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvSmeConfigGetMaxSvlBytes == nil {
 		ebipurego.RegisterLibFunc(&_fnHvSmeConfigGetMaxSvlBytes, _lib, "hv_sme_config_get_max_svl_bytes")
 	}
 	var _out0 int
-	_ret := int(_fnHvSmeConfigGetMaxSvlBytes(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvSmeConfigGetMaxSvlBytes(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuConfigCreate func() objc.ID
@@ -459,405 +578,528 @@ func HvVcpuConfigCreate() obj.Object {
 	return obj.Adopt(_ret)
 }
 
-var _fnHvVcpuConfigGetCcsidrEl1SysRegValues func(objc.ID, Hv_cache_type_t, unsafe.Pointer) int32
+var _fnHvVcpuConfigGetCcsidrEl1SysRegValues func(objc.ID, CacheType, unsafe.Pointer) int32
 
-// HvVcpuConfigGetCcsidrEl1SysRegValues calls the Hypervisor framework function hv_vcpu_config_get_ccsidr_el1_sys_reg_values.
-func HvVcpuConfigGetCcsidrEl1SysRegValues(config obj.Object, cache_type Hv_cache_type_t) (result int, values uint64) {
+// HvVcpuConfigGetCcsidrEl1SysRegValues reports an error if the Hypervisor framework function hv_vcpu_config_get_ccsidr_el1_sys_reg_values fails.
+func HvVcpuConfigGetCcsidrEl1SysRegValues(config obj.Object, cacheType CacheType) (values uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuConfigGetCcsidrEl1SysRegValues == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuConfigGetCcsidrEl1SysRegValues, _lib, "hv_vcpu_config_get_ccsidr_el1_sys_reg_values")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvVcpuConfigGetCcsidrEl1SysRegValues(objref.IDOf(config), cache_type, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuConfigGetCcsidrEl1SysRegValues(objref.IDOf(config), cacheType, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvVcpuConfigGetFeatureReg func(objc.ID, Hv_feature_reg_t, unsafe.Pointer) int32
+var _fnHvVcpuConfigGetFeatureReg func(objc.ID, FeatureReg, unsafe.Pointer) int32
 
-// HvVcpuConfigGetFeatureReg calls the Hypervisor framework function hv_vcpu_config_get_feature_reg.
-func HvVcpuConfigGetFeatureReg(config obj.Object, feature_reg Hv_feature_reg_t) (result int, value uint64) {
+// HvVcpuConfigGetFeatureReg reports an error if the Hypervisor framework function hv_vcpu_config_get_feature_reg fails.
+func HvVcpuConfigGetFeatureReg(config obj.Object, featureReg FeatureReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuConfigGetFeatureReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuConfigGetFeatureReg, _lib, "hv_vcpu_config_get_feature_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvVcpuConfigGetFeatureReg(objref.IDOf(config), feature_reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuConfigGetFeatureReg(objref.IDOf(config), featureReg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuCreate func(unsafe.Pointer, unsafe.Pointer, objc.ID) int32
 
-// HvVcpuCreate calls the Hypervisor framework function hv_vcpu_create.
-func HvVcpuCreate(config obj.Object) (result int, vcpu uint64, exit *HvVcpuExitT) {
+// HvVcpuCreate reports an error if the Hypervisor framework function hv_vcpu_create fails.
+func HvVcpuCreate(config obj.Object) (vcpu uint64, exit *HvVcpuExitT, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuCreate, _lib, "hv_vcpu_create")
 	}
 	var _out0 uint64
 	var _out1 *HvVcpuExitT
-	_ret := int(_fnHvVcpuCreate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), objref.IDOf(config)))
-	return _ret, _out0, _out1
+	_rc := _fnHvVcpuCreate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), objref.IDOf(config))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, nil, _err
+	}
+	return _out0, _out1, nil
 }
 
 var _fnHvVcpuDestroy func(uint64) int32
 
-// HvVcpuDestroy calls the Hypervisor framework function hv_vcpu_destroy.
-func HvVcpuDestroy(vcpu uint64) int {
+// HvVcpuDestroy reports an error if the Hypervisor framework function hv_vcpu_destroy fails.
+func HvVcpuDestroy(vcpu uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuDestroy == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuDestroy, _lib, "hv_vcpu_destroy")
 	}
-	return int(_fnHvVcpuDestroy(vcpu))
+	_rc := _fnHvVcpuDestroy(vcpu)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuGetExecTime func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetExecTime calls the Hypervisor framework function hv_vcpu_get_exec_time.
-func HvVcpuGetExecTime(vcpu uint64) (result int, time_ uint64) {
+// HvVcpuGetExecTime reports an error if the Hypervisor framework function hv_vcpu_get_exec_time fails.
+func HvVcpuGetExecTime(vcpu uint64) (time_ uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetExecTime == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetExecTime, _lib, "hv_vcpu_get_exec_time")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvVcpuGetExecTime(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetExecTime(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvVcpuGetPendingInterrupt func(uint64, Hv_interrupt_type_t, unsafe.Pointer) int32
+var _fnHvVcpuGetPendingInterrupt func(uint64, InterruptType, unsafe.Pointer) int32
 
-// HvVcpuGetPendingInterrupt calls the Hypervisor framework function hv_vcpu_get_pending_interrupt.
-func HvVcpuGetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t) (result int, pending bool) {
+// HvVcpuGetPendingInterrupt reports an error if the Hypervisor framework function hv_vcpu_get_pending_interrupt fails.
+func HvVcpuGetPendingInterrupt(vcpu uint64, type_ InterruptType) (pending bool, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetPendingInterrupt == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetPendingInterrupt, _lib, "hv_vcpu_get_pending_interrupt")
 	}
 	var _out0 bool
-	_ret := int(_fnHvVcpuGetPendingInterrupt(vcpu, type_, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetPendingInterrupt(vcpu, type_, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvVcpuGetReg func(uint64, Hv_reg_t, unsafe.Pointer) int32
+var _fnHvVcpuGetReg func(uint64, Reg, unsafe.Pointer) int32
 
-// HvVcpuGetReg calls the Hypervisor framework function hv_vcpu_get_reg.
-func HvVcpuGetReg(vcpu uint64, reg Hv_reg_t) (result int, value uint64) {
+// HvVcpuGetReg reports an error if the Hypervisor framework function hv_vcpu_get_reg fails.
+func HvVcpuGetReg(vcpu uint64, reg Reg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetReg, _lib, "hv_vcpu_get_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvVcpuGetReg(vcpu, reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetReg(vcpu, reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvVcpuGetSimdFpReg func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int32
+var _fnHvVcpuGetSimdFpReg func(uint64, SIMDFPReg, unsafe.Pointer) int32
 
-// HvVcpuGetSimdFpReg calls the Hypervisor framework function hv_vcpu_get_simd_fp_reg.
-func HvVcpuGetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
+// HvVcpuGetSimdFpReg reports an error if the Hypervisor framework function hv_vcpu_get_simd_fp_reg fails.
+func HvVcpuGetSimdFpReg(vcpu uint64, reg SIMDFPReg, value unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSimdFpReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSimdFpReg, _lib, "hv_vcpu_get_simd_fp_reg")
 	}
-	return int(_fnHvVcpuGetSimdFpReg(vcpu, reg, value))
+	_rc := _fnHvVcpuGetSimdFpReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuGetSmePReg func(uint64, Hv_sme_p_reg_t, unsafe.Pointer, int) int32
+var _fnHvVcpuGetSmePReg func(uint64, SMEPReg, unsafe.Pointer, int) int32
 
-// HvVcpuGetSmePReg calls the Hypervisor framework function hv_vcpu_get_sme_p_reg.
-func HvVcpuGetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value unsafe.Pointer, length int) int {
+// HvVcpuGetSmePReg reports an error if the Hypervisor framework function hv_vcpu_get_sme_p_reg fails.
+func HvVcpuGetSmePReg(vcpu uint64, reg SMEPReg, value unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmePReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmePReg, _lib, "hv_vcpu_get_sme_p_reg")
 	}
-	return int(_fnHvVcpuGetSmePReg(vcpu, reg, value, length))
+	_rc := _fnHvVcpuGetSmePReg(vcpu, reg, value, length)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuGetSmeState func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetSmeState calls the Hypervisor framework function hv_vcpu_get_sme_state.
-func HvVcpuGetSmeState(vcpu uint64) (result int, sme_state HvVcpuSmeStateT) {
+// HvVcpuGetSmeState reports an error if the Hypervisor framework function hv_vcpu_get_sme_state fails.
+func HvVcpuGetSmeState(vcpu uint64) (smeState HvVcpuSmeStateT, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmeState == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmeState, _lib, "hv_vcpu_get_sme_state")
 	}
 	var _out0 HvVcpuSmeStateT
-	_ret := int(_fnHvVcpuGetSmeState(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetSmeState(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return HvVcpuSmeStateT{}, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvVcpuGetSmeZReg func(uint64, Hv_sme_z_reg_t, unsafe.Pointer, int) int32
+var _fnHvVcpuGetSmeZReg func(uint64, SMEZReg, unsafe.Pointer, int) int32
 
-// HvVcpuGetSmeZReg calls the Hypervisor framework function hv_vcpu_get_sme_z_reg.
-func HvVcpuGetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value unsafe.Pointer, length int) int {
+// HvVcpuGetSmeZReg reports an error if the Hypervisor framework function hv_vcpu_get_sme_z_reg fails.
+func HvVcpuGetSmeZReg(vcpu uint64, reg SMEZReg, value unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmeZReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmeZReg, _lib, "hv_vcpu_get_sme_z_reg")
 	}
-	return int(_fnHvVcpuGetSmeZReg(vcpu, reg, value, length))
+	_rc := _fnHvVcpuGetSmeZReg(vcpu, reg, value, length)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuGetSmeZaReg func(uint64, unsafe.Pointer, int) int32
 
-// HvVcpuGetSmeZaReg calls the Hypervisor framework function hv_vcpu_get_sme_za_reg.
-func HvVcpuGetSmeZaReg(vcpu uint64, value unsafe.Pointer, length int) int {
+// HvVcpuGetSmeZaReg reports an error if the Hypervisor framework function hv_vcpu_get_sme_za_reg fails.
+func HvVcpuGetSmeZaReg(vcpu uint64, value unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmeZaReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmeZaReg, _lib, "hv_vcpu_get_sme_za_reg")
 	}
-	return int(_fnHvVcpuGetSmeZaReg(vcpu, value, length))
+	_rc := _fnHvVcpuGetSmeZaReg(vcpu, value, length)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuGetSmeZt0Reg func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetSmeZt0Reg calls the Hypervisor framework function hv_vcpu_get_sme_zt0_reg.
-func HvVcpuGetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) int {
+// HvVcpuGetSmeZt0Reg reports an error if the Hypervisor framework function hv_vcpu_get_sme_zt0_reg fails.
+func HvVcpuGetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSmeZt0Reg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSmeZt0Reg, _lib, "hv_vcpu_get_sme_zt0_reg")
 	}
-	return int(_fnHvVcpuGetSmeZt0Reg(vcpu, value))
+	_rc := _fnHvVcpuGetSmeZt0Reg(vcpu, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuGetSysReg func(uint64, Hv_sys_reg_t, unsafe.Pointer) int32
+var _fnHvVcpuGetSysReg func(uint64, SysReg, unsafe.Pointer) int32
 
-// HvVcpuGetSysReg calls the Hypervisor framework function hv_vcpu_get_sys_reg.
-func HvVcpuGetSysReg(vcpu uint64, reg Hv_sys_reg_t) (result int, value uint64) {
+// HvVcpuGetSysReg reports an error if the Hypervisor framework function hv_vcpu_get_sys_reg fails.
+func HvVcpuGetSysReg(vcpu uint64, reg SysReg) (value uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetSysReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetSysReg, _lib, "hv_vcpu_get_sys_reg")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvVcpuGetSysReg(vcpu, reg, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetSysReg(vcpu, reg, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuGetTrapDebugExceptions func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetTrapDebugExceptions calls the Hypervisor framework function hv_vcpu_get_trap_debug_exceptions.
-func HvVcpuGetTrapDebugExceptions(vcpu uint64) (result int, value bool) {
+// HvVcpuGetTrapDebugExceptions reports an error if the Hypervisor framework function hv_vcpu_get_trap_debug_exceptions fails.
+func HvVcpuGetTrapDebugExceptions(vcpu uint64) (value bool, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetTrapDebugExceptions == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetTrapDebugExceptions, _lib, "hv_vcpu_get_trap_debug_exceptions")
 	}
 	var _out0 bool
-	_ret := int(_fnHvVcpuGetTrapDebugExceptions(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetTrapDebugExceptions(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuGetTrapDebugRegAccesses func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetTrapDebugRegAccesses calls the Hypervisor framework function hv_vcpu_get_trap_debug_reg_accesses.
-func HvVcpuGetTrapDebugRegAccesses(vcpu uint64) (result int, value bool) {
+// HvVcpuGetTrapDebugRegAccesses reports an error if the Hypervisor framework function hv_vcpu_get_trap_debug_reg_accesses fails.
+func HvVcpuGetTrapDebugRegAccesses(vcpu uint64) (value bool, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetTrapDebugRegAccesses == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetTrapDebugRegAccesses, _lib, "hv_vcpu_get_trap_debug_reg_accesses")
 	}
 	var _out0 bool
-	_ret := int(_fnHvVcpuGetTrapDebugRegAccesses(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetTrapDebugRegAccesses(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuGetVtimerMask func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetVtimerMask calls the Hypervisor framework function hv_vcpu_get_vtimer_mask.
-func HvVcpuGetVtimerMask(vcpu uint64) (result int, vtimer_is_masked bool) {
+// HvVcpuGetVtimerMask reports an error if the Hypervisor framework function hv_vcpu_get_vtimer_mask fails.
+func HvVcpuGetVtimerMask(vcpu uint64) (vtimerIsMasked bool, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetVtimerMask == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetVtimerMask, _lib, "hv_vcpu_get_vtimer_mask")
 	}
 	var _out0 bool
-	_ret := int(_fnHvVcpuGetVtimerMask(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetVtimerMask(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuGetVtimerOffset func(uint64, unsafe.Pointer) int32
 
-// HvVcpuGetVtimerOffset calls the Hypervisor framework function hv_vcpu_get_vtimer_offset.
-func HvVcpuGetVtimerOffset(vcpu uint64) (result int, vtimer_offset uint64) {
+// HvVcpuGetVtimerOffset reports an error if the Hypervisor framework function hv_vcpu_get_vtimer_offset fails.
+func HvVcpuGetVtimerOffset(vcpu uint64) (vtimerOffset uint64, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuGetVtimerOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuGetVtimerOffset, _lib, "hv_vcpu_get_vtimer_offset")
 	}
 	var _out0 uint64
-	_ret := int(_fnHvVcpuGetVtimerOffset(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuGetVtimerOffset(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVcpuRun func(uint64) int32
 
-// HvVcpuRun calls the Hypervisor framework function hv_vcpu_run.
-func HvVcpuRun(vcpu uint64) int {
+// HvVcpuRun reports an error if the Hypervisor framework function hv_vcpu_run fails.
+func HvVcpuRun(vcpu uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuRun == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuRun, _lib, "hv_vcpu_run")
 	}
-	return int(_fnHvVcpuRun(vcpu))
+	_rc := _fnHvVcpuRun(vcpu)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuSetPendingInterrupt func(uint64, Hv_interrupt_type_t, bool) int32
+var _fnHvVcpuSetPendingInterrupt func(uint64, InterruptType, bool) int32
 
-// HvVcpuSetPendingInterrupt calls the Hypervisor framework function hv_vcpu_set_pending_interrupt.
-func HvVcpuSetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending bool) int {
+// HvVcpuSetPendingInterrupt reports an error if the Hypervisor framework function hv_vcpu_set_pending_interrupt fails.
+func HvVcpuSetPendingInterrupt(vcpu uint64, type_ InterruptType, pending bool) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetPendingInterrupt == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetPendingInterrupt, _lib, "hv_vcpu_set_pending_interrupt")
 	}
-	return int(_fnHvVcpuSetPendingInterrupt(vcpu, type_, pending))
+	_rc := _fnHvVcpuSetPendingInterrupt(vcpu, type_, pending)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuSetReg func(uint64, Hv_reg_t, uint64) int32
+var _fnHvVcpuSetReg func(uint64, Reg, uint64) int32
 
-// HvVcpuSetReg calls the Hypervisor framework function hv_vcpu_set_reg.
-func HvVcpuSetReg(vcpu uint64, reg Hv_reg_t, value uint64) int {
+// HvVcpuSetReg reports an error if the Hypervisor framework function hv_vcpu_set_reg fails.
+func HvVcpuSetReg(vcpu uint64, reg Reg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetReg, _lib, "hv_vcpu_set_reg")
 	}
-	return int(_fnHvVcpuSetReg(vcpu, reg, value))
+	_rc := _fnHvVcpuSetReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuSetSimdFpReg func(uint64, Hv_simd_fp_reg_t, unsafe.Pointer) int32
+var _fnHvVcpuSetSimdFpReg func(uint64, SIMDFPReg, unsafe.Pointer) int32
 
-// HvVcpuSetSimdFpReg calls the Hypervisor framework function hv_vcpu_set_simd_fp_reg.
-func HvVcpuSetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
+// HvVcpuSetSimdFpReg reports an error if the Hypervisor framework function hv_vcpu_set_simd_fp_reg fails.
+func HvVcpuSetSimdFpReg(vcpu uint64, reg SIMDFPReg, value unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSimdFpReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSimdFpReg, _lib, "hv_vcpu_set_simd_fp_reg")
 	}
-	return int(_fnHvVcpuSetSimdFpReg(vcpu, reg, value))
+	_rc := _fnHvVcpuSetSimdFpReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuSetSmePReg func(uint64, Hv_sme_p_reg_t, unsafe.Pointer, int) int32
+var _fnHvVcpuSetSmePReg func(uint64, SMEPReg, unsafe.Pointer, int) int32
 
-// HvVcpuSetSmePReg calls the Hypervisor framework function hv_vcpu_set_sme_p_reg.
-func HvVcpuSetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value unsafe.Pointer, length int) int {
+// HvVcpuSetSmePReg reports an error if the Hypervisor framework function hv_vcpu_set_sme_p_reg fails.
+func HvVcpuSetSmePReg(vcpu uint64, reg SMEPReg, value unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmePReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmePReg, _lib, "hv_vcpu_set_sme_p_reg")
 	}
-	return int(_fnHvVcpuSetSmePReg(vcpu, reg, value, length))
+	_rc := _fnHvVcpuSetSmePReg(vcpu, reg, value, length)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetSmeState func(uint64, unsafe.Pointer) int32
 
-// HvVcpuSetSmeState calls the Hypervisor framework function hv_vcpu_set_sme_state.
-func HvVcpuSetSmeState(vcpu uint64) (result int, sme_state HvVcpuSmeStateT) {
+// HvVcpuSetSmeState reports an error if the Hypervisor framework function hv_vcpu_set_sme_state fails.
+func HvVcpuSetSmeState(vcpu uint64) (smeState HvVcpuSmeStateT, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeState == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeState, _lib, "hv_vcpu_set_sme_state")
 	}
 	var _out0 HvVcpuSmeStateT
-	_ret := int(_fnHvVcpuSetSmeState(vcpu, unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVcpuSetSmeState(vcpu, unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return HvVcpuSmeStateT{}, _err
+	}
+	return _out0, nil
 }
 
-var _fnHvVcpuSetSmeZReg func(uint64, Hv_sme_z_reg_t, unsafe.Pointer, int) int32
+var _fnHvVcpuSetSmeZReg func(uint64, SMEZReg, unsafe.Pointer, int) int32
 
-// HvVcpuSetSmeZReg calls the Hypervisor framework function hv_vcpu_set_sme_z_reg.
-func HvVcpuSetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value unsafe.Pointer, length int) int {
+// HvVcpuSetSmeZReg reports an error if the Hypervisor framework function hv_vcpu_set_sme_z_reg fails.
+func HvVcpuSetSmeZReg(vcpu uint64, reg SMEZReg, value unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeZReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeZReg, _lib, "hv_vcpu_set_sme_z_reg")
 	}
-	return int(_fnHvVcpuSetSmeZReg(vcpu, reg, value, length))
+	_rc := _fnHvVcpuSetSmeZReg(vcpu, reg, value, length)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetSmeZaReg func(uint64, unsafe.Pointer, int) int32
 
-// HvVcpuSetSmeZaReg calls the Hypervisor framework function hv_vcpu_set_sme_za_reg.
-func HvVcpuSetSmeZaReg(vcpu uint64, value unsafe.Pointer, length int) int {
+// HvVcpuSetSmeZaReg reports an error if the Hypervisor framework function hv_vcpu_set_sme_za_reg fails.
+func HvVcpuSetSmeZaReg(vcpu uint64, value unsafe.Pointer, length int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeZaReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeZaReg, _lib, "hv_vcpu_set_sme_za_reg")
 	}
-	return int(_fnHvVcpuSetSmeZaReg(vcpu, value, length))
+	_rc := _fnHvVcpuSetSmeZaReg(vcpu, value, length)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetSmeZt0Reg func(uint64, unsafe.Pointer) int32
 
-// HvVcpuSetSmeZt0Reg calls the Hypervisor framework function hv_vcpu_set_sme_zt0_reg.
-func HvVcpuSetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) int {
+// HvVcpuSetSmeZt0Reg reports an error if the Hypervisor framework function hv_vcpu_set_sme_zt0_reg fails.
+func HvVcpuSetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSmeZt0Reg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSmeZt0Reg, _lib, "hv_vcpu_set_sme_zt0_reg")
 	}
-	return int(_fnHvVcpuSetSmeZt0Reg(vcpu, value))
+	_rc := _fnHvVcpuSetSmeZt0Reg(vcpu, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVcpuSetSysReg func(uint64, Hv_sys_reg_t, uint64) int32
+var _fnHvVcpuSetSysReg func(uint64, SysReg, uint64) int32
 
-// HvVcpuSetSysReg calls the Hypervisor framework function hv_vcpu_set_sys_reg.
-func HvVcpuSetSysReg(vcpu uint64, reg Hv_sys_reg_t, value uint64) int {
+// HvVcpuSetSysReg reports an error if the Hypervisor framework function hv_vcpu_set_sys_reg fails.
+func HvVcpuSetSysReg(vcpu uint64, reg SysReg, value uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetSysReg == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSysReg, _lib, "hv_vcpu_set_sys_reg")
 	}
-	return int(_fnHvVcpuSetSysReg(vcpu, reg, value))
+	_rc := _fnHvVcpuSetSysReg(vcpu, reg, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetTrapDebugExceptions func(uint64, bool) int32
 
-// HvVcpuSetTrapDebugExceptions calls the Hypervisor framework function hv_vcpu_set_trap_debug_exceptions.
-func HvVcpuSetTrapDebugExceptions(vcpu uint64, value bool) int {
+// HvVcpuSetTrapDebugExceptions reports an error if the Hypervisor framework function hv_vcpu_set_trap_debug_exceptions fails.
+func HvVcpuSetTrapDebugExceptions(vcpu uint64, value bool) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetTrapDebugExceptions == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetTrapDebugExceptions, _lib, "hv_vcpu_set_trap_debug_exceptions")
 	}
-	return int(_fnHvVcpuSetTrapDebugExceptions(vcpu, value))
+	_rc := _fnHvVcpuSetTrapDebugExceptions(vcpu, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetTrapDebugRegAccesses func(uint64, bool) int32
 
-// HvVcpuSetTrapDebugRegAccesses calls the Hypervisor framework function hv_vcpu_set_trap_debug_reg_accesses.
-func HvVcpuSetTrapDebugRegAccesses(vcpu uint64, value bool) int {
+// HvVcpuSetTrapDebugRegAccesses reports an error if the Hypervisor framework function hv_vcpu_set_trap_debug_reg_accesses fails.
+func HvVcpuSetTrapDebugRegAccesses(vcpu uint64, value bool) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetTrapDebugRegAccesses == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetTrapDebugRegAccesses, _lib, "hv_vcpu_set_trap_debug_reg_accesses")
 	}
-	return int(_fnHvVcpuSetTrapDebugRegAccesses(vcpu, value))
+	_rc := _fnHvVcpuSetTrapDebugRegAccesses(vcpu, value)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetVtimerMask func(uint64, bool) int32
 
-// HvVcpuSetVtimerMask calls the Hypervisor framework function hv_vcpu_set_vtimer_mask.
-func HvVcpuSetVtimerMask(vcpu uint64, vtimer_is_masked bool) int {
+// HvVcpuSetVtimerMask reports an error if the Hypervisor framework function hv_vcpu_set_vtimer_mask fails.
+func HvVcpuSetVtimerMask(vcpu uint64, vtimerIsMasked bool) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetVtimerMask == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetVtimerMask, _lib, "hv_vcpu_set_vtimer_mask")
 	}
-	return int(_fnHvVcpuSetVtimerMask(vcpu, vtimer_is_masked))
+	_rc := _fnHvVcpuSetVtimerMask(vcpu, vtimerIsMasked)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpuSetVtimerOffset func(uint64, uint64) int32
 
-// HvVcpuSetVtimerOffset calls the Hypervisor framework function hv_vcpu_set_vtimer_offset.
-func HvVcpuSetVtimerOffset(vcpu uint64, vtimer_offset uint64) int {
+// HvVcpuSetVtimerOffset reports an error if the Hypervisor framework function hv_vcpu_set_vtimer_offset fails.
+func HvVcpuSetVtimerOffset(vcpu uint64, vtimerOffset uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpuSetVtimerOffset == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpuSetVtimerOffset, _lib, "hv_vcpu_set_vtimer_offset")
 	}
-	return int(_fnHvVcpuSetVtimerOffset(vcpu, vtimer_offset))
+	_rc := _fnHvVcpuSetVtimerOffset(vcpu, vtimerOffset)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVcpusExit func(unsafe.Pointer, uint32) int32
 
-// HvVcpusExit calls the Hypervisor framework function hv_vcpus_exit.
-func HvVcpusExit(vcpus unsafe.Pointer, vcpu_count uint32) int {
+// HvVcpusExit reports an error if the Hypervisor framework function hv_vcpus_exit fails.
+func HvVcpusExit(vcpus unsafe.Pointer, vcpuCount uint32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVcpusExit == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVcpusExit, _lib, "hv_vcpus_exit")
 	}
-	return int(_fnHvVcpusExit(vcpus, vcpu_count))
+	_rc := _fnHvVcpusExit(vcpus, vcpuCount)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmAllocate func(unsafe.Pointer, int, uint64) int32
 
-// HvVmAllocate calls the Hypervisor framework function hv_vm_allocate.
-func HvVmAllocate(uvap unsafe.Pointer, size int, flags uint64) int {
+// HvVmAllocate reports an error if the Hypervisor framework function hv_vm_allocate fails.
+func HvVmAllocate(uvap unsafe.Pointer, size int, flags uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmAllocate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmAllocate, _lib, "hv_vm_allocate")
 	}
-	return int(_fnHvVmAllocate(uvap, size, flags))
+	_rc := _fnHvVmAllocate(uvap, size, flags)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmConfigCreate func() objc.ID
@@ -874,203 +1116,263 @@ func HvVmConfigCreate() obj.Object {
 
 var _fnHvVmConfigGetDefaultIpaGranule func(unsafe.Pointer) int32
 
-// HvVmConfigGetDefaultIpaGranule calls the Hypervisor framework function hv_vm_config_get_default_ipa_granule.
-func HvVmConfigGetDefaultIpaGranule() (result int, granule Hv_ipa_granule_t) {
+// HvVmConfigGetDefaultIpaGranule reports an error if the Hypervisor framework function hv_vm_config_get_default_ipa_granule fails.
+func HvVmConfigGetDefaultIpaGranule() (granule IPAGranule, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetDefaultIpaGranule == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetDefaultIpaGranule, _lib, "hv_vm_config_get_default_ipa_granule")
 	}
-	var _out0 Hv_ipa_granule_t
-	_ret := int(_fnHvVmConfigGetDefaultIpaGranule(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	var _out0 IPAGranule
+	_rc := _fnHvVmConfigGetDefaultIpaGranule(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigGetDefaultIpaSize func(unsafe.Pointer) int32
 
-// HvVmConfigGetDefaultIpaSize calls the Hypervisor framework function hv_vm_config_get_default_ipa_size.
-func HvVmConfigGetDefaultIpaSize() (result int, ipa_bit_length uint32) {
+// HvVmConfigGetDefaultIpaSize reports an error if the Hypervisor framework function hv_vm_config_get_default_ipa_size fails.
+func HvVmConfigGetDefaultIpaSize() (ipaBitLength uint32, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetDefaultIpaSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetDefaultIpaSize, _lib, "hv_vm_config_get_default_ipa_size")
 	}
 	var _out0 uint32
-	_ret := int(_fnHvVmConfigGetDefaultIpaSize(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVmConfigGetDefaultIpaSize(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigGetEl2Enabled func(objc.ID, unsafe.Pointer) int32
 
-// HvVmConfigGetEl2Enabled calls the Hypervisor framework function hv_vm_config_get_el2_enabled.
-func HvVmConfigGetEl2Enabled(config obj.Object) (result int, el2_enabled bool) {
+// HvVmConfigGetEl2Enabled reports an error if the Hypervisor framework function hv_vm_config_get_el2_enabled fails.
+func HvVmConfigGetEl2Enabled(config obj.Object) (el2Enabled bool, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetEl2Enabled == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetEl2Enabled, _lib, "hv_vm_config_get_el2_enabled")
 	}
 	var _out0 bool
-	_ret := int(_fnHvVmConfigGetEl2Enabled(objref.IDOf(config), unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVmConfigGetEl2Enabled(objref.IDOf(config), unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigGetEl2Supported func(unsafe.Pointer) int32
 
-// HvVmConfigGetEl2Supported calls the Hypervisor framework function hv_vm_config_get_el2_supported.
-func HvVmConfigGetEl2Supported() (result int, el2_supported bool) {
+// HvVmConfigGetEl2Supported reports an error if the Hypervisor framework function hv_vm_config_get_el2_supported fails.
+func HvVmConfigGetEl2Supported() (el2Supported bool, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetEl2Supported == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetEl2Supported, _lib, "hv_vm_config_get_el2_supported")
 	}
 	var _out0 bool
-	_ret := int(_fnHvVmConfigGetEl2Supported(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVmConfigGetEl2Supported(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return false, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigGetIpaGranule func(objc.ID, unsafe.Pointer) int32
 
-// HvVmConfigGetIpaGranule calls the Hypervisor framework function hv_vm_config_get_ipa_granule.
-func HvVmConfigGetIpaGranule(config obj.Object) (result int, granule Hv_ipa_granule_t) {
+// HvVmConfigGetIpaGranule reports an error if the Hypervisor framework function hv_vm_config_get_ipa_granule fails.
+func HvVmConfigGetIpaGranule(config obj.Object) (granule IPAGranule, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetIpaGranule == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetIpaGranule, _lib, "hv_vm_config_get_ipa_granule")
 	}
-	var _out0 Hv_ipa_granule_t
-	_ret := int(_fnHvVmConfigGetIpaGranule(objref.IDOf(config), unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	var _out0 IPAGranule
+	_rc := _fnHvVmConfigGetIpaGranule(objref.IDOf(config), unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigGetIpaSize func(objc.ID, unsafe.Pointer) int32
 
-// HvVmConfigGetIpaSize calls the Hypervisor framework function hv_vm_config_get_ipa_size.
-func HvVmConfigGetIpaSize(config obj.Object) (result int, ipa_bit_length uint32) {
+// HvVmConfigGetIpaSize reports an error if the Hypervisor framework function hv_vm_config_get_ipa_size fails.
+func HvVmConfigGetIpaSize(config obj.Object) (ipaBitLength uint32, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetIpaSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetIpaSize, _lib, "hv_vm_config_get_ipa_size")
 	}
 	var _out0 uint32
-	_ret := int(_fnHvVmConfigGetIpaSize(objref.IDOf(config), unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVmConfigGetIpaSize(objref.IDOf(config), unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigGetMaxIpaSize func(unsafe.Pointer) int32
 
-// HvVmConfigGetMaxIpaSize calls the Hypervisor framework function hv_vm_config_get_max_ipa_size.
-func HvVmConfigGetMaxIpaSize() (result int, ipa_bit_length uint32) {
+// HvVmConfigGetMaxIpaSize reports an error if the Hypervisor framework function hv_vm_config_get_max_ipa_size fails.
+func HvVmConfigGetMaxIpaSize() (ipaBitLength uint32, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigGetMaxIpaSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigGetMaxIpaSize, _lib, "hv_vm_config_get_max_ipa_size")
 	}
 	var _out0 uint32
-	_ret := int(_fnHvVmConfigGetMaxIpaSize(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVmConfigGetMaxIpaSize(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmConfigSetEl2Enabled func(objc.ID, bool) int32
 
-// HvVmConfigSetEl2Enabled calls the Hypervisor framework function hv_vm_config_set_el2_enabled.
-func HvVmConfigSetEl2Enabled(config obj.Object, el2_enabled bool) int {
+// HvVmConfigSetEl2Enabled reports an error if the Hypervisor framework function hv_vm_config_set_el2_enabled fails.
+func HvVmConfigSetEl2Enabled(config obj.Object, el2Enabled bool) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigSetEl2Enabled == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetEl2Enabled, _lib, "hv_vm_config_set_el2_enabled")
 	}
-	return int(_fnHvVmConfigSetEl2Enabled(objref.IDOf(config), el2_enabled))
+	_rc := _fnHvVmConfigSetEl2Enabled(objref.IDOf(config), el2Enabled)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-var _fnHvVmConfigSetIpaGranule func(objc.ID, Hv_ipa_granule_t) int32
+var _fnHvVmConfigSetIpaGranule func(objc.ID, IPAGranule) int32
 
-// HvVmConfigSetIpaGranule calls the Hypervisor framework function hv_vm_config_set_ipa_granule.
-func HvVmConfigSetIpaGranule(config obj.Object, granule Hv_ipa_granule_t) int {
+// HvVmConfigSetIpaGranule reports an error if the Hypervisor framework function hv_vm_config_set_ipa_granule fails.
+func HvVmConfigSetIpaGranule(config obj.Object, granule IPAGranule) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigSetIpaGranule == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetIpaGranule, _lib, "hv_vm_config_set_ipa_granule")
 	}
-	return int(_fnHvVmConfigSetIpaGranule(objref.IDOf(config), granule))
+	_rc := _fnHvVmConfigSetIpaGranule(objref.IDOf(config), granule)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmConfigSetIpaSize func(objc.ID, uint32) int32
 
-// HvVmConfigSetIpaSize calls the Hypervisor framework function hv_vm_config_set_ipa_size.
-func HvVmConfigSetIpaSize(config obj.Object, ipa_bit_length uint32) int {
+// HvVmConfigSetIpaSize reports an error if the Hypervisor framework function hv_vm_config_set_ipa_size fails.
+func HvVmConfigSetIpaSize(config obj.Object, ipaBitLength uint32) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmConfigSetIpaSize == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetIpaSize, _lib, "hv_vm_config_set_ipa_size")
 	}
-	return int(_fnHvVmConfigSetIpaSize(objref.IDOf(config), ipa_bit_length))
+	_rc := _fnHvVmConfigSetIpaSize(objref.IDOf(config), ipaBitLength)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmCreate func(objc.ID) int32
 
-// HvVmCreate calls the Hypervisor framework function hv_vm_create.
-func HvVmCreate(config obj.Object) int {
+// HvVmCreate reports an error if the Hypervisor framework function hv_vm_create fails.
+func HvVmCreate(config obj.Object) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmCreate, _lib, "hv_vm_create")
 	}
-	return int(_fnHvVmCreate(objref.IDOf(config)))
+	_rc := _fnHvVmCreate(objref.IDOf(config))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmDeallocate func(unsafe.Pointer, int) int32
 
-// HvVmDeallocate calls the Hypervisor framework function hv_vm_deallocate.
-func HvVmDeallocate(uva unsafe.Pointer, size int) int {
+// HvVmDeallocate reports an error if the Hypervisor framework function hv_vm_deallocate fails.
+func HvVmDeallocate(uva unsafe.Pointer, size int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmDeallocate == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmDeallocate, _lib, "hv_vm_deallocate")
 	}
-	return int(_fnHvVmDeallocate(uva, size))
+	_rc := _fnHvVmDeallocate(uva, size)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmDestroy func() int32
 
-// HvVmDestroy calls the Hypervisor framework function hv_vm_destroy.
-func HvVmDestroy() int {
+// HvVmDestroy reports an error if the Hypervisor framework function hv_vm_destroy fails.
+func HvVmDestroy() error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmDestroy == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmDestroy, _lib, "hv_vm_destroy")
 	}
-	return int(_fnHvVmDestroy())
+	_rc := _fnHvVmDestroy()
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmGetMaxVcpuCount func(unsafe.Pointer) int32
 
-// HvVmGetMaxVcpuCount calls the Hypervisor framework function hv_vm_get_max_vcpu_count.
-func HvVmGetMaxVcpuCount() (result int, max_vcpu_count uint32) {
+// HvVmGetMaxVcpuCount reports an error if the Hypervisor framework function hv_vm_get_max_vcpu_count fails.
+func HvVmGetMaxVcpuCount() (maxVcpuCount uint32, err error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmGetMaxVcpuCount == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmGetMaxVcpuCount, _lib, "hv_vm_get_max_vcpu_count")
 	}
 	var _out0 uint32
-	_ret := int(_fnHvVmGetMaxVcpuCount(unsafe.Pointer(&_out0)))
-	return _ret, _out0
+	_rc := _fnHvVmGetMaxVcpuCount(unsafe.Pointer(&_out0))
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return 0, _err
+	}
+	return _out0, nil
 }
 
 var _fnHvVmMap func(unsafe.Pointer, uint64, int, uint64) int32
 
-// HvVmMap calls the Hypervisor framework function hv_vm_map.
-func HvVmMap(addr unsafe.Pointer, ipa uint64, size int, flags uint64) int {
+// HvVmMap reports an error if the Hypervisor framework function hv_vm_map fails.
+func HvVmMap(addr unsafe.Pointer, ipa uint64, size int, flags uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmMap == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmMap, _lib, "hv_vm_map")
 	}
-	return int(_fnHvVmMap(addr, ipa, size, flags))
+	_rc := _fnHvVmMap(addr, ipa, size, flags)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmProtect func(uint64, int, uint64) int32
 
-// HvVmProtect calls the Hypervisor framework function hv_vm_protect.
-func HvVmProtect(ipa uint64, size int, flags uint64) int {
+// HvVmProtect reports an error if the Hypervisor framework function hv_vm_protect fails.
+func HvVmProtect(ipa uint64, size int, flags uint64) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmProtect == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmProtect, _lib, "hv_vm_protect")
 	}
-	return int(_fnHvVmProtect(ipa, size, flags))
+	_rc := _fnHvVmProtect(ipa, size, flags)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }
 
 var _fnHvVmUnmap func(uint64, int) int32
 
-// HvVmUnmap calls the Hypervisor framework function hv_vm_unmap.
-func HvVmUnmap(ipa uint64, size int) int {
+// HvVmUnmap reports an error if the Hypervisor framework function hv_vm_unmap fails.
+func HvVmUnmap(ipa uint64, size int) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnHvVmUnmap == nil {
 		ebipurego.RegisterLibFunc(&_fnHvVmUnmap, _lib, "hv_vm_unmap")
 	}
-	return int(_fnHvVmUnmap(ipa, size))
+	_rc := _fnHvVmUnmap(ipa, size)
+	if _err := errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0); _err != nil {
+		return _err
+	}
+	return nil
 }

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Description() string {
+	defer runtime.KeepAlive(mtbrmcdrp)
 	return rt.Description(objref.IDOf(mtbrmcdrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtbrmcdrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtbrmcdrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtbrmcdrp)
 	return rt.IsKind(objref.IDOf(mtbrmcdrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) String() string {
+	defer runtime.KeepAlive(mtbrmcdrp)
 	return rt.Description(objref.IDOf(mtbrmcdrp))
 }
 
-// NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
+// NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValue initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRThreadBorderRouterManagementClusterDatasetResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadBorderRouterManagementClusterDatasetResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -79,13 +85,14 @@ func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseV
 }
 
 // WithDataset sets the dataset.
-func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
-	objc.Send[objc.ID](objref.IDOf(mtbrmcdrp), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset []byte) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcdrp), objc.RegisterName("setDataset:"), rt.BytesToNSData(dataset))
 	return mtbrmcdrp
 }
 
 // Dataset returns the dataset.
-func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() obj.Object {
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() []byte {
+	defer runtime.KeepAlive(mtbrmcdrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcdrp), objc.RegisterName("dataset"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -5,7 +5,10 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func personHandleAdopt(id objc.ID) *PersonHandle {
 
 // Description returns the object's -description text.
 func (ph *PersonHandle) Description() string {
+	defer runtime.KeepAlive(ph)
 	return rt.Description(objref.IDOf(ph))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ph *PersonHandle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ph)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ph), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ph *PersonHandle) IsKind(className string) bool {
+	defer runtime.KeepAlive(ph)
 	return rt.IsKind(objref.IDOf(ph), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ph *PersonHandle) String() string {
+	defer runtime.KeepAlive(ph)
 	return rt.Description(objref.IDOf(ph))
 }
 
 // NewPersonHandleWithValueTypeLabel initializes and returns a person handle with the specified data.
 func NewPersonHandleWithValueTypeLabel(value string, type_ PersonHandleType, label obj.Object) *PersonHandle {
+	defer runtime.KeepAlive(label)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPersonHandle")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:type:label:"), purego.NSString(value), type_, objref.IDOf(label))
 	return personHandleAdopt(_id)
@@ -82,6 +91,7 @@ func NewPersonHandleWithValueType(value string, type_ PersonHandleType) *PersonH
 
 // Value returns the value.
 func (ph *PersonHandle) Value() string {
+	defer runtime.KeepAlive(ph)
 	_r := objc.Send[objc.ID](objref.IDOf(ph), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -91,12 +101,14 @@ func (ph *PersonHandle) Value() string {
 
 // Type returns the type.
 func (ph *PersonHandle) Type() PersonHandleType {
+	defer runtime.KeepAlive(ph)
 	_r := objc.Send[PersonHandleType](objref.IDOf(ph), objc.RegisterName("type"))
 	return _r
 }
 
 // Label returns the label.
-func (ph *PersonHandle) Label() obj.Object {
+func (ph *PersonHandle) Label() *foundation.String {
+	defer runtime.KeepAlive(ph)
 	_r := objc.Send[objc.ID](objref.IDOf(ph), objc.RegisterName("label"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

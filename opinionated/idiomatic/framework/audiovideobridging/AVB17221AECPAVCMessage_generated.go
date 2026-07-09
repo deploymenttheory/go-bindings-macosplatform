@@ -5,9 +5,11 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,8 +53,8 @@ func NewAVB17221AECPAVCMessage() *AVB17221AECPAVCMessage {
 }
 
 // WithCommandResponse sets the avc_command_response field of the AECP AEM message.
-func (aam *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse obj.Object) *AVB17221AECPAVCMessage {
-	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandResponse:"), objref.IDOf(commandResponse))
+func (aam *AVB17221AECPAVCMessage) WithCommandResponse(commandResponse []byte) *AVB17221AECPAVCMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandResponse:"), rt.BytesToNSData(commandResponse))
 	return aam
 }
 
@@ -88,14 +90,16 @@ func (aam *AVB17221AECPAVCMessage) WithSequenceID(sequenceID uint16) *AVB17221AE
 
 // WithSourceMAC sets the source_mac field of the AECP message.
 func (aam *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAVCMessage {
+	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aam
 }
 
 // CommandResponse returns the command response.
-func (aam *AVB17221AECPAVCMessage) CommandResponse() obj.Object {
+func (aam *AVB17221AECPAVCMessage) CommandResponse() []byte {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("commandResponse"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ AVB17221AECPMessageProvider = (*AVB17221AECPAVCMessage)(nil)

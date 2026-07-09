@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func captureDeviceDiscoverySessionAdopt(id objc.ID) *CaptureDeviceDiscoverySessi
 
 // Description returns the object's -description text.
 func (cdds *CaptureDeviceDiscoverySession) Description() string {
+	defer runtime.KeepAlive(cdds)
 	return rt.Description(objref.IDOf(cdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdds *CaptureDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdds *CaptureDeviceDiscoverySession) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdds)
 	return rt.IsKind(objref.IDOf(cdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdds *CaptureDeviceDiscoverySession) String() string {
+	defer runtime.KeepAlive(cdds)
 	return rt.Description(objref.IDOf(cdds))
 }
 
@@ -76,6 +83,7 @@ func NewCaptureDeviceDiscoverySession() *CaptureDeviceDiscoverySession {
 //
 // Devices returns the collection as a Go slice.
 func (cdds *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {
+	defer runtime.KeepAlive(cdds)
 	_arr := objc.Send[objc.ID](objref.IDOf(cdds), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureDevice { return CaptureDeviceFromID(_id) })
 }

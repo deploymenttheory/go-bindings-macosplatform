@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func speechRecognitionResultAdopt(id objc.ID) *SpeechRecognitionResult {
 
 // Description returns the object's -description text.
 func (srr *SpeechRecognitionResult) Description() string {
+	defer runtime.KeepAlive(srr)
 	return rt.Description(objref.IDOf(srr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srr *SpeechRecognitionResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srr *SpeechRecognitionResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(srr)
 	return rt.IsKind(objref.IDOf(srr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srr *SpeechRecognitionResult) String() string {
+	defer runtime.KeepAlive(srr)
 	return rt.Description(objref.IDOf(srr))
 }
 
@@ -74,6 +81,7 @@ func NewSpeechRecognitionResult() *SpeechRecognitionResult {
 
 // BestTranscription returns the transcription with the highest confidence level.
 func (srr *SpeechRecognitionResult) BestTranscription() *Transcription {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("bestTranscription"))
 	return TranscriptionFromID(_r)
 }
@@ -82,18 +90,21 @@ func (srr *SpeechRecognitionResult) BestTranscription() *Transcription {
 //
 // Transcriptions returns the collection as a Go slice.
 func (srr *SpeechRecognitionResult) Transcriptions() []*Transcription {
+	defer runtime.KeepAlive(srr)
 	_arr := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("transcriptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Transcription { return TranscriptionFromID(_id) })
 }
 
 // IsFinal reports whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
 func (srr *SpeechRecognitionResult) IsFinal() bool {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[bool](objref.IDOf(srr), objc.RegisterName("isFinal"))
 	return _r
 }
 
 // SpeechRecognitionMetadata returns an object that contains the metadata results for a speech recognition request.
 func (srr *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
+	defer runtime.KeepAlive(srr)
 	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("speechRecognitionMetadata"))
 	return SpeechRecognitionMetadataFromID(_r)
 }

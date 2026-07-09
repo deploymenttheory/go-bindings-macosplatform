@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -102,6 +104,7 @@ func (s *Scroller) WithControlTint(controlTint ControlTint) *Scroller {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (s *Scroller) WithTarget(target obj.Object) *Scroller {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -166,6 +169,7 @@ func (s *Scroller) WithControlSize(controlSize ControlSize) *Scroller {
 
 // WithFormatter sets the receiver’s formatter.
 func (s *Scroller) WithFormatter(formatter obj.Object) *Scroller {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -174,6 +178,7 @@ func (s *Scroller) WithFormatter(formatter obj.Object) *Scroller {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (s *Scroller) WithObjectValue(objectValue obj.Object) *Scroller {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -190,6 +195,7 @@ func (s *Scroller) WithStringValue(stringValue string) *Scroller {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (s *Scroller) WithAttributedStringValue(attributedStringValue obj.Object) *Scroller {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -230,6 +236,7 @@ func (s *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (s *Scroller) WithFont(font *Font) *Scroller {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -278,6 +285,7 @@ func (s *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Sc
 
 // WithCell sets the cell.
 func (s *Scroller) WithCell(cell CellProvider) *Scroller {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -423,6 +431,7 @@ func (s *Scroller) WithWantsLayer(wantsLayer bool) *Scroller {
 
 // WithLayer sets the layer.
 func (s *Scroller) WithLayer(layer obj.Object) *Scroller {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -472,6 +481,7 @@ func (s *Scroller) WithBackgroundFilters(items ...obj.Object) *Scroller {
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Scroller) WithCompositingFilter(compositingFilter obj.Object) *Scroller {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -489,6 +499,7 @@ func (s *Scroller) WithContentFilters(items ...obj.Object) *Scroller {
 
 // WithShadow sets the shadow.
 func (s *Scroller) WithShadow(shadow *Shadow) *Scroller {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -537,6 +548,7 @@ func (s *Scroller) WithPreparedContentRect(preparedContentRect corefoundation.CG
 
 // WithNextKeyView sets the next key view.
 func (s *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -586,6 +598,7 @@ func (s *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scroller {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -642,6 +655,7 @@ func (s *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scroller {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -650,6 +664,7 @@ func (s *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConf
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -658,6 +673,7 @@ func (s *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller 
 
 // WithMenu sets returns the responder’s menu.
 func (s *Scroller) WithMenu(menu *Menu) *Scroller {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -666,6 +682,7 @@ func (s *Scroller) WithMenu(menu *Menu) *Scroller {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Scroller) WithUserActivity(userActivity obj.Object) *Scroller {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -674,6 +691,7 @@ func (s *Scroller) WithUserActivity(userActivity obj.Object) *Scroller {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -682,6 +700,7 @@ func (s *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
 
 // RectForPart returns the rectangle occupied by aPart, which for this method is interpreted literally rather than as an indicator of scrolling direction.
 func (s *Scroller) RectForPart(partCode ScrollerPart) corefoundation.CGRect {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -695,6 +714,7 @@ func (s *Scroller) RectForPart(partCode ScrollerPart) corefoundation.CGRect {
 
 // CheckSpaceForParts checks to see if there is enough room in the receiver to display the knob and buttons.
 func (s *Scroller) CheckSpaceForParts() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("checkSpaceForParts"))
 	})
@@ -703,6 +723,7 @@ func (s *Scroller) CheckSpaceForParts() {
 
 // DrawKnob draws the knob.
 func (s *Scroller) DrawKnob() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnob"))
 	})
@@ -711,6 +732,7 @@ func (s *Scroller) DrawKnob() {
 
 // DrawKnobSlotInRectHighlight draws the portion of the scroller’s track, possibly including the line increment and decrement arrow buttons, that falls in the given rectangle.
 func (s *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawKnobSlotInRect:highlight:"), slotRect, flag)
 	})
@@ -719,6 +741,7 @@ func (s *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, f
 
 // TestPart returns the part that would be hit by a mouse-down event at aPoint (expressed in the window’s coordinate system).
 func (s *Scroller) TestPart(point corefoundation.CGPoint) ScrollerPart {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrollerPart
 	purego.Main(func() {
 		_mainthread0 = func() ScrollerPart {
@@ -732,6 +755,8 @@ func (s *Scroller) TestPart(point corefoundation.CGPoint) ScrollerPart {
 
 // TrackKnob tracks the knob and sends action messages to the receiver’s target.
 func (s *Scroller) TrackKnob(event *Event) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackKnob:"), objref.IDOf(event))
 	})
@@ -740,6 +765,7 @@ func (s *Scroller) TrackKnob(event *Event) {
 
 // ScrollerStyle returns the scroller style.
 func (s *Scroller) ScrollerStyle() ScrollerStyle {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrollerStyle
 	purego.Main(func() {
 		_mainthread0 = func() ScrollerStyle {
@@ -753,6 +779,7 @@ func (s *Scroller) ScrollerStyle() ScrollerStyle {
 
 // KnobStyle returns the knob style.
 func (s *Scroller) KnobStyle() ScrollerKnobStyle {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrollerKnobStyle
 	purego.Main(func() {
 		_mainthread0 = func() ScrollerKnobStyle {
@@ -766,6 +793,7 @@ func (s *Scroller) KnobStyle() ScrollerKnobStyle {
 
 // UsableParts returns the usable parts.
 func (s *Scroller) UsableParts() UsableScrollerParts {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 UsableScrollerParts
 	purego.Main(func() {
 		_mainthread0 = func() UsableScrollerParts {
@@ -779,6 +807,7 @@ func (s *Scroller) UsableParts() UsableScrollerParts {
 
 // HitPart returns the hit part.
 func (s *Scroller) HitPart() ScrollerPart {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrollerPart
 	purego.Main(func() {
 		_mainthread0 = func() ScrollerPart {
@@ -792,6 +821,7 @@ func (s *Scroller) HitPart() ScrollerPart {
 
 // KnobProportion returns the knob proportion.
 func (s *Scroller) KnobProportion() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -805,6 +835,7 @@ func (s *Scroller) KnobProportion() float64 {
 
 // SetFloatValueKnobProportion sets the position of the knob to aFloat, which is a value from 0.0 (indicating the top or left end) to 1.0 (the bottom or right end).
 func (s *Scroller) SetFloatValueKnobProportion(value float32, proportion float64) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:knobProportion:"), value, proportion)
 	})
@@ -813,6 +844,7 @@ func (s *Scroller) SetFloatValueKnobProportion(value float32, proportion float64
 
 // Highlight highlights or unhighlights the scroll button the user clicked.
 func (s *Scroller) Highlight(flag bool) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("highlight:"), flag)
 	})
@@ -821,6 +853,8 @@ func (s *Scroller) Highlight(flag bool) {
 
 // TrackScrollButtons tracks the scroll buttons and sends action messages to the receiver’s target.
 func (s *Scroller) TrackScrollButtons(event *Event) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackScrollButtons:"), objref.IDOf(event))
 	})
@@ -829,6 +863,7 @@ func (s *Scroller) TrackScrollButtons(event *Event) {
 
 // DrawParts caches images for the scroll buttons and knob.
 func (s *Scroller) DrawParts() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawParts"))
 	})
@@ -837,6 +872,7 @@ func (s *Scroller) DrawParts() {
 
 // DrawArrowHighlight draws the scroll button indicated by arrow, which is either NSScrollerIncrementArrow (the down or right scroll button) or NSScrollerDecrementArrow (up or left).
 func (s *Scroller) DrawArrowHighlight(whichArrow ScrollerArrow, flag bool) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawArrow:highlight:"), whichArrow, flag)
 	})
@@ -845,6 +881,7 @@ func (s *Scroller) DrawArrowHighlight(whichArrow ScrollerArrow, flag bool) {
 
 // ArrowsPosition returns the arrows position.
 func (s *Scroller) ArrowsPosition() ScrollArrowPosition {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrollArrowPosition
 	purego.Main(func() {
 		_mainthread0 = func() ScrollArrowPosition {
@@ -858,6 +895,7 @@ func (s *Scroller) ArrowsPosition() ScrollArrowPosition {
 
 // ControlTint returns the control tint.
 func (s *Scroller) ControlTint() ControlTint {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ControlTint
 	purego.Main(func() {
 		_mainthread0 = func() ControlTint {

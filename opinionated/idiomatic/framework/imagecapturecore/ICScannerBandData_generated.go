@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func scannerBandDataAdopt(id objc.ID) *ScannerBandData {
 
 // Description returns the object's -description text.
 func (sbd *ScannerBandData) Description() string {
+	defer runtime.KeepAlive(sbd)
 	return rt.Description(objref.IDOf(sbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbd *ScannerBandData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbd *ScannerBandData) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbd)
 	return rt.IsKind(objref.IDOf(sbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbd *ScannerBandData) String() string {
+	defer runtime.KeepAlive(sbd)
 	return rt.Description(objref.IDOf(sbd))
 }
 
@@ -74,66 +81,77 @@ func NewScannerBandData() *ScannerBandData {
 
 // FullImageWidth describes the full image width of the banded image.
 func (sbd *ScannerBandData) FullImageWidth() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("fullImageWidth"))
 	return _r
 }
 
 // FullImageHeight describes the full image height of the banded image.
 func (sbd *ScannerBandData) FullImageHeight() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("fullImageHeight"))
 	return _r
 }
 
 // BitsPerPixel describes the number of bits per pixel for banded the image.
 func (sbd *ScannerBandData) BitsPerPixel() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("bitsPerPixel"))
 	return _r
 }
 
 // BitsPerComponent describes the number of bits per component for the banded image.
 func (sbd *ScannerBandData) BitsPerComponent() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("bitsPerComponent"))
 	return _r
 }
 
 // NumComponents describes how many components are contained within the banded image.
 func (sbd *ScannerBandData) NumComponents() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("numComponents"))
 	return _r
 }
 
 // IsBigEndian reports whether describes if the banded image data is reported in big endian.
 func (sbd *ScannerBandData) IsBigEndian() bool {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[bool](objref.IDOf(sbd), objc.RegisterName("isBigEndian"))
 	return _r
 }
 
 // PixelDataType returns type of pixel data that is contained in the band.
 func (sbd *ScannerBandData) PixelDataType() ScannerPixelDataType {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[ScannerPixelDataType](objref.IDOf(sbd), objc.RegisterName("pixelDataType"))
 	return _r
 }
 
 // BytesPerRow returns descries how many bytes are in each image band row.
 func (sbd *ScannerBandData) BytesPerRow() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
 // DataStartRow describes the start row of the image band.
 func (sbd *ScannerBandData) DataStartRow() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataStartRow"))
 	return _r
 }
 
 // DataNumRows describes the number of rows contained in the image band.
 func (sbd *ScannerBandData) DataNumRows() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataNumRows"))
 	return _r
 }
 
 // DataSize describes the actual data size of the image band buffer.
 func (sbd *ScannerBandData) DataSize() int {
+	defer runtime.KeepAlive(sbd)
 	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataSize"))
 	return _r
 }

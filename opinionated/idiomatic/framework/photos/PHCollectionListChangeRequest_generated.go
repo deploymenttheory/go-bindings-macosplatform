@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,22 +62,28 @@ func (clcr *CollectionListChangeRequest) WithTitle(title string) *CollectionList
 
 // RemoveChildCollectionsAtIndexes removes the child collections at the specified indexes from the collection list.
 func (clcr *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes obj.Object) {
+	defer runtime.KeepAlive(clcr)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("removeChildCollectionsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // MoveChildCollectionsAtIndexesToIndex moves the child collections at the specified indexes in the collection list to a new index.
 func (clcr *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int) {
+	defer runtime.KeepAlive(clcr)
+	defer runtime.KeepAlive(indexes)
 	objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:"), objref.IDOf(indexes), toIndex)
 }
 
 // PlaceholderForCreatedCollectionList returns the placeholder for created collection list.
 func (clcr *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
+	defer runtime.KeepAlive(clcr)
 	_r := objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("placeholderForCreatedCollectionList"))
 	return ObjectPlaceholderFromID(_r)
 }
 
 // Title returns the title.
 func (clcr *CollectionListChangeRequest) Title() string {
+	defer runtime.KeepAlive(clcr)
 	_r := objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""

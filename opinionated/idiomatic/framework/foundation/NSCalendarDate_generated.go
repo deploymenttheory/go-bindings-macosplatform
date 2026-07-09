@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func calendarDateAdopt(id objc.ID) *CalendarDate {
 
 // NewCalendarDateWithStringCalendarFormatLocale creates a new CalendarDate.
 func NewCalendarDateWithStringCalendarFormatLocale(description string, format string, locale obj.Object) *CalendarDate {
+	defer runtime.KeepAlive(locale)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:calendarFormat:locale:"), purego.NSString(description), purego.NSString(format), objref.IDOf(locale))
 	return calendarDateAdopt(_id)
@@ -71,6 +74,7 @@ func NewCalendarDateWithString(description string) *CalendarDate {
 
 // NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone creates a new CalendarDate.
 func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int, day int, hour int, minute int, second int, aTimeZone *TimeZone) *CalendarDate {
+	defer runtime.KeepAlive(aTimeZone)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithYear:month:day:hour:minute:second:timeZone:"), year, month, day, hour, minute, second, objref.IDOf(aTimeZone))
 	return calendarDateAdopt(_id)
@@ -83,73 +87,84 @@ func (cd *CalendarDate) WithObservationInfo(observationInfo unsafe.Pointer) *Cal
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cd *CalendarDate) WithScriptingProperties(scriptingProperties obj.Object) *CalendarDate {
-	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cd *CalendarDate) WithScriptingProperties(scriptingProperties map[string]obj.Object) *CalendarDate {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cd
 }
 
 // DateByAddingYearsMonthsDaysHoursMinutesSeconds wraps the corresponding Objective-C method.
 func (cd *CalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("dateByAddingYears:months:days:hours:minutes:seconds:"), year, month, day, hour, minute, second)
 	return CalendarDateFromID(_r)
 }
 
 // DayOfCommonEra returns the day of common era.
 func (cd *CalendarDate) DayOfCommonEra() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfCommonEra"))
 	return _r
 }
 
 // DayOfMonth returns the day of month.
 func (cd *CalendarDate) DayOfMonth() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfMonth"))
 	return _r
 }
 
 // DayOfWeek returns the day of week.
 func (cd *CalendarDate) DayOfWeek() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfWeek"))
 	return _r
 }
 
 // DayOfYear returns the day of year.
 func (cd *CalendarDate) DayOfYear() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("dayOfYear"))
 	return _r
 }
 
 // HourOfDay returns the hour of day.
 func (cd *CalendarDate) HourOfDay() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("hourOfDay"))
 	return _r
 }
 
 // MinuteOfHour returns the minute of hour.
 func (cd *CalendarDate) MinuteOfHour() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("minuteOfHour"))
 	return _r
 }
 
 // MonthOfYear returns the month of year.
 func (cd *CalendarDate) MonthOfYear() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("monthOfYear"))
 	return _r
 }
 
 // SecondOfMinute returns the second of minute.
 func (cd *CalendarDate) SecondOfMinute() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("secondOfMinute"))
 	return _r
 }
 
 // YearOfCommonEra returns the year of common era.
 func (cd *CalendarDate) YearOfCommonEra() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("yearOfCommonEra"))
 	return _r
 }
 
 // CalendarFormat returns the calendar format.
 func (cd *CalendarDate) CalendarFormat() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("calendarFormat"))
 	if _r == 0 {
 		return ""
@@ -159,6 +174,8 @@ func (cd *CalendarDate) CalendarFormat() string {
 
 // DescriptionWithCalendarFormatLocale wraps the corresponding Objective-C method.
 func (cd *CalendarDate) DescriptionWithCalendarFormatLocale(format string, locale obj.Object) string {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("descriptionWithCalendarFormat:locale:"), purego.NSString(format), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -168,6 +185,7 @@ func (cd *CalendarDate) DescriptionWithCalendarFormatLocale(format string, local
 
 // DescriptionWithCalendarFormat wraps the corresponding Objective-C method.
 func (cd *CalendarDate) DescriptionWithCalendarFormat(format string) string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("descriptionWithCalendarFormat:"), purego.NSString(format))
 	if _r == 0 {
 		return ""
@@ -177,22 +195,28 @@ func (cd *CalendarDate) DescriptionWithCalendarFormat(format string) string {
 
 // TimeZone returns the time zone.
 func (cd *CalendarDate) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // SetCalendarFormat wraps the corresponding Objective-C method.
 func (cd *CalendarDate) SetCalendarFormat(format string) {
+	defer runtime.KeepAlive(cd)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCalendarFormat:"), purego.NSString(format))
 }
 
 // SetTimeZone wraps the corresponding Objective-C method.
 func (cd *CalendarDate) SetTimeZone(aTimeZone *TimeZone) {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(aTimeZone)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setTimeZone:"), objref.IDOf(aTimeZone))
 }
 
 // YearsMonthsDaysHoursMinutesSecondsSinceDate wraps the corresponding Objective-C method.
 func (cd *CalendarDate) YearsMonthsDaysHoursMinutesSecondsSinceDate(date *CalendarDate) (yp int64, mop int64, dp int64, hp int64, mip int64, sp int64) {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(date)
 	var _out0 int64
 	var _out1 int64
 	var _out2 int64

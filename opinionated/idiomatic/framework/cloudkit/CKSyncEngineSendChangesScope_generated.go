@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,72 +49,87 @@ func syncEngineSendChangesScopeAdopt(id objc.ID) *SyncEngineSendChangesScope {
 
 // Description returns the object's -description text.
 func (sescs *SyncEngineSendChangesScope) Description() string {
+	defer runtime.KeepAlive(sescs)
 	return rt.Description(objref.IDOf(sescs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sescs *SyncEngineSendChangesScope) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sescs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sescs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sescs *SyncEngineSendChangesScope) IsKind(className string) bool {
+	defer runtime.KeepAlive(sescs)
 	return rt.IsKind(objref.IDOf(sescs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sescs *SyncEngineSendChangesScope) String() string {
+	defer runtime.KeepAlive(sescs)
 	return rt.Description(objref.IDOf(sescs))
 }
 
 // NewSyncEngineSendChangesScopeWithZoneIDs creates a scope that contains only the given zone IDs. If zoneIDs is nil, then this scope contains all zones.
-func NewSyncEngineSendChangesScopeWithZoneIDs(zoneIDs obj.Object) *SyncEngineSendChangesScope {
+func NewSyncEngineSendChangesScopeWithZoneIDs(zoneIDs []*RecordZoneID) *SyncEngineSendChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), objref.IDOf(zoneIDs))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), rt.SliceToNSSet(zoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 	return syncEngineSendChangesScopeAdopt(_id)
 }
 
 // NewSyncEngineSendChangesScopeWithExcludedZoneIDs creates a scope that contains all zones except for the given zone IDs.
-func NewSyncEngineSendChangesScopeWithExcludedZoneIDs(excludedZoneIDs obj.Object) *SyncEngineSendChangesScope {
+func NewSyncEngineSendChangesScopeWithExcludedZoneIDs(excludedZoneIDs []*RecordZoneID) *SyncEngineSendChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), objref.IDOf(excludedZoneIDs))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), rt.SliceToNSSet(excludedZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 	return syncEngineSendChangesScopeAdopt(_id)
 }
 
 // NewSyncEngineSendChangesScopeWithRecordIDs creates a scope that includes only the given record IDs. If recordIDs is nil, this scope contains all records.
-func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs obj.Object) *SyncEngineSendChangesScope {
+func NewSyncEngineSendChangesScopeWithRecordIDs(recordIDs []*RecordID) *SyncEngineSendChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineSendChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordIDs:"), objref.IDOf(recordIDs))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordIDs:"), rt.SliceToNSSet(recordIDs, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }))
 	return syncEngineSendChangesScopeAdopt(_id)
 }
 
 // ContainsRecordID returns true if this scope includes the given record ID.
 func (sescs *SyncEngineSendChangesScope) ContainsRecordID(recordID *RecordID) bool {
+	defer runtime.KeepAlive(sescs)
+	defer runtime.KeepAlive(recordID)
 	_r := objc.Send[bool](objref.IDOf(sescs), objc.RegisterName("containsRecordID:"), objref.IDOf(recordID))
 	return _r
 }
 
 // ContainsPendingRecordZoneChange returns true if this scope includes the given pending change.
 func (sescs *SyncEngineSendChangesScope) ContainsPendingRecordZoneChange(pendingRecordZoneChange *SyncEnginePendingRecordZoneChange) bool {
+	defer runtime.KeepAlive(sescs)
+	defer runtime.KeepAlive(pendingRecordZoneChange)
 	_r := objc.Send[bool](objref.IDOf(sescs), objc.RegisterName("containsPendingRecordZoneChange:"), objref.IDOf(pendingRecordZoneChange))
 	return _r
 }
 
 // ZoneIDs returns the scope of zone IDs in which to send changes. If you only want to send changes for a particular set of zones, you can initialize your scope with those zone IDs. When creating the next batch of changes to send to the server, consult this, and only send changes within these zones. If this and “recordIDs“ are `nil`, then you should send all changes.
-func (sescs *SyncEngineSendChangesScope) ZoneIDs() obj.Object {
+// The order of the returned elements is unspecified.
+func (sescs *SyncEngineSendChangesScope) ZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(sescs)
 	_r := objc.Send[objc.ID](objref.IDOf(sescs), objc.RegisterName("zoneIDs"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
 // ExcludedZoneIDs returns a specific set of zone IDs to exclude from this scope. If you know that you don't want to send changes for a particular set of zones, you can set those zones here. - Note: a scope with a non-nil “zoneIDs“ always has an empty `excludedZoneIDs`.
-func (sescs *SyncEngineSendChangesScope) ExcludedZoneIDs() obj.Object {
+// The order of the returned elements is unspecified.
+func (sescs *SyncEngineSendChangesScope) ExcludedZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(sescs)
 	_r := objc.Send[objc.ID](objref.IDOf(sescs), objc.RegisterName("excludedZoneIDs"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
 // RecordIDs returns the scope of record IDs in which to send changes. If you only want to send changes for a particular set of records, you can initialize your scope with those records IDs. When creating the next batch of changes to send to the server, consult this property, and only send changes for these record IDs. If this and “zoneIDs“ are `nil`, then you should send all changes.
-func (sescs *SyncEngineSendChangesScope) RecordIDs() obj.Object {
+// The order of the returned elements is unspecified.
+func (sescs *SyncEngineSendChangesScope) RecordIDs() []*RecordID {
+	defer runtime.KeepAlive(sescs)
 	_r := objc.Send[objc.ID](objref.IDOf(sescs), objc.RegisterName("recordIDs"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }

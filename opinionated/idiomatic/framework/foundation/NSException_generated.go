@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,34 @@ func exceptionAdopt(id objc.ID) *Exception {
 
 // Description returns the object's -description text.
 func (e *Exception) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Exception) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Exception) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Exception) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // NewExceptionWithNameReasonUserInfo initializes and returns a newly allocated exception object.
 func NewExceptionWithNameReasonUserInfo(aName *String, aReason string, aUserInfo obj.Object) *Exception {
+	defer runtime.KeepAlive(aName)
+	defer runtime.KeepAlive(aUserInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), objref.IDOf(aName), purego.NSString(aReason), objref.IDOf(aUserInfo))
 	return exceptionAdopt(_id)
@@ -82,24 +90,27 @@ func (e *Exception) WithObservationInfo(observationInfo unsafe.Pointer) *Excepti
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (e *Exception) WithScriptingProperties(scriptingProperties obj.Object) *Exception {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (e *Exception) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Exception {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return e
 }
 
 // Raise raises the receiver, causing program flow to jump to the local exception handler.
 func (e *Exception) Raise() {
+	defer runtime.KeepAlive(e)
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("raise"))
 }
 
 // Name returns the name.
 func (e *Exception) Name() *String {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
 // Reason returns the reason.
 func (e *Exception) Reason() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("reason"))
 	if _r == 0 {
 		return ""
@@ -109,6 +120,7 @@ func (e *Exception) Reason() string {
 
 // UserInfo returns the user info.
 func (e *Exception) UserInfo() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
@@ -117,6 +129,7 @@ func (e *Exception) UserInfo() obj.Object {
 //
 // CallStackReturnAddresses returns the collection as a Go slice.
 func (e *Exception) CallStackReturnAddresses() []*Number {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("callStackReturnAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
@@ -125,6 +138,7 @@ func (e *Exception) CallStackReturnAddresses() []*Number {
 //
 // CallStackSymbols returns the collection as a Go slice.
 func (e *Exception) CallStackSymbols() []string {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("callStackSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

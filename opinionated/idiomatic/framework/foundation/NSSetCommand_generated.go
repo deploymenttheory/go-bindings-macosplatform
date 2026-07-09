@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +58,21 @@ func NewSetCommand() *SetCommand {
 
 // WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (sc *SetCommand) WithDirectParameter(directParameter obj.Object) *SetCommand {
+	defer runtime.KeepAlive(directParameter)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return sc
 }
 
 // WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (sc *SetCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *SetCommand {
+	defer runtime.KeepAlive(receiversSpecifier)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return sc
 }
 
 // WithArguments sets sets the arguments of the command to args.
-func (sc *SetCommand) WithArguments(arguments obj.Object) *SetCommand {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+func (sc *SetCommand) WithArguments(arguments map[string]obj.Object) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setArguments:"), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sc
 }
 
@@ -80,18 +84,21 @@ func (sc *SetCommand) WithScriptErrorNumber(scriptErrorNumber int) *SetCommand {
 
 // WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (sc *SetCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *SetCommand {
+	defer runtime.KeepAlive(scriptErrorOffendingObjectDescriptor)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return sc
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (sc *SetCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *SetCommand {
+	defer runtime.KeepAlive(scriptErrorExpectedTypeDescriptor)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return sc
 }
 
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (sc *SetCommand) WithScriptErrorString(scriptErrorString StringProvider) *SetCommand {
+	defer runtime.KeepAlive(scriptErrorString)
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return sc
 }
@@ -103,13 +110,14 @@ func (sc *SetCommand) WithObservationInfo(observationInfo unsafe.Pointer) *SetCo
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sc *SetCommand) WithScriptingProperties(scriptingProperties obj.Object) *SetCommand {
-	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sc *SetCommand) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SetCommand {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sc
 }
 
 // KeySpecifier returns the key specifier.
 func (sc *SetCommand) KeySpecifier() *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }

@@ -5,6 +5,8 @@
 package soundanalysis
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func audioStreamAnalyzerAdopt(id objc.ID) *AudioStreamAnalyzer {
 
 // Description returns the object's -description text.
 func (asa *AudioStreamAnalyzer) Description() string {
+	defer runtime.KeepAlive(asa)
 	return rt.Description(objref.IDOf(asa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asa *AudioStreamAnalyzer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asa *AudioStreamAnalyzer) IsKind(className string) bool {
+	defer runtime.KeepAlive(asa)
 	return rt.IsKind(objref.IDOf(asa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asa *AudioStreamAnalyzer) String() string {
+	defer runtime.KeepAlive(asa)
 	return rt.Description(objref.IDOf(asa))
 }
 
 // NewAudioStreamAnalyzerWithFormat creates a new audio stream analyzer.
 func NewAudioStreamAnalyzerWithFormat(format obj.Object) *AudioStreamAnalyzer {
+	defer runtime.KeepAlive(format)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNAudioStreamAnalyzer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:"), objref.IDOf(format))
 	return audioStreamAnalyzerAdopt(_id)
@@ -75,15 +83,19 @@ func NewAudioStreamAnalyzerWithFormat(format obj.Object) *AudioStreamAnalyzer {
 
 // RemoveAllRequests removes all the sound analysis requests from the audio stream analyzer.
 func (asa *AudioStreamAnalyzer) RemoveAllRequests() {
+	defer runtime.KeepAlive(asa)
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("removeAllRequests"))
 }
 
 // AnalyzeAudioBufferAtAudioFramePosition adds a new audio buffer to the analyzer’s larger stream buffer.
 func (asa *AudioStreamAnalyzer) AnalyzeAudioBufferAtAudioFramePosition(audioBuffer obj.Object, audioFramePosition int64) {
+	defer runtime.KeepAlive(asa)
+	defer runtime.KeepAlive(audioBuffer)
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("analyzeAudioBuffer:atAudioFramePosition:"), objref.IDOf(audioBuffer), audioFramePosition)
 }
 
 // CompleteAnalysis notifies the analyzer when it receives the final audio buffer.
 func (asa *AudioStreamAnalyzer) CompleteAnalysis() {
+	defer runtime.KeepAlive(asa)
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("completeAnalysis"))
 }

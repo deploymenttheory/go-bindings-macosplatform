@@ -5,6 +5,8 @@
 package screentime
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func screenTimeConfigurationObserverAdopt(id objc.ID) *ScreenTimeConfigurationOb
 
 // Description returns the object's -description text.
 func (stco *ScreenTimeConfigurationObserver) Description() string {
+	defer runtime.KeepAlive(stco)
 	return rt.Description(objref.IDOf(stco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (stco *ScreenTimeConfigurationObserver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(stco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(stco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (stco *ScreenTimeConfigurationObserver) IsKind(className string) bool {
+	defer runtime.KeepAlive(stco)
 	return rt.IsKind(objref.IDOf(stco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (stco *ScreenTimeConfigurationObserver) String() string {
+	defer runtime.KeepAlive(stco)
 	return rt.Description(objref.IDOf(stco))
 }
 
 // NewScreenTimeConfigurationObserverWithUpdateQueue creates a configuration observer that reports updates on the queue you specify.
 func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue obj.Object) *ScreenTimeConfigurationObserver {
+	defer runtime.KeepAlive(updateQueue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("STScreenTimeConfigurationObserver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateQueue:"), objref.IDOf(updateQueue))
 	return screenTimeConfigurationObserverAdopt(_id)
@@ -75,16 +83,19 @@ func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue obj.Object) *
 
 // StartObserving starts observing changes to the current configuration.
 func (stco *ScreenTimeConfigurationObserver) StartObserving() {
+	defer runtime.KeepAlive(stco)
 	objc.Send[objc.ID](objref.IDOf(stco), objc.RegisterName("startObserving"))
 }
 
 // StopObserving stops observing changes to the current configuration.
 func (stco *ScreenTimeConfigurationObserver) StopObserving() {
+	defer runtime.KeepAlive(stco)
 	objc.Send[objc.ID](objref.IDOf(stco), objc.RegisterName("stopObserving"))
 }
 
 // Configuration returns the configuration being observed.
 func (stco *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
+	defer runtime.KeepAlive(stco)
 	_r := objc.Send[objc.ID](objref.IDOf(stco), objc.RegisterName("configuration"))
 	return ScreenTimeConfigurationFromID(_r)
 }

@@ -5,6 +5,8 @@
 package calendarstore
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +50,27 @@ func calCalendarStoreAdopt(id objc.ID) *CalCalendarStore {
 
 // Description returns the object's -description text.
 func (ccs *CalCalendarStore) Description() string {
+	defer runtime.KeepAlive(ccs)
 	return rt.Description(objref.IDOf(ccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ccs *CalCalendarStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ccs *CalCalendarStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(ccs)
 	return rt.IsKind(objref.IDOf(ccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ccs *CalCalendarStore) String() string {
+	defer runtime.KeepAlive(ccs)
 	return rt.Description(objref.IDOf(ccs))
 }
 
@@ -75,18 +82,22 @@ func NewCalCalendarStore() *CalCalendarStore {
 
 // Calendars returns the calendars.
 func (ccs *CalCalendarStore) Calendars() obj.Object {
+	defer runtime.KeepAlive(ccs)
 	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("calendars"))
 	return obj.Wrap(_r)
 }
 
 // CalendarWithUID wraps the corresponding Objective-C method.
-func (ccs *CalCalendarStore) CalendarWithUID(uID string) *CalCalendar {
-	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("calendarWithUID:"), purego.NSString(uID))
+func (ccs *CalCalendarStore) CalendarWithUID(uid string) *CalCalendar {
+	defer runtime.KeepAlive(ccs)
+	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("calendarWithUID:"), purego.NSString(uid))
 	return CalCalendarFromID(_r)
 }
 
 // SaveCalendar saves calendar.
 func (ccs *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(calendar)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("saveCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,6 +108,8 @@ func (ccs *CalCalendarStore) SaveCalendar(calendar *CalCalendar) error {
 
 // RemoveCalendar removes calendar.
 func (ccs *CalCalendarStore) RemoveCalendar(calendar *CalCalendar) error {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(calendar)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("removeCalendar:error:"), objref.IDOf(calendar), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -107,30 +120,38 @@ func (ccs *CalCalendarStore) RemoveCalendar(calendar *CalCalendar) error {
 
 // EventsWithPredicate wraps the corresponding Objective-C method.
 func (ccs *CalCalendarStore) EventsWithPredicate(predicate obj.Object) obj.Object {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("eventsWithPredicate:"), objref.IDOf(predicate))
 	return obj.Wrap(_r)
 }
 
 // EventWithUIDOccurrence wraps the corresponding Objective-C method.
-func (ccs *CalCalendarStore) EventWithUIDOccurrence(uid string, date obj.Object) *CalEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("eventWithUID:occurrence:"), purego.NSString(uid), objref.IDOf(date))
+func (ccs *CalCalendarStore) EventWithUIDOccurrence(uid string, date time.Time) *CalEvent {
+	defer runtime.KeepAlive(ccs)
+	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("eventWithUID:occurrence:"), purego.NSString(uid), rt.TimeToNSDate(date))
 	return CalEventFromID(_r)
 }
 
 // TasksWithPredicate wraps the corresponding Objective-C method.
 func (ccs *CalCalendarStore) TasksWithPredicate(predicate obj.Object) obj.Object {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("tasksWithPredicate:"), objref.IDOf(predicate))
 	return obj.Wrap(_r)
 }
 
 // TaskWithUID wraps the corresponding Objective-C method.
 func (ccs *CalCalendarStore) TaskWithUID(uid string) *CalTask {
+	defer runtime.KeepAlive(ccs)
 	_r := objc.Send[objc.ID](objref.IDOf(ccs), objc.RegisterName("taskWithUID:"), purego.NSString(uid))
 	return CalTaskFromID(_r)
 }
 
 // SaveEventSpan saves event span.
 func (ccs *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(event)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("saveEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -141,6 +162,8 @@ func (ccs *CalCalendarStore) SaveEventSpan(event *CalEvent, span CalSpan) error 
 
 // RemoveEventSpan removes event span.
 func (ccs *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) error {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(event)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("removeEvent:span:error:"), objref.IDOf(event), span, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -151,6 +174,8 @@ func (ccs *CalCalendarStore) RemoveEventSpan(event *CalEvent, span CalSpan) erro
 
 // SaveTask saves task.
 func (ccs *CalCalendarStore) SaveTask(task *CalTask) error {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(task)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("saveTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -161,6 +186,8 @@ func (ccs *CalCalendarStore) SaveTask(task *CalTask) error {
 
 // RemoveTask removes task.
 func (ccs *CalCalendarStore) RemoveTask(task *CalTask) error {
+	defer runtime.KeepAlive(ccs)
+	defer runtime.KeepAlive(task)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ccs), objc.RegisterName("removeTask:error:"), objref.IDOf(task), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

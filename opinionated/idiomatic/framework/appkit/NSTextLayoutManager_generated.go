@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func textLayoutManagerAdopt(id objc.ID) *TextLayoutManager {
 
 // Description returns the object's -description text.
 func (tlm *TextLayoutManager) Description() string {
+	defer runtime.KeepAlive(tlm)
 	return rt.Description(objref.IDOf(tlm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tlm *TextLayoutManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tlm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tlm *TextLayoutManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(tlm)
 	return rt.IsKind(objref.IDOf(tlm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tlm *TextLayoutManager) String() string {
+	defer runtime.KeepAlive(tlm)
 	return rt.Description(objref.IDOf(tlm))
 }
 
@@ -75,6 +83,7 @@ func NewTextLayoutManager() *TextLayoutManager {
 
 // NewTextLayoutManagerWithCoder creates a new text layout manager with the coder you provide.
 func NewTextLayoutManagerWithCoder(coder obj.Object) *TextLayoutManager {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutManager")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textLayoutManagerAdopt(_id)
@@ -106,12 +115,14 @@ func (tlm *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirecti
 
 // WithTextContainer sets the text container object that provides geometric information for the layout destination.
 func (tlm *TextLayoutManager) WithTextContainer(textContainer *TextContainer) *TextLayoutManager {
+	defer runtime.KeepAlive(textContainer)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
 	return tlm
 }
 
 // WithLayoutQueue sets the queue that the framework dispatches layout operations on.
 func (tlm *TextLayoutManager) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutManager {
+	defer runtime.KeepAlive(layoutQueue)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
 	return tlm
 }
@@ -125,6 +136,7 @@ func (tlm *TextLayoutManager) WithTextSelections(items ...*TextSelection) *TextL
 
 // WithTextSelectionNavigation sets returns a text selection manager configured to have the text layout manager as its data source.
 func (tlm *TextLayoutManager) WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager {
+	defer runtime.KeepAlive(textSelectionNavigation)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setTextSelectionNavigation:"), objref.IDOf(textSelectionNavigation))
 	return tlm
 }
@@ -139,124 +151,160 @@ func (tlm *TextLayoutManager) WithRenderingAttributesValidator(renderingAttribut
 
 // ReplaceTextContentManager replaces the current text content manager with a new one you provide.
 func (tlm *TextLayoutManager) ReplaceTextContentManager(textContentManager *TextContentManager) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(textContentManager)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceTextContentManager:"), objref.IDOf(textContentManager))
 }
 
 // EnsureLayoutForRange performs the layout for specified text range.
 func (tlm *TextLayoutManager) EnsureLayoutForRange(range_ *TextRange) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(range_)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("ensureLayoutForRange:"), objref.IDOf(range_))
 }
 
 // EnsureLayoutForBounds performs the layout for filling the bounds you specify inside the last text container.
 func (tlm *TextLayoutManager) EnsureLayoutForBounds(bounds corefoundation.CGRect) {
+	defer runtime.KeepAlive(tlm)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("ensureLayoutForBounds:"), bounds)
 }
 
 // InvalidateLayoutForRange invalidates the layout information for specified text range.
 func (tlm *TextLayoutManager) InvalidateLayoutForRange(range_ *TextRange) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(range_)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("invalidateLayoutForRange:"), objref.IDOf(range_))
 }
 
 // TextLayoutFragmentForPosition returns the text layout fragment at the position you specify in the text container.
 func (tlm *TextLayoutManager) TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textLayoutFragmentForPosition:"), position)
 	return TextLayoutFragmentFromID(_r)
 }
 
 // SetRenderingAttributesForTextRange sets the rendering attributes for the range you specify.
 func (tlm *TextLayoutManager) SetRenderingAttributesForTextRange(renderingAttributes obj.Object, textRange *TextRange) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(renderingAttributes)
+	defer runtime.KeepAlive(textRange)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("setRenderingAttributes:forTextRange:"), objref.IDOf(renderingAttributes), objref.IDOf(textRange))
 }
 
 // AddRenderingAttributeValueForTextRange sets the rendering attribute for the value and range you specify.
 func (tlm *TextLayoutManager) AddRenderingAttributeValueForTextRange(renderingAttribute obj.Object, value obj.Object, textRange *TextRange) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(renderingAttribute)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(textRange)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("addRenderingAttribute:value:forTextRange:"), objref.IDOf(renderingAttribute), objref.IDOf(value), objref.IDOf(textRange))
 }
 
 // RemoveRenderingAttributeForTextRange removes the rendering attribute from the specified text range.
 func (tlm *TextLayoutManager) RemoveRenderingAttributeForTextRange(renderingAttribute obj.Object, textRange *TextRange) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(renderingAttribute)
+	defer runtime.KeepAlive(textRange)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("removeRenderingAttribute:forTextRange:"), objref.IDOf(renderingAttribute), objref.IDOf(textRange))
 }
 
 // InvalidateRenderingAttributesForTextRange invalidates the rendering attributes of the specified text range.
 func (tlm *TextLayoutManager) InvalidateRenderingAttributesForTextRange(textRange *TextRange) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(textRange)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("invalidateRenderingAttributesForTextRange:"), objref.IDOf(textRange))
 }
 
 // ReplaceContentsInRangeWithTextElements replaces content at the location you specify with the text elements string you provide.
 func (tlm *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *TextRange, textElements []*TextElement) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(range_)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceContentsInRange:withTextElements:"), objref.IDOf(range_), purego.SliceToNSArray(textElements, func(_v *TextElement) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ReplaceContentsInRangeWithAttributedString replaces content at the location you specify with an attributed string you provide.
 func (tlm *TextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ *TextRange, attributedString obj.Object) {
+	defer runtime.KeepAlive(tlm)
+	defer runtime.KeepAlive(range_)
+	defer runtime.KeepAlive(attributedString)
 	objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("replaceContentsInRange:withAttributedString:"), objref.IDOf(range_), objref.IDOf(attributedString))
 }
 
 // UsesFontLeading wraps the corresponding Objective-C method.
 func (tlm *TextLayoutManager) UsesFontLeading() bool {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("usesFontLeading"))
 	return _r
 }
 
 // LimitsLayoutForSuspiciousContents wraps the corresponding Objective-C method.
 func (tlm *TextLayoutManager) LimitsLayoutForSuspiciousContents() bool {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("limitsLayoutForSuspiciousContents"))
 	return _r
 }
 
 // UsesHyphenation wraps the corresponding Objective-C method.
 func (tlm *TextLayoutManager) UsesHyphenation() bool {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("usesHyphenation"))
 	return _r
 }
 
 // ResolvesNaturalAlignmentWithBaseWritingDirection reports whether specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
 func (tlm *TextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[bool](objref.IDOf(tlm), objc.RegisterName("resolvesNaturalAlignmentWithBaseWritingDirection"))
 	return _r
 }
 
 // TextContentManager returns the text content manager.
 func (tlm *TextLayoutManager) TextContentManager() *TextContentManager {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
 // TextContainer returns the text container.
 func (tlm *TextLayoutManager) TextContainer() *TextContainer {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textContainer"))
 	return TextContainerFromID(_r)
 }
 
 // UsageBoundsForTextContainer returns the usage bounds for text container.
 func (tlm *TextLayoutManager) UsageBoundsForTextContainer() corefoundation.CGRect {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlm), objc.RegisterName("usageBoundsForTextContainer"))
 	return _r
 }
 
 // TextViewportLayoutController returns the text viewport layout controller.
 func (tlm *TextLayoutManager) TextViewportLayoutController() *TextViewportLayoutController {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textViewportLayoutController"))
 	return TextViewportLayoutControllerFromID(_r)
 }
 
 // LayoutQueue returns the layout queue.
-func (tlm *TextLayoutManager) LayoutQueue() obj.Object {
+func (tlm *TextLayoutManager) LayoutQueue() *foundation.OperationQueue {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("layoutQueue"))
-	return obj.Wrap(_r)
+	return foundation.OperationQueueFromID(_r)
 }
 
 // TextSelections returns the text selections.
 //
 // TextSelections returns the collection as a Go slice.
 func (tlm *TextLayoutManager) TextSelections() []*TextSelection {
+	defer runtime.KeepAlive(tlm)
 	_arr := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textSelections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextSelection { return TextSelectionFromID(_id) })
 }
 
 // TextSelectionNavigation returns the text selection navigation.
 func (tlm *TextLayoutManager) TextSelectionNavigation() *TextSelectionNavigation {
+	defer runtime.KeepAlive(tlm)
 	_r := objc.Send[objc.ID](objref.IDOf(tlm), objc.RegisterName("textSelectionNavigation"))
 	return TextSelectionNavigationFromID(_r)
 }

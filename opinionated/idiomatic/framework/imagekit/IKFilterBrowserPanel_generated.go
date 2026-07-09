@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func filterBrowserPanelAdopt(id objc.ID) *FilterBrowserPanel {
 
 // Description returns the object's -description text.
 func (fbp *FilterBrowserPanel) Description() string {
+	defer runtime.KeepAlive(fbp)
 	return rt.Description(objref.IDOf(fbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fbp *FilterBrowserPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fbp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fbp *FilterBrowserPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(fbp)
 	return rt.IsKind(objref.IDOf(fbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fbp *FilterBrowserPanel) String() string {
+	defer runtime.KeepAlive(fbp)
 	return rt.Description(objref.IDOf(fbp))
 }
 
@@ -80,6 +87,7 @@ func NewFilterBrowserPanel() *FilterBrowserPanel {
 
 // FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (fbp *FilterBrowserPanel) FilterName() string {
+	defer runtime.KeepAlive(fbp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -96,6 +104,8 @@ func (fbp *FilterBrowserPanel) FilterName() string {
 
 // RunModalWithOptions displays the FilterBrowser in a modal dialog. Use this method to run the IKFilterBrowser in a modal dialog. The value passed as returnCode will be either NSCancelButton or NSOKButton.
 func (fbp *FilterBrowserPanel) RunModalWithOptions(inOptions obj.Object) int {
+	defer runtime.KeepAlive(fbp)
+	defer runtime.KeepAlive(inOptions)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -109,6 +119,8 @@ func (fbp *FilterBrowserPanel) RunModalWithOptions(inOptions obj.Object) int {
 
 // FilterBrowserViewWithOptions returns a view containing the FilterBrowser. Use this method to run the IKFilterBrowser in your own UI. To dismiss it, invoke the finish action as described below.
 func (fbp *FilterBrowserPanel) FilterBrowserViewWithOptions(inOptions obj.Object) *FilterBrowserView {
+	defer runtime.KeepAlive(fbp)
+	defer runtime.KeepAlive(inOptions)
 	var _mainthread0 *FilterBrowserView
 	purego.Main(func() {
 		_mainthread0 = func() *FilterBrowserView {
@@ -122,6 +134,8 @@ func (fbp *FilterBrowserPanel) FilterBrowserViewWithOptions(inOptions obj.Object
 
 // Finish closes the IKFilterBrowser. Invoke this action for instance from your OK or Cancel button when you are running the IKFilterBrowserView modal in your own UI.
 func (fbp *FilterBrowserPanel) Finish(sender obj.Object) {
+	defer runtime.KeepAlive(fbp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fbp), objc.RegisterName("finish:"), objref.IDOf(sender))
 	})

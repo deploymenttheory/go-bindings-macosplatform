@@ -8,35 +8,35 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeNone matches the ClassKit error CLSErrorCodeNone.
-var ErrCodeNone = errkit.New("CLSErrorDomain", 0)
+// ErrCodeAuthorizationDenied matches the ClassKit error CLSErrorCodeAuthorizationDenied.
+var ErrCodeAuthorizationDenied = errkit.New("CLSErrorDomain", 4)
 
 // ErrCodeClassKitUnavailable matches the ClassKit error CLSErrorCodeClassKitUnavailable.
 var ErrCodeClassKitUnavailable = errkit.New("CLSErrorDomain", 1)
 
-// ErrCodeInvalidArgument matches the ClassKit error CLSErrorCodeInvalidArgument.
-var ErrCodeInvalidArgument = errkit.New("CLSErrorDomain", 2)
-
-// ErrCodeInvalidModification matches the ClassKit error CLSErrorCodeInvalidModification.
-var ErrCodeInvalidModification = errkit.New("CLSErrorDomain", 3)
-
-// ErrCodeAuthorizationDenied matches the ClassKit error CLSErrorCodeAuthorizationDenied.
-var ErrCodeAuthorizationDenied = errkit.New("CLSErrorDomain", 4)
-
 // ErrCodeDatabaseInaccessible matches the ClassKit error CLSErrorCodeDatabaseInaccessible.
 var ErrCodeDatabaseInaccessible = errkit.New("CLSErrorDomain", 5)
 
-// ErrCodeLimits matches the ClassKit error CLSErrorCodeLimits.
-var ErrCodeLimits = errkit.New("CLSErrorDomain", 6)
+// ErrCodeInvalidAccountCredentials matches the ClassKit error CLSErrorCodeInvalidAccountCredentials.
+var ErrCodeInvalidAccountCredentials = errkit.New("CLSErrorDomain", 10)
+
+// ErrCodeInvalidArgument matches the ClassKit error CLSErrorCodeInvalidArgument.
+var ErrCodeInvalidArgument = errkit.New("CLSErrorDomain", 2)
 
 // ErrCodeInvalidCreate matches the ClassKit error CLSErrorCodeInvalidCreate.
 var ErrCodeInvalidCreate = errkit.New("CLSErrorDomain", 7)
 
+// ErrCodeInvalidModification matches the ClassKit error CLSErrorCodeInvalidModification.
+var ErrCodeInvalidModification = errkit.New("CLSErrorDomain", 3)
+
 // ErrCodeInvalidUpdate matches the ClassKit error CLSErrorCodeInvalidUpdate.
 var ErrCodeInvalidUpdate = errkit.New("CLSErrorDomain", 8)
 
+// ErrCodeLimits matches the ClassKit error CLSErrorCodeLimits.
+var ErrCodeLimits = errkit.New("CLSErrorDomain", 6)
+
+// ErrCodeNone matches the ClassKit error CLSErrorCodeNone.
+var ErrCodeNone = errkit.New("CLSErrorDomain", 0)
+
 // ErrCodePartialFailure matches the ClassKit error CLSErrorCodePartialFailure.
 var ErrCodePartialFailure = errkit.New("CLSErrorDomain", 9)
-
-// ErrCodeInvalidAccountCredentials matches the ClassKit error CLSErrorCodeInvalidAccountCredentials.
-var ErrCodeInvalidAccountCredentials = errkit.New("CLSErrorDomain", 10)

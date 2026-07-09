@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -74,12 +77,14 @@ func (rdtf *RelativeDateTimeFormatter) WithFormattingContext(formattingContext F
 
 // WithCalendar sets the calendar.
 func (rdtf *RelativeDateTimeFormatter) WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return rdtf
 }
 
 // WithLocale sets the locale.
 func (rdtf *RelativeDateTimeFormatter) WithLocale(locale *Locale) *RelativeDateTimeFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return rdtf
 }
@@ -91,13 +96,15 @@ func (rdtf *RelativeDateTimeFormatter) WithObservationInfo(observationInfo unsaf
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (rdtf *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperties obj.Object) *RelativeDateTimeFormatter {
-	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (rdtf *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *RelativeDateTimeFormatter {
+	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rdtf
 }
 
 // LocalizedStringFromDateComponents wraps the corresponding Objective-C method.
 func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *DateComponents) string {
+	defer runtime.KeepAlive(rdtf)
+	defer runtime.KeepAlive(dateComponents)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("localizedStringFromDateComponents:"), objref.IDOf(dateComponents))
 	if _r == 0 {
 		return ""
@@ -107,6 +114,7 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateCom
 
 // LocalizedStringFromTimeInterval wraps the corresponding Objective-C method.
 func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterval float64) string {
+	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("localizedStringFromTimeInterval:"), timeInterval)
 	if _r == 0 {
 		return ""
@@ -115,8 +123,9 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInter
 }
 
 // LocalizedStringForDateRelativeToDate wraps the corresponding Objective-C method.
-func (rdtf *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date *Date, referenceDate *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("localizedStringForDate:relativeToDate:"), objref.IDOf(date), objref.IDOf(referenceDate))
+func (rdtf *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date time.Time, referenceDate time.Time) string {
+	defer runtime.KeepAlive(rdtf)
+	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("localizedStringForDate:relativeToDate:"), rt.TimeToNSDate(date), rt.TimeToNSDate(referenceDate))
 	if _r == 0 {
 		return ""
 	}
@@ -125,30 +134,35 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date
 
 // DateTimeStyle returns the date time style.
 func (rdtf *RelativeDateTimeFormatter) DateTimeStyle() RelativeDateTimeFormatterStyle {
+	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[RelativeDateTimeFormatterStyle](objref.IDOf(rdtf), objc.RegisterName("dateTimeStyle"))
 	return _r
 }
 
 // UnitsStyle returns the units style.
 func (rdtf *RelativeDateTimeFormatter) UnitsStyle() RelativeDateTimeFormatterUnitsStyle {
+	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[RelativeDateTimeFormatterUnitsStyle](objref.IDOf(rdtf), objc.RegisterName("unitsStyle"))
 	return _r
 }
 
 // FormattingContext returns the formatting context.
 func (rdtf *RelativeDateTimeFormatter) FormattingContext() FormattingContext {
+	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[FormattingContext](objref.IDOf(rdtf), objc.RegisterName("formattingContext"))
 	return _r
 }
 
 // Calendar returns the calendar.
 func (rdtf *RelativeDateTimeFormatter) Calendar() *Calendar {
+	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
 // Locale returns the locale.
 func (rdtf *RelativeDateTimeFormatter) Locale() *Locale {
+	defer runtime.KeepAlive(rdtf)
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }

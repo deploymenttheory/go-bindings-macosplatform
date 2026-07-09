@@ -1,4 +1,5 @@
 func (x *Array) Count() int {
+defer runtime.KeepAlive(x)
 _r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
 return _r
 }

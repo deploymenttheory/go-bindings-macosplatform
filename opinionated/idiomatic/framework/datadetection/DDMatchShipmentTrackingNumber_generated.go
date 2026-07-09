@@ -5,6 +5,8 @@
 package datadetection
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMatchShipmentTrackingNumber() *MatchShipmentTrackingNumber {
 
 // Carrier returns the name of a parcel carrier.
 func (mstn *MatchShipmentTrackingNumber) Carrier() string {
+	defer runtime.KeepAlive(mstn)
 	_r := objc.Send[objc.ID](objref.IDOf(mstn), objc.RegisterName("carrier"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (mstn *MatchShipmentTrackingNumber) Carrier() string {
 
 // TrackingNumber returns a string that represents a carrier’s tracking identifier for a parcel.
 func (mstn *MatchShipmentTrackingNumber) TrackingNumber() string {
+	defer runtime.KeepAlive(mstn)
 	_r := objc.Send[objc.ID](objref.IDOf(mstn), objc.RegisterName("trackingNumber"))
 	if _r == 0 {
 		return ""

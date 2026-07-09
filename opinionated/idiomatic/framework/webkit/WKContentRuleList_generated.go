@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKContentRuleListAdopt(id objc.ID) *WKContentRuleList {
 
 // Description returns the object's -description text.
 func (wcrl *WKContentRuleList) Description() string {
+	defer runtime.KeepAlive(wcrl)
 	return rt.Description(objref.IDOf(wcrl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wcrl *WKContentRuleList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wcrl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wcrl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wcrl *WKContentRuleList) IsKind(className string) bool {
+	defer runtime.KeepAlive(wcrl)
 	return rt.IsKind(objref.IDOf(wcrl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wcrl *WKContentRuleList) String() string {
+	defer runtime.KeepAlive(wcrl)
 	return rt.Description(objref.IDOf(wcrl))
 }
 
@@ -80,6 +87,7 @@ func NewWKContentRuleList() *WKContentRuleList {
 
 // Identifier returns the identifier.
 func (wcrl *WKContentRuleList) Identifier() string {
+	defer runtime.KeepAlive(wcrl)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

@@ -5,6 +5,8 @@
 package systemextensions
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func systemExtensionInfoAdopt(id objc.ID) *SystemExtensionInfo {
 
 // Description returns the object's -description text.
 func (sei *SystemExtensionInfo) Description() string {
+	defer runtime.KeepAlive(sei)
 	return rt.Description(objref.IDOf(sei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sei *SystemExtensionInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sei *SystemExtensionInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(sei)
 	return rt.IsKind(objref.IDOf(sei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sei *SystemExtensionInfo) String() string {
+	defer runtime.KeepAlive(sei)
 	return rt.Description(objref.IDOf(sei))
 }
 
@@ -72,6 +79,7 @@ func NewSystemExtensionInfo() *SystemExtensionInfo {
 
 // BundleIdentifier returns the bundle identifier of the extension (CFBundleIdentifier)
 func (sei *SystemExtensionInfo) BundleIdentifier() string {
+	defer runtime.KeepAlive(sei)
 	_r := objc.Send[objc.ID](objref.IDOf(sei), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (sei *SystemExtensionInfo) BundleIdentifier() string {
 
 // BundleVersion returns the bundle version of the extension (CFBundleVersion)
 func (sei *SystemExtensionInfo) BundleVersion() string {
+	defer runtime.KeepAlive(sei)
 	_r := objc.Send[objc.ID](objref.IDOf(sei), objc.RegisterName("bundleVersion"))
 	if _r == 0 {
 		return ""
@@ -90,6 +99,7 @@ func (sei *SystemExtensionInfo) BundleVersion() string {
 
 // BundleShortVersion returns the bundle short version string of the extension (CFBundleShortVersionString)
 func (sei *SystemExtensionInfo) BundleShortVersion() string {
+	defer runtime.KeepAlive(sei)
 	_r := objc.Send[objc.ID](objref.IDOf(sei), objc.RegisterName("bundleShortVersion"))
 	if _r == 0 {
 		return ""

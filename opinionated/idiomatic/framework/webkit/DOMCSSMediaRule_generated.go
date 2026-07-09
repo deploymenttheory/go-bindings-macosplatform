@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,29 +59,34 @@ func (dmr *DOMCSSMediaRule) WithCSSText(cssText string) *DOMCSSMediaRule {
 
 // InsertRuleIndex inserts rule index.
 func (dmr *DOMCSSMediaRule) InsertRuleIndex(rule string, index int) int {
+	defer runtime.KeepAlive(dmr)
 	_r := objc.Send[int](objref.IDOf(dmr), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
 // DeleteRule deletes rule.
 func (dmr *DOMCSSMediaRule) DeleteRule(index int) {
+	defer runtime.KeepAlive(dmr)
 	objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("deleteRule:"), index)
 }
 
 // Media returns the media.
 func (dmr *DOMCSSMediaRule) Media() *DOMMediaList {
+	defer runtime.KeepAlive(dmr)
 	_r := objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
 // CSSRules returns the CSS rules.
 func (dmr *DOMCSSMediaRule) CSSRules() *DOMCSSRuleList {
+	defer runtime.KeepAlive(dmr)
 	_r := objc.Send[objc.ID](objref.IDOf(dmr), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
 // InsertRule inserts rule.
 func (dmr *DOMCSSMediaRule) InsertRule(rule string, index int) int {
+	defer runtime.KeepAlive(dmr)
 	_r := objc.Send[int](objref.IDOf(dmr), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r
 }

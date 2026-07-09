@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,28 +50,34 @@ func mTRSoftwareDiagnosticsClusterThreadMetricsStructAdopt(id objc.ID) *MTRSoftw
 
 // Description returns the object's -description text.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Description() string {
+	defer runtime.KeepAlive(msdctms)
 	return rt.Description(objref.IDOf(msdctms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msdctms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msdctms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(msdctms)
 	return rt.IsKind(objref.IDOf(msdctms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) String() string {
+	defer runtime.KeepAlive(msdctms)
 	return rt.Description(objref.IDOf(msdctms))
 }
 
 // WithID sets the ID.
-func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setId:"), objref.IDOf(id_))
+func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithID(identifier obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	defer runtime.KeepAlive(identifier)
+	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setId:"), objref.IDOf(identifier))
 	return msdctms
 }
 
@@ -80,30 +89,35 @@ func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithName(name s
 
 // WithStackFreeCurrent sets the stack free current.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	defer runtime.KeepAlive(stackFreeCurrent)
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
 	return msdctms
 }
 
 // WithStackFreeMinimum sets the stack free minimum.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	defer runtime.KeepAlive(stackFreeMinimum)
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
 	return msdctms
 }
 
 // WithStackSize sets the stack size.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	defer runtime.KeepAlive(stackSize)
 	objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
 	return msdctms
 }
 
 // ID returns the ID.
-func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) ID() obj.Object {
+func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) ID() *foundation.Number {
+	defer runtime.KeepAlive(msdctms)
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("id"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() string {
+	defer runtime.KeepAlive(msdctms)
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -112,21 +126,24 @@ func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() string {
 }
 
 // StackFreeCurrent returns the stack free current.
-func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() obj.Object {
+func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() *foundation.Number {
+	defer runtime.KeepAlive(msdctms)
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("stackFreeCurrent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StackFreeMinimum returns the stack free minimum.
-func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() obj.Object {
+func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() *foundation.Number {
+	defer runtime.KeepAlive(msdctms)
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("stackFreeMinimum"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StackSize returns the stack size.
-func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() obj.Object {
+func (msdctms *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() *foundation.Number {
+	defer runtime.KeepAlive(msdctms)
 	_r := objc.Send[objc.ID](objref.IDOf(msdctms), objc.RegisterName("stackSize"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRSoftwareDiagnosticsClusterThreadMetricsStruct marks MTRSoftwareDiagnosticsClusterThreadMetricsStruct — and, by embedding promotion, its

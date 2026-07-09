@@ -5,22 +5,29 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpsmatrix"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // NodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
 func NodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *CNNBatchNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNBatchNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return CNNBatchNormalizationGradientNodeFromID(_r)
 }
 
 // CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter creates a convolution descriptor with an optional neuron filter.
 func CnnConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChannelsOutputFeatureChannelsNeuronFilter(kernelWidth int, kernelHeight int, inputFeatureChannels int, outputFeatureChannels int, neuronFilter obj.Object) *CNNConvolutionDescriptor {
+	defer runtime.KeepAlive(neuronFilter)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionDescriptor")), objc.RegisterName("cnnConvolutionDescriptorWithKernelWidth:kernelHeight:inputFeatureChannels:outputFeatureChannels:neuronFilter:"), kernelWidth, kernelHeight, inputFeatureChannels, outputFeatureChannels, objref.IDOf(neuronFilter))
 	return CNNConvolutionDescriptorFromID(_r)
 }
@@ -39,336 +46,420 @@ func SupportsSecureCoding() bool {
 
 // NodeWithSourceGradientSourceImageGradientStateKernelSize wraps the corresponding Objective-C method.
 func NodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, kernelSize int) *CNNCrossChannelNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelSize:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelSize)
 	return CNNCrossChannelNormalizationGradientNodeFromID(_r)
 }
 
 // NodeWithSourceKernelSize wraps the corresponding Objective-C method.
 func NodeWithSourceKernelSize(sourceNode obj.Object, kernelSize int) *CNNCrossChannelNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNCrossChannelNormalizationNode")), objc.RegisterName("nodeWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
 	return CNNCrossChannelNormalizationNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY make a pooling gradient node It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
 func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
 	return CNNDilatedPoolingMaxGradientNodeFromID(_r)
 }
 
 // NodeWithSourceFilterSize convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels
 func NodeWithSourceFilterSize(sourceNode obj.Object, size int) *CNNDilatedPoolingMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("nodeWithSource:filterSize:"), objref.IDOf(sourceNode), size)
 	return CNNDilatedPoolingMaxNodeFromID(_r)
 }
 
 // NodeWithSourceFilterSizeStrideDilationRate convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors
 func NodeWithSourceFilterSizeStrideDilationRate(sourceNode obj.Object, size int, stride int, dilationRate int) *CNNDilatedPoolingMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("nodeWithSource:filterSize:stride:dilationRate:"), objref.IDOf(sourceNode), size, stride, dilationRate)
 	return CNNDilatedPoolingMaxNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels create a new dropout gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func NodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), keepProbability, seed, maskStrideInPixels)
 	return CNNDropoutGradientNodeFromID(_r)
 }
 
 // NodeWithSource wraps the corresponding Objective-C method.
 func NodeWithSource(source obj.Object) *CNNDropoutNode {
+	defer runtime.KeepAlive(source)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(source))
 	return CNNDropoutNodeFromID(_r)
 }
 
 // NodeWithSourceKeepProbability wraps the corresponding Objective-C method.
 func NodeWithSourceKeepProbability(source obj.Object, keepProbability float32) *CNNDropoutNode {
+	defer runtime.KeepAlive(source)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("nodeWithSource:keepProbability:"), objref.IDOf(source), keepProbability)
 	return CNNDropoutNodeFromID(_r)
 }
 
 // NodeWithSourceKeepProbabilitySeedMaskStrideInPixels wraps the corresponding Objective-C method.
 func NodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source obj.Object, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
+	defer runtime.KeepAlive(source)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("nodeWithSource:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(source), keepProbability, seed, maskStrideInPixels)
 	return CNNDropoutNodeFromID(_r)
 }
 
 // MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
 func MPSCNNGroupNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *CNNGroupNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNGroupNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return CNNGroupNormalizationGradientNodeFromID(_r)
 }
 
 // MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
 func MPSCNNInstanceNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *CNNInstanceNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNInstanceNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return CNNInstanceNormalizationGradientNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight wraps the corresponding Objective-C method.
 func NodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, kernelWidth int, kernelHeight int) *CNNLocalContrastNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight)
 	return CNNLocalContrastNormalizationGradientNodeFromID(_r)
 }
 
 // MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize wraps the corresponding Objective-C method.
 func MPSCNNLocalContrastNormalizationNodeNodeWithSourceKernelSize(sourceNode obj.Object, kernelSize int) *CNNLocalContrastNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationNode")), objc.RegisterName("nodeWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
 	return CNNLocalContrastNormalizationNodeFromID(_r)
 }
 
 // MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
 func MPSCNNLogSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *CNNLogSoftMaxGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return CNNLogSoftMaxGradientNodeFromID(_r)
 }
 
 // MPSCNNLogSoftMaxNodeNodeWithSource init a node representing a autoreleased MPSCNNLogSoftMax kernel
 func MPSCNNLogSoftMaxNodeNodeWithSource(sourceNode obj.Object) *CNNLogSoftMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLogSoftMaxNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNLogSoftMaxNodeFromID(_r)
 }
 
 // NodeWithSourceLossDescriptor wraps the corresponding Objective-C method.
 func NodeWithSourceLossDescriptor(source obj.Object, descriptor obj.Object) *CNNLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossNode")), objc.RegisterName("nodeWithSource:lossDescriptor:"), objref.IDOf(source), objref.IDOf(descriptor))
 	return CNNLossNodeFromID(_r)
 }
 
 // MPSCNNNeuronAbsoluteNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronAbsoluteNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronAbsoluteNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronAbsoluteNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronAbsoluteNodeFromID(_r)
 }
 
 // NodeWithSourceA wraps the corresponding Objective-C method.
 func NodeWithSourceA(sourceNode obj.Object, a float32) *CNNNeuronELUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("nodeWithSource:a:"), objref.IDOf(sourceNode), a)
 	return CNNNeuronELUNodeFromID(_r)
 }
 
 // MPSCNNNeuronELUNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronELUNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronELUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronELUNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronELUNodeFromID(_r)
 }
 
 // NodeWithSourceABC wraps the corresponding Objective-C method.
 func NodeWithSourceABC(sourceNode obj.Object, a float32, b float32, c float32) *CNNNeuronExponentialNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronExponentialNode")), objc.RegisterName("nodeWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
 	return CNNNeuronExponentialNodeFromID(_r)
 }
 
 // MPSCNNNeuronExponentialNodeNodeWithSource create an autoreleased node with default values for parameters a, b, and c
 func MPSCNNNeuronExponentialNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronExponentialNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronExponentialNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronExponentialNodeFromID(_r)
 }
 
 // MPSCNNNeuronGeLUNodeNodeWithSource create an autoreleased node
 func MPSCNNNeuronGeLUNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronGeLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGeLUNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronGeLUNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageGradientStateDescriptor create a new neuron gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func NodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, descriptor obj.Object) *CNNNeuronGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:descriptor:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), objref.IDOf(descriptor))
 	return CNNNeuronGradientNodeFromID(_r)
 }
 
 // NodeWithSourceAB wraps the corresponding Objective-C method.
 func NodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronHardSigmoidNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return CNNNeuronHardSigmoidNodeFromID(_r)
 }
 
 // MPSCNNNeuronHardSigmoidNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronHardSigmoidNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronHardSigmoidNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronHardSigmoidNodeFromID(_r)
 }
 
 // MPSCNNNeuronLinearNodeNodeWithSourceAB wraps the corresponding Objective-C method.
 func MPSCNNNeuronLinearNodeNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronLinearNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLinearNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return CNNNeuronLinearNodeFromID(_r)
 }
 
 // MPSCNNNeuronLinearNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronLinearNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronLinearNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLinearNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronLinearNodeFromID(_r)
 }
 
 // MPSCNNNeuronLogarithmNodeNodeWithSourceABC wraps the corresponding Objective-C method.
 func MPSCNNNeuronLogarithmNodeNodeWithSourceABC(sourceNode obj.Object, a float32, b float32, c float32) *CNNNeuronLogarithmNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLogarithmNode")), objc.RegisterName("nodeWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
 	return CNNNeuronLogarithmNodeFromID(_r)
 }
 
 // MPSCNNNeuronLogarithmNodeNodeWithSource create an autoreleased node with default values for parameters a, b, and c
 func MPSCNNNeuronLogarithmNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronLogarithmNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronLogarithmNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronLogarithmNodeFromID(_r)
 }
 
 // NodeWithSourceDescriptor create a neuron node of the appropriate type with a MPSNNNeuronDescriptor
 func NodeWithSourceDescriptor(sourceNode obj.Object, descriptor obj.Object) *CNNNeuronNode {
+	defer runtime.KeepAlive(sourceNode)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronNode")), objc.RegisterName("nodeWithSource:descriptor:"), objref.IDOf(sourceNode), objref.IDOf(descriptor))
 	return CNNNeuronNodeFromID(_r)
 }
 
 // NodeWithSourceAData wraps the corresponding Objective-C method.
-func NodeWithSourceAData(sourceNode obj.Object, aData obj.Object) *CNNNeuronPReLUNode {
-	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPReLUNode")), objc.RegisterName("nodeWithSource:aData:"), objref.IDOf(sourceNode), objref.IDOf(aData))
+func NodeWithSourceAData(sourceNode obj.Object, aData []byte) *CNNNeuronPReLUNode {
+	defer runtime.KeepAlive(sourceNode)
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPReLUNode")), objc.RegisterName("nodeWithSource:aData:"), objref.IDOf(sourceNode), rt.BytesToNSData(aData))
 	return CNNNeuronPReLUNodeFromID(_r)
 }
 
 // MPSCNNNeuronPowerNodeNodeWithSourceABC wraps the corresponding Objective-C method.
 func MPSCNNNeuronPowerNodeNodeWithSourceABC(sourceNode obj.Object, a float32, b float32, c float32) *CNNNeuronPowerNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPowerNode")), objc.RegisterName("nodeWithSource:a:b:c:"), objref.IDOf(sourceNode), a, b, c)
 	return CNNNeuronPowerNodeFromID(_r)
 }
 
 // MPSCNNNeuronPowerNodeNodeWithSource create an autoreleased node with default values for parameters a, b, and c
 func MPSCNNNeuronPowerNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronPowerNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPowerNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronPowerNodeFromID(_r)
 }
 
 // MPSCNNNeuronReLUNNodeNodeWithSourceAB wraps the corresponding Objective-C method.
 func MPSCNNNeuronReLUNNodeNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronReLUNNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return CNNNeuronReLUNNodeFromID(_r)
 }
 
 // MPSCNNNeuronReLUNNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronReLUNNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronReLUNNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronReLUNNodeFromID(_r)
 }
 
 // MPSCNNNeuronReLUNodeNodeWithSourceA wraps the corresponding Objective-C method.
 func MPSCNNNeuronReLUNodeNodeWithSourceA(sourceNode obj.Object, a float32) *CNNNeuronReLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNode")), objc.RegisterName("nodeWithSource:a:"), objref.IDOf(sourceNode), a)
 	return CNNNeuronReLUNodeFromID(_r)
 }
 
 // MPSCNNNeuronReLUNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronReLUNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronReLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronReLUNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronReLUNodeFromID(_r)
 }
 
 // MPSCNNNeuronSigmoidNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronSigmoidNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronSigmoidNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSigmoidNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronSigmoidNodeFromID(_r)
 }
 
 // MPSCNNNeuronSoftPlusNodeNodeWithSourceAB wraps the corresponding Objective-C method.
 func MPSCNNNeuronSoftPlusNodeNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronSoftPlusNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSoftPlusNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return CNNNeuronSoftPlusNodeFromID(_r)
 }
 
 // MPSCNNNeuronSoftPlusNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronSoftPlusNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronSoftPlusNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSoftPlusNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronSoftPlusNodeFromID(_r)
 }
 
 // MPSCNNNeuronSoftSignNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronSoftSignNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronSoftSignNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronSoftSignNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronSoftSignNodeFromID(_r)
 }
 
 // MPSCNNNeuronTanHNodeNodeWithSourceAB wraps the corresponding Objective-C method.
 func MPSCNNNeuronTanHNodeNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronTanHNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("nodeWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return CNNNeuronTanHNodeFromID(_r)
 }
 
 // MPSCNNNeuronTanHNodeNodeWithSource create an autoreleased node with default values for parameters a & b
 func MPSCNNNeuronTanHNodeNodeWithSource(sourceNode obj.Object) *CNNNeuronTanHNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNeuronTanHNodeFromID(_r)
 }
 
 // MPSCNNNormalizationNodeNodeWithSource wraps the corresponding Objective-C method.
 func MPSCNNNormalizationNodeNodeWithSource(sourceNode obj.Object) *CNNNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNNormalizationNodeFromID(_r)
 }
 
 // MPSCNNPoolingNodeNodeWithSourceFilterSize convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels
 func MPSCNNPoolingNodeNodeWithSourceFilterSize(sourceNode obj.Object, size int) *CNNPoolingNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("nodeWithSource:filterSize:"), objref.IDOf(sourceNode), size)
 	return CNNPoolingNodeFromID(_r)
 }
 
 // NodeWithSourceFilterSizeStride convenience initializer for MPSCNNPooling nodes with square non-overlapping kernels and a different stride
 func NodeWithSourceFilterSizeStride(sourceNode obj.Object, size int, stride int) *CNNPoolingNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingNode")), objc.RegisterName("nodeWithSource:filterSize:stride:"), objref.IDOf(sourceNode), size, stride)
 	return CNNPoolingNodeFromID(_r)
 }
 
 // MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
 func MPSCNNSoftMaxGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *CNNSoftMaxGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSoftMaxGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return CNNSoftMaxGradientNodeFromID(_r)
 }
 
 // MPSCNNSoftMaxNodeNodeWithSource init a node representing a autoreleased MPSCNNSoftMax kernel
 func MPSCNNSoftMaxNodeNodeWithSource(sourceNode obj.Object) *CNNSoftMaxNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSoftMaxNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return CNNSoftMaxNodeFromID(_r)
 }
 
 // MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize wraps the corresponding Objective-C method.
 func MPSCNNSpatialNormalizationGradientNodeNodeWithSourceGradientSourceImageGradientStateKernelSize(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, kernelSize int) *CNNSpatialNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:kernelSize:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelSize)
 	return CNNSpatialNormalizationGradientNodeFromID(_r)
 }
 
 // MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize wraps the corresponding Objective-C method.
 func MPSCNNSpatialNormalizationNodeNodeWithSourceKernelSize(sourceNode obj.Object, kernelSize int) *CNNSpatialNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationNode")), objc.RegisterName("nodeWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
 	return CNNSpatialNormalizationNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY a node to represent the gradient calculation for nearest upsampling training. [forwardFilter gradientFilterWithSources:] is a more convient way to do this.
 func NodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingBilinearGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), scaleFactorX, scaleFactorY)
 	return CNNUpsamplingBilinearGradientNodeFromID(_r)
 }
 
 // NodeWithSourceIntegerScaleFactorXIntegerScaleFactorY init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel
 func NodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode obj.Object, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingBilinearNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
 	return CNNUpsamplingBilinearNodeFromID(_r)
 }
 
 // NodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners init a autoreleased node representing a MPSCNNUpsamplingBilinear kernel
 func NodeWithSourceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(sourceNode obj.Object, integerScaleFactorX int, integerScaleFactorY int, alignCorners bool) *CNNUpsamplingBilinearNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinearNode")), objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:alignCorners:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY, alignCorners)
 	return CNNUpsamplingBilinearNodeFromID(_r)
 }
 
 // MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY a node to represent the gradient calculation for nearest upsampling training. [forwardFilter gradientFilterWithSources:] is a more convient way to do this.
 func MPSCNNUpsamplingNearestGradientNodeNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingNearestGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:scaleFactorX:scaleFactorY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), scaleFactorX, scaleFactorY)
 	return CNNUpsamplingNearestGradientNodeFromID(_r)
 }
 
 // MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY convenience initializer for an autoreleased MPSCNNUpsamplingNearest nodes
 func MPSCNNUpsamplingNearestNodeNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY(sourceNode obj.Object, integerScaleFactorX int, integerScaleFactorY int) *CNNUpsamplingNearestNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingNearestNode")), objc.RegisterName("nodeWithSource:integerScaleFactorX:integerScaleFactorY:"), objref.IDOf(sourceNode), integerScaleFactorX, integerScaleFactorY)
 	return CNNUpsamplingNearestNodeFromID(_r)
 }
 
 // MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor wraps the corresponding Objective-C method.
 func MPSCNNYOLOLossNodeNodeWithSourceLossDescriptor(source obj.Object, descriptor obj.Object) *CNNYOLOLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSCNNYOLOLossNode")), objc.RegisterName("nodeWithSource:lossDescriptor:"), objref.IDOf(source), objref.IDOf(descriptor))
 	return CNNYOLOLossNodeFromID(_r)
 }
@@ -399,6 +490,8 @@ func CreateLSTMDescriptorWithInputFeatureChannelsOutputFeatureChannels(inputFeat
 
 // DescriptorWithSourceMatrixDestinationMatrixOffsets convenience allocator for single copies
 func DescriptorWithSourceMatrixDestinationMatrixOffsets(sourceMatrix obj.Object, destinationMatrix obj.Object, offsets mpsmatrix.MPSMatrixCopyOffsets) *MatrixCopyDescriptor {
+	defer runtime.KeepAlive(sourceMatrix)
+	defer runtime.KeepAlive(destinationMatrix)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyDescriptor")), objc.RegisterName("descriptorWithSourceMatrix:destinationMatrix:offsets:"), objref.IDOf(sourceMatrix), objref.IDOf(destinationMatrix), offsets)
 	return MatrixCopyDescriptorFromID(_r)
 }
@@ -429,6 +522,9 @@ func DefaultDistributionDescriptor() obj.Object {
 
 // NodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter create a new arithmetic gradient node See also -[MPSCNNNeuronNode gradientFilterNodesWithSources:] for an easier way to do this.
 func NodeWithSourceGradientSourceImageGradientStateIsSecondarySourceFilter(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, isSecondarySourceFilter bool) *NNArithmeticGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:isSecondarySourceFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), isSecondarySourceFilter)
 	return NNArithmeticGradientNodeFromID(_r)
 }
@@ -441,12 +537,17 @@ func NodeWithSources(sourceNodes []obj.Object) *NNBinaryArithmeticNode {
 
 // NodeWithLeftSourceRightSource create an autoreleased arithemtic node with two sources
 func NodeWithLeftSourceRightSource(left obj.Object, right obj.Object) *NNBinaryArithmeticNode {
+	defer runtime.KeepAlive(left)
+	defer runtime.KeepAlive(right)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryArithmeticNode")), objc.RegisterName("nodeWithLeftSource:rightSource:"), objref.IDOf(left), objref.IDOf(right))
 	return NNBinaryArithmeticNodeFromID(_r)
 }
 
 // MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState create a MPSNNConcatenationGradientNode Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead.
 func MPSNNConcatenationGradientNodeNodeWithSourceGradientSourceImageGradientState(gradientSourceNode obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNConcatenationGradientNode {
+	defer runtime.KeepAlive(gradientSourceNode)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(gradientSourceNode), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return NNConcatenationGradientNodeFromID(_r)
 }
@@ -471,120 +572,164 @@ func PaddingForTensorflowAveragePoolingValidOnly() *NNDefaultPadding {
 
 // NodeWithSourceLabelsWeightsLossDescriptor wraps the corresponding Objective-C method.
 func NodeWithSourceLabelsWeightsLossDescriptor(source obj.Object, labels obj.Object, weights obj.Object, descriptor obj.Object) *NNForwardLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(weights)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("nodeWithSource:labels:weights:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(descriptor))
 	return NNForwardLossNodeFromID(_r)
 }
 
 // NodeWithSourceLabelsLossDescriptor wraps the corresponding Objective-C method.
 func NodeWithSourceLabelsLossDescriptor(source obj.Object, labels obj.Object, descriptor obj.Object) *NNForwardLossNode {
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("nodeWithSource:labels:lossDescriptor:"), objref.IDOf(source), objref.IDOf(labels), objref.IDOf(descriptor))
 	return NNForwardLossNodeFromID(_r)
 }
 
 // NodeWithSourcesLossDescriptor init a forward loss node from multiple images
 func NodeWithSourcesLossDescriptor(sourceNodes []obj.Object, descriptor obj.Object) *NNForwardLossNode {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNForwardLossNode")), objc.RegisterName("nodeWithSources:lossDescriptor:"), purego.SliceToNSArray(sourceNodes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(descriptor))
 	return NNForwardLossNodeFromID(_r)
 }
 
 // MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState wraps the corresponding Objective-C method.
 func MPSNNGramMatrixCalculationGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNGramMatrixCalculationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return NNGramMatrixCalculationGradientNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageGradientStateAlpha wraps the corresponding Objective-C method.
 func NodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, alpha float32) *NNGramMatrixCalculationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:alpha:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), alpha)
 	return NNGramMatrixCalculationGradientNodeFromID(_r)
 }
 
 // MPSNNGramMatrixCalculationNodeNodeWithSource init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel.
 func MPSNNGramMatrixCalculationNodeNodeWithSource(sourceNode obj.Object) *NNGramMatrixCalculationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return NNGramMatrixCalculationNodeFromID(_r)
 }
 
 // NodeWithSourceAlpha init a node representing a autoreleased MPSNNGramMatrixCalculationNode kernel.
 func NodeWithSourceAlpha(sourceNode obj.Object, alpha float32) *NNGramMatrixCalculationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationNode")), objc.RegisterName("nodeWithSource:alpha:"), objref.IDOf(sourceNode), alpha)
 	return NNGramMatrixCalculationNodeFromID(_r)
 }
 
 // NodeWithHandle wraps the corresponding Objective-C method.
 func NodeWithHandle(handle obj.Object) *NNImageNode {
+	defer runtime.KeepAlive(handle)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNImageNode")), objc.RegisterName("nodeWithHandle:"), objref.IDOf(handle))
 	return NNImageNodeFromID(_r)
 }
 
 // ExportedNodeWithHandle create a autoreleased MPSNNImageNode with exportFromGraph = YES. Note: image is still temporary. See MPSNNImageNode.imageAllocator parameter.
 func ExportedNodeWithHandle(handle obj.Object) *NNImageNode {
+	defer runtime.KeepAlive(handle)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNImageNode")), objc.RegisterName("exportedNodeWithHandle:"), objref.IDOf(handle))
 	return NNImageNodeFromID(_r)
 }
 
 // MPSNNInitialGradientNodeNodeWithSource init a node representing a MPSNNInitialGradient MPSNNPad kernel
 func MPSNNInitialGradientNodeNodeWithSource(source obj.Object) *NNInitialGradientNode {
+	defer runtime.KeepAlive(source)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNInitialGradientNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(source))
 	return NNInitialGradientNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter wraps the corresponding Objective-C method.
 func NodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient obj.Object, sourceImage obj.Object, labels obj.Object, weights obj.Object, gradientState obj.Object, descriptor obj.Object, isLabelsGradientFilter bool) *NNLossGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(weights)
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
 	return NNLossGradientNodeFromID(_r)
 }
 
 // NodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter wraps the corresponding Objective-C method.
 func NodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient obj.Object, sourceImage obj.Object, labels obj.Object, gradientState obj.Object, descriptor obj.Object, isLabelsGradientFilter bool) *NNLossGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
 	return NNLossGradientNodeFromID(_r)
 }
 
 // NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter init a gradient loss node from multiple images
 func NodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes []obj.Object, gradientState obj.Object, descriptor obj.Object, isLabelsGradientFilter bool) *NNLossGradientNode {
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("nodeWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:"), purego.SliceToNSArray(sourceNodes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
 	return NNLossGradientNodeFromID(_r)
 }
 
 // CnnNeuronPReLUDescriptorWithDataNoCopy make a descriptor for a neuron of type MPSCNNNeuronTypePReLU. The PReLU neuron is the same as a ReLU neuron, except parameter "a" is per feature channel.
-func CnnNeuronPReLUDescriptorWithDataNoCopy(data obj.Object, noCopy bool) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronPReLUDescriptorWithData:noCopy:"), objref.IDOf(data), noCopy)
+func CnnNeuronPReLUDescriptorWithDataNoCopy(data []byte, noCopy bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("cnnNeuronPReLUDescriptorWithData:noCopy:"), rt.BytesToNSData(data), noCopy)
 	return obj.Wrap(_r)
 }
 
 // MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a padding node.
 func MPSNNPadGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNPadGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNPadGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return NNPadGradientNodeFromID(_r)
 }
 
 // MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a spatial mean reduction node.
 func MPSNNReductionSpatialMeanGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNReductionSpatialMeanGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNReductionSpatialMeanGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return NNReductionSpatialMeanGradientNodeFromID(_r)
 }
 
 // MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a reshape node.
 func MPSNNReshapeGradientNodeNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNReshapeGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeGradientNode")), objc.RegisterName("nodeWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return NNReshapeGradientNodeFromID(_r)
 }
 
 // NodeWithSourceResultWidthResultHeightResultFeatureChannels init a node representing a autoreleased MPSNNReshape kernel
 func NodeWithSourceResultWidthResultHeightResultFeatureChannels(source obj.Object, resultWidth int, resultHeight int, resultFeatureChannels int) *NNReshapeNode {
+	defer runtime.KeepAlive(source)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeNode")), objc.RegisterName("nodeWithSource:resultWidth:resultHeight:resultFeatureChannels:"), objref.IDOf(source), resultWidth, resultHeight, resultFeatureChannels)
 	return NNReshapeNodeFromID(_r)
 }
 
 // NodeWithSourceOutputSize create an autoreleased node to convert a MPSImage to the desired size
 func NodeWithSourceOutputSize(sourceNode obj.Object, size metal.MTLSize) *NNScaleNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNScaleNode")), objc.RegisterName("nodeWithSource:outputSize:"), objref.IDOf(sourceNode), size)
 	return NNScaleNodeFromID(_r)
 }
 
 // MPSNNUnaryReductionNodeNodeWithSource create an autoreleased node representing an MPS reduction kernel.
 func MPSNNUnaryReductionNodeNodeWithSource(sourceNode obj.Object) *NNUnaryReductionNode {
+	defer runtime.KeepAlive(sourceNode)
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSNNUnaryReductionNode")), objc.RegisterName("nodeWithSource:"), objref.IDOf(sourceNode))
 	return NNUnaryReductionNodeFromID(_r)
 }

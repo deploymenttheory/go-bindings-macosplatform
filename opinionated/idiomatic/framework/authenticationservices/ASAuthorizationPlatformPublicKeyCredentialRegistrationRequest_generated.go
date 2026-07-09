@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistrationRequest() *Authoriza
 
 // WithLargeBlob sets the request’s binary large object value.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	defer runtime.KeepAlive(largeBlob)
 	objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("setLargeBlob:"), objref.IDOf(largeBlob))
 	return appkcrr
 }
 
 // WithPrf sets the prf.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	defer runtime.KeepAlive(prf)
 	objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return appkcrr
 }
@@ -71,18 +75,21 @@ func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) With
 
 // LargeBlob returns the large blob.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	defer runtime.KeepAlive(appkcrr)
 	_r := objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_r)
 }
 
 // Prf returns the prf.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	defer runtime.KeepAlive(appkcrr)
 	_r := objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
 }
 
 // RequestStyle returns the request style.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestStyle() AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle {
+	defer runtime.KeepAlive(appkcrr)
 	_r := objc.Send[AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle](objref.IDOf(appkcrr), objc.RegisterName("requestStyle"))
 	return _r
 }

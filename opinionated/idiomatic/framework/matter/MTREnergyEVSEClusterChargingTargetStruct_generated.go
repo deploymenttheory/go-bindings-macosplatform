@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEClusterChargingTargetStructAdopt(id objc.ID) *MTREnergyEVSEClu
 
 // Description returns the object's -description text.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) Description() string {
+	defer runtime.KeepAlive(meeccts)
 	return rt.Description(objref.IDOf(meeccts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meeccts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meeccts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(meeccts)
 	return rt.IsKind(objref.IDOf(meeccts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) String() string {
+	defer runtime.KeepAlive(meeccts)
 	return rt.Description(objref.IDOf(meeccts))
 }
 
@@ -72,36 +80,42 @@ func NewMTREnergyEVSEClusterChargingTargetStruct() *MTREnergyEVSEClusterCharging
 
 // WithTargetTimeMinutesPastMidnight sets the target time minutes past midnight.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
+	defer runtime.KeepAlive(targetTimeMinutesPastMidnight)
 	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setTargetTimeMinutesPastMidnight:"), objref.IDOf(targetTimeMinutesPastMidnight))
 	return meeccts
 }
 
 // WithTargetSoC sets the target so c.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithTargetSoC(targetSoC obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
+	defer runtime.KeepAlive(targetSoC)
 	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setTargetSoC:"), objref.IDOf(targetSoC))
 	return meeccts
 }
 
 // WithAddedEnergy sets the added energy.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithAddedEnergy(addedEnergy obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
+	defer runtime.KeepAlive(addedEnergy)
 	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setAddedEnergy:"), objref.IDOf(addedEnergy))
 	return meeccts
 }
 
 // TargetTimeMinutesPastMidnight returns the target time minutes past midnight.
-func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() obj.Object {
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() *foundation.Number {
+	defer runtime.KeepAlive(meeccts)
 	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("targetTimeMinutesPastMidnight"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TargetSoC returns the target so c.
-func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() obj.Object {
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() *foundation.Number {
+	defer runtime.KeepAlive(meeccts)
 	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("targetSoC"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AddedEnergy returns the added energy.
-func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() obj.Object {
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() *foundation.Number {
+	defer runtime.KeepAlive(meeccts)
 	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("addedEnergy"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

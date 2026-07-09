@@ -11,7 +11,7 @@ type ControlEditTextSelectionRec struct {
 
 type ControlID struct {
 	Signature uint
-	Id        int
+	ID        int
 }
 
 type ControlKind struct {
@@ -43,7 +43,7 @@ type DataBrowserPropertyDesc struct {
 
 type EventHotKeyID struct {
 	Signature uint
-	Id        uint
+	ID        uint
 }
 
 type EventTypeSpec struct {

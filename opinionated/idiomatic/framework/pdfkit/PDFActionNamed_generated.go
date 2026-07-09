@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (an *ActionNamed) WithName(name ActionNamedName) *ActionNamed {
 
 // Name returns the name.
 func (an *ActionNamed) Name() ActionNamedName {
+	defer runtime.KeepAlive(an)
 	_r := objc.Send[ActionNamedName](objref.IDOf(an), objc.RegisterName("name"))
 	return _r
 }

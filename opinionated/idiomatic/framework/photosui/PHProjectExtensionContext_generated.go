@@ -5,7 +5,10 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func projectExtensionContextAdopt(id objc.ID) *ProjectExtensionContext {
 
 // Description returns the object's -description text.
 func (pec *ProjectExtensionContext) Description() string {
+	defer runtime.KeepAlive(pec)
 	return rt.Description(objref.IDOf(pec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pec *ProjectExtensionContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pec *ProjectExtensionContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(pec)
 	return rt.IsKind(objref.IDOf(pec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pec *ProjectExtensionContext) String() string {
+	defer runtime.KeepAlive(pec)
 	return rt.Description(objref.IDOf(pec))
 }
 
@@ -74,23 +82,29 @@ func NewProjectExtensionContext() *ProjectExtensionContext {
 
 // ShowEditorForAsset invokes the built-in photo editor for the given asset.
 func (pec *ProjectExtensionContext) ShowEditorForAsset(asset obj.Object) {
+	defer runtime.KeepAlive(pec)
+	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("showEditorForAsset:"), objref.IDOf(asset))
 }
 
 // UpdatedProjectInfoFromProjectInfoCompletion creates an updated PHProjectInfo instance from existing project information and current assets.
-func (pec *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) obj.Object {
+func (pec *ProjectExtensionContext) UpdatedProjectInfoFromProjectInfoCompletion(existingProjectInfo *ProjectInfo, completion func(obj.Object)) *foundation.Progress {
+	defer runtime.KeepAlive(pec)
+	defer runtime.KeepAlive(existingProjectInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("updatedProjectInfoFromProjectInfo:completion:"), objref.IDOf(existingProjectInfo), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completion(obj.Wrap(_b0)) }))
-	return obj.Wrap(_r)
+	return foundation.ProgressFromID(_r)
 }
 
 // PhotoLibrary returns the photo library.
 func (pec *ProjectExtensionContext) PhotoLibrary() obj.Object {
+	defer runtime.KeepAlive(pec)
 	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("photoLibrary"))
 	return obj.Wrap(_r)
 }
 
 // Project returns the project.
 func (pec *ProjectExtensionContext) Project() obj.Object {
+	defer runtime.KeepAlive(pec)
 	_r := objc.Send[objc.ID](objref.IDOf(pec), objc.RegisterName("project"))
 	return obj.Wrap(_r)
 }

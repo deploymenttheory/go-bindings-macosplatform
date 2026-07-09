@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func contentFilterAdopt(id objc.ID) *ContentFilter {
 
 // Description returns the object's -description text.
 func (cf *ContentFilter) Description() string {
+	defer runtime.KeepAlive(cf)
 	return rt.Description(objref.IDOf(cf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cf *ContentFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cf *ContentFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(cf)
 	return rt.IsKind(objref.IDOf(cf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cf *ContentFilter) String() string {
+	defer runtime.KeepAlive(cf)
 	return rt.Description(objref.IDOf(cf))
 }
 
 // NewContentFilterWithDesktopIndependentWindow creates a filter that captures only the specified window.
 func NewContentFilterWithDesktopIndependentWindow(window *Window) *ContentFilter {
+	defer runtime.KeepAlive(window)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDesktopIndependentWindow:"), objref.IDOf(window))
 	return contentFilterAdopt(_id)
@@ -76,6 +84,7 @@ func NewContentFilterWithDesktopIndependentWindow(window *Window) *ContentFilter
 
 // NewContentFilterWithDisplayExcludingWindows creates a filter that captures the contents of a display, excluding the specified windows.
 func NewContentFilterWithDisplayExcludingWindows(display *Display, excluded []*Window) *ContentFilter {
+	defer runtime.KeepAlive(display)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:excludingWindows:"), objref.IDOf(display), purego.SliceToNSArray(excluded, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
@@ -83,6 +92,7 @@ func NewContentFilterWithDisplayExcludingWindows(display *Display, excluded []*W
 
 // NewContentFilterWithDisplayIncludingWindows creates a filter that captures only specific windows from a display.
 func NewContentFilterWithDisplayIncludingWindows(display *Display, includedWindows []*Window) *ContentFilter {
+	defer runtime.KeepAlive(display)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:includingWindows:"), objref.IDOf(display), purego.SliceToNSArray(includedWindows, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
@@ -90,6 +100,7 @@ func NewContentFilterWithDisplayIncludingWindows(display *Display, includedWindo
 
 // NewContentFilterWithDisplayIncludingApplicationsExceptingWindows creates a filter that captures a display, including only windows of the specified apps.
 func NewContentFilterWithDisplayIncludingApplicationsExceptingWindows(display *Display, applications []*RunningApplication, exceptingWindows []*Window) *ContentFilter {
+	defer runtime.KeepAlive(display)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:includingApplications:exceptingWindows:"), objref.IDOf(display), purego.SliceToNSArray(applications, func(_v *RunningApplication) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(exceptingWindows, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
@@ -97,6 +108,7 @@ func NewContentFilterWithDisplayIncludingApplicationsExceptingWindows(display *D
 
 // NewContentFilterWithDisplayExcludingApplicationsExceptingWindows creates a filter that captures a display, excluding windows of the specified apps.
 func NewContentFilterWithDisplayExcludingApplicationsExceptingWindows(display *Display, applications []*RunningApplication, exceptingWindows []*Window) *ContentFilter {
+	defer runtime.KeepAlive(display)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCContentFilter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplay:excludingApplications:exceptingWindows:"), objref.IDOf(display), purego.SliceToNSArray(applications, func(_v *RunningApplication) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(exceptingWindows, func(_v *Window) objc.ID { return objref.IDOf(_v) }))
 	return contentFilterAdopt(_id)
@@ -110,30 +122,35 @@ func (cf *ContentFilter) WithIncludeMenuBar(includeMenuBar bool) *ContentFilter 
 
 // StreamType returns streamType type of stream
 func (cf *ContentFilter) StreamType() StreamType {
+	defer runtime.KeepAlive(cf)
 	_r := objc.Send[StreamType](objref.IDOf(cf), objc.RegisterName("streamType"))
 	return _r
 }
 
 // Style returns style of stream
 func (cf *ContentFilter) Style() ShareableContentStyle {
+	defer runtime.KeepAlive(cf)
 	_r := objc.Send[ShareableContentStyle](objref.IDOf(cf), objc.RegisterName("style"))
 	return _r
 }
 
 // PointPixelScale returns pixel to points scaling factor
 func (cf *ContentFilter) PointPixelScale() float32 {
+	defer runtime.KeepAlive(cf)
 	_r := objc.Send[float32](objref.IDOf(cf), objc.RegisterName("pointPixelScale"))
 	return _r
 }
 
 // ContentRect returns size and location of content in points
 func (cf *ContentFilter) ContentRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(cf)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cf), objc.RegisterName("contentRect"))
 	return _r
 }
 
 // IncludeMenuBar reports whether to include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is true. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is false. Display including content filters do not contain the desktop and dock
 func (cf *ContentFilter) IncludeMenuBar() bool {
+	defer runtime.KeepAlive(cf)
 	_r := objc.Send[bool](objref.IDOf(cf), objc.RegisterName("includeMenuBar"))
 	return _r
 }
@@ -142,6 +159,7 @@ func (cf *ContentFilter) IncludeMenuBar() bool {
 //
 // IncludedDisplays returns the collection as a Go slice.
 func (cf *ContentFilter) IncludedDisplays() []*Display {
+	defer runtime.KeepAlive(cf)
 	_arr := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("includedDisplays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Display { return DisplayFromID(_id) })
 }
@@ -150,6 +168,7 @@ func (cf *ContentFilter) IncludedDisplays() []*Display {
 //
 // IncludedApplications returns the collection as a Go slice.
 func (cf *ContentFilter) IncludedApplications() []*RunningApplication {
+	defer runtime.KeepAlive(cf)
 	_arr := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("includedApplications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }
@@ -158,6 +177,7 @@ func (cf *ContentFilter) IncludedApplications() []*RunningApplication {
 //
 // IncludedWindows returns the collection as a Go slice.
 func (cf *ContentFilter) IncludedWindows() []*Window {
+	defer runtime.KeepAlive(cf)
 	_arr := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("includedWindows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }

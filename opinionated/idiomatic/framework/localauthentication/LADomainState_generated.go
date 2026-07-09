@@ -5,6 +5,8 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func domainStateAdopt(id objc.ID) *DomainState {
 
 // Description returns the object's -description text.
 func (ds *DomainState) Description() string {
+	defer runtime.KeepAlive(ds)
 	return rt.Description(objref.IDOf(ds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ds *DomainState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ds *DomainState) IsKind(className string) bool {
+	defer runtime.KeepAlive(ds)
 	return rt.IsKind(objref.IDOf(ds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ds *DomainState) String() string {
+	defer runtime.KeepAlive(ds)
 	return rt.Description(objref.IDOf(ds))
 }
 
@@ -72,18 +79,21 @@ func NewDomainState() *DomainState {
 
 // Biometry contains biometric domain state.
 func (ds *DomainState) Biometry() *DomainStateBiometry {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("biometry"))
 	return DomainStateBiometryFromID(_r)
 }
 
 // Companion contains companion domain state.
 func (ds *DomainState) Companion() *DomainStateCompanion {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("companion"))
 	return DomainStateCompanionFromID(_r)
 }
 
 // StateHash contains combined state hash data for biometry and companion state hashes.
-func (ds *DomainState) StateHash() obj.Object {
+func (ds *DomainState) StateHash() []byte {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("stateHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

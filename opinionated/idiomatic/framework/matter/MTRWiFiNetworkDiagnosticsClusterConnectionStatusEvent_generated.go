@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *MTR
 
 // Description returns the object's -description text.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
+	defer runtime.KeepAlive(mwfndccse)
 	return rt.Description(objref.IDOf(mwfndccse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwfndccse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwfndccse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwfndccse)
 	return rt.IsKind(objref.IDOf(mwfndccse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
+	defer runtime.KeepAlive(mwfndccse)
 	return rt.Description(objref.IDOf(mwfndccse))
 }
 
@@ -72,12 +80,14 @@ func NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent() *MTRWiFiNetworkD
 
 // WithConnectionStatus sets the connection status.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
+	defer runtime.KeepAlive(connectionStatus)
 	objc.Send[objc.ID](objref.IDOf(mwfndccse), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 	return mwfndccse
 }
 
 // ConnectionStatus returns the connection status.
-func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.Number {
+	defer runtime.KeepAlive(mwfndccse)
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndccse), objc.RegisterName("connectionStatus"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

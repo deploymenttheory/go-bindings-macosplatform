@@ -5,9 +5,11 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,14 +49,15 @@ func mIDIMetaEventAdopt(id objc.ID) *MIDIMetaEvent {
 }
 
 // NewMIDIMetaEventWithTypeData creates an event with a MIDI meta event type and data.
-func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data obj.Object) *MIDIMetaEvent {
+func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data []byte) *MIDIMetaEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, rt.BytesToNSData(data))
 	return mIDIMetaEventAdopt(_id)
 }
 
 // Type returns the type.
 func (mme *MIDIMetaEvent) Type() MIDIMetaEventType {
+	defer runtime.KeepAlive(mme)
 	_r := objc.Send[MIDIMetaEventType](objref.IDOf(mme), objc.RegisterName("type"))
 	return _r
 }

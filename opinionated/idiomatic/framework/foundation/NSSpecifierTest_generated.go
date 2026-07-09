@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func specifierTestAdopt(id objc.ID) *SpecifierTest {
 
 // NewSpecifierTestWithCoder creates a new SpecifierTest.
 func NewSpecifierTestWithCoder(inCoder *Coder) *SpecifierTest {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSpecifierTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return specifierTestAdopt(_id)
@@ -57,6 +60,8 @@ func NewSpecifierTestWithCoder(inCoder *Coder) *SpecifierTest {
 
 // NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject returns a specifier test initialized to evaluate a test object against an object specified by an object specifier using a given comparison operation.
 func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *ScriptObjectSpecifier, compOp TestComparisonOperation, obj2 obj.Object) *SpecifierTest {
+	defer runtime.KeepAlive(obj1)
+	defer runtime.KeepAlive(obj2)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSpecifierTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectSpecifier:comparisonOperator:testObject:"), objref.IDOf(obj1), compOp, objref.IDOf(obj2))
 	return specifierTestAdopt(_id)
@@ -69,8 +74,8 @@ func (st *SpecifierTest) WithObservationInfo(observationInfo unsafe.Pointer) *Sp
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (st *SpecifierTest) WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest {
-	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (st *SpecifierTest) WithScriptingProperties(scriptingProperties map[string]obj.Object) *SpecifierTest {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return st
 }
 

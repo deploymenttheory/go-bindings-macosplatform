@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetVariantAdopt(id objc.ID) *AssetVariant {
 
 // Description returns the object's -description text.
 func (av *AssetVariant) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AssetVariant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AssetVariant) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AssetVariant) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
@@ -74,30 +81,35 @@ func NewAssetVariant() *AssetVariant {
 
 // PeakBitRate returns if it is not declared, the value will be negative.
 func (av *AssetVariant) PeakBitRate() float64 {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("peakBitRate"))
 	return _r
 }
 
 // AverageBitRate returns if it is not declared, the value will be negative.
 func (av *AssetVariant) AverageBitRate() float64 {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[float64](objref.IDOf(av), objc.RegisterName("averageBitRate"))
 	return _r
 }
 
 // VideoAttributes provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
 func (av *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("videoAttributes"))
 	return AssetVariantVideoAttributesFromID(_r)
 }
 
 // AudioAttributes provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
 func (av *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("audioAttributes"))
 	return AssetVariantAudioAttributesFromID(_r)
 }
 
 // URL provides URL to media playlist corresponding to variant
-func (av *AssetVariant) URL() obj.Object {
+func (av *AssetVariant) URL() string {
+	defer runtime.KeepAlive(av)
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

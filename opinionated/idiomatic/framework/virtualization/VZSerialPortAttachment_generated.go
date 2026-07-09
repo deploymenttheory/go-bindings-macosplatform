@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func serialPortAttachmentAdopt(id objc.ID) *SerialPortAttachment {
 
 // Description returns the object's -description text.
 func (spa *SerialPortAttachment) Description() string {
+	defer runtime.KeepAlive(spa)
 	return rt.Description(objref.IDOf(spa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (spa *SerialPortAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(spa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(spa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (spa *SerialPortAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(spa)
 	return rt.IsKind(objref.IDOf(spa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (spa *SerialPortAttachment) String() string {
+	defer runtime.KeepAlive(spa)
 	return rt.Description(objref.IDOf(spa))
 }
 

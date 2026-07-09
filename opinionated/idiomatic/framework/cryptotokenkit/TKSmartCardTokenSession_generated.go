@@ -5,11 +5,13 @@
 package cryptotokenkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,8 +56,19 @@ func NewSmartCardTokenSession() *SmartCardTokenSession {
 	return smartCardTokenSessionAdopt(_id)
 }
 
-// GetSmartCardWithError returns a TKSmartCard instance with an active exclusive session and the SmartCard application selected. Replaces the deprecated The TKSmartCard object is only accessible within the methods of the TKTokenSessionDelegate protocol. If the associated token has an AID set, the returned card will have an exclusive session already opened and the specified application selected. In this scenario: Do not call -[TKSmartCard beginSessionWithReply:]) on the returned SmartCard instance. The system manages the session lifecycle and will terminate it automatically when the current token request servicing is finished. Do not call -[TKSmartCard endSession]. You can use the `smartCard.context` property to store any context-specific state information related to the card. This property is automatically set to `nil` if the card is reset or accessed by a different TKSmartCard instance (potentially in another process). Before performing an operation, check the `TKSmartCard.context` property for a previously stored value. This can help you avoid potentially costly restoration of the SmartCard state if it's already available.
-func (scts *SmartCardTokenSession) GetSmartCardWithError() (result *SmartCard, err error) {
+// WithDelegate sets the token session delegate.
+func (scts *SmartCardTokenSession) WithDelegate(delegate TokenSessionDelegate) *SmartCardTokenSession {
+	_shim := newTokenSessionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(scts), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(scts), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return scts
+}
+
+// GetSmartCard returns a TKSmartCard instance with an active exclusive session and the SmartCard application selected. Replaces the deprecated The TKSmartCard object is only accessible within the methods of the TKTokenSessionDelegate protocol. If the associated token has an AID set, the returned card will have an exclusive session already opened and the specified application selected. In this scenario: Do not call -[TKSmartCard beginSessionWithReply:]) on the returned SmartCard instance. The system manages the session lifecycle and will terminate it automatically when the current token request servicing is finished. Do not call -[TKSmartCard endSession]. You can use the `smartCard.context` property to store any context-specific state information related to the card. This property is automatically set to `nil` if the card is reset or accessed by a different TKSmartCard instance (potentially in another process). Before performing an operation, check the `TKSmartCard.context` property for a previously stored value. This can help you avoid potentially costly restoration of the SmartCard state if it's already available.
+func (scts *SmartCardTokenSession) GetSmartCard() (result *SmartCard, err error) {
+	defer runtime.KeepAlive(scts)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(scts), objc.RegisterName("getSmartCardWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -66,6 +79,7 @@ func (scts *SmartCardTokenSession) GetSmartCardWithError() (result *SmartCard, e
 
 // SmartCard contains TKSmartCard instance with active exclusive session and SmartCard application selected. This property can be accessed only when handling one of the methods of TKTokenSessionDelegate protocol.  If associated token has set AID property, then the returned card has opened exclusive session to the card and the application is already selected.  Therefore there is no need to call -[TKSmartCard beginSessionWithReply:]) on returned SmartCard instance in such case and system will take care of terminating session when current token request servicing is finished,  -[TKSmartCard endSession] must not be called either. You can store any kind of context state information representing state of the card into smartCard.context property.  This property will be automatically set to nil if the card is reset or accessed by different TKSmartCard instance (possibly in another process).  Checking TKSmartCard.context property for previously stored value can be used to avoid potentially costly restoring of SmartCard state before performing the operation.
 func (scts *SmartCardTokenSession) SmartCard() *SmartCard {
+	defer runtime.KeepAlive(scts)
 	_r := objc.Send[objc.ID](objref.IDOf(scts), objc.RegisterName("smartCard"))
 	return SmartCardFromID(_r)
 }

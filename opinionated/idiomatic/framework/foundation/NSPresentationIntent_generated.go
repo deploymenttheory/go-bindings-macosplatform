@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func presentationIntentAdopt(id objc.ID) *PresentationIntent {
 
 // Description returns the object's -description text.
 func (pi *PresentationIntent) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *PresentationIntent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *PresentationIntent) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *PresentationIntent) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
@@ -81,37 +87,43 @@ func (pi *PresentationIntent) WithObservationInfo(observationInfo unsafe.Pointer
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pi *PresentationIntent) WithScriptingProperties(scriptingProperties obj.Object) *PresentationIntent {
-	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pi *PresentationIntent) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PresentationIntent {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pi
 }
 
 // IsEquivalentToPresentationIntent returns a Boolean value that indicates whether the current intent is equivalent to the specified intent.
 func (pi *PresentationIntent) IsEquivalentToPresentationIntent(other *PresentationIntent) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isEquivalentToPresentationIntent:"), objref.IDOf(other))
 	return _r
 }
 
 // IntentKind returns the intent kind.
 func (pi *PresentationIntent) IntentKind() PresentationIntentKind {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[PresentationIntentKind](objref.IDOf(pi), objc.RegisterName("intentKind"))
 	return _r
 }
 
 // ParentIntent returns the parent intent.
 func (pi *PresentationIntent) ParentIntent() *PresentationIntent {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("parentIntent"))
 	return PresentationIntentFromID(_r)
 }
 
 // Identity returns an integer value which uniquely identifies this intent in the document. Identity disambiguates attributes which apply to contiguous text -- for example, two headers in a row with the same level. It can also be used to track the location in an attributed string of a particular part of a document, even after mutation.
 func (pi *PresentationIntent) Identity() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("identity"))
 	return _r
 }
 
 // Ordinal returns if the intent is not a list, this value is 0.
 func (pi *PresentationIntent) Ordinal() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("ordinal"))
 	return _r
 }
@@ -120,24 +132,28 @@ func (pi *PresentationIntent) Ordinal() int {
 //
 // ColumnAlignments returns the collection as a Go slice.
 func (pi *PresentationIntent) ColumnAlignments() []*Number {
+	defer runtime.KeepAlive(pi)
 	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("columnAlignments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
 // ColumnCount returns if the intent is not a table, this value is 0.
 func (pi *PresentationIntent) ColumnCount() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("columnCount"))
 	return _r
 }
 
 // HeaderLevel returns if the intent is not a header, this value is 0.
 func (pi *PresentationIntent) HeaderLevel() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("headerLevel"))
 	return _r
 }
 
 // LanguageHint returns if the intent is not a code block, this value is `nil`.
 func (pi *PresentationIntent) LanguageHint() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("languageHint"))
 	if _r == 0 {
 		return ""
@@ -147,18 +163,21 @@ func (pi *PresentationIntent) LanguageHint() string {
 
 // Column returns the column to which this cell belongs (0-based). If the intent is not a cell, this value is 0.
 func (pi *PresentationIntent) Column() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("column"))
 	return _r
 }
 
 // Row returns the row to which this cell belongs (0-based). If the intent is not a row, this value is 0. Header rows are always row 0. If the table has more rows, those start at row 1.
 func (pi *PresentationIntent) Row() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("row"))
 	return _r
 }
 
 // IndentationLevel returns the indentation level of this intent. Each nested list increases the indentation level by one; all elements within the same list (and not then nested into a child list intent) have the same indentation level. Text outside list intents has an indentation level of 0.
 func (pi *PresentationIntent) IndentationLevel() int {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("indentationLevel"))
 	return _r
 }

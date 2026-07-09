@@ -8,8 +8,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks"
+	idiofw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -623,6 +623,18 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	// references so the two always agree.
 	mapper.EmittableStructs = idiofw.ComputeEmittableStructs(reg.Frameworks, mapper)
 
+	// The class index spans every framework the idiomatic layer emits — not
+	// just the ones this invocation regenerates — so a partial regen resolves
+	// cross-framework wrapper references identically to a full one.
+	var emittable []*meta.FrameworkMeta
+	for _, fw := range reg.Frameworks {
+		if fw.IsSwiftOnly || len(fw.UmbrellaFor) > 0 || fw.LinkLib != "" {
+			continue
+		}
+		emittable = append(emittable, fw)
+	}
+	mapper.IdiomaticClassIndex = idiofw.ComputeIdiomaticClassIndex(emittable, reg.OwnerIndex)
+
 	// Emit the layer's support packages (objref, errkit, rt) first so the whole
 	// idiomatic tree is regenerable from scratch on every run. They are
 	// framework-independent and live at the idiomatic root (the parent of the
@@ -659,6 +671,7 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 			rawPkgPath,
 			fw,
 			mapper,
+			reg.IdiomaticConfigIndex[fw.Framework],
 		); err != nil {
 			return fmt.Errorf("idiomatic %s: %w", fw.Framework, err)
 		}

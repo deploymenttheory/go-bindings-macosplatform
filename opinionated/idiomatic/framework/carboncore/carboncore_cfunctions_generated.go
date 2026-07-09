@@ -77,24 +77,24 @@ func AddAtomic8(amount int) (result int8, address int8) {
 var _fnAddCollectionItem func(objc.ID, int, int, int, unsafe.Pointer) int16
 
 // AddCollectionItem calls the CarbonCore framework function AddCollectionItem.
-func AddCollectionItem(c obj.Object, tag int, id_ int, itemSize int, itemData unsafe.Pointer) int16 {
+func AddCollectionItem(c obj.Object, tag int, identifier int, itemSize int, itemData unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAddCollectionItem == nil {
 		ebipurego.RegisterLibFunc(&_fnAddCollectionItem, _lib, "AddCollectionItem")
 	}
-	return _fnAddCollectionItem(objref.IDOf(c), tag, id_, itemSize, itemData)
+	return _fnAddCollectionItem(objref.IDOf(c), tag, identifier, itemSize, itemData)
 }
 
 var _fnAddCollectionItemHdl func(objc.ID, int, int, unsafe.Pointer) int16
 
 // AddCollectionItemHdl calls the CarbonCore framework function AddCollectionItemHdl.
-func AddCollectionItemHdl(aCollection obj.Object, tag int, id_ int) (result int16, itemData string) {
+func AddCollectionItemHdl(aCollection obj.Object, tag int, identifier int) (result int16, itemData string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAddCollectionItemHdl == nil {
 		ebipurego.RegisterLibFunc(&_fnAddCollectionItemHdl, _lib, "AddCollectionItemHdl")
 	}
 	var _out0 string
-	_ret := _fnAddCollectionItemHdl(objref.IDOf(aCollection), tag, id_, unsafe.Pointer(&_out0))
+	_ret := _fnAddCollectionItemHdl(objref.IDOf(aCollection), tag, identifier, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -1706,7 +1706,7 @@ func FSMountServerVolumeSync(url obj.Object, mountDir obj.Object, user obj.Objec
 var _fnFSPathFileOperationCopyStatus func(objc.ID, string, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // FSPathFileOperationCopyStatus calls the CarbonCore framework function FSPathFileOperationCopyStatus.
-func FSPathFileOperationCopyStatus(fileOp obj.Object, currentItem string, statusDictionary unsafe.Pointer, info unsafe.Pointer) (result int, stage int, error_ int) {
+func FSPathFileOperationCopyStatus(fileOp obj.Object, currentItem string, statusDictionary unsafe.Pointer, info unsafe.Pointer) (result int, stage int, err int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnFSPathFileOperationCopyStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnFSPathFileOperationCopyStatus, _lib, "FSPathFileOperationCopyStatus")
@@ -2059,33 +2059,33 @@ func GetCollectionDefaultAttributes(c obj.Object) int {
 var _fnGetCollectionItem func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer) int16
 
 // GetCollectionItem calls the CarbonCore framework function GetCollectionItem.
-func GetCollectionItem(c obj.Object, tag int, id_ int, itemData unsafe.Pointer) (result int16, itemSize int) {
+func GetCollectionItem(c obj.Object, tag int, identifier int, itemData unsafe.Pointer) (result int16, itemSize int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetCollectionItem == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCollectionItem, _lib, "GetCollectionItem")
 	}
 	var _out0 int
-	_ret := _fnGetCollectionItem(objref.IDOf(c), tag, id_, unsafe.Pointer(&_out0), itemData)
+	_ret := _fnGetCollectionItem(objref.IDOf(c), tag, identifier, unsafe.Pointer(&_out0), itemData)
 	return _ret, _out0
 }
 
 var _fnGetCollectionItemHdl func(objc.ID, int, int, unsafe.Pointer) int16
 
 // GetCollectionItemHdl calls the CarbonCore framework function GetCollectionItemHdl.
-func GetCollectionItemHdl(aCollection obj.Object, tag int, id_ int) (result int16, itemData string) {
+func GetCollectionItemHdl(aCollection obj.Object, tag int, identifier int) (result int16, itemData string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetCollectionItemHdl == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCollectionItemHdl, _lib, "GetCollectionItemHdl")
 	}
 	var _out0 string
-	_ret := _fnGetCollectionItemHdl(objref.IDOf(aCollection), tag, id_, unsafe.Pointer(&_out0))
+	_ret := _fnGetCollectionItemHdl(objref.IDOf(aCollection), tag, identifier, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnGetCollectionItemInfo func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // GetCollectionItemInfo calls the CarbonCore framework function GetCollectionItemInfo.
-func GetCollectionItemInfo(c obj.Object, tag int, id_ int) (result int16, itemIndex int, itemSize int, attributes int) {
+func GetCollectionItemInfo(c obj.Object, tag int, identifier int) (result int16, itemIndex int, itemSize int, attributes int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetCollectionItemInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetCollectionItemInfo, _lib, "GetCollectionItemInfo")
@@ -2093,7 +2093,7 @@ func GetCollectionItemInfo(c obj.Object, tag int, id_ int) (result int16, itemIn
 	var _out0 int
 	var _out1 int
 	var _out2 int
-	_ret := _fnGetCollectionItemInfo(objref.IDOf(c), tag, id_, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_ret := _fnGetCollectionItemInfo(objref.IDOf(c), tag, identifier, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
 	return _ret, _out0, _out1, _out2
 }
 
@@ -2280,7 +2280,7 @@ func GetIndexedCollectionItemHdl(aCollection obj.Object, itemIndex int) (result 
 var _fnGetIndexedCollectionItemInfo func(objc.ID, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // GetIndexedCollectionItemInfo calls the CarbonCore framework function GetIndexedCollectionItemInfo.
-func GetIndexedCollectionItemInfo(c obj.Object, itemIndex int) (result int16, tag int, id_ int, itemSize int, attributes int) {
+func GetIndexedCollectionItemInfo(c obj.Object, itemIndex int) (result int16, tag int, identifier int, itemSize int, attributes int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetIndexedCollectionItemInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetIndexedCollectionItemInfo, _lib, "GetIndexedCollectionItemInfo")
@@ -2471,7 +2471,7 @@ func GetTaggedCollectionItem(c obj.Object, tag int, whichItem int, itemData unsa
 var _fnGetTaggedCollectionItemInfo func(objc.ID, int, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // GetTaggedCollectionItemInfo calls the CarbonCore framework function GetTaggedCollectionItemInfo.
-func GetTaggedCollectionItemInfo(c obj.Object, tag int, whichItem int) (result int16, id_ int, itemIndex int, itemSize int, attributes int) {
+func GetTaggedCollectionItemInfo(c obj.Object, tag int, whichItem int) (result int16, identifier int, itemIndex int, itemSize int, attributes int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGetTaggedCollectionItemInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGetTaggedCollectionItemInfo, _lib, "GetTaggedCollectionItemInfo")
@@ -4002,12 +4002,12 @@ func ReleaseResource() (theResource string) {
 var _fnRemoveCollectionItem func(objc.ID, int, int) int16
 
 // RemoveCollectionItem calls the CarbonCore framework function RemoveCollectionItem.
-func RemoveCollectionItem(c obj.Object, tag int, id_ int) int16 {
+func RemoveCollectionItem(c obj.Object, tag int, identifier int) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnRemoveCollectionItem == nil {
 		ebipurego.RegisterLibFunc(&_fnRemoveCollectionItem, _lib, "RemoveCollectionItem")
 	}
-	return _fnRemoveCollectionItem(objref.IDOf(c), tag, id_)
+	return _fnRemoveCollectionItem(objref.IDOf(c), tag, identifier)
 }
 
 var _fnRemoveFolderDescriptor func(int) int16
@@ -4430,12 +4430,12 @@ func SetCollectionExceptionProc(c obj.Object, exceptionProc unsafe.Pointer) {
 var _fnSetCollectionItemInfo func(objc.ID, int, int, int, int) int16
 
 // SetCollectionItemInfo calls the CarbonCore framework function SetCollectionItemInfo.
-func SetCollectionItemInfo(c obj.Object, tag int, id_ int, whichAttributes int, newAttributes int) int16 {
+func SetCollectionItemInfo(c obj.Object, tag int, identifier int, whichAttributes int, newAttributes int) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSetCollectionItemInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnSetCollectionItemInfo, _lib, "SetCollectionItemInfo")
 	}
-	return _fnSetCollectionItemInfo(objref.IDOf(c), tag, id_, whichAttributes, newAttributes)
+	return _fnSetCollectionItemInfo(objref.IDOf(c), tag, identifier, whichAttributes, newAttributes)
 }
 
 var _fnSetDebuggerNotificationProcs func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16

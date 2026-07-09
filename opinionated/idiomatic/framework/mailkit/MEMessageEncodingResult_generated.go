@@ -5,6 +5,7 @@
 package mailkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func messageEncodingResultAdopt(id objc.ID) *MessageEncodingResult {
 
 // Description returns the object's -description text.
 func (mer *MessageEncodingResult) Description() string {
+	defer runtime.KeepAlive(mer)
 	return rt.Description(objref.IDOf(mer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mer *MessageEncodingResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mer)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mer *MessageEncodingResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(mer)
 	return rt.IsKind(objref.IDOf(mer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mer *MessageEncodingResult) String() string {
+	defer runtime.KeepAlive(mer)
 	return rt.Description(objref.IDOf(mer))
 }
 
 // NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError creates an encoding result object with a signed or encrypted message, or errors if the message encoder fails to encode the message.
 func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encodedMessage *EncodedOutgoingMessage, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageEncodingResult {
+	defer runtime.KeepAlive(encodedMessage)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEMessageEncodingResult")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEncodedMessage:signingError:encryptionError:"), objref.IDOf(encodedMessage), signingError, encryptionError)
 	return messageEncodingResultAdopt(_id)
@@ -77,6 +84,7 @@ func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encod
 
 // EncodedMessage returns the encoded message. Nil if no need to encode or an error occured while encoding
 func (mer *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
+	defer runtime.KeepAlive(mer)
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("encodedMessage"))
 	return EncodedOutgoingMessageFromID(_r)
 }

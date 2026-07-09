@@ -5,8 +5,11 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,32 +52,49 @@ func requestAdopt(id objc.ID) *Request {
 
 // Description returns the object's -description text.
 func (r *Request) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Request) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Request) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Request) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
+}
+
+// WithDelegate sets the delegate of the request object.
+func (r *Request) WithDelegate(delegate RequestDelegate) *Request {
+	_shim := newRequestDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(r), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(r), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return r
 }
 
 // Cancel cancels a previously started request.
 func (r *Request) Cancel() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("cancel"))
 }
 
 // Start sends the request to the Apple App Store.
 func (r *Request) Start() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("start"))
 }
 

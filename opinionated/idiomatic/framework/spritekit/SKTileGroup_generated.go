@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func tileGroupAdopt(id objc.ID) *TileGroup {
 
 // Description returns the object's -description text.
 func (tg *TileGroup) Description() string {
+	defer runtime.KeepAlive(tg)
 	return rt.Description(objref.IDOf(tg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tg *TileGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tg *TileGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(tg)
 	return rt.IsKind(objref.IDOf(tg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tg *TileGroup) String() string {
+	defer runtime.KeepAlive(tg)
 	return rt.Description(objref.IDOf(tg))
 }
 
 // NewTileGroupWithTileDefinition creates and initializes a simple tile group with a single tile definition.
 func NewTileGroupWithTileDefinition(tileDefinition *TileDefinition) *TileGroup {
+	defer runtime.KeepAlive(tileDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileDefinition:"), objref.IDOf(tileDefinition))
 	return tileGroupAdopt(_id)
@@ -97,12 +105,14 @@ func (tg *TileGroup) WithName(name string) *TileGroup {
 //
 // Rules returns the collection as a Go slice.
 func (tg *TileGroup) Rules() []*TileGroupRule {
+	defer runtime.KeepAlive(tg)
 	_arr := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("rules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileGroupRule { return TileGroupRuleFromID(_id) })
 }
 
 // Name returns client-assignable name for the tile group. Defaults to nil.
 func (tg *TileGroup) Name() string {
+	defer runtime.KeepAlive(tg)
 	_r := objc.Send[objc.ID](objref.IDOf(tg), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

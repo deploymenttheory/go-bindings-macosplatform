@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func windowAdopt(id objc.ID) *Window {
 
 // Description returns the object's -description text.
 func (w *Window) Description() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (w *Window) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(w), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (w *Window) IsKind(className string) bool {
+	defer runtime.KeepAlive(w)
 	return rt.IsKind(objref.IDOf(w), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (w *Window) String() string {
+	defer runtime.KeepAlive(w)
 	return rt.Description(objref.IDOf(w))
 }
 
@@ -75,18 +82,21 @@ func NewWindow() *Window {
 
 // WindowID returns windowID the CGWindowID for the SCWindow
 func (w *Window) WindowID() uint32 {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[uint32](objref.IDOf(w), objc.RegisterName("windowID"))
 	return _r
 }
 
 // Frame returns frame the CGRect for the SCWindow
 func (w *Window) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(w), objc.RegisterName("frame"))
 	return _r
 }
 
 // Title returns title the window title for the SCWindow
 func (w *Window) Title() string {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -96,24 +106,28 @@ func (w *Window) Title() string {
 
 // WindowLayer returns windowLayer the window layer for the SCWindow
 func (w *Window) WindowLayer() int {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("windowLayer"))
 	return _r
 }
 
 // OwningApplication returns owningApplication is the SCRunningApplication that owns this SCWindow
 func (w *Window) OwningApplication() *RunningApplication {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("owningApplication"))
 	return RunningApplicationFromID(_r)
 }
 
 // IsOnScreen reports whether onScreen the bool property denoting of the SCWindow is on the screen
 func (w *Window) IsOnScreen() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isOnScreen"))
 	return _r
 }
 
 // IsActive reports whether active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
 func (w *Window) IsActive() bool {
+	defer runtime.KeepAlive(w)
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isActive"))
 	return _r
 }

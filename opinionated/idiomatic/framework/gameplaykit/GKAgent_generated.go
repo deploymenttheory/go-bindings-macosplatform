@@ -5,8 +5,11 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,8 +48,19 @@ func agentAdopt(id objc.ID) *Agent {
 	return x
 }
 
+// WithDelegate sets an object that prepares for or responds to updates in the agent simulation.
+func (a *Agent) WithDelegate(delegate AgentDelegate) *Agent {
+	_shim := newAgentDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(a), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(a), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return a
+}
+
 // WithBehavior sets a weighted collection of goals that influence the agent’s movement.
 func (a *Agent) WithBehavior(behavior BehaviorProvider) *Agent {
+	defer runtime.KeepAlive(behavior)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return a
 }
@@ -83,36 +97,42 @@ func (a *Agent) WithMaxSpeed(maxSpeed float32) *Agent {
 
 // Behavior returns the behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
 func (a *Agent) Behavior() *Behavior {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("behavior"))
 	return BehaviorFromID(_r)
 }
 
 // Mass returns agent's mass. Used for agent impulse application purposes. Defaults to 1.0
 func (a *Agent) Mass() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("mass"))
 	return _r
 }
 
 // Radius returns radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
 func (a *Agent) Radius() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("radius"))
 	return _r
 }
 
 // Speed returns current speed of the agent along its foward direction. Defaults to 0.0
 func (a *Agent) Speed() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("speed"))
 	return _r
 }
 
 // MaxAcceleration returns maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
 func (a *Agent) MaxAcceleration() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("maxAcceleration"))
 	return _r
 }
 
 // MaxSpeed returns maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
 func (a *Agent) MaxSpeed() float32 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float32](objref.IDOf(a), objc.RegisterName("maxSpeed"))
 	return _r
 }

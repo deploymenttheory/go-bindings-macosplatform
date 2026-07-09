@@ -6,9 +6,12 @@ package webkit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +53,33 @@ func wKWebExtensionContextAdopt(id objc.ID) *WKWebExtensionContext {
 
 // Description returns the object's -description text.
 func (wwec *WKWebExtensionContext) Description() string {
+	defer runtime.KeepAlive(wwec)
 	return rt.Description(objref.IDOf(wwec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwec *WKWebExtensionContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwec *WKWebExtensionContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwec)
 	return rt.IsKind(objref.IDOf(wwec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwec *WKWebExtensionContext) String() string {
+	defer runtime.KeepAlive(wwec)
 	return rt.Description(objref.IDOf(wwec))
 }
 
 // NewWKWebExtensionContextForExtension returns a web extension context initialized with a specified extension.
 func NewWKWebExtensionContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
+	defer runtime.KeepAlive(extension)
 	var _mainthread0 *WKWebExtensionContext
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtensionContext {
@@ -115,15 +124,16 @@ func (wwec *WKWebExtensionContext) WithInspectionName(inspectionName string) *WK
 }
 
 // WithUnsupportedAPIs sets specifies unsupported APIs for this extension, making them undefined in JavaScript.
-func (wwec *WKWebExtensionContext) WithUnsupportedAPIs(unsupportedAPIs obj.Object) *WKWebExtensionContext {
+func (wwec *WKWebExtensionContext) WithUnsupportedAPIs(unsupportedAPIs []string) *WKWebExtensionContext {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setUnsupportedAPIs:"), objref.IDOf(unsupportedAPIs))
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setUnsupportedAPIs:"), rt.SliceToNSSet(unsupportedAPIs, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return wwec
 }
 
 // WithGrantedPermissions sets the currently granted permissions and their expiration dates.
 func (wwec *WKWebExtensionContext) WithGrantedPermissions(grantedPermissions obj.Object) *WKWebExtensionContext {
+	defer runtime.KeepAlive(grantedPermissions)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setGrantedPermissions:"), objref.IDOf(grantedPermissions))
 	})
@@ -132,6 +142,7 @@ func (wwec *WKWebExtensionContext) WithGrantedPermissions(grantedPermissions obj
 
 // WithGrantedPermissionMatchPatterns sets the currently granted permission match patterns and their expiration dates.
 func (wwec *WKWebExtensionContext) WithGrantedPermissionMatchPatterns(grantedPermissionMatchPatterns obj.Object) *WKWebExtensionContext {
+	defer runtime.KeepAlive(grantedPermissionMatchPatterns)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setGrantedPermissionMatchPatterns:"), objref.IDOf(grantedPermissionMatchPatterns))
 	})
@@ -140,6 +151,7 @@ func (wwec *WKWebExtensionContext) WithGrantedPermissionMatchPatterns(grantedPer
 
 // WithDeniedPermissions sets the currently denied permissions and their expiration dates.
 func (wwec *WKWebExtensionContext) WithDeniedPermissions(deniedPermissions obj.Object) *WKWebExtensionContext {
+	defer runtime.KeepAlive(deniedPermissions)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setDeniedPermissions:"), objref.IDOf(deniedPermissions))
 	})
@@ -148,6 +160,7 @@ func (wwec *WKWebExtensionContext) WithDeniedPermissions(deniedPermissions obj.O
 
 // WithDeniedPermissionMatchPatterns sets the currently denied permission match patterns and their expiration dates.
 func (wwec *WKWebExtensionContext) WithDeniedPermissionMatchPatterns(deniedPermissionMatchPatterns obj.Object) *WKWebExtensionContext {
+	defer runtime.KeepAlive(deniedPermissionMatchPatterns)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setDeniedPermissionMatchPatterns:"), objref.IDOf(deniedPermissionMatchPatterns))
 	})
@@ -172,6 +185,8 @@ func (wwec *WKWebExtensionContext) WithHasAccessToPrivateData(hasAccessToPrivate
 
 // HasPermission checks the specified permission against the currently granted permissions.
 func (wwec *WKWebExtensionContext) HasPermission(permission obj.Object) bool {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(permission)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -185,6 +200,7 @@ func (wwec *WKWebExtensionContext) HasPermission(permission obj.Object) bool {
 
 // HasAccessToURL checks the specified URL against the currently granted permission match patterns.
 func (wwec *WKWebExtensionContext) HasAccessToURL(url string) bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -198,6 +214,7 @@ func (wwec *WKWebExtensionContext) HasAccessToURL(url string) bool {
 
 // HasInjectedContentForURL checks if the extension has script or stylesheet content that can be injected into the specified URL.
 func (wwec *WKWebExtensionContext) HasInjectedContentForURL(url string) bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -211,6 +228,8 @@ func (wwec *WKWebExtensionContext) HasInjectedContentForURL(url string) bool {
 
 // PermissionStatusForPermission checks the specified permission against the currently denied, granted, and requested permissions.
 func (wwec *WKWebExtensionContext) PermissionStatusForPermission(permission obj.Object) WKWebExtensionContextPermissionStatus {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(permission)
 	var _mainthread0 WKWebExtensionContextPermissionStatus
 	purego.Main(func() {
 		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
@@ -224,6 +243,8 @@ func (wwec *WKWebExtensionContext) PermissionStatusForPermission(permission obj.
 
 // SetPermissionStatusForPermission sets the status of a permission with a distant future expiration date.
 func (wwec *WKWebExtensionContext) SetPermissionStatusForPermission(status WKWebExtensionContextPermissionStatus, permission obj.Object) {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(permission)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forPermission:"), status, objref.IDOf(permission))
 	})
@@ -231,15 +252,18 @@ func (wwec *WKWebExtensionContext) SetPermissionStatusForPermission(status WKWeb
 }
 
 // SetPermissionStatusForPermissionExpirationDate sets the status of a permission with a specific expiration date.
-func (wwec *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission obj.Object, expirationDate obj.Object) {
+func (wwec *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission obj.Object, expirationDate time.Time) {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(permission)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forPermission:expirationDate:"), status, objref.IDOf(permission), objref.IDOf(expirationDate))
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forPermission:expirationDate:"), status, objref.IDOf(permission), rt.TimeToNSDate(expirationDate))
 	})
 
 }
 
 // PermissionStatusForURL checks the specified URL against the currently denied, granted, and requested permission match patterns.
 func (wwec *WKWebExtensionContext) PermissionStatusForURL(url string) WKWebExtensionContextPermissionStatus {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 WKWebExtensionContextPermissionStatus
 	purego.Main(func() {
 		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
@@ -253,6 +277,7 @@ func (wwec *WKWebExtensionContext) PermissionStatusForURL(url string) WKWebExten
 
 // SetPermissionStatusForURL sets the permission status of a URL with a distant future expiration date.
 func (wwec *WKWebExtensionContext) SetPermissionStatusForURL(status WKWebExtensionContextPermissionStatus, url string) {
+	defer runtime.KeepAlive(wwec)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forURL:"), status, rt.FileURL(url))
 	})
@@ -260,15 +285,18 @@ func (wwec *WKWebExtensionContext) SetPermissionStatusForURL(status WKWebExtensi
 }
 
 // SetPermissionStatusForURLExpirationDate sets the permission status of a URL with a distant future expiration date.
-func (wwec *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url string, expirationDate obj.Object) {
+func (wwec *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url string, expirationDate time.Time) {
+	defer runtime.KeepAlive(wwec)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forURL:expirationDate:"), status, rt.FileURL(url), objref.IDOf(expirationDate))
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forURL:expirationDate:"), status, rt.FileURL(url), rt.TimeToNSDate(expirationDate))
 	})
 
 }
 
 // PermissionStatusForMatchPattern checks the specified match pattern against the currently denied, granted, and requested permission match patterns.
 func (wwec *WKWebExtensionContext) PermissionStatusForMatchPattern(pattern *WKWebExtensionMatchPattern) WKWebExtensionContextPermissionStatus {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(pattern)
 	var _mainthread0 WKWebExtensionContextPermissionStatus
 	purego.Main(func() {
 		_mainthread0 = func() WKWebExtensionContextPermissionStatus {
@@ -282,6 +310,8 @@ func (wwec *WKWebExtensionContext) PermissionStatusForMatchPattern(pattern *WKWe
 
 // SetPermissionStatusForMatchPattern sets the status of a match pattern with a distant future expiration date.
 func (wwec *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern) {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(pattern)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forMatchPattern:"), status, objref.IDOf(pattern))
 	})
@@ -289,9 +319,11 @@ func (wwec *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status WKW
 }
 
 // SetPermissionStatusForMatchPatternExpirationDate sets the status of a match pattern with a specific expiration date.
-func (wwec *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern, expirationDate obj.Object) {
+func (wwec *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *WKWebExtensionMatchPattern, expirationDate time.Time) {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(pattern)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forMatchPattern:expirationDate:"), status, objref.IDOf(pattern), objref.IDOf(expirationDate))
+		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("setPermissionStatus:forMatchPattern:expirationDate:"), status, objref.IDOf(pattern), rt.TimeToNSDate(expirationDate))
 	})
 
 }
@@ -300,6 +332,7 @@ func (wwec *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationD
 //
 // LoadBackgroundContent blocks until the operation completes or ctx is cancelled.
 func (wwec *WKWebExtensionContext) LoadBackgroundContent(ctx context.Context) error {
+	defer runtime.KeepAlive(wwec)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -317,6 +350,8 @@ func (wwec *WKWebExtensionContext) LoadBackgroundContent(ctx context.Context) er
 
 // PerformCommand performs the specified command, triggering events specific to this extension.
 func (wwec *WKWebExtensionContext) PerformCommand(command *WKWebExtensionCommand) {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(command)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("performCommand:"), objref.IDOf(command))
 	})
@@ -325,6 +360,8 @@ func (wwec *WKWebExtensionContext) PerformCommand(command *WKWebExtensionCommand
 
 // PerformCommandForEvent performs the command associated with the given event.
 func (wwec *WKWebExtensionContext) PerformCommandForEvent(event obj.Object) bool {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -338,6 +375,8 @@ func (wwec *WKWebExtensionContext) PerformCommandForEvent(event obj.Object) bool
 
 // CommandForEvent retrieves the command associated with the given event without performing it.
 func (wwec *WKWebExtensionContext) CommandForEvent(event obj.Object) *WKWebExtensionCommand {
+	defer runtime.KeepAlive(wwec)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 *WKWebExtensionCommand
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtensionCommand {
@@ -351,6 +390,7 @@ func (wwec *WKWebExtensionContext) CommandForEvent(event obj.Object) *WKWebExten
 
 // DidSelectTabs called by the app when tabs are selected to fire appropriate events with only this extension.
 func (wwec *WKWebExtensionContext) DidSelectTabs(selectedTabs []obj.Object) {
+	defer runtime.KeepAlive(wwec)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("didSelectTabs:"), purego.SliceToNSArray(selectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -359,6 +399,7 @@ func (wwec *WKWebExtensionContext) DidSelectTabs(selectedTabs []obj.Object) {
 
 // DidDeselectTabs called by the app when tabs are deselected to fire appropriate events with only this extension.
 func (wwec *WKWebExtensionContext) DidDeselectTabs(deselectedTabs []obj.Object) {
+	defer runtime.KeepAlive(wwec)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("didDeselectTabs:"), purego.SliceToNSArray(deselectedTabs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -367,6 +408,7 @@ func (wwec *WKWebExtensionContext) DidDeselectTabs(deselectedTabs []obj.Object) 
 
 // WebExtension returns the extension this context represents.
 func (wwec *WKWebExtensionContext) WebExtension() *WKWebExtension {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 *WKWebExtension
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtension {
@@ -380,6 +422,7 @@ func (wwec *WKWebExtensionContext) WebExtension() *WKWebExtension {
 
 // WebExtensionController returns the extension controller this context is loaded in, otherwise `nil` if it isn't loaded.
 func (wwec *WKWebExtensionContext) WebExtensionController() *WKWebExtensionController {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 *WKWebExtensionController
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtensionController {
@@ -393,6 +436,7 @@ func (wwec *WKWebExtensionContext) WebExtensionController() *WKWebExtensionContr
 
 // IsLoaded reports whether a Boolean value indicating if this context is loaded in an extension controller.
 func (wwec *WKWebExtensionContext) IsLoaded() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -406,6 +450,7 @@ func (wwec *WKWebExtensionContext) IsLoaded() bool {
 
 // Errors returns all errors that occurred in the extension context. Provides an array of all parse-time and runtime errors for the extension and extension context, with repeat errors consolidated into a single entry for the original occurrence. If no errors occurred, an empty array is returned.
 func (wwec *WKWebExtensionContext) Errors() []obj.Object {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -418,12 +463,13 @@ func (wwec *WKWebExtensionContext) Errors() []obj.Object {
 }
 
 // BaseURL returns the base URL the context uses for loading extension resources or injecting content into webpages. The default value is a unique URL using the `webkit-extension` scheme. The base URL can be set to any URL, but only the scheme and host will be used. The scheme cannot be a scheme that is already supported by “WKWebView“ (e.g. http, https, etc.) Setting is only allowed when the context is not loaded.
-func (wwec *WKWebExtensionContext) BaseURL() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) BaseURL() string {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("baseURL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -432,6 +478,7 @@ func (wwec *WKWebExtensionContext) BaseURL() obj.Object {
 
 // UniqueIdentifier returns a unique identifier used to distinguish the extension from other extensions and target it for messages. The default value is a unique value that matches the host in the default base URL. The identifier can be any value that is unique. Setting is only allowed when the context is not loaded. This value is accessible by the extension via `browser.runtime.id` and is used for messaging the extension via `browser.runtime.sendMessage()`.
 func (wwec *WKWebExtensionContext) UniqueIdentifier() string {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -448,6 +495,7 @@ func (wwec *WKWebExtensionContext) UniqueIdentifier() string {
 
 // IsInspectable reports whether web Inspector can inspect the “WKWebView“ instances for this context. A context can control multiple “WKWebView“ instances, from the background content, to the popover. You should set this to `YES` when needed for debugging purposes. The default value is `NO`.
 func (wwec *WKWebExtensionContext) IsInspectable() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -461,6 +509,7 @@ func (wwec *WKWebExtensionContext) IsInspectable() bool {
 
 // InspectionName returns the name shown when inspecting the background web view. This is the text that will appear when inspecting the background web view.
 func (wwec *WKWebExtensionContext) InspectionName() string {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -476,12 +525,13 @@ func (wwec *WKWebExtensionContext) InspectionName() string {
 }
 
 // UnsupportedAPIs specifies unsupported APIs for this extension, making them `undefined` in JavaScript. This property allows the app to specify a subset of web extension APIs that it chooses not to support, effectively making these APIs `undefined` within the extension's JavaScript contexts. This enables extensions to employ feature detection techniques for unsupported APIs, allowing them to adapt their behavior based on the APIs actually supported by the app. Setting is only allowed when the context is not loaded. Only certain APIs can be specified here, particularly those within the `browser` namespace and other dynamic functions and properties, anything else will be silently ignored.
-func (wwec *WKWebExtensionContext) UnsupportedAPIs() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) UnsupportedAPIs() []string {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []string {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("unsupportedAPIs"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -490,6 +540,7 @@ func (wwec *WKWebExtensionContext) UnsupportedAPIs() obj.Object {
 
 // WebViewConfiguration returns the web view configuration to use for web views that load pages from this extension. Returns a customized copy of the configuration, originally set in the web extension controller configuration, for this extension. The app must use this configuration when initializing web views intended to navigate to a URL originating from this extension's base URL. The app must also swap web views in tabs when navigating to and from web extension URLs. This property returns `nil` if the context isn't associated with a web extension controller. The returned configuration copy can be customized prior to web view initialization.
 func (wwec *WKWebExtensionContext) WebViewConfiguration() *WKWebViewConfiguration {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 *WKWebViewConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebViewConfiguration {
@@ -502,12 +553,13 @@ func (wwec *WKWebExtensionContext) WebViewConfiguration() *WKWebViewConfiguratio
 }
 
 // OptionsPageURL returns the URL of the extension's options page, if the extension has one. Provides the URL for the dedicated options page, if provided by the extension; otherwise `nil` if no page is defined. The app should provide access to this page through a user interface element.
-func (wwec *WKWebExtensionContext) OptionsPageURL() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) OptionsPageURL() string {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("optionsPageURL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -515,12 +567,13 @@ func (wwec *WKWebExtensionContext) OptionsPageURL() obj.Object {
 }
 
 // OverrideNewTabPageURL returns the URL to use as an alternative to the default new tab page, if the extension has one. Provides the URL for a new tab page, if provided by the extension; otherwise `nil` if no page is defined. The app should prompt the user for permission to use the extension's new tab page as the default.
-func (wwec *WKWebExtensionContext) OverrideNewTabPageURL() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) OverrideNewTabPageURL() string {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("overrideNewTabPageURL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -529,6 +582,7 @@ func (wwec *WKWebExtensionContext) OverrideNewTabPageURL() obj.Object {
 
 // GrantedPermissions returns the currently granted permissions and their expiration dates. Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly granted by the user before being added. Any permissions in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionContext) GrantedPermissions() obj.Object {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -542,6 +596,7 @@ func (wwec *WKWebExtensionContext) GrantedPermissions() obj.Object {
 
 // GrantedPermissionMatchPatterns returns the currently granted permission match patterns and their expiration dates. Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly granted by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionContext) GrantedPermissionMatchPatterns() obj.Object {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -555,6 +610,7 @@ func (wwec *WKWebExtensionContext) GrantedPermissionMatchPatterns() obj.Object {
 
 // DeniedPermissions returns the currently denied permissions and their expiration dates. Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionContext) DeniedPermissions() obj.Object {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -568,6 +624,7 @@ func (wwec *WKWebExtensionContext) DeniedPermissions() obj.Object {
 
 // DeniedPermissionMatchPatterns returns the currently denied permission match patterns and their expiration dates. Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionContext) DeniedPermissionMatchPatterns() obj.Object {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -581,6 +638,7 @@ func (wwec *WKWebExtensionContext) DeniedPermissionMatchPatterns() obj.Object {
 
 // HasRequestedOptionalAccessToAllHosts reports whether a Boolean value indicating if the extension has requested optional access to all hosts. If this property is `YES`, the extension has asked for access to all hosts in a call to `browser.runtime.permissions.request()`, and future permission checks will present discrete hosts for approval as being implicitly requested. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionContext) HasRequestedOptionalAccessToAllHosts() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -594,6 +652,7 @@ func (wwec *WKWebExtensionContext) HasRequestedOptionalAccessToAllHosts() bool {
 
 // HasAccessToPrivateData reports whether a Boolean value indicating if the extension has access to private data. If this property is `YES`, the extension is granted permission to interact with private windows, tabs, and cookies. Access to private data should be explicitly allowed by the user before setting this property. This value should be saved and restored as needed by the app.
 func (wwec *WKWebExtensionContext) HasAccessToPrivateData() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -606,12 +665,13 @@ func (wwec *WKWebExtensionContext) HasAccessToPrivateData() bool {
 }
 
 // CurrentPermissions returns the currently granted permissions that have not expired.
-func (wwec *WKWebExtensionContext) CurrentPermissions() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) CurrentPermissions() []*foundation.String {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 []*foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("currentPermissions"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -619,12 +679,13 @@ func (wwec *WKWebExtensionContext) CurrentPermissions() obj.Object {
 }
 
 // CurrentPermissionMatchPatterns returns the currently granted permission match patterns that have not expired.
-func (wwec *WKWebExtensionContext) CurrentPermissionMatchPatterns() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) CurrentPermissionMatchPatterns() []*WKWebExtensionMatchPattern {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 []*WKWebExtensionMatchPattern
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*WKWebExtensionMatchPattern {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("currentPermissionMatchPatterns"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *WKWebExtensionMatchPattern { return WKWebExtensionMatchPatternFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -633,6 +694,7 @@ func (wwec *WKWebExtensionContext) CurrentPermissionMatchPatterns() obj.Object {
 
 // HasAccessToAllURLs reports whether a Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern. This does not check for any `*` host patterns. In most cases you should use the broader “hasAccessToAllHosts“.
 func (wwec *WKWebExtensionContext) HasAccessToAllURLs() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -646,6 +708,7 @@ func (wwec *WKWebExtensionContext) HasAccessToAllURLs() bool {
 
 // HasAccessToAllHosts reports whether a Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern or any `*` host patterns.
 func (wwec *WKWebExtensionContext) HasAccessToAllHosts() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -659,6 +722,7 @@ func (wwec *WKWebExtensionContext) HasAccessToAllHosts() bool {
 
 // HasInjectedContent reports whether the extension has script or stylesheet content that can be injected into webpages. If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns.
 func (wwec *WKWebExtensionContext) HasInjectedContent() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -672,6 +736,7 @@ func (wwec *WKWebExtensionContext) HasInjectedContent() bool {
 
 // HasContentModificationRules reports whether the extension includes rules used for content modification or blocking. This includes both static rules available in the extension's manifest and dynamic rules applied during a browsing session.
 func (wwec *WKWebExtensionContext) HasContentModificationRules() bool {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -687,6 +752,7 @@ func (wwec *WKWebExtensionContext) HasContentModificationRules() bool {
 //
 // Commands returns the collection as a Go slice.
 func (wwec *WKWebExtensionContext) Commands() []*WKWebExtensionCommand {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 []*WKWebExtensionCommand
 	purego.Main(func() {
 		_mainthread0 = func() []*WKWebExtensionCommand {
@@ -699,6 +765,7 @@ func (wwec *WKWebExtensionContext) Commands() []*WKWebExtensionCommand {
 
 // OpenWindows returns the open windows that are exposed to this extension. Provides the windows that are open and visible to the extension, as updated by the “didOpenWindow:“ and “didCloseWindow:“ methods. Initially populated by the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“.
 func (wwec *WKWebExtensionContext) OpenWindows() []obj.Object {
+	defer runtime.KeepAlive(wwec)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -711,12 +778,13 @@ func (wwec *WKWebExtensionContext) OpenWindows() []obj.Object {
 }
 
 // OpenTabs returns a set of open tabs in all open windows that are exposed to this extension. Provides a set of tabs in all open windows that are visible to the extension, as updated by the “didOpenTab:“ and “didCloseTab:“ methods. Initially populated by the tabs in the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“.
-func (wwec *WKWebExtensionContext) OpenTabs() obj.Object {
-	var _mainthread0 obj.Object
+func (wwec *WKWebExtensionContext) OpenTabs() []obj.Object {
+	defer runtime.KeepAlive(wwec)
+	var _mainthread0 []obj.Object
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []obj.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(wwec), objc.RegisterName("openTabs"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 		}()
 	})
 	return _mainthread0

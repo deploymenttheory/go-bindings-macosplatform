@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func filterShapeAdopt(id objc.ID) *FilterShape {
 
 // Description returns the object's -description text.
 func (fs *FilterShape) Description() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fs *FilterShape) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fs *FilterShape) IsKind(className string) bool {
+	defer runtime.KeepAlive(fs)
 	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fs *FilterShape) String() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 
@@ -76,42 +83,51 @@ func NewFilterShapeWithRect(r corefoundation.CGRect) *FilterShape {
 
 // TransformByInterior creates a filter shape that results from applying a transform to the current filter shape.
 func (fs *FilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape {
+	defer runtime.KeepAlive(fs)
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("transformBy:interior:"), m, flag)
 	return FilterShapeFromID(_r)
 }
 
 // InsetByXY modifies a filter shape object so that it is inset by the specified x and y values.
 func (fs *FilterShape) InsetByXY(dx int, dy int) *FilterShape {
+	defer runtime.KeepAlive(fs)
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("insetByX:Y:"), dx, dy)
 	return FilterShapeFromID(_r)
 }
 
 // UnionWith creates a filter shape that results from the union of the current filter shape and another filter shape object.
 func (fs *FilterShape) UnionWith(s2 *FilterShape) *FilterShape {
+	defer runtime.KeepAlive(fs)
+	defer runtime.KeepAlive(s2)
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("unionWith:"), objref.IDOf(s2))
 	return FilterShapeFromID(_r)
 }
 
 // UnionWithRect creates a filter shape that results from the union of the current filter shape and a rectangle.
 func (fs *FilterShape) UnionWithRect(r corefoundation.CGRect) *FilterShape {
+	defer runtime.KeepAlive(fs)
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("unionWithRect:"), r)
 	return FilterShapeFromID(_r)
 }
 
 // IntersectWith creates a filter shape object that represents the intersection of the current filter shape and the specified filter shape object.
 func (fs *FilterShape) IntersectWith(s2 *FilterShape) *FilterShape {
+	defer runtime.KeepAlive(fs)
+	defer runtime.KeepAlive(s2)
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("intersectWith:"), objref.IDOf(s2))
 	return FilterShapeFromID(_r)
 }
 
 // IntersectWithRect creates a filter shape that represents the intersection of the current filter shape and a rectangle.
 func (fs *FilterShape) IntersectWithRect(r corefoundation.CGRect) *FilterShape {
+	defer runtime.KeepAlive(fs)
 	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("intersectWithRect:"), r)
 	return FilterShapeFromID(_r)
 }
 
 // Extent returns the extent.
 func (fs *FilterShape) Extent() corefoundation.CGRect {
+	defer runtime.KeepAlive(fs)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(fs), objc.RegisterName("extent"))
 	return _r
 }

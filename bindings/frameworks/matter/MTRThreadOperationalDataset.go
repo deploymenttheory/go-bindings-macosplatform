@@ -42,8 +42,8 @@ func MTRThreadOperationalDatasetFromID(id objc.ID) *MTRThreadOperationalDataset 
 }
 
 // Create a Thread Operational Dataset object with the individual network fields. @param extendedPANID Must be MTRSizeThreadExtendedPANID bytes.  Otherwise nil will be returned. @param masterKey Must be MTRSizeThreadMasterKey bytes. Otherwise nil will be returned. @param PSKc Must be MTRSizeThreadPSKc bytes.  Otherwise nil will be returned. @param channelNumber Must be an unsigned 16-bit value. @param panID Must be MTRSizeThreadPANID bytes.  Otherwise nil will be returned.  In particular, it's expected to be a 16-bit unsigned integer stored as 2 bytes in host order.
-func (o *MTRThreadOperationalDataset) InitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID(networkName *foundation.NSString, extendedPANID *foundation.NSData, masterKey *foundation.NSData, pSKc *foundation.NSData, channelNumber *foundation.NSNumber, panID *foundation.NSData) *MTRThreadOperationalDataset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID, networkName.Ptr(), extendedPANID.Ptr(), masterKey.Ptr(), pSKc.Ptr(), channelNumber.Ptr(), panID.Ptr())
+func (o *MTRThreadOperationalDataset) InitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID(networkName *foundation.NSString, extendedPANID *foundation.NSData, masterKey *foundation.NSData, psKc *foundation.NSData, channelNumber *foundation.NSNumber, panID *foundation.NSData) *MTRThreadOperationalDataset {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelNumberPanID, networkName.Ptr(), extendedPANID.Ptr(), masterKey.Ptr(), psKc.Ptr(), channelNumber.Ptr(), panID.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -122,8 +122,8 @@ func (o *MTRThreadOperationalDataset) PanID() *foundation.NSData {
 	return foundation.NSDataFromID(_ret)
 }
 
-func (o *MTRThreadOperationalDataset) InitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID(networkName *foundation.NSString, extendedPANID *foundation.NSData, masterKey *foundation.NSData, pSKc *foundation.NSData, channel uint16, panID *foundation.NSData) *MTRThreadOperationalDataset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID, networkName.Ptr(), extendedPANID.Ptr(), masterKey.Ptr(), pSKc.Ptr(), channel, panID.Ptr())
+func (o *MTRThreadOperationalDataset) InitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID(networkName *foundation.NSString, extendedPANID *foundation.NSData, masterKey *foundation.NSData, psKc *foundation.NSData, channel uint16, panID *foundation.NSData) *MTRThreadOperationalDataset {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mTRThreadOperationalDatasetSelInitWithNetworkNameExtendedPANIDMasterKeyPSKcChannelPanID, networkName.Ptr(), extendedPANID.Ptr(), masterKey.Ptr(), psKc.Ptr(), channel, panID.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

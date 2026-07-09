@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,10 @@ func cNNNeuronGradientNodeAdopt(id objc.ID) *CNNNeuronGradientNode {
 
 // NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescriptor create a new neuron gradient node See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
 func NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescriptor(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, descriptor obj.Object) *CNNNeuronGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:descriptor:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), objref.IDOf(descriptor))
 	return cNNNeuronGradientNodeAdopt(_id)
@@ -61,6 +67,7 @@ func (cngn *CNNNeuronGradientNode) WithLabel(label string) *CNNNeuronGradientNod
 
 // Descriptor returns the neuron descriptor
 func (cngn *CNNNeuronGradientNode) Descriptor() obj.Object {
+	defer runtime.KeepAlive(cngn)
 	_r := objc.Send[objc.ID](objref.IDOf(cngn), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)
 }

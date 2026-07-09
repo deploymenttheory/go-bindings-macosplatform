@@ -5,9 +5,11 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,13 +49,15 @@ func transitPassPropertiesAdopt(id objc.ID) *TransitPassProperties {
 }
 
 // TransitBalance returns the transit balance.
-func (tpp *TransitPassProperties) TransitBalance() obj.Object {
+func (tpp *TransitPassProperties) TransitBalance() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(tpp)
 	_r := objc.Send[objc.ID](objref.IDOf(tpp), objc.RegisterName("transitBalance"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 // TransitBalanceCurrencyCode returns the transit balance currency code.
 func (tpp *TransitPassProperties) TransitBalanceCurrencyCode() string {
+	defer runtime.KeepAlive(tpp)
 	_r := objc.Send[objc.ID](objref.IDOf(tpp), objc.RegisterName("transitBalanceCurrencyCode"))
 	if _r == 0 {
 		return ""
@@ -63,6 +67,7 @@ func (tpp *TransitPassProperties) TransitBalanceCurrencyCode() string {
 
 // IsInStation reports whether the object is in station.
 func (tpp *TransitPassProperties) IsInStation() bool {
+	defer runtime.KeepAlive(tpp)
 	_r := objc.Send[bool](objref.IDOf(tpp), objc.RegisterName("isInStation"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func aVB17221AECPMessageAdopt(id objc.ID) *AVB17221AECPMessage {
 
 // Description returns the object's -description text.
 func (aam *AVB17221AECPMessage) Description() string {
+	defer runtime.KeepAlive(aam)
 	return rt.Description(objref.IDOf(aam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aam *AVB17221AECPMessage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aam *AVB17221AECPMessage) IsKind(className string) bool {
+	defer runtime.KeepAlive(aam)
 	return rt.IsKind(objref.IDOf(aam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aam *AVB17221AECPMessage) String() string {
+	defer runtime.KeepAlive(aam)
 	return rt.Description(objref.IDOf(aam))
 }
 
@@ -98,42 +105,49 @@ func (aam *AVB17221AECPMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPM
 
 // WithSourceMAC sets the source_mac field of the AECP message.
 func (aam *AVB17221AECPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPMessage {
+	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aam
 }
 
 // MessageType returns the message_type field of the AECP message.
 func (aam *AVB17221AECPMessage) MessageType() AVB17221AECPMessageType {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221AECPMessageType](objref.IDOf(aam), objc.RegisterName("messageType"))
 	return _r
 }
 
 // Status returns the status field of the AECP message.
 func (aam *AVB17221AECPMessage) Status() AVB17221AECPStatusCode {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221AECPStatusCode](objref.IDOf(aam), objc.RegisterName("status"))
 	return _r
 }
 
 // TargetEntityID returns the target_entity_id field of the AECP message.
 func (aam *AVB17221AECPMessage) TargetEntityID() uint64 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("targetEntityID"))
 	return _r
 }
 
 // ControllerEntityID returns the controller_entity_id field of the AECP message.
 func (aam *AVB17221AECPMessage) ControllerEntityID() uint64 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("controllerEntityID"))
 	return _r
 }
 
 // SequenceID returns the sequence_id field of the AECP message.
 func (aam *AVB17221AECPMessage) SequenceID() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("sequenceID"))
 	return _r
 }
 
 // SourceMAC returns the source_mac field of the AECP message.
 func (aam *AVB17221AECPMessage) SourceMAC() *MACAddress {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("sourceMAC"))
 	return MACAddressFromID(_r)
 }

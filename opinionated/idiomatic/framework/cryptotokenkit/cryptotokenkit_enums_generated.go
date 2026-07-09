@@ -261,3 +261,37 @@ func (e SmartCardSlotState) String() string {
 		return fmt.Sprintf("SmartCardSlotState(%d)", int64(e))
 	}
 }
+
+// Operations that can be performed with a token’s keys and certificates.
+type TokenOperation int64
+
+const (
+	TokenOperationNone TokenOperation = 0
+	// Reading of raw data of certificate.
+	TokenOperationReadData TokenOperation = 1
+	// Cryptographic signature using private key.
+	TokenOperationSignData TokenOperation = 2
+	// Decrypting data using private key.
+	TokenOperationDecryptData TokenOperation = 3
+	// Performing Diffie-Hellman style of cryptographic key exchange using private key.
+	TokenOperationPerformKeyExchange TokenOperation = 4
+)
+
+// String returns the TokenOperation constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TokenOperation) String() string {
+	switch e {
+	case TokenOperationNone:
+		return "TokenOperationNone"
+	case TokenOperationReadData:
+		return "TokenOperationReadData"
+	case TokenOperationSignData:
+		return "TokenOperationSignData"
+	case TokenOperationDecryptData:
+		return "TokenOperationDecryptData"
+	case TokenOperationPerformKeyExchange:
+		return "TokenOperationPerformKeyExchange"
+	default:
+		return fmt.Sprintf("TokenOperation(%d)", int64(e))
+	}
+}

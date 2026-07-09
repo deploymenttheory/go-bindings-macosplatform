@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func persistentHistoryTokenAdopt(id objc.ID) *PersistentHistoryToken {
 
 // Description returns the object's -description text.
 func (pht *PersistentHistoryToken) Description() string {
+	defer runtime.KeepAlive(pht)
 	return rt.Description(objref.IDOf(pht))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pht *PersistentHistoryToken) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pht)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pht), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pht *PersistentHistoryToken) IsKind(className string) bool {
+	defer runtime.KeepAlive(pht)
 	return rt.IsKind(objref.IDOf(pht), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pht *PersistentHistoryToken) String() string {
+	defer runtime.KeepAlive(pht)
 	return rt.Description(objref.IDOf(pht))
 }
 

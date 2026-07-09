@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,34 @@ func mediaSelectionGroupAdopt(id objc.ID) *MediaSelectionGroup {
 
 // Description returns the object's -description text.
 func (msg *MediaSelectionGroup) Description() string {
+	defer runtime.KeepAlive(msg)
 	return rt.Description(objref.IDOf(msg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msg *MediaSelectionGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msg *MediaSelectionGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(msg)
 	return rt.IsKind(objref.IDOf(msg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msg *MediaSelectionGroup) String() string {
+	defer runtime.KeepAlive(msg)
 	return rt.Description(objref.IDOf(msg))
 }
 
 // MediaSelectionOptionWithPropertyList returns the media selection options that match the given property list.
 func (msg *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist obj.Object) *MediaSelectionOption {
+	defer runtime.KeepAlive(msg)
+	defer runtime.KeepAlive(plist)
 	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("mediaSelectionOptionWithPropertyList:"), objref.IDOf(plist))
 	return MediaSelectionOptionFromID(_r)
 }
@@ -78,24 +87,28 @@ func (msg *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist obj.O
 //
 // Options returns the collection as a Go slice.
 func (msg *MediaSelectionGroup) Options() []*MediaSelectionOption {
+	defer runtime.KeepAlive(msg)
 	_arr := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("options"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
 // DefaultOption indicates the default option in the group, i.e. the option that's intended for use in the absence of a specific end-user selection or preference. Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
 func (msg *MediaSelectionGroup) DefaultOption() *MediaSelectionOption {
+	defer runtime.KeepAlive(msg)
 	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("defaultOption"))
 	return MediaSelectionOptionFromID(_r)
 }
 
 // AllowsEmptySelection reports whether it's possible to present none of the options in the group when an associated AVPlayerItem is played. If allowsEmptySelection is true, all of the available media options in the group can be deselected by passing nil as the specified AVMediaSelectionOption to -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
 func (msg *MediaSelectionGroup) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(msg)
 	_r := objc.Send[bool](objref.IDOf(msg), objc.RegisterName("allowsEmptySelection"))
 	return _r
 }
 
 // CustomMediaSelectionScheme returns the custom media selection scheme.
 func (msg *MediaSelectionGroup) CustomMediaSelectionScheme() *CustomMediaSelectionScheme {
+	defer runtime.KeepAlive(msg)
 	_r := objc.Send[objc.ID](objref.IDOf(msg), objc.RegisterName("customMediaSelectionScheme"))
 	return CustomMediaSelectionSchemeFromID(_r)
 }

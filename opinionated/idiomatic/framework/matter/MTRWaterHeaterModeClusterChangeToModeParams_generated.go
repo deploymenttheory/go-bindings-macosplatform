@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWaterHeaterModeClusterChangeToModeParamsAdopt(id objc.ID) *MTRWaterHeate
 
 // Description returns the object's -description text.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) Description() string {
+	defer runtime.KeepAlive(mwhmcctmp)
 	return rt.Description(objref.IDOf(mwhmcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcctmp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcctmp)
 	return rt.IsKind(objref.IDOf(mwhmcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) String() string {
+	defer runtime.KeepAlive(mwhmcctmp)
 	return rt.Description(objref.IDOf(mwhmcctmp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRWaterHeaterModeClusterChangeToModeParams() *MTRWaterHeaterModeCluster
 
 // WithNewMode sets the new mode.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(newMode)
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mwhmcctmp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mwhmcctmp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mwhmcctmp
 }
 
 // NewMode returns the new mode.
-func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) NewMode() obj.Object {
+func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) NewMode() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("getNewMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+func (mwhmcctmp *MTRWaterHeaterModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcctmp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

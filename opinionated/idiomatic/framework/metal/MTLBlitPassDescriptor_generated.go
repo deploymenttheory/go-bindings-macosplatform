@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func blitPassDescriptorAdopt(id objc.ID) *BlitPassDescriptor {
 
 // Description returns the object's -description text.
 func (bpd *BlitPassDescriptor) Description() string {
+	defer runtime.KeepAlive(bpd)
 	return rt.Description(objref.IDOf(bpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bpd *BlitPassDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bpd *BlitPassDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(bpd)
 	return rt.IsKind(objref.IDOf(bpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bpd *BlitPassDescriptor) String() string {
+	defer runtime.KeepAlive(bpd)
 	return rt.Description(objref.IDOf(bpd))
 }
 
@@ -74,6 +81,7 @@ func NewBlitPassDescriptor() *BlitPassDescriptor {
 
 // SampleBufferAttachments returns the sample buffer attachments.
 func (bpd *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
+	defer runtime.KeepAlive(bpd)
 	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("sampleBufferAttachments"))
 	return BlitPassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }

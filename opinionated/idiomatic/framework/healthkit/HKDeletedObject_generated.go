@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func deletedObjectAdopt(id objc.ID) *DeletedObject {
 
 // Description returns the object's -description text.
 func (do *DeletedObject) Description() string {
+	defer runtime.KeepAlive(do)
 	return rt.Description(objref.IDOf(do))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (do *DeletedObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(do)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(do), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (do *DeletedObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(do)
 	return rt.IsKind(objref.IDOf(do), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (do *DeletedObject) String() string {
+	defer runtime.KeepAlive(do)
 	return rt.Description(objref.IDOf(do))
 }
 
@@ -73,13 +81,15 @@ func NewDeletedObject() *DeletedObject {
 }
 
 // UUID returns the unique identifier of the HKObject that was deleted from the HealthKit database.
-func (do *DeletedObject) UUID() obj.Object {
+func (do *DeletedObject) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(do)
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("UUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Metadata returns extra information describing properties of the receiver. Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
-func (do *DeletedObject) Metadata() obj.Object {
+func (do *DeletedObject) Metadata() map[string]obj.Object {
+	defer runtime.KeepAlive(do)
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("metadata"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

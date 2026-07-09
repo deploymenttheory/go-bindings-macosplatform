@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func seriesBuilderAdopt(id objc.ID) *SeriesBuilder {
 
 // Description returns the object's -description text.
 func (sb *SeriesBuilder) Description() string {
+	defer runtime.KeepAlive(sb)
 	return rt.Description(objref.IDOf(sb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sb *SeriesBuilder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sb *SeriesBuilder) IsKind(className string) bool {
+	defer runtime.KeepAlive(sb)
 	return rt.IsKind(objref.IDOf(sb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sb *SeriesBuilder) String() string {
+	defer runtime.KeepAlive(sb)
 	return rt.Description(objref.IDOf(sb))
 }
 
 // Discard invalidates the builder and discards the collected data.
 func (sb *SeriesBuilder) Discard() {
+	defer runtime.KeepAlive(sb)
 	objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("discard"))
 }
 

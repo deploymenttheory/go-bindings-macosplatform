@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterEthernetNetworkDiagnosticsAdopt(id objc.ID) *MTRClusterEthernetNe
 
 // NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterEthernetNetworkDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterEthernetNetworkDiagnosticsAdopt(_id)
@@ -53,93 +59,123 @@ func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MT
 
 // NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterEthernetNetworkDiagnostics.
 func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterEthernetNetworkDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterEthernetNetworkDiagnosticsAdopt(_id)
 }
 
 // ReadAttributePHYRateWithParams reads attribute phy rate with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributePHYRateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFullDuplexWithParams reads attribute full duplex with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeFullDuplexWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePacketRxCountWithParams reads attribute packet rx count with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributePacketRxCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePacketTxCountWithParams reads attribute packet tx count with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributePacketTxCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxErrCountWithParams reads attribute tx err count with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeTxErrCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCollisionCountWithParams reads attribute collision count with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeCollisionCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOverrunCountWithParams reads attribute overrun count with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCarrierDetectWithParams reads attribute carrier detect with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeCarrierDetectWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTimeSinceResetWithParams reads attribute time since reset with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeTimeSinceResetWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcend)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterEthernetNetworkDiagnostics)(nil)

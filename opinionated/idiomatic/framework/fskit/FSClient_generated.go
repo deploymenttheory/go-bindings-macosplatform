@@ -6,6 +6,7 @@ package fskit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func clientAdopt(id objc.ID) *Client {
 
 // Description returns the object's -description text.
 func (c *Client) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Client) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Client) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Client) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -79,6 +85,7 @@ func NewClient() *Client {
 //
 // FetchInstalledExtensions blocks until the operation completes or ctx is cancelled.
 func (c *Client) FetchInstalledExtensions(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
 	type _result struct {
 		val obj.Object
 		err error

@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func containerStatusAdopt(id objc.ID) *ContainerStatus {
 
 // Description returns the object's -description text.
 func (cs *ContainerStatus) Description() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cs *ContainerStatus) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cs *ContainerStatus) IsKind(className string) bool {
+	defer runtime.KeepAlive(cs)
 	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cs *ContainerStatus) String() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
@@ -74,6 +81,7 @@ func NewContainerStatus() *ContainerStatus {
 
 // State returns a value that represents the container state, such as ready, active, or blocked.
 func (cs *ContainerStatus) State() ContainerState {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[ContainerState](objref.IDOf(cs), objc.RegisterName("state"))
 	return _r
 }

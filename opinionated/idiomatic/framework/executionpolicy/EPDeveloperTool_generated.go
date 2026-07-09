@@ -5,6 +5,8 @@
 package executionpolicy
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func developerToolAdopt(id objc.ID) *DeveloperTool {
 
 // Description returns the object's -description text.
 func (dt *DeveloperTool) Description() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dt *DeveloperTool) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dt *DeveloperTool) IsKind(className string) bool {
+	defer runtime.KeepAlive(dt)
 	return rt.IsKind(objref.IDOf(dt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dt *DeveloperTool) String() string {
+	defer runtime.KeepAlive(dt)
 	return rt.Description(objref.IDOf(dt))
 }
 
@@ -72,11 +79,13 @@ func NewDeveloperTool() *DeveloperTool {
 
 // RequestDeveloperToolAccessWithCompletionHandler checks whether developer tool privileges are already available and if not populates an entry in Settings for user approval. This method does not show any UI to the user or guide them towards Settings for approval, if necessary. - Parameter handler: A block called asynchronously with whether the privilege is available. > New info > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift > func requestAccess() async -> Bool > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 func (dt *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
+	defer runtime.KeepAlive(dt)
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("requestDeveloperToolAccessWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
 // AuthorizationStatus returns the current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
 func (dt *DeveloperTool) AuthorizationStatus() DeveloperToolStatus {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[DeveloperToolStatus](objref.IDOf(dt), objc.RegisterName("authorizationStatus"))
 	return _r
 }

@@ -5,8 +5,12 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -54,6 +58,7 @@ func NewKeyframeAnimation() *KeyframeAnimation {
 
 // WithPath sets the path for a point-based property to follow.
 func (ka *KeyframeAnimation) WithPath(path obj.Object) *KeyframeAnimation {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return ka
 }
@@ -74,6 +79,7 @@ func (ka *KeyframeAnimation) WithTimingFunctions(items ...*MediaTimingFunction) 
 
 // WithCalculationMode sets specifies how intermediate keyframe values are calculated by the receiver.
 func (ka *KeyframeAnimation) WithCalculationMode(calculationMode obj.Object) *KeyframeAnimation {
+	defer runtime.KeepAlive(calculationMode)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setCalculationMode:"), objref.IDOf(calculationMode))
 	return ka
 }
@@ -101,6 +107,7 @@ func (ka *KeyframeAnimation) WithBiasValues(items ...obj.Object) *KeyframeAnimat
 
 // WithRotationMode sets determines whether objects animating along the path rotate to match the path tangent.
 func (ka *KeyframeAnimation) WithRotationMode(rotationMode obj.Object) *KeyframeAnimation {
+	defer runtime.KeepAlive(rotationMode)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setRotationMode:"), objref.IDOf(rotationMode))
 	return ka
 }
@@ -125,13 +132,25 @@ func (ka *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation 
 
 // WithValueFunction sets an optional value function that is applied to interpolated values.
 func (ka *KeyframeAnimation) WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation {
+	defer runtime.KeepAlive(valueFunction)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return ka
 }
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (ka *KeyframeAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return ka
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (ka *KeyframeAnimation) WithDelegate(delegate AnimationDelegate) *KeyframeAnimation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ka), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ka), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return ka
 }
 
@@ -143,17 +162,21 @@ func (ka *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *
 
 // Values returns the values.
 func (ka *KeyframeAnimation) Values() obj.Object {
+	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("values"))
 	return obj.Wrap(_r)
 }
 
 // SetValues wraps the corresponding Objective-C method.
 func (ka *KeyframeAnimation) SetValues(values obj.Object) {
+	defer runtime.KeepAlive(ka)
+	defer runtime.KeepAlive(values)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setValues:"), objref.IDOf(values))
 }
 
 // Path returns the path.
 func (ka *KeyframeAnimation) Path() obj.Object {
+	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
@@ -162,6 +185,7 @@ func (ka *KeyframeAnimation) Path() obj.Object {
 //
 // KeyTimes returns the collection as a Go slice.
 func (ka *KeyframeAnimation) KeyTimes() []obj.Object {
+	defer runtime.KeepAlive(ka)
 	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("keyTimes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -170,20 +194,23 @@ func (ka *KeyframeAnimation) KeyTimes() []obj.Object {
 //
 // TimingFunctions returns the collection as a Go slice.
 func (ka *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
+	defer runtime.KeepAlive(ka)
 	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("timingFunctions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaTimingFunction { return MediaTimingFunctionFromID(_id) })
 }
 
 // CalculationMode returns the calculation mode.
-func (ka *KeyframeAnimation) CalculationMode() obj.Object {
+func (ka *KeyframeAnimation) CalculationMode() *foundation.String {
+	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("calculationMode"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // TensionValues returns the tension values.
 //
 // TensionValues returns the collection as a Go slice.
 func (ka *KeyframeAnimation) TensionValues() []obj.Object {
+	defer runtime.KeepAlive(ka)
 	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("tensionValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -192,6 +219,7 @@ func (ka *KeyframeAnimation) TensionValues() []obj.Object {
 //
 // ContinuityValues returns the collection as a Go slice.
 func (ka *KeyframeAnimation) ContinuityValues() []obj.Object {
+	defer runtime.KeepAlive(ka)
 	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("continuityValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -200,14 +228,16 @@ func (ka *KeyframeAnimation) ContinuityValues() []obj.Object {
 //
 // BiasValues returns the collection as a Go slice.
 func (ka *KeyframeAnimation) BiasValues() []obj.Object {
+	defer runtime.KeepAlive(ka)
 	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("biasValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RotationMode returns the rotation mode.
-func (ka *KeyframeAnimation) RotationMode() obj.Object {
+func (ka *KeyframeAnimation) RotationMode() *foundation.String {
+	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("rotationMode"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ PropertyAnimationProvider = (*KeyframeAnimation)(nil)

@@ -5,12 +5,12 @@
 package shazamkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -56,11 +56,11 @@ func NewCustomCatalog() *CustomCatalog {
 	return customCatalogAdopt(_id)
 }
 
-// NewCustomCatalogWithDataRepresentationError load a
-func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) (result *CustomCatalog, err error) {
+// NewCustomCatalogWithDataRepresentation load a
+func NewCustomCatalogWithDataRepresentation(dataRepresentation []byte) (result *CustomCatalog, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHCustomCatalog")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), rt.BytesToNSData(dataRepresentation), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -69,6 +69,8 @@ func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) 
 
 // AddReferenceSignatureRepresentingMediaItems adds a reference signature and its associated metadata to a catalog.
 func (cc *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(signature)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cc), objc.RegisterName("addReferenceSignature:representingMediaItems:error:"), objref.IDOf(signature), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,6 +81,7 @@ func (cc *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *
 
 // AddCustomCatalogFromURL loads a saved custom catalog from a file.
 func (cc *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
+	defer runtime.KeepAlive(cc)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cc), objc.RegisterName("addCustomCatalogFromURL:error:"), rt.FileURL(customCatalogURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -89,6 +92,7 @@ func (cc *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error 
 
 // WriteToURL saves the custom catalog to a local file.
 func (cc *CustomCatalog) WriteToURL(destinationURL string) error {
+	defer runtime.KeepAlive(cc)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cc), objc.RegisterName("writeToURL:error:"), rt.FileURL(destinationURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -98,9 +102,10 @@ func (cc *CustomCatalog) WriteToURL(destinationURL string) error {
 }
 
 // DataRepresentation returns the data representation of this file, it can be written to disk
-func (cc *CustomCatalog) DataRepresentation() obj.Object {
+func (cc *CustomCatalog) DataRepresentation() []byte {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ CatalogProvider = (*CustomCatalog)(nil)

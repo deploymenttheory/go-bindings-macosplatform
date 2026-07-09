@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contentItemAdopt(id objc.ID) *ContentItem {
 
 // Description returns the object's -description text.
 func (ci *ContentItem) Description() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ci *ContentItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ci *ContentItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(ci)
 	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ci *ContentItem) String() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
@@ -87,6 +94,7 @@ func (ci *ContentItem) WithSubtitle(subtitle string) *ContentItem {
 
 // WithArtwork sets a single image that’s associated with the media item.
 func (ci *ContentItem) WithArtwork(artwork *MediaItemArtwork) *ContentItem {
+	defer runtime.KeepAlive(artwork)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setArtwork:"), objref.IDOf(artwork))
 	return ci
 }
@@ -123,6 +131,7 @@ func (ci *ContentItem) WithPlayable(playable bool) *ContentItem {
 
 // Identifier returns a unique identifier for this content item. (Required)
 func (ci *ContentItem) Identifier() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -132,6 +141,7 @@ func (ci *ContentItem) Identifier() string {
 
 // Title returns a title for this item. Usually this would be the track name, if representing a song, the episode name of a podcast, etc.
 func (ci *ContentItem) Title() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -141,6 +151,7 @@ func (ci *ContentItem) Title() string {
 
 // Subtitle returns a subtitle for this item. If this were representing a song, this would usually be the artist or composer.
 func (ci *ContentItem) Subtitle() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -150,36 +161,42 @@ func (ci *ContentItem) Subtitle() string {
 
 // Artwork returns artwork for this item. Examples of artwork for a content item are the album cover for a song, or a movie poster for a movie.
 func (ci *ContentItem) Artwork() *MediaItemArtwork {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("artwork"))
 	return MediaItemArtworkFromID(_r)
 }
 
 // PlaybackProgress represents the current playback progress of the item. 0.0 = not watched/listened/viewed, 1.0 = fully watched/listened/viewed Default is -1.0 (no progress indicator shown)
 func (ci *ContentItem) PlaybackProgress() float32 {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[float32](objref.IDOf(ci), objc.RegisterName("playbackProgress"))
 	return _r
 }
 
 // IsStreamingContent reports whether this content item is streaming content, i.e. from the cloud where the content is not stored locally.
 func (ci *ContentItem) IsStreamingContent() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isStreamingContent"))
 	return _r
 }
 
 // IsExplicitContent reports whether this content item is explicit content
 func (ci *ContentItem) IsExplicitContent() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isExplicitContent"))
 	return _r
 }
 
 // IsContainer reports whether the content item is a container that may contain other content items, e.g. an album or a playlist.
 func (ci *ContentItem) IsContainer() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isContainer"))
 	return _r
 }
 
 // IsPlayable reports whether the content item is actionable from a playback perspective. Albums are playable, for example, because selecting an album for playback means the app should play each song in the album in order. An example of a content item that may not be playable is a genre, since an app experience typically doesn't involve selecting an entire genre for playback.
 func (ci *ContentItem) IsPlayable() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isPlayable"))
 	return _r
 }

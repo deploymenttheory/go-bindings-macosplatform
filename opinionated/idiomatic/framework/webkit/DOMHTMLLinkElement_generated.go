@@ -5,9 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -208,12 +210,14 @@ func (dle *DOMHTMLLinkElement) WithTextContent(textContent string) *DOMHTMLLinkE
 
 // Disabled wraps the corresponding Objective-C method.
 func (dle *DOMHTMLLinkElement) Disabled() bool {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[bool](objref.IDOf(dle), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Charset returns the charset.
 func (dle *DOMHTMLLinkElement) Charset() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("charset"))
 	if _r == 0 {
 		return ""
@@ -223,6 +227,7 @@ func (dle *DOMHTMLLinkElement) Charset() string {
 
 // Href returns the href.
 func (dle *DOMHTMLLinkElement) Href() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
@@ -232,6 +237,7 @@ func (dle *DOMHTMLLinkElement) Href() string {
 
 // Hreflang returns the hreflang.
 func (dle *DOMHTMLLinkElement) Hreflang() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("hreflang"))
 	if _r == 0 {
 		return ""
@@ -241,6 +247,7 @@ func (dle *DOMHTMLLinkElement) Hreflang() string {
 
 // Media returns the media.
 func (dle *DOMHTMLLinkElement) Media() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("media"))
 	if _r == 0 {
 		return ""
@@ -250,6 +257,7 @@ func (dle *DOMHTMLLinkElement) Media() string {
 
 // Rel returns the rel.
 func (dle *DOMHTMLLinkElement) Rel() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("rel"))
 	if _r == 0 {
 		return ""
@@ -259,6 +267,7 @@ func (dle *DOMHTMLLinkElement) Rel() string {
 
 // Rev returns the rev.
 func (dle *DOMHTMLLinkElement) Rev() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("rev"))
 	if _r == 0 {
 		return ""
@@ -268,6 +277,7 @@ func (dle *DOMHTMLLinkElement) Rev() string {
 
 // Target returns the target.
 func (dle *DOMHTMLLinkElement) Target() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""
@@ -277,6 +287,7 @@ func (dle *DOMHTMLLinkElement) Target() string {
 
 // Type returns the type.
 func (dle *DOMHTMLLinkElement) Type() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -285,9 +296,10 @@ func (dle *DOMHTMLLinkElement) Type() string {
 }
 
 // AbsoluteLinkURL returns the absolute link URL.
-func (dle *DOMHTMLLinkElement) AbsoluteLinkURL() obj.Object {
+func (dle *DOMHTMLLinkElement) AbsoluteLinkURL() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("absoluteLinkURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ DOMHTMLElementProvider = (*DOMHTMLLinkElement)(nil)

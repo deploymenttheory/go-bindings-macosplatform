@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func persistentHistoryChangeAdopt(id objc.ID) *PersistentHistoryChange {
 
 // Description returns the object's -description text.
 func (phc *PersistentHistoryChange) Description() string {
+	defer runtime.KeepAlive(phc)
 	return rt.Description(objref.IDOf(phc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (phc *PersistentHistoryChange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(phc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(phc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (phc *PersistentHistoryChange) IsKind(className string) bool {
+	defer runtime.KeepAlive(phc)
 	return rt.IsKind(objref.IDOf(phc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (phc *PersistentHistoryChange) String() string {
+	defer runtime.KeepAlive(phc)
 	return rt.Description(objref.IDOf(phc))
 }
 
@@ -74,36 +81,42 @@ func NewPersistentHistoryChange() *PersistentHistoryChange {
 
 // ChangeID returns the change ID.
 func (phc *PersistentHistoryChange) ChangeID() int64 {
+	defer runtime.KeepAlive(phc)
 	_r := objc.Send[int64](objref.IDOf(phc), objc.RegisterName("changeID"))
 	return _r
 }
 
 // ChangedObjectID returns the changed object ID.
 func (phc *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
+	defer runtime.KeepAlive(phc)
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("changedObjectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
 // ChangeType returns the change type.
 func (phc *PersistentHistoryChange) ChangeType() PersistentHistoryChangeType {
+	defer runtime.KeepAlive(phc)
 	_r := objc.Send[PersistentHistoryChangeType](objref.IDOf(phc), objc.RegisterName("changeType"))
 	return _r
 }
 
 // Tombstone returns the tombstone.
 func (phc *PersistentHistoryChange) Tombstone() obj.Object {
+	defer runtime.KeepAlive(phc)
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("tombstone"))
 	return obj.Wrap(_r)
 }
 
 // Transaction returns the transaction.
 func (phc *PersistentHistoryChange) Transaction() *PersistentHistoryTransaction {
+	defer runtime.KeepAlive(phc)
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("transaction"))
 	return PersistentHistoryTransactionFromID(_r)
 }
 
-// UpdatedProperties returns the updated properties.
-func (phc *PersistentHistoryChange) UpdatedProperties() obj.Object {
+// UpdatedProperties returns the order of the returned elements is unspecified.
+func (phc *PersistentHistoryChange) UpdatedProperties() []*PropertyDescription {
+	defer runtime.KeepAlive(phc)
 	_r := objc.Send[objc.ID](objref.IDOf(phc), objc.RegisterName("updatedProperties"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *PropertyDescription { return PropertyDescriptionFromID(_id) })
 }

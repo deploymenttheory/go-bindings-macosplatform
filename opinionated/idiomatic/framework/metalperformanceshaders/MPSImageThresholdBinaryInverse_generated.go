@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -73,12 +75,14 @@ func (itbi *ImageThresholdBinaryInverse) WithLabel(label string) *ImageThreshold
 
 // ThresholdValue returns the threshold value used to init the threshold filter
 func (itbi *ImageThresholdBinaryInverse) ThresholdValue() float32 {
+	defer runtime.KeepAlive(itbi)
 	_r := objc.Send[float32](objref.IDOf(itbi), objc.RegisterName("thresholdValue"))
 	return _r
 }
 
 // MaximumValue returns the maximum value used to init the threshold filter
 func (itbi *ImageThresholdBinaryInverse) MaximumValue() float32 {
+	defer runtime.KeepAlive(itbi)
 	_r := objc.Send[float32](objref.IDOf(itbi), objc.RegisterName("maximumValue"))
 	return _r
 }

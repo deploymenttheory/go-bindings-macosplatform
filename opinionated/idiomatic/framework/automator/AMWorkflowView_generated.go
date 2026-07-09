@@ -5,6 +5,8 @@
 package automator
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func workflowViewAdopt(id objc.ID) *WorkflowView {
 
 // Description returns the object's -description text.
 func (wv *WorkflowView) Description() string {
+	defer runtime.KeepAlive(wv)
 	return rt.Description(objref.IDOf(wv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wv *WorkflowView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wv *WorkflowView) IsKind(className string) bool {
+	defer runtime.KeepAlive(wv)
 	return rt.IsKind(objref.IDOf(wv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wv *WorkflowView) String() string {
+	defer runtime.KeepAlive(wv)
 	return rt.Description(objref.IDOf(wv))
 }
 
@@ -88,6 +95,7 @@ func (wv *WorkflowView) WithEditable(editable bool) *WorkflowView {
 
 // WithWorkflowController sets the view’s workflow controller.
 func (wv *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
+	defer runtime.KeepAlive(workflowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setWorkflowController:"), objref.IDOf(workflowController))
 	})
@@ -96,6 +104,7 @@ func (wv *WorkflowView) WithWorkflowController(workflowController *WorkflowContr
 
 // IsEditable reports whether the object is editable.
 func (wv *WorkflowView) IsEditable() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -109,6 +118,7 @@ func (wv *WorkflowView) IsEditable() bool {
 
 // WorkflowController returns the workflow controller.
 func (wv *WorkflowView) WorkflowController() *WorkflowController {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *WorkflowController
 	purego.Main(func() {
 		_mainthread0 = func() *WorkflowController {

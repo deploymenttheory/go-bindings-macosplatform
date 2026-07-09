@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,42 +51,51 @@ func componentAdopt(id objc.ID) *Component {
 
 // Description returns the object's -description text.
 func (c *Component) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Component) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Component) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Component) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // UpdateWithDeltaTime performs any custom periodic actions defined by the component subclass.
 func (c *Component) UpdateWithDeltaTime(seconds float64) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // DidAddToEntity notifies the component that it has been assigned to an entity.
 func (c *Component) DidAddToEntity() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("didAddToEntity"))
 }
 
 // WillRemoveFromEntity notifies the component that it has been removed from an entity.
 func (c *Component) WillRemoveFromEntity() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("willRemoveFromEntity"))
 }
 
 // Entity returns the entity that this component belongs to. Defaults to nil until the component is added to an entity.
 func (c *Component) Entity() *Entity {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("entity"))
 	return EntityFromID(_r)
 }

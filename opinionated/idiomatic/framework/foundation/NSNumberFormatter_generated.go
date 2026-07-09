@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -74,6 +76,7 @@ func (nf *NumberFormatter) WithNumberStyle(numberStyle NumberFormatterStyle) *Nu
 
 // WithLocale sets the locale.
 func (nf *NumberFormatter) WithLocale(locale *Locale) *NumberFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return nf
 }
@@ -92,25 +95,27 @@ func (nf *NumberFormatter) WithFormatterBehavior(formatterBehavior NumberFormatt
 
 // WithNegativeFormat sets the negative format.
 func (nf *NumberFormatter) WithNegativeFormat(negativeFormat StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(negativeFormat)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeFormat:"), objref.IDOf(negativeFormat))
 	return nf
 }
 
 // WithTextAttributesForNegativeValues sets the text attributes for negative values.
-func (nf *NumberFormatter) WithTextAttributesForNegativeValues(textAttributesForNegativeValues obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeValues:"), objref.IDOf(textAttributesForNegativeValues))
+func (nf *NumberFormatter) WithTextAttributesForNegativeValues(textAttributesForNegativeValues map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeValues:"), rt.MapToDict(textAttributesForNegativeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // WithPositiveFormat sets the positive format.
 func (nf *NumberFormatter) WithPositiveFormat(positiveFormat StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(positiveFormat)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveFormat:"), objref.IDOf(positiveFormat))
 	return nf
 }
 
 // WithTextAttributesForPositiveValues sets the text attributes for positive values.
-func (nf *NumberFormatter) WithTextAttributesForPositiveValues(textAttributesForPositiveValues obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveValues:"), objref.IDOf(textAttributesForPositiveValues))
+func (nf *NumberFormatter) WithTextAttributesForPositiveValues(textAttributesForPositiveValues map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveValues:"), rt.MapToDict(textAttributesForPositiveValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
@@ -122,6 +127,7 @@ func (nf *NumberFormatter) WithAllowsFloats(allowsFloats bool) *NumberFormatter 
 
 // WithDecimalSeparator sets the decimal separator.
 func (nf *NumberFormatter) WithDecimalSeparator(decimalSeparator StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(decimalSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setDecimalSeparator:"), objref.IDOf(decimalSeparator))
 	return nf
 }
@@ -134,6 +140,7 @@ func (nf *NumberFormatter) WithAlwaysShowsDecimalSeparator(alwaysShowsDecimalSep
 
 // WithCurrencyDecimalSeparator sets the currency decimal separator.
 func (nf *NumberFormatter) WithCurrencyDecimalSeparator(currencyDecimalSeparator StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(currencyDecimalSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyDecimalSeparator:"), objref.IDOf(currencyDecimalSeparator))
 	return nf
 }
@@ -146,138 +153,156 @@ func (nf *NumberFormatter) WithUsesGroupingSeparator(usesGroupingSeparator bool)
 
 // WithGroupingSeparator sets the grouping separator.
 func (nf *NumberFormatter) WithGroupingSeparator(groupingSeparator StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(groupingSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setGroupingSeparator:"), objref.IDOf(groupingSeparator))
 	return nf
 }
 
 // WithZeroSymbol sets the zero symbol.
 func (nf *NumberFormatter) WithZeroSymbol(zeroSymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(zeroSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setZeroSymbol:"), objref.IDOf(zeroSymbol))
 	return nf
 }
 
 // WithTextAttributesForZero sets the text attributes for zero.
-func (nf *NumberFormatter) WithTextAttributesForZero(textAttributesForZero obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForZero:"), objref.IDOf(textAttributesForZero))
+func (nf *NumberFormatter) WithTextAttributesForZero(textAttributesForZero map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForZero:"), rt.MapToDict(textAttributesForZero, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // WithNilSymbol sets the nil symbol.
 func (nf *NumberFormatter) WithNilSymbol(nilSymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(nilSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNilSymbol:"), objref.IDOf(nilSymbol))
 	return nf
 }
 
 // WithTextAttributesForNil sets the text attributes for nil.
-func (nf *NumberFormatter) WithTextAttributesForNil(textAttributesForNil obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNil:"), objref.IDOf(textAttributesForNil))
+func (nf *NumberFormatter) WithTextAttributesForNil(textAttributesForNil map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNil:"), rt.MapToDict(textAttributesForNil, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // WithNotANumberSymbol sets the not a number symbol.
 func (nf *NumberFormatter) WithNotANumberSymbol(notANumberSymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(notANumberSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNotANumberSymbol:"), objref.IDOf(notANumberSymbol))
 	return nf
 }
 
 // WithTextAttributesForNotANumber sets the text attributes for not a number.
-func (nf *NumberFormatter) WithTextAttributesForNotANumber(textAttributesForNotANumber obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNotANumber:"), objref.IDOf(textAttributesForNotANumber))
+func (nf *NumberFormatter) WithTextAttributesForNotANumber(textAttributesForNotANumber map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNotANumber:"), rt.MapToDict(textAttributesForNotANumber, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // WithPositiveInfinitySymbol sets the positive infinity symbol.
 func (nf *NumberFormatter) WithPositiveInfinitySymbol(positiveInfinitySymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(positiveInfinitySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveInfinitySymbol:"), objref.IDOf(positiveInfinitySymbol))
 	return nf
 }
 
 // WithTextAttributesForPositiveInfinity sets the text attributes for positive infinity.
-func (nf *NumberFormatter) WithTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveInfinity:"), objref.IDOf(textAttributesForPositiveInfinity))
+func (nf *NumberFormatter) WithTextAttributesForPositiveInfinity(textAttributesForPositiveInfinity map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForPositiveInfinity:"), rt.MapToDict(textAttributesForPositiveInfinity, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // WithNegativeInfinitySymbol sets the negative infinity symbol.
 func (nf *NumberFormatter) WithNegativeInfinitySymbol(negativeInfinitySymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(negativeInfinitySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeInfinitySymbol:"), objref.IDOf(negativeInfinitySymbol))
 	return nf
 }
 
 // WithTextAttributesForNegativeInfinity sets the text attributes for negative infinity.
-func (nf *NumberFormatter) WithTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeInfinity:"), objref.IDOf(textAttributesForNegativeInfinity))
+func (nf *NumberFormatter) WithTextAttributesForNegativeInfinity(textAttributesForNegativeInfinity map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setTextAttributesForNegativeInfinity:"), rt.MapToDict(textAttributesForNegativeInfinity, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // WithPositivePrefix sets the positive prefix.
 func (nf *NumberFormatter) WithPositivePrefix(positivePrefix StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(positivePrefix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositivePrefix:"), objref.IDOf(positivePrefix))
 	return nf
 }
 
 // WithPositiveSuffix sets the positive suffix.
 func (nf *NumberFormatter) WithPositiveSuffix(positiveSuffix StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(positiveSuffix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPositiveSuffix:"), objref.IDOf(positiveSuffix))
 	return nf
 }
 
 // WithNegativePrefix sets the negative prefix.
 func (nf *NumberFormatter) WithNegativePrefix(negativePrefix StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(negativePrefix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativePrefix:"), objref.IDOf(negativePrefix))
 	return nf
 }
 
 // WithNegativeSuffix sets the negative suffix.
 func (nf *NumberFormatter) WithNegativeSuffix(negativeSuffix StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(negativeSuffix)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setNegativeSuffix:"), objref.IDOf(negativeSuffix))
 	return nf
 }
 
 // WithCurrencyCode sets the currency code.
 func (nf *NumberFormatter) WithCurrencyCode(currencyCode StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(currencyCode)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyCode:"), objref.IDOf(currencyCode))
 	return nf
 }
 
 // WithCurrencySymbol sets the currency symbol.
 func (nf *NumberFormatter) WithCurrencySymbol(currencySymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(currencySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencySymbol:"), objref.IDOf(currencySymbol))
 	return nf
 }
 
 // WithInternationalCurrencySymbol sets the international currency symbol.
 func (nf *NumberFormatter) WithInternationalCurrencySymbol(internationalCurrencySymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(internationalCurrencySymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setInternationalCurrencySymbol:"), objref.IDOf(internationalCurrencySymbol))
 	return nf
 }
 
 // WithPercentSymbol sets the percent symbol.
 func (nf *NumberFormatter) WithPercentSymbol(percentSymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(percentSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPercentSymbol:"), objref.IDOf(percentSymbol))
 	return nf
 }
 
 // WithPerMillSymbol sets the per mill symbol.
 func (nf *NumberFormatter) WithPerMillSymbol(perMillSymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(perMillSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPerMillSymbol:"), objref.IDOf(perMillSymbol))
 	return nf
 }
 
 // WithMinusSign sets the minus sign.
 func (nf *NumberFormatter) WithMinusSign(minusSign StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(minusSign)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinusSign:"), objref.IDOf(minusSign))
 	return nf
 }
 
 // WithPlusSign sets the plus sign.
 func (nf *NumberFormatter) WithPlusSign(plusSign StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(plusSign)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPlusSign:"), objref.IDOf(plusSign))
 	return nf
 }
 
 // WithExponentSymbol sets the exponent symbol.
 func (nf *NumberFormatter) WithExponentSymbol(exponentSymbol StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(exponentSymbol)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setExponentSymbol:"), objref.IDOf(exponentSymbol))
 	return nf
 }
@@ -296,6 +321,7 @@ func (nf *NumberFormatter) WithSecondaryGroupingSize(secondaryGroupingSize int) 
 
 // WithMultiplier sets the multiplier.
 func (nf *NumberFormatter) WithMultiplier(multiplier NumberProvider) *NumberFormatter {
+	defer runtime.KeepAlive(multiplier)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMultiplier:"), objref.IDOf(multiplier))
 	return nf
 }
@@ -308,6 +334,7 @@ func (nf *NumberFormatter) WithFormatWidth(formatWidth int) *NumberFormatter {
 
 // WithPaddingCharacter sets the padding character.
 func (nf *NumberFormatter) WithPaddingCharacter(paddingCharacter StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(paddingCharacter)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setPaddingCharacter:"), objref.IDOf(paddingCharacter))
 	return nf
 }
@@ -326,6 +353,7 @@ func (nf *NumberFormatter) WithRoundingMode(roundingMode NumberFormatterRounding
 
 // WithRoundingIncrement sets the rounding increment.
 func (nf *NumberFormatter) WithRoundingIncrement(roundingIncrement NumberProvider) *NumberFormatter {
+	defer runtime.KeepAlive(roundingIncrement)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingIncrement:"), objref.IDOf(roundingIncrement))
 	return nf
 }
@@ -356,18 +384,21 @@ func (nf *NumberFormatter) WithMaximumFractionDigits(maximumFractionDigits int) 
 
 // WithMinimum sets the minimum.
 func (nf *NumberFormatter) WithMinimum(minimum NumberProvider) *NumberFormatter {
+	defer runtime.KeepAlive(minimum)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMinimum:"), objref.IDOf(minimum))
 	return nf
 }
 
 // WithMaximum sets the maximum.
 func (nf *NumberFormatter) WithMaximum(maximum NumberProvider) *NumberFormatter {
+	defer runtime.KeepAlive(maximum)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setMaximum:"), objref.IDOf(maximum))
 	return nf
 }
 
 // WithCurrencyGroupingSeparator sets the currency grouping separator.
 func (nf *NumberFormatter) WithCurrencyGroupingSeparator(currencyGroupingSeparator StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(currencyGroupingSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setCurrencyGroupingSeparator:"), objref.IDOf(currencyGroupingSeparator))
 	return nf
 }
@@ -410,6 +441,7 @@ func (nf *NumberFormatter) WithHasThousandSeparators(hasThousandSeparators bool)
 
 // WithThousandSeparator sets the thousand separator.
 func (nf *NumberFormatter) WithThousandSeparator(thousandSeparator StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(thousandSeparator)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setThousandSeparator:"), objref.IDOf(thousandSeparator))
 	return nf
 }
@@ -422,30 +454,35 @@ func (nf *NumberFormatter) WithLocalizesFormat(localizesFormat bool) *NumberForm
 
 // WithFormat sets the format.
 func (nf *NumberFormatter) WithFormat(format StringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(format)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setFormat:"), objref.IDOf(format))
 	return nf
 }
 
 // WithAttributedStringForZero sets the attributed string for zero.
 func (nf *NumberFormatter) WithAttributedStringForZero(attributedStringForZero AttributedStringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(attributedStringForZero)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForZero:"), objref.IDOf(attributedStringForZero))
 	return nf
 }
 
 // WithAttributedStringForNil sets the attributed string for nil.
 func (nf *NumberFormatter) WithAttributedStringForNil(attributedStringForNil AttributedStringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(attributedStringForNil)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForNil:"), objref.IDOf(attributedStringForNil))
 	return nf
 }
 
 // WithAttributedStringForNotANumber sets the attributed string for not a number.
 func (nf *NumberFormatter) WithAttributedStringForNotANumber(attributedStringForNotANumber AttributedStringProvider) *NumberFormatter {
+	defer runtime.KeepAlive(attributedStringForNotANumber)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setAttributedStringForNotANumber:"), objref.IDOf(attributedStringForNotANumber))
 	return nf
 }
 
 // WithRoundingBehavior sets the rounding behavior.
 func (nf *NumberFormatter) WithRoundingBehavior(roundingBehavior *DecimalNumberHandler) *NumberFormatter {
+	defer runtime.KeepAlive(roundingBehavior)
 	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setRoundingBehavior:"), objref.IDOf(roundingBehavior))
 	return nf
 }
@@ -457,13 +494,15 @@ func (nf *NumberFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (nf *NumberFormatter) WithScriptingProperties(scriptingProperties obj.Object) *NumberFormatter {
-	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (nf *NumberFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *NumberFormatter {
+	objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nf
 }
 
 // StringFromNumber wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) StringFromNumber(number *Number) string {
+	defer runtime.KeepAlive(nf)
+	defer runtime.KeepAlive(number)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("stringFromNumber:"), objref.IDOf(number))
 	if _r == 0 {
 		return ""
@@ -472,49 +511,57 @@ func (nf *NumberFormatter) StringFromNumber(number *Number) string {
 }
 
 // NumberFromString wraps the corresponding Objective-C method.
-func (nf *NumberFormatter) NumberFromString(string_ string) *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("numberFromString:"), purego.NSString(string_))
+func (nf *NumberFormatter) NumberFromString(str string) *Number {
+	defer runtime.KeepAlive(nf)
+	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("numberFromString:"), purego.NSString(str))
 	return NumberFromID(_r)
 }
 
 // FormattingContext returns the formatting context.
 func (nf *NumberFormatter) FormattingContext() FormattingContext {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[FormattingContext](objref.IDOf(nf), objc.RegisterName("formattingContext"))
 	return _r
 }
 
 // MinimumGroupingDigits returns the minimum grouping digits.
 func (nf *NumberFormatter) MinimumGroupingDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumGroupingDigits"))
 	return _r
 }
 
 // NumberStyle returns the number style.
 func (nf *NumberFormatter) NumberStyle() NumberFormatterStyle {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterStyle](objref.IDOf(nf), objc.RegisterName("numberStyle"))
 	return _r
 }
 
 // Locale returns the locale.
 func (nf *NumberFormatter) Locale() *Locale {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
 // GeneratesDecimalNumbers wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) GeneratesDecimalNumbers() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("generatesDecimalNumbers"))
 	return _r
 }
 
 // FormatterBehavior returns the formatter behavior.
 func (nf *NumberFormatter) FormatterBehavior() NumberFormatterBehavior {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterBehavior](objref.IDOf(nf), objc.RegisterName("formatterBehavior"))
 	return _r
 }
 
 // NegativeFormat returns the negative format.
 func (nf *NumberFormatter) NegativeFormat() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeFormat"))
 	if _r == 0 {
 		return ""
@@ -523,13 +570,15 @@ func (nf *NumberFormatter) NegativeFormat() string {
 }
 
 // TextAttributesForNegativeValues returns the text attributes for negative values.
-func (nf *NumberFormatter) TextAttributesForNegativeValues() obj.Object {
+func (nf *NumberFormatter) TextAttributesForNegativeValues() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNegativeValues"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PositiveFormat returns the positive format.
 func (nf *NumberFormatter) PositiveFormat() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveFormat"))
 	if _r == 0 {
 		return ""
@@ -538,19 +587,22 @@ func (nf *NumberFormatter) PositiveFormat() string {
 }
 
 // TextAttributesForPositiveValues returns the text attributes for positive values.
-func (nf *NumberFormatter) TextAttributesForPositiveValues() obj.Object {
+func (nf *NumberFormatter) TextAttributesForPositiveValues() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForPositiveValues"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AllowsFloats wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) AllowsFloats() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("allowsFloats"))
 	return _r
 }
 
 // DecimalSeparator returns the decimal separator.
 func (nf *NumberFormatter) DecimalSeparator() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("decimalSeparator"))
 	if _r == 0 {
 		return ""
@@ -560,12 +612,14 @@ func (nf *NumberFormatter) DecimalSeparator() string {
 
 // AlwaysShowsDecimalSeparator wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) AlwaysShowsDecimalSeparator() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("alwaysShowsDecimalSeparator"))
 	return _r
 }
 
 // CurrencyDecimalSeparator returns the currency decimal separator.
 func (nf *NumberFormatter) CurrencyDecimalSeparator() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyDecimalSeparator"))
 	if _r == 0 {
 		return ""
@@ -575,12 +629,14 @@ func (nf *NumberFormatter) CurrencyDecimalSeparator() string {
 
 // UsesGroupingSeparator wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) UsesGroupingSeparator() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("usesGroupingSeparator"))
 	return _r
 }
 
 // GroupingSeparator returns the grouping separator.
 func (nf *NumberFormatter) GroupingSeparator() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("groupingSeparator"))
 	if _r == 0 {
 		return ""
@@ -590,6 +646,7 @@ func (nf *NumberFormatter) GroupingSeparator() string {
 
 // ZeroSymbol returns the zero symbol.
 func (nf *NumberFormatter) ZeroSymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("zeroSymbol"))
 	if _r == 0 {
 		return ""
@@ -598,13 +655,15 @@ func (nf *NumberFormatter) ZeroSymbol() string {
 }
 
 // TextAttributesForZero returns the text attributes for zero.
-func (nf *NumberFormatter) TextAttributesForZero() obj.Object {
+func (nf *NumberFormatter) TextAttributesForZero() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForZero"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NilSymbol returns the nil symbol.
 func (nf *NumberFormatter) NilSymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("nilSymbol"))
 	if _r == 0 {
 		return ""
@@ -613,13 +672,15 @@ func (nf *NumberFormatter) NilSymbol() string {
 }
 
 // TextAttributesForNil returns the text attributes for nil.
-func (nf *NumberFormatter) TextAttributesForNil() obj.Object {
+func (nf *NumberFormatter) TextAttributesForNil() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNil"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NotANumberSymbol returns the not a number symbol.
 func (nf *NumberFormatter) NotANumberSymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("notANumberSymbol"))
 	if _r == 0 {
 		return ""
@@ -628,13 +689,15 @@ func (nf *NumberFormatter) NotANumberSymbol() string {
 }
 
 // TextAttributesForNotANumber returns the text attributes for not a number.
-func (nf *NumberFormatter) TextAttributesForNotANumber() obj.Object {
+func (nf *NumberFormatter) TextAttributesForNotANumber() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNotANumber"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PositiveInfinitySymbol returns the positive infinity symbol.
 func (nf *NumberFormatter) PositiveInfinitySymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveInfinitySymbol"))
 	if _r == 0 {
 		return ""
@@ -643,13 +706,15 @@ func (nf *NumberFormatter) PositiveInfinitySymbol() string {
 }
 
 // TextAttributesForPositiveInfinity returns the text attributes for positive infinity.
-func (nf *NumberFormatter) TextAttributesForPositiveInfinity() obj.Object {
+func (nf *NumberFormatter) TextAttributesForPositiveInfinity() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForPositiveInfinity"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NegativeInfinitySymbol returns the negative infinity symbol.
 func (nf *NumberFormatter) NegativeInfinitySymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeInfinitySymbol"))
 	if _r == 0 {
 		return ""
@@ -658,13 +723,15 @@ func (nf *NumberFormatter) NegativeInfinitySymbol() string {
 }
 
 // TextAttributesForNegativeInfinity returns the text attributes for negative infinity.
-func (nf *NumberFormatter) TextAttributesForNegativeInfinity() obj.Object {
+func (nf *NumberFormatter) TextAttributesForNegativeInfinity() map[string]obj.Object {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("textAttributesForNegativeInfinity"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PositivePrefix returns the positive prefix.
 func (nf *NumberFormatter) PositivePrefix() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positivePrefix"))
 	if _r == 0 {
 		return ""
@@ -674,6 +741,7 @@ func (nf *NumberFormatter) PositivePrefix() string {
 
 // PositiveSuffix returns the positive suffix.
 func (nf *NumberFormatter) PositiveSuffix() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("positiveSuffix"))
 	if _r == 0 {
 		return ""
@@ -683,6 +751,7 @@ func (nf *NumberFormatter) PositiveSuffix() string {
 
 // NegativePrefix returns the negative prefix.
 func (nf *NumberFormatter) NegativePrefix() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativePrefix"))
 	if _r == 0 {
 		return ""
@@ -692,6 +761,7 @@ func (nf *NumberFormatter) NegativePrefix() string {
 
 // NegativeSuffix returns the negative suffix.
 func (nf *NumberFormatter) NegativeSuffix() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("negativeSuffix"))
 	if _r == 0 {
 		return ""
@@ -701,6 +771,7 @@ func (nf *NumberFormatter) NegativeSuffix() string {
 
 // CurrencyCode returns the currency code.
 func (nf *NumberFormatter) CurrencyCode() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
@@ -710,6 +781,7 @@ func (nf *NumberFormatter) CurrencyCode() string {
 
 // CurrencySymbol returns the currency symbol.
 func (nf *NumberFormatter) CurrencySymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencySymbol"))
 	if _r == 0 {
 		return ""
@@ -719,6 +791,7 @@ func (nf *NumberFormatter) CurrencySymbol() string {
 
 // InternationalCurrencySymbol returns the international currency symbol.
 func (nf *NumberFormatter) InternationalCurrencySymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("internationalCurrencySymbol"))
 	if _r == 0 {
 		return ""
@@ -728,6 +801,7 @@ func (nf *NumberFormatter) InternationalCurrencySymbol() string {
 
 // PercentSymbol returns the percent symbol.
 func (nf *NumberFormatter) PercentSymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("percentSymbol"))
 	if _r == 0 {
 		return ""
@@ -737,6 +811,7 @@ func (nf *NumberFormatter) PercentSymbol() string {
 
 // PerMillSymbol returns the per mill symbol.
 func (nf *NumberFormatter) PerMillSymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("perMillSymbol"))
 	if _r == 0 {
 		return ""
@@ -746,6 +821,7 @@ func (nf *NumberFormatter) PerMillSymbol() string {
 
 // MinusSign returns the minus sign.
 func (nf *NumberFormatter) MinusSign() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("minusSign"))
 	if _r == 0 {
 		return ""
@@ -755,6 +831,7 @@ func (nf *NumberFormatter) MinusSign() string {
 
 // PlusSign returns the plus sign.
 func (nf *NumberFormatter) PlusSign() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("plusSign"))
 	if _r == 0 {
 		return ""
@@ -764,6 +841,7 @@ func (nf *NumberFormatter) PlusSign() string {
 
 // ExponentSymbol returns the exponent symbol.
 func (nf *NumberFormatter) ExponentSymbol() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("exponentSymbol"))
 	if _r == 0 {
 		return ""
@@ -773,30 +851,35 @@ func (nf *NumberFormatter) ExponentSymbol() string {
 
 // GroupingSize returns the grouping size.
 func (nf *NumberFormatter) GroupingSize() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("groupingSize"))
 	return _r
 }
 
 // SecondaryGroupingSize returns the secondary grouping size.
 func (nf *NumberFormatter) SecondaryGroupingSize() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("secondaryGroupingSize"))
 	return _r
 }
 
 // Multiplier returns the multiplier.
 func (nf *NumberFormatter) Multiplier() *Number {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("multiplier"))
 	return NumberFromID(_r)
 }
 
 // FormatWidth returns the format width.
 func (nf *NumberFormatter) FormatWidth() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("formatWidth"))
 	return _r
 }
 
 // PaddingCharacter returns the padding character.
 func (nf *NumberFormatter) PaddingCharacter() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("paddingCharacter"))
 	if _r == 0 {
 		return ""
@@ -806,60 +889,70 @@ func (nf *NumberFormatter) PaddingCharacter() string {
 
 // PaddingPosition returns the padding position.
 func (nf *NumberFormatter) PaddingPosition() NumberFormatterPadPosition {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterPadPosition](objref.IDOf(nf), objc.RegisterName("paddingPosition"))
 	return _r
 }
 
 // RoundingMode returns the rounding mode.
 func (nf *NumberFormatter) RoundingMode() NumberFormatterRoundingMode {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[NumberFormatterRoundingMode](objref.IDOf(nf), objc.RegisterName("roundingMode"))
 	return _r
 }
 
 // RoundingIncrement returns the rounding increment.
 func (nf *NumberFormatter) RoundingIncrement() *Number {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("roundingIncrement"))
 	return NumberFromID(_r)
 }
 
 // MinimumIntegerDigits returns the minimum integer digits.
 func (nf *NumberFormatter) MinimumIntegerDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumIntegerDigits"))
 	return _r
 }
 
 // MaximumIntegerDigits returns the maximum integer digits.
 func (nf *NumberFormatter) MaximumIntegerDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumIntegerDigits"))
 	return _r
 }
 
 // MinimumFractionDigits returns the minimum fraction digits.
 func (nf *NumberFormatter) MinimumFractionDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumFractionDigits"))
 	return _r
 }
 
 // MaximumFractionDigits returns the maximum fraction digits.
 func (nf *NumberFormatter) MaximumFractionDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumFractionDigits"))
 	return _r
 }
 
 // Minimum returns the minimum.
 func (nf *NumberFormatter) Minimum() *Number {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("minimum"))
 	return NumberFromID(_r)
 }
 
 // Maximum returns the maximum.
 func (nf *NumberFormatter) Maximum() *Number {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("maximum"))
 	return NumberFromID(_r)
 }
 
 // CurrencyGroupingSeparator returns the currency grouping separator.
 func (nf *NumberFormatter) CurrencyGroupingSeparator() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("currencyGroupingSeparator"))
 	if _r == 0 {
 		return ""
@@ -869,42 +962,49 @@ func (nf *NumberFormatter) CurrencyGroupingSeparator() string {
 
 // IsLenient reports whether the object is lenient.
 func (nf *NumberFormatter) IsLenient() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("isLenient"))
 	return _r
 }
 
 // UsesSignificantDigits wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) UsesSignificantDigits() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("usesSignificantDigits"))
 	return _r
 }
 
 // MinimumSignificantDigits returns the minimum significant digits.
 func (nf *NumberFormatter) MinimumSignificantDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("minimumSignificantDigits"))
 	return _r
 }
 
 // MaximumSignificantDigits returns the maximum significant digits.
 func (nf *NumberFormatter) MaximumSignificantDigits() int {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[int](objref.IDOf(nf), objc.RegisterName("maximumSignificantDigits"))
 	return _r
 }
 
 // IsPartialStringValidationEnabled reports whether the object is partial string validation enabled.
 func (nf *NumberFormatter) IsPartialStringValidationEnabled() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("isPartialStringValidationEnabled"))
 	return _r
 }
 
 // HasThousandSeparators reports whether the object has thousand separators.
 func (nf *NumberFormatter) HasThousandSeparators() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("hasThousandSeparators"))
 	return _r
 }
 
 // ThousandSeparator returns the thousand separator.
 func (nf *NumberFormatter) ThousandSeparator() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("thousandSeparator"))
 	if _r == 0 {
 		return ""
@@ -914,12 +1014,14 @@ func (nf *NumberFormatter) ThousandSeparator() string {
 
 // LocalizesFormat wraps the corresponding Objective-C method.
 func (nf *NumberFormatter) LocalizesFormat() bool {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[bool](objref.IDOf(nf), objc.RegisterName("localizesFormat"))
 	return _r
 }
 
 // Format returns the format.
 func (nf *NumberFormatter) Format() string {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("format"))
 	if _r == 0 {
 		return ""
@@ -929,24 +1031,28 @@ func (nf *NumberFormatter) Format() string {
 
 // AttributedStringForZero returns the attributed string for zero.
 func (nf *NumberFormatter) AttributedStringForZero() *AttributedString {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForZero"))
 	return AttributedStringFromID(_r)
 }
 
 // AttributedStringForNil returns the attributed string for nil.
 func (nf *NumberFormatter) AttributedStringForNil() *AttributedString {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForNil"))
 	return AttributedStringFromID(_r)
 }
 
 // AttributedStringForNotANumber returns the attributed string for not a number.
 func (nf *NumberFormatter) AttributedStringForNotANumber() *AttributedString {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("attributedStringForNotANumber"))
 	return AttributedStringFromID(_r)
 }
 
 // RoundingBehavior returns the rounding behavior.
 func (nf *NumberFormatter) RoundingBehavior() *DecimalNumberHandler {
+	defer runtime.KeepAlive(nf)
 	_r := objc.Send[objc.ID](objref.IDOf(nf), objc.RegisterName("roundingBehavior"))
 	return DecimalNumberHandlerFromID(_r)
 }

@@ -5,10 +5,12 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -52,37 +54,46 @@ func hostObjectAdopt(id objc.ID) *HostObject {
 
 // Description returns the object's -description text.
 func (ho *HostObject) Description() string {
+	defer runtime.KeepAlive(ho)
 	return rt.Description(objref.IDOf(ho))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ho *HostObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ho), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ho *HostObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(ho)
 	return rt.IsKind(objref.IDOf(ho), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ho *HostObject) String() string {
+	defer runtime.KeepAlive(ho)
 	return rt.Description(objref.IDOf(ho))
 }
 
 // Destroy removes underlying allocations and connections from the USB host object.
 func (ho *HostObject) Destroy() {
+	defer runtime.KeepAlive(ho)
 	objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("destroy"))
 }
 
-// DestroyWithOptions removes underlying allocations of the IOUSBHostObject object along with user client Extends <code>destroy</code> to take an options to modify the destroy behavior.  Currently only the <code>IOUSBHostObjectDestroyOptionsDeviceSurrender</code> is defined to support surrendering ownersip of the kernel service.  To be used when accepting the <code>kUSBHostMessageDeviceIsRequestingClose</code> message.
-func (ho *HostObject) DestroyWithOptions(options HostObjectDestroyOptions) {
+// DestroyWith removes underlying allocations of the IOUSBHostObject object along with user client Extends <code>destroy</code> to take an options to modify the destroy behavior.  Currently only the <code>IOUSBHostObjectDestroyOptionsDeviceSurrender</code> is defined to support surrendering ownersip of the kernel service.  To be used when accepting the <code>kUSBHostMessageDeviceIsRequestingClose</code> message.
+func (ho *HostObject) DestroyWith(options HostObjectDestroyOptions) {
+	defer runtime.KeepAlive(ho)
 	objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("destroyWithOptions:"), options)
 }
 
 // SendDeviceRequestDataBytesTransferredCompletionTimeout sends a request on the default control endpoint.
 func (ho *HostObject) SendDeviceRequestDataBytesTransferredCompletionTimeout(request unsafe.Pointer, data obj.Object, completionTimeout float64) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:data:bytesTransferred:completionTimeout:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), completionTimeout, unsafe.Pointer(&_nsErr))
@@ -94,6 +105,8 @@ func (ho *HostObject) SendDeviceRequestDataBytesTransferredCompletionTimeout(req
 
 // SendDeviceRequestDataBytesTransferred sends a request on the default control endpoint with a default completion timeout.
 func (ho *HostObject) SendDeviceRequestDataBytesTransferred(request unsafe.Pointer, data obj.Object) (bytesTransferred int, err error) {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
 	var _out0 int
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:data:bytesTransferred:error:"), request, objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -105,6 +118,7 @@ func (ho *HostObject) SendDeviceRequestDataBytesTransferred(request unsafe.Point
 
 // SendDeviceRequest sends a request on the default control endpoint without a data phase and default completion timeout.
 func (ho *HostObject) SendDeviceRequest(request unsafe.Pointer) error {
+	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ho), objc.RegisterName("sendDeviceRequest:error:"), request, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -114,25 +128,31 @@ func (ho *HostObject) SendDeviceRequest(request unsafe.Pointer) error {
 }
 
 // EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler enqueues a request on the default control endpoint.
-func (ho *HostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, error_, completionHandler)
+func (ho *HostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data obj.Object, completionTimeout float64, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:completionTimeout:error:completionHandler:"), request, objref.IDOf(data), completionTimeout, err, completionHandler)
 	return _r
 }
 
 // EnqueueDeviceRequestDataErrorCompletionHandler enqueues a request on the default control endpoint with a default completion timeout.
-func (ho *HostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:error:completionHandler:"), request, objref.IDOf(data), error_, completionHandler)
+func (ho *HostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request unsafe.Pointer, data obj.Object, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(ho)
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:data:error:completionHandler:"), request, objref.IDOf(data), err, completionHandler)
 	return _r
 }
 
 // EnqueueDeviceRequestErrorCompletionHandler enqueues a request on the default control endpoint without a data phase and a default timeout.
-func (ho *HostObject) EnqueueDeviceRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
-	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:error:completionHandler:"), request, error_, completionHandler)
+func (ho *HostObject) EnqueueDeviceRequestErrorCompletionHandler(request unsafe.Pointer, err unsafe.Pointer, completionHandler func(int, uint)) bool {
+	defer runtime.KeepAlive(ho)
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("enqueueDeviceRequest:error:completionHandler:"), request, err, completionHandler)
 	return _r
 }
 
 // AbortDeviceRequestsWithOption aborts device requests.
 func (ho *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) error {
+	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ho), objc.RegisterName("abortDeviceRequestsWithOption:error:"), option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -145,6 +165,7 @@ func (ho *HostObject) AbortDeviceRequestsWithOption(option HostAbortOption) erro
 //
 // AbortDeviceRequests returns an error if the operation did not succeed.
 func (ho *HostObject) AbortDeviceRequests() error {
+	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(ho), objc.RegisterName("abortDeviceRequestsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -153,35 +174,39 @@ func (ho *HostObject) AbortDeviceRequests() error {
 	return nil
 }
 
-// StringWithIndexLanguageIDError retrieves a string from a string descriptor.
-func (ho *HostObject) StringWithIndexLanguageIDError(index int, languageID int) (result obj.Object, err error) {
+// StringWithIndexLanguageID retrieves a string from a string descriptor.
+func (ho *HostObject) StringWithIndexLanguageID(index int, languageID int) (result *foundation.String, err error) {
+	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("stringWithIndex:languageID:error:"), index, languageID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.StringFromID(_r), nil
 }
 
-// StringWithIndexError retrieves an English-language string from a string descriptor.
-func (ho *HostObject) StringWithIndexError(index int) (result obj.Object, err error) {
+// StringWithIndex retrieves an English-language string from a string descriptor.
+func (ho *HostObject) StringWithIndex(index int) (result *foundation.String, err error) {
+	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("stringWithIndex:error:"), index, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.StringFromID(_r), nil
 }
 
 // FrameNumberWithTime returns the current frame number of the USB controller.
 func (ho *HostObject) FrameNumberWithTime() (result uint64, time_ uint64) {
+	defer runtime.KeepAlive(ho)
 	var _out0 uint64
 	_r := objc.Send[uint64](objref.IDOf(ho), objc.RegisterName("frameNumberWithTime:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
-// CurrentMicroframeWithTimeError return the current microframe number of the USB controller This method will return the current microframe number of the USB controller. This is most useful for scheduling future isochronous requests.
-func (ho *HostObject) CurrentMicroframeWithTimeError() (result uint64, time_ uint64, err error) {
+// CurrentMicroframeWithTime return the current microframe number of the USB controller This method will return the current microframe number of the USB controller. This is most useful for scheduling future isochronous requests.
+func (ho *HostObject) CurrentMicroframeWithTime() (result uint64, time_ uint64, err error) {
+	defer runtime.KeepAlive(ho)
 	var _out0 uint64
 	var _nsErr uintptr
 	_r := objc.Send[uint64](objref.IDOf(ho), objc.RegisterName("currentMicroframeWithTime:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -191,8 +216,9 @@ func (ho *HostObject) CurrentMicroframeWithTimeError() (result uint64, time_ uin
 	return _r, _out0, nil
 }
 
-// ReferenceMicroframeWithTimeError return a recent microframe number of the USB controller This method will return a recent microframe number of the USB controller. This is most useful for scheduling future isochronous requests.
-func (ho *HostObject) ReferenceMicroframeWithTimeError() (result uint64, time_ uint64, err error) {
+// ReferenceMicroframeWithTime return a recent microframe number of the USB controller This method will return a recent microframe number of the USB controller. This is most useful for scheduling future isochronous requests.
+func (ho *HostObject) ReferenceMicroframeWithTime() (result uint64, time_ uint64, err error) {
+	defer runtime.KeepAlive(ho)
 	var _out0 uint64
 	var _nsErr uintptr
 	_r := objc.Send[uint64](objref.IDOf(ho), objc.RegisterName("referenceMicroframeWithTime:error:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -202,30 +228,34 @@ func (ho *HostObject) ReferenceMicroframeWithTimeError() (result uint64, time_ u
 	return _r, _out0, nil
 }
 
-// IODataWithCapacityError allocates a buffer for input/output requests.
-func (ho *HostObject) IODataWithCapacityError(capacity int) (result obj.Object, err error) {
+// IODataWithCapacity allocates a buffer for input/output requests.
+func (ho *HostObject) IODataWithCapacity(capacity int) (result *foundation.MutableData, err error) {
+	defer runtime.KeepAlive(ho)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("ioDataWithCapacity:error:"), capacity, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.MutableDataFromID(_r), nil
 }
 
 // IOService returns retrieve the IOUSBHostObject's io_service_t.
 func (ho *HostObject) IOService() int {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[int](objref.IDOf(ho), objc.RegisterName("ioService"))
 	return _r
 }
 
 // Queue returns the dispatch queue that all asynchronous io will be serviced.
-func (ho *HostObject) Queue() obj.Object {
+func (ho *HostObject) Queue() *foundation.Object {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[objc.ID](objref.IDOf(ho), objc.RegisterName("queue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // DeviceAddress returns retrieve the current address of the device.
 func (ho *HostObject) DeviceAddress() int {
+	defer runtime.KeepAlive(ho)
 	_r := objc.Send[int](objref.IDOf(ho), objc.RegisterName("deviceAddress"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func customContentAdopt(id objc.ID) *CustomContent {
 
 // Description returns the object's -description text.
 func (cc *CustomContent) Description() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cc *CustomContent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cc *CustomContent) IsKind(className string) bool {
+	defer runtime.KeepAlive(cc)
 	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cc *CustomContent) String() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
@@ -80,6 +88,7 @@ func (cc *CustomContent) WithImportance(importance CustomContentImportance) *Cus
 
 // Label returns the label.
 func (cc *CustomContent) Label() string {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -88,13 +97,15 @@ func (cc *CustomContent) Label() string {
 }
 
 // AttributedLabel returns the attributed label.
-func (cc *CustomContent) AttributedLabel() obj.Object {
+func (cc *CustomContent) AttributedLabel() *foundation.AttributedString {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("attributedLabel"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Value returns the value.
 func (cc *CustomContent) Value() string {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -103,13 +114,15 @@ func (cc *CustomContent) Value() string {
 }
 
 // AttributedValue returns the attributed value.
-func (cc *CustomContent) AttributedValue() obj.Object {
+func (cc *CustomContent) AttributedValue() *foundation.AttributedString {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("attributedValue"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Importance returns the importance.
 func (cc *CustomContent) Importance() CustomContentImportance {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[CustomContentImportance](objref.IDOf(cc), objc.RegisterName("importance"))
 	return _r
 }

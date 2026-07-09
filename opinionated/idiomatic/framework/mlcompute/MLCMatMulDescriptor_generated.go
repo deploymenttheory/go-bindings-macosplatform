@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func matMulDescriptorAdopt(id objc.ID) *MatMulDescriptor {
 
 // Description returns the object's -description text.
 func (mmd *MatMulDescriptor) Description() string {
+	defer runtime.KeepAlive(mmd)
 	return rt.Description(objref.IDOf(mmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmd *MatMulDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmd *MatMulDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmd)
 	return rt.IsKind(objref.IDOf(mmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmd *MatMulDescriptor) String() string {
+	defer runtime.KeepAlive(mmd)
 	return rt.Description(objref.IDOf(mmd))
 }
 
@@ -74,18 +81,21 @@ func NewMatMulDescriptor() *MatMulDescriptor {
 
 // Alpha returns a scalar to scale the result in C=alpha x X x Y. Default = 1.0
 func (mmd *MatMulDescriptor) Alpha() float32 {
+	defer runtime.KeepAlive(mmd)
 	_r := objc.Send[float32](objref.IDOf(mmd), objc.RegisterName("alpha"))
 	return _r
 }
 
 // TransposesX reports whether if true, transposes the last two dimensions of X. Default = False
 func (mmd *MatMulDescriptor) TransposesX() bool {
+	defer runtime.KeepAlive(mmd)
 	_r := objc.Send[bool](objref.IDOf(mmd), objc.RegisterName("transposesX"))
 	return _r
 }
 
 // TransposesY reports whether if true, transposes the last two dimensions of Y. Default = False
 func (mmd *MatMulDescriptor) TransposesY() bool {
+	defer runtime.KeepAlive(mmd)
 	_r := objc.Send[bool](objref.IDOf(mmd), objc.RegisterName("transposesY"))
 	return _r
 }

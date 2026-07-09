@@ -5,7 +5,10 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func suggestionAdopt(id objc.ID) *Suggestion {
 
 // Description returns the object's -description text.
 func (s *Suggestion) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Suggestion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Suggestion) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Suggestion) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -73,13 +81,15 @@ func NewSuggestion() *Suggestion {
 }
 
 // LocalizedAttributedSuggestion returns the localized attributed suggestion.
-func (s *Suggestion) LocalizedAttributedSuggestion() obj.Object {
+func (s *Suggestion) LocalizedAttributedSuggestion() *foundation.AttributedString {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedAttributedSuggestion"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // SuggestionKind returns the suggestion kind.
 func (s *Suggestion) SuggestionKind() SuggestionKind {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[SuggestionKind](objref.IDOf(s), objc.RegisterName("suggestionKind"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package pushkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func voIPPushMetadataAdopt(id objc.ID) *VoIPPushMetadata {
 
 // Description returns the object's -description text.
 func (vipm *VoIPPushMetadata) Description() string {
+	defer runtime.KeepAlive(vipm)
 	return rt.Description(objref.IDOf(vipm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vipm *VoIPPushMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vipm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vipm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vipm *VoIPPushMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(vipm)
 	return rt.IsKind(objref.IDOf(vipm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vipm *VoIPPushMetadata) String() string {
+	defer runtime.KeepAlive(vipm)
 	return rt.Description(objref.IDOf(vipm))
 }
 
@@ -74,6 +81,7 @@ func NewVoIPPushMetadata() *VoIPPushMetadata {
 
 // MustReport wraps the corresponding Objective-C method.
 func (vipm *VoIPPushMetadata) MustReport() bool {
+	defer runtime.KeepAlive(vipm)
 	_r := objc.Send[bool](objref.IDOf(vipm), objc.RegisterName("mustReport"))
 	return _r
 }

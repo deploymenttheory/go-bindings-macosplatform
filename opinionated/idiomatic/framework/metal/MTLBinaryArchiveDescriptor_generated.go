@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func binaryArchiveDescriptorAdopt(id objc.ID) *BinaryArchiveDescriptor {
 
 // Description returns the object's -description text.
 func (bad *BinaryArchiveDescriptor) Description() string {
+	defer runtime.KeepAlive(bad)
 	return rt.Description(objref.IDOf(bad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bad *BinaryArchiveDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bad *BinaryArchiveDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(bad)
 	return rt.IsKind(objref.IDOf(bad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bad *BinaryArchiveDescriptor) String() string {
+	defer runtime.KeepAlive(bad)
 	return rt.Description(objref.IDOf(bad))
 }
 
@@ -79,7 +86,8 @@ func (bad *BinaryArchiveDescriptor) WithURL(url string) *BinaryArchiveDescriptor
 }
 
 // URL returns the URL.
-func (bad *BinaryArchiveDescriptor) URL() obj.Object {
+func (bad *BinaryArchiveDescriptor) URL() string {
+	defer runtime.KeepAlive(bad)
 	_r := objc.Send[objc.ID](objref.IDOf(bad), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

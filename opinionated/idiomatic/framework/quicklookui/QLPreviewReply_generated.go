@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func previewReplyAdopt(id objc.ID) *PreviewReply {
 
 // Description returns the object's -description text.
 func (pr *PreviewReply) Description() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pr *PreviewReply) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pr *PreviewReply) IsKind(className string) bool {
+	defer runtime.KeepAlive(pr)
 	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pr *PreviewReply) String() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
@@ -80,8 +87,8 @@ func (pr *PreviewReply) WithStringEncoding(stringEncoding int) *PreviewReply {
 }
 
 // WithAttachments sets the attachments for a preview reply that provide additional data for the system to display the preview.
-func (pr *PreviewReply) WithAttachments(attachments obj.Object) *PreviewReply {
-	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
+func (pr *PreviewReply) WithAttachments(attachments map[string]*PreviewReplyAttachment) *PreviewReply {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setAttachments:"), rt.MapToDict(attachments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *PreviewReplyAttachment) objc.ID { return objref.IDOf(_v) }))
 	return pr
 }
 
@@ -93,18 +100,21 @@ func (pr *PreviewReply) WithTitle(title string) *PreviewReply {
 
 // StringEncoding returns string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
 func (pr *PreviewReply) StringEncoding() int {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[int](objref.IDOf(pr), objc.RegisterName("stringEncoding"))
 	return _r
 }
 
 // Attachments returns attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
-func (pr *PreviewReply) Attachments() obj.Object {
+func (pr *PreviewReply) Attachments() map[string]*PreviewReplyAttachment {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("attachments"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *PreviewReplyAttachment { return PreviewReplyAttachmentFromID(_id) })
 }
 
 // Title returns custom display title for the preview. If left as the empty string, QuickLook will use the file name.
 func (pr *PreviewReply) Title() string {
+	defer runtime.KeepAlive(pr)
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""

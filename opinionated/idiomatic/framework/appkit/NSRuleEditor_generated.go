@@ -5,11 +5,14 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,9 +60,9 @@ func (re *RuleEditor) WithFormattingStringsFilename(formattingStringsFilename st
 }
 
 // WithFormattingDictionary sets the formatting dictionary for the rule editor.
-func (re *RuleEditor) WithFormattingDictionary(formattingDictionary obj.Object) *RuleEditor {
+func (re *RuleEditor) WithFormattingDictionary(formattingDictionary map[string]string) *RuleEditor {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormattingDictionary:"), rt.MapToDict(formattingDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return re
 }
@@ -130,6 +133,7 @@ func (re *RuleEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *Rul
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (re *RuleEditor) WithTarget(target obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -194,6 +198,7 @@ func (re *RuleEditor) WithControlSize(controlSize ControlSize) *RuleEditor {
 
 // WithFormatter sets the receiver’s formatter.
 func (re *RuleEditor) WithFormatter(formatter obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -202,6 +207,7 @@ func (re *RuleEditor) WithFormatter(formatter obj.Object) *RuleEditor {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (re *RuleEditor) WithObjectValue(objectValue obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -218,6 +224,7 @@ func (re *RuleEditor) WithStringValue(stringValue string) *RuleEditor {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (re *RuleEditor) WithAttributedStringValue(attributedStringValue obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -258,6 +265,7 @@ func (re *RuleEditor) WithDoubleValue(doubleValue float64) *RuleEditor {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (re *RuleEditor) WithFont(font *Font) *RuleEditor {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -306,6 +314,7 @@ func (re *RuleEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) 
 
 // WithCell sets the cell.
 func (re *RuleEditor) WithCell(cell CellProvider) *RuleEditor {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -451,6 +460,7 @@ func (re *RuleEditor) WithWantsLayer(wantsLayer bool) *RuleEditor {
 
 // WithLayer sets the layer.
 func (re *RuleEditor) WithLayer(layer obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -500,6 +510,7 @@ func (re *RuleEditor) WithBackgroundFilters(items ...obj.Object) *RuleEditor {
 
 // WithCompositingFilter sets the compositing filter.
 func (re *RuleEditor) WithCompositingFilter(compositingFilter obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -517,6 +528,7 @@ func (re *RuleEditor) WithContentFilters(items ...obj.Object) *RuleEditor {
 
 // WithShadow sets the shadow.
 func (re *RuleEditor) WithShadow(shadow *Shadow) *RuleEditor {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -565,6 +577,7 @@ func (re *RuleEditor) WithPreparedContentRect(preparedContentRect corefoundation
 
 // WithNextKeyView sets the next key view.
 func (re *RuleEditor) WithNextKeyView(nextKeyView ViewProvider) *RuleEditor {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -614,6 +627,7 @@ func (re *RuleEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (re *RuleEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RuleEditor {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -670,6 +684,7 @@ func (re *RuleEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 
 // WithPressureConfiguration sets the pressure configuration.
 func (re *RuleEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RuleEditor {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -678,6 +693,7 @@ func (re *RuleEditor) WithPressureConfiguration(pressureConfiguration *PressureC
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (re *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEditor {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -686,6 +702,7 @@ func (re *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEd
 
 // WithMenu sets returns the responder’s menu.
 func (re *RuleEditor) WithMenu(menu *Menu) *RuleEditor {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -694,6 +711,7 @@ func (re *RuleEditor) WithMenu(menu *Menu) *RuleEditor {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (re *RuleEditor) WithUserActivity(userActivity obj.Object) *RuleEditor {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -702,6 +720,7 @@ func (re *RuleEditor) WithUserActivity(userActivity obj.Object) *RuleEditor {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (re *RuleEditor) WithTouchBar(touchBar *TouchBar) *RuleEditor {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -710,6 +729,7 @@ func (re *RuleEditor) WithTouchBar(touchBar *TouchBar) *RuleEditor {
 
 // ReloadCriteria instructs the receiver to refetch criteria from its delegate.
 func (re *RuleEditor) ReloadCriteria() {
+	defer runtime.KeepAlive(re)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("reloadCriteria"))
 	})
@@ -718,6 +738,7 @@ func (re *RuleEditor) ReloadCriteria() {
 
 // ReloadPredicate instructs the receiver to regenerate its predicate by invoking the corresponding delegate method.
 func (re *RuleEditor) ReloadPredicate() {
+	defer runtime.KeepAlive(re)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("reloadPredicate"))
 	})
@@ -725,12 +746,13 @@ func (re *RuleEditor) ReloadPredicate() {
 }
 
 // PredicateForRow returns the predicate for a given row.
-func (re *RuleEditor) PredicateForRow(row int) obj.Object {
-	var _mainthread0 obj.Object
+func (re *RuleEditor) PredicateForRow(row int) *foundation.Predicate {
+	defer runtime.KeepAlive(re)
+	var _mainthread0 *foundation.Predicate
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Predicate {
 			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("predicateForRow:"), row)
-			return obj.Wrap(_r)
+			return foundation.PredicateFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -738,12 +760,13 @@ func (re *RuleEditor) PredicateForRow(row int) obj.Object {
 }
 
 // SubrowIndexesForRow returns the immediate subrows of a given row.
-func (re *RuleEditor) SubrowIndexesForRow(rowIndex int) obj.Object {
-	var _mainthread0 obj.Object
+func (re *RuleEditor) SubrowIndexesForRow(rowIndex int) *foundation.IndexSet {
+	defer runtime.KeepAlive(re)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("subrowIndexesForRow:"), rowIndex)
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -752,6 +775,7 @@ func (re *RuleEditor) SubrowIndexesForRow(rowIndex int) obj.Object {
 
 // CriteriaForRow returns the currently chosen items for a given row.
 func (re *RuleEditor) CriteriaForRow(row int) obj.Object {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -765,6 +789,7 @@ func (re *RuleEditor) CriteriaForRow(row int) obj.Object {
 
 // DisplayValuesForRow returns the chosen values for a given row.
 func (re *RuleEditor) DisplayValuesForRow(row int) obj.Object {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -778,6 +803,8 @@ func (re *RuleEditor) DisplayValuesForRow(row int) obj.Object {
 
 // RowForDisplayValue returns the index of the row containing a given value.
 func (re *RuleEditor) RowForDisplayValue(displayValue obj.Object) int {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(displayValue)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -791,6 +818,7 @@ func (re *RuleEditor) RowForDisplayValue(displayValue obj.Object) int {
 
 // RowTypeForRow returns the type of a given row.
 func (re *RuleEditor) RowTypeForRow(rowIndex int) RuleEditorRowType {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 RuleEditorRowType
 	purego.Main(func() {
 		_mainthread0 = func() RuleEditorRowType {
@@ -804,6 +832,7 @@ func (re *RuleEditor) RowTypeForRow(rowIndex int) RuleEditorRowType {
 
 // ParentRowForRow returns the index of the parent of a given row.
 func (re *RuleEditor) ParentRowForRow(rowIndex int) int {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -817,6 +846,8 @@ func (re *RuleEditor) ParentRowForRow(rowIndex int) int {
 
 // AddRow adds a row to the receiver.
 func (re *RuleEditor) AddRow(sender obj.Object) {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("addRow:"), objref.IDOf(sender))
 	})
@@ -825,6 +856,7 @@ func (re *RuleEditor) AddRow(sender obj.Object) {
 
 // InsertRowAtIndexWithTypeAsSubrowOfRowAnimate adds a new row of a given type at a given location.
 func (re *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int, rowType RuleEditorRowType, parentRow int, shouldAnimate bool) {
+	defer runtime.KeepAlive(re)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("insertRowAtIndex:withType:asSubrowOfRow:animate:"), rowIndex, rowType, parentRow, shouldAnimate)
 	})
@@ -833,6 +865,9 @@ func (re *RuleEditor) InsertRowAtIndexWithTypeAsSubrowOfRowAnimate(rowIndex int,
 
 // SetCriteriaAndDisplayValuesForRowAtIndex modifies the row at a given index to contain the given items and values.
 func (re *RuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria obj.Object, values obj.Object, rowIndex int) {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(criteria)
+	defer runtime.KeepAlive(values)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setCriteria:andDisplayValues:forRowAtIndex:"), objref.IDOf(criteria), objref.IDOf(values), rowIndex)
 	})
@@ -841,6 +876,7 @@ func (re *RuleEditor) SetCriteriaAndDisplayValuesForRowAtIndex(criteria obj.Obje
 
 // RemoveRowAtIndex removes the row at a given index.
 func (re *RuleEditor) RemoveRowAtIndex(rowIndex int) {
+	defer runtime.KeepAlive(re)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("removeRowAtIndex:"), rowIndex)
 	})
@@ -849,6 +885,8 @@ func (re *RuleEditor) RemoveRowAtIndex(rowIndex int) {
 
 // RemoveRowsAtIndexesIncludeSubrows removes the rows at given indexes.
 func (re *RuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes obj.Object, includeSubrows bool) {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(rowIndexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("removeRowsAtIndexes:includeSubrows:"), objref.IDOf(rowIndexes), includeSubrows)
 	})
@@ -857,6 +895,8 @@ func (re *RuleEditor) RemoveRowsAtIndexesIncludeSubrows(rowIndexes obj.Object, i
 
 // SelectRowIndexesByExtendingSelection sets in the receiver the indexes of rows that are selected.
 func (re *RuleEditor) SelectRowIndexesByExtendingSelection(indexes obj.Object, extend bool) {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("selectRowIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
 	})
@@ -865,6 +905,7 @@ func (re *RuleEditor) SelectRowIndexesByExtendingSelection(indexes obj.Object, e
 
 // FormattingStringsFilename returns the formatting strings filename.
 func (re *RuleEditor) FormattingStringsFilename() string {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -880,12 +921,13 @@ func (re *RuleEditor) FormattingStringsFilename() string {
 }
 
 // FormattingDictionary returns the formatting dictionary.
-func (re *RuleEditor) FormattingDictionary() obj.Object {
-	var _mainthread0 obj.Object
+func (re *RuleEditor) FormattingDictionary() map[string]string {
+	defer runtime.KeepAlive(re)
+	var _mainthread0 map[string]string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() map[string]string {
 			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("formattingDictionary"))
-			return obj.Wrap(_r)
+			return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -894,6 +936,7 @@ func (re *RuleEditor) FormattingDictionary() obj.Object {
 
 // NestingMode returns the nesting mode.
 func (re *RuleEditor) NestingMode() RuleEditorNestingMode {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 RuleEditorNestingMode
 	purego.Main(func() {
 		_mainthread0 = func() RuleEditorNestingMode {
@@ -907,6 +950,7 @@ func (re *RuleEditor) NestingMode() RuleEditorNestingMode {
 
 // RowHeight returns the row height.
 func (re *RuleEditor) RowHeight() float64 {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -920,6 +964,7 @@ func (re *RuleEditor) RowHeight() float64 {
 
 // IsEditable reports whether the object is editable.
 func (re *RuleEditor) IsEditable() bool {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -933,6 +978,7 @@ func (re *RuleEditor) IsEditable() bool {
 
 // CanRemoveAllRows wraps the corresponding Objective-C method.
 func (re *RuleEditor) CanRemoveAllRows() bool {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -945,12 +991,13 @@ func (re *RuleEditor) CanRemoveAllRows() bool {
 }
 
 // Predicate returns the predicate.
-func (re *RuleEditor) Predicate() obj.Object {
-	var _mainthread0 obj.Object
+func (re *RuleEditor) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(re)
+	var _mainthread0 *foundation.Predicate
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Predicate {
 			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("predicate"))
-			return obj.Wrap(_r)
+			return foundation.PredicateFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -959,6 +1006,7 @@ func (re *RuleEditor) Predicate() obj.Object {
 
 // NumberOfRows returns the number of rows.
 func (re *RuleEditor) NumberOfRows() int {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -971,12 +1019,13 @@ func (re *RuleEditor) NumberOfRows() int {
 }
 
 // SelectedRowIndexes returns the selected row indexes.
-func (re *RuleEditor) SelectedRowIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (re *RuleEditor) SelectedRowIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(re)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("selectedRowIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -985,6 +1034,7 @@ func (re *RuleEditor) SelectedRowIndexes() obj.Object {
 
 // RowTypeKeyPath returns the row type key path.
 func (re *RuleEditor) RowTypeKeyPath() string {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1001,6 +1051,7 @@ func (re *RuleEditor) RowTypeKeyPath() string {
 
 // SubrowsKeyPath returns the subrows key path.
 func (re *RuleEditor) SubrowsKeyPath() string {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1017,6 +1068,7 @@ func (re *RuleEditor) SubrowsKeyPath() string {
 
 // CriteriaKeyPath returns the criteria key path.
 func (re *RuleEditor) CriteriaKeyPath() string {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1033,6 +1085,7 @@ func (re *RuleEditor) CriteriaKeyPath() string {
 
 // DisplayValuesKeyPath returns the display values key path.
 func (re *RuleEditor) DisplayValuesKeyPath() string {
+	defer runtime.KeepAlive(re)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

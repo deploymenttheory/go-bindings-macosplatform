@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -233,8 +234,9 @@ func MaxNumberOfRecipients() int {
 	return _r
 }
 
-// StartWithDefinitionPartyCodeError creates and starts a new game activity with a custom party code.
-func StartWithDefinitionPartyCodeError(activityDefinition *GameActivityDefinition, partyCode string) (result *GameActivity, err error) {
+// StartWithDefinitionPartyCode creates and starts a new game activity with a custom party code.
+func StartWithDefinitionPartyCode(activityDefinition *GameActivityDefinition, partyCode string) (result *GameActivity, err error) {
+	defer runtime.KeepAlive(activityDefinition)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("startWithDefinition:partyCode:error:"), objref.IDOf(activityDefinition), purego.NSString(partyCode), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -243,8 +245,9 @@ func StartWithDefinitionPartyCodeError(activityDefinition *GameActivityDefinitio
 	return GameActivityFromID(_r), nil
 }
 
-// StartWithDefinitionError creates and starts a game activity with a definition.
-func StartWithDefinitionError(activityDefinition *GameActivityDefinition) (result *GameActivity, err error) {
+// StartWithDefinition creates and starts a game activity with a definition.
+func StartWithDefinition(activityDefinition *GameActivityDefinition) (result *GameActivity, err error) {
+	defer runtime.KeepAlive(activityDefinition)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("startWithDefinition:error:"), objref.IDOf(activityDefinition), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -418,11 +421,13 @@ func RemoveSessionWithIdentifier(ctx context.Context, identifier string) error {
 
 // AddEventListener adds a new event listener object.
 func AddEventListener(listener obj.Object) {
+	defer runtime.KeepAlive(listener)
 	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("addEventListener:"), objref.IDOf(listener))
 }
 
 // RemoveEventListener stops listening to the event listener object.
 func RemoveEventListener(listener obj.Object) {
+	defer runtime.KeepAlive(listener)
 	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("removeEventListener:"), objref.IDOf(listener))
 }
 
@@ -455,6 +460,7 @@ func LoadLeaderboardsWithIDs(ctx context.Context, leaderboardIDs []string) (resu
 //
 // SubmitScoreContextPlayerLeaderboardIDs blocks until the operation completes or ctx is cancelled.
 func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, context_ int, player *Player, leaderboardIDs []string) error {
+	defer runtime.KeepAlive(player)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -695,6 +701,7 @@ func SharedTurnBasedEventHandler() *TurnBasedEventHandler {
 //
 // FindMatchForRequest blocks until the operation completes or ctx is cancelled.
 func FindMatchForRequest(ctx context.Context, request *MatchRequest) (result *TurnBasedMatch, err error) {
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *TurnBasedMatch
 		err error

@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func tokenKeychainItemAdopt(id objc.ID) *TokenKeychainItem {
 
 // Description returns the object's -description text.
 func (tki *TokenKeychainItem) Description() string {
+	defer runtime.KeepAlive(tki)
 	return rt.Description(objref.IDOf(tki))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tki *TokenKeychainItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tki)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tki), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tki *TokenKeychainItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(tki)
 	return rt.IsKind(objref.IDOf(tki), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tki *TokenKeychainItem) String() string {
+	defer runtime.KeepAlive(tki)
 	return rt.Description(objref.IDOf(tki))
 }
 
 // NewTokenKeychainItemWithObjectID initializes a token keychain item with the specified object ID.
 func NewTokenKeychainItemWithObjectID(objectID obj.Object) *TokenKeychainItem {
+	defer runtime.KeepAlive(objectID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:"), objref.IDOf(objectID))
 	return tokenKeychainItemAdopt(_id)
@@ -83,18 +91,21 @@ func (tki *TokenKeychainItem) WithLabel(label string) *TokenKeychainItem {
 
 // WithConstraints sets access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 func (tki *TokenKeychainItem) WithConstraints(constraints obj.Object) *TokenKeychainItem {
+	defer runtime.KeepAlive(constraints)
 	objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 	return tki
 }
 
 // ObjectID returns object ID for item identification
 func (tki *TokenKeychainItem) ObjectID() obj.Object {
+	defer runtime.KeepAlive(tki)
 	_r := objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("objectID"))
 	return obj.Wrap(_r)
 }
 
 // Label contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
 func (tki *TokenKeychainItem) Label() string {
+	defer runtime.KeepAlive(tki)
 	_r := objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -104,6 +115,7 @@ func (tki *TokenKeychainItem) Label() string {
 
 // Constraints contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
 func (tki *TokenKeychainItem) Constraints() obj.Object {
+	defer runtime.KeepAlive(tki)
 	_r := objc.Send[objc.ID](objref.IDOf(tki), objc.RegisterName("constraints"))
 	return obj.Wrap(_r)
 }

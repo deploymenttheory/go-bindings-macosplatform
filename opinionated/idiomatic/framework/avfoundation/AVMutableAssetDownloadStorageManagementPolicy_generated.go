@@ -5,9 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,13 +58,14 @@ func NewMutableAssetDownloadStorageManagementPolicy() *MutableAssetDownloadStora
 
 // WithPriority sets the eviction priority for a downloaded asset.
 func (madsmp *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority obj.Object) *MutableAssetDownloadStorageManagementPolicy {
+	defer runtime.KeepAlive(priority)
 	objc.Send[objc.ID](objref.IDOf(madsmp), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return madsmp
 }
 
 // WithExpirationDate sets the expiration date for an asset.
-func (madsmp *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate obj.Object) *MutableAssetDownloadStorageManagementPolicy {
-	objc.Send[objc.ID](objref.IDOf(madsmp), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+func (madsmp *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate time.Time) *MutableAssetDownloadStorageManagementPolicy {
+	objc.Send[objc.ID](objref.IDOf(madsmp), objc.RegisterName("setExpirationDate:"), rt.TimeToNSDate(expirationDate))
 	return madsmp
 }
 

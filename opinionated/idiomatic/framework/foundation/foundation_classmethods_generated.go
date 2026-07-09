@@ -6,6 +6,8 @@ package foundation
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -30,14 +32,14 @@ func NullDescriptor() *AppleEventDescriptor {
 }
 
 // DescriptorWithDescriptorTypeBytesLength creates a descriptor initialized with the specified event type that stores the specified data (from a series of bytes).
-func DescriptorWithDescriptorTypeBytesLength(descriptorType int, bytes_ unsafe.Pointer, byteCount int) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:bytes:length:"), descriptorType, bytes_, byteCount)
+func DescriptorWithDescriptorTypeBytesLength(descriptorType int, data unsafe.Pointer, byteCount int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:bytes:length:"), descriptorType, data, byteCount)
 	return AppleEventDescriptorFromID(_r)
 }
 
 // DescriptorWithDescriptorTypeData creates a descriptor initialized with the specified event type that stores the specified data (from an instance of NSData).
-func DescriptorWithDescriptorTypeData(descriptorType int, data *Data) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:data:"), descriptorType, objref.IDOf(data))
+func DescriptorWithDescriptorTypeData(descriptorType int, data []byte) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDescriptorType:data:"), descriptorType, rt.BytesToNSData(data))
 	return AppleEventDescriptorFromID(_r)
 }
 
@@ -72,14 +74,14 @@ func DescriptorWithTypeCode(typeCode int) *AppleEventDescriptor {
 }
 
 // DescriptorWithString creates a descriptor initialized with type typeUnicodeText that stores the text from the specified string.
-func DescriptorWithString(string_ string) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithString:"), purego.NSString(string_))
+func DescriptorWithString(str string) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithString:"), purego.NSString(str))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // DescriptorWithDate creates a descriptor that stores the specified date value.
-func DescriptorWithDate(date *Date) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDate:"), objref.IDOf(date))
+func DescriptorWithDate(date time.Time) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("descriptorWithDate:"), rt.TimeToNSDate(date))
 	return AppleEventDescriptorFromID(_r)
 }
 
@@ -91,6 +93,7 @@ func DescriptorWithFileURL(fileURL string) *AppleEventDescriptor {
 
 // AppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID creates a descriptor that represents an Apple event, initialized according to the specified information.
 func AppleEventWithEventClassEventIDTargetDescriptorReturnIDTransactionID(eventClass int, eventID int, targetDescriptor *AppleEventDescriptor, returnID int16, transactionID int) *AppleEventDescriptor {
+	defer runtime.KeepAlive(targetDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAppleEventDescriptor")), objc.RegisterName("appleEventWithEventClass:eventID:targetDescriptor:returnID:transactionID:"), eventClass, eventID, objref.IDOf(targetDescriptor), returnID, transactionID)
 	return AppleEventDescriptorFromID(_r)
 }
@@ -138,13 +141,15 @@ func SharedAppleEventManager() *AppleEventManager {
 }
 
 // ArchivedDataWithRootObject returns a data object containing the encoded form of the object graph whose root object is given.
-func ArchivedDataWithRootObject(rootObject obj.Object) *Data {
+func ArchivedDataWithRootObject(rootObject obj.Object) []byte {
+	defer runtime.KeepAlive(rootObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSArchiver")), objc.RegisterName("archivedDataWithRootObject:"), objref.IDOf(rootObject))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ArchiveRootObjectToFile creates a temporary instance of NSArchiver and archives an object graph by encoding it into a data object and writing the resulting data object to a specified file.
 func ArchiveRootObjectToFile(rootObject obj.Object, path string) bool {
+	defer runtime.KeepAlive(rootObject)
 	_r := objc.Send[bool](objc.ID(_class("NSArchiver")), objc.RegisterName("archiveRootObject:toFile:"), objref.IDOf(rootObject), purego.NSString(path))
 	return _r
 }
@@ -157,6 +162,7 @@ func NSArrayArray() obj.Object {
 
 // ArrayWithObject creates and returns an array containing a given object.
 func ArrayWithObject(anObject obj.Object) obj.Object {
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithObject:"), objref.IDOf(anObject))
 	return obj.Wrap(_r)
 }
@@ -173,8 +179,8 @@ func ArrayWithArray(array []obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ArrayWithContentsOfURLError wraps the corresponding Objective-C method.
-func ArrayWithContentsOfURLError(url string) (result []obj.Object, err error) {
+// ArrayWithContentsOfURL wraps the corresponding Objective-C method.
+func ArrayWithContentsOfURL(url string) (result []obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -189,8 +195,8 @@ func ArrayWithContentsOfFile(path string) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ArrayWithContentsOfURL creates and returns an array containing the contents specified by a given URL.
-func ArrayWithContentsOfURL(url string) []obj.Object {
+// NSArrayArrayWithContentsOfURL creates and returns an array containing the contents specified by a given URL.
+func NSArrayArrayWithContentsOfURL(url string) []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("arrayWithContentsOfURL:"), rt.FileURL(url))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -203,30 +209,37 @@ func CurrentHandler() *AssertionHandler {
 
 // LocalizedAttributedStringWithFormat formats the string using the current locale and default options.
 func LocalizedAttributedStringWithFormat(format *AttributedString) *AttributedString {
+	defer runtime.KeepAlive(format)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:"), objref.IDOf(format))
 	return AttributedStringFromID(_r)
 }
 
 // LocalizedAttributedStringWithFormatOptions formats the string using the current locale and the specified options.
 func LocalizedAttributedStringWithFormatOptions(format *AttributedString, options AttributedStringFormattingOptions) *AttributedString {
+	defer runtime.KeepAlive(format)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:options:"), objref.IDOf(format), options)
 	return AttributedStringFromID(_r)
 }
 
 // LocalizedAttributedStringWithFormatContext formats the string using the current locale and default options.
 func LocalizedAttributedStringWithFormatContext(format *AttributedString, context_ obj.Object) *AttributedString {
+	defer runtime.KeepAlive(format)
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:context:"), objref.IDOf(format), objref.IDOf(context_))
 	return AttributedStringFromID(_r)
 }
 
 // LocalizedAttributedStringWithFormatOptionsContext formats the string using the current locale and the specified options.
 func LocalizedAttributedStringWithFormatOptionsContext(format *AttributedString, options AttributedStringFormattingOptions, context_ obj.Object) *AttributedString {
+	defer runtime.KeepAlive(format)
+	defer runtime.KeepAlive(context_)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("localizedAttributedStringWithFormat:options:context:"), objref.IDOf(format), options, objref.IDOf(context_))
 	return AttributedStringFromID(_r)
 }
 
 // AddObject adds a given object to the active autorelease pool in the current thread.
 func AddObject(anObject obj.Object) {
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objc.ID(_class("NSAutoreleasePool")), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
@@ -255,15 +268,15 @@ func BundleWithIdentifier(identifier string) *Bundle {
 }
 
 // URLForResourceWithExtensionSubdirectoryInBundleWithURL wraps the corresponding Objective-C method.
-func URLForResourceWithExtensionSubdirectoryInBundleWithURL(name string, ext string, subpath string, bundleURL string) *URL {
+func URLForResourceWithExtensionSubdirectoryInBundleWithURL(name string, ext string, subpath string, bundleURL string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("URLForResource:withExtension:subdirectory:inBundleWithURL:"), purego.NSString(name), purego.NSString(ext), purego.NSString(subpath), rt.FileURL(bundleURL))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // URLsForResourcesWithExtensionSubdirectoryInBundleWithURL wraps the corresponding Objective-C method.
-func URLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext string, subpath string, bundleURL string) []*URL {
+func URLsForResourcesWithExtensionSubdirectoryInBundleWithURL(ext string, subpath string, bundleURL string) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("URLsForResourcesWithExtension:subdirectory:inBundleWithURL:"), purego.NSString(ext), purego.NSString(subpath), rt.FileURL(bundleURL))
-	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) })
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return rt.URLString(_id) })
 }
 
 // PathForResourceOfTypeInDirectory wraps the corresponding Objective-C method.
@@ -326,6 +339,7 @@ func StringFromByteCountCountStyle(byteCount int64, countStyle ByteCountFormatte
 
 // StringFromMeasurementCountStyle wraps the corresponding Objective-C method.
 func StringFromMeasurementCountStyle(measurement obj.Object, countStyle ByteCountFormatterCountStyle) string {
+	defer runtime.KeepAlive(measurement)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSByteCountFormatter")), objc.RegisterName("stringFromMeasurement:countStyle:"), objref.IDOf(measurement), countStyle)
 	if _r == 0 {
 		return ""
@@ -335,6 +349,7 @@ func StringFromMeasurementCountStyle(measurement obj.Object, countStyle ByteCoun
 
 // CalendarWithIdentifier creates a new calendar specified by a given identifier.
 func CalendarWithIdentifier(calendarIdentifierConstant *String) *Calendar {
+	defer runtime.KeepAlive(calendarIdentifierConstant)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("calendarWithIdentifier:"), objref.IDOf(calendarIdentifierConstant))
 	return CalendarFromID(_r)
 }
@@ -359,6 +374,7 @@ func NSCalendarDateCalendarDate() obj.Object {
 
 // DateWithStringCalendarFormatLocale wraps the corresponding Objective-C method.
 func DateWithStringCalendarFormatLocale(description string, format string, locale obj.Object) obj.Object {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("dateWithString:calendarFormat:locale:"), purego.NSString(description), purego.NSString(format), objref.IDOf(locale))
 	return obj.Wrap(_r)
 }
@@ -371,6 +387,7 @@ func DateWithStringCalendarFormat(description string, format string) obj.Object 
 
 // DateWithYearMonthDayHourMinuteSecondTimeZone wraps the corresponding Objective-C method.
 func DateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int, day int, hour int, minute int, second int, aTimeZone *TimeZone) obj.Object {
+	defer runtime.KeepAlive(aTimeZone)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("dateWithYear:month:day:hour:minute:second:timeZone:"), year, month, day, hour, minute, second, objref.IDOf(aTimeZone))
 	return obj.Wrap(_r)
 }
@@ -394,8 +411,8 @@ func CharacterSetWithCharactersInString(aString string) *CharacterSet {
 }
 
 // CharacterSetWithBitmapRepresentation returns a character set containing characters determined by a given bitmap representation.
-func CharacterSetWithBitmapRepresentation(data *Data) *CharacterSet {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithBitmapRepresentation:"), objref.IDOf(data))
+func CharacterSetWithBitmapRepresentation(data []byte) *CharacterSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("characterSetWithBitmapRepresentation:"), rt.BytesToNSData(data))
 	return CharacterSetFromID(_r)
 }
 
@@ -538,6 +555,8 @@ func InvalidateClassDescriptionCache() {
 
 // PredicateWithLeftExpressionRightExpressionModifierTypeOptions creates and returns a predicate of a given type formed by combining given left and right expressions using a given modifier and options.
 func PredicateWithLeftExpressionRightExpressionModifierTypeOptions(lhs *Expression, rhs *Expression, modifier ComparisonPredicateModifier, type_ PredicateOperatorType, options ComparisonPredicateOptions) *ComparisonPredicate {
+	defer runtime.KeepAlive(lhs)
+	defer runtime.KeepAlive(rhs)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSComparisonPredicate")), objc.RegisterName("predicateWithLeftExpression:rightExpression:modifier:type:options:"), objref.IDOf(lhs), objref.IDOf(rhs), modifier, type_, options)
 	return ComparisonPredicateFromID(_r)
 }
@@ -556,6 +575,7 @@ func OrPredicateWithSubpredicates(subpredicates []*Predicate) *CompoundPredicate
 
 // NotPredicateWithSubpredicate returns a new predicate that you form using a NOT operation on a specified predicate.
 func NotPredicateWithSubpredicate(predicate *Predicate) *CompoundPredicate {
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("notPredicateWithSubpredicate:"), objref.IDOf(predicate))
 	return CompoundPredicateFromID(_r)
 }
@@ -582,6 +602,7 @@ func ConnectionWithRegisteredNameHost(name string, hostName string) *Connection 
 
 // ConnectionWithRegisteredNameHostUsingNameServer returns the NSConnection object whose send port links it to the NSConnection object registered under a given name with a given server on a given host.
 func ConnectionWithRegisteredNameHostUsingNameServer(name string, hostName string, server *PortNameServer) *Connection {
+	defer runtime.KeepAlive(server)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("connectionWithRegisteredName:host:usingNameServer:"), purego.NSString(name), purego.NSString(hostName), objref.IDOf(server))
 	return ConnectionFromID(_r)
 }
@@ -594,24 +615,30 @@ func RootProxyForConnectionWithRegisteredNameHost(name string, hostName string) 
 
 // RootProxyForConnectionWithRegisteredNameHostUsingNameServer returns a proxy for the root object of the NSConnection object registered with server under name on a given host.
 func RootProxyForConnectionWithRegisteredNameHostUsingNameServer(name string, hostName string, server *PortNameServer) *DistantObject {
+	defer runtime.KeepAlive(server)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("rootProxyForConnectionWithRegisteredName:host:usingNameServer:"), purego.NSString(name), purego.NSString(hostName), objref.IDOf(server))
 	return DistantObjectFromID(_r)
 }
 
 // ServiceConnectionWithNameRootObjectUsingNameServer creates and returns a new connection object representing a vended service on the specified port name server.
 func ServiceConnectionWithNameRootObjectUsingNameServer(name string, root obj.Object, server *PortNameServer) *Connection {
+	defer runtime.KeepAlive(root)
+	defer runtime.KeepAlive(server)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("serviceConnectionWithName:rootObject:usingNameServer:"), purego.NSString(name), objref.IDOf(root), objref.IDOf(server))
 	return ConnectionFromID(_r)
 }
 
 // ServiceConnectionWithNameRootObject creates and returns a new connection object representing a vended service on the default system port name server.
 func ServiceConnectionWithNameRootObject(name string, root obj.Object) *Connection {
+	defer runtime.KeepAlive(root)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("serviceConnectionWithName:rootObject:"), purego.NSString(name), objref.IDOf(root))
 	return ConnectionFromID(_r)
 }
 
 // ConnectionWithReceivePortSendPort returns an NSConnection object that communicates using given send and receive ports.
 func ConnectionWithReceivePortSendPort(receivePort *Port, sendPort *Port) *Connection {
+	defer runtime.KeepAlive(receivePort)
+	defer runtime.KeepAlive(sendPort)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSConnection")), objc.RegisterName("connectionWithReceivePort:sendPort:"), objref.IDOf(receivePort), objref.IDOf(sendPort))
 	return ConnectionFromID(_r)
 }
@@ -629,25 +656,25 @@ func NSDataData() *Data {
 }
 
 // DataWithBytesLength creates a data object containing a given number of bytes copied from a given buffer.
-func DataWithBytesLength(bytes_ unsafe.Pointer, length int) *Data {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytes:length:"), bytes_, length)
+func DataWithBytesLength(data unsafe.Pointer, length int) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytes:length:"), data, length)
 	return DataFromID(_r)
 }
 
 // DataWithBytesNoCopyLength creates a data object that holds a given number of bytes from a given buffer.
-func DataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *Data {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytesNoCopy:length:"), bytes_, length)
+func DataWithBytesNoCopyLength(data unsafe.Pointer, length int) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytesNoCopy:length:"), data, length)
 	return DataFromID(_r)
 }
 
 // DataWithBytesNoCopyLengthFreeWhenDone creates a data object that holds a given number of bytes from a given buffer.
-func DataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length int, b bool) *Data {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytesNoCopy:length:freeWhenDone:"), bytes_, length, b)
+func DataWithBytesNoCopyLengthFreeWhenDone(data unsafe.Pointer, length int, b bool) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithBytesNoCopy:length:freeWhenDone:"), data, length, b)
 	return DataFromID(_r)
 }
 
-// DataWithContentsOfFileOptionsError creates a data object by reading every byte from the file at a given path.
-func DataWithContentsOfFileOptionsError(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
+// DataWithContentsOfFileOptions creates a data object by reading every byte from the file at a given path.
+func DataWithContentsOfFileOptions(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfFile:options:error:"), purego.NSString(path), readOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -656,8 +683,8 @@ func DataWithContentsOfFileOptionsError(path string, readOptionsMask DataReading
 	return DataFromID(_r), nil
 }
 
-// DataWithContentsOfURLOptionsError creates a data object from the data at the provided file URL using specific reading options.
-func DataWithContentsOfURLOptionsError(url string, readOptionsMask DataReadingOptions) (result *Data, err error) {
+// DataWithContentsOfURLOptions creates a data object from the data at the provided file URL using specific reading options.
+func DataWithContentsOfURLOptions(url string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithContentsOfURL:options:error:"), rt.FileURL(url), readOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -679,8 +706,8 @@ func DataWithContentsOfURL(url string) *Data {
 }
 
 // DataWithData creates a data object containing the contents of another data object.
-func DataWithData(data *Data) *Data {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithData:"), objref.IDOf(data))
+func DataWithData(data []byte) *Data {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("dataWithData:"), rt.BytesToNSData(data))
 	return DataFromID(_r)
 }
 
@@ -690,8 +717,8 @@ func DataWithContentsOfMappedFile(path string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// DataDetectorWithTypesError creates and returns a new data detector instance.
-func DataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, err error) {
+// DataDetectorWithTypes creates and returns a new data detector instance.
+func DataDetectorWithTypes(checkingTypes uint64) (result *DataDetector, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDataDetector")), objc.RegisterName("dataDetectorWithTypes:error:"), checkingTypes, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -731,38 +758,39 @@ func DateWithTimeIntervalSince1970(secs float64) *Date {
 }
 
 // DateWithTimeIntervalSinceDate creates and returns a date object set to a given number of seconds from the specified date.
-func DateWithTimeIntervalSinceDate(secsToBeAdded float64, date *Date) *Date {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithTimeInterval:sinceDate:"), secsToBeAdded, objref.IDOf(date))
+func DateWithTimeIntervalSinceDate(secsToBeAdded float64, date time.Time) *Date {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithTimeInterval:sinceDate:"), secsToBeAdded, rt.TimeToNSDate(date))
 	return DateFromID(_r)
 }
 
 // NSDateDistantFuture returns the ns date distant future.
-func NSDateDistantFuture() *Date {
+func NSDateDistantFuture() time.Time {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantFuture"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // NSDateDistantPast returns the ns date distant past.
-func NSDateDistantPast() *Date {
+func NSDateDistantPast() time.Time {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantPast"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Now returns the now.
-func Now() *Date {
+func Now() time.Time {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("now"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DateWithNaturalLanguageStringLocale creates and returns a date object set to the date and time specified by a given string.
-func DateWithNaturalLanguageStringLocale(string_ string, locale obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithNaturalLanguageString:locale:"), purego.NSString(string_), objref.IDOf(locale))
+func DateWithNaturalLanguageStringLocale(str string, locale obj.Object) obj.Object {
+	defer runtime.KeepAlive(locale)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithNaturalLanguageString:locale:"), purego.NSString(str), objref.IDOf(locale))
 	return obj.Wrap(_r)
 }
 
 // DateWithNaturalLanguageString creates and returns a date object set to the date and time specified by a given string.
-func DateWithNaturalLanguageString(string_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithNaturalLanguageString:"), purego.NSString(string_))
+func DateWithNaturalLanguageString(str string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("dateWithNaturalLanguageString:"), purego.NSString(str))
 	return obj.Wrap(_r)
 }
 
@@ -774,6 +802,7 @@ func DateWithString(aString string) obj.Object {
 
 // LocalizedStringFromDateComponentsUnitsStyle wraps the corresponding Objective-C method.
 func LocalizedStringFromDateComponentsUnitsStyle(components *DateComponents, unitsStyle DateComponentsFormatterUnitsStyle) string {
+	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDateComponentsFormatter")), objc.RegisterName("localizedStringFromDateComponents:unitsStyle:"), objref.IDOf(components), unitsStyle)
 	if _r == 0 {
 		return ""
@@ -782,8 +811,8 @@ func LocalizedStringFromDateComponentsUnitsStyle(components *DateComponents, uni
 }
 
 // LocalizedStringFromDateDateStyleTimeStyle wraps the corresponding Objective-C method.
-func LocalizedStringFromDateDateStyleTimeStyle(date *Date, dstyle DateFormatterStyle, tstyle DateFormatterStyle) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("localizedStringFromDate:dateStyle:timeStyle:"), objref.IDOf(date), dstyle, tstyle)
+func LocalizedStringFromDateDateStyleTimeStyle(date time.Time, dstyle DateFormatterStyle, tstyle DateFormatterStyle) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("localizedStringFromDate:dateStyle:timeStyle:"), rt.TimeToNSDate(date), dstyle, tstyle)
 	if _r == 0 {
 		return ""
 	}
@@ -792,6 +821,7 @@ func LocalizedStringFromDateDateStyleTimeStyle(date *Date, dstyle DateFormatterS
 
 // DateFormatFromTemplateOptionsLocale wraps the corresponding Objective-C method.
 func DateFormatFromTemplateOptionsLocale(tmplate string, opts int, locale *Locale) string {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("dateFormatFromTemplate:options:locale:"), purego.NSString(tmplate), opts, objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -824,6 +854,7 @@ func DecimalNumberWithString(numberValue string) *DecimalNumber {
 
 // DecimalNumberWithStringLocale creates a decimal number whose value is equivalent to that in a given numeric string, interpreted using a given locale.
 func DecimalNumberWithStringLocale(numberValue string, locale obj.Object) *DecimalNumber {
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("decimalNumberWithString:locale:"), purego.NSString(numberValue), objref.IDOf(locale))
 	return DecimalNumberFromID(_r)
 }
@@ -890,6 +921,7 @@ func NSDictionaryDictionary() obj.Object {
 
 // DictionaryWithDictionary creates a dictionary containing the keys and values from another given dictionary.
 func DictionaryWithDictionary(dict obj.Object) obj.Object {
+	defer runtime.KeepAlive(dict)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithDictionary:"), objref.IDOf(dict))
 	return obj.Wrap(_r)
 }
@@ -900,14 +932,14 @@ func DictionaryWithObjectsForKeys(objects []obj.Object, keys []obj.Object) obj.O
 	return obj.Wrap(_r)
 }
 
-// DictionaryWithContentsOfURLError creates a dictionary using the keys and values found in a resource specified by a given URL.
-func DictionaryWithContentsOfURLError(url string) (result obj.Object, err error) {
+// NSDictionaryDictionaryWithContentsOfURL creates a dictionary using the keys and values found in a resource specified by a given URL.
+func NSDictionaryDictionaryWithContentsOfURL(url string) (result map[string]obj.Object, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("dictionaryWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // SharedKeySetForKeys creates a shared key set object for the specified keys.
@@ -924,12 +956,16 @@ func BaseUnit() *Dimension {
 
 // ProxyWithTargetConnection returns a remote proxy for a given object and connection, creating the proxy if necessary.
 func ProxyWithTargetConnection(target obj.Object, connection *Connection) obj.Object {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(connection)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("proxyWithTarget:connection:"), objref.IDOf(target), objref.IDOf(connection))
 	return obj.Wrap(_r)
 }
 
 // ProxyWithLocalConnection returns a local proxy for a given object and connection, creating the proxy if necessary.
 func ProxyWithLocalConnection(target obj.Object, connection *Connection) obj.Object {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(connection)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("proxyWithLocal:connection:"), objref.IDOf(target), objref.IDOf(connection))
 	return obj.Wrap(_r)
 }
@@ -942,6 +978,7 @@ func LockWithPath(path string) *DistributedLock {
 
 // NotificationCenterForType wraps the corresponding Objective-C method.
 func NotificationCenterForType(notificationCenterType *String) *DistributedNotificationCenter {
+	defer runtime.KeepAlive(notificationCenterType)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("notificationCenterForType:"), objref.IDOf(notificationCenterType))
 	return DistributedNotificationCenterFromID(_r)
 }
@@ -954,28 +991,35 @@ func DefaultCenter() *DistributedNotificationCenter {
 
 // ErrorWithDomainCodeUserInfo creates and initializes an NSError object for a given domain and code with a given userInfo dictionary.
 func ErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *Error {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(dict)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("errorWithDomain:code:userInfo:"), objref.IDOf(domain), code, objref.IDOf(dict))
 	return ErrorFromID(_r)
 }
 
 // ExceptionWithNameReasonUserInfo creates and returns an exception object .
 func ExceptionWithNameReasonUserInfo(name *String, reason string, userInfo obj.Object) *Exception {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(userInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("exceptionWithName:reason:userInfo:"), objref.IDOf(name), purego.NSString(reason), objref.IDOf(userInfo))
 	return ExceptionFromID(_r)
 }
 
 // RaiseFormat a convenience method that creates and raises an exception.
 func RaiseFormat(name *String, format string) {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("raise:format:"), objref.IDOf(name), purego.NSString(format))
 }
 
 // RaiseFormatArguments creates and raises an exception with the specified name, reason, and arguments.
 func RaiseFormatArguments(name *String, format string, argList string) {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objc.ID(_class("NSException")), objc.RegisterName("raise:format:arguments:"), objref.IDOf(name), purego.NSString(format), argList)
 }
 
 // ExpressionWithFormatArgumentArray creates the expression with the specified expression format and array of arguments.
 func ExpressionWithFormatArgumentArray(expressionFormat string, arguments obj.Object) *Expression {
+	defer runtime.KeepAlive(arguments)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionWithFormat:argumentArray:"), purego.NSString(expressionFormat), objref.IDOf(arguments))
 	return ExpressionFromID(_r)
 }
@@ -993,8 +1037,9 @@ func ExpressionWithFormatArguments(expressionFormat string, argList string) *Exp
 }
 
 // ExpressionForConstantValue creates an expression that represents a specified constant value.
-func ExpressionForConstantValue(obj_ obj.Object) *Expression {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForConstantValue:"), objref.IDOf(obj_))
+func ExpressionForConstantValue(object obj.Object) *Expression {
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForConstantValue:"), objref.IDOf(object))
 	return ExpressionFromID(_r)
 }
 
@@ -1005,8 +1050,8 @@ func ExpressionForEvaluatedObject() *Expression {
 }
 
 // ExpressionForVariable creates an expression that extracts a value from the variable bindings dictionary for a specified key.
-func ExpressionForVariable(string_ string) *Expression {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForVariable:"), purego.NSString(string_))
+func ExpressionForVariable(str string) *Expression {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForVariable:"), purego.NSString(str))
 	return ExpressionFromID(_r)
 }
 
@@ -1018,6 +1063,7 @@ func ExpressionForKeyPath(keyPath string) *Expression {
 
 // ExpressionForFunctionArguments creates an expression that invokes one of the predefined functions.
 func ExpressionForFunctionArguments(name string, parameters obj.Object) *Expression {
+	defer runtime.KeepAlive(parameters)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForFunction:arguments:"), purego.NSString(name), objref.IDOf(parameters))
 	return ExpressionFromID(_r)
 }
@@ -1030,30 +1076,40 @@ func ExpressionForAggregate(subexpressions []*Expression) *Expression {
 
 // ExpressionForUnionSetWith creates an expression object that represents the union of a specified set and collection.
 func ExpressionForUnionSetWith(left *Expression, right *Expression) *Expression {
+	defer runtime.KeepAlive(left)
+	defer runtime.KeepAlive(right)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForUnionSet:with:"), objref.IDOf(left), objref.IDOf(right))
 	return ExpressionFromID(_r)
 }
 
 // ExpressionForIntersectSetWith creates an expression object that represents the intersection of a specified set and collection.
 func ExpressionForIntersectSetWith(left *Expression, right *Expression) *Expression {
+	defer runtime.KeepAlive(left)
+	defer runtime.KeepAlive(right)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForIntersectSet:with:"), objref.IDOf(left), objref.IDOf(right))
 	return ExpressionFromID(_r)
 }
 
 // ExpressionForMinusSetWith creates an expression object that represents the subtraction of a specified collection from a specified set.
 func ExpressionForMinusSetWith(left *Expression, right *Expression) *Expression {
+	defer runtime.KeepAlive(left)
+	defer runtime.KeepAlive(right)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForMinusSet:with:"), objref.IDOf(left), objref.IDOf(right))
 	return ExpressionFromID(_r)
 }
 
 // ExpressionForSubqueryUsingIteratorVariablePredicate creates an expression that filters a collection by storing elements in the collection in a specified variable and keeping the elements that the qualifier returns as true.
 func ExpressionForSubqueryUsingIteratorVariablePredicate(expression *Expression, variable string, predicate *Predicate) *Expression {
+	defer runtime.KeepAlive(expression)
+	defer runtime.KeepAlive(predicate)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForSubquery:usingIteratorVariable:predicate:"), objref.IDOf(expression), purego.NSString(variable), objref.IDOf(predicate))
 	return ExpressionFromID(_r)
 }
 
 // ExpressionForFunctionSelectorNameArguments creates an expression that returns the result of invoking a selector with a specified name using specified arguments.
 func ExpressionForFunctionSelectorNameArguments(target *Expression, name string, parameters obj.Object) *Expression {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(parameters)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForFunction:selectorName:arguments:"), objref.IDOf(target), purego.NSString(name), objref.IDOf(parameters))
 	return ExpressionFromID(_r)
 }
@@ -1074,6 +1130,9 @@ func ExpressionForBlockArguments(block func(obj.Object, obj.Object, obj.Object) 
 
 // ExpressionForConditionalTrueExpressionFalseExpression creates an expression that returns a result, depending on the value of predicate.
 func ExpressionForConditionalTrueExpressionFalseExpression(predicate *Predicate, trueExpression *Expression, falseExpression *Expression) *Expression {
+	defer runtime.KeepAlive(predicate)
+	defer runtime.KeepAlive(trueExpression)
+	defer runtime.KeepAlive(falseExpression)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("expressionForConditional:trueExpression:falseExpression:"), objref.IDOf(predicate), objref.IDOf(trueExpression), objref.IDOf(falseExpression))
 	return ExpressionFromID(_r)
 }
@@ -1114,8 +1173,8 @@ func FileHandleForUpdatingAtPath(path string) *FileHandle {
 	return FileHandleFromID(_r)
 }
 
-// FileHandleForReadingFromURLError wraps the corresponding Objective-C method.
-func FileHandleForReadingFromURLError(url string) (result *FileHandle, err error) {
+// FileHandleForReadingFromURL wraps the corresponding Objective-C method.
+func FileHandleForReadingFromURL(url string) (result *FileHandle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForReadingFromURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1124,8 +1183,8 @@ func FileHandleForReadingFromURLError(url string) (result *FileHandle, err error
 	return FileHandleFromID(_r), nil
 }
 
-// FileHandleForWritingToURLError wraps the corresponding Objective-C method.
-func FileHandleForWritingToURLError(url string) (result *FileHandle, err error) {
+// FileHandleForWritingToURL wraps the corresponding Objective-C method.
+func FileHandleForWritingToURL(url string) (result *FileHandle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForWritingToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1134,8 +1193,8 @@ func FileHandleForWritingToURLError(url string) (result *FileHandle, err error) 
 	return FileHandleFromID(_r), nil
 }
 
-// FileHandleForUpdatingURLError wraps the corresponding Objective-C method.
-func FileHandleForUpdatingURLError(url string) (result *FileHandle, err error) {
+// FileHandleForUpdatingURL wraps the corresponding Objective-C method.
+func FileHandleForUpdatingURL(url string) (result *FileHandle, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleForUpdatingURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1219,12 +1278,13 @@ func GetNonlocalVersionsOfItemAtURL(ctx context.Context, url string) (result obj
 
 // VersionOfItemAtURLForPersistentIdentifier returns the version of the file that has the specified persistent ID.
 func VersionOfItemAtURLForPersistentIdentifier(url string, persistentIdentifier obj.Object) *FileVersion {
+	defer runtime.KeepAlive(persistentIdentifier)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("versionOfItemAtURL:forPersistentIdentifier:"), rt.FileURL(url), objref.IDOf(persistentIdentifier))
 	return FileVersionFromID(_r)
 }
 
-// AddVersionOfItemAtURLWithContentsOfURLOptionsError creates a version of the file at the specified location.
-func AddVersionOfItemAtURLWithContentsOfURLOptionsError(url string, contentsURL string, options FileVersionAddingOptions) (result *FileVersion, err error) {
+// AddVersionOfItemAtURLWithContentsOfURLOptions creates a version of the file at the specified location.
+func AddVersionOfItemAtURLWithContentsOfURLOptions(url string, contentsURL string, options FileVersionAddingOptions) (result *FileVersion, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("addVersionOfItemAtURL:withContentsOfURL:options:error:"), rt.FileURL(url), rt.FileURL(contentsURL), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1234,9 +1294,9 @@ func AddVersionOfItemAtURLWithContentsOfURLOptionsError(url string, contentsURL 
 }
 
 // TemporaryDirectoryURLForNewVersionOfItemAtURL creates and returns a temporary directory to use for saving the contents of the file.
-func TemporaryDirectoryURLForNewVersionOfItemAtURL(url string) *URL {
+func TemporaryDirectoryURLForNewVersionOfItemAtURL(url string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("temporaryDirectoryURLForNewVersionOfItemAtURL:"), rt.FileURL(url))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // RemoveOtherVersionsOfItemAtURL removes all versions of a file, except the current one, from the version store.
@@ -1257,19 +1317,20 @@ func DefaultCollector() obj.Object {
 
 // CookieWithProperties creates and initializes an HTTP cookie object using the provided properties.
 func CookieWithProperties(properties obj.Object) *HTTPCookie {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookieWithProperties:"), objref.IDOf(properties))
 	return HTTPCookieFromID(_r)
 }
 
 // RequestHeaderFieldsWithCookies return a dictionary of header fields that can be used to add the specified cookies to the request.
-func RequestHeaderFieldsWithCookies(cookies []*HTTPCookie) obj.Object {
+func RequestHeaderFieldsWithCookies(cookies []*HTTPCookie) map[string]string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("requestHeaderFieldsWithCookies:"), purego.SliceToNSArray(cookies, func(_v *HTTPCookie) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CookiesWithResponseHeaderFieldsForURL return an array of cookies parsed from the specified response header fields and URL. This method will ignore irrelevant header fields so you can pass a dictionary containing data other than cookie data.
-func CookiesWithResponseHeaderFieldsForURL(headerFields obj.Object, uRL string) []*HTTPCookie {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookiesWithResponseHeaderFields:forURL:"), objref.IDOf(headerFields), rt.FileURL(uRL))
+func CookiesWithResponseHeaderFieldsForURL(headerFields map[string]string, url string) []*HTTPCookie {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("cookiesWithResponseHeaderFields:forURL:"), rt.MapToDict(headerFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }), rt.FileURL(url))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *HTTPCookie { return HTTPCookieFromID(_id) })
 }
 
@@ -1347,8 +1408,9 @@ func FlushHostCache() {
 }
 
 // StringFromDateTimeZoneFormatOptions wraps the corresponding Objective-C method.
-func StringFromDateTimeZoneFormatOptions(date *Date, timeZone *TimeZone, formatOptions ISO8601DateFormatOptions) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSISO8601DateFormatter")), objc.RegisterName("stringFromDate:timeZone:formatOptions:"), objref.IDOf(date), objref.IDOf(timeZone), formatOptions)
+func StringFromDateTimeZoneFormatOptions(date time.Time, timeZone *TimeZone, formatOptions ISO8601DateFormatOptions) string {
+	defer runtime.KeepAlive(timeZone)
+	_r := objc.Send[objc.ID](objc.ID(_class("NSISO8601DateFormatter")), objc.RegisterName("stringFromDate:timeZone:formatOptions:"), rt.TimeToNSDate(date), objref.IDOf(timeZone), formatOptions)
 	if _r == 0 {
 		return ""
 	}
@@ -1400,8 +1462,8 @@ func CanInflectPreferredLocalization() bool {
 }
 
 // InputStreamWithData creates and returns an initialized NSInputStream object for reading from a given NSData object.
-func InputStreamWithData(data *Data) *InputStream {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithData:"), objref.IDOf(data))
+func InputStreamWithData(data []byte) *InputStream {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("inputStreamWithData:"), rt.BytesToNSData(data))
 	return InputStreamFromID(_r)
 }
 
@@ -1419,48 +1481,54 @@ func InputStreamWithURL(url string) *InputStream {
 
 // InvocationWithMethodSignature returns an NSInvocation object able to construct messages using a given method signature.
 func InvocationWithMethodSignature(sig *MethodSignature) *Invocation {
+	defer runtime.KeepAlive(sig)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInvocation")), objc.RegisterName("invocationWithMethodSignature:"), objref.IDOf(sig))
 	return InvocationFromID(_r)
 }
 
 // IsValidJSONObject wraps the corresponding Objective-C method.
-func IsValidJSONObject(obj_ obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("isValidJSONObject:"), objref.IDOf(obj_))
+func IsValidJSONObject(object obj.Object) bool {
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[bool](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("isValidJSONObject:"), objref.IDOf(object))
 	return _r
 }
 
-// DataWithJSONObjectOptionsError wraps the corresponding Objective-C method.
-func DataWithJSONObjectOptionsError(obj_ obj.Object, opt JSONWritingOptions) (result *Data, err error) {
+// DataWithJSONObjectOptions wraps the corresponding Objective-C method.
+func DataWithJSONObjectOptions(object obj.Object, opt JSONWritingOptions) (result []byte, err error) {
+	defer runtime.KeepAlive(object)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("dataWithJSONObject:options:error:"), objref.IDOf(obj_), opt, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("dataWithJSONObject:options:error:"), objref.IDOf(object), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
-// JSONObjectWithDataOptionsError wraps the corresponding Objective-C method.
-func JSONObjectWithDataOptionsError(data *Data, opt JSONReadingOptions) (result obj.Object, err error) {
+// JSONObjectWithDataOptions wraps the corresponding Objective-C method.
+func JSONObjectWithDataOptions(data []byte, opt JSONReadingOptions) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("JSONObjectWithData:options:error:"), objref.IDOf(data), opt, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("JSONObjectWithData:options:error:"), rt.BytesToNSData(data), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// WriteJSONObjectToStreamOptionsError writes JSON object to stream options error.
-func WriteJSONObjectToStreamOptionsError(obj_ obj.Object, stream *OutputStream, opt JSONWritingOptions) (result int, err error) {
+// WriteJSONObjectToStreamOptions writes JSON object to stream options.
+func WriteJSONObjectToStreamOptions(object obj.Object, stream *OutputStream, opt JSONWritingOptions) (result int, err error) {
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(stream)
 	var _nsErr uintptr
-	_r := objc.Send[int](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("writeJSONObject:toStream:options:error:"), objref.IDOf(obj_), objref.IDOf(stream), opt, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[int](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("writeJSONObject:toStream:options:error:"), objref.IDOf(object), objref.IDOf(stream), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return _r, nil
 }
 
-// JSONObjectWithStreamOptionsError wraps the corresponding Objective-C method.
-func JSONObjectWithStreamOptionsError(stream *InputStream, opt JSONReadingOptions) (result obj.Object, err error) {
+// JSONObjectWithStreamOptions wraps the corresponding Objective-C method.
+func JSONObjectWithStreamOptions(stream *InputStream, opt JSONReadingOptions) (result obj.Object, err error) {
+	defer runtime.KeepAlive(stream)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("JSONObjectWithStream:options:error:"), objref.IDOf(stream), opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -1469,52 +1537,55 @@ func JSONObjectWithStreamOptionsError(stream *InputStream, opt JSONReadingOption
 	return obj.Wrap(_r), nil
 }
 
-// ArchivedDataWithRootObjectRequiringSecureCodingError encodes an object graph with the given root object into a data representation, optionally requiring secure coding.
-func ArchivedDataWithRootObjectRequiringSecureCodingError(object obj.Object, requiresSecureCoding bool) (result *Data, err error) {
+// ArchivedDataWithRootObjectRequiringSecureCoding encodes an object graph with the given root object into a data representation, optionally requiring secure coding.
+func ArchivedDataWithRootObjectRequiringSecureCoding(object obj.Object, requiresSecureCoding bool) (result []byte, err error) {
+	defer runtime.KeepAlive(object)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("archivedDataWithRootObject:requiringSecureCoding:error:"), objref.IDOf(object), requiresSecureCoding, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
 // NSKeyedArchiverArchivedDataWithRootObject returns a data object that contains the encoded form of the object graph formed by the given root object.
-func NSKeyedArchiverArchivedDataWithRootObject(rootObject obj.Object) *Data {
+func NSKeyedArchiverArchivedDataWithRootObject(rootObject obj.Object) []byte {
+	defer runtime.KeepAlive(rootObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("archivedDataWithRootObject:"), objref.IDOf(rootObject))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // NSKeyedArchiverArchiveRootObjectToFile archives an object graph rooted at a given object to a file at a given path.
 func NSKeyedArchiverArchiveRootObjectToFile(rootObject obj.Object, path string) bool {
+	defer runtime.KeepAlive(rootObject)
 	_r := objc.Send[bool](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("archiveRootObject:toFile:"), objref.IDOf(rootObject), purego.NSString(path))
 	return _r
 }
 
-// UnarchivedObjectOfClassesFromDataError decodes a previously-archived object graph, returning the root object as one of the specified classes.
-func UnarchivedObjectOfClassesFromDataError(classes obj.Object, data *Data) (result obj.Object, err error) {
+// UnarchivedObjectOfClassesFromData decodes a previously-archived object graph, returning the root object as one of the specified classes.
+func UnarchivedObjectOfClassesFromData(classes []obj.Object, data []byte) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedObjectOfClasses:fromData:error:"), objref.IDOf(classes), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedObjectOfClasses:fromData:error:"), rt.SliceToNSSet(classes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// UnarchivedArrayOfObjectsOfClassesFromDataError decodes the \c NSArray root object from \c data which should be an \c NSArray, containing the given non-collection classes in \c classes (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
-func UnarchivedArrayOfObjectsOfClassesFromDataError(classes obj.Object, data *Data) (result obj.Object, err error) {
+// UnarchivedArrayOfObjectsOfClassesFromData decodes the \c NSArray root object from \c data which should be an \c NSArray, containing the given non-collection classes in \c classes (no nested arrays or arrays of dictionaries, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+func UnarchivedArrayOfObjectsOfClassesFromData(classes []obj.Object, data []byte) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedArrayOfObjectsOfClasses:fromData:error:"), objref.IDOf(classes), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedArrayOfObjectsOfClasses:fromData:error:"), rt.SliceToNSSet(classes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
-func UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError(keyClasses obj.Object, valueClasses obj.Object, data *Data) (result obj.Object, err error) {
+// UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromData decodes the \c NSDictionary root object from \c data which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given archive, previously encoded by \c NSKeyedArchiver.
+func UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromData(keyClasses []obj.Object, valueClasses []obj.Object, data []byte) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedDictionaryWithKeysOfClasses:objectsOfClasses:fromData:error:"), objref.IDOf(keyClasses), objref.IDOf(valueClasses), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchivedDictionaryWithKeysOfClasses:objectsOfClasses:fromData:error:"), rt.SliceToNSSet(keyClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(valueClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -1522,15 +1593,15 @@ func UnarchivedDictionaryWithKeysOfClassesObjectsOfClassesFromDataError(keyClass
 }
 
 // UnarchiveObjectWithData decodes and returns the object graph previously encoded by NSKeyedArchiver and stored in a given NSData object.
-func UnarchiveObjectWithData(data *Data) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveObjectWithData:"), objref.IDOf(data))
+func UnarchiveObjectWithData(data []byte) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveObjectWithData:"), rt.BytesToNSData(data))
 	return obj.Wrap(_r)
 }
 
-// UnarchiveTopLevelObjectWithDataError decodes a previously-archived object graph, returning the root object.
-func UnarchiveTopLevelObjectWithDataError(data *Data) (result obj.Object, err error) {
+// UnarchiveTopLevelObjectWithData decodes a previously-archived object graph, returning the root object.
+func UnarchiveTopLevelObjectWithData(data []byte) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveTopLevelObjectWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("unarchiveTopLevelObjectWithData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -1556,8 +1627,8 @@ func AvailableTagSchemesForLanguage(language string) []*String {
 }
 
 // DominantLanguageForString returns the dominant language for the specified string.
-func DominantLanguageForString(string_ string) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("dominantLanguageForString:"), purego.NSString(string_))
+func DominantLanguageForString(str string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("dominantLanguageForString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -1598,14 +1669,14 @@ func SystemLocale() *Locale {
 }
 
 // ComponentsFromLocaleIdentifier returns a dictionary that is the result of parsing a locale ID.
-func ComponentsFromLocaleIdentifier(string_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("componentsFromLocaleIdentifier:"), purego.NSString(string_))
-	return obj.Wrap(_r)
+func ComponentsFromLocaleIdentifier(str string) map[string]string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("componentsFromLocaleIdentifier:"), purego.NSString(str))
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocaleIdentifierFromComponents returns a locale identifier from the components specified in a given dictionary.
-func LocaleIdentifierFromComponents(dict obj.Object) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("localeIdentifierFromComponents:"), objref.IDOf(dict))
+func LocaleIdentifierFromComponents(dict map[string]string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("localeIdentifierFromComponents:"), rt.MapToDict(dict, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	if _r == 0 {
 		return ""
 	}
@@ -1613,8 +1684,8 @@ func LocaleIdentifierFromComponents(dict obj.Object) string {
 }
 
 // CanonicalLocaleIdentifierFromString returns the canonical identifier for a given locale identification string.
-func CanonicalLocaleIdentifierFromString(string_ string) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("canonicalLocaleIdentifierFromString:"), purego.NSString(string_))
+func CanonicalLocaleIdentifierFromString(str string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("canonicalLocaleIdentifierFromString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -1622,8 +1693,8 @@ func CanonicalLocaleIdentifierFromString(string_ string) string {
 }
 
 // CanonicalLanguageIdentifierFromString returns a canonical language identifier by mapping an arbitrary locale identification string to the canonical identifier.
-func CanonicalLanguageIdentifierFromString(string_ string) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("canonicalLanguageIdentifierFromString:"), purego.NSString(string_))
+func CanonicalLanguageIdentifierFromString(str string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("canonicalLanguageIdentifierFromString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -1928,8 +1999,8 @@ func NSMutableCharacterSetCharacterSetWithCharactersInString(aString string) *Mu
 }
 
 // NSMutableCharacterSetCharacterSetWithBitmapRepresentation returns a character set containing characters determined by a given bitmap representation.
-func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data *Data) *MutableCharacterSet {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("characterSetWithBitmapRepresentation:"), objref.IDOf(data))
+func NSMutableCharacterSetCharacterSetWithBitmapRepresentation(data []byte) *MutableCharacterSet {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("characterSetWithBitmapRepresentation:"), rt.BytesToNSData(data))
 	return MutableCharacterSetFromID(_r)
 }
 
@@ -1971,6 +2042,7 @@ func NSMutableDictionaryDictionaryWithContentsOfURL(url string) obj.Object {
 
 // DictionaryWithSharedKeySet creates a mutable dictionary which is optimized for dealing with a known set of keys.
 func DictionaryWithSharedKeySet(keyset obj.Object) obj.Object {
+	defer runtime.KeepAlive(keyset)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("dictionaryWithSharedKeySet:"), objref.IDOf(keyset))
 	return obj.Wrap(_r)
 }
@@ -1994,25 +2066,30 @@ func StringWithCapacity(capacity int) *MutableString {
 }
 
 // DictionaryFromTXTRecordData wraps the corresponding Objective-C method.
-func DictionaryFromTXTRecordData(txtData *Data) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dictionaryFromTXTRecordData:"), objref.IDOf(txtData))
-	return obj.Wrap(_r)
+func DictionaryFromTXTRecordData(txtData []byte) map[string][]byte {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dictionaryFromTXTRecordData:"), rt.BytesToNSData(txtData))
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // DataFromTXTRecordDictionary wraps the corresponding Objective-C method.
-func DataFromTXTRecordDictionary(txtDictionary obj.Object) *Data {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dataFromTXTRecordDictionary:"), objref.IDOf(txtDictionary))
-	return DataFromID(_r)
+func DataFromTXTRecordDictionary(txtDictionary map[string][]byte) []byte {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSNetService")), objc.RegisterName("dataFromTXTRecordDictionary:"), rt.MapToDict(txtDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }))
+	return rt.NSDataToBytes(_r)
 }
 
 // NotificationWithNameObject returns a new notification object with a specified name and object.
 func NotificationWithNameObject(aName *String, anObject obj.Object) *Notification {
+	defer runtime.KeepAlive(aName)
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("notificationWithName:object:"), objref.IDOf(aName), objref.IDOf(anObject))
 	return NotificationFromID(_r)
 }
 
 // NotificationWithNameObjectUserInfo returns a notification object with a specified name, object, and user information.
 func NotificationWithNameObjectUserInfo(aName *String, anObject obj.Object, aUserInfo obj.Object) *Notification {
+	defer runtime.KeepAlive(aName)
+	defer runtime.KeepAlive(anObject)
+	defer runtime.KeepAlive(aUserInfo)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNotification")), objc.RegisterName("notificationWithName:object:userInfo:"), objref.IDOf(aName), objref.IDOf(anObject), objref.IDOf(aUserInfo))
 	return NotificationFromID(_r)
 }
@@ -2127,6 +2204,7 @@ func NumberWithUnsignedInteger(value int) *Number {
 
 // LocalizedStringFromNumberNumberStyle wraps the corresponding Objective-C method.
 func LocalizedStringFromNumberNumberStyle(num *Number, nstyle NumberFormatterStyle) string {
+	defer runtime.KeepAlive(num)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("localizedStringFromNumber:numberStyle:"), objref.IDOf(num), nstyle)
 	if _r == 0 {
 		return ""
@@ -2218,6 +2296,7 @@ func SetVersion(aVersion int) {
 
 // CancelPreviousPerformRequestsWithTarget cancels previous perform requests with target.
 func CancelPreviousPerformRequestsWithTarget(aTarget obj.Object) {
+	defer runtime.KeepAlive(aTarget)
 	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("cancelPreviousPerformRequestsWithTarget:"), objref.IDOf(aTarget))
 }
 
@@ -2234,9 +2313,9 @@ func UseStoredAccessor() bool {
 }
 
 // KeyPathsForValuesAffectingValueForKey wraps the corresponding Objective-C method.
-func KeyPathsForValuesAffectingValueForKey(key string) obj.Object {
+func KeyPathsForValuesAffectingValueForKey(key string) []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("keyPathsForValuesAffectingValueForKey:"), purego.NSString(key))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AutomaticallyNotifiesObserversForKey wraps the corresponding Objective-C method.
@@ -2247,6 +2326,7 @@ func AutomaticallyNotifiesObserversForKey(key string) bool {
 
 // SetKeysTriggerChangeNotificationsForDependentKey wraps the corresponding Objective-C method.
 func SetKeysTriggerChangeNotificationsForDependentKey(keys obj.Object, dependentKey string) {
+	defer runtime.KeepAlive(keys)
 	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("setKeys:triggerChangeNotificationsForDependentKey:"), objref.IDOf(keys), purego.NSString(dependentKey))
 }
 
@@ -2272,12 +2352,14 @@ func MainQueue() *OperationQueue {
 
 // ChangeWithObjectTypeIndex creates an change object that represents inserting or removing an object from an ordered collection at a specific index.
 func ChangeWithObjectTypeIndex(anObject obj.Object, type_ CollectionChangeType, index int) obj.Object {
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("changeWithObject:type:index:"), objref.IDOf(anObject), type_, index)
 	return obj.Wrap(_r)
 }
 
 // ChangeWithObjectTypeIndexAssociatedIndex creates an change object that represents inserting or removing an object from an ordered collection at a specific index, matched with an associated location that infers a move within the collection.
 func ChangeWithObjectTypeIndexAssociatedIndex(anObject obj.Object, type_ CollectionChangeType, index int, associatedIndex int) obj.Object {
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("changeWithObject:type:index:associatedIndex:"), objref.IDOf(anObject), type_, index, associatedIndex)
 	return obj.Wrap(_r)
 }
@@ -2290,6 +2372,7 @@ func NSOrderedSetOrderedSet() obj.Object {
 
 // OrderedSetWithObject creates and returns a ordered set that contains a single given object.
 func OrderedSetWithObject(object obj.Object) obj.Object {
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
@@ -2302,6 +2385,7 @@ func OrderedSetWithObjectsCount(objects unsafe.Pointer, cnt int) obj.Object {
 
 // OrderedSetWithOrderedSet creates and returns an ordered set containing the objects from another ordered set.
 func OrderedSetWithOrderedSet(set obj.Object) obj.Object {
+	defer runtime.KeepAlive(set)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithOrderedSet:"), objref.IDOf(set))
 	return obj.Wrap(_r)
 }
@@ -2313,14 +2397,14 @@ func OrderedSetWithArray(array []obj.Object) obj.Object {
 }
 
 // OrderedSetWithSet creates and returns an ordered set with the contents of a set.
-func OrderedSetWithSet(set obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithSet:"), objref.IDOf(set))
+func OrderedSetWithSet(set []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithSet:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // OrderedSetWithSetCopyItems creates and returns an ordered set with the contents of a set, optionally copying the items.
-func OrderedSetWithSetCopyItems(set obj.Object, flag bool) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithSet:copyItems:"), objref.IDOf(set), flag)
+func OrderedSetWithSetCopyItems(set []obj.Object, flag bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrderedSet")), objc.RegisterName("orderedSetWithSet:copyItems:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), flag)
 	return obj.Wrap(_r)
 }
 
@@ -2331,8 +2415,8 @@ func DefaultOrthographyForLanguage(language string) *Orthography {
 }
 
 // OrthographyWithDominantScriptLanguageMap creates and returns an orthography object with the specified dominant script and language map.
-func OrthographyWithDominantScriptLanguageMap(script string, map_ obj.Object) *Orthography {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("orthographyWithDominantScript:languageMap:"), purego.NSString(script), objref.IDOf(map_))
+func OrthographyWithDominantScriptLanguageMap(script string, map_ map[string]obj.Object) *Orthography {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("orthographyWithDominantScript:languageMap:"), purego.NSString(script), rt.MapToDict(map_, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return OrthographyFromID(_r)
 }
 
@@ -2364,6 +2448,7 @@ func OutputStreamWithURLAppend(url string, shouldAppend bool) *OutputStream {
 
 // LocalizedStringFromPersonNameComponentsStyleOptions wraps the corresponding Objective-C method.
 func LocalizedStringFromPersonNameComponentsStyleOptions(components *PersonNameComponents, nameFormatStyle PersonNameComponentsFormatterStyle, nameOptions PersonNameComponentsFormatterOptions) string {
+	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersonNameComponentsFormatter")), objc.RegisterName("localizedStringFromPersonNameComponents:style:options:"), objref.IDOf(components), nameFormatStyle, nameOptions)
 	if _r == 0 {
 		return ""
@@ -2385,6 +2470,7 @@ func PointerArrayWithOptions(options PointerFunctionsOptions) *PointerArray {
 
 // PointerArrayWithPointerFunctions a new pointer array initialized to use the given functions.
 func PointerArrayWithPointerFunctions(functions *PointerFunctions) *PointerArray {
+	defer runtime.KeepAlive(functions)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPointerArray")), objc.RegisterName("pointerArrayWithPointerFunctions:"), objref.IDOf(functions))
 	return PointerArrayFromID(_r)
 }
@@ -2427,6 +2513,9 @@ func NSPortPort() *Port {
 
 // PortCoderWithReceivePortSendPortComponents creates and returns a new NSPortCoder object.
 func PortCoderWithReceivePortSendPortComponents(rcvPort *Port, sndPort *Port, comps obj.Object) obj.Object {
+	defer runtime.KeepAlive(rcvPort)
+	defer runtime.KeepAlive(sndPort)
+	defer runtime.KeepAlive(comps)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPortCoder")), objc.RegisterName("portCoderWithReceivePort:sendPort:components:"), objref.IDOf(rcvPort), objref.IDOf(sndPort), objref.IDOf(comps))
 	return obj.Wrap(_r)
 }
@@ -2439,6 +2528,7 @@ func SystemDefaultPortNameServer() *PortNameServer {
 
 // PredicateWithFormatArgumentArray creates a predicate by substituting the values in a specified array into a format string and parsing the result.
 func PredicateWithFormatArgumentArray(predicateFormat string, arguments obj.Object) *Predicate {
+	defer runtime.KeepAlive(arguments)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("predicateWithFormat:argumentArray:"), purego.NSString(predicateFormat), objref.IDOf(arguments))
 	return PredicateFromID(_r)
 }
@@ -2475,72 +2565,84 @@ func PredicateWith(block func(obj.Object, obj.Object) bool) *Predicate {
 
 // ParagraphIntentWithIdentityNestedInsideIntent creates a paragraph intent with the provided information.
 func ParagraphIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("paragraphIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // HeaderIntentWithIdentityLevelNestedInsideIntent creates a header intent with the provided information.
 func HeaderIntentWithIdentityLevelNestedInsideIntent(identity int, level int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("headerIntentWithIdentity:level:nestedInsideIntent:"), identity, level, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // CodeBlockIntentWithIdentityLanguageHintNestedInsideIntent creates an code-block intent with the provided information.
 func CodeBlockIntentWithIdentityLanguageHintNestedInsideIntent(identity int, languageHint string, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("codeBlockIntentWithIdentity:languageHint:nestedInsideIntent:"), identity, purego.NSString(languageHint), objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // ThematicBreakIntentWithIdentityNestedInsideIntent creates a thematic break intent with the provided information.
 func ThematicBreakIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("thematicBreakIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // OrderedListIntentWithIdentityNestedInsideIntent creates an ordered-list intent with the provided information.
 func OrderedListIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("orderedListIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // UnorderedListIntentWithIdentityNestedInsideIntent creates an unordered-list intent with the provided information.
 func UnorderedListIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("unorderedListIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // ListItemIntentWithIdentityOrdinalNestedInsideIntent creates an item for an ordered list with the provided information.
 func ListItemIntentWithIdentityOrdinalNestedInsideIntent(identity int, ordinal int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("listItemIntentWithIdentity:ordinal:nestedInsideIntent:"), identity, ordinal, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // BlockQuoteIntentWithIdentityNestedInsideIntent creates a block-quote intent with the provided information.
 func BlockQuoteIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("blockQuoteIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // TableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent creates a table intent with the provided information.
 func TableIntentWithIdentityColumnCountAlignmentsNestedInsideIntent(identity int, columnCount int, alignments []*Number, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableIntentWithIdentity:columnCount:alignments:nestedInsideIntent:"), identity, columnCount, purego.SliceToNSArray(alignments, func(_v *Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // TableHeaderRowIntentWithIdentityNestedInsideIntent creates a table header intent with the provided information.
 func TableHeaderRowIntentWithIdentityNestedInsideIntent(identity int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableHeaderRowIntentWithIdentity:nestedInsideIntent:"), identity, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // TableRowIntentWithIdentityRowNestedInsideIntent creates a table row intent with the provided information.
 func TableRowIntentWithIdentityRowNestedInsideIntent(identity int, row int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableRowIntentWithIdentity:row:nestedInsideIntent:"), identity, row, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
 
 // TableCellIntentWithIdentityColumnNestedInsideIntent creates a table cell intent with the provided information.
 func TableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column int, parent *PresentationIntent) *PresentationIntent {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPresentationIntent")), objc.RegisterName("tableCellIntentWithIdentity:column:nestedInsideIntent:"), identity, column, objref.IDOf(parent))
 	return PresentationIntentFromID(_r)
 }
@@ -2571,33 +2673,39 @@ func DiscreteProgressWithTotalUnitCount(unitCount int64) *Progress {
 
 // ProgressWithTotalUnitCountParentPendingUnitCount wraps the corresponding Objective-C method.
 func ProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *Progress, portionOfParentTotalUnitCount int64) *Progress {
+	defer runtime.KeepAlive(parent)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("progressWithTotalUnitCount:parent:pendingUnitCount:"), unitCount, objref.IDOf(parent), portionOfParentTotalUnitCount)
 	return ProgressFromID(_r)
 }
 
 // RemoveSubscriber removes subscriber.
 func RemoveSubscriber(subscriber obj.Object) {
+	defer runtime.KeepAlive(subscriber)
 	objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("removeSubscriber:"), objref.IDOf(subscriber))
 }
 
 // PropertyListIsValidForFormat wraps the corresponding Objective-C method.
 func PropertyListIsValidForFormat(plist obj.Object, format PropertyListFormat) bool {
+	defer runtime.KeepAlive(plist)
 	_r := objc.Send[bool](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyList:isValidForFormat:"), objref.IDOf(plist), format)
 	return _r
 }
 
-// DataWithPropertyListFormatOptionsError wraps the corresponding Objective-C method.
-func DataWithPropertyListFormatOptionsError(plist obj.Object, format PropertyListFormat, opt int) (result *Data, err error) {
+// DataWithPropertyListFormatOptions wraps the corresponding Objective-C method.
+func DataWithPropertyListFormatOptions(plist obj.Object, format PropertyListFormat, opt int) (result []byte, err error) {
+	defer runtime.KeepAlive(plist)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("dataWithPropertyList:format:options:error:"), objref.IDOf(plist), format, opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
-// WritePropertyListToStreamFormatOptionsError writes property list to stream format options error.
-func WritePropertyListToStreamFormatOptionsError(plist obj.Object, stream *OutputStream, format PropertyListFormat, opt int) (result int, err error) {
+// WritePropertyListToStreamFormatOptions writes property list to stream format options.
+func WritePropertyListToStreamFormatOptions(plist obj.Object, stream *OutputStream, format PropertyListFormat, opt int) (result int, err error) {
+	defer runtime.KeepAlive(plist)
+	defer runtime.KeepAlive(stream)
 	var _nsErr uintptr
 	_r := objc.Send[int](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("writePropertyList:toStream:format:options:error:"), objref.IDOf(plist), objref.IDOf(stream), format, opt, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -2606,11 +2714,11 @@ func WritePropertyListToStreamFormatOptionsError(plist obj.Object, stream *Outpu
 	return _r, nil
 }
 
-// PropertyListWithDataOptionsFormatError wraps the corresponding Objective-C method.
-func PropertyListWithDataOptionsFormatError(data *Data, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
+// PropertyListWithDataOptionsFormat wraps the corresponding Objective-C method.
+func PropertyListWithDataOptionsFormat(data []byte, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
 	var _out0 PropertyListFormat
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListWithData:options:format:error:"), objref.IDOf(data), opt, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListWithData:options:format:error:"), rt.BytesToNSData(data), opt, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
 	_v := obj.Wrap(_r)
 	if _nsErr != 0 {
 		return nil, 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
@@ -2618,8 +2726,9 @@ func PropertyListWithDataOptionsFormatError(data *Data, opt PropertyListMutabili
 	return _v, _out0, nil
 }
 
-// PropertyListWithStreamOptionsFormatError wraps the corresponding Objective-C method.
-func PropertyListWithStreamOptionsFormatError(stream *InputStream, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
+// PropertyListWithStreamOptionsFormat wraps the corresponding Objective-C method.
+func PropertyListWithStreamOptionsFormat(stream *InputStream, opt PropertyListMutabilityOptions) (result obj.Object, format PropertyListFormat, err error) {
+	defer runtime.KeepAlive(stream)
 	var _out0 PropertyListFormat
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListWithStream:options:format:error:"), objref.IDOf(stream), opt, unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -2631,21 +2740,23 @@ func PropertyListWithStreamOptionsFormatError(stream *InputStream, opt PropertyL
 }
 
 // DataFromPropertyListFormatErrorDescription wraps the corresponding Objective-C method.
-func DataFromPropertyListFormatErrorDescription(plist obj.Object, format PropertyListFormat, errorString string) *Data {
+func DataFromPropertyListFormatErrorDescription(plist obj.Object, format PropertyListFormat, errorString string) []byte {
+	defer runtime.KeepAlive(plist)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("dataFromPropertyList:format:errorDescription:"), objref.IDOf(plist), format, purego.NSString(errorString))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PropertyListFromDataMutabilityOptionFormatErrorDescription wraps the corresponding Objective-C method.
-func PropertyListFromDataMutabilityOptionFormatErrorDescription(data *Data, opt PropertyListMutabilityOptions, errorString string) (result obj.Object, format PropertyListFormat) {
+func PropertyListFromDataMutabilityOptionFormatErrorDescription(data []byte, opt PropertyListMutabilityOptions, errorString string) (result obj.Object, format PropertyListFormat) {
 	var _out0 PropertyListFormat
-	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListFromData:mutabilityOption:format:errorDescription:"), objref.IDOf(data), opt, unsafe.Pointer(&_out0), purego.NSString(errorString))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("propertyListFromData:mutabilityOption:format:errorDescription:"), rt.BytesToNSData(data), opt, unsafe.Pointer(&_out0), purego.NSString(errorString))
 	_v := obj.Wrap(_r)
 	return _v, _out0
 }
 
 // ProtocolCheckerWithTargetProtocol allocates and initializes an NSProtocolChecker instance that will forward any messages in aProtocol to anObject, the protocol checker’s target.
 func ProtocolCheckerWithTargetProtocol(anObject *Object, aProtocol unsafe.Pointer) *ProtocolChecker {
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProtocolChecker")), objc.RegisterName("protocolCheckerWithTarget:protocol:"), objref.IDOf(anObject), aProtocol)
 	return ProtocolCheckerFromID(_r)
 }
@@ -2662,8 +2773,8 @@ func NSProxyAllocWithZone(zone unsafe.Pointer) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// RegularExpressionWithPatternOptionsError creates an NSRegularExpression instance with the specified regular expression pattern and options.
-func RegularExpressionWithPatternOptionsError(pattern string, options RegularExpressionOptions) (result *RegularExpression, err error) {
+// RegularExpressionWithPatternOptions creates an NSRegularExpression instance with the specified regular expression pattern and options.
+func RegularExpressionWithPatternOptions(pattern string, options RegularExpressionOptions) (result *RegularExpression, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("regularExpressionWithPattern:options:error:"), purego.NSString(pattern), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -2673,8 +2784,8 @@ func RegularExpressionWithPatternOptionsError(pattern string, options RegularExp
 }
 
 // EscapedPatternForString returns a string by adding backslash escapes as necessary to protect any characters that would match as pattern metacharacters.
-func EscapedPatternForString(string_ string) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("escapedPatternForString:"), purego.NSString(string_))
+func EscapedPatternForString(str string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("escapedPatternForString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -2682,8 +2793,8 @@ func EscapedPatternForString(string_ string) string {
 }
 
 // EscapedTemplateForString returns a template string by adding backslash escapes as necessary to protect any characters that would match as pattern metacharacters
-func EscapedTemplateForString(string_ string) string {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("escapedTemplateForString:"), purego.NSString(string_))
+func EscapedTemplateForString(str string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("escapedTemplateForString:"), purego.NSString(str))
 	if _r == 0 {
 		return ""
 	}
@@ -2703,14 +2814,14 @@ func MainRunLoop() *RunLoop {
 }
 
 // ScannerWithString returns an NSScanner object that scans a given string.
-func ScannerWithString(string_ string) *Scanner {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("scannerWithString:"), purego.NSString(string_))
+func ScannerWithString(str string) *Scanner {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("scannerWithString:"), purego.NSString(str))
 	return ScannerFromID(_r)
 }
 
 // LocalizedScannerWithString wraps the corresponding Objective-C method.
-func LocalizedScannerWithString(string_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("localizedScannerWithString:"), purego.NSString(string_))
+func LocalizedScannerWithString(str string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSScanner")), objc.RegisterName("localizedScannerWithString:"), purego.NSString(str))
 	return obj.Wrap(_r)
 }
 
@@ -2734,6 +2845,7 @@ func SharedScriptExecutionContext() *ScriptExecutionContext {
 
 // ObjectSpecifierWithDescriptor returns a new object specifier for an Apple event descriptor.
 func ObjectSpecifierWithDescriptor(descriptor *AppleEventDescriptor) *ScriptObjectSpecifier {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSScriptObjectSpecifier")), objc.RegisterName("objectSpecifierWithDescriptor:"), objref.IDOf(descriptor))
 	return ScriptObjectSpecifierFromID(_r)
 }
@@ -2746,6 +2858,7 @@ func SharedScriptSuiteRegistry() *ScriptSuiteRegistry {
 
 // SetSharedScriptSuiteRegistry sets the single, shared instance of NSScriptSuiteRegistry to registry.
 func SetSharedScriptSuiteRegistry(registry *ScriptSuiteRegistry) {
+	defer runtime.KeepAlive(registry)
 	objc.Send[objc.ID](objc.ID(_class("NSScriptSuiteRegistry")), objc.RegisterName("setSharedScriptSuiteRegistry:"), objref.IDOf(registry))
 }
 
@@ -2763,6 +2876,7 @@ func NSSetSet() obj.Object {
 
 // SetWithObject creates and returns a set that contains a single given object.
 func SetWithObject(object obj.Object) obj.Object {
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
@@ -2774,8 +2888,8 @@ func SetWithObjectsCount(objects unsafe.Pointer, cnt int) obj.Object {
 }
 
 // SetWithSet creates and returns a set containing the objects from another set.
-func SetWithSet(set obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithSet:"), objref.IDOf(set))
+func SetWithSet(set []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSSet")), objc.RegisterName("setWithSet:"), rt.SliceToNSSet(set, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
@@ -2799,16 +2913,23 @@ func SortDescriptorWithKeyAscending(key string, ascending bool) *SortDescriptor 
 
 // GetStreamsToHostWithNamePortInputStreamOutputStream wraps the corresponding Objective-C method.
 func GetStreamsToHostWithNamePortInputStreamOutputStream(hostname string, port int, inputStream *InputStream, outputStream *OutputStream) {
+	defer runtime.KeepAlive(inputStream)
+	defer runtime.KeepAlive(outputStream)
 	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getStreamsToHostWithName:port:inputStream:outputStream:"), purego.NSString(hostname), port, objref.IDOf(inputStream), objref.IDOf(outputStream))
 }
 
 // GetStreamsToHostPortInputStreamOutputStream wraps the corresponding Objective-C method.
 func GetStreamsToHostPortInputStreamOutputStream(host *Host, port int, inputStream *InputStream, outputStream *OutputStream) {
+	defer runtime.KeepAlive(host)
+	defer runtime.KeepAlive(inputStream)
+	defer runtime.KeepAlive(outputStream)
 	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getStreamsToHost:port:inputStream:outputStream:"), objref.IDOf(host), port, objref.IDOf(inputStream), objref.IDOf(outputStream))
 }
 
 // GetBoundStreamsWithBufferSizeInputStreamOutputStream wraps the corresponding Objective-C method.
 func GetBoundStreamsWithBufferSizeInputStreamOutputStream(bufferSize int, inputStream *InputStream, outputStream *OutputStream) {
+	defer runtime.KeepAlive(inputStream)
+	defer runtime.KeepAlive(outputStream)
 	objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("getBoundStreamsWithBufferSize:inputStream:outputStream:"), bufferSize, objref.IDOf(inputStream), objref.IDOf(outputStream))
 }
 
@@ -2828,8 +2949,8 @@ func NSStringString() *String {
 }
 
 // StringWithString returns a string created by copying the characters from another given string.
-func StringWithString(string_ string) *String {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithString:"), purego.NSString(string_))
+func StringWithString(str string) *String {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithString:"), purego.NSString(str))
 	return StringFromID(_r)
 }
 
@@ -2859,8 +2980,8 @@ func LocalizedStringWithFormat(format string) *String {
 	return StringFromID(_r)
 }
 
-// StringWithValidatedFormatValidFormatSpecifiersError wraps the corresponding Objective-C method.
-func StringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (result *String, err error) {
+// StringWithValidatedFormatValidFormatSpecifiers wraps the corresponding Objective-C method.
+func StringWithValidatedFormatValidFormatSpecifiers(format string, validFormatSpecifiers string) (result *String, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithValidatedFormat:validFormatSpecifiers:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -2869,8 +2990,8 @@ func StringWithValidatedFormatValidFormatSpecifiersError(format string, validFor
 	return StringFromID(_r), nil
 }
 
-// LocalizedStringWithValidatedFormatValidFormatSpecifiersError wraps the corresponding Objective-C method.
-func LocalizedStringWithValidatedFormatValidFormatSpecifiersError(format string, validFormatSpecifiers string) (result *String, err error) {
+// LocalizedStringWithValidatedFormatValidFormatSpecifiers wraps the corresponding Objective-C method.
+func LocalizedStringWithValidatedFormatValidFormatSpecifiers(format string, validFormatSpecifiers string) (result *String, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("localizedStringWithValidatedFormat:validFormatSpecifiers:error:"), purego.NSString(format), purego.NSString(validFormatSpecifiers), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -2885,8 +3006,8 @@ func StringWithCStringEncoding(cString string, enc int) *String {
 	return StringFromID(_r)
 }
 
-// StringWithContentsOfURLEncodingError returns a string created by reading data from the file at a given path interpreted using a given encoding.
-func StringWithContentsOfURLEncodingError(url string, enc int) (result *String, err error) {
+// StringWithContentsOfURLEncoding returns a string created by reading data from the file at a given path interpreted using a given encoding.
+func StringWithContentsOfURLEncoding(url string, enc int) (result *String, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfURL:encoding:error:"), rt.FileURL(url), enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -2895,8 +3016,8 @@ func StringWithContentsOfURLEncodingError(url string, enc int) (result *String, 
 	return StringFromID(_r), nil
 }
 
-// StringWithContentsOfFileEncodingError returns a string created by reading data from the file at a given path interpreted using a given encoding.
-func StringWithContentsOfFileEncodingError(path string, enc int) (result *String, err error) {
+// StringWithContentsOfFileEncoding returns a string created by reading data from the file at a given path interpreted using a given encoding.
+func StringWithContentsOfFileEncoding(path string, enc int) (result *String, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfFile:encoding:error:"), purego.NSString(path), enc, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -2905,8 +3026,8 @@ func StringWithContentsOfFileEncodingError(path string, enc int) (result *String
 	return StringFromID(_r), nil
 }
 
-// StringWithContentsOfURLUsedEncodingError returns a string created by reading data from the file at a given URL and returns by reference the encoding used to interpret the data.
-func StringWithContentsOfURLUsedEncodingError(url string) (result *String, enc int, err error) {
+// StringWithContentsOfURLUsedEncoding returns a string created by reading data from the file at a given URL and returns by reference the encoding used to interpret the data.
+func StringWithContentsOfURLUsedEncoding(url string) (result *String, enc int, err error) {
 	var _out0 int
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfURL:usedEncoding:error:"), rt.FileURL(url), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -2917,8 +3038,8 @@ func StringWithContentsOfURLUsedEncodingError(url string) (result *String, enc i
 	return _v, _out0, nil
 }
 
-// StringWithContentsOfFileUsedEncodingError returns a string created by reading data from the file at a given path and returns by reference the encoding used to interpret the file.
-func StringWithContentsOfFileUsedEncodingError(path string) (result *String, enc int, err error) {
+// StringWithContentsOfFileUsedEncoding returns a string created by reading data from the file at a given path and returns by reference the encoding used to interpret the file.
+func StringWithContentsOfFileUsedEncoding(path string) (result *String, enc int, err error) {
 	var _out0 int
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithContentsOfFile:usedEncoding:error:"), purego.NSString(path), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
@@ -2936,9 +3057,10 @@ func DefaultCStringEncoding() int {
 }
 
 // StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion returns the string encoding for the given data as detected by attempting to create a string according to the specified encoding options.
-func StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data *Data, opts obj.Object, string_ string) (result int, usedLossyConversion bool) {
+func StringEncodingForDataEncodingOptionsConvertedStringUsedLossyConversion(data []byte, opts obj.Object, str string) (result int, usedLossyConversion bool) {
+	defer runtime.KeepAlive(opts)
 	var _out0 bool
-	_r := objc.Send[int](objc.ID(_class("NSString")), objc.RegisterName("stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:"), objref.IDOf(data), objref.IDOf(opts), purego.NSString(string_), unsafe.Pointer(&_out0))
+	_r := objc.Send[int](objc.ID(_class("NSString")), objc.RegisterName("stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:"), rt.BytesToNSData(data), objref.IDOf(opts), purego.NSString(str), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
@@ -2955,14 +3077,14 @@ func StringWithContentsOfURL(url string) obj.Object {
 }
 
 // StringWithCStringLength returns a string containing the characters in a given C-string.
-func StringWithCStringLength(bytes_ string, length int) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:length:"), bytes_, length)
+func StringWithCStringLength(data string, length int) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:length:"), data, length)
 	return obj.Wrap(_r)
 }
 
 // StringWithCString creates a new string using a given C-string.
-func StringWithCString(bytes_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:"), bytes_)
+func StringWithCString(data string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSString")), objc.RegisterName("stringWithCString:"), data)
 	return obj.Wrap(_r)
 }
 
@@ -2976,8 +3098,8 @@ func PathWithComponents(components []string) string {
 }
 
 // LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler wraps the corresponding Objective-C method.
-func LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url string, arguments []string, error_ unsafe.Pointer, terminationHandler func(obj.Object)) *Task {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("launchedTaskWithExecutableURL:arguments:error:terminationHandler:"), rt.FileURL(url), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), error_, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
+func LaunchedTaskWithExecutableURLArgumentsErrorTerminationHandler(url string, arguments []string, err unsafe.Pointer, terminationHandler func(obj.Object)) *Task {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTask")), objc.RegisterName("launchedTaskWithExecutableURL:arguments:error:terminationHandler:"), rt.FileURL(url), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), err, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { terminationHandler(obj.Wrap(_b0)) }))
 	return TaskFromID(_r)
 }
 
@@ -3041,8 +3163,8 @@ func IsMultiThreaded() bool {
 }
 
 // SleepUntilDate wraps the corresponding Objective-C method.
-func SleepUntilDate(date *Date) {
-	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("sleepUntilDate:"), objref.IDOf(date))
+func SleepUntilDate(date time.Time) {
+	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("sleepUntilDate:"), rt.TimeToNSDate(date))
 }
 
 // SleepForTimeInterval wraps the corresponding Objective-C method.
@@ -3107,9 +3229,9 @@ func ResetSystemTimeZone() {
 }
 
 // AbbreviationDictionary returns the abbreviation dictionary.
-func AbbreviationDictionary() obj.Object {
+func AbbreviationDictionary() map[string]string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("abbreviationDictionary"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SystemTimeZone returns the system time zone.
@@ -3126,6 +3248,7 @@ func DefaultTimeZone() *TimeZone {
 
 // SetDefaultTimeZone wraps the corresponding Objective-C method.
 func SetDefaultTimeZone(defaultTimeZone *TimeZone) {
+	defer runtime.KeepAlive(defaultTimeZone)
 	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setDefaultTimeZone:"), objref.IDOf(defaultTimeZone))
 }
 
@@ -3144,8 +3267,8 @@ func KnownTimeZoneNames() []string {
 }
 
 // SetAbbreviationDictionary wraps the corresponding Objective-C method.
-func SetAbbreviationDictionary(abbreviationDictionary obj.Object) {
-	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setAbbreviationDictionary:"), objref.IDOf(abbreviationDictionary))
+func SetAbbreviationDictionary(abbreviationDictionary map[string]string) {
+	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setAbbreviationDictionary:"), rt.MapToDict(abbreviationDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // TimeZoneDataVersion returns the time zone data version.
@@ -3164,8 +3287,8 @@ func TimeZoneWithName(tzName string) *TimeZone {
 }
 
 // TimeZoneWithNameData returns the time zone with a given identifier whose data has been initialized using given data.
-func TimeZoneWithNameData(tzName string, aData *Data) *TimeZone {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneWithName:data:"), purego.NSString(tzName), objref.IDOf(aData))
+func TimeZoneWithNameData(tzName string, aData []byte) *TimeZone {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneWithName:data:"), purego.NSString(tzName), rt.BytesToNSData(aData))
 	return TimeZoneFromID(_r)
 }
 
@@ -3183,12 +3306,14 @@ func TimeZoneWithAbbreviation(abbreviation string) *TimeZone {
 
 // TimerWithTimeIntervalInvocationRepeats wraps the corresponding Objective-C method.
 func TimerWithTimeIntervalInvocationRepeats(ti float64, invocation *Invocation, yesOrNo bool) *Timer {
+	defer runtime.KeepAlive(invocation)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("timerWithTimeInterval:invocation:repeats:"), ti, objref.IDOf(invocation), yesOrNo)
 	return TimerFromID(_r)
 }
 
 // ScheduledTimerWithTimeIntervalInvocationRepeats wraps the corresponding Objective-C method.
 func ScheduledTimerWithTimeIntervalInvocationRepeats(ti float64, invocation *Invocation, yesOrNo bool) *Timer {
+	defer runtime.KeepAlive(invocation)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("scheduledTimerWithTimeInterval:invocation:repeats:"), ti, objref.IDOf(invocation), yesOrNo)
 	return TimerFromID(_r)
 }
@@ -3206,70 +3331,70 @@ func ScheduledTimerWithTimeIntervalRepeatsBlock(interval float64, repeats bool, 
 }
 
 // FileURLWithPathIsDirectoryRelativeToURL initializes and returns a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
-func FileURLWithPathIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
+func FileURLWithPathIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:isDirectory:relativeToURL:"), purego.NSString(path), isDir, rt.FileURL(baseURL))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // FileURLWithPathRelativeToURL initializes and returns a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
-func FileURLWithPathRelativeToURL(path string, baseURL string) *URL {
+func FileURLWithPathRelativeToURL(path string, baseURL string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:relativeToURL:"), purego.NSString(path), rt.FileURL(baseURL))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // FileURLWithPathIsDirectory initializes and returns a newly created NSURL object as a file URL with a specified path.
-func FileURLWithPathIsDirectory(path string, isDir bool) *URL {
+func FileURLWithPathIsDirectory(path string, isDir bool) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:isDirectory:"), purego.NSString(path), isDir)
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // FileURLWithPath initializes and returns a newly created NSURL object as a file URL with a specified path.
-func FileURLWithPath(path string) *URL {
+func FileURLWithPath(path string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPath:"), purego.NSString(path))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // FileURLWithFileSystemRepresentationIsDirectoryRelativeToURL returns a new URL object initialized with a C string representing a local file system path.
-func FileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
+func FileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithFileSystemRepresentation:isDirectory:relativeToURL:"), path, isDir, rt.FileURL(baseURL))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // URLWithString creates and returns an NSURL object initialized with a provided URL string.
-func URLWithString(uRLString string) *URL {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:"), purego.NSString(uRLString))
+func URLWithString(urlString string) *URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:"), purego.NSString(urlString))
 	return URLFromID(_r)
 }
 
 // URLWithStringRelativeToURL creates and returns an NSURL object initialized with a base URL and a relative string.
-func URLWithStringRelativeToURL(uRLString string, baseURL string) *URL {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:relativeToURL:"), purego.NSString(uRLString), rt.FileURL(baseURL))
+func URLWithStringRelativeToURL(urlString string, baseURL string) *URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:relativeToURL:"), purego.NSString(urlString), rt.FileURL(baseURL))
 	return URLFromID(_r)
 }
 
 // URLWithStringEncodingInvalidCharacters creates and returns an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
-func URLWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URL {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:encodingInvalidCharacters:"), purego.NSString(uRLString), encodingInvalidCharacters)
+func URLWithStringEncodingInvalidCharacters(urlString string, encodingInvalidCharacters bool) *URL {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithString:encodingInvalidCharacters:"), purego.NSString(urlString), encodingInvalidCharacters)
 	return URLFromID(_r)
 }
 
 // URLWithDataRepresentationRelativeToURL initializes and returns a newly created NSURL using the contents of the given data, relative to a base URL.
-func URLWithDataRepresentationRelativeToURL(data *Data, baseURL string) *URL {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithDataRepresentation:relativeToURL:"), objref.IDOf(data), rt.FileURL(baseURL))
-	return URLFromID(_r)
+func URLWithDataRepresentationRelativeToURL(data []byte, baseURL string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLWithDataRepresentation:relativeToURL:"), rt.BytesToNSData(data), rt.FileURL(baseURL))
+	return rt.URLString(_r)
 }
 
 // AbsoluteURLWithDataRepresentationRelativeToURL initializes and returns a newly created absolute NSURL using the contents of the given data, relative to a base URL.
-func AbsoluteURLWithDataRepresentationRelativeToURL(data *Data, baseURL string) *URL {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("absoluteURLWithDataRepresentation:relativeToURL:"), objref.IDOf(data), rt.FileURL(baseURL))
-	return URLFromID(_r)
+func AbsoluteURLWithDataRepresentationRelativeToURL(data []byte, baseURL string) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("absoluteURLWithDataRepresentation:relativeToURL:"), rt.BytesToNSData(data), rt.FileURL(baseURL))
+	return rt.URLString(_r)
 }
 
-// URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError returns a new URL made by resolving bookmark data.
-func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *Data, options URLBookmarkResolutionOptions, relativeURL string) (result *URL, isStale bool, err error) {
+// URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStale returns a new URL made by resolving bookmark data.
+func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStale(bookmarkData []byte, options URLBookmarkResolutionOptions, relativeURL string) (result *URL, isStale bool, err error) {
 	var _out0 bool
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:"), objref.IDOf(bookmarkData), options, rt.FileURL(relativeURL), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:"), rt.BytesToNSData(bookmarkData), options, rt.FileURL(relativeURL), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
 	_v := URLFromID(_r)
 	if _nsErr != 0 {
 		return nil, false, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
@@ -3278,33 +3403,33 @@ func URLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(book
 }
 
 // ResourceValuesForKeysFromBookmarkData returns the resource values for properties identified by a specified array of keys contained in specified bookmark data.
-func ResourceValuesForKeysFromBookmarkData(keys []*String, bookmarkData *Data) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("resourceValuesForKeys:fromBookmarkData:"), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), objref.IDOf(bookmarkData))
+func ResourceValuesForKeysFromBookmarkData(keys []*String, bookmarkData []byte) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("resourceValuesForKeys:fromBookmarkData:"), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), rt.BytesToNSData(bookmarkData))
 	return obj.Wrap(_r)
 }
 
 // WriteBookmarkDataToURLOptions creates an alias file on disk at a specified location with specified bookmark data.
-func WriteBookmarkDataToURLOptions(bookmarkData *Data, bookmarkFileURL string, options int) error {
+func WriteBookmarkDataToURLOptions(bookmarkData []byte, bookmarkFileURL string, options int) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("NSURL")), objc.RegisterName("writeBookmarkData:toURL:options:error:"), objref.IDOf(bookmarkData), rt.FileURL(bookmarkFileURL), options, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("NSURL")), objc.RegisterName("writeBookmarkData:toURL:options:error:"), rt.BytesToNSData(bookmarkData), rt.FileURL(bookmarkFileURL), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// BookmarkDataWithContentsOfURLError initializes and returns bookmark data derived from an alias file pointed to by a specified URL.
-func BookmarkDataWithContentsOfURLError(bookmarkFileURL string) (result *Data, err error) {
+// BookmarkDataWithContentsOfURL initializes and returns bookmark data derived from an alias file pointed to by a specified URL.
+func BookmarkDataWithContentsOfURL(bookmarkFileURL string) (result []byte, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("bookmarkDataWithContentsOfURL:error:"), rt.FileURL(bookmarkFileURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
-// URLByResolvingAliasFileAtURLOptionsError returns a new URL made by resolving the alias file at url.
-func URLByResolvingAliasFileAtURLOptionsError(url string, options URLBookmarkResolutionOptions) (result *URL, err error) {
+// URLByResolvingAliasFileAtURLOptions returns a new URL made by resolving the alias file at url.
+func URLByResolvingAliasFileAtURLOptions(url string, options URLBookmarkResolutionOptions) (result *URL, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("URLByResolvingAliasFileAtURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -3314,9 +3439,9 @@ func URLByResolvingAliasFileAtURLOptionsError(url string, options URLBookmarkRes
 }
 
 // FileURLWithPathComponents initializes and returns a newly created NSURL object as a file URL with specified path components.
-func FileURLWithPathComponents(components []string) *URL {
+func FileURLWithPathComponents(components []string) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("fileURLWithPathComponents:"), purego.SliceToNSArray(components, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // SharedURLCache returns the shared NSURLCache instance or sets the NSURLCache instance shared by all clients of the current process. This will be the new object returned when calls to the <tt>sharedURLCache</tt> method are made. Unless set explicitly through a call to <tt>+setSharedURLCache:</tt>, this method returns an NSURLCache instance created with the following default values: <ul> <li>Memory capacity: 4 megabytes (4 * 1024 * 1024 bytes) <li>Disk capacity: 20 megabytes (20 * 1024 * 1024 bytes) <li>Disk path: <nobr>(user home directory)/Library/Caches/(application bundle id)</nobr> </ul> <p>Users who do not have special caching requirements or constraints should find the default shared cache instance acceptable. If this default shared cache instance is not acceptable, <tt>+setSharedURLCache:</tt> can be called to set a different NSURLCache instance to be returned from this method. Callers should take care to ensure that the setter is called at a time when no other caller has a reference to the previously-set shared URL cache. This is to prevent storing cache data from becoming unexpectedly unretrievable.
@@ -3327,6 +3452,7 @@ func SharedURLCache() *URLCache {
 
 // SetSharedURLCache wraps the corresponding Objective-C method.
 func SetSharedURLCache(sharedURLCache *URLCache) {
+	defer runtime.KeepAlive(sharedURLCache)
 	objc.Send[objc.ID](objc.ID(_class("NSURLCache")), objc.RegisterName("setSharedURLCache:"), objref.IDOf(sharedURLCache))
 }
 
@@ -3337,37 +3463,42 @@ func ComponentsWithURLResolvingAgainstBaseURL(url string, resolve bool) *URLComp
 }
 
 // ComponentsWithString returns a URL components object by parsing a URL in string form.
-func ComponentsWithString(uRLString string) *URLComponents {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithString:"), purego.NSString(uRLString))
+func ComponentsWithString(urlString string) *URLComponents {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithString:"), purego.NSString(urlString))
 	return URLComponentsFromID(_r)
 }
 
 // ComponentsWithStringEncodingInvalidCharacters returns a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
-func ComponentsWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URLComponents {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithString:encodingInvalidCharacters:"), purego.NSString(uRLString), encodingInvalidCharacters)
+func ComponentsWithStringEncodingInvalidCharacters(urlString string, encodingInvalidCharacters bool) *URLComponents {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("componentsWithString:encodingInvalidCharacters:"), purego.NSString(urlString), encodingInvalidCharacters)
 	return URLComponentsFromID(_r)
 }
 
 // ConnectionWithRequestDelegate creates and returns an initialized URL connection and begins to load the data for the URL request.
 func ConnectionWithRequestDelegate(request *URLRequest, delegate obj.Object) *URLConnection {
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(delegate)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("connectionWithRequest:delegate:"), objref.IDOf(request), objref.IDOf(delegate))
 	return URLConnectionFromID(_r)
 }
 
 // CanHandleRequest returns whether a request can be handled based on a preflight evaluation.
 func CanHandleRequest(request *URLRequest) bool {
+	defer runtime.KeepAlive(request)
 	_r := objc.Send[bool](objc.ID(_class("NSURLConnection")), objc.RegisterName("canHandleRequest:"), objref.IDOf(request))
 	return _r
 }
 
-// SendSynchronousRequestReturningResponseError performs a synchronous load of the specified URL request.
-func SendSynchronousRequestReturningResponseError(request *URLRequest, response *URLResponse) (result *Data, err error) {
+// SendSynchronousRequestReturningResponse performs a synchronous load of the specified URL request.
+func SendSynchronousRequestReturningResponse(request *URLRequest, response *URLResponse) (result []byte, err error) {
+	defer runtime.KeepAlive(request)
+	defer runtime.KeepAlive(response)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLConnection")), objc.RegisterName("sendSynchronousRequest:returningResponse:error:"), objref.IDOf(request), objref.IDOf(response), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return DataFromID(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
 // CredentialWithUserPasswordPersistence creates a URL credential instance for internet password authentication with a given user name and password, using a given persistence setting.
@@ -3378,12 +3509,15 @@ func CredentialWithUserPasswordPersistence(user string, password string, persist
 
 // CredentialWithIdentityCertificatesPersistence creates a URL credential instance for resolving a client certificate authentication challenge.
 func CredentialWithIdentityCertificatesPersistence(identity obj.Object, certArray obj.Object, persistence URLCredentialPersistence) *URLCredential {
+	defer runtime.KeepAlive(identity)
+	defer runtime.KeepAlive(certArray)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialWithIdentity:certificates:persistence:"), objref.IDOf(identity), objref.IDOf(certArray), persistence)
 	return URLCredentialFromID(_r)
 }
 
 // CredentialForTrust creates a URL credential instance for server trust authentication with a given accepted trust.
 func CredentialForTrust(trust obj.Object) *URLCredential {
+	defer runtime.KeepAlive(trust)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLCredential")), objc.RegisterName("credentialForTrust:"), objref.IDOf(trust))
 	return URLCredentialFromID(_r)
 }
@@ -3395,8 +3529,8 @@ func SharedCredentialStorage() *URLCredentialStorage {
 }
 
 // CanResumeDownloadDecodedWithEncodingMIMEType returns whether a URL download object can resume a download that was decoded with the specified MIME type.
-func CanResumeDownloadDecodedWithEncodingMIMEType(mIMEType string) bool {
-	_r := objc.Send[bool](objc.ID(_class("NSURLDownload")), objc.RegisterName("canResumeDownloadDecodedWithEncodingMIMEType:"), purego.NSString(mIMEType))
+func CanResumeDownloadDecodedWithEncodingMIMEType(mimeType string) bool {
+	_r := objc.Send[bool](objc.ID(_class("NSURLDownload")), objc.RegisterName("canResumeDownloadDecodedWithEncodingMIMEType:"), purego.NSString(mimeType))
 	return _r
 }
 
@@ -3414,40 +3548,49 @@ func CachedHandleForURL(anURL string) *URLHandle {
 
 // CanInitWithRequest this method determines whether this protocol can handle the given request. A concrete subclass should inspect the given request and determine whether or not the implementation can perform a load with that request. This is an abstract method. Subclasses must provide an implementation.
 func CanInitWithRequest(request *URLRequest) bool {
+	defer runtime.KeepAlive(request)
 	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canInitWithRequest:"), objref.IDOf(request))
 	return _r
 }
 
 // CanonicalRequestForRequest this method returns a canonical version of the given request. It is up to each concrete protocol implementation to define what "canonical" means. However, a protocol should guarantee that the same input request always yields the same canonical form. Special consideration should be given when implementing this method since the canonical form of a request is used to look up objects in the URL cache, a process which performs equality checks between NSURLRequest objects. <p> This is an abstract method; subclasses must provide an implementation.
 func CanonicalRequestForRequest(request *URLRequest) *URLRequest {
+	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canonicalRequestForRequest:"), objref.IDOf(request))
 	return URLRequestFromID(_r)
 }
 
 // RequestIsCacheEquivalentToRequest compares two requests for equivalence with regard to caching. Requests are considered equivalent for cache purposes if and only if they would be handled by the same protocol AND that protocol declares them equivalent after performing implementation-specific checks.
 func RequestIsCacheEquivalentToRequest(a *URLRequest, b *URLRequest) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("requestIsCacheEquivalent:toRequest:"), objref.IDOf(a), objref.IDOf(b))
 	return _r
 }
 
 // PropertyForKeyInRequest returns the property in the given request previously stored with the given key. The purpose of this method is to provide an interface for protocol implementors to access protocol-specific information associated with NSURLRequest objects.
 func PropertyForKeyInRequest(key string, request *URLRequest) obj.Object {
+	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("propertyForKey:inRequest:"), purego.NSString(key), objref.IDOf(request))
 	return obj.Wrap(_r)
 }
 
 // SetPropertyForKeyInRequest stores the given property in the given request using the given key. The purpose of this method is to provide an interface for protocol implementors to customize protocol-specific information associated with NSMutableURLRequest objects.
 func SetPropertyForKeyInRequest(value obj.Object, key string, request *MutableURLRequest) {
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("setProperty:forKey:inRequest:"), objref.IDOf(value), purego.NSString(key), objref.IDOf(request))
 }
 
 // RemovePropertyForKeyInRequest remove any property stored under the given key Like setProperty:forKey:inRequest: above, the purpose of this method is to give protocol implementors the ability to store protocol-specific information in an NSURLRequest
 func RemovePropertyForKeyInRequest(key string, request *MutableURLRequest) {
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objc.ID(_class("NSURLProtocol")), objc.RegisterName("removePropertyForKey:inRequest:"), purego.NSString(key), objref.IDOf(request))
 }
 
 // CanInitWithTask wraps the corresponding Objective-C method.
 func CanInitWithTask(task *URLSessionTask) bool {
+	defer runtime.KeepAlive(task)
 	_r := objc.Send[bool](objc.ID(_class("NSURLProtocol")), objc.RegisterName("canInitWithTask:"), objref.IDOf(task))
 	return _r
 }
@@ -3459,14 +3602,14 @@ func QueryItemWithNameValue(name string, value string) *URLQueryItem {
 }
 
 // RequestWithURL creates and returns a URL request for a specified URL.
-func RequestWithURL(uRL string) *URLRequest {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("requestWithURL:"), rt.FileURL(uRL))
+func RequestWithURL(url string) *URLRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("requestWithURL:"), rt.FileURL(url))
 	return URLRequestFromID(_r)
 }
 
 // RequestWithURLCachePolicyTimeoutInterval creates and returns an initialized URL request with specified URL, cache policy, and timeout values.
-func RequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy URLRequestCachePolicy, timeoutInterval float64) *URLRequest {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("requestWithURL:cachePolicy:timeoutInterval:"), rt.FileURL(uRL), cachePolicy, timeoutInterval)
+func RequestWithURLCachePolicyTimeoutInterval(url string, cachePolicy URLRequestCachePolicy, timeoutInterval float64) *URLRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSURLRequest")), objc.RegisterName("requestWithURL:cachePolicy:timeoutInterval:"), rt.FileURL(url), cachePolicy, timeoutInterval)
 	return URLRequestFromID(_r)
 }
 
@@ -3478,6 +3621,7 @@ func SupportsSecureCoding() bool {
 
 // SessionWithConfiguration wraps the corresponding Objective-C method.
 func SessionWithConfiguration(configuration *URLSessionConfiguration) *URLSession {
+	defer runtime.KeepAlive(configuration)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("sessionWithConfiguration:"), objref.IDOf(configuration))
 	return URLSessionFromID(_r)
 }
@@ -3579,8 +3723,8 @@ func DefaultStore() *UbiquitousKeyValueStore {
 }
 
 // NSUnarchiverUnarchiveObjectWithData decodes and returns the object archived in a given NSData object.
-func NSUnarchiverUnarchiveObjectWithData(data *Data) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("unarchiveObjectWithData:"), objref.IDOf(data))
+func NSUnarchiverUnarchiveObjectWithData(data []byte) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSUnarchiver")), objc.RegisterName("unarchiveObjectWithData:"), rt.BytesToNSData(data))
 	return obj.Wrap(_r)
 }
 
@@ -4899,6 +5043,7 @@ func ValueWithObjCType(value unsafe.Pointer, type_ string) *Value {
 
 // ValueWithNonretainedObject creates a value object containing the specified object.
 func ValueWithNonretainedObject(anObject obj.Object) *Value {
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("valueWithNonretainedObject:"), objref.IDOf(anObject))
 	return ValueFromID(_r)
 }
@@ -4929,11 +5074,14 @@ func ValueWithRect(rect corefoundation.CGRect) *Value {
 
 // SetValueTransformerForName wraps the corresponding Objective-C method.
 func SetValueTransformerForName(transformer *ValueTransformer, name *String) {
+	defer runtime.KeepAlive(transformer)
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("setValueTransformer:forName:"), objref.IDOf(transformer), objref.IDOf(name))
 }
 
 // ValueTransformerForName wraps the corresponding Objective-C method.
 func ValueTransformerForName(name *String) *ValueTransformer {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSValueTransformer")), objc.RegisterName("valueTransformerForName:"), objref.IDOf(name))
 	return ValueTransformerFromID(_r)
 }
@@ -4966,6 +5114,7 @@ func Document() obj.Object {
 
 // DocumentWithRootElement returns a document
 func DocumentWithRootElement(element *XMLElement) obj.Object {
+	defer runtime.KeepAlive(element)
 	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("documentWithRootElement:"), objref.IDOf(element))
 	return obj.Wrap(_r)
 }
@@ -4977,14 +5126,14 @@ func ElementWithName(name string) obj.Object {
 }
 
 // ElementWithNameURI returns an element whose full QName is specified.
-func ElementWithNameURI(name string, uRI string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:URI:"), purego.NSString(name), purego.NSString(uRI))
+func ElementWithNameURI(name string, uri string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:URI:"), purego.NSString(name), purego.NSString(uri))
 	return obj.Wrap(_r)
 }
 
 // ElementWithNameStringValue returns an element with a single text node child <tt>&lt;name>string&lt;/name></tt>.
-func ElementWithNameStringValue(name string, string_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:stringValue:"), purego.NSString(name), purego.NSString(string_))
+func ElementWithNameStringValue(name string, str string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("elementWithName:stringValue:"), purego.NSString(name), purego.NSString(str))
 	return obj.Wrap(_r)
 }
 
@@ -5001,8 +5150,8 @@ func AttributeWithNameStringValue(name string, stringValue string) obj.Object {
 }
 
 // AttributeWithNameURIStringValue returns an attribute whose full QName is specified.
-func AttributeWithNameURIStringValue(name string, uRI string, stringValue string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("attributeWithName:URI:stringValue:"), purego.NSString(name), purego.NSString(uRI), purego.NSString(stringValue))
+func AttributeWithNameURIStringValue(name string, uri string, stringValue string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("attributeWithName:URI:stringValue:"), purego.NSString(name), purego.NSString(uri), purego.NSString(stringValue))
 	return obj.Wrap(_r)
 }
 
@@ -5031,8 +5180,8 @@ func TextWithStringValue(stringValue string) obj.Object {
 }
 
 // DTDNodeWithXMLString returns an element, attribute, entity, or notation DTD node based on the full XML string.
-func DTDNodeWithXMLString(string_ string) obj.Object {
-	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("DTDNodeWithXMLString:"), purego.NSString(string_))
+func DTDNodeWithXMLString(str string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSXMLNode")), objc.RegisterName("DTDNodeWithXMLString:"), purego.NSString(str))
 	return obj.Wrap(_r)
 }
 

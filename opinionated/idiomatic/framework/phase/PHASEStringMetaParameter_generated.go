@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewStringMetaParameter() *StringMetaParameter {
 
 // WithValue sets a value for the metaparameter.
 func (smp *StringMetaParameter) WithValue(value obj.Object) *StringMetaParameter {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(smp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return smp
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRChannelClusterPageTokenStructAdopt(id objc.ID) *MTRChannelClusterPageTok
 
 // Description returns the object's -description text.
 func (mccpts *MTRChannelClusterPageTokenStruct) Description() string {
+	defer runtime.KeepAlive(mccpts)
 	return rt.Description(objref.IDOf(mccpts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccpts *MTRChannelClusterPageTokenStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccpts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccpts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccpts *MTRChannelClusterPageTokenStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccpts)
 	return rt.IsKind(objref.IDOf(mccpts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccpts *MTRChannelClusterPageTokenStruct) String() string {
+	defer runtime.KeepAlive(mccpts)
 	return rt.Description(objref.IDOf(mccpts))
 }
 
@@ -72,6 +80,7 @@ func NewMTRChannelClusterPageTokenStruct() *MTRChannelClusterPageTokenStruct {
 
 // WithLimit sets the limit.
 func (mccpts *MTRChannelClusterPageTokenStruct) WithLimit(limit obj.Object) *MTRChannelClusterPageTokenStruct {
+	defer runtime.KeepAlive(limit)
 	objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("setLimit:"), objref.IDOf(limit))
 	return mccpts
 }
@@ -89,13 +98,15 @@ func (mccpts *MTRChannelClusterPageTokenStruct) WithBefore(before string) *MTRCh
 }
 
 // Limit returns the limit.
-func (mccpts *MTRChannelClusterPageTokenStruct) Limit() obj.Object {
+func (mccpts *MTRChannelClusterPageTokenStruct) Limit() *foundation.Number {
+	defer runtime.KeepAlive(mccpts)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("limit"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // After returns the after.
 func (mccpts *MTRChannelClusterPageTokenStruct) After() string {
+	defer runtime.KeepAlive(mccpts)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("after"))
 	if _r == 0 {
 		return ""
@@ -105,6 +116,7 @@ func (mccpts *MTRChannelClusterPageTokenStruct) After() string {
 
 // Before returns the before.
 func (mccpts *MTRChannelClusterPageTokenStruct) Before() string {
+	defer runtime.KeepAlive(mccpts)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("before"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,6 +70,7 @@ func (tl *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Trans
 //
 // Dimensions returns the collection as a Go slice.
 func (tl *TransposeLayer) Dimensions() []obj.Object {
+	defer runtime.KeepAlive(tl)
 	_arr := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("dimensions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,8 +5,11 @@
 package safetykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func emergencyResponseManagerAdopt(id objc.ID) *EmergencyResponseManager {
 
 // Description returns the object's -description text.
 func (erm *EmergencyResponseManager) Description() string {
+	defer runtime.KeepAlive(erm)
 	return rt.Description(objref.IDOf(erm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (erm *EmergencyResponseManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(erm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(erm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (erm *EmergencyResponseManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(erm)
 	return rt.IsKind(objref.IDOf(erm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (erm *EmergencyResponseManager) String() string {
+	defer runtime.KeepAlive(erm)
 	return rt.Description(objref.IDOf(erm))
 }
 
@@ -70,4 +78,14 @@ func (erm *EmergencyResponseManager) String() string {
 func NewEmergencyResponseManager() *EmergencyResponseManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("SAEmergencyResponseManager")), objc.RegisterName("new"))
 	return emergencyResponseManagerAdopt(_id)
+}
+
+// WithDelegate sets the object that receives voice call status updates and requested emergency response actions.
+func (erm *EmergencyResponseManager) WithDelegate(delegate EmergencyResponseDelegate) *EmergencyResponseManager {
+	_shim := newEmergencyResponseDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(erm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(erm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return erm
 }

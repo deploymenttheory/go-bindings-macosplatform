@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -72,6 +74,7 @@ func (ibr *ImageBasedRequest) WithRevision(revision int) *ImageBasedRequest {
 
 // RegionOfInterest returns the region of interest.
 func (ibr *ImageBasedRequest) RegionOfInterest() corefoundation.CGRect {
+	defer runtime.KeepAlive(ibr)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ibr), objc.RegisterName("regionOfInterest"))
 	return _r
 }

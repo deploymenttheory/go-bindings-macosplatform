@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func decisionNodeAdopt(id objc.ID) *DecisionNode {
 
 // Description returns the object's -description text.
 func (dn *DecisionNode) Description() string {
+	defer runtime.KeepAlive(dn)
 	return rt.Description(objref.IDOf(dn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dn *DecisionNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dn *DecisionNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(dn)
 	return rt.IsKind(objref.IDOf(dn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dn *DecisionNode) String() string {
+	defer runtime.KeepAlive(dn)
 	return rt.Description(objref.IDOf(dn))
 }
 

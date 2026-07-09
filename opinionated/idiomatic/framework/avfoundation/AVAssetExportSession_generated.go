@@ -6,9 +6,11 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +52,33 @@ func assetExportSessionAdopt(id objc.ID) *AssetExportSession {
 
 // Description returns the object's -description text.
 func (aes *AssetExportSession) Description() string {
+	defer runtime.KeepAlive(aes)
 	return rt.Description(objref.IDOf(aes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aes *AssetExportSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aes)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aes *AssetExportSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(aes)
 	return rt.IsKind(objref.IDOf(aes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aes *AssetExportSession) String() string {
+	defer runtime.KeepAlive(aes)
 	return rt.Description(objref.IDOf(aes))
 }
 
 // NewAssetExportSessionWithAssetPresetName creates an export session with a preset configuration.
 func NewAssetExportSessionWithAssetPresetName(asset *Asset, presetName string) *AssetExportSession {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetExportSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:presetName:"), objref.IDOf(asset), purego.NSString(presetName))
 	return assetExportSessionAdopt(_id)
@@ -78,6 +86,7 @@ func NewAssetExportSessionWithAssetPresetName(asset *Asset, presetName string) *
 
 // WithOutputFileType sets the file type of the output an asset export session writes.
 func (aes *AssetExportSession) WithOutputFileType(outputFileType obj.Object) *AssetExportSession {
+	defer runtime.KeepAlive(outputFileType)
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 	return aes
 }
@@ -121,24 +130,28 @@ func (aes *AssetExportSession) WithMetadata(items ...MetadataItemProvider) *Asse
 
 // WithMetadataItemFilter sets an object the export session uses to filter the metadata items it transfers to the output asset.
 func (aes *AssetExportSession) WithMetadataItemFilter(metadataItemFilter *MetadataItemFilter) *AssetExportSession {
+	defer runtime.KeepAlive(metadataItemFilter)
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setMetadataItemFilter:"), objref.IDOf(metadataItemFilter))
 	return aes
 }
 
 // WithAudioTimePitchAlgorithm sets a processing algorithm for managing audio pitch for scaled audio edits.
 func (aes *AssetExportSession) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetExportSession {
+	defer runtime.KeepAlive(audioTimePitchAlgorithm)
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return aes
 }
 
 // WithAudioMix sets the parameters for audio mixing and an indication of whether to enable nondefault audio mixing for export.
 func (aes *AssetExportSession) WithAudioMix(audioMix AudioMixProvider) *AssetExportSession {
+	defer runtime.KeepAlive(audioMix)
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setAudioMix:"), objref.IDOf(audioMix))
 	return aes
 }
 
 // WithVideoComposition sets an optional object that provides instructions for how to composite frames of video.
 func (aes *AssetExportSession) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetExportSession {
+	defer runtime.KeepAlive(videoComposition)
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return aes
 }
@@ -165,6 +178,7 @@ func (aes *AssetExportSession) WithDirectoryForTemporaryFiles(directoryForTempor
 //
 // ExportAsynchronously blocks until the operation completes or ctx is cancelled.
 func (aes *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
+	defer runtime.KeepAlive(aes)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -180,11 +194,13 @@ func (aes *AssetExportSession) ExportAsynchronously(ctx context.Context) error {
 
 // CancelExport cancels the execution of an export session.
 func (aes *AssetExportSession) CancelExport() {
+	defer runtime.KeepAlive(aes)
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("cancelExport"))
 }
 
 // PresetName returns the preset name.
 func (aes *AssetExportSession) PresetName() string {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("presetName"))
 	if _r == 0 {
 		return ""
@@ -194,42 +210,49 @@ func (aes *AssetExportSession) PresetName() string {
 
 // Asset returns the asset.
 func (aes *AssetExportSession) Asset() *Asset {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
 // OutputFileType returns the output file type.
-func (aes *AssetExportSession) OutputFileType() obj.Object {
+func (aes *AssetExportSession) OutputFileType() *foundation.String {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("outputFileType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // OutputURL returns the output URL.
-func (aes *AssetExportSession) OutputURL() obj.Object {
+func (aes *AssetExportSession) OutputURL() string {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("outputURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ShouldOptimizeForNetworkUse wraps the corresponding Objective-C method.
 func (aes *AssetExportSession) ShouldOptimizeForNetworkUse() bool {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[bool](objref.IDOf(aes), objc.RegisterName("shouldOptimizeForNetworkUse"))
 	return _r
 }
 
 // AllowsParallelizedExport reports whether or not parallelization can be employed in the export. On select platforms, there may be opportunities to expedite the export by using additional resources in parallel. If set to true, export parallelization will be enabled, only if parallelization requirements are met. There will be no error signaled if export parallelization is not achievable, and instead the export will proceed as normal (without parallelization). If set to false, export parallelization will not be used.
 func (aes *AssetExportSession) AllowsParallelizedExport() bool {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[bool](objref.IDOf(aes), objc.RegisterName("allowsParallelizedExport"))
 	return _r
 }
 
 // Status returns the status.
 func (aes *AssetExportSession) Status() AssetExportSessionStatus {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[AssetExportSessionStatus](objref.IDOf(aes), objc.RegisterName("status"))
 	return _r
 }
 
 // Progress returns the progress.
 func (aes *AssetExportSession) Progress() float32 {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[float32](objref.IDOf(aes), objc.RegisterName("progress"))
 	return _r
 }
@@ -238,6 +261,7 @@ func (aes *AssetExportSession) Progress() float32 {
 //
 // DetermineCompatibleFileTypes blocks until the operation completes or ctx is cancelled.
 func (aes *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(aes)
 	type _result struct {
 		val obj.Object
 		err error
@@ -262,30 +286,35 @@ func (aes *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context)
 //
 // SupportedFileTypes returns the collection as a Go slice.
 func (aes *AssetExportSession) SupportedFileTypes() []obj.Object {
+	defer runtime.KeepAlive(aes)
 	_arr := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("supportedFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TimeRange returns the time range.
 func (aes *AssetExportSession) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(aes), objc.RegisterName("timeRange"))
 	return _r
 }
 
 // MaxDuration returns the max duration.
 func (aes *AssetExportSession) MaxDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aes), objc.RegisterName("maxDuration"))
 	return _r
 }
 
 // EstimatedOutputFileLength returns the estimated output file length.
 func (aes *AssetExportSession) EstimatedOutputFileLength() int64 {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[int64](objref.IDOf(aes), objc.RegisterName("estimatedOutputFileLength"))
 	return _r
 }
 
 // FileLengthLimit returns the file length limit.
 func (aes *AssetExportSession) FileLengthLimit() int64 {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[int64](objref.IDOf(aes), objc.RegisterName("fileLengthLimit"))
 	return _r
 }
@@ -294,48 +323,56 @@ func (aes *AssetExportSession) FileLengthLimit() int64 {
 //
 // Metadata returns the collection as a Go slice.
 func (aes *AssetExportSession) Metadata() []*MetadataItem {
+	defer runtime.KeepAlive(aes)
 	_arr := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("metadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // MetadataItemFilter returns the metadata item filter.
 func (aes *AssetExportSession) MetadataItemFilter() *MetadataItemFilter {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("metadataItemFilter"))
 	return MetadataItemFilterFromID(_r)
 }
 
 // AudioTimePitchAlgorithm returns the audio time pitch algorithm.
-func (aes *AssetExportSession) AudioTimePitchAlgorithm() obj.Object {
+func (aes *AssetExportSession) AudioTimePitchAlgorithm() *foundation.String {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("audioTimePitchAlgorithm"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AudioMix returns the audio mix.
 func (aes *AssetExportSession) AudioMix() *AudioMix {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("audioMix"))
 	return AudioMixFromID(_r)
 }
 
 // VideoComposition returns the video composition.
 func (aes *AssetExportSession) VideoComposition() *VideoComposition {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
 
 // AudioTrackGroupHandling defines export policy for handling alternate audio tracks Specifies the handling of audio tracks that are members of the same alternate track group corresponding to an exported audio track in the source asset. If no audio track group is present, the value of this property has no effect. If necessary, use the trackGroups property of AVAsset to determine whether any audio track groups are present. The AVAudioMix property is not allowed to be used when also specifying alternate track output handling.  An exception will be thrown if both are specified.
 func (aes *AssetExportSession) AudioTrackGroupHandling() AssetTrackGroupOutputHandling {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[AssetTrackGroupOutputHandling](objref.IDOf(aes), objc.RegisterName("audioTrackGroupHandling"))
 	return _r
 }
 
 // CanPerformMultiplePassesOverSourceMediaData reports whether the export session can perform multiple passes over the source media to achieve better results. When the value for this property is true, the export session can produce higher quality results at the expense of longer export times. Setting this property to true may also require the export session to write temporary data to disk during the export. To control the location of temporary data, use the property directoryForTemporaryFiles. The default value is false. Not all export session configurations can benefit from performing multiple passes over the source media. In these cases, setting this property to true has no effect. This property cannot be set after the export has started.
 func (aes *AssetExportSession) CanPerformMultiplePassesOverSourceMediaData() bool {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[bool](objref.IDOf(aes), objc.RegisterName("canPerformMultiplePassesOverSourceMediaData"))
 	return _r
 }
 
 // DirectoryForTemporaryFiles specifies a directory that is suitable for containing temporary files generated during the export process AVAssetExportSession may need to write temporary files when configured in certain ways, such as when canPerformMultiplePassesOverSourceMediaData is set to YES.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when the export is completed, is canceled, or fails. When the value of this property is nil, the export session will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after the export has started.  The export will fail if the URL points to a location that is not a directory, does not exist, is not on the local file system, or if a file cannot be created in this directory (for example, due to insufficient permissions or sandboxing restrictions).
-func (aes *AssetExportSession) DirectoryForTemporaryFiles() obj.Object {
+func (aes *AssetExportSession) DirectoryForTemporaryFiles() string {
+	defer runtime.KeepAlive(aes)
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("directoryForTemporaryFiles"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

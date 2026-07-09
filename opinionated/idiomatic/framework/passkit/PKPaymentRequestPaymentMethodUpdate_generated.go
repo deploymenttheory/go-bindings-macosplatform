@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -85,30 +86,35 @@ func (prpmu *PaymentRequestPaymentMethodUpdate) WithMultiTokenContexts(items ...
 
 // WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
 func (prpmu *PaymentRequestPaymentMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestPaymentMethodUpdate {
+	defer runtime.KeepAlive(recurringPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prpmu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 	return prpmu
 }
 
 // WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
 func (prpmu *PaymentRequestPaymentMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestPaymentMethodUpdate {
+	defer runtime.KeepAlive(automaticReloadPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prpmu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 	return prpmu
 }
 
 // WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
 func (prpmu *PaymentRequestPaymentMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestPaymentMethodUpdate {
+	defer runtime.KeepAlive(deferredPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prpmu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 	return prpmu
 }
 
 // Errors returns the errors.
 func (prpmu *PaymentRequestPaymentMethodUpdate) Errors() []obj.Object {
+	defer runtime.KeepAlive(prpmu)
 	_r := objc.Send[objc.ID](objref.IDOf(prpmu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
 func (prpmu *PaymentRequestPaymentMethodUpdate) SetErrors() error {
+	defer runtime.KeepAlive(prpmu)
 	var _nsErr uintptr
 	_ = objc.Send[objc.ID](objref.IDOf(prpmu), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

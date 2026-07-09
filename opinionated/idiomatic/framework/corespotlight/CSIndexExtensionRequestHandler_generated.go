@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func indexExtensionRequestHandlerAdopt(id objc.ID) *IndexExtensionRequestHandler
 
 // Description returns the object's -description text.
 func (ierh *IndexExtensionRequestHandler) Description() string {
+	defer runtime.KeepAlive(ierh)
 	return rt.Description(objref.IDOf(ierh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ierh *IndexExtensionRequestHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ierh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ierh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ierh *IndexExtensionRequestHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(ierh)
 	return rt.IsKind(objref.IDOf(ierh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ierh *IndexExtensionRequestHandler) String() string {
+	defer runtime.KeepAlive(ierh)
 	return rt.Description(objref.IDOf(ierh))
 }
 

@@ -5,6 +5,8 @@
 package datadetection
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMatchPostalAddress() *MatchPostalAddress {
 
 // Street returns the street name in a postal address.
 func (mpa *MatchPostalAddress) Street() string {
+	defer runtime.KeepAlive(mpa)
 	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("street"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (mpa *MatchPostalAddress) Street() string {
 
 // City returns the city name in a postal address.
 func (mpa *MatchPostalAddress) City() string {
+	defer runtime.KeepAlive(mpa)
 	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("city"))
 	if _r == 0 {
 		return ""
@@ -71,6 +75,7 @@ func (mpa *MatchPostalAddress) City() string {
 
 // State returns the state name in a postal address.
 func (mpa *MatchPostalAddress) State() string {
+	defer runtime.KeepAlive(mpa)
 	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
@@ -80,6 +85,7 @@ func (mpa *MatchPostalAddress) State() string {
 
 // PostalCode returns the postal code in a postal address.
 func (mpa *MatchPostalAddress) PostalCode() string {
+	defer runtime.KeepAlive(mpa)
 	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
@@ -89,6 +95,7 @@ func (mpa *MatchPostalAddress) PostalCode() string {
 
 // Country returns the country or region name in a postal address.
 func (mpa *MatchPostalAddress) Country() string {
+	defer runtime.KeepAlive(mpa)
 	_r := objc.Send[objc.ID](objref.IDOf(mpa), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""

@@ -6,6 +6,7 @@ package corelocation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,12 +64,14 @@ func DeferredLocationUpdatesAvailable() bool {
 
 // LiveUpdaterWithQueueHandler creates a location updater on the queue you specify.
 func LiveUpdaterWithQueueHandler(queue obj.Object, handler func(obj.Object)) *LocationUpdater {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("CLLocationUpdater")), objc.RegisterName("liveUpdaterWithQueue:handler:"), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 	return LocationUpdaterFromID(_r)
 }
 
 // LiveUpdaterWithConfigurationQueueHandler creates a location updater with the configuration and queue that you specify.
 func LiveUpdaterWithConfigurationQueueHandler(configuration LiveUpdateConfiguration, queue obj.Object, handler func(obj.Object)) *LocationUpdater {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("CLLocationUpdater")), objc.RegisterName("liveUpdaterWithConfiguration:queue:handler:"), configuration, objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { handler(obj.Wrap(_b0)) }))
 	return LocationUpdaterFromID(_r)
 }
@@ -77,6 +80,7 @@ func LiveUpdaterWithConfigurationQueueHandler(configuration LiveUpdateConfigurat
 //
 // RequestMonitorWithConfigurationCompletion blocks until the operation completes or ctx is cancelled.
 func RequestMonitorWithConfigurationCompletion(ctx context.Context, config *MonitorConfiguration) (result *Monitor, err error) {
+	defer runtime.KeepAlive(config)
 	type _result struct {
 		val *Monitor
 		err error
@@ -99,6 +103,7 @@ func RequestMonitorWithConfigurationCompletion(ctx context.Context, config *Moni
 
 // ConfigWithMonitorNameQueueEventHandler creates a location monitor instance with the name, dispatch queue, and event handler you specify.
 func ConfigWithMonitorNameQueueEventHandler(name string, queue obj.Object, eventHandler func(obj.Object, obj.Object)) *MonitorConfiguration {
+	defer runtime.KeepAlive(queue)
 	_r := objc.Send[objc.ID](objc.ID(_class("CLMonitorConfiguration")), objc.RegisterName("configWithMonitorName:queue:eventHandler:"), purego.NSString(name), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { eventHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return MonitorConfigurationFromID(_r)
 }

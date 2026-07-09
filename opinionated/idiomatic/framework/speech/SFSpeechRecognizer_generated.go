@@ -5,8 +5,12 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +51,27 @@ func speechRecognizerAdopt(id objc.ID) *SpeechRecognizer {
 
 // Description returns the object's -description text.
 func (sr *SpeechRecognizer) Description() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sr *SpeechRecognizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sr *SpeechRecognizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(sr)
 	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sr *SpeechRecognizer) String() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
@@ -74,6 +83,7 @@ func NewSpeechRecognizer() *SpeechRecognizer {
 
 // NewSpeechRecognizerWithLocale creates a speech recognizer associated with the specified locale.
 func NewSpeechRecognizerWithLocale(locale obj.Object) *SpeechRecognizer {
+	defer runtime.KeepAlive(locale)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocale:"), objref.IDOf(locale))
 	return speechRecognizerAdopt(_id)
@@ -85,6 +95,16 @@ func (sr *SpeechRecognizer) WithSupportsOnDeviceRecognition(supportsOnDeviceReco
 	return sr
 }
 
+// WithDelegate sets the delegate object that handles changes to the availability of speech recognition services.
+func (sr *SpeechRecognizer) WithDelegate(delegate SpeechRecognizerDelegate) *SpeechRecognizer {
+	_shim := newSpeechRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sr), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sr), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return sr
+}
+
 // WithDefaultTaskHint sets a hint that indicates the type of speech recognition being requested.
 func (sr *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint SpeechRecognitionTaskHint) *SpeechRecognizer {
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setDefaultTaskHint:"), defaultTaskHint)
@@ -93,36 +113,42 @@ func (sr *SpeechRecognizer) WithDefaultTaskHint(defaultTaskHint SpeechRecognitio
 
 // WithQueue sets the queue on which to execute recognition task handlers and delegate methods.
 func (sr *SpeechRecognizer) WithQueue(queue obj.Object) *SpeechRecognizer {
+	defer runtime.KeepAlive(queue)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("setQueue:"), objref.IDOf(queue))
 	return sr
 }
 
 // IsAvailable reports whether the speech recognizer is currently available. When the value of this property is `true`, you may create new speech recognition tasks. When value of this property is `false`, speech recognition services are not available.
 func (sr *SpeechRecognizer) IsAvailable() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isAvailable"))
 	return _r
 }
 
 // Locale returns the locale of the speech recognizer. The locale of the speech recognizer is an `NSLocale` object. The default value of this property is the system locale (that is, `+[NSLocale systemLocale]`).
-func (sr *SpeechRecognizer) Locale() obj.Object {
+func (sr *SpeechRecognizer) Locale() *foundation.Locale {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("locale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }
 
 // SupportsOnDeviceRecognition reports whether the speech recognizer can operate without network access. An “SFSpeechRecognitionRequest“ can only honor its “SFSpeechRecognitionRequest/requiresOnDeviceRecognition“ property if “supportsOnDeviceRecognition“ is `true`. If “supportsOnDeviceRecognition“ is `false`, the “SFSpeechRecognizer“ requires a network in order to recognize speech.
 func (sr *SpeechRecognizer) SupportsOnDeviceRecognition() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("supportsOnDeviceRecognition"))
 	return _r
 }
 
 // DefaultTaskHint returns a hint that indicates the type of speech recognition being requested. By default, the value of this property overrides the “SFSpeechRecognitionTaskHint/unspecified“ value for requests. For possible values, see “SFSpeechRecognitionTaskHint“.
 func (sr *SpeechRecognizer) DefaultTaskHint() SpeechRecognitionTaskHint {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[SpeechRecognitionTaskHint](objref.IDOf(sr), objc.RegisterName("defaultTaskHint"))
 	return _r
 }
 
 // Queue returns the queue on which to execute recognition task handlers and delegate methods. The default value of this property is the app's main queue. Assign a different queue if you want delegate methods and handlers to be executed on a background queue. The handler you pass to the “requestAuthorization(_:)“ method does not use this queue.
-func (sr *SpeechRecognizer) Queue() obj.Object {
+func (sr *SpeechRecognizer) Queue() *foundation.OperationQueue {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("queue"))
-	return obj.Wrap(_r)
+	return foundation.OperationQueueFromID(_r)
 }

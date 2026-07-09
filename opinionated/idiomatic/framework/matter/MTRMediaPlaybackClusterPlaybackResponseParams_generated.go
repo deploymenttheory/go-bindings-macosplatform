@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRMediaPlaybackClusterPlaybackResponseParamsAdopt(id objc.ID) *MTRMediaPla
 
 // Description returns the object's -description text.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Description() string {
+	defer runtime.KeepAlive(mmpcprp)
 	return rt.Description(objref.IDOf(mmpcprp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmpcprp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmpcprp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmpcprp)
 	return rt.IsKind(objref.IDOf(mmpcprp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) String() string {
+	defer runtime.KeepAlive(mmpcprp)
 	return rt.Description(objref.IDOf(mmpcprp))
 }
 
-// NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError initialize an MTRMediaPlaybackClusterPlaybackResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+// NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValue initialize an MTRMediaPlaybackClusterPlaybackResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterPlaybackResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(resp
 
 // WithStatus sets the status.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) WithStatus(status obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mmpcprp
 }
@@ -92,18 +100,21 @@ func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) WithData(data stri
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mmpcprp
 }
 
 // Status returns the status.
-func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Status() obj.Object {
+func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mmpcprp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Data() string {
+	defer runtime.KeepAlive(mmpcprp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -112,7 +123,8 @@ func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Data() string {
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mmpcprp)
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

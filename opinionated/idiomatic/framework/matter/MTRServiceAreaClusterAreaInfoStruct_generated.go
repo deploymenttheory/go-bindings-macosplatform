@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRServiceAreaClusterAreaInfoStructAdopt(id objc.ID) *MTRServiceAreaCluster
 
 // Description returns the object's -description text.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) Description() string {
+	defer runtime.KeepAlive(msacais)
 	return rt.Description(objref.IDOf(msacais))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msacais)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msacais), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(msacais)
 	return rt.IsKind(objref.IDOf(msacais), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) String() string {
+	defer runtime.KeepAlive(msacais)
 	return rt.Description(objref.IDOf(msacais))
 }
 
@@ -72,24 +79,28 @@ func NewMTRServiceAreaClusterAreaInfoStruct() *MTRServiceAreaClusterAreaInfoStru
 
 // WithLocationInfo sets the location info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
+	defer runtime.KeepAlive(locationInfo)
 	objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
 	return msacais
 }
 
 // WithLandmarkInfo sets the landmark info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
+	defer runtime.KeepAlive(landmarkInfo)
 	objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
 	return msacais
 }
 
 // LocationInfo returns the location info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
+	defer runtime.KeepAlive(msacais)
 	_r := objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("locationInfo"))
 	return MTRDataTypeLocationDescriptorStructFromID(_r)
 }
 
 // LandmarkInfo returns the landmark info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
+	defer runtime.KeepAlive(msacais)
 	_r := objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("landmarkInfo"))
 	return MTRServiceAreaClusterLandmarkInfoStructFromID(_r)
 }

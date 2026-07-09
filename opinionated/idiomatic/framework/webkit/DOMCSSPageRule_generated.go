@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +65,7 @@ func (dpr *DOMCSSPageRule) WithCSSText(cssText string) *DOMCSSPageRule {
 
 // SelectorText returns the selector text.
 func (dpr *DOMCSSPageRule) SelectorText() string {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("selectorText"))
 	if _r == 0 {
 		return ""
@@ -72,6 +75,7 @@ func (dpr *DOMCSSPageRule) SelectorText() string {
 
 // Style returns the style.
 func (dpr *DOMCSSPageRule) Style() *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }

@@ -5,7 +5,10 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func projectInfoAdopt(id objc.ID) *ProjectInfo {
 
 // Description returns the object's -description text.
 func (pi *ProjectInfo) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *ProjectInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *ProjectInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *ProjectInfo) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
@@ -74,38 +82,44 @@ func NewProjectInfo() *ProjectInfo {
 
 // CreationSource returns source from which the project was created.
 func (pi *ProjectInfo) CreationSource() ProjectCreationSource {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[ProjectCreationSource](objref.IDOf(pi), objc.RegisterName("creationSource"))
 	return _r
 }
 
 // ProjectType returns selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
-func (pi *ProjectInfo) ProjectType() obj.Object {
+func (pi *ProjectInfo) ProjectType() *foundation.String {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("projectType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Sections returns array of project sections each containing one or more PHProjectSectionContent objects.
 //
 // Sections returns the collection as a Go slice.
 func (pi *ProjectInfo) Sections() []*ProjectSection {
+	defer runtime.KeepAlive(pi)
 	_arr := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("sections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSection { return ProjectSectionFromID(_id) })
 }
 
 // BrandingEnabled reports whether the following properties are only used when the user creates a new project from an existing Apple Print Product. true if the source project had branding enabled.
 func (pi *ProjectInfo) BrandingEnabled() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("brandingEnabled"))
 	return _r
 }
 
 // PageNumbersEnabled reports whether the source project had page numbers enabled.
 func (pi *ProjectInfo) PageNumbersEnabled() bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("pageNumbersEnabled"))
 	return _r
 }
 
 // ProductIdentifier returns the product identifier of the originating Apple Print Product.
 func (pi *ProjectInfo) ProductIdentifier() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("productIdentifier"))
 	if _r == 0 {
 		return ""
@@ -115,6 +129,7 @@ func (pi *ProjectInfo) ProductIdentifier() string {
 
 // ThemeIdentifier returns the product theme identifier of the originating Apple Print Product.
 func (pi *ProjectInfo) ThemeIdentifier() string {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("themeIdentifier"))
 	if _r == 0 {
 		return ""

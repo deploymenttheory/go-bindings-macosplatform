@@ -5,6 +5,9 @@
 package metrickit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func signpostRecordAdopt(id objc.ID) *SignpostRecord {
 
 // Description returns the object's -description text.
 func (sr *SignpostRecord) Description() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sr *SignpostRecord) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sr *SignpostRecord) IsKind(className string) bool {
+	defer runtime.KeepAlive(sr)
 	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sr *SignpostRecord) String() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
@@ -73,19 +81,22 @@ func NewSignpostRecord() *SignpostRecord {
 }
 
 // JSONRepresentation returns convenience method to return a JSON representation of this SignpostRecord.
-func (sr *SignpostRecord) JSONRepresentation() obj.Object {
+func (sr *SignpostRecord) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DictionaryRepresentation returns convenience method to return a NSDictionary representation of this SignpostRecord.
 func (sr *SignpostRecord) DictionaryRepresentation() obj.Object {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // Subsystem returns an NSString representation of the subsystem of the signpost instance.
 func (sr *SignpostRecord) Subsystem() string {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("subsystem"))
 	if _r == 0 {
 		return ""
@@ -95,6 +106,7 @@ func (sr *SignpostRecord) Subsystem() string {
 
 // Category returns the category.
 func (sr *SignpostRecord) Category() string {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
@@ -104,6 +116,7 @@ func (sr *SignpostRecord) Category() string {
 
 // Name returns the name.
 func (sr *SignpostRecord) Name() string {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -112,25 +125,29 @@ func (sr *SignpostRecord) Name() string {
 }
 
 // BeginTimeStamp returns the begin time stamp.
-func (sr *SignpostRecord) BeginTimeStamp() obj.Object {
+func (sr *SignpostRecord) BeginTimeStamp() time.Time {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("beginTimeStamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndTimeStamp returns the end time stamp.
-func (sr *SignpostRecord) EndTimeStamp() obj.Object {
+func (sr *SignpostRecord) EndTimeStamp() time.Time {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("endTimeStamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Duration returns the duration.
 func (sr *SignpostRecord) Duration() obj.Object {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
 // IsInterval reports whether the object is interval.
 func (sr *SignpostRecord) IsInterval() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isInterval"))
 	return _r
 }

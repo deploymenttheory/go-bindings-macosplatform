@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSwitchClusterMultiPressCompleteEventAdopt(id objc.ID) *MTRSwitchClusterM
 
 // Description returns the object's -description text.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) Description() string {
+	defer runtime.KeepAlive(mscmpce)
 	return rt.Description(objref.IDOf(mscmpce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscmpce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscmpce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscmpce)
 	return rt.IsKind(objref.IDOf(mscmpce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) String() string {
+	defer runtime.KeepAlive(mscmpce)
 	return rt.Description(objref.IDOf(mscmpce))
 }
 
@@ -72,36 +80,42 @@ func NewMTRSwitchClusterMultiPressCompleteEvent() *MTRSwitchClusterMultiPressCom
 
 // WithPreviousPosition sets the previous position.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) WithPreviousPosition(previousPosition obj.Object) *MTRSwitchClusterMultiPressCompleteEvent {
+	defer runtime.KeepAlive(previousPosition)
 	objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("setPreviousPosition:"), objref.IDOf(previousPosition))
 	return mscmpce
 }
 
 // WithNewPosition sets the new position.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterMultiPressCompleteEvent {
+	defer runtime.KeepAlive(newPosition)
 	objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscmpce
 }
 
 // WithTotalNumberOfPressesCounted sets the total number of presses counted.
 func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) WithTotalNumberOfPressesCounted(totalNumberOfPressesCounted obj.Object) *MTRSwitchClusterMultiPressCompleteEvent {
+	defer runtime.KeepAlive(totalNumberOfPressesCounted)
 	objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("setTotalNumberOfPressesCounted:"), objref.IDOf(totalNumberOfPressesCounted))
 	return mscmpce
 }
 
 // PreviousPosition returns the previous position.
-func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) PreviousPosition() obj.Object {
+func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) PreviousPosition() *foundation.Number {
+	defer runtime.KeepAlive(mscmpce)
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("previousPosition"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NewPosition returns the new position.
-func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) NewPosition() obj.Object {
+func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) NewPosition() *foundation.Number {
+	defer runtime.KeepAlive(mscmpce)
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("getNewPosition"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TotalNumberOfPressesCounted returns the total number of presses counted.
-func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) TotalNumberOfPressesCounted() obj.Object {
+func (mscmpce *MTRSwitchClusterMultiPressCompleteEvent) TotalNumberOfPressesCounted() *foundation.Number {
+	defer runtime.KeepAlive(mscmpce)
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpce), objc.RegisterName("totalNumberOfPressesCounted"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

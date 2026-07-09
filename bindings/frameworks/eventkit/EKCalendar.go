@@ -124,8 +124,8 @@ func (o *EKCalendar) CGColor() unsafe.Pointer {
 	return _ret
 }
 
-func (o *EKCalendar) SetCGColor(cGColor unsafe.Pointer) {
-	o.Ptr().Send(_eKCalendarSelSetCGColor, cGColor)
+func (o *EKCalendar) SetCGColor(cgColor unsafe.Pointer) {
+	o.Ptr().Send(_eKCalendarSelSetCGColor, cgColor)
 }
 
 // @property   color @abstract   Returns the calendar color as a NSColor. @discussion This will be nil for new calendars until you set it.

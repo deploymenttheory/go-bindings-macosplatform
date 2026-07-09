@@ -6,11 +6,14 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,6 +60,7 @@ func NewNEAppProxyTCPFlow() *NEAppProxyTCPFlow {
 
 // WithNetworkInterface sets the network interface, if any, used by this flow.
 func (naptf *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyTCPFlow {
+	defer runtime.KeepAlive(networkInterface)
 	objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return naptf
 }
@@ -65,6 +69,7 @@ func (naptf *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface obj.Object
 //
 // ReadData blocks until the operation completes or ctx is cancelled.
 func (naptf *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(naptf)
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,14 +94,15 @@ func (naptf *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object
 // WriteData write data to the flow.
 //
 // WriteData blocks until the operation completes or ctx is cancelled.
-func (naptf *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) error {
+func (naptf *NEAppProxyTCPFlow) WriteData(ctx context.Context, data []byte) error {
+	defer runtime.KeepAlive(naptf)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("writeData:withCompletionHandler:"), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("writeData:withCompletionHandler:"), rt.BytesToNSData(data), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -106,9 +112,10 @@ func (naptf *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) 
 }
 
 // RemoteFlowEndpoint returns an `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
-func (naptf *NEAppProxyTCPFlow) RemoteFlowEndpoint() obj.Object {
+func (naptf *NEAppProxyTCPFlow) RemoteFlowEndpoint() *foundation.Object {
+	defer runtime.KeepAlive(naptf)
 	_r := objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("remoteFlowEndpoint"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyTCPFlow)(nil)

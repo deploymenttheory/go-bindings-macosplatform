@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,12 +62,14 @@ func (mcce *MIDIControlChangeEvent) WithChannel(channel int) *MIDIControlChangeE
 
 // MessageType returns the message type.
 func (mcce *MIDIControlChangeEvent) MessageType() MIDIControlChangeMessageType {
+	defer runtime.KeepAlive(mcce)
 	_r := objc.Send[MIDIControlChangeMessageType](objref.IDOf(mcce), objc.RegisterName("messageType"))
 	return _r
 }
 
 // Value returns the value.
 func (mcce *MIDIControlChangeEvent) Value() int {
+	defer runtime.KeepAlive(mcce)
 	_r := objc.Send[int](objref.IDOf(mcce), objc.RegisterName("value"))
 	return _r
 }

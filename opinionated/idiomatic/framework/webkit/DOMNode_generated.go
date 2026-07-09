@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -65,71 +67,91 @@ func (dn *DOMNode) WithTextContent(textContent string) *DOMNode {
 
 // InsertBeforeRefChild inserts before ref child.
 func (dn *DOMNode) InsertBeforeRefChild(newChild *DOMNode, refChild *DOMNode) *DOMNode {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(newChild)
+	defer runtime.KeepAlive(refChild)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("insertBefore:refChild:"), objref.IDOf(newChild), objref.IDOf(refChild))
 	return DOMNodeFromID(_r)
 }
 
 // ReplaceChildOldChild replaces child old child.
 func (dn *DOMNode) ReplaceChildOldChild(newChild *DOMNode, oldChild *DOMNode) *DOMNode {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(newChild)
+	defer runtime.KeepAlive(oldChild)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("replaceChild:oldChild:"), objref.IDOf(newChild), objref.IDOf(oldChild))
 	return DOMNodeFromID(_r)
 }
 
 // RemoveChild removes child.
 func (dn *DOMNode) RemoveChild(oldChild *DOMNode) *DOMNode {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(oldChild)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("removeChild:"), objref.IDOf(oldChild))
 	return DOMNodeFromID(_r)
 }
 
 // AppendChild appends child.
 func (dn *DOMNode) AppendChild(newChild *DOMNode) *DOMNode {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(newChild)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("appendChild:"), objref.IDOf(newChild))
 	return DOMNodeFromID(_r)
 }
 
 // HasChildNodes reports whether the object has child nodes.
 func (dn *DOMNode) HasChildNodes() bool {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("hasChildNodes"))
 	return _r
 }
 
 // CloneNode wraps the corresponding Objective-C method.
 func (dn *DOMNode) CloneNode(deep bool) *DOMNode {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("cloneNode:"), deep)
 	return DOMNodeFromID(_r)
 }
 
 // Normalize wraps the corresponding Objective-C method.
 func (dn *DOMNode) Normalize() {
+	defer runtime.KeepAlive(dn)
 	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("normalize"))
 }
 
 // IsSupportedVersion wraps the corresponding Objective-C method.
 func (dn *DOMNode) IsSupportedVersion(feature string, version string) bool {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isSupported:version:"), purego.NSString(feature), purego.NSString(version))
 	return _r
 }
 
 // HasAttributes reports whether the object has attributes.
 func (dn *DOMNode) HasAttributes() bool {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("hasAttributes"))
 	return _r
 }
 
 // IsSameNode wraps the corresponding Objective-C method.
 func (dn *DOMNode) IsSameNode(other *DOMNode) bool {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isSameNode:"), objref.IDOf(other))
 	return _r
 }
 
 // IsEqualNode wraps the corresponding Objective-C method.
 func (dn *DOMNode) IsEqualNode(other *DOMNode) bool {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isEqualNode:"), objref.IDOf(other))
 	return _r
 }
 
 // LookupPrefix wraps the corresponding Objective-C method.
 func (dn *DOMNode) LookupPrefix(namespaceURI string) string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("lookupPrefix:"), purego.NSString(namespaceURI))
 	if _r == 0 {
 		return ""
@@ -139,6 +161,7 @@ func (dn *DOMNode) LookupPrefix(namespaceURI string) string {
 
 // LookupNamespaceURI wraps the corresponding Objective-C method.
 func (dn *DOMNode) LookupNamespaceURI(prefix string) string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("lookupNamespaceURI:"), purego.NSString(prefix))
 	if _r == 0 {
 		return ""
@@ -148,24 +171,30 @@ func (dn *DOMNode) LookupNamespaceURI(prefix string) string {
 
 // IsDefaultNamespace wraps the corresponding Objective-C method.
 func (dn *DOMNode) IsDefaultNamespace(namespaceURI string) bool {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isDefaultNamespace:"), purego.NSString(namespaceURI))
 	return _r
 }
 
 // CompareDocumentPosition wraps the corresponding Objective-C method.
 func (dn *DOMNode) CompareDocumentPosition(other *DOMNode) uint16 {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[uint16](objref.IDOf(dn), objc.RegisterName("compareDocumentPosition:"), objref.IDOf(other))
 	return _r
 }
 
 // Contains wraps the corresponding Objective-C method.
 func (dn *DOMNode) Contains(other *DOMNode) bool {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("contains:"), objref.IDOf(other))
 	return _r
 }
 
 // NodeName returns the node name.
 func (dn *DOMNode) NodeName() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("nodeName"))
 	if _r == 0 {
 		return ""
@@ -175,6 +204,7 @@ func (dn *DOMNode) NodeName() string {
 
 // NodeValue returns the node value.
 func (dn *DOMNode) NodeValue() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("nodeValue"))
 	if _r == 0 {
 		return ""
@@ -184,54 +214,63 @@ func (dn *DOMNode) NodeValue() string {
 
 // NodeType returns the node type.
 func (dn *DOMNode) NodeType() uint16 {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[uint16](objref.IDOf(dn), objc.RegisterName("nodeType"))
 	return _r
 }
 
 // ParentNode returns the parent node.
 func (dn *DOMNode) ParentNode() *DOMNode {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("parentNode"))
 	return DOMNodeFromID(_r)
 }
 
 // ChildNodes returns the child nodes.
 func (dn *DOMNode) ChildNodes() *DOMNodeList {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("childNodes"))
 	return DOMNodeListFromID(_r)
 }
 
 // FirstChild returns the first child.
 func (dn *DOMNode) FirstChild() *DOMNode {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("firstChild"))
 	return DOMNodeFromID(_r)
 }
 
 // LastChild returns the last child.
 func (dn *DOMNode) LastChild() *DOMNode {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("lastChild"))
 	return DOMNodeFromID(_r)
 }
 
 // PreviousSibling returns the previous sibling.
 func (dn *DOMNode) PreviousSibling() *DOMNode {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("previousSibling"))
 	return DOMNodeFromID(_r)
 }
 
 // NextSibling returns the next sibling.
 func (dn *DOMNode) NextSibling() *DOMNode {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("nextSibling"))
 	return DOMNodeFromID(_r)
 }
 
 // OwnerDocument returns the owner document.
 func (dn *DOMNode) OwnerDocument() *DOMDocument {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("ownerDocument"))
 	return DOMDocumentFromID(_r)
 }
 
 // NamespaceURI returns the namespace URI.
 func (dn *DOMNode) NamespaceURI() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("namespaceURI"))
 	if _r == 0 {
 		return ""
@@ -241,6 +280,7 @@ func (dn *DOMNode) NamespaceURI() string {
 
 // Prefix returns the prefix.
 func (dn *DOMNode) Prefix() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("prefix"))
 	if _r == 0 {
 		return ""
@@ -250,6 +290,7 @@ func (dn *DOMNode) Prefix() string {
 
 // LocalName returns the local name.
 func (dn *DOMNode) LocalName() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("localName"))
 	if _r == 0 {
 		return ""
@@ -259,12 +300,14 @@ func (dn *DOMNode) LocalName() string {
 
 // Attributes returns the attributes.
 func (dn *DOMNode) Attributes() *DOMNamedNodeMap {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("attributes"))
 	return DOMNamedNodeMapFromID(_r)
 }
 
 // BaseURI returns the base URI.
 func (dn *DOMNode) BaseURI() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("baseURI"))
 	if _r == 0 {
 		return ""
@@ -274,6 +317,7 @@ func (dn *DOMNode) BaseURI() string {
 
 // TextContent returns the text content.
 func (dn *DOMNode) TextContent() string {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("textContent"))
 	if _r == 0 {
 		return ""
@@ -283,48 +327,60 @@ func (dn *DOMNode) TextContent() string {
 
 // ParentElement returns the parent element.
 func (dn *DOMNode) ParentElement() *DOMElement {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("parentElement"))
 	return DOMElementFromID(_r)
 }
 
 // IsContentEditable reports whether the object is content editable.
 func (dn *DOMNode) IsContentEditable() bool {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isContentEditable"))
 	return _r
 }
 
 // InsertBefore inserts before.
 func (dn *DOMNode) InsertBefore(newChild *DOMNode, refChild *DOMNode) *DOMNode {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(newChild)
+	defer runtime.KeepAlive(refChild)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("insertBefore::"), objref.IDOf(newChild), objref.IDOf(refChild))
 	return DOMNodeFromID(_r)
 }
 
 // ReplaceChild replaces child.
 func (dn *DOMNode) ReplaceChild(newChild *DOMNode, oldChild *DOMNode) *DOMNode {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(newChild)
+	defer runtime.KeepAlive(oldChild)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("replaceChild::"), objref.IDOf(newChild), objref.IDOf(oldChild))
 	return DOMNodeFromID(_r)
 }
 
 // IsSupported wraps the corresponding Objective-C method.
 func (dn *DOMNode) IsSupported(feature string, version string) bool {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isSupported::"), purego.NSString(feature), purego.NSString(version))
 	return _r
 }
 
 // BoundingBox returns a rectangle that bounds the onscreen rendering of the node.
 func (dn *DOMNode) BoundingBox() corefoundation.CGRect {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(dn), objc.RegisterName("boundingBox"))
 	return _r
 }
 
 // LineBoxRects returns the rectangles that bound each line of text in the node.
 func (dn *DOMNode) LineBoxRects() obj.Object {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("lineBoxRects"))
 	return obj.Wrap(_r)
 }
 
 // WebArchive returns the web archive.
 func (dn *DOMNode) WebArchive() *WebArchive {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("webArchive"))
 	return WebArchiveFromID(_r)
 }

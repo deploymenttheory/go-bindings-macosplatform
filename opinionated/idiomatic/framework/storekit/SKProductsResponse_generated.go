@@ -5,6 +5,8 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func productsResponseAdopt(id objc.ID) *ProductsResponse {
 
 // Description returns the object's -description text.
 func (pr *ProductsResponse) Description() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pr *ProductsResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pr *ProductsResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(pr)
 	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pr *ProductsResponse) String() string {
+	defer runtime.KeepAlive(pr)
 	return rt.Description(objref.IDOf(pr))
 }
 
@@ -76,6 +83,7 @@ func NewProductsResponse() *ProductsResponse {
 //
 // Products returns the collection as a Go slice.
 func (pr *ProductsResponse) Products() []*Product {
+	defer runtime.KeepAlive(pr)
 	_arr := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("products"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Product { return ProductFromID(_id) })
 }
@@ -84,6 +92,7 @@ func (pr *ProductsResponse) Products() []*Product {
 //
 // InvalidProductIdentifiers returns the collection as a Go slice.
 func (pr *ProductsResponse) InvalidProductIdentifiers() []string {
+	defer runtime.KeepAlive(pr)
 	_arr := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("invalidProductIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

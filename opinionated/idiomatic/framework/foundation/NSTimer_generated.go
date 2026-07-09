@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,34 +51,40 @@ func timerAdopt(id objc.ID) *Timer {
 
 // Description returns the object's -description text.
 func (t *Timer) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Timer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Timer) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Timer) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // NewTimerWithFireDateIntervalRepeatsBlock initializes a new NSTimer object using the block as the main body of execution for the timer. This timer needs to be scheduled on a run loop (via -[NSRunLoop addTimer:]) before it will fire. - parameter:  fireDate   The time at which the timer should first fire. - parameter:  interval  The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
-func NewTimerWithFireDateIntervalRepeatsBlock(date *Date, interval float64, repeats bool, block func(obj.Object)) *Timer {
+func NewTimerWithFireDateIntervalRepeatsBlock(date time.Time, interval float64, repeats bool, block func(obj.Object)) *Timer {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFireDate:interval:repeats:block:"), objref.IDOf(date), interval, repeats, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFireDate:interval:repeats:block:"), rt.TimeToNSDate(date), interval, repeats, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
 	return timerAdopt(_id)
 }
 
 // WithFireDate sets the fire date.
 func (t *Timer) WithFireDate(fireDate DateProvider) *Timer {
+	defer runtime.KeepAlive(fireDate)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFireDate:"), objref.IDOf(fireDate))
 	return t
 }
@@ -94,47 +102,54 @@ func (t *Timer) WithObservationInfo(observationInfo unsafe.Pointer) *Timer {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (t *Timer) WithScriptingProperties(scriptingProperties obj.Object) *Timer {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (t *Timer) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Timer {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return t
 }
 
 // Fire wraps the corresponding Objective-C method.
 func (t *Timer) Fire() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("fire"))
 }
 
 // Invalidate wraps the corresponding Objective-C method.
 func (t *Timer) Invalidate() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("invalidate"))
 }
 
 // FireDate returns the fire date.
-func (t *Timer) FireDate() *Date {
+func (t *Timer) FireDate() time.Time {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("fireDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeInterval returns the time interval.
 func (t *Timer) TimeInterval() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("timeInterval"))
 	return _r
 }
 
 // Tolerance returns the tolerance.
 func (t *Timer) Tolerance() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("tolerance"))
 	return _r
 }
 
 // IsValid reports whether the object is valid.
 func (t *Timer) IsValid() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isValid"))
 	return _r
 }
 
 // UserInfo returns the user info.
 func (t *Timer) UserInfo() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

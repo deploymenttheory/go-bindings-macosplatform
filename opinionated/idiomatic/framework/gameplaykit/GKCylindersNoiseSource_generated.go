@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (cns *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNois
 
 // Frequency returns the frequency.
 func (cns *CylindersNoiseSource) Frequency() float64 {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("frequency"))
 	return _r
 }

@@ -5,7 +5,11 @@
 package coredata
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func persistentHistoryTransactionAdopt(id objc.ID) *PersistentHistoryTransaction
 
 // Description returns the object's -description text.
 func (pht *PersistentHistoryTransaction) Description() string {
+	defer runtime.KeepAlive(pht)
 	return rt.Description(objref.IDOf(pht))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pht *PersistentHistoryTransaction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pht)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pht), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pht *PersistentHistoryTransaction) IsKind(className string) bool {
+	defer runtime.KeepAlive(pht)
 	return rt.IsKind(objref.IDOf(pht), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pht *PersistentHistoryTransaction) String() string {
+	defer runtime.KeepAlive(pht)
 	return rt.Description(objref.IDOf(pht))
 }
 
@@ -73,33 +82,38 @@ func NewPersistentHistoryTransaction() *PersistentHistoryTransaction {
 }
 
 // ObjectIDNotification returns obtains a notification for use in merging the transaction’s changes into a managed object context.
-func (pht *PersistentHistoryTransaction) ObjectIDNotification() obj.Object {
+func (pht *PersistentHistoryTransaction) ObjectIDNotification() *foundation.Notification {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("objectIDNotification"))
-	return obj.Wrap(_r)
+	return foundation.NotificationFromID(_r)
 }
 
 // Timestamp returns the timestamp.
-func (pht *PersistentHistoryTransaction) Timestamp() obj.Object {
+func (pht *PersistentHistoryTransaction) Timestamp() time.Time {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("timestamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Changes returns the changes.
 //
 // Changes returns the collection as a Go slice.
 func (pht *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
+	defer runtime.KeepAlive(pht)
 	_arr := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("changes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentHistoryChange { return PersistentHistoryChangeFromID(_id) })
 }
 
 // TransactionNumber returns the transaction number.
 func (pht *PersistentHistoryTransaction) TransactionNumber() int64 {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[int64](objref.IDOf(pht), objc.RegisterName("transactionNumber"))
 	return _r
 }
 
 // StoreID returns the store ID.
 func (pht *PersistentHistoryTransaction) StoreID() string {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("storeID"))
 	if _r == 0 {
 		return ""
@@ -109,6 +123,7 @@ func (pht *PersistentHistoryTransaction) StoreID() string {
 
 // BundleID returns the bundle ID.
 func (pht *PersistentHistoryTransaction) BundleID() string {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("bundleID"))
 	if _r == 0 {
 		return ""
@@ -118,6 +133,7 @@ func (pht *PersistentHistoryTransaction) BundleID() string {
 
 // ProcessID returns the process ID.
 func (pht *PersistentHistoryTransaction) ProcessID() string {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("processID"))
 	if _r == 0 {
 		return ""
@@ -127,6 +143,7 @@ func (pht *PersistentHistoryTransaction) ProcessID() string {
 
 // ContextName returns the context name.
 func (pht *PersistentHistoryTransaction) ContextName() string {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("contextName"))
 	if _r == 0 {
 		return ""
@@ -136,6 +153,7 @@ func (pht *PersistentHistoryTransaction) ContextName() string {
 
 // Author returns the author.
 func (pht *PersistentHistoryTransaction) Author() string {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("author"))
 	if _r == 0 {
 		return ""
@@ -145,6 +163,7 @@ func (pht *PersistentHistoryTransaction) Author() string {
 
 // Token returns the token.
 func (pht *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
+	defer runtime.KeepAlive(pht)
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructAdopt
 
 // Description returns the object's -description text.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) Description() string {
+	defer runtime.KeepAlive(mratccmcmts)
 	return rt.Description(objref.IDOf(mratccmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mratccmcmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mratccmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mratccmcmts)
 	return rt.IsKind(objref.IDOf(mratccmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) String() string {
+	defer runtime.KeepAlive(mratccmcmts)
 	return rt.Description(objref.IDOf(mratccmcmts))
 }
 
@@ -72,24 +80,28 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct()
 
 // WithMfgCode sets the mfg code.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mratccmcmts
 }
 
 // WithValue sets the value.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mratccmcmts
 }
 
 // MfgCode returns the mfg code.
-func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) MfgCode() obj.Object {
+func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(mratccmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) Value() obj.Object {
+func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(mratccmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

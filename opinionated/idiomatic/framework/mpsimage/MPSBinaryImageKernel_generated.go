@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -49,22 +51,27 @@ func binaryImageKernelAdopt(id objc.ID) *BinaryImageKernel {
 
 // Description returns the object's -description text.
 func (bik *BinaryImageKernel) Description() string {
+	defer runtime.KeepAlive(bik)
 	return rt.Description(objref.IDOf(bik))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bik *BinaryImageKernel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bik)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bik), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bik *BinaryImageKernel) IsKind(className string) bool {
+	defer runtime.KeepAlive(bik)
 	return rt.IsKind(objref.IDOf(bik), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bik *BinaryImageKernel) String() string {
+	defer runtime.KeepAlive(bik)
 	return rt.Description(objref.IDOf(bik))
 }
 
@@ -88,30 +95,35 @@ func (bik *BinaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *BinaryImag
 
 // PrimarySourceRegionForDestinationSize primarySourceRegionForDestinationSize: is used to determine which region of the primaryTexture will be read by encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture (and in-place variants) when the filter runs. This information may be needed if the primary source image is broken into multiple textures.  The size of the full (untiled) destination image is provided. The region of the full (untiled) source image that will be read is returned. You can then piece together an appropriate texture containing that information for use in your tiled context. The function will consult the MPSBinaryImageKernel primaryOffset and clipRect parameters, to determine the full region read by the function. Other parameters such as kernelHeight and kernelWidth will be consulted as necessary. All properties should be set to intended values prior to calling primarySourceRegionForDestinationSize:. Caution: This function operates using global image coordinates, but -encodeToCommandBuffer:... uses coordinates local to the source and destination image textures. Consequently, the primaryOffset and clipRect attached to this object will need to be updated using a global to local coordinate transform before -encodeToCommandBuffer:... is called. Determine the region of the source texture that will be read for a encode operation
 func (bik *BinaryImageKernel) PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(bik), objc.RegisterName("primarySourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // SecondarySourceRegionForDestinationSize secondarySourceRegionForDestinationSize: is used to determine which region of the sourceTexture will be read by encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture (and in-place variants) when the filter runs. This information may be needed if the secondary source image is broken into multiple textures.  The size of the full (untiled) destination image is provided. The region of the full (untiled) secondary source image that will be read is returned. You can then piece together an appropriate texture containing that information for use in your tiled context. The function will consult the MPSBinaryImageKernel secondaryOffset and clipRect parameters, to determine the full region read by the function. Other parameters such as kernelHeight and kernelWidth will be consulted as necessary.  All properties should be set to intended values prior to calling secondarySourceRegionForDestinationSize:. Caution: This function operates using global image coordinates, but -encodeToCommandBuffer:... uses coordinates local to the source and destination image textures. Consequently, the secondaryOffset and clipRect attached to this object will need to be updated using a global to local coordinate transform before -encodeToCommandBuffer:... is called. Determine the region of the source texture that will be read for a encode operation
 func (bik *BinaryImageKernel) SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(bik), objc.RegisterName("secondarySourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // PrimaryOffset returns the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
 func (bik *BinaryImageKernel) PrimaryOffset() mpscore.MPSOffset {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(bik), objc.RegisterName("primaryOffset"))
 	return _r
 }
 
 // SecondaryOffset returns the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
 func (bik *BinaryImageKernel) SecondaryOffset() mpscore.MPSOffset {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(bik), objc.RegisterName("secondaryOffset"))
 	return _r
 }
 
 // ClipRect returns an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (bik *BinaryImageKernel) ClipRect() metal.MTLRegion {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(bik), objc.RegisterName("clipRect"))
 	return _r
 }

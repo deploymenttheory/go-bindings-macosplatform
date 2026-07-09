@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func captureInputAdopt(id objc.ID) *CaptureInput {
 
 // Description returns the object's -description text.
 func (ci *CaptureInput) Description() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ci *CaptureInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ci *CaptureInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(ci)
 	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ci *CaptureInput) String() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
@@ -72,6 +79,7 @@ func (ci *CaptureInput) String() string {
 //
 // Ports returns the collection as a Go slice.
 func (ci *CaptureInput) Ports() []*CaptureInputPort {
+	defer runtime.KeepAlive(ci)
 	_arr := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("ports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptureInputPort { return CaptureInputPortFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func authorizationPublicKeyCredentialPRFAssertionInputAdopt(id objc.ID) *Authori
 
 // Description returns the object's -description text.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) Description() string {
+	defer runtime.KeepAlive(apkcpai)
 	return rt.Description(objref.IDOf(apkcpai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkcpai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkcpai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkcpai)
 	return rt.IsKind(objref.IDOf(apkcpai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) String() string {
+	defer runtime.KeepAlive(apkcpai)
 	return rt.Description(objref.IDOf(apkcpai))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues creates a new AuthorizationPublicKeyCredentialPRFAssertionInput.
 func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues(inputValues *AuthorizationPublicKeyCredentialPRFAssertionInputValues, perCredentialInputValues obj.Object) *AuthorizationPublicKeyCredentialPRFAssertionInput {
+	defer runtime.KeepAlive(inputValues)
+	defer runtime.KeepAlive(perCredentialInputValues)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputValues:perCredentialInputValues:"), objref.IDOf(inputValues), objref.IDOf(perCredentialInputValues))
 	return authorizationPublicKeyCredentialPRFAssertionInputAdopt(_id)
@@ -75,12 +84,14 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCrede
 
 // InputValues returns the input values.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	defer runtime.KeepAlive(apkcpai)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpai), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }
 
 // PerCredentialInputValues returns the per credential input values.
 func (apkcpai *AuthorizationPublicKeyCredentialPRFAssertionInput) PerCredentialInputValues() obj.Object {
+	defer runtime.KeepAlive(apkcpai)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpai), objc.RegisterName("perCredentialInputValues"))
 	return obj.Wrap(_r)
 }

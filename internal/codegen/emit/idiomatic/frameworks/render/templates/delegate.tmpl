@@ -1,0 +1,61 @@
+{{/*
+    delegate.tmpl renders one Objective-C delegate protocol as Go: the
+    interface (required methods), one-method upgrade interfaces for the
+    @optional methods, and the shim builder — a once-registered Objective-C
+    class whose method IMPs route each callback to the wrapped Go value. All
+    names, signatures, and conversion expressions are resolved in the gather
+    phase (protocols.go); this template only assembles them.
+*/}}
+{{define "delegate"}}{{.DocComment}}type {{.IfaceName}} interface {
+{{- range .Required}}
+{{.DocComment}}{{.GoName}}({{.SigParams}}){{.RetSig}}
+{{- end}}
+}
+
+{{range .Optional}}{{.OptionalDoc}}type {{.OptIfaceName}} interface {
+{{.GoName}}({{.SigParams}}){{.RetSig}}
+}
+
+{{end -}}
+var (
+{{.ClassVar}}Once sync.Once
+{{.ClassVar}} objc.Class
+)
+
+// {{.ShimFuncName}} wraps d in an Objective-C object conforming to
+// {{.ProtocolName}}, routing each callback the framework sends to the matching
+// Go method. Optional protocol methods fire only when d implements the
+// corresponding upgrade interface. The returned object is owned by the caller.
+func {{.ShimFuncName}}(d {{.IfaceName}}) objc.ID {
+{{.ClassVar}}Once.Do(func() {
+{{.ClassVar}} = shim.Class({{printf "%q" .ShimClassName}}, {{printf "%q" .ProtocolName}}, []objc.MethodDef{
+{{- range .Required}}
+{{template "delegate_methoddef" .}}
+{{- end}}
+{{- range .Optional}}
+{{template "delegate_methoddef" .}}
+{{- end}}
+})
+})
+_responds := map[objc.SEL]bool{}
+{{- range $i, $m := .Optional}}
+_, _ok{{$i}} := d.({{$m.OptIfaceName}})
+_responds[objc.RegisterName({{printf "%q" $m.Selector}})] = _ok{{$i}}
+{{- end}}
+return shim.New({{.ClassVar}}, d, _responds)
+}
+
+{{end}}
+
+{{define "delegate_methoddef"}}{Cmd: objc.RegisterName({{printf "%q" .Selector}}), Fn: func(_self objc.ID, _ objc.SEL{{range .ABIParams}}, {{.}}{{end}}){{if .ABIRet}} {{.ABIRet}}{{end}} {
+{{- if .RetSig}}
+if _h, _ok := shim.Value(_self).({{.AssertIface}}); _ok {
+return {{.RetExpr}}
+}
+return {{.RetZero}}
+{{- else}}
+if _h, _ok := shim.Value(_self).({{.AssertIface}}); _ok {
+_h.{{.GoName}}({{join .CallArgs ", "}})
+}
+{{- end}}
+}},{{end}}

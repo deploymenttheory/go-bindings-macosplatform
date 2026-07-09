@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,6 +50,7 @@ func trackObjectRequestAdopt(id objc.ID) *TrackObjectRequest {
 
 // NewTrackObjectRequestWithDetectedObjectObservation creates a new object tracking request with a detected object observation.
 func NewTrackObjectRequestWithDetectedObjectObservation(observation *DetectedObjectObservation) *TrackObjectRequest {
+	defer runtime.KeepAlive(observation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackObjectRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDetectedObjectObservation:"), objref.IDOf(observation))
 	return trackObjectRequestAdopt(_id)
@@ -55,6 +58,7 @@ func NewTrackObjectRequestWithDetectedObjectObservation(observation *DetectedObj
 
 // WithInputObservation sets the observation object defining a region to track.
 func (tor *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest {
+	defer runtime.KeepAlive(inputObservation)
 	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
 	return tor
 }

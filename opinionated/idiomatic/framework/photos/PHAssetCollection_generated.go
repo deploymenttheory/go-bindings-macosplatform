@@ -5,9 +5,12 @@
 package photos
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,32 +51,37 @@ func assetCollectionAdopt(id objc.ID) *AssetCollection {
 
 // AssetCollectionType returns the asset collection type.
 func (ac *AssetCollection) AssetCollectionType() AssetCollectionType {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[AssetCollectionType](objref.IDOf(ac), objc.RegisterName("assetCollectionType"))
 	return _r
 }
 
 // EstimatedAssetCount returns the estimated asset count.
 func (ac *AssetCollection) EstimatedAssetCount() int {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("estimatedAssetCount"))
 	return _r
 }
 
 // StartDate returns the start date.
-func (ac *AssetCollection) StartDate() obj.Object {
+func (ac *AssetCollection) StartDate() time.Time {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (ac *AssetCollection) EndDate() obj.Object {
+func (ac *AssetCollection) EndDate() time.Time {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // LocalizedLocationNames returns the localized location names.
 //
 // LocalizedLocationNames returns the collection as a Go slice.
 func (ac *AssetCollection) LocalizedLocationNames() []string {
+	defer runtime.KeepAlive(ac)
 	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("localizedLocationNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

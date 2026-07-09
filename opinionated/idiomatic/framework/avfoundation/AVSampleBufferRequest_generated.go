@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func sampleBufferRequestAdopt(id objc.ID) *SampleBufferRequest {
 
 // Description returns the object's -description text.
 func (sbr *SampleBufferRequest) Description() string {
+	defer runtime.KeepAlive(sbr)
 	return rt.Description(objref.IDOf(sbr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sbr *SampleBufferRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sbr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sbr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sbr *SampleBufferRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(sbr)
 	return rt.IsKind(objref.IDOf(sbr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sbr *SampleBufferRequest) String() string {
+	defer runtime.KeepAlive(sbr)
 	return rt.Description(objref.IDOf(sbr))
 }
 
 // NewSampleBufferRequestWithStartCursor creates a newly allocated sample buffer request with the specified sample cursor.
 func NewSampleBufferRequestWithStartCursor(startCursor *SampleCursor) *SampleBufferRequest {
+	defer runtime.KeepAlive(startCursor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSampleBufferRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartCursor:"), objref.IDOf(startCursor))
 	return sampleBufferRequestAdopt(_id)
@@ -82,6 +90,7 @@ func (sbr *SampleBufferRequest) WithDirection(direction SampleBufferRequestDirec
 
 // WithLimitCursor sets the limiting position for sample loading.
 func (sbr *SampleBufferRequest) WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest {
+	defer runtime.KeepAlive(limitCursor)
 	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setLimitCursor:"), objref.IDOf(limitCursor))
 	return sbr
 }
@@ -112,42 +121,49 @@ func (sbr *SampleBufferRequest) WithOverrideTime(overrideTime coremedia.CMTime) 
 
 // StartCursor returns the start cursor.
 func (sbr *SampleBufferRequest) StartCursor() *SampleCursor {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("startCursor"))
 	return SampleCursorFromID(_r)
 }
 
 // Direction returns the direction.
 func (sbr *SampleBufferRequest) Direction() SampleBufferRequestDirection {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[SampleBufferRequestDirection](objref.IDOf(sbr), objc.RegisterName("direction"))
 	return _r
 }
 
 // LimitCursor returns the limit cursor.
 func (sbr *SampleBufferRequest) LimitCursor() *SampleCursor {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("limitCursor"))
 	return SampleCursorFromID(_r)
 }
 
 // PreferredMinSampleCount returns the preferred min sample count.
 func (sbr *SampleBufferRequest) PreferredMinSampleCount() int {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[int](objref.IDOf(sbr), objc.RegisterName("preferredMinSampleCount"))
 	return _r
 }
 
 // MaxSampleCount returns the max sample count.
 func (sbr *SampleBufferRequest) MaxSampleCount() int {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[int](objref.IDOf(sbr), objc.RegisterName("maxSampleCount"))
 	return _r
 }
 
 // Mode returns the mode.
 func (sbr *SampleBufferRequest) Mode() SampleBufferRequestMode {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[SampleBufferRequestMode](objref.IDOf(sbr), objc.RegisterName("mode"))
 	return _r
 }
 
 // OverrideTime returns the override time.
 func (sbr *SampleBufferRequest) OverrideTime() coremedia.CMTime {
+	defer runtime.KeepAlive(sbr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(sbr), objc.RegisterName("overrideTime"))
 	return _r
 }

@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -78,9 +81,22 @@ func (sv *SplitView) WithDividerStyle(dividerStyle SplitViewDividerStyle) *Split
 
 // WithAutosaveName sets the name to use when the system automatically saves the split view’s divider configuration.
 func (sv *SplitView) WithAutosaveName(autosaveName obj.Object) *SplitView {
+	defer runtime.KeepAlive(autosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
 	})
+	return sv
+}
+
+// WithDelegate sets the split view’s delegate.
+func (sv *SplitView) WithDelegate(delegate SplitViewDelegate) *SplitView {
+	_shim := newSplitViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(sv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return sv
 }
 
@@ -231,6 +247,7 @@ func (sv *SplitView) WithWantsLayer(wantsLayer bool) *SplitView {
 
 // WithLayer sets the layer.
 func (sv *SplitView) WithLayer(layer obj.Object) *SplitView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -280,6 +297,7 @@ func (sv *SplitView) WithBackgroundFilters(items ...obj.Object) *SplitView {
 
 // WithCompositingFilter sets the compositing filter.
 func (sv *SplitView) WithCompositingFilter(compositingFilter obj.Object) *SplitView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -297,6 +315,7 @@ func (sv *SplitView) WithContentFilters(items ...obj.Object) *SplitView {
 
 // WithShadow sets the shadow.
 func (sv *SplitView) WithShadow(shadow *Shadow) *SplitView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -345,6 +364,7 @@ func (sv *SplitView) WithPreparedContentRect(preparedContentRect corefoundation.
 
 // WithNextKeyView sets the next key view.
 func (sv *SplitView) WithNextKeyView(nextKeyView ViewProvider) *SplitView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -394,6 +414,7 @@ func (sv *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *SplitView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SplitView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -450,6 +471,7 @@ func (sv *SplitView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sv *SplitView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SplitView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -458,6 +480,7 @@ func (sv *SplitView) WithPressureConfiguration(pressureConfiguration *PressureCo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sv *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -466,6 +489,7 @@ func (sv *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitVi
 
 // WithMenu sets returns the responder’s menu.
 func (sv *SplitView) WithMenu(menu *Menu) *SplitView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -474,6 +498,7 @@ func (sv *SplitView) WithMenu(menu *Menu) *SplitView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sv *SplitView) WithUserActivity(userActivity obj.Object) *SplitView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -482,6 +507,7 @@ func (sv *SplitView) WithUserActivity(userActivity obj.Object) *SplitView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sv *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -490,6 +516,7 @@ func (sv *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
 
 // DrawDividerInRect draws a divider between two of the split view’s subviews.
 func (sv *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("drawDividerInRect:"), rect)
 	})
@@ -498,6 +525,7 @@ func (sv *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
 
 // AdjustSubviews adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
 func (sv *SplitView) AdjustSubviews() {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("adjustSubviews"))
 	})
@@ -506,6 +534,8 @@ func (sv *SplitView) AdjustSubviews() {
 
 // IsSubviewCollapsed returns whether the specified view is in a collapsed state.
 func (sv *SplitView) IsSubviewCollapsed(subview *View) bool {
+	defer runtime.KeepAlive(sv)
+	defer runtime.KeepAlive(subview)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -519,6 +549,7 @@ func (sv *SplitView) IsSubviewCollapsed(subview *View) bool {
 
 // MinPossiblePositionOfDividerAtIndex returns the minimum possible position of the divider at the specified index.
 func (sv *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -532,6 +563,7 @@ func (sv *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float
 
 // MaxPossiblePositionOfDividerAtIndex returns the maximum possible position of the divider at the specified index.
 func (sv *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -545,6 +577,7 @@ func (sv *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float
 
 // SetPositionOfDividerAtIndex updates the location of a divider you specify by index.
 func (sv *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPosition:ofDividerAtIndex:"), position, dividerIndex)
 	})
@@ -553,6 +586,7 @@ func (sv *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex 
 
 // HoldingPriorityForSubviewAtIndex returns the priority of the subview’s width or height when resizing.
 func (sv *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -566,6 +600,7 @@ func (sv *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 
 
 // SetHoldingPriorityForSubviewAtIndex sets the priority for split view subviews to maintain their width or height.
 func (sv *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHoldingPriority:forSubviewAtIndex:"), priority, subviewIndex)
 	})
@@ -574,6 +609,7 @@ func (sv *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subvi
 
 // IsVertical reports whether the object is vertical.
 func (sv *SplitView) IsVertical() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -587,6 +623,7 @@ func (sv *SplitView) IsVertical() bool {
 
 // DividerStyle returns the divider style.
 func (sv *SplitView) DividerStyle() SplitViewDividerStyle {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 SplitViewDividerStyle
 	purego.Main(func() {
 		_mainthread0 = func() SplitViewDividerStyle {
@@ -599,12 +636,13 @@ func (sv *SplitView) DividerStyle() SplitViewDividerStyle {
 }
 
 // AutosaveName returns the autosave name.
-func (sv *SplitView) AutosaveName() obj.Object {
-	var _mainthread0 obj.Object
+func (sv *SplitView) AutosaveName() *foundation.String {
+	defer runtime.KeepAlive(sv)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("autosaveName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -613,6 +651,7 @@ func (sv *SplitView) AutosaveName() obj.Object {
 
 // DividerColor returns the divider color.
 func (sv *SplitView) DividerColor() *Color {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -626,6 +665,7 @@ func (sv *SplitView) DividerColor() *Color {
 
 // DividerThickness returns the divider thickness.
 func (sv *SplitView) DividerThickness() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -639,6 +679,8 @@ func (sv *SplitView) DividerThickness() float64 {
 
 // AddArrangedSubview adds a view as an arranged split pane.
 func (sv *SplitView) AddArrangedSubview(view *View) {
+	defer runtime.KeepAlive(sv)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addArrangedSubview:"), objref.IDOf(view))
 	})
@@ -647,6 +689,8 @@ func (sv *SplitView) AddArrangedSubview(view *View) {
 
 // InsertArrangedSubviewAtIndex adds a view as an arranged split pane at the specified index.
 func (sv *SplitView) InsertArrangedSubviewAtIndex(view *View, index int) {
+	defer runtime.KeepAlive(sv)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("insertArrangedSubview:atIndex:"), objref.IDOf(view), index)
 	})
@@ -655,6 +699,8 @@ func (sv *SplitView) InsertArrangedSubviewAtIndex(view *View, index int) {
 
 // RemoveArrangedSubview removes a view as an arranged split pane.
 func (sv *SplitView) RemoveArrangedSubview(view *View) {
+	defer runtime.KeepAlive(sv)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("removeArrangedSubview:"), objref.IDOf(view))
 	})
@@ -663,6 +709,7 @@ func (sv *SplitView) RemoveArrangedSubview(view *View) {
 
 // ArrangesAllSubviews reports whether all subviews will be added as arranged views. When false, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When true, \c -arrangedSubviews always be identical to \c -subviews. Defaults to true. Setting this from true to false will leave all existing subviews as \c -arrangedSubviews. Setting this from false to true will cause \c -arrangedSubviews to become the value of \c -subviews.
 func (sv *SplitView) ArrangesAllSubviews() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -678,6 +725,7 @@ func (sv *SplitView) ArrangesAllSubviews() bool {
 //
 // ArrangedSubviews returns the collection as a Go slice.
 func (sv *SplitView) ArrangedSubviews() []*View {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 []*View
 	purego.Main(func() {
 		_mainthread0 = func() []*View {
@@ -690,6 +738,7 @@ func (sv *SplitView) ArrangedSubviews() []*View {
 
 // SetIsPaneSplitter sets the type of splitter.
 func (sv *SplitView) SetIsPaneSplitter(flag bool) {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setIsPaneSplitter:"), flag)
 	})
@@ -698,6 +747,7 @@ func (sv *SplitView) SetIsPaneSplitter(flag bool) {
 
 // IsPaneSplitter reports whether the type of pane splitter.
 func (sv *SplitView) IsPaneSplitter() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,9 @@
 package gamekit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func turnBasedExchangeReplyAdopt(id objc.ID) *TurnBasedExchangeReply {
 
 // Description returns the object's -description text.
 func (tber *TurnBasedExchangeReply) Description() string {
+	defer runtime.KeepAlive(tber)
 	return rt.Description(objref.IDOf(tber))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tber *TurnBasedExchangeReply) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tber)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tber), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tber *TurnBasedExchangeReply) IsKind(className string) bool {
+	defer runtime.KeepAlive(tber)
 	return rt.IsKind(objref.IDOf(tber), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tber *TurnBasedExchangeReply) String() string {
+	defer runtime.KeepAlive(tber)
 	return rt.Description(objref.IDOf(tber))
 }
 
@@ -74,12 +82,14 @@ func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
 
 // Recipient returns the recipient.
 func (tber *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
+	defer runtime.KeepAlive(tber)
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("recipient"))
 	return TurnBasedParticipantFromID(_r)
 }
 
 // Message returns the message.
 func (tber *TurnBasedExchangeReply) Message() string {
+	defer runtime.KeepAlive(tber)
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
@@ -88,13 +98,15 @@ func (tber *TurnBasedExchangeReply) Message() string {
 }
 
 // Data returns the data.
-func (tber *TurnBasedExchangeReply) Data() obj.Object {
+func (tber *TurnBasedExchangeReply) Data() []byte {
+	defer runtime.KeepAlive(tber)
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ReplyDate returns the reply date.
-func (tber *TurnBasedExchangeReply) ReplyDate() obj.Object {
+func (tber *TurnBasedExchangeReply) ReplyDate() time.Time {
+	defer runtime.KeepAlive(tber)
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("replyDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

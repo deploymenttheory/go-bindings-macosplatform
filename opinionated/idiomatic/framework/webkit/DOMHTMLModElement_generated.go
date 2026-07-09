@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -165,6 +167,7 @@ func (dme *DOMHTMLModElement) WithTextContent(textContent string) *DOMHTMLModEle
 
 // Cite returns the cite.
 func (dme *DOMHTMLModElement) Cite() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("cite"))
 	if _r == 0 {
 		return ""
@@ -174,6 +177,7 @@ func (dme *DOMHTMLModElement) Cite() string {
 
 // DateTime returns the date time.
 func (dme *DOMHTMLModElement) DateTime() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("dateTime"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRBridgedDeviceBasicClusterReachableChangedEvent() *MTRBridgedDeviceBas
 
 // WithReachableNewValue sets the reachable new value.
 func (mbdbcrce *MTRBridgedDeviceBasicClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicClusterReachableChangedEvent {
+	defer runtime.KeepAlive(reachableNewValue)
 	objc.Send[objc.ID](objref.IDOf(mbdbcrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return mbdbcrce
 }

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func xPCListenerEndpointAdopt(id objc.ID) *XPCListenerEndpoint {
 
 // Description returns the object's -description text.
 func (xle *XPCListenerEndpoint) Description() string {
+	defer runtime.KeepAlive(xle)
 	return rt.Description(objref.IDOf(xle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (xle *XPCListenerEndpoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(xle)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(xle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (xle *XPCListenerEndpoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(xle)
 	return rt.IsKind(objref.IDOf(xle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (xle *XPCListenerEndpoint) String() string {
+	defer runtime.KeepAlive(xle)
 	return rt.Description(objref.IDOf(xle))
 }
 
@@ -81,7 +87,7 @@ func (xle *XPCListenerEndpoint) WithObservationInfo(observationInfo unsafe.Point
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xle *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties obj.Object) *XPCListenerEndpoint {
-	objc.Send[objc.ID](objref.IDOf(xle), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xle *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XPCListenerEndpoint {
+	objc.Send[objc.ID](objref.IDOf(xle), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xle
 }

@@ -5,6 +5,8 @@
 package browserenginekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textAlternativesAdopt(id objc.ID) *TextAlternatives {
 
 // Description returns the object's -description text.
 func (ta *TextAlternatives) Description() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ta *TextAlternatives) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ta *TextAlternatives) IsKind(className string) bool {
+	defer runtime.KeepAlive(ta)
 	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ta *TextAlternatives) String() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
@@ -74,6 +81,7 @@ func NewTextAlternatives() *TextAlternatives {
 
 // PrimaryString returns original text for which alternative strings are provided
 func (ta *TextAlternatives) PrimaryString() string {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("primaryString"))
 	if _r == 0 {
 		return ""
@@ -85,6 +93,7 @@ func (ta *TextAlternatives) PrimaryString() string {
 //
 // AlternativeStrings returns the collection as a Go slice.
 func (ta *TextAlternatives) AlternativeStrings() []string {
+	defer runtime.KeepAlive(ta)
 	_arr := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("alternativeStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

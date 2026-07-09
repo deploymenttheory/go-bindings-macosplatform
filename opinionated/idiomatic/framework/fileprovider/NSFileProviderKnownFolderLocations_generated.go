@@ -5,6 +5,8 @@
 package fileprovider
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fileProviderKnownFolderLocationsAdopt(id objc.ID) *FileProviderKnownFolderL
 
 // Description returns the object's -description text.
 func (fpkfl *FileProviderKnownFolderLocations) Description() string {
+	defer runtime.KeepAlive(fpkfl)
 	return rt.Description(objref.IDOf(fpkfl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpkfl *FileProviderKnownFolderLocations) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpkfl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpkfl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpkfl *FileProviderKnownFolderLocations) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpkfl)
 	return rt.IsKind(objref.IDOf(fpkfl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpkfl *FileProviderKnownFolderLocations) String() string {
+	defer runtime.KeepAlive(fpkfl)
 	return rt.Description(objref.IDOf(fpkfl))
 }
 
@@ -80,30 +87,35 @@ func (fpkfl *FileProviderKnownFolderLocations) WithShouldCreateBinaryCompatibili
 
 // WithDesktopLocation sets candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
 func (fpkfl *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
+	defer runtime.KeepAlive(desktopLocation)
 	objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("setDesktopLocation:"), objref.IDOf(desktopLocation))
 	return fpkfl
 }
 
 // WithDocumentsLocation sets candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
 func (fpkfl *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
+	defer runtime.KeepAlive(documentsLocation)
 	objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("setDocumentsLocation:"), objref.IDOf(documentsLocation))
 	return fpkfl
 }
 
 // ShouldCreateBinaryCompatibilitySymlink reports whether specify whether the system should create a binary compatibility symlink folders. If true, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is true.
 func (fpkfl *FileProviderKnownFolderLocations) ShouldCreateBinaryCompatibilitySymlink() bool {
+	defer runtime.KeepAlive(fpkfl)
 	_r := objc.Send[bool](objref.IDOf(fpkfl), objc.RegisterName("shouldCreateBinaryCompatibilitySymlink"))
 	return _r
 }
 
 // DesktopLocation returns candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
 func (fpkfl *FileProviderKnownFolderLocations) DesktopLocation() *FileProviderKnownFolderLocation {
+	defer runtime.KeepAlive(fpkfl)
 	_r := objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("desktopLocation"))
 	return FileProviderKnownFolderLocationFromID(_r)
 }
 
 // DocumentsLocation returns candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
 func (fpkfl *FileProviderKnownFolderLocations) DocumentsLocation() *FileProviderKnownFolderLocation {
+	defer runtime.KeepAlive(fpkfl)
 	_r := objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("documentsLocation"))
 	return FileProviderKnownFolderLocationFromID(_r)
 }

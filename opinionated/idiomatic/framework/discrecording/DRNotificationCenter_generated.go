@@ -5,6 +5,8 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func notificationCenterAdopt(id objc.ID) *NotificationCenter {
 
 // Description returns the object's -description text.
 func (nc *NotificationCenter) Description() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nc *NotificationCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nc *NotificationCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(nc)
 	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nc *NotificationCenter) String() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
@@ -74,5 +81,8 @@ func NewNotificationCenter() *NotificationCenter {
 
 // RemoveObserverNameObject removes anObserver from receiving notifications. Removes anObserver as the observer of notifications with the name notificationName and object anObject from the receiver. Be sure to invoke this method before deallocating the observer object or any object specified in
 func (nc *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName string, anObject obj.Object) {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(observer)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), purego.NSString(aName), objref.IDOf(anObject))
 }

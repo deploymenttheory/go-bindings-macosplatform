@@ -42,6 +42,21 @@ func metaDir() string {
 	return defaultMetaDir
 }
 
+// requireRepoRootMetaDir returns the metadata directory for a test that has
+// already chdir'd to the repo root (GO_BINDINGS_METADATA_DIR still wins), and
+// skips the test if it does not exist on disk.
+func requireRepoRootMetaDir(t *testing.T) string {
+	t.Helper()
+	dir := "metadata"
+	if d := os.Getenv("GO_BINDINGS_METADATA_DIR"); d != "" {
+		dir = d
+	}
+	if _, err := os.Stat(dir); err != nil {
+		t.Skipf("metadata directory %q not found — set GO_BINDINGS_METADATA_DIR: %v", dir, err)
+	}
+	return dir
+}
+
 // requireMetaDir returns the metadata directory and skips the test if it does
 // not exist on disk.
 func requireMetaDir(t *testing.T) string {
@@ -54,14 +69,24 @@ func requireMetaDir(t *testing.T) string {
 }
 
 // requireFrameworkMeta skips the test if the specified framework subdirectory
-// is absent inside dir.
+// is absent inside dir. The committed layout nests frameworks and C libraries
+// one level down (metadata/frameworks/<name>/, metadata/libraries/<name>/);
+// the flat <dir>/<name>/ form is still accepted for ad-hoc metadata dirs.
 func requireFrameworkMeta(t *testing.T, dir, framework string) string {
 	t.Helper()
-	fwDir := filepath.Join(dir, strings.ToLower(framework))
-	if _, err := os.Stat(fwDir); err != nil {
-		t.Skipf("metadata for framework %q not found in %s: %v", framework, dir, err)
+	name := strings.ToLower(framework)
+	candidates := []string{
+		filepath.Join(dir, "frameworks", name),
+		filepath.Join(dir, "libraries", name),
+		filepath.Join(dir, name),
 	}
-	return fwDir
+	for _, fwDir := range candidates {
+		if _, err := os.Stat(fwDir); err == nil {
+			return fwDir
+		}
+	}
+	t.Skipf("metadata for framework %q not found in %s (tried %v)", framework, dir, candidates)
+	return ""
 }
 
 // loadRegistry is a helper that calls pipeline.LoadAll on a list of metadata
@@ -79,7 +104,13 @@ func loadRegistry(t *testing.T, paths []string) *pipeline.Registry {
 // error.
 func generateTo(t *testing.T, reg *pipeline.Registry, outDir string) {
 	t.Helper()
-	if err := pipeline.GenerateBindings(pipeline.BindingsConfig{Registry: reg, FrameworksOutDir: outDir}); err != nil {
+	if err := pipeline.GenerateBindings(pipeline.BindingsConfig{
+		Registry:         reg,
+		FrameworksOutDir: outDir,
+		LibrariesOutDir:  t.TempDir(),
+		BlocksDir:        t.TempDir(),
+		CallbacksDir:     t.TempDir(),
+	}); err != nil {
 		t.Fatalf("pipeline.GenerateBindings: %v", err)
 	}
 }
@@ -247,12 +278,14 @@ func TestGenericClassGeneration(t *testing.T) {
 		t.Fatalf("reading NSArray.go: %v", err)
 	}
 
-	// The struct must carry a type parameter.
+	// The struct must carry a type parameter. The constraint moved from the old
+	// internal runtime package (runtime.Object) to the public bindings/runtime/cgo
+	// package (cgo.Object) when the runtime was relocated.
 	content := string(data)
-	hasGeneric := strings.Contains(content, "[T runtime.Object]") ||
-		strings.Contains(content, "[runtime.Object]")
+	hasGeneric := strings.Contains(content, "[T cgo.Object]") ||
+		strings.Contains(content, "[T runtime.Object]")
 	if !hasGeneric {
-		t.Errorf("NSArray.go: expected generic type parameter (e.g. '[T runtime.Object]'); got:\n%s", content)
+		t.Errorf("NSArray.go: expected generic type parameter (e.g. '[T cgo.Object]'); got:\n%s", content)
 	}
 
 	// The struct declaration must reference the type parameter.
@@ -363,9 +396,11 @@ func TestSubFrameworkLinkFlag(t *testing.T) {
 // TestAllFrameworksGenerateWithoutError loads every metadata file in the
 // metadata directory and generates all framework packages. This is a smoke test
 // that catches generator panics, crashes, or structural errors across the full
-// corpus.
+// corpus. The CGo bridge emitters read repo-relative shim headers
+// (metadata/shims/…), so corpus generation must run from the repo root.
 func TestAllFrameworksGenerateWithoutError(t *testing.T) {
-	base := requireMetaDir(t)
+	t.Chdir("..")
+	base := requireRepoRootMetaDir(t)
 	outDir := t.TempDir()
 
 	reg, err := pipeline.LoadAll([]string{base}, defaultModPrefix)
@@ -377,7 +412,13 @@ func TestAllFrameworksGenerateWithoutError(t *testing.T) {
 	}
 	t.Logf("loaded %d frameworks", len(reg.Frameworks))
 
-	if err := pipeline.GenerateBindings(pipeline.BindingsConfig{Registry: reg, FrameworksOutDir: outDir}); err != nil {
+	if err := pipeline.GenerateBindings(pipeline.BindingsConfig{
+		Registry:         reg,
+		FrameworksOutDir: outDir,
+		LibrariesOutDir:  t.TempDir(),
+		BlocksDir:        t.TempDir(),
+		CallbacksDir:     t.TempDir(),
+	}); err != nil {
 		t.Fatalf("Generate: %v", err)
 	}
 
@@ -405,12 +446,14 @@ func TestAllFrameworksBuild(t *testing.T) {
 		t.Skipf("go binary not found in PATH: %v", err)
 	}
 
-	base := requireMetaDir(t)
+	// Corpus generation reads repo-relative shim headers; run from the repo root.
+	t.Chdir("..")
+	base := requireRepoRootMetaDir(t)
 
 	// We need a compilable module: write generated packages under a subdirectory
-	// of the real project repo so go.mod is inherited automatically.
-	// Use the project root (parent of acceptance/) as the repo root.
-	repoRoot, err := filepath.Abs("..")
+	// of the real project repo so go.mod is inherited automatically. The test
+	// already chdir'd to the repo root above.
+	repoRoot, err := filepath.Abs(".")
 	if err != nil {
 		t.Fatalf("resolving repo root: %v", err)
 	}
@@ -430,7 +473,13 @@ func TestAllFrameworksBuild(t *testing.T) {
 	}
 	t.Logf("loaded %d frameworks; generating...", len(reg.Frameworks))
 
-	if err := pipeline.GenerateBindings(pipeline.BindingsConfig{Registry: reg, FrameworksOutDir: outDir}); err != nil {
+	if err := pipeline.GenerateBindings(pipeline.BindingsConfig{
+		Registry:         reg,
+		FrameworksOutDir: outDir,
+		LibrariesOutDir:  t.TempDir(),
+		BlocksDir:        t.TempDir(),
+		CallbacksDir:     t.TempDir(),
+	}); err != nil {
 		t.Fatalf("Generate: %v", err)
 	}
 

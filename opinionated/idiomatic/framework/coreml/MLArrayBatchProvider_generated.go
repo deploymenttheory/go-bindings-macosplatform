@@ -5,6 +5,7 @@
 package coreml
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func arrayBatchProviderAdopt(id objc.ID) *ArrayBatchProvider {
 
 // Description returns the object's -description text.
 func (abp *ArrayBatchProvider) Description() string {
+	defer runtime.KeepAlive(abp)
 	return rt.Description(objref.IDOf(abp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (abp *ArrayBatchProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(abp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(abp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (abp *ArrayBatchProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(abp)
 	return rt.IsKind(objref.IDOf(abp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (abp *ArrayBatchProvider) String() string {
+	defer runtime.KeepAlive(abp)
 	return rt.Description(objref.IDOf(abp))
 }
 
@@ -76,11 +82,11 @@ func NewArrayBatchProviderWithFeatureProviderArray(array []obj.Object) *ArrayBat
 	return arrayBatchProviderAdopt(_id)
 }
 
-// NewArrayBatchProviderWithDictionaryError creates a batch provider based on feature names and their associated arrays of data.
-func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (result *ArrayBatchProvider, err error) {
+// NewArrayBatchProviderWithDictionary creates a batch provider based on feature names and their associated arrays of data.
+func NewArrayBatchProviderWithDictionary(dictionary map[string]obj.Object) (result *ArrayBatchProvider, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MLArrayBatchProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(dictionary), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), rt.MapToDict(dictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -89,6 +95,7 @@ func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (result *Ar
 
 // Array returns the array.
 func (abp *ArrayBatchProvider) Array() []obj.Object {
+	defer runtime.KeepAlive(abp)
 	_r := objc.Send[objc.ID](objref.IDOf(abp), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

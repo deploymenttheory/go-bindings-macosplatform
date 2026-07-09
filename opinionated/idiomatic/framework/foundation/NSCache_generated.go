@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func cacheAdopt(id objc.ID) *Cache {
 
 // Description returns the object's -description text.
 func (c *Cache) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Cache) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Cache) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Cache) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -76,7 +83,18 @@ func NewCache() *Cache {
 
 // WithName sets the name of the cache.
 func (c *Cache) WithName(name StringProvider) *Cache {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), objref.IDOf(name))
+	return c
+}
+
+// WithDelegate sets the cache’s delegate.
+func (c *Cache) WithDelegate(delegate CacheDelegate) *Cache {
+	_shim := newCacheDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(c), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(c), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return c
 }
 
@@ -105,39 +123,51 @@ func (c *Cache) WithObservationInfo(observationInfo unsafe.Pointer) *Cache {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (c *Cache) WithScriptingProperties(scriptingProperties obj.Object) *Cache {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (c *Cache) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Cache {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return c
 }
 
 // ObjectForKey returns the value associated with a given key.
 func (c *Cache) ObjectForKey(key obj.Object) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectForKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // SetObjectForKey sets the value of the specified key in the cache.
-func (c *Cache) SetObjectForKey(obj_ obj.Object, key obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObject:forKey:"), objref.IDOf(obj_), objref.IDOf(key))
+func (c *Cache) SetObjectForKey(object obj.Object, key obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(key)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObject:forKey:"), objref.IDOf(object), objref.IDOf(key))
 }
 
 // SetObjectForKeyCost sets the value of the specified key in the cache, and associates the key-value pair with the specified cost.
-func (c *Cache) SetObjectForKeyCost(obj_ obj.Object, key obj.Object, g int) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObject:forKey:cost:"), objref.IDOf(obj_), objref.IDOf(key), g)
+func (c *Cache) SetObjectForKeyCost(object obj.Object, key obj.Object, g int) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(key)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObject:forKey:cost:"), objref.IDOf(object), objref.IDOf(key), g)
 }
 
 // RemoveObjectForKey removes the value of the specified key in the cache.
 func (c *Cache) RemoveObjectForKey(key obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeObjectForKey:"), objref.IDOf(key))
 }
 
 // RemoveAllObjects empties the cache.
 func (c *Cache) RemoveAllObjects() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeAllObjects"))
 }
 
 // Name returns the name.
 func (c *Cache) Name() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -147,18 +177,21 @@ func (c *Cache) Name() string {
 
 // TotalCostLimit returns the total cost limit.
 func (c *Cache) TotalCostLimit() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("totalCostLimit"))
 	return _r
 }
 
 // CountLimit returns the count limit.
 func (c *Cache) CountLimit() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("countLimit"))
 	return _r
 }
 
 // EvictsObjectsWithDiscardedContent wraps the corresponding Objective-C method.
 func (c *Cache) EvictsObjectsWithDiscardedContent() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("evictsObjectsWithDiscardedContent"))
 	return _r
 }

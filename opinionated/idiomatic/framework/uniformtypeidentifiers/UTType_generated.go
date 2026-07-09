@@ -5,6 +5,8 @@
 package uniformtypeidentifiers
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func typeAdopt(id objc.ID) *Type {
 
 // Description returns the object's -description text.
 func (t *Type) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Type) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Type) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Type) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -74,6 +81,7 @@ func NewType() *Type {
 
 // Identifier returns \brief The receiver's identifier. A type is \em identified \em by its Uniform Type Identifier (UTI), a reverse-DNS string such as \c "public.jpeg" or \c "com.adobe.pdf". The type itself \em has a UTI, but is not itself the UTI. This terminology is not consistently used across Apple's documentation.
 func (t *Type) Identifier() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (t *Type) Identifier() string {
 
 // PreferredFilenameExtension returns \brief If available, the preferred (first available) tag of class \c UTTagClassFilenameExtension. Many uses of types require the generation of a filename (e.g. when saving a file to disk.) If not \c nil, the value of this property is the best available filename extension for the given type. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassFilenameExtension].firstObject \endcode
 func (t *Type) PreferredFilenameExtension() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("preferredFilenameExtension"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (t *Type) PreferredFilenameExtension() string {
 
 // PreferredMIMEType returns \brief If available, the preferred (first available) tag of class \c UTTagClassMIMEType. If not \c nil, the value of this property is the best available MIME type for the given type, according to its declaration. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassMIMEType].firstObject \endcode
 func (t *Type) PreferredMIMEType() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("preferredMIMEType"))
 	if _r == 0 {
 		return ""
@@ -101,6 +111,7 @@ func (t *Type) PreferredMIMEType() string {
 
 // LocalizedDescription returns \brief The localized description of the type. If the type does not provide a description, the system may search its supertypes for one. Dynamic types never have localized descriptions even if their supertypes do.
 func (t *Type) LocalizedDescription() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -109,55 +120,68 @@ func (t *Type) LocalizedDescription() string {
 }
 
 // ReferenceURL returns \brief The reference URL of the type. A reference URL is a human-readable document describing a type. Most types do not specify reference URLs. \warning This URL is not validated in any way by the system, nor is its scheme or structure guaranteed in any way.
-func (t *Type) ReferenceURL() obj.Object {
+func (t *Type) ReferenceURL() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("referenceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsDynamic reports whether \brief Whether or not the receiver is a dynamically generated type. Dynamic types are recognized by the system, but may not be directly declared or claimed by an application. They are used when a file is encountered whose metadata has no corresponding type known to the system. A type cannot be both declared \em and dynamic.
 func (t *Type) IsDynamic() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isDynamic"))
 	return _r
 }
 
 // IsDeclared reports whether \brief Whether or not the receiver is a type known to the system. A type cannot be both declared \em and dynamic.
 func (t *Type) IsDeclared() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isDeclared"))
 	return _r
 }
 
 // IsPublicType reports whether \brief Whether or not the type is in the public domain. Types in the public domain have identifiers starting with \c "public." and are generally defined by a standards body or by convention. They are never dynamic.
 func (t *Type) IsPublicType() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isPublicType"))
 	return _r
 }
 
 // ConformsToType \brief Tests for a conformance relationship between the receiver and another type. \param type The type against which conformance should be tested. \result If the two types are equal, returns \c YES. If the receiver conforms, directly or indirectly, to \a type, returns \c YES. Otherwise, returns \c NO. \sa -isSupertypeOfType: \sa -isSubtypeOfType:
 func (t *Type) ConformsToType(type_ *Type) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("conformsToType:"), objref.IDOf(type_))
 	return _r
 }
 
 // IsSupertypeOfType \brief Tests if the receiver is a supertype of another type. \param type The type against which conformance should be tested. \result If \a type conforms, directly or indirectly, to the receiver and is not equal to it, returns \c YES. Otherwise, returns \c NO. \sa -conformsToType: \sa -isSubtypeOfType:
 func (t *Type) IsSupertypeOfType(type_ *Type) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSupertypeOfType:"), objref.IDOf(type_))
 	return _r
 }
 
 // IsSubtypeOfType \brief Tests if the receiver is a subtype of another type. \param type The type against which conformance should be tested. \result If the receiver conforms, directly or indirectly, to \a type and is not equal to it, returns \c YES. Otherwise, returns \c NO. \sa -conformsToType: \sa -isSupertypeOfType:
 func (t *Type) IsSubtypeOfType(type_ *Type) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSubtypeOfType:"), objref.IDOf(type_))
 	return _r
 }
 
 // Supertypes returns \brief The set of types to which the receiving type conforms, directly or indirectly. If you are just interested in checking if one type conforms to another, it is more efficient to use \c -conformsToType: than this property.
-func (t *Type) Supertypes() obj.Object {
+// The order of the returned elements is unspecified.
+func (t *Type) Supertypes() []*Type {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("supertypes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Type { return TypeFromID(_id) })
 }
 
 // Tags returns \brief The tag specification dictionary of the type. The system does not store tag information for non-standard tag classes. It normalizes string values into arrays containing those strings. For instance, a value of: \code { "public.mime-type": "x/y", "nonstandard-tag-class": "abc", } \endcode Is normalized to: \code { "public.mime-type": [ "x/y" ] } \endcode If you are simply looking for the preferred filename extension or MIME type of a type, it is more efficient for you to use the \c preferredFilenameExtension and \c preferredMIMEType properties respectively.
-func (t *Type) Tags() obj.Object {
+func (t *Type) Tags() map[string]obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tags"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

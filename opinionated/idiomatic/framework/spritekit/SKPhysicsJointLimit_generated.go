@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,18 +61,21 @@ func (pjl *PhysicsJointLimit) WithMaxLength(maxLength float64) *PhysicsJointLimi
 
 // WithBodyA sets the first body connected by the joint.
 func (pjl *PhysicsJointLimit) WithBodyA(bodyA *PhysicsBody) *PhysicsJointLimit {
+	defer runtime.KeepAlive(bodyA)
 	objc.Send[objc.ID](objref.IDOf(pjl), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return pjl
 }
 
 // WithBodyB sets the second body connected by the joint.
 func (pjl *PhysicsJointLimit) WithBodyB(bodyB *PhysicsBody) *PhysicsJointLimit {
+	defer runtime.KeepAlive(bodyB)
 	objc.Send[objc.ID](objref.IDOf(pjl), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return pjl
 }
 
 // MaxLength returns the max length.
 func (pjl *PhysicsJointLimit) MaxLength() float64 {
+	defer runtime.KeepAlive(pjl)
 	_r := objc.Send[float64](objref.IDOf(pjl), objc.RegisterName("maxLength"))
 	return _r
 }

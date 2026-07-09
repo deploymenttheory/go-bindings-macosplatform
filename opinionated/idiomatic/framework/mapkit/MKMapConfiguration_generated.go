@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func mapConfigurationAdopt(id objc.ID) *MapConfiguration {
 
 // Description returns the object's -description text.
 func (mc *MapConfiguration) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MapConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MapConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MapConfiguration) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -76,6 +83,7 @@ func (mc *MapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle)
 
 // ElevationStyle returns the elevation style.
 func (mc *MapConfiguration) ElevationStyle() MapElevationStyle {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[MapElevationStyle](objref.IDOf(mc), objc.RegisterName("elevationStyle"))
 	return _r
 }

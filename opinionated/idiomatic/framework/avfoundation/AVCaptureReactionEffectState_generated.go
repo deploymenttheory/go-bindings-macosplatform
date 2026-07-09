@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func captureReactionEffectStateAdopt(id objc.ID) *CaptureReactionEffectState {
 
 // Description returns the object's -description text.
 func (cres *CaptureReactionEffectState) Description() string {
+	defer runtime.KeepAlive(cres)
 	return rt.Description(objref.IDOf(cres))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cres *CaptureReactionEffectState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cres)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cres), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cres *CaptureReactionEffectState) IsKind(className string) bool {
+	defer runtime.KeepAlive(cres)
 	return rt.IsKind(objref.IDOf(cres), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cres *CaptureReactionEffectState) String() string {
+	defer runtime.KeepAlive(cres)
 	return rt.Description(objref.IDOf(cres))
 }
 
@@ -74,19 +82,22 @@ func NewCaptureReactionEffectState() *CaptureReactionEffectState {
 }
 
 // ReactionType indicates the reaction which is running. There may be multiple reactions of the same type at a given time.  Some may come from gesture detection, some may come from calls to -[AVCaptureDevice performReactionEffect:]
-func (cres *CaptureReactionEffectState) ReactionType() obj.Object {
+func (cres *CaptureReactionEffectState) ReactionType() *foundation.String {
+	defer runtime.KeepAlive(cres)
 	_r := objc.Send[objc.ID](objref.IDOf(cres), objc.RegisterName("reactionType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // StartTime provides the presentation time of the first frame where the effect is being rendered.
 func (cres *CaptureReactionEffectState) StartTime() coremedia.CMTime {
+	defer runtime.KeepAlive(cres)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cres), objc.RegisterName("startTime"))
 	return _r
 }
 
 // EndTime provides the presentation time of the frame following the last frame where the effect is seen. Will be kCMTimeInvalid while the effect is in progress, but will be updated to a valid time when the reaction effect completes and the AVCaptureReactionEffectState is removed from -[AVCaptureDevice reactionEffectsInProgress]. (If using NSKeyValueObservingOptionOld, you can access completed effects with valid end times via NSKeyValueChangeOldKey.)
 func (cres *CaptureReactionEffectState) EndTime() coremedia.CMTime {
+	defer runtime.KeepAlive(cres)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cres), objc.RegisterName("endTime"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func itemAdopt(id objc.ID) *Item {
 
 // Description returns the object's -description text.
 func (i *Item) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Item) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Item) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Item) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 

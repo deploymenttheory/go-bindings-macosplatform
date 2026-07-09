@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func nEFilterRuleAdopt(id objc.ID) *NEFilterRule {
 
 // Description returns the object's -description text.
 func (nfr *NEFilterRule) Description() string {
+	defer runtime.KeepAlive(nfr)
 	return rt.Description(objref.IDOf(nfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfr *NEFilterRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfr *NEFilterRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfr)
 	return rt.IsKind(objref.IDOf(nfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfr *NEFilterRule) String() string {
+	defer runtime.KeepAlive(nfr)
 	return rt.Description(objref.IDOf(nfr))
 }
 
 // NewNEFilterRuleWithNetworkRuleAction creates a new filter rule from a network rule and an action to take when network traffic matches.
 func NewNEFilterRuleWithNetworkRuleAction(networkRule *NENetworkRule, action NEFilterAction) *NEFilterRule {
+	defer runtime.KeepAlive(networkRule)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEFilterRule")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkRule:action:"), objref.IDOf(networkRule), action)
 	return nEFilterRuleAdopt(_id)
@@ -75,12 +83,14 @@ func NewNEFilterRuleWithNetworkRuleAction(networkRule *NENetworkRule, action NEF
 
 // NetworkRule returns the NENetworkRule that defines the network traffic characteristics that this rule matches.
 func (nfr *NEFilterRule) NetworkRule() *NENetworkRule {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[objc.ID](objref.IDOf(nfr), objc.RegisterName("networkRule"))
 	return NENetworkRuleFromID(_r)
 }
 
 // Action returns the action to take when this rule matches network traffic.
 func (nfr *NEFilterRule) Action() NEFilterAction {
+	defer runtime.KeepAlive(nfr)
 	_r := objc.Send[NEFilterAction](objref.IDOf(nfr), objc.RegisterName("action"))
 	return _r
 }

@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func assetSegmentTrackReportAdopt(id objc.ID) *AssetSegmentTrackReport {
 
 // Description returns the object's -description text.
 func (astr *AssetSegmentTrackReport) Description() string {
+	defer runtime.KeepAlive(astr)
 	return rt.Description(objref.IDOf(astr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (astr *AssetSegmentTrackReport) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(astr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(astr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (astr *AssetSegmentTrackReport) IsKind(className string) bool {
+	defer runtime.KeepAlive(astr)
 	return rt.IsKind(objref.IDOf(astr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (astr *AssetSegmentTrackReport) String() string {
+	defer runtime.KeepAlive(astr)
 	return rt.Description(objref.IDOf(astr))
 }
 
@@ -75,30 +83,35 @@ func NewAssetSegmentTrackReport() *AssetSegmentTrackReport {
 
 // TrackID indicates the persistent unique identifier for this track.
 func (astr *AssetSegmentTrackReport) TrackID() int32 {
+	defer runtime.KeepAlive(astr)
 	_r := objc.Send[int32](objref.IDOf(astr), objc.RegisterName("trackID"))
 	return _r
 }
 
 // MediaType indicates the media type for this track. Media types are declared in AVMediaFormat.h.
-func (astr *AssetSegmentTrackReport) MediaType() obj.Object {
+func (astr *AssetSegmentTrackReport) MediaType() *foundation.String {
+	defer runtime.KeepAlive(astr)
 	_r := objc.Send[objc.ID](objref.IDOf(astr), objc.RegisterName("mediaType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // EarliestPresentationTimeStamp indicates the earliest presentation timestamp (PTS) for this track. The value is kCMTimeInvalid if there is no information available.
 func (astr *AssetSegmentTrackReport) EarliestPresentationTimeStamp() coremedia.CMTime {
+	defer runtime.KeepAlive(astr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(astr), objc.RegisterName("earliestPresentationTimeStamp"))
 	return _r
 }
 
 // Duration indicates the duration for this track. The value is kCMTimeInvalid if there is no information available.
 func (astr *AssetSegmentTrackReport) Duration() coremedia.CMTime {
+	defer runtime.KeepAlive(astr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(astr), objc.RegisterName("duration"))
 	return _r
 }
 
 // FirstVideoSampleInformation provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
 func (astr *AssetSegmentTrackReport) FirstVideoSampleInformation() *AssetSegmentReportSampleInformation {
+	defer runtime.KeepAlive(astr)
 	_r := objc.Send[objc.ID](objref.IDOf(astr), objc.RegisterName("firstVideoSampleInformation"))
 	return AssetSegmentReportSampleInformationFromID(_r)
 }

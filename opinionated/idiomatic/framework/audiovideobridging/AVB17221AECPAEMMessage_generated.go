@@ -5,9 +5,11 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -69,8 +71,8 @@ func (aam *AVB17221AECPAEMMessage) WithControllerRequest(controllerRequest bool)
 }
 
 // WithCommandSpecificData sets the command_specific_data field of the AECP AEM message.
-func (aam *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData obj.Object) *AVB17221AECPAEMMessage {
-	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandSpecificData:"), objref.IDOf(commandSpecificData))
+func (aam *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData []byte) *AVB17221AECPAEMMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setCommandSpecificData:"), rt.BytesToNSData(commandSpecificData))
 	return aam
 }
 
@@ -106,32 +108,37 @@ func (aam *AVB17221AECPAEMMessage) WithSequenceID(sequenceID uint16) *AVB17221AE
 
 // WithSourceMAC sets the source_mac field of the AECP message.
 func (aam *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage {
+	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aam
 }
 
 // CommandType returns the command_type field of the AECP AEM message.
 func (aam *AVB17221AECPAEMMessage) CommandType() AVB17221AEMCommandType {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221AEMCommandType](objref.IDOf(aam), objc.RegisterName("commandType"))
 	return _r
 }
 
 // IsUnsolicited reports whether the u field of the AECP AEM message.
 func (aam *AVB17221AECPAEMMessage) IsUnsolicited() bool {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[bool](objref.IDOf(aam), objc.RegisterName("isUnsolicited"))
 	return _r
 }
 
 // IsControllerRequest reports whether the cr field of the AECP AEM message.
 func (aam *AVB17221AECPAEMMessage) IsControllerRequest() bool {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[bool](objref.IDOf(aam), objc.RegisterName("isControllerRequest"))
 	return _r
 }
 
 // CommandSpecificData returns the command_specific_data field of the AECP AEM message.
-func (aam *AVB17221AECPAEMMessage) CommandSpecificData() obj.Object {
+func (aam *AVB17221AECPAEMMessage) CommandSpecificData() []byte {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("commandSpecificData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ AVB17221AECPMessageProvider = (*AVB17221AECPAEMMessage)(nil)

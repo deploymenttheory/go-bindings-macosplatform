@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func componentSystemAdopt(id objc.ID) *ComponentSystem {
 
 // Description returns the object's -description text.
 func (cs *ComponentSystem) Description() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cs *ComponentSystem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cs *ComponentSystem) IsKind(className string) bool {
+	defer runtime.KeepAlive(cs)
 	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cs *ComponentSystem) String() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
@@ -74,37 +81,48 @@ func NewComponentSystem() *ComponentSystem {
 
 // ObjectAtIndexedSubscript returns the component at the specified index in the system’s list of components.
 func (cs *ComponentSystem) ObjectAtIndexedSubscript(idx int) obj.Object {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
 // AddComponent adds a component instance to the component system.
 func (cs *ComponentSystem) AddComponent(component obj.Object) {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(component)
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
 // AddComponentWithEntity adds any instances of the component system’s component class in the specified entity to the component system.
 func (cs *ComponentSystem) AddComponentWithEntity(entity *Entity) {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(entity)
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("addComponentWithEntity:"), objref.IDOf(entity))
 }
 
 // RemoveComponentWithEntity removes any instances of the component system’s component class in the specified entity from the component system.
 func (cs *ComponentSystem) RemoveComponentWithEntity(entity *Entity) {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(entity)
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("removeComponentWithEntity:"), objref.IDOf(entity))
 }
 
 // RemoveComponent removes the specified component instance from the component system.
 func (cs *ComponentSystem) RemoveComponent(component obj.Object) {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(component)
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("removeComponent:"), objref.IDOf(component))
 }
 
 // UpdateWithDeltaTime tells all component instances managed by the system to perform their custom periodic actions.
 func (cs *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
+	defer runtime.KeepAlive(cs)
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // Components returns the array of components currently in the system.
 func (cs *ComponentSystem) Components() []obj.Object {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,6 +5,8 @@
 package mpsrayintersector
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func temporalAAAdopt(id objc.ID) *TemporalAA {
 
 // Description returns the object's -description text.
 func (ta *TemporalAA) Description() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ta *TemporalAA) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ta *TemporalAA) IsKind(className string) bool {
+	defer runtime.KeepAlive(ta)
 	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ta *TemporalAA) String() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
@@ -78,11 +85,14 @@ func (ta *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
 
 // EncodeWithCoder encodes with coder.
 func (ta *TemporalAA) EncodeWithCoder(coder obj.Object) {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(coder)
 	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // BlendFactor returns how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
 func (ta *TemporalAA) BlendFactor() float32 {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[float32](objref.IDOf(ta), objc.RegisterName("blendFactor"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func playerVideoOutputAdopt(id objc.ID) *PlayerVideoOutput {
 
 // Description returns the object's -description text.
 func (pvo *PlayerVideoOutput) Description() string {
+	defer runtime.KeepAlive(pvo)
 	return rt.Description(objref.IDOf(pvo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pvo *PlayerVideoOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pvo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pvo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pvo *PlayerVideoOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(pvo)
 	return rt.IsKind(objref.IDOf(pvo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pvo *PlayerVideoOutput) String() string {
+	defer runtime.KeepAlive(pvo)
 	return rt.Description(objref.IDOf(pvo))
 }
 
 // NewPlayerVideoOutputWithSpecification creates a video output from a specification.
 func NewPlayerVideoOutputWithSpecification(specification *VideoOutputSpecification) *PlayerVideoOutput {
+	defer runtime.KeepAlive(specification)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerVideoOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), objref.IDOf(specification))
 	return playerVideoOutputAdopt(_id)

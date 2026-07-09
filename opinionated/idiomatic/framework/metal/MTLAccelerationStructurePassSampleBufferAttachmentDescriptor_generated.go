@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func accelerationStructurePassSampleBufferAttachmentDescriptorAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(aspsbad)
 	return rt.Description(objref.IDOf(aspsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aspsbad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aspsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(aspsbad)
 	return rt.IsKind(objref.IDOf(aspsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(aspsbad)
 	return rt.Description(objref.IDOf(aspsbad))
 }
 
@@ -84,12 +91,14 @@ func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithEn
 
 // StartOfEncoderSampleIndex returns the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
 func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
+	defer runtime.KeepAlive(aspsbad)
 	_r := objc.Send[int](objref.IDOf(aspsbad), objc.RegisterName("startOfEncoderSampleIndex"))
 	return _r
 }
 
 // EndOfEncoderSampleIndex returns the sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
 func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
+	defer runtime.KeepAlive(aspsbad)
 	_r := objc.Send[int](objref.IDOf(aspsbad), objc.RegisterName("endOfEncoderSampleIndex"))
 	return _r
 }

@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterPressureMeasurementAdopt(id objc.ID) *MTRClusterPressureMeasureme
 
 // NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPressureMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterPressureMeasurementAdopt(_id)
@@ -53,93 +59,123 @@ func NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue(device *MTRDevice
 
 // NewMTRClusterPressureMeasurementWithDeviceEndpointQueue creates a new MTRClusterPressureMeasurement.
 func NewMTRClusterPressureMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterPressureMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterPressureMeasurementAdopt(_id)
 }
 
 // ReadAttributeMeasuredValueWithParams reads attribute measured value with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinMeasuredValueWithParams reads attribute min measured value with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxMeasuredValueWithParams reads attribute max measured value with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeToleranceWithParams reads attribute tolerance with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeToleranceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeScaledValueWithParams reads attribute scaled value with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaledValueWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaledValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeScaledValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinScaledValueWithParams reads attribute min scaled value with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMinScaledValueWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMinScaledValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMinScaledValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxScaledValueWithParams reads attribute max scaled value with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMaxScaledValueWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMaxScaledValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMaxScaledValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeScaledToleranceWithParams reads attribute scaled tolerance with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaledToleranceWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaledToleranceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeScaledToleranceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeScaleWithParams reads attribute scale with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaleWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaleWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeScaleWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcpm *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcpm *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcpm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterPressureMeasurement)(nil)

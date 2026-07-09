@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -83,48 +85,56 @@ func (cl *CNNLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount
 
 // LossType returns see MPSCNNLossDescriptor for information about the following properties.
 func (cl *CNNLoss) LossType() CNNLossType {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[CNNLossType](objref.IDOf(cl), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType returns the reduction type.
 func (cl *CNNLoss) ReductionType() CNNReductionType {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[CNNReductionType](objref.IDOf(cl), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // Weight returns the weight.
 func (cl *CNNLoss) Weight() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing.
 func (cl *CNNLoss) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // NumberOfClasses returns the number of classes.
 func (cl *CNNLoss) NumberOfClasses() int {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // Epsilon returns the epsilon.
 func (cl *CNNLoss) Epsilon() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta.
 func (cl *CNNLoss) Delta() float32 {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("delta"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (cl *CNNLoss) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }

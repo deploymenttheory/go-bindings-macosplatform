@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func deviceBatteryAdopt(id objc.ID) *DeviceBattery {
 
 // Description returns the object's -description text.
 func (db *DeviceBattery) Description() string {
+	defer runtime.KeepAlive(db)
 	return rt.Description(objref.IDOf(db))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (db *DeviceBattery) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(db)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(db), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (db *DeviceBattery) IsKind(className string) bool {
+	defer runtime.KeepAlive(db)
 	return rt.IsKind(objref.IDOf(db), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (db *DeviceBattery) String() string {
+	defer runtime.KeepAlive(db)
 	return rt.Description(objref.IDOf(db))
 }
 
@@ -74,12 +81,14 @@ func NewDeviceBattery() *DeviceBattery {
 
 // BatteryLevel returns this is the battery level for controller. Battery level ranges from 0.0 (fully discharged) to 1.0 (100% charged) and defaults to 0
 func (db *DeviceBattery) BatteryLevel() float32 {
+	defer runtime.KeepAlive(db)
 	_r := objc.Send[float32](objref.IDOf(db), objc.RegisterName("batteryLevel"))
 	return _r
 }
 
 // BatteryState returns a battery state for controller, defaults to GCControllerBatteryStateUnknown
 func (db *DeviceBattery) BatteryState() DeviceBatteryState {
+	defer runtime.KeepAlive(db)
 	_r := objc.Send[DeviceBatteryState](objref.IDOf(db), objc.RegisterName("batteryState"))
 	return _r
 }

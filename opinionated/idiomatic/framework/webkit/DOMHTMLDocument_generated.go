@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -124,6 +126,7 @@ func (dd *DOMHTMLDocument) WithCookie(cookie string) *DOMHTMLDocument {
 
 // WithBody sets the body.
 func (dd *DOMHTMLDocument) WithBody(body DOMHTMLElementProvider) *DOMHTMLDocument {
+	defer runtime.KeepAlive(body)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setBody:"), objref.IDOf(body))
 	return dd
 }
@@ -160,71 +163,84 @@ func (dd *DOMHTMLDocument) WithTextContent(textContent string) *DOMHTMLDocument 
 
 // Open wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) Open() {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("open"))
 }
 
 // Close wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) Close() {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("close"))
 }
 
 // Write wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) Write(text string) {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("write:"), purego.NSString(text))
 }
 
 // Writeln wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) Writeln(text string) {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("writeln:"), purego.NSString(text))
 }
 
 // Clear wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) Clear() {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("clear"))
 }
 
 // CaptureEvents wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) CaptureEvents() {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("captureEvents"))
 }
 
 // ReleaseEvents wraps the corresponding Objective-C method.
 func (dd *DOMHTMLDocument) ReleaseEvents() {
+	defer runtime.KeepAlive(dd)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("releaseEvents"))
 }
 
 // Embeds returns the embeds.
 func (dd *DOMHTMLDocument) Embeds() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("embeds"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Plugins returns the plugins.
 func (dd *DOMHTMLDocument) Plugins() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("plugins"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Scripts returns the scripts.
 func (dd *DOMHTMLDocument) Scripts() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("scripts"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Width returns the width.
 func (dd *DOMHTMLDocument) Width() int {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[int](objref.IDOf(dd), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the height.
 func (dd *DOMHTMLDocument) Height() int {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[int](objref.IDOf(dd), objc.RegisterName("height"))
 	return _r
 }
 
 // Dir returns the dir.
 func (dd *DOMHTMLDocument) Dir() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("dir"))
 	if _r == 0 {
 		return ""
@@ -234,6 +250,7 @@ func (dd *DOMHTMLDocument) Dir() string {
 
 // DesignMode returns the design mode.
 func (dd *DOMHTMLDocument) DesignMode() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("designMode"))
 	if _r == 0 {
 		return ""
@@ -243,6 +260,7 @@ func (dd *DOMHTMLDocument) DesignMode() string {
 
 // CompatMode returns the compat mode.
 func (dd *DOMHTMLDocument) CompatMode() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("compatMode"))
 	if _r == 0 {
 		return ""
@@ -252,6 +270,7 @@ func (dd *DOMHTMLDocument) CompatMode() string {
 
 // BgColor returns the bg color.
 func (dd *DOMHTMLDocument) BgColor() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("bgColor"))
 	if _r == 0 {
 		return ""
@@ -261,6 +280,7 @@ func (dd *DOMHTMLDocument) BgColor() string {
 
 // FgColor returns the fg color.
 func (dd *DOMHTMLDocument) FgColor() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("fgColor"))
 	if _r == 0 {
 		return ""
@@ -270,6 +290,7 @@ func (dd *DOMHTMLDocument) FgColor() string {
 
 // AlinkColor returns the alink color.
 func (dd *DOMHTMLDocument) AlinkColor() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("alinkColor"))
 	if _r == 0 {
 		return ""
@@ -279,6 +300,7 @@ func (dd *DOMHTMLDocument) AlinkColor() string {
 
 // LinkColor returns the link color.
 func (dd *DOMHTMLDocument) LinkColor() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("linkColor"))
 	if _r == 0 {
 		return ""
@@ -288,6 +310,7 @@ func (dd *DOMHTMLDocument) LinkColor() string {
 
 // VlinkColor returns the vlink color.
 func (dd *DOMHTMLDocument) VlinkColor() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("vlinkColor"))
 	if _r == 0 {
 		return ""
@@ -297,12 +320,14 @@ func (dd *DOMHTMLDocument) VlinkColor() string {
 
 // CreateDocumentFragmentWithMarkupStringBaseURL creates a document fragment containing the given HTML markup.
 func (dd *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupString string, baseURL string) *DOMDocumentFragment {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("createDocumentFragmentWithMarkupString:baseURL:"), purego.NSString(markupString), rt.FileURL(baseURL))
 	return DOMDocumentFragmentFromID(_r)
 }
 
 // CreateDocumentFragmentWithText creates a document fragment containing the given text.
 func (dd *DOMHTMLDocument) CreateDocumentFragmentWithText(text string) *DOMDocumentFragment {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("createDocumentFragmentWithText:"), purego.NSString(text))
 	return DOMDocumentFragmentFromID(_r)
 }

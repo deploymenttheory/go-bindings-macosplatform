@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func bluetoothPasskeyDisplayAdopt(id objc.ID) *BluetoothPasskeyDisplay {
 
 // Description returns the object's -description text.
 func (bpd *BluetoothPasskeyDisplay) Description() string {
+	defer runtime.KeepAlive(bpd)
 	return rt.Description(objref.IDOf(bpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bpd *BluetoothPasskeyDisplay) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bpd *BluetoothPasskeyDisplay) IsKind(className string) bool {
+	defer runtime.KeepAlive(bpd)
 	return rt.IsKind(objref.IDOf(bpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bpd *BluetoothPasskeyDisplay) String() string {
+	defer runtime.KeepAlive(bpd)
 	return rt.Description(objref.IDOf(bpd))
 }
 
@@ -102,6 +109,7 @@ func (bpd *BluetoothPasskeyDisplay) WithPasskey(passkey string) *BluetoothPasske
 
 // WithReturnImage sets the return image.
 func (bpd *BluetoothPasskeyDisplay) WithReturnImage(returnImage obj.Object) *BluetoothPasskeyDisplay {
+	defer runtime.KeepAlive(returnImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setReturnImage:"), objref.IDOf(returnImage))
 	})
@@ -110,6 +118,7 @@ func (bpd *BluetoothPasskeyDisplay) WithReturnImage(returnImage obj.Object) *Blu
 
 // WithReturnHighlightImage sets the return highlight image.
 func (bpd *BluetoothPasskeyDisplay) WithReturnHighlightImage(returnHighlightImage obj.Object) *BluetoothPasskeyDisplay {
+	defer runtime.KeepAlive(returnHighlightImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setReturnHighlightImage:"), objref.IDOf(returnHighlightImage))
 	})
@@ -118,6 +127,7 @@ func (bpd *BluetoothPasskeyDisplay) WithReturnHighlightImage(returnHighlightImag
 
 // WithCenteredView sets the centered view.
 func (bpd *BluetoothPasskeyDisplay) WithCenteredView(centeredView obj.Object) *BluetoothPasskeyDisplay {
+	defer runtime.KeepAlive(centeredView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setCenteredView:"), objref.IDOf(centeredView))
 	})
@@ -126,6 +136,7 @@ func (bpd *BluetoothPasskeyDisplay) WithCenteredView(centeredView obj.Object) *B
 
 // WithBackgroundImageConstraint sets the background image constraint.
 func (bpd *BluetoothPasskeyDisplay) WithBackgroundImageConstraint(backgroundImageConstraint obj.Object) *BluetoothPasskeyDisplay {
+	defer runtime.KeepAlive(backgroundImageConstraint)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setBackgroundImageConstraint:"), objref.IDOf(backgroundImageConstraint))
 	})
@@ -134,6 +145,8 @@ func (bpd *BluetoothPasskeyDisplay) WithBackgroundImageConstraint(backgroundImag
 
 // SetPasskeyForDeviceUsingSSP wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetPasskeyForDeviceUsingSSP(inString string, device obj.Object, isSSP bool) {
+	defer runtime.KeepAlive(bpd)
+	defer runtime.KeepAlive(device)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskey:forDevice:usingSSP:"), purego.NSString(inString), objref.IDOf(device), isSSP)
 	})
@@ -142,6 +155,7 @@ func (bpd *BluetoothPasskeyDisplay) SetPasskeyForDeviceUsingSSP(inString string,
 
 // AdvancePasskeyIndicator wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) AdvancePasskeyIndicator() {
+	defer runtime.KeepAlive(bpd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("advancePasskeyIndicator"))
 	})
@@ -150,6 +164,7 @@ func (bpd *BluetoothPasskeyDisplay) AdvancePasskeyIndicator() {
 
 // RetreatPasskeyIndicator wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) RetreatPasskeyIndicator() {
+	defer runtime.KeepAlive(bpd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("retreatPasskeyIndicator"))
 	})
@@ -158,6 +173,7 @@ func (bpd *BluetoothPasskeyDisplay) RetreatPasskeyIndicator() {
 
 // ResetPasskeyIndicator resets passkey indicator.
 func (bpd *BluetoothPasskeyDisplay) ResetPasskeyIndicator() {
+	defer runtime.KeepAlive(bpd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("resetPasskeyIndicator"))
 	})
@@ -166,6 +182,8 @@ func (bpd *BluetoothPasskeyDisplay) ResetPasskeyIndicator() {
 
 // SetupUIForDevice wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetupUIForDevice(device obj.Object) {
+	defer runtime.KeepAlive(bpd)
+	defer runtime.KeepAlive(device)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setupUIForDevice:"), objref.IDOf(device))
 	})
@@ -174,6 +192,8 @@ func (bpd *BluetoothPasskeyDisplay) SetupUIForDevice(device obj.Object) {
 
 // SetupUIForSSPDevice wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetupUIForSSPDevice(device obj.Object) {
+	defer runtime.KeepAlive(bpd)
+	defer runtime.KeepAlive(device)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setupUIForSSPDevice:"), objref.IDOf(device))
 	})
@@ -182,6 +202,7 @@ func (bpd *BluetoothPasskeyDisplay) SetupUIForSSPDevice(device obj.Object) {
 
 // SetPasskeyString wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetPasskeyString(inString string) {
+	defer runtime.KeepAlive(bpd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskeyString:"), purego.NSString(inString))
 	})
@@ -190,6 +211,7 @@ func (bpd *BluetoothPasskeyDisplay) SetPasskeyString(inString string) {
 
 // SetPasskeyIndicatorEnabled wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) SetPasskeyIndicatorEnabled(inEnabled bool) {
+	defer runtime.KeepAlive(bpd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("setPasskeyIndicatorEnabled:"), inEnabled)
 	})
@@ -198,6 +220,7 @@ func (bpd *BluetoothPasskeyDisplay) SetPasskeyIndicatorEnabled(inEnabled bool) {
 
 // ResetAll resets all.
 func (bpd *BluetoothPasskeyDisplay) ResetAll() {
+	defer runtime.KeepAlive(bpd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("resetAll"))
 	})
@@ -206,6 +229,7 @@ func (bpd *BluetoothPasskeyDisplay) ResetAll() {
 
 // UsePasskeyNotificaitons wraps the corresponding Objective-C method.
 func (bpd *BluetoothPasskeyDisplay) UsePasskeyNotificaitons() bool {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -219,6 +243,7 @@ func (bpd *BluetoothPasskeyDisplay) UsePasskeyNotificaitons() bool {
 
 // IsIncomingRequest reports whether the object is incoming request.
 func (bpd *BluetoothPasskeyDisplay) IsIncomingRequest() bool {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -232,6 +257,7 @@ func (bpd *BluetoothPasskeyDisplay) IsIncomingRequest() bool {
 
 // Passkey returns the passkey.
 func (bpd *BluetoothPasskeyDisplay) Passkey() string {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -248,6 +274,7 @@ func (bpd *BluetoothPasskeyDisplay) Passkey() string {
 
 // ReturnImage returns the return image.
 func (bpd *BluetoothPasskeyDisplay) ReturnImage() obj.Object {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -261,6 +288,7 @@ func (bpd *BluetoothPasskeyDisplay) ReturnImage() obj.Object {
 
 // ReturnHighlightImage returns the return highlight image.
 func (bpd *BluetoothPasskeyDisplay) ReturnHighlightImage() obj.Object {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -274,6 +302,7 @@ func (bpd *BluetoothPasskeyDisplay) ReturnHighlightImage() obj.Object {
 
 // CenteredView returns the centered view.
 func (bpd *BluetoothPasskeyDisplay) CenteredView() obj.Object {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -287,6 +316,7 @@ func (bpd *BluetoothPasskeyDisplay) CenteredView() obj.Object {
 
 // BackgroundImageConstraint returns the background image constraint.
 func (bpd *BluetoothPasskeyDisplay) BackgroundImageConstraint() obj.Object {
+	defer runtime.KeepAlive(bpd)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

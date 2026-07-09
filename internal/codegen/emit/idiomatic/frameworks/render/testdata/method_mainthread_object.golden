@@ -1,4 +1,6 @@
-func (x *NSView) Window() obj.Object {var _mainthread0 obj.Object
+func (x *NSView) Window() obj.Object {
+defer runtime.KeepAlive(x)
+var _mainthread0 obj.Object
 purego.Main(func() {
 _mainthread0 = func() obj.Object {
 _r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))

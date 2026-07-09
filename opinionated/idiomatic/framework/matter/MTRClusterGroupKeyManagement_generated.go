@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterGroupKeyManagementAdopt(id objc.ID) *MTRClusterGroupKeyManagement
 
 // NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterGroupKeyManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterGroupKeyManagementAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterGroupKeyManagementWithDeviceEndpointIDQueue(device *MTRDevice,
 
 // NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue creates a new MTRClusterGroupKeyManagement.
 func NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterGroupKeyManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroupKeyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterGroupKeyManagementAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterGroupKeyManagementWithDeviceEndpointQueue(device *MTRDevice, e
 //
 // KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExp
 //
 // KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
@@ -115,6 +128,8 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpecte
 //
 // KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error
@@ -137,73 +152,99 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithExpectedValue
 }
 
 // ReadAttributeGroupKeyMapWithParams reads attribute group key map with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeGroupKeyMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeGroupKeyMapWithValueExpectedValueInterval writes attribute group key map with value expected value interval.
-func (mcgkm *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcgkm *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams writes attribute group key map with value expected value interval params.
-func (mcgkm *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcgkm *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGroupTableWithParams reads attribute group table with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeGroupTableWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxGroupsPerFabricWithParams reads attribute max groups per fabric with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeMaxGroupsPerFabricWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxGroupKeysPerFabricWithParams reads attribute max group keys per fabric with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeMaxGroupKeysPerFabricWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // KeySetReadWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // KeySetReadWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadResponseParams, err error) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadResponseParams
 		err error
@@ -229,6 +270,9 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadWithParamsExpectedValuesExp
 //
 // KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupKeyManagementClusterKeySetReadAllIndicesParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams, err error) {
+	defer runtime.KeepAlive(mcgkm)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams
 		err error

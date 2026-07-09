@@ -5,12 +5,14 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -64,9 +66,22 @@ func NewBrowser() *Browser {
 
 // WithCellPrototype sets the prototype NSCell for displaying items in the matrices in the columns of the browser.
 func (b *Browser) WithCellPrototype(cellPrototype obj.Object) *Browser {
+	defer runtime.KeepAlive(cellPrototype)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCellPrototype:"), objref.IDOf(cellPrototype))
 	})
+	return b
+}
+
+// WithDelegate sets the browser’s delegate.
+func (b *Browser) WithDelegate(delegate BrowserDelegate) *Browser {
+	_shim := newBrowserDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(b), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(b), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return b
 }
 
@@ -176,6 +191,7 @@ func (b *Browser) WithPathSeparator(pathSeparator string) *Browser {
 
 // WithSelectionIndexPath sets the index path of the item selected in the browser.
 func (b *Browser) WithSelectionIndexPath(selectionIndexPath obj.Object) *Browser {
+	defer runtime.KeepAlive(selectionIndexPath)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(selectionIndexPath))
 	})
@@ -225,6 +241,7 @@ func (b *Browser) WithRowHeight(rowHeight float64) *Browser {
 
 // WithColumnsAutosaveName sets the name used to automatically save the browser’s column configuration.
 func (b *Browser) WithColumnsAutosaveName(columnsAutosaveName obj.Object) *Browser {
+	defer runtime.KeepAlive(columnsAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setColumnsAutosaveName:"), objref.IDOf(columnsAutosaveName))
 	})
@@ -241,6 +258,7 @@ func (b *Browser) WithAllowsTypeSelect(allowsTypeSelect bool) *Browser {
 
 // WithBackgroundColor sets the browser’s background color.
 func (b *Browser) WithBackgroundColor(backgroundColor *Color) *Browser {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -249,6 +267,7 @@ func (b *Browser) WithBackgroundColor(backgroundColor *Color) *Browser {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (b *Browser) WithTarget(target obj.Object) *Browser {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -313,6 +332,7 @@ func (b *Browser) WithControlSize(controlSize ControlSize) *Browser {
 
 // WithFormatter sets the receiver’s formatter.
 func (b *Browser) WithFormatter(formatter obj.Object) *Browser {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -321,6 +341,7 @@ func (b *Browser) WithFormatter(formatter obj.Object) *Browser {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (b *Browser) WithObjectValue(objectValue obj.Object) *Browser {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -337,6 +358,7 @@ func (b *Browser) WithStringValue(stringValue string) *Browser {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (b *Browser) WithAttributedStringValue(attributedStringValue obj.Object) *Browser {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -377,6 +399,7 @@ func (b *Browser) WithDoubleValue(doubleValue float64) *Browser {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (b *Browser) WithFont(font *Font) *Browser {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -425,6 +448,7 @@ func (b *Browser) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Bro
 
 // WithCell sets the cell.
 func (b *Browser) WithCell(cell CellProvider) *Browser {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -570,6 +594,7 @@ func (b *Browser) WithWantsLayer(wantsLayer bool) *Browser {
 
 // WithLayer sets the layer.
 func (b *Browser) WithLayer(layer obj.Object) *Browser {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -619,6 +644,7 @@ func (b *Browser) WithBackgroundFilters(items ...obj.Object) *Browser {
 
 // WithCompositingFilter sets the compositing filter.
 func (b *Browser) WithCompositingFilter(compositingFilter obj.Object) *Browser {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -636,6 +662,7 @@ func (b *Browser) WithContentFilters(items ...obj.Object) *Browser {
 
 // WithShadow sets the shadow.
 func (b *Browser) WithShadow(shadow *Shadow) *Browser {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -684,6 +711,7 @@ func (b *Browser) WithPreparedContentRect(preparedContentRect corefoundation.CGR
 
 // WithNextKeyView sets the next key view.
 func (b *Browser) WithNextKeyView(nextKeyView ViewProvider) *Browser {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -733,6 +761,7 @@ func (b *Browser) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (b *Browser) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Browser {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -789,6 +818,7 @@ func (b *Browser) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 
 // WithPressureConfiguration sets the pressure configuration.
 func (b *Browser) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Browser {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -797,6 +827,7 @@ func (b *Browser) WithPressureConfiguration(pressureConfiguration *PressureConfi
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (b *Browser) WithNextResponder(nextResponder ResponderProvider) *Browser {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -805,6 +836,7 @@ func (b *Browser) WithNextResponder(nextResponder ResponderProvider) *Browser {
 
 // WithMenu sets returns the responder’s menu.
 func (b *Browser) WithMenu(menu *Menu) *Browser {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -813,6 +845,7 @@ func (b *Browser) WithMenu(menu *Menu) *Browser {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (b *Browser) WithUserActivity(userActivity obj.Object) *Browser {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -821,6 +854,7 @@ func (b *Browser) WithUserActivity(userActivity obj.Object) *Browser {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (b *Browser) WithTouchBar(touchBar *TouchBar) *Browser {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -829,6 +863,7 @@ func (b *Browser) WithTouchBar(touchBar *TouchBar) *Browser {
 
 // LoadColumnZero loads column 0; unloads previously loaded columns.
 func (b *Browser) LoadColumnZero() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("loadColumnZero"))
 	})
@@ -837,6 +872,8 @@ func (b *Browser) LoadColumnZero() {
 
 // ItemAtIndexPath returns the item at the specified index path.
 func (b *Browser) ItemAtIndexPath(indexPath obj.Object) obj.Object {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -850,6 +887,7 @@ func (b *Browser) ItemAtIndexPath(indexPath obj.Object) obj.Object {
 
 // ItemAtRowInColumn returns the item located at the specified row and column.
 func (b *Browser) ItemAtRowInColumn(row int, column int) obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -862,12 +900,13 @@ func (b *Browser) ItemAtRowInColumn(row int, column int) obj.Object {
 }
 
 // IndexPathForColumn returns the index path of the item whose children are displayed in the given column.
-func (b *Browser) IndexPathForColumn(column int) obj.Object {
-	var _mainthread0 obj.Object
+func (b *Browser) IndexPathForColumn(column int) *foundation.IndexPath {
+	defer runtime.KeepAlive(b)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("indexPathForColumn:"), column)
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -876,6 +915,8 @@ func (b *Browser) IndexPathForColumn(column int) obj.Object {
 
 // IsLeafItem returns whether the specified item is a leaf item.
 func (b *Browser) IsLeafItem(item obj.Object) bool {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -889,6 +930,8 @@ func (b *Browser) IsLeafItem(item obj.Object) bool {
 
 // ReloadDataForRowIndexesInColumn updates the rows in the column with the specified column index with indexes in the specified set.
 func (b *Browser) ReloadDataForRowIndexesInColumn(rowIndexes obj.Object, column int) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(rowIndexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("reloadDataForRowIndexes:inColumn:"), objref.IDOf(rowIndexes), column)
 	})
@@ -897,6 +940,7 @@ func (b *Browser) ReloadDataForRowIndexesInColumn(rowIndexes obj.Object, column 
 
 // ParentForItemsInColumn returns the item that contains the children located in the specified column.
 func (b *Browser) ParentForItemsInColumn(column int) obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -910,6 +954,7 @@ func (b *Browser) ParentForItemsInColumn(column int) obj.Object {
 
 // ScrollRowToVisibleInColumn scrolls the specified row to be visible within the specified column.
 func (b *Browser) ScrollRowToVisibleInColumn(row int, column int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollRowToVisible:inColumn:"), row, column)
 	})
@@ -917,15 +962,17 @@ func (b *Browser) ScrollRowToVisibleInColumn(row int, column int) {
 }
 
 // SetTitleOfColumn sets the title of the given column.
-func (b *Browser) SetTitleOfColumn(string_ string, column int) {
+func (b *Browser) SetTitleOfColumn(str string, column int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitle:ofColumn:"), purego.NSString(string_), column)
+		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTitle:ofColumn:"), purego.NSString(str), column)
 	})
 
 }
 
 // TitleOfColumn returns the title displayed for the given column.
 func (b *Browser) TitleOfColumn(column int) string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -942,6 +989,7 @@ func (b *Browser) TitleOfColumn(column int) string {
 
 // SetPath sets the path to be displayed by the browser.
 func (b *Browser) SetPath(path string) bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -955,6 +1003,7 @@ func (b *Browser) SetPath(path string) bool {
 
 // Path returns a string representing the browser’s current path.
 func (b *Browser) Path() string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -971,6 +1020,7 @@ func (b *Browser) Path() string {
 
 // PathToColumn returns a string representing the path from the first column up to, but not including, the column at the given index.
 func (b *Browser) PathToColumn(column int) string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -987,6 +1037,7 @@ func (b *Browser) PathToColumn(column int) string {
 
 // SelectedCellInColumn returns the last (lowest) cell selected in the given column.
 func (b *Browser) SelectedCellInColumn(column int) obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1000,6 +1051,7 @@ func (b *Browser) SelectedCellInColumn(column int) obj.Object {
 
 // SelectRowInColumn selects the cell at the specified row and column index.
 func (b *Browser) SelectRowInColumn(row int, column int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectRow:inColumn:"), row, column)
 	})
@@ -1008,6 +1060,7 @@ func (b *Browser) SelectRowInColumn(row int, column int) {
 
 // SelectedRowInColumn returns the row index of the selected cell in the specified column.
 func (b *Browser) SelectedRowInColumn(column int) int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1021,6 +1074,8 @@ func (b *Browser) SelectedRowInColumn(column int) int {
 
 // SelectRowIndexesInColumn specifies the selected rows in a given column of the browser.
 func (b *Browser) SelectRowIndexesInColumn(indexes obj.Object, column int) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectRowIndexes:inColumn:"), objref.IDOf(indexes), column)
 	})
@@ -1028,12 +1083,13 @@ func (b *Browser) SelectRowIndexesInColumn(indexes obj.Object, column int) {
 }
 
 // SelectedRowIndexesInColumn provides the indexes of the selected rows in a given column of the browser.
-func (b *Browser) SelectedRowIndexesInColumn(column int) obj.Object {
-	var _mainthread0 obj.Object
+func (b *Browser) SelectedRowIndexesInColumn(column int) *foundation.IndexSet {
+	defer runtime.KeepAlive(b)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectedRowIndexesInColumn:"), column)
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1042,6 +1098,7 @@ func (b *Browser) SelectedRowIndexesInColumn(column int) obj.Object {
 
 // ReloadColumn reloads the given column.
 func (b *Browser) ReloadColumn(column int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("reloadColumn:"), column)
 	})
@@ -1050,6 +1107,7 @@ func (b *Browser) ReloadColumn(column int) {
 
 // ValidateVisibleColumns validates the browser’s visible columns.
 func (b *Browser) ValidateVisibleColumns() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("validateVisibleColumns"))
 	})
@@ -1058,6 +1116,7 @@ func (b *Browser) ValidateVisibleColumns() {
 
 // ScrollColumnsRightBy scrolls columns right by the specified number of columns.
 func (b *Browser) ScrollColumnsRightBy(shiftAmount int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollColumnsRightBy:"), shiftAmount)
 	})
@@ -1066,6 +1125,7 @@ func (b *Browser) ScrollColumnsRightBy(shiftAmount int) {
 
 // ScrollColumnsLeftBy scrolls columns left by the specified number of columns.
 func (b *Browser) ScrollColumnsLeftBy(shiftAmount int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollColumnsLeftBy:"), shiftAmount)
 	})
@@ -1074,6 +1134,7 @@ func (b *Browser) ScrollColumnsLeftBy(shiftAmount int) {
 
 // ScrollColumnToVisible scrolls to make the specified column visible.
 func (b *Browser) ScrollColumnToVisible(column int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollColumnToVisible:"), column)
 	})
@@ -1082,6 +1143,7 @@ func (b *Browser) ScrollColumnToVisible(column int) {
 
 // AddColumn adds a column to the right of the last column.
 func (b *Browser) AddColumn() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("addColumn"))
 	})
@@ -1090,6 +1152,7 @@ func (b *Browser) AddColumn() {
 
 // LoadedCellAtRowColumn loads, if necessary, and returns the cell at the specified row and column location.
 func (b *Browser) LoadedCellAtRowColumn(row int, col int) obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1103,6 +1166,8 @@ func (b *Browser) LoadedCellAtRowColumn(row int, col int) obj.Object {
 
 // SelectAll selects all cells in the last column of the browser.
 func (b *Browser) SelectAll(sender obj.Object) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 	})
@@ -1111,6 +1176,7 @@ func (b *Browser) SelectAll(sender obj.Object) {
 
 // Tile adjusts the various subviews of the browser—scrollers, columns, titles, and so on—without redrawing.
 func (b *Browser) Tile() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("tile"))
 	})
@@ -1119,6 +1185,8 @@ func (b *Browser) Tile() {
 
 // DoClick responds to (single) mouse clicks in a column of the browser.
 func (b *Browser) DoClick(sender obj.Object) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("doClick:"), objref.IDOf(sender))
 	})
@@ -1127,6 +1195,8 @@ func (b *Browser) DoClick(sender obj.Object) {
 
 // DoDoubleClick responds to double clicks in a column of the browser.
 func (b *Browser) DoDoubleClick(sender obj.Object) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("doDoubleClick:"), objref.IDOf(sender))
 	})
@@ -1135,6 +1205,7 @@ func (b *Browser) DoDoubleClick(sender obj.Object) {
 
 // SendAction reports whether sends the action message to the target.
 func (b *Browser) SendAction() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1148,6 +1219,7 @@ func (b *Browser) SendAction() bool {
 
 // TitleFrameOfColumn returns the bounds of the title frame for the specified column.
 func (b *Browser) TitleFrameOfColumn(column int) corefoundation.CGRect {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1161,6 +1233,7 @@ func (b *Browser) TitleFrameOfColumn(column int) corefoundation.CGRect {
 
 // DrawTitleOfColumnInRect draws the title for the specified column within the given rectangle.
 func (b *Browser) DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("drawTitleOfColumn:inRect:"), column, rect)
 	})
@@ -1169,6 +1242,7 @@ func (b *Browser) DrawTitleOfColumnInRect(column int, rect corefoundation.CGRect
 
 // FrameOfColumn returns the rectangle containing the given column.
 func (b *Browser) FrameOfColumn(column int) corefoundation.CGRect {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1182,6 +1256,7 @@ func (b *Browser) FrameOfColumn(column int) corefoundation.CGRect {
 
 // FrameOfInsideOfColumn returns the rectangle containing the specified column, not including borders.
 func (b *Browser) FrameOfInsideOfColumn(column int) corefoundation.CGRect {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1195,6 +1270,7 @@ func (b *Browser) FrameOfInsideOfColumn(column int) corefoundation.CGRect {
 
 // FrameOfRowInColumn returns the frame of the cell at the specified location, including the expandable arrow.
 func (b *Browser) FrameOfRowInColumn(row int, column int) corefoundation.CGRect {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1208,6 +1284,7 @@ func (b *Browser) FrameOfRowInColumn(row int, column int) corefoundation.CGRect 
 
 // GetRowColumnForPoint gets the row and column coordinates for the specified point, if a cell exists at that point.
 func (b *Browser) GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, row int64, column int64) {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	var _mainthread1 int64
 	var _mainthread2 int64
@@ -1225,6 +1302,7 @@ func (b *Browser) GetRowColumnForPoint(point corefoundation.CGPoint) (ok bool, r
 
 // ColumnWidthForColumnContentWidth returns the column width for the width of the given column’s content.
 func (b *Browser) ColumnWidthForColumnContentWidth(columnContentWidth float64) float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1238,6 +1316,7 @@ func (b *Browser) ColumnWidthForColumnContentWidth(columnContentWidth float64) f
 
 // ColumnContentWidthForColumnWidth returns the content width for a given column width.
 func (b *Browser) ColumnContentWidthForColumnWidth(columnWidth float64) float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1251,6 +1330,7 @@ func (b *Browser) ColumnContentWidthForColumnWidth(columnWidth float64) float64 
 
 // SetWidthOfColumn sets the width of the specified column.
 func (b *Browser) SetWidthOfColumn(columnWidth float64, columnIndex int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWidth:ofColumn:"), columnWidth, columnIndex)
 	})
@@ -1259,6 +1339,7 @@ func (b *Browser) SetWidthOfColumn(columnWidth float64, columnIndex int) {
 
 // WidthOfColumn returns the width of the specified column.
 func (b *Browser) WidthOfColumn(column int) float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1272,6 +1353,8 @@ func (b *Browser) WidthOfColumn(column int) float64 {
 
 // NoteHeightOfRowsWithIndexesChangedInColumn immediately retiles the browser’s columns using row heights specified by the browser’s delegate.
 func (b *Browser) NoteHeightOfRowsWithIndexesChangedInColumn(indexSet obj.Object, columnIndex int) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(indexSet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("noteHeightOfRowsWithIndexesChanged:inColumn:"), objref.IDOf(indexSet), columnIndex)
 	})
@@ -1280,6 +1363,7 @@ func (b *Browser) NoteHeightOfRowsWithIndexesChangedInColumn(indexSet obj.Object
 
 // SetDefaultColumnWidth sets the default column width for new browser columns that do not otherwise have an initial width from defaults or the browser’s delegate.
 func (b *Browser) SetDefaultColumnWidth(columnWidth float64) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDefaultColumnWidth:"), columnWidth)
 	})
@@ -1288,6 +1372,7 @@ func (b *Browser) SetDefaultColumnWidth(columnWidth float64) {
 
 // DefaultColumnWidth returns the default column width of the browser’s columns.
 func (b *Browser) DefaultColumnWidth() float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1301,6 +1386,9 @@ func (b *Browser) DefaultColumnWidth() float64 {
 
 // CanDragRowsWithIndexesInColumnWithEvent indicates whether the browser can attempt to initiate a drag of the given rows for the given event.
 func (b *Browser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes obj.Object, column int, event *Event) bool {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(rowIndexes)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1314,6 +1402,7 @@ func (b *Browser) CanDragRowsWithIndexesInColumnWithEvent(rowIndexes obj.Object,
 
 // SetDraggingSourceOperationMaskForLocal specifies the drag-operation mask for dragging operations with local or external destinations.
 func (b *Browser) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
 	})
@@ -1322,6 +1411,9 @@ func (b *Browser) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isL
 
 // EditItemAtIndexPathWithEventSelect begins editing the item at the specified path.
 func (b *Browser) EditItemAtIndexPathWithEventSelect(indexPath obj.Object, event *Event, select_ bool) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(indexPath)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("editItemAtIndexPath:withEvent:select:"), objref.IDOf(indexPath), objref.IDOf(event), select_)
 	})
@@ -1330,6 +1422,7 @@ func (b *Browser) EditItemAtIndexPathWithEventSelect(indexPath obj.Object, event
 
 // IsLoaded reports whether the object is loaded.
 func (b *Browser) IsLoaded() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1343,6 +1436,7 @@ func (b *Browser) IsLoaded() bool {
 
 // CellPrototype returns the cell prototype.
 func (b *Browser) CellPrototype() obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1356,6 +1450,7 @@ func (b *Browser) CellPrototype() obj.Object {
 
 // ReusesColumns wraps the corresponding Objective-C method.
 func (b *Browser) ReusesColumns() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1369,6 +1464,7 @@ func (b *Browser) ReusesColumns() bool {
 
 // HasHorizontalScroller reports whether the object has horizontal scroller.
 func (b *Browser) HasHorizontalScroller() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1382,6 +1478,7 @@ func (b *Browser) HasHorizontalScroller() bool {
 
 // AutohidesScroller wraps the corresponding Objective-C method.
 func (b *Browser) AutohidesScroller() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1395,6 +1492,7 @@ func (b *Browser) AutohidesScroller() bool {
 
 // SeparatesColumns wraps the corresponding Objective-C method.
 func (b *Browser) SeparatesColumns() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1408,6 +1506,7 @@ func (b *Browser) SeparatesColumns() bool {
 
 // IsTitled reports whether the object is titled.
 func (b *Browser) IsTitled() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1421,6 +1520,7 @@ func (b *Browser) IsTitled() bool {
 
 // MinColumnWidth returns the min column width.
 func (b *Browser) MinColumnWidth() float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1434,6 +1534,7 @@ func (b *Browser) MinColumnWidth() float64 {
 
 // MaxVisibleColumns returns the max visible columns.
 func (b *Browser) MaxVisibleColumns() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1447,6 +1548,7 @@ func (b *Browser) MaxVisibleColumns() int {
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (b *Browser) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1460,6 +1562,7 @@ func (b *Browser) AllowsMultipleSelection() bool {
 
 // AllowsBranchSelection wraps the corresponding Objective-C method.
 func (b *Browser) AllowsBranchSelection() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1473,6 +1576,7 @@ func (b *Browser) AllowsBranchSelection() bool {
 
 // AllowsEmptySelection wraps the corresponding Objective-C method.
 func (b *Browser) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1486,6 +1590,7 @@ func (b *Browser) AllowsEmptySelection() bool {
 
 // TakesTitleFromPreviousColumn wraps the corresponding Objective-C method.
 func (b *Browser) TakesTitleFromPreviousColumn() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1499,6 +1604,7 @@ func (b *Browser) TakesTitleFromPreviousColumn() bool {
 
 // SendsActionOnArrowKeys wraps the corresponding Objective-C method.
 func (b *Browser) SendsActionOnArrowKeys() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1512,6 +1618,7 @@ func (b *Browser) SendsActionOnArrowKeys() bool {
 
 // PathSeparator returns the path separator.
 func (b *Browser) PathSeparator() string {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1528,6 +1635,7 @@ func (b *Browser) PathSeparator() string {
 
 // ClickedColumn returns the clicked column.
 func (b *Browser) ClickedColumn() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1541,6 +1649,7 @@ func (b *Browser) ClickedColumn() int {
 
 // ClickedRow returns the clicked row.
 func (b *Browser) ClickedRow() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1554,6 +1663,7 @@ func (b *Browser) ClickedRow() int {
 
 // SelectedColumn returns the selected column.
 func (b *Browser) SelectedColumn() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1569,6 +1679,7 @@ func (b *Browser) SelectedColumn() int {
 //
 // SelectedCells returns the collection as a Go slice.
 func (b *Browser) SelectedCells() []*Cell {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 []*Cell
 	purego.Main(func() {
 		_mainthread0 = func() []*Cell {
@@ -1580,12 +1691,13 @@ func (b *Browser) SelectedCells() []*Cell {
 }
 
 // SelectionIndexPath returns the selection index path.
-func (b *Browser) SelectionIndexPath() obj.Object {
-	var _mainthread0 obj.Object
+func (b *Browser) SelectionIndexPath() *foundation.IndexPath {
+	defer runtime.KeepAlive(b)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("selectionIndexPath"))
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1596,6 +1708,7 @@ func (b *Browser) SelectionIndexPath() obj.Object {
 //
 // SelectionIndexPaths returns the collection as a Go slice.
 func (b *Browser) SelectionIndexPaths() []obj.Object {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1608,6 +1721,7 @@ func (b *Browser) SelectionIndexPaths() []obj.Object {
 
 // LastColumn returns the last column.
 func (b *Browser) LastColumn() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1621,6 +1735,7 @@ func (b *Browser) LastColumn() int {
 
 // NumberOfVisibleColumns returns the number of visible columns.
 func (b *Browser) NumberOfVisibleColumns() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1634,6 +1749,7 @@ func (b *Browser) NumberOfVisibleColumns() int {
 
 // FirstVisibleColumn returns the first visible column.
 func (b *Browser) FirstVisibleColumn() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1647,6 +1763,7 @@ func (b *Browser) FirstVisibleColumn() int {
 
 // LastVisibleColumn returns the last visible column.
 func (b *Browser) LastVisibleColumn() int {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1660,6 +1777,7 @@ func (b *Browser) LastVisibleColumn() int {
 
 // TitleHeight returns the title height.
 func (b *Browser) TitleHeight() float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1673,6 +1791,7 @@ func (b *Browser) TitleHeight() float64 {
 
 // ColumnResizingType returns the column resizing type.
 func (b *Browser) ColumnResizingType() BrowserColumnResizingType {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 BrowserColumnResizingType
 	purego.Main(func() {
 		_mainthread0 = func() BrowserColumnResizingType {
@@ -1686,6 +1805,7 @@ func (b *Browser) ColumnResizingType() BrowserColumnResizingType {
 
 // PrefersAllColumnUserResizing wraps the corresponding Objective-C method.
 func (b *Browser) PrefersAllColumnUserResizing() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1699,6 +1819,7 @@ func (b *Browser) PrefersAllColumnUserResizing() bool {
 
 // RowHeight returns the row height.
 func (b *Browser) RowHeight() float64 {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1711,12 +1832,13 @@ func (b *Browser) RowHeight() float64 {
 }
 
 // ColumnsAutosaveName returns the columns autosave name.
-func (b *Browser) ColumnsAutosaveName() obj.Object {
-	var _mainthread0 obj.Object
+func (b *Browser) ColumnsAutosaveName() *foundation.String {
+	defer runtime.KeepAlive(b)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("columnsAutosaveName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1725,6 +1847,7 @@ func (b *Browser) ColumnsAutosaveName() obj.Object {
 
 // AllowsTypeSelect wraps the corresponding Objective-C method.
 func (b *Browser) AllowsTypeSelect() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1738,6 +1861,7 @@ func (b *Browser) AllowsTypeSelect() bool {
 
 // BackgroundColor returns the background color.
 func (b *Browser) BackgroundColor() *Color {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1751,6 +1875,7 @@ func (b *Browser) BackgroundColor() *Color {
 
 // SetAcceptsArrowKeys specifies whether the browser allows navigation using the arrow keys.
 func (b *Browser) SetAcceptsArrowKeys(flag bool) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsArrowKeys:"), flag)
 	})
@@ -1759,6 +1884,7 @@ func (b *Browser) SetAcceptsArrowKeys(flag bool) {
 
 // AcceptsArrowKeys reports whether the browser allows navigation using the arrow keys.
 func (b *Browser) AcceptsArrowKeys() bool {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1772,6 +1898,7 @@ func (b *Browser) AcceptsArrowKeys() bool {
 
 // DisplayColumn updates the browser to display the given column.
 func (b *Browser) DisplayColumn(column int) {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("displayColumn:"), column)
 	})
@@ -1780,6 +1907,7 @@ func (b *Browser) DisplayColumn(column int) {
 
 // DisplayAllColumns updates the browser to display all loaded columns.
 func (b *Browser) DisplayAllColumns() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("displayAllColumns"))
 	})
@@ -1788,6 +1916,8 @@ func (b *Browser) DisplayAllColumns() {
 
 // ScrollViaScroller scrolls columns left or right based on an NSScroller.
 func (b *Browser) ScrollViaScroller(sender *Scroller) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("scrollViaScroller:"), objref.IDOf(sender))
 	})
@@ -1796,6 +1926,7 @@ func (b *Browser) ScrollViaScroller(sender *Scroller) {
 
 // UpdateScroller updates the horizontal scroller to reflect column positions.
 func (b *Browser) UpdateScroller() {
+	defer runtime.KeepAlive(b)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("updateScroller"))
 	})
@@ -1804,6 +1935,8 @@ func (b *Browser) UpdateScroller() {
 
 // ColumnOfMatrix returns the column number in which the given matrix is located.
 func (b *Browser) ColumnOfMatrix(matrix *Matrix) int {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(matrix)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1817,6 +1950,7 @@ func (b *Browser) ColumnOfMatrix(matrix *Matrix) int {
 
 // MatrixInColumn returns the matrix located in the specified column.
 func (b *Browser) MatrixInColumn(column int) *Matrix {
+	defer runtime.KeepAlive(b)
 	var _mainthread0 *Matrix
 	purego.Main(func() {
 		_mainthread0 = func() *Matrix {

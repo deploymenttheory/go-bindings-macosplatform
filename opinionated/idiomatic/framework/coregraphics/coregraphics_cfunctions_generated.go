@@ -2506,23 +2506,23 @@ func CGContextShowGlyphsWithAdvances(c obj.Object, advances unsafe.Pointer, coun
 var _fnCGContextShowText func(objc.ID, unsafe.Pointer, int)
 
 // CGContextShowText calls the CoreGraphics framework function CGContextShowText.
-func CGContextShowText(c obj.Object, string_ unsafe.Pointer, length int) {
+func CGContextShowText(c obj.Object, str unsafe.Pointer, length int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowText == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowText, _lib, "CGContextShowText")
 	}
-	_fnCGContextShowText(objref.IDOf(c), string_, length)
+	_fnCGContextShowText(objref.IDOf(c), str, length)
 }
 
 var _fnCGContextShowTextAtPoint func(objc.ID, float64, float64, unsafe.Pointer, int)
 
 // CGContextShowTextAtPoint calls the CoreGraphics framework function CGContextShowTextAtPoint.
-func CGContextShowTextAtPoint(c obj.Object, x float64, y float64, string_ unsafe.Pointer, length int) {
+func CGContextShowTextAtPoint(c obj.Object, x float64, y float64, str unsafe.Pointer, length int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGContextShowTextAtPoint == nil {
 		ebipurego.RegisterLibFunc(&_fnCGContextShowTextAtPoint, _lib, "CGContextShowTextAtPoint")
 	}
-	_fnCGContextShowTextAtPoint(objref.IDOf(c), x, y, string_, length)
+	_fnCGContextShowTextAtPoint(objref.IDOf(c), x, y, str, length)
 }
 
 var _fnCGContextStrokeEllipseInRect func(objc.ID, corefoundation.CGRect)
@@ -5475,12 +5475,12 @@ func CGPDFContextSetDestinationForRect(context_ obj.Object, name obj.Object, rec
 var _fnCGPDFContextSetIDTree func(objc.ID, objc.ID)
 
 // CGPDFContextSetIDTree calls the CoreGraphics framework function CGPDFContextSetIDTree.
-func CGPDFContextSetIDTree(context_ obj.Object, iDTreeDictionary obj.Object) {
+func CGPDFContextSetIDTree(context_ obj.Object, idTreeDictionary obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFContextSetIDTree == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFContextSetIDTree, _lib, "CGPDFContextSetIDTree")
 	}
-	_fnCGPDFContextSetIDTree(objref.IDOf(context_), objref.IDOf(iDTreeDictionary))
+	_fnCGPDFContextSetIDTree(objref.IDOf(context_), objref.IDOf(idTreeDictionary))
 }
 
 var _fnCGPDFContextSetOutline func(objc.ID, objc.ID)
@@ -6301,36 +6301,36 @@ func CGPDFStreamGetDictionary(stream obj.Object) obj.Object {
 var _fnCGPDFStringCopyDate func(objc.ID) objc.ID
 
 // CGPDFStringCopyDate calls the CoreGraphics framework function CGPDFStringCopyDate.
-func CGPDFStringCopyDate(string_ obj.Object) obj.Object {
+func CGPDFStringCopyDate(str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringCopyDate == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringCopyDate, _lib, "CGPDFStringCopyDate")
 	}
-	_ret := _fnCGPDFStringCopyDate(objref.IDOf(string_))
+	_ret := _fnCGPDFStringCopyDate(objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
 var _fnCGPDFStringCopyTextString func(objc.ID) objc.ID
 
 // CGPDFStringCopyTextString calls the CoreGraphics framework function CGPDFStringCopyTextString.
-func CGPDFStringCopyTextString(string_ obj.Object) obj.Object {
+func CGPDFStringCopyTextString(str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringCopyTextString == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringCopyTextString, _lib, "CGPDFStringCopyTextString")
 	}
-	_ret := _fnCGPDFStringCopyTextString(objref.IDOf(string_))
+	_ret := _fnCGPDFStringCopyTextString(objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
 var _fnCGPDFStringGetLength func(objc.ID) int
 
 // CGPDFStringGetLength calls the CoreGraphics framework function CGPDFStringGetLength.
-func CGPDFStringGetLength(string_ obj.Object) int {
+func CGPDFStringGetLength(str obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCGPDFStringGetLength == nil {
 		ebipurego.RegisterLibFunc(&_fnCGPDFStringGetLength, _lib, "CGPDFStringGetLength")
 	}
-	return _fnCGPDFStringGetLength(objref.IDOf(string_))
+	return _fnCGPDFStringGetLength(objref.IDOf(str))
 }
 
 var _fnCGPDFTagTypeGetName func(CGPDFTagType) string

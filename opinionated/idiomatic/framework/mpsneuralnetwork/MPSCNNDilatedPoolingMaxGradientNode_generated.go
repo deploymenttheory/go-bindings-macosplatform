@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,9 @@ func cNNDilatedPoolingMaxGradientNodeAdopt(id objc.ID) *CNNDilatedPoolingMaxGrad
 
 // NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY make a pooling gradient node It would be much easier to use [inferencePoolingNode gradientNodeForSourceGradient:] instead.
 func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode, kernelWidth int, kernelHeight int, strideInPixelsX int, strideInPixelsY int, dilationRateX int, dilationRateY int) *CNNDilatedPoolingMaxGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:dilationRateX:dilationRateY:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY, dilationRateX, dilationRateY)
 	return cNNDilatedPoolingMaxGradientNodeAdopt(_id)
@@ -58,12 +63,14 @@ func (cdpmgn *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDila
 
 // DilationRateX returns the dilation rate x.
 func (cdpmgn *CNNDilatedPoolingMaxGradientNode) DilationRateX() int {
+	defer runtime.KeepAlive(cdpmgn)
 	_r := objc.Send[int](objref.IDOf(cdpmgn), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
 // DilationRateY returns the dilation rate y.
 func (cdpmgn *CNNDilatedPoolingMaxGradientNode) DilationRateY() int {
+	defer runtime.KeepAlive(cdpmgn)
 	_r := objc.Send[int](objref.IDOf(cdpmgn), objc.RegisterName("dilationRateY"))
 	return _r
 }

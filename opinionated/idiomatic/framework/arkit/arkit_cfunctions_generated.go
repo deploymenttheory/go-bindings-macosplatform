@@ -7,6 +7,7 @@ package arkit
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -16,7 +17,7 @@ import (
 var _fnArAnchorGetIdentifier func(objc.ID, unsafe.Pointer)
 
 // ArAnchorGetIdentifier calls the ARKit framework function ar_anchor_get_identifier.
-func ArAnchorGetIdentifier(anchor obj.Object) (out_identifier uint8) {
+func ArAnchorGetIdentifier(anchor obj.Object) (outIdentifier uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArAnchorGetIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnArAnchorGetIdentifier, _lib, "ar_anchor_get_identifier")
@@ -37,142 +38,142 @@ func ArAnchorGetTimestamp(anchor obj.Object) float64 {
 	return _fnArAnchorGetTimestamp(objref.IDOf(anchor))
 }
 
-var _fnArAuthorizationResultGetAuthorizationType func(objc.ID) Ar_authorization_type_t
+var _fnArAuthorizationResultGetAuthorizationType func(objc.ID) AuthorizationType
 
 // ArAuthorizationResultGetAuthorizationType calls the ARKit framework function ar_authorization_result_get_authorization_type.
-func ArAuthorizationResultGetAuthorizationType(authorization_result obj.Object) Ar_authorization_type_t {
+func ArAuthorizationResultGetAuthorizationType(authorizationResult obj.Object) AuthorizationType {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArAuthorizationResultGetAuthorizationType == nil {
 		ebipurego.RegisterLibFunc(&_fnArAuthorizationResultGetAuthorizationType, _lib, "ar_authorization_result_get_authorization_type")
 	}
-	return _fnArAuthorizationResultGetAuthorizationType(objref.IDOf(authorization_result))
+	return _fnArAuthorizationResultGetAuthorizationType(objref.IDOf(authorizationResult))
 }
 
-var _fnArAuthorizationResultGetStatus func(objc.ID) Ar_authorization_status_t
+var _fnArAuthorizationResultGetStatus func(objc.ID) AuthorizationStatus
 
 // ArAuthorizationResultGetStatus calls the ARKit framework function ar_authorization_result_get_status.
-func ArAuthorizationResultGetStatus(authorization_result obj.Object) Ar_authorization_status_t {
+func ArAuthorizationResultGetStatus(authorizationResult obj.Object) AuthorizationStatus {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArAuthorizationResultGetStatus == nil {
 		ebipurego.RegisterLibFunc(&_fnArAuthorizationResultGetStatus, _lib, "ar_authorization_result_get_status")
 	}
-	return _fnArAuthorizationResultGetStatus(objref.IDOf(authorization_result))
+	return _fnArAuthorizationResultGetStatus(objref.IDOf(authorizationResult))
 }
 
 var _fnArAuthorizationResultsEnumerateResultsF func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // ArAuthorizationResultsEnumerateResultsF calls the ARKit framework function ar_authorization_results_enumerate_results_f.
-func ArAuthorizationResultsEnumerateResultsF(authorization_results obj.Object, context_ unsafe.Pointer, authorization_results_enumerator_function unsafe.Pointer) {
+func ArAuthorizationResultsEnumerateResultsF(authorizationResults obj.Object, context_ unsafe.Pointer, authorizationResultsEnumeratorFunction unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArAuthorizationResultsEnumerateResultsF == nil {
 		ebipurego.RegisterLibFunc(&_fnArAuthorizationResultsEnumerateResultsF, _lib, "ar_authorization_results_enumerate_results_f")
 	}
-	_fnArAuthorizationResultsEnumerateResultsF(objref.IDOf(authorization_results), context_, authorization_results_enumerator_function)
+	_fnArAuthorizationResultsEnumerateResultsF(objref.IDOf(authorizationResults), context_, authorizationResultsEnumeratorFunction)
 }
 
 var _fnArAuthorizationResultsGetCount func(objc.ID) int
 
 // ArAuthorizationResultsGetCount calls the ARKit framework function ar_authorization_results_get_count.
-func ArAuthorizationResultsGetCount(authorization_results obj.Object) int {
+func ArAuthorizationResultsGetCount(authorizationResults obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArAuthorizationResultsGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnArAuthorizationResultsGetCount, _lib, "ar_authorization_results_get_count")
 	}
-	return _fnArAuthorizationResultsGetCount(objref.IDOf(authorization_results))
+	return _fnArAuthorizationResultsGetCount(objref.IDOf(authorizationResults))
 }
 
-var _fnArDataProviderGetRequiredAuthorizationType func(objc.ID) Ar_authorization_type_t
+var _fnArDataProviderGetRequiredAuthorizationType func(objc.ID) AuthorizationType
 
 // ArDataProviderGetRequiredAuthorizationType calls the ARKit framework function ar_data_provider_get_required_authorization_type.
-func ArDataProviderGetRequiredAuthorizationType(data_provider obj.Object) Ar_authorization_type_t {
+func ArDataProviderGetRequiredAuthorizationType(dataProvider obj.Object) AuthorizationType {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProviderGetRequiredAuthorizationType == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProviderGetRequiredAuthorizationType, _lib, "ar_data_provider_get_required_authorization_type")
 	}
-	return _fnArDataProviderGetRequiredAuthorizationType(objref.IDOf(data_provider))
+	return _fnArDataProviderGetRequiredAuthorizationType(objref.IDOf(dataProvider))
 }
 
-var _fnArDataProviderGetState func(objc.ID) Ar_data_provider_state_t
+var _fnArDataProviderGetState func(objc.ID) DataProviderState
 
 // ArDataProviderGetState calls the ARKit framework function ar_data_provider_get_state.
-func ArDataProviderGetState(data_provider obj.Object) Ar_data_provider_state_t {
+func ArDataProviderGetState(dataProvider obj.Object) DataProviderState {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProviderGetState == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProviderGetState, _lib, "ar_data_provider_get_state")
 	}
-	return _fnArDataProviderGetState(objref.IDOf(data_provider))
+	return _fnArDataProviderGetState(objref.IDOf(dataProvider))
 }
 
 var _fnArDataProvidersAddDataProvider func(objc.ID, objc.ID)
 
 // ArDataProvidersAddDataProvider calls the ARKit framework function ar_data_providers_add_data_provider.
-func ArDataProvidersAddDataProvider(data_providers obj.Object, data_provider_to_add obj.Object) {
+func ArDataProvidersAddDataProvider(dataProviders obj.Object, dataProviderToAdd obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersAddDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersAddDataProvider, _lib, "ar_data_providers_add_data_provider")
 	}
-	_fnArDataProvidersAddDataProvider(objref.IDOf(data_providers), objref.IDOf(data_provider_to_add))
+	_fnArDataProvidersAddDataProvider(objref.IDOf(dataProviders), objref.IDOf(dataProviderToAdd))
 }
 
 var _fnArDataProvidersAddDataProviders func(objc.ID, objc.ID)
 
 // ArDataProvidersAddDataProviders calls the ARKit framework function ar_data_providers_add_data_providers.
-func ArDataProvidersAddDataProviders(data_providers obj.Object, data_providers_to_add obj.Object) {
+func ArDataProvidersAddDataProviders(dataProviders obj.Object, dataProvidersToAdd obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersAddDataProviders == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersAddDataProviders, _lib, "ar_data_providers_add_data_providers")
 	}
-	_fnArDataProvidersAddDataProviders(objref.IDOf(data_providers), objref.IDOf(data_providers_to_add))
+	_fnArDataProvidersAddDataProviders(objref.IDOf(dataProviders), objref.IDOf(dataProvidersToAdd))
 }
 
 var _fnArDataProvidersEnumerateDataProvidersF func(objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // ArDataProvidersEnumerateDataProvidersF calls the ARKit framework function ar_data_providers_enumerate_data_providers_f.
-func ArDataProvidersEnumerateDataProvidersF(data_providers obj.Object, context_ unsafe.Pointer, data_providers_enumerator_function unsafe.Pointer) {
+func ArDataProvidersEnumerateDataProvidersF(dataProviders obj.Object, context_ unsafe.Pointer, dataProvidersEnumeratorFunction unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersEnumerateDataProvidersF == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersEnumerateDataProvidersF, _lib, "ar_data_providers_enumerate_data_providers_f")
 	}
-	_fnArDataProvidersEnumerateDataProvidersF(objref.IDOf(data_providers), context_, data_providers_enumerator_function)
+	_fnArDataProvidersEnumerateDataProvidersF(objref.IDOf(dataProviders), context_, dataProvidersEnumeratorFunction)
 }
 
 var _fnArDataProvidersGetCount func(objc.ID) int
 
 // ArDataProvidersGetCount calls the ARKit framework function ar_data_providers_get_count.
-func ArDataProvidersGetCount(data_providers obj.Object) int {
+func ArDataProvidersGetCount(dataProviders obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersGetCount == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersGetCount, _lib, "ar_data_providers_get_count")
 	}
-	return _fnArDataProvidersGetCount(objref.IDOf(data_providers))
+	return _fnArDataProvidersGetCount(objref.IDOf(dataProviders))
 }
 
 var _fnArDataProvidersRemoveDataProvider func(objc.ID, objc.ID)
 
 // ArDataProvidersRemoveDataProvider calls the ARKit framework function ar_data_providers_remove_data_provider.
-func ArDataProvidersRemoveDataProvider(data_providers obj.Object, data_provider_to_remove obj.Object) {
+func ArDataProvidersRemoveDataProvider(dataProviders obj.Object, dataProviderToRemove obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersRemoveDataProvider == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersRemoveDataProvider, _lib, "ar_data_providers_remove_data_provider")
 	}
-	_fnArDataProvidersRemoveDataProvider(objref.IDOf(data_providers), objref.IDOf(data_provider_to_remove))
+	_fnArDataProvidersRemoveDataProvider(objref.IDOf(dataProviders), objref.IDOf(dataProviderToRemove))
 }
 
 var _fnArDataProvidersRemoveDataProviders func(objc.ID, objc.ID)
 
 // ArDataProvidersRemoveDataProviders calls the ARKit framework function ar_data_providers_remove_data_providers.
-func ArDataProvidersRemoveDataProviders(data_providers obj.Object, data_providers_to_remove obj.Object) {
+func ArDataProvidersRemoveDataProviders(dataProviders obj.Object, dataProvidersToRemove obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDataProvidersRemoveDataProviders == nil {
 		ebipurego.RegisterLibFunc(&_fnArDataProvidersRemoveDataProviders, _lib, "ar_data_providers_remove_data_providers")
 	}
-	_fnArDataProvidersRemoveDataProviders(objref.IDOf(data_providers), objref.IDOf(data_providers_to_remove))
+	_fnArDataProvidersRemoveDataProviders(objref.IDOf(dataProviders), objref.IDOf(dataProvidersToRemove))
 }
 
 var _fnArDeviceAnchorGetIdentifier func(objc.ID, unsafe.Pointer)
 
 // ArDeviceAnchorGetIdentifier calls the ARKit framework function ar_device_anchor_get_identifier.
-func ArDeviceAnchorGetIdentifier(anchor obj.Object) (out_identifier uint8) {
+func ArDeviceAnchorGetIdentifier(anchor obj.Object) (outIdentifier uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDeviceAnchorGetIdentifier == nil {
 		ebipurego.RegisterLibFunc(&_fnArDeviceAnchorGetIdentifier, _lib, "ar_device_anchor_get_identifier")
@@ -193,10 +194,10 @@ func ArDeviceAnchorGetTimestamp(anchor obj.Object) float64 {
 	return _fnArDeviceAnchorGetTimestamp(objref.IDOf(anchor))
 }
 
-var _fnArDeviceAnchorGetTrackingState func(objc.ID) Ar_device_anchor_tracking_state_t
+var _fnArDeviceAnchorGetTrackingState func(objc.ID) DeviceAnchorTrackingState
 
 // ArDeviceAnchorGetTrackingState calls the ARKit framework function ar_device_anchor_get_tracking_state.
-func ArDeviceAnchorGetTrackingState(anchor obj.Object) Ar_device_anchor_tracking_state_t {
+func ArDeviceAnchorGetTrackingState(anchor obj.Object) DeviceAnchorTrackingState {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArDeviceAnchorGetTrackingState == nil {
 		ebipurego.RegisterLibFunc(&_fnArDeviceAnchorGetTrackingState, _lib, "ar_device_anchor_get_tracking_state")
@@ -218,24 +219,24 @@ func ArDeviceAnchorIsTracked(anchor obj.Object) bool {
 var _fnArErrorCopyCfError func(objc.ID) objc.ID
 
 // ArErrorCopyCfError calls the ARKit framework function ar_error_copy_cf_error.
-func ArErrorCopyCfError(error_ obj.Object) obj.Object {
+func ArErrorCopyCfError(err obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArErrorCopyCfError == nil {
 		ebipurego.RegisterLibFunc(&_fnArErrorCopyCfError, _lib, "ar_error_copy_cf_error")
 	}
-	_ret := _fnArErrorCopyCfError(objref.IDOf(error_))
+	_ret := _fnArErrorCopyCfError(objref.IDOf(err))
 	return obj.Wrap(_ret)
 }
 
 var _fnArErrorGetErrorCode func(objc.ID) int
 
 // ArErrorGetErrorCode calls the ARKit framework function ar_error_get_error_code.
-func ArErrorGetErrorCode(error_ obj.Object) int {
+func ArErrorGetErrorCode(err obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArErrorGetErrorCode == nil {
 		ebipurego.RegisterLibFunc(&_fnArErrorGetErrorCode, _lib, "ar_error_get_error_code")
 	}
-	return _fnArErrorGetErrorCode(objref.IDOf(error_))
+	return _fnArErrorGetErrorCode(objref.IDOf(err))
 }
 
 var _fnArRelease func(unsafe.Pointer)
@@ -252,35 +253,35 @@ func ArRelease(object unsafe.Pointer) {
 var _fnArSessionCreateWithDevice func(objc.ID) objc.ID
 
 // ArSessionCreateWithDevice calls the ARKit framework function ar_session_create_with_device.
-func ArSessionCreateWithDevice(device obj.Object) obj.Object {
+func ArSessionCreateWithDevice(device obj.Object) *foundation.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArSessionCreateWithDevice == nil {
 		ebipurego.RegisterLibFunc(&_fnArSessionCreateWithDevice, _lib, "ar_session_create_with_device")
 	}
 	_ret := _fnArSessionCreateWithDevice(objref.IDOf(device))
-	return obj.Wrap(_ret)
+	return foundation.ObjectFromID(_ret)
 }
 
 var _fnArSessionRun func(objc.ID, objc.ID)
 
 // ArSessionRun calls the ARKit framework function ar_session_run.
-func ArSessionRun(session obj.Object, data_providers obj.Object) {
+func ArSessionRun(session obj.Object, dataProviders obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArSessionRun == nil {
 		ebipurego.RegisterLibFunc(&_fnArSessionRun, _lib, "ar_session_run")
 	}
-	_fnArSessionRun(objref.IDOf(session), objref.IDOf(data_providers))
+	_fnArSessionRun(objref.IDOf(session), objref.IDOf(dataProviders))
 }
 
 var _fnArSessionSetDataProviderStateChangeHandlerF func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer)
 
 // ArSessionSetDataProviderStateChangeHandlerF calls the ARKit framework function ar_session_set_data_provider_state_change_handler_f.
-func ArSessionSetDataProviderStateChangeHandlerF(session obj.Object, queue obj.Object, context_ unsafe.Pointer, data_provider_state_change_handler_function unsafe.Pointer) {
+func ArSessionSetDataProviderStateChangeHandlerF(session obj.Object, queue obj.Object, context_ unsafe.Pointer, dataProviderStateChangeHandlerFunction unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArSessionSetDataProviderStateChangeHandlerF == nil {
 		ebipurego.RegisterLibFunc(&_fnArSessionSetDataProviderStateChangeHandlerF, _lib, "ar_session_set_data_provider_state_change_handler_f")
 	}
-	_fnArSessionSetDataProviderStateChangeHandlerF(objref.IDOf(session), objref.IDOf(queue), context_, data_provider_state_change_handler_function)
+	_fnArSessionSetDataProviderStateChangeHandlerF(objref.IDOf(session), objref.IDOf(queue), context_, dataProviderStateChangeHandlerFunction)
 }
 
 var _fnArSessionStop func(objc.ID)
@@ -305,10 +306,10 @@ func ArTrackableAnchorIsTracked(anchor obj.Object) bool {
 	return _fnArTrackableAnchorIsTracked(objref.IDOf(anchor))
 }
 
-var _fnArWorldTrackingProviderGetRequiredAuthorizationType func() Ar_authorization_type_t
+var _fnArWorldTrackingProviderGetRequiredAuthorizationType func() AuthorizationType
 
 // ArWorldTrackingProviderGetRequiredAuthorizationType calls the ARKit framework function ar_world_tracking_provider_get_required_authorization_type.
-func ArWorldTrackingProviderGetRequiredAuthorizationType() Ar_authorization_type_t {
+func ArWorldTrackingProviderGetRequiredAuthorizationType() AuthorizationType {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArWorldTrackingProviderGetRequiredAuthorizationType == nil {
 		ebipurego.RegisterLibFunc(&_fnArWorldTrackingProviderGetRequiredAuthorizationType, _lib, "ar_world_tracking_provider_get_required_authorization_type")
@@ -327,13 +328,13 @@ func ArWorldTrackingProviderIsSupported() bool {
 	return _fnArWorldTrackingProviderIsSupported()
 }
 
-var _fnArWorldTrackingProviderQueryDeviceAnchorAtTimestamp func(objc.ID, float64, objc.ID) Ar_device_anchor_query_status_t
+var _fnArWorldTrackingProviderQueryDeviceAnchorAtTimestamp func(objc.ID, float64, objc.ID) DeviceAnchorQueryStatus
 
 // ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp calls the ARKit framework function ar_world_tracking_provider_query_device_anchor_at_timestamp.
-func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(world_tracking_provider obj.Object, timestamp float64, device_anchor obj.Object) Ar_device_anchor_query_status_t {
+func ArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(worldTrackingProvider obj.Object, timestamp float64, deviceAnchor obj.Object) DeviceAnchorQueryStatus {
 	_loadOnce.Do(_loadLibrary)
 	if _fnArWorldTrackingProviderQueryDeviceAnchorAtTimestamp == nil {
 		ebipurego.RegisterLibFunc(&_fnArWorldTrackingProviderQueryDeviceAnchorAtTimestamp, _lib, "ar_world_tracking_provider_query_device_anchor_at_timestamp")
 	}
-	return _fnArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(objref.IDOf(world_tracking_provider), timestamp, objref.IDOf(device_anchor))
+	return _fnArWorldTrackingProviderQueryDeviceAnchorAtTimestamp(objref.IDOf(worldTrackingProvider), timestamp, objref.IDOf(deviceAnchor))
 }

@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,24 +56,28 @@ func NewRectangleFeature() *RectangleFeature {
 
 // TopLeft returns the image coordinate of the upper-left corner of the detected rectangle.
 func (rf *RectangleFeature) TopLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("topLeft"))
 	return _r
 }
 
 // TopRight returns the image coordinate of the upper-right corner of the detected rectangle.
 func (rf *RectangleFeature) TopRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("topRight"))
 	return _r
 }
 
 // BottomLeft returns the image coordinate of the lower-left corner of the detected rectangle.
 func (rf *RectangleFeature) BottomLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
 // BottomRight returns the image coordinate of the lower-right corner of the detected rectangle.
 func (rf *RectangleFeature) BottomRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(rf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("bottomRight"))
 	return _r
 }

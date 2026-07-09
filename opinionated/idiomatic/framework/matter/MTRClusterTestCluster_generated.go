@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,8 @@ func mTRClusterTestClusterAdopt(id objc.ID) *MTRClusterTestCluster {
 
 // NewMTRClusterTestClusterWithDeviceEndpointQueue creates a new MTRClusterTestCluster.
 func NewMTRClusterTestClusterWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterTestCluster {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTestCluster")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterTestClusterAdopt(_id)
@@ -58,6 +61,9 @@ func NewMTRClusterTestClusterWithDeviceEndpointQueue(device *MTRDevice, endpoint
 //
 // TestSpecificWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -83,6 +89,8 @@ func (mctc *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedV
 //
 // TestSpecificWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -108,6 +116,9 @@ func (mctc *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueIn
 //
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestAddArgumentsResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestAddArgumentsResponseParams
 		err error
@@ -133,6 +144,9 @@ func (mctc *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpec
 //
 // TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSimpleArgumentResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestSimpleArgumentResponseParams
 		err error
@@ -158,6 +172,9 @@ func (mctc *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedVa
 //
 // TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestStructArrayArgumentResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestStructArrayArgumentResponseParams
 		err error
@@ -183,6 +200,9 @@ func (mctc *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpec
 //
 // TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -208,6 +228,9 @@ func (mctc *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedVa
 //
 // TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -233,6 +256,9 @@ func (mctc *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpe
 //
 // TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -258,6 +284,9 @@ func (mctc *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpect
 //
 // TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -283,6 +312,9 @@ func (mctc *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpecte
 //
 // TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -308,6 +340,9 @@ func (mctc *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParams
 //
 // TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -333,6 +368,9 @@ func (mctc *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithPa
 //
 // TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestListInt8UReverseResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestListInt8UReverseResponseParams
 		err error
@@ -358,6 +396,9 @@ func (mctc *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpected
 //
 // TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEnumsResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestEnumsResponseParams
 		err error
@@ -383,6 +424,9 @@ func (mctc *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpec
 //
 // TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -408,6 +452,8 @@ func (mctc *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpected
 //
 // TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -433,6 +479,9 @@ func (mctc *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValues
 //
 // TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestComplexNullableOptionalResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -458,6 +507,9 @@ func (mctc *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsE
 //
 // SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterSimpleStructResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStructResponseParams
 		err error
@@ -483,6 +535,9 @@ func (mctc *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValu
 //
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestEventResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestEventResponseParams
 		err error
@@ -508,6 +563,9 @@ func (mctc *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedVal
 //
 // TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mctc *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
 		err error

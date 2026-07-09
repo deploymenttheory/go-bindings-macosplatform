@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -195,6 +197,7 @@ func (dse *DOMHTMLScriptElement) WithTextContent(textContent string) *DOMHTMLScr
 
 // Text returns the text.
 func (dse *DOMHTMLScriptElement) Text() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -204,6 +207,7 @@ func (dse *DOMHTMLScriptElement) Text() string {
 
 // HTMLFor returns the HTML for.
 func (dse *DOMHTMLScriptElement) HTMLFor() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("htmlFor"))
 	if _r == 0 {
 		return ""
@@ -213,6 +217,7 @@ func (dse *DOMHTMLScriptElement) HTMLFor() string {
 
 // Event returns the event.
 func (dse *DOMHTMLScriptElement) Event() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("event"))
 	if _r == 0 {
 		return ""
@@ -222,6 +227,7 @@ func (dse *DOMHTMLScriptElement) Event() string {
 
 // Charset returns the charset.
 func (dse *DOMHTMLScriptElement) Charset() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("charset"))
 	if _r == 0 {
 		return ""
@@ -231,12 +237,14 @@ func (dse *DOMHTMLScriptElement) Charset() string {
 
 // Defer wraps the corresponding Objective-C method.
 func (dse *DOMHTMLScriptElement) Defer() bool {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("defer"))
 	return _r
 }
 
 // Src returns the src.
 func (dse *DOMHTMLScriptElement) Src() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("src"))
 	if _r == 0 {
 		return ""
@@ -246,6 +254,7 @@ func (dse *DOMHTMLScriptElement) Src() string {
 
 // Type returns the type.
 func (dse *DOMHTMLScriptElement) Type() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""

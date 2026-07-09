@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -59,6 +61,7 @@ func (mpg *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func
 
 // Evaluate wraps the corresponding Objective-C method.
 func (mpg *MaterialPropertyGraph) Evaluate() {
+	defer runtime.KeepAlive(mpg)
 	objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("evaluate"))
 }
 
@@ -66,6 +69,7 @@ func (mpg *MaterialPropertyGraph) Evaluate() {
 //
 // Nodes returns the collection as a Go slice.
 func (mpg *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
+	defer runtime.KeepAlive(mpg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("nodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyNode { return MaterialPropertyNodeFromID(_id) })
 }
@@ -74,6 +78,7 @@ func (mpg *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
 //
 // Connections returns the collection as a Go slice.
 func (mpg *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {
+	defer runtime.KeepAlive(mpg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("connections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyConnection { return MaterialPropertyConnectionFromID(_id) })
 }

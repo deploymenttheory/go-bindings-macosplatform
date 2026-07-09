@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterThermostatAdopt(id objc.ID) *MTRClusterThermostat {
 
 // NewMTRClusterThermostatWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterThermostatWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThermostat {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThermostat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterThermostatAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterThermostatWithDeviceEndpointIDQueue(device *MTRDevice, endpoin
 
 // NewMTRClusterThermostatWithDeviceEndpointQueue creates a new MTRClusterThermostat.
 func NewMTRClusterThermostatWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterThermostat {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThermostat")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterThermostatAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterThermostatWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 //
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterGetWeeklyScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRThermostatClusterGetWeeklyScheduleResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpect
 //
 // AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mct *MTRClusterThermostat) AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterAtomicRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRThermostatClusterAtomicResponseParams
 		err error
@@ -112,689 +125,967 @@ func (mct *MTRClusterThermostat) AtomicRequestWithParamsExpectedValuesExpectedVa
 }
 
 // ReadAttributeLocalTemperatureWithParams reads attribute local temperature with params.
-func (mct *MTRClusterThermostat) ReadAttributeLocalTemperatureWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeLocalTemperatureWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeLocalTemperatureWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOutdoorTemperatureWithParams reads attribute outdoor temperature with params.
-func (mct *MTRClusterThermostat) ReadAttributeOutdoorTemperatureWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOutdoorTemperatureWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOutdoorTemperatureWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOccupancyWithParams reads attribute occupancy with params.
-func (mct *MTRClusterThermostat) ReadAttributeOccupancyWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOccupancyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupancyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAbsMinHeatSetpointLimitWithParams reads attribute abs min heat setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeAbsMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeAbsMinHeatSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMinHeatSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAbsMaxHeatSetpointLimitWithParams reads attribute abs max heat setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeAbsMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeAbsMaxHeatSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMaxHeatSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAbsMinCoolSetpointLimitWithParams reads attribute abs min cool setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeAbsMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeAbsMinCoolSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMinCoolSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAbsMaxCoolSetpointLimitWithParams reads attribute abs max cool setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeAbsMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeAbsMaxCoolSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMaxCoolSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePICoolingDemandWithParams reads attribute pi cooling demand with params.
-func (mct *MTRClusterThermostat) ReadAttributePICoolingDemandWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributePICoolingDemandWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePICoolingDemandWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePIHeatingDemandWithParams reads attribute pi heating demand with params.
-func (mct *MTRClusterThermostat) ReadAttributePIHeatingDemandWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributePIHeatingDemandWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePIHeatingDemandWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeHVACSystemTypeConfigurationWithParams reads attribute hvac system type configuration with params.
-func (mct *MTRClusterThermostat) ReadAttributeHVACSystemTypeConfigurationWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeHVACSystemTypeConfigurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeHVACSystemTypeConfigurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval writes attribute hvac system type configuration with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams writes attribute hvac system type configuration with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLocalTemperatureCalibrationWithParams reads attribute local temperature calibration with params.
-func (mct *MTRClusterThermostat) ReadAttributeLocalTemperatureCalibrationWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeLocalTemperatureCalibrationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeLocalTemperatureCalibrationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval writes attribute local temperature calibration with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams writes attribute local temperature calibration with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOccupiedCoolingSetpointWithParams reads attribute occupied cooling setpoint with params.
-func (mct *MTRClusterThermostat) ReadAttributeOccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedCoolingSetpointWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedCoolingSetpointWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval writes attribute occupied cooling setpoint with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams writes attribute occupied cooling setpoint with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOccupiedHeatingSetpointWithParams reads attribute occupied heating setpoint with params.
-func (mct *MTRClusterThermostat) ReadAttributeOccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedHeatingSetpointWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedHeatingSetpointWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval writes attribute occupied heating setpoint with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams writes attribute occupied heating setpoint with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnoccupiedCoolingSetpointWithParams reads attribute unoccupied cooling setpoint with params.
-func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedCoolingSetpointWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedCoolingSetpointWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval writes attribute unoccupied cooling setpoint with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams writes attribute unoccupied cooling setpoint with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnoccupiedHeatingSetpointWithParams reads attribute unoccupied heating setpoint with params.
-func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedHeatingSetpointWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedHeatingSetpointWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval writes attribute unoccupied heating setpoint with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams writes attribute unoccupied heating setpoint with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMinHeatSetpointLimitWithParams reads attribute min heat setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeMinHeatSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMinHeatSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval writes attribute min heat setpoint limit with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams writes attribute min heat setpoint limit with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMaxHeatSetpointLimitWithParams reads attribute max heat setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeMaxHeatSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMaxHeatSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval writes attribute max heat setpoint limit with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams writes attribute max heat setpoint limit with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMinCoolSetpointLimitWithParams reads attribute min cool setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeMinCoolSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMinCoolSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval writes attribute min cool setpoint limit with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams writes attribute min cool setpoint limit with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMaxCoolSetpointLimitWithParams reads attribute max cool setpoint limit with params.
-func (mct *MTRClusterThermostat) ReadAttributeMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeMaxCoolSetpointLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMaxCoolSetpointLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval writes attribute max cool setpoint limit with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams writes attribute max cool setpoint limit with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMinSetpointDeadBandWithParams reads attribute min setpoint dead band with params.
-func (mct *MTRClusterThermostat) ReadAttributeMinSetpointDeadBandWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeMinSetpointDeadBandWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMinSetpointDeadBandWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval writes attribute min setpoint dead band with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams writes attribute min setpoint dead band with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRemoteSensingWithParams reads attribute remote sensing with params.
-func (mct *MTRClusterThermostat) ReadAttributeRemoteSensingWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeRemoteSensingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeRemoteSensingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRemoteSensingWithValueExpectedValueInterval writes attribute remote sensing with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams writes attribute remote sensing with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeControlSequenceOfOperationWithParams reads attribute control sequence of operation with params.
-func (mct *MTRClusterThermostat) ReadAttributeControlSequenceOfOperationWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeControlSequenceOfOperationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeControlSequenceOfOperationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval writes attribute control sequence of operation with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams writes attribute control sequence of operation with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSystemModeWithParams reads attribute system mode with params.
-func (mct *MTRClusterThermostat) ReadAttributeSystemModeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeSystemModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSystemModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeSystemModeWithValueExpectedValueInterval writes attribute system mode with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSystemModeWithValueExpectedValueIntervalParams writes attribute system mode with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThermostatRunningModeWithParams reads attribute thermostat running mode with params.
-func (mct *MTRClusterThermostat) ReadAttributeThermostatRunningModeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeThermostatRunningModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeThermostatRunningModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeStartOfWeekWithParams reads attribute start of week with params.
-func (mct *MTRClusterThermostat) ReadAttributeStartOfWeekWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeStartOfWeekWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeStartOfWeekWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfWeeklyTransitionsWithParams reads attribute number of weekly transitions with params.
-func (mct *MTRClusterThermostat) ReadAttributeNumberOfWeeklyTransitionsWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfWeeklyTransitionsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfWeeklyTransitionsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfDailyTransitionsWithParams reads attribute number of daily transitions with params.
-func (mct *MTRClusterThermostat) ReadAttributeNumberOfDailyTransitionsWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfDailyTransitionsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfDailyTransitionsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTemperatureSetpointHoldWithParams reads attribute temperature setpoint hold with params.
-func (mct *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeTemperatureSetpointHoldWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval writes attribute temperature setpoint hold with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams writes attribute temperature setpoint hold with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeTemperatureSetpointHoldDurationWithParams reads attribute temperature setpoint hold duration with params.
-func (mct *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldDurationWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeTemperatureSetpointHoldDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval writes attribute temperature setpoint hold duration with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams writes attribute temperature setpoint hold duration with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThermostatProgrammingOperationModeWithParams reads attribute thermostat programming operation mode with params.
-func (mct *MTRClusterThermostat) ReadAttributeThermostatProgrammingOperationModeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeThermostatProgrammingOperationModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeThermostatProgrammingOperationModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval writes attribute thermostat programming operation mode with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams writes attribute thermostat programming operation mode with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThermostatRunningStateWithParams reads attribute thermostat running state with params.
-func (mct *MTRClusterThermostat) ReadAttributeThermostatRunningStateWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeThermostatRunningStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeThermostatRunningStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSetpointChangeSourceWithParams reads attribute setpoint change source with params.
-func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeSourceWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeSourceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointChangeSourceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSetpointChangeAmountWithParams reads attribute setpoint change amount with params.
-func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeAmountWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeAmountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointChangeAmountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSetpointChangeSourceTimestampWithParams reads attribute setpoint change source timestamp with params.
-func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeSourceTimestampWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeSourceTimestampWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointChangeSourceTimestampWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOccupiedSetbackWithParams reads attribute occupied setback with params.
-func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedSetbackWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOccupiedSetbackWithValueExpectedValueInterval writes attribute occupied setback with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams writes attribute occupied setback with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOccupiedSetbackMinWithParams reads attribute occupied setback min with params.
-func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedSetbackMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOccupiedSetbackMaxWithParams reads attribute occupied setback max with params.
-func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedSetbackMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUnoccupiedSetbackWithParams reads attribute unoccupied setback with params.
-func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedSetbackWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval writes attribute unoccupied setback with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams writes attribute unoccupied setback with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnoccupiedSetbackMinWithParams reads attribute unoccupied setback min with params.
-func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedSetbackMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUnoccupiedSetbackMaxWithParams reads attribute unoccupied setback max with params.
-func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedSetbackMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeEmergencyHeatDeltaWithParams reads attribute emergency heat delta with params.
-func (mct *MTRClusterThermostat) ReadAttributeEmergencyHeatDeltaWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeEmergencyHeatDeltaWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeEmergencyHeatDeltaWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval writes attribute emergency heat delta with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams writes attribute emergency heat delta with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACTypeWithParams reads attribute ac type with params.
-func (mct *MTRClusterThermostat) ReadAttributeACTypeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACTypeWithValueExpectedValueInterval writes attribute ac type with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACTypeWithValueExpectedValueIntervalParams writes attribute ac type with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACCapacityWithParams reads attribute ac capacity with params.
-func (mct *MTRClusterThermostat) ReadAttributeACCapacityWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACCapacityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCapacityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACCapacityWithValueExpectedValueInterval writes attribute ac capacity with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACCapacityWithValueExpectedValueIntervalParams writes attribute ac capacity with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACRefrigerantTypeWithParams reads attribute ac refrigerant type with params.
-func (mct *MTRClusterThermostat) ReadAttributeACRefrigerantTypeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACRefrigerantTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACRefrigerantTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval writes attribute ac refrigerant type with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams writes attribute ac refrigerant type with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACCompressorTypeWithParams reads attribute ac compressor type with params.
-func (mct *MTRClusterThermostat) ReadAttributeACCompressorTypeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACCompressorTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCompressorTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACCompressorTypeWithValueExpectedValueInterval writes attribute ac compressor type with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams writes attribute ac compressor type with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACErrorCodeWithParams reads attribute ac error code with params.
-func (mct *MTRClusterThermostat) ReadAttributeACErrorCodeWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACErrorCodeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACErrorCodeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACErrorCodeWithValueExpectedValueInterval writes attribute ac error code with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams writes attribute ac error code with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACLouverPositionWithParams reads attribute ac louver position with params.
-func (mct *MTRClusterThermostat) ReadAttributeACLouverPositionWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACLouverPositionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACLouverPositionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACLouverPositionWithValueExpectedValueInterval writes attribute ac louver position with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams writes attribute ac louver position with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACCoilTemperatureWithParams reads attribute ac coil temperature with params.
-func (mct *MTRClusterThermostat) ReadAttributeACCoilTemperatureWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACCoilTemperatureWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCoilTemperatureWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeACCapacityformatWithParams reads attribute ac capacityformat with params.
-func (mct *MTRClusterThermostat) ReadAttributeACCapacityformatWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeACCapacityformatWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCapacityformatWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeACCapacityformatWithValueExpectedValueInterval writes attribute ac capacityformat with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams writes attribute ac capacityformat with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributePresetTypesWithParams reads attribute preset types with params.
-func (mct *MTRClusterThermostat) ReadAttributePresetTypesWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributePresetTypesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePresetTypesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeScheduleTypesWithParams reads attribute schedule types with params.
-func (mct *MTRClusterThermostat) ReadAttributeScheduleTypesWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeScheduleTypesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeScheduleTypesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfPresetsWithParams reads attribute number of presets with params.
-func (mct *MTRClusterThermostat) ReadAttributeNumberOfPresetsWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfPresetsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfPresetsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfSchedulesWithParams reads attribute number of schedules with params.
-func (mct *MTRClusterThermostat) ReadAttributeNumberOfSchedulesWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfSchedulesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfSchedulesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfScheduleTransitionsWithParams reads attribute number of schedule transitions with params.
-func (mct *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionsWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfScheduleTransitionsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfScheduleTransitionPerDayWithParams reads attribute number of schedule transition per day with params.
-func (mct *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionPerDayWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionPerDayWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfScheduleTransitionPerDayWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePresetHandleWithParams reads attribute active preset handle with params.
-func (mct *MTRClusterThermostat) ReadAttributeActivePresetHandleWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeActivePresetHandleWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeActivePresetHandleWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveScheduleHandleWithParams reads attribute active schedule handle with params.
-func (mct *MTRClusterThermostat) ReadAttributeActiveScheduleHandleWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeActiveScheduleHandleWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeActiveScheduleHandleWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePresetsWithParams reads attribute presets with params.
-func (mct *MTRClusterThermostat) ReadAttributePresetsWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributePresetsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePresetsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributePresetsWithValueExpectedValueInterval writes attribute presets with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributePresetsWithValueExpectedValueIntervalParams writes attribute presets with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSchedulesWithParams reads attribute schedules with params.
-func (mct *MTRClusterThermostat) ReadAttributeSchedulesWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeSchedulesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSchedulesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeSchedulesWithValueExpectedValueInterval writes attribute schedules with value expected value interval.
-func (mct *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSchedulesWithValueExpectedValueIntervalParams writes attribute schedules with value expected value interval params.
-func (mct *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSetpointHoldExpiryTimestampWithParams reads attribute setpoint hold expiry timestamp with params.
-func (mct *MTRClusterThermostat) ReadAttributeSetpointHoldExpiryTimestampWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeSetpointHoldExpiryTimestampWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointHoldExpiryTimestampWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mct *MTRClusterThermostat) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mct *MTRClusterThermostat) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mct *MTRClusterThermostat) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mct *MTRClusterThermostat) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mct *MTRClusterThermostat) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mct *MTRClusterThermostat) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterGetWeeklyScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mct)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRThermostatClusterGetWeeklyScheduleResponseParams
 		err error

@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,6 +48,7 @@ func answerCallIntentResponseAdopt(id objc.ID) *AnswerCallIntentResponse {
 
 // NewAnswerCallIntentResponseWithCodeUserActivity creates a new AnswerCallIntentResponse.
 func NewAnswerCallIntentResponseWithCodeUserActivity(code AnswerCallIntentResponseCode, userActivity obj.Object) *AnswerCallIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INAnswerCallIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return answerCallIntentResponseAdopt(_id)
@@ -60,12 +63,14 @@ func (acir *AnswerCallIntentResponse) WithCallRecords(items ...*CallRecord) *Ans
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (acir *AnswerCallIntentResponse) WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(acir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return acir
 }
 
 // Code returns the code.
 func (acir *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
+	defer runtime.KeepAlive(acir)
 	_r := objc.Send[AnswerCallIntentResponseCode](objref.IDOf(acir), objc.RegisterName("code"))
 	return _r
 }
@@ -74,6 +79,7 @@ func (acir *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
 //
 // CallRecords returns the collection as a Go slice.
 func (acir *AnswerCallIntentResponse) CallRecords() []*CallRecord {
+	defer runtime.KeepAlive(acir)
 	_arr := objc.Send[objc.ID](objref.IDOf(acir), objc.RegisterName("callRecords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CallRecord { return CallRecordFromID(_id) })
 }

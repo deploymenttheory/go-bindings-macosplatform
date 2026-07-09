@@ -2334,12 +2334,12 @@ func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator u
 	return _fnCMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator, imageDescriptionData, size, stringEncoding, flavor, formatDescriptionOut)
 }
 
-func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers *uint8, parameterSetSizes *uint, nALUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) int {
-	return _fnCMVideoFormatDescriptionCreateFromH264ParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nALUnitHeaderLength, formatDescriptionOut)
+func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers *uint8, parameterSetSizes *uint, nalUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) int {
+	return _fnCMVideoFormatDescriptionCreateFromH264ParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nalUnitHeaderLength, formatDescriptionOut)
 }
 
-func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers *uint8, parameterSetSizes *uint, nALUnitHeaderLength int, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nALUnitHeaderLength, extensions, formatDescriptionOut)
+func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers *uint8, parameterSetSizes *uint, nalUnitHeaderLength int, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
+	return _fnCMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nalUnitHeaderLength, extensions, formatDescriptionOut)
 }
 
 func CMVideoFormatDescriptionGetCleanAperture(videoDesc unsafe.Pointer, originIsAtTopLeft uint8) corefoundation.CGRect {
@@ -2354,12 +2354,12 @@ func CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers() unsafe.Poi
 	return _fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers()
 }
 
-func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc unsafe.Pointer, parameterSetIndex uint, parameterSetPointerOut *uint8, parameterSetSizeOut *uint, parameterSetCountOut *uint, nALUnitHeaderLengthOut *int32) int {
-	return _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc, parameterSetIndex, parameterSetPointerOut, parameterSetSizeOut, parameterSetCountOut, nALUnitHeaderLengthOut)
+func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc unsafe.Pointer, parameterSetIndex uint, parameterSetPointerOut *uint8, parameterSetSizeOut *uint, parameterSetCountOut *uint, nalUnitHeaderLengthOut *int32) int {
+	return _fnCMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc, parameterSetIndex, parameterSetPointerOut, parameterSetSizeOut, parameterSetCountOut, nalUnitHeaderLengthOut)
 }
 
-func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc unsafe.Pointer, parameterSetIndex uint, parameterSetPointerOut *uint8, parameterSetSizeOut *uint, parameterSetCountOut *uint, nALUnitHeaderLengthOut *int32) int {
-	return _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc, parameterSetIndex, parameterSetPointerOut, parameterSetSizeOut, parameterSetCountOut, nALUnitHeaderLengthOut)
+func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc unsafe.Pointer, parameterSetIndex uint, parameterSetPointerOut *uint8, parameterSetSizeOut *uint, parameterSetCountOut *uint, nalUnitHeaderLengthOut *int32) int {
+	return _fnCMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc, parameterSetIndex, parameterSetPointerOut, parameterSetSizeOut, parameterSetCountOut, nalUnitHeaderLengthOut)
 }
 
 func CMVideoFormatDescriptionGetPresentationDimensions(videoDesc unsafe.Pointer, usePixelAspectRatio uint8, useCleanAperture uint8) corefoundation.CGSize {

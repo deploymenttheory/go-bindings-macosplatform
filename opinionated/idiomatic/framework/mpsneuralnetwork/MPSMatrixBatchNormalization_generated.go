@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func matrixBatchNormalizationAdopt(id objc.ID) *MatrixBatchNormalization {
 
 // Description returns the object's -description text.
 func (mbn *MatrixBatchNormalization) Description() string {
+	defer runtime.KeepAlive(mbn)
 	return rt.Description(objref.IDOf(mbn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbn *MatrixBatchNormalization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbn *MatrixBatchNormalization) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbn)
 	return rt.IsKind(objref.IDOf(mbn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbn *MatrixBatchNormalization) String() string {
+	defer runtime.KeepAlive(mbn)
 	return rt.Description(objref.IDOf(mbn))
 }
 
@@ -96,53 +103,62 @@ func (mbn *MatrixBatchNormalization) WithComputeStatistics(computeStatistics boo
 
 // SetNeuronTypeParameterAParameterBParameterC specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
 func (mbn *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	defer runtime.KeepAlive(mbn)
 	objc.Send[objc.ID](objref.IDOf(mbn), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
 // NeuronType returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(mbn), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
 func (mbn *MatrixBatchNormalization) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[int](objref.IDOf(mbn), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
 func (mbn *MatrixBatchNormalization) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[int](objref.IDOf(mbn), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Epsilon returns a small value to add to the variance when normalizing the inputs.  Defaults to FLT_MIN upon initialization.
 func (mbn *MatrixBatchNormalization) Epsilon() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // ComputeStatistics reports whether if true the batch statistics will be computed prior to performing the normalization. Otherwise the provided statistics will be used. Defaults to false at initialization time.
 func (mbn *MatrixBatchNormalization) ComputeStatistics() bool {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[bool](objref.IDOf(mbn), objc.RegisterName("computeStatistics"))
 	return _r
 }

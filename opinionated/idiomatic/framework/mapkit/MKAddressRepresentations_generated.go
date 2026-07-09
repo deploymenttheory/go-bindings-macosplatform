@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func addressRepresentationsAdopt(id objc.ID) *AddressRepresentations {
 
 // Description returns the object's -description text.
 func (ar *AddressRepresentations) Description() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ar *AddressRepresentations) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ar *AddressRepresentations) IsKind(className string) bool {
+	defer runtime.KeepAlive(ar)
 	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ar *AddressRepresentations) String() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
@@ -74,6 +81,7 @@ func NewAddressRepresentations() *AddressRepresentations {
 
 // FullAddressIncludingRegionSingleLine returns the the location’s full address, optionally including the country or on a single link without line breaks.
 func (ar *AddressRepresentations) FullAddressIncludingRegionSingleLine(includingRegion bool, singleLine bool) string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("fullAddressIncludingRegion:singleLine:"), includingRegion, singleLine)
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (ar *AddressRepresentations) FullAddressIncludingRegionSingleLine(including
 
 // CityWithContextUsingStyle the city name and, optionally and if applicable, state and region to provide additional disambiguating context.
 func (ar *AddressRepresentations) CityWithContextUsingStyle(style AddressRepresentationsContextStyle) string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityWithContextUsingStyle:"), style)
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (ar *AddressRepresentations) CityWithContextUsingStyle(style AddressReprese
 
 // CityName returns the city name.
 func (ar *AddressRepresentations) CityName() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityName"))
 	if _r == 0 {
 		return ""
@@ -101,6 +111,7 @@ func (ar *AddressRepresentations) CityName() string {
 
 // CityWithContext returns the city with context.
 func (ar *AddressRepresentations) CityWithContext() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cityWithContext"))
 	if _r == 0 {
 		return ""
@@ -110,6 +121,7 @@ func (ar *AddressRepresentations) CityWithContext() string {
 
 // RegionName returns the region name.
 func (ar *AddressRepresentations) RegionName() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("regionName"))
 	if _r == 0 {
 		return ""
@@ -119,6 +131,7 @@ func (ar *AddressRepresentations) RegionName() string {
 
 // RegionCode returns the region code.
 func (ar *AddressRepresentations) RegionCode() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("regionCode"))
 	if _r == 0 {
 		return ""

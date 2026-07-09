@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func distributedLockAdopt(id objc.ID) *DistributedLock {
 
 // Description returns the object's -description text.
 func (dl *DistributedLock) Description() string {
+	defer runtime.KeepAlive(dl)
 	return rt.Description(objref.IDOf(dl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dl *DistributedLock) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dl *DistributedLock) IsKind(className string) bool {
+	defer runtime.KeepAlive(dl)
 	return rt.IsKind(objref.IDOf(dl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dl *DistributedLock) String() string {
+	defer runtime.KeepAlive(dl)
 	return rt.Description(objref.IDOf(dl))
 }
 
@@ -82,29 +89,33 @@ func (dl *DistributedLock) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dl *DistributedLock) WithScriptingProperties(scriptingProperties obj.Object) *DistributedLock {
-	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dl *DistributedLock) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DistributedLock {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dl
 }
 
 // TryLock reports whether attempts to acquire the receiver and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (dl *DistributedLock) TryLock() bool {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[bool](objref.IDOf(dl), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // Unlock relinquishes the receiver.
 func (dl *DistributedLock) Unlock() {
+	defer runtime.KeepAlive(dl)
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("unlock"))
 }
 
 // BreakLock forces the lock to be relinquished.
 func (dl *DistributedLock) BreakLock() {
+	defer runtime.KeepAlive(dl)
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("breakLock"))
 }
 
 // LockDate returns the lock date.
-func (dl *DistributedLock) LockDate() *Date {
+func (dl *DistributedLock) LockDate() time.Time {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("lockDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }

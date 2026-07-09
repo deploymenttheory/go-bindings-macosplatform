@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,34 @@ func mTRAsyncCallbackWorkQueueAdopt(id objc.ID) *MTRAsyncCallbackWorkQueue {
 
 // Description returns the object's -description text.
 func (macwq *MTRAsyncCallbackWorkQueue) Description() string {
+	defer runtime.KeepAlive(macwq)
 	return rt.Description(objref.IDOf(macwq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macwq *MTRAsyncCallbackWorkQueue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macwq)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macwq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macwq *MTRAsyncCallbackWorkQueue) IsKind(className string) bool {
+	defer runtime.KeepAlive(macwq)
 	return rt.IsKind(objref.IDOf(macwq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macwq *MTRAsyncCallbackWorkQueue) String() string {
+	defer runtime.KeepAlive(macwq)
 	return rt.Description(objref.IDOf(macwq))
 }
 
 // NewMTRAsyncCallbackWorkQueueWithContextQueue creates a new MTRAsyncCallbackWorkQueue.
 func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ obj.Object, queue obj.Object) *MTRAsyncCallbackWorkQueue {
+	defer runtime.KeepAlive(context_)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackWorkQueue")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:queue:"), objref.IDOf(context_), objref.IDOf(queue))
 	return mTRAsyncCallbackWorkQueueAdopt(_id)
@@ -73,10 +82,13 @@ func NewMTRAsyncCallbackWorkQueueWithContextQueue(context_ obj.Object, queue obj
 
 // Invalidate wraps the corresponding Objective-C method.
 func (macwq *MTRAsyncCallbackWorkQueue) Invalidate() {
+	defer runtime.KeepAlive(macwq)
 	objc.Send[objc.ID](objref.IDOf(macwq), objc.RegisterName("invalidate"))
 }
 
 // EnqueueWorkItem wraps the corresponding Objective-C method.
 func (macwq *MTRAsyncCallbackWorkQueue) EnqueueWorkItem(item *MTRAsyncCallbackQueueWorkItem) {
+	defer runtime.KeepAlive(macwq)
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objref.IDOf(macwq), objc.RegisterName("enqueueWorkItem:"), objref.IDOf(item))
 }

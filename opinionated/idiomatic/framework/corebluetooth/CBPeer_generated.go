@@ -5,7 +5,10 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,29 +52,35 @@ func peerAdopt(id objc.ID) *Peer {
 
 // Description returns the object's -description text.
 func (p *Peer) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Peer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Peer) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Peer) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // Identifier returns the identifier.
-func (p *Peer) Identifier() obj.Object {
+func (p *Peer) Identifier() *foundation.UUID {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // isPeer marks Peer — and, by embedding promotion, its

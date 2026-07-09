@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func localizedStringAdopt(id objc.ID) *LocalizedString {
 
 // Description returns the object's -description text.
 func (ls *LocalizedString) Description() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ls *LocalizedString) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ls *LocalizedString) IsKind(className string) bool {
+	defer runtime.KeepAlive(ls)
 	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ls *LocalizedString) String() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLocalizedStringWithLocalizedStrings initializes a CSLocalizedString object with the specified dictionary of localized strings.
 func NewLocalizedStringWithLocalizedStrings(localizedStrings obj.Object) *LocalizedString {
+	defer runtime.KeepAlive(localizedStrings)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSLocalizedString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedStrings:"), objref.IDOf(localizedStrings))
 	return localizedStringAdopt(_id)
@@ -75,6 +83,7 @@ func NewLocalizedStringWithLocalizedStrings(localizedStrings obj.Object) *Locali
 
 // LocalizedString returns the localized string for the current language.
 func (ls *LocalizedString) LocalizedString() string {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("localizedString"))
 	if _r == 0 {
 		return ""

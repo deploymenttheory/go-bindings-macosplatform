@@ -6,11 +6,13 @@ package backgroundassets
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,22 +53,27 @@ func assetPackManagerAdopt(id objc.ID) *AssetPackManager {
 
 // Description returns the object's -description text.
 func (apm *AssetPackManager) Description() string {
+	defer runtime.KeepAlive(apm)
 	return rt.Description(objref.IDOf(apm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apm *AssetPackManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apm *AssetPackManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(apm)
 	return rt.IsKind(objref.IDOf(apm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apm *AssetPackManager) String() string {
+	defer runtime.KeepAlive(apm)
 	return rt.Description(objref.IDOf(apm))
 }
 
@@ -76,10 +83,21 @@ func NewAssetPackManager() *AssetPackManager {
 	return assetPackManagerAdopt(_id)
 }
 
+// WithDelegate sets an object that receives notifications about events that occur as an asset pack is downloaded.
+func (apm *AssetPackManager) WithDelegate(delegate ManagedAssetPackDownloadDelegate) *AssetPackManager {
+	_shim := newManagedAssetPackDownloadDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(apm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(apm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return apm
+}
+
 // GetAllAssetPacks gets the asset packs that are available to download.
 //
 // GetAllAssetPacks blocks until the operation completes or ctx is cancelled.
 func (apm *AssetPackManager) GetAllAssetPacks(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(apm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -105,6 +123,7 @@ func (apm *AssetPackManager) GetAllAssetPacks(ctx context.Context) (result obj.O
 //
 // GetAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (apm *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) (result *AssetPack, err error) {
+	defer runtime.KeepAlive(apm)
 	type _result struct {
 		val *AssetPack
 		err error
@@ -128,6 +147,7 @@ func (apm *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, ass
 
 // AssetPackIsAvailableLocallyWithIdentifier checks whether the asset pack with the specified identifier is available locally.
 func (apm *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool {
+	defer runtime.KeepAlive(apm)
 	_r := objc.Send[bool](objref.IDOf(apm), objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:"), purego.NSString(assetPackIdentifier))
 	return _r
 }
@@ -136,6 +156,8 @@ func (apm *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPack
 //
 // EnsureLocalAvailabilityOfAssetPack blocks until the operation completes or ctx is cancelled.
 func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(assetPack)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -155,6 +177,8 @@ func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Cont
 //
 // EnsureLocalAvailabilityOfAssetPackRequireLatestVersion blocks until the operation completes or ctx is cancelled.
 func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error {
+	defer runtime.KeepAlive(apm)
+	defer runtime.KeepAlive(assetPack)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -170,8 +194,9 @@ func (apm *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVers
 	}
 }
 
-// FileDescriptorForPathSearchingInAssetPackWithIdentifierError opens and returns a file descriptor for the asset file at the specified relative path.
-func (apm *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (result int, err error) {
+// FileDescriptorForPathSearchingInAssetPackWithIdentifier opens and returns a file descriptor for the asset file at the specified relative path.
+func (apm *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifier(path string, assetPackIdentifier string) (result int, err error) {
+	defer runtime.KeepAlive(apm)
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(apm), objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:"), purego.NSString(path), purego.NSString(assetPackIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -180,20 +205,22 @@ func (apm *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdenti
 	return _r, nil
 }
 
-// URLForPathError returns a URL for the specified relative path.
-func (apm *AssetPackManager) URLForPathError(path string) (result obj.Object, err error) {
+// URLForPath returns a URL for the specified relative path.
+func (apm *AssetPackManager) URLForPath(path string) (result string, err error) {
+	defer runtime.KeepAlive(apm)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("URLForPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.URLString(_r), nil
 }
 
 // RemoveAssetPackWithIdentifier removes the specified asset pack from the device.
 //
 // RemoveAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (apm *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error {
+	defer runtime.KeepAlive(apm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

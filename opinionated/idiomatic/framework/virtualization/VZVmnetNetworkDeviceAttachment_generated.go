@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func vmnetNetworkDeviceAttachmentAdopt(id objc.ID) *VmnetNetworkDeviceAttachment
 
 // NewVmnetNetworkDeviceAttachmentWithNetwork creates the attachment and configures it with the specified data.
 func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetworkDeviceAttachment {
+	defer runtime.KeepAlive(network)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVmnetNetworkDeviceAttachment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetwork:"), objref.IDOf(network))
 	return vmnetNetworkDeviceAttachmentAdopt(_id)
@@ -55,6 +58,7 @@ func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetwor
 
 // Network returns the network.
 func (vnda *VmnetNetworkDeviceAttachment) Network() obj.Object {
+	defer runtime.KeepAlive(vnda)
 	_r := objc.Send[objc.ID](objref.IDOf(vnda), objc.RegisterName("network"))
 	return obj.Wrap(_r)
 }

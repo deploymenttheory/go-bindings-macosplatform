@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBooleanStateClusterStateChangeEventAdopt(id objc.ID) *MTRBooleanStateClu
 
 // Description returns the object's -description text.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) Description() string {
+	defer runtime.KeepAlive(mbscsce)
 	return rt.Description(objref.IDOf(mbscsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbscsce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbscsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbscsce)
 	return rt.IsKind(objref.IDOf(mbscsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) String() string {
+	defer runtime.KeepAlive(mbscsce)
 	return rt.Description(objref.IDOf(mbscsce))
 }
 
@@ -72,12 +80,14 @@ func NewMTRBooleanStateClusterStateChangeEvent() *MTRBooleanStateClusterStateCha
 
 // WithStateValue sets the state value.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent {
+	defer runtime.KeepAlive(stateValue)
 	objc.Send[objc.ID](objref.IDOf(mbscsce), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
 	return mbscsce
 }
 
 // StateValue returns the state value.
-func (mbscsce *MTRBooleanStateClusterStateChangeEvent) StateValue() obj.Object {
+func (mbscsce *MTRBooleanStateClusterStateChangeEvent) StateValue() *foundation.Number {
+	defer runtime.KeepAlive(mbscsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mbscsce), objc.RegisterName("stateValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

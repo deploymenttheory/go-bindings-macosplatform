@@ -5,6 +5,8 @@
 package oslog
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewLogEntryLog() *LogEntryLog {
 
 // Level returns the level of the entry, e.g., info, debug.
 func (lel *LogEntryLog) Level() LogEntryLogLevel {
+	defer runtime.KeepAlive(lel)
 	_r := objc.Send[LogEntryLogLevel](objref.IDOf(lel), objc.RegisterName("level"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,6 +50,7 @@ func trackRectangleRequestAdopt(id objc.ID) *TrackRectangleRequest {
 
 // NewTrackRectangleRequestWithRectangleObservation creates a new rectangle tracking request with a rectangle observation.
 func NewTrackRectangleRequestWithRectangleObservation(observation *RectangleObservation) *TrackRectangleRequest {
+	defer runtime.KeepAlive(observation)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNTrackRectangleRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRectangleObservation:"), objref.IDOf(observation))
 	return trackRectangleRequestAdopt(_id)
@@ -55,6 +58,7 @@ func NewTrackRectangleRequestWithRectangleObservation(observation *RectangleObse
 
 // WithInputObservation sets the observation object defining a region to track.
 func (trr *TrackRectangleRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest {
+	defer runtime.KeepAlive(inputObservation)
 	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
 	return trr
 }

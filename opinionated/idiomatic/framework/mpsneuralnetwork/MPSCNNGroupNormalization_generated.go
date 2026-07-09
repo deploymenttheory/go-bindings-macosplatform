@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -89,11 +91,13 @@ func (cgn *CNNGroupNormalization) WithSourceFeatureChannelMaxCount(sourceFeature
 
 // ReloadGammaAndBetaFromDataSource reinitialize the filter using the data source provided at kernel initialization.
 func (cgn *CNNGroupNormalization) ReloadGammaAndBetaFromDataSource() {
+	defer runtime.KeepAlive(cgn)
 	objc.Send[objc.ID](objref.IDOf(cgn), objc.RegisterName("reloadGammaAndBetaFromDataSource"))
 }
 
 // Epsilon returns the epsilon value used to bias the variance when normalizing.
 func (cgn *CNNGroupNormalization) Epsilon() float32 {
+	defer runtime.KeepAlive(cgn)
 	_r := objc.Send[float32](objref.IDOf(cgn), objc.RegisterName("epsilon"))
 	return _r
 }

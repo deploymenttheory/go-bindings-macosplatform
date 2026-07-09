@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func qCPatchControllerAdopt(id objc.ID) *QCPatchController {
 
 // Description returns the object's -description text.
 func (qpc *QCPatchController) Description() string {
+	defer runtime.KeepAlive(qpc)
 	return rt.Description(objref.IDOf(qpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qpc *QCPatchController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qpc *QCPatchController) IsKind(className string) bool {
+	defer runtime.KeepAlive(qpc)
 	return rt.IsKind(objref.IDOf(qpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qpc *QCPatchController) String() string {
+	defer runtime.KeepAlive(qpc)
 	return rt.Description(objref.IDOf(qpc))
 }
 

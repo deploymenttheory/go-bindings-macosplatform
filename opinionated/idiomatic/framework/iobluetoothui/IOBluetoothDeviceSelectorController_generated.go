@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func bluetoothDeviceSelectorControllerAdopt(id objc.ID) *BluetoothDeviceSelector
 
 // Description returns the object's -description text.
 func (bdsc *BluetoothDeviceSelectorController) Description() string {
+	defer runtime.KeepAlive(bdsc)
 	return rt.Description(objref.IDOf(bdsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bdsc *BluetoothDeviceSelectorController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bdsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bdsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bdsc *BluetoothDeviceSelectorController) IsKind(className string) bool {
+	defer runtime.KeepAlive(bdsc)
 	return rt.IsKind(objref.IDOf(bdsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bdsc *BluetoothDeviceSelectorController) String() string {
+	defer runtime.KeepAlive(bdsc)
 	return rt.Description(objref.IDOf(bdsc))
 }
 
@@ -80,6 +87,7 @@ func NewBluetoothDeviceSelectorController() *BluetoothDeviceSelectorController {
 
 // RunModal returns runs the device selector panel in a modal session to allow the user to select a Bluetooth device.
 func (bdsc *BluetoothDeviceSelectorController) RunModal() int {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -93,6 +101,7 @@ func (bdsc *BluetoothDeviceSelectorController) RunModal() int {
 
 // Results returns the result of the user’s selection.
 func (bdsc *BluetoothDeviceSelectorController) Results() obj.Object {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -106,6 +115,7 @@ func (bdsc *BluetoothDeviceSelectorController) Results() obj.Object {
 
 // SetOptions sets the option bits that control the panel’s behavior.
 func (bdsc *BluetoothDeviceSelectorController) SetOptions(options uint32) {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setOptions:"), options)
 	})
@@ -114,6 +124,7 @@ func (bdsc *BluetoothDeviceSelectorController) SetOptions(options uint32) {
 
 // Options returns the option bits that control the panel’s behavior.
 func (bdsc *BluetoothDeviceSelectorController) Options() uint32 {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -127,6 +138,8 @@ func (bdsc *BluetoothDeviceSelectorController) Options() uint32 {
 
 // AddAllowedUUID adds a UUID to the list of UUIDs that are used to validate the user’s selection.
 func (bdsc *BluetoothDeviceSelectorController) AddAllowedUUID(allowedUUID obj.Object) {
+	defer runtime.KeepAlive(bdsc)
+	defer runtime.KeepAlive(allowedUUID)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("addAllowedUUID:"), objref.IDOf(allowedUUID))
 	})
@@ -135,6 +148,8 @@ func (bdsc *BluetoothDeviceSelectorController) AddAllowedUUID(allowedUUID obj.Ob
 
 // AddAllowedUUIDArray adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
 func (bdsc *BluetoothDeviceSelectorController) AddAllowedUUIDArray(allowedUUIDArray obj.Object) {
+	defer runtime.KeepAlive(bdsc)
+	defer runtime.KeepAlive(allowedUUIDArray)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("addAllowedUUIDArray:"), objref.IDOf(allowedUUIDArray))
 	})
@@ -143,6 +158,7 @@ func (bdsc *BluetoothDeviceSelectorController) AddAllowedUUIDArray(allowedUUIDAr
 
 // ClearAllowedUUIDs resets the controller back to the default state where it will accept any device the user selects.
 func (bdsc *BluetoothDeviceSelectorController) ClearAllowedUUIDs() {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("clearAllowedUUIDs"))
 	})
@@ -151,6 +167,7 @@ func (bdsc *BluetoothDeviceSelectorController) ClearAllowedUUIDs() {
 
 // SetTitle sets the title of the panel when not run as a sheet.
 func (bdsc *BluetoothDeviceSelectorController) SetTitle(windowTitle string) {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 	})
@@ -159,6 +176,7 @@ func (bdsc *BluetoothDeviceSelectorController) SetTitle(windowTitle string) {
 
 // Title returns the title of the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) Title() string {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -175,6 +193,7 @@ func (bdsc *BluetoothDeviceSelectorController) Title() string {
 
 // SetHeader sets the header text that appears in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) SetHeader(headerText string) {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setHeader:"), purego.NSString(headerText))
 	})
@@ -183,6 +202,7 @@ func (bdsc *BluetoothDeviceSelectorController) SetHeader(headerText string) {
 
 // Header returns the header text that appears in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) Header() string {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -199,6 +219,7 @@ func (bdsc *BluetoothDeviceSelectorController) Header() string {
 
 // SetDescriptionText sets the description text that appears in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) SetDescriptionText(descriptionText string) {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 	})
@@ -207,6 +228,7 @@ func (bdsc *BluetoothDeviceSelectorController) SetDescriptionText(descriptionTex
 
 // DescriptionText returns the description text that appears in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) DescriptionText() string {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -223,6 +245,7 @@ func (bdsc *BluetoothDeviceSelectorController) DescriptionText() string {
 
 // SetPrompt sets the title of the default/select button in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) SetPrompt(prompt string) {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 	})
@@ -231,6 +254,7 @@ func (bdsc *BluetoothDeviceSelectorController) SetPrompt(prompt string) {
 
 // Prompt returns the title of the default/select button in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) Prompt() string {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -247,6 +271,7 @@ func (bdsc *BluetoothDeviceSelectorController) Prompt() string {
 
 // SetCancel sets the title of the default/cancel button in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) SetCancel(prompt string) {
+	defer runtime.KeepAlive(bdsc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setCancel:"), purego.NSString(prompt))
 	})
@@ -255,6 +280,7 @@ func (bdsc *BluetoothDeviceSelectorController) SetCancel(prompt string) {
 
 // Cancel returns the title of the default/cancel button in the device selector panel.
 func (bdsc *BluetoothDeviceSelectorController) Cancel() string {
+	defer runtime.KeepAlive(bdsc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

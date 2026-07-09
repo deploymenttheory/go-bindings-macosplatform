@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -63,6 +66,7 @@ func (df *DateFormatter) WithFormattingContext(formattingContext FormattingConte
 
 // WithDateFormat sets the date format.
 func (df *DateFormatter) WithDateFormat(dateFormat StringProvider) *DateFormatter {
+	defer runtime.KeepAlive(dateFormat)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDateFormat:"), objref.IDOf(dateFormat))
 	return df
 }
@@ -81,6 +85,7 @@ func (df *DateFormatter) WithTimeStyle(timeStyle DateFormatterStyle) *DateFormat
 
 // WithLocale sets the locale.
 func (df *DateFormatter) WithLocale(locale *Locale) *DateFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return df
 }
@@ -99,12 +104,14 @@ func (df *DateFormatter) WithFormatterBehavior(formatterBehavior DateFormatterBe
 
 // WithTimeZone sets the time zone.
 func (df *DateFormatter) WithTimeZone(timeZone *TimeZone) *DateFormatter {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return df
 }
 
 // WithCalendar sets the calendar.
 func (df *DateFormatter) WithCalendar(calendar *Calendar) *DateFormatter {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return df
 }
@@ -117,12 +124,14 @@ func (df *DateFormatter) WithLenient(lenient bool) *DateFormatter {
 
 // WithTwoDigitStartDate sets the two digit start date.
 func (df *DateFormatter) WithTwoDigitStartDate(twoDigitStartDate DateProvider) *DateFormatter {
+	defer runtime.KeepAlive(twoDigitStartDate)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setTwoDigitStartDate:"), objref.IDOf(twoDigitStartDate))
 	return df
 }
 
 // WithDefaultDate sets the default date.
 func (df *DateFormatter) WithDefaultDate(defaultDate DateProvider) *DateFormatter {
+	defer runtime.KeepAlive(defaultDate)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setDefaultDate:"), objref.IDOf(defaultDate))
 	return df
 }
@@ -163,14 +172,16 @@ func (df *DateFormatter) WithShortWeekdaySymbols(items ...StringProvider) *DateF
 }
 
 // WithAMSymbol sets the am symbol.
-func (df *DateFormatter) WithAMSymbol(aMSymbol StringProvider) *DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setAMSymbol:"), objref.IDOf(aMSymbol))
+func (df *DateFormatter) WithAMSymbol(amSymbol StringProvider) *DateFormatter {
+	defer runtime.KeepAlive(amSymbol)
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setAMSymbol:"), objref.IDOf(amSymbol))
 	return df
 }
 
 // WithPMSymbol sets the pm symbol.
-func (df *DateFormatter) WithPMSymbol(pMSymbol StringProvider) *DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setPMSymbol:"), objref.IDOf(pMSymbol))
+func (df *DateFormatter) WithPMSymbol(pmSymbol StringProvider) *DateFormatter {
+	defer runtime.KeepAlive(pmSymbol)
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setPMSymbol:"), objref.IDOf(pmSymbol))
 	return df
 }
 
@@ -267,6 +278,7 @@ func (df *DateFormatter) WithShortStandaloneQuarterSymbols(items ...StringProvid
 
 // WithGregorianStartDate sets the gregorian start date.
 func (df *DateFormatter) WithGregorianStartDate(gregorianStartDate DateProvider) *DateFormatter {
+	defer runtime.KeepAlive(gregorianStartDate)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setGregorianStartDate:"), objref.IDOf(gregorianStartDate))
 	return df
 }
@@ -284,14 +296,15 @@ func (df *DateFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *Da
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (df *DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateFormatter {
-	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (df *DateFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return df
 }
 
 // StringFromDate wraps the corresponding Objective-C method.
-func (df *DateFormatter) StringFromDate(date *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
+func (df *DateFormatter) StringFromDate(date time.Time) string {
+	defer runtime.KeepAlive(df)
+	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("stringFromDate:"), rt.TimeToNSDate(date))
 	if _r == 0 {
 		return ""
 	}
@@ -299,24 +312,28 @@ func (df *DateFormatter) StringFromDate(date *Date) string {
 }
 
 // DateFromString wraps the corresponding Objective-C method.
-func (df *DateFormatter) DateFromString(string_ string) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("dateFromString:"), purego.NSString(string_))
-	return DateFromID(_r)
+func (df *DateFormatter) DateFromString(str string) time.Time {
+	defer runtime.KeepAlive(df)
+	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("dateFromString:"), purego.NSString(str))
+	return rt.NSDateToTime(_r)
 }
 
 // SetLocalizedDateFormatFromTemplate wraps the corresponding Objective-C method.
 func (df *DateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate string) {
+	defer runtime.KeepAlive(df)
 	objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("setLocalizedDateFormatFromTemplate:"), purego.NSString(dateFormatTemplate))
 }
 
 // FormattingContext returns the formatting context.
 func (df *DateFormatter) FormattingContext() FormattingContext {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[FormattingContext](objref.IDOf(df), objc.RegisterName("formattingContext"))
 	return _r
 }
 
 // DateFormat returns the date format.
 func (df *DateFormatter) DateFormat() string {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("dateFormat"))
 	if _r == 0 {
 		return ""
@@ -326,68 +343,79 @@ func (df *DateFormatter) DateFormat() string {
 
 // DateStyle returns the date style.
 func (df *DateFormatter) DateStyle() DateFormatterStyle {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[DateFormatterStyle](objref.IDOf(df), objc.RegisterName("dateStyle"))
 	return _r
 }
 
 // TimeStyle returns the time style.
 func (df *DateFormatter) TimeStyle() DateFormatterStyle {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[DateFormatterStyle](objref.IDOf(df), objc.RegisterName("timeStyle"))
 	return _r
 }
 
 // Locale returns the locale.
 func (df *DateFormatter) Locale() *Locale {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
 // GeneratesCalendarDates wraps the corresponding Objective-C method.
 func (df *DateFormatter) GeneratesCalendarDates() bool {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[bool](objref.IDOf(df), objc.RegisterName("generatesCalendarDates"))
 	return _r
 }
 
 // FormatterBehavior returns the formatter behavior.
 func (df *DateFormatter) FormatterBehavior() DateFormatterBehavior {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[DateFormatterBehavior](objref.IDOf(df), objc.RegisterName("formatterBehavior"))
 	return _r
 }
 
 // TimeZone returns the time zone.
 func (df *DateFormatter) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // Calendar returns the calendar.
 func (df *DateFormatter) Calendar() *Calendar {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
 // IsLenient reports whether the object is lenient.
 func (df *DateFormatter) IsLenient() bool {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[bool](objref.IDOf(df), objc.RegisterName("isLenient"))
 	return _r
 }
 
 // TwoDigitStartDate returns the two digit start date.
-func (df *DateFormatter) TwoDigitStartDate() *Date {
+func (df *DateFormatter) TwoDigitStartDate() time.Time {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("twoDigitStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DefaultDate returns the default date.
-func (df *DateFormatter) DefaultDate() *Date {
+func (df *DateFormatter) DefaultDate() time.Time {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("defaultDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EraSymbols returns the era symbols.
 //
 // EraSymbols returns the collection as a Go slice.
 func (df *DateFormatter) EraSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("eraSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -396,6 +424,7 @@ func (df *DateFormatter) EraSymbols() []string {
 //
 // MonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) MonthSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("monthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -404,6 +433,7 @@ func (df *DateFormatter) MonthSymbols() []string {
 //
 // ShortMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortMonthSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("shortMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -412,6 +442,7 @@ func (df *DateFormatter) ShortMonthSymbols() []string {
 //
 // WeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) WeekdaySymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("weekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -420,12 +451,14 @@ func (df *DateFormatter) WeekdaySymbols() []string {
 //
 // ShortWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortWeekdaySymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("shortWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AMSymbol returns the am symbol.
 func (df *DateFormatter) AMSymbol() string {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("AMSymbol"))
 	if _r == 0 {
 		return ""
@@ -435,6 +468,7 @@ func (df *DateFormatter) AMSymbol() string {
 
 // PMSymbol returns the pm symbol.
 func (df *DateFormatter) PMSymbol() string {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("PMSymbol"))
 	if _r == 0 {
 		return ""
@@ -446,6 +480,7 @@ func (df *DateFormatter) PMSymbol() string {
 //
 // LongEraSymbols returns the collection as a Go slice.
 func (df *DateFormatter) LongEraSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("longEraSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -454,6 +489,7 @@ func (df *DateFormatter) LongEraSymbols() []string {
 //
 // VeryShortMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortMonthSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("veryShortMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -462,6 +498,7 @@ func (df *DateFormatter) VeryShortMonthSymbols() []string {
 //
 // StandaloneMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) StandaloneMonthSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("standaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -470,6 +507,7 @@ func (df *DateFormatter) StandaloneMonthSymbols() []string {
 //
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortStandaloneMonthSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("shortStandaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -478,6 +516,7 @@ func (df *DateFormatter) ShortStandaloneMonthSymbols() []string {
 //
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("veryShortStandaloneMonthSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -486,6 +525,7 @@ func (df *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
 //
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortWeekdaySymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("veryShortWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -494,6 +534,7 @@ func (df *DateFormatter) VeryShortWeekdaySymbols() []string {
 //
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) StandaloneWeekdaySymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("standaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -502,6 +543,7 @@ func (df *DateFormatter) StandaloneWeekdaySymbols() []string {
 //
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("shortStandaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -510,6 +552,7 @@ func (df *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
 //
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (df *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("veryShortStandaloneWeekdaySymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -518,6 +561,7 @@ func (df *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
 //
 // QuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) QuarterSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("quarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -526,6 +570,7 @@ func (df *DateFormatter) QuarterSymbols() []string {
 //
 // ShortQuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortQuarterSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("shortQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -534,6 +579,7 @@ func (df *DateFormatter) ShortQuarterSymbols() []string {
 //
 // StandaloneQuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) StandaloneQuarterSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("standaloneQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -542,24 +588,28 @@ func (df *DateFormatter) StandaloneQuarterSymbols() []string {
 //
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
 func (df *DateFormatter) ShortStandaloneQuarterSymbols() []string {
+	defer runtime.KeepAlive(df)
 	_arr := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("shortStandaloneQuarterSymbols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // GregorianStartDate returns the gregorian start date.
-func (df *DateFormatter) GregorianStartDate() *Date {
+func (df *DateFormatter) GregorianStartDate() time.Time {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("gregorianStartDate"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DoesRelativeDateFormatting wraps the corresponding Objective-C method.
 func (df *DateFormatter) DoesRelativeDateFormatting() bool {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[bool](objref.IDOf(df), objc.RegisterName("doesRelativeDateFormatting"))
 	return _r
 }
 
 // AllowsNaturalLanguage reports whether returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
 func (df *DateFormatter) AllowsNaturalLanguage() bool {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[bool](objref.IDOf(df), objc.RegisterName("allowsNaturalLanguage"))
 	return _r
 }

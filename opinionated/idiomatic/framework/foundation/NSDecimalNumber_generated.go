@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -64,6 +66,7 @@ func NewDecimalNumberWithString(numberValue string) *DecimalNumber {
 
 // NewDecimalNumberWithStringLocale initializes a decimal number so that its value is equivalent to that in a given numeric string, interpreted using a given locale.
 func NewDecimalNumberWithStringLocale(numberValue string, locale obj.Object) *DecimalNumber {
+	defer runtime.KeepAlive(locale)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:locale:"), purego.NSString(numberValue), objref.IDOf(locale))
 	return decimalNumberAdopt(_id)
@@ -76,43 +79,53 @@ func (dn *DecimalNumber) WithObservationInfo(observationInfo unsafe.Pointer) *De
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dn *DecimalNumber) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumber {
-	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dn *DecimalNumber) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DecimalNumber {
+	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dn
 }
 
 // DecimalNumberByAdding adds this number to another given number.
 func (dn *DecimalNumber) DecimalNumberByAdding(decimalNumber *DecimalNumber) *DecimalNumber {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(decimalNumber)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByAdding:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberBySubtracting subtracts another given number from this one.
 func (dn *DecimalNumber) DecimalNumberBySubtracting(decimalNumber *DecimalNumber) *DecimalNumber {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(decimalNumber)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberBySubtracting:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByMultiplyingBy multiplies the number by another given number.
 func (dn *DecimalNumber) DecimalNumberByMultiplyingBy(decimalNumber *DecimalNumber) *DecimalNumber {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(decimalNumber)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByMultiplyingBy:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByDividingBy divides the number by another given number.
 func (dn *DecimalNumber) DecimalNumberByDividingBy(decimalNumber *DecimalNumber) *DecimalNumber {
+	defer runtime.KeepAlive(dn)
+	defer runtime.KeepAlive(decimalNumber)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByDividingBy:"), objref.IDOf(decimalNumber))
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByRaisingToPower raises the number to a given power.
 func (dn *DecimalNumber) DecimalNumberByRaisingToPower(power int) *DecimalNumber {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByRaisingToPower:"), power)
 	return DecimalNumberFromID(_r)
 }
 
 // DecimalNumberByMultiplyingByPowerOf10 multiplies the number by 10 raised to the given power.
 func (dn *DecimalNumber) DecimalNumberByMultiplyingByPowerOf10(power int16) *DecimalNumber {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("decimalNumberByMultiplyingByPowerOf10:"), power)
 	return DecimalNumberFromID(_r)
 }

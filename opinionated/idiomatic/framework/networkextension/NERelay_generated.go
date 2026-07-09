@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nERelayAdopt(id objc.ID) *NERelay {
 
 // Description returns the object's -description text.
 func (nr *NERelay) Description() string {
+	defer runtime.KeepAlive(nr)
 	return rt.Description(objref.IDOf(nr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nr *NERelay) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nr *NERelay) IsKind(className string) bool {
+	defer runtime.KeepAlive(nr)
 	return rt.IsKind(objref.IDOf(nr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nr *NERelay) String() string {
+	defer runtime.KeepAlive(nr)
 	return rt.Description(objref.IDOf(nr))
 }
 
@@ -73,14 +80,14 @@ func NewNERelay() *NERelay {
 }
 
 // WithHTTP3RelayURL sets a URL identifying the relay server accessible using HTTP/3.
-func (nr *NERelay) WithHTTP3RelayURL(hTTP3RelayURL string) *NERelay {
-	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setHTTP3RelayURL:"), rt.FileURL(hTTP3RelayURL))
+func (nr *NERelay) WithHTTP3RelayURL(http3RelayURL string) *NERelay {
+	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setHTTP3RelayURL:"), rt.FileURL(http3RelayURL))
 	return nr
 }
 
 // WithHTTP2RelayURL sets a URL identifying the relay server accessible using HTTP/2.
-func (nr *NERelay) WithHTTP2RelayURL(hTTP2RelayURL string) *NERelay {
-	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setHTTP2RelayURL:"), rt.FileURL(hTTP2RelayURL))
+func (nr *NERelay) WithHTTP2RelayURL(http2RelayURL string) *NERelay {
+	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setHTTP2RelayURL:"), rt.FileURL(http2RelayURL))
 	return nr
 }
 
@@ -103,8 +110,8 @@ func (nr *NERelay) WithSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix
 }
 
 // WithAdditionalHTTPHeaderFields sets a dictionary of additional HTTP headers to send as part of CONNECT requests to the relay.
-func (nr *NERelay) WithAdditionalHTTPHeaderFields(additionalHTTPHeaderFields obj.Object) *NERelay {
-	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setAdditionalHTTPHeaderFields:"), objref.IDOf(additionalHTTPHeaderFields))
+func (nr *NERelay) WithAdditionalHTTPHeaderFields(additionalHTTPHeaderFields map[string]string) *NERelay {
+	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setAdditionalHTTPHeaderFields:"), rt.MapToDict(additionalHTTPHeaderFields, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return nr
 }
 
@@ -116,8 +123,8 @@ func (nr *NERelay) WithRawPublicKeys(items ...obj.Object) *NERelay {
 }
 
 // WithIdentityData sets the PKCS12 data for the relay client authentication.
-func (nr *NERelay) WithIdentityData(identityData obj.Object) *NERelay {
-	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+func (nr *NERelay) WithIdentityData(identityData []byte) *NERelay {
+	objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("setIdentityData:"), rt.BytesToNSData(identityData))
 	return nr
 }
 
@@ -128,25 +135,29 @@ func (nr *NERelay) WithIdentityDataPassword(identityDataPassword string) *NERela
 }
 
 // HTTP3RelayURL returns the URL of the relay accessible over HTTP/3.
-func (nr *NERelay) HTTP3RelayURL() obj.Object {
+func (nr *NERelay) HTTP3RelayURL() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("HTTP3RelayURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // HTTP2RelayURL returns the URL of the relay accessible over HTTP/2.
-func (nr *NERelay) HTTP2RelayURL() obj.Object {
+func (nr *NERelay) HTTP2RelayURL() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("HTTP2RelayURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // DNSOverHTTPSURL returns the URL of a DNS-over-HTTPS (DoH) resolver accessible via the relay.
-func (nr *NERelay) DNSOverHTTPSURL() obj.Object {
+func (nr *NERelay) DNSOverHTTPSURL() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("dnsOverHTTPSURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // SyntheticDNSAnswerIPv4Prefix returns an IPv4 address prefix (such as "192.0.2.0/24") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
 func (nr *NERelay) SyntheticDNSAnswerIPv4Prefix() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("syntheticDNSAnswerIPv4Prefix"))
 	if _r == 0 {
 		return ""
@@ -156,6 +167,7 @@ func (nr *NERelay) SyntheticDNSAnswerIPv4Prefix() string {
 
 // SyntheticDNSAnswerIPv6Prefix returns an IPv6 address prefix (such as "2001:DB8::/32") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
 func (nr *NERelay) SyntheticDNSAnswerIPv6Prefix() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("syntheticDNSAnswerIPv6Prefix"))
 	if _r == 0 {
 		return ""
@@ -164,27 +176,31 @@ func (nr *NERelay) SyntheticDNSAnswerIPv6Prefix() string {
 }
 
 // AdditionalHTTPHeaderFields returns additional HTTP header field names and values to be added to all relay requests.
-func (nr *NERelay) AdditionalHTTPHeaderFields() obj.Object {
+func (nr *NERelay) AdditionalHTTPHeaderFields() map[string]string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("additionalHTTPHeaderFields"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // RawPublicKeys returns TLS 1.3 raw public keys to use to authenticate the relay servers.
 //
 // RawPublicKeys returns the collection as a Go slice.
-func (nr *NERelay) RawPublicKeys() []obj.Object {
+func (nr *NERelay) RawPublicKeys() [][]byte {
+	defer runtime.KeepAlive(nr)
 	_arr := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("rawPublicKeys"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) []byte { return rt.NSDataToBytes(_id) })
 }
 
 // IdentityData returns the PKCS12 data for the relay client authentication. The value is a NSData in PKCS12 format.
-func (nr *NERelay) IdentityData() obj.Object {
+func (nr *NERelay) IdentityData() []byte {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("identityData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IdentityDataPassword returns the password to be used to decrypt the PKCS12 identity data.
 func (nr *NERelay) IdentityDataPassword() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("identityDataPassword"))
 	if _r == 0 {
 		return ""

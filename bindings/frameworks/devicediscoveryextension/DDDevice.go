@@ -250,8 +250,8 @@ func (o *DDDevice) SSID() *foundation.NSString {
 }
 
 // Device's WiFi Hotspot SSID.
-func (o *DDDevice) SetSSID(sSID *foundation.NSString) {
-	o.Ptr().Send(_dDDeviceSelSetSSID, sSID.Ptr())
+func (o *DDDevice) SetSSID(ssid *foundation.NSString) {
+	o.Ptr().Send(_dDDeviceSelSetSSID, ssid.Ptr())
 }
 
 // Whether the device supports grouping with other devices with the same protocol.

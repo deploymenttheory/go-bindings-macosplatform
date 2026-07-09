@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func scoredAssessmentAdopt(id objc.ID) *ScoredAssessment {
 
 // Score returns the score determined by the answers on an assessment
 func (sa *ScoredAssessment) Score() int {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[int](objref.IDOf(sa), objc.RegisterName("score"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetDownloadConfigurationAdopt(id objc.ID) *AssetDownloadConfiguration {
 
 // Description returns the object's -description text.
 func (adc *AssetDownloadConfiguration) Description() string {
+	defer runtime.KeepAlive(adc)
 	return rt.Description(objref.IDOf(adc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (adc *AssetDownloadConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(adc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(adc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (adc *AssetDownloadConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(adc)
 	return rt.IsKind(objref.IDOf(adc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (adc *AssetDownloadConfiguration) String() string {
+	defer runtime.KeepAlive(adc)
 	return rt.Description(objref.IDOf(adc))
 }
 
@@ -73,8 +80,8 @@ func NewAssetDownloadConfiguration() *AssetDownloadConfiguration {
 }
 
 // WithArtworkData sets a data value that represents the asset’s artwork.
-func (adc *AssetDownloadConfiguration) WithArtworkData(artworkData obj.Object) *AssetDownloadConfiguration {
-	objc.Send[objc.ID](objref.IDOf(adc), objc.RegisterName("setArtworkData:"), objref.IDOf(artworkData))
+func (adc *AssetDownloadConfiguration) WithArtworkData(artworkData []byte) *AssetDownloadConfiguration {
+	objc.Send[objc.ID](objref.IDOf(adc), objc.RegisterName("setArtworkData:"), rt.BytesToNSData(artworkData))
 	return adc
 }
 
@@ -99,17 +106,21 @@ func (adc *AssetDownloadConfiguration) WithDownloadsInterstitialAssets(downloads
 
 // SetInterstitialMediaSelectionCriteriaForMediaCharacteristic sets media selection on interstitials for this asset
 func (adc *AssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria []*PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object) {
+	defer runtime.KeepAlive(adc)
+	defer runtime.KeepAlive(mediaCharacteristic)
 	objc.Send[objc.ID](objref.IDOf(adc), objc.RegisterName("setInterstitialMediaSelectionCriteria:forMediaCharacteristic:"), purego.SliceToNSArray(criteria, func(_v *PlayerMediaSelectionCriteria) objc.ID { return objref.IDOf(_v) }), objref.IDOf(mediaCharacteristic))
 }
 
 // ArtworkData returns NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
-func (adc *AssetDownloadConfiguration) ArtworkData() obj.Object {
+func (adc *AssetDownloadConfiguration) ArtworkData() []byte {
+	defer runtime.KeepAlive(adc)
 	_r := objc.Send[objc.ID](objref.IDOf(adc), objc.RegisterName("artworkData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PrimaryContentConfiguration returns the primary content for the download.
 func (adc *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloadContentConfiguration {
+	defer runtime.KeepAlive(adc)
 	_r := objc.Send[objc.ID](objref.IDOf(adc), objc.RegisterName("primaryContentConfiguration"))
 	return AssetDownloadContentConfigurationFromID(_r)
 }
@@ -118,6 +129,7 @@ func (adc *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownl
 //
 // AuxiliaryContentConfigurations returns the collection as a Go slice.
 func (adc *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration {
+	defer runtime.KeepAlive(adc)
 	_arr := objc.Send[objc.ID](objref.IDOf(adc), objc.RegisterName("auxiliaryContentConfigurations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetDownloadContentConfiguration {
 		return AssetDownloadContentConfigurationFromID(_id)
@@ -126,12 +138,14 @@ func (adc *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*Asset
 
 // OptimizesAuxiliaryContentConfigurations reports whether optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
 func (adc *AssetDownloadConfiguration) OptimizesAuxiliaryContentConfigurations() bool {
+	defer runtime.KeepAlive(adc)
 	_r := objc.Send[bool](objref.IDOf(adc), objc.RegisterName("optimizesAuxiliaryContentConfigurations"))
 	return _r
 }
 
 // DownloadsInterstitialAssets reports whether download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
 func (adc *AssetDownloadConfiguration) DownloadsInterstitialAssets() bool {
+	defer runtime.KeepAlive(adc)
 	_r := objc.Send[bool](objref.IDOf(adc), objc.RegisterName("downloadsInterstitialAssets"))
 	return _r
 }

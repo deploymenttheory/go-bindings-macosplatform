@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolScaleEffect() *SymbolScaleEffect {
 
 // EffectWithByLayer returns an effect that scales each layer separately.
 func (sse *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
+	defer runtime.KeepAlive(sse)
 	_r := objc.Send[objc.ID](objref.IDOf(sse), objc.RegisterName("effectWithByLayer"))
 	return SymbolScaleEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns an effect that scales all layers simultaneously.
 func (sse *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
+	defer runtime.KeepAlive(sse)
 	_r := objc.Send[objc.ID](objref.IDOf(sse), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolScaleEffectFromID(_r)
 }

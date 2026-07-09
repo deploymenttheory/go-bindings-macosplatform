@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,12 +161,14 @@ func (dme *DOMHTMLMapElement) WithTextContent(textContent string) *DOMHTMLMapEle
 
 // Areas returns the areas.
 func (dme *DOMHTMLMapElement) Areas() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("areas"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // Name returns the name.
 func (dme *DOMHTMLMapElement) Name() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

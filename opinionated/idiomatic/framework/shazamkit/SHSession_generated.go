@@ -5,8 +5,11 @@
 package shazamkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func sessionAdopt(id objc.ID) *Session {
 
 // Description returns the object's -description text.
 func (s *Session) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Session) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Session) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Session) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -74,23 +82,40 @@ func NewSession() *Session {
 
 // NewSessionWithCatalog creates a new session object for matching audio in a custom catalog.
 func NewSessionWithCatalog(catalog *Catalog) *Session {
+	defer runtime.KeepAlive(catalog)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCatalog:"), objref.IDOf(catalog))
 	return sessionAdopt(_id)
 }
 
+// WithDelegate sets the object that the session calls with the result of a match request.
+func (s *Session) WithDelegate(delegate SessionDelegate) *Session {
+	_shim := newSessionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(s), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(s), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return s
+}
+
 // MatchStreamingBufferAtTime converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
 func (s *Session) MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(time_)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("matchStreamingBuffer:atTime:"), objref.IDOf(buffer), objref.IDOf(time_))
 }
 
 // MatchSignature searches for the query signature in the reference signatures that the session catalog contains.
 func (s *Session) MatchSignature(signature *Signature) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(signature)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("matchSignature:"), objref.IDOf(signature))
 }
 
 // Catalog returns the catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
 func (s *Session) Catalog() *Catalog {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("catalog"))
 	return CatalogFromID(_r)
 }

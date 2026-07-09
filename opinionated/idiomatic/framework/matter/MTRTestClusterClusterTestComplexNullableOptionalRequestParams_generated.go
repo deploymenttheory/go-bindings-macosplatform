@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTRTestClusterClusterTestComplexNullableOptionalRequestParams() *MTRTest
 
 // WithNullableInt sets the nullable int.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableInt(nullableInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(nullableInt)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableInt:"), objref.IDOf(nullableInt))
 	return mtcctcnorp
 }
 
 // WithOptionalInt sets the optional int.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalInt(optionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(optionalInt)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setOptionalInt:"), objref.IDOf(optionalInt))
 	return mtcctcnorp
 }
 
 // WithNullableOptionalInt sets the nullable optional int.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalInt(nullableOptionalInt obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(nullableOptionalInt)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableOptionalInt:"), objref.IDOf(nullableOptionalInt))
 	return mtcctcnorp
 }
@@ -88,30 +93,35 @@ func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams)
 
 // WithNullableStruct sets the nullable struct.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(nullableStruct)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableStruct:"), objref.IDOf(nullableStruct))
 	return mtcctcnorp
 }
 
 // WithOptionalStruct sets the optional struct.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(optionalStruct)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setOptionalStruct:"), objref.IDOf(optionalStruct))
 	return mtcctcnorp
 }
 
 // WithNullableOptionalStruct sets the nullable optional struct.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(nullableOptionalStruct)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setNullableOptionalStruct:"), objref.IDOf(nullableOptionalStruct))
 	return mtcctcnorp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtcctcnorp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mtcctcnorp *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtcctcnorp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtcctcnorp
 }

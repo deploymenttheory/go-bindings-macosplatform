@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func photoLibraryAdopt(id objc.ID) *PhotoLibrary {
 
 // Description returns the object's -description text.
 func (pl *PhotoLibrary) Description() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pl *PhotoLibrary) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pl *PhotoLibrary) IsKind(className string) bool {
+	defer runtime.KeepAlive(pl)
 	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pl *PhotoLibrary) String() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
@@ -77,6 +83,7 @@ func NewPhotoLibrary() *PhotoLibrary {
 
 // PerformChangesAndWait synchronously runs a block that requests changes to be performed in the photo library.
 func (pl *PhotoLibrary) PerformChangesAndWait(changeBlock func()) error {
+	defer runtime.KeepAlive(pl)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(pl), objc.RegisterName("performChangesAndWait:error:"), changeBlock, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,8 +92,10 @@ func (pl *PhotoLibrary) PerformChangesAndWait(changeBlock func()) error {
 	return nil
 }
 
-// FetchPersistentChangesSinceTokenError retrieves the Photos library changes since the token you specify.
-func (pl *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (result *PersistentChangeFetchResult, err error) {
+// FetchPersistentChangesSinceToken retrieves the Photos library changes since the token you specify.
+func (pl *PhotoLibrary) FetchPersistentChangesSinceToken(token *PersistentChangeToken) (result *PersistentChangeFetchResult, err error) {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(token)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("fetchPersistentChangesSinceToken:error:"), objref.IDOf(token), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,30 +106,35 @@ func (pl *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentC
 
 // CurrentChangeToken returns the current change token.
 func (pl *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("currentChangeToken"))
 	return PersistentChangeTokenFromID(_r)
 }
 
 // LocalIdentifierMappingsForCloudIdentifiers retrieves the local identifier mappings for the list of cloud identifiers.
 func (pl *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // CloudIdentifierMappingsForLocalIdentifiers retrieves the cloud identifier mappings for the list of local identifiers.
-func (pl *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers []string) obj.Object {
+func (pl *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers []string) map[string]*CloudIdentifierMapping {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("cloudIdentifierMappingsForLocalIdentifiers:"), purego.SliceToNSArray(localIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *CloudIdentifierMapping { return CloudIdentifierMappingFromID(_id) })
 }
 
 // LocalIdentifiersForCloudIdentifiers retrieves the equivalent local identifiers for the list of iCloud identifiers.
 func (pl *PhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) []string {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("localIdentifiersForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CloudIdentifiersForLocalIdentifiers retrieves the equivalent iCloud identifiers for the list of local identifiers.
 func (pl *PhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers []string) []*CloudIdentifier {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("cloudIdentifiersForLocalIdentifiers:"), purego.SliceToNSArray(localIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CloudIdentifier { return CloudIdentifierFromID(_id) })
 }

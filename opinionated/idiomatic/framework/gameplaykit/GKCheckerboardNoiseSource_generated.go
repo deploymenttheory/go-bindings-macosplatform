@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (cns *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *Checkerb
 
 // SquareSize returns the square size.
 func (cns *CheckerboardNoiseSource) SquareSize() float64 {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("squareSize"))
 	return _r
 }

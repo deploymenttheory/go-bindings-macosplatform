@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func rNNRecurrentImageStateAdopt(id objc.ID) *RNNRecurrentImageState {
 
 // Description returns the object's -description text.
 func (rris *RNNRecurrentImageState) Description() string {
+	defer runtime.KeepAlive(rris)
 	return rt.Description(objref.IDOf(rris))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rris *RNNRecurrentImageState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rris)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rris), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rris *RNNRecurrentImageState) IsKind(className string) bool {
+	defer runtime.KeepAlive(rris)
 	return rt.IsKind(objref.IDOf(rris), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rris *RNNRecurrentImageState) String() string {
+	defer runtime.KeepAlive(rris)
 	return rt.Description(objref.IDOf(rris))
 }
 
@@ -72,12 +79,14 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 
 // GetRecurrentOutputImageForLayerIndex access the stored recurrent image data.
 func (rris *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
+	defer runtime.KeepAlive(rris)
 	_r := objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
 // GetMemoryCellImageForLayerIndex access the stored memory cell image data (if present).
 func (rris *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
+	defer runtime.KeepAlive(rris)
 	_r := objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }

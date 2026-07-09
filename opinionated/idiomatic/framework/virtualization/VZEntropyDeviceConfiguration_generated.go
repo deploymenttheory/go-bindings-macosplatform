@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func entropyDeviceConfigurationAdopt(id objc.ID) *EntropyDeviceConfiguration {
 
 // Description returns the object's -description text.
 func (edc *EntropyDeviceConfiguration) Description() string {
+	defer runtime.KeepAlive(edc)
 	return rt.Description(objref.IDOf(edc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (edc *EntropyDeviceConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(edc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(edc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (edc *EntropyDeviceConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(edc)
 	return rt.IsKind(objref.IDOf(edc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (edc *EntropyDeviceConfiguration) String() string {
+	defer runtime.KeepAlive(edc)
 	return rt.Description(objref.IDOf(edc))
 }
 

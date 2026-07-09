@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (mml *MatMulLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulL
 
 // Descriptor returns the matrix multiplication descriptor
 func (mml *MatMulLayer) Descriptor() *MatMulDescriptor {
+	defer runtime.KeepAlive(mml)
 	_r := objc.Send[objc.ID](objref.IDOf(mml), objc.RegisterName("descriptor"))
 	return MatMulDescriptorFromID(_r)
 }

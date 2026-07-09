@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,151 +49,203 @@ func mTRClusterBridgedDeviceBasicInformationAdopt(id objc.ID) *MTRClusterBridged
 
 // NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBridgedDeviceBasicInformation {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
 // ReadAttributeVendorNameWithParams reads attribute vendor name with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeVendorIDWithParams reads attribute vendor ID with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeProductNameWithParams reads attribute product name with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductNameWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeProductIDWithParams reads attribute product ID with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNodeLabelWithParams reads attribute node label with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeNodeLabelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeNodeLabelWithValueExpectedValueInterval writes attribute node label with value expected value interval.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNodeLabelWithValueExpectedValueIntervalParams writes attribute node label with value expected value interval params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeHardwareVersionWithParams reads attribute hardware version with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeHardwareVersionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeHardwareVersionStringWithParams reads attribute hardware version string with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeHardwareVersionStringWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSoftwareVersionWithParams reads attribute software version with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeSoftwareVersionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSoftwareVersionStringWithParams reads attribute software version string with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeSoftwareVersionStringWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeManufacturingDateWithParams reads attribute manufacturing date with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeManufacturingDateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePartNumberWithParams reads attribute part number with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributePartNumberWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeProductURLWithParams reads attribute product URL with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductURLWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeProductLabelWithParams reads attribute product label with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductLabelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSerialNumberWithParams reads attribute serial number with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeSerialNumberWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeReachableWithParams reads attribute reachable with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeReachableWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUniqueIDWithParams reads attribute unique ID with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeUniqueIDWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeProductAppearanceWithParams reads attribute product appearance with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeProductAppearanceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcbdbi *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbdbi)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbdbi), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // isMTRClusterBridgedDeviceBasicInformation marks MTRClusterBridgedDeviceBasicInformation — and, by embedding promotion, its

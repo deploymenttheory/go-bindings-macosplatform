@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func dOMObjectAdopt(id objc.ID) *DOMObject {
 
 // Sheet returns the sheet.
 func (do *DOMObject) Sheet() *DOMStyleSheet {
+	defer runtime.KeepAlive(do)
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("sheet"))
 	return DOMStyleSheetFromID(_r)
 }

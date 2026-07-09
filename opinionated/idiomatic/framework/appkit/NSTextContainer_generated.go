@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func textContainerAdopt(id objc.ID) *TextContainer {
 
 // Description returns the object's -description text.
 func (tc *TextContainer) Description() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tc *TextContainer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tc *TextContainer) IsKind(className string) bool {
+	defer runtime.KeepAlive(tc)
 	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tc *TextContainer) String() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
@@ -76,6 +83,7 @@ func NewTextContainerWithSize(size corefoundation.CGSize) *TextContainer {
 
 // NewTextContainerWithCoder creates a text container from data in an unarchiver.
 func NewTextContainerWithCoder(coder obj.Object) *TextContainer {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextContainer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textContainerAdopt(_id)
@@ -126,6 +134,7 @@ func (tc *TextContainer) WithHeightTracksTextView(heightTracksTextView bool) *Te
 
 // WithLayoutManager sets the text container’s layout manager.
 func (tc *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextContainer {
+	defer runtime.KeepAlive(layoutManager)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setLayoutManager:"), objref.IDOf(layoutManager))
 	return tc
 }
@@ -139,6 +148,7 @@ func (tc *TextContainer) WithExclusionPaths(items ...*BezierPath) *TextContainer
 
 // WithTextView sets the text container’s text view.
 func (tc *TextContainer) WithTextView(textView *TextView) *TextContainer {
+	defer runtime.KeepAlive(textView)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTextView:"), objref.IDOf(textView))
 	return tc
 }
@@ -151,60 +161,71 @@ func (tc *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) 
 
 // TextLayoutManager returns the text layout manager.
 func (tc *TextContainer) TextLayoutManager() *TextLayoutManager {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // Size returns the size.
 func (tc *TextContainer) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tc), objc.RegisterName("size"))
 	return _r
 }
 
 // LineBreakMode returns the line break mode.
 func (tc *TextContainer) LineBreakMode() LineBreakMode {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[LineBreakMode](objref.IDOf(tc), objc.RegisterName("lineBreakMode"))
 	return _r
 }
 
 // LineFragmentPadding returns the line fragment padding.
 func (tc *TextContainer) LineFragmentPadding() float64 {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("lineFragmentPadding"))
 	return _r
 }
 
 // MaximumNumberOfLines returns the maximum number of lines.
 func (tc *TextContainer) MaximumNumberOfLines() int {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[int](objref.IDOf(tc), objc.RegisterName("maximumNumberOfLines"))
 	return _r
 }
 
 // IsSimpleRectangularTextContainer reports whether the object is simple rectangular text container.
 func (tc *TextContainer) IsSimpleRectangularTextContainer() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isSimpleRectangularTextContainer"))
 	return _r
 }
 
 // WidthTracksTextView wraps the corresponding Objective-C method.
 func (tc *TextContainer) WidthTracksTextView() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("widthTracksTextView"))
 	return _r
 }
 
 // HeightTracksTextView wraps the corresponding Objective-C method.
 func (tc *TextContainer) HeightTracksTextView() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("heightTracksTextView"))
 	return _r
 }
 
 // LayoutManager returns the layout manager.
 func (tc *TextContainer) LayoutManager() *LayoutManager {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("layoutManager"))
 	return LayoutManagerFromID(_r)
 }
 
 // ReplaceLayoutManager replaces the layout manager for the group of text system objects that contains the text container.
 func (tc *TextContainer) ReplaceLayoutManager(newLayoutManager *LayoutManager) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(newLayoutManager)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("replaceLayoutManager:"), objref.IDOf(newLayoutManager))
 }
 
@@ -212,24 +233,28 @@ func (tc *TextContainer) ReplaceLayoutManager(newLayoutManager *LayoutManager) {
 //
 // ExclusionPaths returns the collection as a Go slice.
 func (tc *TextContainer) ExclusionPaths() []*BezierPath {
+	defer runtime.KeepAlive(tc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("exclusionPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BezierPath { return BezierPathFromID(_id) })
 }
 
 // TextView returns the text view.
 func (tc *TextContainer) TextView() *TextView {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("textView"))
 	return TextViewFromID(_r)
 }
 
 // ContainsPoint queries whether a point lies within the text container’s region or on the region’s edge—not simply within its bounding rectangle.
 func (tc *TextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("containsPoint:"), point)
 	return _r
 }
 
 // ContainerSize returns the container size.
 func (tc *TextContainer) ContainerSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tc), objc.RegisterName("containerSize"))
 	return _r
 }

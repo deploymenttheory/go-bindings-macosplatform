@@ -1,5 +1,6 @@
 // Start blocks until the operation completes or ctx is cancelled.
 func (x *Machine) Start(ctx context.Context) error {
+defer runtime.KeepAlive(x)
 _ch := make(chan error, 1)
 _block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 var _err error

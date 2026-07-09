@@ -5,6 +5,8 @@
 package calendarstore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func calNthWeekDayAdopt(id objc.ID) *CalNthWeekDay {
 
 // Description returns the object's -description text.
 func (cnwd *CalNthWeekDay) Description() string {
+	defer runtime.KeepAlive(cnwd)
 	return rt.Description(objref.IDOf(cnwd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cnwd *CalNthWeekDay) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cnwd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cnwd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cnwd *CalNthWeekDay) IsKind(className string) bool {
+	defer runtime.KeepAlive(cnwd)
 	return rt.IsKind(objref.IDOf(cnwd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cnwd *CalNthWeekDay) String() string {
+	defer runtime.KeepAlive(cnwd)
 	return rt.Description(objref.IDOf(cnwd))
 }
 
@@ -72,12 +79,14 @@ func NewCalNthWeekDay() *CalNthWeekDay {
 
 // DayOfTheWeek returns the day of the week.
 func (cnwd *CalNthWeekDay) DayOfTheWeek() int {
+	defer runtime.KeepAlive(cnwd)
 	_r := objc.Send[int](objref.IDOf(cnwd), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
 // WeekNumber returns the week number.
 func (cnwd *CalNthWeekDay) WeekNumber() int {
+	defer runtime.KeepAlive(cnwd)
 	_r := objc.Send[int](objref.IDOf(cnwd), objc.RegisterName("weekNumber"))
 	return _r
 }

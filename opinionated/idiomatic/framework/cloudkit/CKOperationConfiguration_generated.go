@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func operationConfigurationAdopt(id objc.ID) *OperationConfiguration {
 
 // Description returns the object's -description text.
 func (oc *OperationConfiguration) Description() string {
+	defer runtime.KeepAlive(oc)
 	return rt.Description(objref.IDOf(oc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (oc *OperationConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(oc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (oc *OperationConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(oc)
 	return rt.IsKind(objref.IDOf(oc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (oc *OperationConfiguration) String() string {
+	defer runtime.KeepAlive(oc)
 	return rt.Description(objref.IDOf(oc))
 }
 
@@ -74,6 +81,7 @@ func NewOperationConfiguration() *OperationConfiguration {
 
 // WithContainer sets the configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
 func (oc *OperationConfiguration) WithContainer(container *Container) *OperationConfiguration {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return oc
 }
@@ -104,30 +112,35 @@ func (oc *OperationConfiguration) WithTimeoutIntervalForResource(timeoutInterval
 
 // Container returns the configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
 func (oc *OperationConfiguration) Container() *Container {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("container"))
 	return ContainerFromID(_r)
 }
 
 // AllowsCellularAccess reports whether operations that use this configuration can send data over the cellular network.
 func (oc *OperationConfiguration) AllowsCellularAccess() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
 // IsLongLived reports whether the operations that use this configuration are long-lived.
 func (oc *OperationConfiguration) IsLongLived() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("isLongLived"))
 	return _r
 }
 
 // TimeoutIntervalForRequest returns the maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
 func (oc *OperationConfiguration) TimeoutIntervalForRequest() float64 {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[float64](objref.IDOf(oc), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
 }
 
 // TimeoutIntervalForResource returns the maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
 func (oc *OperationConfiguration) TimeoutIntervalForResource() float64 {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[float64](objref.IDOf(oc), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
 }

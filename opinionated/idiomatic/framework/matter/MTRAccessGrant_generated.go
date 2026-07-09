@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessGrantAdopt(id objc.ID) *MTRAccessGrant {
 
 // Description returns the object's -description text.
 func (mag *MTRAccessGrant) Description() string {
+	defer runtime.KeepAlive(mag)
 	return rt.Description(objref.IDOf(mag))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mag *MTRAccessGrant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mag)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mag), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mag *MTRAccessGrant) IsKind(className string) bool {
+	defer runtime.KeepAlive(mag)
 	return rt.IsKind(objref.IDOf(mag), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mag *MTRAccessGrant) String() string {
+	defer runtime.KeepAlive(mag)
 	return rt.Description(objref.IDOf(mag))
 }
 
@@ -71,19 +79,22 @@ func NewMTRAccessGrant() *MTRAccessGrant {
 }
 
 // SubjectID returns the matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
-func (mag *MTRAccessGrant) SubjectID() obj.Object {
+func (mag *MTRAccessGrant) SubjectID() *foundation.Number {
+	defer runtime.KeepAlive(mag)
 	_r := objc.Send[objc.ID](objref.IDOf(mag), objc.RegisterName("subjectID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GrantedPrivilege returns the privilege that has been granted
 func (mag *MTRAccessGrant) GrantedPrivilege() MTRAccessControlEntryPrivilege {
+	defer runtime.KeepAlive(mag)
 	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(mag), objc.RegisterName("grantedPrivilege"))
 	return _r
 }
 
 // AuthenticationMode returns the type of authentication mode the access grant is for. MTRAccessControlEntryAuthModeCASE for unicast messages and MTRAccessControlEntryAuthModeGroup for groupcast ones.
 func (mag *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
+	defer runtime.KeepAlive(mag)
 	_r := objc.Send[MTRAccessControlEntryAuthMode](objref.IDOf(mag), objc.RegisterName("authenticationMode"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func deviceHapticsAdopt(id objc.ID) *DeviceHaptics {
 
 // Description returns the object's -description text.
 func (dh *DeviceHaptics) Description() string {
+	defer runtime.KeepAlive(dh)
 	return rt.Description(objref.IDOf(dh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dh *DeviceHaptics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dh *DeviceHaptics) IsKind(className string) bool {
+	defer runtime.KeepAlive(dh)
 	return rt.IsKind(objref.IDOf(dh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dh *DeviceHaptics) String() string {
+	defer runtime.KeepAlive(dh)
 	return rt.Description(objref.IDOf(dh))
 }
 
@@ -74,12 +82,15 @@ func NewDeviceHaptics() *DeviceHaptics {
 
 // CreateEngineWithLocality creates a haptics engine with the specified locality.
 func (dh *DeviceHaptics) CreateEngineWithLocality(locality obj.Object) obj.Object {
+	defer runtime.KeepAlive(dh)
+	defer runtime.KeepAlive(locality)
 	_r := objc.Send[objc.ID](objref.IDOf(dh), objc.RegisterName("createEngineWithLocality:"), objref.IDOf(locality))
 	return obj.Wrap(_r)
 }
 
 // SupportedLocalities returns the set of supported haptic localities for this device - representing the locations of its haptic actuators.
-func (dh *DeviceHaptics) SupportedLocalities() obj.Object {
+func (dh *DeviceHaptics) SupportedLocalities() []*foundation.String {
+	defer runtime.KeepAlive(dh)
 	_r := objc.Send[objc.ID](objref.IDOf(dh), objc.RegisterName("supportedLocalities"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.String { return foundation.StringFromID(_id) })
 }

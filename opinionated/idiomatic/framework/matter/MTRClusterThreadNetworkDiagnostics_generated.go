@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterThreadNetworkDiagnosticsAdopt(id objc.ID) *MTRClusterThreadNetwor
 
 // NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThreadNetworkDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterThreadNetworkDiagnosticsAdopt(_id)
@@ -53,429 +59,571 @@ func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRD
 
 // NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterThreadNetworkDiagnostics.
 func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterThreadNetworkDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
 // ReadAttributeChannelWithParams reads attribute channel with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeChannelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRoutingRoleWithParams reads attribute routing role with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRoutingRoleWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNetworkNameWithParams reads attribute network name with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeNetworkNameWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePanIDWithParams reads attribute pan ID with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePanIDWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePanIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributePanIdWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeExtendedPanIDWithParams reads attribute extended pan ID with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIDWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeExtendedPanIdWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeshLocalPrefixWithParams reads attribute mesh local prefix with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeMeshLocalPrefixWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOverrunCountWithParams reads attribute overrun count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNeighborTableWithParams reads attribute neighbor table with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeNeighborTableWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRouteTableWithParams reads attribute route table with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRouteTableWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePartitionIDWithParams reads attribute partition ID with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIDWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributePartitionIdWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeWeightingWithParams reads attribute weighting with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeWeightingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDataVersionWithParams reads attribute data version with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeDataVersionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeStableDataVersionWithParams reads attribute stable data version with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeStableDataVersionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLeaderRouterIDWithParams reads attribute leader router ID with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIDWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeLeaderRouterIdWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDetachedRoleCountWithParams reads attribute detached role count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeDetachedRoleCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeChildRoleCountWithParams reads attribute child role count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeChildRoleCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRouterRoleCountWithParams reads attribute router role count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRouterRoleCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLeaderRoleCountWithParams reads attribute leader role count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeLeaderRoleCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttachAttemptCountWithParams reads attribute attach attempt count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAttachAttemptCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePartitionIDChangeCountWithParams reads attribute partition ID change count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributePartitionIdChangeCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeBetterPartitionAttachAttemptCountWithParams reads attribute better partition attach attempt count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeParentChangeCountWithParams reads attribute parent change count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeParentChangeCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxTotalCountWithParams reads attribute tx total count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxTotalCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxUnicastCountWithParams reads attribute tx unicast count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxUnicastCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxBroadcastCountWithParams reads attribute tx broadcast count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxBroadcastCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxAckRequestedCountWithParams reads attribute tx ack requested count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxAckRequestedCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxAckedCountWithParams reads attribute tx acked count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxAckedCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxNoAckRequestedCountWithParams reads attribute tx no ack requested count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxNoAckRequestedCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxDataCountWithParams reads attribute tx data count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxDataCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxDataPollCountWithParams reads attribute tx data poll count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxDataPollCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxBeaconCountWithParams reads attribute tx beacon count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxBeaconCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxBeaconRequestCountWithParams reads attribute tx beacon request count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxBeaconRequestCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxOtherCountWithParams reads attribute tx other count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxOtherCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxRetryCountWithParams reads attribute tx retry count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxRetryCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxDirectMaxRetryExpiryCountWithParams reads attribute tx direct max retry expiry count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxIndirectMaxRetryExpiryCountWithParams reads attribute tx indirect max retry expiry count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxErrCcaCountWithParams reads attribute tx err cca count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxErrCcaCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxErrAbortCountWithParams reads attribute tx err abort count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxErrAbortCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTxErrBusyChannelCountWithParams reads attribute tx err busy channel count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeTxErrBusyChannelCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxTotalCountWithParams reads attribute rx total count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxTotalCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxUnicastCountWithParams reads attribute rx unicast count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxUnicastCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxBroadcastCountWithParams reads attribute rx broadcast count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxBroadcastCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxDataCountWithParams reads attribute rx data count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxDataCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxDataPollCountWithParams reads attribute rx data poll count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxDataPollCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxBeaconCountWithParams reads attribute rx beacon count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxBeaconCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxBeaconRequestCountWithParams reads attribute rx beacon request count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxBeaconRequestCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxOtherCountWithParams reads attribute rx other count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxOtherCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxAddressFilteredCountWithParams reads attribute rx address filtered count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxAddressFilteredCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxDestAddrFilteredCountWithParams reads attribute rx dest addr filtered count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxDuplicatedCountWithParams reads attribute rx duplicated count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxDuplicatedCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxErrNoFrameCountWithParams reads attribute rx err no frame count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxErrNoFrameCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxErrUnknownNeighborCountWithParams reads attribute rx err unknown neighbor count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxErrInvalidSrcAddrCountWithParams reads attribute rx err invalid src addr count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxErrSecCountWithParams reads attribute rx err sec count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxErrSecCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxErrFcsCountWithParams reads attribute rx err fcs count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxErrFcsCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRxErrOtherCountWithParams reads attribute rx err other count with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRxErrOtherCountWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveTimestampWithParams reads attribute active timestamp with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeActiveTimestampWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePendingTimestampWithParams reads attribute pending timestamp with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributePendingTimestampWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDelayWithParams reads attribute delay with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeDelayWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeDelayWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeDelayWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSecurityPolicyWithParams reads attribute security policy with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeSecurityPolicyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeChannelPage0MaskWithParams reads attribute channel page0 mask with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeChannelPage0MaskWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOperationalDatasetComponentsWithParams reads attribute operational dataset components with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeOperationalDatasetComponentsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveNetworkFaultsListWithParams reads attribute active network faults list with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeActiveNetworkFaultsListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNeighborTableListWithParams reads attribute neighbor table list with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeNeighborTableListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRouteTableListWithParams reads attribute route table list with params.
-func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeRouteTableListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterThreadNetworkDiagnostics)(nil)

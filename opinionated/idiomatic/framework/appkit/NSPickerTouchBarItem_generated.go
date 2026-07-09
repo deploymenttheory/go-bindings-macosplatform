@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -76,6 +78,7 @@ func (ptbi *PickerTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepres
 
 // WithCollapsedRepresentationImage sets the collapsed representation image.
 func (ptbi *PickerTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PickerTouchBarItem {
+	defer runtime.KeepAlive(collapsedRepresentationImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
 	})
@@ -92,6 +95,7 @@ func (ptbi *PickerTouchBarItem) WithSelectedIndex(selectedIndex int) *PickerTouc
 
 // WithSelectionColor sets the selection color.
 func (ptbi *PickerTouchBarItem) WithSelectionColor(selectionColor *Color) *PickerTouchBarItem {
+	defer runtime.KeepAlive(selectionColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setSelectionColor:"), objref.IDOf(selectionColor))
 	})
@@ -116,6 +120,7 @@ func (ptbi *PickerTouchBarItem) WithNumberOfOptions(numberOfOptions int) *Picker
 
 // WithTarget sets the target.
 func (ptbi *PickerTouchBarItem) WithTarget(target obj.Object) *PickerTouchBarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -148,6 +153,8 @@ func (ptbi *PickerTouchBarItem) WithVisibilityPriority(visibilityPriority float3
 
 // SetImageAtIndex wraps the corresponding Objective-C method.
 func (ptbi *PickerTouchBarItem) SetImageAtIndex(image *Image, index int) {
+	defer runtime.KeepAlive(ptbi)
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setImage:atIndex:"), objref.IDOf(image), index)
 	})
@@ -156,6 +163,7 @@ func (ptbi *PickerTouchBarItem) SetImageAtIndex(image *Image, index int) {
 
 // ImageAtIndex wraps the corresponding Objective-C method.
 func (ptbi *PickerTouchBarItem) ImageAtIndex(index int) *Image {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -169,6 +177,7 @@ func (ptbi *PickerTouchBarItem) ImageAtIndex(index int) *Image {
 
 // SetLabelAtIndex wraps the corresponding Objective-C method.
 func (ptbi *PickerTouchBarItem) SetLabelAtIndex(label string, index int) {
+	defer runtime.KeepAlive(ptbi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setLabel:atIndex:"), purego.NSString(label), index)
 	})
@@ -177,6 +186,7 @@ func (ptbi *PickerTouchBarItem) SetLabelAtIndex(label string, index int) {
 
 // LabelAtIndex wraps the corresponding Objective-C method.
 func (ptbi *PickerTouchBarItem) LabelAtIndex(index int) string {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -193,6 +203,7 @@ func (ptbi *PickerTouchBarItem) LabelAtIndex(index int) string {
 
 // SetEnabledAtIndex wraps the corresponding Objective-C method.
 func (ptbi *PickerTouchBarItem) SetEnabledAtIndex(enabled bool, index int) {
+	defer runtime.KeepAlive(ptbi)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setEnabled:atIndex:"), enabled, index)
 	})
@@ -201,6 +212,7 @@ func (ptbi *PickerTouchBarItem) SetEnabledAtIndex(enabled bool, index int) {
 
 // IsEnabledAtIndex wraps the corresponding Objective-C method.
 func (ptbi *PickerTouchBarItem) IsEnabledAtIndex(index int) bool {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -214,6 +226,7 @@ func (ptbi *PickerTouchBarItem) IsEnabledAtIndex(index int) bool {
 
 // ControlRepresentation returns the control representation.
 func (ptbi *PickerTouchBarItem) ControlRepresentation() PickerTouchBarItemControlRepresentation {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 PickerTouchBarItemControlRepresentation
 	purego.Main(func() {
 		_mainthread0 = func() PickerTouchBarItemControlRepresentation {
@@ -227,6 +240,7 @@ func (ptbi *PickerTouchBarItem) ControlRepresentation() PickerTouchBarItemContro
 
 // CollapsedRepresentationLabel returns the collapsed representation label.
 func (ptbi *PickerTouchBarItem) CollapsedRepresentationLabel() string {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -243,6 +257,7 @@ func (ptbi *PickerTouchBarItem) CollapsedRepresentationLabel() string {
 
 // CollapsedRepresentationImage returns the collapsed representation image.
 func (ptbi *PickerTouchBarItem) CollapsedRepresentationImage() *Image {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -256,6 +271,7 @@ func (ptbi *PickerTouchBarItem) CollapsedRepresentationImage() *Image {
 
 // SelectedIndex returns the selected index.
 func (ptbi *PickerTouchBarItem) SelectedIndex() int {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -269,6 +285,7 @@ func (ptbi *PickerTouchBarItem) SelectedIndex() int {
 
 // SelectionColor returns the selection color.
 func (ptbi *PickerTouchBarItem) SelectionColor() *Color {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -282,6 +299,7 @@ func (ptbi *PickerTouchBarItem) SelectionColor() *Color {
 
 // SelectionMode returns the selection mode.
 func (ptbi *PickerTouchBarItem) SelectionMode() PickerTouchBarItemSelectionMode {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 PickerTouchBarItemSelectionMode
 	purego.Main(func() {
 		_mainthread0 = func() PickerTouchBarItemSelectionMode {
@@ -295,6 +313,7 @@ func (ptbi *PickerTouchBarItem) SelectionMode() PickerTouchBarItemSelectionMode 
 
 // NumberOfOptions returns the number of options.
 func (ptbi *PickerTouchBarItem) NumberOfOptions() int {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -308,6 +327,7 @@ func (ptbi *PickerTouchBarItem) NumberOfOptions() int {
 
 // Target returns the target.
 func (ptbi *PickerTouchBarItem) Target() obj.Object {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -321,6 +341,7 @@ func (ptbi *PickerTouchBarItem) Target() obj.Object {
 
 // IsEnabled reports whether the object is enabled.
 func (ptbi *PickerTouchBarItem) IsEnabled() bool {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

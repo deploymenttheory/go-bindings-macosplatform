@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,27 +51,33 @@ func draggingImageComponentAdopt(id objc.ID) *DraggingImageComponent {
 
 // Description returns the object's -description text.
 func (dic *DraggingImageComponent) Description() string {
+	defer runtime.KeepAlive(dic)
 	return rt.Description(objref.IDOf(dic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dic *DraggingImageComponent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dic *DraggingImageComponent) IsKind(className string) bool {
+	defer runtime.KeepAlive(dic)
 	return rt.IsKind(objref.IDOf(dic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dic *DraggingImageComponent) String() string {
+	defer runtime.KeepAlive(dic)
 	return rt.Description(objref.IDOf(dic))
 }
 
 // NewDraggingImageComponentWithKey initializes and returns a dragging image component with the specified key.
 func NewDraggingImageComponentWithKey(key obj.Object) *DraggingImageComponent {
+	defer runtime.KeepAlive(key)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDraggingImageComponent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:"), objref.IDOf(key))
 	return draggingImageComponentAdopt(_id)
@@ -76,12 +85,14 @@ func NewDraggingImageComponentWithKey(key obj.Object) *DraggingImageComponent {
 
 // WithKey sets the unique name of this image component instance.
 func (dic *DraggingImageComponent) WithKey(key obj.Object) *DraggingImageComponent {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(dic), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return dic
 }
 
 // WithContents sets an object providing the image contents of the component.
 func (dic *DraggingImageComponent) WithContents(contents obj.Object) *DraggingImageComponent {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(dic), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return dic
 }
@@ -93,19 +104,22 @@ func (dic *DraggingImageComponent) WithFrame(frame corefoundation.CGRect) *Dragg
 }
 
 // Key returns the key.
-func (dic *DraggingImageComponent) Key() obj.Object {
+func (dic *DraggingImageComponent) Key() *foundation.String {
+	defer runtime.KeepAlive(dic)
 	_r := objc.Send[objc.ID](objref.IDOf(dic), objc.RegisterName("key"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Contents returns the contents.
 func (dic *DraggingImageComponent) Contents() obj.Object {
+	defer runtime.KeepAlive(dic)
 	_r := objc.Send[objc.ID](objref.IDOf(dic), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
 // Frame returns the frame.
 func (dic *DraggingImageComponent) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(dic)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(dic), objc.RegisterName("frame"))
 	return _r
 }

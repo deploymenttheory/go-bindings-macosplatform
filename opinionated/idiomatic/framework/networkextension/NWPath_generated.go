@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nWPathAdopt(id objc.ID) *NWPath {
 
 // Description returns the object's -description text.
 func (np *NWPath) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NWPath) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NWPath) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NWPath) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
@@ -74,24 +81,29 @@ func NewNWPath() *NWPath {
 
 // IsEqualToPath comparison method for NWPath objects.
 func (np *NWPath) IsEqualToPath(path *NWPath) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(path)
 	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isEqualToPath:"), objref.IDOf(path))
 	return _r
 }
 
 // Status returns the evaluated NWPathStatus of the NWPath.
 func (np *NWPath) Status() NWPathStatus {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[NWPathStatus](objref.IDOf(np), objc.RegisterName("status"))
 	return _r
 }
 
 // IsExpensive reports whether the path is considered expensive, as when using a cellular data plan.
 func (np *NWPath) IsExpensive() bool {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isExpensive"))
 	return _r
 }
 
 // IsConstrained reports whether the path is considered constrained, as when it is in save data mode.
 func (np *NWPath) IsConstrained() bool {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isConstrained"))
 	return _r
 }

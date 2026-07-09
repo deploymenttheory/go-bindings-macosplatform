@@ -5,7 +5,10 @@
 package backgroundassets
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func appExtensionInfoAdopt(id objc.ID) *AppExtensionInfo {
 
 // Description returns the object's -description text.
 func (aei *AppExtensionInfo) Description() string {
+	defer runtime.KeepAlive(aei)
 	return rt.Description(objref.IDOf(aei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aei *AppExtensionInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aei *AppExtensionInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(aei)
 	return rt.IsKind(objref.IDOf(aei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aei *AppExtensionInfo) String() string {
+	defer runtime.KeepAlive(aei)
 	return rt.Description(objref.IDOf(aei))
 }
 
@@ -71,13 +79,15 @@ func NewAppExtensionInfo() *AppExtensionInfo {
 }
 
 // RestrictedDownloadSizeRemaining returns the number of bytes remaining that can be scheduled if the total download size is restricted. When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
-func (aei *AppExtensionInfo) RestrictedDownloadSizeRemaining() obj.Object {
+func (aei *AppExtensionInfo) RestrictedDownloadSizeRemaining() *foundation.Number {
+	defer runtime.KeepAlive(aei)
 	_r := objc.Send[objc.ID](objref.IDOf(aei), objc.RegisterName("restrictedDownloadSizeRemaining"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RestrictedEssentialDownloadSizeRemaining returns the number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed.
-func (aei *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() obj.Object {
+func (aei *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() *foundation.Number {
+	defer runtime.KeepAlive(aei)
 	_r := objc.Send[objc.ID](objref.IDOf(aei), objc.RegisterName("restrictedEssentialDownloadSizeRemaining"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

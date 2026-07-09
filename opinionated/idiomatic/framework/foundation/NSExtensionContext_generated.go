@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func extensionContextAdopt(id objc.ID) *ExtensionContext {
 
 // Description returns the object's -description text.
 func (ec *ExtensionContext) Description() string {
+	defer runtime.KeepAlive(ec)
 	return rt.Description(objref.IDOf(ec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ec *ExtensionContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ec *ExtensionContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(ec)
 	return rt.IsKind(objref.IDOf(ec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ec *ExtensionContext) String() string {
+	defer runtime.KeepAlive(ec)
 	return rt.Description(objref.IDOf(ec))
 }
 
@@ -81,28 +87,33 @@ func (ec *ExtensionContext) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ec *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
-	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ec *ExtensionContext) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ExtensionContext {
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ec
 }
 
 // CompleteRequestReturningItemsCompletionHandler tells the host app to complete the app extension request with an array of result items.
 func (ec *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items obj.Object, completionHandler func(bool)) {
+	defer runtime.KeepAlive(ec)
+	defer runtime.KeepAlive(items)
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("completeRequestReturningItems:completionHandler:"), objref.IDOf(items), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CancelRequestWithError tells the host app to cancel the app extension request, with a supplied error.
-func (ec *ExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("cancelRequestWithError:"), error_)
+func (ec *ExtensionContext) CancelRequestWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(ec)
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("cancelRequestWithError:"), err)
 }
 
 // OpenURLCompletionHandler asks the system to open a URL on behalf of the currently running app extension.
-func (ec *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(uRL), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (ec *ExtensionContext) OpenURLCompletionHandler(url string, completionHandler func(bool)) {
+	defer runtime.KeepAlive(ec)
+	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(url), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // InputItems returns the input items.
 func (ec *ExtensionContext) InputItems() obj.Object {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("inputItems"))
 	return obj.Wrap(_r)
 }

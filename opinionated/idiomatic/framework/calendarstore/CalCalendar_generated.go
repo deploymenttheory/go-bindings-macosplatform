@@ -5,6 +5,8 @@
 package calendarstore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func calCalendarAdopt(id objc.ID) *CalCalendar {
 
 // Description returns the object's -description text.
 func (cc *CalCalendar) Description() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cc *CalCalendar) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cc *CalCalendar) IsKind(className string) bool {
+	defer runtime.KeepAlive(cc)
 	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cc *CalCalendar) String() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
@@ -72,6 +79,7 @@ func NewCalCalendar() *CalCalendar {
 
 // WithColor sets the color.
 func (cc *CalCalendar) WithColor(color obj.Object) *CalCalendar {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return cc
 }
@@ -90,12 +98,14 @@ func (cc *CalCalendar) WithTitle(title string) *CalCalendar {
 
 // Color returns the color.
 func (cc *CalCalendar) Color() obj.Object {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // Notes returns the notes.
 func (cc *CalCalendar) Notes() string {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("notes"))
 	if _r == 0 {
 		return ""
@@ -105,6 +115,7 @@ func (cc *CalCalendar) Notes() string {
 
 // Title returns the title.
 func (cc *CalCalendar) Title() string {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -114,6 +125,7 @@ func (cc *CalCalendar) Title() string {
 
 // Type returns the type.
 func (cc *CalCalendar) Type() string {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -123,6 +135,7 @@ func (cc *CalCalendar) Type() string {
 
 // UID returns the UID.
 func (cc *CalCalendar) UID() string {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("uid"))
 	if _r == 0 {
 		return ""
@@ -132,6 +145,7 @@ func (cc *CalCalendar) UID() string {
 
 // IsEditable reports whether the object is editable.
 func (cc *CalCalendar) IsEditable() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEditable"))
 	return _r
 }

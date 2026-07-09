@@ -5,7 +5,11 @@
 package coremotion
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func odometerDataAdopt(id objc.ID) *OdometerData {
 
 // Description returns the object's -description text.
 func (od *OdometerData) Description() string {
+	defer runtime.KeepAlive(od)
 	return rt.Description(objref.IDOf(od))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (od *OdometerData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(od)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(od), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (od *OdometerData) IsKind(className string) bool {
+	defer runtime.KeepAlive(od)
 	return rt.IsKind(objref.IDOf(od), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (od *OdometerData) String() string {
+	defer runtime.KeepAlive(od)
 	return rt.Description(objref.IDOf(od))
 }
 
@@ -73,37 +82,43 @@ func NewOdometerData() *OdometerData {
 }
 
 // StartDate returns the start date.
-func (od *OdometerData) StartDate() obj.Object {
+func (od *OdometerData) StartDate() time.Time {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (od *OdometerData) EndDate() obj.Object {
+func (od *OdometerData) EndDate() time.Time {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // GpsDate returns the gps date.
-func (od *OdometerData) GpsDate() obj.Object {
+func (od *OdometerData) GpsDate() time.Time {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("gpsDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // OriginDevice returns the origin device.
 func (od *OdometerData) OriginDevice() OdometerOriginDevice {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[OdometerOriginDevice](objref.IDOf(od), objc.RegisterName("originDevice"))
 	return _r
 }
 
 // Slope returns the slope.
-func (od *OdometerData) Slope() obj.Object {
+func (od *OdometerData) Slope() *foundation.Number {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("slope"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxAbsSlope returns the max abs slope.
-func (od *OdometerData) MaxAbsSlope() obj.Object {
+func (od *OdometerData) MaxAbsSlope() *foundation.Number {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("maxAbsSlope"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

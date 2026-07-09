@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func captureTimecodeSourceAdopt(id objc.ID) *CaptureTimecodeSource {
 
 // Description returns the object's -description text.
 func (cts *CaptureTimecodeSource) Description() string {
+	defer runtime.KeepAlive(cts)
 	return rt.Description(objref.IDOf(cts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cts *CaptureTimecodeSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cts *CaptureTimecodeSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(cts)
 	return rt.IsKind(objref.IDOf(cts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cts *CaptureTimecodeSource) String() string {
+	defer runtime.KeepAlive(cts)
 	return rt.Description(objref.IDOf(cts))
 }
 
@@ -72,6 +80,7 @@ func NewCaptureTimecodeSource() *CaptureTimecodeSource {
 
 // DisplayName returns the name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
 func (cts *CaptureTimecodeSource) DisplayName() string {
+	defer runtime.KeepAlive(cts)
 	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -81,12 +90,14 @@ func (cts *CaptureTimecodeSource) DisplayName() string {
 
 // Type returns the type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
 func (cts *CaptureTimecodeSource) Type() CaptureTimecodeSourceType {
+	defer runtime.KeepAlive(cts)
 	_r := objc.Send[CaptureTimecodeSourceType](objref.IDOf(cts), objc.RegisterName("type"))
 	return _r
 }
 
 // UUID returns a unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
-func (cts *CaptureTimecodeSource) UUID() obj.Object {
+func (cts *CaptureTimecodeSource) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(cts)
 	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("uuid"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }

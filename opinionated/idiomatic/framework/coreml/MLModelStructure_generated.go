@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureAdopt(id objc.ID) *ModelStructure {
 
 // Description returns the object's -description text.
 func (ms *ModelStructure) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *ModelStructure) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *ModelStructure) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *ModelStructure) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -74,18 +81,21 @@ func NewModelStructure() *ModelStructure {
 
 // NeuralNetwork returns if the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
 func (ms *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("neuralNetwork"))
 	return ModelStructureNeuralNetworkFromID(_r)
 }
 
 // Program returns if the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
 func (ms *ModelStructure) Program() *ModelStructureProgram {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("program"))
 	return ModelStructureProgramFromID(_r)
 }
 
 // Pipeline returns if the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
 func (ms *ModelStructure) Pipeline() *ModelStructurePipeline {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("pipeline"))
 	return ModelStructurePipelineFromID(_r)
 }

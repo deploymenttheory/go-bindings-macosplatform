@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func fileAccessIntentAdopt(id objc.ID) *FileAccessIntent {
 
 // Description returns the object's -description text.
 func (fai *FileAccessIntent) Description() string {
+	defer runtime.KeepAlive(fai)
 	return rt.Description(objref.IDOf(fai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fai *FileAccessIntent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fai *FileAccessIntent) IsKind(className string) bool {
+	defer runtime.KeepAlive(fai)
 	return rt.IsKind(objref.IDOf(fai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fai *FileAccessIntent) String() string {
+	defer runtime.KeepAlive(fai)
 	return rt.Description(objref.IDOf(fai))
 }
 
@@ -81,13 +87,14 @@ func (fai *FileAccessIntent) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (fai *FileAccessIntent) WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent {
-	objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (fai *FileAccessIntent) WithScriptingProperties(scriptingProperties map[string]obj.Object) *FileAccessIntent {
+	objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return fai
 }
 
 // URL returns the URL.
-func (fai *FileAccessIntent) URL() *URL {
+func (fai *FileAccessIntent) URL() string {
+	defer runtime.KeepAlive(fai)
 	_r := objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("URL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }

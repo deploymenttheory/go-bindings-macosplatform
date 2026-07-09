@@ -5,6 +5,8 @@
 package opendirectory
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func attributeMapAdopt(id objc.ID) *AttributeMap {
 
 // Description returns the object's -description text.
 func (am *AttributeMap) Description() string {
+	defer runtime.KeepAlive(am)
 	return rt.Description(objref.IDOf(am))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (am *AttributeMap) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(am)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(am), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (am *AttributeMap) IsKind(className string) bool {
+	defer runtime.KeepAlive(am)
 	return rt.IsKind(objref.IDOf(am), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (am *AttributeMap) String() string {
+	defer runtime.KeepAlive(am)
 	return rt.Description(objref.IDOf(am))
 }
 
@@ -90,16 +97,19 @@ func (am *AttributeMap) WithValue(value string) *AttributeMap {
 
 // SetStaticValue sets a static value that will always be returned for this mapping. Sets a static value that will always be returned for this mapping, i.e., "20".
 func (am *AttributeMap) SetStaticValue(staticValue string) {
+	defer runtime.KeepAlive(am)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setStaticValue:"), purego.NSString(staticValue))
 }
 
 // SetVariableSubstitution sets a variable substitution-based value. Value should be using the syntax '$native$' for all substited values.  For example, to form a home directory using the "cn" of an LDAP record, substitution could be done with "/home/$cn$".
 func (am *AttributeMap) SetVariableSubstitution(variableSubstitution string) {
+	defer runtime.KeepAlive(am)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setVariableSubstitution:"), purego.NSString(variableSubstitution))
 }
 
 // CustomQueryFunction returns the custom query function.
 func (am *AttributeMap) CustomQueryFunction() string {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("customQueryFunction"))
 	if _r == 0 {
 		return ""
@@ -109,6 +119,7 @@ func (am *AttributeMap) CustomQueryFunction() string {
 
 // CustomTranslationFunction returns the custom translation function.
 func (am *AttributeMap) CustomTranslationFunction() string {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("customTranslationFunction"))
 	if _r == 0 {
 		return ""
@@ -118,17 +129,21 @@ func (am *AttributeMap) CustomTranslationFunction() string {
 
 // CustomAttributes returns the custom attributes.
 func (am *AttributeMap) CustomAttributes() obj.Object {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("customAttributes"))
 	return obj.Wrap(_r)
 }
 
 // SetCustomAttributes wraps the corresponding Objective-C method.
 func (am *AttributeMap) SetCustomAttributes(customAttributes obj.Object) {
+	defer runtime.KeepAlive(am)
+	defer runtime.KeepAlive(customAttributes)
 	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setCustomAttributes:"), objref.IDOf(customAttributes))
 }
 
 // Value returns the value.
 func (am *AttributeMap) Value() string {
+	defer runtime.KeepAlive(am)
 	_r := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

@@ -146,16 +146,16 @@ func IOConnectAddRef(connect uint) int {
 	return _fnIOConnectAddRef(connect)
 }
 
-func IOConnectCallAsyncMethod(connection uint, selector uint32, wake_port uint, reference *uint64, referenceCnt uint32, input *uint64, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt uint, output *uint64, outputCnt *uint32, outputStruct unsafe.Pointer, outputStructCnt *uint) int {
-	return _fnIOConnectCallAsyncMethod(connection, selector, wake_port, reference, referenceCnt, input, inputCnt, inputStruct, inputStructCnt, output, outputCnt, outputStruct, outputStructCnt)
+func IOConnectCallAsyncMethod(connection uint, selector uint32, wakePort uint, reference *uint64, referenceCnt uint32, input *uint64, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt uint, output *uint64, outputCnt *uint32, outputStruct unsafe.Pointer, outputStructCnt *uint) int {
+	return _fnIOConnectCallAsyncMethod(connection, selector, wakePort, reference, referenceCnt, input, inputCnt, inputStruct, inputStructCnt, output, outputCnt, outputStruct, outputStructCnt)
 }
 
-func IOConnectCallAsyncScalarMethod(connection uint, selector uint32, wake_port uint, reference *uint64, referenceCnt uint32, input *uint64, inputCnt uint32, output *uint64, outputCnt *uint32) int {
-	return _fnIOConnectCallAsyncScalarMethod(connection, selector, wake_port, reference, referenceCnt, input, inputCnt, output, outputCnt)
+func IOConnectCallAsyncScalarMethod(connection uint, selector uint32, wakePort uint, reference *uint64, referenceCnt uint32, input *uint64, inputCnt uint32, output *uint64, outputCnt *uint32) int {
+	return _fnIOConnectCallAsyncScalarMethod(connection, selector, wakePort, reference, referenceCnt, input, inputCnt, output, outputCnt)
 }
 
-func IOConnectCallAsyncStructMethod(connection uint, selector uint32, wake_port uint, reference *uint64, referenceCnt uint32, inputStruct unsafe.Pointer, inputStructCnt uint, outputStruct unsafe.Pointer, outputStructCnt *uint) int {
-	return _fnIOConnectCallAsyncStructMethod(connection, selector, wake_port, reference, referenceCnt, inputStruct, inputStructCnt, outputStruct, outputStructCnt)
+func IOConnectCallAsyncStructMethod(connection uint, selector uint32, wakePort uint, reference *uint64, referenceCnt uint32, inputStruct unsafe.Pointer, inputStructCnt uint, outputStruct unsafe.Pointer, outputStructCnt *uint) int {
+	return _fnIOConnectCallAsyncStructMethod(connection, selector, wakePort, reference, referenceCnt, inputStruct, inputStructCnt, outputStruct, outputStructCnt)
 }
 
 func IOConnectCallMethod(connection uint, selector uint32, input *uint64, inputCnt uint32, inputStruct unsafe.Pointer, inputStructCnt uint, output *uint64, outputCnt *uint32, outputStruct unsafe.Pointer, outputStructCnt *uint) int {

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -64,6 +66,7 @@ func (cctgs *CNNConvolutionTransposeGradientState) WithLabel(label string) *CNNC
 
 // ConvolutionTranspose returns the convolutionTranspose filter that produced the state.
 func (cctgs *CNNConvolutionTransposeGradientState) ConvolutionTranspose() obj.Object {
+	defer runtime.KeepAlive(cctgs)
 	_r := objc.Send[objc.ID](objref.IDOf(cctgs), objc.RegisterName("convolutionTranspose"))
 	return obj.Wrap(_r)
 }

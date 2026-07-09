@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,24 +67,28 @@ func (rpo *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping
 
 // MomentumScale returns the momentum factor.  A hyper-parameter. The default is 0.0.
 func (rpo *RMSPropOptimizer) MomentumScale() float32 {
+	defer runtime.KeepAlive(rpo)
 	_r := objc.Send[float32](objref.IDOf(rpo), objc.RegisterName("momentumScale"))
 	return _r
 }
 
 // Alpha returns the smoothing constant. The default is 0.99.
 func (rpo *RMSPropOptimizer) Alpha() float32 {
+	defer runtime.KeepAlive(rpo)
 	_r := objc.Send[float32](objref.IDOf(rpo), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Epsilon returns a term added to improve numerical stability. The default is 1e-8.
 func (rpo *RMSPropOptimizer) Epsilon() float32 {
+	defer runtime.KeepAlive(rpo)
 	_r := objc.Send[float32](objref.IDOf(rpo), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // IsCentered reports whether if True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. The default is false.
 func (rpo *RMSPropOptimizer) IsCentered() bool {
+	defer runtime.KeepAlive(rpo)
 	_r := objc.Send[bool](objref.IDOf(rpo), objc.RegisterName("isCentered"))
 	return _r
 }

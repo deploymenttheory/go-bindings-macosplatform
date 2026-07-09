@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func temporalNoiseFilterConfigurationAdopt(id objc.ID) *TemporalNoiseFilterConfi
 
 // Description returns the object's -description text.
 func (tnfc *TemporalNoiseFilterConfiguration) Description() string {
+	defer runtime.KeepAlive(tnfc)
 	return rt.Description(objref.IDOf(tnfc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tnfc *TemporalNoiseFilterConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tnfc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tnfc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tnfc *TemporalNoiseFilterConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(tnfc)
 	return rt.IsKind(objref.IDOf(tnfc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tnfc *TemporalNoiseFilterConfiguration) String() string {
+	defer runtime.KeepAlive(tnfc)
 	return rt.Description(objref.IDOf(tnfc))
 }
 
@@ -75,12 +82,14 @@ func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelForm
 
 // FrameWidth returns width of source frame in pixels.
 func (tnfc *TemporalNoiseFilterConfiguration) FrameWidth() int {
+	defer runtime.KeepAlive(tnfc)
 	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
 // FrameHeight returns height of source frame in pixels.
 func (tnfc *TemporalNoiseFilterConfiguration) FrameHeight() int {
+	defer runtime.KeepAlive(tnfc)
 	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("frameHeight"))
 	return _r
 }
@@ -89,30 +98,35 @@ func (tnfc *TemporalNoiseFilterConfiguration) FrameHeight() int {
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (tnfc *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	defer runtime.KeepAlive(tnfc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tnfc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (tnfc *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() obj.Object {
+func (tnfc *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(tnfc)
 	_r := objc.Send[objc.ID](objref.IDOf(tnfc), objc.RegisterName("sourcePixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (tnfc *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() obj.Object {
+func (tnfc *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(tnfc)
 	_r := objc.Send[objc.ID](objref.IDOf(tnfc), objc.RegisterName("destinationPixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // NextFrameCount returns maximum number of future reference frames that the processor can use to process a source frame.
 func (tnfc *TemporalNoiseFilterConfiguration) NextFrameCount() int {
+	defer runtime.KeepAlive(tnfc)
 	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("nextFrameCount"))
 	return _r
 }
 
 // PreviousFrameCount returns maximum number of past reference frames that the processor can use to process a source frame.
 func (tnfc *TemporalNoiseFilterConfiguration) PreviousFrameCount() int {
+	defer runtime.KeepAlive(tnfc)
 	_r := objc.Send[int](objref.IDOf(tnfc), objc.RegisterName("previousFrameCount"))
 	return _r
 }

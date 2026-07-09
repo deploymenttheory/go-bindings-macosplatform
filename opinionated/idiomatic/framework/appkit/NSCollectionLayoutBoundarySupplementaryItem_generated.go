@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -84,6 +86,7 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithZIndex(zIndex int) *
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
+	defer runtime.KeepAlive(edgeSpacing)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(clbsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	})
@@ -92,6 +95,7 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpac
 
 // ExtendsBoundary wraps the corresponding Objective-C method.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
+	defer runtime.KeepAlive(clbsi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -105,6 +109,7 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
 
 // PinToVisibleBounds wraps the corresponding Objective-C method.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
+	defer runtime.KeepAlive(clbsi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -118,6 +123,7 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() boo
 
 // Alignment returns the alignment.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignment {
+	defer runtime.KeepAlive(clbsi)
 	var _mainthread0 RectAlignment
 	purego.Main(func() {
 		_mainthread0 = func() RectAlignment {
@@ -131,6 +137,7 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignmen
 
 // Offset returns the offset.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(clbsi)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {

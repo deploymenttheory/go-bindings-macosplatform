@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rasterizationRateLayerDescriptorAdopt(id objc.ID) *RasterizationRateLayerDe
 
 // Description returns the object's -description text.
 func (rrld *RasterizationRateLayerDescriptor) Description() string {
+	defer runtime.KeepAlive(rrld)
 	return rt.Description(objref.IDOf(rrld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rrld *RasterizationRateLayerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rrld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rrld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rrld *RasterizationRateLayerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rrld)
 	return rt.IsKind(objref.IDOf(rrld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rrld *RasterizationRateLayerDescriptor) String() string {
+	defer runtime.KeepAlive(rrld)
 	return rt.Description(objref.IDOf(rrld))
 }
 
@@ -74,12 +81,14 @@ func NewRasterizationRateLayerDescriptor() *RasterizationRateLayerDescriptor {
 
 // Horizontal provide convenient bounds-checked access to the quality samples stored in the descriptor.
 func (rrld *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
+	defer runtime.KeepAlive(rrld)
 	_r := objc.Send[objc.ID](objref.IDOf(rrld), objc.RegisterName("horizontal"))
 	return RasterizationRateSampleArrayFromID(_r)
 }
 
 // Vertical provide convenient bounds-checked access to the quality samples stored in the descriptor.
 func (rrld *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
+	defer runtime.KeepAlive(rrld)
 	_r := objc.Send[objc.ID](objref.IDOf(rrld), objc.RegisterName("vertical"))
 	return RasterizationRateSampleArrayFromID(_r)
 }

@@ -1464,20 +1464,20 @@ func (e SessionCreationFlags) String() string {
 }
 
 // Groups that collect ciphersuites of comparable security properties.
-type Tls_ciphersuite_group_t int64
+type TLSCiphersuiteGroup int64
 
 const (
-	Tls_ciphersuite_group_default           Tls_ciphersuite_group_t = 0
-	Tls_ciphersuite_group_compatibility     Tls_ciphersuite_group_t = 1
-	Tls_ciphersuite_group_legacy            Tls_ciphersuite_group_t = 2
-	Tls_ciphersuite_group_ats               Tls_ciphersuite_group_t = 3
-	Tls_ciphersuite_group_ats_compatibility Tls_ciphersuite_group_t = 4
-	Tls_ciphersuite_group_ats_fcp_v2_1      Tls_ciphersuite_group_t = 5
+	Tls_ciphersuite_group_default           TLSCiphersuiteGroup = 0
+	Tls_ciphersuite_group_compatibility     TLSCiphersuiteGroup = 1
+	Tls_ciphersuite_group_legacy            TLSCiphersuiteGroup = 2
+	Tls_ciphersuite_group_ats               TLSCiphersuiteGroup = 3
+	Tls_ciphersuite_group_ats_compatibility TLSCiphersuiteGroup = 4
+	Tls_ciphersuite_group_ats_fcp_v2_1      TLSCiphersuiteGroup = 5
 )
 
-// String returns the Tls_ciphersuite_group_t constant's name, or its numeric form when the
+// String returns the TLSCiphersuiteGroup constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tls_ciphersuite_group_t) String() string {
+func (e TLSCiphersuiteGroup) String() string {
 	switch e {
 	case Tls_ciphersuite_group_default:
 		return "Tls_ciphersuite_group_default"
@@ -1492,45 +1492,45 @@ func (e Tls_ciphersuite_group_t) String() string {
 	case Tls_ciphersuite_group_ats_fcp_v2_1:
 		return "Tls_ciphersuite_group_ats_fcp_v2_1"
 	default:
-		return fmt.Sprintf("Tls_ciphersuite_group_t(%d)", int64(e))
+		return fmt.Sprintf("TLSCiphersuiteGroup(%d)", int64(e))
 	}
 }
 
 // The collection of valid ciphersuites.
-type Tls_ciphersuite_t int64
+type TLSCiphersuite int64
 
 const (
-	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA                 Tls_ciphersuite_t = 10
-	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA                  Tls_ciphersuite_t = 47
-	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA                  Tls_ciphersuite_t = 53
-	Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256               Tls_ciphersuite_t = 156
-	Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384               Tls_ciphersuite_t = 157
-	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256               Tls_ciphersuite_t = 60
-	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256               Tls_ciphersuite_t = 61
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA         Tls_ciphersuite_t = 49160
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA          Tls_ciphersuite_t = 49161
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA          Tls_ciphersuite_t = 49162
-	Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA           Tls_ciphersuite_t = 49170
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA            Tls_ciphersuite_t = 49171
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA            Tls_ciphersuite_t = 49172
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256       Tls_ciphersuite_t = 49187
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384       Tls_ciphersuite_t = 49188
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256         Tls_ciphersuite_t = 49191
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384         Tls_ciphersuite_t = 49192
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256       Tls_ciphersuite_t = 49195
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384       Tls_ciphersuite_t = 49196
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256         Tls_ciphersuite_t = 49199
-	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384         Tls_ciphersuite_t = 49200
-	Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   Tls_ciphersuite_t = 52392
-	Tls_ciphersuite_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 Tls_ciphersuite_t = 52393
-	Tls_ciphersuite_AES_128_GCM_SHA256                        Tls_ciphersuite_t = 4865
-	Tls_ciphersuite_AES_256_GCM_SHA384                        Tls_ciphersuite_t = 4866
-	Tls_ciphersuite_CHACHA20_POLY1305_SHA256                  Tls_ciphersuite_t = 4867
+	Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA                 TLSCiphersuite = 10
+	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA                  TLSCiphersuite = 47
+	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA                  TLSCiphersuite = 53
+	Tls_ciphersuite_RSA_WITH_AES_128_GCM_SHA256               TLSCiphersuite = 156
+	Tls_ciphersuite_RSA_WITH_AES_256_GCM_SHA384               TLSCiphersuite = 157
+	Tls_ciphersuite_RSA_WITH_AES_128_CBC_SHA256               TLSCiphersuite = 60
+	Tls_ciphersuite_RSA_WITH_AES_256_CBC_SHA256               TLSCiphersuite = 61
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA         TLSCiphersuite = 49160
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA          TLSCiphersuite = 49161
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA          TLSCiphersuite = 49162
+	Tls_ciphersuite_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA           TLSCiphersuite = 49170
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA            TLSCiphersuite = 49171
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA            TLSCiphersuite = 49172
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256       TLSCiphersuite = 49187
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384       TLSCiphersuite = 49188
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_CBC_SHA256         TLSCiphersuite = 49191
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_CBC_SHA384         TLSCiphersuite = 49192
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256       TLSCiphersuite = 49195
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384       TLSCiphersuite = 49196
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_128_GCM_SHA256         TLSCiphersuite = 49199
+	Tls_ciphersuite_ECDHE_RSA_WITH_AES_256_GCM_SHA384         TLSCiphersuite = 49200
+	Tls_ciphersuite_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256   TLSCiphersuite = 52392
+	Tls_ciphersuite_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLSCiphersuite = 52393
+	Tls_ciphersuite_AES_128_GCM_SHA256                        TLSCiphersuite = 4865
+	Tls_ciphersuite_AES_256_GCM_SHA384                        TLSCiphersuite = 4866
+	Tls_ciphersuite_CHACHA20_POLY1305_SHA256                  TLSCiphersuite = 4867
 )
 
-// String returns the Tls_ciphersuite_t constant's name, or its numeric form when the
+// String returns the TLSCiphersuite constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tls_ciphersuite_t) String() string {
+func (e TLSCiphersuite) String() string {
 	switch e {
 	case Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA:
 		return "Tls_ciphersuite_RSA_WITH_3DES_EDE_CBC_SHA"
@@ -1585,43 +1585,43 @@ func (e Tls_ciphersuite_t) String() string {
 	case Tls_ciphersuite_CHACHA20_POLY1305_SHA256:
 		return "Tls_ciphersuite_CHACHA20_POLY1305_SHA256"
 	default:
-		return fmt.Sprintf("Tls_ciphersuite_t(%d)", int64(e))
+		return fmt.Sprintf("TLSCiphersuite(%d)", int64(e))
 	}
 }
 
 // The collection of supported TLS and DTLS versions.
-type Tls_protocol_version_t int64
+type TLSProtocolVersion int64
 
 const (
 	// The TLS 1.0 protocol.
 	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
-	Tls_protocol_version_TLSv10 Tls_protocol_version_t = 769
+	Tls_protocol_version_TLSv10 TLSProtocolVersion = 769
 	// The TLS 1.1 protocol.
 	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
-	Tls_protocol_version_TLSv11 Tls_protocol_version_t = 770
+	Tls_protocol_version_TLSv11 TLSProtocolVersion = 770
 	// The TLS 1.2 protocol.
 	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
-	Tls_protocol_version_TLSv12 Tls_protocol_version_t = 771
+	Tls_protocol_version_TLSv12 TLSProtocolVersion = 771
 	// The TLS 1.3 protocol.
 	//
 	// Deprecated: Use tls_protocol_version_TLSv12 or tls_protocol_version_TLSv13 instead.
-	Tls_protocol_version_TLSv13 Tls_protocol_version_t = 772
+	Tls_protocol_version_TLSv13 TLSProtocolVersion = 772
 	// The DTLS 1.0 protocol.
 	//
 	// Deprecated: Use tls_protocol_version_DTLSv12 instead.
-	Tls_protocol_version_DTLSv10 Tls_protocol_version_t = 65279
+	Tls_protocol_version_DTLSv10 TLSProtocolVersion = 65279
 	// The DTLS 1.2 protocol.
 	//
 	// Deprecated: Use tls_protocol_version_DTLSv12 instead.
-	Tls_protocol_version_DTLSv12 Tls_protocol_version_t = 65277
+	Tls_protocol_version_DTLSv12 TLSProtocolVersion = 65277
 )
 
-// String returns the Tls_protocol_version_t constant's name, or its numeric form when the
+// String returns the TLSProtocolVersion constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Tls_protocol_version_t) String() string {
+func (e TLSProtocolVersion) String() string {
 	switch e {
 	case Tls_protocol_version_TLSv10:
 		return "Tls_protocol_version_TLSv10"
@@ -1636,6 +1636,6 @@ func (e Tls_protocol_version_t) String() string {
 	case Tls_protocol_version_DTLSv12:
 		return "Tls_protocol_version_DTLSv12"
 	default:
-		return fmt.Sprintf("Tls_protocol_version_t(%d)", int64(e))
+		return fmt.Sprintf("TLSProtocolVersion(%d)", int64(e))
 	}
 }

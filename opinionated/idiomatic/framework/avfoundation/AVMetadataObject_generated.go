@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -51,69 +54,82 @@ func metadataObjectAdopt(id objc.ID) *MetadataObject {
 
 // Description returns the object's -description text.
 func (mo *MetadataObject) Description() string {
+	defer runtime.KeepAlive(mo)
 	return rt.Description(objref.IDOf(mo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mo *MetadataObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mo *MetadataObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(mo)
 	return rt.IsKind(objref.IDOf(mo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mo *MetadataObject) String() string {
+	defer runtime.KeepAlive(mo)
 	return rt.Description(objref.IDOf(mo))
 }
 
 // Time returns the media time associated with this metadata object. The value of this property is a CMTime associated with the metadata object. For capture, it is the time at which this object was captured. If this metadata object originates from a CMSampleBuffer, its time matches the sample buffer's presentation time. This property may return kCMTimeInvalid.
 func (mo *MetadataObject) Time() coremedia.CMTime {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(mo), objc.RegisterName("time"))
 	return _r
 }
 
 // Duration returns the media duration associated with this metadata object. The value of this property is a CMTime representing the duration of the metadata object. If this metadata object originates from a CMSampleBuffer, its duration matches the sample buffer's duration. This property may return kCMTimeInvalid.
 func (mo *MetadataObject) Duration() coremedia.CMTime {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(mo), objc.RegisterName("duration"))
 	return _r
 }
 
 // Bounds returns the bounding rectangle of the receiver. The value of this property is a CGRect representing the bounding rectangle of the object with respect to the picture in which it resides. The rectangle's origin is top left. If the metadata originates from video, bounds may be expressed as scalar values from 0. - 1. If the original video has been scaled down, the bounds of the metadata object still are meaningful. This property may return CGRectZero if the metadata has no bounds.
 func (mo *MetadataObject) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mo), objc.RegisterName("bounds"))
 	return _r
 }
 
 // Type returns an identifier for the metadata object. The value of this property is an AVMetadataObjectType representing the type of the metadata object. Clients inspecting a collection of metadata objects can use this property to filter objects with a matching type.
-func (mo *MetadataObject) Type() obj.Object {
+func (mo *MetadataObject) Type() *foundation.String {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // GroupID returns an identifier associated with a metadata object used to group it with other metadata objects belonging to a common parent. When presented with a collection of “AVMetadataObject“ instances of different types, you may use the objects' “groupID“ to combine them into groups. For example, a human body and face belonging to the same person have the same “groupID“.  If an object's “groupID“ property is set to -1, it is invalid. When set to a value of >=0, it is unique across all object groups.
 func (mo *MetadataObject) GroupID() int {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("groupID"))
 	return _r
 }
 
 // ObjectID returns a unique identifier for each detected object type (face, body, hands, heads and salient objects) in a collection. Defaults to a value of -1 when invalid or not available. When used in conjunction with an “AVCaptureMetadataOutput“, each newly detected object that enters the scene is assigned a unique identifier. “objectID“s are never re-used as objects leave the picture and new ones enter. Objects that leave the picture and then re-enter are assigned a new “objectID“.
 func (mo *MetadataObject) ObjectID() int {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("objectID"))
 	return _r
 }
 
 // CinematicVideoFocusMode returns the current focus mode when an object is detected during a Cinematic Video recording. Default is “AVCaptureCinematicVideoFocusMode/AVCaptureCinematicVideoFocusModeNone“.
 func (mo *MetadataObject) CinematicVideoFocusMode() CaptureCinematicVideoFocusMode {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[CaptureCinematicVideoFocusMode](objref.IDOf(mo), objc.RegisterName("cinematicVideoFocusMode"))
 	return _r
 }
 
 // IsFixedFocus reports whether a BOOL indicating whether this metadata object represents a fixed focus.
 func (mo *MetadataObject) IsFixedFocus() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isFixedFocus"))
 	return _r
 }

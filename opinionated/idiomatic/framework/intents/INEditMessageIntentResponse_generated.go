@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -46,6 +48,7 @@ func editMessageIntentResponseAdopt(id objc.ID) *EditMessageIntentResponse {
 
 // NewEditMessageIntentResponseWithCodeUserActivity creates a new EditMessageIntentResponse.
 func NewEditMessageIntentResponseWithCodeUserActivity(code EditMessageIntentResponseCode, userActivity obj.Object) *EditMessageIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INEditMessageIntentResponse")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
 	return editMessageIntentResponseAdopt(_id)
@@ -53,12 +56,14 @@ func NewEditMessageIntentResponseWithCodeUserActivity(code EditMessageIntentResp
 
 // WithUserActivity sets the user activity object to use when launching the app.
 func (emir *EditMessageIntentResponse) WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse {
+	defer runtime.KeepAlive(userActivity)
 	objc.Send[objc.ID](objref.IDOf(emir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return emir
 }
 
 // Code returns the code.
 func (emir *EditMessageIntentResponse) Code() EditMessageIntentResponseCode {
+	defer runtime.KeepAlive(emir)
 	_r := objc.Send[EditMessageIntentResponseCode](objref.IDOf(emir), objc.RegisterName("code"))
 	return _r
 }

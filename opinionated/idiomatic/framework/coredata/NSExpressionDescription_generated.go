@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +57,7 @@ func NewExpressionDescription() *ExpressionDescription {
 
 // WithExpression sets the expression to evaluate.
 func (ed *ExpressionDescription) WithExpression(expression obj.Object) *ExpressionDescription {
+	defer runtime.KeepAlive(expression)
 	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setExpression:"), objref.IDOf(expression))
 	return ed
 }
@@ -84,6 +88,7 @@ func (ed *ExpressionDescription) WithTransient(transient bool) *ExpressionDescri
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (ed *ExpressionDescription) WithUserInfo(userInfo obj.Object) *ExpressionDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return ed
 }
@@ -119,13 +124,15 @@ func (ed *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier strin
 }
 
 // Expression returns the expression.
-func (ed *ExpressionDescription) Expression() obj.Object {
+func (ed *ExpressionDescription) Expression() *foundation.Expression {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("expression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 // ExpressionResultType returns the expression result type.
 func (ed *ExpressionDescription) ExpressionResultType() AttributeType {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[AttributeType](objref.IDOf(ed), objc.RegisterName("expressionResultType"))
 	return _r
 }

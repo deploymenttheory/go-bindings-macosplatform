@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -58,12 +60,14 @@ func (huci *HangUpCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationP
 
 // WithDonationMetadata sets the donation metadata.
 func (huci *HangUpCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return huci
 }
 
 // CallIdentifier returns the call identifier.
 func (huci *HangUpCallIntent) CallIdentifier() string {
+	defer runtime.KeepAlive(huci)
 	_r := objc.Send[objc.ID](objref.IDOf(huci), objc.RegisterName("callIdentifier"))
 	if _r == 0 {
 		return ""

@@ -5,9 +5,11 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,8 +59,8 @@ func (aavm *AVB17221AECPVendorMessage) WithProtocolID(protocolID uint64) *AVB172
 }
 
 // WithProtocolSpecificData sets the protocol_specific_data field of the AECP Vendor Unique message.
-func (aavm *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificData obj.Object) *AVB17221AECPVendorMessage {
-	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setProtocolSpecificData:"), objref.IDOf(protocolSpecificData))
+func (aavm *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificData []byte) *AVB17221AECPVendorMessage {
+	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setProtocolSpecificData:"), rt.BytesToNSData(protocolSpecificData))
 	return aavm
 }
 
@@ -94,20 +96,23 @@ func (aavm *AVB17221AECPVendorMessage) WithSequenceID(sequenceID uint16) *AVB172
 
 // WithSourceMAC sets the source_mac field of the AECP message.
 func (aavm *AVB17221AECPVendorMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPVendorMessage {
+	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aavm
 }
 
 // ProtocolID returns the protocol_id field of the AECP Vendor Unique message.
 func (aavm *AVB17221AECPVendorMessage) ProtocolID() uint64 {
+	defer runtime.KeepAlive(aavm)
 	_r := objc.Send[uint64](objref.IDOf(aavm), objc.RegisterName("protocolID"))
 	return _r
 }
 
 // ProtocolSpecificData returns the protocol_specific_data field of the AECP Vendor Unique message.
-func (aavm *AVB17221AECPVendorMessage) ProtocolSpecificData() obj.Object {
+func (aavm *AVB17221AECPVendorMessage) ProtocolSpecificData() []byte {
+	defer runtime.KeepAlive(aavm)
 	_r := objc.Send[objc.ID](objref.IDOf(aavm), objc.RegisterName("protocolSpecificData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ AVB17221AECPMessageProvider = (*AVB17221AECPVendorMessage)(nil)

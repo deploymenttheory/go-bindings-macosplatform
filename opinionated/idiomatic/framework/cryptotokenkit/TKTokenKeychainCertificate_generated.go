@@ -5,9 +5,12 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +51,8 @@ func tokenKeychainCertificateAdopt(id objc.ID) *TokenKeychainCertificate {
 
 // NewTokenKeychainCertificateWithCertificateObjectID initializes a token keychain certificate with data from the specified certificate reference and a given object ID.
 func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef obj.Object, objectID obj.Object) *TokenKeychainCertificate {
+	defer runtime.KeepAlive(certificateRef)
+	defer runtime.KeepAlive(objectID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainCertificate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), objref.IDOf(certificateRef), objref.IDOf(objectID))
 	return tokenKeychainCertificateAdopt(_id)
@@ -61,14 +66,16 @@ func (tkc *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCerti
 
 // WithConstraints sets access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 func (tkc *TokenKeychainCertificate) WithConstraints(constraints obj.Object) *TokenKeychainCertificate {
+	defer runtime.KeepAlive(constraints)
 	objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 	return tkc
 }
 
 // Data returns the data.
-func (tkc *TokenKeychainCertificate) Data() obj.Object {
+func (tkc *TokenKeychainCertificate) Data() []byte {
+	defer runtime.KeepAlive(tkc)
 	_r := objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ TokenKeychainItemProvider = (*TokenKeychainCertificate)(nil)

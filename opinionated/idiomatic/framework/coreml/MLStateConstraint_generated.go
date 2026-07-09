@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func stateConstraintAdopt(id objc.ID) *StateConstraint {
 
 // Description returns the object's -description text.
 func (sc *StateConstraint) Description() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sc *StateConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sc *StateConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(sc)
 	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sc *StateConstraint) String() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
@@ -76,12 +83,14 @@ func NewStateConstraint() *StateConstraint {
 //
 // BufferShape returns the collection as a Go slice.
 func (sc *StateConstraint) BufferShape() []obj.Object {
+	defer runtime.KeepAlive(sc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("bufferShape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DataType returns the data type of scalars in the state buffer.
 func (sc *StateConstraint) DataType() MultiArrayDataType {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(sc), objc.RegisterName("dataType"))
 	return _r
 }

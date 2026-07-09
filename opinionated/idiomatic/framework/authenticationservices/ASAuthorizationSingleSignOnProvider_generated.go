@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationSingleSignOnProviderAdopt(id objc.ID) *AuthorizationSingleSign
 
 // Description returns the object's -description text.
 func (assop *AuthorizationSingleSignOnProvider) Description() string {
+	defer runtime.KeepAlive(assop)
 	return rt.Description(objref.IDOf(assop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (assop *AuthorizationSingleSignOnProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(assop)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(assop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (assop *AuthorizationSingleSignOnProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(assop)
 	return rt.IsKind(objref.IDOf(assop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (assop *AuthorizationSingleSignOnProvider) String() string {
+	defer runtime.KeepAlive(assop)
 	return rt.Description(objref.IDOf(assop))
 }
 
@@ -74,18 +81,21 @@ func NewAuthorizationSingleSignOnProvider() *AuthorizationSingleSignOnProvider {
 
 // CreateRequest creates a single sign-on (SSO) authorization request.
 func (assop *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
+	defer runtime.KeepAlive(assop)
 	_r := objc.Send[objc.ID](objref.IDOf(assop), objc.RegisterName("createRequest"))
 	return AuthorizationSingleSignOnRequestFromID(_r)
 }
 
 // URL returns the URL.
-func (assop *AuthorizationSingleSignOnProvider) URL() obj.Object {
+func (assop *AuthorizationSingleSignOnProvider) URL() string {
+	defer runtime.KeepAlive(assop)
 	_r := objc.Send[objc.ID](objref.IDOf(assop), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CanPerformAuthorization reports whether the configured provider is capable of performing authorization within a given configuration.
 func (assop *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
+	defer runtime.KeepAlive(assop)
 	_r := objc.Send[bool](objref.IDOf(assop), objc.RegisterName("canPerformAuthorization"))
 	return _r
 }

@@ -503,8 +503,8 @@
         "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/physicalblocksize"
       },
       "read(into:startingAt:length:)": {
-        "doc": "Asychronously reads data from the resource into a buffer.",
-        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/read(into:startingat:length:)-5yozi"
+        "doc": "Synchronously reads data from the resource into a buffer.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/read(into:startingat:length:)-4ax6s"
       },
       "read(into:startingAt:length:completionHandler:)": {
         "doc": "Reads data from the resource into a buffer and executes a closure afterwards.",
@@ -515,8 +515,8 @@
         "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/iswritable"
       },
       "write(from:startingAt:length:)": {
-        "doc": "Synchronously writes data from from a buffer to the resource and executes a block afterwards.",
-        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/write(from:startingat:length:)-2fmgt"
+        "doc": "Asynchronously writes data from from a buffer to the resource.",
+        "url": "https://developer.apple.com/documentation/fskit/fsblockdeviceresource/write(from:startingat:length:)-9oa1x"
       },
       "write(from:startingAt:length:completionHandler:)": {
         "doc": "Writes data from from a buffer to the resource and executes a closure afterwards.",

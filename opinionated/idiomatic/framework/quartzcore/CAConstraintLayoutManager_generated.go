@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func constraintLayoutManagerAdopt(id objc.ID) *ConstraintLayoutManager {
 
 // Description returns the object's -description text.
 func (clm *ConstraintLayoutManager) Description() string {
+	defer runtime.KeepAlive(clm)
 	return rt.Description(objref.IDOf(clm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (clm *ConstraintLayoutManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(clm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(clm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (clm *ConstraintLayoutManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(clm)
 	return rt.IsKind(objref.IDOf(clm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (clm *ConstraintLayoutManager) String() string {
+	defer runtime.KeepAlive(clm)
 	return rt.Description(objref.IDOf(clm))
 }
 

@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterServiceAreaAdopt(id objc.ID) *MTRBaseClusterServiceArea {
 
 // NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterServiceArea {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterServiceArea")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterServiceAreaAdopt(_id)
@@ -60,6 +64,8 @@ func NewMTRBaseClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRBaseDevice
 //
 // SelectAreasWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams) (result *MTRServiceAreaClusterSelectAreasResponseParams, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRServiceAreaClusterSelectAreasResponseParams
 		err error
@@ -85,6 +91,8 @@ func (mbcsa *MTRBaseClusterServiceArea) SelectAreasWithParamsCompletion(ctx cont
 //
 // SkipAreaWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context.Context, params *MTRServiceAreaClusterSkipAreaParams) (result *MTRServiceAreaClusterSkipAreaResponseParams, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRServiceAreaClusterSkipAreaResponseParams
 		err error
@@ -110,6 +118,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context
 //
 // ReadAttributeSupportedAreasWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSupportedAreasWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +144,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSupportedAreasWithCompletio
 //
 // SubscribeAttributeSupportedAreasWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSupportedAreasWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +171,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSupportedAreasWithPara
 //
 // ReadAttributeSupportedMapsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSupportedMapsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +197,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSupportedMapsWithCompletion
 //
 // SubscribeAttributeSupportedMapsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSupportedMapsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +224,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSupportedMapsWithParam
 //
 // ReadAttributeSelectedAreasWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSelectedAreasWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +250,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSelectedAreasWithCompletion
 //
 // SubscribeAttributeSelectedAreasWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSelectedAreasWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +277,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSelectedAreasWithParam
 //
 // ReadAttributeCurrentAreaWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeCurrentAreaWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +303,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeCurrentAreaWithCompletion(c
 //
 // SubscribeAttributeCurrentAreaWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeCurrentAreaWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +330,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeCurrentAreaWithParamsS
 //
 // ReadAttributeEstimatedEndTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeEstimatedEndTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +356,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeEstimatedEndTimeWithComplet
 //
 // SubscribeAttributeEstimatedEndTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeEstimatedEndTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +383,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeEstimatedEndTimeWithPa
 //
 // ReadAttributeProgressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +409,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeProgressWithCompletion(ctx 
 //
 // SubscribeAttributeProgressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +436,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeProgressWithParamsSubs
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +462,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeGeneratedCommandListWithCom
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +489,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeGeneratedCommandListWi
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,6 +515,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeAcceptedCommandListWithComp
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -510,6 +542,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeAcceptedCommandListWit
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -535,6 +568,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeAttributeListWithCompletion
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -560,6 +595,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeAttributeListWithParam
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -585,6 +621,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeFeatureMapWithCompletion(ct
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -610,6 +648,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeFeatureMapWithParamsSu
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
 	type _result struct {
 		val obj.Object
 		err error
@@ -635,6 +674,8 @@ func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeClusterRevisionWithCompleti
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcsa)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

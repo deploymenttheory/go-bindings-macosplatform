@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +50,28 @@ func rectangleObservationAdopt(id objc.ID) *RectangleObservation {
 
 // TopLeft returns the top left.
 func (ro *RectangleObservation) TopLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ro)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("topLeft"))
 	return _r
 }
 
 // TopRight returns the top right.
 func (ro *RectangleObservation) TopRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ro)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("topRight"))
 	return _r
 }
 
 // BottomLeft returns the bottom left.
 func (ro *RectangleObservation) BottomLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ro)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
 // BottomRight returns the bottom right.
 func (ro *RectangleObservation) BottomRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ro)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("bottomRight"))
 	return _r
 }

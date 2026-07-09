@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func levelOfDetailAdopt(id objc.ID) *LevelOfDetail {
 
 // Description returns the object's -description text.
 func (lod *LevelOfDetail) Description() string {
+	defer runtime.KeepAlive(lod)
 	return rt.Description(objref.IDOf(lod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lod *LevelOfDetail) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lod)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lod *LevelOfDetail) IsKind(className string) bool {
+	defer runtime.KeepAlive(lod)
 	return rt.IsKind(objref.IDOf(lod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lod *LevelOfDetail) String() string {
+	defer runtime.KeepAlive(lod)
 	return rt.Description(objref.IDOf(lod))
 }
 
@@ -74,18 +81,21 @@ func NewLevelOfDetail() *LevelOfDetail {
 
 // Geometry returns the geometry of the receiver.
 func (lod *LevelOfDetail) Geometry() *Geometry {
+	defer runtime.KeepAlive(lod)
 	_r := objc.Send[objc.ID](objref.IDOf(lod), objc.RegisterName("geometry"))
 	return GeometryFromID(_r)
 }
 
 // ScreenSpaceRadius returns the screen space radius of the receiver if any, 0 otherwise.
 func (lod *LevelOfDetail) ScreenSpaceRadius() float64 {
+	defer runtime.KeepAlive(lod)
 	_r := objc.Send[float64](objref.IDOf(lod), objc.RegisterName("screenSpaceRadius"))
 	return _r
 }
 
 // WorldSpaceDistance returns the world space distance of the receiver if any, 0 otherwise.
 func (lod *LevelOfDetail) WorldSpaceDistance() float64 {
+	defer runtime.KeepAlive(lod)
 	_r := objc.Send[float64](objref.IDOf(lod), objc.RegisterName("worldSpaceDistance"))
 	return _r
 }

@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,9 @@ func mTRClusterTimeSynchronizationAdopt(id objc.ID) *MTRClusterTimeSynchronizati
 
 // NewMTRClusterTimeSynchronizationWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTimeSynchronization {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTimeSynchronization")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterTimeSynchronizationAdopt(_id)
@@ -60,6 +65,9 @@ func NewMTRClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *MTRDevice
 //
 // SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcts *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
 		err error
@@ -82,111 +90,147 @@ func (mcts *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesEx
 }
 
 // ReadAttributeUTCTimeWithParams reads attribute utc time with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeUTCTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeUTCTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeUTCTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGranularityWithParams reads attribute granularity with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeGranularityWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeGranularityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeGranularityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTimeSourceWithParams reads attribute time source with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeSourceWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeSourceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeSourceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTrustedTimeSourceWithParams reads attribute trusted time source with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTrustedTimeSourceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDefaultNTPWithParams reads attribute default ntp with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeDefaultNTPWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeDefaultNTPWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeDefaultNTPWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTimeZoneWithParams reads attribute time zone with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeZoneWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDSTOffsetWithParams reads attribute dst offset with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeDSTOffsetWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLocalTimeWithParams reads attribute local time with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeLocalTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeLocalTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeLocalTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTimeZoneDatabaseWithParams reads attribute time zone database with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeZoneDatabaseWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNTPServerAvailableWithParams reads attribute ntp server available with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeNTPServerAvailableWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTimeZoneListMaxSizeWithParams reads attribute time zone list max size with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeTimeZoneListMaxSizeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDSTOffsetListMaxSizeWithParams reads attribute dst offset list max size with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupportsDNSResolveWithParams reads attribute supports DNS resolve with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeSupportsDNSResolveWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcts *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcts *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcts)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcts), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterTimeSynchronization)(nil)

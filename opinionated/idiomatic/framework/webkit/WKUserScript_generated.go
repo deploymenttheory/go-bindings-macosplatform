@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKUserScriptAdopt(id objc.ID) *WKUserScript {
 
 // Description returns the object's -description text.
 func (wus *WKUserScript) Description() string {
+	defer runtime.KeepAlive(wus)
 	return rt.Description(objref.IDOf(wus))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wus *WKUserScript) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wus)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wus), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wus *WKUserScript) IsKind(className string) bool {
+	defer runtime.KeepAlive(wus)
 	return rt.IsKind(objref.IDOf(wus), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wus *WKUserScript) String() string {
+	defer runtime.KeepAlive(wus)
 	return rt.Description(objref.IDOf(wus))
 }
 
@@ -81,6 +88,7 @@ func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injec
 
 // NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a user script object that is scoped to a particular content world.
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
+	defer runtime.KeepAlive(contentWorld)
 	var _mainthread0 *WKUserScript
 	purego.Main(func() {
 		_mainthread0 = func() *WKUserScript {
@@ -94,6 +102,7 @@ func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source
 
 // Source returns the source.
 func (wus *WKUserScript) Source() string {
+	defer runtime.KeepAlive(wus)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -110,6 +119,7 @@ func (wus *WKUserScript) Source() string {
 
 // InjectionTime returns the injection time.
 func (wus *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
+	defer runtime.KeepAlive(wus)
 	var _mainthread0 WKUserScriptInjectionTime
 	purego.Main(func() {
 		_mainthread0 = func() WKUserScriptInjectionTime {
@@ -123,6 +133,7 @@ func (wus *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
 
 // IsForMainFrameOnly reports whether the object is for main frame only.
 func (wus *WKUserScript) IsForMainFrameOnly() bool {
+	defer runtime.KeepAlive(wus)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func normalMapTextureAdopt(id objc.ID) *NormalMapTexture {
 
 // NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast initializes a normal map to be generated from the specified texture.
 func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *Texture, name string, smoothness float32, contrast float32) *NormalMapTexture {
+	defer runtime.KeepAlive(sourceTexture)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLNormalMapTexture")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByGeneratingNormalMapWithTexture:name:smoothness:contrast:"), objref.IDOf(sourceTexture), purego.NSString(name), smoothness, contrast)
 	return normalMapTextureAdopt(_id)

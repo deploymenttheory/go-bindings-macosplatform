@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func mTRQRCodeSetupPayloadParserAdopt(id objc.ID) *MTRQRCodeSetupPayloadParser {
 
 // Description returns the object's -description text.
 func (mcspp *MTRQRCodeSetupPayloadParser) Description() string {
+	defer runtime.KeepAlive(mcspp)
 	return rt.Description(objref.IDOf(mcspp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcspp *MTRQRCodeSetupPayloadParser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcspp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcspp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcspp *MTRQRCodeSetupPayloadParser) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcspp)
 	return rt.IsKind(objref.IDOf(mcspp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcspp *MTRQRCodeSetupPayloadParser) String() string {
+	defer runtime.KeepAlive(mcspp)
 	return rt.Description(objref.IDOf(mcspp))
 }
 
@@ -76,6 +82,7 @@ func NewMTRQRCodeSetupPayloadParserWithBase38Representation(base38Representation
 
 // PopulatePayload wraps the corresponding Objective-C method.
 func (mcspp *MTRQRCodeSetupPayloadParser) PopulatePayload() (result *MTRSetupPayload, err error) {
+	defer runtime.KeepAlive(mcspp)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(mcspp), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

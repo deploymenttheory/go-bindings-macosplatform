@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterDishwasherAlarmAdopt(id objc.ID) *MTRBaseClusterDishwasherAla
 
 // NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterDishwasherAlarm {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterDishwasherAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterDishwasherAlarmAdopt(_id)
@@ -60,6 +64,7 @@ func NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRBaseDe
 //
 // ReadAttributeMaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -85,6 +90,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeMaskWithCompletion(ctx 
 //
 // SubscribeAttributeMaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeMaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +117,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeMaskWithParamsSubs
 //
 // ReadAttributeLatchWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeLatchWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +143,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeLatchWithCompletion(ctx
 //
 // SubscribeAttributeLatchWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeLatchWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +170,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeLatchWithParamsSub
 //
 // ReadAttributeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +196,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeStateWithCompletion(ctx
 //
 // SubscribeAttributeStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +223,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeStateWithParamsSub
 //
 // ReadAttributeSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +249,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeSupportedWithCompletion
 //
 // SubscribeAttributeSupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeSupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeSupportedWithParam
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +302,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWit
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeGeneratedCommandLi
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +355,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWith
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +382,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeAcceptedCommandLis
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +408,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeAttributeListWithComple
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +435,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeAttributeListWithP
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -435,6 +461,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeFeatureMapWithCompletio
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -460,6 +488,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeFeatureMapWithPara
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
 	type _result struct {
 		val obj.Object
 		err error
@@ -485,6 +514,8 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeClusterRevisionWithComp
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcda)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

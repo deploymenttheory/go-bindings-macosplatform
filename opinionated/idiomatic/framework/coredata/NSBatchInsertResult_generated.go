@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewBatchInsertResult() *BatchInsertResult {
 
 // Result returns the result.
 func (bir *BatchInsertResult) Result() obj.Object {
+	defer runtime.KeepAlive(bir)
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType returns the result type.
 func (bir *BatchInsertResult) ResultType() BatchInsertRequestResultType {
+	defer runtime.KeepAlive(bir)
 	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(bir), objc.RegisterName("resultType"))
 	return _r
 }

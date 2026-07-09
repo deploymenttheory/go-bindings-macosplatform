@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRServiceAreaClusterLandmarkInfoStructAdopt(id objc.ID) *MTRServiceAreaClu
 
 // Description returns the object's -description text.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) Description() string {
+	defer runtime.KeepAlive(msaclis)
 	return rt.Description(objref.IDOf(msaclis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msaclis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msaclis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(msaclis)
 	return rt.IsKind(objref.IDOf(msaclis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) String() string {
+	defer runtime.KeepAlive(msaclis)
 	return rt.Description(objref.IDOf(msaclis))
 }
 
@@ -72,24 +80,28 @@ func NewMTRServiceAreaClusterLandmarkInfoStruct() *MTRServiceAreaClusterLandmark
 
 // WithLandmarkTag sets the landmark tag.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
+	defer runtime.KeepAlive(landmarkTag)
 	objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 	return msaclis
 }
 
 // WithRelativePositionTag sets the relative position tag.
 func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
+	defer runtime.KeepAlive(relativePositionTag)
 	objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
 	return msaclis
 }
 
 // LandmarkTag returns the landmark tag.
-func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() obj.Object {
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() *foundation.Number {
+	defer runtime.KeepAlive(msaclis)
 	_r := objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("landmarkTag"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RelativePositionTag returns the relative position tag.
-func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() obj.Object {
+func (msaclis *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() *foundation.Number {
+	defer runtime.KeepAlive(msaclis)
 	_r := objc.Send[objc.ID](objref.IDOf(msaclis), objc.RegisterName("relativePositionTag"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

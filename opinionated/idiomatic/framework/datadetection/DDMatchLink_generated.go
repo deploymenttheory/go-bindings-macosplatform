@@ -5,9 +5,11 @@
 package datadetection
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,9 +55,10 @@ func NewMatchLink() *MatchLink {
 }
 
 // URL returns the URL.
-func (ml *MatchLink) URL() obj.Object {
+func (ml *MatchLink) URL() string {
+	defer runtime.KeepAlive(ml)
 	_r := objc.Send[objc.ID](objref.IDOf(ml), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ MatchProvider = (*MatchLink)(nil)

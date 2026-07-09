@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func positionalSpecifierAdopt(id objc.ID) *PositionalSpecifier {
 
 // Description returns the object's -description text.
 func (ps *PositionalSpecifier) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *PositionalSpecifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *PositionalSpecifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *PositionalSpecifier) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // NewPositionalSpecifierWithPositionObjectSpecifier initializes a positional specifier with a given position relative to another given specifier.
 func NewPositionalSpecifierWithPositionObjectSpecifier(position InsertionPosition, specifier *ScriptObjectSpecifier) *PositionalSpecifier {
+	defer runtime.KeepAlive(specifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPositionalSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPosition:objectSpecifier:"), position, objref.IDOf(specifier))
 	return positionalSpecifierAdopt(_id)
@@ -82,35 +89,41 @@ func (ps *PositionalSpecifier) WithObservationInfo(observationInfo unsafe.Pointe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ps *PositionalSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *PositionalSpecifier {
-	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ps *PositionalSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PositionalSpecifier {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ps
 }
 
 // SetInsertionClassDescription sets the class description for the object or objects to be inserted.
 func (ps *PositionalSpecifier) SetInsertionClassDescription(classDescription *ScriptClassDescription) {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(classDescription)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setInsertionClassDescription:"), objref.IDOf(classDescription))
 }
 
 // Evaluate causes the receiver to evaluate its position.
 func (ps *PositionalSpecifier) Evaluate() {
+	defer runtime.KeepAlive(ps)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("evaluate"))
 }
 
 // Position returns the position.
 func (ps *PositionalSpecifier) Position() InsertionPosition {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[InsertionPosition](objref.IDOf(ps), objc.RegisterName("position"))
 	return _r
 }
 
 // InsertionContainer returns the insertion container.
 func (ps *PositionalSpecifier) InsertionContainer() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionContainer"))
 	return obj.Wrap(_r)
 }
 
 // InsertionKey returns the insertion key.
 func (ps *PositionalSpecifier) InsertionKey() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionKey"))
 	if _r == 0 {
 		return ""
@@ -120,12 +133,14 @@ func (ps *PositionalSpecifier) InsertionKey() string {
 
 // InsertionIndex returns the insertion index.
 func (ps *PositionalSpecifier) InsertionIndex() int {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("insertionIndex"))
 	return _r
 }
 
 // InsertionReplaces wraps the corresponding Objective-C method.
 func (ps *PositionalSpecifier) InsertionReplaces() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("insertionReplaces"))
 	return _r
 }

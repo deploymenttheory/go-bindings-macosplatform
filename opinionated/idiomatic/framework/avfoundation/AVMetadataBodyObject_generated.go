@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func metadataBodyObjectAdopt(id objc.ID) *MetadataBodyObject {
 
 // BodyID returns the body ID.
 func (mbo *MetadataBodyObject) BodyID() int {
+	defer runtime.KeepAlive(mbo)
 	_r := objc.Send[int](objref.IDOf(mbo), objc.RegisterName("bodyID"))
 	return _r
 }

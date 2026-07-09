@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -147,11 +149,13 @@ func (de *DOMHTMLElement) WithTextContent(textContent string) *DOMHTMLElement {
 
 // Click wraps the corresponding Objective-C method.
 func (de *DOMHTMLElement) Click() {
+	defer runtime.KeepAlive(de)
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("click"))
 }
 
 // Title returns the title.
 func (de *DOMHTMLElement) Title() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -161,6 +165,7 @@ func (de *DOMHTMLElement) Title() string {
 
 // Lang returns the lang.
 func (de *DOMHTMLElement) Lang() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("lang"))
 	if _r == 0 {
 		return ""
@@ -170,6 +175,7 @@ func (de *DOMHTMLElement) Lang() string {
 
 // Dir returns the dir.
 func (de *DOMHTMLElement) Dir() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("dir"))
 	if _r == 0 {
 		return ""
@@ -179,12 +185,14 @@ func (de *DOMHTMLElement) Dir() string {
 
 // TabIndex returns the tab index.
 func (de *DOMHTMLElement) TabIndex() int {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("tabIndex"))
 	return _r
 }
 
 // AccessKey returns the access key.
 func (de *DOMHTMLElement) AccessKey() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("accessKey"))
 	if _r == 0 {
 		return ""
@@ -194,6 +202,7 @@ func (de *DOMHTMLElement) AccessKey() string {
 
 // OuterText returns the outer text.
 func (de *DOMHTMLElement) OuterText() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("outerText"))
 	if _r == 0 {
 		return ""
@@ -203,6 +212,7 @@ func (de *DOMHTMLElement) OuterText() string {
 
 // ContentEditable returns the content editable.
 func (de *DOMHTMLElement) ContentEditable() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("contentEditable"))
 	if _r == 0 {
 		return ""
@@ -212,6 +222,7 @@ func (de *DOMHTMLElement) ContentEditable() string {
 
 // IDName returns the ID name.
 func (de *DOMHTMLElement) IDName() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("idName"))
 	if _r == 0 {
 		return ""
@@ -221,12 +232,14 @@ func (de *DOMHTMLElement) IDName() string {
 
 // Children returns the children.
 func (de *DOMHTMLElement) Children() *DOMHTMLCollection {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("children"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
 // TitleDisplayString returns the title display string.
 func (de *DOMHTMLElement) TitleDisplayString() string {
+	defer runtime.KeepAlive(de)
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("titleDisplayString"))
 	if _r == 0 {
 		return ""

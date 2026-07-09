@@ -5,6 +5,7 @@
 package audiotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -62,21 +63,25 @@ func (p *Parameter) WithValue(value float32) *Parameter {
 
 // SetValueOriginator sets the parameter’s value, avoiding redundant notifications to the originator.
 func (p *Parameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:originator:"), value, originator)
 }
 
 // SetValueOriginatorAtHostTime sets the parameter’s value, preserving the host time of the gesture that initiated the change.
 func (p *Parameter) SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64) {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:originator:atHostTime:"), value, originator, hostTime)
 }
 
 // SetValueOriginatorAtHostTimeEventType set the parameter's value, preserving the host time of the gesture that initiated the change, and associating an event type such as touch/release. In general, this method should only be called from a user interface. It initiates a change to a parameter in a way that captures the gesture such that it can be recorded later -- any AUParameterAutomationObservers will receive the host time and event type associated with the parameter change. From an audio playback engine, a host should schedule automated parameter changes through AUAudioUnit's scheduleParameterBlock. Bridged to the v2 function AudioUnitSetParameter.
 func (p *Parameter) SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType ParameterAutomationEventType) {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setValue:originator:atHostTime:eventType:"), value, originator, hostTime, eventType)
 }
 
 // StringFromValue gets the string representation of a parameter value.
 func (p *Parameter) StringFromValue() (result string, value float32) {
+	defer runtime.KeepAlive(p)
 	var _out0 float32
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stringFromValue:"), unsafe.Pointer(&_out0))
 	_v := ""
@@ -87,31 +92,36 @@ func (p *Parameter) StringFromValue() (result string, value float32) {
 }
 
 // ValueFromString converts a string into a parameter value.
-func (p *Parameter) ValueFromString(string_ string) float32 {
-	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("valueFromString:"), purego.NSString(string_))
+func (p *Parameter) ValueFromString(str string) float32 {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("valueFromString:"), purego.NSString(str))
 	return _r
 }
 
 // MinValue returns the parameter's minimum value.
 func (p *Parameter) MinValue() float32 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("minValue"))
 	return _r
 }
 
 // MaxValue returns the parameter's maximum value.
 func (p *Parameter) MaxValue() float32 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("maxValue"))
 	return _r
 }
 
 // Unit returns the parameter's unit of measurement.
 func (p *Parameter) Unit() AudioUnitParameterUnit {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[AudioUnitParameterUnit](objref.IDOf(p), objc.RegisterName("unit"))
 	return _r
 }
 
 // UnitName returns a localized name for the parameter's unit. Supplied by the AU if kAudioUnitParameterUnit_CustomUnit; else by the framework.
 func (p *Parameter) UnitName() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("unitName"))
 	if _r == 0 {
 		return ""
@@ -121,12 +131,14 @@ func (p *Parameter) UnitName() string {
 
 // Flags returns various details of the parameter.
 func (p *Parameter) Flags() AudioUnitParameterOptions {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[AudioUnitParameterOptions](objref.IDOf(p), objc.RegisterName("flags"))
 	return _r
 }
 
 // Address returns the parameter's address.
 func (p *Parameter) Address() uint64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[uint64](objref.IDOf(p), objc.RegisterName("address"))
 	return _r
 }
@@ -135,6 +147,7 @@ func (p *Parameter) Address() uint64 {
 //
 // ValueStrings returns the collection as a Go slice.
 func (p *Parameter) ValueStrings() []string {
+	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("valueStrings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -143,12 +156,14 @@ func (p *Parameter) ValueStrings() []string {
 //
 // DependentParameters returns the collection as a Go slice.
 func (p *Parameter) DependentParameters() []obj.Object {
+	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("dependentParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Value returns the parameter's current value.
 func (p *Parameter) Value() float32 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("value"))
 	return _r
 }

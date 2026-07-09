@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,12 +56,14 @@ func NewMathExpressionFencedWithExpressionsOpenStringCloseString(expressions []*
 //
 // Expressions returns the collection as a Go slice.
 func (mef *MathExpressionFenced) Expressions() []*MathExpression {
+	defer runtime.KeepAlive(mef)
 	_arr := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("expressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // OpenString returns the open string.
 func (mef *MathExpressionFenced) OpenString() string {
+	defer runtime.KeepAlive(mef)
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("openString"))
 	if _r == 0 {
 		return ""
@@ -69,6 +73,7 @@ func (mef *MathExpressionFenced) OpenString() string {
 
 // CloseString returns the close string.
 func (mef *MathExpressionFenced) CloseString() string {
+	defer runtime.KeepAlive(mef)
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("closeString"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func composeContextAdopt(id objc.ID) *ComposeContext {
 
 // Description returns the object's -description text.
 func (cc *ComposeContext) Description() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cc *ComposeContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cc *ComposeContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(cc)
 	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cc *ComposeContext) String() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
@@ -72,36 +79,42 @@ func NewComposeContext() *ComposeContext {
 
 // OriginalMessage returns the original email message on which user performed an action It is
 func (cc *ComposeContext) OriginalMessage() *Message {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("originalMessage"))
 	return MessageFromID(_r)
 }
 
 // Action indicates the action performed by the user that created this compose context.
 func (cc *ComposeContext) Action() ComposeUserAction {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[ComposeUserAction](objref.IDOf(cc), objc.RegisterName("action"))
 	return _r
 }
 
 // IsEncrypted reports whether boolean that indicates the message is encrypted by a Message Security extension.
 func (cc *ComposeContext) IsEncrypted() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
 // ShouldEncrypt reports whether boolean that indicates if the user wants to encrypt the message.
 func (cc *ComposeContext) ShouldEncrypt() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("shouldEncrypt"))
 	return _r
 }
 
 // IsSigned reports whether boolean that indicates the message is signed by a Message Security extension.
 func (cc *ComposeContext) IsSigned() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isSigned"))
 	return _r
 }
 
 // ShouldSign reports whether a Boolean that indicates if the user wants to sign the message.
 func (cc *ComposeContext) ShouldSign() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("shouldSign"))
 	return _r
 }

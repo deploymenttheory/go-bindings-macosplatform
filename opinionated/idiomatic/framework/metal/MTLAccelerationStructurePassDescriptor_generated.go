@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func accelerationStructurePassDescriptorAdopt(id objc.ID) *AccelerationStructure
 
 // Description returns the object's -description text.
 func (aspd *AccelerationStructurePassDescriptor) Description() string {
+	defer runtime.KeepAlive(aspd)
 	return rt.Description(objref.IDOf(aspd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aspd *AccelerationStructurePassDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aspd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aspd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aspd *AccelerationStructurePassDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(aspd)
 	return rt.IsKind(objref.IDOf(aspd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aspd *AccelerationStructurePassDescriptor) String() string {
+	defer runtime.KeepAlive(aspd)
 	return rt.Description(objref.IDOf(aspd))
 }
 
@@ -72,6 +79,7 @@ func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescript
 
 // SampleBufferAttachments returns the sample buffer attachments.
 func (aspd *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
+	defer runtime.KeepAlive(aspd)
 	_r := objc.Send[objc.ID](objref.IDOf(aspd), objc.RegisterName("sampleBufferAttachments"))
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }

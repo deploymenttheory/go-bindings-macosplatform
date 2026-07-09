@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewClipView() *ClipView {
 
 // WithBackgroundColor sets the color of the clip view’s background.
 func (cv *ClipView) WithBackgroundColor(backgroundColor *Color) *ClipView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -78,6 +81,7 @@ func (cv *ClipView) WithDrawsBackground(drawsBackground bool) *ClipView {
 
 // WithDocumentView sets the clip view’s document view.
 func (cv *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
+	defer runtime.KeepAlive(documentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
 	})
@@ -86,6 +90,7 @@ func (cv *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
 
 // WithDocumentCursor sets the cursor object used when the pointer lies over the view.
 func (cv *ClipView) WithDocumentCursor(documentCursor *Cursor) *ClipView {
+	defer runtime.KeepAlive(documentCursor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
 	})
@@ -255,6 +260,7 @@ func (cv *ClipView) WithWantsLayer(wantsLayer bool) *ClipView {
 
 // WithLayer sets the layer.
 func (cv *ClipView) WithLayer(layer obj.Object) *ClipView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -304,6 +310,7 @@ func (cv *ClipView) WithBackgroundFilters(items ...obj.Object) *ClipView {
 
 // WithCompositingFilter sets the compositing filter.
 func (cv *ClipView) WithCompositingFilter(compositingFilter obj.Object) *ClipView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -321,6 +328,7 @@ func (cv *ClipView) WithContentFilters(items ...obj.Object) *ClipView {
 
 // WithShadow sets the shadow.
 func (cv *ClipView) WithShadow(shadow *Shadow) *ClipView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -369,6 +377,7 @@ func (cv *ClipView) WithPreparedContentRect(preparedContentRect corefoundation.C
 
 // WithNextKeyView sets the next key view.
 func (cv *ClipView) WithNextKeyView(nextKeyView ViewProvider) *ClipView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -418,6 +427,7 @@ func (cv *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cv *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -474,6 +484,7 @@ func (cv *ClipView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cv *ClipView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -482,6 +493,7 @@ func (cv *ClipView) WithPressureConfiguration(pressureConfiguration *PressureCon
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cv *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -490,6 +502,7 @@ func (cv *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView
 
 // WithMenu sets returns the responder’s menu.
 func (cv *ClipView) WithMenu(menu *Menu) *ClipView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -498,6 +511,7 @@ func (cv *ClipView) WithMenu(menu *Menu) *ClipView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cv *ClipView) WithUserActivity(userActivity obj.Object) *ClipView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -506,6 +520,7 @@ func (cv *ClipView) WithUserActivity(userActivity obj.Object) *ClipView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cv *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -514,6 +529,8 @@ func (cv *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
 
 // ViewFrameChanged handles an NSViewFrameDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new frame.
 func (cv *ClipView) ViewFrameChanged(notification obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewFrameChanged:"), objref.IDOf(notification))
 	})
@@ -522,6 +539,8 @@ func (cv *ClipView) ViewFrameChanged(notification obj.Object) {
 
 // ViewBoundsChanged handles an NSViewBoundsDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new bounds.
 func (cv *ClipView) ViewBoundsChanged(notification obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewBoundsChanged:"), objref.IDOf(notification))
 	})
@@ -530,6 +549,7 @@ func (cv *ClipView) ViewBoundsChanged(notification obj.Object) {
 
 // ScrollToPoint changes the origin of the clip view’s bounds rectangle to newOrigin.
 func (cv *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("scrollToPoint:"), newOrigin)
 	})
@@ -538,6 +558,7 @@ func (cv *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
 
 // ConstrainBoundsRect constrains the bounds of the clip view while the user is magnifying and scrolling.
 func (cv *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -551,6 +572,7 @@ func (cv *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) co
 
 // BackgroundColor returns the background color.
 func (cv *ClipView) BackgroundColor() *Color {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -564,6 +586,7 @@ func (cv *ClipView) BackgroundColor() *Color {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (cv *ClipView) DrawsBackground() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -577,6 +600,7 @@ func (cv *ClipView) DrawsBackground() bool {
 
 // DocumentView returns the document view.
 func (cv *ClipView) DocumentView() *View {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -590,6 +614,7 @@ func (cv *ClipView) DocumentView() *View {
 
 // DocumentRect returns the document rect.
 func (cv *ClipView) DocumentRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -603,6 +628,7 @@ func (cv *ClipView) DocumentRect() corefoundation.CGRect {
 
 // DocumentCursor returns the document cursor.
 func (cv *ClipView) DocumentCursor() *Cursor {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *Cursor
 	purego.Main(func() {
 		_mainthread0 = func() *Cursor {
@@ -616,6 +642,7 @@ func (cv *ClipView) DocumentCursor() *Cursor {
 
 // DocumentVisibleRect returns the document visible rect.
 func (cv *ClipView) DocumentVisibleRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -629,6 +656,7 @@ func (cv *ClipView) DocumentVisibleRect() corefoundation.CGRect {
 
 // ContentInsets returns the content insets.
 func (cv *ClipView) ContentInsets() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -642,6 +670,7 @@ func (cv *ClipView) ContentInsets() foundation.NSEdgeInsets {
 
 // AutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
 func (cv *ClipView) AutomaticallyAdjustsContentInsets() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -655,6 +684,7 @@ func (cv *ClipView) AutomaticallyAdjustsContentInsets() bool {
 
 // ConstrainScrollPoint returns a scroll point adjusted from the proposed new origin, if necessary, to guarantee the view will lie within its document view.
 func (cv *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -668,6 +698,7 @@ func (cv *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) coref
 
 // CopiesOnScroll wraps the corresponding Objective-C method.
 func (cv *ClipView) CopiesOnScroll() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

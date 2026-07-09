@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func jSONSerializationAdopt(id objc.ID) *JSONSerialization {
 
 // Description returns the object's -description text.
 func (js *JSONSerialization) Description() string {
+	defer runtime.KeepAlive(js)
 	return rt.Description(objref.IDOf(js))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (js *JSONSerialization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(js)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(js), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (js *JSONSerialization) IsKind(className string) bool {
+	defer runtime.KeepAlive(js)
 	return rt.IsKind(objref.IDOf(js), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (js *JSONSerialization) String() string {
+	defer runtime.KeepAlive(js)
 	return rt.Description(objref.IDOf(js))
 }
 
@@ -81,7 +87,7 @@ func (js *JSONSerialization) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (js *JSONSerialization) WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization {
-	objc.Send[objc.ID](objref.IDOf(js), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (js *JSONSerialization) WithScriptingProperties(scriptingProperties map[string]obj.Object) *JSONSerialization {
+	objc.Send[objc.ID](objref.IDOf(js), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return js
 }

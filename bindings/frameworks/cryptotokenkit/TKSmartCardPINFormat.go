@@ -95,8 +95,8 @@ func (o *TKSmartCardPINFormat) PINBlockByteLength() int {
 	return _ret
 }
 
-func (o *TKSmartCardPINFormat) SetPINBlockByteLength(pINBlockByteLength int) {
-	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINBlockByteLength, pINBlockByteLength)
+func (o *TKSmartCardPINFormat) SetPINBlockByteLength(pinBlockByteLength int) {
+	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINBlockByteLength, pinBlockByteLength)
 }
 
 // PIN justification within the PIN block. @note Default value: TKSmartCardPINJustificationLeft
@@ -105,8 +105,8 @@ func (o *TKSmartCardPINFormat) PINJustification() TKSmartCardPINJustification {
 	return _ret
 }
 
-func (o *TKSmartCardPINFormat) SetPINJustification(pINJustification TKSmartCardPINJustification) {
-	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINJustification, pINJustification)
+func (o *TKSmartCardPINFormat) SetPINJustification(pinJustification TKSmartCardPINJustification) {
+	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINJustification, pinJustification)
 }
 
 // Offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
@@ -115,8 +115,8 @@ func (o *TKSmartCardPINFormat) PINBitOffset() int {
 	return _ret
 }
 
-func (o *TKSmartCardPINFormat) SetPINBitOffset(pINBitOffset int) {
-	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINBitOffset, pINBitOffset)
+func (o *TKSmartCardPINFormat) SetPINBitOffset(pinBitOffset int) {
+	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINBitOffset, pinBitOffset)
 }
 
 // Offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
@@ -125,8 +125,8 @@ func (o *TKSmartCardPINFormat) PINLengthBitOffset() int {
 	return _ret
 }
 
-func (o *TKSmartCardPINFormat) SetPINLengthBitOffset(pINLengthBitOffset int) {
-	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINLengthBitOffset, pINLengthBitOffset)
+func (o *TKSmartCardPINFormat) SetPINLengthBitOffset(pinLengthBitOffset int) {
+	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINLengthBitOffset, pinLengthBitOffset)
 }
 
 // Size in bits of the PIN length field. If set to 0, PIN length is not written. @note Default value: 0
@@ -135,6 +135,6 @@ func (o *TKSmartCardPINFormat) PINLengthBitSize() int {
 	return _ret
 }
 
-func (o *TKSmartCardPINFormat) SetPINLengthBitSize(pINLengthBitSize int) {
-	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINLengthBitSize, pINLengthBitSize)
+func (o *TKSmartCardPINFormat) SetPINLengthBitSize(pinLengthBitSize int) {
+	o.Ptr().Send(_tKSmartCardPINFormatSelSetPINLengthBitSize, pinLengthBitSize)
 }

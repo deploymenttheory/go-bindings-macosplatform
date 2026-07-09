@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,18 +61,21 @@ func (ged *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted b
 
 // WithCompilationDescriptor sets the compilation descriptor for the graph.
 func (ged *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
+	defer runtime.KeepAlive(compilationDescriptor)
 	objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
 	return ged
 }
 
 // WaitUntilCompleted reports whether the flag that blocks the execution call until the entire execution is complete. Defaults to false.
 func (ged *GraphExecutionDescriptor) WaitUntilCompleted() bool {
+	defer runtime.KeepAlive(ged)
 	_r := objc.Send[bool](objref.IDOf(ged), objc.RegisterName("waitUntilCompleted"))
 	return _r
 }
 
 // CompilationDescriptor returns the compilation descriptor for the graph. Default value is nil.
 func (ged *GraphExecutionDescriptor) CompilationDescriptor() *GraphCompilationDescriptor {
+	defer runtime.KeepAlive(ged)
 	_r := objc.Send[objc.ID](objref.IDOf(ged), objc.RegisterName("compilationDescriptor"))
 	return GraphCompilationDescriptorFromID(_r)
 }

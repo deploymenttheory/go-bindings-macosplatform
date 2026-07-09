@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -177,17 +179,20 @@ func (dtse *DOMHTMLTableSectionElement) WithTextContent(textContent string) *DOM
 
 // InsertRow inserts row.
 func (dtse *DOMHTMLTableSectionElement) InsertRow(index int) *DOMHTMLElement {
+	defer runtime.KeepAlive(dtse)
 	_r := objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("insertRow:"), index)
 	return DOMHTMLElementFromID(_r)
 }
 
 // DeleteRow deletes row.
 func (dtse *DOMHTMLTableSectionElement) DeleteRow(index int) {
+	defer runtime.KeepAlive(dtse)
 	objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("deleteRow:"), index)
 }
 
 // Align returns the align.
 func (dtse *DOMHTMLTableSectionElement) Align() string {
+	defer runtime.KeepAlive(dtse)
 	_r := objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -197,6 +202,7 @@ func (dtse *DOMHTMLTableSectionElement) Align() string {
 
 // Ch returns the ch.
 func (dtse *DOMHTMLTableSectionElement) Ch() string {
+	defer runtime.KeepAlive(dtse)
 	_r := objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("ch"))
 	if _r == 0 {
 		return ""
@@ -206,6 +212,7 @@ func (dtse *DOMHTMLTableSectionElement) Ch() string {
 
 // ChOff returns the ch off.
 func (dtse *DOMHTMLTableSectionElement) ChOff() string {
+	defer runtime.KeepAlive(dtse)
 	_r := objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("chOff"))
 	if _r == 0 {
 		return ""
@@ -215,6 +222,7 @@ func (dtse *DOMHTMLTableSectionElement) ChOff() string {
 
 // VAlign returns the v align.
 func (dtse *DOMHTMLTableSectionElement) VAlign() string {
+	defer runtime.KeepAlive(dtse)
 	_r := objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("vAlign"))
 	if _r == 0 {
 		return ""
@@ -224,6 +232,7 @@ func (dtse *DOMHTMLTableSectionElement) VAlign() string {
 
 // Rows returns the rows.
 func (dtse *DOMHTMLTableSectionElement) Rows() *DOMHTMLCollection {
+	defer runtime.KeepAlive(dtse)
 	_r := objc.Send[objc.ID](objref.IDOf(dtse), objc.RegisterName("rows"))
 	return DOMHTMLCollectionFromID(_r)
 }

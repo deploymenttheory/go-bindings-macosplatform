@@ -5,12 +5,13 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,6 +58,8 @@ func NewFeaturePrintObservation() *FeaturePrintObservation {
 
 // ComputeDistanceToFeaturePrintObservation computes the distance between two feature print observations.
 func (fpo *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservation(featurePrint *FeaturePrintObservation) (outDistance float32, err error) {
+	defer runtime.KeepAlive(fpo)
+	defer runtime.KeepAlive(featurePrint)
 	var _out0 float32
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(fpo), objc.RegisterName("computeDistance:toFeaturePrintObservation:error:"), unsafe.Pointer(&_out0), objref.IDOf(featurePrint), unsafe.Pointer(&_nsErr))
@@ -68,20 +71,23 @@ func (fpo *FeaturePrintObservation) ComputeDistanceToFeaturePrintObservation(fea
 
 // ElementType returns the type of each element in the data.
 func (fpo *FeaturePrintObservation) ElementType() ElementType {
+	defer runtime.KeepAlive(fpo)
 	_r := objc.Send[ElementType](objref.IDOf(fpo), objc.RegisterName("elementType"))
 	return _r
 }
 
 // ElementCount returns the total number of elements in the data.
 func (fpo *FeaturePrintObservation) ElementCount() int {
+	defer runtime.KeepAlive(fpo)
 	_r := objc.Send[int](objref.IDOf(fpo), objc.RegisterName("elementCount"))
 	return _r
 }
 
 // Data returns the feature print data.
-func (fpo *FeaturePrintObservation) Data() obj.Object {
+func (fpo *FeaturePrintObservation) Data() []byte {
+	defer runtime.KeepAlive(fpo)
 	_r := objc.Send[objc.ID](objref.IDOf(fpo), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ ObservationProvider = (*FeaturePrintObservation)(nil)

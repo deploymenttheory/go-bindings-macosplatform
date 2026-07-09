@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationSecurityKeyPublicKeyCredentialRegistrationAdopt(id objc.ID) *A
 
 // Description returns the object's -description text.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Description() string {
+	defer runtime.KeepAlive(askpkcr)
 	return rt.Description(objref.IDOf(askpkcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(askpkcr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(askpkcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) IsKind(className string) bool {
+	defer runtime.KeepAlive(askpkcr)
 	return rt.IsKind(objref.IDOf(askpkcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) String() string {
+	defer runtime.KeepAlive(askpkcr)
 	return rt.Description(objref.IDOf(askpkcr))
 }
 
@@ -76,12 +83,14 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialRegistration() *Authorization
 //
 // Transports returns the collection as a Go slice.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transports() []obj.Object {
+	defer runtime.KeepAlive(askpkcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(askpkcr), objc.RegisterName("transports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Prf returns the prf.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
+	defer runtime.KeepAlive(askpkcr)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)
 }

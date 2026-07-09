@@ -6,6 +6,7 @@ package fileprovider
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,22 +53,27 @@ func fileProviderManagerAdopt(id objc.ID) *FileProviderManager {
 
 // Description returns the object's -description text.
 func (fpm *FileProviderManager) Description() string {
+	defer runtime.KeepAlive(fpm)
 	return rt.Description(objref.IDOf(fpm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpm *FileProviderManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpm *FileProviderManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpm)
 	return rt.IsKind(objref.IDOf(fpm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpm *FileProviderManager) String() string {
+	defer runtime.KeepAlive(fpm)
 	return rt.Description(objref.IDOf(fpm))
 }
 
@@ -81,6 +87,8 @@ func NewFileProviderManager() *FileProviderManager {
 //
 // SignalEnumeratorForContainerItemIdentifier blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier obj.Object) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(containerItemIdentifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -100,6 +108,8 @@ func (fpm *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx c
 //
 // GetUserVisibleURLForItemIdentifier blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(itemIdentifier)
 	type _result struct {
 		val obj.Object
 		err error
@@ -125,6 +135,9 @@ func (fpm *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.C
 //
 // RegisterURLSessionTaskForItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task obj.Object, identifier obj.Object) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(task)
+	defer runtime.KeepAlive(identifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -140,27 +153,29 @@ func (fpm *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx 
 	}
 }
 
-// TemporaryDirectoryURLWithError returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.
-func (fpm *FileProviderManager) TemporaryDirectoryURLWithError() (result obj.Object, err error) {
+// TemporaryDirectoryURL returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.
+func (fpm *FileProviderManager) TemporaryDirectoryURL() (result string, err error) {
+	defer runtime.KeepAlive(fpm)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("temporaryDirectoryURLWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.URLString(_r), nil
 }
 
 // SignalErrorResolved indicates a resolved error.
 //
 // SignalErrorResolved blocks until the operation completes or ctx is cancelled.
-func (fpm *FileProviderManager) SignalErrorResolved(ctx context.Context, error_ unsafe.Pointer) error {
+func (fpm *FileProviderManager) SignalErrorResolved(ctx context.Context, err unsafe.Pointer) error {
+	defer runtime.KeepAlive(fpm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("signalErrorResolved:completionHandler:"), error_, _block)
+	objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("signalErrorResolved:completionHandler:"), err, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -170,15 +185,19 @@ func (fpm *FileProviderManager) SignalErrorResolved(ctx context.Context, error_ 
 }
 
 // GlobalProgressForKind returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.
-func (fpm *FileProviderManager) GlobalProgressForKind(kind obj.Object) obj.Object {
+func (fpm *FileProviderManager) GlobalProgressForKind(kind obj.Object) *foundation.Progress {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(kind)
 	_r := objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("globalProgressForKind:"), objref.IDOf(kind))
-	return obj.Wrap(_r)
+	return foundation.ProgressFromID(_r)
 }
 
 // ReimportItemsBelowItemWithIdentifier tells the system to reimport the item and its content recursively.
 //
 // ReimportItemsBelowItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(itemIdentifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -198,6 +217,8 @@ func (fpm *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context
 //
 // EvictItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(itemIdentifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -217,6 +238,8 @@ func (fpm *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, ite
 //
 // WaitForChangesOnItemsBelowItemWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(itemIdentifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -236,6 +259,7 @@ func (fpm *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx
 //
 // WaitForStabilization blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) WaitForStabilization(ctx context.Context) error {
+	defer runtime.KeepAlive(fpm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -255,6 +279,7 @@ func (fpm *FileProviderManager) WaitForStabilization(ctx context.Context) error 
 //
 // DisconnectWithReasonOptions blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options FileProviderManagerDisconnectionOptions) error {
+	defer runtime.KeepAlive(fpm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -274,6 +299,7 @@ func (fpm *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context,
 //
 // Reconnect blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) Reconnect(ctx context.Context) error {
+	defer runtime.KeepAlive(fpm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -293,6 +319,8 @@ func (fpm *FileProviderManager) Reconnect(ctx context.Context) error {
 //
 // RequestDownloadForItemWithIdentifierRequestedRange blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) RequestDownloadForItemWithIdentifierRequestedRange(ctx context.Context, itemIdentifier obj.Object, rangeToMaterialize foundation.NSRange) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(itemIdentifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -308,20 +336,23 @@ func (fpm *FileProviderManager) RequestDownloadForItemWithIdentifierRequestedRan
 	}
 }
 
-// StateDirectoryURLWithError returns a URL for a directory for storing state information for the domain.
-func (fpm *FileProviderManager) StateDirectoryURLWithError() (result obj.Object, err error) {
+// StateDirectoryURL returns a URL for a directory for storing state information for the domain.
+func (fpm *FileProviderManager) StateDirectoryURL() (result string, err error) {
+	defer runtime.KeepAlive(fpm)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("stateDirectoryURLWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.URLString(_r), nil
 }
 
 // RequestDiagnosticCollectionForItemWithIdentifierErrorReason requests a diagnostics collection for use when working directly with Apple to improve sync behavior.
 //
 // RequestDiagnosticCollectionForItemWithIdentifierErrorReason blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) RequestDiagnosticCollectionForItemWithIdentifierErrorReason(ctx context.Context, itemIdentifier obj.Object, errorReason unsafe.Pointer) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(itemIdentifier)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -337,8 +368,9 @@ func (fpm *FileProviderManager) RequestDiagnosticCollectionForItemWithIdentifier
 	}
 }
 
-// ListAvailableTestingOperationsWithError lists all the operations that are ready for scheduling.
-func (fpm *FileProviderManager) ListAvailableTestingOperationsWithError() (result []obj.Object, err error) {
+// ListAvailableTestingOperations lists all the operations that are ready for scheduling.
+func (fpm *FileProviderManager) ListAvailableTestingOperations() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(fpm)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("listAvailableTestingOperationsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -347,8 +379,9 @@ func (fpm *FileProviderManager) ListAvailableTestingOperationsWithError() (resul
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// RunTestingOperationsError asks the system to schedule and execute the specified operations.
-func (fpm *FileProviderManager) RunTestingOperationsError(operations []obj.Object) (result obj.Object, err error) {
+// RunTestingOperations asks the system to schedule and execute the specified operations.
+func (fpm *FileProviderManager) RunTestingOperations(operations []obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(fpm)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fpm), objc.RegisterName("runTestingOperations:error:"), purego.SliceToNSArray(operations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -361,6 +394,8 @@ func (fpm *FileProviderManager) RunTestingOperationsError(operations []obj.Objec
 //
 // ClaimKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *FileProviderKnownFolderLocations, localizedReason string) error {
+	defer runtime.KeepAlive(fpm)
+	defer runtime.KeepAlive(knownFolders)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -380,6 +415,7 @@ func (fpm *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Con
 //
 // ReleaseKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
 func (fpm *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders FileProviderKnownFolders, localizedReason string) error {
+	defer runtime.KeepAlive(fpm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

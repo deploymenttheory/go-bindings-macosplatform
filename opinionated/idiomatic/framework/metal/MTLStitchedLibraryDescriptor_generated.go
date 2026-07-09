@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func stitchedLibraryDescriptorAdopt(id objc.ID) *StitchedLibraryDescriptor {
 
 // Description returns the object's -description text.
 func (sld *StitchedLibraryDescriptor) Description() string {
+	defer runtime.KeepAlive(sld)
 	return rt.Description(objref.IDOf(sld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sld *StitchedLibraryDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sld *StitchedLibraryDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(sld)
 	return rt.IsKind(objref.IDOf(sld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sld *StitchedLibraryDescriptor) String() string {
+	defer runtime.KeepAlive(sld)
 	return rt.Description(objref.IDOf(sld))
 }
 
@@ -89,34 +96,40 @@ func (sld *StitchedLibraryDescriptor) WithOptions(options StitchedLibraryOptions
 //
 // FunctionGraphs returns the collection as a Go slice.
 func (sld *StitchedLibraryDescriptor) FunctionGraphs() []*FunctionStitchingGraph {
+	defer runtime.KeepAlive(sld)
 	_arr := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("functionGraphs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingGraph { return FunctionStitchingGraphFromID(_id) })
 }
 
 // Functions returns the functions.
 func (sld *StitchedLibraryDescriptor) Functions() []obj.Object {
+	defer runtime.KeepAlive(sld)
 	_r := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("functions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFunctions wraps the corresponding Objective-C method.
 func (sld *StitchedLibraryDescriptor) SetFunctions(functions []obj.Object) {
+	defer runtime.KeepAlive(sld)
 	objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("setFunctions:"), purego.SliceToNSArray(functions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // BinaryArchives returns the array of archives to be searched. Binary archives to be searched for precompiled stitched libraries during the compilation of this library.
 func (sld *StitchedLibraryDescriptor) BinaryArchives() []obj.Object {
+	defer runtime.KeepAlive(sld)
 	_r := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("binaryArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryArchives wraps the corresponding Objective-C method.
 func (sld *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	defer runtime.KeepAlive(sld)
 	objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Options returns the options to use for this new MTLLibrary.
 func (sld *StitchedLibraryDescriptor) Options() StitchedLibraryOptions {
+	defer runtime.KeepAlive(sld)
 	_r := objc.Send[StitchedLibraryOptions](objref.IDOf(sld), objc.RegisterName("options"))
 	return _r
 }

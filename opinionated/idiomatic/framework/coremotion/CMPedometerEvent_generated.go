@@ -5,6 +5,9 @@
 package coremotion
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func pedometerEventAdopt(id objc.ID) *PedometerEvent {
 
 // Description returns the object's -description text.
 func (pe *PedometerEvent) Description() string {
+	defer runtime.KeepAlive(pe)
 	return rt.Description(objref.IDOf(pe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pe *PedometerEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pe *PedometerEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(pe)
 	return rt.IsKind(objref.IDOf(pe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pe *PedometerEvent) String() string {
+	defer runtime.KeepAlive(pe)
 	return rt.Description(objref.IDOf(pe))
 }
 
@@ -73,13 +81,15 @@ func NewPedometerEvent() *PedometerEvent {
 }
 
 // Date returns the date.
-func (pe *PedometerEvent) Date() obj.Object {
+func (pe *PedometerEvent) Date() time.Time {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Type returns the type.
 func (pe *PedometerEvent) Type() PedometerEventType {
+	defer runtime.KeepAlive(pe)
 	_r := objc.Send[PedometerEventType](objref.IDOf(pe), objc.RegisterName("type"))
 	return _r
 }

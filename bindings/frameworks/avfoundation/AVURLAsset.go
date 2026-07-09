@@ -76,8 +76,8 @@ func AVURLAssetIsPlayableExtendedMIMEType(extendedMIMEType *foundation.NSString)
 }
 
 // Returns an asset that models the media resource found at the specified URL.
-func AVURLAssetURLAssetWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelURLAssetWithURLOptions, uRL.Ptr(), options.Ptr())
+func AVURLAssetURLAssetWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVURLAsset), _aVURLAssetSelURLAssetWithURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -85,8 +85,8 @@ func AVURLAssetURLAssetWithURLOptions(uRL *foundation.NSURL, options *foundation
 }
 
 // Creates an asset that models the media resource at the specified URL.
-func (o *AVURLAsset) InitWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelInitWithURLOptions, uRL.Ptr(), options.Ptr())
+func (o *AVURLAsset) InitWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVURLAsset {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVURLAssetSelInitWithURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

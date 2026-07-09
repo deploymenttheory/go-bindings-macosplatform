@@ -5,6 +5,7 @@
 package iousbhost
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func hostCIEndpointStateMachineAdopt(id objc.ID) *HostCIEndpointStateMachine {
 
 // Description returns the object's -description text.
 func (hcesm *HostCIEndpointStateMachine) Description() string {
+	defer runtime.KeepAlive(hcesm)
 	return rt.Description(objref.IDOf(hcesm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hcesm *HostCIEndpointStateMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hcesm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hcesm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hcesm *HostCIEndpointStateMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(hcesm)
 	return rt.IsKind(objref.IDOf(hcesm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hcesm *HostCIEndpointStateMachine) String() string {
+	defer runtime.KeepAlive(hcesm)
 	return rt.Description(objref.IDOf(hcesm))
 }
 
@@ -77,6 +83,7 @@ func NewHostCIEndpointStateMachine() *HostCIEndpointStateMachine {
 
 // ProcessDoorbell advance the state machine and process an IOUSBHostCIDoorbell message The IOUSBHostCIDoorbell is inspected to determine if it is handled by this state machine and is appropriate for the current state.  If successful, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed.
 func (hcesm *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error {
+	defer runtime.KeepAlive(hcesm)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(hcesm), objc.RegisterName("processDoorbell:error:"), doorbell, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,24 +94,28 @@ func (hcesm *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error 
 
 // EndpointState returns the endpoint state.
 func (hcesm *HostCIEndpointStateMachine) EndpointState() HostCIEndpointState {
+	defer runtime.KeepAlive(hcesm)
 	_r := objc.Send[HostCIEndpointState](objref.IDOf(hcesm), objc.RegisterName("endpointState"))
 	return _r
 }
 
 // DeviceAddress returns the device address.
 func (hcesm *HostCIEndpointStateMachine) DeviceAddress() int {
+	defer runtime.KeepAlive(hcesm)
 	_r := objc.Send[int](objref.IDOf(hcesm), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
 // EndpointAddress returns the endpoint address.
 func (hcesm *HostCIEndpointStateMachine) EndpointAddress() int {
+	defer runtime.KeepAlive(hcesm)
 	_r := objc.Send[int](objref.IDOf(hcesm), objc.RegisterName("endpointAddress"))
 	return _r
 }
 
 // ControllerInterface returns the controller interface.
 func (hcesm *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
+	defer runtime.KeepAlive(hcesm)
 	_r := objc.Send[objc.ID](objref.IDOf(hcesm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }

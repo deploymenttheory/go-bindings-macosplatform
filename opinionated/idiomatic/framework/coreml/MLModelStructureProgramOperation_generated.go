@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramOperationAdopt(id objc.ID) *ModelStructureProgramOpera
 
 // Description returns the object's -description text.
 func (mspo *ModelStructureProgramOperation) Description() string {
+	defer runtime.KeepAlive(mspo)
 	return rt.Description(objref.IDOf(mspo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspo *ModelStructureProgramOperation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspo *ModelStructureProgramOperation) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspo)
 	return rt.IsKind(objref.IDOf(mspo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspo *ModelStructureProgramOperation) String() string {
+	defer runtime.KeepAlive(mspo)
 	return rt.Description(objref.IDOf(mspo))
 }
 
@@ -74,6 +81,7 @@ func NewModelStructureProgramOperation() *ModelStructureProgramOperation {
 
 // OperatorName returns the name of the operator, e.g., "conv", "pool", "softmax", etc.
 func (mspo *ModelStructureProgramOperation) OperatorName() string {
+	defer runtime.KeepAlive(mspo)
 	_r := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("operatorName"))
 	if _r == 0 {
 		return ""
@@ -82,15 +90,17 @@ func (mspo *ModelStructureProgramOperation) OperatorName() string {
 }
 
 // Inputs returns the arguments to the Operation.
-func (mspo *ModelStructureProgramOperation) Inputs() obj.Object {
+func (mspo *ModelStructureProgramOperation) Inputs() map[string]*ModelStructureProgramArgument {
+	defer runtime.KeepAlive(mspo)
 	_r := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("inputs"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ModelStructureProgramArgument { return ModelStructureProgramArgumentFromID(_id) })
 }
 
 // Outputs returns the outputs of the Operation.
 //
 // Outputs returns the collection as a Go slice.
 func (mspo *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
+	defer runtime.KeepAlive(mspo)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("outputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
 		return ModelStructureProgramNamedValueTypeFromID(_id)
@@ -101,6 +111,7 @@ func (mspo *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNa
 //
 // Blocks returns the collection as a Go slice.
 func (mspo *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {
+	defer runtime.KeepAlive(mspo)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspo), objc.RegisterName("blocks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramBlock { return ModelStructureProgramBlockFromID(_id) })
 }

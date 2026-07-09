@@ -5,7 +5,10 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,62 +51,72 @@ func nEPacketTunnelNetworkSettingsAdopt(id objc.ID) *NEPacketTunnelNetworkSettin
 
 // WithIPv4Settings sets the tunnel IP version 4 settings.
 func (nptns *NEPacketTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEPacketTunnelNetworkSettings {
+	defer runtime.KeepAlive(iPv4Settings)
 	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setIPv4Settings:"), objref.IDOf(iPv4Settings))
 	return nptns
 }
 
 // WithIPv6Settings sets the tunnel IP version 6 settings.
 func (nptns *NEPacketTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEPacketTunnelNetworkSettings {
+	defer runtime.KeepAlive(iPv6Settings)
 	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setIPv6Settings:"), objref.IDOf(iPv6Settings))
 	return nptns
 }
 
 // WithTunnelOverheadBytes sets the number of bytes added to each tunneled packet for storing tunneling protocol headers.
 func (nptns *NEPacketTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes obj.Object) *NEPacketTunnelNetworkSettings {
+	defer runtime.KeepAlive(tunnelOverheadBytes)
 	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setTunnelOverheadBytes:"), objref.IDOf(tunnelOverheadBytes))
 	return nptns
 }
 
 // WithMTU sets the size of the maximum trasnmission unit, in bytes.
-func (nptns *NEPacketTunnelNetworkSettings) WithMTU(mTU obj.Object) *NEPacketTunnelNetworkSettings {
-	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setMTU:"), objref.IDOf(mTU))
+func (nptns *NEPacketTunnelNetworkSettings) WithMTU(mtu obj.Object) *NEPacketTunnelNetworkSettings {
+	defer runtime.KeepAlive(mtu)
+	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setMTU:"), objref.IDOf(mtu))
 	return nptns
 }
 
 // WithDNSSettings sets the tunnel DNS settings.
-func (nptns *NEPacketTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings {
-	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
+func (nptns *NEPacketTunnelNetworkSettings) WithDNSSettings(dnsSettings NEDNSSettingsProvider) *NEPacketTunnelNetworkSettings {
+	defer runtime.KeepAlive(dnsSettings)
+	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dnsSettings))
 	return nptns
 }
 
 // WithProxySettings sets the tunnel HTTP proxy settings.
 func (nptns *NEPacketTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEPacketTunnelNetworkSettings {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return nptns
 }
 
 // IPv4Settings returns an NEIPv4Settings object that contains the desired tunnel IPv4 settings.
 func (nptns *NEPacketTunnelNetworkSettings) IPv4Settings() *NEIPv4Settings {
+	defer runtime.KeepAlive(nptns)
 	_r := objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("IPv4Settings"))
 	return NEIPv4SettingsFromID(_r)
 }
 
 // IPv6Settings returns an NEIPv6Settings object that contains the desired tunnel IPv6 settings.
 func (nptns *NEPacketTunnelNetworkSettings) IPv6Settings() *NEIPv6Settings {
+	defer runtime.KeepAlive(nptns)
 	_r := objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("IPv6Settings"))
 	return NEIPv6SettingsFromID(_r)
 }
 
 // TunnelOverheadBytes returns an NSNumber object containing the number of bytes of overhead appended to each outbound packet through the tunnel. The MTU for the TUN interface is computed by subtracting this value from the MTU of the primary physical interface.
-func (nptns *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() obj.Object {
+func (nptns *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() *foundation.Number {
+	defer runtime.KeepAlive(nptns)
 	_r := objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("tunnelOverheadBytes"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MTU returns an NSNumber object containing the Maximum Transmission Unit (MTU) size in bytes to assign to the TUN interface. If this property is set, the tunnelOverheadBytes property is ignored.
-func (nptns *NEPacketTunnelNetworkSettings) MTU() obj.Object {
+func (nptns *NEPacketTunnelNetworkSettings) MTU() *foundation.Number {
+	defer runtime.KeepAlive(nptns)
 	_r := objc.Send[objc.ID](objref.IDOf(nptns), objc.RegisterName("MTU"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isNEPacketTunnelNetworkSettings marks NEPacketTunnelNetworkSettings — and, by embedding promotion, its

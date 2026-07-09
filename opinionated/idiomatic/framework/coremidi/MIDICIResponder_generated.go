@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cIResponderAdopt(id objc.ID) *CIResponder {
 
 // Description returns the object's -description text.
 func (cr *CIResponder) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *CIResponder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *CIResponder) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *CIResponder) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
@@ -74,29 +81,36 @@ func NewCIResponder() *CIResponder {
 
 // NotifyProfileOnChannelIsEnabled enables or disables a profile and notifies all connected initiators.
 func (cr *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *CIProfile, channel uint8, enabledState bool) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(aProfile)
 	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("notifyProfile:onChannel:isEnabled:"), objref.IDOf(aProfile), channel, enabledState)
 	return _r
 }
 
 // SendProfileOnChannelProfileData sends profile-specific data to all connected initiators.
-func (cr *CIResponder) SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(aProfile), channel, objref.IDOf(profileSpecificData))
+func (cr *CIResponder) SendProfileOnChannelProfileData(aProfile *CIProfile, channel uint8, profileSpecificData []byte) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(aProfile)
+	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("sendProfile:onChannel:profileData:"), objref.IDOf(aProfile), channel, rt.BytesToNSData(profileSpecificData))
 	return _r
 }
 
 // Start reports whether starts receiving initiator requests.
 func (cr *CIResponder) Start() bool {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[bool](objref.IDOf(cr), objc.RegisterName("start"))
 	return _r
 }
 
 // Stop stops receiving initiator requests and disconnects all connected initiators.
 func (cr *CIResponder) Stop() {
+	defer runtime.KeepAlive(cr)
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("stop"))
 }
 
 // DeviceInfo returns the device info.
 func (cr *CIResponder) DeviceInfo() *CIDeviceInfo {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }

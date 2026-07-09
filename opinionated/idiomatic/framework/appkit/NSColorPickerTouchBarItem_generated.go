@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func NewColorPickerTouchBarItem() *ColorPickerTouchBarItem {
 
 // WithColor sets the picker’s currently selected color.
 func (cptbi *ColorPickerTouchBarItem) WithColor(color *Color) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -85,6 +88,7 @@ func (cptbi *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*ColorSpac
 
 // WithColorList sets the list of colors displayed in the color picker.
 func (cptbi *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(colorList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setColorList:"), objref.IDOf(colorList))
 	})
@@ -101,6 +105,7 @@ func (cptbi *ColorPickerTouchBarItem) WithCustomizationLabel(customizationLabel 
 
 // WithTarget sets an object that is notified when a user interacts with the color picker.
 func (cptbi *ColorPickerTouchBarItem) WithTarget(target obj.Object) *ColorPickerTouchBarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -125,6 +130,7 @@ func (cptbi *ColorPickerTouchBarItem) WithVisibilityPriority(visibilityPriority 
 
 // Color returns the color.
 func (cptbi *ColorPickerTouchBarItem) Color() *Color {
+	defer runtime.KeepAlive(cptbi)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -138,6 +144,7 @@ func (cptbi *ColorPickerTouchBarItem) Color() *Color {
 
 // ShowsAlpha reports whether the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
 func (cptbi *ColorPickerTouchBarItem) ShowsAlpha() bool {
+	defer runtime.KeepAlive(cptbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -153,6 +160,7 @@ func (cptbi *ColorPickerTouchBarItem) ShowsAlpha() bool {
 //
 // AllowedColorSpaces returns the collection as a Go slice.
 func (cptbi *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
+	defer runtime.KeepAlive(cptbi)
 	var _mainthread0 []*ColorSpace
 	purego.Main(func() {
 		_mainthread0 = func() []*ColorSpace {
@@ -165,6 +173,7 @@ func (cptbi *ColorPickerTouchBarItem) AllowedColorSpaces() []*ColorSpace {
 
 // ColorList returns the color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 func (cptbi *ColorPickerTouchBarItem) ColorList() *ColorList {
+	defer runtime.KeepAlive(cptbi)
 	var _mainthread0 *ColorList
 	purego.Main(func() {
 		_mainthread0 = func() *ColorList {
@@ -178,6 +187,7 @@ func (cptbi *ColorPickerTouchBarItem) ColorList() *ColorList {
 
 // Target returns the target.
 func (cptbi *ColorPickerTouchBarItem) Target() obj.Object {
+	defer runtime.KeepAlive(cptbi)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -191,6 +201,7 @@ func (cptbi *ColorPickerTouchBarItem) Target() obj.Object {
 
 // IsEnabled reports whether enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
 func (cptbi *ColorPickerTouchBarItem) IsEnabled() bool {
+	defer runtime.KeepAlive(cptbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -22,6 +22,11 @@ import (
 )
 
 // Object is a Go handle for an Objective-C object.
+//
+// Only types that embed an objref.Handle can satisfy Object (the embedded
+// interface has an unexported method), and the Handle supplies Release — so
+// every implementation, generated or hand-written, gets the same lifecycle
+// behavior.
 type Object interface {
 	objref.Object
 	// Description returns the object's human-readable description text (the
@@ -34,6 +39,10 @@ type Object interface {
 	// class, or of a subclass of it. Use it to check an object's type before
 	// converting it to a specific wrapper.
 	IsKind(className string) bool
+	// Release relinquishes the Go side's reference to the object immediately,
+	// instead of waiting for the garbage collector. Idempotent; after Release
+	// the object's methods are no-ops returning zero values.
+	Release()
 }
 
 // generic is the Object used for an Objective-C object that has no more specific

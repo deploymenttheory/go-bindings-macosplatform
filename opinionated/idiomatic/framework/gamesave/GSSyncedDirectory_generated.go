@@ -6,6 +6,7 @@ package gamesave
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func syncedDirectoryAdopt(id objc.ID) *SyncedDirectory {
 
 // Description returns the object's -description text.
 func (sd *SyncedDirectory) Description() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sd *SyncedDirectory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sd *SyncedDirectory) IsKind(className string) bool {
+	defer runtime.KeepAlive(sd)
 	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sd *SyncedDirectory) String() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
@@ -76,16 +82,20 @@ func NewSyncedDirectory() *SyncedDirectory {
 
 // Close closes the directory, and resumes syncing the directory to the cloud.
 func (sd *SyncedDirectory) Close() {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("close"))
 }
 
 // TriggerPendingUploadWithCompletionHandler triggers an upload of the directory for any changes that were pending.
 func (sd *SyncedDirectory) TriggerPendingUploadWithCompletionHandler(completion func(bool)) {
+	defer runtime.KeepAlive(sd)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("triggerPendingUploadWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // ResolveConflictsWithVersion indicates that you resolved a conflict.
 func (sd *SyncedDirectory) ResolveConflictsWithVersion(version *SyncedDirectoryVersion) {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(version)
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("resolveConflictsWithVersion:"), objref.IDOf(version))
 }
 
@@ -93,6 +103,7 @@ func (sd *SyncedDirectory) ResolveConflictsWithVersion(version *SyncedDirectoryV
 //
 // FinishSyncing blocks until the operation completes or ctx is cancelled.
 func (sd *SyncedDirectory) FinishSyncing(ctx context.Context) error {
+	defer runtime.KeepAlive(sd)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -108,6 +119,7 @@ func (sd *SyncedDirectory) FinishSyncing(ctx context.Context) error {
 
 // DirectoryState returns the state of the directory.
 func (sd *SyncedDirectory) DirectoryState() *SyncedDirectoryState {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("directoryState"))
 	return SyncedDirectoryStateFromID(_r)
 }

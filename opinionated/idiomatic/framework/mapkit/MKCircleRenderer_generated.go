@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func circleRendererAdopt(id objc.ID) *CircleRenderer {
 
 // NewCircleRendererWithCircle creates a new overlay view using the specified circle overlay object.
 func NewCircleRendererWithCircle(circle *Circle) *CircleRenderer {
+	defer runtime.KeepAlive(circle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKCircleRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCircle:"), objref.IDOf(circle))
 	return circleRendererAdopt(_id)
@@ -67,12 +70,14 @@ func (cr *CircleRenderer) WithStrokeEnd(strokeEnd float64) *CircleRenderer {
 
 // WithFillColor sets the fill color to use for the path.
 func (cr *CircleRenderer) WithFillColor(fillColor obj.Object) *CircleRenderer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return cr
 }
 
 // WithStrokeColor sets the stroke color to use for the path.
 func (cr *CircleRenderer) WithStrokeColor(strokeColor obj.Object) *CircleRenderer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return cr
 }
@@ -110,6 +115,7 @@ func (cr *CircleRenderer) WithShouldRasterize(shouldRasterize bool) *CircleRende
 
 // WithPath sets the path representing the overlay’s shape.
 func (cr *CircleRenderer) WithPath(path obj.Object) *CircleRenderer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return cr
 }
@@ -122,18 +128,21 @@ func (cr *CircleRenderer) WithAlpha(alpha float64) *CircleRenderer {
 
 // Circle returns the circle.
 func (cr *CircleRenderer) Circle() *Circle {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("circle"))
 	return CircleFromID(_r)
 }
 
 // StrokeStart returns the stroke start.
 func (cr *CircleRenderer) StrokeStart() float64 {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[float64](objref.IDOf(cr), objc.RegisterName("strokeStart"))
 	return _r
 }
 
 // StrokeEnd returns the stroke end.
 func (cr *CircleRenderer) StrokeEnd() float64 {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[float64](objref.IDOf(cr), objc.RegisterName("strokeEnd"))
 	return _r
 }

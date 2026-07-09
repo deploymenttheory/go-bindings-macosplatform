@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -74,6 +75,7 @@ func (al *AreaLight) WithAspect(aspect float32) *AreaLight {
 
 // WithColor sets the color of the light source.
 func (al *AreaLight) WithColor(color obj.Object) *AreaLight {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return al
 }
@@ -122,12 +124,14 @@ func (al *AreaLight) WithColorSpace(colorSpace string) *AreaLight {
 
 // WithParent sets the parent object that contains this object.
 func (al *AreaLight) WithParent(parent ObjectProvider) *AreaLight {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return al
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (al *AreaLight) WithInstance(instance ObjectProvider) *AreaLight {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(al), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return al
 }
@@ -140,12 +144,14 @@ func (al *AreaLight) WithHidden(hidden bool) *AreaLight {
 
 // AreaRadius returns the area radius.
 func (al *AreaLight) AreaRadius() float32 {
+	defer runtime.KeepAlive(al)
 	_r := objc.Send[float32](objref.IDOf(al), objc.RegisterName("areaRadius"))
 	return _r
 }
 
 // Aspect returns the aspect.
 func (al *AreaLight) Aspect() float32 {
+	defer runtime.KeepAlive(al)
 	_r := objc.Send[float32](objref.IDOf(al), objc.RegisterName("aspect"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,18 +49,21 @@ func metricPlayerItemRateChangeEventAdopt(id objc.ID) *MetricPlayerItemRateChang
 
 // Rate returns the playback rate after the rate change event.
 func (mpirce *MetricPlayerItemRateChangeEvent) Rate() float64 {
+	defer runtime.KeepAlive(mpirce)
 	_r := objc.Send[float64](objref.IDOf(mpirce), objc.RegisterName("rate"))
 	return _r
 }
 
 // PreviousRate returns the playback rate before the rate change event.
 func (mpirce *MetricPlayerItemRateChangeEvent) PreviousRate() float64 {
+	defer runtime.KeepAlive(mpirce)
 	_r := objc.Send[float64](objref.IDOf(mpirce), objc.RegisterName("previousRate"))
 	return _r
 }
 
 // Variant returns the variant being played at the time of rate change. If no value is present, returns nil.
 func (mpirce *MetricPlayerItemRateChangeEvent) Variant() *AssetVariant {
+	defer runtime.KeepAlive(mpirce)
 	_r := objc.Send[objc.ID](objref.IDOf(mpirce), objc.RegisterName("variant"))
 	return AssetVariantFromID(_r)
 }

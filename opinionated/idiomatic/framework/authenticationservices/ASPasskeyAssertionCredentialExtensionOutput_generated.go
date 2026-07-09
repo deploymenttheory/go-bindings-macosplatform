@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func passkeyAssertionCredentialExtensionOutputAdopt(id objc.ID) *PasskeyAssertio
 
 // Description returns the object's -description text.
 func (paceo *PasskeyAssertionCredentialExtensionOutput) Description() string {
+	defer runtime.KeepAlive(paceo)
 	return rt.Description(objref.IDOf(paceo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (paceo *PasskeyAssertionCredentialExtensionOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(paceo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(paceo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (paceo *PasskeyAssertionCredentialExtensionOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(paceo)
 	return rt.IsKind(objref.IDOf(paceo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (paceo *PasskeyAssertionCredentialExtensionOutput) String() string {
+	defer runtime.KeepAlive(paceo)
 	return rt.Description(objref.IDOf(paceo))
 }
 
 // NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyAssertionCredentialExtensionOutput.
 func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) *PasskeyAssertionCredentialExtensionOutput {
+	defer runtime.KeepAlive(largeBlob)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredentialExtensionOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLargeBlobOutput:"), objref.IDOf(largeBlob))
 	return passkeyAssertionCredentialExtensionOutputAdopt(_id)
@@ -75,6 +83,7 @@ func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *
 
 // LargeBlobAssertionOutput returns the large blob assertion output.
 func (paceo *PasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	defer runtime.KeepAlive(paceo)
 	_r := objc.Send[objc.ID](objref.IDOf(paceo), objc.RegisterName("largeBlobAssertionOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }

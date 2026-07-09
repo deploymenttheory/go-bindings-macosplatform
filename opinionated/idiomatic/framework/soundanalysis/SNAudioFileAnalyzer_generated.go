@@ -5,6 +5,7 @@
 package soundanalysis
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,32 @@ func audioFileAnalyzerAdopt(id objc.ID) *AudioFileAnalyzer {
 
 // Description returns the object's -description text.
 func (afa *AudioFileAnalyzer) Description() string {
+	defer runtime.KeepAlive(afa)
 	return rt.Description(objref.IDOf(afa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (afa *AudioFileAnalyzer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(afa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(afa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (afa *AudioFileAnalyzer) IsKind(className string) bool {
+	defer runtime.KeepAlive(afa)
 	return rt.IsKind(objref.IDOf(afa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (afa *AudioFileAnalyzer) String() string {
+	defer runtime.KeepAlive(afa)
 	return rt.Description(objref.IDOf(afa))
 }
 
-// NewAudioFileAnalyzerWithURLError creates a new audio file analyzer.
-func NewAudioFileAnalyzerWithURLError(url string) (result *AudioFileAnalyzer, err error) {
+// NewAudioFileAnalyzerWithURL creates a new audio file analyzer.
+func NewAudioFileAnalyzerWithURL(url string) (result *AudioFileAnalyzer, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SNAudioFileAnalyzer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -82,20 +88,24 @@ func NewAudioFileAnalyzerWithURLError(url string) (result *AudioFileAnalyzer, er
 
 // RemoveAllRequests removes all the sound analysis requests from the audio file analyzer.
 func (afa *AudioFileAnalyzer) RemoveAllRequests() {
+	defer runtime.KeepAlive(afa)
 	objc.Send[objc.ID](objref.IDOf(afa), objc.RegisterName("removeAllRequests"))
 }
 
 // Analyze analyzes the audio file synchronously.
 func (afa *AudioFileAnalyzer) Analyze() {
+	defer runtime.KeepAlive(afa)
 	objc.Send[objc.ID](objref.IDOf(afa), objc.RegisterName("analyze"))
 }
 
 // AnalyzeWithCompletionHandler analyzes the audio file asynchronously.
 func (afa *AudioFileAnalyzer) AnalyzeWithCompletionHandler(completionHandler func(bool)) {
+	defer runtime.KeepAlive(afa)
 	objc.Send[objc.ID](objref.IDOf(afa), objc.RegisterName("analyzeWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CancelAnalysis cancels all the asynchronous sound analysis requests the analyzer is currently processing.
 func (afa *AudioFileAnalyzer) CancelAnalysis() {
+	defer runtime.KeepAlive(afa)
 	objc.Send[objc.ID](objref.IDOf(afa), objc.RegisterName("cancelAnalysis"))
 }

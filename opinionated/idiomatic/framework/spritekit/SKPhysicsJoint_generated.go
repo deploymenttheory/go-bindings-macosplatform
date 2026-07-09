@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,57 +52,68 @@ func physicsJointAdopt(id objc.ID) *PhysicsJoint {
 
 // Description returns the object's -description text.
 func (pj *PhysicsJoint) Description() string {
+	defer runtime.KeepAlive(pj)
 	return rt.Description(objref.IDOf(pj))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pj *PhysicsJoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pj)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pj), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pj *PhysicsJoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(pj)
 	return rt.IsKind(objref.IDOf(pj), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pj *PhysicsJoint) String() string {
+	defer runtime.KeepAlive(pj)
 	return rt.Description(objref.IDOf(pj))
 }
 
 // WithBodyA sets the first body connected by the joint.
 func (pj *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
+	defer runtime.KeepAlive(bodyA)
 	objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return pj
 }
 
 // WithBodyB sets the second body connected by the joint.
 func (pj *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
+	defer runtime.KeepAlive(bodyB)
 	objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return pj
 }
 
 // BodyA returns the body a.
 func (pj *PhysicsJoint) BodyA() *PhysicsBody {
+	defer runtime.KeepAlive(pj)
 	_r := objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyB returns the body b.
 func (pj *PhysicsJoint) BodyB() *PhysicsBody {
+	defer runtime.KeepAlive(pj)
 	_r := objc.Send[objc.ID](objref.IDOf(pj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
 // ReactionForce returns the reaction force.
 func (pj *PhysicsJoint) ReactionForce() corefoundation.CGVector {
+	defer runtime.KeepAlive(pj)
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pj), objc.RegisterName("reactionForce"))
 	return _r
 }
 
 // ReactionTorque returns the reaction torque.
 func (pj *PhysicsJoint) ReactionTorque() float64 {
+	defer runtime.KeepAlive(pj)
 	_r := objc.Send[float64](objref.IDOf(pj), objc.RegisterName("reactionTorque"))
 	return _r
 }

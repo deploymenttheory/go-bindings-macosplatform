@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewGraphTensor() *GraphTensor {
 
 // Operation returns the operation responsible for creating this tensor.
 func (gt *GraphTensor) Operation() *GraphOperation {
+	defer runtime.KeepAlive(gt)
 	_r := objc.Send[objc.ID](objref.IDOf(gt), objc.RegisterName("operation"))
 	return GraphOperationFromID(_r)
 }

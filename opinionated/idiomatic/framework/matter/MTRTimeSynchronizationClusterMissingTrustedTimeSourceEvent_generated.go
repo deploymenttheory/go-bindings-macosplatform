@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRTimeSynchronizationClusterMissingTrustedTimeSourceEventAdopt(id objc.ID)
 
 // Description returns the object's -description text.
 func (mtscmttse *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) Description() string {
+	defer runtime.KeepAlive(mtscmttse)
 	return rt.Description(objref.IDOf(mtscmttse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscmttse *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscmttse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscmttse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscmttse *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscmttse)
 	return rt.IsKind(objref.IDOf(mtscmttse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscmttse *MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent) String() string {
+	defer runtime.KeepAlive(mtscmttse)
 	return rt.Description(objref.IDOf(mtscmttse))
 }
 

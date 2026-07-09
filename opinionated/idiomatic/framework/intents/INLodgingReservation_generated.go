@@ -5,7 +5,11 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,41 +52,55 @@ func lodgingReservationAdopt(id objc.ID) *LodgingReservation {
 }
 
 // NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a lodging reservation with the specified contents and attributes.
-func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
+func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(lodgingBusinessLocation)
+	defer runtime.KeepAlive(reservationDuration)
+	defer runtime.KeepAlive(numberOfAdults)
+	defer runtime.KeepAlive(numberOfChildren)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INLodgingReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
 	return lodgingReservationAdopt(_id)
 }
 
 // NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new lodging reservation with the provided information.
-func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
+func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(lodgingBusinessLocation)
+	defer runtime.KeepAlive(reservationDuration)
+	defer runtime.KeepAlive(numberOfAdults)
+	defer runtime.KeepAlive(numberOfChildren)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INLodgingReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
 	return lodgingReservationAdopt(_id)
 }
 
 // LodgingBusinessLocation returns the lodging business location.
 func (lr *LodgingReservation) LodgingBusinessLocation() obj.Object {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("lodgingBusinessLocation"))
 	return obj.Wrap(_r)
 }
 
 // ReservationDuration returns the reservation duration.
 func (lr *LodgingReservation) ReservationDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("reservationDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // NumberOfAdults returns the number of adults.
-func (lr *LodgingReservation) NumberOfAdults() obj.Object {
+func (lr *LodgingReservation) NumberOfAdults() *foundation.Number {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("numberOfAdults"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NumberOfChildren returns the number of children.
-func (lr *LodgingReservation) NumberOfChildren() obj.Object {
+func (lr *LodgingReservation) NumberOfChildren() *foundation.Number {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("numberOfChildren"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 var _ ReservationProvider = (*LodgingReservation)(nil)

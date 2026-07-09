@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func notificationRequestAdopt(id objc.ID) *NotificationRequest {
 
 // Description returns the object's -description text.
 func (nr *NotificationRequest) Description() string {
+	defer runtime.KeepAlive(nr)
 	return rt.Description(objref.IDOf(nr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nr *NotificationRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nr *NotificationRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(nr)
 	return rt.IsKind(objref.IDOf(nr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nr *NotificationRequest) String() string {
+	defer runtime.KeepAlive(nr)
 	return rt.Description(objref.IDOf(nr))
 }
 
@@ -74,6 +81,7 @@ func NewNotificationRequest() *NotificationRequest {
 
 // Identifier returns the identifier.
 func (nr *NotificationRequest) Identifier() string {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,12 +91,14 @@ func (nr *NotificationRequest) Identifier() string {
 
 // Content returns the content.
 func (nr *NotificationRequest) Content() *NotificationContent {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("content"))
 	return NotificationContentFromID(_r)
 }
 
 // Trigger returns the trigger.
 func (nr *NotificationRequest) Trigger() *NotificationTrigger {
+	defer runtime.KeepAlive(nr)
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("trigger"))
 	return NotificationTriggerFromID(_r)
 }

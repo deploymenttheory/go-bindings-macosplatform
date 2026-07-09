@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,75 +51,100 @@ func mTRClusterTemperatureControlAdopt(id objc.ID) *MTRClusterTemperatureControl
 
 // NewMTRClusterTemperatureControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterTemperatureControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTemperatureControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTemperatureControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterTemperatureControlAdopt(_id)
 }
 
 // ReadAttributeTemperatureSetpointWithParams reads attribute temperature setpoint with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeTemperatureSetpointWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeTemperatureSetpointWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeTemperatureSetpointWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinTemperatureWithParams reads attribute min temperature with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeMinTemperatureWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeMinTemperatureWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeMinTemperatureWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxTemperatureWithParams reads attribute max temperature with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeMaxTemperatureWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeMaxTemperatureWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeMaxTemperatureWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeStepWithParams reads attribute step with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeStepWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeStepWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeStepWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSelectedTemperatureLevelWithParams reads attribute selected temperature level with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeSelectedTemperatureLevelWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeSelectedTemperatureLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeSelectedTemperatureLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupportedTemperatureLevelsWithParams reads attribute supported temperature levels with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeSupportedTemperatureLevelsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mctc *MTRClusterTemperatureControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mctc *MTRClusterTemperatureControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterTemperatureControl)(nil)

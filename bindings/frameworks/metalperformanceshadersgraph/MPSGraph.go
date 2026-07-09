@@ -2001,8 +2001,8 @@ func (o *MPSGraph) AssignVariableWithValueOfTensorName(variable *MPSGraphTensor,
 }
 
 // Creates a nonMaximumumSuppression operation and returns the result tensor.
-func (o *MPSGraph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *MPSGraphTensor, scoresTensor *MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name *foundation.NSString) *MPSGraphTensor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelNonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName, boxesTensor.Ptr(), scoresTensor.Ptr(), iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, name.Ptr())
+func (o *MPSGraph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *MPSGraphTensor, scoresTensor *MPSGraphTensor, iouThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name *foundation.NSString) *MPSGraphTensor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelNonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName, boxesTensor.Ptr(), scoresTensor.Ptr(), iouThreshold, scoreThreshold, perClassSuppression, coordinateMode, name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -2010,8 +2010,8 @@ func (o *MPSGraph) NonMaximumSuppressionWithBoxesTensorScoresTensorIOUThresholdS
 }
 
 // Creates a nonMaximumumSuppression operation and returns the result tensor.
-func (o *MPSGraph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *MPSGraphTensor, scoresTensor *MPSGraphTensor, classIndicesTensor *MPSGraphTensor, iOUThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name *foundation.NSString) *MPSGraphTensor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelNonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName, boxesTensor.Ptr(), scoresTensor.Ptr(), classIndicesTensor.Ptr(), iOUThreshold, scoreThreshold, perClassSuppression, coordinateMode, name.Ptr())
+func (o *MPSGraph) NonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName(boxesTensor *MPSGraphTensor, scoresTensor *MPSGraphTensor, classIndicesTensor *MPSGraphTensor, iouThreshold float32, scoreThreshold float32, perClassSuppression bool, coordinateMode MPSGraphNonMaximumSuppressionCoordinateMode, name *foundation.NSString) *MPSGraphTensor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelNonMaximumSuppressionWithBoxesTensorScoresTensorClassIndicesTensorIOUThresholdScoreThresholdPerClassSuppressionCoordinateModeName, boxesTensor.Ptr(), scoresTensor.Ptr(), classIndicesTensor.Ptr(), iouThreshold, scoreThreshold, perClassSuppression, coordinateMode, name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -2397,8 +2397,8 @@ func (o *MPSGraph) DequantizeTensorScaleTensorDataTypeName(tensor *MPSGraphTenso
 }
 
 // Creates a lookup-table based dequantize operation and returns the result tensor.
-func (o *MPSGraph) DequantizeTensorLUTTensorName(tensor *MPSGraphTensor, lUTTensor *MPSGraphTensor, name *foundation.NSString) *MPSGraphTensor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelDequantizeTensorLUTTensorName, tensor.Ptr(), lUTTensor.Ptr(), name.Ptr())
+func (o *MPSGraph) DequantizeTensorLUTTensorName(tensor *MPSGraphTensor, lutTensor *MPSGraphTensor, name *foundation.NSString) *MPSGraphTensor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelDequantizeTensorLUTTensorName, tensor.Ptr(), lutTensor.Ptr(), name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -2406,8 +2406,8 @@ func (o *MPSGraph) DequantizeTensorLUTTensorName(tensor *MPSGraphTensor, lUTTens
 }
 
 // Creates a vector lookup-table based dequantize operation and returns the result tensor.
-func (o *MPSGraph) DequantizeTensorLUTTensorAxisName(tensor *MPSGraphTensor, lUTTensor *MPSGraphTensor, axis int, name *foundation.NSString) *MPSGraphTensor {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelDequantizeTensorLUTTensorAxisName, tensor.Ptr(), lUTTensor.Ptr(), axis, name.Ptr())
+func (o *MPSGraph) DequantizeTensorLUTTensorAxisName(tensor *MPSGraphTensor, lutTensor *MPSGraphTensor, axis int, name *foundation.NSString) *MPSGraphTensor {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mPSGraphSelDequantizeTensorLUTTensorAxisName, tensor.Ptr(), lutTensor.Ptr(), axis, name.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -21,5 +21,5 @@ type SpeechStatusInfo struct {
 
 type VoiceSpec struct {
 	Creator uint
-	Id      uint
+	ID      uint
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func imageSizeAdopt(id objc.ID) *ImageSize {
 
 // Description returns the object's -description text.
 func (is *ImageSize) Description() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (is *ImageSize) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (is *ImageSize) IsKind(className string) bool {
+	defer runtime.KeepAlive(is)
 	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (is *ImageSize) String() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
@@ -74,12 +81,14 @@ func NewImageSize() *ImageSize {
 
 // PixelsWide returns the pixels wide.
 func (is *ImageSize) PixelsWide() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
 // PixelsHigh returns the pixels high.
 func (is *ImageSize) PixelsHigh() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("pixelsHigh"))
 	return _r
 }

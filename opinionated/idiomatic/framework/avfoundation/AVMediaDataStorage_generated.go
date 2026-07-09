@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,34 +49,40 @@ func mediaDataStorageAdopt(id objc.ID) *MediaDataStorage {
 
 // Description returns the object's -description text.
 func (mds *MediaDataStorage) Description() string {
+	defer runtime.KeepAlive(mds)
 	return rt.Description(objref.IDOf(mds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mds *MediaDataStorage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mds *MediaDataStorage) IsKind(className string) bool {
+	defer runtime.KeepAlive(mds)
 	return rt.IsKind(objref.IDOf(mds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mds *MediaDataStorage) String() string {
+	defer runtime.KeepAlive(mds)
 	return rt.Description(objref.IDOf(mds))
 }
 
 // NewMediaDataStorageWithURLOptions creates a media data storage object associated with a file URL.
-func NewMediaDataStorageWithURLOptions(uRL string, options obj.Object) *MediaDataStorage {
+func NewMediaDataStorageWithURLOptions(url string, options map[string]obj.Object) *MediaDataStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMediaDataStorage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mediaDataStorageAdopt(_id)
 }
 
 // URL returns the URL used to initialize the receiver.
-func (mds *MediaDataStorage) URL() obj.Object {
+func (mds *MediaDataStorage) URL() string {
+	defer runtime.KeepAlive(mds)
 	_r := objc.Send[objc.ID](objref.IDOf(mds), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

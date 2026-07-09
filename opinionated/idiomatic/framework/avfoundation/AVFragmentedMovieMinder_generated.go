@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func fragmentedMovieMinderAdopt(id objc.ID) *FragmentedMovieMinder {
 
 // NewFragmentedMovieMinderWithMovieMindingInterval creates a movie minder and adds a movie with a minding interval.
 func NewFragmentedMovieMinderWithMovieMindingInterval(movie *FragmentedMovie, mindingInterval float64) *FragmentedMovieMinder {
+	defer runtime.KeepAlive(movie)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVFragmentedMovieMinder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMovie:mindingInterval:"), objref.IDOf(movie), mindingInterval)
 	return fragmentedMovieMinderAdopt(_id)
@@ -60,11 +63,15 @@ func (fmm *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *
 
 // AddFragmentedMovie adds a fragmented movie to the array of movies being minded.
 func (fmm *FragmentedMovieMinder) AddFragmentedMovie(movie *FragmentedMovie) {
+	defer runtime.KeepAlive(fmm)
+	defer runtime.KeepAlive(movie)
 	objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("addFragmentedMovie:"), objref.IDOf(movie))
 }
 
 // RemoveFragmentedMovie removes a fragmented movie from the array of movies being minded.
 func (fmm *FragmentedMovieMinder) RemoveFragmentedMovie(movie *FragmentedMovie) {
+	defer runtime.KeepAlive(fmm)
+	defer runtime.KeepAlive(movie)
 	objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("removeFragmentedMovie:"), objref.IDOf(movie))
 }
 
@@ -72,6 +79,7 @@ func (fmm *FragmentedMovieMinder) RemoveFragmentedMovie(movie *FragmentedMovie) 
 //
 // Movies returns the collection as a Go slice.
 func (fmm *FragmentedMovieMinder) Movies() []*FragmentedMovie {
+	defer runtime.KeepAlive(fmm)
 	_arr := objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("movies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FragmentedMovie { return FragmentedMovieFromID(_id) })
 }

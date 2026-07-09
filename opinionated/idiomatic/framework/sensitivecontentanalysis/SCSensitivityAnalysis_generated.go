@@ -5,6 +5,8 @@
 package sensitivecontentanalysis
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func sensitivityAnalysisAdopt(id objc.ID) *SensitivityAnalysis {
 
 // Description returns the object's -description text.
 func (sa *SensitivityAnalysis) Description() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sa *SensitivityAnalysis) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sa *SensitivityAnalysis) IsKind(className string) bool {
+	defer runtime.KeepAlive(sa)
 	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sa *SensitivityAnalysis) String() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
@@ -74,18 +81,21 @@ func NewSensitivityAnalysis() *SensitivityAnalysis {
 
 // IsSensitive reports whether the object is sensitive.
 func (sa *SensitivityAnalysis) IsSensitive() bool {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("isSensitive"))
 	return _r
 }
 
 // ShouldIndicateSensitivity reports whether intervention guidance that suggests the app indicate the presence of sensitive content.
 func (sa *SensitivityAnalysis) ShouldIndicateSensitivity() bool {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("shouldIndicateSensitivity"))
 	return _r
 }
 
 // ShouldMuteAudio reports whether intervention guidance that suggests the app mute the audio of the current video stream.
 func (sa *SensitivityAnalysis) ShouldMuteAudio() bool {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[bool](objref.IDOf(sa), objc.RegisterName("shouldMuteAudio"))
 	return _r
 }

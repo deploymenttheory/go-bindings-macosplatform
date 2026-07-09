@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func mapCameraZoomRangeAdopt(id objc.ID) *MapCameraZoomRange {
 
 // Description returns the object's -description text.
 func (mczr *MapCameraZoomRange) Description() string {
+	defer runtime.KeepAlive(mczr)
 	return rt.Description(objref.IDOf(mczr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mczr *MapCameraZoomRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mczr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mczr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mczr *MapCameraZoomRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(mczr)
 	return rt.IsKind(objref.IDOf(mczr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mczr *MapCameraZoomRange) String() string {
+	defer runtime.KeepAlive(mczr)
 	return rt.Description(objref.IDOf(mczr))
 }
 

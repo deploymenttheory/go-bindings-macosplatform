@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,70 +51,84 @@ func workoutActivityAdopt(id objc.ID) *WorkoutActivity {
 
 // Description returns the object's -description text.
 func (wa *WorkoutActivity) Description() string {
+	defer runtime.KeepAlive(wa)
 	return rt.Description(objref.IDOf(wa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wa *WorkoutActivity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wa *WorkoutActivity) IsKind(className string) bool {
+	defer runtime.KeepAlive(wa)
 	return rt.IsKind(objref.IDOf(wa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wa *WorkoutActivity) String() string {
+	defer runtime.KeepAlive(wa)
 	return rt.Description(objref.IDOf(wa))
 }
 
 // NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a workout activity using the provided configuration, start date, end date, and metadata.
-func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *WorkoutConfiguration, startDate obj.Object, endDate obj.Object, metadata obj.Object) *WorkoutActivity {
+func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *WorkoutConfiguration, startDate time.Time, endDate time.Time, metadata map[string]obj.Object) *WorkoutActivity {
+	defer runtime.KeepAlive(workoutConfiguration)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutActivity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:"), objref.IDOf(workoutConfiguration), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:"), objref.IDOf(workoutConfiguration), rt.TimeToNSDate(startDate), rt.TimeToNSDate(endDate), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return workoutActivityAdopt(_id)
 }
 
 // StatisticsForType returns the activity’s statistics for the provided quantity type.
 func (wa *WorkoutActivity) StatisticsForType(quantityType *QuantityType) *Statistics {
+	defer runtime.KeepAlive(wa)
+	defer runtime.KeepAlive(quantityType)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
 	return StatisticsFromID(_r)
 }
 
 // UUID returns a unique identifier of the activity in the HealthKit database.
-func (wa *WorkoutActivity) UUID() obj.Object {
+func (wa *WorkoutActivity) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("UUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // WorkoutConfiguration returns the configuration object describing the workout activity.
 func (wa *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("workoutConfiguration"))
 	return WorkoutConfigurationFromID(_r)
 }
 
 // StartDate returns the point in time when the workout activity was started.
-func (wa *WorkoutActivity) StartDate() obj.Object {
+func (wa *WorkoutActivity) StartDate() time.Time {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the point in time when the workout activity was ended. This value is nil when a workout activity is in progress.
-func (wa *WorkoutActivity) EndDate() obj.Object {
+func (wa *WorkoutActivity) EndDate() time.Time {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Metadata returns extra information describing properties of the workout activity. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-func (wa *WorkoutActivity) Metadata() obj.Object {
+func (wa *WorkoutActivity) Metadata() map[string]obj.Object {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("metadata"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Duration returns the length of time that the workout activity was recording The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.
 func (wa *WorkoutActivity) Duration() float64 {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[float64](objref.IDOf(wa), objc.RegisterName("duration"))
 	return _r
 }
@@ -119,12 +137,14 @@ func (wa *WorkoutActivity) Duration() float64 {
 //
 // WorkoutEvents returns the collection as a Go slice.
 func (wa *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
+	defer runtime.KeepAlive(wa)
 	_arr := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("workoutEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
 // AllStatistics returns a dictionary of statistics per quantity type during the activity This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
 func (wa *WorkoutActivity) AllStatistics() obj.Object {
+	defer runtime.KeepAlive(wa)
 	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("allStatistics"))
 	return obj.Wrap(_r)
 }

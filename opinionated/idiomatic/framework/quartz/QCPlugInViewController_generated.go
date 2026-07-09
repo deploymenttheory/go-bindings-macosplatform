@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func qCPlugInViewControllerAdopt(id objc.ID) *QCPlugInViewController {
 
 // Description returns the object's -description text.
 func (qpivc *QCPlugInViewController) Description() string {
+	defer runtime.KeepAlive(qpivc)
 	return rt.Description(objref.IDOf(qpivc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qpivc *QCPlugInViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qpivc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qpivc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qpivc *QCPlugInViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(qpivc)
 	return rt.IsKind(objref.IDOf(qpivc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qpivc *QCPlugInViewController) String() string {
+	defer runtime.KeepAlive(qpivc)
 	return rt.Description(objref.IDOf(qpivc))
 }
 
 // NewQCPlugInViewControllerWithPlugInViewNibName creates and initializes a controller for the specified QCPlugIn object and nib file.
 func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *QCPlugIn, name string) *QCPlugInViewController {
+	defer runtime.KeepAlive(plugIn)
 	var _mainthread0 *QCPlugInViewController
 	purego.Main(func() {
 		_mainthread0 = func() *QCPlugInViewController {
@@ -81,6 +89,7 @@ func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *QCPlugIn, name strin
 
 // PlugIn returns the QCPlugIn object associated with the view controller for the custom patch.
 func (qpivc *QCPlugInViewController) PlugIn() *QCPlugIn {
+	defer runtime.KeepAlive(qpivc)
 	var _mainthread0 *QCPlugIn
 	purego.Main(func() {
 		_mainthread0 = func() *QCPlugIn {

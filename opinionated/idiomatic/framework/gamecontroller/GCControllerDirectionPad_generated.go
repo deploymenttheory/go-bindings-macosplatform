@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,41 +79,48 @@ func (cdp *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedNa
 
 // SetValueForXAxisYAxis sets the input values of a snapshot of a directional pad.
 func (cdp *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {
+	defer runtime.KeepAlive(cdp)
 	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setValueForXAxis:yAxis:"), xAxis, yAxis)
 }
 
 // XAxis returns the x axis.
 func (cdp *ControllerDirectionPad) XAxis() *ControllerAxisInput {
+	defer runtime.KeepAlive(cdp)
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("xAxis"))
 	return ControllerAxisInputFromID(_r)
 }
 
 // YAxis returns the y axis.
 func (cdp *ControllerDirectionPad) YAxis() *ControllerAxisInput {
+	defer runtime.KeepAlive(cdp)
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("yAxis"))
 	return ControllerAxisInputFromID(_r)
 }
 
 // Up returns the up.
 func (cdp *ControllerDirectionPad) Up() *ControllerButtonInput {
+	defer runtime.KeepAlive(cdp)
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("up"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // Down returns the down.
 func (cdp *ControllerDirectionPad) Down() *ControllerButtonInput {
+	defer runtime.KeepAlive(cdp)
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("down"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // Left returns the left.
 func (cdp *ControllerDirectionPad) Left() *ControllerButtonInput {
+	defer runtime.KeepAlive(cdp)
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("left"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // Right returns the right.
 func (cdp *ControllerDirectionPad) Right() *ControllerButtonInput {
+	defer runtime.KeepAlive(cdp)
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("right"))
 	return ControllerButtonInputFromID(_r)
 }

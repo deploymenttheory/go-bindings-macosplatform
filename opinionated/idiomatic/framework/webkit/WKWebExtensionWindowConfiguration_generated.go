@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func wKWebExtensionWindowConfigurationAdopt(id objc.ID) *WKWebExtensionWindowCon
 
 // Description returns the object's -description text.
 func (wwewc *WKWebExtensionWindowConfiguration) Description() string {
+	defer runtime.KeepAlive(wwewc)
 	return rt.Description(objref.IDOf(wwewc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwewc *WKWebExtensionWindowConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwewc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwewc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwewc *WKWebExtensionWindowConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwewc)
 	return rt.IsKind(objref.IDOf(wwewc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwewc *WKWebExtensionWindowConfiguration) String() string {
+	defer runtime.KeepAlive(wwewc)
 	return rt.Description(objref.IDOf(wwewc))
 }
 
@@ -79,6 +86,7 @@ func NewWKWebExtensionWindowConfiguration() *WKWebExtensionWindowConfiguration {
 
 // WindowType indicates the window type for the window.
 func (wwewc *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindowType {
+	defer runtime.KeepAlive(wwewc)
 	var _mainthread0 WKWebExtensionWindowType
 	purego.Main(func() {
 		_mainthread0 = func() WKWebExtensionWindowType {
@@ -92,6 +100,7 @@ func (wwewc *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindo
 
 // WindowState indicates the window state for the window.
 func (wwewc *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWindowState {
+	defer runtime.KeepAlive(wwewc)
 	var _mainthread0 WKWebExtensionWindowState
 	purego.Main(func() {
 		_mainthread0 = func() WKWebExtensionWindowState {
@@ -105,6 +114,7 @@ func (wwewc *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWind
 
 // Frame indicates the frame where the window should be positioned on the main screen. This frame should override the app's default window position and size. Individual components (e.g., `origin.x`, `size.width`) will be `NaN` if not specified.
 func (wwewc *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(wwewc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -119,12 +129,13 @@ func (wwewc *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
 // TabURLs indicates the URLs that the window should initially load as tabs. If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab.
 //
 // TabURLs returns the collection as a Go slice.
-func (wwewc *WKWebExtensionWindowConfiguration) TabURLs() []obj.Object {
-	var _mainthread0 []obj.Object
+func (wwewc *WKWebExtensionWindowConfiguration) TabURLs() []string {
+	defer runtime.KeepAlive(wwewc)
+	var _mainthread0 []string
 	purego.Main(func() {
-		_mainthread0 = func() []obj.Object {
+		_mainthread0 = func() []string {
 			_arr := objc.Send[objc.ID](objref.IDOf(wwewc), objc.RegisterName("tabURLs"))
-			return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+			return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return rt.URLString(_id) })
 		}()
 	})
 	return _mainthread0
@@ -132,6 +143,7 @@ func (wwewc *WKWebExtensionWindowConfiguration) TabURLs() []obj.Object {
 
 // Tabs indicates the existing tabs that should be moved to the window. If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab.
 func (wwewc *WKWebExtensionWindowConfiguration) Tabs() []obj.Object {
+	defer runtime.KeepAlive(wwewc)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -145,6 +157,7 @@ func (wwewc *WKWebExtensionWindowConfiguration) Tabs() []obj.Object {
 
 // ShouldBeFocused reports whether the window should be focused.
 func (wwewc *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
+	defer runtime.KeepAlive(wwewc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -158,6 +171,7 @@ func (wwewc *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
 
 // ShouldBePrivate reports whether the window should be private.
 func (wwewc *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
+	defer runtime.KeepAlive(wwewc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

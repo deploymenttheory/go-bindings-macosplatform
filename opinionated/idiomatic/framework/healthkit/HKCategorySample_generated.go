@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewCategorySample() *CategorySample {
 
 // CategoryType returns the category type.
 func (cs *CategorySample) CategoryType() *CategoryType {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("categoryType"))
 	return CategoryTypeFromID(_r)
 }
 
 // Value returns the preferred enum for the value is determined by the receiver's category type.
 func (cs *CategorySample) Value() int {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("value"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -86,6 +88,7 @@ func (vev *VisualEffectView) WithState(state VisualEffectState) *VisualEffectVie
 
 // WithMaskImage sets an image whose alpha channel masks the visual effect view’s material.
 func (vev *VisualEffectView) WithMaskImage(maskImage *Image) *VisualEffectView {
+	defer runtime.KeepAlive(maskImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMaskImage:"), objref.IDOf(maskImage))
 	})
@@ -239,6 +242,7 @@ func (vev *VisualEffectView) WithWantsLayer(wantsLayer bool) *VisualEffectView {
 
 // WithLayer sets the layer.
 func (vev *VisualEffectView) WithLayer(layer obj.Object) *VisualEffectView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -288,6 +292,7 @@ func (vev *VisualEffectView) WithBackgroundFilters(items ...obj.Object) *VisualE
 
 // WithCompositingFilter sets the compositing filter.
 func (vev *VisualEffectView) WithCompositingFilter(compositingFilter obj.Object) *VisualEffectView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -305,6 +310,7 @@ func (vev *VisualEffectView) WithContentFilters(items ...obj.Object) *VisualEffe
 
 // WithShadow sets the shadow.
 func (vev *VisualEffectView) WithShadow(shadow *Shadow) *VisualEffectView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -353,6 +359,7 @@ func (vev *VisualEffectView) WithPreparedContentRect(preparedContentRect corefou
 
 // WithNextKeyView sets the next key view.
 func (vev *VisualEffectView) WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -402,6 +409,7 @@ func (vev *VisualEffectView) WithPrefersCompactControlSizeMetrics(prefersCompact
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (vev *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *VisualEffectView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -458,6 +466,7 @@ func (vev *VisualEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExt
 
 // WithPressureConfiguration sets the pressure configuration.
 func (vev *VisualEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *VisualEffectView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -466,6 +475,7 @@ func (vev *VisualEffectView) WithPressureConfiguration(pressureConfiguration *Pr
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (vev *VisualEffectView) WithNextResponder(nextResponder ResponderProvider) *VisualEffectView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -474,6 +484,7 @@ func (vev *VisualEffectView) WithNextResponder(nextResponder ResponderProvider) 
 
 // WithMenu sets returns the responder’s menu.
 func (vev *VisualEffectView) WithMenu(menu *Menu) *VisualEffectView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -482,6 +493,7 @@ func (vev *VisualEffectView) WithMenu(menu *Menu) *VisualEffectView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (vev *VisualEffectView) WithUserActivity(userActivity obj.Object) *VisualEffectView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -490,6 +502,7 @@ func (vev *VisualEffectView) WithUserActivity(userActivity obj.Object) *VisualEf
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (vev *VisualEffectView) WithTouchBar(touchBar *TouchBar) *VisualEffectView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -498,6 +511,7 @@ func (vev *VisualEffectView) WithTouchBar(touchBar *TouchBar) *VisualEffectView 
 
 // Material returns a value indicating which material is shown by the NSVisualEffectView.  See the comments on NSVisualEffectMaterial.  Defaults to NSVisualEffectMaterialAppearanceBased.  You should instead specify an appropriate semantic material value.  See the comments on NSVisualEffectMaterial.
 func (vev *VisualEffectView) Material() VisualEffectMaterial {
+	defer runtime.KeepAlive(vev)
 	var _mainthread0 VisualEffectMaterial
 	purego.Main(func() {
 		_mainthread0 = func() VisualEffectMaterial {
@@ -511,6 +525,7 @@ func (vev *VisualEffectView) Material() VisualEffectMaterial {
 
 // InteriorBackgroundStyle returns an NSBackgroundStyle value that most closely matches the look of the material shown by the NSVisualEffectView.
 func (vev *VisualEffectView) InteriorBackgroundStyle() BackgroundStyle {
+	defer runtime.KeepAlive(vev)
 	var _mainthread0 BackgroundStyle
 	purego.Main(func() {
 		_mainthread0 = func() BackgroundStyle {
@@ -524,6 +539,7 @@ func (vev *VisualEffectView) InteriorBackgroundStyle() BackgroundStyle {
 
 // BlendingMode returns a value controlling how the NSVisualEffectView generates its material.  See the comments on NSVisualEffectBlendingMode.  Not all materials support both blending modes, so NSVisualEffectView may fall back to a more appropriate blending mode as needed.  Defaults to NSVisualEffectBlendingModeBehindWindow.
 func (vev *VisualEffectView) BlendingMode() VisualEffectBlendingMode {
+	defer runtime.KeepAlive(vev)
 	var _mainthread0 VisualEffectBlendingMode
 	purego.Main(func() {
 		_mainthread0 = func() VisualEffectBlendingMode {
@@ -537,6 +553,7 @@ func (vev *VisualEffectView) BlendingMode() VisualEffectBlendingMode {
 
 // State returns a value controlling when the NSVisualEffectView takes on the active look.  See the comments on NSVisualEffectState.  Defaults to NSVisualEffectStateFollowsWindowActiveState.
 func (vev *VisualEffectView) State() VisualEffectState {
+	defer runtime.KeepAlive(vev)
 	var _mainthread0 VisualEffectState
 	purego.Main(func() {
 		_mainthread0 = func() VisualEffectState {
@@ -550,6 +567,7 @@ func (vev *VisualEffectView) State() VisualEffectState {
 
 // MaskImage returns an image whose alpha channel is used to mask the material generated by the NSVisualEffectView.  (It does not also mask subviews.)  Defaults to nil.  It is best to set this to the smallest mask image possible and properly set the image's capInsets property to stretch it.  Setting the maskImage on an NSVisualEffectView that is the contentView of a window will correctly influence the window's shadow.
 func (vev *VisualEffectView) MaskImage() *Image {
+	defer runtime.KeepAlive(vev)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -563,6 +581,7 @@ func (vev *VisualEffectView) MaskImage() *Image {
 
 // IsEmphasized reports whether when true, the material takes on the emphasized look. Defaults to false. Some, but not all, materials change their look when emphasized. This is used to indicate that an associated view has firstResponder status.
 func (vev *VisualEffectView) IsEmphasized() bool {
+	defer runtime.KeepAlive(vev)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

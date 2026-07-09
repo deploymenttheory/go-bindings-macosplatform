@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,18 +51,21 @@ func basicAnimationAdopt(id objc.ID) *BasicAnimation {
 
 // WithFromValue sets defines the value the receiver uses to start interpolation.
 func (ba *BasicAnimation) WithFromValue(fromValue obj.Object) *BasicAnimation {
+	defer runtime.KeepAlive(fromValue)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setFromValue:"), objref.IDOf(fromValue))
 	return ba
 }
 
 // WithToValue sets defines the value the receiver uses to end interpolation.
 func (ba *BasicAnimation) WithToValue(toValue obj.Object) *BasicAnimation {
+	defer runtime.KeepAlive(toValue)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setToValue:"), objref.IDOf(toValue))
 	return ba
 }
 
 // WithByValue sets defines the value the receiver uses to perform relative interpolation.
 func (ba *BasicAnimation) WithByValue(byValue obj.Object) *BasicAnimation {
+	defer runtime.KeepAlive(byValue)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setByValue:"), objref.IDOf(byValue))
 	return ba
 }
@@ -84,13 +90,25 @@ func (ba *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
 
 // WithValueFunction sets an optional value function that is applied to interpolated values.
 func (ba *BasicAnimation) WithValueFunction(valueFunction *ValueFunction) *BasicAnimation {
+	defer runtime.KeepAlive(valueFunction)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return ba
 }
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (ba *BasicAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *BasicAnimation {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return ba
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (ba *BasicAnimation) WithDelegate(delegate AnimationDelegate) *BasicAnimation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ba), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ba), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return ba
 }
 
@@ -102,18 +120,21 @@ func (ba *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *Bas
 
 // FromValue returns the from value.
 func (ba *BasicAnimation) FromValue() obj.Object {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("fromValue"))
 	return obj.Wrap(_r)
 }
 
 // ToValue returns the to value.
 func (ba *BasicAnimation) ToValue() obj.Object {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("toValue"))
 	return obj.Wrap(_r)
 }
 
 // ByValue returns the by value.
 func (ba *BasicAnimation) ByValue() obj.Object {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("byValue"))
 	return obj.Wrap(_r)
 }

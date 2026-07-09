@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func cNNSpatialNormalizationNodeAdopt(id objc.ID) *CNNSpatialNormalizationNode {
 
 // NewCNNSpatialNormalizationNodeWithSourceKernelSize creates a new CNNSpatialNormalizationNode.
 func NewCNNSpatialNormalizationNodeWithSourceKernelSize(sourceNode *NNImageNode, kernelSize int) *CNNSpatialNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
 	return cNNSpatialNormalizationNodeAdopt(_id)
@@ -52,6 +55,7 @@ func NewCNNSpatialNormalizationNodeWithSourceKernelSize(sourceNode *NNImageNode,
 
 // NewCNNSpatialNormalizationNodeWithSource creates a new CNNSpatialNormalizationNode.
 func NewCNNSpatialNormalizationNodeWithSource(sourceNode *NNImageNode) *CNNSpatialNormalizationNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNSpatialNormalizationNodeAdopt(_id)
@@ -95,12 +99,14 @@ func (csnn *CNNSpatialNormalizationNode) WithLabel(label string) *CNNSpatialNorm
 
 // KernelWidth returns the kernel width.
 func (csnn *CNNSpatialNormalizationNode) KernelWidth() int {
+	defer runtime.KeepAlive(csnn)
 	_r := objc.Send[int](objref.IDOf(csnn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the kernel height.
 func (csnn *CNNSpatialNormalizationNode) KernelHeight() int {
+	defer runtime.KeepAlive(csnn)
 	_r := objc.Send[int](objref.IDOf(csnn), objc.RegisterName("kernelHeight"))
 	return _r
 }

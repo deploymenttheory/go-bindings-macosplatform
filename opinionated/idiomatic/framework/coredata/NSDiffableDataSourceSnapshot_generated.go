@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func diffableDataSourceSnapshotAdopt(id objc.ID) *DiffableDataSourceSnapshot {
 
 // Description returns the object's -description text.
 func (ddss *DiffableDataSourceSnapshot) Description() string {
+	defer runtime.KeepAlive(ddss)
 	return rt.Description(objref.IDOf(ddss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ddss *DiffableDataSourceSnapshot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ddss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ddss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ddss *DiffableDataSourceSnapshot) IsKind(className string) bool {
+	defer runtime.KeepAlive(ddss)
 	return rt.IsKind(objref.IDOf(ddss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ddss *DiffableDataSourceSnapshot) String() string {
+	defer runtime.KeepAlive(ddss)
 	return rt.Description(objref.IDOf(ddss))
 }
 

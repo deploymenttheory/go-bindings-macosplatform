@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func saveRequestAdopt(id objc.ID) *SaveRequest {
 
 // Description returns the object's -description text.
 func (sr *SaveRequest) Description() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sr *SaveRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sr *SaveRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(sr)
 	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sr *SaveRequest) String() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
@@ -86,56 +93,81 @@ func (sr *SaveRequest) WithShouldRefetchContacts(shouldRefetchContacts bool) *Sa
 
 // AddContactToContainerWithIdentifier adds the specified contact to the contact store.
 func (sr *SaveRequest) AddContactToContainerWithIdentifier(contact *MutableContact, identifier string) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(contact)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("addContact:toContainerWithIdentifier:"), objref.IDOf(contact), purego.NSString(identifier))
 }
 
 // UpdateContact updates an existing contact in the contact store.
 func (sr *SaveRequest) UpdateContact(contact *MutableContact) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(contact)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("updateContact:"), objref.IDOf(contact))
 }
 
 // DeleteContact deletes a contact from the contact store.
 func (sr *SaveRequest) DeleteContact(contact *MutableContact) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(contact)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("deleteContact:"), objref.IDOf(contact))
 }
 
 // AddGroupToContainerWithIdentifier adds a group to the contact store.
 func (sr *SaveRequest) AddGroupToContainerWithIdentifier(group *MutableGroup, identifier string) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("addGroup:toContainerWithIdentifier:"), objref.IDOf(group), purego.NSString(identifier))
 }
 
 // UpdateGroup updates an existing group in the contact store.
 func (sr *SaveRequest) UpdateGroup(group *MutableGroup) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("updateGroup:"), objref.IDOf(group))
 }
 
 // DeleteGroup deletes a group from the contact store.
 func (sr *SaveRequest) DeleteGroup(group *MutableGroup) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("deleteGroup:"), objref.IDOf(group))
 }
 
 // AddSubgroupToGroup add the specified group to a parent group.
 func (sr *SaveRequest) AddSubgroupToGroup(subgroup *Group, group *Group) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(subgroup)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("addSubgroup:toGroup:"), objref.IDOf(subgroup), objref.IDOf(group))
 }
 
 // RemoveSubgroupFromGroup remove a subgroup from the specified parent group.
 func (sr *SaveRequest) RemoveSubgroupFromGroup(subgroup *Group, group *Group) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(subgroup)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("removeSubgroup:fromGroup:"), objref.IDOf(subgroup), objref.IDOf(group))
 }
 
 // AddMemberToGroup adds a contact as a member of a group.
 func (sr *SaveRequest) AddMemberToGroup(contact *Contact, group *Group) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(contact)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("addMember:toGroup:"), objref.IDOf(contact), objref.IDOf(group))
 }
 
 // RemoveMemberFromGroup removes a contact as a member of a group.
 func (sr *SaveRequest) RemoveMemberFromGroup(contact *Contact, group *Group) {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(contact)
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("removeMember:fromGroup:"), objref.IDOf(contact), objref.IDOf(group))
 }
 
 // TransactionAuthor returns the author of this transaction. Use this, in conjunction with
 func (sr *SaveRequest) TransactionAuthor() string {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("transactionAuthor"))
 	if _r == 0 {
 		return ""
@@ -145,6 +177,7 @@ func (sr *SaveRequest) TransactionAuthor() string {
 
 // ShouldRefetchContacts reports whether should the contacts be refetched as part of executing the save request. Default is `YES` where added and updated contacts are refetched by the executing save request. Set to `NO` to suppress this refetch behavior and reduce the execution time of the save request.
 func (sr *SaveRequest) ShouldRefetchContacts() bool {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("shouldRefetchContacts"))
 	return _r
 }

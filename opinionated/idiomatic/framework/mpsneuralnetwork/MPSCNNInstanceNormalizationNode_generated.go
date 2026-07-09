@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +65,7 @@ func (cinn *CNNInstanceNormalizationNode) WithLabel(label string) *CNNInstanceNo
 
 // TrainingStyle returns the training style of the forward node will be propagated to gradient nodes made from it
 func (cinn *CNNInstanceNormalizationNode) TrainingStyle() NNTrainingStyle {
+	defer runtime.KeepAlive(cinn)
 	_r := objc.Send[NNTrainingStyle](objref.IDOf(cinn), objc.RegisterName("trainingStyle"))
 	return _r
 }

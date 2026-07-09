@@ -5,9 +5,11 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -50,6 +52,7 @@ func bundleActionAdopt(id objc.ID) *BundleAction {
 
 // WithParameters sets the action’s parameters.
 func (ba *BundleAction) WithParameters(parameters obj.Object) *BundleAction {
+	defer runtime.KeepAlive(parameters)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return ba
 }
@@ -80,29 +83,34 @@ func (ba *BundleAction) WithOutput(output unsafe.Pointer) *BundleAction {
 
 // AwakeFromBundle allows the action object to perform setup tasks requiring the presence of all bundle objects.
 func (ba *BundleAction) AwakeFromBundle() {
+	defer runtime.KeepAlive(ba)
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("awakeFromBundle"))
 }
 
 // HasView reports whether the object has view.
 func (ba *BundleAction) HasView() bool {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[bool](objref.IDOf(ba), objc.RegisterName("hasView"))
 	return _r
 }
 
 // View returns the view.
 func (ba *BundleAction) View() obj.Object {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("view"))
 	return obj.Wrap(_r)
 }
 
 // Bundle returns the bundle.
-func (ba *BundleAction) Bundle() obj.Object {
+func (ba *BundleAction) Bundle() *foundation.Bundle {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("bundle"))
-	return obj.Wrap(_r)
+	return foundation.BundleFromID(_r)
 }
 
 // Parameters returns the parameters.
 func (ba *BundleAction) Parameters() obj.Object {
+	defer runtime.KeepAlive(ba)
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }

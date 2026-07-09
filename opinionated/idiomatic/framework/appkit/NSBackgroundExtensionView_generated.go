@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewBackgroundExtensionView() *BackgroundExtensionView {
 
 // WithContentView sets the content view to extend to fill the NSBackgroundExtensionView.
 func (bev *BackgroundExtensionView) WithContentView(contentView ViewProvider) *BackgroundExtensionView {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
@@ -215,6 +218,7 @@ func (bev *BackgroundExtensionView) WithWantsLayer(wantsLayer bool) *BackgroundE
 
 // WithLayer sets the layer.
 func (bev *BackgroundExtensionView) WithLayer(layer obj.Object) *BackgroundExtensionView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -264,6 +268,7 @@ func (bev *BackgroundExtensionView) WithBackgroundFilters(items ...obj.Object) *
 
 // WithCompositingFilter sets the compositing filter.
 func (bev *BackgroundExtensionView) WithCompositingFilter(compositingFilter obj.Object) *BackgroundExtensionView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -281,6 +286,7 @@ func (bev *BackgroundExtensionView) WithContentFilters(items ...obj.Object) *Bac
 
 // WithShadow sets the shadow.
 func (bev *BackgroundExtensionView) WithShadow(shadow *Shadow) *BackgroundExtensionView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -329,6 +335,7 @@ func (bev *BackgroundExtensionView) WithPreparedContentRect(preparedContentRect 
 
 // WithNextKeyView sets the next key view.
 func (bev *BackgroundExtensionView) WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -378,6 +385,7 @@ func (bev *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefers
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (bev *BackgroundExtensionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *BackgroundExtensionView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -434,6 +442,7 @@ func (bev *BackgroundExtensionView) WithWantsExtendedDynamicRangeOpenGLSurface(w
 
 // WithPressureConfiguration sets the pressure configuration.
 func (bev *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *BackgroundExtensionView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -442,6 +451,7 @@ func (bev *BackgroundExtensionView) WithPressureConfiguration(pressureConfigurat
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (bev *BackgroundExtensionView) WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -450,6 +460,7 @@ func (bev *BackgroundExtensionView) WithNextResponder(nextResponder ResponderPro
 
 // WithMenu sets returns the responder’s menu.
 func (bev *BackgroundExtensionView) WithMenu(menu *Menu) *BackgroundExtensionView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -458,6 +469,7 @@ func (bev *BackgroundExtensionView) WithMenu(menu *Menu) *BackgroundExtensionVie
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (bev *BackgroundExtensionView) WithUserActivity(userActivity obj.Object) *BackgroundExtensionView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -466,6 +478,7 @@ func (bev *BackgroundExtensionView) WithUserActivity(userActivity obj.Object) *B
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (bev *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bev), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -474,6 +487,7 @@ func (bev *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *Background
 
 // ContentView returns the content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
 func (bev *BackgroundExtensionView) ContentView() *View {
+	defer runtime.KeepAlive(bev)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -487,6 +501,7 @@ func (bev *BackgroundExtensionView) ContentView() *View {
 
 // AutomaticallyPlacesContentView reports whether controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
 func (bev *BackgroundExtensionView) AutomaticallyPlacesContentView() bool {
+	defer runtime.KeepAlive(bev)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func definitionAdopt(id objc.ID) *Definition {
 
 // Description returns the object's -description text.
 func (d *Definition) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Definition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Definition) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Definition) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // Identifier returns the identifier.
 func (d *Definition) Identifier() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

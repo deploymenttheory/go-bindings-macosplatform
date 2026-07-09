@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewFetchDatabaseChangesOperation() *FetchDatabaseChangesOperation {
 
 // NewFetchDatabaseChangesOperationWithPreviousServerChangeToken creates an operation for fetching database changes.
 func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
+	defer runtime.KeepAlive(previousServerChangeToken)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchDatabaseChangesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 	return fetchDatabaseChangesOperationAdopt(_id)
@@ -61,6 +64,7 @@ func NewFetchDatabaseChangesOperationWithPreviousServerChangeToken(previousServe
 
 // WithPreviousServerChangeToken sets the server change token.
 func (fdco *FetchDatabaseChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchDatabaseChangesOperation {
+	defer runtime.KeepAlive(previousServerChangeToken)
 	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 	return fdco
 }
@@ -111,18 +115,21 @@ func (fdco *FetchDatabaseChangesOperation) WithChangeTokenUpdatedBlock(changeTok
 
 // WithDatabase sets the database that the operation uses.
 func (fdco *FetchDatabaseChangesOperation) WithDatabase(database *Database) *FetchDatabaseChangesOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return fdco
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (fdco *FetchDatabaseChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchDatabaseChangesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return fdco
 }
 
 // WithGroup sets the operation’s group.
 func (fdco *FetchDatabaseChangesOperation) WithGroup(group *OperationGroup) *FetchDatabaseChangesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return fdco
 }
@@ -135,6 +142,7 @@ func (fdco *FetchDatabaseChangesOperation) WithLongLivedOperationWasPersistedBlo
 
 // WithContainer sets the operation's container.
 func (fdco *FetchDatabaseChangesOperation) WithContainer(container *Container) *FetchDatabaseChangesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return fdco
 }
@@ -165,18 +173,21 @@ func (fdco *FetchDatabaseChangesOperation) WithTimeoutIntervalForResource(timeou
 
 // PreviousServerChangeToken returns the server change token. Assign the token you receive from the “CKFetchDatabaseChangesOperation/fetchDatabaseChangesCompletionBlock“ to this property. Doing so yields only the changes that occur after your most recent fetch operation. If you specify `nil` for this parameter, the operation fetches all changes.
 func (fdco *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
+	defer runtime.KeepAlive(fdco)
 	_r := objc.Send[objc.ID](objref.IDOf(fdco), objc.RegisterName("previousServerChangeToken"))
 	return ServerChangeTokenFromID(_r)
 }
 
 // ResultsLimit returns the maximum number of results that the operation fetches. Use this property to limit the number of changes this operation returns. When the operation reaches the limit, it updates the change token and returns it to indicate that more results are available.
 func (fdco *FetchDatabaseChangesOperation) ResultsLimit() int {
+	defer runtime.KeepAlive(fdco)
 	_r := objc.Send[int](objref.IDOf(fdco), objc.RegisterName("resultsLimit"))
 	return _r
 }
 
 // FetchAllChanges reports whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchDatabaseChangesOperation/changeTokenUpdatedBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (fdco *FetchDatabaseChangesOperation) FetchAllChanges() bool {
+	defer runtime.KeepAlive(fdco)
 	_r := objc.Send[bool](objref.IDOf(fdco), objc.RegisterName("fetchAllChanges"))
 	return _r
 }

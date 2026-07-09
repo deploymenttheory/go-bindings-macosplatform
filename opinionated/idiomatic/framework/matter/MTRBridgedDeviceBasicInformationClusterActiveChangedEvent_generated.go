@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) Description() string {
+	defer runtime.KeepAlive(mbdbicace)
 	return rt.Description(objref.IDOf(mbdbicace))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbdbicace)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbdbicace), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbdbicace)
 	return rt.IsKind(objref.IDOf(mbdbicace), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) String() string {
+	defer runtime.KeepAlive(mbdbicace)
 	return rt.Description(objref.IDOf(mbdbicace))
 }
 
@@ -72,12 +80,14 @@ func NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent() *MTRBridgedD
 
 // WithPromisedActiveDuration sets the promised active duration.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
+	defer runtime.KeepAlive(promisedActiveDuration)
 	objc.Send[objc.ID](objref.IDOf(mbdbicace), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 	return mbdbicace
 }
 
 // PromisedActiveDuration returns the promised active duration.
-func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() obj.Object {
+func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() *foundation.Number {
+	defer runtime.KeepAlive(mbdbicace)
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbicace), objc.RegisterName("promisedActiveDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

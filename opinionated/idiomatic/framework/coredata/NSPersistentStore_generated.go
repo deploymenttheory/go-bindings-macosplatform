@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,35 +53,42 @@ func persistentStoreAdopt(id objc.ID) *PersistentStore {
 
 // Description returns the object's -description text.
 func (ps *PersistentStore) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *PersistentStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *PersistentStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *PersistentStore) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions returns a store initialized with the given arguments.
 func NewPersistentStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(root *PersistentStoreCoordinator, name string, url string, options obj.Object) *PersistentStore {
+	defer runtime.KeepAlive(root)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentStore")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), objref.IDOf(root), purego.NSString(name), rt.FileURL(url), objref.IDOf(options))
 	return persistentStoreAdopt(_id)
 }
 
 // WithURL sets the URL for the persistent store.
-func (ps *PersistentStore) WithURL(uRL string) *PersistentStore {
-	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (ps *PersistentStore) WithURL(url string) *PersistentStore {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return ps
 }
 
@@ -97,8 +105,8 @@ func (ps *PersistentStore) WithReadOnly(readOnly bool) *PersistentStore {
 }
 
 // WithMetadata sets the metadata for the persistent store.
-func (ps *PersistentStore) WithMetadata(metadata obj.Object) *PersistentStore {
-	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
+func (ps *PersistentStore) WithMetadata(metadata map[string]obj.Object) *PersistentStore {
+	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setMetadata:"), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ps
 }
 
@@ -106,6 +114,7 @@ func (ps *PersistentStore) WithMetadata(metadata obj.Object) *PersistentStore {
 //
 // LoadMetadata returns an error if the operation did not succeed.
 func (ps *PersistentStore) LoadMetadata() error {
+	defer runtime.KeepAlive(ps)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(ps), objc.RegisterName("loadMetadata:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -116,22 +125,28 @@ func (ps *PersistentStore) LoadMetadata() error {
 
 // DidAddToPersistentStoreCoordinator invoked after the persistent store has been added to the persistent store coordinator.
 func (ps *PersistentStore) DidAddToPersistentStoreCoordinator(coordinator *PersistentStoreCoordinator) {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(coordinator)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("didAddToPersistentStoreCoordinator:"), objref.IDOf(coordinator))
 }
 
 // WillRemoveFromPersistentStoreCoordinator invoked before the persistent store is removed from the persistent store coordinator.
 func (ps *PersistentStore) WillRemoveFromPersistentStoreCoordinator(coordinator *PersistentStoreCoordinator) {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(coordinator)
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("willRemoveFromPersistentStoreCoordinator:"), objref.IDOf(coordinator))
 }
 
 // PersistentStoreCoordinator returns the persistent store coordinator.
 func (ps *PersistentStore) PersistentStoreCoordinator() *PersistentStoreCoordinator {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("persistentStoreCoordinator"))
 	return PersistentStoreCoordinatorFromID(_r)
 }
 
 // ConfigurationName returns the configuration name.
 func (ps *PersistentStore) ConfigurationName() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("configurationName"))
 	if _r == 0 {
 		return ""
@@ -141,18 +156,21 @@ func (ps *PersistentStore) ConfigurationName() string {
 
 // Options returns the options.
 func (ps *PersistentStore) Options() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
 // URL returns the URL.
-func (ps *PersistentStore) URL() obj.Object {
+func (ps *PersistentStore) URL() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Identifier returns the identifier.
 func (ps *PersistentStore) Identifier() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -162,6 +180,7 @@ func (ps *PersistentStore) Identifier() string {
 
 // Type returns the type.
 func (ps *PersistentStore) Type() string {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -171,18 +190,21 @@ func (ps *PersistentStore) Type() string {
 
 // IsReadOnly reports whether the object is read only.
 func (ps *PersistentStore) IsReadOnly() bool {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
 // Metadata returns the metadata.
-func (ps *PersistentStore) Metadata() obj.Object {
+func (ps *PersistentStore) Metadata() map[string]obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("metadata"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CoreSpotlightExporter returns the core spotlight exporter.
 func (ps *PersistentStore) CoreSpotlightExporter() *CoreDataCoreSpotlightDelegate {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("coreSpotlightExporter"))
 	return CoreDataCoreSpotlightDelegateFromID(_r)
 }

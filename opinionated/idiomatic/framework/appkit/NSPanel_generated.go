@@ -5,11 +5,13 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -149,9 +151,22 @@ func (p *Panel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Panel
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (p *Panel) WithContentView(contentView ViewProvider) *Panel {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return p
+}
+
+// WithDelegate sets the window’s delegate.
+func (p *Panel) WithDelegate(delegate WindowDelegate) *Panel {
+	_shim := newWindowDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(p), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(p), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return p
 }
 
@@ -221,6 +236,7 @@ func (p *Panel) WithReleasedWhenClosed(releasedWhenClosed bool) *Panel {
 
 // WithBackgroundColor sets the color of the window’s background.
 func (p *Panel) WithBackgroundColor(backgroundColor *Color) *Panel {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -261,6 +277,7 @@ func (p *Panel) WithCanHide(canHide bool) *Panel {
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (p *Panel) WithMiniwindowImage(miniwindowImage *Image) *Panel {
+	defer runtime.KeepAlive(miniwindowImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	})
@@ -397,6 +414,7 @@ func (p *Panel) WithAnimationBehavior(animationBehavior WindowAnimationBehavior)
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (p *Panel) WithFrameAutosaveName(frameAutosaveName obj.Object) *Panel {
+	defer runtime.KeepAlive(frameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	})
@@ -453,6 +471,7 @@ func (p *Panel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefounda
 
 // WithWindowController sets the window’s window controller.
 func (p *Panel) WithWindowController(windowController *WindowController) *Panel {
+	defer runtime.KeepAlive(windowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	})
@@ -461,6 +480,7 @@ func (p *Panel) WithWindowController(windowController *WindowController) *Panel 
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (p *Panel) WithParentWindow(parentWindow WindowProvider) *Panel {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -469,6 +489,7 @@ func (p *Panel) WithParentWindow(parentWindow WindowProvider) *Panel {
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (p *Panel) WithAppearanceSource(appearanceSource obj.Object) *Panel {
+	defer runtime.KeepAlive(appearanceSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	})
@@ -477,6 +498,7 @@ func (p *Panel) WithAppearanceSource(appearanceSource obj.Object) *Panel {
 
 // WithColorSpace sets the window’s color space.
 func (p *Panel) WithColorSpace(colorSpace *ColorSpace) *Panel {
+	defer runtime.KeepAlive(colorSpace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	})
@@ -493,6 +515,7 @@ func (p *Panel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSepara
 
 // WithContentViewController sets the main content view controller for the window.
 func (p *Panel) WithContentViewController(contentViewController ViewControllerProvider) *Panel {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -501,6 +524,7 @@ func (p *Panel) WithContentViewController(contentViewController ViewControllerPr
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (p *Panel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *Panel {
+	defer runtime.KeepAlive(initialFirstResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	})
@@ -509,6 +533,7 @@ func (p *Panel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *P
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (p *Panel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Panel {
+	defer runtime.KeepAlive(defaultButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	})
@@ -525,6 +550,7 @@ func (p *Panel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool
 
 // WithToolbar sets the window’s toolbar.
 func (p *Panel) WithToolbar(toolbar *Toolbar) *Panel {
+	defer runtime.KeepAlive(toolbar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	})
@@ -549,6 +575,7 @@ func (p *Panel) WithTabbingMode(tabbingMode WindowTabbingMode) *Panel {
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (p *Panel) WithTabbingIdentifier(tabbingIdentifier obj.Object) *Panel {
+	defer runtime.KeepAlive(tabbingIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	})
@@ -629,6 +656,7 @@ func (p *Panel) WithRestorationClass(restorationClass unsafe.Pointer) *Panel {
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (p *Panel) WithNextResponder(nextResponder ResponderProvider) *Panel {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -637,6 +665,7 @@ func (p *Panel) WithNextResponder(nextResponder ResponderProvider) *Panel {
 
 // WithMenu sets returns the responder’s menu.
 func (p *Panel) WithMenu(menu *Menu) *Panel {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -645,6 +674,7 @@ func (p *Panel) WithMenu(menu *Menu) *Panel {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (p *Panel) WithUserActivity(userActivity obj.Object) *Panel {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -653,6 +683,7 @@ func (p *Panel) WithUserActivity(userActivity obj.Object) *Panel {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (p *Panel) WithTouchBar(touchBar *TouchBar) *Panel {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -661,6 +692,7 @@ func (p *Panel) WithTouchBar(touchBar *TouchBar) *Panel {
 
 // BecomesKeyOnlyIfNeeded wraps the corresponding Objective-C method.
 func (p *Panel) BecomesKeyOnlyIfNeeded() bool {
+	defer runtime.KeepAlive(p)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

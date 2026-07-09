@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceAttestationDeviceInfoAdopt(id objc.ID) *MTRDeviceAttestationDevice
 
 // Description returns the object's -description text.
 func (mdadi *MTRDeviceAttestationDeviceInfo) Description() string {
+	defer runtime.KeepAlive(mdadi)
 	return rt.Description(objref.IDOf(mdadi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdadi *MTRDeviceAttestationDeviceInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdadi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdadi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdadi *MTRDeviceAttestationDeviceInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdadi)
 	return rt.IsKind(objref.IDOf(mdadi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdadi *MTRDeviceAttestationDeviceInfo) String() string {
+	defer runtime.KeepAlive(mdadi)
 	return rt.Description(objref.IDOf(mdadi))
 }
 
@@ -71,73 +79,85 @@ func NewMTRDeviceAttestationDeviceInfo() *MTRDeviceAttestationDeviceInfo {
 }
 
 // VendorID returns the vendor ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
-func (mdadi *MTRDeviceAttestationDeviceInfo) VendorID() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) VendorID() *foundation.Number {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("vendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProductID returns the product ID from the Device Attestation Certificate. May be nil only if attestation verification failed.
-func (mdadi *MTRDeviceAttestationDeviceInfo) ProductID() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) ProductID() *foundation.Number {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("productID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // BasicInformationVendorID returns the vendor ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match the vendor ID from the certification declaration.
-func (mdadi *MTRDeviceAttestationDeviceInfo) BasicInformationVendorID() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) BasicInformationVendorID() *foundation.Number {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("basicInformationVendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // BasicInformationProductID returns the product ID value from the device's Basic Information cluster that was used for device attestation.  If attestation succeeds, this must match one of the product IDs from the certification declaration.
-func (mdadi *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() *foundation.Number {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("basicInformationProductID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DacCertificate returns the dac certificate.
-func (mdadi *MTRDeviceAttestationDeviceInfo) DacCertificate() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) DacCertificate() *foundation.Data {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("dacCertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // DacPAICertificate returns the dac pai certificate.
-func (mdadi *MTRDeviceAttestationDeviceInfo) DacPAICertificate() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) DacPAICertificate() *foundation.Data {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("dacPAICertificate"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // CertificateDeclaration returns the certificate declaration.
-func (mdadi *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() []byte {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("certificateDeclaration"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AttestationChallenge returns the attestation challenge from the secure session.
-func (mdadi *MTRDeviceAttestationDeviceInfo) AttestationChallenge() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) AttestationChallenge() []byte {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("attestationChallenge"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AttestationNonce returns the attestation nonce from the AttestationRequest command.
-func (mdadi *MTRDeviceAttestationDeviceInfo) AttestationNonce() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) AttestationNonce() []byte {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("attestationNonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ElementsTLV returns the TLV-encoded attestation_elements_message that was used to find the certificationDeclaration (possibly unsuccessfully).
-func (mdadi *MTRDeviceAttestationDeviceInfo) ElementsTLV() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) ElementsTLV() *foundation.Data {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("elementsTLV"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // CertificationDeclaration returns the certification declaration of the device, if available.  This is a DER-encoded string representing a CMS-formatted certification declaration.  May be nil only if attestation verification failed.
-func (mdadi *MTRDeviceAttestationDeviceInfo) CertificationDeclaration() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) CertificationDeclaration() []byte {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("certificationDeclaration"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ElementsSignature returns a signature, using the device attestation private key of the device that sent the attestation information, over the concatenation of elementsTLV and attestationChallenge.
-func (mdadi *MTRDeviceAttestationDeviceInfo) ElementsSignature() obj.Object {
+func (mdadi *MTRDeviceAttestationDeviceInfo) ElementsSignature() []byte {
+	defer runtime.KeepAlive(mdadi)
 	_r := objc.Send[objc.ID](objref.IDOf(mdadi), objc.RegisterName("elementsSignature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

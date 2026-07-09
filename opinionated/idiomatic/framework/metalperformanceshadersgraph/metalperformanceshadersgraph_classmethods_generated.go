@@ -8,8 +8,8 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,8 +56,8 @@ func DescriptorWithDataLayoutWeightsLayout(dataLayout GraphTensorNamedDataLayout
 }
 
 // DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle creates a 3D depthwise convolution descriptor with given values.
-func DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides []obj.Object, dilationRates []obj.Object, paddingValues []obj.Object, paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution3DOpDescriptor")), objc.RegisterName("descriptorWithStrides:dilationRates:paddingValues:paddingStyle:"), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingStyle)
+func DescriptorWithStridesDilationRatesPaddingValuesPaddingStyle(strides []*foundation.Number, dilationRates []*foundation.Number, paddingValues []*foundation.Number, paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution3DOpDescriptor")), objc.RegisterName("descriptorWithStrides:dilationRates:paddingValues:paddingStyle:"), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(paddingValues, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingStyle)
 	return GraphDepthwiseConvolution3DOpDescriptorFromID(_r)
 }
 
@@ -110,14 +110,14 @@ func DescriptorWithKernelWidthKernelHeightStrideInXStrideInYPaddingStyleDataLayo
 }
 
 // DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle creates a 4D pooling descriptor with given values.
-func DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingValues []obj.Object, paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("descriptorWithKernelSizes:strides:dilationRates:paddingValues:paddingStyle:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingStyle)
+func DescriptorWithKernelSizesStridesDilationRatesPaddingValuesPaddingStyle(kernelSizes []*foundation.Number, strides []*foundation.Number, dilationRates []*foundation.Number, paddingValues []*foundation.Number, paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("descriptorWithKernelSizes:strides:dilationRates:paddingValues:paddingStyle:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(paddingValues, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingStyle)
 	return GraphPooling4DOpDescriptorFromID(_r)
 }
 
 // DescriptorWithKernelSizesPaddingStyle creates a 4D pooling descriptor with default values.
-func DescriptorWithKernelSizesPaddingStyle(kernelSizes []obj.Object, paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("descriptorWithKernelSizes:paddingStyle:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingStyle)
+func DescriptorWithKernelSizesPaddingStyle(kernelSizes []*foundation.Number, paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("descriptorWithKernelSizes:paddingStyle:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingStyle)
 	return GraphPooling4DOpDescriptorFromID(_r)
 }
 

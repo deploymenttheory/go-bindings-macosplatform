@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -58,23 +60,29 @@ func (cim *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCaching
 	return cim
 }
 
-// StartCachingImagesForAssetsTargetSizeContentModeOptions prepares image representations of the specified assets for later use.
-func (cim *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+// StartCachingImagesForAssetsTargetSizeContentMode prepares image representations of the specified assets for later use.
+func (cim *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentMode(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+	defer runtime.KeepAlive(cim)
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("startCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
 }
 
-// StopCachingImagesForAssetsTargetSizeContentModeOptions cancels image preparation for the specified assets and options.
-func (cim *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+// StopCachingImagesForAssetsTargetSizeContentMode cancels image preparation for the specified assets and options.
+func (cim *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentMode(assets []*Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions) {
+	defer runtime.KeepAlive(cim)
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("stopCachingImagesForAssets:targetSize:contentMode:options:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), targetSize, contentMode, objref.IDOf(options))
 }
 
 // StopCachingImagesForAllAssets cancels all image preparation that is currently in progress.
 func (cim *CachingImageManager) StopCachingImagesForAllAssets() {
+	defer runtime.KeepAlive(cim)
 	objc.Send[objc.ID](objref.IDOf(cim), objc.RegisterName("stopCachingImagesForAllAssets"))
 }
 
 // AllowsCachingHighQualityImages wraps the corresponding Objective-C method.
 func (cim *CachingImageManager) AllowsCachingHighQualityImages() bool {
+	defer runtime.KeepAlive(cim)
 	_r := objc.Send[bool](objref.IDOf(cim), objc.RegisterName("allowsCachingHighQualityImages"))
 	return _r
 }

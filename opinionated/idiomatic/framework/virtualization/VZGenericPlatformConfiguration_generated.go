@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewGenericPlatformConfiguration() *GenericPlatformConfiguration {
 
 // WithMachineIdentifier sets a value that represents a unique identifier for the virtual machine.
 func (gpc *GenericPlatformConfiguration) WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration {
+	defer runtime.KeepAlive(machineIdentifier)
 	objc.Send[objc.ID](objref.IDOf(gpc), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 	return gpc
 }
@@ -65,12 +68,14 @@ func (gpc *GenericPlatformConfiguration) WithNestedVirtualizationEnabled(nestedV
 
 // MachineIdentifier returns the unique machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
 func (gpc *GenericPlatformConfiguration) MachineIdentifier() *GenericMachineIdentifier {
+	defer runtime.KeepAlive(gpc)
 	_r := objc.Send[objc.ID](objref.IDOf(gpc), objc.RegisterName("machineIdentifier"))
 	return GenericMachineIdentifierFromID(_r)
 }
 
 // IsNestedVirtualizationEnabled reports whether enable nested virtualization for the platform. If nested virtualization is available, enable it for the current platform configuration. You can use `nestedVirtualizationSupported` to discover the nested virtualization availability before enabling it. The default value is false, nested virtualization is disabled.
 func (gpc *GenericPlatformConfiguration) IsNestedVirtualizationEnabled() bool {
+	defer runtime.KeepAlive(gpc)
 	_r := objc.Send[bool](objref.IDOf(gpc), objc.RegisterName("isNestedVirtualizationEnabled"))
 	return _r
 }

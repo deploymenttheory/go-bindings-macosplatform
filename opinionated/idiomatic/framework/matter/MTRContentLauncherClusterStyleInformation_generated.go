@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +65,7 @@ func (mclcsi *MTRContentLauncherClusterStyleInformation) WithColor(color string)
 
 // WithSize sets the size.
 func (mclcsi *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation {
+	defer runtime.KeepAlive(size)
 	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setSize:"), objref.IDOf(size))
 	return mclcsi
 }

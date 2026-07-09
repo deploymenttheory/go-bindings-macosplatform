@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -56,6 +57,7 @@ func NewAnnotationCircle() *AnnotationCircle {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (ac *AnnotationCircle) WithPage(page *Page) *AnnotationCircle {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return ac
 }
@@ -140,18 +142,21 @@ func (ac *AnnotationCircle) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Ann
 
 // WithFont sets the font the annotation uses to display text.
 func (ac *AnnotationCircle) WithFont(font obj.Object) *AnnotationCircle {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return ac
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (ac *AnnotationCircle) WithFontColor(fontColor obj.Object) *AnnotationCircle {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return ac
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (ac *AnnotationCircle) WithInteriorColor(interiorColor obj.Object) *AnnotationCircle {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return ac
 }
@@ -201,6 +206,7 @@ func (ac *AnnotationCircle) WithMarkupType(markupType MarkupType) *AnnotationCir
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (ac *AnnotationCircle) WithWidgetFieldType(widgetFieldType obj.Object) *AnnotationCircle {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return ac
 }
@@ -299,13 +305,14 @@ func (ac *AnnotationCircle) WithOpen(open bool) *AnnotationCircle {
 
 // WithDestination sets the destination for a link annotation.
 func (ac *AnnotationCircle) WithDestination(destination *Destination) *AnnotationCircle {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return ac
 }
 
 // WithURL sets a URL for a link annotation.
-func (ac *AnnotationCircle) WithURL(uRL string) *AnnotationCircle {
-	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (ac *AnnotationCircle) WithURL(url string) *AnnotationCircle {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return ac
 }
 
@@ -323,6 +330,7 @@ func (ac *AnnotationCircle) WithCaption(caption string) *AnnotationCircle {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (ac *AnnotationCircle) WithBackgroundColor(backgroundColor obj.Object) *AnnotationCircle {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return ac
 }

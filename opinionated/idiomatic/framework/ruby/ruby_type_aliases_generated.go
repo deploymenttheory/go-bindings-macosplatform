@@ -14,8 +14,8 @@ type RClassDeprecated struct {
 }
 
 type RbArithmeticSequenceComponentsT struct {
-	Begin       uint
-	End         uint
-	Step        uint
-	Exclude_end int
+	Begin      uint
+	End        uint
+	Step       uint
+	ExcludeEnd int
 }

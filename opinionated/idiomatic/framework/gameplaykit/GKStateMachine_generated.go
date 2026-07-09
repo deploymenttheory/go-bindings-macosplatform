@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func stateMachineAdopt(id objc.ID) *StateMachine {
 
 // Description returns the object's -description text.
 func (sm *StateMachine) Description() string {
+	defer runtime.KeepAlive(sm)
 	return rt.Description(objref.IDOf(sm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sm *StateMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sm *StateMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(sm)
 	return rt.IsKind(objref.IDOf(sm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sm *StateMachine) String() string {
+	defer runtime.KeepAlive(sm)
 	return rt.Description(objref.IDOf(sm))
 }
 
@@ -75,11 +82,13 @@ func NewStateMachineWithStates(states []*State) *StateMachine {
 
 // UpdateWithDeltaTime tells the current state object to perform per-frame updates.
 func (sm *StateMachine) UpdateWithDeltaTime(sec float64) {
+	defer runtime.KeepAlive(sm)
 	objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("updateWithDeltaTime:"), sec)
 }
 
 // CurrentState returns the current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
 func (sm *StateMachine) CurrentState() *State {
+	defer runtime.KeepAlive(sm)
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("currentState"))
 	return StateFromID(_r)
 }

@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func authorizationWebBrowserPublicKeyCredentialManagerAdopt(id objc.ID) *Authori
 
 // Description returns the object's -description text.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) Description() string {
+	defer runtime.KeepAlive(awbpkcm)
 	return rt.Description(objref.IDOf(awbpkcm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(awbpkcm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(awbpkcm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(awbpkcm)
 	return rt.IsKind(objref.IDOf(awbpkcm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) String() string {
+	defer runtime.KeepAlive(awbpkcm)
 	return rt.Description(objref.IDOf(awbpkcm))
 }
 
@@ -78,6 +84,7 @@ func NewAuthorizationWebBrowserPublicKeyCredentialManager() *AuthorizationWebBro
 //
 // PlatformCredentialsForRelyingParty blocks until the operation completes or ctx is cancelled.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCredentialsForRelyingParty(ctx context.Context, relyingParty string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(awbpkcm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -100,6 +107,7 @@ func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCreden
 
 // AuthorizationStateForPlatformCredentials returns the authorization state for platform credentials.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
+	defer runtime.KeepAlive(awbpkcm)
 	_r := objc.Send[AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState](objref.IDOf(awbpkcm), objc.RegisterName("authorizationStateForPlatformCredentials"))
 	return _r
 }

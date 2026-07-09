@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func (phcr *PersistentHistoryChangeRequest) WithResultType(resultType Persistent
 
 // WithFetchRequest sets the specified fetch request, when retrieving history.
 func (phcr *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest obj.Object) *PersistentHistoryChangeRequest {
+	defer runtime.KeepAlive(fetchRequest)
 	objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 	return phcr
 }
@@ -73,18 +76,21 @@ func (phcr *PersistentHistoryChangeRequest) WithAffectedStores(items ...Persiste
 
 // ResultType returns the result type.
 func (phcr *PersistentHistoryChangeRequest) ResultType() PersistentHistoryResultType {
+	defer runtime.KeepAlive(phcr)
 	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(phcr), objc.RegisterName("resultType"))
 	return _r
 }
 
 // Token returns the token.
 func (phcr *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
+	defer runtime.KeepAlive(phcr)
 	_r := objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)
 }
 
 // FetchRequest returns the fetch request.
 func (phcr *PersistentHistoryChangeRequest) FetchRequest() obj.Object {
+	defer runtime.KeepAlive(phcr)
 	_r := objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }

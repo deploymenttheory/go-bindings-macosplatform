@@ -5,7 +5,10 @@
 package preferencepanes
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func preferencePaneAdopt(id objc.ID) *PreferencePane {
 
 // Description returns the object's -description text.
 func (pp *PreferencePane) Description() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pp *PreferencePane) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pp *PreferencePane) IsKind(className string) bool {
+	defer runtime.KeepAlive(pp)
 	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pp *PreferencePane) String() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
@@ -74,6 +82,7 @@ func NewPreferencePane() *PreferencePane {
 
 // NewPreferencePaneWithBundle initializes a preference pane with the specified bundle.
 func NewPreferencePaneWithBundle(bundle obj.Object) *PreferencePane {
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreferencePane")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundle:"), objref.IDOf(bundle))
 	return preferencePaneAdopt(_id)
@@ -81,82 +90,97 @@ func NewPreferencePaneWithBundle(bundle obj.Object) *PreferencePane {
 
 // WithMainView sets the main view of the preference pane.
 func (pp *PreferencePane) WithMainView(mainView obj.Object) *PreferencePane {
+	defer runtime.KeepAlive(mainView)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setMainView:"), objref.IDOf(mainView))
 	return pp
 }
 
 // WithInitialKeyView sets the view that should have keyboard focus when the pane is selected.
 func (pp *PreferencePane) WithInitialKeyView(initialKeyView obj.Object) *PreferencePane {
+	defer runtime.KeepAlive(initialKeyView)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setInitialKeyView:"), objref.IDOf(initialKeyView))
 	return pp
 }
 
 // WithFirstKeyView sets the first view in the keyboard focus chain.
 func (pp *PreferencePane) WithFirstKeyView(firstKeyView obj.Object) *PreferencePane {
+	defer runtime.KeepAlive(firstKeyView)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setFirstKeyView:"), objref.IDOf(firstKeyView))
 	return pp
 }
 
 // WithLastKeyView sets the last view in the keyboard focus chain.
 func (pp *PreferencePane) WithLastKeyView(lastKeyView obj.Object) *PreferencePane {
+	defer runtime.KeepAlive(lastKeyView)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setLastKeyView:"), objref.IDOf(lastKeyView))
 	return pp
 }
 
 // LoadMainView returns loads the preference pane’s user interface into its main view.
 func (pp *PreferencePane) LoadMainView() obj.Object {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("loadMainView"))
 	return obj.Wrap(_r)
 }
 
 // MainViewDidLoad notifies the preference pane that the main view is set up and prepared to be displayed.
 func (pp *PreferencePane) MainViewDidLoad() {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("mainViewDidLoad"))
 }
 
 // AssignMainView locates and assigns the preference pane’s main view from the nib file loaded by loadMainView.
 func (pp *PreferencePane) AssignMainView() {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("assignMainView"))
 }
 
 // WillSelect notifies the preference pane that the main app is about to display the preference pane’s main view.
 func (pp *PreferencePane) WillSelect() {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("willSelect"))
 }
 
 // DidSelect notifies the preference pane that the main app has just displayed the preference pane’s main view.
 func (pp *PreferencePane) DidSelect() {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("didSelect"))
 }
 
 // ReplyToShouldUnselect notifies the main application of the preference pane’s ability to be deselected.
 func (pp *PreferencePane) ReplyToShouldUnselect(shouldUnselect bool) {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("replyToShouldUnselect:"), shouldUnselect)
 }
 
 // WillUnselect notifies the preference pane that the main app is about to stop displaying the preference pane’s main view.
 func (pp *PreferencePane) WillUnselect() {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("willUnselect"))
 }
 
 // DidUnselect notifies the preference pane that the main app has just stopped displaying the preference pane’s main view.
 func (pp *PreferencePane) DidUnselect() {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("didUnselect"))
 }
 
 // UpdateHelpMenuWithArray updates the help menu.
 func (pp *PreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems []obj.Object) {
+	defer runtime.KeepAlive(pp)
 	objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateHelpMenuWithArray:"), purego.SliceToNSArray(inArrayOfMenuItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Bundle returns the bundle.
-func (pp *PreferencePane) Bundle() obj.Object {
+func (pp *PreferencePane) Bundle() *foundation.Bundle {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("bundle"))
-	return obj.Wrap(_r)
+	return foundation.BundleFromID(_r)
 }
 
 // MainNibName returns the main nib name.
 func (pp *PreferencePane) MainNibName() string {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("mainNibName"))
 	if _r == 0 {
 		return ""
@@ -166,36 +190,42 @@ func (pp *PreferencePane) MainNibName() string {
 
 // ShouldUnselect returns the should unselect.
 func (pp *PreferencePane) ShouldUnselect() PreferencePaneUnselectReply {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[PreferencePaneUnselectReply](objref.IDOf(pp), objc.RegisterName("shouldUnselect"))
 	return _r
 }
 
 // MainView returns the main view.
 func (pp *PreferencePane) MainView() obj.Object {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("mainView"))
 	return obj.Wrap(_r)
 }
 
 // FirstKeyView returns the first key view.
 func (pp *PreferencePane) FirstKeyView() obj.Object {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("firstKeyView"))
 	return obj.Wrap(_r)
 }
 
 // LastKeyView returns the last key view.
 func (pp *PreferencePane) LastKeyView() obj.Object {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("lastKeyView"))
 	return obj.Wrap(_r)
 }
 
 // AutoSaveTextFields wraps the corresponding Objective-C method.
 func (pp *PreferencePane) AutoSaveTextFields() bool {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("autoSaveTextFields"))
 	return _r
 }
 
 // IsSelected reports whether the object is selected.
 func (pp *PreferencePane) IsSelected() bool {
+	defer runtime.KeepAlive(pp)
 	_r := objc.Send[bool](objref.IDOf(pp), objc.RegisterName("isSelected"))
 	return _r
 }

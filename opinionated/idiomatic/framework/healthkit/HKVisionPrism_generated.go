@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func visionPrismAdopt(id objc.ID) *VisionPrism {
 
 // Description returns the object's -description text.
 func (vp *VisionPrism) Description() string {
+	defer runtime.KeepAlive(vp)
 	return rt.Description(objref.IDOf(vp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vp *VisionPrism) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vp *VisionPrism) IsKind(className string) bool {
+	defer runtime.KeepAlive(vp)
 	return rt.IsKind(objref.IDOf(vp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vp *VisionPrism) String() string {
+	defer runtime.KeepAlive(vp)
 	return rt.Description(objref.IDOf(vp))
 }
 
 // NewVisionPrismWithAmountAngleEye creates a new vision prism object, using a single quantity and an alignment angle.
 func NewVisionPrismWithAmountAngleEye(amount *Quantity, angle *Quantity, eye VisionEye) *VisionPrism {
+	defer runtime.KeepAlive(amount)
+	defer runtime.KeepAlive(angle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKVisionPrism")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAmount:angle:eye:"), objref.IDOf(amount), objref.IDOf(angle), eye)
 	return visionPrismAdopt(_id)
@@ -75,6 +84,8 @@ func NewVisionPrismWithAmountAngleEye(amount *Quantity, angle *Quantity, eye Vis
 
 // NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye creates a new vision prism object that separates the correction strength into horizontal and vertical components.
 func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseEye(verticalAmount *Quantity, verticalBase PrismBase, horizontalAmount *Quantity, horizontalBase PrismBase, eye VisionEye) *VisionPrism {
+	defer runtime.KeepAlive(verticalAmount)
+	defer runtime.KeepAlive(horizontalAmount)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKVisionPrism")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVerticalAmount:verticalBase:horizontalAmount:horizontalBase:eye:"), objref.IDOf(verticalAmount), verticalBase, objref.IDOf(horizontalAmount), horizontalBase, eye)
 	return visionPrismAdopt(_id)
@@ -82,42 +93,49 @@ func NewVisionPrismWithVerticalAmountVerticalBaseHorizontalAmountHorizontalBaseE
 
 // Amount returns the compensation in prism diopters to correct eye misalignment [polar coordinates]
 func (vp *VisionPrism) Amount() *Quantity {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("amount"))
 	return QuantityFromID(_r)
 }
 
 // Angle returns the direction of the prism base [polar coordinates]
 func (vp *VisionPrism) Angle() *Quantity {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("angle"))
 	return QuantityFromID(_r)
 }
 
 // VerticalAmount returns the vertical component of compensation in prism diopters [rectangular coordinates]
 func (vp *VisionPrism) VerticalAmount() *Quantity {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("verticalAmount"))
 	return QuantityFromID(_r)
 }
 
 // HorizontalAmount returns the horizontal component of compensation in prism diopters [rectangular coordinates]
 func (vp *VisionPrism) HorizontalAmount() *Quantity {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("horizontalAmount"))
 	return QuantityFromID(_r)
 }
 
 // VerticalBase returns the direction of the prism base relative to the vertical axis of the lens; base up or base down. [rectangular coordinates]
 func (vp *VisionPrism) VerticalBase() PrismBase {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[PrismBase](objref.IDOf(vp), objc.RegisterName("verticalBase"))
 	return _r
 }
 
 // HorizontalBase returns the direction of the prism base relative to the horizontal axis of the lens; base in (toward the nose) or base out (away from the nose). [rectangular coordinates]
 func (vp *VisionPrism) HorizontalBase() PrismBase {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[PrismBase](objref.IDOf(vp), objc.RegisterName("horizontalBase"))
 	return _r
 }
 
 // Eye returns which eye (left or right)
 func (vp *VisionPrism) Eye() VisionEye {
+	defer runtime.KeepAlive(vp)
 	_r := objc.Send[VisionEye](objref.IDOf(vp), objc.RegisterName("eye"))
 	return _r
 }

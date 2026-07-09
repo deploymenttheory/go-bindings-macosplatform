@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -18,6 +19,7 @@ import (
 
 // CheckIfCinematicCompletionHandler check if asset is cinematic asynchronously.
 func CheckIfCinematicCompletionHandler(asset obj.Object, completionHandler func(bool)) {
+	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("checkIfCinematic:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
@@ -25,6 +27,7 @@ func CheckIfCinematicCompletionHandler(asset obj.Object, completionHandler func(
 //
 // LoadFromAsset blocks until the operation completes or ctx is cancelled.
 func LoadFromAsset(ctx context.Context, asset obj.Object) (result *AssetInfo, err error) {
+	defer runtime.KeepAlive(asset)
 	type _result struct {
 		val *AssetInfo
 		err error
@@ -48,6 +51,7 @@ func LoadFromAsset(ctx context.Context, asset obj.Object) (result *AssetInfo, er
 
 // CheckIfContainsSpatialAudioCompletionHandler check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects
 func CheckIfContainsSpatialAudioCompletionHandler(asset obj.Object, completionHandler func(bool)) {
+	defer runtime.KeepAlive(asset)
 	objc.Send[objc.ID](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("checkIfContainsSpatialAudio:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
@@ -55,6 +59,7 @@ func CheckIfContainsSpatialAudioCompletionHandler(asset obj.Object, completionHa
 //
 // CNAssetSpatialAudioInfoLoadFromAsset blocks until the operation completes or ctx is cancelled.
 func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset obj.Object) (result *AssetSpatialAudioInfo, err error) {
+	defer runtime.KeepAlive(asset)
 	type _result struct {
 		val *AssetSpatialAudioInfo
 		err error
@@ -135,6 +140,7 @@ func DestinationPixelFormatTypes() []obj.Object {
 //
 // CNRenderingSessionAttributesLoadFromAsset blocks until the operation completes or ctx is cancelled.
 func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset obj.Object) (result *RenderingSessionAttributes, err error) {
+	defer runtime.KeepAlive(asset)
 	type _result struct {
 		val *RenderingSessionAttributes
 		err error
@@ -160,6 +166,9 @@ func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset obj.Ob
 //
 // LoadFromAssetChangesProgress blocks until the operation completes or ctx is cancelled.
 func LoadFromAssetChangesProgress(ctx context.Context, asset obj.Object, changes *ScriptChanges, progress obj.Object) (result *Script, err error) {
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(changes)
+	defer runtime.KeepAlive(progress)
 	type _result struct {
 		val *Script
 		err error

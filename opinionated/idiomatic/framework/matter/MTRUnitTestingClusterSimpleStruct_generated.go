@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,46 +50,54 @@ func mTRUnitTestingClusterSimpleStructAdopt(id objc.ID) *MTRUnitTestingClusterSi
 
 // Description returns the object's -description text.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) Description() string {
+	defer runtime.KeepAlive(mutcss)
 	return rt.Description(objref.IDOf(mutcss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutcss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutcss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutcss)
 	return rt.IsKind(objref.IDOf(mutcss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) String() string {
+	defer runtime.KeepAlive(mutcss)
 	return rt.Description(objref.IDOf(mutcss))
 }
 
 // WithA sets the a.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithA(a obj.Object) *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mutcss
 }
 
 // WithB sets the b.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithB(b obj.Object) *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(b)
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mutcss
 }
 
 // WithC sets the c.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithC(c obj.Object) *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mutcss
 }
 
 // WithD sets the d.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) WithD(d obj.Object) *MTRUnitTestingClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setD:"), objref.IDOf(d))
+func (mutcss *MTRUnitTestingClusterSimpleStruct) WithD(d []byte) *MTRUnitTestingClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setD:"), rt.BytesToNSData(d))
 	return mutcss
 }
 
@@ -98,48 +109,56 @@ func (mutcss *MTRUnitTestingClusterSimpleStruct) WithE(e string) *MTRUnitTesting
 
 // WithF sets the f.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithF(f obj.Object) *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(f)
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setF:"), objref.IDOf(f))
 	return mutcss
 }
 
 // WithG sets the g.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithG(g obj.Object) *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setG:"), objref.IDOf(g))
 	return mutcss
 }
 
 // WithH sets the h.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithH(h obj.Object) *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(h)
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setH:"), objref.IDOf(h))
 	return mutcss
 }
 
 // A returns the a.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) A() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) A() *foundation.Number {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("a"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // B returns the b.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) B() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) B() *foundation.Number {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("b"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // C returns the c.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) C() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) C() *foundation.Number {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("c"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // D returns the d.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) D() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) D() []byte {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("d"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // E returns the e.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) E() string {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("e"))
 	if _r == 0 {
 		return ""
@@ -148,21 +167,24 @@ func (mutcss *MTRUnitTestingClusterSimpleStruct) E() string {
 }
 
 // F returns the f.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) F() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) F() *foundation.Number {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("f"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // G returns the g.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) G() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) G() *foundation.Number {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("g"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // H returns the h.
-func (mutcss *MTRUnitTestingClusterSimpleStruct) H() obj.Object {
+func (mutcss *MTRUnitTestingClusterSimpleStruct) H() *foundation.Number {
+	defer runtime.KeepAlive(mutcss)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("h"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterSimpleStruct marks MTRUnitTestingClusterSimpleStruct — and, by embedding promotion, its

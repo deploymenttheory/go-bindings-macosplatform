@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func emitterCellAdopt(id objc.ID) *EmitterCell {
 
 // Description returns the object's -description text.
 func (ec *EmitterCell) Description() string {
+	defer runtime.KeepAlive(ec)
 	return rt.Description(objref.IDOf(ec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ec *EmitterCell) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ec *EmitterCell) IsKind(className string) bool {
+	defer runtime.KeepAlive(ec)
 	return rt.IsKind(objref.IDOf(ec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ec *EmitterCell) String() string {
+	defer runtime.KeepAlive(ec)
 	return rt.Description(objref.IDOf(ec))
 }
 
@@ -183,6 +190,7 @@ func (ec *EmitterCell) WithSpinRange(spinRange float64) *EmitterCell {
 
 // WithColor sets the color of each emitted object. Animatable.
 func (ec *EmitterCell) WithColor(color obj.Object) *EmitterCell {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return ec
 }
@@ -237,6 +245,7 @@ func (ec *EmitterCell) WithAlphaSpeed(alphaSpeed float32) *EmitterCell {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (ec *EmitterCell) WithContents(contents obj.Object) *EmitterCell {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return ec
 }
@@ -280,18 +289,21 @@ func (ec *EmitterCell) WithEmitterCells(items ...*EmitterCell) *EmitterCell {
 
 // WithStyle sets an optional dictionary containing additional style values that are not explicitly defined by the receiver.
 func (ec *EmitterCell) WithStyle(style obj.Object) *EmitterCell {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return ec
 }
 
 // ShouldArchiveValueForKey returns a Boolean value indicating whether the value for a given key should be archived.
 func (ec *EmitterCell) ShouldArchiveValueForKey(key string) bool {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[bool](objref.IDOf(ec), objc.RegisterName("shouldArchiveValueForKey:"), purego.NSString(key))
 	return _r
 }
 
 // Name returns the name.
 func (ec *EmitterCell) Name() string {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -301,180 +313,210 @@ func (ec *EmitterCell) Name() string {
 
 // IsEnabled reports whether the object is enabled.
 func (ec *EmitterCell) IsEnabled() bool {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[bool](objref.IDOf(ec), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // BirthRate returns the birth rate.
 func (ec *EmitterCell) BirthRate() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("birthRate"))
 	return _r
 }
 
 // Lifetime returns the lifetime.
 func (ec *EmitterCell) Lifetime() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("lifetime"))
 	return _r
 }
 
 // LifetimeRange returns the lifetime range.
 func (ec *EmitterCell) LifetimeRange() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("lifetimeRange"))
 	return _r
 }
 
 // EmissionLatitude returns the emission latitude.
 func (ec *EmitterCell) EmissionLatitude() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("emissionLatitude"))
 	return _r
 }
 
 // EmissionLongitude returns the emission longitude.
 func (ec *EmitterCell) EmissionLongitude() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("emissionLongitude"))
 	return _r
 }
 
 // EmissionRange returns the emission range.
 func (ec *EmitterCell) EmissionRange() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("emissionRange"))
 	return _r
 }
 
 // Velocity returns the velocity.
 func (ec *EmitterCell) Velocity() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("velocity"))
 	return _r
 }
 
 // VelocityRange returns the velocity range.
 func (ec *EmitterCell) VelocityRange() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("velocityRange"))
 	return _r
 }
 
 // XAcceleration returns the x acceleration.
 func (ec *EmitterCell) XAcceleration() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("xAcceleration"))
 	return _r
 }
 
 // YAcceleration returns the y acceleration.
 func (ec *EmitterCell) YAcceleration() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("yAcceleration"))
 	return _r
 }
 
 // ZAcceleration returns the z acceleration.
 func (ec *EmitterCell) ZAcceleration() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("zAcceleration"))
 	return _r
 }
 
 // Scale returns the scale.
 func (ec *EmitterCell) Scale() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("scale"))
 	return _r
 }
 
 // ScaleRange returns the scale range.
 func (ec *EmitterCell) ScaleRange() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("scaleRange"))
 	return _r
 }
 
 // ScaleSpeed returns the scale speed.
 func (ec *EmitterCell) ScaleSpeed() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("scaleSpeed"))
 	return _r
 }
 
 // Spin returns the spin.
 func (ec *EmitterCell) Spin() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("spin"))
 	return _r
 }
 
 // SpinRange returns the spin range.
 func (ec *EmitterCell) SpinRange() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("spinRange"))
 	return _r
 }
 
 // Color returns the color.
 func (ec *EmitterCell) Color() obj.Object {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // RedRange returns the red range.
 func (ec *EmitterCell) RedRange() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("redRange"))
 	return _r
 }
 
 // GreenRange returns the green range.
 func (ec *EmitterCell) GreenRange() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("greenRange"))
 	return _r
 }
 
 // BlueRange returns the blue range.
 func (ec *EmitterCell) BlueRange() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("blueRange"))
 	return _r
 }
 
 // AlphaRange returns the alpha range.
 func (ec *EmitterCell) AlphaRange() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("alphaRange"))
 	return _r
 }
 
 // RedSpeed returns the red speed.
 func (ec *EmitterCell) RedSpeed() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("redSpeed"))
 	return _r
 }
 
 // GreenSpeed returns the green speed.
 func (ec *EmitterCell) GreenSpeed() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("greenSpeed"))
 	return _r
 }
 
 // BlueSpeed returns the blue speed.
 func (ec *EmitterCell) BlueSpeed() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("blueSpeed"))
 	return _r
 }
 
 // AlphaSpeed returns the alpha speed.
 func (ec *EmitterCell) AlphaSpeed() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("alphaSpeed"))
 	return _r
 }
 
 // Contents returns the contents.
 func (ec *EmitterCell) Contents() obj.Object {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
 // ContentsRect returns the contents rect.
 func (ec *EmitterCell) ContentsRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ec), objc.RegisterName("contentsRect"))
 	return _r
 }
 
 // ContentsScale returns the contents scale.
 func (ec *EmitterCell) ContentsScale() float64 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("contentsScale"))
 	return _r
 }
 
 // MinificationFilter returns the minification filter.
 func (ec *EmitterCell) MinificationFilter() string {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("minificationFilter"))
 	if _r == 0 {
 		return ""
@@ -484,6 +526,7 @@ func (ec *EmitterCell) MinificationFilter() string {
 
 // MagnificationFilter returns the magnification filter.
 func (ec *EmitterCell) MagnificationFilter() string {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("magnificationFilter"))
 	if _r == 0 {
 		return ""
@@ -493,6 +536,7 @@ func (ec *EmitterCell) MagnificationFilter() string {
 
 // MinificationFilterBias returns the minification filter bias.
 func (ec *EmitterCell) MinificationFilterBias() float32 {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("minificationFilterBias"))
 	return _r
 }
@@ -501,12 +545,14 @@ func (ec *EmitterCell) MinificationFilterBias() float32 {
 //
 // EmitterCells returns the collection as a Go slice.
 func (ec *EmitterCell) EmitterCells() []*EmitterCell {
+	defer runtime.KeepAlive(ec)
 	_arr := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("emitterCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmitterCell { return EmitterCellFromID(_id) })
 }
 
 // Style returns the style.
 func (ec *EmitterCell) Style() obj.Object {
+	defer runtime.KeepAlive(ec)
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("style"))
 	return obj.Wrap(_r)
 }

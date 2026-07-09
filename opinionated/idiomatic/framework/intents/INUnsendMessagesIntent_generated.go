@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -58,6 +60,7 @@ func (umi *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocati
 
 // WithDonationMetadata sets the donation metadata.
 func (umi *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(umi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return umi
 }
@@ -66,6 +69,7 @@ func (umi *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDon
 //
 // MessageIdentifiers returns the collection as a Go slice.
 func (umi *UnsendMessagesIntent) MessageIdentifiers() []string {
+	defer runtime.KeepAlive(umi)
 	_arr := objc.Send[objc.ID](objref.IDOf(umi), objc.RegisterName("messageIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

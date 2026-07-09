@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func qCViewAdopt(id objc.ID) *QCView {
 
 // Description returns the object's -description text.
 func (qv *QCView) Description() string {
+	defer runtime.KeepAlive(qv)
 	return rt.Description(objref.IDOf(qv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qv *QCView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qv *QCView) IsKind(className string) bool {
+	defer runtime.KeepAlive(qv)
 	return rt.IsKind(objref.IDOf(qv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qv *QCView) String() string {
+	defer runtime.KeepAlive(qv)
 	return rt.Description(objref.IDOf(qv))
 }
 
@@ -80,6 +87,7 @@ func NewQCView() *QCView {
 
 // LoadCompositionFromFile loads the composition file located at the specified path.
 func (qv *QCView) LoadCompositionFromFile(path string) bool {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -93,6 +101,8 @@ func (qv *QCView) LoadCompositionFromFile(path string) bool {
 
 // LoadComposition loads a QCComposition object into the view.
 func (qv *QCView) LoadComposition(composition *QCComposition) bool {
+	defer runtime.KeepAlive(qv)
+	defer runtime.KeepAlive(composition)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -106,6 +116,7 @@ func (qv *QCView) LoadComposition(composition *QCComposition) bool {
 
 // LoadedComposition returns the composition loaded in the view.
 func (qv *QCView) LoadedComposition() *QCComposition {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 *QCComposition
 	purego.Main(func() {
 		_mainthread0 = func() *QCComposition {
@@ -119,6 +130,7 @@ func (qv *QCView) LoadedComposition() *QCComposition {
 
 // UnloadComposition unloads the composition from the view.
 func (qv *QCView) UnloadComposition() {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("unloadComposition"))
 	})
@@ -127,6 +139,7 @@ func (qv *QCView) UnloadComposition() {
 
 // SetAutostartsRendering sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
 func (qv *QCView) SetAutostartsRendering(flag bool) {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("setAutostartsRendering:"), flag)
 	})
@@ -135,6 +148,7 @@ func (qv *QCView) SetAutostartsRendering(flag bool) {
 
 // AutostartsRendering reports whether checks whether the view is set to start rendering automatically.
 func (qv *QCView) AutostartsRendering() bool {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -148,6 +162,8 @@ func (qv *QCView) AutostartsRendering() bool {
 
 // SetEraseColor sets the color used to erase the view.
 func (qv *QCView) SetEraseColor(color obj.Object) {
+	defer runtime.KeepAlive(qv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 	})
@@ -156,6 +172,7 @@ func (qv *QCView) SetEraseColor(color obj.Object) {
 
 // EraseColor returns retrieves the current color used to erase the view.
 func (qv *QCView) EraseColor() obj.Object {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -169,6 +186,7 @@ func (qv *QCView) EraseColor() obj.Object {
 
 // SetEventForwardingMask sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (qv *QCView) SetEventForwardingMask(mask int) {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("setEventForwardingMask:"), mask)
 	})
@@ -177,6 +195,7 @@ func (qv *QCView) SetEventForwardingMask(mask int) {
 
 // EventForwardingMask returns retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
 func (qv *QCView) EventForwardingMask() int {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -190,6 +209,7 @@ func (qv *QCView) EventForwardingMask() int {
 
 // SetMaxRenderingFrameRate sets the maximum rendering frame rate.
 func (qv *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 	})
@@ -198,6 +218,7 @@ func (qv *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
 
 // MaxRenderingFrameRate returns the maximum frame rate for rendering.
 func (qv *QCView) MaxRenderingFrameRate() float32 {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -211,6 +232,7 @@ func (qv *QCView) MaxRenderingFrameRate() float32 {
 
 // Erase clears the view using the current erase color.
 func (qv *QCView) Erase() {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("erase"))
 	})
@@ -219,6 +241,7 @@ func (qv *QCView) Erase() {
 
 // StartRendering reports whether starts rendering the composition that is in the view.
 func (qv *QCView) StartRendering() bool {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -232,6 +255,8 @@ func (qv *QCView) StartRendering() bool {
 
 // RenderAtTimeArguments overrides to perform your custom operations prior to or after rendering a frame of a composition.
 func (qv *QCView) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	defer runtime.KeepAlive(qv)
+	defer runtime.KeepAlive(arguments)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -245,6 +270,7 @@ func (qv *QCView) RenderAtTimeArguments(time_ float64, arguments obj.Object) boo
 
 // PauseRendering pauses rendering in the view.
 func (qv *QCView) PauseRendering() {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("pauseRendering"))
 	})
@@ -253,6 +279,7 @@ func (qv *QCView) PauseRendering() {
 
 // IsPausedRendering reports whether the rendering in the view is paused.
 func (qv *QCView) IsPausedRendering() bool {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -266,6 +293,7 @@ func (qv *QCView) IsPausedRendering() bool {
 
 // ResumeRendering resumes rendering a paused composition.
 func (qv *QCView) ResumeRendering() {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("resumeRendering"))
 	})
@@ -274,6 +302,7 @@ func (qv *QCView) ResumeRendering() {
 
 // StopRendering stops rendering the composition that is in the view.
 func (qv *QCView) StopRendering() {
+	defer runtime.KeepAlive(qv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qv), objc.RegisterName("stopRendering"))
 	})
@@ -282,6 +311,7 @@ func (qv *QCView) StopRendering() {
 
 // IsRendering reports whether checks whether a composition is rendering in the view.
 func (qv *QCView) IsRendering() bool {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -295,6 +325,7 @@ func (qv *QCView) IsRendering() bool {
 
 // SnapshotImage returns an NSImage object of the current image in the view.
 func (qv *QCView) SnapshotImage() obj.Object {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -308,6 +339,7 @@ func (qv *QCView) SnapshotImage() obj.Object {
 
 // CreateSnapshotImageOfType returns the current image in the view as an image object of the provided image type.
 func (qv *QCView) CreateSnapshotImageOfType(type_ string) obj.Object {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -321,6 +353,7 @@ func (qv *QCView) CreateSnapshotImageOfType(type_ string) obj.Object {
 
 // OpenGLContext returns the OpenGL context used by the view.
 func (qv *QCView) OpenGLContext() obj.Object {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -334,6 +367,7 @@ func (qv *QCView) OpenGLContext() obj.Object {
 
 // OpenGLPixelFormat returns the OpenGL pixel format used by the view.
 func (qv *QCView) OpenGLPixelFormat() obj.Object {
+	defer runtime.KeepAlive(qv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

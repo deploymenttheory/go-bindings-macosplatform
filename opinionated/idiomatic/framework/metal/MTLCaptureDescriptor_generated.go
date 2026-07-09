@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func captureDescriptorAdopt(id objc.ID) *CaptureDescriptor {
 
 // Description returns the object's -description text.
 func (cd *CaptureDescriptor) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *CaptureDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *CaptureDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *CaptureDescriptor) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
@@ -74,6 +81,7 @@ func NewCaptureDescriptor() *CaptureDescriptor {
 
 // WithCaptureObject sets the instance whose contents should be captured.
 func (cd *CaptureDescriptor) WithCaptureObject(captureObject obj.Object) *CaptureDescriptor {
+	defer runtime.KeepAlive(captureObject)
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
 	return cd
 }
@@ -92,18 +100,21 @@ func (cd *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor 
 
 // CaptureObject returns the object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
 func (cd *CaptureDescriptor) CaptureObject() obj.Object {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("captureObject"))
 	return obj.Wrap(_r)
 }
 
 // Destination returns the destination you want the GPU trace to be captured to.
 func (cd *CaptureDescriptor) Destination() CaptureDestination {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CaptureDestination](objref.IDOf(cd), objc.RegisterName("destination"))
 	return _r
 }
 
 // OutputURL returns URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
-func (cd *CaptureDescriptor) OutputURL() obj.Object {
+func (cd *CaptureDescriptor) OutputURL() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("outputURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

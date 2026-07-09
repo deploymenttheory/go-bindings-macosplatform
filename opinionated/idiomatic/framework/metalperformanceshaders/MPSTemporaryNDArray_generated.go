@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +65,7 @@ func (tna *TemporaryNDArray) WithLabel(label string) *TemporaryNDArray {
 
 // ReadCount returns the number of times a temporary MPSNDArray may be read by a MPSNDArray... kernel before its contents become undefined. MPSTemporaryNDArrays must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryNDArray is read by a MPSNDArray... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryNDArrays prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a MPSNDArray that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSNDArrayKernels to read the MPSTemporaryNDArray additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryNDArray with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryNDArray does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryNDArray is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 func (tna *TemporaryNDArray) ReadCount() int {
+	defer runtime.KeepAlive(tna)
 	_r := objc.Send[int](objref.IDOf(tna), objc.RegisterName("readCount"))
 	return _r
 }

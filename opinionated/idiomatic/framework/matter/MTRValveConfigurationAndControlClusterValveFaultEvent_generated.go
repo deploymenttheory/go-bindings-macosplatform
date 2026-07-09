@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRValveConfigurationAndControlClusterValveFaultEventAdopt(id objc.ID) *MTR
 
 // Description returns the object's -description text.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) Description() string {
+	defer runtime.KeepAlive(mvcaccvfe)
 	return rt.Description(objref.IDOf(mvcaccvfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mvcaccvfe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mvcaccvfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mvcaccvfe)
 	return rt.IsKind(objref.IDOf(mvcaccvfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) String() string {
+	defer runtime.KeepAlive(mvcaccvfe)
 	return rt.Description(objref.IDOf(mvcaccvfe))
 }
 
@@ -72,12 +80,14 @@ func NewMTRValveConfigurationAndControlClusterValveFaultEvent() *MTRValveConfigu
 
 // WithValveFault sets the valve fault.
 func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) WithValveFault(valveFault obj.Object) *MTRValveConfigurationAndControlClusterValveFaultEvent {
+	defer runtime.KeepAlive(valveFault)
 	objc.Send[objc.ID](objref.IDOf(mvcaccvfe), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
 	return mvcaccvfe
 }
 
 // ValveFault returns the valve fault.
-func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() obj.Object {
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccvfe)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccvfe), objc.RegisterName("valveFault"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

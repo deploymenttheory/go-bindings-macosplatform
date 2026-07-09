@@ -5,7 +5,10 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func extensionDevicePropertiesAdopt(id objc.ID) *ExtensionDeviceProperties {
 
 // Description returns the object's -description text.
 func (edp *ExtensionDeviceProperties) Description() string {
+	defer runtime.KeepAlive(edp)
 	return rt.Description(objref.IDOf(edp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (edp *ExtensionDeviceProperties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(edp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(edp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (edp *ExtensionDeviceProperties) IsKind(className string) bool {
+	defer runtime.KeepAlive(edp)
 	return rt.IsKind(objref.IDOf(edp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (edp *ExtensionDeviceProperties) String() string {
+	defer runtime.KeepAlive(edp)
 	return rt.Description(objref.IDOf(edp))
 }
 
 // NewExtensionDevicePropertiesWithDictionary creates a properties object with a dictionary of property states.
 func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties {
+	defer runtime.KeepAlive(propertiesDictionary)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionDeviceProperties")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(propertiesDictionary))
 	return extensionDevicePropertiesAdopt(_id)
@@ -81,12 +90,14 @@ func (edp *ExtensionDeviceProperties) WithModel(model string) *ExtensionDevicePr
 
 // WithSuspended sets a Boolean value that indicates whether the device is in a suspended state.
 func (edp *ExtensionDeviceProperties) WithSuspended(suspended obj.Object) *ExtensionDeviceProperties {
+	defer runtime.KeepAlive(suspended)
 	objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("setSuspended:"), objref.IDOf(suspended))
 	return edp
 }
 
 // WithTransportType sets the transport type of the device, such as USB or HDMI.
 func (edp *ExtensionDeviceProperties) WithTransportType(transportType obj.Object) *ExtensionDeviceProperties {
+	defer runtime.KeepAlive(transportType)
 	objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("setTransportType:"), objref.IDOf(transportType))
 	return edp
 }
@@ -99,17 +110,22 @@ func (edp *ExtensionDeviceProperties) WithLinkedCoreAudioDeviceUID(linkedCoreAud
 
 // WithPropertiesDictionary sets a dictionary of properties for a device.
 func (edp *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties {
+	defer runtime.KeepAlive(propertiesDictionary)
 	objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("setPropertiesDictionary:"), objref.IDOf(propertiesDictionary))
 	return edp
 }
 
 // SetPropertyStateForProperty sets the value of a device property.
 func (edp *ExtensionDeviceProperties) SetPropertyStateForProperty(propertyState obj.Object, property obj.Object) {
+	defer runtime.KeepAlive(edp)
+	defer runtime.KeepAlive(propertyState)
+	defer runtime.KeepAlive(property)
 	objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("setPropertyState:forProperty:"), objref.IDOf(propertyState), objref.IDOf(property))
 }
 
 // Model returns the device model. The property key is CMIOExtensionPropertyDeviceModel.
 func (edp *ExtensionDeviceProperties) Model() string {
+	defer runtime.KeepAlive(edp)
 	_r := objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("model"))
 	if _r == 0 {
 		return ""
@@ -118,19 +134,22 @@ func (edp *ExtensionDeviceProperties) Model() string {
 }
 
 // Suspended indicates whether the device is suspended. The property key is CMIOExtensionPropertyDeviceIsSuspended.
-func (edp *ExtensionDeviceProperties) Suspended() obj.Object {
+func (edp *ExtensionDeviceProperties) Suspended() *foundation.Number {
+	defer runtime.KeepAlive(edp)
 	_r := objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("suspended"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TransportType returns the transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. The property key is CMIOExtensionPropertyDeviceTransportType.
-func (edp *ExtensionDeviceProperties) TransportType() obj.Object {
+func (edp *ExtensionDeviceProperties) TransportType() *foundation.Number {
+	defer runtime.KeepAlive(edp)
 	_r := objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("transportType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LinkedCoreAudioDeviceUID returns the device linked CoreAudio device UID. The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
 func (edp *ExtensionDeviceProperties) LinkedCoreAudioDeviceUID() string {
+	defer runtime.KeepAlive(edp)
 	_r := objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("linkedCoreAudioDeviceUID"))
 	if _r == 0 {
 		return ""
@@ -140,6 +159,7 @@ func (edp *ExtensionDeviceProperties) LinkedCoreAudioDeviceUID() string {
 
 // PropertiesDictionary returns the dictionary of properties. The dictionary containing all keys and values.
 func (edp *ExtensionDeviceProperties) PropertiesDictionary() obj.Object {
+	defer runtime.KeepAlive(edp)
 	_r := objc.Send[objc.ID](objref.IDOf(edp), objc.RegisterName("propertiesDictionary"))
 	return obj.Wrap(_r)
 }

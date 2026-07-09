@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func videoCompositionCoreAnimationToolAdopt(id objc.ID) *VideoCompositionCoreAni
 
 // Description returns the object's -description text.
 func (vccat *VideoCompositionCoreAnimationTool) Description() string {
+	defer runtime.KeepAlive(vccat)
 	return rt.Description(objref.IDOf(vccat))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vccat *VideoCompositionCoreAnimationTool) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vccat)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vccat), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vccat *VideoCompositionCoreAnimationTool) IsKind(className string) bool {
+	defer runtime.KeepAlive(vccat)
 	return rt.IsKind(objref.IDOf(vccat), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vccat *VideoCompositionCoreAnimationTool) String() string {
+	defer runtime.KeepAlive(vccat)
 	return rt.Description(objref.IDOf(vccat))
 }
 

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineFetchedZoneDeletionAdopt(id objc.ID) *SyncEngineFetchedZoneDeleti
 
 // Description returns the object's -description text.
 func (sefzd *SyncEngineFetchedZoneDeletion) Description() string {
+	defer runtime.KeepAlive(sefzd)
 	return rt.Description(objref.IDOf(sefzd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sefzd *SyncEngineFetchedZoneDeletion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sefzd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sefzd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sefzd *SyncEngineFetchedZoneDeletion) IsKind(className string) bool {
+	defer runtime.KeepAlive(sefzd)
 	return rt.IsKind(objref.IDOf(sefzd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sefzd *SyncEngineFetchedZoneDeletion) String() string {
+	defer runtime.KeepAlive(sefzd)
 	return rt.Description(objref.IDOf(sefzd))
 }
 
@@ -74,12 +81,14 @@ func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
 
 // ZoneID returns the identifier of the deleted record zone.
 func (sefzd *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(sefzd)
 	_r := objc.Send[objc.ID](objref.IDOf(sefzd), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
 // Reason returns the reason for the deletion.
 func (sefzd *SyncEngineFetchedZoneDeletion) Reason() SyncEngineZoneDeletionReason {
+	defer runtime.KeepAlive(sefzd)
 	_r := objc.Send[SyncEngineZoneDeletionReason](objref.IDOf(sefzd), objc.RegisterName("reason"))
 	return _r
 }

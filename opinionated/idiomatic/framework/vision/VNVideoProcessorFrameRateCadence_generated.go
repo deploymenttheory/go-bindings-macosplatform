@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -54,6 +56,7 @@ func NewVideoProcessorFrameRateCadenceWithFrameRate(frameRate int) *VideoProcess
 
 // FrameRate returns the frame rate.
 func (vpfrc *VideoProcessorFrameRateCadence) FrameRate() int {
+	defer runtime.KeepAlive(vpfrc)
 	_r := objc.Send[int](objref.IDOf(vpfrc), objc.RegisterName("frameRate"))
 	return _r
 }

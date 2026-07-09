@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,34 @@ func distantObjectAdopt(id objc.ID) *DistantObject {
 
 // Description returns the object's -description text.
 func (do *DistantObject) Description() string {
+	defer runtime.KeepAlive(do)
 	return rt.Description(objref.IDOf(do))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (do *DistantObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(do)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(do), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (do *DistantObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(do)
 	return rt.IsKind(objref.IDOf(do), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (do *DistantObject) String() string {
+	defer runtime.KeepAlive(do)
 	return rt.Description(objref.IDOf(do))
 }
 
 // NewDistantObjectWithTargetConnection initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
 func NewDistantObjectWithTargetConnection(target obj.Object, connection *Connection) *DistantObject {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(connection)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:connection:"), objref.IDOf(target), objref.IDOf(connection))
 	return distantObjectAdopt(_id)
@@ -77,6 +85,8 @@ func NewDistantObjectWithTargetConnection(target obj.Object, connection *Connect
 
 // NewDistantObjectWithLocalConnection initializes an NSDistantObject object as a local proxy for a given object.
 func NewDistantObjectWithLocalConnection(target obj.Object, connection *Connection) *DistantObject {
+	defer runtime.KeepAlive(target)
+	defer runtime.KeepAlive(connection)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocal:connection:"), objref.IDOf(target), objref.IDOf(connection))
 	return distantObjectAdopt(_id)
@@ -84,6 +94,7 @@ func NewDistantObjectWithLocalConnection(target obj.Object, connection *Connecti
 
 // NewDistantObjectWithCoder creates a new DistantObject.
 func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
+	defer runtime.KeepAlive(inCoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
 	return distantObjectAdopt(_id)
@@ -91,11 +102,13 @@ func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
 
 // SetProtocolForProxy sets the methods known to be handled by the receiver to those in a given protocol.
 func (do *DistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
+	defer runtime.KeepAlive(do)
 	objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("setProtocolForProxy:"), proto)
 }
 
 // ConnectionForProxy returns the connection for proxy.
 func (do *DistantObject) ConnectionForProxy() *Connection {
+	defer runtime.KeepAlive(do)
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("connectionForProxy"))
 	return ConnectionFromID(_r)
 }

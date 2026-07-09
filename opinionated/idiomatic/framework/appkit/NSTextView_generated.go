@@ -5,12 +5,14 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,6 +54,7 @@ func textViewAdopt(id objc.ID) *TextView {
 
 // NewTextViewWithFrameTextContainer initializes a text view.
 func NewTextViewWithFrameTextContainer(frameRect corefoundation.CGRect, container *TextContainer) *TextView {
+	defer runtime.KeepAlive(container)
 	var _mainthread0 *TextView
 	purego.Main(func() {
 		_mainthread0 = func() *TextView {
@@ -65,6 +68,7 @@ func NewTextViewWithFrameTextContainer(frameRect corefoundation.CGRect, containe
 
 // NewTextViewWithCoder initializes a text view with data in an unarchiver.
 func NewTextViewWithCoder(coder obj.Object) *TextView {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *TextView
 	purego.Main(func() {
 		_mainthread0 = func() *TextView {
@@ -104,6 +108,7 @@ func NewTextViewUsingTextLayoutManager(usingTextLayoutManager bool) *TextView {
 
 // WithTextContainer sets the receiver’s text container.
 func (tv *TextView) WithTextContainer(textContainer *TextContainer) *TextView {
+	defer runtime.KeepAlive(textContainer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextContainer:"), objref.IDOf(textContainer))
 	})
@@ -145,6 +150,7 @@ func (tv *TextView) WithSelectionGranularity(selectionGranularity SelectionGranu
 
 // WithSelectedTextAttributes sets the attributes used to indicate the selection.
 func (tv *TextView) WithSelectedTextAttributes(selectedTextAttributes obj.Object) *TextView {
+	defer runtime.KeepAlive(selectedTextAttributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedTextAttributes:"), objref.IDOf(selectedTextAttributes))
 	})
@@ -153,6 +159,7 @@ func (tv *TextView) WithSelectedTextAttributes(selectedTextAttributes obj.Object
 
 // WithInsertionPointColor sets the color of the insertion point.
 func (tv *TextView) WithInsertionPointColor(insertionPointColor *Color) *TextView {
+	defer runtime.KeepAlive(insertionPointColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setInsertionPointColor:"), objref.IDOf(insertionPointColor))
 	})
@@ -161,6 +168,7 @@ func (tv *TextView) WithInsertionPointColor(insertionPointColor *Color) *TextVie
 
 // WithMarkedTextAttributes sets the attributes used to draw marked text.
 func (tv *TextView) WithMarkedTextAttributes(markedTextAttributes obj.Object) *TextView {
+	defer runtime.KeepAlive(markedTextAttributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMarkedTextAttributes:"), objref.IDOf(markedTextAttributes))
 	})
@@ -169,6 +177,7 @@ func (tv *TextView) WithMarkedTextAttributes(markedTextAttributes obj.Object) *T
 
 // WithLinkTextAttributes sets the attributes used to draw the onscreen presentation of link text.
 func (tv *TextView) WithLinkTextAttributes(linkTextAttributes obj.Object) *TextView {
+	defer runtime.KeepAlive(linkTextAttributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLinkTextAttributes:"), objref.IDOf(linkTextAttributes))
 	})
@@ -225,6 +234,7 @@ func (tv *TextView) WithGrammarCheckingEnabled(grammarCheckingEnabled bool) *Tex
 
 // WithTypingAttributes sets the receiver’s typing attributes.
 func (tv *TextView) WithTypingAttributes(typingAttributes obj.Object) *TextView {
+	defer runtime.KeepAlive(typingAttributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTypingAttributes:"), objref.IDOf(typingAttributes))
 	})
@@ -241,6 +251,7 @@ func (tv *TextView) WithAllowsDocumentBackgroundColorChange(allowsDocumentBackgr
 
 // WithDefaultParagraphStyle sets the receiver’s default paragraph style.
 func (tv *TextView) WithDefaultParagraphStyle(defaultParagraphStyle ParagraphStyleProvider) *TextView {
+	defer runtime.KeepAlive(defaultParagraphStyle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDefaultParagraphStyle:"), objref.IDOf(defaultParagraphStyle))
 	})
@@ -426,6 +437,7 @@ func (tv *TextView) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerT
 
 // WithTextHighlightAttributes sets ************************* Text Highlight support **************************
 func (tv *TextView) WithTextHighlightAttributes(textHighlightAttributes obj.Object) *TextView {
+	defer runtime.KeepAlive(textHighlightAttributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextHighlightAttributes:"), objref.IDOf(textHighlightAttributes))
 	})
@@ -433,10 +445,22 @@ func (tv *TextView) WithTextHighlightAttributes(textHighlightAttributes obj.Obje
 }
 
 // WithString sets the characters of the receiver’s text.
-func (tv *TextView) WithString(string_ string) *TextView {
+func (tv *TextView) WithString(str string) *TextView {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setString:"), purego.NSString(string_))
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setString:"), purego.NSString(str))
 	})
+	return tv
+}
+
+// WithDelegate sets the receiver’s delegate.
+func (tv *TextView) WithDelegate(delegate TextDelegate) *TextView {
+	_shim := newTextDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return tv
 }
 
@@ -498,6 +522,7 @@ func (tv *TextView) WithDrawsBackground(drawsBackground bool) *TextView {
 
 // WithBackgroundColor sets the receiver’s background color to a given color.
 func (tv *TextView) WithBackgroundColor(backgroundColor *Color) *TextView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -514,6 +539,7 @@ func (tv *TextView) WithSelectedRange(selectedRange foundation.NSRange) *TextVie
 
 // WithFont sets the font of all the receiver’s text.
 func (tv *TextView) WithFont(font *Font) *TextView {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -522,6 +548,7 @@ func (tv *TextView) WithFont(font *Font) *TextView {
 
 // WithTextColor sets the text color of all characters in the receiver.
 func (tv *TextView) WithTextColor(textColor *Color) *TextView {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -715,6 +742,7 @@ func (tv *TextView) WithWantsLayer(wantsLayer bool) *TextView {
 
 // WithLayer sets the layer.
 func (tv *TextView) WithLayer(layer obj.Object) *TextView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -764,6 +792,7 @@ func (tv *TextView) WithBackgroundFilters(items ...obj.Object) *TextView {
 
 // WithCompositingFilter sets the compositing filter.
 func (tv *TextView) WithCompositingFilter(compositingFilter obj.Object) *TextView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -781,6 +810,7 @@ func (tv *TextView) WithContentFilters(items ...obj.Object) *TextView {
 
 // WithShadow sets the shadow.
 func (tv *TextView) WithShadow(shadow *Shadow) *TextView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -829,6 +859,7 @@ func (tv *TextView) WithPreparedContentRect(preparedContentRect corefoundation.C
 
 // WithNextKeyView sets the next key view.
 func (tv *TextView) WithNextKeyView(nextKeyView ViewProvider) *TextView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -878,6 +909,7 @@ func (tv *TextView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tv *TextView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -934,6 +966,7 @@ func (tv *TextView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tv *TextView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -942,6 +975,7 @@ func (tv *TextView) WithPressureConfiguration(pressureConfiguration *PressureCon
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tv *TextView) WithNextResponder(nextResponder ResponderProvider) *TextView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -950,6 +984,7 @@ func (tv *TextView) WithNextResponder(nextResponder ResponderProvider) *TextView
 
 // WithMenu sets returns the responder’s menu.
 func (tv *TextView) WithMenu(menu *Menu) *TextView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -958,6 +993,7 @@ func (tv *TextView) WithMenu(menu *Menu) *TextView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tv *TextView) WithUserActivity(userActivity obj.Object) *TextView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -966,6 +1002,7 @@ func (tv *TextView) WithUserActivity(userActivity obj.Object) *TextView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tv *TextView) WithTouchBar(touchBar *TouchBar) *TextView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -974,6 +1011,8 @@ func (tv *TextView) WithTouchBar(touchBar *TouchBar) *TextView {
 
 // ReplaceTextContainer replaces the text container for the group of text system objects containing the receiver, keeping the association between the receiver and its layout manager intact.
 func (tv *TextView) ReplaceTextContainer(newContainer *TextContainer) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(newContainer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("replaceTextContainer:"), objref.IDOf(newContainer))
 	})
@@ -982,6 +1021,7 @@ func (tv *TextView) ReplaceTextContainer(newContainer *TextContainer) {
 
 // InvalidateTextContainerOrigin invalidates the calculated origin of the text container.
 func (tv *TextView) InvalidateTextContainerOrigin() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("invalidateTextContainerOrigin"))
 	})
@@ -990,6 +1030,8 @@ func (tv *TextView) InvalidateTextContainerOrigin() {
 
 // InsertText inserts aString into the receiver’s text at the insertion point if there is one, otherwise replacing the selection.
 func (tv *TextView) InsertText(insertString obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(insertString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertText:"), objref.IDOf(insertString))
 	})
@@ -998,6 +1040,7 @@ func (tv *TextView) InsertText(insertString obj.Object) {
 
 // SetConstrainedFrameSize attempts to set the frame size as if by user action.
 func (tv *TextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setConstrainedFrameSize:"), desiredSize)
 	})
@@ -1006,6 +1049,7 @@ func (tv *TextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
 
 // SetAlignmentRange sets the alignment of the paragraphs containing characters in the specified range.
 func (tv *TextView) SetAlignmentRange(alignment TextAlignment, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAlignment:range:"), alignment, range_)
 	})
@@ -1014,6 +1058,7 @@ func (tv *TextView) SetAlignmentRange(alignment TextAlignment, range_ foundation
 
 // SetBaseWritingDirectionRange sets the base writing direction of a range of text.
 func (tv *TextView) SetBaseWritingDirectionRange(writingDirection WritingDirection, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBaseWritingDirection:range:"), writingDirection, range_)
 	})
@@ -1022,6 +1067,8 @@ func (tv *TextView) SetBaseWritingDirectionRange(writingDirection WritingDirecti
 
 // TurnOffKerning sets the receiver to use nominal glyph spacing for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (tv *TextView) TurnOffKerning(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("turnOffKerning:"), objref.IDOf(sender))
 	})
@@ -1030,6 +1077,8 @@ func (tv *TextView) TurnOffKerning(sender obj.Object) {
 
 // TightenKerning decreases the space between glyphs in the receiver’s selection, or for all glyphs if the receiver is a plain text view.
 func (tv *TextView) TightenKerning(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tightenKerning:"), objref.IDOf(sender))
 	})
@@ -1038,6 +1087,8 @@ func (tv *TextView) TightenKerning(sender obj.Object) {
 
 // LoosenKerning increases the space between glyphs in the receiver’s selection, or in all text if the receiver is a plain text view.
 func (tv *TextView) LoosenKerning(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("loosenKerning:"), objref.IDOf(sender))
 	})
@@ -1046,6 +1097,8 @@ func (tv *TextView) LoosenKerning(sender obj.Object) {
 
 // UseStandardKerning set the receiver to use pair kerning data for the glyphs in its selection, or for all glyphs if the receiver is a plain text view.
 func (tv *TextView) UseStandardKerning(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useStandardKerning:"), objref.IDOf(sender))
 	})
@@ -1054,6 +1107,8 @@ func (tv *TextView) UseStandardKerning(sender obj.Object) {
 
 // TurnOffLigatures sets the receiver to use only required ligatures when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (tv *TextView) TurnOffLigatures(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("turnOffLigatures:"), objref.IDOf(sender))
 	})
@@ -1062,6 +1117,8 @@ func (tv *TextView) TurnOffLigatures(sender obj.Object) {
 
 // UseStandardLigatures sets the receiver to use the standard ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (tv *TextView) UseStandardLigatures(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useStandardLigatures:"), objref.IDOf(sender))
 	})
@@ -1070,6 +1127,8 @@ func (tv *TextView) UseStandardLigatures(sender obj.Object) {
 
 // UseAllLigatures sets the receiver to use all ligatures available for the fonts and languages used when setting text, for the glyphs in the selection if the receiver is a rich text view, or for all glyphs if it’s a plain text view.
 func (tv *TextView) UseAllLigatures(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("useAllLigatures:"), objref.IDOf(sender))
 	})
@@ -1078,6 +1137,8 @@ func (tv *TextView) UseAllLigatures(sender obj.Object) {
 
 // RaiseBaseline raises the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (tv *TextView) RaiseBaseline(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("raiseBaseline:"), objref.IDOf(sender))
 	})
@@ -1086,6 +1147,8 @@ func (tv *TextView) RaiseBaseline(sender obj.Object) {
 
 // LowerBaseline lowers the baseline offset of selected text by 1 point, or of all text if the receiver is a plain text view.
 func (tv *TextView) LowerBaseline(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("lowerBaseline:"), objref.IDOf(sender))
 	})
@@ -1094,6 +1157,8 @@ func (tv *TextView) LowerBaseline(sender obj.Object) {
 
 // ToggleTraditionalCharacterShape toggles the NSCharacterShapeAttributeName attribute at the current selection.
 func (tv *TextView) ToggleTraditionalCharacterShape(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleTraditionalCharacterShape:"), objref.IDOf(sender))
 	})
@@ -1102,6 +1167,8 @@ func (tv *TextView) ToggleTraditionalCharacterShape(sender obj.Object) {
 
 // Outline adds the outline attribute to the selected text attributes if absent; removes the attribute if present.
 func (tv *TextView) Outline(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("outline:"), objref.IDOf(sender))
 	})
@@ -1110,6 +1177,8 @@ func (tv *TextView) Outline(sender obj.Object) {
 
 // PerformFindPanelAction performs a find panel action specified by the sender’s tag.
 func (tv *TextView) PerformFindPanelAction(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
 	})
@@ -1118,6 +1187,8 @@ func (tv *TextView) PerformFindPanelAction(sender obj.Object) {
 
 // AlignJustified applies full justification to selected paragraphs (or all text, if the receiver is a plain text object).
 func (tv *TextView) AlignJustified(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("alignJustified:"), objref.IDOf(sender))
 	})
@@ -1126,6 +1197,8 @@ func (tv *TextView) AlignJustified(sender obj.Object) {
 
 // ChangeColor sets the color of the selected text.
 func (tv *TextView) ChangeColor(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeColor:"), objref.IDOf(sender))
 	})
@@ -1134,6 +1207,8 @@ func (tv *TextView) ChangeColor(sender obj.Object) {
 
 // ChangeAttributes changes the attributes of the current selection.
 func (tv *TextView) ChangeAttributes(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeAttributes:"), objref.IDOf(sender))
 	})
@@ -1142,6 +1217,8 @@ func (tv *TextView) ChangeAttributes(sender obj.Object) {
 
 // ChangeDocumentBackgroundColor an action method used to set the background color.
 func (tv *TextView) ChangeDocumentBackgroundColor(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeDocumentBackgroundColor:"), objref.IDOf(sender))
 	})
@@ -1150,6 +1227,8 @@ func (tv *TextView) ChangeDocumentBackgroundColor(sender obj.Object) {
 
 // OrderFrontSpacingPanel brings forward a panel allowing the user to manipulate text line heights, interline spacing, and paragraph spacing, in the text view.
 func (tv *TextView) OrderFrontSpacingPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSpacingPanel:"), objref.IDOf(sender))
 	})
@@ -1158,6 +1237,8 @@ func (tv *TextView) OrderFrontSpacingPanel(sender obj.Object) {
 
 // OrderFrontLinkPanel brings forward a panel allowing the user to manipulate links in the text view.
 func (tv *TextView) OrderFrontLinkPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontLinkPanel:"), objref.IDOf(sender))
 	})
@@ -1166,6 +1247,8 @@ func (tv *TextView) OrderFrontLinkPanel(sender obj.Object) {
 
 // OrderFrontListPanel brings forward a panel allowing the user to manipulate text lists in the text view.
 func (tv *TextView) OrderFrontListPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontListPanel:"), objref.IDOf(sender))
 	})
@@ -1174,6 +1257,8 @@ func (tv *TextView) OrderFrontListPanel(sender obj.Object) {
 
 // OrderFrontTablePanel brings forward a panel allowing the user to manipulate text tables in the text view.
 func (tv *TextView) OrderFrontTablePanel(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontTablePanel:"), objref.IDOf(sender))
 	})
@@ -1182,6 +1267,7 @@ func (tv *TextView) OrderFrontTablePanel(sender obj.Object) {
 
 // SetNeedsDisplayInRectAvoidAdditionalLayout marks the receiver as requiring display.
 func (tv *TextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNeedsDisplayInRect:avoidAdditionalLayout:"), rect, flag)
 	})
@@ -1190,6 +1276,8 @@ func (tv *TextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundati
 
 // DrawInsertionPointInRectColorTurnedOn draws or erases the insertion point.
 func (tv *TextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *Color, flag bool) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawInsertionPointInRect:color:turnedOn:"), rect, objref.IDOf(color), flag)
 	})
@@ -1198,6 +1286,7 @@ func (tv *TextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CG
 
 // DrawViewBackgroundInRect draws the background of the text view.
 func (tv *TextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawViewBackgroundInRect:"), rect)
 	})
@@ -1206,6 +1295,7 @@ func (tv *TextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
 
 // UpdateRuler updates the ruler view in the receiver’s enclosing scroll view to reflect the selection’s paragraph and marker attributes.
 func (tv *TextView) UpdateRuler() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateRuler"))
 	})
@@ -1214,6 +1304,7 @@ func (tv *TextView) UpdateRuler() {
 
 // UpdateFontPanel updates the Font panel to contain the font attributes of the selection.
 func (tv *TextView) UpdateFontPanel() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateFontPanel"))
 	})
@@ -1222,6 +1313,7 @@ func (tv *TextView) UpdateFontPanel() {
 
 // UpdateDragTypeRegistration updates the acceptable drag types of all text views associated with the receiver’s layout manager.
 func (tv *TextView) UpdateDragTypeRegistration() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateDragTypeRegistration"))
 	})
@@ -1230,6 +1322,7 @@ func (tv *TextView) UpdateDragTypeRegistration() {
 
 // SelectionRangeForProposedRangeGranularity returns an adjusted selected range based on the selection granularity.
 func (tv *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity SelectionGranularity) foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1243,6 +1336,8 @@ func (tv *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange 
 
 // ClickedOnLinkAtIndex causes the text view to act as if the user clicked on some text with the given link as the value of a link attribute associated with the text.
 func (tv *TextView) ClickedOnLinkAtIndex(link obj.Object, charIndex int) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(link)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("clickedOnLink:atIndex:"), objref.IDOf(link), charIndex)
 	})
@@ -1251,6 +1346,8 @@ func (tv *TextView) ClickedOnLinkAtIndex(link obj.Object, charIndex int) {
 
 // StartSpeaking speaks the selected text, or all text if no selection.
 func (tv *TextView) StartSpeaking(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
 	})
@@ -1259,6 +1356,8 @@ func (tv *TextView) StartSpeaking(sender obj.Object) {
 
 // StopSpeaking stops the speaking of text.
 func (tv *TextView) StopSpeaking(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
 	})
@@ -1267,6 +1366,7 @@ func (tv *TextView) StopSpeaking(sender obj.Object) {
 
 // SetLayoutOrientation changes the receiver’s layout orientation and invalidates the contents.
 func (tv *TextView) SetLayoutOrientation(orientation TextLayoutOrientation) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayoutOrientation:"), orientation)
 	})
@@ -1275,6 +1375,8 @@ func (tv *TextView) SetLayoutOrientation(orientation TextLayoutOrientation) {
 
 // ChangeLayoutOrientation an action method that sets the layout orientation of the text.
 func (tv *TextView) ChangeLayoutOrientation(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("changeLayoutOrientation:"), objref.IDOf(sender))
 	})
@@ -1283,6 +1385,7 @@ func (tv *TextView) ChangeLayoutOrientation(sender obj.Object) {
 
 // CharacterIndexForInsertionAtPoint returns a character index appropriate for placing a zero-length selection for an insertion point associated with the mouse at the given point.
 func (tv *TextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1296,6 +1399,8 @@ func (tv *TextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoi
 
 // PerformValidatedReplacementInRangeWithAttributedString replaces text in the range you specify with the attributed string you provide.
 func (tv *TextView) PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString obj.Object) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(attributedString)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1309,6 +1414,7 @@ func (tv *TextView) PerformValidatedReplacementInRangeWithAttributedString(range
 
 // TextContainer returns the text container.
 func (tv *TextView) TextContainer() *TextContainer {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TextContainer
 	purego.Main(func() {
 		_mainthread0 = func() *TextContainer {
@@ -1322,6 +1428,7 @@ func (tv *TextView) TextContainer() *TextContainer {
 
 // TextContainerInset returns the text container inset.
 func (tv *TextView) TextContainerInset() corefoundation.CGSize {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1335,6 +1442,7 @@ func (tv *TextView) TextContainerInset() corefoundation.CGSize {
 
 // TextContainerOrigin returns the text container origin.
 func (tv *TextView) TextContainerOrigin() corefoundation.CGPoint {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -1348,6 +1456,7 @@ func (tv *TextView) TextContainerOrigin() corefoundation.CGPoint {
 
 // LayoutManager returns the layout manager.
 func (tv *TextView) LayoutManager() *LayoutManager {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *LayoutManager
 	purego.Main(func() {
 		_mainthread0 = func() *LayoutManager {
@@ -1361,6 +1470,7 @@ func (tv *TextView) LayoutManager() *LayoutManager {
 
 // TextStorage returns the text storage.
 func (tv *TextView) TextStorage() *TextStorage {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TextStorage
 	purego.Main(func() {
 		_mainthread0 = func() *TextStorage {
@@ -1374,6 +1484,7 @@ func (tv *TextView) TextStorage() *TextStorage {
 
 // TextLayoutManager returns the text layout manager.
 func (tv *TextView) TextLayoutManager() *TextLayoutManager {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TextLayoutManager
 	purego.Main(func() {
 		_mainthread0 = func() *TextLayoutManager {
@@ -1387,6 +1498,7 @@ func (tv *TextView) TextLayoutManager() *TextLayoutManager {
 
 // TextContentStorage returns the text content storage.
 func (tv *TextView) TextContentStorage() *TextContentStorage {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TextContentStorage
 	purego.Main(func() {
 		_mainthread0 = func() *TextContentStorage {
@@ -1400,6 +1512,7 @@ func (tv *TextView) TextContentStorage() *TextContentStorage {
 
 // ShouldDrawInsertionPoint wraps the corresponding Objective-C method.
 func (tv *TextView) ShouldDrawInsertionPoint() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1413,6 +1526,7 @@ func (tv *TextView) ShouldDrawInsertionPoint() bool {
 
 // UsesAdaptiveColorMappingForDarkAppearance wraps the corresponding Objective-C method.
 func (tv *TextView) UsesAdaptiveColorMappingForDarkAppearance() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1426,6 +1540,8 @@ func (tv *TextView) UsesAdaptiveColorMappingForDarkAppearance() bool {
 
 // Complete invokes completion in a text view.
 func (tv *TextView) Complete(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("complete:"), objref.IDOf(sender))
 	})
@@ -1434,6 +1550,7 @@ func (tv *TextView) Complete(sender obj.Object) {
 
 // CompletionsForPartialWordRangeIndexOfSelectedItem returns an array of potential completions, in the order to be presented, representing possible word completions available from a partial word.
 func (tv *TextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange) (result []string, index int64) {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []string
 	var _mainthread1 int64
 	purego.Main(func() {
@@ -1450,6 +1567,7 @@ func (tv *TextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange 
 
 // InsertCompletionForPartialWordRangeMovementIsFinal inserts the selected completion into the text at the appropriate location.
 func (tv *TextView) InsertCompletionForPartialWordRangeMovementIsFinal(word string, charRange foundation.NSRange, movement int, flag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertCompletion:forPartialWordRange:movement:isFinal:"), purego.NSString(word), charRange, movement, flag)
 	})
@@ -1458,6 +1576,7 @@ func (tv *TextView) InsertCompletionForPartialWordRangeMovementIsFinal(word stri
 
 // RangeForUserCompletion returns the range for user completion.
 func (tv *TextView) RangeForUserCompletion() foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1471,6 +1590,9 @@ func (tv *TextView) RangeForUserCompletion() foundation.NSRange {
 
 // WriteSelectionToPasteboardType writes the current selection to the specified pasteboard using the given type.
 func (tv *TextView) WriteSelectionToPasteboardType(pboard *Pasteboard, type_ obj.Object) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(pboard)
+	defer runtime.KeepAlive(type_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1483,11 +1605,13 @@ func (tv *TextView) WriteSelectionToPasteboardType(pboard *Pasteboard, type_ obj
 }
 
 // WriteSelectionToPasteboardTypes writes the current selection to the specified pasteboard under each given type.
-func (tv *TextView) WriteSelectionToPasteboardTypes(pboard *Pasteboard, types []obj.Object) bool {
+func (tv *TextView) WriteSelectionToPasteboardTypes(pboard *Pasteboard, types []*foundation.String) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(pboard)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
-			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("writeSelectionToPasteboard:types:"), objref.IDOf(pboard), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("writeSelectionToPasteboard:types:"), objref.IDOf(pboard), purego.SliceToNSArray(types, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 			return _r
 		}()
 	})
@@ -1496,12 +1620,13 @@ func (tv *TextView) WriteSelectionToPasteboardTypes(pboard *Pasteboard, types []
 }
 
 // PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray returns whatever type on the pasteboard would be most preferred for copying data.
-func (tv *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes []obj.Object, allowedTypes []obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+func (tv *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes []*foundation.String, allowedTypes []*foundation.String) *foundation.String {
+	defer runtime.KeepAlive(tv)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
-			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:"), purego.SliceToNSArray(availableTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(allowedTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-			return obj.Wrap(_r)
+		_mainthread0 = func() *foundation.String {
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:"), purego.SliceToNSArray(availableTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(allowedTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1510,6 +1635,9 @@ func (tv *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(a
 
 // ReadSelectionFromPasteboardType reads data of the given type from the specified pasteboard.
 func (tv *TextView) ReadSelectionFromPasteboardType(pboard *Pasteboard, type_ obj.Object) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(pboard)
+	defer runtime.KeepAlive(type_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1523,6 +1651,8 @@ func (tv *TextView) ReadSelectionFromPasteboardType(pboard *Pasteboard, type_ ob
 
 // ReadSelectionFromPasteboard reads the text view’s preferred type of data from the specified pasteboard.
 func (tv *TextView) ReadSelectionFromPasteboard(pboard *Pasteboard) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(pboard)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1536,6 +1666,8 @@ func (tv *TextView) ReadSelectionFromPasteboard(pboard *Pasteboard) bool {
 
 // PasteAsPlainText inserts the contents of the pasteboard into the receiver’s text as plain text.
 func (tv *TextView) PasteAsPlainText(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsPlainText:"), objref.IDOf(sender))
 	})
@@ -1544,6 +1676,8 @@ func (tv *TextView) PasteAsPlainText(sender obj.Object) {
 
 // PasteAsRichText this action method inserts the contents of the pasteboard into the receiver’s text as rich text, maintaining its attributes.
 func (tv *TextView) PasteAsRichText(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
 	})
@@ -1554,6 +1688,7 @@ func (tv *TextView) PasteAsRichText(sender obj.Object) {
 //
 // WritablePasteboardTypes returns the collection as a Go slice.
 func (tv *TextView) WritablePasteboardTypes() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1568,6 +1703,7 @@ func (tv *TextView) WritablePasteboardTypes() []obj.Object {
 //
 // ReadablePasteboardTypes returns the collection as a Go slice.
 func (tv *TextView) ReadablePasteboardTypes() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1580,6 +1716,8 @@ func (tv *TextView) ReadablePasteboardTypes() []obj.Object {
 
 // DragSelectionWithEventOffsetSlideBack begins dragging the current selected text range.
 func (tv *TextView) DragSelectionWithEventOffsetSlideBack(event *Event, mouseOffset corefoundation.CGSize, slideBack bool) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(event)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1593,6 +1731,7 @@ func (tv *TextView) DragSelectionWithEventOffsetSlideBack(event *Event, mouseOff
 
 // CleanUpAfterDragOperation releases the drag information still existing after the dragging session has completed.
 func (tv *TextView) CleanUpAfterDragOperation() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("cleanUpAfterDragOperation"))
 	})
@@ -1603,6 +1742,7 @@ func (tv *TextView) CleanUpAfterDragOperation() {
 //
 // AcceptableDragTypes returns the collection as a Go slice.
 func (tv *TextView) AcceptableDragTypes() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1614,15 +1754,17 @@ func (tv *TextView) AcceptableDragTypes() []obj.Object {
 }
 
 // SetSelectedRangesAffinityStillSelecting sets the selection to the characters in an array of ranges in response to user action.
-func (tv *TextView) SetSelectedRangesAffinityStillSelecting(ranges []obj.Object, affinity SelectionAffinity, stillSelectingFlag bool) {
+func (tv *TextView) SetSelectedRangesAffinityStillSelecting(ranges []*foundation.Value, affinity SelectionAffinity, stillSelectingFlag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRanges:affinity:stillSelecting:"), purego.SliceToNSArray(ranges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), affinity, stillSelectingFlag)
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRanges:affinity:stillSelecting:"), purego.SliceToNSArray(ranges, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }), affinity, stillSelectingFlag)
 	})
 
 }
 
 // SetSelectedRangeAffinityStillSelecting sets the selection to a range of characters in response to user action.
 func (tv *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity SelectionAffinity, stillSelectingFlag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSelectedRange:affinity:stillSelecting:"), charRange, affinity, stillSelectingFlag)
 	})
@@ -1631,6 +1773,7 @@ func (tv *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.
 
 // UpdateInsertionPointStateAndRestartTimer updates the insertion point’s location and optionally restarts the blinking cursor timer.
 func (tv *TextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateInsertionPointStateAndRestartTimer:"), restartFlag)
 	})
@@ -1639,6 +1782,8 @@ func (tv *TextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
 
 // ToggleContinuousSpellChecking toggles whether continuous spell checking is enabled for the receiver.
 func (tv *TextView) ToggleContinuousSpellChecking(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
 	})
@@ -1647,6 +1792,8 @@ func (tv *TextView) ToggleContinuousSpellChecking(sender obj.Object) {
 
 // ToggleGrammarChecking changes the state of grammar checking from enabled to disabled and vice versa.
 func (tv *TextView) ToggleGrammarChecking(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleGrammarChecking:"), objref.IDOf(sender))
 	})
@@ -1655,6 +1802,7 @@ func (tv *TextView) ToggleGrammarChecking(sender obj.Object) {
 
 // SetSpellingStateRange sets the spelling state, which controls the display of the spelling and grammar indicators on the given text range.
 func (tv *TextView) SetSpellingStateRange(value int, charRange foundation.NSRange) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setSpellingState:range:"), value, charRange)
 	})
@@ -1662,11 +1810,12 @@ func (tv *TextView) SetSpellingStateRange(value int, charRange foundation.NSRang
 }
 
 // ShouldChangeTextInRangesReplacementStrings initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
-func (tv *TextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges []obj.Object, replacementStrings []string) bool {
+func (tv *TextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges []*foundation.Value, replacementStrings []string) bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
-			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldChangeTextInRanges:replacementStrings:"), purego.SliceToNSArray(affectedRanges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(replacementStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
+			_r := objc.Send[bool](objref.IDOf(tv), objc.RegisterName("shouldChangeTextInRanges:replacementStrings:"), purego.SliceToNSArray(affectedRanges, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(replacementStrings, func(_v string) objc.ID { return purego.NSString(_v) }))
 			return _r
 		}()
 	})
@@ -1676,6 +1825,7 @@ func (tv *TextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges []
 
 // ShouldChangeTextInRangeReplacementString initiates a series of delegate messages (and general notifications) to determine whether modifications can be made to the characters and attributes of the receiver’s text.
 func (tv *TextView) ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString string) bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1689,6 +1839,7 @@ func (tv *TextView) ShouldChangeTextInRangeReplacementString(affectedCharRange f
 
 // DidChangeText sends out necessary notifications when a text change completes.
 func (tv *TextView) DidChangeText() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("didChangeText"))
 	})
@@ -1697,6 +1848,7 @@ func (tv *TextView) DidChangeText() {
 
 // BreakUndoCoalescing informs the receiver that it should begin coalescing successive typing operations in a new undo grouping.
 func (tv *TextView) BreakUndoCoalescing() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("breakUndoCoalescing"))
 	})
@@ -1705,6 +1857,7 @@ func (tv *TextView) BreakUndoCoalescing() {
 
 // ShowFindIndicatorForRange causes a temporary highlighting effect to appear around the visible portion (or portions) of the specified range.
 func (tv *TextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("showFindIndicatorForRange:"), charRange)
 	})
@@ -1715,6 +1868,7 @@ func (tv *TextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
 //
 // SelectedRanges returns the collection as a Go slice.
 func (tv *TextView) SelectedRanges() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1727,6 +1881,7 @@ func (tv *TextView) SelectedRanges() []obj.Object {
 
 // SelectionAffinity returns the selection affinity.
 func (tv *TextView) SelectionAffinity() SelectionAffinity {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 SelectionAffinity
 	purego.Main(func() {
 		_mainthread0 = func() SelectionAffinity {
@@ -1740,6 +1895,7 @@ func (tv *TextView) SelectionAffinity() SelectionAffinity {
 
 // SelectionGranularity returns the selection granularity.
 func (tv *TextView) SelectionGranularity() SelectionGranularity {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 SelectionGranularity
 	purego.Main(func() {
 		_mainthread0 = func() SelectionGranularity {
@@ -1753,6 +1909,7 @@ func (tv *TextView) SelectionGranularity() SelectionGranularity {
 
 // SelectedTextAttributes returns the selected text attributes.
 func (tv *TextView) SelectedTextAttributes() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1766,6 +1923,7 @@ func (tv *TextView) SelectedTextAttributes() obj.Object {
 
 // InsertionPointColor returns the insertion point color.
 func (tv *TextView) InsertionPointColor() *Color {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1779,6 +1937,7 @@ func (tv *TextView) InsertionPointColor() *Color {
 
 // MarkedTextAttributes returns the marked text attributes.
 func (tv *TextView) MarkedTextAttributes() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1792,6 +1951,7 @@ func (tv *TextView) MarkedTextAttributes() obj.Object {
 
 // LinkTextAttributes returns the link text attributes.
 func (tv *TextView) LinkTextAttributes() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1805,6 +1965,7 @@ func (tv *TextView) LinkTextAttributes() obj.Object {
 
 // DisplaysLinkToolTips wraps the corresponding Objective-C method.
 func (tv *TextView) DisplaysLinkToolTips() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1818,6 +1979,7 @@ func (tv *TextView) DisplaysLinkToolTips() bool {
 
 // AcceptsGlyphInfo wraps the corresponding Objective-C method.
 func (tv *TextView) AcceptsGlyphInfo() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1831,6 +1993,7 @@ func (tv *TextView) AcceptsGlyphInfo() bool {
 
 // UsesRuler wraps the corresponding Objective-C method.
 func (tv *TextView) UsesRuler() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1844,6 +2007,7 @@ func (tv *TextView) UsesRuler() bool {
 
 // UsesInspectorBar wraps the corresponding Objective-C method.
 func (tv *TextView) UsesInspectorBar() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1857,6 +2021,7 @@ func (tv *TextView) UsesInspectorBar() bool {
 
 // IsContinuousSpellCheckingEnabled reports whether the object is continuous spell checking enabled.
 func (tv *TextView) IsContinuousSpellCheckingEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1870,6 +2035,7 @@ func (tv *TextView) IsContinuousSpellCheckingEnabled() bool {
 
 // SpellCheckerDocumentTag returns the spell checker document tag.
 func (tv *TextView) SpellCheckerDocumentTag() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1883,6 +2049,7 @@ func (tv *TextView) SpellCheckerDocumentTag() int {
 
 // IsGrammarCheckingEnabled reports whether the object is grammar checking enabled.
 func (tv *TextView) IsGrammarCheckingEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1896,6 +2063,7 @@ func (tv *TextView) IsGrammarCheckingEnabled() bool {
 
 // TypingAttributes returns the typing attributes.
 func (tv *TextView) TypingAttributes() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1911,6 +2079,7 @@ func (tv *TextView) TypingAttributes() obj.Object {
 //
 // RangesForUserTextChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserTextChange() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1925,6 +2094,7 @@ func (tv *TextView) RangesForUserTextChange() []obj.Object {
 //
 // RangesForUserCharacterAttributeChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserCharacterAttributeChange() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1939,6 +2109,7 @@ func (tv *TextView) RangesForUserCharacterAttributeChange() []obj.Object {
 //
 // RangesForUserParagraphAttributeChange returns the collection as a Go slice.
 func (tv *TextView) RangesForUserParagraphAttributeChange() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1951,6 +2122,7 @@ func (tv *TextView) RangesForUserParagraphAttributeChange() []obj.Object {
 
 // RangeForUserTextChange returns the range for user text change.
 func (tv *TextView) RangeForUserTextChange() foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1964,6 +2136,7 @@ func (tv *TextView) RangeForUserTextChange() foundation.NSRange {
 
 // RangeForUserCharacterAttributeChange returns the range for user character attribute change.
 func (tv *TextView) RangeForUserCharacterAttributeChange() foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1977,6 +2150,7 @@ func (tv *TextView) RangeForUserCharacterAttributeChange() foundation.NSRange {
 
 // RangeForUserParagraphAttributeChange returns the range for user paragraph attribute change.
 func (tv *TextView) RangeForUserParagraphAttributeChange() foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1990,6 +2164,7 @@ func (tv *TextView) RangeForUserParagraphAttributeChange() foundation.NSRange {
 
 // AllowsDocumentBackgroundColorChange wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsDocumentBackgroundColorChange() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2003,6 +2178,7 @@ func (tv *TextView) AllowsDocumentBackgroundColorChange() bool {
 
 // DefaultParagraphStyle returns the default paragraph style.
 func (tv *TextView) DefaultParagraphStyle() *ParagraphStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *ParagraphStyle
 	purego.Main(func() {
 		_mainthread0 = func() *ParagraphStyle {
@@ -2016,6 +2192,7 @@ func (tv *TextView) DefaultParagraphStyle() *ParagraphStyle {
 
 // AllowsUndo wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsUndo() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2029,6 +2206,7 @@ func (tv *TextView) AllowsUndo() bool {
 
 // IsCoalescingUndo reports whether the object is coalescing undo.
 func (tv *TextView) IsCoalescingUndo() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2042,6 +2220,7 @@ func (tv *TextView) IsCoalescingUndo() bool {
 
 // AllowsImageEditing wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsImageEditing() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2055,6 +2234,7 @@ func (tv *TextView) AllowsImageEditing() bool {
 
 // UsesRolloverButtonForSelection wraps the corresponding Objective-C method.
 func (tv *TextView) UsesRolloverButtonForSelection() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2070,6 +2250,7 @@ func (tv *TextView) UsesRolloverButtonForSelection() bool {
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tv *TextView) AllowedInputSourceLocales() []string {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -2082,6 +2263,7 @@ func (tv *TextView) AllowedInputSourceLocales() []string {
 
 // IsWritingToolsActive reports whether the object is writing tools active.
 func (tv *TextView) IsWritingToolsActive() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2095,6 +2277,7 @@ func (tv *TextView) IsWritingToolsActive() bool {
 
 // WritingToolsBehavior returns the writing tools behavior.
 func (tv *TextView) WritingToolsBehavior() WritingToolsBehavior {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 WritingToolsBehavior
 	purego.Main(func() {
 		_mainthread0 = func() WritingToolsBehavior {
@@ -2108,6 +2291,7 @@ func (tv *TextView) WritingToolsBehavior() WritingToolsBehavior {
 
 // AllowedWritingToolsResultOptions returns the allowed writing tools result options.
 func (tv *TextView) AllowedWritingToolsResultOptions() WritingToolsResultOptions {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 WritingToolsResultOptions
 	purego.Main(func() {
 		_mainthread0 = func() WritingToolsResultOptions {
@@ -2121,6 +2305,7 @@ func (tv *TextView) AllowedWritingToolsResultOptions() WritingToolsResultOptions
 
 // SmartDeleteRangeForProposedRange returns an extended range that includes adjacent whitespace that should be deleted along with the proposed range in order to preserve proper spacing and punctuation.
 func (tv *TextView) SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -2134,6 +2319,8 @@ func (tv *TextView) SmartDeleteRangeForProposedRange(proposedCharRange foundatio
 
 // ToggleSmartInsertDelete changes the state of smart insert and delete from enabled to disabled and vice versa.
 func (tv *TextView) ToggleSmartInsertDelete(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
 	})
@@ -2142,6 +2329,7 @@ func (tv *TextView) ToggleSmartInsertDelete(sender obj.Object) {
 
 // SmartInsertForStringReplacingRangeBeforeStringAfterString determines whether whitespace needs to be added around the string to preserve proper spacing and punctuation when it replaces the characters in the specified range.
 func (tv *TextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString string, charRangeToReplace foundation.NSRange, beforeString string, afterString string) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("smartInsertForString:replacingRange:beforeString:afterString:"), purego.NSString(pasteString), charRangeToReplace, purego.NSString(beforeString), purego.NSString(afterString))
 	})
@@ -2150,6 +2338,7 @@ func (tv *TextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pa
 
 // SmartInsertBeforeStringForStringReplacingRange returns any whitespace that needs to be added before the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (tv *TextView) SmartInsertBeforeStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -2166,6 +2355,7 @@ func (tv *TextView) SmartInsertBeforeStringForStringReplacingRange(pasteString s
 
 // SmartInsertAfterStringForStringReplacingRange returns any whitespace that needs to be added after the string to preserve proper spacing and punctuation when the string replaces the characters in the specified range.
 func (tv *TextView) SmartInsertAfterStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -2182,6 +2372,8 @@ func (tv *TextView) SmartInsertAfterStringForStringReplacingRange(pasteString st
 
 // ToggleAutomaticQuoteSubstitution changes the state of automatic quotation mark substitution from enabled to disabled and vice versa.
 func (tv *TextView) ToggleAutomaticQuoteSubstitution(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticQuoteSubstitution:"), objref.IDOf(sender))
 	})
@@ -2190,6 +2382,8 @@ func (tv *TextView) ToggleAutomaticQuoteSubstitution(sender obj.Object) {
 
 // ToggleAutomaticLinkDetection changes the state of automatic link detection from enabled to disabled and vice versa.
 func (tv *TextView) ToggleAutomaticLinkDetection(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticLinkDetection:"), objref.IDOf(sender))
 	})
@@ -2198,6 +2392,8 @@ func (tv *TextView) ToggleAutomaticLinkDetection(sender obj.Object) {
 
 // ToggleAutomaticDataDetection toggles the state of the automatic data detection.
 func (tv *TextView) ToggleAutomaticDataDetection(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticDataDetection:"), objref.IDOf(sender))
 	})
@@ -2206,6 +2402,8 @@ func (tv *TextView) ToggleAutomaticDataDetection(sender obj.Object) {
 
 // ToggleAutomaticDashSubstitution toggles the state of the automatic dash substitution.
 func (tv *TextView) ToggleAutomaticDashSubstitution(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticDashSubstitution:"), objref.IDOf(sender))
 	})
@@ -2214,6 +2412,8 @@ func (tv *TextView) ToggleAutomaticDashSubstitution(sender obj.Object) {
 
 // ToggleAutomaticTextReplacement toggles the state of the automatic text replacement.
 func (tv *TextView) ToggleAutomaticTextReplacement(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextReplacement:"), objref.IDOf(sender))
 	})
@@ -2222,6 +2422,8 @@ func (tv *TextView) ToggleAutomaticTextReplacement(sender obj.Object) {
 
 // ToggleAutomaticSpellingCorrection toggles the state of the automatic spelling correction.
 func (tv *TextView) ToggleAutomaticSpellingCorrection(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticSpellingCorrection:"), objref.IDOf(sender))
 	})
@@ -2230,6 +2432,8 @@ func (tv *TextView) ToggleAutomaticSpellingCorrection(sender obj.Object) {
 
 // CheckTextInRangeTypesOptions check and replace the text in the range using the specified checking types and options.
 func (tv *TextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInRange:types:options:"), range_, checkingTypes, objref.IDOf(options))
 	})
@@ -2237,15 +2441,20 @@ func (tv *TextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, chec
 }
 
 // HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount handles the text checking results returned by the text view
-func (tv *TextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results []obj.Object, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, orthography obj.Object, wordCount int) {
+func (tv *TextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results []*foundation.TextCheckingResult, range_ foundation.NSRange, checkingTypes uint64, options obj.Object, orthography obj.Object, wordCount int) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(options)
+	defer runtime.KeepAlive(orthography)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("handleTextCheckingResults:forRange:types:options:orthography:wordCount:"), purego.SliceToNSArray(results, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), range_, checkingTypes, objref.IDOf(options), objref.IDOf(orthography), wordCount)
+		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("handleTextCheckingResults:forRange:types:options:orthography:wordCount:"), purego.SliceToNSArray(results, func(_v *foundation.TextCheckingResult) objc.ID { return objref.IDOf(_v) }), range_, checkingTypes, objref.IDOf(options), objref.IDOf(orthography), wordCount)
 	})
 
 }
 
 // OrderFrontSubstitutionsPanel brings forward a panel allowing the user to specify string substitutions in the text view.
 func (tv *TextView) OrderFrontSubstitutionsPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSubstitutionsPanel:"), objref.IDOf(sender))
 	})
@@ -2254,6 +2463,8 @@ func (tv *TextView) OrderFrontSubstitutionsPanel(sender obj.Object) {
 
 // CheckTextInSelection performs the default text checking on the current selection.
 func (tv *TextView) CheckTextInSelection(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInSelection:"), objref.IDOf(sender))
 	})
@@ -2262,6 +2473,8 @@ func (tv *TextView) CheckTextInSelection(sender obj.Object) {
 
 // CheckTextInDocument performs the default text checking on the entire document.
 func (tv *TextView) CheckTextInDocument(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("checkTextInDocument:"), objref.IDOf(sender))
 	})
@@ -2270,6 +2483,7 @@ func (tv *TextView) CheckTextInDocument(sender obj.Object) {
 
 // SmartInsertDeleteEnabled wraps the corresponding Objective-C method.
 func (tv *TextView) SmartInsertDeleteEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2283,6 +2497,7 @@ func (tv *TextView) SmartInsertDeleteEnabled() bool {
 
 // IsAutomaticQuoteSubstitutionEnabled reports whether the object is automatic quote substitution enabled.
 func (tv *TextView) IsAutomaticQuoteSubstitutionEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2296,6 +2511,7 @@ func (tv *TextView) IsAutomaticQuoteSubstitutionEnabled() bool {
 
 // IsAutomaticLinkDetectionEnabled reports whether the object is automatic link detection enabled.
 func (tv *TextView) IsAutomaticLinkDetectionEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2309,6 +2525,7 @@ func (tv *TextView) IsAutomaticLinkDetectionEnabled() bool {
 
 // IsAutomaticDataDetectionEnabled reports whether the object is automatic data detection enabled.
 func (tv *TextView) IsAutomaticDataDetectionEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2322,6 +2539,7 @@ func (tv *TextView) IsAutomaticDataDetectionEnabled() bool {
 
 // IsAutomaticDashSubstitutionEnabled reports whether the object is automatic dash substitution enabled.
 func (tv *TextView) IsAutomaticDashSubstitutionEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2335,6 +2553,7 @@ func (tv *TextView) IsAutomaticDashSubstitutionEnabled() bool {
 
 // IsAutomaticTextReplacementEnabled reports whether the object is automatic text replacement enabled.
 func (tv *TextView) IsAutomaticTextReplacementEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2348,6 +2567,7 @@ func (tv *TextView) IsAutomaticTextReplacementEnabled() bool {
 
 // IsAutomaticSpellingCorrectionEnabled reports whether the object is automatic spelling correction enabled.
 func (tv *TextView) IsAutomaticSpellingCorrectionEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2361,6 +2581,7 @@ func (tv *TextView) IsAutomaticSpellingCorrectionEnabled() bool {
 
 // EnabledTextCheckingTypes returns the enabled text checking types.
 func (tv *TextView) EnabledTextCheckingTypes() uint64 {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 uint64
 	purego.Main(func() {
 		_mainthread0 = func() uint64 {
@@ -2374,6 +2595,7 @@ func (tv *TextView) EnabledTextCheckingTypes() uint64 {
 
 // UsesFindPanel wraps the corresponding Objective-C method.
 func (tv *TextView) UsesFindPanel() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2387,6 +2609,7 @@ func (tv *TextView) UsesFindPanel() bool {
 
 // UsesFindBar wraps the corresponding Objective-C method.
 func (tv *TextView) UsesFindBar() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2400,6 +2623,7 @@ func (tv *TextView) UsesFindBar() bool {
 
 // IsIncrementalSearchingEnabled reports whether the object is incremental searching enabled.
 func (tv *TextView) IsIncrementalSearchingEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2413,6 +2637,7 @@ func (tv *TextView) IsIncrementalSearchingEnabled() bool {
 
 // InlinePredictionType returns the inline prediction type.
 func (tv *TextView) InlinePredictionType() TextInputTraitType {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TextInputTraitType
 	purego.Main(func() {
 		_mainthread0 = func() TextInputTraitType {
@@ -2426,6 +2651,7 @@ func (tv *TextView) InlinePredictionType() TextInputTraitType {
 
 // MathExpressionCompletionType returns the math expression completion type.
 func (tv *TextView) MathExpressionCompletionType() TextInputTraitType {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TextInputTraitType
 	purego.Main(func() {
 		_mainthread0 = func() TextInputTraitType {
@@ -2439,6 +2665,8 @@ func (tv *TextView) MathExpressionCompletionType() TextInputTraitType {
 
 // ToggleQuickLookPreviewPanel an action message that toggles the visibility state of the Quick Look preview panel.
 func (tv *TextView) ToggleQuickLookPreviewPanel(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleQuickLookPreviewPanel:"), objref.IDOf(sender))
 	})
@@ -2446,11 +2674,12 @@ func (tv *TextView) ToggleQuickLookPreviewPanel(sender obj.Object) {
 }
 
 // QuickLookPreviewableItemsInRanges returns an array of URLs for items that can be displayed by QuickLook in the specified ranges.
-func (tv *TextView) QuickLookPreviewableItemsInRanges(ranges []obj.Object) []obj.Object {
+func (tv *TextView) QuickLookPreviewableItemsInRanges(ranges []*foundation.Value) []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
-			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("quickLookPreviewableItemsInRanges:"), purego.SliceToNSArray(ranges, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("quickLookPreviewableItemsInRanges:"), purego.SliceToNSArray(ranges, func(_v *foundation.Value) objc.ID { return objref.IDOf(_v) }))
 			return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 		}()
 	})
@@ -2460,6 +2689,7 @@ func (tv *TextView) QuickLookPreviewableItemsInRanges(ranges []obj.Object) []obj
 
 // UpdateQuickLookPreviewPanel notifies the QuickLook panel that an update may be required.
 func (tv *TextView) UpdateQuickLookPreviewPanel() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateQuickLookPreviewPanel"))
 	})
@@ -2468,6 +2698,8 @@ func (tv *TextView) UpdateQuickLookPreviewPanel() {
 
 // OrderFrontSharingServicePicker creates and displays a new instance of the sharing service picker.
 func (tv *TextView) OrderFrontSharingServicePicker(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("orderFrontSharingServicePicker:"), objref.IDOf(sender))
 	})
@@ -2476,6 +2708,8 @@ func (tv *TextView) OrderFrontSharingServicePicker(sender obj.Object) {
 
 // ToggleAutomaticTextCompletion toggles automatic text completion.
 func (tv *TextView) ToggleAutomaticTextCompletion(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleAutomaticTextCompletion:"), objref.IDOf(sender))
 	})
@@ -2484,6 +2718,7 @@ func (tv *TextView) ToggleAutomaticTextCompletion(sender obj.Object) {
 
 // UpdateTouchBarItemIdentifiers updates touch bar item identifiers.
 func (tv *TextView) UpdateTouchBarItemIdentifiers() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTouchBarItemIdentifiers"))
 	})
@@ -2492,6 +2727,7 @@ func (tv *TextView) UpdateTouchBarItemIdentifiers() {
 
 // UpdateTextTouchBarItems updates text touch bar items.
 func (tv *TextView) UpdateTextTouchBarItems() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateTextTouchBarItems"))
 	})
@@ -2500,6 +2736,7 @@ func (tv *TextView) UpdateTextTouchBarItems() {
 
 // UpdateCandidates updates candidates.
 func (tv *TextView) UpdateCandidates() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("updateCandidates"))
 	})
@@ -2508,6 +2745,7 @@ func (tv *TextView) UpdateCandidates() {
 
 // IsAutomaticTextCompletionEnabled reports whether the object is automatic text completion enabled.
 func (tv *TextView) IsAutomaticTextCompletionEnabled() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2521,6 +2759,7 @@ func (tv *TextView) IsAutomaticTextCompletionEnabled() bool {
 
 // AllowsCharacterPickerTouchBarItem wraps the corresponding Objective-C method.
 func (tv *TextView) AllowsCharacterPickerTouchBarItem() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2534,6 +2773,8 @@ func (tv *TextView) AllowsCharacterPickerTouchBarItem() bool {
 
 // DrawTextHighlightBackgroundForTextRangeOrigin draws text highlight background for text range origin.
 func (tv *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *TextRange, origin corefoundation.CGPoint) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textRange)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawTextHighlightBackgroundForTextRange:origin:"), objref.IDOf(textRange), origin)
 	})
@@ -2542,6 +2783,8 @@ func (tv *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *Tex
 
 // Highlight an action for toggling NSTextHighlightStyleAttributeName in the receiver’s selected range. The sender should be a menu item with a representedObject of type (NSTextHighlightColorScheme).
 func (tv *TextView) Highlight(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("highlight:"), objref.IDOf(sender))
 	})
@@ -2550,6 +2793,7 @@ func (tv *TextView) Highlight(sender obj.Object) {
 
 // TextHighlightAttributes returns the text highlight attributes.
 func (tv *TextView) TextHighlightAttributes() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -2563,6 +2807,8 @@ func (tv *TextView) TextHighlightAttributes() obj.Object {
 
 // ToggleBaseWritingDirection changes the base writing direction of a paragraph between left-to-right and right-to-left.
 func (tv *TextView) ToggleBaseWritingDirection(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("toggleBaseWritingDirection:"), objref.IDOf(sender))
 	})

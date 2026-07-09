@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textFinderAdopt(id objc.ID) *TextFinder {
 
 // Description returns the object's -description text.
 func (tf *TextFinder) Description() string {
+	defer runtime.KeepAlive(tf)
 	return rt.Description(objref.IDOf(tf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tf *TextFinder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tf *TextFinder) IsKind(className string) bool {
+	defer runtime.KeepAlive(tf)
 	return rt.IsKind(objref.IDOf(tf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tf *TextFinder) String() string {
+	defer runtime.KeepAlive(tf)
 	return rt.Description(objref.IDOf(tf))
 }
 
@@ -74,6 +81,7 @@ func NewTextFinder() *TextFinder {
 
 // NewTextFinderWithCoder creates a new TextFinder.
 func NewTextFinderWithCoder(coder obj.Object) *TextFinder {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextFinder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textFinderAdopt(_id)
@@ -99,39 +107,46 @@ func (tf *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSe
 
 // PerformAction performs the specified text finding action.
 func (tf *TextFinder) PerformAction(op TextFinderAction) {
+	defer runtime.KeepAlive(tf)
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("performAction:"), op)
 }
 
 // ValidateAction allows validation of the find action before performing.
 func (tf *TextFinder) ValidateAction(op TextFinderAction) bool {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("validateAction:"), op)
 	return _r
 }
 
 // CancelFindIndicator cancels the find indicator immediately.
 func (tf *TextFinder) CancelFindIndicator() {
+	defer runtime.KeepAlive(tf)
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("cancelFindIndicator"))
 }
 
 // NoteClientStringWillChange invoke this method when the searched content will change.
 func (tf *TextFinder) NoteClientStringWillChange() {
+	defer runtime.KeepAlive(tf)
 	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("noteClientStringWillChange"))
 }
 
 // FindIndicatorNeedsUpdate wraps the corresponding Objective-C method.
 func (tf *TextFinder) FindIndicatorNeedsUpdate() bool {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("findIndicatorNeedsUpdate"))
 	return _r
 }
 
 // IsIncrementalSearchingEnabled reports whether the object is incremental searching enabled.
 func (tf *TextFinder) IsIncrementalSearchingEnabled() bool {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("isIncrementalSearchingEnabled"))
 	return _r
 }
 
 // IncrementalSearchingShouldDimContentView wraps the corresponding Objective-C method.
 func (tf *TextFinder) IncrementalSearchingShouldDimContentView() bool {
+	defer runtime.KeepAlive(tf)
 	_r := objc.Send[bool](objref.IDOf(tf), objc.RegisterName("incrementalSearchingShouldDimContentView"))
 	return _r
 }
@@ -140,6 +155,7 @@ func (tf *TextFinder) IncrementalSearchingShouldDimContentView() bool {
 //
 // IncrementalMatchRanges returns the collection as a Go slice.
 func (tf *TextFinder) IncrementalMatchRanges() []obj.Object {
+	defer runtime.KeepAlive(tf)
 	_arr := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("incrementalMatchRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

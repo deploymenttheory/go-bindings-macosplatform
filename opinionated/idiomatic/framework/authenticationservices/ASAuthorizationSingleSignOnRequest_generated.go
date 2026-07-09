@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -86,6 +88,7 @@ func (assor *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *Authoriz
 
 // WithRequestedOperation sets the OpenID authentication operation you want this request to perform.
 func (assor *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationSingleSignOnRequest {
+	defer runtime.KeepAlive(requestedOperation)
 	objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
 	return assor
 }
@@ -94,12 +97,14 @@ func (assor *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedO
 //
 // AuthorizationOptions returns the collection as a Go slice.
 func (assor *AuthorizationSingleSignOnRequest) AuthorizationOptions() []obj.Object {
+	defer runtime.KeepAlive(assor)
 	_arr := objc.Send[objc.ID](objref.IDOf(assor), objc.RegisterName("authorizationOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsUserInterfaceEnabled reports whether enables or disables the authorization user interface. The default values is true. If user interface is not enabled, then the authorization will fail with
 func (assor *AuthorizationSingleSignOnRequest) IsUserInterfaceEnabled() bool {
+	defer runtime.KeepAlive(assor)
 	_r := objc.Send[bool](objref.IDOf(assor), objc.RegisterName("isUserInterfaceEnabled"))
 	return _r
 }

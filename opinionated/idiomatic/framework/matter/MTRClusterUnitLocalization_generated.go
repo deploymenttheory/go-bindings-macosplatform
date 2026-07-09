@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterUnitLocalizationAdopt(id objc.ID) *MTRClusterUnitLocalization {
 
 // NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterUnitLocalization {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterUnitLocalization")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterUnitLocalizationAdopt(_id)
@@ -53,55 +59,74 @@ func NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue(device *MTRDevice, e
 
 // NewMTRClusterUnitLocalizationWithDeviceEndpointQueue creates a new MTRClusterUnitLocalization.
 func NewMTRClusterUnitLocalizationWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterUnitLocalization {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterUnitLocalization")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterUnitLocalizationAdopt(_id)
 }
 
 // ReadAttributeTemperatureUnitWithParams reads attribute temperature unit with params.
-func (mcul *MTRClusterUnitLocalization) ReadAttributeTemperatureUnitWithParams(params *MTRReadParams) obj.Object {
+func (mcul *MTRClusterUnitLocalization) ReadAttributeTemperatureUnitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("readAttributeTemperatureUnitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeTemperatureUnitWithValueExpectedValueInterval writes attribute temperature unit with value expected value interval.
-func (mcul *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcul *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams writes attribute temperature unit with value expected value interval params.
-func (mcul *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcul *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcul *MTRClusterUnitLocalization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcul *MTRClusterUnitLocalization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcul *MTRClusterUnitLocalization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcul *MTRClusterUnitLocalization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcul *MTRClusterUnitLocalization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcul *MTRClusterUnitLocalization) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcul *MTRClusterUnitLocalization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcul *MTRClusterUnitLocalization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcul *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcul *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcul)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcul), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterUnitLocalization)(nil)

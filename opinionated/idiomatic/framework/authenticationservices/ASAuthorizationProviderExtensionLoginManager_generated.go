@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func authorizationProviderExtensionLoginManagerAdopt(id objc.ID) *AuthorizationP
 
 // Description returns the object's -description text.
 func (apelm *AuthorizationProviderExtensionLoginManager) Description() string {
+	defer runtime.KeepAlive(apelm)
 	return rt.Description(objref.IDOf(apelm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apelm *AuthorizationProviderExtensionLoginManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apelm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apelm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apelm *AuthorizationProviderExtensionLoginManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(apelm)
 	return rt.IsKind(objref.IDOf(apelm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apelm *AuthorizationProviderExtensionLoginManager) String() string {
+	defer runtime.KeepAlive(apelm)
 	return rt.Description(objref.IDOf(apelm))
 }
 
@@ -84,12 +90,15 @@ func (apelm *AuthorizationProviderExtensionLoginManager) WithLoginUserName(login
 
 // WithSsoTokens sets the single sign-on response tokens for the current user and extension.
 func (apelm *AuthorizationProviderExtensionLoginManager) WithSsoTokens(ssoTokens obj.Object) *AuthorizationProviderExtensionLoginManager {
+	defer runtime.KeepAlive(ssoTokens)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("setSsoTokens:"), objref.IDOf(ssoTokens))
 	return apelm
 }
 
 // SaveUserLoginConfiguration saves or replaces the user login configration.
 func (apelm *AuthorizationProviderExtensionLoginManager) SaveUserLoginConfiguration(userLoginConfiguration *AuthorizationProviderExtensionUserLoginConfiguration) error {
+	defer runtime.KeepAlive(apelm)
+	defer runtime.KeepAlive(userLoginConfiguration)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(apelm), objc.RegisterName("saveUserLoginConfiguration:error:"), objref.IDOf(userLoginConfiguration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -100,6 +109,8 @@ func (apelm *AuthorizationProviderExtensionLoginManager) SaveUserLoginConfigurat
 
 // SaveLoginConfiguration saves or replaces the login configuration.
 func (apelm *AuthorizationProviderExtensionLoginManager) SaveLoginConfiguration(loginConfiguration *AuthorizationProviderExtensionLoginConfiguration) error {
+	defer runtime.KeepAlive(apelm)
+	defer runtime.KeepAlive(loginConfiguration)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(apelm), objc.RegisterName("saveLoginConfiguration:error:"), objref.IDOf(loginConfiguration), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -110,29 +121,35 @@ func (apelm *AuthorizationProviderExtensionLoginManager) SaveLoginConfiguration(
 
 // SaveCertificateKeyType saves the provided certificate for the key type.
 func (apelm *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate obj.Object, keyType AuthorizationProviderExtensionKeyType) {
+	defer runtime.KeepAlive(apelm)
+	defer runtime.KeepAlive(certificate)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("saveCertificate:keyType:"), objref.IDOf(certificate), keyType)
 }
 
 // CopyKeyForKeyType retrieves the key for the specified platform single sign-on key type.
 func (apelm *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("copyKeyForKeyType:"), keyType)
 	return obj.Wrap(_r)
 }
 
 // CopyIdentityForKeyType retrieves the identity for the specified platform single sign-on key type.
 func (apelm *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("copyIdentityForKeyType:"), keyType)
 	return obj.Wrap(_r)
 }
 
 // BeginKeyRotationForKeyType generates a new key for the specified platform SSO key type using the strongest supported key strength returning the new key.  Nil is returned if there is an error generating the new key.
 func (apelm *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType) obj.Object {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("beginKeyRotationForKeyType:"), keyType)
 	return obj.Wrap(_r)
 }
 
 // CompleteKeyRotationForKeyType completes rotation for the key to replace the previous key.
 func (apelm *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyType(keyType AuthorizationProviderExtensionKeyType) {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("completeKeyRotationForKeyType:"), keyType)
 }
 
@@ -140,6 +157,7 @@ func (apelm *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForK
 //
 // UserNeedsReauthenticationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (apelm *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(apelm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -157,38 +175,45 @@ func (apelm *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticati
 
 // DeviceRegistrationsNeedsRepair invokes the device registration to run again so the current user can repair it.
 func (apelm *AuthorizationProviderExtensionLoginManager) DeviceRegistrationsNeedsRepair() {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("deviceRegistrationsNeedsRepair"))
 }
 
 // UserRegistrationsNeedsRepair invokes the user registration to run again so the current user can repair it.
 func (apelm *AuthorizationProviderExtensionLoginManager) UserRegistrationsNeedsRepair() {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("userRegistrationsNeedsRepair"))
 }
 
 // DecryptionKeysNeedRepair requests that the decryption keys are repaired.
 func (apelm *AuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepair() {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("decryptionKeysNeedRepair"))
 }
 
 // ResetKeys creates new encryption, signing, and Secure Enclave keys for the user.
 func (apelm *AuthorizationProviderExtensionLoginManager) ResetKeys() {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("resetKeys"))
 }
 
 // ResetDeviceKeys creates new Encryption, and Signing keys for the device or user.  The old keys will be destroyed.
 func (apelm *AuthorizationProviderExtensionLoginManager) ResetDeviceKeys() {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("resetDeviceKeys"))
 }
 
 // ResetUserSecureEnclaveKey creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
 func (apelm *AuthorizationProviderExtensionLoginManager) ResetUserSecureEnclaveKey() {
+	defer runtime.KeepAlive(apelm)
 	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("resetUserSecureEnclaveKey"))
 }
 
 // AttestKeyClientDataHashCompletion provides a new or cached attestation for the specified key type.
 //
 // AttestKeyClientDataHashCompletion blocks until the operation completes or ctx is cancelled.
-func (apelm *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash obj.Object) (result obj.Object, err error) {
+func (apelm *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(apelm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -200,7 +225,7 @@ func (apelm *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHash
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("attestKey:clientDataHash:completion:"), keyType, objref.IDOf(clientDataHash), _block)
+	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("attestKey:clientDataHash:completion:"), keyType, rt.BytesToNSData(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +238,8 @@ func (apelm *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHash
 // AttestPendingKeyClientDataHashCompletion provides a new or cached attestation for the specified pending key type.
 //
 // AttestPendingKeyClientDataHashCompletion blocks until the operation completes or ctx is cancelled.
-func (apelm *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash obj.Object) (result obj.Object, err error) {
+func (apelm *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(ctx context.Context, keyType AuthorizationProviderExtensionKeyType, clientDataHash []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(apelm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -225,7 +251,7 @@ func (apelm *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientD
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("attestPendingKey:clientDataHash:completion:"), keyType, objref.IDOf(clientDataHash), _block)
+	objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("attestPendingKey:clientDataHash:completion:"), keyType, rt.BytesToNSData(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -239,6 +265,7 @@ func (apelm *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientD
 //
 // PresentRegistrationViewControllerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (apelm *AuthorizationProviderExtensionLoginManager) PresentRegistrationViewControllerWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(apelm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -256,18 +283,21 @@ func (apelm *AuthorizationProviderExtensionLoginManager) PresentRegistrationView
 
 // IsDeviceRegistered reports whether the current device completed registration.
 func (apelm *AuthorizationProviderExtensionLoginManager) IsDeviceRegistered() bool {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[bool](objref.IDOf(apelm), objc.RegisterName("isDeviceRegistered"))
 	return _r
 }
 
 // IsUserRegistered reports whether current user completed registration.
 func (apelm *AuthorizationProviderExtensionLoginManager) IsUserRegistered() bool {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[bool](objref.IDOf(apelm), objc.RegisterName("isUserRegistered"))
 	return _r
 }
 
 // RegistrationToken returns the device registration token from the MDM profile.
 func (apelm *AuthorizationProviderExtensionLoginManager) RegistrationToken() string {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("registrationToken"))
 	if _r == 0 {
 		return ""
@@ -277,30 +307,35 @@ func (apelm *AuthorizationProviderExtensionLoginManager) RegistrationToken() str
 
 // AuthenticationMethod returns the authentication method used for the device.
 func (apelm *AuthorizationProviderExtensionLoginManager) AuthenticationMethod() AuthorizationProviderExtensionAuthenticationMethod {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[AuthorizationProviderExtensionAuthenticationMethod](objref.IDOf(apelm), objc.RegisterName("authenticationMethod"))
 	return _r
 }
 
 // ExtensionData returns the extension data from the MDM profile.
 func (apelm *AuthorizationProviderExtensionLoginManager) ExtensionData() obj.Object {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("extensionData"))
 	return obj.Wrap(_r)
 }
 
 // UserLoginConfiguration returns retrieves the current user login configuration for the extension.
 func (apelm *AuthorizationProviderExtensionLoginManager) UserLoginConfiguration() *AuthorizationProviderExtensionUserLoginConfiguration {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("userLoginConfiguration"))
 	return AuthorizationProviderExtensionUserLoginConfigurationFromID(_r)
 }
 
 // SsoTokens returns retrieves or sets the current SSO tokens response for the current user and extension.
 func (apelm *AuthorizationProviderExtensionLoginManager) SsoTokens() obj.Object {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("ssoTokens"))
 	return obj.Wrap(_r)
 }
 
 // LoginConfiguration returns retrieves or sets the current login configuration for the extension.
 func (apelm *AuthorizationProviderExtensionLoginManager) LoginConfiguration() *AuthorizationProviderExtensionLoginConfiguration {
+	defer runtime.KeepAlive(apelm)
 	_r := objc.Send[objc.ID](objref.IDOf(apelm), objc.RegisterName("loginConfiguration"))
 	return AuthorizationProviderExtensionLoginConfigurationFromID(_r)
 }

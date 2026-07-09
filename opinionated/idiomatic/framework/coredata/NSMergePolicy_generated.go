@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func mergePolicyAdopt(id objc.ID) *MergePolicy {
 
 // Description returns the object's -description text.
 func (mp *MergePolicy) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MergePolicy) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MergePolicy) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MergePolicy) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
@@ -78,6 +84,8 @@ func NewMergePolicyWithMergeType(ty MergePolicyType) *MergePolicy {
 
 // ResolveConflicts resolves the conflicts in a given list.
 func (mp *MergePolicy) ResolveConflicts(list obj.Object) error {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(list)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mp), objc.RegisterName("resolveConflicts:error:"), objref.IDOf(list), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -88,6 +96,7 @@ func (mp *MergePolicy) ResolveConflicts(list obj.Object) error {
 
 // ResolveOptimisticLockingVersionConflicts resolves the conflicts in a given list.
 func (mp *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error {
+	defer runtime.KeepAlive(mp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mp), objc.RegisterName("resolveOptimisticLockingVersionConflicts:error:"), purego.SliceToNSArray(list, func(_v *MergeConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -98,6 +107,7 @@ func (mp *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeCon
 
 // ResolveConstraintConflicts resolves the conflicts in a given list.
 func (mp *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) error {
+	defer runtime.KeepAlive(mp)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mp), objc.RegisterName("resolveConstraintConflicts:error:"), purego.SliceToNSArray(list, func(_v *ConstraintConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -108,6 +118,7 @@ func (mp *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) er
 
 // MergeType returns the merge type.
 func (mp *MergePolicy) MergeType() MergePolicyType {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[MergePolicyType](objref.IDOf(mp), objc.RegisterName("mergeType"))
 	return _r
 }

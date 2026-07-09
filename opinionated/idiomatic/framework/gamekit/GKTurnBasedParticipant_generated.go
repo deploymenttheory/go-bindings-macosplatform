@@ -5,6 +5,9 @@
 package gamekit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func turnBasedParticipantAdopt(id objc.ID) *TurnBasedParticipant {
 
 // Description returns the object's -description text.
 func (tbp *TurnBasedParticipant) Description() string {
+	defer runtime.KeepAlive(tbp)
 	return rt.Description(objref.IDOf(tbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tbp *TurnBasedParticipant) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tbp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tbp *TurnBasedParticipant) IsKind(className string) bool {
+	defer runtime.KeepAlive(tbp)
 	return rt.IsKind(objref.IDOf(tbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tbp *TurnBasedParticipant) String() string {
+	defer runtime.KeepAlive(tbp)
 	return rt.Description(objref.IDOf(tbp))
 }
 
@@ -80,36 +88,42 @@ func (tbp *TurnBasedParticipant) WithMatchOutcome(matchOutcome TurnBasedMatchOut
 
 // Player returns the player.
 func (tbp *TurnBasedParticipant) Player() *Player {
+	defer runtime.KeepAlive(tbp)
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // LastTurnDate returns the last turn date.
-func (tbp *TurnBasedParticipant) LastTurnDate() obj.Object {
+func (tbp *TurnBasedParticipant) LastTurnDate() time.Time {
+	defer runtime.KeepAlive(tbp)
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("lastTurnDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Status returns the status.
 func (tbp *TurnBasedParticipant) Status() TurnBasedParticipantStatus {
+	defer runtime.KeepAlive(tbp)
 	_r := objc.Send[TurnBasedParticipantStatus](objref.IDOf(tbp), objc.RegisterName("status"))
 	return _r
 }
 
 // MatchOutcome returns the match outcome.
 func (tbp *TurnBasedParticipant) MatchOutcome() TurnBasedMatchOutcome {
+	defer runtime.KeepAlive(tbp)
 	_r := objc.Send[TurnBasedMatchOutcome](objref.IDOf(tbp), objc.RegisterName("matchOutcome"))
 	return _r
 }
 
 // TimeoutDate returns the timeout date.
-func (tbp *TurnBasedParticipant) TimeoutDate() obj.Object {
+func (tbp *TurnBasedParticipant) TimeoutDate() time.Time {
+	defer runtime.KeepAlive(tbp)
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("timeoutDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // PlayerID returns the player ID.
 func (tbp *TurnBasedParticipant) PlayerID() string {
+	defer runtime.KeepAlive(tbp)
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""

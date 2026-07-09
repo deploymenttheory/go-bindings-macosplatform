@@ -10,9 +10,9 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -38,14 +38,18 @@ const ebipuregoImportPath = "github.com/ebitengine/purego"
 // cfuncABIType returns the type a parameter has when it is handed to the bound C
 // function, given its idiomatic type (sig) and the expression that produces the
 // argument (argExpr). When the argument is converted to an Objective-C pointer
-// (an object, an NSString, a URL, or an array), the C function receives an
-// objc.ID; otherwise the value — a C string, a number, an enum, or a value
-// struct — is passed unchanged.
+// (an object, an NSString, a URL, a date, a data buffer, or a collection), the C
+// function receives an objc.ID; otherwise the value — a C string, a number, an
+// enum, or a value struct — is passed unchanged.
 func cfuncABIType(sig, argExpr string) string {
 	if strings.HasPrefix(argExpr, "objc.NewBlock(") {
 		return "objc.Block"
 	}
-	for _, prefix := range []string{"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(", "rt.FileURL("} {
+	for _, prefix := range []string{
+		"purego.NSString(", "objref.IDOf(", "purego.SliceToNSArray(",
+		"rt.FileURL(", "rt.TimeToNSDate(", "rt.BytesToNSData(",
+		"rt.MapToDict(", "rt.SliceToNSSet(",
+	} {
 		if strings.HasPrefix(argExpr, prefix) {
 			return "objc.ID"
 		}
@@ -73,7 +77,13 @@ func cfuncRetABI(kind objKind, retType string) string {
 // methods path: "result" (or "ok" for bool) for the result, the parameter name
 // for each out, de-duplicated against the Go parameter names. It joins resolved
 // type strings only — the gather phase decided each type.
-func buildCFuncRetSig(retType string, kind objKind, outNames []string, outs []view.DispatchOut, sigParts []string) string {
+func buildCFuncRetSig(
+	retType string,
+	kind objKind,
+	outNames []string,
+	outs []view.DispatchOut,
+	sigParts []string,
+) string {
 	type ret struct{ name, typ string }
 	var rets []ret
 	if retType != "" {
@@ -192,7 +202,14 @@ func emitGenericFunctionWrappers(
 			// A pointer out-parameter is lifted into an extra return value: declare a
 			// local (named _outN so it never clashes with the readable return name),
 			// pass its address to the call, and return it after the result.
-			if outGo, isOut := outParamGoType(param.ObjCType, ctx, mapper, fc, rawPkgAlias, true); isOut {
+			if outGo, isOut := outParamGoType(
+				param.ObjCType,
+				ctx,
+				mapper,
+				fc,
+				rawPkgAlias,
+				true,
+			); isOut {
 				local := fmt.Sprintf("_out%d", len(outs))
 				outs = append(outs, view.DispatchOut{
 					GoName: local,
@@ -253,7 +270,9 @@ func emitGenericFunctionWrappers(
 		maps.Copy(fnImports, rimps)
 
 		goName := naming.ExportedFunctionName(fn.Name)
-		if stripped := strings.TrimPrefix(goName, prefix); stripped != goName &&
+		if curated, isCurated := fc.idio.FunctionGoName(fn.Name); isCurated {
+			goName = curated
+		} else if stripped := strings.TrimPrefix(goName, prefix); stripped != goName &&
 			stripped != "" && stripped[0] >= 'A' && stripped[0] <= 'Z' {
 			if !takenNames[stripped] {
 				goName = stripped
@@ -265,6 +284,36 @@ func emitGenericFunctionWrappers(
 		takenNames[goName] = true
 
 		varName := "_fn" + goName
+
+		// A return whose typedef is registered in the sidecar's error_typedefs
+		// (hv_return_t, kern_return_t, …) is a status code: the wrapper returns a
+		// Go error (nil on the success value) instead of a bare integer, with any
+		// lifted out-parameters returned on success and zeroed on failure.
+		if statusTypedef, isStatus := fc.idio.ErrorTypedefFor(
+			strings.TrimSpace(normaliseObjC(fn.Return.ObjCType)),
+		); isStatus && (kind == kindScalar || kind == kindEnum) {
+			fnImports["errkit"] = errkitImportPath
+			maps.Copy(imports, fnImports)
+			if slices.Contains(abiParts, "objc.ID") {
+				imports["objc"] = objcImportPath
+			}
+			funcs = append(funcs, buildStatusCodeFunc(statusCodeFuncInput{
+				goName:       goName,
+				fn:           fn,
+				framework:    framework,
+				varName:      varName,
+				retType:      retType,
+				statusDomain: statusTypedef.Domain,
+				successValue: statusTypedef.SuccessValue,
+				sigParts:     sigParts,
+				abiParts:     abiParts,
+				callArgs:     callArgs,
+				outs:         outs,
+				outNames:     outNames,
+			}, mapper))
+			continue
+		}
+
 		retSig := buildCFuncRetSig(retType, kind, outNames, outs, sigParts)
 		abiRet := cfuncRetABI(kind, retType)
 		// Bind the C function at its C-faithful ABI return width (e.g. int32 for a
@@ -414,29 +463,59 @@ func emitClassMethodFunctions(
 				continue
 			}
 
-			// The emitted function name is independent of the raw symbol it
-			// calls (entry.rawGoName), so pick the most fluent free name.
-			fluent := classFuncShortName(entry.goName, className)
-			if fluent == "" {
-				fluent = entry.goName
-			}
-			qualified := className + fluent
 			var name string
-			switch {
-			case isFreeFuncName(fluent, takenNames, handFuncs):
-				name = fluent
-			case isFreeFuncName(qualified, takenNames, handFuncs):
-				name = qualified
-			default:
-				mapper.AppendDiagnostic(
-					"%s: idiomatic class-method wrapper for +[%s %s] skipped (names %s/%s already taken)",
-					framework.Framework,
-					className,
-					method.Selector,
-					fluent,
-					qualified,
-				)
-				continue
+			if curated, isCurated := fc.idio.MethodGoName(
+				className,
+				method.Selector,
+				true,
+			); isCurated {
+				// A curated sidecar name is used verbatim (it still must be free).
+				if !isFreeFuncName(curated, takenNames, handFuncs) {
+					mapper.AppendDiagnostic(
+						"%s: curated name %s for +[%s %s] already taken; wrapper skipped",
+						framework.Framework, curated, className, method.Selector,
+					)
+					continue
+				}
+				name = curated
+			} else {
+				// An error-returning class function drops a redundant trailing
+				// error label, mirroring repairMethodNames (the free-name checks
+				// below still apply to whichever spelling is chosen).
+				if methodReturnsError(*entry) {
+					for _, suffix := range []string{"AndReturnError", "WithError", "Error"} {
+						if stripped, ok := strings.CutSuffix(entry.goName, suffix); ok {
+							if stripped != "" && stripped[0] >= 'A' && stripped[0] <= 'Z' {
+								entry.goName = stripped
+							}
+							break
+						}
+					}
+				}
+
+				// The emitted function name is independent of the raw symbol it
+				// calls (entry.rawGoName), so pick the most fluent free name.
+				fluent := classFuncShortName(entry.goName, className)
+				if fluent == "" {
+					fluent = entry.goName
+				}
+				qualified := className + fluent
+				switch {
+				case isFreeFuncName(fluent, takenNames, handFuncs):
+					name = fluent
+				case isFreeFuncName(qualified, takenNames, handFuncs):
+					name = qualified
+				default:
+					mapper.AppendDiagnostic(
+						"%s: idiomatic class-method wrapper for +[%s %s] skipped (names %s/%s already taken)",
+						framework.Framework,
+						className,
+						method.Selector,
+						fluent,
+						qualified,
+					)
+					continue
+				}
 			}
 			takenNames[name] = true
 			entry.goName = name
@@ -446,6 +525,13 @@ func emitClassMethodFunctions(
 				// The class receiver is objc.ID(_class(...)), not objref.IDOf(x);
 				// objref is needed only when an argument marshals through it.
 				delete(fnImps, "objref")
+			}
+			// A class function has no receiver to keep alive; runtime is needed
+			// only when a wrapper argument is (defer runtime.KeepAlive).
+			if len(keepAliveNames("", *entry)) == 0 {
+				delete(fnImps, "runtime")
+			} else {
+				fnImps["runtime"] = "runtime"
 			}
 			maps.Copy(imports, fnImps)
 			writeClassFunc(&body, fmt.Sprintf("objc.ID(_class(%q))", className), *entry)
@@ -614,6 +700,9 @@ func emitCFFunctionWrappers(
 			continue
 		}
 		goName := naming.ExportedFunctionName(fn.Name)
+		if curated, isCurated := fc.idio.FunctionGoName(fn.Name); isCurated {
+			goName = curated
+		}
 		if goName == "" || takenNames[goName] {
 			continue
 		}
@@ -741,4 +830,84 @@ func emitCFFunctionWrappers(
 		filepath.Join(outDir, fname),
 		assembleFile(pkgName, imports, body),
 	)
+}
+
+// statusCodeFuncInput carries the pieces emitGenericFunctionWrappers has
+// already resolved for one status-code-returning C function into
+// buildStatusCodeFunc.
+type statusCodeFuncInput struct {
+	goName       string
+	fn           meta.Function
+	framework    *meta.FrameworkMeta
+	varName      string
+	retType      string
+	statusDomain string
+	successValue int64
+	sigParts     []string
+	abiParts     []string
+	callArgs     []string
+	outs         []view.DispatchOut
+	outNames     []string
+}
+
+// buildStatusCodeFunc assembles the view for a C function whose registered
+// status-code return becomes a Go error (nil on the success value): any lifted
+// out-parameters are declared as locals, returned on success, and zeroed on
+// failure alongside the error.
+func buildStatusCodeFunc(in statusCodeFuncInput, mapper *typemap.Mapper) view.Func {
+	preLines := make([]string, 0, len(in.outs))
+	failParts := make([]string, 0, len(in.outs)+1)
+	okParts := make([]string, 0, len(in.outs)+1)
+	retParts := make([]string, 0, len(in.outs)+1)
+	returnNamesTaken := map[string]bool{}
+	for _, sigPart := range in.sigParts {
+		if paramName, _, hasSpace := strings.Cut(sigPart, " "); hasSpace {
+			returnNamesTaken[paramName] = true
+		}
+	}
+	for i, out := range in.outs {
+		preLines = append(preLines, "var "+out.GoName+" "+out.GoType)
+		// zeroLiteral's "0" covers scalars and enums; a lifted value-struct
+		// out (e.g. HvVcpuSmeStateT) zeroes to its composite literal.
+		zero := out.Zero
+		if mapper.EmittableStructs[out.GoType] {
+			zero = out.GoType + "{}"
+		}
+		failParts = append(failParts, zero)
+		okParts = append(okParts, out.GoName)
+		returnName := safeReturnName(in.outNames[i], returnNamesTaken)
+		returnNamesTaken[returnName] = true
+		retParts = append(retParts, returnName+" "+out.GoType)
+	}
+	failParts = append(failParts, "_err")
+	okParts = append(okParts, "nil")
+	retSig := " error"
+	if len(retParts) > 0 {
+		retSig = " (" + strings.Join(append(retParts, "err error"), ", ") + ")"
+	}
+	return view.Func{
+		GoName:  in.goName,
+		CName:   in.fn.Name,
+		VarName: in.varName,
+		CommentLine: fmt.Sprintf(
+			"// %s reports an error if the %s framework function %s fails.\n",
+			in.goName,
+			in.framework.Framework,
+			in.fn.Name,
+		),
+		ABIParams: in.abiParts,
+		ABIRet:    mapper.GoABIType(in.fn.Return.ObjCType, in.retType),
+		SigParams: in.sigParts,
+		RetSig:    retSig,
+		Kind:      view.FuncStatusCode,
+		PreLines:  preLines,
+		Call:      fmt.Sprintf("%s(%s)", in.varName, strings.Join(in.callArgs, ", ")),
+		ErrExpr: fmt.Sprintf(
+			"errkit.FromCode(%q, int64(_rc), %d)",
+			in.statusDomain,
+			in.successValue,
+		),
+		FailRet: strings.Join(failParts, ", "),
+		OkRet:   strings.Join(okParts, ", "),
+	}
 }

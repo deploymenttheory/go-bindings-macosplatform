@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,8 @@ func NewFetchRecordChangesOperation() *FetchRecordChangesOperation {
 
 // NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken creates an operation for fetching changes in the specified record zone.
 func NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken(recordZoneID *RecordZoneID, previousServerChangeToken *ServerChangeToken) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(recordZoneID)
+	defer runtime.KeepAlive(previousServerChangeToken)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordChangesOperation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneID:previousServerChangeToken:"), objref.IDOf(recordZoneID), objref.IDOf(previousServerChangeToken))
 	return fetchRecordChangesOperationAdopt(_id)
@@ -61,12 +65,14 @@ func NewFetchRecordChangesOperationWithRecordZoneIDPreviousServerChangeToken(rec
 
 // WithRecordZoneID sets the ID of the record zone with the records you want to fetch.
 func (frco *FetchRecordChangesOperation) WithRecordZoneID(recordZoneID *RecordZoneID) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(recordZoneID)
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setRecordZoneID:"), objref.IDOf(recordZoneID))
 	return frco
 }
 
 // WithPreviousServerChangeToken sets the token that identifies the starting point for retrieving changes.
 func (frco *FetchRecordChangesOperation) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(previousServerChangeToken)
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 	return frco
 }
@@ -98,18 +104,21 @@ func (frco *FetchRecordChangesOperation) WithRecordWithIDWasDeletedBlock(recordW
 
 // WithDatabase sets the database that the operation uses.
 func (frco *FetchRecordChangesOperation) WithDatabase(database *Database) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return frco
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (frco *FetchRecordChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return frco
 }
 
 // WithGroup sets the operation’s group.
 func (frco *FetchRecordChangesOperation) WithGroup(group *OperationGroup) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return frco
 }
@@ -122,6 +131,7 @@ func (frco *FetchRecordChangesOperation) WithLongLivedOperationWasPersistedBlock
 
 // WithContainer sets the operation's container.
 func (frco *FetchRecordChangesOperation) WithContainer(container *Container) *FetchRecordChangesOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return frco
 }
@@ -152,18 +162,21 @@ func (frco *FetchRecordChangesOperation) WithTimeoutIntervalForResource(timeoutI
 
 // RecordZoneID returns the ID of the record zone with the records you want to fetch. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value before executing the operation or submitting it to a queue.
 func (frco *FetchRecordChangesOperation) RecordZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(frco)
 	_r := objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("recordZoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
 // PreviousServerChangeToken returns the token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. The token passes as a parameter to your “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes that occur after the previous fetch request. Tokens are opaque data objects that you can write to disk safely and reuse later. Typically, you set the value of this property when you initialize the operation object. If you intend to change the record zone, update the value of the property before executing the operation or submitting it to a queue.
 func (frco *FetchRecordChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
+	defer runtime.KeepAlive(frco)
 	_r := objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("previousServerChangeToken"))
 	return ServerChangeTokenFromID(_r)
 }
 
 // ResultsLimit returns the maximum number of changed records to report with this operation object. Use this property to limit the number of results in situations where you expect the number of changed records to be large. The default value is 0, which causes the server to return an appropriate number of results using dynamic conditions. When the number of returned results exceeds the results limit, the operation object sets the “CKFetchRecordChangesOperation/moreComing“ property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. In your block, check the value of that property, and if it's <doc://com.apple.documentation/documentation/swift/true>, create a new “CKFetchRecordChangesOperation“ object to fetch more results.
 func (frco *FetchRecordChangesOperation) ResultsLimit() int {
+	defer runtime.KeepAlive(frco)
 	_r := objc.Send[int](objref.IDOf(frco), objc.RegisterName("resultsLimit"))
 	return _r
 }
@@ -172,12 +185,14 @@ func (frco *FetchRecordChangesOperation) ResultsLimit() int {
 //
 // DesiredKeys returns the collection as a Go slice.
 func (frco *FetchRecordChangesOperation) DesiredKeys() []obj.Object {
+	defer runtime.KeepAlive(frco)
 	_arr := objc.Send[objc.ID](objref.IDOf(frco), objc.RegisterName("desiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MoreComing reports whether more results are available. If the server is unable to deliver all of the changed results with this operation object, it sets this property to <doc://com.apple.documentation/documentation/swift/true> before executing the block in the “CKFetchRecordChangesOperation/fetchRecordChangesCompletionBlock“ property. To fetch the remaining changes, create a new “CKFetchRecordChangesOperation“ object using the change token that the server returns.
 func (frco *FetchRecordChangesOperation) MoreComing() bool {
+	defer runtime.KeepAlive(frco)
 	_r := objc.Send[bool](objref.IDOf(frco), objc.RegisterName("moreComing"))
 	return _r
 }

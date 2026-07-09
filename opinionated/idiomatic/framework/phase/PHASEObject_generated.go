@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,27 +53,33 @@ func objectAdopt(id objc.ID) *Object {
 
 // Description returns the object's -description text.
 func (o *Object) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Object) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Object) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Object) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // NewObjectWithEngine creates an object in the scene.
 func NewObjectWithEngine(engine *Engine) *Object {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:"), objref.IDOf(engine))
 	return objectAdopt(_id)
@@ -92,6 +99,8 @@ func (o *Object) WithWorldTransform(worldTransform unsafe.Pointer) *Object {
 
 // AddChild adds the given object as a child.
 func (o *Object) AddChild(child *Object) error {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(child)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(o), objc.RegisterName("addChild:error:"), objref.IDOf(child), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -102,16 +111,20 @@ func (o *Object) AddChild(child *Object) error {
 
 // RemoveChild removes the given object as a child.
 func (o *Object) RemoveChild(child *Object) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeChild:"), objref.IDOf(child))
 }
 
 // RemoveChildren removes all child objects from the given object.
 func (o *Object) RemoveChildren() {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeChildren"))
 }
 
 // Parent returns the parent of this object, or nil if this object doesn't have a parent object.
 func (o *Object) Parent() *Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("parent"))
 	return ObjectFromID(_r)
 }
@@ -120,6 +133,7 @@ func (o *Object) Parent() *Object {
 //
 // Children returns the collection as a Go slice.
 func (o *Object) Children() []*Object {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Object { return ObjectFromID(_id) })
 }

@@ -5,11 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -55,6 +57,16 @@ func NewPlayerPlaybackCoordinator() *PlayerPlaybackCoordinator {
 	return playerPlaybackCoordinatorAdopt(_id)
 }
 
+// WithDelegate sets a delegate object for the playback coordinator.
+func (ppc *PlayerPlaybackCoordinator) WithDelegate(delegate PlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator {
+	_shim := newPlayerPlaybackCoordinatorDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ppc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ppc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ppc
+}
+
 // WithSuspensionReasonsThatTriggerWaiting sets the reasons that cause a coordinator to suspend playback.
 func (ppc *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
@@ -70,12 +82,15 @@ func (ppc *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(paus
 
 // Player returns the AVPlayer this coordinator is controlling.
 func (ppc *PlayerPlaybackCoordinator) Player() *Player {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // CoordinateUsingCoordinationMedium connects the playback coordinator to the coordination medium
 func (ppc *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error {
+	defer runtime.KeepAlive(ppc)
+	defer runtime.KeepAlive(coordinationMedium)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ppc), objc.RegisterName("coordinateUsingCoordinationMedium:error:"), objref.IDOf(coordinationMedium), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -86,6 +101,7 @@ func (ppc *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordina
 
 // PlaybackCoordinationMedium returns the playback coordination medium.
 func (ppc *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("playbackCoordinationMedium"))
 	return PlaybackCoordinationMediumFromID(_r)
 }

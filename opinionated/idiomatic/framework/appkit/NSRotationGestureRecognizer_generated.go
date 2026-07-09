@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -76,6 +79,7 @@ func (rgr *RotationGestureRecognizer) WithRotationInDegrees(rotationInDegrees fl
 
 // WithTarget sets the object that implements the action method.
 func (rgr *RotationGestureRecognizer) WithTarget(target obj.Object) *RotationGestureRecognizer {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -90,6 +94,18 @@ func (rgr *RotationGestureRecognizer) WithState(state GestureRecognizerState) *R
 	return rgr
 }
 
+// WithDelegate sets the delegate of the gesture recognizer.
+func (rgr *RotationGestureRecognizer) WithDelegate(delegate GestureRecognizerDelegate) *RotationGestureRecognizer {
+	_shim := newGestureRecognizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(rgr), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rgr), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return rgr
+}
+
 // WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
 func (rgr *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGestureRecognizer {
 	purego.Main(func() {
@@ -100,6 +116,7 @@ func (rgr *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGesture
 
 // WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
 func (rgr *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -172,6 +189,7 @@ func (rgr *RotationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes To
 
 // Rotation returns the rotation.
 func (rgr *RotationGestureRecognizer) Rotation() float64 {
+	defer runtime.KeepAlive(rgr)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -185,6 +203,7 @@ func (rgr *RotationGestureRecognizer) Rotation() float64 {
 
 // RotationInDegrees returns the rotation in degrees.
 func (rgr *RotationGestureRecognizer) RotationInDegrees() float64 {
+	defer runtime.KeepAlive(rgr)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

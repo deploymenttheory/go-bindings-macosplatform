@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func garbageCollectorAdopt(id objc.ID) *GarbageCollector {
 
 // Description returns the object's -description text.
 func (gc *GarbageCollector) Description() string {
+	defer runtime.KeepAlive(gc)
 	return rt.Description(objref.IDOf(gc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gc *GarbageCollector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gc *GarbageCollector) IsKind(className string) bool {
+	defer runtime.KeepAlive(gc)
 	return rt.IsKind(objref.IDOf(gc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gc *GarbageCollector) String() string {
+	defer runtime.KeepAlive(gc)
 	return rt.Description(objref.IDOf(gc))
 }
 
@@ -81,49 +87,57 @@ func (gc *GarbageCollector) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (gc *GarbageCollector) WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector {
-	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (gc *GarbageCollector) WithScriptingProperties(scriptingProperties map[string]obj.Object) *GarbageCollector {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return gc
 }
 
 // IsCollecting reports whether returns a Boolean value that indicates whether a collection is currently in progress.
 func (gc *GarbageCollector) IsCollecting() bool {
+	defer runtime.KeepAlive(gc)
 	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isCollecting"))
 	return _r
 }
 
 // Disable temporarily disables collections.
 func (gc *GarbageCollector) Disable() {
+	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("disable"))
 }
 
 // Enable enables collection after collection has been disabled.
 func (gc *GarbageCollector) Enable() {
+	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("enable"))
 }
 
 // IsEnabled reports whether returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
 func (gc *GarbageCollector) IsEnabled() bool {
+	defer runtime.KeepAlive(gc)
 	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // CollectIfNeeded tells the receiver to collect if memory consumption thresholds have been exceeded.
 func (gc *GarbageCollector) CollectIfNeeded() {
+	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("collectIfNeeded"))
 }
 
 // CollectExhaustively tells the receiver to collect iteratively.
 func (gc *GarbageCollector) CollectExhaustively() {
+	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("collectExhaustively"))
 }
 
 // DisableCollectorForPointer specifies that a given pointer will not be collected.
 func (gc *GarbageCollector) DisableCollectorForPointer(ptr unsafe.Pointer) {
+	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("disableCollectorForPointer:"), ptr)
 }
 
 // EnableCollectorForPointer specifies that a given pointer may be collected.
 func (gc *GarbageCollector) EnableCollectorForPointer(ptr unsafe.Pointer) {
+	defer runtime.KeepAlive(gc)
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("enableCollectorForPointer:"), ptr)
 }

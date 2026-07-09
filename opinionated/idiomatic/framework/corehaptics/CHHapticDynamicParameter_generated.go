@@ -5,7 +5,10 @@
 package corehaptics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func hapticDynamicParameterAdopt(id objc.ID) *HapticDynamicParameter {
 
 // Description returns the object's -description text.
 func (hdp *HapticDynamicParameter) Description() string {
+	defer runtime.KeepAlive(hdp)
 	return rt.Description(objref.IDOf(hdp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hdp *HapticDynamicParameter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hdp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hdp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hdp *HapticDynamicParameter) IsKind(className string) bool {
+	defer runtime.KeepAlive(hdp)
 	return rt.IsKind(objref.IDOf(hdp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hdp *HapticDynamicParameter) String() string {
+	defer runtime.KeepAlive(hdp)
 	return rt.Description(objref.IDOf(hdp))
 }
 
 // NewHapticDynamicParameterWithParameterIDValueRelativeTime creates a dynamic parameter from its ID, value, and start time.
 func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID obj.Object, value float32, time_ float64) *HapticDynamicParameter {
+	defer runtime.KeepAlive(parameterID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticDynamicParameter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:relativeTime:"), objref.IDOf(parameterID), value, time_)
 	return hapticDynamicParameterAdopt(_id)
@@ -86,19 +95,22 @@ func (hdp *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *Hapti
 }
 
 // ParameterID returns the parameter ID.
-func (hdp *HapticDynamicParameter) ParameterID() obj.Object {
+func (hdp *HapticDynamicParameter) ParameterID() *foundation.String {
+	defer runtime.KeepAlive(hdp)
 	_r := objc.Send[objc.ID](objref.IDOf(hdp), objc.RegisterName("parameterID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Value returns the value.
 func (hdp *HapticDynamicParameter) Value() float32 {
+	defer runtime.KeepAlive(hdp)
 	_r := objc.Send[float32](objref.IDOf(hdp), objc.RegisterName("value"))
 	return _r
 }
 
 // RelativeTime returns the relative time.
 func (hdp *HapticDynamicParameter) RelativeTime() float64 {
+	defer runtime.KeepAlive(hdp)
 	_r := objc.Send[float64](objref.IDOf(hdp), objc.RegisterName("relativeTime"))
 	return _r
 }

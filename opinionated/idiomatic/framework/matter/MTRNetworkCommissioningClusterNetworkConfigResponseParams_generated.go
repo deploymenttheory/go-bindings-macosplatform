@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRNetworkCommissioningClusterNetworkConfigResponseParamsAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) Description() string {
+	defer runtime.KeepAlive(mnccncrp)
 	return rt.Description(objref.IDOf(mnccncrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mnccncrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mnccncrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mnccncrp)
 	return rt.IsKind(objref.IDOf(mnccncrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) String() string {
+	defer runtime.KeepAlive(mnccncrp)
 	return rt.Description(objref.IDOf(mnccncrp))
 }
 
-// NewMTRNetworkCommissioningClusterNetworkConfigResponseParamsWithResponseValueError initialize an MTRNetworkCommissioningClusterNetworkConfigResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRNetworkCommissioningClusterNetworkConfigResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+// NewMTRNetworkCommissioningClusterNetworkConfigResponseParamsWithResponseValue initialize an MTRNetworkCommissioningClusterNetworkConfigResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRNetworkCommissioningClusterNetworkConfigResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterNetworkConfigResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRNetworkCommissioningClusterNetworkConfigResponseParamsWithResponseVal
 
 // WithNetworkingStatus sets the networking status.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
+	defer runtime.KeepAlive(networkingStatus)
 	objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 	return mnccncrp
 }
@@ -92,24 +100,28 @@ func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithD
 
 // WithNetworkIndex sets the network index.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithNetworkIndex(networkIndex obj.Object) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
+	defer runtime.KeepAlive(networkIndex)
 	objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("setNetworkIndex:"), objref.IDOf(networkIndex))
 	return mnccncrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mnccncrp
 }
 
 // NetworkingStatus returns the networking status.
-func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkingStatus() obj.Object {
+func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkingStatus() *foundation.Number {
+	defer runtime.KeepAlive(mnccncrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("networkingStatus"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DebugText returns the debug text.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) DebugText() string {
+	defer runtime.KeepAlive(mnccncrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("debugText"))
 	if _r == 0 {
 		return ""
@@ -118,13 +130,15 @@ func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) Debug
 }
 
 // NetworkIndex returns the network index.
-func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkIndex() obj.Object {
+func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkIndex() *foundation.Number {
+	defer runtime.KeepAlive(mnccncrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("networkIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mnccncrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

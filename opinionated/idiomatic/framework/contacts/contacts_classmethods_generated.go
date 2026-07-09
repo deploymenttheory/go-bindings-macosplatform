@@ -5,12 +5,15 @@
 package contacts
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,43 +27,45 @@ func LocalizedStringForKey(key string) string {
 }
 
 // PredicateForContactsMatchingName returns a predicate to find the contacts matching the specified name.
-func PredicateForContactsMatchingName(name string) obj.Object {
+func PredicateForContactsMatchingName(name string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("predicateForContactsMatchingName:"), purego.NSString(name))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContactsMatchingEmailAddress returns a predicate to find the contacts whose email address matches the specified value.
-func PredicateForContactsMatchingEmailAddress(emailAddress string) obj.Object {
+func PredicateForContactsMatchingEmailAddress(emailAddress string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("predicateForContactsMatchingEmailAddress:"), purego.NSString(emailAddress))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContactsMatchingPhoneNumber returns a predicate to find the contacts whose phone number matches the specified value.
-func PredicateForContactsMatchingPhoneNumber(phoneNumber *PhoneNumber) obj.Object {
+func PredicateForContactsMatchingPhoneNumber(phoneNumber *PhoneNumber) *foundation.Predicate {
+	defer runtime.KeepAlive(phoneNumber)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("predicateForContactsMatchingPhoneNumber:"), objref.IDOf(phoneNumber))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContactsWithIdentifiers returns a predicate to find the contacts matching the specified identifiers.
-func PredicateForContactsWithIdentifiers(identifiers []string) obj.Object {
+func PredicateForContactsWithIdentifiers(identifiers []string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("predicateForContactsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContactsInGroupWithIdentifier returns a predicate to find the contacts that are members in the specified group.
-func PredicateForContactsInGroupWithIdentifier(groupIdentifier string) obj.Object {
+func PredicateForContactsInGroupWithIdentifier(groupIdentifier string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("predicateForContactsInGroupWithIdentifier:"), purego.NSString(groupIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContactsInContainerWithIdentifier returns a predicate to find the contacts in the specified container.
-func PredicateForContactsInContainerWithIdentifier(containerIdentifier string) obj.Object {
+func PredicateForContactsInContainerWithIdentifier(containerIdentifier string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("predicateForContactsInContainerWithIdentifier:"), purego.NSString(containerIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // StringFromContactStyle returns the contact name, formatted with the specified formatter.
 func StringFromContactStyle(contact *Contact, style ContactFormatterStyle) string {
+	defer runtime.KeepAlive(contact)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContactFormatter")), objc.RegisterName("stringFromContact:style:"), objref.IDOf(contact), style)
 	if _r == 0 {
 		return ""
@@ -69,19 +74,23 @@ func StringFromContactStyle(contact *Contact, style ContactFormatterStyle) strin
 }
 
 // AttributedStringFromContactStyleDefaultAttributes formats the contact name as an attributed string.
-func AttributedStringFromContactStyleDefaultAttributes(contact *Contact, style ContactFormatterStyle, attributes obj.Object) obj.Object {
+func AttributedStringFromContactStyleDefaultAttributes(contact *Contact, style ContactFormatterStyle, attributes obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(contact)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContactFormatter")), objc.RegisterName("attributedStringFromContact:style:defaultAttributes:"), objref.IDOf(contact), style, objref.IDOf(attributes))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // NameOrderForContact returns the display name order.
 func NameOrderForContact(contact *Contact) ContactDisplayNameOrder {
+	defer runtime.KeepAlive(contact)
 	_r := objc.Send[ContactDisplayNameOrder](objc.ID(_class("CNContactFormatter")), objc.RegisterName("nameOrderForContact:"), objref.IDOf(contact))
 	return _r
 }
 
 // DelimiterForContact returns the delimiter to use between name components.
 func DelimiterForContact(contact *Contact) string {
+	defer runtime.KeepAlive(contact)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContactFormatter")), objc.RegisterName("delimiterForContact:"), objref.IDOf(contact))
 	if _r == 0 {
 		return ""
@@ -101,20 +110,20 @@ func AuthorizationStatusForEntityType(entityType EntityType) AuthorizationStatus
 	return _r
 }
 
-// DataWithContactsError returns the vCard representation of the specified contacts.
-func DataWithContactsError(contacts []*Contact) (result obj.Object, err error) {
+// DataWithContacts returns the vCard representation of the specified contacts.
+func DataWithContacts(contacts []*Contact) (result []byte, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContactVCardSerialization")), objc.RegisterName("dataWithContacts:error:"), purego.SliceToNSArray(contacts, func(_v *Contact) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
-// ContactsWithDataError returns the contacts from the vCard data.
-func ContactsWithDataError(data obj.Object) (result []*Contact, err error) {
+// ContactsWithData returns the contacts from the vCard data.
+func ContactsWithData(data []byte) (result []*Contact, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objc.ID(_class("CNContactVCardSerialization")), objc.RegisterName("contactsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objc.ID(_class("CNContactVCardSerialization")), objc.RegisterName("contactsWithData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -128,39 +137,39 @@ func SharedDefaults() *ContactsUserDefaults {
 }
 
 // PredicateForContainersWithIdentifiers returns a predicate to find the containers with the specified identifiers.
-func PredicateForContainersWithIdentifiers(identifiers []string) obj.Object {
+func PredicateForContainersWithIdentifiers(identifiers []string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContainer")), objc.RegisterName("predicateForContainersWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContainerOfContactWithIdentifier returns a predicate to find the container of the specified contact.
-func PredicateForContainerOfContactWithIdentifier(contactIdentifier string) obj.Object {
+func PredicateForContainerOfContactWithIdentifier(contactIdentifier string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContainer")), objc.RegisterName("predicateForContainerOfContactWithIdentifier:"), purego.NSString(contactIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForContainerOfGroupWithIdentifier returns a predicate to find the container of the specified group.
-func PredicateForContainerOfGroupWithIdentifier(groupIdentifier string) obj.Object {
+func PredicateForContainerOfGroupWithIdentifier(groupIdentifier string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNContainer")), objc.RegisterName("predicateForContainerOfGroupWithIdentifier:"), purego.NSString(groupIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForGroupsWithIdentifiers returns a predicate to find groups with the specified identifiers.
-func PredicateForGroupsWithIdentifiers(identifiers []string) obj.Object {
+func PredicateForGroupsWithIdentifiers(identifiers []string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNGroup")), objc.RegisterName("predicateForGroupsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForSubgroupsInGroupWithIdentifier returns a predicate to find subgroups in the specified parent group.
-func PredicateForSubgroupsInGroupWithIdentifier(parentGroupIdentifier string) obj.Object {
+func PredicateForSubgroupsInGroupWithIdentifier(parentGroupIdentifier string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNGroup")), objc.RegisterName("predicateForSubgroupsInGroupWithIdentifier:"), purego.NSString(parentGroupIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // PredicateForGroupsInContainerWithIdentifier returns a predicate to find groups in the specified container.
-func PredicateForGroupsInContainerWithIdentifier(containerIdentifier string) obj.Object {
+func PredicateForGroupsInContainerWithIdentifier(containerIdentifier string) *foundation.Predicate {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNGroup")), objc.RegisterName("predicateForGroupsInContainerWithIdentifier:"), purego.NSString(containerIdentifier))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // CNInstantMessageAddressLocalizedStringForKey returns a string containing the localized property name.
@@ -183,6 +192,7 @@ func LocalizedStringForService(service string) string {
 
 // LabeledValueWithLabelValue returns a new labeled value identifier.
 func LabeledValueWithLabelValue(label string, value obj.Object) obj.Object {
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNLabeledValue")), objc.RegisterName("labeledValueWithLabel:value:"), purego.NSString(label), objref.IDOf(value))
 	return obj.Wrap(_r)
 }
@@ -219,6 +229,7 @@ func CNPostalAddressLocalizedStringForKey(key string) string {
 
 // StringFromPostalAddressStyle returns a postal address as a string and formatted for the specified style.
 func StringFromPostalAddressStyle(postalAddress *PostalAddress, style PostalAddressFormatterStyle) string {
+	defer runtime.KeepAlive(postalAddress)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNPostalAddressFormatter")), objc.RegisterName("stringFromPostalAddress:style:"), objref.IDOf(postalAddress), style)
 	if _r == 0 {
 		return ""
@@ -227,9 +238,11 @@ func StringFromPostalAddressStyle(postalAddress *PostalAddress, style PostalAddr
 }
 
 // AttributedStringFromPostalAddressStyleWithDefaultAttributes returns a postal address as an attributed string and formatted for the specified style.
-func AttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress *PostalAddress, style PostalAddressFormatterStyle, attributes obj.Object) obj.Object {
+func AttributedStringFromPostalAddressStyleWithDefaultAttributes(postalAddress *PostalAddress, style PostalAddressFormatterStyle, attributes obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(postalAddress)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objc.ID(_class("CNPostalAddressFormatter")), objc.RegisterName("attributedStringFromPostalAddress:style:withDefaultAttributes:"), objref.IDOf(postalAddress), style, objref.IDOf(attributes))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // CNSocialProfileLocalizedStringForKey returns the localized name of the property for the specified key.

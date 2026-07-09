@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,34 +49,40 @@ func adjustmentDataAdopt(id objc.ID) *AdjustmentData {
 
 // Description returns the object's -description text.
 func (ad *AdjustmentData) Description() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ad *AdjustmentData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ad *AdjustmentData) IsKind(className string) bool {
+	defer runtime.KeepAlive(ad)
 	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ad *AdjustmentData) String() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
 // NewAdjustmentDataWithFormatIdentifierFormatVersionData initializes an adjustment object with the specified format and data.
-func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier string, formatVersion string, data obj.Object) *AdjustmentData {
+func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier string, formatVersion string, data []byte) *AdjustmentData {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHAdjustmentData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatIdentifier:formatVersion:data:"), purego.NSString(formatIdentifier), purego.NSString(formatVersion), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatIdentifier:formatVersion:data:"), purego.NSString(formatIdentifier), purego.NSString(formatVersion), rt.BytesToNSData(data))
 	return adjustmentDataAdopt(_id)
 }
 
 // FormatIdentifier returns the format identifier.
 func (ad *AdjustmentData) FormatIdentifier() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("formatIdentifier"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (ad *AdjustmentData) FormatIdentifier() string {
 
 // FormatVersion returns the format version.
 func (ad *AdjustmentData) FormatVersion() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("formatVersion"))
 	if _r == 0 {
 		return ""
@@ -92,7 +101,8 @@ func (ad *AdjustmentData) FormatVersion() string {
 }
 
 // Data returns the data.
-func (ad *AdjustmentData) Data() obj.Object {
+func (ad *AdjustmentData) Data() []byte {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

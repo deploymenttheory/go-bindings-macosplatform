@@ -674,20 +674,20 @@ func KLVerifyInitialTickets(inPrincipal obj.Object, inFailIfNoHostKey int8, outC
 var _fnAppleGssKrb5ExportAuthdataIfRelevantContext func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) uint32
 
 // AppleGssKrb5ExportAuthdataIfRelevantContext calls the Kerberos framework function apple_gss_krb5_export_authdata_if_relevant_context.
-func AppleGssKrb5ExportAuthdataIfRelevantContext(context_handle unsafe.Pointer, version uint32, kctx unsafe.Pointer) (result uint32, minor_status uint32) {
+func AppleGssKrb5ExportAuthdataIfRelevantContext(contextHandle unsafe.Pointer, version uint32, kctx unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAppleGssKrb5ExportAuthdataIfRelevantContext == nil {
 		ebipurego.RegisterLibFunc(&_fnAppleGssKrb5ExportAuthdataIfRelevantContext, _lib, "apple_gss_krb5_export_authdata_if_relevant_context")
 	}
 	var _out0 uint32
-	_ret := _fnAppleGssKrb5ExportAuthdataIfRelevantContext(unsafe.Pointer(&_out0), context_handle, version, kctx)
+	_ret := _fnAppleGssKrb5ExportAuthdataIfRelevantContext(unsafe.Pointer(&_out0), contextHandle, version, kctx)
 	return _ret, _out0
 }
 
 var _fnAppleGssKrb5FreeAuthdataIfRelevant func(unsafe.Pointer, unsafe.Pointer) uint32
 
 // AppleGssKrb5FreeAuthdataIfRelevant calls the Kerberos framework function apple_gss_krb5_free_authdata_if_relevant.
-func AppleGssKrb5FreeAuthdataIfRelevant(kctx unsafe.Pointer) (result uint32, minor_status uint32) {
+func AppleGssKrb5FreeAuthdataIfRelevant(kctx unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAppleGssKrb5FreeAuthdataIfRelevant == nil {
 		ebipurego.RegisterLibFunc(&_fnAppleGssKrb5FreeAuthdataIfRelevant, _lib, "apple_gss_krb5_free_authdata_if_relevant")
@@ -763,46 +763,46 @@ func GssDuplicateName(arg2 obj.Object, arg3 unsafe.Pointer) (result uint32, arg 
 var _fnGssKrb5CcacheName func(unsafe.Pointer, string, string) uint32
 
 // GssKrb5CcacheName calls the Kerberos framework function gss_krb5_ccache_name.
-func GssKrb5CcacheName(name string, out_name string) (result uint32, minor_status uint32) {
+func GssKrb5CcacheName(name string, outName string) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5CcacheName == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5CcacheName, _lib, "gss_krb5_ccache_name")
 	}
 	var _out0 uint32
-	_ret := _fnGssKrb5CcacheName(unsafe.Pointer(&_out0), name, out_name)
+	_ret := _fnGssKrb5CcacheName(unsafe.Pointer(&_out0), name, outName)
 	return _ret, _out0
 }
 
 var _fnGssKrb5CopyCcache func(unsafe.Pointer, objc.ID, objc.ID) uint32
 
 // GssKrb5CopyCcache calls the Kerberos framework function gss_krb5_copy_ccache.
-func GssKrb5CopyCcache(cred_handle obj.Object, out_ccache obj.Object) (result uint32, minor_status uint32) {
+func GssKrb5CopyCcache(credHandle obj.Object, outCcache obj.Object) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5CopyCcache == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5CopyCcache, _lib, "gss_krb5_copy_ccache")
 	}
 	var _out0 uint32
-	_ret := _fnGssKrb5CopyCcache(unsafe.Pointer(&_out0), objref.IDOf(cred_handle), objref.IDOf(out_ccache))
+	_ret := _fnGssKrb5CopyCcache(unsafe.Pointer(&_out0), objref.IDOf(credHandle), objref.IDOf(outCcache))
 	return _ret, _out0
 }
 
 var _fnGssKrb5ExportLucidSecContext func(unsafe.Pointer, unsafe.Pointer, uint32, unsafe.Pointer) uint32
 
 // GssKrb5ExportLucidSecContext calls the Kerberos framework function gss_krb5_export_lucid_sec_context.
-func GssKrb5ExportLucidSecContext(context_handle unsafe.Pointer, version uint32, kctx unsafe.Pointer) (result uint32, minor_status uint32) {
+func GssKrb5ExportLucidSecContext(contextHandle unsafe.Pointer, version uint32, kctx unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5ExportLucidSecContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5ExportLucidSecContext, _lib, "gss_krb5_export_lucid_sec_context")
 	}
 	var _out0 uint32
-	_ret := _fnGssKrb5ExportLucidSecContext(unsafe.Pointer(&_out0), context_handle, version, kctx)
+	_ret := _fnGssKrb5ExportLucidSecContext(unsafe.Pointer(&_out0), contextHandle, version, kctx)
 	return _ret, _out0
 }
 
 var _fnGssKrb5FreeLucidSecContext func(unsafe.Pointer, unsafe.Pointer) uint32
 
 // GssKrb5FreeLucidSecContext calls the Kerberos framework function gss_krb5_free_lucid_sec_context.
-func GssKrb5FreeLucidSecContext(kctx unsafe.Pointer) (result uint32, minor_status uint32) {
+func GssKrb5FreeLucidSecContext(kctx unsafe.Pointer) (result uint32, minorStatus uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5FreeLucidSecContext == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5FreeLucidSecContext, _lib, "gss_krb5_free_lucid_sec_context")
@@ -815,28 +815,28 @@ func GssKrb5FreeLucidSecContext(kctx unsafe.Pointer) (result uint32, minor_statu
 var _fnGssKrb5GetTktFlags func(unsafe.Pointer, objc.ID, unsafe.Pointer) uint32
 
 // GssKrb5GetTktFlags calls the Kerberos framework function gss_krb5_get_tkt_flags.
-func GssKrb5GetTktFlags(context_handle obj.Object) (result uint32, minor_status uint32, ticket_flags int) {
+func GssKrb5GetTktFlags(contextHandle obj.Object) (result uint32, minorStatus uint32, ticketFlags int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5GetTktFlags == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5GetTktFlags, _lib, "gss_krb5_get_tkt_flags")
 	}
 	var _out0 uint32
 	var _out1 int
-	_ret := _fnGssKrb5GetTktFlags(unsafe.Pointer(&_out0), objref.IDOf(context_handle), unsafe.Pointer(&_out1))
+	_ret := _fnGssKrb5GetTktFlags(unsafe.Pointer(&_out0), objref.IDOf(contextHandle), unsafe.Pointer(&_out1))
 	return _ret, _out0, _out1
 }
 
 var _fnGssKrb5SetAllowableEnctypes func(unsafe.Pointer, objc.ID, uint32, unsafe.Pointer) uint32
 
 // GssKrb5SetAllowableEnctypes calls the Kerberos framework function gss_krb5_set_allowable_enctypes.
-func GssKrb5SetAllowableEnctypes(cred obj.Object, num_ktypes uint32) (result uint32, minor_status uint32, ktypes int) {
+func GssKrb5SetAllowableEnctypes(cred obj.Object, numKtypes uint32) (result uint32, minorStatus uint32, ktypes int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGssKrb5SetAllowableEnctypes == nil {
 		ebipurego.RegisterLibFunc(&_fnGssKrb5SetAllowableEnctypes, _lib, "gss_krb5_set_allowable_enctypes")
 	}
 	var _out0 uint32
 	var _out1 int
-	_ret := _fnGssKrb5SetAllowableEnctypes(unsafe.Pointer(&_out0), objref.IDOf(cred), num_ktypes, unsafe.Pointer(&_out1))
+	_ret := _fnGssKrb5SetAllowableEnctypes(unsafe.Pointer(&_out0), objref.IDOf(cred), numKtypes, unsafe.Pointer(&_out1))
 	return _ret, _out0, _out1
 }
 
@@ -1275,7 +1275,7 @@ func Krb5CcGetType(context_ obj.Object, cache obj.Object) string {
 var _fnKrb5CcLastChangeTime func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // Krb5CcLastChangeTime calls the Kerberos framework function krb5_cc_last_change_time.
-func Krb5CcLastChangeTime(context_ obj.Object, ccache obj.Object) (result int, change_time int) {
+func Krb5CcLastChangeTime(context_ obj.Object, ccache obj.Object) (result int, changeTime int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcLastChangeTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcLastChangeTime, _lib, "krb5_cc_last_change_time")
@@ -1310,12 +1310,12 @@ func Krb5CcMove(context_ obj.Object, src obj.Object, dst obj.Object) int {
 var _fnKrb5CcNewUnique func(objc.ID, string, string, unsafe.Pointer) int32
 
 // Krb5CcNewUnique calls the Kerberos framework function krb5_cc_new_unique.
-func Krb5CcNewUnique(context_ obj.Object, type_ string, hint string, id_ unsafe.Pointer) int {
+func Krb5CcNewUnique(context_ obj.Object, type_ string, hint string, identifier unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CcNewUnique == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CcNewUnique, _lib, "krb5_cc_new_unique")
 	}
-	return int(_fnKrb5CcNewUnique(objref.IDOf(context_), type_, hint, id_))
+	return int(_fnKrb5CcNewUnique(objref.IDOf(context_), type_, hint, identifier))
 }
 
 var _fnKrb5CcResolve func(objc.ID, string, unsafe.Pointer) int32
@@ -1409,7 +1409,7 @@ func Krb5CccolCursorNext(context_ obj.Object, cursor obj.Object, ccache unsafe.P
 var _fnKrb5CccolLastChangeTime func(objc.ID, unsafe.Pointer) int32
 
 // Krb5CccolLastChangeTime calls the Kerberos framework function krb5_cccol_last_change_time.
-func Krb5CccolLastChangeTime(context_ obj.Object) (result int, change_time int) {
+func Krb5CccolLastChangeTime(context_ obj.Object) (result int, changeTime int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5CccolLastChangeTime == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5CccolLastChangeTime, _lib, "krb5_cccol_last_change_time")
@@ -1952,7 +1952,7 @@ func Krb5UsTimeofday(arg obj.Object) (result int, arg2 int, arg3 int) {
 var _fnKrb5VerifyInitCredsOptInit func(unsafe.Pointer)
 
 // Krb5VerifyInitCredsOptInit calls the Kerberos framework function krb5_verify_init_creds_opt_init.
-func Krb5VerifyInitCredsOptInit() (k5_vic_options Krb5VerifyInitCredsOpt) {
+func Krb5VerifyInitCredsOptInit() (k5VicOptions Krb5VerifyInitCredsOpt) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5VerifyInitCredsOptInit == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5VerifyInitCredsOptInit, _lib, "krb5_verify_init_creds_opt_init")
@@ -1965,13 +1965,13 @@ func Krb5VerifyInitCredsOptInit() (k5_vic_options Krb5VerifyInitCredsOpt) {
 var _fnKrb5VerifyInitCredsOptSetApReqNofail func(unsafe.Pointer, int)
 
 // Krb5VerifyInitCredsOptSetApReqNofail calls the Kerberos framework function krb5_verify_init_creds_opt_set_ap_req_nofail.
-func Krb5VerifyInitCredsOptSetApReqNofail(ap_req_nofail int) (k5_vic_options Krb5VerifyInitCredsOpt) {
+func Krb5VerifyInitCredsOptSetApReqNofail(apReqNofail int) (k5VicOptions Krb5VerifyInitCredsOpt) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnKrb5VerifyInitCredsOptSetApReqNofail == nil {
 		ebipurego.RegisterLibFunc(&_fnKrb5VerifyInitCredsOptSetApReqNofail, _lib, "krb5_verify_init_creds_opt_set_ap_req_nofail")
 	}
 	var _out0 Krb5VerifyInitCredsOpt
-	_fnKrb5VerifyInitCredsOptSetApReqNofail(unsafe.Pointer(&_out0), ap_req_nofail)
+	_fnKrb5VerifyInitCredsOptSetApReqNofail(unsafe.Pointer(&_out0), apReqNofail)
 	return _out0
 }
 
@@ -2000,12 +2000,12 @@ func ProfileAbandon(profile obj.Object) {
 var _fnProfileAddRelation func(objc.ID, string, string) int
 
 // ProfileAddRelation calls the Kerberos framework function profile_add_relation.
-func ProfileAddRelation(profile obj.Object, names string, new_value string) int {
+func ProfileAddRelation(profile obj.Object, names string, newValue string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileAddRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileAddRelation, _lib, "profile_add_relation")
 	}
-	return _fnProfileAddRelation(objref.IDOf(profile), names, new_value)
+	return _fnProfileAddRelation(objref.IDOf(profile), names, newValue)
 }
 
 var _fnProfileClearRelation func(objc.ID, string) int
@@ -2088,95 +2088,95 @@ func ProfileFreeList(list string) {
 var _fnProfileGetBoolean func(objc.ID, string, string, string, int, unsafe.Pointer) int
 
 // ProfileGetBoolean calls the Kerberos framework function profile_get_boolean.
-func ProfileGetBoolean(profile obj.Object, name string, subname string, subsubname string, def_val int) (result int, ret_default int32) {
+func ProfileGetBoolean(profile obj.Object, name string, subname string, subsubname string, defVal int) (result int, retDefault int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetBoolean == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetBoolean, _lib, "profile_get_boolean")
 	}
 	var _out0 int32
-	_ret := _fnProfileGetBoolean(objref.IDOf(profile), name, subname, subsubname, def_val, unsafe.Pointer(&_out0))
+	_ret := _fnProfileGetBoolean(objref.IDOf(profile), name, subname, subsubname, defVal, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnProfileGetInteger func(objc.ID, string, string, string, int, unsafe.Pointer) int
 
 // ProfileGetInteger calls the Kerberos framework function profile_get_integer.
-func ProfileGetInteger(profile obj.Object, name string, subname string, subsubname string, def_val int) (result int, ret_default int32) {
+func ProfileGetInteger(profile obj.Object, name string, subname string, subsubname string, defVal int) (result int, retDefault int32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetInteger == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetInteger, _lib, "profile_get_integer")
 	}
 	var _out0 int32
-	_ret := _fnProfileGetInteger(objref.IDOf(profile), name, subname, subsubname, def_val, unsafe.Pointer(&_out0))
+	_ret := _fnProfileGetInteger(objref.IDOf(profile), name, subname, subsubname, defVal, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
 var _fnProfileGetRelationNames func(objc.ID, string, string) int
 
 // ProfileGetRelationNames calls the Kerberos framework function profile_get_relation_names.
-func ProfileGetRelationNames(profile obj.Object, names string, ret_names string) int {
+func ProfileGetRelationNames(profile obj.Object, names string, retNames string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetRelationNames == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetRelationNames, _lib, "profile_get_relation_names")
 	}
-	return _fnProfileGetRelationNames(objref.IDOf(profile), names, ret_names)
+	return _fnProfileGetRelationNames(objref.IDOf(profile), names, retNames)
 }
 
 var _fnProfileGetString func(objc.ID, string, string, string, string, string) int
 
 // ProfileGetString calls the Kerberos framework function profile_get_string.
-func ProfileGetString(profile obj.Object, name string, subname string, subsubname string, def_val string, ret_string string) int {
+func ProfileGetString(profile obj.Object, name string, subname string, subsubname string, defVal string, retString string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetString == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetString, _lib, "profile_get_string")
 	}
-	return _fnProfileGetString(objref.IDOf(profile), name, subname, subsubname, def_val, ret_string)
+	return _fnProfileGetString(objref.IDOf(profile), name, subname, subsubname, defVal, retString)
 }
 
 var _fnProfileGetSubsectionNames func(objc.ID, string, string) int
 
 // ProfileGetSubsectionNames calls the Kerberos framework function profile_get_subsection_names.
-func ProfileGetSubsectionNames(profile obj.Object, names string, ret_names string) int {
+func ProfileGetSubsectionNames(profile obj.Object, names string, retNames string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetSubsectionNames == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetSubsectionNames, _lib, "profile_get_subsection_names")
 	}
-	return _fnProfileGetSubsectionNames(objref.IDOf(profile), names, ret_names)
+	return _fnProfileGetSubsectionNames(objref.IDOf(profile), names, retNames)
 }
 
 var _fnProfileGetValues func(objc.ID, string, string) int
 
 // ProfileGetValues calls the Kerberos framework function profile_get_values.
-func ProfileGetValues(profile obj.Object, names string, ret_values string) int {
+func ProfileGetValues(profile obj.Object, names string, retValues string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileGetValues == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileGetValues, _lib, "profile_get_values")
 	}
-	return _fnProfileGetValues(objref.IDOf(profile), names, ret_values)
+	return _fnProfileGetValues(objref.IDOf(profile), names, retValues)
 }
 
 var _fnProfileInit func(unsafe.Pointer, unsafe.Pointer) int
 
 // ProfileInit calls the Kerberos framework function profile_init.
-func ProfileInit(ret_profile unsafe.Pointer) (result int, files string) {
+func ProfileInit(retProfile unsafe.Pointer) (result int, files string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileInit == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileInit, _lib, "profile_init")
 	}
 	var _out0 string
-	_ret := _fnProfileInit(unsafe.Pointer(&_out0), ret_profile)
+	_ret := _fnProfileInit(unsafe.Pointer(&_out0), retProfile)
 	return _ret, _out0
 }
 
 var _fnProfileInitPath func(string, unsafe.Pointer) int
 
 // ProfileInitPath calls the Kerberos framework function profile_init_path.
-func ProfileInitPath(filelist string, ret_profile unsafe.Pointer) int {
+func ProfileInitPath(filelist string, retProfile unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileInitPath == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileInitPath, _lib, "profile_init_path")
 	}
-	return _fnProfileInitPath(filelist, ret_profile)
+	return _fnProfileInitPath(filelist, retProfile)
 }
 
 var _fnProfileIsModified func(objc.ID, unsafe.Pointer) int
@@ -2208,34 +2208,34 @@ func ProfileIsWritable(profile obj.Object) (result int, writable int32) {
 var _fnProfileIterator func(unsafe.Pointer, string, string) int
 
 // ProfileIterator calls the Kerberos framework function profile_iterator.
-func ProfileIterator(iter_p unsafe.Pointer, ret_name string, ret_value string) int {
+func ProfileIterator(iterP unsafe.Pointer, retName string, retValue string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIterator == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIterator, _lib, "profile_iterator")
 	}
-	return _fnProfileIterator(iter_p, ret_name, ret_value)
+	return _fnProfileIterator(iterP, retName, retValue)
 }
 
 var _fnProfileIteratorCreate func(objc.ID, string, int, unsafe.Pointer) int
 
 // ProfileIteratorCreate calls the Kerberos framework function profile_iterator_create.
-func ProfileIteratorCreate(profile obj.Object, names string, flags int, ret_iter unsafe.Pointer) int {
+func ProfileIteratorCreate(profile obj.Object, names string, flags int, retIter unsafe.Pointer) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIteratorCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIteratorCreate, _lib, "profile_iterator_create")
 	}
-	return _fnProfileIteratorCreate(objref.IDOf(profile), names, flags, ret_iter)
+	return _fnProfileIteratorCreate(objref.IDOf(profile), names, flags, retIter)
 }
 
 var _fnProfileIteratorFree func(unsafe.Pointer)
 
 // ProfileIteratorFree calls the Kerberos framework function profile_iterator_free.
-func ProfileIteratorFree(iter_p unsafe.Pointer) {
+func ProfileIteratorFree(iterP unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileIteratorFree == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileIteratorFree, _lib, "profile_iterator_free")
 	}
-	_fnProfileIteratorFree(iter_p)
+	_fnProfileIteratorFree(iterP)
 }
 
 var _fnProfileRelease func(objc.ID)
@@ -2263,21 +2263,21 @@ func ProfileReleaseString(str string) {
 var _fnProfileRenameSection func(objc.ID, string, string) int
 
 // ProfileRenameSection calls the Kerberos framework function profile_rename_section.
-func ProfileRenameSection(profile obj.Object, names string, new_name string) int {
+func ProfileRenameSection(profile obj.Object, names string, newName string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileRenameSection == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileRenameSection, _lib, "profile_rename_section")
 	}
-	return _fnProfileRenameSection(objref.IDOf(profile), names, new_name)
+	return _fnProfileRenameSection(objref.IDOf(profile), names, newName)
 }
 
 var _fnProfileUpdateRelation func(objc.ID, string, string, string) int
 
 // ProfileUpdateRelation calls the Kerberos framework function profile_update_relation.
-func ProfileUpdateRelation(profile obj.Object, names string, old_value string, new_value string) int {
+func ProfileUpdateRelation(profile obj.Object, names string, oldValue string, newValue string) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProfileUpdateRelation == nil {
 		ebipurego.RegisterLibFunc(&_fnProfileUpdateRelation, _lib, "profile_update_relation")
 	}
-	return _fnProfileUpdateRelation(objref.IDOf(profile), names, old_value, new_value)
+	return _fnProfileUpdateRelation(objref.IDOf(profile), names, oldValue, newValue)
 }

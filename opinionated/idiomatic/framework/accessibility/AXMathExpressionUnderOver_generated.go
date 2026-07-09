@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,9 @@ func mathExpressionUnderOverAdopt(id objc.ID) *MathExpressionUnderOver {
 
 // NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression creates a new MathExpressionUnderOver.
 func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(baseExpression *MathExpression, underExpression *MathExpression, overExpression *MathExpression) *MathExpressionUnderOver {
+	defer runtime.KeepAlive(baseExpression)
+	defer runtime.KeepAlive(underExpression)
+	defer runtime.KeepAlive(overExpression)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionUnderOver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:underExpression:overExpression:"), objref.IDOf(baseExpression), objref.IDOf(underExpression), objref.IDOf(overExpression))
 	return mathExpressionUnderOverAdopt(_id)
@@ -52,18 +57,21 @@ func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(b
 
 // BaseExpression returns the base expression.
 func (meuo *MathExpressionUnderOver) BaseExpression() *MathExpression {
+	defer runtime.KeepAlive(meuo)
 	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // UnderExpression returns the under expression.
 func (meuo *MathExpressionUnderOver) UnderExpression() *MathExpression {
+	defer runtime.KeepAlive(meuo)
 	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("underExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // OverExpression returns the over expression.
 func (meuo *MathExpressionUnderOver) OverExpression() *MathExpression {
+	defer runtime.KeepAlive(meuo)
 	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("overExpression"))
 	return MathExpressionFromID(_r)
 }

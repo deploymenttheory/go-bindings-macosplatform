@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewFeedbackCommandEvent() *FeedbackCommandEvent {
 
 // IsNegative reports whether the object is negative.
 func (fce *FeedbackCommandEvent) IsNegative() bool {
+	defer runtime.KeepAlive(fce)
 	_r := objc.Send[bool](objref.IDOf(fce), objc.RegisterName("isNegative"))
 	return _r
 }

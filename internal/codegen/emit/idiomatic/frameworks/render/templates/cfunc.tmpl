@@ -38,6 +38,11 @@ if {{.Fail}} {
 return errkit.FromCFError(_cfErr)
 }
 return nil
+{{- else if eq .Kind 7}}_rc := {{.Call}}
+if _err := {{.ErrExpr}}; _err != nil {
+return {{.FailRet}}
+}
+return {{.OkRet}}
 {{- else}}_r := {{.Call}}
 if _cfErr != nil {
 return nil, errkit.FromCFError(_cfErr)

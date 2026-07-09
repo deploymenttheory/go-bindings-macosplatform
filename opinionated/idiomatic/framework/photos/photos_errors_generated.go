@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeUnknown matches the Photos error PHLivePhotoEditingErrorCodeUnknown.
-var ErrCodeUnknown = errkit.New("PHLivePhotoEditingErrorDomain", 0)
-
 // ErrCodeAborted matches the Photos error PHLivePhotoEditingErrorCodeAborted.
 var ErrCodeAborted = errkit.New("PHLivePhotoEditingErrorDomain", 1)
+
+// ErrCodeUnknown matches the Photos error PHLivePhotoEditingErrorCodeUnknown.
+var ErrCodeUnknown = errkit.New("PHLivePhotoEditingErrorDomain", 0)

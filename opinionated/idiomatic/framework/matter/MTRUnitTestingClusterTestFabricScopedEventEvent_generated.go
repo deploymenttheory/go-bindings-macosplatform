@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,35 +50,42 @@ func mTRUnitTestingClusterTestFabricScopedEventEventAdopt(id objc.ID) *MTRUnitTe
 
 // Description returns the object's -description text.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) Description() string {
+	defer runtime.KeepAlive(mutctfsee)
 	return rt.Description(objref.IDOf(mutctfsee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctfsee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctfsee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctfsee)
 	return rt.IsKind(objref.IDOf(mutctfsee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) String() string {
+	defer runtime.KeepAlive(mutctfsee)
 	return rt.Description(objref.IDOf(mutctfsee))
 }
 
 // WithFabricIndex sets the fabric index.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScopedEventEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mutctfsee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mutctfsee
 }
 
 // FabricIndex returns the fabric index.
-func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() obj.Object {
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mutctfsee)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfsee), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestFabricScopedEventEvent marks MTRUnitTestingClusterTestFabricScopedEventEvent — and, by embedding promotion, its

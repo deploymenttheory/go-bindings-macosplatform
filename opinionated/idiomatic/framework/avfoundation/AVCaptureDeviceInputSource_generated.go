@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func captureDeviceInputSourceAdopt(id objc.ID) *CaptureDeviceInputSource {
 
 // Description returns the object's -description text.
 func (cdis *CaptureDeviceInputSource) Description() string {
+	defer runtime.KeepAlive(cdis)
 	return rt.Description(objref.IDOf(cdis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdis *CaptureDeviceInputSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdis *CaptureDeviceInputSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdis)
 	return rt.IsKind(objref.IDOf(cdis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdis *CaptureDeviceInputSource) String() string {
+	defer runtime.KeepAlive(cdis)
 	return rt.Description(objref.IDOf(cdis))
 }
 
@@ -74,6 +81,7 @@ func NewCaptureDeviceInputSource() *CaptureDeviceInputSource {
 
 // InputSourceID returns an ID unique among the inputSources exposed by a given AVCaptureDevice. An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
 func (cdis *CaptureDeviceInputSource) InputSourceID() string {
+	defer runtime.KeepAlive(cdis)
 	_r := objc.Send[objc.ID](objref.IDOf(cdis), objc.RegisterName("inputSourceID"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (cdis *CaptureDeviceInputSource) InputSourceID() string {
 
 // LocalizedName returns a localized human-readable name for the receiver. This property can be used for displaying the name of the capture device input source in a user interface.
 func (cdis *CaptureDeviceInputSource) LocalizedName() string {
+	defer runtime.KeepAlive(cdis)
 	_r := objc.Send[objc.ID](objref.IDOf(cdis), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""

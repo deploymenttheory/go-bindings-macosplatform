@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -118,6 +120,7 @@ func (s *Slider) WithVertical(vertical bool) *Slider {
 
 // WithTrackFillColor sets the color of the filled portion of the slider track, in appearances that support it.
 func (s *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
+	defer runtime.KeepAlive(trackFillColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTrackFillColor:"), objref.IDOf(trackFillColor))
 	})
@@ -158,6 +161,7 @@ func (s *Slider) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Sl
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (s *Slider) WithTarget(target obj.Object) *Slider {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -222,6 +226,7 @@ func (s *Slider) WithControlSize(controlSize ControlSize) *Slider {
 
 // WithFormatter sets the receiver’s formatter.
 func (s *Slider) WithFormatter(formatter obj.Object) *Slider {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -230,6 +235,7 @@ func (s *Slider) WithFormatter(formatter obj.Object) *Slider {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (s *Slider) WithObjectValue(objectValue obj.Object) *Slider {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -246,6 +252,7 @@ func (s *Slider) WithStringValue(stringValue string) *Slider {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (s *Slider) WithAttributedStringValue(attributedStringValue obj.Object) *Slider {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -286,6 +293,7 @@ func (s *Slider) WithDoubleValue(doubleValue float64) *Slider {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (s *Slider) WithFont(font *Font) *Slider {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -334,6 +342,7 @@ func (s *Slider) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slid
 
 // WithCell sets the cell.
 func (s *Slider) WithCell(cell CellProvider) *Slider {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -479,6 +488,7 @@ func (s *Slider) WithWantsLayer(wantsLayer bool) *Slider {
 
 // WithLayer sets the layer.
 func (s *Slider) WithLayer(layer obj.Object) *Slider {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -528,6 +538,7 @@ func (s *Slider) WithBackgroundFilters(items ...obj.Object) *Slider {
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Slider) WithCompositingFilter(compositingFilter obj.Object) *Slider {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -545,6 +556,7 @@ func (s *Slider) WithContentFilters(items ...obj.Object) *Slider {
 
 // WithShadow sets the shadow.
 func (s *Slider) WithShadow(shadow *Shadow) *Slider {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -593,6 +605,7 @@ func (s *Slider) WithPreparedContentRect(preparedContentRect corefoundation.CGRe
 
 // WithNextKeyView sets the next key view.
 func (s *Slider) WithNextKeyView(nextKeyView ViewProvider) *Slider {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -642,6 +655,7 @@ func (s *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -698,6 +712,7 @@ func (s *Slider) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamic
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -706,6 +721,7 @@ func (s *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfig
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -714,6 +730,7 @@ func (s *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
 
 // WithMenu sets returns the responder’s menu.
 func (s *Slider) WithMenu(menu *Menu) *Slider {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -722,6 +739,7 @@ func (s *Slider) WithMenu(menu *Menu) *Slider {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Slider) WithUserActivity(userActivity obj.Object) *Slider {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -730,6 +748,7 @@ func (s *Slider) WithUserActivity(userActivity obj.Object) *Slider {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -738,6 +757,7 @@ func (s *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
 
 // SliderType returns the slider type.
 func (s *Slider) SliderType() SliderType {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 SliderType
 	purego.Main(func() {
 		_mainthread0 = func() SliderType {
@@ -751,6 +771,7 @@ func (s *Slider) SliderType() SliderType {
 
 // MinValue returns the min value.
 func (s *Slider) MinValue() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -764,6 +785,7 @@ func (s *Slider) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (s *Slider) MaxValue() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -777,6 +799,7 @@ func (s *Slider) MaxValue() float64 {
 
 // NeutralValue returns the value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
 func (s *Slider) NeutralValue() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -790,6 +813,7 @@ func (s *Slider) NeutralValue() float64 {
 
 // AltIncrementValue returns the alt increment value.
 func (s *Slider) AltIncrementValue() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -803,6 +827,7 @@ func (s *Slider) AltIncrementValue() float64 {
 
 // KnobThickness returns the knob thickness.
 func (s *Slider) KnobThickness() float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -816,6 +841,7 @@ func (s *Slider) KnobThickness() float64 {
 
 // IsVertical reports whether the object is vertical.
 func (s *Slider) IsVertical() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -829,6 +855,7 @@ func (s *Slider) IsVertical() bool {
 
 // TrackFillColor returns the track fill color.
 func (s *Slider) TrackFillColor() *Color {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -842,6 +869,7 @@ func (s *Slider) TrackFillColor() *Color {
 
 // TintProminence returns the tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
 func (s *Slider) TintProminence() TintProminence {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 TintProminence
 	purego.Main(func() {
 		_mainthread0 = func() TintProminence {
@@ -855,6 +883,7 @@ func (s *Slider) TintProminence() TintProminence {
 
 // TickMarkValueAtIndex returns the slider’s value represented by the tick mark at the specified index.
 func (s *Slider) TickMarkValueAtIndex(index int) float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -868,6 +897,7 @@ func (s *Slider) TickMarkValueAtIndex(index int) float64 {
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark at the given index.
 func (s *Slider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -881,6 +911,7 @@ func (s *Slider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 
 // IndexOfTickMarkAtPoint returns the index of the tick mark closest to the location of the slider represented by the given point.
 func (s *Slider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -894,6 +925,7 @@ func (s *Slider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
 
 // ClosestTickMarkValueToValue returns the value of the tick mark closest to the specified value.
 func (s *Slider) ClosestTickMarkValueToValue(value float64) float64 {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -907,6 +939,7 @@ func (s *Slider) ClosestTickMarkValueToValue(value float64) float64 {
 
 // NumberOfTickMarks returns the number of tick marks.
 func (s *Slider) NumberOfTickMarks() int {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -920,6 +953,7 @@ func (s *Slider) NumberOfTickMarks() int {
 
 // TickMarkPosition returns the tick mark position.
 func (s *Slider) TickMarkPosition() TickMarkPosition {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 TickMarkPosition
 	purego.Main(func() {
 		_mainthread0 = func() TickMarkPosition {
@@ -933,6 +967,7 @@ func (s *Slider) TickMarkPosition() TickMarkPosition {
 
 // AllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
 func (s *Slider) AllowsTickMarkValuesOnly() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -946,6 +981,8 @@ func (s *Slider) AllowsTickMarkValuesOnly() bool {
 
 // SetTitleCell sets the cell used to draw the slider’s title.
 func (s *Slider) SetTitleCell(cell *Cell) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
 	})
@@ -954,6 +991,7 @@ func (s *Slider) SetTitleCell(cell *Cell) {
 
 // TitleCell returns this method has been deprecated. Returns nil.
 func (s *Slider) TitleCell() obj.Object {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -967,6 +1005,8 @@ func (s *Slider) TitleCell() obj.Object {
 
 // SetTitleColor sets the color used to draw the slider’s title.
 func (s *Slider) SetTitleColor(newColor *Color) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(newColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
 	})
@@ -975,6 +1015,7 @@ func (s *Slider) SetTitleColor(newColor *Color) {
 
 // TitleColor returns this method has been deprecated. Returns nil.
 func (s *Slider) TitleColor() *Color {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -988,6 +1029,8 @@ func (s *Slider) TitleColor() *Color {
 
 // SetTitleFont sets the font used to draw the slider’s title.
 func (s *Slider) SetTitleFont(fontObj *Font) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(fontObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
 	})
@@ -996,6 +1039,7 @@ func (s *Slider) SetTitleFont(fontObj *Font) {
 
 // TitleFont returns this method has been deprecated. Returns nil.
 func (s *Slider) TitleFont() *Font {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -1009,6 +1053,7 @@ func (s *Slider) TitleFont() *Font {
 
 // Title returns the slider’s title.
 func (s *Slider) Title() string {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1024,15 +1069,18 @@ func (s *Slider) Title() string {
 }
 
 // SetTitle sets the title the slider displays in the bar behind its knob.
-func (s *Slider) SetTitle(string_ string) {
+func (s *Slider) SetTitle(str string) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitle:"), purego.NSString(string_))
+		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitle:"), purego.NSString(str))
 	})
 
 }
 
 // SetImage sets the image the slider displays in the bar behind its knob.
 func (s *Slider) SetImage(backgroundImage *Image) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(backgroundImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setImage:"), objref.IDOf(backgroundImage))
 	})
@@ -1041,6 +1089,7 @@ func (s *Slider) SetImage(backgroundImage *Image) {
 
 // Image returns nil.
 func (s *Slider) Image() *Image {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {

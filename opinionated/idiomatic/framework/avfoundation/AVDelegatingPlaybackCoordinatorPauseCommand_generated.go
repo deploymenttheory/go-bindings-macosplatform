@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewDelegatingPlaybackCoordinatorPauseCommand() *DelegatingPlaybackCoordinat
 
 // ShouldBufferInAnticipationOfPlayback reports whether indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback is true, some participant wants to resume playback at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If true, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
 func (dpcpc *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
+	defer runtime.KeepAlive(dpcpc)
 	_r := objc.Send[bool](objref.IDOf(dpcpc), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
 	return _r
 }
 
 // AnticipatedPlaybackRate returns the rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
 func (dpcpc *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
+	defer runtime.KeepAlive(dpcpc)
 	_r := objc.Send[float32](objref.IDOf(dpcpc), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
 }

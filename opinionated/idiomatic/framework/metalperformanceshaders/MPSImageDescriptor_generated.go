@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func imageDescriptorAdopt(id objc.ID) *ImageDescriptor {
 
 // Description returns the object's -description text.
 func (id_ *ImageDescriptor) Description() string {
+	defer runtime.KeepAlive(id_)
 	return rt.Description(objref.IDOf(id_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (id_ *ImageDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(id_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(id_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (id_ *ImageDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(id_)
 	return rt.IsKind(objref.IDOf(id_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (id_ *ImageDescriptor) String() string {
+	defer runtime.KeepAlive(id_)
 	return rt.Description(objref.IDOf(id_))
 }
 
@@ -100,30 +106,35 @@ func (id_ *ImageDescriptor) WithNumberOfImages(numberOfImages int) *ImageDescrip
 
 // CopyWithZone copies with zone.
 func (id_ *ImageDescriptor) CopyWithZone(zone unsafe.Pointer) *ImageDescriptor {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("copyWithZone:"), zone)
 	return ImageDescriptorFromID(_r)
 }
 
 // Width returns the width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
 func (id_ *ImageDescriptor) Width() int {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
 func (id_ *ImageDescriptor) Height() int {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("height"))
 	return _r
 }
 
 // FeatureChannels returns the number of feature channels per pixel.  Default = 1.
 func (id_ *ImageDescriptor) FeatureChannels() int {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("featureChannels"))
 	return _r
 }
 
 // NumberOfImages returns the number of images for batch processing.   Default = 1.
 func (id_ *ImageDescriptor) NumberOfImages() int {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("numberOfImages"))
 	return _r
 }

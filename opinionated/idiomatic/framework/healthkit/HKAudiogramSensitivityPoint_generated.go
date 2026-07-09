@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audiogramSensitivityPointAdopt(id objc.ID) *AudiogramSensitivityPoint {
 
 // Description returns the object's -description text.
 func (asp *AudiogramSensitivityPoint) Description() string {
+	defer runtime.KeepAlive(asp)
 	return rt.Description(objref.IDOf(asp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asp *AudiogramSensitivityPoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asp *AudiogramSensitivityPoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(asp)
 	return rt.IsKind(objref.IDOf(asp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asp *AudiogramSensitivityPoint) String() string {
+	defer runtime.KeepAlive(asp)
 	return rt.Description(objref.IDOf(asp))
 }
 
@@ -74,18 +81,21 @@ func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
 
 // Frequency returns the frequency.
 func (asp *AudiogramSensitivityPoint) Frequency() *Quantity {
+	defer runtime.KeepAlive(asp)
 	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("frequency"))
 	return QuantityFromID(_r)
 }
 
 // LeftEarSensitivity returns the left ear sensitivity.
 func (asp *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
+	defer runtime.KeepAlive(asp)
 	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("leftEarSensitivity"))
 	return QuantityFromID(_r)
 }
 
 // RightEarSensitivity returns the right ear sensitivity.
 func (asp *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
+	defer runtime.KeepAlive(asp)
 	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("rightEarSensitivity"))
 	return QuantityFromID(_r)
 }
@@ -94,6 +104,7 @@ func (asp *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
 //
 // Tests returns the collection as a Go slice.
 func (asp *AudiogramSensitivityPoint) Tests() []*AudiogramSensitivityTest {
+	defer runtime.KeepAlive(asp)
 	_arr := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("tests"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudiogramSensitivityTest { return AudiogramSensitivityTestFromID(_id) })
 }

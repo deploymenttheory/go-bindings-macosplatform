@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,8 @@ func collectionViewTransitionLayoutAdopt(id objc.ID) *CollectionViewTransitionLa
 
 // NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout initializes and returns the transition layout object.
 func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout *CollectionViewLayout, newLayout *CollectionViewLayout) *CollectionViewTransitionLayout {
+	defer runtime.KeepAlive(currentLayout)
+	defer runtime.KeepAlive(newLayout)
 	var _mainthread0 *CollectionViewTransitionLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewTransitionLayout {
@@ -69,6 +73,8 @@ func (cvtl *CollectionViewTransitionLayout) WithTransitionProgress(transitionPro
 
 // UpdateValueForAnimatedKey sets the value of a key whose value you use during the animation.
 func (cvtl *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key obj.Object) {
+	defer runtime.KeepAlive(cvtl)
+	defer runtime.KeepAlive(key)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cvtl), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
 	})
@@ -77,6 +83,8 @@ func (cvtl *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value floa
 
 // ValueForAnimatedKey returns the most recently set value for the specified key.
 func (cvtl *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) float64 {
+	defer runtime.KeepAlive(cvtl)
+	defer runtime.KeepAlive(key)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -90,6 +98,7 @@ func (cvtl *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) 
 
 // TransitionProgress returns the transition progress.
 func (cvtl *CollectionViewTransitionLayout) TransitionProgress() float64 {
+	defer runtime.KeepAlive(cvtl)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -103,6 +112,7 @@ func (cvtl *CollectionViewTransitionLayout) TransitionProgress() float64 {
 
 // CurrentLayout returns the current layout.
 func (cvtl *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
+	defer runtime.KeepAlive(cvtl)
 	var _mainthread0 *CollectionViewLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayout {
@@ -116,6 +126,7 @@ func (cvtl *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayou
 
 // NextLayout returns the next layout.
 func (cvtl *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
+	defer runtime.KeepAlive(cvtl)
 	var _mainthread0 *CollectionViewLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayout {

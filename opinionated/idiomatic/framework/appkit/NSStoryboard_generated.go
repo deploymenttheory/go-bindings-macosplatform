@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func storyboardAdopt(id objc.ID) *Storyboard {
 
 // Description returns the object's -description text.
 func (s *Storyboard) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Storyboard) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Storyboard) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Storyboard) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -74,12 +81,15 @@ func NewStoryboard() *Storyboard {
 
 // InstantiateInitialController creates the initial view controller or window controller from a storyboard.
 func (s *Storyboard) InstantiateInitialController() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateInitialController"))
 	return obj.Wrap(_r)
 }
 
 // InstantiateControllerWithIdentifier instantiates a specified view controller or window controller from a storyboard.
 func (s *Storyboard) InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateControllerWithIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }

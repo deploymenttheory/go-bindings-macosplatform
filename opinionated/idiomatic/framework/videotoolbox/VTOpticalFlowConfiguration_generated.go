@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func opticalFlowConfigurationAdopt(id objc.ID) *OpticalFlowConfiguration {
 
 // Description returns the object's -description text.
 func (ofc *OpticalFlowConfiguration) Description() string {
+	defer runtime.KeepAlive(ofc)
 	return rt.Description(objref.IDOf(ofc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ofc *OpticalFlowConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ofc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ofc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ofc *OpticalFlowConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(ofc)
 	return rt.IsKind(objref.IDOf(ofc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ofc *OpticalFlowConfiguration) String() string {
+	defer runtime.KeepAlive(ofc)
 	return rt.Description(objref.IDOf(ofc))
 }
 
@@ -75,24 +82,28 @@ func NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRe
 
 // FrameWidth returns width of source frame in pixels.
 func (ofc *OpticalFlowConfiguration) FrameWidth() int {
+	defer runtime.KeepAlive(ofc)
 	_r := objc.Send[int](objref.IDOf(ofc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
 // FrameHeight returns height of source frame in pixels.
 func (ofc *OpticalFlowConfiguration) FrameHeight() int {
+	defer runtime.KeepAlive(ofc)
 	_r := objc.Send[int](objref.IDOf(ofc), objc.RegisterName("frameHeight"))
 	return _r
 }
 
 // QualityPrioritization returns a parameter you use to control quality and performance levels. For more information about supported levels, see “VTOpticalFlowConfigurationQualityPrioritization“.
 func (ofc *OpticalFlowConfiguration) QualityPrioritization() OpticalFlowConfigurationQualityPrioritization {
+	defer runtime.KeepAlive(ofc)
 	_r := objc.Send[OpticalFlowConfigurationQualityPrioritization](objref.IDOf(ofc), objc.RegisterName("qualityPrioritization"))
 	return _r
 }
 
 // Revision returns the specific algorithm or configuration revision you use to perform the request.
 func (ofc *OpticalFlowConfiguration) Revision() OpticalFlowConfigurationRevision {
+	defer runtime.KeepAlive(ofc)
 	_r := objc.Send[OpticalFlowConfigurationRevision](objref.IDOf(ofc), objc.RegisterName("revision"))
 	return _r
 }
@@ -101,18 +112,21 @@ func (ofc *OpticalFlowConfiguration) Revision() OpticalFlowConfigurationRevision
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (ofc *OpticalFlowConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	defer runtime.KeepAlive(ofc)
 	_arr := objc.Send[objc.ID](objref.IDOf(ofc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (ofc *OpticalFlowConfiguration) SourcePixelBufferAttributes() obj.Object {
+func (ofc *OpticalFlowConfiguration) SourcePixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(ofc)
 	_r := objc.Send[objc.ID](objref.IDOf(ofc), objc.RegisterName("sourcePixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (ofc *OpticalFlowConfiguration) DestinationPixelBufferAttributes() obj.Object {
+func (ofc *OpticalFlowConfiguration) DestinationPixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(ofc)
 	_r := objc.Send[objc.ID](objref.IDOf(ofc), objc.RegisterName("destinationPixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

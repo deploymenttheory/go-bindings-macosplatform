@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func sourceRevisionAdopt(id objc.ID) *SourceRevision {
 
 // Description returns the object's -description text.
 func (sr *SourceRevision) Description() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sr *SourceRevision) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sr *SourceRevision) IsKind(className string) bool {
+	defer runtime.KeepAlive(sr)
 	return rt.IsKind(objref.IDOf(sr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sr *SourceRevision) String() string {
+	defer runtime.KeepAlive(sr)
 	return rt.Description(objref.IDOf(sr))
 }
 
 // NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion initializes a new source revision object with the provided source, version, product type, and operating system.
 func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source *Source, version string, productType string, operatingSystemVersion foundation.NSOperatingSystemVersion) *SourceRevision {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSourceRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:version:productType:operatingSystemVersion:"), objref.IDOf(source), purego.NSString(version), purego.NSString(productType), operatingSystemVersion)
 	return sourceRevisionAdopt(_id)
@@ -76,6 +84,7 @@ func NewSourceRevisionWithSourceVersionProductTypeOperatingSystemVersion(source 
 
 // NewSourceRevisionWithSourceVersion initializes a new source revision object with the provided source and version information.
 func NewSourceRevisionWithSourceVersion(source *Source, version string) *SourceRevision {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKSourceRevision")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:version:"), objref.IDOf(source), purego.NSString(version))
 	return sourceRevisionAdopt(_id)
@@ -83,12 +92,14 @@ func NewSourceRevisionWithSourceVersion(source *Source, version string) *SourceR
 
 // Source returns the HKSource of the receiver.
 func (sr *SourceRevision) Source() *Source {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("source"))
 	return SourceFromID(_r)
 }
 
 // ProductType represents the product type of the device running HealthKit when the object was created. This value may be nil for older data, which indicates an unknown product type.
 func (sr *SourceRevision) ProductType() string {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("productType"))
 	if _r == 0 {
 		return ""
@@ -98,6 +109,7 @@ func (sr *SourceRevision) ProductType() string {
 
 // OperatingSystemVersion represents the operating system version of the device running HealthKit when the object was created. iOS versions after 8.0 but prior to 8.2 are saved as 8.0, and iOS version after 8.2 but prior to 9.0 are saved as 8.2.
 func (sr *SourceRevision) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[foundation.NSOperatingSystemVersion](objref.IDOf(sr), objc.RegisterName("operatingSystemVersion"))
 	return _r
 }

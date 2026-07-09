@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,33 @@ func orderedCollectionChangeAdopt(id objc.ID) *OrderedCollectionChange {
 
 // Description returns the object's -description text.
 func (occ *OrderedCollectionChange) Description() string {
+	defer runtime.KeepAlive(occ)
 	return rt.Description(objref.IDOf(occ))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (occ *OrderedCollectionChange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(occ)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(occ), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (occ *OrderedCollectionChange) IsKind(className string) bool {
+	defer runtime.KeepAlive(occ)
 	return rt.IsKind(objref.IDOf(occ), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (occ *OrderedCollectionChange) String() string {
+	defer runtime.KeepAlive(occ)
 	return rt.Description(objref.IDOf(occ))
 }
 
 // NewOrderedCollectionChangeWithObjectTypeIndex creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
 func NewOrderedCollectionChangeWithObjectTypeIndex(anObject obj.Object, type_ CollectionChangeType, index int) *OrderedCollectionChange {
+	defer runtime.KeepAlive(anObject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:"), objref.IDOf(anObject), type_, index)
 	return orderedCollectionChangeAdopt(_id)
@@ -77,6 +84,7 @@ func NewOrderedCollectionChangeWithObjectTypeIndex(anObject obj.Object, type_ Co
 
 // NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a change object that represents inserting, removing, or moving an object from an ordered collection at a specific index.
 func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject obj.Object, type_ CollectionChangeType, index int, associatedIndex int) *OrderedCollectionChange {
+	defer runtime.KeepAlive(anObject)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), objref.IDOf(anObject), type_, index, associatedIndex)
 	return orderedCollectionChangeAdopt(_id)
@@ -89,31 +97,35 @@ func (occ *OrderedCollectionChange) WithObservationInfo(observationInfo unsafe.P
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (occ *OrderedCollectionChange) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange {
-	objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (occ *OrderedCollectionChange) WithScriptingProperties(scriptingProperties map[string]obj.Object) *OrderedCollectionChange {
+	objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return occ
 }
 
 // Object returns the object.
 func (occ *OrderedCollectionChange) Object() obj.Object {
+	defer runtime.KeepAlive(occ)
 	_r := objc.Send[objc.ID](objref.IDOf(occ), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
 // ChangeType returns the change type.
 func (occ *OrderedCollectionChange) ChangeType() CollectionChangeType {
+	defer runtime.KeepAlive(occ)
 	_r := objc.Send[CollectionChangeType](objref.IDOf(occ), objc.RegisterName("changeType"))
 	return _r
 }
 
 // Index returns the index.
 func (occ *OrderedCollectionChange) Index() int {
+	defer runtime.KeepAlive(occ)
 	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("index"))
 	return _r
 }
 
 // AssociatedIndex returns the associated index.
 func (occ *OrderedCollectionChange) AssociatedIndex() int {
+	defer runtime.KeepAlive(occ)
 	_r := objc.Send[int](objref.IDOf(occ), objc.RegisterName("associatedIndex"))
 	return _r
 }

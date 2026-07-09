@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,28 +49,33 @@ func authorizationPlatformPublicKeyCredentialDescriptorAdopt(id objc.ID) *Author
 
 // Description returns the object's -description text.
 func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) Description() string {
+	defer runtime.KeepAlive(appkcd)
 	return rt.Description(objref.IDOf(appkcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(appkcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(appkcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(appkcd)
 	return rt.IsKind(objref.IDOf(appkcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) String() string {
+	defer runtime.KeepAlive(appkcd)
 	return rt.Description(objref.IDOf(appkcd))
 }
 
 // NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID creates the descriptor with a credential.
-func NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID(credentialID obj.Object) *AuthorizationPlatformPublicKeyCredentialDescriptor {
+func NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID(credentialID []byte) *AuthorizationPlatformPublicKeyCredentialDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:"), objref.IDOf(credentialID))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:"), rt.BytesToNSData(credentialID))
 	return authorizationPlatformPublicKeyCredentialDescriptorAdopt(_id)
 }

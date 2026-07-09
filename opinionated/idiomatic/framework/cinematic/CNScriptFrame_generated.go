@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func scriptFrameAdopt(id objc.ID) *ScriptFrame {
 
 // Description returns the object's -description text.
 func (sf *ScriptFrame) Description() string {
+	defer runtime.KeepAlive(sf)
 	return rt.Description(objref.IDOf(sf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sf *ScriptFrame) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sf *ScriptFrame) IsKind(className string) bool {
+	defer runtime.KeepAlive(sf)
 	return rt.IsKind(objref.IDOf(sf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sf *ScriptFrame) String() string {
+	defer runtime.KeepAlive(sf)
 	return rt.Description(objref.IDOf(sf))
 }
 
@@ -75,18 +82,21 @@ func NewScriptFrame() *ScriptFrame {
 
 // Time returns the presentation time associated with the remaining properties.
 func (sf *ScriptFrame) Time() coremedia.CMTime {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(sf), objc.RegisterName("time"))
 	return _r
 }
 
 // FocusDisparity returns the disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
 func (sf *ScriptFrame) FocusDisparity() float32 {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[float32](objref.IDOf(sf), objc.RegisterName("focusDisparity"))
 	return _r
 }
 
 // FocusDetection returns the detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
 func (sf *ScriptFrame) FocusDetection() *Detection {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("focusDetection"))
 	return DetectionFromID(_r)
 }
@@ -95,18 +105,21 @@ func (sf *ScriptFrame) FocusDetection() *Detection {
 //
 // AllDetections returns the collection as a Go slice.
 func (sf *ScriptFrame) AllDetections() []*Detection {
+	defer runtime.KeepAlive(sf)
 	_arr := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("allDetections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
 
 // DetectionForID the detection in the frame with the given detection ID, if any.
 func (sf *ScriptFrame) DetectionForID(detectionID int64) *Detection {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("detectionForID:"), detectionID)
 	return DetectionFromID(_r)
 }
 
 // BestDetectionForGroupID the best detection to focus on in a frame among those within the given detection group.
 func (sf *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
+	defer runtime.KeepAlive(sf)
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("bestDetectionForGroupID:"), detectionGroupID)
 	return DetectionFromID(_r)
 }

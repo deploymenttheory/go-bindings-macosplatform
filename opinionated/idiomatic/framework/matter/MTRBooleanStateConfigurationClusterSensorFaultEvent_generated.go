@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBooleanStateConfigurationClusterSensorFaultEventAdopt(id objc.ID) *MTRBo
 
 // Description returns the object's -description text.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) Description() string {
+	defer runtime.KeepAlive(mbsccsfe)
 	return rt.Description(objref.IDOf(mbsccsfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbsccsfe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbsccsfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbsccsfe)
 	return rt.IsKind(objref.IDOf(mbsccsfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) String() string {
+	defer runtime.KeepAlive(mbsccsfe)
 	return rt.Description(objref.IDOf(mbsccsfe))
 }
 
@@ -72,12 +80,14 @@ func NewMTRBooleanStateConfigurationClusterSensorFaultEvent() *MTRBooleanStateCo
 
 // WithSensorFault sets the sensor fault.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) WithSensorFault(sensorFault obj.Object) *MTRBooleanStateConfigurationClusterSensorFaultEvent {
+	defer runtime.KeepAlive(sensorFault)
 	objc.Send[objc.ID](objref.IDOf(mbsccsfe), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
 	return mbsccsfe
 }
 
 // SensorFault returns the sensor fault.
-func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() obj.Object {
+func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() *foundation.Number {
+	defer runtime.KeepAlive(mbsccsfe)
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccsfe), objc.RegisterName("sensorFault"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

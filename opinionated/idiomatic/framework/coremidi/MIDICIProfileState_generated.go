@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func cIProfileStateAdopt(id objc.ID) *CIProfileState {
 
 // Description returns the object's -description text.
 func (cps *CIProfileState) Description() string {
+	defer runtime.KeepAlive(cps)
 	return rt.Description(objref.IDOf(cps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cps *CIProfileState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cps *CIProfileState) IsKind(className string) bool {
+	defer runtime.KeepAlive(cps)
 	return rt.IsKind(objref.IDOf(cps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cps *CIProfileState) String() string {
+	defer runtime.KeepAlive(cps)
 	return rt.Description(objref.IDOf(cps))
 }
 
@@ -82,6 +89,7 @@ func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled []*CIProfile, 
 
 // MidiChannel returns the midi channel.
 func (cps *CIProfileState) MidiChannel() uint8 {
+	defer runtime.KeepAlive(cps)
 	_r := objc.Send[uint8](objref.IDOf(cps), objc.RegisterName("midiChannel"))
 	return _r
 }
@@ -90,6 +98,7 @@ func (cps *CIProfileState) MidiChannel() uint8 {
 //
 // EnabledProfiles returns the collection as a Go slice.
 func (cps *CIProfileState) EnabledProfiles() []*CIProfile {
+	defer runtime.KeepAlive(cps)
 	_arr := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("enabledProfiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
@@ -98,6 +107,7 @@ func (cps *CIProfileState) EnabledProfiles() []*CIProfile {
 //
 // DisabledProfiles returns the collection as a Go slice.
 func (cps *CIProfileState) DisabledProfiles() []*CIProfile {
+	defer runtime.KeepAlive(cps)
 	_arr := objc.Send[objc.ID](objref.IDOf(cps), objc.RegisterName("disabledProfiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }

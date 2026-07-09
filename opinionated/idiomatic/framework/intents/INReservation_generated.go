@@ -5,6 +5,9 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +52,40 @@ func reservationAdopt(id objc.ID) *Reservation {
 
 // Description returns the object's -description text.
 func (r *Reservation) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Reservation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Reservation) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Reservation) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // ItemReference returns the item reference.
 func (r *Reservation) ItemReference() *SpeakableString {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("itemReference"))
 	return SpeakableStringFromID(_r)
 }
 
 // ReservationNumber returns the reservation number.
 func (r *Reservation) ReservationNumber() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("reservationNumber"))
 	if _r == 0 {
 		return ""
@@ -84,19 +94,22 @@ func (r *Reservation) ReservationNumber() string {
 }
 
 // BookingTime returns the booking time.
-func (r *Reservation) BookingTime() obj.Object {
+func (r *Reservation) BookingTime() time.Time {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("bookingTime"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ReservationStatus returns the reservation status.
 func (r *Reservation) ReservationStatus() ReservationStatus {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[ReservationStatus](objref.IDOf(r), objc.RegisterName("reservationStatus"))
 	return _r
 }
 
 // ReservationHolderName returns the reservation holder name.
 func (r *Reservation) ReservationHolderName() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("reservationHolderName"))
 	if _r == 0 {
 		return ""
@@ -108,14 +121,16 @@ func (r *Reservation) ReservationHolderName() string {
 //
 // Actions returns the collection as a Go slice.
 func (r *Reservation) Actions() []*ReservationAction {
+	defer runtime.KeepAlive(r)
 	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ReservationAction { return ReservationActionFromID(_id) })
 }
 
 // URL returns the URL.
-func (r *Reservation) URL() obj.Object {
+func (r *Reservation) URL() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // isReservation marks Reservation — and, by embedding promotion, its

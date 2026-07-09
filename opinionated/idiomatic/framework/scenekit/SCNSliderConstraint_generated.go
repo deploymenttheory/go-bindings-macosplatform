@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -81,12 +83,14 @@ func (sc *SliderConstraint) WithIncremental(incremental bool) *SliderConstraint 
 
 // CollisionCategoryBitMask defines the category of node to collide against. Defaults to 0.
 func (sc *SliderConstraint) CollisionCategoryBitMask() int {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("collisionCategoryBitMask"))
 	return _r
 }
 
 // Radius defines the radius of the slider. Defaults to 1.
 func (sc *SliderConstraint) Radius() float64 {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("radius"))
 	return _r
 }

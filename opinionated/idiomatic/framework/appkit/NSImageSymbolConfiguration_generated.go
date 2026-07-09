@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func imageSymbolConfigurationAdopt(id objc.ID) *ImageSymbolConfiguration {
 
 // Description returns the object's -description text.
 func (isc *ImageSymbolConfiguration) Description() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isc *ImageSymbolConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isc *ImageSymbolConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(isc)
 	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isc *ImageSymbolConfiguration) String() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
@@ -74,6 +81,8 @@ func NewImageSymbolConfiguration() *ImageSymbolConfiguration {
 
 // ConfigurationByApplyingConfiguration returns a new configuration object whose values are defined by applying values from the provided configuration and the receiver. Values defined by both configurations will use the provided configuration’s values.
 func (isc *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(configuration)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("configurationByApplyingConfiguration:"), objref.IDOf(configuration))
 	return ImageSymbolConfigurationFromID(_r)
 }

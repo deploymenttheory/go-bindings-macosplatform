@@ -8,35 +8,35 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
+// ErrCodeCanceledLogin matches the AuthenticationServices error ASWebAuthenticationSessionErrorCodeCanceledLogin.
+var ErrCodeCanceledLogin = errkit.New("ASWebAuthenticationSessionErrorDomain", 1)
+
+// ErrCodeCredentialIdentityNotFound matches the AuthenticationServices error ASExtensionErrorCodeCredentialIdentityNotFound.
+var ErrCodeCredentialIdentityNotFound = errkit.New("ASExtensionErrorDomain", 101)
+
+// ErrCodeFailed matches the AuthenticationServices error ASExtensionErrorCodeFailed.
+var ErrCodeFailed = errkit.New("ASExtensionErrorDomain", 0)
+
 // ErrCodeInternalError matches the AuthenticationServices error ASCredentialIdentityStoreErrorCodeInternalError.
 var ErrCodeInternalError = errkit.New("ASCredentialIdentityStoreErrorDomain", 0)
 
-// ErrCodeStoreDisabled matches the AuthenticationServices error ASCredentialIdentityStoreErrorCodeStoreDisabled.
-var ErrCodeStoreDisabled = errkit.New("ASCredentialIdentityStoreErrorDomain", 1)
+// ErrCodeMatchedExcludedCredential matches the AuthenticationServices error ASExtensionErrorCodeMatchedExcludedCredential.
+var ErrCodeMatchedExcludedCredential = errkit.New("ASExtensionErrorDomain", 102)
+
+// ErrCodePresentationContextInvalid matches the AuthenticationServices error ASWebAuthenticationSessionErrorCodePresentationContextInvalid.
+var ErrCodePresentationContextInvalid = errkit.New("ASWebAuthenticationSessionErrorDomain", 3)
+
+// ErrCodePresentationContextNotProvided matches the AuthenticationServices error ASWebAuthenticationSessionErrorCodePresentationContextNotProvided.
+var ErrCodePresentationContextNotProvided = errkit.New("ASWebAuthenticationSessionErrorDomain", 2)
 
 // ErrCodeStoreBusy matches the AuthenticationServices error ASCredentialIdentityStoreErrorCodeStoreBusy.
 var ErrCodeStoreBusy = errkit.New("ASCredentialIdentityStoreErrorDomain", 2)
 
-// ErrCodeFailed matches the AuthenticationServices error ASExtensionErrorCodeFailed.
-var ErrCodeFailed = errkit.New("ASExtensionErrorDomain", 0)
+// ErrCodeStoreDisabled matches the AuthenticationServices error ASCredentialIdentityStoreErrorCodeStoreDisabled.
+var ErrCodeStoreDisabled = errkit.New("ASCredentialIdentityStoreErrorDomain", 1)
 
 // ErrCodeUserCanceled matches the AuthenticationServices error ASExtensionErrorCodeUserCanceled.
 var ErrCodeUserCanceled = errkit.New("ASExtensionErrorDomain", 1)
 
 // ErrCodeUserInteractionRequired matches the AuthenticationServices error ASExtensionErrorCodeUserInteractionRequired.
 var ErrCodeUserInteractionRequired = errkit.New("ASExtensionErrorDomain", 100)
-
-// ErrCodeCredentialIdentityNotFound matches the AuthenticationServices error ASExtensionErrorCodeCredentialIdentityNotFound.
-var ErrCodeCredentialIdentityNotFound = errkit.New("ASExtensionErrorDomain", 101)
-
-// ErrCodeMatchedExcludedCredential matches the AuthenticationServices error ASExtensionErrorCodeMatchedExcludedCredential.
-var ErrCodeMatchedExcludedCredential = errkit.New("ASExtensionErrorDomain", 102)
-
-// ErrCodeCanceledLogin matches the AuthenticationServices error ASWebAuthenticationSessionErrorCodeCanceledLogin.
-var ErrCodeCanceledLogin = errkit.New("ASWebAuthenticationSessionErrorDomain", 1)
-
-// ErrCodePresentationContextNotProvided matches the AuthenticationServices error ASWebAuthenticationSessionErrorCodePresentationContextNotProvided.
-var ErrCodePresentationContextNotProvided = errkit.New("ASWebAuthenticationSessionErrorDomain", 2)
-
-// ErrCodePresentationContextInvalid matches the AuthenticationServices error ASWebAuthenticationSessionErrorCodePresentationContextInvalid.
-var ErrCodePresentationContextInvalid = errkit.New("ASWebAuthenticationSessionErrorDomain", 3)

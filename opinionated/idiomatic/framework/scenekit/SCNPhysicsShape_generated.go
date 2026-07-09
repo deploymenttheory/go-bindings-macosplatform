@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func physicsShapeAdopt(id objc.ID) *PhysicsShape {
 
 // Description returns the object's -description text.
 func (ps *PhysicsShape) Description() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ps *PhysicsShape) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ps *PhysicsShape) IsKind(className string) bool {
+	defer runtime.KeepAlive(ps)
 	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ps *PhysicsShape) String() string {
+	defer runtime.KeepAlive(ps)
 	return rt.Description(objref.IDOf(ps))
 }
 
@@ -74,12 +81,14 @@ func NewPhysicsShape() *PhysicsShape {
 
 // Options returns the options.
 func (ps *PhysicsShape) Options() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
 // SourceObject returns the source object.
 func (ps *PhysicsShape) SourceObject() obj.Object {
+	defer runtime.KeepAlive(ps)
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("sourceObject"))
 	return obj.Wrap(_r)
 }
@@ -88,6 +97,7 @@ func (ps *PhysicsShape) SourceObject() obj.Object {
 //
 // Transforms returns the collection as a Go slice.
 func (ps *PhysicsShape) Transforms() []obj.Object {
+	defer runtime.KeepAlive(ps)
 	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("transforms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

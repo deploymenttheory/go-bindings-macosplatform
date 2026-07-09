@@ -6,12 +6,15 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,8 +65,19 @@ func (uswst *URLSessionWebSocketTask) WithMaximumMessageSize(maximumMessageSize 
 	return uswst
 }
 
+// WithDelegate sets the delegate.
+func (uswst *URLSessionWebSocketTask) WithDelegate(delegate URLSessionTaskDelegate) *URLSessionWebSocketTask {
+	_shim := newURLSessionTaskDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(uswst), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(uswst), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return uswst
+}
+
 // WithEarliestBeginDate sets the earliest begin date.
 func (uswst *URLSessionWebSocketTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask {
+	defer runtime.KeepAlive(earliestBeginDate)
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return uswst
 }
@@ -82,6 +96,7 @@ func (uswst *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToReceive(cou
 
 // WithTaskDescription sets the task description.
 func (uswst *URLSessionWebSocketTask) WithTaskDescription(taskDescription StringProvider) *URLSessionWebSocketTask {
+	defer runtime.KeepAlive(taskDescription)
 	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return uswst
 }
@@ -105,8 +120,8 @@ func (uswst *URLSessionWebSocketTask) WithObservationInfo(observationInfo unsafe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uswst *URLSessionWebSocketTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketTask {
-	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uswst *URLSessionWebSocketTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionWebSocketTask {
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uswst
 }
 
@@ -114,6 +129,8 @@ func (uswst *URLSessionWebSocketTask) WithScriptingProperties(scriptingPropertie
 //
 // SendMessage blocks until the operation completes or ctx is cancelled.
 func (uswst *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *URLSessionWebSocketMessage) error {
+	defer runtime.KeepAlive(uswst)
+	defer runtime.KeepAlive(message)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -133,6 +150,7 @@ func (uswst *URLSessionWebSocketTask) SendMessage(ctx context.Context, message *
 //
 // ReceiveMessage blocks until the operation completes or ctx is cancelled.
 func (uswst *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (result *URLSessionWebSocketMessage, err error) {
+	defer runtime.KeepAlive(uswst)
 	type _result struct {
 		val *URLSessionWebSocketMessage
 		err error
@@ -158,6 +176,7 @@ func (uswst *URLSessionWebSocketTask) ReceiveMessage(ctx context.Context) (resul
 //
 // SendPingWithPongReceiveHandler blocks until the operation completes or ctx is cancelled.
 func (uswst *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context.Context) error {
+	defer runtime.KeepAlive(uswst)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -174,26 +193,30 @@ func (uswst *URLSessionWebSocketTask) SendPingWithPongReceiveHandler(ctx context
 }
 
 // CancelWithCloseCodeReason cancels with close code reason.
-func (uswst *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode URLSessionWebSocketCloseCode, reason *Data) {
-	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("cancelWithCloseCode:reason:"), closeCode, objref.IDOf(reason))
+func (uswst *URLSessionWebSocketTask) CancelWithCloseCodeReason(closeCode URLSessionWebSocketCloseCode, reason []byte) {
+	defer runtime.KeepAlive(uswst)
+	objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("cancelWithCloseCode:reason:"), closeCode, rt.BytesToNSData(reason))
 }
 
 // MaximumMessageSize returns the maximum message size.
 func (uswst *URLSessionWebSocketTask) MaximumMessageSize() int {
+	defer runtime.KeepAlive(uswst)
 	_r := objc.Send[int](objref.IDOf(uswst), objc.RegisterName("maximumMessageSize"))
 	return _r
 }
 
 // CloseCode returns the close code.
 func (uswst *URLSessionWebSocketTask) CloseCode() URLSessionWebSocketCloseCode {
+	defer runtime.KeepAlive(uswst)
 	_r := objc.Send[URLSessionWebSocketCloseCode](objref.IDOf(uswst), objc.RegisterName("closeCode"))
 	return _r
 }
 
 // CloseReason returns the close reason.
-func (uswst *URLSessionWebSocketTask) CloseReason() *Data {
+func (uswst *URLSessionWebSocketTask) CloseReason() []byte {
+	defer runtime.KeepAlive(uswst)
 	_r := objc.Send[objc.ID](objref.IDOf(uswst), objc.RegisterName("closeReason"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ URLSessionTaskProvider = (*URLSessionWebSocketTask)(nil)

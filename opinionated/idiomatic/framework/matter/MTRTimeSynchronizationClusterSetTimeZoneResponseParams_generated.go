@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRTimeSynchronizationClusterSetTimeZoneResponseParamsAdopt(id objc.ID) *MT
 
 // Description returns the object's -description text.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) Description() string {
+	defer runtime.KeepAlive(mtscstzrp)
 	return rt.Description(objref.IDOf(mtscstzrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscstzrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscstzrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscstzrp)
 	return rt.IsKind(objref.IDOf(mtscstzrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) String() string {
+	defer runtime.KeepAlive(mtscstzrp)
 	return rt.Description(objref.IDOf(mtscstzrp))
 }
 
-// NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
+// NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValue initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterSetTimeZoneResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +87,14 @@ func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueE
 
 // WithDstOffsetRequired sets the dst offset required.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) WithDstOffsetRequired(dstOffsetRequired obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
+	defer runtime.KeepAlive(dstOffsetRequired)
 	objc.Send[objc.ID](objref.IDOf(mtscstzrp), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
 	return mtscstzrp
 }
 
 // DstOffsetRequired returns the dst offset required.
-func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() obj.Object {
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() *foundation.Number {
+	defer runtime.KeepAlive(mtscstzrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscstzrp), objc.RegisterName("dstOffsetRequired"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

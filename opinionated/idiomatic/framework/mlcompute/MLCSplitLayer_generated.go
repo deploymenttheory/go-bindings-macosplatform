@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,12 +68,14 @@ func (sl *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLaye
 
 // Dimension returns the dimension (or axis) along which to split tensor
 func (sl *SplitLayer) Dimension() int {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("dimension"))
 	return _r
 }
 
 // SplitCount returns the number of splits. The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
 func (sl *SplitLayer) SplitCount() int {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("splitCount"))
 	return _r
 }
@@ -80,6 +84,7 @@ func (sl *SplitLayer) SplitCount() int {
 //
 // SplitSectionLengths returns the collection as a Go slice.
 func (sl *SplitLayer) SplitSectionLengths() []obj.Object {
+	defer runtime.KeepAlive(sl)
 	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("splitSectionLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

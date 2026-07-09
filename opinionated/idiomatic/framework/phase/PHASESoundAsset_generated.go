@@ -5,9 +5,11 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,19 +55,22 @@ func NewSoundAsset() *SoundAsset {
 }
 
 // URL returns the URL of the sound asset, if applicable.
-func (sa *SoundAsset) URL() obj.Object {
+func (sa *SoundAsset) URL() string {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Data returns the buffer for the sound asset, if applicable.
-func (sa *SoundAsset) Data() obj.Object {
+func (sa *SoundAsset) Data() []byte {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Type returns the sound asset type.
 func (sa *SoundAsset) Type() AssetType {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[AssetType](objref.IDOf(sa), objc.RegisterName("type"))
 	return _r
 }

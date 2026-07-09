@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func accelerationStructurePassSampleBufferAttachmentDescriptorArrayAdopt(id objc
 
 // Description returns the object's -description text.
 func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(aspsbada)
 	return rt.Description(objref.IDOf(aspsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aspsbada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aspsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(aspsbada)
 	return rt.IsKind(objref.IDOf(aspsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(aspsbada)
 	return rt.Description(objref.IDOf(aspsbada))
 }
 
@@ -72,11 +79,14 @@ func NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray() *Accele
 
 // ObjectAtIndexedSubscript wraps the corresponding Objective-C method.
 func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
+	defer runtime.KeepAlive(aspsbada)
 	_r := objc.Send[objc.ID](objref.IDOf(aspsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript wraps the corresponding Objective-C method.
 func (aspsbada *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *AccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(aspsbada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(aspsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

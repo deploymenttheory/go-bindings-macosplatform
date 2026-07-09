@@ -5,6 +5,8 @@
 package metalkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
@@ -49,27 +51,33 @@ func viewAdopt(id objc.ID) *View {
 
 // Description returns the object's -description text.
 func (v_ *View) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *View) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *View) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *View) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // NewViewWithCoder initializes a view from data in a given unarchiver.
 func NewViewWithCoder(coder obj.Object) *View {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -171,6 +179,7 @@ func (v_ *View) WithPaused(paused bool) *View {
 
 // WithColorspace sets the color space of the rendered content.
 func (v_ *View) WithColorspace(colorspace obj.Object) *View {
+	defer runtime.KeepAlive(colorspace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
 	})
@@ -179,6 +188,7 @@ func (v_ *View) WithColorspace(colorspace obj.Object) *View {
 
 // ReleaseDrawables releases the depthStencilTexture and multisampleColorTexture objects.
 func (v_ *View) ReleaseDrawables() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("releaseDrawables"))
 	})
@@ -187,6 +197,7 @@ func (v_ *View) ReleaseDrawables() {
 
 // Draw redraws the view’s contents immediately.
 func (v_ *View) Draw() {
+	defer runtime.KeepAlive(v_)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("draw"))
 	})
@@ -195,6 +206,7 @@ func (v_ *View) Draw() {
 
 // FramebufferOnly reports whether if the currentDrawable can be used for sampling or texture read operations This defaults to true. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of true allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is true.
 func (v_ *View) FramebufferOnly() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -208,6 +220,7 @@ func (v_ *View) FramebufferOnly() bool {
 
 // PresentsWithTransaction reports whether if the layer should be presented synchronously Defaults to false. When false, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When true, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
 func (v_ *View) PresentsWithTransaction() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -221,6 +234,7 @@ func (v_ *View) PresentsWithTransaction() bool {
 
 // SampleCount returns the sample count used to to create multisampleColorTexture This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
 func (v_ *View) SampleCount() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -234,6 +248,7 @@ func (v_ *View) SampleCount() int {
 
 // ClearColor returns the clear color value used to generate the currentRenderPassDescriptor This defaults to (0.0, 0.0, 0.0, 1.0)
 func (v_ *View) ClearColor() metal.MTLClearColor {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 metal.MTLClearColor
 	purego.Main(func() {
 		_mainthread0 = func() metal.MTLClearColor {
@@ -247,6 +262,7 @@ func (v_ *View) ClearColor() metal.MTLClearColor {
 
 // ClearDepth returns the clear depth value used to generate the currentRenderPassDescriptor This defaults to 1.0
 func (v_ *View) ClearDepth() float64 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -260,6 +276,7 @@ func (v_ *View) ClearDepth() float64 {
 
 // ClearStencil returns the clear stencil value used to generate currentRenderPassDescriptor This defaults to 0
 func (v_ *View) ClearStencil() uint32 {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -273,6 +290,7 @@ func (v_ *View) ClearStencil() uint32 {
 
 // CurrentRenderPassDescriptor returns a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
 func (v_ *View) CurrentRenderPassDescriptor() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -286,6 +304,7 @@ func (v_ *View) CurrentRenderPassDescriptor() obj.Object {
 
 // CurrentMTL4RenderPassDescriptor returns a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
 func (v_ *View) CurrentMTL4RenderPassDescriptor() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -299,6 +318,7 @@ func (v_ *View) CurrentMTL4RenderPassDescriptor() obj.Object {
 
 // PreferredFramesPerSecond returns the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
 func (v_ *View) PreferredFramesPerSecond() int {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -312,6 +332,7 @@ func (v_ *View) PreferredFramesPerSecond() int {
 
 // EnableSetNeedsDisplay reports whether controls whether the view responds to setNeedsDisplay. If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
 func (v_ *View) EnableSetNeedsDisplay() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -325,6 +346,7 @@ func (v_ *View) EnableSetNeedsDisplay() bool {
 
 // AutoResizeDrawable reports whether controls whether to resize the drawable as the view changes size. If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes. If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
 func (v_ *View) AutoResizeDrawable() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -338,6 +360,7 @@ func (v_ *View) AutoResizeDrawable() bool {
 
 // DrawableSize returns the current size of drawable textures The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
 func (v_ *View) DrawableSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -351,6 +374,7 @@ func (v_ *View) DrawableSize() corefoundation.CGSize {
 
 // PreferredDrawableSize returns the preferred drawable size reported by the backing NSView to match a NSView's native resolution. this value can be observed via key-value observation to determine if the current native drawable size has changed.
 func (v_ *View) PreferredDrawableSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -364,6 +388,7 @@ func (v_ *View) PreferredDrawableSize() corefoundation.CGSize {
 
 // IsPaused reports whether controls whether the draw methods should countinue at preferredFramesPerSecond If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
 func (v_ *View) IsPaused() bool {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -377,6 +402,7 @@ func (v_ *View) IsPaused() bool {
 
 // Colorspace returns the colorspace of the rendered frames. ' If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
 func (v_ *View) Colorspace() obj.Object {
+	defer runtime.KeepAlive(v_)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,11 +56,16 @@ func NewPushStreamNode() *PushStreamNode {
 
 // ScheduleBuffer schedules audio data for playback.
 func (psn *PushStreamNode) ScheduleBuffer(buffer obj.Object) {
+	defer runtime.KeepAlive(psn)
+	defer runtime.KeepAlive(buffer)
 	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:"), objref.IDOf(buffer))
 }
 
-// ScheduleBufferAtTimeOptions schedules audio data playback at a specific time.
-func (psn *PushStreamNode) ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
+// ScheduleBufferAtTime schedules audio data playback at a specific time.
+func (psn *PushStreamNode) ScheduleBufferAtTime(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
+	defer runtime.KeepAlive(psn)
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(when)
 	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:atTime:options:"), objref.IDOf(buffer), objref.IDOf(when), options)
 }
 

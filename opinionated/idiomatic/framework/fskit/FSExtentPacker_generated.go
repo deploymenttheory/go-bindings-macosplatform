@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func extentPackerAdopt(id objc.ID) *ExtentPacker {
 
 // Description returns the object's -description text.
 func (ep *ExtentPacker) Description() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ep *ExtentPacker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ep *ExtentPacker) IsKind(className string) bool {
+	defer runtime.KeepAlive(ep)
 	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ep *ExtentPacker) String() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
@@ -74,6 +81,8 @@ func NewExtentPacker() *ExtentPacker {
 
 // PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength packs a single extent to send to the kernel.
 func (ep *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(resource)
 	_r := objc.Send[bool](objref.IDOf(ep), objc.RegisterName("packExtentWithResource:type:logicalOffset:physicalOffset:length:"), objref.IDOf(resource), type_, logicalOffset, physicalOffset, length)
 	return _r
 }

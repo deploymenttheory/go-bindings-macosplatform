@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -101,60 +103,70 @@ func (psj *PhysicsSliderJoint) WithMotorMaximumTorque(motorMaximumTorque float64
 
 // BodyA returns the body a.
 func (psj *PhysicsSliderJoint) BodyA() *PhysicsBody {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyB returns the body b.
 func (psj *PhysicsSliderJoint) BodyB() *PhysicsBody {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
 // MinimumLinearLimit returns the minimum linear limit.
 func (psj *PhysicsSliderJoint) MinimumLinearLimit() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("minimumLinearLimit"))
 	return _r
 }
 
 // MaximumLinearLimit returns the maximum linear limit.
 func (psj *PhysicsSliderJoint) MaximumLinearLimit() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("maximumLinearLimit"))
 	return _r
 }
 
 // MinimumAngularLimit returns the minimum angular limit.
 func (psj *PhysicsSliderJoint) MinimumAngularLimit() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("minimumAngularLimit"))
 	return _r
 }
 
 // MaximumAngularLimit returns the maximum angular limit.
 func (psj *PhysicsSliderJoint) MaximumAngularLimit() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("maximumAngularLimit"))
 	return _r
 }
 
 // MotorTargetLinearVelocity returns the motor target linear velocity.
 func (psj *PhysicsSliderJoint) MotorTargetLinearVelocity() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorTargetLinearVelocity"))
 	return _r
 }
 
 // MotorMaximumForce returns the motor maximum force.
 func (psj *PhysicsSliderJoint) MotorMaximumForce() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorMaximumForce"))
 	return _r
 }
 
 // MotorTargetAngularVelocity returns the motor target angular velocity.
 func (psj *PhysicsSliderJoint) MotorTargetAngularVelocity() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorTargetAngularVelocity"))
 	return _r
 }
 
 // MotorMaximumTorque returns the motor maximum torque.
 func (psj *PhysicsSliderJoint) MotorMaximumTorque() float64 {
+	defer runtime.KeepAlive(psj)
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorMaximumTorque"))
 	return _r
 }

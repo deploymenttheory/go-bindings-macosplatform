@@ -6,9 +6,11 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,8 @@ func viewControllerAdopt(id objc.ID) *ViewController {
 
 // NewViewControllerWithNibNameBundle returns a view controller object initialized to the nib file in the specified bundle.
 func NewViewControllerWithNibNameBundle(nibNameOrNil obj.Object, nibBundleOrNil obj.Object) *ViewController {
+	defer runtime.KeepAlive(nibNameOrNil)
+	defer runtime.KeepAlive(nibBundleOrNil)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -64,6 +68,7 @@ func NewViewControllerWithNibNameBundle(nibNameOrNil obj.Object, nibBundleOrNil 
 
 // NewViewControllerWithCoder creates a new ViewController.
 func NewViewControllerWithCoder(coder obj.Object) *ViewController {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -77,6 +82,7 @@ func NewViewControllerWithCoder(coder obj.Object) *ViewController {
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (vc *ViewController) WithRepresentedObject(representedObject obj.Object) *ViewController {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -93,6 +99,7 @@ func (vc *ViewController) WithTitle(title string) *ViewController {
 
 // WithView sets the view controller’s primary view.
 func (vc *ViewController) WithView(view ViewProvider) *ViewController {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -118,6 +125,7 @@ func (vc *ViewController) WithChildViewControllers(items ...ViewControllerProvid
 
 // WithSourceItemView sets the source item view.
 func (vc *ViewController) WithSourceItemView(sourceItemView ViewProvider) *ViewController {
+	defer runtime.KeepAlive(sourceItemView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	})
@@ -134,6 +142,7 @@ func (vc *ViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (vc *ViewController) WithNextResponder(nextResponder ResponderProvider) *ViewController {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -142,6 +151,7 @@ func (vc *ViewController) WithNextResponder(nextResponder ResponderProvider) *Vi
 
 // WithMenu sets returns the responder’s menu.
 func (vc *ViewController) WithMenu(menu *Menu) *ViewController {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -150,6 +160,7 @@ func (vc *ViewController) WithMenu(menu *Menu) *ViewController {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (vc *ViewController) WithUserActivity(userActivity obj.Object) *ViewController {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -158,6 +169,7 @@ func (vc *ViewController) WithUserActivity(userActivity obj.Object) *ViewControl
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (vc *ViewController) WithTouchBar(touchBar *TouchBar) *ViewController {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -166,6 +178,7 @@ func (vc *ViewController) WithTouchBar(touchBar *TouchBar) *ViewController {
 
 // LoadView instantiates a view from a nib file and sets the value of the view property.
 func (vc *ViewController) LoadView() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadView"))
 	})
@@ -174,6 +187,7 @@ func (vc *ViewController) LoadView() {
 
 // LoadViewIfNeeded loads view if needed.
 func (vc *ViewController) LoadViewIfNeeded() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("loadViewIfNeeded"))
 	})
@@ -182,6 +196,7 @@ func (vc *ViewController) LoadViewIfNeeded() {
 
 // CommitEditing reports whether the receiver was able to commit any pending edits.
 func (vc *ViewController) CommitEditing() bool {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -195,6 +210,7 @@ func (vc *ViewController) CommitEditing() bool {
 
 // DiscardEditing causes the receiver to discard any changes, restoring the previous values.
 func (vc *ViewController) DiscardEditing() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("discardEditing"))
 	})
@@ -203,6 +219,7 @@ func (vc *ViewController) DiscardEditing() {
 
 // ViewDidLoad called after the view controller’s view has been loaded into memory.
 func (vc *ViewController) ViewDidLoad() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLoad"))
 	})
@@ -211,6 +228,7 @@ func (vc *ViewController) ViewDidLoad() {
 
 // ViewWillAppear called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
 func (vc *ViewController) ViewWillAppear() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillAppear"))
 	})
@@ -219,6 +237,7 @@ func (vc *ViewController) ViewWillAppear() {
 
 // ViewDidAppear called when the view controller’s view is fully transitioned onto the screen.
 func (vc *ViewController) ViewDidAppear() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidAppear"))
 	})
@@ -227,6 +246,7 @@ func (vc *ViewController) ViewDidAppear() {
 
 // ViewWillDisappear called when the view controller’s view is about to be removed from the view hierarchy in the window.
 func (vc *ViewController) ViewWillDisappear() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillDisappear"))
 	})
@@ -235,6 +255,7 @@ func (vc *ViewController) ViewWillDisappear() {
 
 // ViewDidDisappear called after the view controller’s view is removed from the view hierarchy in a window.
 func (vc *ViewController) ViewDidDisappear() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidDisappear"))
 	})
@@ -243,6 +264,7 @@ func (vc *ViewController) ViewDidDisappear() {
 
 // UpdateViewConstraints called during Auto Layout constraint updating to enable the view controller to mediate the process.
 func (vc *ViewController) UpdateViewConstraints() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("updateViewConstraints"))
 	})
@@ -251,6 +273,7 @@ func (vc *ViewController) UpdateViewConstraints() {
 
 // ViewWillLayout called just before the layout method of the view controller’s view is called.
 func (vc *ViewController) ViewWillLayout() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillLayout"))
 	})
@@ -259,6 +282,7 @@ func (vc *ViewController) ViewWillLayout() {
 
 // ViewDidLayout called immediately after the layout method of the view controller’s view is called.
 func (vc *ViewController) ViewDidLayout() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewDidLayout"))
 	})
@@ -266,12 +290,13 @@ func (vc *ViewController) ViewDidLayout() {
 }
 
 // NibName returns the nib name.
-func (vc *ViewController) NibName() obj.Object {
-	var _mainthread0 obj.Object
+func (vc *ViewController) NibName() *foundation.String {
+	defer runtime.KeepAlive(vc)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -279,12 +304,13 @@ func (vc *ViewController) NibName() obj.Object {
 }
 
 // NibBundle returns the nib bundle.
-func (vc *ViewController) NibBundle() obj.Object {
-	var _mainthread0 obj.Object
+func (vc *ViewController) NibBundle() *foundation.Bundle {
+	defer runtime.KeepAlive(vc)
+	var _mainthread0 *foundation.Bundle
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Bundle {
 			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("nibBundle"))
-			return obj.Wrap(_r)
+			return foundation.BundleFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -293,6 +319,7 @@ func (vc *ViewController) NibBundle() obj.Object {
 
 // RepresentedObject returns the represented object.
 func (vc *ViewController) RepresentedObject() obj.Object {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -306,6 +333,7 @@ func (vc *ViewController) RepresentedObject() obj.Object {
 
 // Title returns the title.
 func (vc *ViewController) Title() string {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -322,6 +350,7 @@ func (vc *ViewController) Title() string {
 
 // View returns the view.
 func (vc *ViewController) View() *View {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -335,6 +364,7 @@ func (vc *ViewController) View() *View {
 
 // ViewIfLoaded returns the view if loaded.
 func (vc *ViewController) ViewIfLoaded() *View {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -348,6 +378,7 @@ func (vc *ViewController) ViewIfLoaded() *View {
 
 // IsViewLoaded reports whether the object is view loaded.
 func (vc *ViewController) IsViewLoaded() bool {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -361,6 +392,7 @@ func (vc *ViewController) IsViewLoaded() bool {
 
 // PreferredContentSize returns the preferred content size.
 func (vc *ViewController) PreferredContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -374,6 +406,8 @@ func (vc *ViewController) PreferredContentSize() corefoundation.CGSize {
 
 // DismissViewController dismisses a presented view controller, using the same animator that presented it.
 func (vc *ViewController) DismissViewController(viewController *ViewController) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(viewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissViewController:"), objref.IDOf(viewController))
 	})
@@ -382,6 +416,8 @@ func (vc *ViewController) DismissViewController(viewController *ViewController) 
 
 // DismissController dismisses controller.
 func (vc *ViewController) DismissController(sender obj.Object) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("dismissController:"), objref.IDOf(sender))
 	})
@@ -392,6 +428,7 @@ func (vc *ViewController) DismissController(sender obj.Object) {
 //
 // PresentedViewControllers returns the collection as a Go slice.
 func (vc *ViewController) PresentedViewControllers() []*ViewController {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 []*ViewController
 	purego.Main(func() {
 		_mainthread0 = func() []*ViewController {
@@ -404,6 +441,7 @@ func (vc *ViewController) PresentedViewControllers() []*ViewController {
 
 // PresentingViewController returns the presenting view controller.
 func (vc *ViewController) PresentingViewController() *ViewController {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -417,6 +455,8 @@ func (vc *ViewController) PresentingViewController() *ViewController {
 
 // PresentViewControllerAsSheet presents another view controller as a sheet.
 func (vc *ViewController) PresentViewControllerAsSheet(viewController *ViewController) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(viewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentViewControllerAsSheet:"), objref.IDOf(viewController))
 	})
@@ -425,6 +465,8 @@ func (vc *ViewController) PresentViewControllerAsSheet(viewController *ViewContr
 
 // PresentViewControllerAsModalWindow presents another view controller as a modal window, also known as an alert.
 func (vc *ViewController) PresentViewControllerAsModalWindow(viewController *ViewController) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(viewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("presentViewControllerAsModalWindow:"), objref.IDOf(viewController))
 	})
@@ -435,6 +477,9 @@ func (vc *ViewController) PresentViewControllerAsModalWindow(viewController *Vie
 //
 // TransitionFromViewControllerToViewControllerOptions blocks until the operation completes or ctx is cancelled.
 func (vc *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *ViewController, toViewController *ViewController, options ViewControllerTransitionOptions) error {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(fromViewController)
+	defer runtime.KeepAlive(toViewController)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -450,6 +495,8 @@ func (vc *ViewController) TransitionFromViewControllerToViewControllerOptions(ct
 
 // AddChildViewController a convenience method for adding a child view controller at the end of the childViewControllers array.
 func (vc *ViewController) AddChildViewController(childViewController *ViewController) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(childViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("addChildViewController:"), objref.IDOf(childViewController))
 	})
@@ -458,6 +505,7 @@ func (vc *ViewController) AddChildViewController(childViewController *ViewContro
 
 // RemoveFromParentViewController removes the called view controller from its parent view controller.
 func (vc *ViewController) RemoveFromParentViewController() {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("removeFromParentViewController"))
 	})
@@ -466,6 +514,8 @@ func (vc *ViewController) RemoveFromParentViewController() {
 
 // InsertChildViewControllerAtIndex inserts a specified child view controller into the childViewControllers array at a specified position.
 func (vc *ViewController) InsertChildViewControllerAtIndex(childViewController *ViewController, index int) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(childViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("insertChildViewController:atIndex:"), objref.IDOf(childViewController), index)
 	})
@@ -474,6 +524,7 @@ func (vc *ViewController) InsertChildViewControllerAtIndex(childViewController *
 
 // RemoveChildViewControllerAtIndex removes a specified child controller from the view controller.
 func (vc *ViewController) RemoveChildViewControllerAtIndex(index int) {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("removeChildViewControllerAtIndex:"), index)
 	})
@@ -482,6 +533,8 @@ func (vc *ViewController) RemoveChildViewControllerAtIndex(index int) {
 
 // PreferredContentSizeDidChangeForViewController called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
 func (vc *ViewController) PreferredContentSizeDidChangeForViewController(viewController *ViewController) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(viewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("preferredContentSizeDidChangeForViewController:"), objref.IDOf(viewController))
 	})
@@ -490,6 +543,7 @@ func (vc *ViewController) PreferredContentSizeDidChangeForViewController(viewCon
 
 // ViewWillTransitionToSize for a view controller that is part of an app extension, called when its view is about to be resized.
 func (vc *ViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize) {
+	defer runtime.KeepAlive(vc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("viewWillTransitionToSize:"), newSize)
 	})
@@ -498,6 +552,7 @@ func (vc *ViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize
 
 // ParentViewController returns the parent view controller.
 func (vc *ViewController) ParentViewController() *ViewController {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -513,6 +568,7 @@ func (vc *ViewController) ParentViewController() *ViewController {
 //
 // ChildViewControllers returns the collection as a Go slice.
 func (vc *ViewController) ChildViewControllers() []*ViewController {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 []*ViewController
 	purego.Main(func() {
 		_mainthread0 = func() []*ViewController {
@@ -525,6 +581,7 @@ func (vc *ViewController) ChildViewControllers() []*ViewController {
 
 // Storyboard returns the storyboard.
 func (vc *ViewController) Storyboard() *Storyboard {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 *Storyboard
 	purego.Main(func() {
 		_mainthread0 = func() *Storyboard {
@@ -537,12 +594,13 @@ func (vc *ViewController) Storyboard() *Storyboard {
 }
 
 // ExtensionContext returns the extension context.
-func (vc *ViewController) ExtensionContext() obj.Object {
-	var _mainthread0 obj.Object
+func (vc *ViewController) ExtensionContext() *foundation.ExtensionContext {
+	defer runtime.KeepAlive(vc)
+	var _mainthread0 *foundation.ExtensionContext
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.ExtensionContext {
 			_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("extensionContext"))
-			return obj.Wrap(_r)
+			return foundation.ExtensionContextFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -551,6 +609,7 @@ func (vc *ViewController) ExtensionContext() obj.Object {
 
 // SourceItemView returns the source item view.
 func (vc *ViewController) SourceItemView() *View {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -564,6 +623,7 @@ func (vc *ViewController) SourceItemView() *View {
 
 // PreferredScreenOrigin returns the preferred screen origin.
 func (vc *ViewController) PreferredScreenOrigin() corefoundation.CGPoint {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -577,6 +637,7 @@ func (vc *ViewController) PreferredScreenOrigin() corefoundation.CGPoint {
 
 // PreferredMinimumSize returns the preferred minimum size.
 func (vc *ViewController) PreferredMinimumSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -590,6 +651,7 @@ func (vc *ViewController) PreferredMinimumSize() corefoundation.CGSize {
 
 // PreferredMaximumSize returns the preferred maximum size.
 func (vc *ViewController) PreferredMaximumSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(vc)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {

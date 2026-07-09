@@ -36,8 +36,8 @@ func INTicketedEventReservationFromID(id objc.ID) *INTicketedEventReservation {
 }
 
 // Creates a ticketed event reservation with the specified contents and attributes.
-func (o *INTicketedEventReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, event *INTicketedEvent) *INTicketedEventReservation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), event.Ptr())
+func (o *INTicketedEventReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], url *foundation.NSURL, reservedSeat *INSeat, event *INTicketedEvent) *INTicketedEventReservation {
+	_ret := objc.Send[objc.ID](o.Ptr(), _iNTicketedEventReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatEvent, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), url.Ptr(), reservedSeat.Ptr(), event.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func logItemAdopt(id objc.ID) *LogItem {
 
 // Description returns the object's -description text.
 func (li *LogItem) Description() string {
+	defer runtime.KeepAlive(li)
 	return rt.Description(objref.IDOf(li))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (li *LogItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(li)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(li), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (li *LogItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(li)
 	return rt.IsKind(objref.IDOf(li), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (li *LogItem) String() string {
+	defer runtime.KeepAlive(li)
 	return rt.Description(objref.IDOf(li))
 }
 
 // Timestamp returns the timestamp.
 func (li *LogItem) Timestamp() float64 {
+	defer runtime.KeepAlive(li)
 	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("timestamp"))
 	return _r
 }

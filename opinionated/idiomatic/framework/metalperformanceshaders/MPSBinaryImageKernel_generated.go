@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -73,30 +75,35 @@ func (bik *BinaryImageKernel) WithLabel(label string) *BinaryImageKernel {
 
 // PrimarySourceRegionForDestinationSize determines the region of the primary source texture that will be read for an encode operation.
 func (bik *BinaryImageKernel) PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(bik), objc.RegisterName("primarySourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // SecondarySourceRegionForDestinationSize determines the region of the secondary source texture that will be read for an encode operation.
 func (bik *BinaryImageKernel) SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(bik), objc.RegisterName("secondarySourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // PrimaryOffset returns the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
 func (bik *BinaryImageKernel) PrimaryOffset() mpscore.MPSOffset {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(bik), objc.RegisterName("primaryOffset"))
 	return _r
 }
 
 // SecondaryOffset returns the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
 func (bik *BinaryImageKernel) SecondaryOffset() mpscore.MPSOffset {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(bik), objc.RegisterName("secondaryOffset"))
 	return _r
 }
 
 // ClipRect returns an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (bik *BinaryImageKernel) ClipRect() metal.MTLRegion {
+	defer runtime.KeepAlive(bik)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(bik), objc.RegisterName("clipRect"))
 	return _r
 }

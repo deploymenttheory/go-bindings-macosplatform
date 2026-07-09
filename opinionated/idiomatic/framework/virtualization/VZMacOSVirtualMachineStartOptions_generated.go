@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (movmso *MacOSVirtualMachineStartOptions) WithStartUpFromMACOSRecovery(star
 
 // StartUpFromMACOSRecovery wraps the corresponding Objective-C method.
 func (movmso *MacOSVirtualMachineStartOptions) StartUpFromMACOSRecovery() bool {
+	defer runtime.KeepAlive(movmso)
 	_r := objc.Send[bool](objref.IDOf(movmso), objc.RegisterName("startUpFromMacOSRecovery"))
 	return _r
 }

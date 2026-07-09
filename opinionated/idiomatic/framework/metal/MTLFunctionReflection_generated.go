@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func functionReflectionAdopt(id objc.ID) *FunctionReflection {
 
 // Description returns the object's -description text.
 func (fr *FunctionReflection) Description() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fr *FunctionReflection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fr *FunctionReflection) IsKind(className string) bool {
+	defer runtime.KeepAlive(fr)
 	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fr *FunctionReflection) String() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
@@ -74,12 +81,14 @@ func NewFunctionReflection() *FunctionReflection {
 
 // Bindings provides a list of inputs and outputs of the function.
 func (fr *FunctionReflection) Bindings() []obj.Object {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // UserAnnotation returns the string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
 func (fr *FunctionReflection) UserAnnotation() string {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("userAnnotation"))
 	if _r == 0 {
 		return ""

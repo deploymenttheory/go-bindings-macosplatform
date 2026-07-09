@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func asynchronousVideoCompositionRequestAdopt(id objc.ID) *AsynchronousVideoComp
 
 // Description returns the object's -description text.
 func (avcr *AsynchronousVideoCompositionRequest) Description() string {
+	defer runtime.KeepAlive(avcr)
 	return rt.Description(objref.IDOf(avcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avcr *AsynchronousVideoCompositionRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avcr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avcr *AsynchronousVideoCompositionRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(avcr)
 	return rt.IsKind(objref.IDOf(avcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avcr *AsynchronousVideoCompositionRequest) String() string {
+	defer runtime.KeepAlive(avcr)
 	return rt.Description(objref.IDOf(avcr))
 }
 
@@ -77,55 +83,67 @@ func NewAsynchronousVideoCompositionRequest() *AsynchronousVideoCompositionReque
 
 // SourceSampleBufferByTrackID returns a source sample buffer for the track that contains the specified identifier.
 func (avcr *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) obj.Object {
+	defer runtime.KeepAlive(avcr)
 	_r := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("sourceSampleBufferByTrackID:"), trackID)
 	return obj.Wrap(_r)
 }
 
 // SourceTimedMetadataByTrackID returns a source timed metadata group for the track that contains the specified identifier.
 func (avcr *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup {
+	defer runtime.KeepAlive(avcr)
 	_r := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("sourceTimedMetadataByTrackID:"), trackID)
 	return TimedMetadataGroupFromID(_r)
 }
 
 // FinishWithComposedVideoFrame finishes the request to compose the frame.
 func (avcr *AsynchronousVideoCompositionRequest) FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer) {
+	defer runtime.KeepAlive(avcr)
 	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithComposedVideoFrame:"), composedVideoFrame)
 }
 
 // FinishWithError finishes the request with an error.
-func (avcr *AsynchronousVideoCompositionRequest) FinishWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithError:"), error_)
+func (avcr *AsynchronousVideoCompositionRequest) FinishWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(avcr)
+	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithError:"), err)
 }
 
 // FinishCancelledRequest cancels the request to compose a video frame.
 func (avcr *AsynchronousVideoCompositionRequest) FinishCancelledRequest() {
+	defer runtime.KeepAlive(avcr)
 	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishCancelledRequest"))
 }
 
 // SourceTaggedBufferGroupByTrackID returns the source CMTaggedBufferGroupRef for the given track ID.
 func (avcr *AsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) obj.Object {
+	defer runtime.KeepAlive(avcr)
 	_r := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("sourceTaggedBufferGroupByTrackID:"), trackID)
 	return obj.Wrap(_r)
 }
 
 // FinishWithComposedTaggedBufferGroup the method that the custom compositor calls when composition succeeds.
 func (avcr *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup obj.Object) {
+	defer runtime.KeepAlive(avcr)
+	defer runtime.KeepAlive(taggedBufferGroup)
 	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("finishWithComposedTaggedBufferGroup:"), objref.IDOf(taggedBufferGroup))
 }
 
 // AttachSpatialVideoConfigurationToPixelBuffer associates the pixel buffer with the specified spatial configuration.
 func (avcr *AsynchronousVideoCompositionRequest) AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *SpatialVideoConfiguration, pixelBuffer unsafe.Pointer) {
+	defer runtime.KeepAlive(avcr)
+	defer runtime.KeepAlive(spatialVideoConfiguration)
 	objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("attachSpatialVideoConfiguration:toPixelBuffer:"), objref.IDOf(spatialVideoConfiguration), pixelBuffer)
 }
 
 // RenderContext returns the AVVideoCompositionRenderContext making the request
 func (avcr *AsynchronousVideoCompositionRequest) RenderContext() *VideoCompositionRenderContext {
+	defer runtime.KeepAlive(avcr)
 	_r := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("renderContext"))
 	return VideoCompositionRenderContextFromID(_r)
 }
 
 // CompositionTime returns the time for which the frame should be composed
 func (avcr *AsynchronousVideoCompositionRequest) CompositionTime() coremedia.CMTime {
+	defer runtime.KeepAlive(avcr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(avcr), objc.RegisterName("compositionTime"))
 	return _r
 }
@@ -134,6 +152,7 @@ func (avcr *AsynchronousVideoCompositionRequest) CompositionTime() coremedia.CMT
 //
 // SourceTrackIDs returns the collection as a Go slice.
 func (avcr *AsynchronousVideoCompositionRequest) SourceTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(avcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("sourceTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -142,6 +161,7 @@ func (avcr *AsynchronousVideoCompositionRequest) SourceTrackIDs() []obj.Object {
 //
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
 func (avcr *AsynchronousVideoCompositionRequest) SourceSampleDataTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(avcr)
 	_arr := objc.Send[objc.ID](objref.IDOf(avcr), objc.RegisterName("sourceSampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

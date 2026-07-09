@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,30 +56,35 @@ func NewQRCodeFeature() *QRCodeFeature {
 
 // TopLeft returns the image coordinate of the upper-left corner of the detected QR code.
 func (qcf *QRCodeFeature) TopLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(qcf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("topLeft"))
 	return _r
 }
 
 // TopRight returns the image coordinate of the upper-right corner of the detected QR code.
 func (qcf *QRCodeFeature) TopRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(qcf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("topRight"))
 	return _r
 }
 
 // BottomLeft returns the image coordinate of the lower-left corner of the detected QR code.
 func (qcf *QRCodeFeature) BottomLeft() corefoundation.CGPoint {
+	defer runtime.KeepAlive(qcf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
 // BottomRight returns the image coordinate of the lower-right corner of the detected QR code.
 func (qcf *QRCodeFeature) BottomRight() corefoundation.CGPoint {
+	defer runtime.KeepAlive(qcf)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(qcf), objc.RegisterName("bottomRight"))
 	return _r
 }
 
 // MessageString returns the string decoded from the detected barcode.
 func (qcf *QRCodeFeature) MessageString() string {
+	defer runtime.KeepAlive(qcf)
 	_r := objc.Send[objc.ID](objref.IDOf(qcf), objc.RegisterName("messageString"))
 	if _r == 0 {
 		return ""
@@ -87,6 +94,7 @@ func (qcf *QRCodeFeature) MessageString() string {
 
 // SymbolDescriptor returns an abstract representation of a QR Code symbol. The property is a “CIQRCodeDescriptor“ instance that contains the payload, symbol version, mask pattern, and error correction level, so the QR Code can be reproduced.
 func (qcf *QRCodeFeature) SymbolDescriptor() *QRCodeDescriptor {
+	defer runtime.KeepAlive(qcf)
 	_r := objc.Send[objc.ID](objref.IDOf(qcf), objc.RegisterName("symbolDescriptor"))
 	return QRCodeDescriptorFromID(_r)
 }

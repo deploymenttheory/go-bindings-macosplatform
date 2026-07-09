@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewCDADocumentSample() *CDADocumentSample {
 
 // Document returns the contents of the document. Access to each CDA instance must be authorized by the user in order for the document data to be accessible to an app.  The authorization request occurs the first time a document matches the predicate of an executed HKDocumentQuery.  This property will always be nil if the sample is returned by an HKSampleQuery or an HKAnchoredObjectQuery.
 func (cds *CDADocumentSample) Document() *CDADocument {
+	defer runtime.KeepAlive(cds)
 	_r := objc.Send[objc.ID](objref.IDOf(cds), objc.RegisterName("document"))
 	return CDADocumentFromID(_r)
 }

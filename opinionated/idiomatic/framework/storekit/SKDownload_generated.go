@@ -5,6 +5,8 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func downloadAdopt(id objc.ID) *Download {
 
 // Description returns the object's -description text.
 func (d *Download) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Download) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Download) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Download) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -74,18 +81,21 @@ func NewDownload() *Download {
 
 // State returns the state.
 func (d *Download) State() DownloadState {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[DownloadState](objref.IDOf(d), objc.RegisterName("state"))
 	return _r
 }
 
 // ExpectedContentLength returns the expected content length.
 func (d *Download) ExpectedContentLength() int64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
 // ContentIdentifier returns the content identifier.
 func (d *Download) ContentIdentifier() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
 		return ""
@@ -94,13 +104,15 @@ func (d *Download) ContentIdentifier() string {
 }
 
 // ContentURL returns the content URL.
-func (d *Download) ContentURL() obj.Object {
+func (d *Download) ContentURL() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ContentVersion returns the content version.
 func (d *Download) ContentVersion() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentVersion"))
 	if _r == 0 {
 		return ""
@@ -110,18 +122,21 @@ func (d *Download) ContentVersion() string {
 
 // Progress returns the progress.
 func (d *Download) Progress() float32 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float32](objref.IDOf(d), objc.RegisterName("progress"))
 	return _r
 }
 
 // TimeRemaining returns the time remaining.
 func (d *Download) TimeRemaining() float64 {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeRemaining"))
 	return _r
 }
 
 // Transaction returns the transaction.
 func (d *Download) Transaction() *PaymentTransaction {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("transaction"))
 	return PaymentTransactionFromID(_r)
 }

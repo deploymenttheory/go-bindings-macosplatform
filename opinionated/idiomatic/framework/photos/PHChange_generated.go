@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func changeAdopt(id objc.ID) *Change {
 
 // Description returns the object's -description text.
 func (c *Change) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Change) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Change) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Change) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -74,12 +81,16 @@ func NewChange() *Change {
 
 // ChangeDetailsForObject returns detailed change information for the specified asset or collection.
 func (c *Change) ChangeDetailsForObject(object *Object) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("changeDetailsForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // ChangeDetailsForFetchResult returns detailed change information for a fetch result.
 func (c *Change) ChangeDetailsForFetchResult(object obj.Object) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("changeDetailsForFetchResult:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }

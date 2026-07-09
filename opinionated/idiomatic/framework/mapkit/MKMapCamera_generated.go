@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func mapCameraAdopt(id objc.ID) *MapCamera {
 
 // Description returns the object's -description text.
 func (mc *MapCamera) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MapCamera) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MapCamera) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MapCamera) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -106,6 +112,7 @@ func (mc *MapCamera) WithAltitude(altitude unsafe.Pointer) *MapCamera {
 
 // Pitch returns the pitch.
 func (mc *MapCamera) Pitch() float64 {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[float64](objref.IDOf(mc), objc.RegisterName("pitch"))
 	return _r
 }

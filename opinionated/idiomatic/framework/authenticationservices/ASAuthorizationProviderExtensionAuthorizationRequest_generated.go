@@ -5,9 +5,11 @@
 package authenticationservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +51,27 @@ func authorizationProviderExtensionAuthorizationRequestAdopt(id objc.ID) *Author
 
 // Description returns the object's -description text.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) Description() string {
+	defer runtime.KeepAlive(apear)
 	return rt.Description(objref.IDOf(apear))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apear)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apear), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(apear)
 	return rt.IsKind(objref.IDOf(apear), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) String() string {
+	defer runtime.KeepAlive(apear)
 	return rt.Description(objref.IDOf(apear))
 }
 
@@ -76,65 +83,79 @@ func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProvi
 
 // DoNotHandle indicates the request wasn’t handled.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
+	defer runtime.KeepAlive(apear)
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("doNotHandle"))
 }
 
 // Cancel cancels the request, for example, because the user taps a cancel button.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
+	defer runtime.KeepAlive(apear)
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("cancel"))
 }
 
 // Complete indicates the requested authorization completed with no output.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
+	defer runtime.KeepAlive(apear)
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("complete"))
 }
 
 // CompleteWithHTTPAuthorizationHeaders indicates the requested authorization succeeded with tokens in the HTTP headers.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithHTTPAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders map[string]string) {
+	defer runtime.KeepAlive(apear)
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithHTTPAuthorizationHeaders:"), rt.MapToDict(httpAuthorizationHeaders, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // CompleteWithHTTPResponseHTTPBody indicates the requested authorization succeeded with an HTTP response.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHTTPBody(httpResponse obj.Object, httpBody obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), objref.IDOf(httpBody))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHTTPBody(httpResponse obj.Object, httpBody []byte) {
+	defer runtime.KeepAlive(apear)
+	defer runtime.KeepAlive(httpResponse)
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), rt.BytesToNSData(httpBody))
 }
 
 // CompleteWithAuthorizationResult call when authorization succeeded with
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult) {
+	defer runtime.KeepAlive(apear)
+	defer runtime.KeepAlive(authorizationResult)
 	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithAuthorizationResult:"), objref.IDOf(authorizationResult))
 }
 
 // CompleteWithError indicates the requested authorization failed.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithError:"), error_)
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(apear)
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithError:"), err)
 }
 
 // URL returns request URL with all components.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) URL() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) URL() string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // RequestedOperation returns operation to be executed by the extension.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() *foundation.String {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("requestedOperation"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // HTTPHeaders returns request HTTP headers.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) HTTPHeaders() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) HTTPHeaders() map[string]string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpHeaders"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // HTTPBody returns request body.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) HTTPBody() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) HTTPBody() []byte {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpBody"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Realm returns realm.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("realm"))
 	if _r == 0 {
 		return ""
@@ -144,12 +165,14 @@ func (apear *AuthorizationProviderExtensionAuthorizationRequest) Realm() string 
 
 // ExtensionData returns extension data from extension configuration provided by MDM stored as a property-list.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() obj.Object {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("extensionData"))
 	return obj.Wrap(_r)
 }
 
 // CallerBundleIdentifier returns identification of the calling application.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("callerBundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -159,18 +182,21 @@ func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIde
 
 // AuthorizationOptions returns authorization options.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() obj.Object {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("authorizationOptions"))
 	return obj.Wrap(_r)
 }
 
 // IsCallerManaged reports whether the calling application is managed.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[bool](objref.IDOf(apear), objc.RegisterName("isCallerManaged"))
 	return _r
 }
 
 // CallerTeamIdentifier returns team identifier of the calling application.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("callerTeamIdentifier"))
 	if _r == 0 {
 		return ""
@@ -180,6 +206,7 @@ func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdent
 
 // LocalizedCallerDisplayName returns localized display name of the calling application.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("localizedCallerDisplayName"))
 	if _r == 0 {
 		return ""
@@ -188,19 +215,22 @@ func (apear *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCaller
 }
 
 // CallerAuditToken returns audit token of the calling application.
-func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() obj.Object {
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() []byte {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("callerAuditToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IsUserInterfaceEnabled reports whether the authorization user interface is enabled. If user interface is not enabled, then the authorization will fail with
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[bool](objref.IDOf(apear), objc.RegisterName("isUserInterfaceEnabled"))
 	return _r
 }
 
 // LoginManager returns the login manager to interface with the Platform SSO configuration.
 func (apear *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
+	defer runtime.KeepAlive(apear)
 	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("loginManager"))
 	return AuthorizationProviderExtensionLoginManagerFromID(_r)
 }

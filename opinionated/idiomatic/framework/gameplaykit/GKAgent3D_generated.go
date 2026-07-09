@@ -5,10 +5,12 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -71,8 +73,19 @@ func (ad *Agent3D) WithRotation(rotation unsafe.Pointer) *Agent3D {
 	return ad
 }
 
+// WithDelegate sets an object that prepares for or responds to updates in the agent simulation.
+func (ad *Agent3D) WithDelegate(delegate AgentDelegate) *Agent3D {
+	_shim := newAgentDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ad), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ad), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ad
+}
+
 // WithBehavior sets a weighted collection of goals that influence the agent’s movement.
 func (ad *Agent3D) WithBehavior(behavior BehaviorProvider) *Agent3D {
+	defer runtime.KeepAlive(behavior)
 	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return ad
 }
@@ -109,6 +122,7 @@ func (ad *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
 
 // RightHanded reports whether should this vehicle operate in a right-handed coordinate system? false means it will be left-handed
 func (ad *Agent3D) RightHanded() bool {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("rightHanded"))
 	return _r
 }

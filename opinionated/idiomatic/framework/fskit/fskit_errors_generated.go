@@ -8,14 +8,17 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
+// ErrInvalidDirectoryCookie matches the FSKit error FSErrorInvalidDirectoryCookie.
+var ErrInvalidDirectoryCookie = errkit.New("FSErrorDomain", 4506)
+
 // ErrModuleLoadFailed matches the FSKit error FSErrorModuleLoadFailed.
 var ErrModuleLoadFailed = errkit.New("FSErrorDomain", 4500)
 
-// ErrResourceUnrecognized matches the FSKit error FSErrorResourceUnrecognized.
-var ErrResourceUnrecognized = errkit.New("FSErrorDomain", 4501)
-
 // ErrResourceDamaged matches the FSKit error FSErrorResourceDamaged.
 var ErrResourceDamaged = errkit.New("FSErrorDomain", 4502)
+
+// ErrResourceUnrecognized matches the FSKit error FSErrorResourceUnrecognized.
+var ErrResourceUnrecognized = errkit.New("FSErrorDomain", 4501)
 
 // ErrResourceUnusable matches the FSKit error FSErrorResourceUnusable.
 var ErrResourceUnusable = errkit.New("FSErrorDomain", 4503)
@@ -25,6 +28,3 @@ var ErrStatusOperationInProgress = errkit.New("FSErrorDomain", 4504)
 
 // ErrStatusOperationPaused matches the FSKit error FSErrorStatusOperationPaused.
 var ErrStatusOperationPaused = errkit.New("FSErrorDomain", 4505)
-
-// ErrInvalidDirectoryCookie matches the FSKit error FSErrorInvalidDirectoryCookie.
-var ErrInvalidDirectoryCookie = errkit.New("FSErrorDomain", 4506)

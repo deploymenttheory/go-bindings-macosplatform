@@ -5,6 +5,8 @@
 package businesschat
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func chatActionAdopt(id objc.ID) *ChatAction {
 
 // Description returns the object's -description text.
 func (ca *ChatAction) Description() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ca *ChatAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ca *ChatAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(ca)
 	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ca *ChatAction) String() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 

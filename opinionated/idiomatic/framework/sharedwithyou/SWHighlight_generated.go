@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,35 +51,42 @@ func highlightAdopt(id objc.ID) *Highlight {
 
 // Description returns the object's -description text.
 func (h *Highlight) Description() string {
+	defer runtime.KeepAlive(h)
 	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (h *Highlight) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(h)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (h *Highlight) IsKind(className string) bool {
+	defer runtime.KeepAlive(h)
 	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (h *Highlight) String() string {
+	defer runtime.KeepAlive(h)
 	return rt.Description(objref.IDOf(h))
 }
 
 // Identifier returns the unique identifier for this highlight
 func (h *Highlight) Identifier() obj.Object {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
 // URL returns the surfaced content URL
-func (h *Highlight) URL() obj.Object {
+func (h *Highlight) URL() string {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // isHighlight marks Highlight — and, by embedding promotion, its

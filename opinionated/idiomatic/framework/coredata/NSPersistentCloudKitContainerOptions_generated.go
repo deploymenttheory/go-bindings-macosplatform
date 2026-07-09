@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func persistentCloudKitContainerOptionsAdopt(id objc.ID) *PersistentCloudKitCont
 
 // Description returns the object's -description text.
 func (pckco *PersistentCloudKitContainerOptions) Description() string {
+	defer runtime.KeepAlive(pckco)
 	return rt.Description(objref.IDOf(pckco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pckco *PersistentCloudKitContainerOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pckco)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pckco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pckco *PersistentCloudKitContainerOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(pckco)
 	return rt.IsKind(objref.IDOf(pckco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pckco *PersistentCloudKitContainerOptions) String() string {
+	defer runtime.KeepAlive(pckco)
 	return rt.Description(objref.IDOf(pckco))
 }
 
@@ -75,12 +82,14 @@ func NewPersistentCloudKitContainerOptionsWithContainerIdentifier(containerIdent
 
 // WithDatabaseScope sets the database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
 func (pckco *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions {
+	defer runtime.KeepAlive(databaseScope)
 	objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
 	return pckco
 }
 
 // ContainerIdentifier returns the container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
 func (pckco *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
+	defer runtime.KeepAlive(pckco)
 	_r := objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -90,6 +99,7 @@ func (pckco *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
 
 // DatabaseScope returns the database scope.
 func (pckco *PersistentCloudKitContainerOptions) DatabaseScope() obj.Object {
+	defer runtime.KeepAlive(pckco)
 	_r := objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("databaseScope"))
 	return obj.Wrap(_r)
 }

@@ -8,71 +8,29 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrAMWorkflowNewerVersionError matches the Automator error AMWorkflowNewerVersionError.
-var ErrAMWorkflowNewerVersionError = errkit.New("AMErrorDomain", -100)
-
-// ErrAMWorkflowPropertyListInvalidError matches the Automator error AMWorkflowPropertyListInvalidError.
-var ErrAMWorkflowPropertyListInvalidError = errkit.New("AMErrorDomain", -101)
-
-// ErrAMWorkflowNewerActionVersionError matches the Automator error AMWorkflowNewerActionVersionError.
-var ErrAMWorkflowNewerActionVersionError = errkit.New("AMErrorDomain", -111)
-
-// ErrAMWorkflowOlderActionVersionError matches the Automator error AMWorkflowOlderActionVersionError.
-var ErrAMWorkflowOlderActionVersionError = errkit.New("AMErrorDomain", -112)
-
-// ErrAMWorkflowActionsNotLoadedError matches the Automator error AMWorkflowActionsNotLoadedError.
-var ErrAMWorkflowActionsNotLoadedError = errkit.New("AMErrorDomain", -113)
-
-// ErrAMWorkflowNoEnabledActionsError matches the Automator error AMWorkflowNoEnabledActionsError.
-var ErrAMWorkflowNoEnabledActionsError = errkit.New("AMErrorDomain", -114)
-
-// ErrAMUserCanceledError matches the Automator error AMUserCanceledError.
-var ErrAMUserCanceledError = errkit.New("AMErrorDomain", -128)
-
-// ErrAMNoSuchActionError matches the Automator error AMNoSuchActionError.
-var ErrAMNoSuchActionError = errkit.New("AMErrorDomain", -200)
-
-// ErrAMActionNotLoadableError matches the Automator error AMActionNotLoadableError.
-var ErrAMActionNotLoadableError = errkit.New("AMErrorDomain", -201)
-
-// ErrAMActionArchitectureMismatchError matches the Automator error AMActionArchitectureMismatchError.
-var ErrAMActionArchitectureMismatchError = errkit.New("AMErrorDomain", -202)
-
-// ErrAMActionRuntimeMismatchError matches the Automator error AMActionRuntimeMismatchError.
-var ErrAMActionRuntimeMismatchError = errkit.New("AMErrorDomain", -203)
-
-// ErrAMActionLoadError matches the Automator error AMActionLoadError.
-var ErrAMActionLoadError = errkit.New("AMErrorDomain", -204)
-
-// ErrAMActionLinkError matches the Automator error AMActionLinkError.
-var ErrAMActionLinkError = errkit.New("AMErrorDomain", -205)
-
 // ErrAMActionApplicationResourceError matches the Automator error AMActionApplicationResourceError.
 var ErrAMActionApplicationResourceError = errkit.New("AMErrorDomain", -206)
 
 // ErrAMActionApplicationVersionResourceError matches the Automator error AMActionApplicationVersionResourceError.
 var ErrAMActionApplicationVersionResourceError = errkit.New("AMErrorDomain", -207)
 
-// ErrAMActionFileResourceError matches the Automator error AMActionFileResourceError.
-var ErrAMActionFileResourceError = errkit.New("AMErrorDomain", -208)
-
-// ErrAMActionLicenseResourceError matches the Automator error AMActionLicenseResourceError.
-var ErrAMActionLicenseResourceError = errkit.New("AMErrorDomain", -209)
-
-// ErrAMActionRequiredActionResourceError matches the Automator error AMActionRequiredActionResourceError.
-var ErrAMActionRequiredActionResourceError = errkit.New("AMErrorDomain", -210)
-
-// ErrAMActionInitializationError matches the Automator error AMActionInitializationError.
-var ErrAMActionInitializationError = errkit.New("AMErrorDomain", -211)
-
-// ErrAMActionExecutionError matches the Automator error AMActionExecutionError.
-var ErrAMActionExecutionError = errkit.New("AMErrorDomain", -212)
+// ErrAMActionArchitectureMismatchError matches the Automator error AMActionArchitectureMismatchError.
+var ErrAMActionArchitectureMismatchError = errkit.New("AMErrorDomain", -202)
 
 // ErrAMActionExceptionError matches the Automator error AMActionExceptionError.
 var ErrAMActionExceptionError = errkit.New("AMErrorDomain", -213)
 
-// ErrAMActionPropertyListInvalidError matches the Automator error AMActionPropertyListInvalidError.
-var ErrAMActionPropertyListInvalidError = errkit.New("AMErrorDomain", -214)
+// ErrAMActionExecutionError matches the Automator error AMActionExecutionError.
+var ErrAMActionExecutionError = errkit.New("AMErrorDomain", -212)
+
+// ErrAMActionFailedGatekeeperError matches the Automator error AMActionFailedGatekeeperError.
+var ErrAMActionFailedGatekeeperError = errkit.New("AMErrorDomain", -217)
+
+// ErrAMActionFileResourceError matches the Automator error AMActionFileResourceError.
+var ErrAMActionFileResourceError = errkit.New("AMErrorDomain", -208)
+
+// ErrAMActionInitializationError matches the Automator error AMActionInitializationError.
+var ErrAMActionInitializationError = errkit.New("AMErrorDomain", -211)
 
 // ErrAMActionInsufficientDataError matches the Automator error AMActionInsufficientDataError.
 var ErrAMActionInsufficientDataError = errkit.New("AMErrorDomain", -215)
@@ -80,20 +38,35 @@ var ErrAMActionInsufficientDataError = errkit.New("AMErrorDomain", -215)
 // ErrAMActionIsDeprecatedError matches the Automator error AMActionIsDeprecatedError.
 var ErrAMActionIsDeprecatedError = errkit.New("AMErrorDomain", -216)
 
-// ErrAMActionFailedGatekeeperError matches the Automator error AMActionFailedGatekeeperError.
-var ErrAMActionFailedGatekeeperError = errkit.New("AMErrorDomain", -217)
+// ErrAMActionLicenseResourceError matches the Automator error AMActionLicenseResourceError.
+var ErrAMActionLicenseResourceError = errkit.New("AMErrorDomain", -209)
 
-// ErrAMActionSignatureCorruptError matches the Automator error AMActionSignatureCorruptError.
-var ErrAMActionSignatureCorruptError = errkit.New("AMErrorDomain", -218)
+// ErrAMActionLinkError matches the Automator error AMActionLinkError.
+var ErrAMActionLinkError = errkit.New("AMErrorDomain", -205)
+
+// ErrAMActionLoadError matches the Automator error AMActionLoadError.
+var ErrAMActionLoadError = errkit.New("AMErrorDomain", -204)
+
+// ErrAMActionMalwareError matches the Automator error AMActionMalwareError.
+var ErrAMActionMalwareError = errkit.New("AMErrorDomain", -221)
+
+// ErrAMActionNotLoadableError matches the Automator error AMActionNotLoadableError.
+var ErrAMActionNotLoadableError = errkit.New("AMErrorDomain", -201)
+
+// ErrAMActionPropertyListInvalidError matches the Automator error AMActionPropertyListInvalidError.
+var ErrAMActionPropertyListInvalidError = errkit.New("AMErrorDomain", -214)
 
 // ErrAMActionQuarantineError matches the Automator error AMActionQuarantineError.
 var ErrAMActionQuarantineError = errkit.New("AMErrorDomain", -219)
 
-// ErrAMActionXProtectError matches the Automator error AMActionXProtectError.
-var ErrAMActionXProtectError = errkit.New("AMErrorDomain", -220)
+// ErrAMActionRequiredActionResourceError matches the Automator error AMActionRequiredActionResourceError.
+var ErrAMActionRequiredActionResourceError = errkit.New("AMErrorDomain", -210)
 
-// ErrAMActionMalwareError matches the Automator error AMActionMalwareError.
-var ErrAMActionMalwareError = errkit.New("AMErrorDomain", -221)
+// ErrAMActionRuntimeMismatchError matches the Automator error AMActionRuntimeMismatchError.
+var ErrAMActionRuntimeMismatchError = errkit.New("AMErrorDomain", -203)
+
+// ErrAMActionSignatureCorruptError matches the Automator error AMActionSignatureCorruptError.
+var ErrAMActionSignatureCorruptError = errkit.New("AMErrorDomain", -218)
 
 // ErrAMActionThirdPartyActionsNotAllowedError matches the Automator error AMActionThirdPartyActionsNotAllowedError.
 var ErrAMActionThirdPartyActionsNotAllowedError = errkit.New("AMErrorDomain", -222)
@@ -101,11 +74,38 @@ var ErrAMActionThirdPartyActionsNotAllowedError = errkit.New("AMErrorDomain", -2
 // ErrAMActionXPCError matches the Automator error AMActionXPCError.
 var ErrAMActionXPCError = errkit.New("AMErrorDomain", -223)
 
-// ErrAMConversionNotPossibleError matches the Automator error AMConversionNotPossibleError.
-var ErrAMConversionNotPossibleError = errkit.New("AMErrorDomain", -300)
+// ErrAMActionXProtectError matches the Automator error AMActionXProtectError.
+var ErrAMActionXProtectError = errkit.New("AMErrorDomain", -220)
+
+// ErrAMConversionFailedError matches the Automator error AMConversionFailedError.
+var ErrAMConversionFailedError = errkit.New("AMErrorDomain", -302)
 
 // ErrAMConversionNoDataError matches the Automator error AMConversionNoDataError.
 var ErrAMConversionNoDataError = errkit.New("AMErrorDomain", -301)
 
-// ErrAMConversionFailedError matches the Automator error AMConversionFailedError.
-var ErrAMConversionFailedError = errkit.New("AMErrorDomain", -302)
+// ErrAMConversionNotPossibleError matches the Automator error AMConversionNotPossibleError.
+var ErrAMConversionNotPossibleError = errkit.New("AMErrorDomain", -300)
+
+// ErrAMNoSuchActionError matches the Automator error AMNoSuchActionError.
+var ErrAMNoSuchActionError = errkit.New("AMErrorDomain", -200)
+
+// ErrAMUserCanceledError matches the Automator error AMUserCanceledError.
+var ErrAMUserCanceledError = errkit.New("AMErrorDomain", -128)
+
+// ErrAMWorkflowActionsNotLoadedError matches the Automator error AMWorkflowActionsNotLoadedError.
+var ErrAMWorkflowActionsNotLoadedError = errkit.New("AMErrorDomain", -113)
+
+// ErrAMWorkflowNewerActionVersionError matches the Automator error AMWorkflowNewerActionVersionError.
+var ErrAMWorkflowNewerActionVersionError = errkit.New("AMErrorDomain", -111)
+
+// ErrAMWorkflowNewerVersionError matches the Automator error AMWorkflowNewerVersionError.
+var ErrAMWorkflowNewerVersionError = errkit.New("AMErrorDomain", -100)
+
+// ErrAMWorkflowNoEnabledActionsError matches the Automator error AMWorkflowNoEnabledActionsError.
+var ErrAMWorkflowNoEnabledActionsError = errkit.New("AMErrorDomain", -114)
+
+// ErrAMWorkflowOlderActionVersionError matches the Automator error AMWorkflowOlderActionVersionError.
+var ErrAMWorkflowOlderActionVersionError = errkit.New("AMErrorDomain", -112)
+
+// ErrAMWorkflowPropertyListInvalidError matches the Automator error AMWorkflowPropertyListInvalidError.
+var ErrAMWorkflowPropertyListInvalidError = errkit.New("AMErrorDomain", -101)

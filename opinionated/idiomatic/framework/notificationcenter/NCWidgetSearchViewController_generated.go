@@ -5,8 +5,11 @@
 package notificationcenter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func widgetSearchViewControllerAdopt(id objc.ID) *WidgetSearchViewController {
 
 // Description returns the object's -description text.
 func (wsvc *WidgetSearchViewController) Description() string {
+	defer runtime.KeepAlive(wsvc)
 	return rt.Description(objref.IDOf(wsvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wsvc *WidgetSearchViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wsvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wsvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wsvc *WidgetSearchViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(wsvc)
 	return rt.IsKind(objref.IDOf(wsvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wsvc *WidgetSearchViewController) String() string {
+	defer runtime.KeepAlive(wsvc)
 	return rt.Description(objref.IDOf(wsvc))
 }
 
@@ -76,6 +84,18 @@ func NewWidgetSearchViewController() *WidgetSearchViewController {
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the search view controller’s delegate or nil if the receiver doesn’t have a delegate.
+func (wsvc *WidgetSearchViewController) WithDelegate(delegate WidgetSearchViewDelegate) *WidgetSearchViewController {
+	_shim := newWidgetSearchViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(wsvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(wsvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return wsvc
 }
 
 // WithSearchDescription sets a localized description of the nature of the search.
@@ -104,6 +124,7 @@ func (wsvc *WidgetSearchViewController) WithSearchResultKeyPath(searchResultKeyP
 
 // SearchResults returns the search results.
 func (wsvc *WidgetSearchViewController) SearchResults() []obj.Object {
+	defer runtime.KeepAlive(wsvc)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -117,6 +138,7 @@ func (wsvc *WidgetSearchViewController) SearchResults() []obj.Object {
 
 // SetSearchResults wraps the corresponding Objective-C method.
 func (wsvc *WidgetSearchViewController) SetSearchResults(searchResults []obj.Object) {
+	defer runtime.KeepAlive(wsvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wsvc), objc.RegisterName("setSearchResults:"), purego.SliceToNSArray(searchResults, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -125,6 +147,7 @@ func (wsvc *WidgetSearchViewController) SetSearchResults(searchResults []obj.Obj
 
 // SearchDescription returns the search description.
 func (wsvc *WidgetSearchViewController) SearchDescription() string {
+	defer runtime.KeepAlive(wsvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -141,6 +164,7 @@ func (wsvc *WidgetSearchViewController) SearchDescription() string {
 
 // SearchResultsPlaceholderString returns the search results placeholder string.
 func (wsvc *WidgetSearchViewController) SearchResultsPlaceholderString() string {
+	defer runtime.KeepAlive(wsvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -157,6 +181,7 @@ func (wsvc *WidgetSearchViewController) SearchResultsPlaceholderString() string 
 
 // SearchResultKeyPath returns the search result key path.
 func (wsvc *WidgetSearchViewController) SearchResultKeyPath() string {
+	defer runtime.KeepAlive(wsvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

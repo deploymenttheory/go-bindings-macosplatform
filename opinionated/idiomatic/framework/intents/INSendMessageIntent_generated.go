@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,8 @@ func sendMessageIntentAdopt(id objc.ID) *SendMessageIntent {
 
 // NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments creates a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSenderAttachments(recipients []*Person, outgoingMessageType OutgoingMessageType, content string, speakableGroupName *SpeakableString, conversationIdentifier string, serviceName string, sender *Person, attachments []*SendMessageAttachment) *SendMessageIntent {
+	defer runtime.KeepAlive(speakableGroupName)
+	defer runtime.KeepAlive(sender)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:attachments:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), outgoingMessageType, purego.NSString(content), objref.IDOf(speakableGroupName), purego.NSString(conversationIdentifier), purego.NSString(serviceName), objref.IDOf(sender), purego.SliceToNSArray(attachments, func(_v *SendMessageAttachment) objc.ID { return objref.IDOf(_v) }))
 	return sendMessageIntentAdopt(_id)
@@ -54,6 +58,7 @@ func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupN
 
 // NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender initializes a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender(recipients []*Person, content string, groupName string, serviceName string, sender *Person) *SendMessageIntent {
+	defer runtime.KeepAlive(sender)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:content:groupName:serviceName:sender:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), purego.NSString(content), purego.NSString(groupName), purego.NSString(serviceName), objref.IDOf(sender))
 	return sendMessageIntentAdopt(_id)
@@ -61,6 +66,8 @@ func NewSendMessageIntentWithRecipientsContentGroupNameServiceNameSender(recipie
 
 // NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender initializes a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients []*Person, content string, speakableGroupName *SpeakableString, conversationIdentifier string, serviceName string, sender *Person) *SendMessageIntent {
+	defer runtime.KeepAlive(speakableGroupName)
+	defer runtime.KeepAlive(sender)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:content:speakableGroupName:conversationIdentifier:serviceName:sender:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), purego.NSString(content), objref.IDOf(speakableGroupName), purego.NSString(conversationIdentifier), purego.NSString(serviceName), objref.IDOf(sender))
 	return sendMessageIntentAdopt(_id)
@@ -68,6 +75,8 @@ func NewSendMessageIntentWithRecipientsContentSpeakableGroupNameConversationIden
 
 // NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender initializes a send message intent object with the specified content and recipients.
 func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupNameConversationIdentifierServiceNameSender(recipients []*Person, outgoingMessageType OutgoingMessageType, content string, speakableGroupName *SpeakableString, conversationIdentifier string, serviceName string, sender *Person) *SendMessageIntent {
+	defer runtime.KeepAlive(speakableGroupName)
+	defer runtime.KeepAlive(sender)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecipients:outgoingMessageType:content:speakableGroupName:conversationIdentifier:serviceName:sender:"), purego.SliceToNSArray(recipients, func(_v *Person) objc.ID { return objref.IDOf(_v) }), outgoingMessageType, purego.NSString(content), objref.IDOf(speakableGroupName), purego.NSString(conversationIdentifier), purego.NSString(serviceName), objref.IDOf(sender))
 	return sendMessageIntentAdopt(_id)
@@ -81,6 +90,7 @@ func (smi *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationP
 
 // WithDonationMetadata sets the donation metadata.
 func (smi *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return smi
 }
@@ -89,18 +99,21 @@ func (smi *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonati
 //
 // Recipients returns the collection as a Go slice.
 func (smi *SendMessageIntent) Recipients() []*Person {
+	defer runtime.KeepAlive(smi)
 	_arr := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // OutgoingMessageType returns the outgoing message type.
 func (smi *SendMessageIntent) OutgoingMessageType() OutgoingMessageType {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[OutgoingMessageType](objref.IDOf(smi), objc.RegisterName("outgoingMessageType"))
 	return _r
 }
 
 // Content returns the content.
 func (smi *SendMessageIntent) Content() string {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
@@ -110,12 +123,14 @@ func (smi *SendMessageIntent) Content() string {
 
 // SpeakableGroupName returns the speakable group name.
 func (smi *SendMessageIntent) SpeakableGroupName() *SpeakableString {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("speakableGroupName"))
 	return SpeakableStringFromID(_r)
 }
 
 // ConversationIdentifier returns the conversation identifier.
 func (smi *SendMessageIntent) ConversationIdentifier() string {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("conversationIdentifier"))
 	if _r == 0 {
 		return ""
@@ -125,6 +140,7 @@ func (smi *SendMessageIntent) ConversationIdentifier() string {
 
 // ServiceName returns the service name.
 func (smi *SendMessageIntent) ServiceName() string {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("serviceName"))
 	if _r == 0 {
 		return ""
@@ -134,6 +150,7 @@ func (smi *SendMessageIntent) ServiceName() string {
 
 // Sender returns the sender.
 func (smi *SendMessageIntent) Sender() *Person {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("sender"))
 	return PersonFromID(_r)
 }
@@ -142,12 +159,14 @@ func (smi *SendMessageIntent) Sender() *Person {
 //
 // Attachments returns the collection as a Go slice.
 func (smi *SendMessageIntent) Attachments() []*SendMessageAttachment {
+	defer runtime.KeepAlive(smi)
 	_arr := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("attachments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SendMessageAttachment { return SendMessageAttachmentFromID(_id) })
 }
 
 // GroupName returns the group name.
 func (smi *SendMessageIntent) GroupName() string {
+	defer runtime.KeepAlive(smi)
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""

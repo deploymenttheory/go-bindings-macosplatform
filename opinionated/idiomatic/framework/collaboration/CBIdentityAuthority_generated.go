@@ -5,6 +5,8 @@
 package collaboration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func identityAuthorityAdopt(id objc.ID) *IdentityAuthority {
 
 // Description returns the object's -description text.
 func (ia *IdentityAuthority) Description() string {
+	defer runtime.KeepAlive(ia)
 	return rt.Description(objref.IDOf(ia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ia *IdentityAuthority) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ia)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ia *IdentityAuthority) IsKind(className string) bool {
+	defer runtime.KeepAlive(ia)
 	return rt.IsKind(objref.IDOf(ia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ia *IdentityAuthority) String() string {
+	defer runtime.KeepAlive(ia)
 	return rt.Description(objref.IDOf(ia))
 }
 
@@ -74,12 +81,14 @@ func NewIdentityAuthority() *IdentityAuthority {
 
 // CSIdentityAuthority returns an identity authority for use with the Core Services Identity API. This method, along with “CBIdentityAuthority/identityAuthorityWithCSIdentityAuthority:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque authority object for use with the Core Services Identity API.
 func (ia *IdentityAuthority) CSIdentityAuthority() obj.Object {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("CSIdentityAuthority"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedName returns the localized name of the identity authority. - Returns: The computer’s name if the authority is local, or Managed Network Directory if the authority is managed.
 func (ia *IdentityAuthority) LocalizedName() string {
+	defer runtime.KeepAlive(ia)
 	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""

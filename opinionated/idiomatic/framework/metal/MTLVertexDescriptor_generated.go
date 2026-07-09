@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexDescriptorAdopt(id objc.ID) *VertexDescriptor {
 
 // Description returns the object's -description text.
 func (vd *VertexDescriptor) Description() string {
+	defer runtime.KeepAlive(vd)
 	return rt.Description(objref.IDOf(vd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vd *VertexDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vd *VertexDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vd)
 	return rt.IsKind(objref.IDOf(vd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vd *VertexDescriptor) String() string {
+	defer runtime.KeepAlive(vd)
 	return rt.Description(objref.IDOf(vd))
 }
 
@@ -74,17 +81,20 @@ func NewVertexDescriptor() *VertexDescriptor {
 
 // Reset resets the default state for the vertex descriptor.
 func (vd *VertexDescriptor) Reset() {
+	defer runtime.KeepAlive(vd)
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("reset"))
 }
 
 // Layouts returns the layouts.
 func (vd *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
+	defer runtime.KeepAlive(vd)
 	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("layouts"))
 	return VertexBufferLayoutDescriptorArrayFromID(_r)
 }
 
 // Attributes returns the attributes.
 func (vd *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
+	defer runtime.KeepAlive(vd)
 	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("attributes"))
 	return VertexAttributeDescriptorArrayFromID(_r)
 }

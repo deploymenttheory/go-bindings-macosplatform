@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func remoteLayerClientAdopt(id objc.ID) *RemoteLayerClient {
 
 // Description returns the object's -description text.
 func (rlc *RemoteLayerClient) Description() string {
+	defer runtime.KeepAlive(rlc)
 	return rt.Description(objref.IDOf(rlc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rlc *RemoteLayerClient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rlc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rlc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rlc *RemoteLayerClient) IsKind(className string) bool {
+	defer runtime.KeepAlive(rlc)
 	return rt.IsKind(objref.IDOf(rlc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rlc *RemoteLayerClient) String() string {
+	defer runtime.KeepAlive(rlc)
 	return rt.Description(objref.IDOf(rlc))
 }
 
@@ -75,23 +82,27 @@ func NewRemoteLayerClientWithServerPort(port int) *RemoteLayerClient {
 
 // WithLayer sets the layer associated with the remote client.
 func (rlc *RemoteLayerClient) WithLayer(layer LayerProvider) *RemoteLayerClient {
+	defer runtime.KeepAlive(layer)
 	objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return rlc
 }
 
 // Invalidate invalidates a remote layer client.
 func (rlc *RemoteLayerClient) Invalidate() {
+	defer runtime.KeepAlive(rlc)
 	objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("invalidate"))
 }
 
 // ClientID returns the client ID.
 func (rlc *RemoteLayerClient) ClientID() uint32 {
+	defer runtime.KeepAlive(rlc)
 	_r := objc.Send[uint32](objref.IDOf(rlc), objc.RegisterName("clientId"))
 	return _r
 }
 
 // Layer returns the layer.
 func (rlc *RemoteLayerClient) Layer() *Layer {
+	defer runtime.KeepAlive(rlc)
 	_r := objc.Send[objc.ID](objref.IDOf(rlc), objc.RegisterName("layer"))
 	return LayerFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func sequenceConstraintAdopt(id objc.ID) *SequenceConstraint {
 
 // Description returns the object's -description text.
 func (sc *SequenceConstraint) Description() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sc *SequenceConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sc *SequenceConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(sc)
 	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sc *SequenceConstraint) String() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
@@ -75,12 +82,14 @@ func NewSequenceConstraint() *SequenceConstraint {
 
 // ValueDescription returns the value description.
 func (sc *SequenceConstraint) ValueDescription() *FeatureDescription {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("valueDescription"))
 	return FeatureDescriptionFromID(_r)
 }
 
 // CountRange returns the count range.
 func (sc *SequenceConstraint) CountRange() foundation.NSRange {
+	defer runtime.KeepAlive(sc)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(sc), objc.RegisterName("countRange"))
 	return _r
 }

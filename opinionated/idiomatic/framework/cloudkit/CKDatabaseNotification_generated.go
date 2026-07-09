@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewDatabaseNotification() *DatabaseNotification {
 
 // DatabaseScope returns the database scope.
 func (dn *DatabaseNotification) DatabaseScope() DatabaseScope {
+	defer runtime.KeepAlive(dn)
 	_r := objc.Send[DatabaseScope](objref.IDOf(dn), objc.RegisterName("databaseScope"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,33 +49,41 @@ func mTRUnitTestingClusterDoubleNestedStructListAdopt(id objc.ID) *MTRUnitTestin
 
 // Description returns the object's -description text.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) Description() string {
+	defer runtime.KeepAlive(mutcdnsl)
 	return rt.Description(objref.IDOf(mutcdnsl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutcdnsl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutcdnsl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutcdnsl)
 	return rt.IsKind(objref.IDOf(mutcdnsl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) String() string {
+	defer runtime.KeepAlive(mutcdnsl)
 	return rt.Description(objref.IDOf(mutcdnsl))
 }
 
 // A returns the a.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) A() obj.Object {
+	defer runtime.KeepAlive(mutcdnsl)
 	_r := objc.Send[objc.ID](objref.IDOf(mutcdnsl), objc.RegisterName("a"))
 	return obj.Wrap(_r)
 }
 
 // SetA wraps the corresponding Objective-C method.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) SetA(a obj.Object) {
+	defer runtime.KeepAlive(mutcdnsl)
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(mutcdnsl), objc.RegisterName("setA:"), objref.IDOf(a))
 }
 

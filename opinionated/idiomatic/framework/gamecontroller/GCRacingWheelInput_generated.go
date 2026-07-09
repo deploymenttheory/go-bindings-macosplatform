@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewRacingWheelInput() *RacingWheelInput {
 
 // Capture returns a snapshot of the racing wheel inputs.
 func (rwi *RacingWheelInput) Capture() *RacingWheelInputState {
+	defer runtime.KeepAlive(rwi)
 	_r := objc.Send[objc.ID](objref.IDOf(rwi), objc.RegisterName("capture"))
 	return RacingWheelInputStateFromID(_r)
 }
 
 // NextInputState returns the next input state of the racing wheel from the queue.
 func (rwi *RacingWheelInput) NextInputState() *RacingWheelInputState {
+	defer runtime.KeepAlive(rwi)
 	_r := objc.Send[objc.ID](objref.IDOf(rwi), objc.RegisterName("nextInputState"))
 	return RacingWheelInputStateFromID(_r)
 }

@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func migrationStageAdopt(id objc.ID) *MigrationStage {
 
 // Description returns the object's -description text.
 func (ms *MigrationStage) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MigrationStage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MigrationStage) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MigrationStage) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -76,6 +83,7 @@ func (ms *MigrationStage) WithLabel(label string) *MigrationStage {
 
 // Label returns the label.
 func (ms *MigrationStage) Label() string {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

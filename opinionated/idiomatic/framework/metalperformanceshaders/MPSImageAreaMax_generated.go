@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -67,12 +69,14 @@ func (iam *ImageAreaMax) WithLabel(label string) *ImageAreaMax {
 
 // KernelHeight returns the height of the filter window. Must be an odd number.
 func (iam *ImageAreaMax) KernelHeight() int {
+	defer runtime.KeepAlive(iam)
 	_r := objc.Send[int](objref.IDOf(iam), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // KernelWidth returns the width of the filter window. Must be an odd number.
 func (iam *ImageAreaMax) KernelWidth() int {
+	defer runtime.KeepAlive(iam)
 	_r := objc.Send[int](objref.IDOf(iam), objc.RegisterName("kernelWidth"))
 	return _r
 }

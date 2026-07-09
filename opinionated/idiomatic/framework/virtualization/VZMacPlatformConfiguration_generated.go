@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,36 +55,42 @@ func NewMacPlatformConfiguration() *MacPlatformConfiguration {
 
 // WithHardwareModel sets the Mac hardware model.
 func (mpc *MacPlatformConfiguration) WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration {
+	defer runtime.KeepAlive(hardwareModel)
 	objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("setHardwareModel:"), objref.IDOf(hardwareModel))
 	return mpc
 }
 
 // WithMachineIdentifier sets the Mac machine identifier.
 func (mpc *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration {
+	defer runtime.KeepAlive(machineIdentifier)
 	objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 	return mpc
 }
 
 // WithAuxiliaryStorage sets the Mac auxiliary storage.
 func (mpc *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration {
+	defer runtime.KeepAlive(auxiliaryStorage)
 	objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("setAuxiliaryStorage:"), objref.IDOf(auxiliaryStorage))
 	return mpc
 }
 
 // HardwareModel returns the Mac hardware model.
 func (mpc *MacPlatformConfiguration) HardwareModel() *MacHardwareModel {
+	defer runtime.KeepAlive(mpc)
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("hardwareModel"))
 	return MacHardwareModelFromID(_r)
 }
 
 // MachineIdentifier returns the unique Mac machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system.
 func (mpc *MacPlatformConfiguration) MachineIdentifier() *MacMachineIdentifier {
+	defer runtime.KeepAlive(mpc)
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("machineIdentifier"))
 	return MacMachineIdentifierFromID(_r)
 }
 
 // AuxiliaryStorage returns the Mac auxiliary storage. When creating a virtual machine from scratch, the hardware model of the `auxiliaryStorage` must match the hardware model of the `hardwareModel` property.
 func (mpc *MacPlatformConfiguration) AuxiliaryStorage() *MacAuxiliaryStorage {
+	defer runtime.KeepAlive(mpc)
 	_r := objc.Send[objc.ID](objref.IDOf(mpc), objc.RegisterName("auxiliaryStorage"))
 	return MacAuxiliaryStorageFromID(_r)
 }

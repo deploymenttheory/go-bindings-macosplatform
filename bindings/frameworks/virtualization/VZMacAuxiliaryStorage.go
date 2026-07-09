@@ -38,8 +38,8 @@ func VZMacAuxiliaryStorageFromID(id objc.ID) *VZMacAuxiliaryStorage {
 }
 
 // Initializes an auxiliary storage object with data from the location at the URL you provide.
-func (o *VZMacAuxiliaryStorage) InitWithURL(uRL *foundation.NSURL) *VZMacAuxiliaryStorage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithURL, uRL.Ptr())
+func (o *VZMacAuxiliaryStorage) InitWithURL(url *foundation.NSURL) *VZMacAuxiliaryStorage {
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -47,9 +47,9 @@ func (o *VZMacAuxiliaryStorage) InitWithURL(uRL *foundation.NSURL) *VZMacAuxilia
 }
 
 // Creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
-func (o *VZMacAuxiliaryStorage) InitCreatingStorageAtURLHardwareModelOptionsError(uRL *foundation.NSURL, hardwareModel *VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*VZMacAuxiliaryStorage, error) {
+func (o *VZMacAuxiliaryStorage) InitCreatingStorageAtURLHardwareModelOptionsError(url *foundation.NSURL, hardwareModel *VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*VZMacAuxiliaryStorage, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitCreatingStorageAtURLHardwareModelOptionsError, uRL.Ptr(), hardwareModel.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitCreatingStorageAtURLHardwareModelOptionsError, url.Ptr(), hardwareModel.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -68,8 +68,8 @@ func (o *VZMacAuxiliaryStorage) URL() *foundation.NSURL {
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *VZMacAuxiliaryStorage) InitWithContentsOfURL(uRL *foundation.NSURL) *VZMacAuxiliaryStorage {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithContentsOfURL, uRL.Ptr())
+func (o *VZMacAuxiliaryStorage) InitWithContentsOfURL(url *foundation.NSURL) *VZMacAuxiliaryStorage {
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithContentsOfURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

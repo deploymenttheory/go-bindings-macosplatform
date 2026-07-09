@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func audioMixAdopt(id objc.ID) *AudioMix {
 
 // Description returns the object's -description text.
 func (am *AudioMix) Description() string {
+	defer runtime.KeepAlive(am)
 	return rt.Description(objref.IDOf(am))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (am *AudioMix) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(am)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(am), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (am *AudioMix) IsKind(className string) bool {
+	defer runtime.KeepAlive(am)
 	return rt.IsKind(objref.IDOf(am), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (am *AudioMix) String() string {
+	defer runtime.KeepAlive(am)
 	return rt.Description(objref.IDOf(am))
 }
 
@@ -72,6 +79,7 @@ func (am *AudioMix) String() string {
 //
 // InputParameters returns the collection as a Go slice.
 func (am *AudioMix) InputParameters() []*AudioMixInputParameters {
+	defer runtime.KeepAlive(am)
 	_arr := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("inputParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioMixInputParameters { return AudioMixInputParametersFromID(_id) })
 }

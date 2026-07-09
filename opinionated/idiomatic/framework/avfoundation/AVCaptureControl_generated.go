@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func captureControlAdopt(id objc.ID) *CaptureControl {
 
 // Description returns the object's -description text.
 func (cc *CaptureControl) Description() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cc *CaptureControl) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cc *CaptureControl) IsKind(className string) bool {
+	defer runtime.KeepAlive(cc)
 	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cc *CaptureControl) String() string {
+	defer runtime.KeepAlive(cc)
 	return rt.Description(objref.IDOf(cc))
 }
 
@@ -76,6 +83,7 @@ func (cc *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
 
 // IsEnabled reports whether the object is enabled.
 func (cc *CaptureControl) IsEnabled() bool {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEnabled"))
 	return _r
 }

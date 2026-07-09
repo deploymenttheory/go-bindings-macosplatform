@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func geoJSONFeatureAdopt(id objc.ID) *GeoJSONFeature {
 
 // Description returns the object's -description text.
 func (gjf *GeoJSONFeature) Description() string {
+	defer runtime.KeepAlive(gjf)
 	return rt.Description(objref.IDOf(gjf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gjf *GeoJSONFeature) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gjf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gjf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gjf *GeoJSONFeature) IsKind(className string) bool {
+	defer runtime.KeepAlive(gjf)
 	return rt.IsKind(objref.IDOf(gjf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gjf *GeoJSONFeature) String() string {
+	defer runtime.KeepAlive(gjf)
 	return rt.Description(objref.IDOf(gjf))
 }
 
@@ -74,6 +81,7 @@ func NewGeoJSONFeature() *GeoJSONFeature {
 
 // Identifier returns the identifier.
 func (gjf *GeoJSONFeature) Identifier() string {
+	defer runtime.KeepAlive(gjf)
 	_r := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -82,15 +90,17 @@ func (gjf *GeoJSONFeature) Identifier() string {
 }
 
 // Properties returns the properties.
-func (gjf *GeoJSONFeature) Properties() obj.Object {
+func (gjf *GeoJSONFeature) Properties() []byte {
+	defer runtime.KeepAlive(gjf)
 	_r := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("properties"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Geometry returns the geometry.
 //
 // Geometry returns the collection as a Go slice.
 func (gjf *GeoJSONFeature) Geometry() []*Shape {
+	defer runtime.KeepAlive(gjf)
 	_arr := objc.Send[objc.ID](objref.IDOf(gjf), objc.RegisterName("geometry"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }

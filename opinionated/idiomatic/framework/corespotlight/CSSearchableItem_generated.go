@@ -5,6 +5,9 @@
 package corespotlight
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +50,33 @@ func searchableItemAdopt(id objc.ID) *SearchableItem {
 
 // Description returns the object's -description text.
 func (si *SearchableItem) Description() string {
+	defer runtime.KeepAlive(si)
 	return rt.Description(objref.IDOf(si))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (si *SearchableItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(si)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(si), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (si *SearchableItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(si)
 	return rt.IsKind(objref.IDOf(si), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (si *SearchableItem) String() string {
+	defer runtime.KeepAlive(si)
 	return rt.Description(objref.IDOf(si))
 }
 
 // NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
 func NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIdentifier string, domainIdentifier string, attributeSet *SearchableItemAttributeSet) *SearchableItem {
+	defer runtime.KeepAlive(attributeSet)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUniqueIdentifier:domainIdentifier:attributeSet:"), purego.NSString(uniqueIdentifier), purego.NSString(domainIdentifier), objref.IDOf(attributeSet))
 	return searchableItemAdopt(_id)
@@ -86,13 +95,14 @@ func (si *SearchableItem) WithDomainIdentifier(domainIdentifier string) *Searcha
 }
 
 // WithExpirationDate sets the date after which the searchable item should no longer exist.
-func (si *SearchableItem) WithExpirationDate(expirationDate obj.Object) *SearchableItem {
-	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+func (si *SearchableItem) WithExpirationDate(expirationDate time.Time) *SearchableItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setExpirationDate:"), rt.TimeToNSDate(expirationDate))
 	return si
 }
 
 // WithAttributeSet sets the set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.
 func (si *SearchableItem) WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem {
+	defer runtime.KeepAlive(attributeSet)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAttributeSet:"), objref.IDOf(attributeSet))
 	return si
 }
@@ -111,6 +121,7 @@ func (si *SearchableItem) WithUpdateListenerOptions(updateListenerOptions Search
 
 // UniqueIdentifier returns the unique identifier.
 func (si *SearchableItem) UniqueIdentifier() string {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("uniqueIdentifier"))
 	if _r == 0 {
 		return ""
@@ -120,6 +131,7 @@ func (si *SearchableItem) UniqueIdentifier() string {
 
 // DomainIdentifier returns the domain identifier.
 func (si *SearchableItem) DomainIdentifier() string {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
 		return ""
@@ -128,25 +140,29 @@ func (si *SearchableItem) DomainIdentifier() string {
 }
 
 // ExpirationDate returns the expiration date.
-func (si *SearchableItem) ExpirationDate() obj.Object {
+func (si *SearchableItem) ExpirationDate() time.Time {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("expirationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AttributeSet returns the attribute set.
 func (si *SearchableItem) AttributeSet() *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("attributeSet"))
 	return SearchableItemAttributeSetFromID(_r)
 }
 
 // IsUpdate reports whether the object is update.
 func (si *SearchableItem) IsUpdate() bool {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isUpdate"))
 	return _r
 }
 
 // UpdateListenerOptions returns the update listener options.
 func (si *SearchableItem) UpdateListenerOptions() SearchableItemUpdateListenerOptions {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[SearchableItemUpdateListenerOptions](objref.IDOf(si), objc.RegisterName("updateListenerOptions"))
 	return _r
 }

@@ -6,6 +6,7 @@ package coredata
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -52,22 +53,27 @@ func persistentContainerAdopt(id objc.ID) *PersistentContainer {
 
 // Description returns the object's -description text.
 func (pc *PersistentContainer) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PersistentContainer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PersistentContainer) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PersistentContainer) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -80,6 +86,7 @@ func NewPersistentContainerWithName(name string) *PersistentContainer {
 
 // NewPersistentContainerWithNameManagedObjectModel create a container with the specified name and managed object model.
 func NewPersistentContainerWithNameManagedObjectModel(name string, model *ManagedObjectModel) *PersistentContainer {
+	defer runtime.KeepAlive(model)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentContainer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:managedObjectModel:"), purego.NSString(name), objref.IDOf(model))
 	return persistentContainerAdopt(_id)
@@ -96,6 +103,7 @@ func (pc *PersistentContainer) WithPersistentStoreDescriptions(items ...*Persist
 //
 // LoadPersistentStores blocks until the operation completes or ctx is cancelled.
 func (pc *PersistentContainer) LoadPersistentStores(ctx context.Context) (result *PersistentStoreDescription, err error) {
+	defer runtime.KeepAlive(pc)
 	type _result struct {
 		val *PersistentStoreDescription
 		err error
@@ -119,6 +127,7 @@ func (pc *PersistentContainer) LoadPersistentStores(ctx context.Context) (result
 
 // NewBackgroundContext returns a new managed object context that executes on a private queue.
 func (pc *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("newBackgroundContext"))
 	return ManagedObjectContextFromID(_r)
 }
@@ -127,6 +136,7 @@ func (pc *PersistentContainer) NewBackgroundContext() *ManagedObjectContext {
 //
 // PerformBackgroundTask blocks until the operation completes or ctx is cancelled.
 func (pc *PersistentContainer) PerformBackgroundTask(ctx context.Context) (result *ManagedObjectContext, err error) {
+	defer runtime.KeepAlive(pc)
 	type _result struct {
 		val *ManagedObjectContext
 		err error
@@ -149,6 +159,7 @@ func (pc *PersistentContainer) PerformBackgroundTask(ctx context.Context) (resul
 
 // Name returns the name.
 func (pc *PersistentContainer) Name() string {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -158,18 +169,21 @@ func (pc *PersistentContainer) Name() string {
 
 // ViewContext returns the view context.
 func (pc *PersistentContainer) ViewContext() *ManagedObjectContext {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("viewContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // ManagedObjectModel returns the managed object model.
 func (pc *PersistentContainer) ManagedObjectModel() *ManagedObjectModel {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // PersistentStoreCoordinator returns the persistent store coordinator.
 func (pc *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoordinator {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("persistentStoreCoordinator"))
 	return PersistentStoreCoordinatorFromID(_r)
 }
@@ -178,6 +192,7 @@ func (pc *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoor
 //
 // PersistentStoreDescriptions returns the collection as a Go slice.
 func (pc *PersistentContainer) PersistentStoreDescriptions() []*PersistentStoreDescription {
+	defer runtime.KeepAlive(pc)
 	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("persistentStoreDescriptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStoreDescription { return PersistentStoreDescriptionFromID(_id) })
 }

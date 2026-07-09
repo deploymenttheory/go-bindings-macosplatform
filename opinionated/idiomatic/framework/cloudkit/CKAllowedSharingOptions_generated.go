@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func allowedSharingOptionsAdopt(id objc.ID) *AllowedSharingOptions {
 
 // Description returns the object's -description text.
 func (aso *AllowedSharingOptions) Description() string {
+	defer runtime.KeepAlive(aso)
 	return rt.Description(objref.IDOf(aso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aso *AllowedSharingOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aso *AllowedSharingOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(aso)
 	return rt.IsKind(objref.IDOf(aso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aso *AllowedSharingOptions) String() string {
+	defer runtime.KeepAlive(aso)
 	return rt.Description(objref.IDOf(aso))
 }
 
@@ -99,24 +106,28 @@ func (aso *AllowedSharingOptions) WithAllowsAccessRequests(allowsAccessRequests 
 
 // AllowedParticipantPermissionOptions returns the permission option the system uses to control whether a user can grant read-only or write access.
 func (aso *AllowedSharingOptions) AllowedParticipantPermissionOptions() SharingParticipantPermissionOption {
+	defer runtime.KeepAlive(aso)
 	_r := objc.Send[SharingParticipantPermissionOption](objref.IDOf(aso), objc.RegisterName("allowedParticipantPermissionOptions"))
 	return _r
 }
 
 // AllowedParticipantAccessOptions returns the permission option the system uses to control whether a user can share publicly or privately.
 func (aso *AllowedSharingOptions) AllowedParticipantAccessOptions() SharingParticipantAccessOption {
+	defer runtime.KeepAlive(aso)
 	_r := objc.Send[SharingParticipantAccessOption](objref.IDOf(aso), objc.RegisterName("allowedParticipantAccessOptions"))
 	return _r
 }
 
 // AllowsParticipantsToInviteOthers reports whether default value is false. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with “CKShare/ParticipantRole/administrator-enum.case“ participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as “CKShare/ParticipantRole/privateUser-enum.case“.
 func (aso *AllowedSharingOptions) AllowsParticipantsToInviteOthers() bool {
+	defer runtime.KeepAlive(aso)
 	_r := objc.Send[bool](objref.IDOf(aso), objc.RegisterName("allowsParticipantsToInviteOthers"))
 	return _r
 }
 
 // AllowsAccessRequests reports whether default value is false. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
 func (aso *AllowedSharingOptions) AllowsAccessRequests() bool {
+	defer runtime.KeepAlive(aso)
 	_r := objc.Send[bool](objref.IDOf(aso), objc.RegisterName("allowsAccessRequests"))
 	return _r
 }

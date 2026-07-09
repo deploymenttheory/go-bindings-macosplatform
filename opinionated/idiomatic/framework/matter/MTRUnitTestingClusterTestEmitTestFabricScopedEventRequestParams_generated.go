@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsAdopt(id obj
 
 // Description returns the object's -description text.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Description() string {
+	defer runtime.KeepAlive(mutctetfserp)
 	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctetfserp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctetfserp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctetfserp)
 	return rt.IsKind(objref.IDOf(mutctetfserp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) String() string {
+	defer runtime.KeepAlive(mutctetfserp)
 	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
 // WithArg1 sets the arg1.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	defer runtime.KeepAlive(arg1)
 	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctetfserp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mutctetfserp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mutctetfserp
 }
 
 // Arg1 returns the arg1.
-func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Arg1() obj.Object {
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Arg1() *foundation.Number {
+	defer runtime.KeepAlive(mutctetfserp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("arg1"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mutctetfserp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mutctetfserp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams marks MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams — and, by embedding promotion, its

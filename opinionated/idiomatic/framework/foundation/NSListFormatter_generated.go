@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,12 +58,14 @@ func NewListFormatter() *ListFormatter {
 
 // WithLocale sets the locale.
 func (lf *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return lf
 }
 
 // WithItemFormatter sets the item formatter.
 func (lf *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
+	defer runtime.KeepAlive(itemFormatter)
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
 	return lf
 }
@@ -73,13 +77,15 @@ func (lf *ListFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *Li
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (lf *ListFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter {
-	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (lf *ListFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ListFormatter {
+	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return lf
 }
 
 // StringFromItems wraps the corresponding Objective-C method.
 func (lf *ListFormatter) StringFromItems(items obj.Object) string {
+	defer runtime.KeepAlive(lf)
+	defer runtime.KeepAlive(items)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("stringFromItems:"), objref.IDOf(items))
 	if _r == 0 {
 		return ""
@@ -89,12 +95,14 @@ func (lf *ListFormatter) StringFromItems(items obj.Object) string {
 
 // Locale returns the locale.
 func (lf *ListFormatter) Locale() *Locale {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
 // ItemFormatter returns the item formatter.
 func (lf *ListFormatter) ItemFormatter() *Formatter {
+	defer runtime.KeepAlive(lf)
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("itemFormatter"))
 	return FormatterFromID(_r)
 }

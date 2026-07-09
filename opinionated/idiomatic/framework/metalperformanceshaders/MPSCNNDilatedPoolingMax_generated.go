@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -91,12 +93,14 @@ func (cdpm *CNNDilatedPoolingMax) WithLabel(label string) *CNNDilatedPoolingMax 
 
 // DilationRateX returns dilationRateX for accessing the image passed in as source
 func (cdpm *CNNDilatedPoolingMax) DilationRateX() int {
+	defer runtime.KeepAlive(cdpm)
 	_r := objc.Send[int](objref.IDOf(cdpm), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
 // DilationRateY returns dilationRateY for accessing the image passed in as source
 func (cdpm *CNNDilatedPoolingMax) DilationRateY() int {
+	defer runtime.KeepAlive(cdpm)
 	_r := objc.Send[int](objref.IDOf(cdpm), objc.RegisterName("dilationRateY"))
 	return _r
 }

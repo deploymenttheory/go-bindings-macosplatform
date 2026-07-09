@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func networkHostAdopt(id objc.ID) *NetworkHost {
 
 // Description returns the object's -description text.
 func (nh *NetworkHost) Description() string {
+	defer runtime.KeepAlive(nh)
 	return rt.Description(objref.IDOf(nh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nh *NetworkHost) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nh *NetworkHost) IsKind(className string) bool {
+	defer runtime.KeepAlive(nh)
 	return rt.IsKind(objref.IDOf(nh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nh *NetworkHost) String() string {
+	defer runtime.KeepAlive(nh)
 	return rt.Description(objref.IDOf(nh))
 }
 
@@ -74,12 +81,15 @@ func NewNetworkHost() *NetworkHost {
 
 // HasSameAddressAs compares this host instance with another to see if they share the same address value.
 func (nh *NetworkHost) HasSameAddressAs(other *NetworkHost) bool {
+	defer runtime.KeepAlive(nh)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(nh), objc.RegisterName("hasSameAddressAs:"), objref.IDOf(other))
 	return _r
 }
 
 // Name returns the name.
 func (nh *NetworkHost) Name() string {
+	defer runtime.KeepAlive(nh)
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (nh *NetworkHost) Name() string {
 
 // Address returns the address.
 func (nh *NetworkHost) Address() string {
+	defer runtime.KeepAlive(nh)
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("address"))
 	if _r == 0 {
 		return ""
@@ -98,12 +109,14 @@ func (nh *NetworkHost) Address() string {
 
 // Port returns the port.
 func (nh *NetworkHost) Port() int {
+	defer runtime.KeepAlive(nh)
 	_r := objc.Send[int](objref.IDOf(nh), objc.RegisterName("port"))
 	return _r
 }
 
 // NetServiceName returns the net service name.
 func (nh *NetworkHost) NetServiceName() string {
+	defer runtime.KeepAlive(nh)
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("netServiceName"))
 	if _r == 0 {
 		return ""
@@ -113,6 +126,7 @@ func (nh *NetworkHost) NetServiceName() string {
 
 // NetServiceDomain returns the net service domain.
 func (nh *NetworkHost) NetServiceDomain() string {
+	defer runtime.KeepAlive(nh)
 	_r := objc.Send[objc.ID](objref.IDOf(nh), objc.RegisterName("netServiceDomain"))
 	if _r == 0 {
 		return ""

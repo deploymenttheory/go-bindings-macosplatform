@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,12 +51,12 @@ func formCellAdopt(id objc.ID) *FormCell {
 }
 
 // NewFormCellTextCell returns an NSFormCell object initialized with the specified title string.
-func NewFormCellTextCell(string_ string) *FormCell {
+func NewFormCellTextCell(str string) *FormCell {
 	var _mainthread0 *FormCell
 	purego.Main(func() {
 		_mainthread0 = func() *FormCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSFormCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return formCellAdopt(_id)
 		}()
 	})
@@ -62,6 +65,7 @@ func NewFormCellTextCell(string_ string) *FormCell {
 
 // NewFormCellWithCoder creates a new FormCell.
 func NewFormCellWithCoder(coder obj.Object) *FormCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *FormCell
 	purego.Main(func() {
 		_mainthread0 = func() *FormCell {
@@ -83,6 +87,7 @@ func (fc *FormCell) WithTitleWidth(titleWidth float64) *FormCell {
 
 // WithTitleFont sets the font used to draw cell’s title.
 func (fc *FormCell) WithTitleFont(titleFont *Font) *FormCell {
+	defer runtime.KeepAlive(titleFont)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
 	})
@@ -99,6 +104,7 @@ func (fc *FormCell) WithPlaceholderString(placeholderString string) *FormCell {
 
 // WithPlaceholderAttributedString sets the cell’s attributed placeholder string.
 func (fc *FormCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *FormCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -131,6 +137,7 @@ func (fc *FormCell) WithPreferredTextFieldWidth(preferredTextFieldWidth float64)
 
 // WithAttributedTitle sets the title of the cell as an attributed string.
 func (fc *FormCell) WithAttributedTitle(attributedTitle obj.Object) *FormCell {
+	defer runtime.KeepAlive(attributedTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	})
@@ -139,6 +146,7 @@ func (fc *FormCell) WithAttributedTitle(attributedTitle obj.Object) *FormCell {
 
 // WithControlView sets the view associated with the cell.
 func (fc *FormCell) WithControlView(controlView ViewProvider) *FormCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -163,6 +171,7 @@ func (fc *FormCell) WithState(state int) *FormCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (fc *FormCell) WithTarget(target obj.Object) *FormCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -267,6 +276,7 @@ func (fc *FormCell) WithWraps(wraps bool) *FormCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (fc *FormCell) WithFont(font *Font) *FormCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -275,6 +285,7 @@ func (fc *FormCell) WithFont(font *Font) *FormCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (fc *FormCell) WithFormatter(formatter obj.Object) *FormCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -283,6 +294,7 @@ func (fc *FormCell) WithFormatter(formatter obj.Object) *FormCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (fc *FormCell) WithObjectValue(objectValue obj.Object) *FormCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -331,6 +343,7 @@ func (fc *FormCell) WithIntegerValue(integerValue int) *FormCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (fc *FormCell) WithImage(image *Image) *FormCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -347,6 +360,7 @@ func (fc *FormCell) WithControlSize(controlSize ControlSize) *FormCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (fc *FormCell) WithRepresentedObject(representedObject obj.Object) *FormCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -355,6 +369,7 @@ func (fc *FormCell) WithRepresentedObject(representedObject obj.Object) *FormCel
 
 // WithMenu sets the cell’s contextual menu.
 func (fc *FormCell) WithMenu(menu *Menu) *FormCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -443,6 +458,7 @@ func (fc *FormCell) WithFocusRingType(focusRingType FocusRingType) *FormCell {
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (fc *FormCell) WithAttributedStringValue(attributedStringValue obj.Object) *FormCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -491,6 +507,7 @@ func (fc *FormCell) WithControlTint(controlTint ControlTint) *FormCell {
 
 // TitleWidth returns the width of the title field constrained to the specified size.
 func (fc *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -504,6 +521,7 @@ func (fc *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
 
 // TitleWidth2 returns the title width2.
 func (fc *FormCell) TitleWidth2() float64 {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -517,6 +535,7 @@ func (fc *FormCell) TitleWidth2() float64 {
 
 // TitleFont returns the title font.
 func (fc *FormCell) TitleFont() *Font {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -530,6 +549,7 @@ func (fc *FormCell) TitleFont() *Font {
 
 // PlaceholderString returns the placeholder string.
 func (fc *FormCell) PlaceholderString() string {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -545,12 +565,13 @@ func (fc *FormCell) PlaceholderString() string {
 }
 
 // PlaceholderAttributedString returns the placeholder attributed string.
-func (fc *FormCell) PlaceholderAttributedString() obj.Object {
-	var _mainthread0 obj.Object
+func (fc *FormCell) PlaceholderAttributedString() *foundation.AttributedString {
+	defer runtime.KeepAlive(fc)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("placeholderAttributedString"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -559,6 +580,7 @@ func (fc *FormCell) PlaceholderAttributedString() obj.Object {
 
 // TitleAlignment returns the title alignment.
 func (fc *FormCell) TitleAlignment() TextAlignment {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 TextAlignment
 	purego.Main(func() {
 		_mainthread0 = func() TextAlignment {
@@ -572,6 +594,7 @@ func (fc *FormCell) TitleAlignment() TextAlignment {
 
 // TitleBaseWritingDirection returns the title base writing direction.
 func (fc *FormCell) TitleBaseWritingDirection() WritingDirection {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 WritingDirection
 	purego.Main(func() {
 		_mainthread0 = func() WritingDirection {
@@ -585,6 +608,7 @@ func (fc *FormCell) TitleBaseWritingDirection() WritingDirection {
 
 // PreferredTextFieldWidth returns the preferred text field width.
 func (fc *FormCell) PreferredTextFieldWidth() float64 {
+	defer runtime.KeepAlive(fc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -597,12 +621,13 @@ func (fc *FormCell) PreferredTextFieldWidth() float64 {
 }
 
 // AttributedTitle returns the attributed title.
-func (fc *FormCell) AttributedTitle() obj.Object {
-	var _mainthread0 obj.Object
+func (fc *FormCell) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(fc)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("attributedTitle"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0

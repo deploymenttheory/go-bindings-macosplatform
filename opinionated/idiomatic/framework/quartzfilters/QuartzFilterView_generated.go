@@ -5,6 +5,8 @@
 package quartzfilters
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func quartzFilterViewAdopt(id objc.ID) *QuartzFilterView {
 
 // Description returns the object's -description text.
 func (qfv *QuartzFilterView) Description() string {
+	defer runtime.KeepAlive(qfv)
 	return rt.Description(objref.IDOf(qfv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qfv *QuartzFilterView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qfv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qfv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qfv *QuartzFilterView) IsKind(className string) bool {
+	defer runtime.KeepAlive(qfv)
 	return rt.IsKind(objref.IDOf(qfv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qfv *QuartzFilterView) String() string {
+	defer runtime.KeepAlive(qfv)
 	return rt.Description(objref.IDOf(qfv))
 }
 
@@ -78,6 +85,7 @@ func NewQuartzFilterView() *QuartzFilterView {
 
 // SizeToFit wraps the corresponding Objective-C method.
 func (qfv *QuartzFilterView) SizeToFit() {
+	defer runtime.KeepAlive(qfv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(qfv), objc.RegisterName("sizeToFit"))
 	})

@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,10 @@ func textListElementAdopt(id objc.ID) *TextListElement {
 
 // NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
 func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *TextListElement, textList *TextList, contents obj.Object, markerAttributes obj.Object, children []*TextListElement) *TextListElement {
+	defer runtime.KeepAlive(parent)
+	defer runtime.KeepAlive(textList)
+	defer runtime.KeepAlive(contents)
+	defer runtime.KeepAlive(markerAttributes)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextListElement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentElement:textList:contents:markerAttributes:childElements:"), objref.IDOf(parent), objref.IDOf(textList), objref.IDOf(contents), objref.IDOf(markerAttributes), purego.SliceToNSArray(children, func(_v *TextListElement) objc.ID { return objref.IDOf(_v) }))
 	return textListElementAdopt(_id)
@@ -55,30 +62,35 @@ func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildEle
 
 // WithTextContentManager sets the value that represents the current content manager.
 func (tle *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
+	defer runtime.KeepAlive(textContentManager)
 	objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
 	return tle
 }
 
 // WithElementRange sets a range value that represents the range of the element inside the document.
 func (tle *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
+	defer runtime.KeepAlive(elementRange)
 	objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
 	return tle
 }
 
 // TextList returns the text list.
 func (tle *TextListElement) TextList() *TextList {
+	defer runtime.KeepAlive(tle)
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("textList"))
 	return TextListFromID(_r)
 }
 
 // Contents returns the contents.
-func (tle *TextListElement) Contents() obj.Object {
+func (tle *TextListElement) Contents() *foundation.AttributedString {
+	defer runtime.KeepAlive(tle)
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("contents"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // MarkerAttributes returns the marker attributes.
 func (tle *TextListElement) MarkerAttributes() obj.Object {
+	defer runtime.KeepAlive(tle)
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("markerAttributes"))
 	return obj.Wrap(_r)
 }

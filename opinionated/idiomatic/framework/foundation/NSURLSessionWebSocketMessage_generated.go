@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,30 +48,34 @@ func uRLSessionWebSocketMessageAdopt(id objc.ID) *URLSessionWebSocketMessage {
 
 // Description returns the object's -description text.
 func (uswsm *URLSessionWebSocketMessage) Description() string {
+	defer runtime.KeepAlive(uswsm)
 	return rt.Description(objref.IDOf(uswsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uswsm *URLSessionWebSocketMessage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uswsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uswsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uswsm *URLSessionWebSocketMessage) IsKind(className string) bool {
+	defer runtime.KeepAlive(uswsm)
 	return rt.IsKind(objref.IDOf(uswsm), className)
 }
 
 // NewURLSessionWebSocketMessageWithData creates a new URLSessionWebSocketMessage.
-func NewURLSessionWebSocketMessageWithData(data *Data) *URLSessionWebSocketMessage {
+func NewURLSessionWebSocketMessageWithData(data []byte) *URLSessionWebSocketMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLSessionWebSocketMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return uRLSessionWebSocketMessageAdopt(_id)
 }
 
 // NewURLSessionWebSocketMessageWithString creates a new URLSessionWebSocketMessage.
-func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocketMessage {
+func NewURLSessionWebSocketMessageWithString(str string) *URLSessionWebSocketMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLSessionWebSocketMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return uRLSessionWebSocketMessageAdopt(_id)
 }
 
@@ -81,25 +86,28 @@ func (uswsm *URLSessionWebSocketMessage) WithObservationInfo(observationInfo uns
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uswsm *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionWebSocketMessage {
-	objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uswsm *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionWebSocketMessage {
+	objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uswsm
 }
 
 // Type returns the type.
 func (uswsm *URLSessionWebSocketMessage) Type() URLSessionWebSocketMessageType {
+	defer runtime.KeepAlive(uswsm)
 	_r := objc.Send[URLSessionWebSocketMessageType](objref.IDOf(uswsm), objc.RegisterName("type"))
 	return _r
 }
 
 // Data returns the data.
-func (uswsm *URLSessionWebSocketMessage) Data() *Data {
+func (uswsm *URLSessionWebSocketMessage) Data() []byte {
+	defer runtime.KeepAlive(uswsm)
 	_r := objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("data"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // String returns the string.
 func (uswsm *URLSessionWebSocketMessage) String() string {
+	defer runtime.KeepAlive(uswsm)
 	_r := objc.Send[objc.ID](objref.IDOf(uswsm), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""

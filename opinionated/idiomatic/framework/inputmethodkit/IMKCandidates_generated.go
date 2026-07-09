@@ -5,8 +5,11 @@
 package inputmethodkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,27 +51,33 @@ func candidatesAdopt(id objc.ID) *Candidates {
 
 // Description returns the object's -description text.
 func (c *Candidates) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Candidates) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Candidates) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Candidates) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // NewCandidatesWithServerPanelType returns the initialized IMKCandidates object.
 func NewCandidatesWithServerPanelType(server *Server, panelType int) *Candidates {
+	defer runtime.KeepAlive(server)
 	var _mainthread0 *Candidates
 	purego.Main(func() {
 		_mainthread0 = func() *Candidates {
@@ -82,6 +91,7 @@ func NewCandidatesWithServerPanelType(server *Server, panelType int) *Candidates
 
 // NewCandidatesWithServerPanelTypeStyleType creates a new Candidates.
 func NewCandidatesWithServerPanelTypeStyleType(server *Server, panelType int, style int) *Candidates {
+	defer runtime.KeepAlive(server)
 	var _mainthread0 *Candidates
 	purego.Main(func() {
 		_mainthread0 = func() *Candidates {
@@ -95,6 +105,7 @@ func NewCandidatesWithServerPanelTypeStyleType(server *Server, panelType int, st
 
 // PanelType returns the style of the candidates window.
 func (c *Candidates) PanelType() int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -108,6 +119,7 @@ func (c *Candidates) PanelType() int {
 
 // SetPanelType sets the style of the candidates window.
 func (c *Candidates) SetPanelType(panelType int) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPanelType:"), panelType)
 	})
@@ -116,6 +128,7 @@ func (c *Candidates) SetPanelType(panelType int) {
 
 // Show shows the candidates window.
 func (c *Candidates) Show(locationHint int) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("show:"), locationHint)
 	})
@@ -124,6 +137,7 @@ func (c *Candidates) Show(locationHint int) {
 
 // Hide hides a candidates window, if it is visible.
 func (c *Candidates) Hide() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("hide"))
 	})
@@ -132,6 +146,7 @@ func (c *Candidates) Hide() {
 
 // IsVisible reports whether the candidates window is visible.
 func (c *Candidates) IsVisible() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -145,6 +160,7 @@ func (c *Candidates) IsVisible() bool {
 
 // UpdateCandidates updates the candidates that are displayed in the candidates window.
 func (c *Candidates) UpdateCandidates() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCandidates"))
 	})
@@ -153,6 +169,8 @@ func (c *Candidates) UpdateCandidates() {
 
 // ShowAnnotation displays an annotation string in an annotation window.
 func (c *Candidates) ShowAnnotation(annotationString obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(annotationString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showAnnotation:"), objref.IDOf(annotationString))
 	})
@@ -161,6 +179,9 @@ func (c *Candidates) ShowAnnotation(annotationString obj.Object) {
 
 // ShowSublistSubListDelegate shows sublist sub list delegate.
 func (c *Candidates) ShowSublistSubListDelegate(candidates obj.Object, delegate obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(candidates)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showSublist:subListDelegate:"), objref.IDOf(candidates), objref.IDOf(delegate))
 	})
@@ -169,6 +190,7 @@ func (c *Candidates) ShowSublistSubListDelegate(candidates obj.Object, delegate 
 
 // CandidateFrame returns the candidate frame.
 func (c *Candidates) CandidateFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -182,6 +204,8 @@ func (c *Candidates) CandidateFrame() corefoundation.CGRect {
 
 // SetSelectionKeys sets the selection keys for the candidates.
 func (c *Candidates) SetSelectionKeys(keyCodes obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(keyCodes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSelectionKeys:"), objref.IDOf(keyCodes))
 	})
@@ -190,6 +214,7 @@ func (c *Candidates) SetSelectionKeys(keyCodes obj.Object) {
 
 // SelectionKeys returns an array of NSNumber objects where each NSNumber object represents a virtual key code.
 func (c *Candidates) SelectionKeys() obj.Object {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -203,6 +228,8 @@ func (c *Candidates) SelectionKeys() obj.Object {
 
 // SetSelectionKeysKeylayout sets the key layout that is used to map virtual key codes to characters.
 func (c *Candidates) SetSelectionKeysKeylayout(layout obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(layout)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSelectionKeysKeylayout:"), objref.IDOf(layout))
 	})
@@ -211,6 +238,7 @@ func (c *Candidates) SetSelectionKeysKeylayout(layout obj.Object) {
 
 // SelectionKeysKeylayout returns the key layout that maps virtual key codes to selection keys.
 func (c *Candidates) SelectionKeysKeylayout() obj.Object {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -224,6 +252,8 @@ func (c *Candidates) SelectionKeysKeylayout() obj.Object {
 
 // SetAttributes sets the style attributes for the candidates window.
 func (c *Candidates) SetAttributes(attributes obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(attributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributes:"), objref.IDOf(attributes))
 	})
@@ -232,6 +262,7 @@ func (c *Candidates) SetAttributes(attributes obj.Object) {
 
 // Attributes returns a dictionary of the style attributes used for the candidates window..
 func (c *Candidates) Attributes() obj.Object {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -245,6 +276,7 @@ func (c *Candidates) Attributes() obj.Object {
 
 // SetDismissesAutomatically sets the state of the flag that determines whether the candidates window dismisses automatically.
 func (c *Candidates) SetDismissesAutomatically(flag bool) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDismissesAutomatically:"), flag)
 	})
@@ -253,6 +285,7 @@ func (c *Candidates) SetDismissesAutomatically(flag bool) {
 
 // DismissesAutomatically reports whether returns the state of the flag that determines whether the candidates window dismisses automatically.
 func (c *Candidates) DismissesAutomatically() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -266,6 +299,7 @@ func (c *Candidates) DismissesAutomatically() bool {
 
 // SelectedCandidate returns the currently selected candidate identifer. Attempts to determine the identifier for the selected candidate.  If there is no selection the return value will be NSNotFound.
 func (c *Candidates) SelectedCandidate() int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -279,6 +313,7 @@ func (c *Candidates) SelectedCandidate() int {
 
 // SetCandidateFrameTopLeft positions the top-left corner of the candidate window’s frame rectangle at a given point in screen coordinates.
 func (c *Candidates) SetCandidateFrameTopLeft(point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCandidateFrameTopLeft:"), point)
 	})
@@ -287,6 +322,7 @@ func (c *Candidates) SetCandidateFrameTopLeft(point corefoundation.CGPoint) {
 
 // ShowChild if the current selection has a child IMKCandidates object that will be shown. If there is a failure in showing the child this method will throw an exception.
 func (c *Candidates) ShowChild() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showChild"))
 	})
@@ -295,6 +331,7 @@ func (c *Candidates) ShowChild() {
 
 // HideChild if the current selection has a child IMKCandidates that is being shown hide it. Typically a client will not need to call this as IMKCandidates automatically hides and shows children.
 func (c *Candidates) HideChild() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("hideChild"))
 	})
@@ -303,6 +340,8 @@ func (c *Candidates) HideChild() {
 
 // AttachChildToCandidateType attach an IMKCandidates object to the specified selection. The IMKCandidate can be a sublist or an annotation.
 func (c *Candidates) AttachChildToCandidateType(child *Candidates, candidateIdentifier int, theType int) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(child)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attachChild:toCandidate:type:"), objref.IDOf(child), candidateIdentifier, theType)
 	})
@@ -311,6 +350,7 @@ func (c *Candidates) AttachChildToCandidateType(child *Candidates, candidateIden
 
 // DetachChild detach the IMKCandidates object attached to candidate
 func (c *Candidates) DetachChild(candidateIdentifier int) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("detachChild:"), candidateIdentifier)
 	})
@@ -319,6 +359,8 @@ func (c *Candidates) DetachChild(candidateIdentifier int) {
 
 // SetCandidateData set the candidates data directly rather than supplying data via [IMKInputContoller candidates:]. The elements of the array can be strings or attributed strings.
 func (c *Candidates) SetCandidateData(candidatesArray obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(candidatesArray)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCandidateData:"), objref.IDOf(candidatesArray))
 	})
@@ -327,6 +369,7 @@ func (c *Candidates) SetCandidateData(candidatesArray obj.Object) {
 
 // SelectCandidateWithIdentifier select the candidate whose identifier matches the identifier parameter.
 func (c *Candidates) SelectCandidateWithIdentifier(candidateIdentifier int) bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -340,6 +383,7 @@ func (c *Candidates) SelectCandidateWithIdentifier(candidateIdentifier int) bool
 
 // SelectCandidate selects candidate.
 func (c *Candidates) SelectCandidate(candidateIdentifier int) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCandidate:"), candidateIdentifier)
 	})
@@ -348,6 +392,7 @@ func (c *Candidates) SelectCandidate(candidateIdentifier int) {
 
 // ShowCandidates show the candidate window. This simply shows the candidates.  No effort is made to position the candidate.  The caller should move the candidate window to an appropriate location prior to showing.
 func (c *Candidates) ShowCandidates() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showCandidates"))
 	})
@@ -356,6 +401,8 @@ func (c *Candidates) ShowCandidates() {
 
 // CandidateStringIdentifier map a candidateString to an identifier. Beginning with MacOS 10.7, candidate strings are mapped internally to an unique identifier of type NSInteger.  Using identifiers to identify a particular candidate is the first stage of enabling data types other than NSString and NSAttributedString for containing the contents of a candidate.
 func (c *Candidates) CandidateStringIdentifier(candidateString obj.Object) int {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(candidateString)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -368,12 +415,13 @@ func (c *Candidates) CandidateStringIdentifier(candidateString obj.Object) int {
 }
 
 // SelectedCandidateString returns the currently selected candidate string. Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
-func (c *Candidates) SelectedCandidateString() obj.Object {
-	var _mainthread0 obj.Object
+func (c *Candidates) SelectedCandidateString() *foundation.AttributedString {
+	defer runtime.KeepAlive(c)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectedCandidateString"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -382,6 +430,7 @@ func (c *Candidates) SelectedCandidateString() obj.Object {
 
 // CandidateIdentifierAtLineNumber returns the candidate identifier for a given line in the candidate window display. Maps the lineNumber to a candidate identifier.  Line number 0 corresponds to the candidate in the cell currently in the first (top for vertical) line of the candidate window.  This is convienient for input methods that support selecting a candidate by a number key. Line Number values depend on the column arrangement of your candidate.  If you are displaying a single column candidate window, lines that have been scrolled out of view will have negative values.  For a single row grid line, numbers will correspond to the cell's position in the row (i.e. the first cell will be 0, the second 1, etc).  Finally, for a grid, the line numbers correspond to the grid row.  If the line number is invalid, NSNotFound is returned.
 func (c *Candidates) CandidateIdentifierAtLineNumber(lineNumber int) int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -395,6 +444,7 @@ func (c *Candidates) CandidateIdentifierAtLineNumber(lineNumber int) int {
 
 // LineNumberForCandidateWithIdentifier returns the line number for a given CandidateID. If the cell that contains the candidate is at the top line of the candidate window, the return value will be 0.
 func (c *Candidates) LineNumberForCandidateWithIdentifier(candidateIdentifier int) int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -408,6 +458,7 @@ func (c *Candidates) LineNumberForCandidateWithIdentifier(candidateIdentifier in
 
 // ClearSelection clears selection.
 func (c *Candidates) ClearSelection() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("clearSelection"))
 	})

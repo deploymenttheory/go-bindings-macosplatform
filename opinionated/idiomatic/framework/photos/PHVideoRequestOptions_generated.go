@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func videoRequestOptionsAdopt(id objc.ID) *VideoRequestOptions {
 
 // Description returns the object's -description text.
 func (vro *VideoRequestOptions) Description() string {
+	defer runtime.KeepAlive(vro)
 	return rt.Description(objref.IDOf(vro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vro *VideoRequestOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vro *VideoRequestOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(vro)
 	return rt.IsKind(objref.IDOf(vro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vro *VideoRequestOptions) String() string {
+	defer runtime.KeepAlive(vro)
 	return rt.Description(objref.IDOf(vro))
 }
 
@@ -86,12 +93,14 @@ func (vro *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOption
 
 // IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (vro *VideoRequestOptions) IsNetworkAccessAllowed() bool {
+	defer runtime.KeepAlive(vro)
 	_r := objc.Send[bool](objref.IDOf(vro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
 // DeliveryMode returns the delivery mode.
 func (vro *VideoRequestOptions) DeliveryMode() VideoRequestOptionsDeliveryMode {
+	defer runtime.KeepAlive(vro)
 	_r := objc.Send[VideoRequestOptionsDeliveryMode](objref.IDOf(vro), objc.RegisterName("deliveryMode"))
 	return _r
 }

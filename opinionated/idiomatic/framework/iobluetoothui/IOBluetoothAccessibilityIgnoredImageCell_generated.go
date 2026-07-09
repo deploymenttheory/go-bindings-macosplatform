@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func bluetoothAccessibilityIgnoredImageCellAdopt(id objc.ID) *BluetoothAccessibi
 
 // Description returns the object's -description text.
 func (baiic *BluetoothAccessibilityIgnoredImageCell) Description() string {
+	defer runtime.KeepAlive(baiic)
 	return rt.Description(objref.IDOf(baiic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (baiic *BluetoothAccessibilityIgnoredImageCell) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(baiic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(baiic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (baiic *BluetoothAccessibilityIgnoredImageCell) IsKind(className string) bool {
+	defer runtime.KeepAlive(baiic)
 	return rt.IsKind(objref.IDOf(baiic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (baiic *BluetoothAccessibilityIgnoredImageCell) String() string {
+	defer runtime.KeepAlive(baiic)
 	return rt.Description(objref.IDOf(baiic))
 }
 

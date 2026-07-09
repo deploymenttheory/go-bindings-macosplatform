@@ -10521,8 +10521,8 @@
         "url": "https://developer.apple.com/documentation/foundation/nscoder/cgvector(for:)"
       },
       "decodeObject(of:forKey:)": {
-        "doc": "Decode an object as an expected type, failing if the archived type doesn’t match.",
-        "url": "https://developer.apple.com/documentation/foundation/nscoder/decodeobject(of:forkey:)-7tmft"
+        "doc": "Decode an object as one of several expected types, failing if the archived type doesn’t match any of the types.",
+        "url": "https://developer.apple.com/documentation/foundation/nscoder/decodeobject(of:forkey:)-roif"
       },
       "decodeTopLevelObject()": {
         "doc": "Decodes a previously-encoded object.",
@@ -10534,7 +10534,7 @@
       },
       "decodeTopLevelObject(of:forKey:)": {
         "doc": "Decode an object as one of several expected types, failing if the archived type does not match.",
-        "url": "https://developer.apple.com/documentation/foundation/nscoder/decodetoplevelobject(of:forkey:)-5lnnn"
+        "url": "https://developer.apple.com/documentation/foundation/nscoder/decodetoplevelobject(of:forkey:)-3w6pd"
       },
       "decodingFailurePolicy": {
         "doc": "The action the coder should take when decoding fails.",
@@ -10553,8 +10553,8 @@
         "url": "https://developer.apple.com/documentation/foundation/nscoder/requiressecurecoding"
       },
       "string(for:)": {
-        "doc": "Returns a string formatted to contain the data from a vector data structure.",
-        "url": "https://developer.apple.com/documentation/foundation/nscoder/string(for:)-4omzv"
+        "doc": "Returns a string formatted to contain the data from a rectangle.",
+        "url": "https://developer.apple.com/documentation/foundation/nscoder/string(for:)-4qz0a"
       },
       "systemVersion": {
         "doc": "The system version in effect for the archive.",

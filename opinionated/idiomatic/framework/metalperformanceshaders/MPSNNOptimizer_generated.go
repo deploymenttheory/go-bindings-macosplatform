@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,36 +67,42 @@ func (no *NNOptimizer) WithLabel(label string) *NNOptimizer {
 
 // LearningRate returns the learningRate at which we update values The default value is 1e-3
 func (no *NNOptimizer) LearningRate() float32 {
+	defer runtime.KeepAlive(no)
 	_r := objc.Send[float32](objref.IDOf(no), objc.RegisterName("learningRate"))
 	return _r
 }
 
 // GradientRescale returns the gradientRescale at which we apply to incoming gradient values The default value is 1.0
 func (no *NNOptimizer) GradientRescale() float32 {
+	defer runtime.KeepAlive(no)
 	_r := objc.Send[float32](objref.IDOf(no), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
 // ApplyGradientClipping reports whether a bool which decides if gradient will be clipped The default value is false
 func (no *NNOptimizer) ApplyGradientClipping() bool {
+	defer runtime.KeepAlive(no)
 	_r := objc.Send[bool](objref.IDOf(no), objc.RegisterName("applyGradientClipping"))
 	return _r
 }
 
 // GradientClipMax returns the maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
 func (no *NNOptimizer) GradientClipMax() float32 {
+	defer runtime.KeepAlive(no)
 	_r := objc.Send[float32](objref.IDOf(no), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
 // GradientClipMin returns the minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
 func (no *NNOptimizer) GradientClipMin() float32 {
+	defer runtime.KeepAlive(no)
 	_r := objc.Send[float32](objref.IDOf(no), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
 // RegularizationScale returns the regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
 func (no *NNOptimizer) RegularizationScale() float32 {
+	defer runtime.KeepAlive(no)
 	_r := objc.Send[float32](objref.IDOf(no), objc.RegisterName("regularizationScale"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +52,27 @@ func paymentSummaryItemAdopt(id objc.ID) *PaymentSummaryItem {
 
 // Description returns the object's -description text.
 func (psi *PaymentSummaryItem) Description() string {
+	defer runtime.KeepAlive(psi)
 	return rt.Description(objref.IDOf(psi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (psi *PaymentSummaryItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(psi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(psi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (psi *PaymentSummaryItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(psi)
 	return rt.IsKind(objref.IDOf(psi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (psi *PaymentSummaryItem) String() string {
+	defer runtime.KeepAlive(psi)
 	return rt.Description(objref.IDOf(psi))
 }
 
@@ -76,6 +84,7 @@ func (psi *PaymentSummaryItem) WithLabel(label string) *PaymentSummaryItem {
 
 // WithAmount sets the summary item’s amount.
 func (psi *PaymentSummaryItem) WithAmount(amount obj.Object) *PaymentSummaryItem {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return psi
 }
@@ -88,6 +97,7 @@ func (psi *PaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *PaymentSu
 
 // Label returns the label.
 func (psi *PaymentSummaryItem) Label() string {
+	defer runtime.KeepAlive(psi)
 	_r := objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -96,13 +106,15 @@ func (psi *PaymentSummaryItem) Label() string {
 }
 
 // Amount returns the amount.
-func (psi *PaymentSummaryItem) Amount() obj.Object {
+func (psi *PaymentSummaryItem) Amount() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(psi)
 	_r := objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("amount"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 // Type returns the type.
 func (psi *PaymentSummaryItem) Type() PaymentSummaryItemType {
+	defer runtime.KeepAlive(psi)
 	_r := objc.Send[PaymentSummaryItemType](objref.IDOf(psi), objc.RegisterName("type"))
 	return _r
 }

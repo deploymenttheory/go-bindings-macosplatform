@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -72,12 +74,14 @@ func (mcti *MatrixCopyToImage) WithLabel(label string) *MatrixCopyToImage {
 
 // SourceMatrixOrigin returns the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mcti *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mcti)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mcti), objc.RegisterName("sourceMatrixOrigin"))
 	return _r
 }
 
 // SourceMatrixBatchIndex returns the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
 func (mcti *MatrixCopyToImage) SourceMatrixBatchIndex() int {
+	defer runtime.KeepAlive(mcti)
 	_r := objc.Send[int](objref.IDOf(mcti), objc.RegisterName("sourceMatrixBatchIndex"))
 	return _r
 }

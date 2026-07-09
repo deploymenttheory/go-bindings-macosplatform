@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,37 +51,43 @@ func macAuxiliaryStorageAdopt(id objc.ID) *MacAuxiliaryStorage {
 
 // Description returns the object's -description text.
 func (mas *MacAuxiliaryStorage) Description() string {
+	defer runtime.KeepAlive(mas)
 	return rt.Description(objref.IDOf(mas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mas *MacAuxiliaryStorage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mas *MacAuxiliaryStorage) IsKind(className string) bool {
+	defer runtime.KeepAlive(mas)
 	return rt.IsKind(objref.IDOf(mas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mas *MacAuxiliaryStorage) String() string {
+	defer runtime.KeepAlive(mas)
 	return rt.Description(objref.IDOf(mas))
 }
 
 // NewMACAuxiliaryStorageWithURL initializes an auxiliary storage object with data from the location at the URL you provide.
-func NewMACAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
+func NewMACAuxiliaryStorageWithURL(url string) *MacAuxiliaryStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return macAuxiliaryStorageAdopt(_id)
 }
 
-// NewMACAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
-func NewMACAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *MacHardwareModel, options MacAuxiliaryStorageInitializationOptions) (result *MacAuxiliaryStorage, err error) {
+// NewMACAuxiliaryStorageCreatingStorageAtURLHardwareModelOptions creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
+func NewMACAuxiliaryStorageCreatingStorageAtURLHardwareModelOptions(url string, hardwareModel *MacHardwareModel, options MacAuxiliaryStorageInitializationOptions) (result *MacAuxiliaryStorage, err error) {
+	defer runtime.KeepAlive(hardwareModel)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), rt.FileURL(uRL), objref.IDOf(hardwareModel), options, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingStorageAtURL:hardwareModel:options:error:"), rt.FileURL(url), objref.IDOf(hardwareModel), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -88,14 +95,15 @@ func NewMACAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL str
 }
 
 // NewMACAuxiliaryStorageWithContentsOfURL creates a new MacAuxiliaryStorage.
-func NewMACAuxiliaryStorageWithContentsOfURL(uRL string) *MacAuxiliaryStorage {
+func NewMACAuxiliaryStorageWithContentsOfURL(url string) *MacAuxiliaryStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
 	return macAuxiliaryStorageAdopt(_id)
 }
 
 // URL returns the URL.
-func (mas *MacAuxiliaryStorage) URL() obj.Object {
+func (mas *MacAuxiliaryStorage) URL() string {
+	defer runtime.KeepAlive(mas)
 	_r := objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

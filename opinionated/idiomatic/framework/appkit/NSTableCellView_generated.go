@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewTableCellView() *TableCellView {
 
 // WithObjectValue sets the object that represents the cell data.
 func (tcv *TableCellView) WithObjectValue(objectValue obj.Object) *TableCellView {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -70,6 +73,7 @@ func (tcv *TableCellView) WithObjectValue(objectValue obj.Object) *TableCellView
 
 // WithTextField sets text displayed by the cell.
 func (tcv *TableCellView) WithTextField(textField TextFieldProvider) *TableCellView {
+	defer runtime.KeepAlive(textField)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTextField:"), objref.IDOf(textField))
 	})
@@ -78,6 +82,7 @@ func (tcv *TableCellView) WithTextField(textField TextFieldProvider) *TableCellV
 
 // WithImageView sets image displayed by the cell.
 func (tcv *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
+	defer runtime.KeepAlive(imageView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setImageView:"), objref.IDOf(imageView))
 	})
@@ -239,6 +244,7 @@ func (tcv *TableCellView) WithWantsLayer(wantsLayer bool) *TableCellView {
 
 // WithLayer sets the layer.
 func (tcv *TableCellView) WithLayer(layer obj.Object) *TableCellView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -288,6 +294,7 @@ func (tcv *TableCellView) WithBackgroundFilters(items ...obj.Object) *TableCellV
 
 // WithCompositingFilter sets the compositing filter.
 func (tcv *TableCellView) WithCompositingFilter(compositingFilter obj.Object) *TableCellView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -305,6 +312,7 @@ func (tcv *TableCellView) WithContentFilters(items ...obj.Object) *TableCellView
 
 // WithShadow sets the shadow.
 func (tcv *TableCellView) WithShadow(shadow *Shadow) *TableCellView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -353,6 +361,7 @@ func (tcv *TableCellView) WithPreparedContentRect(preparedContentRect corefounda
 
 // WithNextKeyView sets the next key view.
 func (tcv *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -402,6 +411,7 @@ func (tcv *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tcv *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -458,6 +468,7 @@ func (tcv *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tcv *TableCellView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -466,6 +477,7 @@ func (tcv *TableCellView) WithPressureConfiguration(pressureConfiguration *Press
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tcv *TableCellView) WithNextResponder(nextResponder ResponderProvider) *TableCellView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -474,6 +486,7 @@ func (tcv *TableCellView) WithNextResponder(nextResponder ResponderProvider) *Ta
 
 // WithMenu sets returns the responder’s menu.
 func (tcv *TableCellView) WithMenu(menu *Menu) *TableCellView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -482,6 +495,7 @@ func (tcv *TableCellView) WithMenu(menu *Menu) *TableCellView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tcv *TableCellView) WithUserActivity(userActivity obj.Object) *TableCellView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -490,6 +504,7 @@ func (tcv *TableCellView) WithUserActivity(userActivity obj.Object) *TableCellVi
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tcv *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -498,6 +513,7 @@ func (tcv *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
 
 // ObjectValue returns the object value.
 func (tcv *TableCellView) ObjectValue() obj.Object {
+	defer runtime.KeepAlive(tcv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -511,6 +527,7 @@ func (tcv *TableCellView) ObjectValue() obj.Object {
 
 // TextField returns the text field.
 func (tcv *TableCellView) TextField() *TextField {
+	defer runtime.KeepAlive(tcv)
 	var _mainthread0 *TextField
 	purego.Main(func() {
 		_mainthread0 = func() *TextField {
@@ -524,6 +541,7 @@ func (tcv *TableCellView) TextField() *TextField {
 
 // ImageView returns the image view.
 func (tcv *TableCellView) ImageView() *ImageView {
+	defer runtime.KeepAlive(tcv)
 	var _mainthread0 *ImageView
 	purego.Main(func() {
 		_mainthread0 = func() *ImageView {
@@ -537,6 +555,7 @@ func (tcv *TableCellView) ImageView() *ImageView {
 
 // BackgroundStyle returns the background style.
 func (tcv *TableCellView) BackgroundStyle() BackgroundStyle {
+	defer runtime.KeepAlive(tcv)
 	var _mainthread0 BackgroundStyle
 	purego.Main(func() {
 		_mainthread0 = func() BackgroundStyle {
@@ -550,6 +569,7 @@ func (tcv *TableCellView) BackgroundStyle() BackgroundStyle {
 
 // RowSizeStyle returns the row size style.
 func (tcv *TableCellView) RowSizeStyle() TableViewRowSizeStyle {
+	defer runtime.KeepAlive(tcv)
 	var _mainthread0 TableViewRowSizeStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewRowSizeStyle {
@@ -565,6 +585,7 @@ func (tcv *TableCellView) RowSizeStyle() TableViewRowSizeStyle {
 //
 // DraggingImageComponents returns the collection as a Go slice.
 func (tcv *TableCellView) DraggingImageComponents() []*DraggingImageComponent {
+	defer runtime.KeepAlive(tcv)
 	var _mainthread0 []*DraggingImageComponent
 	purego.Main(func() {
 		_mainthread0 = func() []*DraggingImageComponent {

@@ -700,8 +700,8 @@ func (o *PDFAnnotation) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *PDFAnnotation) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_pDFAnnotationSelSetURL, uRL.Ptr())
+func (o *PDFAnnotation) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_pDFAnnotationSelSetURL, url.Ptr())
 }
 
 func (o *PDFAnnotation) FieldName() *foundation.NSString {

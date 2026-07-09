@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func airportGateAdopt(id objc.ID) *AirportGate {
 
 // Description returns the object's -description text.
 func (ag *AirportGate) Description() string {
+	defer runtime.KeepAlive(ag)
 	return rt.Description(objref.IDOf(ag))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ag *AirportGate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ag)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ag), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ag *AirportGate) IsKind(className string) bool {
+	defer runtime.KeepAlive(ag)
 	return rt.IsKind(objref.IDOf(ag), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ag *AirportGate) String() string {
+	defer runtime.KeepAlive(ag)
 	return rt.Description(objref.IDOf(ag))
 }
 
 // NewAirportGateWithAirportTerminalGate creates a new gate object for a flight.
 func NewAirportGateWithAirportTerminalGate(airport *Airport, terminal string, gate string) *AirportGate {
+	defer runtime.KeepAlive(airport)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INAirportGate")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirport:terminal:gate:"), objref.IDOf(airport), purego.NSString(terminal), purego.NSString(gate))
 	return airportGateAdopt(_id)
@@ -75,12 +83,14 @@ func NewAirportGateWithAirportTerminalGate(airport *Airport, terminal string, ga
 
 // Airport returns the airport.
 func (ag *AirportGate) Airport() *Airport {
+	defer runtime.KeepAlive(ag)
 	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("airport"))
 	return AirportFromID(_r)
 }
 
 // Terminal returns the terminal.
 func (ag *AirportGate) Terminal() string {
+	defer runtime.KeepAlive(ag)
 	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("terminal"))
 	if _r == 0 {
 		return ""
@@ -90,6 +100,7 @@ func (ag *AirportGate) Terminal() string {
 
 // Gate returns the gate.
 func (ag *AirportGate) Gate() string {
+	defer runtime.KeepAlive(ag)
 	_r := objc.Send[objc.ID](objref.IDOf(ag), objc.RegisterName("gate"))
 	if _r == 0 {
 		return ""

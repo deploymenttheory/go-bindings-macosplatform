@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func symbolEffectOptionsRepeatBehaviorAdopt(id objc.ID) *SymbolEffectOptionsRepe
 
 // Description returns the object's -description text.
 func (seorb *SymbolEffectOptionsRepeatBehavior) Description() string {
+	defer runtime.KeepAlive(seorb)
 	return rt.Description(objref.IDOf(seorb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (seorb *SymbolEffectOptionsRepeatBehavior) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(seorb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(seorb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (seorb *SymbolEffectOptionsRepeatBehavior) IsKind(className string) bool {
+	defer runtime.KeepAlive(seorb)
 	return rt.IsKind(objref.IDOf(seorb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (seorb *SymbolEffectOptionsRepeatBehavior) String() string {
+	defer runtime.KeepAlive(seorb)
 	return rt.Description(objref.IDOf(seorb))
 }
 

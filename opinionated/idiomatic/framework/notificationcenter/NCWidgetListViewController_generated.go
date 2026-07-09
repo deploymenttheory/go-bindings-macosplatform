@@ -5,6 +5,8 @@
 package notificationcenter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func widgetListViewControllerAdopt(id objc.ID) *WidgetListViewController {
 
 // Description returns the object's -description text.
 func (wlvc *WidgetListViewController) Description() string {
+	defer runtime.KeepAlive(wlvc)
 	return rt.Description(objref.IDOf(wlvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wlvc *WidgetListViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wlvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wlvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wlvc *WidgetListViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(wlvc)
 	return rt.IsKind(objref.IDOf(wlvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wlvc *WidgetListViewController) String() string {
+	defer runtime.KeepAlive(wlvc)
 	return rt.Description(objref.IDOf(wlvc))
 }
 
@@ -112,6 +119,7 @@ func (wlvc *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButt
 
 // ViewControllerAtRowMakeIfNecessary returns the content view controller associated with the specified row, or a new content view controller if desired.
 func (wlvc *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object {
+	defer runtime.KeepAlive(wlvc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -125,6 +133,8 @@ func (wlvc *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int
 
 // RowForViewController returns the row represented by the specified content view controller.
 func (wlvc *WidgetListViewController) RowForViewController(viewController obj.Object) int {
+	defer runtime.KeepAlive(wlvc)
+	defer runtime.KeepAlive(viewController)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -138,6 +148,7 @@ func (wlvc *WidgetListViewController) RowForViewController(viewController obj.Ob
 
 // Contents returns the contents.
 func (wlvc *WidgetListViewController) Contents() []obj.Object {
+	defer runtime.KeepAlive(wlvc)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -151,6 +162,7 @@ func (wlvc *WidgetListViewController) Contents() []obj.Object {
 
 // SetContents wraps the corresponding Objective-C method.
 func (wlvc *WidgetListViewController) SetContents(contents []obj.Object) {
+	defer runtime.KeepAlive(wlvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -159,6 +171,7 @@ func (wlvc *WidgetListViewController) SetContents(contents []obj.Object) {
 
 // MinimumVisibleRowCount returns the minimum visible row count.
 func (wlvc *WidgetListViewController) MinimumVisibleRowCount() int {
+	defer runtime.KeepAlive(wlvc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -172,6 +185,7 @@ func (wlvc *WidgetListViewController) MinimumVisibleRowCount() int {
 
 // HasDividerLines reports whether the object has divider lines.
 func (wlvc *WidgetListViewController) HasDividerLines() bool {
+	defer runtime.KeepAlive(wlvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -185,6 +199,7 @@ func (wlvc *WidgetListViewController) HasDividerLines() bool {
 
 // Editing wraps the corresponding Objective-C method.
 func (wlvc *WidgetListViewController) Editing() bool {
+	defer runtime.KeepAlive(wlvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -198,6 +213,7 @@ func (wlvc *WidgetListViewController) Editing() bool {
 
 // ShowsAddButtonWhenEditing wraps the corresponding Objective-C method.
 func (wlvc *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
+	defer runtime.KeepAlive(wlvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

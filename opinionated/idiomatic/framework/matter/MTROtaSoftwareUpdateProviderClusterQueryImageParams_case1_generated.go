@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,24 +55,28 @@ func NewMTROtaSoftwareUpdateProviderClusterQueryImageParams() *MTROtaSoftwareUpd
 
 // WithVendorID sets the vendor ID.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithVendorID(vendorID obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(vendorID)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return mosupcqip
 }
 
 // WithProductID sets the product ID.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(productID)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return mosupcqip
 }
 
 // WithSoftwareVersion sets the software version.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosupcqip
 }
 
 // WithHardwareVersion sets the hardware version.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithHardwareVersion(hardwareVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(hardwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setHardwareVersion:"), objref.IDOf(hardwareVersion))
 	return mosupcqip
 }
@@ -82,24 +89,27 @@ func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithLocati
 
 // WithRequestorCanConsent sets the requestor can consent.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithRequestorCanConsent(requestorCanConsent obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(requestorCanConsent)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setRequestorCanConsent:"), objref.IDOf(requestorCanConsent))
 	return mosupcqip
 }
 
 // WithMetadataForProvider sets the metadata for provider.
-func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithMetadataForProvider(metadataForProvider obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
-	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setMetadataForProvider:"), objref.IDOf(metadataForProvider))
+func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithMetadataForProvider(metadataForProvider []byte) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setMetadataForProvider:"), rt.BytesToNSData(metadataForProvider))
 	return mosupcqip
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mosupcqip
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mosupcqip *MTROtaSoftwareUpdateProviderClusterQueryImageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterQueryImageParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mosupcqip), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mosupcqip
 }

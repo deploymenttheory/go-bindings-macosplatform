@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -102,6 +104,7 @@ func (p *Plane) WithMaterials(items ...*Material) *Plane {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (p *Plane) WithFirstMaterial(firstMaterial *Material) *Plane {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return p
 }
@@ -115,6 +118,7 @@ func (p *Plane) WithLevelsOfDetail(items ...*LevelOfDetail) *Plane {
 
 // WithTessellator sets the tessellator.
 func (p *Plane) WithTessellator(tessellator *GeometryTessellator) *Plane {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return p
 }
@@ -133,48 +137,56 @@ func (p *Plane) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pla
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (p *Plane) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Plane {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return p
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (p *Plane) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Plane {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return p
 }
 
 // Width returns the plane extent along the X axis. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (p *Plane) Width() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("width"))
 	return _r
 }
 
 // Height returns the plane extent along the Y axis. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (p *Plane) Height() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("height"))
 	return _r
 }
 
 // WidthSegmentCount returns the number of subdivisions along the X axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (p *Plane) WidthSegmentCount() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("widthSegmentCount"))
 	return _r
 }
 
 // HeightSegmentCount returns the number of subdivisions along the Y axis. The default value is 1. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (p *Plane) HeightSegmentCount() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
 
 // CornerRadius returns the corner radius. Animatable. If the value is strictly less than 0, the geometry is empty. The default value is 0.
 func (p *Plane) CornerRadius() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("cornerRadius"))
 	return _r
 }
 
 // CornerSegmentCount returns the number of subdivisions for the rounded corners. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
 func (p *Plane) CornerSegmentCount() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("cornerSegmentCount"))
 	return _r
 }

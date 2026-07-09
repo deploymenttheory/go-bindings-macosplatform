@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +52,7 @@ func tileMapNodeAdopt(id objc.ID) *TileMapNode {
 
 // NewTileMapNodeWithTileSetColumnsRowsTileSize initialize a tile map node with the specified tile set and dimensions. The tiles of the map will be empty, equivalent to the nil tile definition/group.
 func NewTileMapNodeWithTileSetColumnsRowsTileSize(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
 	var _mainthread0 *TileMapNode
 	purego.Main(func() {
 		_mainthread0 = func() *TileMapNode {
@@ -62,6 +66,8 @@ func NewTileMapNodeWithTileSetColumnsRowsTileSize(tileSet *TileSet, columns int,
 
 // NewTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup initialize a tile map node with the specified tile set and dimensions, and fill it with the specified tile group.
 func NewTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroup *TileGroup) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
+	defer runtime.KeepAlive(tileGroup)
 	var _mainthread0 *TileMapNode
 	purego.Main(func() {
 		_mainthread0 = func() *TileMapNode {
@@ -75,6 +81,7 @@ func NewTileMapNodeWithTileSetColumnsRowsTileSizeFillWithTileGroup(tileSet *Tile
 
 // NewTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout initialize a tile map node with the specified tile set and dimensions, and fill it with a specific layout of tile groups that belong to the provided tile set. The tileGroupLayout array should match the dimensions of the tile map (i.e., the number of elements should be equal to columns * rows). Index 0 of the array maps to column 0, row 0 of the tile map. Index 1 is column 1, row 0, and so on, wrapping around to the next row once the index passes the number of columns in the tile map. If the array has fewer elements than the number of tiles in the map, the remaining tiles are initialized with the nil tile group. If the array has more elements than the number of tiles in the map, the extra tile groups are ignored.
 func NewTileMapNodeWithTileSetColumnsRowsTileSizeTileGroupLayout(tileSet *TileSet, columns int, rows int, tileSize corefoundation.CGSize, tileGroupLayout []*TileGroup) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
 	var _mainthread0 *TileMapNode
 	purego.Main(func() {
 		_mainthread0 = func() *TileMapNode {
@@ -112,6 +119,7 @@ func (tmn *TileMapNode) WithTileSize(tileSize corefoundation.CGSize) *TileMapNod
 
 // WithTileSet sets the tile set being used by this tile map. The tile map object can only display tiles that exist in this set.
 func (tmn *TileMapNode) WithTileSet(tileSet *TileSet) *TileMapNode {
+	defer runtime.KeepAlive(tileSet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileSet:"), objref.IDOf(tileSet))
 	})
@@ -128,6 +136,7 @@ func (tmn *TileMapNode) WithColorBlendFactor(colorBlendFactor float64) *TileMapN
 
 // WithColor sets the base color for the tile map. The influence of the color over the tile map node’s textures is controlled by colorBlendFactor.
 func (tmn *TileMapNode) WithColor(color obj.Object) *TileMapNode {
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setColor:"), objref.IDOf(color))
 	})
@@ -152,6 +161,7 @@ func (tmn *TileMapNode) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Til
 
 // WithShader sets defines a shader which is applied to each tile of the tile map.
 func (tmn *TileMapNode) WithShader(shader *Shader) *TileMapNode {
+	defer runtime.KeepAlive(shader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	})
@@ -264,6 +274,7 @@ func (tmn *TileMapNode) WithName(name string) *TileMapNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (tmn *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -272,6 +283,7 @@ func (tmn *TileMapNode) WithPhysicsBody(physicsBody *PhysicsBody) *TileMapNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (tmn *TileMapNode) WithUserData(userData obj.Object) *TileMapNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -280,6 +292,7 @@ func (tmn *TileMapNode) WithUserData(userData obj.Object) *TileMapNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (tmn *TileMapNode) WithReachConstraints(reachConstraints *ReachConstraints) *TileMapNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -296,9 +309,9 @@ func (tmn *TileMapNode) WithConstraints(items ...*Constraint) *TileMapNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (tmn *TileMapNode) WithAttributeValues(attributeValues obj.Object) *TileMapNode {
+func (tmn *TileMapNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *TileMapNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return tmn
 }
@@ -345,6 +358,7 @@ func (tmn *TileMapNode) WithAccessibilityFrame(accessibilityFrame corefoundation
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (tmn *TileMapNode) WithAccessibilityParent(accessibilityParent obj.Object) *TileMapNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -375,8 +389,10 @@ func (tmn *TileMapNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Til
 	return tmn
 }
 
-// FillWithTileGroup when creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
-func (tmn *TileMapNode) FillWithTileGroup(tileGroup *TileGroup) {
+// Fill when creating a tile map node programmatically, this function performs a fill operation with the specified tile group.
+func (tmn *TileMapNode) Fill(tileGroup *TileGroup) {
+	defer runtime.KeepAlive(tmn)
+	defer runtime.KeepAlive(tileGroup)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("fillWithTileGroup:"), objref.IDOf(tileGroup))
 	})
@@ -385,6 +401,7 @@ func (tmn *TileMapNode) FillWithTileGroup(tileGroup *TileGroup) {
 
 // TileDefinitionAtColumnRow look up the tile definition at the specified tile index.
 func (tmn *TileMapNode) TileDefinitionAtColumnRow(column int, row int) *TileDefinition {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 *TileDefinition
 	purego.Main(func() {
 		_mainthread0 = func() *TileDefinition {
@@ -398,6 +415,7 @@ func (tmn *TileMapNode) TileDefinitionAtColumnRow(column int, row int) *TileDefi
 
 // TileGroupAtColumnRow look up the tile group at the specified tile index.
 func (tmn *TileMapNode) TileGroupAtColumnRow(column int, row int) *TileGroup {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 *TileGroup
 	purego.Main(func() {
 		_mainthread0 = func() *TileGroup {
@@ -411,6 +429,8 @@ func (tmn *TileMapNode) TileGroupAtColumnRow(column int, row int) *TileGroup {
 
 // SetTileGroupForColumnRow set the tile group at the specified tile index. When automapping is enabled, the appropriate tile definitions will automatically be selected and placed, possibly modifying neighboring tiles. When automapping is disabled, it will simply place the default center tile definition for the group, and will not modify any of the neihboring tiles.
 func (tmn *TileMapNode) SetTileGroupForColumnRow(tileGroup *TileGroup, column int, row int) {
+	defer runtime.KeepAlive(tmn)
+	defer runtime.KeepAlive(tileGroup)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:forColumn:row:"), objref.IDOf(tileGroup), column, row)
 	})
@@ -419,6 +439,9 @@ func (tmn *TileMapNode) SetTileGroupForColumnRow(tileGroup *TileGroup, column in
 
 // SetTileGroupAndTileDefinitionForColumnRow set the tile group and tile definition at the specified tile index.
 func (tmn *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *TileGroup, tileDefinition *TileDefinition, column int, row int) {
+	defer runtime.KeepAlive(tmn)
+	defer runtime.KeepAlive(tileGroup)
+	defer runtime.KeepAlive(tileDefinition)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tmn), objc.RegisterName("setTileGroup:andTileDefinition:forColumn:row:"), objref.IDOf(tileGroup), objref.IDOf(tileDefinition), column, row)
 	})
@@ -427,6 +450,7 @@ func (tmn *TileMapNode) SetTileGroupAndTileDefinitionForColumnRow(tileGroup *Til
 
 // TileColumnIndexFromPosition returns the column index of the tile that lies under the specified position. Returns NSUIntegerMax if the position does not fall within the tile map.
 func (tmn *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -440,6 +464,7 @@ func (tmn *TileMapNode) TileColumnIndexFromPosition(position corefoundation.CGPo
 
 // TileRowIndexFromPosition returns the tile map node object’s tile row index for the specified position in points.
 func (tmn *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -453,6 +478,7 @@ func (tmn *TileMapNode) TileRowIndexFromPosition(position corefoundation.CGPoint
 
 // CenterOfTileAtColumnRow returns the position of the center of the tile at the specified column and row.
 func (tmn *TileMapNode) CenterOfTileAtColumnRow(column int, row int) corefoundation.CGPoint {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -466,6 +492,7 @@ func (tmn *TileMapNode) CenterOfTileAtColumnRow(column int, row int) corefoundat
 
 // NumberOfColumns returns the number of columns in the tile map.
 func (tmn *TileMapNode) NumberOfColumns() int {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -479,6 +506,7 @@ func (tmn *TileMapNode) NumberOfColumns() int {
 
 // NumberOfRows returns the number of rows in the tile map.
 func (tmn *TileMapNode) NumberOfRows() int {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -492,6 +520,7 @@ func (tmn *TileMapNode) NumberOfRows() int {
 
 // TileSize returns the size of each tile in the map.
 func (tmn *TileMapNode) TileSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -505,6 +534,7 @@ func (tmn *TileMapNode) TileSize() corefoundation.CGSize {
 
 // MapSize returns the size of the tile map. This is dependent on the tileSize, the number of columns and rows in the map, and the tile set type.
 func (tmn *TileMapNode) MapSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -518,6 +548,7 @@ func (tmn *TileMapNode) MapSize() corefoundation.CGSize {
 
 // TileSet returns the tile set being used by this tile map.
 func (tmn *TileMapNode) TileSet() *TileSet {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 *TileSet
 	purego.Main(func() {
 		_mainthread0 = func() *TileSet {
@@ -531,6 +562,7 @@ func (tmn *TileMapNode) TileSet() *TileSet {
 
 // ColorBlendFactor returns controls the blending between the texture and the tile map color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
 func (tmn *TileMapNode) ColorBlendFactor() float64 {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -544,6 +576,7 @@ func (tmn *TileMapNode) ColorBlendFactor() float64 {
 
 // Color returns base color for the tile map (If no texture is present, the color still is drawn).
 func (tmn *TileMapNode) Color() obj.Object {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -557,6 +590,7 @@ func (tmn *TileMapNode) Color() obj.Object {
 
 // BlendMode sets the blend mode to use when composing the tile map with the final framebuffer.
 func (tmn *TileMapNode) BlendMode() BlendMode {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 BlendMode
 	purego.Main(func() {
 		_mainthread0 = func() BlendMode {
@@ -570,6 +604,7 @@ func (tmn *TileMapNode) BlendMode() BlendMode {
 
 // AnchorPoint returns used to choose the location in the tile map that maps to its 'position' in the parent's coordinate space. The valid interval for each input is from 0.0 up to and including 1.0.
 func (tmn *TileMapNode) AnchorPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -583,6 +618,7 @@ func (tmn *TileMapNode) AnchorPoint() corefoundation.CGPoint {
 
 // Shader returns a property that determines whether the tile map is rendered using a custom shader.
 func (tmn *TileMapNode) Shader() *Shader {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 *Shader
 	purego.Main(func() {
 		_mainthread0 = func() *Shader {
@@ -596,6 +632,7 @@ func (tmn *TileMapNode) Shader() *Shader {
 
 // LightingBitMask returns bitmask to indicate being lit by a set of lights using overlapping lighting categories. A light whose category is set to a value that masks to non-zero using this mask will apply light to this sprite. When used together with a normal texture, complex lighting effects can be used.
 func (tmn *TileMapNode) LightingBitMask() uint32 {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -609,6 +646,7 @@ func (tmn *TileMapNode) LightingBitMask() uint32 {
 
 // EnableAutomapping wraps the corresponding Objective-C method.
 func (tmn *TileMapNode) EnableAutomapping() bool {
+	defer runtime.KeepAlive(tmn)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

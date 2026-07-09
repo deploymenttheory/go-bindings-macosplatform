@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt(id objc.ID) *MTRG
 
 // Description returns the object's -description text.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Description() string {
+	defer runtime.KeepAlive(mgdcptrp)
 	return rt.Description(objref.IDOf(mgdcptrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgdcptrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgdcptrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgdcptrp)
 	return rt.IsKind(objref.IDOf(mgdcptrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) String() string {
+	defer runtime.KeepAlive(mgdcptrp)
 	return rt.Description(objref.IDOf(mgdcptrp))
 }
 
@@ -71,61 +79,70 @@ func NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams() *MTRGeneralDiagno
 }
 
 // WithEnableKey sets the enable key.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithEnableKey(enableKey []byte) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setEnableKey:"), rt.BytesToNSData(enableKey))
 	return mgdcptrp
 }
 
 // WithValue sets the value.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithValue(value obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mgdcptrp
 }
 
 // WithCount sets the count.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithCount(count obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	defer runtime.KeepAlive(count)
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setCount:"), objref.IDOf(count))
 	return mgdcptrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgdcptrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mgdcptrp
 }
 
 // EnableKey returns the enable key.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() obj.Object {
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() []byte {
+	defer runtime.KeepAlive(mgdcptrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("enableKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Value returns the value.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() obj.Object {
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() *foundation.Number {
+	defer runtime.KeepAlive(mgdcptrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Count returns the count.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Count() obj.Object {
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Count() *foundation.Number {
+	defer runtime.KeepAlive(mgdcptrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("getCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgdcptrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mgdcptrp *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mgdcptrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcptrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

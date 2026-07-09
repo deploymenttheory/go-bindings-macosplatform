@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,9 @@ func nNReshapeGradientNodeAdopt(id objc.ID) *NNReshapeGradientNode {
 
 // NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState a node to represent the gradient of a reshape node.
 func NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *NNImageNode, sourceImage *NNImageNode, gradientState *NNGradientStateNode) *NNReshapeGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return nNReshapeGradientNodeAdopt(_id)

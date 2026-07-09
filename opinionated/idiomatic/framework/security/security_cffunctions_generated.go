@@ -2297,13 +2297,13 @@ func SecKeychainUnlock(keychain obj.Object, passwordLength int, password unsafe.
 var _fnSecPKCS12Import func(objc.ID, objc.ID, unsafe.Pointer) int32
 
 // SecPKCS12Import reports an error if the Security framework function SecPKCS12Import fails.
-func SecPKCS12Import(pkcs12_data obj.Object, options obj.Object) (obj.Object, error) {
+func SecPKCS12Import(pkcs12Data obj.Object, options obj.Object) (obj.Object, error) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSecPKCS12Import == nil {
 		ebipurego.RegisterLibFunc(&_fnSecPKCS12Import, _lib, "SecPKCS12Import")
 	}
 	var _out0 uintptr
-	_rc := _fnSecPKCS12Import(objref.IDOf(pkcs12_data), objref.IDOf(options), unsafe.Pointer(&_out0))
+	_rc := _fnSecPKCS12Import(objref.IDOf(pkcs12Data), objref.IDOf(options), unsafe.Pointer(&_out0))
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return nil, _err
 	}

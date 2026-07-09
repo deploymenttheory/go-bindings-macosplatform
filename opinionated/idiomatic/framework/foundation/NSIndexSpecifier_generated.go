@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,8 @@ func indexSpecifierAdopt(id objc.ID) *IndexSpecifier {
 
 // NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex initializes an allocated NSIndexSpecifier object with a class description, container specifier, collection key, and object index.
 func NewIndexSpecifierWithContainerClassDescriptionContainerSpecifierKeyIndex(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, index int) *IndexSpecifier {
+	defer runtime.KeepAlive(classDesc)
+	defer runtime.KeepAlive(container)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIndexSpecifier")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:index:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), index)
 	return indexSpecifierAdopt(_id)
@@ -63,12 +67,14 @@ func (is *IndexSpecifier) WithIndex(index int) *IndexSpecifier {
 
 // WithChildSpecifier sets sets the receiver’s child reference.
 func (is *IndexSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
+	defer runtime.KeepAlive(childSpecifier)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return is
 }
 
 // WithContainerSpecifier sets sets the container specifier of the receiver.
 func (is *IndexSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *IndexSpecifier {
+	defer runtime.KeepAlive(containerSpecifier)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return is
 }
@@ -87,12 +93,14 @@ func (is *IndexSpecifier) WithContainerIsRangeContainerObject(containerIsRangeCo
 
 // WithKey sets sets the key of the receiver.
 func (is *IndexSpecifier) WithKey(key StringProvider) *IndexSpecifier {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return is
 }
 
 // WithContainerClassDescription sets sets the class description of the receiver’s container specifier to a given specifier.
 func (is *IndexSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *IndexSpecifier {
+	defer runtime.KeepAlive(containerClassDescription)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return is
 }
@@ -110,13 +118,14 @@ func (is *IndexSpecifier) WithObservationInfo(observationInfo unsafe.Pointer) *I
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (is *IndexSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *IndexSpecifier {
-	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (is *IndexSpecifier) WithScriptingProperties(scriptingProperties map[string]obj.Object) *IndexSpecifier {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return is
 }
 
 // Index returns the index.
 func (is *IndexSpecifier) Index() int {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("index"))
 	return _r
 }

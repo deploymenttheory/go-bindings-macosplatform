@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mixerAdopt(id objc.ID) *Mixer {
 
 // Description returns the object's -description text.
 func (m *Mixer) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Mixer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Mixer) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Mixer) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -74,6 +81,7 @@ func NewMixer() *Mixer {
 
 // Identifier returns the identifier that uniquely represents this mixer.
 func (m *Mixer) Identifier() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,12 +91,14 @@ func (m *Mixer) Identifier() string {
 
 // Gain returns linear gain scalar.
 func (m *Mixer) Gain() float64 {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[float64](objref.IDOf(m), objc.RegisterName("gain"))
 	return _r
 }
 
 // GainMetaParameter returns the metaparameter that can be used to adjust the gain during playback
 func (m *Mixer) GainMetaParameter() *MetaParameter {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("gainMetaParameter"))
 	return MetaParameterFromID(_r)
 }

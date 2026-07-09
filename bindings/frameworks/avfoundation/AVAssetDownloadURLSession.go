@@ -46,8 +46,8 @@ func AVAssetDownloadURLSessionSessionWithConfigurationAssetDownloadDelegateDeleg
 
 // Creates a download task to download the asset.
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
-func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *AVURLAsset, title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetDownloadTask {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), title.Ptr(), artworkData.Ptr(), options.Ptr())
+func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(urlAsset *AVURLAsset, title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAssetDownloadTask {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions, urlAsset.Ptr(), title.Ptr(), artworkData.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -56,8 +56,8 @@ func (o *AVAssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAsset
 
 // Creates a download task to download the asset and media selections.
 // Deprecated: Use assetDownloadTaskWithConfiguration: instead
-func (o *AVAssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *AVURLAsset, mediaSelections *foundation.NSArray[*AVMediaSelection], title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAggregateAssetDownloadTask {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions, uRLAsset.Ptr(), mediaSelections.Ptr(), title.Ptr(), artworkData.Ptr(), options.Ptr())
+func (o *AVAssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(urlAsset *AVURLAsset, mediaSelections *foundation.NSArray[*AVMediaSelection], title *foundation.NSString, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVAggregateAssetDownloadTask {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVAssetDownloadURLSessionSelAggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions, urlAsset.Ptr(), mediaSelections.Ptr(), title.Ptr(), artworkData.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

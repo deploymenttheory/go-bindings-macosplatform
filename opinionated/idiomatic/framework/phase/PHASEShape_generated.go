@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func shapeAdopt(id objc.ID) *Shape {
 
 // Description returns the object's -description text.
 func (s *Shape) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Shape) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Shape) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Shape) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // NewShapeWithEngineMesh creates an object that the given geometric data shapes.
 func NewShapeWithEngineMesh(engine *Engine, mesh obj.Object) *Shape {
+	defer runtime.KeepAlive(engine)
+	defer runtime.KeepAlive(mesh)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEShape")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:"), objref.IDOf(engine), objref.IDOf(mesh))
 	return shapeAdopt(_id)
@@ -75,6 +84,8 @@ func NewShapeWithEngineMesh(engine *Engine, mesh obj.Object) *Shape {
 
 // NewShapeWithEngineMeshMaterials creates an object of a specific material that the given geometric data shapes.
 func NewShapeWithEngineMeshMaterials(engine *Engine, mesh obj.Object, materials []*Material) *Shape {
+	defer runtime.KeepAlive(engine)
+	defer runtime.KeepAlive(mesh)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEShape")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:materials:"), objref.IDOf(engine), objref.IDOf(mesh), purego.SliceToNSArray(materials, func(_v *Material) objc.ID { return objref.IDOf(_v) }))
 	return shapeAdopt(_id)
@@ -84,6 +95,7 @@ func NewShapeWithEngineMeshMaterials(engine *Engine, mesh obj.Object, materials 
 //
 // Elements returns the collection as a Go slice.
 func (s *Shape) Elements() []*ShapeElement {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("elements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShapeElement { return ShapeElementFromID(_id) })
 }

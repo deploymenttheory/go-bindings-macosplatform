@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsAdopt(id objc.ID) *MTRDis
 
 // Description returns the object's -description text.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Description() string {
+	defer runtime.KeepAlive(mdacmeap)
 	return rt.Description(objref.IDOf(mdacmeap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdacmeap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdacmeap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdacmeap)
 	return rt.IsKind(objref.IDOf(mdacmeap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) String() string {
+	defer runtime.KeepAlive(mdacmeap)
 	return rt.Description(objref.IDOf(mdacmeap))
 }
 
@@ -72,36 +80,42 @@ func NewMTRDishwasherAlarmClusterModifyEnabledAlarmsParams() *MTRDishwasherAlarm
 
 // WithMask sets the mask.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithMask(mask obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return mdacmeap
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdacmeap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdacmeap
 }
 
 // Mask returns the mask.
-func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Mask() obj.Object {
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Mask() *foundation.Number {
+	defer runtime.KeepAlive(mdacmeap)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("mask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdacmeap)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) ServerSideProcessingTimeout() obj.Object {
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdacmeap)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func keychainSavePanelAdopt(id objc.ID) *KeychainSavePanel {
 
 // Description returns the object's -description text.
 func (ksp *KeychainSavePanel) Description() string {
+	defer runtime.KeepAlive(ksp)
 	return rt.Description(objref.IDOf(ksp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ksp *KeychainSavePanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ksp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ksp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ksp *KeychainSavePanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(ksp)
 	return rt.IsKind(objref.IDOf(ksp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ksp *KeychainSavePanel) String() string {
+	defer runtime.KeepAlive(ksp)
 	return rt.Description(objref.IDOf(ksp))
 }
 
@@ -80,6 +87,7 @@ func NewKeychainSavePanel() *KeychainSavePanel {
 
 // SetPassword specifies the password for the keychain that will be created.
 func (ksp *KeychainSavePanel) SetPassword(password string) {
+	defer runtime.KeepAlive(ksp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("setPassword:"), purego.NSString(password))
 	})
@@ -88,6 +96,7 @@ func (ksp *KeychainSavePanel) SetPassword(password string) {
 
 // Keychain returns the keychain created by the keychain save panel.
 func (ksp *KeychainSavePanel) Keychain() obj.Object {
+	defer runtime.KeepAlive(ksp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

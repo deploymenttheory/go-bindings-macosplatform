@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fileAdopt(id objc.ID) *File {
 
 // Description returns the object's -description text.
 func (f *File) Description() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (f *File) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (f *File) IsKind(className string) bool {
+	defer runtime.KeepAlive(f)
 	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (f *File) String() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
@@ -85,13 +92,15 @@ func (f *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
 }
 
 // Data returns the contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
-func (f *File) Data() obj.Object {
+func (f *File) Data() []byte {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Filename returns the human-readable name of the file, which will be displayed to the user.
 func (f *File) Filename() string {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("filename"))
 	if _r == 0 {
 		return ""
@@ -101,6 +110,7 @@ func (f *File) Filename() string {
 
 // TypeIdentifier returns the uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
 func (f *File) TypeIdentifier() string {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -109,13 +119,15 @@ func (f *File) TypeIdentifier() string {
 }
 
 // FileURL returns URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
-func (f *File) FileURL() obj.Object {
+func (f *File) FileURL() string {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("fileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // RemovedOnCompletion reports whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
 func (f *File) RemovedOnCompletion() bool {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("removedOnCompletion"))
 	return _r
 }

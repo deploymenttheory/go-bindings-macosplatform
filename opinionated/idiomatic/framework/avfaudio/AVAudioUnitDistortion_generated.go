@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,17 +73,20 @@ func (aud *AudioUnitDistortion) WithBypass(bypass bool) *AudioUnitDistortion {
 
 // LoadFactoryPreset configures the audio distortion unit by loading a distortion preset.
 func (aud *AudioUnitDistortion) LoadFactoryPreset(preset AudioUnitDistortionPreset) {
+	defer runtime.KeepAlive(aud)
 	objc.Send[objc.ID](objref.IDOf(aud), objc.RegisterName("loadFactoryPreset:"), preset)
 }
 
 // PreGain returns gain applied to the signal before being distorted Range:      -80 -> 20 Default:    -6 Unit:       dB
 func (aud *AudioUnitDistortion) PreGain() float32 {
+	defer runtime.KeepAlive(aud)
 	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("preGain"))
 	return _r
 }
 
 // WetDryMix returns blend of the distorted and dry signals Range:      0 (all dry) -> 100 (all distorted) Default:    50 Unit:       Percent
 func (aud *AudioUnitDistortion) WetDryMix() float32 {
+	defer runtime.KeepAlive(aud)
 	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("wetDryMix"))
 	return _r
 }

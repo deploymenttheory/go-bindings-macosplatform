@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accessibilityCustomRotorSearchParametersAdopt(id objc.ID) *AccessibilityCus
 
 // Description returns the object's -description text.
 func (acrsp *AccessibilityCustomRotorSearchParameters) Description() string {
+	defer runtime.KeepAlive(acrsp)
 	return rt.Description(objref.IDOf(acrsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (acrsp *AccessibilityCustomRotorSearchParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(acrsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(acrsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (acrsp *AccessibilityCustomRotorSearchParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(acrsp)
 	return rt.IsKind(objref.IDOf(acrsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (acrsp *AccessibilityCustomRotorSearchParameters) String() string {
+	defer runtime.KeepAlive(acrsp)
 	return rt.Description(objref.IDOf(acrsp))
 }
 
@@ -74,6 +81,7 @@ func NewAccessibilityCustomRotorSearchParameters() *AccessibilityCustomRotorSear
 
 // WithCurrentItem sets the currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
 func (acrsp *AccessibilityCustomRotorSearchParameters) WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters {
+	defer runtime.KeepAlive(currentItem)
 	objc.Send[objc.ID](objref.IDOf(acrsp), objc.RegisterName("setCurrentItem:"), objref.IDOf(currentItem))
 	return acrsp
 }
@@ -92,18 +100,21 @@ func (acrsp *AccessibilityCustomRotorSearchParameters) WithFilterString(filterSt
 
 // CurrentItem returns the currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
 func (acrsp *AccessibilityCustomRotorSearchParameters) CurrentItem() *AccessibilityCustomRotorItemResult {
+	defer runtime.KeepAlive(acrsp)
 	_r := objc.Send[objc.ID](objref.IDOf(acrsp), objc.RegisterName("currentItem"))
 	return AccessibilityCustomRotorItemResultFromID(_r)
 }
 
 // SearchDirection returns either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
 func (acrsp *AccessibilityCustomRotorSearchParameters) SearchDirection() AccessibilityCustomRotorSearchDirection {
+	defer runtime.KeepAlive(acrsp)
 	_r := objc.Send[AccessibilityCustomRotorSearchDirection](objref.IDOf(acrsp), objc.RegisterName("searchDirection"))
 	return _r
 }
 
 // FilterString returns a string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
 func (acrsp *AccessibilityCustomRotorSearchParameters) FilterString() string {
+	defer runtime.KeepAlive(acrsp)
 	_r := objc.Send[objc.ID](objref.IDOf(acrsp), objc.RegisterName("filterString"))
 	if _r == 0 {
 		return ""

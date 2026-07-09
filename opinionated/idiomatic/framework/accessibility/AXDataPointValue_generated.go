@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func dataPointValueAdopt(id objc.ID) *DataPointValue {
 
 // Description returns the object's -description text.
 func (dpv *DataPointValue) Description() string {
+	defer runtime.KeepAlive(dpv)
 	return rt.Description(objref.IDOf(dpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dpv *DataPointValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dpv *DataPointValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(dpv)
 	return rt.IsKind(objref.IDOf(dpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dpv *DataPointValue) String() string {
+	defer runtime.KeepAlive(dpv)
 	return rt.Description(objref.IDOf(dpv))
 }
 
@@ -86,12 +93,14 @@ func (dpv *DataPointValue) WithCategory(category string) *DataPointValue {
 
 // Number returns the number.
 func (dpv *DataPointValue) Number() float64 {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[float64](objref.IDOf(dpv), objc.RegisterName("number"))
 	return _r
 }
 
 // Category returns the category.
 func (dpv *DataPointValue) Category() string {
+	defer runtime.KeepAlive(dpv)
 	_r := objc.Send[objc.ID](objref.IDOf(dpv), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""

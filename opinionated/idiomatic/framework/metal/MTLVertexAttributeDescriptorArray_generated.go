@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexAttributeDescriptorArrayAdopt(id objc.ID) *VertexAttributeDescriptorA
 
 // Description returns the object's -description text.
 func (vada *VertexAttributeDescriptorArray) Description() string {
+	defer runtime.KeepAlive(vada)
 	return rt.Description(objref.IDOf(vada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vada *VertexAttributeDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vada *VertexAttributeDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(vada)
 	return rt.IsKind(objref.IDOf(vada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vada *VertexAttributeDescriptorArray) String() string {
+	defer runtime.KeepAlive(vada)
 	return rt.Description(objref.IDOf(vada))
 }
 
@@ -74,11 +81,14 @@ func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
 
 // ObjectAtIndexedSubscript returns the state of the specified vertex attribute.
 func (vada *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor {
+	defer runtime.KeepAlive(vada)
 	_r := objc.Send[objc.ID](objref.IDOf(vada), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return VertexAttributeDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets state for the specified vertex attribute.
 func (vada *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int) {
+	defer runtime.KeepAlive(vada)
+	defer runtime.KeepAlive(attributeDesc)
 	objc.Send[objc.ID](objref.IDOf(vada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }

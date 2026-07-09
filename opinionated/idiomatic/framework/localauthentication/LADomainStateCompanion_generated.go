@@ -5,7 +5,10 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func domainStateCompanionAdopt(id objc.ID) *DomainStateCompanion {
 
 // Description returns the object's -description text.
 func (dsc *DomainStateCompanion) Description() string {
+	defer runtime.KeepAlive(dsc)
 	return rt.Description(objref.IDOf(dsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dsc *DomainStateCompanion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dsc *DomainStateCompanion) IsKind(className string) bool {
+	defer runtime.KeepAlive(dsc)
 	return rt.IsKind(objref.IDOf(dsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dsc *DomainStateCompanion) String() string {
+	defer runtime.KeepAlive(dsc)
 	return rt.Description(objref.IDOf(dsc))
 }
 
@@ -71,19 +79,22 @@ func NewDomainStateCompanion() *DomainStateCompanion {
 }
 
 // StateHashForCompanionType returns state hash data for the given companion type.
-func (dsc *DomainStateCompanion) StateHashForCompanionType(companionType CompanionType) obj.Object {
+func (dsc *DomainStateCompanion) StateHashForCompanionType(companionType CompanionType) []byte {
+	defer runtime.KeepAlive(dsc)
 	_r := objc.Send[objc.ID](objref.IDOf(dsc), objc.RegisterName("stateHashForCompanionType:"), companionType)
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AvailableCompanionTypes indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of
-func (dsc *DomainStateCompanion) AvailableCompanionTypes() obj.Object {
+func (dsc *DomainStateCompanion) AvailableCompanionTypes() []*foundation.Number {
+	defer runtime.KeepAlive(dsc)
 	_r := objc.Send[objc.ID](objref.IDOf(dsc), objc.RegisterName("availableCompanionTypes"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.Number { return foundation.NumberFromID(_id) })
 }
 
 // StateHash contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method.
-func (dsc *DomainStateCompanion) StateHash() obj.Object {
+func (dsc *DomainStateCompanion) StateHash() []byte {
+	defer runtime.KeepAlive(dsc)
 	_r := objc.Send[objc.ID](objref.IDOf(dsc), objc.RegisterName("stateHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

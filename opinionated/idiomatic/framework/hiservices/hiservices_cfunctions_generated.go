@@ -127,12 +127,12 @@ func AXObserverRemoveNotification(observer obj.Object, element obj.Object, notif
 var _fnAXTextMarkerCreate func(objc.ID, unsafe.Pointer, int) objc.ID
 
 // AXTextMarkerCreate calls the HIServices framework function AXTextMarkerCreate.
-func AXTextMarkerCreate(allocator obj.Object, bytes_ unsafe.Pointer, length int) obj.Object {
+func AXTextMarkerCreate(allocator obj.Object, data unsafe.Pointer, length int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnAXTextMarkerCreate == nil {
 		ebipurego.RegisterLibFunc(&_fnAXTextMarkerCreate, _lib, "AXTextMarkerCreate")
 	}
-	_ret := _fnAXTextMarkerCreate(objref.IDOf(allocator), bytes_, length)
+	_ret := _fnAXTextMarkerCreate(objref.IDOf(allocator), data, length)
 	return obj.Wrap(_ret)
 }
 
@@ -957,7 +957,7 @@ func ICGetVersion(inst obj.Object, whichVersion int) (result int, version int) {
 var _fnICLaunchURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICLaunchURL calls the HIServices framework function ICLaunchURL.
-func ICLaunchURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hint uint8, selStart int64, selEnd int64) {
+func ICLaunchURL(inst obj.Object, data unsafe.Pointer, length int) (result int, hint uint8, selStart int64, selEnd int64) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICLaunchURL == nil {
 		ebipurego.RegisterLibFunc(&_fnICLaunchURL, _lib, "ICLaunchURL")
@@ -965,14 +965,14 @@ func ICLaunchURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hi
 	var _out0 uint8
 	var _out1 int64
 	var _out2 int64
-	_ret := int(_fnICLaunchURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, len_, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
+	_ret := int(_fnICLaunchURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, length, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2)))
 	return _ret, _out0, _out1, _out2
 }
 
 var _fnICParseURL func(objc.ID, unsafe.Pointer, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int32
 
 // ICParseURL calls the HIServices framework function ICParseURL.
-func ICParseURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hint uint8, selStart int64, selEnd int64, url string) {
+func ICParseURL(inst obj.Object, data unsafe.Pointer, length int) (result int, hint uint8, selStart int64, selEnd int64, url string) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnICParseURL == nil {
 		ebipurego.RegisterLibFunc(&_fnICParseURL, _lib, "ICParseURL")
@@ -981,7 +981,7 @@ func ICParseURL(inst obj.Object, data unsafe.Pointer, len_ int) (result int, hin
 	var _out1 int64
 	var _out2 int64
 	var _out3 string
-	_ret := int(_fnICParseURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, len_, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
+	_ret := int(_fnICParseURL(objref.IDOf(inst), unsafe.Pointer(&_out0), data, length, unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), unsafe.Pointer(&_out3)))
 	return _ret, _out0, _out1, _out2, _out3
 }
 
@@ -1109,25 +1109,25 @@ func PasteboardSynchronize(inPasteboard obj.Object) PasteboardSyncFlags {
 var _fnProcessInformationCopyDictionary func(unsafe.Pointer, int) objc.ID
 
 // ProcessInformationCopyDictionary calls the HIServices framework function ProcessInformationCopyDictionary.
-func ProcessInformationCopyDictionary(pSN unsafe.Pointer, infoToReturn int) obj.Object {
+func ProcessInformationCopyDictionary(psn unsafe.Pointer, infoToReturn int) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnProcessInformationCopyDictionary == nil {
 		ebipurego.RegisterLibFunc(&_fnProcessInformationCopyDictionary, _lib, "ProcessInformationCopyDictionary")
 	}
-	_ret := _fnProcessInformationCopyDictionary(pSN, infoToReturn)
+	_ret := _fnProcessInformationCopyDictionary(psn, infoToReturn)
 	return obj.Wrap(_ret)
 }
 
 var _fnSameProcess func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) int16
 
 // SameProcess calls the HIServices framework function SameProcess.
-func SameProcess(pSN1 unsafe.Pointer, pSN2 unsafe.Pointer) (result int16, result_ uint8) {
+func SameProcess(psn1 unsafe.Pointer, psn2 unsafe.Pointer) (result int16, result_ uint8) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnSameProcess == nil {
 		ebipurego.RegisterLibFunc(&_fnSameProcess, _lib, "SameProcess")
 	}
 	var _out0 uint8
-	_ret := _fnSameProcess(pSN1, pSN2, unsafe.Pointer(&_out0))
+	_ret := _fnSameProcess(psn1, psn2, unsafe.Pointer(&_out0))
 	return _ret, _out0
 }
 
@@ -1191,10 +1191,10 @@ func UAZoomEnabled() uint8 {
 var _fnWakeUpProcess func(unsafe.Pointer) int16
 
 // WakeUpProcess calls the HIServices framework function WakeUpProcess.
-func WakeUpProcess(pSN unsafe.Pointer) int16 {
+func WakeUpProcess(psn unsafe.Pointer) int16 {
 	_loadOnce.Do(_loadLibrary)
 	if _fnWakeUpProcess == nil {
 		ebipurego.RegisterLibFunc(&_fnWakeUpProcess, _lib, "WakeUpProcess")
 	}
-	return _fnWakeUpProcess(pSN)
+	return _fnWakeUpProcess(psn)
 }

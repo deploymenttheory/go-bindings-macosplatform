@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,113 +56,133 @@ func (eg *ExtendedGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(
 
 // SaveSnapshot returns saves a snapshot of all of the profile’s elements.
 func (eg *ExtendedGamepad) SaveSnapshot() *ExtendedGamepadSnapshot {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("saveSnapshot"))
 	return ExtendedGamepadSnapshotFromID(_r)
 }
 
 // SetStateFromExtendedGamepad copies the input values from a specified extended gamepad to a snapshot of an extended gamepad.
 func (eg *ExtendedGamepad) SetStateFromExtendedGamepad(extendedGamepad *ExtendedGamepad) {
+	defer runtime.KeepAlive(eg)
+	defer runtime.KeepAlive(extendedGamepad)
 	objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("setStateFromExtendedGamepad:"), objref.IDOf(extendedGamepad))
 }
 
 // Controller returns a profile keeps a reference to the controller that this profile is mapping input from.
 func (eg *ExtendedGamepad) Controller() *Controller {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
 // Dpad returns required to be analog in the Extended profile. All the elements of this directional input are thus analog.
 func (eg *ExtendedGamepad) Dpad() *ControllerDirectionPad {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("dpad"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // ButtonA returns all face buttons are required to be analog in the Extended profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
 func (eg *ExtendedGamepad) ButtonA() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonA"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonB returns the button b.
 func (eg *ExtendedGamepad) ButtonB() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonX returns the button x.
 func (eg *ExtendedGamepad) ButtonX() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonY returns the button y.
 func (eg *ExtendedGamepad) ButtonY() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonMenu returns button menu is the primary menu button, and should be used to enter the main menu and pause the game.
 func (eg *ExtendedGamepad) ButtonMenu() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonMenu"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonOptions returns button options is the secondary menu button. It should be used to enter a secondary menu, such as graphics and sound configuration, and pause the game.
 func (eg *ExtendedGamepad) ButtonOptions() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonOptions"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonHome returns button home is a special menu button. If the system does not consume button home events, they will be passed to your application and should be used to enter a secondary menu, and pause the game.
 func (eg *ExtendedGamepad) ButtonHome() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonHome"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // LeftThumbstick returns a thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
 func (eg *ExtendedGamepad) LeftThumbstick() *ControllerDirectionPad {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftThumbstick"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // RightThumbstick returns a thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
 func (eg *ExtendedGamepad) RightThumbstick() *ControllerDirectionPad {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightThumbstick"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // LeftShoulder returns shoulder buttons are required to be analog inputs.
 func (eg *ExtendedGamepad) LeftShoulder() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightShoulder returns shoulder buttons are required to be analog inputs.
 func (eg *ExtendedGamepad) RightShoulder() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // LeftTrigger returns triggers are required to be analog inputs. Common uses would be acceleration and decelleration in a driving game for example.
 func (eg *ExtendedGamepad) LeftTrigger() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftTrigger"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightTrigger returns the right trigger.
 func (eg *ExtendedGamepad) RightTrigger() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightTrigger"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // LeftThumbstickButton returns a thumbstick may also have a clickable component, which is treated as a non-analog button.
 func (eg *ExtendedGamepad) LeftThumbstickButton() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftThumbstickButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightThumbstickButton returns the right thumbstick button.
 func (eg *ExtendedGamepad) RightThumbstickButton() *ControllerButtonInput {
+	defer runtime.KeepAlive(eg)
 	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightThumbstickButton"))
 	return ControllerButtonInputFromID(_r)
 }

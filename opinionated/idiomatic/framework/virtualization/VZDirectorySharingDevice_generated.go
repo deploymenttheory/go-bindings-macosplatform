@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func directorySharingDeviceAdopt(id objc.ID) *DirectorySharingDevice {
 
 // Description returns the object's -description text.
 func (dsd *DirectorySharingDevice) Description() string {
+	defer runtime.KeepAlive(dsd)
 	return rt.Description(objref.IDOf(dsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dsd *DirectorySharingDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dsd *DirectorySharingDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(dsd)
 	return rt.IsKind(objref.IDOf(dsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dsd *DirectorySharingDevice) String() string {
+	defer runtime.KeepAlive(dsd)
 	return rt.Description(objref.IDOf(dsd))
 }
 

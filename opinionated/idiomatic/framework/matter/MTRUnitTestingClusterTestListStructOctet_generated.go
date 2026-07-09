@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,55 @@ func mTRUnitTestingClusterTestListStructOctetAdopt(id objc.ID) *MTRUnitTestingCl
 
 // Description returns the object's -description text.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Description() string {
+	defer runtime.KeepAlive(mutctlso)
 	return rt.Description(objref.IDOf(mutctlso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctlso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctlso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctlso)
 	return rt.IsKind(objref.IDOf(mutctlso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) String() string {
+	defer runtime.KeepAlive(mutctlso)
 	return rt.Description(objref.IDOf(mutctlso))
 }
 
 // WithMember1 sets the member1.
 func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
+	defer runtime.KeepAlive(member1)
 	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return mutctlso
 }
 
 // WithMember2 sets the member2.
-func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
-	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember2:"), objref.IDOf(member2))
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 []byte) *MTRUnitTestingClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember2:"), rt.BytesToNSData(member2))
 	return mutctlso
 }
 
 // Member1 returns the member1.
-func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member1() obj.Object {
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member1() *foundation.Number {
+	defer runtime.KeepAlive(mutctlso)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("member1"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Member2 returns the member2.
-func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member2() obj.Object {
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member2() []byte {
+	defer runtime.KeepAlive(mutctlso)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("member2"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // isMTRUnitTestingClusterTestListStructOctet marks MTRUnitTestingClusterTestListStructOctet — and, by embedding promotion, its

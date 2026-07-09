@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolBreatheEffect() *SymbolBreatheEffect {
 
 // EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
 func (sbe *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
+	defer runtime.KeepAlive(sbe)
 	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithByLayer"))
 	return SymbolBreatheEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
 func (sbe *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
+	defer runtime.KeepAlive(sbe)
 	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolBreatheEffectFromID(_r)
 }

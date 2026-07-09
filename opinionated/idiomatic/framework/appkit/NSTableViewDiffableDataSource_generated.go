@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func tableViewDiffableDataSourceAdopt(id objc.ID) *TableViewDiffableDataSource {
 
 // Description returns the object's -description text.
 func (tvdds *TableViewDiffableDataSource) Description() string {
+	defer runtime.KeepAlive(tvdds)
 	return rt.Description(objref.IDOf(tvdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tvdds *TableViewDiffableDataSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tvdds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tvdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tvdds *TableViewDiffableDataSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(tvdds)
 	return rt.IsKind(objref.IDOf(tvdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tvdds *TableViewDiffableDataSource) String() string {
+	defer runtime.KeepAlive(tvdds)
 	return rt.Description(objref.IDOf(tvdds))
 }
 
@@ -82,12 +88,15 @@ func (tvdds *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnim
 
 // Snapshot returns the snapshot.
 func (tvdds *TableViewDiffableDataSource) Snapshot() obj.Object {
+	defer runtime.KeepAlive(tvdds)
 	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
 // ApplySnapshotAnimatingDifferences applies snapshot animating differences.
 func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
+	defer runtime.KeepAlive(tvdds)
+	defer runtime.KeepAlive(snapshot)
 	objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }
 
@@ -95,6 +104,8 @@ func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snap
 //
 // ApplySnapshotAnimatingDifferencesCompletion blocks until the operation completes or ctx is cancelled.
 func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error {
+	defer runtime.KeepAlive(tvdds)
+	defer runtime.KeepAlive(snapshot)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -110,30 +121,37 @@ func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompl
 
 // ItemIdentifierForRow wraps the corresponding Objective-C method.
 func (tvdds *TableViewDiffableDataSource) ItemIdentifierForRow(row int) obj.Object {
+	defer runtime.KeepAlive(tvdds)
 	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("itemIdentifierForRow:"), row)
 	return obj.Wrap(_r)
 }
 
 // RowForItemIdentifier wraps the corresponding Objective-C method.
 func (tvdds *TableViewDiffableDataSource) RowForItemIdentifier(identifier obj.Object) int {
+	defer runtime.KeepAlive(tvdds)
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[int](objref.IDOf(tvdds), objc.RegisterName("rowForItemIdentifier:"), objref.IDOf(identifier))
 	return _r
 }
 
 // SectionIdentifierForRow wraps the corresponding Objective-C method.
 func (tvdds *TableViewDiffableDataSource) SectionIdentifierForRow(row int) obj.Object {
+	defer runtime.KeepAlive(tvdds)
 	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("sectionIdentifierForRow:"), row)
 	return obj.Wrap(_r)
 }
 
 // RowForSectionIdentifier wraps the corresponding Objective-C method.
 func (tvdds *TableViewDiffableDataSource) RowForSectionIdentifier(identifier obj.Object) int {
+	defer runtime.KeepAlive(tvdds)
+	defer runtime.KeepAlive(identifier)
 	_r := objc.Send[int](objref.IDOf(tvdds), objc.RegisterName("rowForSectionIdentifier:"), objref.IDOf(identifier))
 	return _r
 }
 
 // DefaultRowAnimation returns the default row animation.
 func (tvdds *TableViewDiffableDataSource) DefaultRowAnimation() TableViewAnimationOptions {
+	defer runtime.KeepAlive(tvdds)
 	_r := objc.Send[TableViewAnimationOptions](objref.IDOf(tvdds), objc.RegisterName("defaultRowAnimation"))
 	return _r
 }

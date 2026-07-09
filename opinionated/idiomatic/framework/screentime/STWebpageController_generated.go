@@ -5,10 +5,12 @@
 package screentime
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func webpageControllerAdopt(id objc.ID) *WebpageController {
 
 // Description returns the object's -description text.
 func (wc *WebpageController) Description() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wc *WebpageController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wc *WebpageController) IsKind(className string) bool {
+	defer runtime.KeepAlive(wc)
 	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wc *WebpageController) String() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
@@ -90,31 +97,32 @@ func (wc *WebpageController) WithSuppressUsageRecording(suppressUsageRecording b
 }
 
 // WithURL sets the URL for the webpage.
-func (wc *WebpageController) WithURL(uRL string) *WebpageController {
+func (wc *WebpageController) WithURL(url string) *WebpageController {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setURL:"), rt.FileURL(url))
 	})
 	return wc
 }
 
 // WithURLIsPlayingVideo sets a Boolean that indicates whether there are one or more videos currently playing in the webpage.
-func (wc *WebpageController) WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *WebpageController {
+func (wc *WebpageController) WithURLIsPlayingVideo(urlisPlayingVideo bool) *WebpageController {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setURLIsPlayingVideo:"), uRLIsPlayingVideo)
+		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setURLIsPlayingVideo:"), urlisPlayingVideo)
 	})
 	return wc
 }
 
 // WithURLIsPictureInPicture sets a Boolean that indicates whether the webpage is currently displaying a floating picture in picture window.
-func (wc *WebpageController) WithURLIsPictureInPicture(uRLIsPictureInPicture bool) *WebpageController {
+func (wc *WebpageController) WithURLIsPictureInPicture(urlisPictureInPicture bool) *WebpageController {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setURLIsPictureInPicture:"), uRLIsPictureInPicture)
+		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setURLIsPictureInPicture:"), urlisPictureInPicture)
 	})
 	return wc
 }
 
 // WithProfileIdentifier sets an optional identifier for the current browsing profile.
 func (wc *WebpageController) WithProfileIdentifier(profileIdentifier obj.Object) *WebpageController {
+	defer runtime.KeepAlive(profileIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setProfileIdentifier:"), objref.IDOf(profileIdentifier))
 	})
@@ -123,6 +131,7 @@ func (wc *WebpageController) WithProfileIdentifier(profileIdentifier obj.Object)
 
 // SetBundleIdentifier changes the bundle identifier used to report web usage.
 func (wc *WebpageController) SetBundleIdentifier(bundleIdentifier string) error {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 error
 	purego.Main(func() {
 		_mainthread0 = func() error {
@@ -140,6 +149,7 @@ func (wc *WebpageController) SetBundleIdentifier(bundleIdentifier string) error 
 
 // SuppressUsageRecording reports whether a Boolean that indicates whether the webpage controller is not recording web usage. Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
 func (wc *WebpageController) SuppressUsageRecording() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -152,12 +162,13 @@ func (wc *WebpageController) SuppressUsageRecording() bool {
 }
 
 // URL returns the URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
-func (wc *WebpageController) URL() obj.Object {
-	var _mainthread0 obj.Object
+func (wc *WebpageController) URL() string {
+	defer runtime.KeepAlive(wc)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("URL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -166,6 +177,7 @@ func (wc *WebpageController) URL() obj.Object {
 
 // URLIsPlayingVideo reports whether a Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
 func (wc *WebpageController) URLIsPlayingVideo() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -179,6 +191,7 @@ func (wc *WebpageController) URLIsPlayingVideo() bool {
 
 // URLIsPictureInPicture reports whether a Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
 func (wc *WebpageController) URLIsPictureInPicture() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -192,6 +205,7 @@ func (wc *WebpageController) URLIsPictureInPicture() bool {
 
 // URLIsBlocked reports whether a Boolean that indicates whether a parent or guardian has blocked the URL. When a parent or guardian blocks the webpage’s URL, the webpage controller displays a blocking UI and then sets this property to <doc://com.apple.documentation/documentation/objectivec/yes>.
 func (wc *WebpageController) URLIsBlocked() bool {
+	defer runtime.KeepAlive(wc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -204,12 +218,13 @@ func (wc *WebpageController) URLIsBlocked() bool {
 }
 
 // ProfileIdentifier returns an optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
-func (wc *WebpageController) ProfileIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (wc *WebpageController) ProfileIdentifier() *foundation.String {
+	defer runtime.KeepAlive(wc)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("profileIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0

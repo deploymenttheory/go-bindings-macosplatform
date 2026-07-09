@@ -5,9 +5,11 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,9 +59,10 @@ func (mdcp *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended 
 }
 
 // UniqueIdentifier returns the unique identifier.
-func (mdcp *MTRXPCDeviceControllerParameters) UniqueIdentifier() obj.Object {
+func (mdcp *MTRXPCDeviceControllerParameters) UniqueIdentifier() *foundation.UUID {
+	defer runtime.KeepAlive(mdcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("uniqueIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 var _ MTRDeviceControllerAbstractParametersProvider = (*MTRXPCDeviceControllerParameters)(nil)

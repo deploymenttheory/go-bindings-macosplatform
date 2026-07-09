@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func cNNNeuronTanHNodeAdopt(id objc.ID) *CNNNeuronTanHNode {
 
 // NewCNNNeuronTanHNodeWithSourceAB init a node representing a MPSCNNNeuronTanH kernel For each pixel, applies the following function:
 func NewCNNNeuronTanHNodeWithSourceAB(sourceNode obj.Object, a float32, b float32) *CNNNeuronTanHNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return cNNNeuronTanHNodeAdopt(_id)
@@ -55,6 +58,7 @@ func NewCNNNeuronTanHNodeWithSourceAB(sourceNode obj.Object, a float32, b float3
 
 // NewCNNNeuronTanHNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronTanHNodeWithSource(sourceNode obj.Object) *CNNNeuronTanHNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronTanHNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronTanHNodeAdopt(_id)

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func videoCompositionRenderContextAdopt(id objc.ID) *VideoCompositionRenderConte
 
 // Description returns the object's -description text.
 func (vcrc *VideoCompositionRenderContext) Description() string {
+	defer runtime.KeepAlive(vcrc)
 	return rt.Description(objref.IDOf(vcrc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcrc *VideoCompositionRenderContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcrc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcrc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcrc *VideoCompositionRenderContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcrc)
 	return rt.IsKind(objref.IDOf(vcrc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcrc *VideoCompositionRenderContext) String() string {
+	defer runtime.KeepAlive(vcrc)
 	return rt.Description(objref.IDOf(vcrc))
 }
 
@@ -75,30 +82,35 @@ func NewVideoCompositionRenderContext() *VideoCompositionRenderContext {
 
 // Size indicates the width and height for rendering frames.
 func (vcrc *VideoCompositionRenderContext) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(vcrc)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(vcrc), objc.RegisterName("size"))
 	return _r
 }
 
 // RenderTransform returns transform to apply to the source image to incorporate renderScale, pixelAspectRatio, edgeWidths. The coordinate system origin is the top left corner of the buffer.
 func (vcrc *VideoCompositionRenderContext) RenderTransform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(vcrc)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(vcrc), objc.RegisterName("renderTransform"))
 	return _r
 }
 
 // RenderScale indicates a scaling ratio that should be applied when rendering frames.
 func (vcrc *VideoCompositionRenderContext) RenderScale() float32 {
+	defer runtime.KeepAlive(vcrc)
 	_r := objc.Send[float32](objref.IDOf(vcrc), objc.RegisterName("renderScale"))
 	return _r
 }
 
 // HighQualityRendering reports whether hints the custom compositor that it may use higher quality, potentially slower algorithms. Generally true for non real time use cases.
 func (vcrc *VideoCompositionRenderContext) HighQualityRendering() bool {
+	defer runtime.KeepAlive(vcrc)
 	_r := objc.Send[bool](objref.IDOf(vcrc), objc.RegisterName("highQualityRendering"))
 	return _r
 }
 
 // VideoComposition returns the AVVideoComposition being rendered.
 func (vcrc *VideoCompositionRenderContext) VideoComposition() *VideoComposition {
+	defer runtime.KeepAlive(vcrc)
 	_r := objc.Send[objc.ID](objref.IDOf(vcrc), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }

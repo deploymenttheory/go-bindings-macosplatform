@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func hashTableAdopt(id objc.ID) *HashTable {
 
 // Description returns the object's -description text.
 func (ht *HashTable) Description() string {
+	defer runtime.KeepAlive(ht)
 	return rt.Description(objref.IDOf(ht))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ht *HashTable) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ht), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ht *HashTable) IsKind(className string) bool {
+	defer runtime.KeepAlive(ht)
 	return rt.IsKind(objref.IDOf(ht), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ht *HashTable) String() string {
+	defer runtime.KeepAlive(ht)
 	return rt.Description(objref.IDOf(ht))
 }
 
@@ -77,6 +83,7 @@ func NewHashTableWithOptionsCapacity(options PointerFunctionsOptions, initialCap
 
 // NewHashTableWithPointerFunctionsCapacity returns a hash table initialized with the given functions and capacity.
 func NewHashTableWithPointerFunctionsCapacity(functions *PointerFunctions, initialCapacity int) *HashTable {
+	defer runtime.KeepAlive(functions)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHashTable")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointerFunctions:capacity:"), objref.IDOf(functions), initialCapacity)
 	return hashTableAdopt(_id)
@@ -89,103 +96,130 @@ func (ht *HashTable) WithObservationInfo(observationInfo unsafe.Pointer) *HashTa
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ht *HashTable) WithScriptingProperties(scriptingProperties obj.Object) *HashTable {
-	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ht *HashTable) WithScriptingProperties(scriptingProperties map[string]obj.Object) *HashTable {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ht
 }
 
 // Member determines whether the hash table contains a given object, and returns that object if it is present
 func (ht *HashTable) Member(object obj.Object) obj.Object {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("member:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // ObjectEnumerator returns an enumerator object that lets you access each object in the hash table.
 func (ht *HashTable) ObjectEnumerator() obj.Object {
+	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // AddObject adds a given object to the hash table.
 func (ht *HashTable) AddObject(object obj.Object) {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes a given object from the hash table.
 func (ht *HashTable) RemoveObject(object obj.Object) {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // RemoveAllObjects removes all objects from the hash table.
 func (ht *HashTable) RemoveAllObjects() {
+	defer runtime.KeepAlive(ht)
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("removeAllObjects"))
 }
 
 // ContainsObject returns a Boolean value that indicates whether the hash table contains a given object.
 func (ht *HashTable) ContainsObject(anObject obj.Object) bool {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(anObject)
 	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // IntersectsHashTable returns a Boolean value that indicates whether a given hash table intersects with the receiving hash table.
 func (ht *HashTable) IntersectsHashTable(other obj.Object) bool {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("intersectsHashTable:"), objref.IDOf(other))
 	return _r
 }
 
 // IsEqualToHashTable returns a Boolean value that indicates whether a given hash table is equal to the receiving hash table.
 func (ht *HashTable) IsEqualToHashTable(other obj.Object) bool {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("isEqualToHashTable:"), objref.IDOf(other))
 	return _r
 }
 
 // IsSubsetOfHashTable returns a Boolean value that indicates whether every element in the receiving hash table is also present in another given hash table.
 func (ht *HashTable) IsSubsetOfHashTable(other obj.Object) bool {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("isSubsetOfHashTable:"), objref.IDOf(other))
 	return _r
 }
 
 // IntersectHashTable removes from the receiving hash table each element that isn’t a member of another given hash table.
 func (ht *HashTable) IntersectHashTable(other obj.Object) {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("intersectHashTable:"), objref.IDOf(other))
 }
 
 // UnionHashTable adds each element in another given hash table to the receiving hash table, if not present.
 func (ht *HashTable) UnionHashTable(other obj.Object) {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("unionHashTable:"), objref.IDOf(other))
 }
 
 // MinusHashTable removes each element in another given hash table from the receiving hash table, if present.
 func (ht *HashTable) MinusHashTable(other obj.Object) {
+	defer runtime.KeepAlive(ht)
+	defer runtime.KeepAlive(other)
 	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("minusHashTable:"), objref.IDOf(other))
 }
 
 // PointerFunctions returns the pointer functions.
 func (ht *HashTable) PointerFunctions() *PointerFunctions {
+	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
 // Count returns the count.
 func (ht *HashTable) Count() int {
+	defer runtime.KeepAlive(ht)
 	_r := objc.Send[int](objref.IDOf(ht), objc.RegisterName("count"))
 	return _r
 }
 
 // AllObjects returns the all objects.
 func (ht *HashTable) AllObjects() []obj.Object {
+	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AnyObject returns the any object.
 func (ht *HashTable) AnyObject() obj.Object {
+	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("anyObject"))
 	return obj.Wrap(_r)
 }
 
-// SetRepresentation returns the set representation.
-func (ht *HashTable) SetRepresentation() obj.Object {
+// SetRepresentation returns the order of the returned elements is unspecified.
+func (ht *HashTable) SetRepresentation() []obj.Object {
+	defer runtime.KeepAlive(ht)
 	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

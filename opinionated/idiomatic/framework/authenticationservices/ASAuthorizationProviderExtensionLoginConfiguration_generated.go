@@ -5,10 +5,12 @@
 package authenticationservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func authorizationProviderExtensionLoginConfigurationAdopt(id objc.ID) *Authoriz
 
 // Description returns the object's -description text.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) Description() string {
+	defer runtime.KeepAlive(apelc)
 	return rt.Description(objref.IDOf(apelc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apelc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apelc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(apelc)
 	return rt.IsKind(objref.IDOf(apelc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) String() string {
+	defer runtime.KeepAlive(apelc)
 	return rt.Description(objref.IDOf(apelc))
 }
 
@@ -107,8 +114,8 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithJwksEndpointU
 }
 
 // WithDeviceContext sets the device context for storing device meta data.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithDeviceContext(deviceContext obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setDeviceContext:"), objref.IDOf(deviceContext))
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithDeviceContext(deviceContext []byte) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setDeviceContext:"), rt.BytesToNSData(deviceContext))
 	return apelc
 }
 
@@ -263,31 +270,33 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithCustomFederat
 
 // WithLoginRequestEncryptionPublicKey sets the public key to use for encrypting the embedded login assertion. Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestEncryptionPublicKey(loginRequestEncryptionPublicKey obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
+	defer runtime.KeepAlive(loginRequestEncryptionPublicKey)
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestEncryptionPublicKey:"), objref.IDOf(loginRequestEncryptionPublicKey))
 	return apelc
 }
 
 // WithLoginRequestEncryptionAPVPrefix sets the APV prefix used for encrypted embedded login assertions.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestEncryptionAPVPrefix:"), objref.IDOf(loginRequestEncryptionAPVPrefix))
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix []byte) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestEncryptionAPVPrefix:"), rt.BytesToNSData(loginRequestEncryptionAPVPrefix))
 	return apelc
 }
 
 // WithLoginRequestEncryptionAlgorithm sets the encryption algorithm to use for the embedded login assertion.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
+	defer runtime.KeepAlive(loginRequestEncryptionAlgorithm)
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestEncryptionAlgorithm:"), objref.IDOf(loginRequestEncryptionAlgorithm))
 	return apelc
 }
 
 // WithLoginRequestHPKEPreSharedKey sets the PreSharedKey to be used for HKPE for embedded login assertions. Setting this value will change the mode to PSK if the loginRequestHPKEPreSharedKeyID is also set. Must be at least 32 bytes.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestHPKEPreSharedKey:"), objref.IDOf(loginRequestHPKEPreSharedKey))
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey []byte) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestHPKEPreSharedKey:"), rt.BytesToNSData(loginRequestHPKEPreSharedKey))
 	return apelc
 }
 
 // WithLoginRequestHPKEPreSharedKeyID sets the PreSharedKey Id to be used for HPKE PSK for embedded login assertions.  This is required if the loginRequestHPKEPreSharedKey is set.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestHPKEPreSharedKeyID:"), objref.IDOf(loginRequestHPKEPreSharedKeyID))
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID []byte) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setLoginRequestHPKEPreSharedKeyID:"), rt.BytesToNSData(loginRequestHPKEPreSharedKeyID))
 	return apelc
 }
 
@@ -312,117 +321,128 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyRequ
 }
 
 // WithHpkePreSharedKey sets the PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKey(hpkePreSharedKey obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setHpkePreSharedKey:"), objref.IDOf(hpkePreSharedKey))
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKey(hpkePreSharedKey []byte) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setHpkePreSharedKey:"), rt.BytesToNSData(hpkePreSharedKey))
 	return apelc
 }
 
 // WithHpkePreSharedKeyID sets the PreSharedKey Id to be used for HPKE PSK or AuthPSK mode.  This is requred if the hpkePreSharedKey is set.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKeyID(hpkePreSharedKeyID obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
-	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setHpkePreSharedKeyID:"), objref.IDOf(hpkePreSharedKeyID))
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKeyID(hpkePreSharedKeyID []byte) *AuthorizationProviderExtensionLoginConfiguration {
+	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setHpkePreSharedKeyID:"), rt.BytesToNSData(hpkePreSharedKeyID))
 	return apelc
 }
 
 // WithHpkeAuthPublicKey sets the Authentication public key to be used for HPKE.  Setting this value with changet the mode to Auth or AuthPSK if the hpkePreSharedKey is also set.  This public key is used to authenticate HPKE responses.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) WithHpkeAuthPublicKey(hpkeAuthPublicKey obj.Object) *AuthorizationProviderExtensionLoginConfiguration {
+	defer runtime.KeepAlive(hpkeAuthPublicKey)
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setHpkeAuthPublicKey:"), objref.IDOf(hpkeAuthPublicKey))
 	return apelc
 }
 
-// SetCustomAssertionRequestHeaderClaimsReturningError adds the custom claims to the embedded assertion request header.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomAssertionRequestHeaderClaimsReturning adds the custom claims to the embedded assertion request header.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomAssertionRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomAssertionRequestBodyClaimsReturningError adds the custom claims to the embedded assertion request body.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomAssertionRequestBodyClaimsReturning adds the custom claims to the embedded assertion request body.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomAssertionRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomLoginRequestHeaderClaimsReturningError adds the custom claims to the login request header.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomLoginRequestHeaderClaimsReturning adds the custom claims to the login request header.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomLoginRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomLoginRequestBodyClaimsReturningError adds the custom claims to the login request body.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomLoginRequestBodyClaimsReturning adds the custom claims to the login request body.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomLoginRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomRefreshRequestHeaderClaimsReturningError sets custom claims to be added to the refresh request header.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomRefreshRequestHeaderClaimsReturning sets custom claims to be added to the refresh request header.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomRefreshRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomRefreshRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomRefreshRequestBodyClaimsReturningError sets custom claims to be added to the refresh request bode.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomRefreshRequestBodyClaimsReturning sets custom claims to be added to the refresh request bode.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomRefreshRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomRefreshRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomKeyExchangeRequestHeaderClaimsReturningError sets custom claims to be added to the key exchange request header.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomKeyExchangeRequestHeaderClaimsReturning sets custom claims to be added to the key exchange request header.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyExchangeRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyExchangeRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomKeyExchangeRequestBodyClaimsReturningError sets custom claims to be added to the key exchange request body.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomKeyExchangeRequestBodyClaimsReturning sets custom claims to be added to the key exchange request body.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyExchangeRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyExchangeRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomKeyRequestHeaderClaimsReturningError sets custom claims to be added to the key request header.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestHeaderClaimsReturningError(claims obj.Object) error {
+// SetCustomKeyRequestHeaderClaimsReturning sets custom claims to be added to the key request header.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestHeaderClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyRequestHeaderClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyRequestHeaderClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// SetCustomKeyRequestBodyClaimsReturningError sets custom claims to be added to the key request body.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestBodyClaimsReturningError(claims obj.Object) error {
+// SetCustomKeyRequestBodyClaimsReturning sets custom claims to be added to the key request body.
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestBodyClaimsReturning(claims map[string]obj.Object) error {
+	defer runtime.KeepAlive(apelc)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyRequestBodyClaims:returningError:"), objref.IDOf(claims), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("setCustomKeyRequestBodyClaims:returningError:"), rt.MapToDict(claims, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -431,6 +451,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyReque
 
 // InvalidCredentialPredicate returns predicate string used to identify invalid credential errors. If there is an HTTP 400 or HTTP 401 error when authenticating, this predicate will be used on the response body JSON to determine if the error is due to an invalid password or something else.  If nil, then only an HTTP 401 will be used for an invalid credential.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) InvalidCredentialPredicate() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("invalidCredentialPredicate"))
 	if _r == 0 {
 		return ""
@@ -440,6 +461,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) InvalidCredential
 
 // AccountDisplayName returns the display name for the account.  Used for notifications and login prompts.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) AccountDisplayName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("accountDisplayName"))
 	if _r == 0 {
 		return ""
@@ -449,6 +471,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) AccountDisplayNam
 
 // ClientID returns the login client_id.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) ClientID() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("clientID"))
 	if _r == 0 {
 		return ""
@@ -458,6 +481,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) ClientID() string
 
 // Issuer returns the issuer for validation.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) Issuer() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("issuer"))
 	if _r == 0 {
 		return ""
@@ -467,6 +491,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) Issuer() string {
 
 // Audience returns the audience for validation and requests.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) Audience() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("audience"))
 	if _r == 0 {
 		return ""
@@ -475,48 +500,57 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) Audience() string
 }
 
 // TokenEndpointURL returns token Endpoint URL for login request.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) TokenEndpointURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) TokenEndpointURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("tokenEndpointURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // JwksEndpointURL returns JWKS Endpoint URL for keys.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) JwksEndpointURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) JwksEndpointURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("jwksEndpointURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // JwksTrustedRootCertificates returns the root certificates to use for trust evaluation of jwks keys. if set, certificates will be required in jwks responses and evaluated using the supplied certificates.  If the jwks certificates are missing or fail trust evaluation the login will fail.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) JwksTrustedRootCertificates() obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("jwksTrustedRootCertificates"))
 	return obj.Wrap(_r)
 }
 
 // SetJwksTrustedRootCertificates wraps the corresponding Objective-C method.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) SetJwksTrustedRootCertificates(jwksTrustedRootCertificates obj.Object) {
+	defer runtime.KeepAlive(apelc)
+	defer runtime.KeepAlive(jwksTrustedRootCertificates)
 	objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("setJwksTrustedRootCertificates:"), objref.IDOf(jwksTrustedRootCertificates))
 }
 
 // DeviceContext returns the device context for storing device meta data.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) DeviceContext() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) DeviceContext() []byte {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("deviceContext"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // UserSecureEnclaveKeyBiometricPolicy returns the biometric policy for User Secure Enclave Key authentication.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) UserSecureEnclaveKeyBiometricPolicy() AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[AuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy](objref.IDOf(apelc), objc.RegisterName("userSecureEnclaveKeyBiometricPolicy"))
 	return _r
 }
 
 // NonceEndpointURL returns nonce Endpoint URL, defaults to token tokenEndpointURL.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) NonceEndpointURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) NonceEndpointURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("nonceEndpointURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // NonceResponseKeypath returns the keypath in the nonce response that contains the nonce value.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) NonceResponseKeypath() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("nonceResponseKeypath"))
 	if _r == 0 {
 		return ""
@@ -526,6 +560,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) NonceResponseKeyp
 
 // ServerNonceClaimName returns the name of the server nonce claim when included in authentication requests.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) ServerNonceClaimName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("serverNonceClaimName"))
 	if _r == 0 {
 		return ""
@@ -537,12 +572,14 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) ServerNonceClaimN
 //
 // CustomNonceRequestValues returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomNonceRequestValues() []obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customNonceRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AdditionalScopes returns additional login scopes.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) AdditionalScopes() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("additionalScopes"))
 	if _r == 0 {
 		return ""
@@ -552,6 +589,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) AdditionalScopes(
 
 // AdditionalAuthorizationScopes returns additional authorization scopes.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) AdditionalAuthorizationScopes() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("additionalAuthorizationScopes"))
 	if _r == 0 {
 		return ""
@@ -561,12 +599,14 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) AdditionalAuthori
 
 // IncludePreviousRefreshTokenInLoginRequest reports whether if true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) IncludePreviousRefreshTokenInLoginRequest() bool {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[bool](objref.IDOf(apelc), objc.RegisterName("includePreviousRefreshTokenInLoginRequest"))
 	return _r
 }
 
 // PreviousRefreshTokenClaimName returns the claim name for the previous SSO token value in the login request.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) PreviousRefreshTokenClaimName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("previousRefreshTokenClaimName"))
 	if _r == 0 {
 		return ""
@@ -576,6 +616,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) PreviousRefreshTo
 
 // CustomRequestJWTParameterName returns the request parameter name for the JWT.  The default is "assertion".
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomRequestJWTParameterName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customRequestJWTParameterName"))
 	if _r == 0 {
 		return ""
@@ -587,12 +628,14 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomRequestJWTP
 //
 // CustomLoginRequestValues returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomLoginRequestValues() []obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customLoginRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // UniqueIdentifierClaimName returns the claim name for the user unique identifier in the id token. Defaults to "sub".
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) UniqueIdentifierClaimName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("uniqueIdentifierClaimName"))
 	if _r == 0 {
 		return ""
@@ -602,6 +645,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) UniqueIdentifierC
 
 // GroupRequestClaimName returns the claim name for group membership request.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) GroupRequestClaimName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("groupRequestClaimName"))
 	if _r == 0 {
 		return ""
@@ -611,6 +655,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) GroupRequestClaim
 
 // GroupResponseClaimName returns the claim name for group responses in the id_token.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) GroupResponseClaimName() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("groupResponseClaimName"))
 	if _r == 0 {
 		return ""
@@ -622,6 +667,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) GroupResponseClai
 //
 // KerberosTicketMappings returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) KerberosTicketMappings() []*AuthorizationProviderExtensionKerberosMapping {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("kerberosTicketMappings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationProviderExtensionKerberosMapping {
 		return AuthorizationProviderExtensionKerberosMappingFromID(_id)
@@ -629,27 +675,31 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) KerberosTicketMap
 }
 
 // RefreshEndpointURL returns token Refresh Endpoint URL for login request.  Defaults to the tokenEndpointURL.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) RefreshEndpointURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) RefreshEndpointURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("refreshEndpointURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CustomRefreshRequestValues returns custom values added to the refresh POST request body.
 //
 // CustomRefreshRequestValues returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomRefreshRequestValues() []obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customRefreshRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FederationType returns the federation method to use.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationType() AuthorizationProviderExtensionFederationType {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[AuthorizationProviderExtensionFederationType](objref.IDOf(apelc), objc.RegisterName("federationType"))
 	return _r
 }
 
 // FederationRequestURN returns the URN to request when performing a federated login.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationRequestURN() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("federationRequestURN"))
 	if _r == 0 {
 		return ""
@@ -658,19 +708,22 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationRequest
 }
 
 // FederationMEXURL returns the federation MEX URL to use.  This can be overwritten when using dynamic federation.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("federationMEXURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // FederationUserPreauthenticationURL returns the URL to use when performing dynamic federation.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationUserPreauthenticationURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationUserPreauthenticationURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("federationUserPreauthenticationURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // FederationMEXURLKeypath returns the claim in the preauthentication response that contains the MEX URL.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURLKeypath() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("federationMEXURLKeypath"))
 	if _r == 0 {
 		return ""
@@ -680,6 +733,7 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURLK
 
 // FederationPredicate returns the predicate to apply to the preauthentication response to perform federation or not.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationPredicate() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("federationPredicate"))
 	if _r == 0 {
 		return ""
@@ -691,50 +745,58 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) FederationPredica
 //
 // CustomFederationUserPreauthenticationRequestValues returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomFederationUserPreauthenticationRequestValues() []obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customFederationUserPreauthenticationRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LoginRequestEncryptionPublicKey returns the public key to use for encrypting the embedded login assertion. Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionPublicKey() obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("loginRequestEncryptionPublicKey"))
 	return obj.Wrap(_r)
 }
 
 // LoginRequestEncryptionAPVPrefix returns the APV prefix used for encrypted embedded login assertions.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAPVPrefix() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAPVPrefix() []byte {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("loginRequestEncryptionAPVPrefix"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // LoginRequestEncryptionAlgorithm returns the encryption algorithm to use for the embedded login assertion.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAlgorithm() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAlgorithm() *foundation.Number {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("loginRequestEncryptionAlgorithm"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LoginRequestHPKEPreSharedKey returns the PreSharedKey to be used for HKPE for embedded login assertions. Setting this value will change the mode to PSK if the loginRequestHPKEPreSharedKeyID is also set. Must be at least 32 bytes.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKey() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKey() []byte {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("loginRequestHPKEPreSharedKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // LoginRequestHPKEPreSharedKeyID returns the PreSharedKey Id to be used for HPKE PSK for embedded login assertions.  This is required if the loginRequestHPKEPreSharedKey is set.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKeyID() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKeyID() []byte {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("loginRequestHPKEPreSharedKeyID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // KeyEndpointURL returns the url endpoint for key service, defaults to token tokenEndpointURL.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) KeyEndpointURL() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) KeyEndpointURL() string {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("keyEndpointURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CustomKeyExchangeRequestValues returns custom values added to the key exchange POST request body.
 //
 // CustomKeyExchangeRequestValues returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomKeyExchangeRequestValues() []obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customKeyExchangeRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -743,24 +805,28 @@ func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomKeyExchange
 //
 // CustomKeyRequestValues returns the collection as a Go slice.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) CustomKeyRequestValues() []obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_arr := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("customKeyRequestValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HpkePreSharedKey returns the PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKey() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKey() []byte {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("hpkePreSharedKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // HpkePreSharedKeyID returns the PreSharedKey Id to be used for HPKE PSK or AuthPSK mode.  This is requred if the hpkePreSharedKey is set.
-func (apelc *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKeyID() obj.Object {
+func (apelc *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKeyID() []byte {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("hpkePreSharedKeyID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // HpkeAuthPublicKey returns the Authentication public key to be used for HPKE.  Setting this value with changet the mode to Auth or AuthPSK if the hpkePreSharedKey is also set.  This public key is used to authenticate HPKE responses.
 func (apelc *AuthorizationProviderExtensionLoginConfiguration) HpkeAuthPublicKey() obj.Object {
+	defer runtime.KeepAlive(apelc)
 	_r := objc.Send[objc.ID](objref.IDOf(apelc), objc.RegisterName("hpkeAuthPublicKey"))
 	return obj.Wrap(_r)
 }

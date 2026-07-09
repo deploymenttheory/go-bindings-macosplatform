@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func filePreviewRequestAdopt(id objc.ID) *FilePreviewRequest {
 
 // Description returns the object's -description text.
 func (fpr *FilePreviewRequest) Description() string {
+	defer runtime.KeepAlive(fpr)
 	return rt.Description(objref.IDOf(fpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpr *FilePreviewRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpr *FilePreviewRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpr)
 	return rt.IsKind(objref.IDOf(fpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpr *FilePreviewRequest) String() string {
+	defer runtime.KeepAlive(fpr)
 	return rt.Description(objref.IDOf(fpr))
 }
 
@@ -73,7 +80,8 @@ func NewFilePreviewRequest() *FilePreviewRequest {
 }
 
 // FileURL returns the file URL.
-func (fpr *FilePreviewRequest) FileURL() obj.Object {
+func (fpr *FilePreviewRequest) FileURL() string {
+	defer runtime.KeepAlive(fpr)
 	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("fileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

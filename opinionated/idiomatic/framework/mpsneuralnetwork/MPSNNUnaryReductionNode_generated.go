@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,6 +50,7 @@ func nNUnaryReductionNodeAdopt(id objc.ID) *NNUnaryReductionNode {
 
 // NewNNUnaryReductionNodeWithSource init a node representing an MPS reduction kernel.
 func NewNNUnaryReductionNodeWithSource(sourceNode *NNImageNode) *NNUnaryReductionNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNUnaryReductionNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return nNUnaryReductionNodeAdopt(_id)
@@ -67,6 +70,7 @@ func (nurn *NNUnaryReductionNode) WithLabel(label string) *NNUnaryReductionNode 
 
 // ClipRectSource returns the clip rectangle to apply to the source image.
 func (nurn *NNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
+	defer runtime.KeepAlive(nurn)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(nurn), objc.RegisterName("clipRectSource"))
 	return _r
 }

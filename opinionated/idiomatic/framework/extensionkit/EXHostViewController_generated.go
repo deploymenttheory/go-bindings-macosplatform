@@ -5,11 +5,14 @@
 package extensionkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,22 +53,27 @@ func hostViewControllerAdopt(id objc.ID) *HostViewController {
 
 // Description returns the object's -description text.
 func (hvc *HostViewController) Description() string {
+	defer runtime.KeepAlive(hvc)
 	return rt.Description(objref.IDOf(hvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hvc *HostViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hvc *HostViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(hvc)
 	return rt.IsKind(objref.IDOf(hvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hvc *HostViewController) String() string {
+	defer runtime.KeepAlive(hvc)
 	return rt.Description(objref.IDOf(hvc))
 }
 
@@ -81,26 +89,40 @@ func NewHostViewController() *HostViewController {
 	return _mainthread0
 }
 
+// WithDelegate sets a custom delegate object you use to receive notifications about the activation and deactivation of the app extension.
+func (hvc *HostViewController) WithDelegate(delegate HostViewControllerDelegate) *HostViewController {
+	_shim := newHostViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(hvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(hvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return hvc
+}
+
 // WithPlaceholderView sets the view to display when the view controller has no app extension content to display.
 func (hvc *HostViewController) WithPlaceholderView(placeholderView obj.Object) *HostViewController {
+	defer runtime.KeepAlive(placeholderView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("setPlaceholderView:"), objref.IDOf(placeholderView))
 	})
 	return hvc
 }
 
-// MakeXPCConnectionWithError initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
-func (hvc *HostViewController) MakeXPCConnectionWithError() (result obj.Object, err error) {
-	var _mainthread0 obj.Object
+// MakeXPCConnection initiates an XPC connection to the app extension’s scene. Call this method from your delegate's “EXHostViewControllerDelegate/hostViewControllerDidActivate:“ method to initiate a scene-specific connection to the app extension. - Returns: An object representing the connection.
+func (hvc *HostViewController) MakeXPCConnection() (result *foundation.XPCConnection, err error) {
+	defer runtime.KeepAlive(hvc)
+	var _mainthread0 *foundation.XPCConnection
 	var _mainthread1 error
 	purego.Main(func() {
-		_mainthread0, _mainthread1 = func() (result obj.Object, err error) {
+		_mainthread0, _mainthread1 = func() (result *foundation.XPCConnection, err error) {
 			var _nsErr uintptr
 			_r := objc.Send[objc.ID](objref.IDOf(hvc), objc.RegisterName("makeXPCConnectionWithError:"), unsafe.Pointer(&_nsErr))
 			if _nsErr != 0 {
 				return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 			}
-			return obj.Wrap(_r), nil
+			return foundation.XPCConnectionFromID(_r), nil
 		}()
 	})
 	return _mainthread0, _mainthread1
@@ -109,6 +131,7 @@ func (hvc *HostViewController) MakeXPCConnectionWithError() (result obj.Object, 
 
 // PlaceholderView returns the view to display when the view controller has no app extension content to display.
 func (hvc *HostViewController) PlaceholderView() obj.Object {
+	defer runtime.KeepAlive(hvc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

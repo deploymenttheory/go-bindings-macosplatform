@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewAssetResourceRenewalRequest() *AssetResourceRenewalRequest {
 
 // WithResponse sets the URL response for the loading request.
 func (arrr *AssetResourceRenewalRequest) WithResponse(response obj.Object) *AssetResourceRenewalRequest {
+	defer runtime.KeepAlive(response)
 	objc.Send[objc.ID](objref.IDOf(arrr), objc.RegisterName("setResponse:"), objref.IDOf(response))
 	return arrr
 }
 
 // WithRedirect sets an URL request instance if the loading request was redirected.
 func (arrr *AssetResourceRenewalRequest) WithRedirect(redirect obj.Object) *AssetResourceRenewalRequest {
+	defer runtime.KeepAlive(redirect)
 	objc.Send[objc.ID](objref.IDOf(arrr), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
 	return arrr
 }

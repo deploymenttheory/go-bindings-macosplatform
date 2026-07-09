@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func matrixCopyToImageAdopt(id objc.ID) *MatrixCopyToImage {
 
 // Description returns the object's -description text.
 func (mcti *MatrixCopyToImage) Description() string {
+	defer runtime.KeepAlive(mcti)
 	return rt.Description(objref.IDOf(mcti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcti *MatrixCopyToImage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcti)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcti *MatrixCopyToImage) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcti)
 	return rt.IsKind(objref.IDOf(mcti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcti *MatrixCopyToImage) String() string {
+	defer runtime.KeepAlive(mcti)
 	return rt.Description(objref.IDOf(mcti))
 }
 
@@ -85,12 +92,14 @@ func (mcti *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex
 
 // SourceMatrixOrigin returns the origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mcti *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mcti)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mcti), objc.RegisterName("sourceMatrixOrigin"))
 	return _r
 }
 
 // SourceMatrixBatchIndex returns the index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
 func (mcti *MatrixCopyToImage) SourceMatrixBatchIndex() int {
+	defer runtime.KeepAlive(mcti)
 	_r := objc.Send[int](objref.IDOf(mcti), objc.RegisterName("sourceMatrixBatchIndex"))
 	return _r
 }

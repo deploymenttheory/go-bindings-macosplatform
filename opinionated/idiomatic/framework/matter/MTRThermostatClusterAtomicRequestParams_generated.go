@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterAtomicRequestParamsAdopt(id objc.ID) *MTRThermostatClus
 
 // Description returns the object's -description text.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) Description() string {
+	defer runtime.KeepAlive(mtcarp)
 	return rt.Description(objref.IDOf(mtcarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcarp)
 	return rt.IsKind(objref.IDOf(mtcarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) String() string {
+	defer runtime.KeepAlive(mtcarp)
 	return rt.Description(objref.IDOf(mtcarp))
 }
 
@@ -72,59 +80,70 @@ func NewMTRThermostatClusterAtomicRequestParams() *MTRThermostatClusterAtomicReq
 
 // WithRequestType sets the request type.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithRequestType(requestType obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	defer runtime.KeepAlive(requestType)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setRequestType:"), objref.IDOf(requestType))
 	return mtcarp
 }
 
 // WithTimeout sets the timeout.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	defer runtime.KeepAlive(timeout)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return mtcarp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtcarp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtcarp
 }
 
 // RequestType returns the request type.
-func (mtcarp *MTRThermostatClusterAtomicRequestParams) RequestType() obj.Object {
+func (mtcarp *MTRThermostatClusterAtomicRequestParams) RequestType() *foundation.Number {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("requestType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AttributeRequests returns the attribute requests.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) AttributeRequests() obj.Object {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("attributeRequests"))
 	return obj.Wrap(_r)
 }
 
 // SetAttributeRequests wraps the corresponding Objective-C method.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attributeRequests obj.Object) {
+	defer runtime.KeepAlive(mtcarp)
+	defer runtime.KeepAlive(attributeRequests)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setAttributeRequests:"), objref.IDOf(attributeRequests))
 }
 
 // Timeout returns the timeout.
-func (mtcarp *MTRThermostatClusterAtomicRequestParams) Timeout() obj.Object {
+func (mtcarp *MTRThermostatClusterAtomicRequestParams) Timeout() *foundation.Number {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("timeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mtcarp *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mtcarp *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mtcarp *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mtcarp *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

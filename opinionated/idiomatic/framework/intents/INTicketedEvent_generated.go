@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,34 @@ func ticketedEventAdopt(id objc.ID) *TicketedEvent {
 
 // Description returns the object's -description text.
 func (te *TicketedEvent) Description() string {
+	defer runtime.KeepAlive(te)
 	return rt.Description(objref.IDOf(te))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (te *TicketedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(te)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(te), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (te *TicketedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(te)
 	return rt.IsKind(objref.IDOf(te), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (te *TicketedEvent) String() string {
+	defer runtime.KeepAlive(te)
 	return rt.Description(objref.IDOf(te))
 }
 
 // NewTicketedEventWithCategoryNameEventDurationLocation creates a ticketed event object with the specified contents and attributes.
 func NewTicketedEventWithCategoryNameEventDurationLocation(category TicketedEventCategory, name string, eventDuration *DateComponentsRange, location obj.Object) *TicketedEvent {
+	defer runtime.KeepAlive(eventDuration)
+	defer runtime.KeepAlive(location)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INTicketedEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:name:eventDuration:location:"), category, purego.NSString(name), objref.IDOf(eventDuration), objref.IDOf(location))
 	return ticketedEventAdopt(_id)
@@ -75,12 +84,14 @@ func NewTicketedEventWithCategoryNameEventDurationLocation(category TicketedEven
 
 // Category returns the category.
 func (te *TicketedEvent) Category() TicketedEventCategory {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[TicketedEventCategory](objref.IDOf(te), objc.RegisterName("category"))
 	return _r
 }
 
 // Name returns the name.
 func (te *TicketedEvent) Name() string {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -90,12 +101,14 @@ func (te *TicketedEvent) Name() string {
 
 // EventDuration returns the event duration.
 func (te *TicketedEvent) EventDuration() *DateComponentsRange {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("eventDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // Location returns the location.
 func (te *TicketedEvent) Location() obj.Object {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("location"))
 	return obj.Wrap(_r)
 }

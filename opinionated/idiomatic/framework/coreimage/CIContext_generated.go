@@ -5,6 +5,7 @@
 package coreimage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func contextAdopt(id objc.ID) *Context {
 
 // Description returns the object's -description text.
 func (c *Context) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Context) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Context) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Context) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -78,6 +84,7 @@ func NewContext() *Context {
 
 // NewContextWithOptions initializes a context without a specific rendering destination, using the specified options.
 func NewContextWithOptions(options obj.Object) *Context {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIContext")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
 	return contextAdopt(_id)
@@ -85,154 +92,221 @@ func NewContextWithOptions(options obj.Object) *Context {
 
 // DrawImageAtPointFromRect renders a region of an image to a point in the context destination.
 func (c *Context) DrawImageAtPointFromRect(image *Image, atPoint corefoundation.CGPoint, fromRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawImage:atPoint:fromRect:"), objref.IDOf(image), atPoint, fromRect)
 }
 
 // DrawImageInRectFromRect renders a region of an image to a rectangle in the context destination.
 func (c *Context) DrawImageInRectFromRect(image *Image, inRect corefoundation.CGRect, fromRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawImage:inRect:fromRect:"), objref.IDOf(image), inRect, fromRect)
 }
 
 // CreateCGLayerWithSizeInfo creates a CGLayer object from the provided parameters.
 func (c *Context) CreateCGLayerWithSizeInfo(size corefoundation.CGSize, info obj.Object) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(info)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGLayerWithSize:info:"), size, objref.IDOf(info))
 	return obj.Wrap(_r)
 }
 
 // RenderToBitmapRowBytesBoundsFormatColorSpace renders to the given bitmap.
 func (c *Context) RenderToBitmapRowBytesBoundsFormatColorSpace(image *Image, data unsafe.Pointer, rowBytes int, bounds corefoundation.CGRect, format int, colorSpace obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toBitmap:rowBytes:bounds:format:colorSpace:"), objref.IDOf(image), data, rowBytes, bounds, format, objref.IDOf(colorSpace))
 }
 
 // RenderToIOSurfaceBoundsColorSpace renders a region of an image into an IOSurface object.
 func (c *Context) RenderToIOSurfaceBoundsColorSpace(image *Image, surface obj.Object, bounds corefoundation.CGRect, colorSpace obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(surface)
+	defer runtime.KeepAlive(colorSpace)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toIOSurface:bounds:colorSpace:"), objref.IDOf(image), objref.IDOf(surface), bounds, objref.IDOf(colorSpace))
 }
 
 // RenderToCVPixelBuffer renders an image into a pixel buffer.
 func (c *Context) RenderToCVPixelBuffer(image *Image, buffer unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toCVPixelBuffer:"), objref.IDOf(image), buffer)
 }
 
 // RenderToCVPixelBufferBoundsColorSpace renders a region of an image into a pixel buffer.
 func (c *Context) RenderToCVPixelBufferBoundsColorSpace(image *Image, buffer unsafe.Pointer, bounds corefoundation.CGRect, colorSpace obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("render:toCVPixelBuffer:bounds:colorSpace:"), objref.IDOf(image), buffer, bounds, objref.IDOf(colorSpace))
 }
 
 // ReclaimResources runs the garbage collector to reclaim any resources that the context no longer requires.
 func (c *Context) ReclaimResources() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("reclaimResources"))
 }
 
 // ClearCaches frees any cached data, such as temporary images, associated with the context and runs the garbage collector.
 func (c *Context) ClearCaches() {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("clearCaches"))
 }
 
 // WorkingColorSpace returns the working color space of the CIContext. The working color space determines the color space used when executing filter kernels. You specify a working color space using the “kCIContextWorkingColorSpace“ option when creating a “CIContext“. * All input images are color matched from the input's color space to the working space. * All renders are color matched from the working space to the destination space. The property will be `null` if the context was created with color management disabled.
 func (c *Context) WorkingColorSpace() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("workingColorSpace"))
 	return obj.Wrap(_r)
 }
 
 // WorkingFormat returns the working pixel format that the CIContext uses for intermediate buffers. The working format determines the pixel format that Core Image uses to create intermediate buffers for rendering images. You specify a working pixel format using the “kCIContextWorkingFormat“ option when creating a “CIContext“.
 func (c *Context) WorkingFormat() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("workingFormat"))
 	return _r
 }
 
 // CreateCGImageFromRect creates a Core Graphics image from a region of a Core Image image instance.
 func (c *Context) CreateCGImageFromRect(image *Image, fromRect corefoundation.CGRect) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:"), objref.IDOf(image), fromRect)
 	return obj.Wrap(_r)
 }
 
 // CreateCGImageFromRectFormatColorSpace creates a Core Graphics image from a region of a Core Image image instance with an option for controlling the pixel format and color space of the CGImage.
 func (c *Context) CreateCGImageFromRectFormatColorSpace(image *Image, fromRect corefoundation.CGRect, format int, colorSpace obj.Object) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:format:colorSpace:"), objref.IDOf(image), fromRect, format, objref.IDOf(colorSpace))
 	return obj.Wrap(_r)
 }
 
 // CreateCGImageFromRectFormatColorSpaceDeferred creates a Core Graphics image from a region of a Core Image image instance with an option for controlling when the image is rendered.
 func (c *Context) CreateCGImageFromRectFormatColorSpaceDeferred(image *Image, fromRect corefoundation.CGRect, format int, colorSpace obj.Object, deferred bool) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:format:colorSpace:deferred:"), objref.IDOf(image), fromRect, format, objref.IDOf(colorSpace), deferred)
 	return obj.Wrap(_r)
 }
 
 // CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats creates a Core Graphics image from a region of a Core Image image instance with an option for calculating HDR statistics.
 func (c *Context) CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image *Image, fromRect corefoundation.CGRect, format int, colorSpace obj.Object, deferred bool, calculateHDRStats bool) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createCGImage:fromRect:format:colorSpace:deferred:calculateHDRStats:"), objref.IDOf(image), fromRect, format, objref.IDOf(colorSpace), deferred, calculateHDRStats)
 	return obj.Wrap(_r)
 }
 
 // CalculateHDRStatsForIOSurface given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface’s attachments to store the values.
 func (c *Context) CalculateHDRStatsForIOSurface(surface obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(surface)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForIOSurface:"), objref.IDOf(surface))
 }
 
 // CalculateHDRStatsForCVPixelBuffer given a CVPixelBuffer, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the buffer’s attachments to store the values.
 func (c *Context) CalculateHDRStatsForCVPixelBuffer(buffer unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForCVPixelBuffer:"), buffer)
 }
 
 // CalculateHDRStatsForCGImage given a Core Graphics image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Graphics image that has the calculated values.
 func (c *Context) CalculateHDRStatsForCGImage(cgimage obj.Object) obj.Object {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cgimage)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForCGImage:"), objref.IDOf(cgimage))
 	return obj.Wrap(_r)
 }
 
 // CalculateHDRStatsForImage given a Core Image image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Image image that has the calculated values.
 func (c *Context) CalculateHDRStatsForImage(image *Image) *Image {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calculateHDRStatsForImage:"), objref.IDOf(image))
 	return ImageFromID(_r)
 }
 
 // TIFFRepresentationOfImageFormatColorSpaceOptions renders the image and exports the resulting image data in TIFF format.
-func (c *Context) TIFFRepresentationOfImageFormatColorSpaceOptions(image *Image, format int, colorSpace obj.Object, options obj.Object) obj.Object {
+func (c *Context) TIFFRepresentationOfImageFormatColorSpaceOptions(image *Image, format int, colorSpace obj.Object, options obj.Object) []byte {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("TIFFRepresentationOfImage:format:colorSpace:options:"), objref.IDOf(image), format, objref.IDOf(colorSpace), objref.IDOf(options))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // JPEGRepresentationOfImageColorSpaceOptions renders the image and exports the resulting image data in JPEG format.
-func (c *Context) JPEGRepresentationOfImageColorSpaceOptions(image *Image, colorSpace obj.Object, options obj.Object) obj.Object {
+func (c *Context) JPEGRepresentationOfImageColorSpaceOptions(image *Image, colorSpace obj.Object, options obj.Object) []byte {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("JPEGRepresentationOfImage:colorSpace:options:"), objref.IDOf(image), objref.IDOf(colorSpace), objref.IDOf(options))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // HEIFRepresentationOfImageFormatColorSpaceOptions renders the image and exports the resulting image data in HEIF format.
-func (c *Context) HEIFRepresentationOfImageFormatColorSpaceOptions(image *Image, format int, colorSpace obj.Object, options obj.Object) obj.Object {
+func (c *Context) HEIFRepresentationOfImageFormatColorSpaceOptions(image *Image, format int, colorSpace obj.Object, options obj.Object) []byte {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("HEIFRepresentationOfImage:format:colorSpace:options:"), objref.IDOf(image), format, objref.IDOf(colorSpace), objref.IDOf(options))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
-// HEIF10RepresentationOfImageColorSpaceOptionsError renders the image and exports the resulting image data in HEIF10 format.
-func (c *Context) HEIF10RepresentationOfImageColorSpaceOptionsError(image *Image, colorSpace obj.Object, options obj.Object) (result obj.Object, err error) {
+// HEIF10RepresentationOfImageColorSpaceOptions renders the image and exports the resulting image data in HEIF10 format.
+func (c *Context) HEIF10RepresentationOfImageColorSpaceOptions(image *Image, colorSpace obj.Object, options obj.Object) (result []byte, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("HEIF10RepresentationOfImage:colorSpace:options:error:"), objref.IDOf(image), objref.IDOf(colorSpace), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
 // PNGRepresentationOfImageFormatColorSpaceOptions renders the image and exports the resulting image data in PNG format.
-func (c *Context) PNGRepresentationOfImageFormatColorSpaceOptions(image *Image, format int, colorSpace obj.Object, options obj.Object) obj.Object {
+func (c *Context) PNGRepresentationOfImageFormatColorSpaceOptions(image *Image, format int, colorSpace obj.Object, options obj.Object) []byte {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("PNGRepresentationOfImage:format:colorSpace:options:"), objref.IDOf(image), format, objref.IDOf(colorSpace), objref.IDOf(options))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
-// OpenEXRRepresentationOfImageOptionsError renders the image and exports the resulting image data in open EXR format.
-func (c *Context) OpenEXRRepresentationOfImageOptionsError(image *Image, options obj.Object) (result obj.Object, err error) {
+// OpenEXRRepresentationOfImageOptions renders the image and exports the resulting image data in open EXR format.
+func (c *Context) OpenEXRRepresentationOfImageOptions(image *Image, options obj.Object) (result []byte, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("OpenEXRRepresentationOfImage:options:error:"), objref.IDOf(image), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
 // WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptions renders the image and exports the resulting image data as a file in TIFF format.
 func (c *Context) WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptions(image *Image, url string, format int, colorSpace obj.Object, options obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("writeTIFFRepresentationOfImage:toURL:format:colorSpace:options:error:"), objref.IDOf(image), rt.FileURL(url), format, objref.IDOf(colorSpace), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -243,6 +317,10 @@ func (c *Context) WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptions(ima
 
 // WritePNGRepresentationOfImageToURLFormatColorSpaceOptions renders the image and exports the resulting image data as a file in PNG format.
 func (c *Context) WritePNGRepresentationOfImageToURLFormatColorSpaceOptions(image *Image, url string, format int, colorSpace obj.Object, options obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("writePNGRepresentationOfImage:toURL:format:colorSpace:options:error:"), objref.IDOf(image), rt.FileURL(url), format, objref.IDOf(colorSpace), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -253,6 +331,10 @@ func (c *Context) WritePNGRepresentationOfImageToURLFormatColorSpaceOptions(imag
 
 // WriteJPEGRepresentationOfImageToURLColorSpaceOptions renders the image and exports the resulting image data as a file in JPEG format.
 func (c *Context) WriteJPEGRepresentationOfImageToURLColorSpaceOptions(image *Image, url string, colorSpace obj.Object, options obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("writeJPEGRepresentationOfImage:toURL:colorSpace:options:error:"), objref.IDOf(image), rt.FileURL(url), objref.IDOf(colorSpace), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -263,6 +345,10 @@ func (c *Context) WriteJPEGRepresentationOfImageToURLColorSpaceOptions(image *Im
 
 // WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptions renders the image and exports the resulting image data as a file in HEIF format.
 func (c *Context) WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptions(image *Image, url string, format int, colorSpace obj.Object, options obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("writeHEIFRepresentationOfImage:toURL:format:colorSpace:options:error:"), objref.IDOf(image), rt.FileURL(url), format, objref.IDOf(colorSpace), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -273,6 +359,10 @@ func (c *Context) WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptions(ima
 
 // WriteHEIF10RepresentationOfImageToURLColorSpaceOptions renders the image and exports the resulting image data as a file in HEIF10 format.
 func (c *Context) WriteHEIF10RepresentationOfImageToURLColorSpaceOptions(image *Image, url string, colorSpace obj.Object, options obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(colorSpace)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("writeHEIF10RepresentationOfImage:toURL:colorSpace:options:error:"), objref.IDOf(image), rt.FileURL(url), objref.IDOf(colorSpace), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -283,6 +373,9 @@ func (c *Context) WriteHEIF10RepresentationOfImageToURLColorSpaceOptions(image *
 
 // WriteOpenEXRRepresentationOfImageToURLOptions renders the image and exports the resulting image data as a file in open EXR format.
 func (c *Context) WriteOpenEXRRepresentationOfImageToURLOptions(image *Image, url string, options obj.Object) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("writeOpenEXRRepresentationOfImage:toURL:options:error:"), objref.IDOf(image), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -293,18 +386,25 @@ func (c *Context) WriteOpenEXRRepresentationOfImageToURLOptions(image *Image, ur
 
 // DepthBlurEffectFilterForImageURLOptions create a CIFilter instance for the supplied image URL that can be used to apply a depth blur effect.
 func (c *Context) DepthBlurEffectFilterForImageURLOptions(url string, options obj.Object) *Filter {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("depthBlurEffectFilterForImageURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return FilterFromID(_r)
 }
 
 // DepthBlurEffectFilterForImageDataOptions create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect.
-func (c *Context) DepthBlurEffectFilterForImageDataOptions(data obj.Object, options obj.Object) *Filter {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("depthBlurEffectFilterForImageData:options:"), objref.IDOf(data), objref.IDOf(options))
+func (c *Context) DepthBlurEffectFilterForImageDataOptions(data []byte, options obj.Object) *Filter {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(options)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("depthBlurEffectFilterForImageData:options:"), rt.BytesToNSData(data), objref.IDOf(options))
 	return FilterFromID(_r)
 }
 
-// StartTaskToRenderFromRectToDestinationAtPointError renders a portion of an image to a point in the destination.
-func (c *Context) StartTaskToRenderFromRectToDestinationAtPointError(image *Image, fromRect corefoundation.CGRect, destination *RenderDestination, atPoint corefoundation.CGPoint) (result *RenderTask, err error) {
+// StartTaskToRenderFromRectToDestinationAtPoint renders a portion of an image to a point in the destination.
+func (c *Context) StartTaskToRenderFromRectToDestinationAtPoint(image *Image, fromRect corefoundation.CGRect, destination *RenderDestination, atPoint corefoundation.CGPoint) (result *RenderTask, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(destination)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("startTaskToRender:fromRect:toDestination:atPoint:error:"), objref.IDOf(image), fromRect, objref.IDOf(destination), atPoint, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -313,8 +413,11 @@ func (c *Context) StartTaskToRenderFromRectToDestinationAtPointError(image *Imag
 	return RenderTaskFromID(_r), nil
 }
 
-// StartTaskToRenderToDestinationError renders an image to a destination so that point (0, 0) of the image maps to point (0, 0) of the destination.
-func (c *Context) StartTaskToRenderToDestinationError(image *Image, destination *RenderDestination) (result *RenderTask, err error) {
+// StartTaskToRenderToDestination renders an image to a destination so that point (0, 0) of the image maps to point (0, 0) of the destination.
+func (c *Context) StartTaskToRenderToDestination(image *Image, destination *RenderDestination) (result *RenderTask, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(destination)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("startTaskToRender:toDestination:error:"), objref.IDOf(image), objref.IDOf(destination), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -325,6 +428,9 @@ func (c *Context) StartTaskToRenderToDestinationError(image *Image, destination 
 
 // PrepareRenderFromRectToDestinationAtPoint an optional call to warm up a CIContext so that subsequent calls to render with the same arguments run more efficiently.
 func (c *Context) PrepareRenderFromRectToDestinationAtPoint(image *Image, fromRect corefoundation.CGRect, destination *RenderDestination, atPoint corefoundation.CGPoint) error {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(destination)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(c), objc.RegisterName("prepareRender:fromRect:toDestination:atPoint:error:"), objref.IDOf(image), fromRect, objref.IDOf(destination), atPoint, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -333,8 +439,10 @@ func (c *Context) PrepareRenderFromRectToDestinationAtPoint(image *Image, fromRe
 	return nil
 }
 
-// StartTaskToClearError fills the entire destination with black or clear depending on its alphaMode.
-func (c *Context) StartTaskToClearError(destination *RenderDestination) (result *RenderTask, err error) {
+// StartTaskToClear fills the entire destination with black or clear depending on its alphaMode.
+func (c *Context) StartTaskToClear(destination *RenderDestination) (result *RenderTask, err error) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(destination)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("startTaskToClear:error:"), objref.IDOf(destination), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

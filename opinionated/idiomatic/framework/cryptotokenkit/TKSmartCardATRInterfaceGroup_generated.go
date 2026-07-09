@@ -5,7 +5,10 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func smartCardATRInterfaceGroupAdopt(id objc.ID) *SmartCardATRInterfaceGroup {
 
 // Description returns the object's -description text.
 func (scaig *SmartCardATRInterfaceGroup) Description() string {
+	defer runtime.KeepAlive(scaig)
 	return rt.Description(objref.IDOf(scaig))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (scaig *SmartCardATRInterfaceGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(scaig)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(scaig), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (scaig *SmartCardATRInterfaceGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(scaig)
 	return rt.IsKind(objref.IDOf(scaig), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (scaig *SmartCardATRInterfaceGroup) String() string {
+	defer runtime.KeepAlive(scaig)
 	return rt.Description(objref.IDOf(scaig))
 }
 
@@ -73,25 +81,29 @@ func NewSmartCardATRInterfaceGroup() *SmartCardATRInterfaceGroup {
 }
 
 // TA returns TA interface byte of ATR group, or nil if TA is not present.
-func (scaig *SmartCardATRInterfaceGroup) TA() obj.Object {
+func (scaig *SmartCardATRInterfaceGroup) TA() *foundation.Number {
+	defer runtime.KeepAlive(scaig)
 	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("TA"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TB returns TB interface byte of ATR group, or nil if TB is not present.
-func (scaig *SmartCardATRInterfaceGroup) TB() obj.Object {
+func (scaig *SmartCardATRInterfaceGroup) TB() *foundation.Number {
+	defer runtime.KeepAlive(scaig)
 	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("TB"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TC returns TC interface byte of ATR group, or nil if TC is not present.
-func (scaig *SmartCardATRInterfaceGroup) TC() obj.Object {
+func (scaig *SmartCardATRInterfaceGroup) TC() *foundation.Number {
+	defer runtime.KeepAlive(scaig)
 	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("TC"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Protocol returns protocol number for this group.  First group (global) has protocol unassigned, contains nil.
-func (scaig *SmartCardATRInterfaceGroup) Protocol() obj.Object {
+func (scaig *SmartCardATRInterfaceGroup) Protocol() *foundation.Number {
+	defer runtime.KeepAlive(scaig)
 	_r := objc.Send[objc.ID](objref.IDOf(scaig), objc.RegisterName("protocol"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

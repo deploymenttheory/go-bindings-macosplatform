@@ -8,137 +8,35 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the GameKit error GKErrorUnknown.
-var ErrUnknown = errkit.New("GKErrorDomain", 1)
-
-// ErrCancelled matches the GameKit error GKErrorCancelled.
-var ErrCancelled = errkit.New("GKErrorDomain", 2)
-
-// ErrCommunicationsFailure matches the GameKit error GKErrorCommunicationsFailure.
-var ErrCommunicationsFailure = errkit.New("GKErrorDomain", 3)
-
-// ErrUserDenied matches the GameKit error GKErrorUserDenied.
-var ErrUserDenied = errkit.New("GKErrorDomain", 4)
-
-// ErrInvalidCredentials matches the GameKit error GKErrorInvalidCredentials.
-var ErrInvalidCredentials = errkit.New("GKErrorDomain", 5)
-
-// ErrNotAuthenticated matches the GameKit error GKErrorNotAuthenticated.
-var ErrNotAuthenticated = errkit.New("GKErrorDomain", 6)
-
-// ErrAuthenticationInProgress matches the GameKit error GKErrorAuthenticationInProgress.
-var ErrAuthenticationInProgress = errkit.New("GKErrorDomain", 7)
-
-// ErrInvalidPlayer matches the GameKit error GKErrorInvalidPlayer.
-var ErrInvalidPlayer = errkit.New("GKErrorDomain", 8)
-
-// ErrScoreNotSet matches the GameKit error GKErrorScoreNotSet.
-var ErrScoreNotSet = errkit.New("GKErrorDomain", 9)
-
-// ErrParentalControlsBlocked matches the GameKit error GKErrorParentalControlsBlocked.
-var ErrParentalControlsBlocked = errkit.New("GKErrorDomain", 10)
-
-// ErrPlayerStatusExceedsMaximumLength matches the GameKit error GKErrorPlayerStatusExceedsMaximumLength.
-var ErrPlayerStatusExceedsMaximumLength = errkit.New("GKErrorDomain", 11)
-
-// ErrPlayerStatusInvalid matches the GameKit error GKErrorPlayerStatusInvalid.
-var ErrPlayerStatusInvalid = errkit.New("GKErrorDomain", 12)
-
-// ErrMatchRequestInvalid matches the GameKit error GKErrorMatchRequestInvalid.
-var ErrMatchRequestInvalid = errkit.New("GKErrorDomain", 13)
-
-// ErrUnderage matches the GameKit error GKErrorUnderage.
-var ErrUnderage = errkit.New("GKErrorDomain", 14)
-
-// ErrGameUnrecognized matches the GameKit error GKErrorGameUnrecognized.
-var ErrGameUnrecognized = errkit.New("GKErrorDomain", 15)
-
-// ErrNotSupported matches the GameKit error GKErrorNotSupported.
-var ErrNotSupported = errkit.New("GKErrorDomain", 16)
-
-// ErrInvalidParameter matches the GameKit error GKErrorInvalidParameter.
-var ErrInvalidParameter = errkit.New("GKErrorDomain", 17)
-
-// ErrUnexpectedConnection matches the GameKit error GKErrorUnexpectedConnection.
-var ErrUnexpectedConnection = errkit.New("GKErrorDomain", 18)
-
-// ErrChallengeInvalid matches the GameKit error GKErrorChallengeInvalid.
-var ErrChallengeInvalid = errkit.New("GKErrorDomain", 19)
-
-// ErrTurnBasedMatchDataTooLarge matches the GameKit error GKErrorTurnBasedMatchDataTooLarge.
-var ErrTurnBasedMatchDataTooLarge = errkit.New("GKErrorDomain", 20)
-
-// ErrTurnBasedTooManySessions matches the GameKit error GKErrorTurnBasedTooManySessions.
-var ErrTurnBasedTooManySessions = errkit.New("GKErrorDomain", 21)
-
-// ErrTurnBasedInvalidParticipant matches the GameKit error GKErrorTurnBasedInvalidParticipant.
-var ErrTurnBasedInvalidParticipant = errkit.New("GKErrorDomain", 22)
-
-// ErrTurnBasedInvalidTurn matches the GameKit error GKErrorTurnBasedInvalidTurn.
-var ErrTurnBasedInvalidTurn = errkit.New("GKErrorDomain", 23)
-
-// ErrTurnBasedInvalidState matches the GameKit error GKErrorTurnBasedInvalidState.
-var ErrTurnBasedInvalidState = errkit.New("GKErrorDomain", 24)
-
-// ErrInvitationsDisabled matches the GameKit error GKErrorInvitationsDisabled.
-var ErrInvitationsDisabled = errkit.New("GKErrorDomain", 25)
-
-// ErrPlayerPhotoFailure matches the GameKit error GKErrorPlayerPhotoFailure.
-var ErrPlayerPhotoFailure = errkit.New("GKErrorDomain", 26)
-
-// ErrUbiquityContainerUnavailable matches the GameKit error GKErrorUbiquityContainerUnavailable.
-var ErrUbiquityContainerUnavailable = errkit.New("GKErrorDomain", 27)
-
-// ErrMatchNotConnected matches the GameKit error GKErrorMatchNotConnected.
-var ErrMatchNotConnected = errkit.New("GKErrorDomain", 28)
-
-// ErrGameSessionRequestInvalid matches the GameKit error GKErrorGameSessionRequestInvalid.
-var ErrGameSessionRequestInvalid = errkit.New("GKErrorDomain", 29)
-
-// ErrRestrictedToAutomatch matches the GameKit error GKErrorRestrictedToAutomatch.
-var ErrRestrictedToAutomatch = errkit.New("GKErrorDomain", 30)
-
 // ErrAPINotAvailable matches the GameKit error GKErrorAPINotAvailable.
 var ErrAPINotAvailable = errkit.New("GKErrorDomain", 31)
-
-// ErrNotAuthorized matches the GameKit error GKErrorNotAuthorized.
-var ErrNotAuthorized = errkit.New("GKErrorDomain", 32)
-
-// ErrConnectionTimeout matches the GameKit error GKErrorConnectionTimeout.
-var ErrConnectionTimeout = errkit.New("GKErrorDomain", 33)
 
 // ErrAPIObsolete matches the GameKit error GKErrorAPIObsolete.
 var ErrAPIObsolete = errkit.New("GKErrorDomain", 34)
 
-// ErrICloudUnavailable matches the GameKit error GKErrorICloudUnavailable.
-var ErrICloudUnavailable = errkit.New("GKErrorDomain", 35)
-
-// ErrLockdownMode matches the GameKit error GKErrorLockdownMode.
-var ErrLockdownMode = errkit.New("GKErrorDomain", 36)
-
 // ErrAppUnlisted matches the GameKit error GKErrorAppUnlisted.
 var ErrAppUnlisted = errkit.New("GKErrorDomain", 37)
 
-// ErrDebugMode matches the GameKit error GKErrorDebugMode.
-var ErrDebugMode = errkit.New("GKErrorDomain", 38)
+// ErrAuthenticationInProgress matches the GameKit error GKErrorAuthenticationInProgress.
+var ErrAuthenticationInProgress = errkit.New("GKErrorDomain", 7)
 
-// ErrFriendListDescriptionMissing matches the GameKit error GKErrorFriendListDescriptionMissing.
-var ErrFriendListDescriptionMissing = errkit.New("GKErrorDomain", 100)
+// ErrBadContainer matches the GameKit error GKGameSessionErrorBadContainer.
+var ErrBadContainer = errkit.New("GKGameSessionErrorDomain", 12)
 
-// ErrFriendListRestricted matches the GameKit error GKErrorFriendListRestricted.
-var ErrFriendListRestricted = errkit.New("GKErrorDomain", 101)
+// ErrCancelled matches the GameKit error GKErrorCancelled.
+var ErrCancelled = errkit.New("GKErrorDomain", 2)
 
-// ErrFriendListDenied matches the GameKit error GKErrorFriendListDenied.
-var ErrFriendListDenied = errkit.New("GKErrorDomain", 102)
+// ErrChallengeInvalid matches the GameKit error GKErrorChallengeInvalid.
+var ErrChallengeInvalid = errkit.New("GKErrorDomain", 19)
 
-// ErrFriendRequestNotAvailable matches the GameKit error GKErrorFriendRequestNotAvailable.
-var ErrFriendRequestNotAvailable = errkit.New("GKErrorDomain", 103)
+// ErrCloudDriveDisabled matches the GameKit error GKGameSessionErrorCloudDriveDisabled.
+var ErrCloudDriveDisabled = errkit.New("GKGameSessionErrorDomain", 15)
 
-// ErrSessionConflict matches the GameKit error GKGameSessionErrorSessionConflict.
-var ErrSessionConflict = errkit.New("GKGameSessionErrorDomain", 3)
+// ErrCloudQuotaExceeded matches the GameKit error GKGameSessionErrorCloudQuotaExceeded.
+var ErrCloudQuotaExceeded = errkit.New("GKGameSessionErrorDomain", 13)
 
-// ErrSessionNotShared matches the GameKit error GKGameSessionErrorSessionNotShared.
-var ErrSessionNotShared = errkit.New("GKGameSessionErrorDomain", 4)
+// ErrCommunicationsFailure matches the GameKit error GKErrorCommunicationsFailure.
+var ErrCommunicationsFailure = errkit.New("GKErrorDomain", 3)
 
 // ErrConnectionCancelledByUser matches the GameKit error GKGameSessionErrorConnectionCancelledByUser.
 var ErrConnectionCancelledByUser = errkit.New("GKGameSessionErrorDomain", 5)
@@ -146,14 +44,92 @@ var ErrConnectionCancelledByUser = errkit.New("GKGameSessionErrorDomain", 5)
 // ErrConnectionFailed matches the GameKit error GKGameSessionErrorConnectionFailed.
 var ErrConnectionFailed = errkit.New("GKGameSessionErrorDomain", 6)
 
-// ErrSessionHasMaxConnectedPlayers matches the GameKit error GKGameSessionErrorSessionHasMaxConnectedPlayers.
-var ErrSessionHasMaxConnectedPlayers = errkit.New("GKGameSessionErrorDomain", 7)
+// ErrConnectionTimeout matches the GameKit error GKErrorConnectionTimeout.
+var ErrConnectionTimeout = errkit.New("GKErrorDomain", 33)
 
-// ErrSendDataNotConnected matches the GameKit error GKGameSessionErrorSendDataNotConnected.
-var ErrSendDataNotConnected = errkit.New("GKGameSessionErrorDomain", 8)
+// ErrDebugMode matches the GameKit error GKErrorDebugMode.
+var ErrDebugMode = errkit.New("GKErrorDomain", 38)
+
+// ErrFriendListDenied matches the GameKit error GKErrorFriendListDenied.
+var ErrFriendListDenied = errkit.New("GKErrorDomain", 102)
+
+// ErrFriendListDescriptionMissing matches the GameKit error GKErrorFriendListDescriptionMissing.
+var ErrFriendListDescriptionMissing = errkit.New("GKErrorDomain", 100)
+
+// ErrFriendListRestricted matches the GameKit error GKErrorFriendListRestricted.
+var ErrFriendListRestricted = errkit.New("GKErrorDomain", 101)
+
+// ErrFriendRequestNotAvailable matches the GameKit error GKErrorFriendRequestNotAvailable.
+var ErrFriendRequestNotAvailable = errkit.New("GKErrorDomain", 103)
+
+// ErrGameSessionRequestInvalid matches the GameKit error GKErrorGameSessionRequestInvalid.
+var ErrGameSessionRequestInvalid = errkit.New("GKErrorDomain", 29)
+
+// ErrGameUnrecognized matches the GameKit error GKErrorGameUnrecognized.
+var ErrGameUnrecognized = errkit.New("GKErrorDomain", 15)
+
+// ErrICloudUnavailable matches the GameKit error GKErrorICloudUnavailable.
+var ErrICloudUnavailable = errkit.New("GKErrorDomain", 35)
+
+// ErrInvalidCredentials matches the GameKit error GKErrorInvalidCredentials.
+var ErrInvalidCredentials = errkit.New("GKErrorDomain", 5)
+
+// ErrInvalidParameter matches the GameKit error GKErrorInvalidParameter.
+var ErrInvalidParameter = errkit.New("GKErrorDomain", 17)
+
+// ErrInvalidPlayer matches the GameKit error GKErrorInvalidPlayer.
+var ErrInvalidPlayer = errkit.New("GKErrorDomain", 8)
+
+// ErrInvalidSession matches the GameKit error GKGameSessionErrorInvalidSession.
+var ErrInvalidSession = errkit.New("GKGameSessionErrorDomain", 16)
+
+// ErrInvitationsDisabled matches the GameKit error GKErrorInvitationsDisabled.
+var ErrInvitationsDisabled = errkit.New("GKErrorDomain", 25)
+
+// ErrLockdownMode matches the GameKit error GKErrorLockdownMode.
+var ErrLockdownMode = errkit.New("GKErrorDomain", 36)
+
+// ErrMatchNotConnected matches the GameKit error GKErrorMatchNotConnected.
+var ErrMatchNotConnected = errkit.New("GKErrorDomain", 28)
+
+// ErrMatchRequestInvalid matches the GameKit error GKErrorMatchRequestInvalid.
+var ErrMatchRequestInvalid = errkit.New("GKErrorDomain", 13)
+
+// ErrNetworkFailure matches the GameKit error GKGameSessionErrorNetworkFailure.
+var ErrNetworkFailure = errkit.New("GKGameSessionErrorDomain", 14)
+
+// ErrNotAuthenticated matches the GameKit error GKErrorNotAuthenticated.
+var ErrNotAuthenticated = errkit.New("GKErrorDomain", 6)
+
+// ErrNotAuthorized matches the GameKit error GKErrorNotAuthorized.
+var ErrNotAuthorized = errkit.New("GKErrorDomain", 32)
+
+// ErrNotSupported matches the GameKit error GKErrorNotSupported.
+var ErrNotSupported = errkit.New("GKErrorDomain", 16)
+
+// ErrParentalControlsBlocked matches the GameKit error GKErrorParentalControlsBlocked.
+var ErrParentalControlsBlocked = errkit.New("GKErrorDomain", 10)
+
+// ErrPlayerPhotoFailure matches the GameKit error GKErrorPlayerPhotoFailure.
+var ErrPlayerPhotoFailure = errkit.New("GKErrorDomain", 26)
+
+// ErrPlayerStatusExceedsMaximumLength matches the GameKit error GKErrorPlayerStatusExceedsMaximumLength.
+var ErrPlayerStatusExceedsMaximumLength = errkit.New("GKErrorDomain", 11)
+
+// ErrPlayerStatusInvalid matches the GameKit error GKErrorPlayerStatusInvalid.
+var ErrPlayerStatusInvalid = errkit.New("GKErrorDomain", 12)
+
+// ErrRestrictedToAutomatch matches the GameKit error GKErrorRestrictedToAutomatch.
+var ErrRestrictedToAutomatch = errkit.New("GKErrorDomain", 30)
+
+// ErrScoreNotSet matches the GameKit error GKErrorScoreNotSet.
+var ErrScoreNotSet = errkit.New("GKErrorDomain", 9)
 
 // ErrSendDataNoRecipients matches the GameKit error GKGameSessionErrorSendDataNoRecipients.
 var ErrSendDataNoRecipients = errkit.New("GKGameSessionErrorDomain", 9)
+
+// ErrSendDataNotConnected matches the GameKit error GKGameSessionErrorSendDataNotConnected.
+var ErrSendDataNotConnected = errkit.New("GKGameSessionErrorDomain", 8)
 
 // ErrSendDataNotReachable matches the GameKit error GKGameSessionErrorSendDataNotReachable.
 var ErrSendDataNotReachable = errkit.New("GKGameSessionErrorDomain", 10)
@@ -161,17 +137,41 @@ var ErrSendDataNotReachable = errkit.New("GKGameSessionErrorDomain", 10)
 // ErrSendRateLimitReached matches the GameKit error GKGameSessionErrorSendRateLimitReached.
 var ErrSendRateLimitReached = errkit.New("GKGameSessionErrorDomain", 11)
 
-// ErrBadContainer matches the GameKit error GKGameSessionErrorBadContainer.
-var ErrBadContainer = errkit.New("GKGameSessionErrorDomain", 12)
+// ErrSessionConflict matches the GameKit error GKGameSessionErrorSessionConflict.
+var ErrSessionConflict = errkit.New("GKGameSessionErrorDomain", 3)
 
-// ErrCloudQuotaExceeded matches the GameKit error GKGameSessionErrorCloudQuotaExceeded.
-var ErrCloudQuotaExceeded = errkit.New("GKGameSessionErrorDomain", 13)
+// ErrSessionHasMaxConnectedPlayers matches the GameKit error GKGameSessionErrorSessionHasMaxConnectedPlayers.
+var ErrSessionHasMaxConnectedPlayers = errkit.New("GKGameSessionErrorDomain", 7)
 
-// ErrNetworkFailure matches the GameKit error GKGameSessionErrorNetworkFailure.
-var ErrNetworkFailure = errkit.New("GKGameSessionErrorDomain", 14)
+// ErrSessionNotShared matches the GameKit error GKGameSessionErrorSessionNotShared.
+var ErrSessionNotShared = errkit.New("GKGameSessionErrorDomain", 4)
 
-// ErrCloudDriveDisabled matches the GameKit error GKGameSessionErrorCloudDriveDisabled.
-var ErrCloudDriveDisabled = errkit.New("GKGameSessionErrorDomain", 15)
+// ErrTurnBasedInvalidParticipant matches the GameKit error GKErrorTurnBasedInvalidParticipant.
+var ErrTurnBasedInvalidParticipant = errkit.New("GKErrorDomain", 22)
 
-// ErrInvalidSession matches the GameKit error GKGameSessionErrorInvalidSession.
-var ErrInvalidSession = errkit.New("GKGameSessionErrorDomain", 16)
+// ErrTurnBasedInvalidState matches the GameKit error GKErrorTurnBasedInvalidState.
+var ErrTurnBasedInvalidState = errkit.New("GKErrorDomain", 24)
+
+// ErrTurnBasedInvalidTurn matches the GameKit error GKErrorTurnBasedInvalidTurn.
+var ErrTurnBasedInvalidTurn = errkit.New("GKErrorDomain", 23)
+
+// ErrTurnBasedMatchDataTooLarge matches the GameKit error GKErrorTurnBasedMatchDataTooLarge.
+var ErrTurnBasedMatchDataTooLarge = errkit.New("GKErrorDomain", 20)
+
+// ErrTurnBasedTooManySessions matches the GameKit error GKErrorTurnBasedTooManySessions.
+var ErrTurnBasedTooManySessions = errkit.New("GKErrorDomain", 21)
+
+// ErrUbiquityContainerUnavailable matches the GameKit error GKErrorUbiquityContainerUnavailable.
+var ErrUbiquityContainerUnavailable = errkit.New("GKErrorDomain", 27)
+
+// ErrUnderage matches the GameKit error GKErrorUnderage.
+var ErrUnderage = errkit.New("GKErrorDomain", 14)
+
+// ErrUnexpectedConnection matches the GameKit error GKErrorUnexpectedConnection.
+var ErrUnexpectedConnection = errkit.New("GKErrorDomain", 18)
+
+// ErrUnknown matches the GameKit error GKErrorUnknown.
+var ErrUnknown = errkit.New("GKErrorDomain", 1)
+
+// ErrUserDenied matches the GameKit error GKErrorUserDenied.
+var ErrUserDenied = errkit.New("GKErrorDomain", 4)

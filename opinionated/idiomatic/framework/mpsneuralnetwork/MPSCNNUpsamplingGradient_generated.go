@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -131,12 +133,14 @@ func (cug *CNNUpsamplingGradient) WithSecondaryStrideInPixelsY(secondaryStrideIn
 
 // ScaleFactorX returns the downsampling scale factor for the x dimension. The default value is 1.
 func (cug *CNNUpsamplingGradient) ScaleFactorX() float64 {
+	defer runtime.KeepAlive(cug)
 	_r := objc.Send[float64](objref.IDOf(cug), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY returns the downsampling scale factor for the y dimension. The default value is 1.
 func (cug *CNNUpsamplingGradient) ScaleFactorY() float64 {
+	defer runtime.KeepAlive(cug)
 	_r := objc.Send[float64](objref.IDOf(cug), objc.RegisterName("scaleFactorY"))
 	return _r
 }

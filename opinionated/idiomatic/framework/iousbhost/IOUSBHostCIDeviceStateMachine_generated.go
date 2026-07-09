@@ -5,6 +5,8 @@
 package iousbhost
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func hostCIDeviceStateMachineAdopt(id objc.ID) *HostCIDeviceStateMachine {
 
 // Description returns the object's -description text.
 func (hcdsm *HostCIDeviceStateMachine) Description() string {
+	defer runtime.KeepAlive(hcdsm)
 	return rt.Description(objref.IDOf(hcdsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hcdsm *HostCIDeviceStateMachine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hcdsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hcdsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hcdsm *HostCIDeviceStateMachine) IsKind(className string) bool {
+	defer runtime.KeepAlive(hcdsm)
 	return rt.IsKind(objref.IDOf(hcdsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hcdsm *HostCIDeviceStateMachine) String() string {
+	defer runtime.KeepAlive(hcdsm)
 	return rt.Description(objref.IDOf(hcdsm))
 }
 
@@ -74,24 +81,28 @@ func NewHostCIDeviceStateMachine() *HostCIDeviceStateMachine {
 
 // DeviceState returns the device state.
 func (hcdsm *HostCIDeviceStateMachine) DeviceState() HostCIDeviceState {
+	defer runtime.KeepAlive(hcdsm)
 	_r := objc.Send[HostCIDeviceState](objref.IDOf(hcdsm), objc.RegisterName("deviceState"))
 	return _r
 }
 
 // CompleteRoute returns the complete route.
 func (hcdsm *HostCIDeviceStateMachine) CompleteRoute() int {
+	defer runtime.KeepAlive(hcdsm)
 	_r := objc.Send[int](objref.IDOf(hcdsm), objc.RegisterName("completeRoute"))
 	return _r
 }
 
 // DeviceAddress returns the device address.
 func (hcdsm *HostCIDeviceStateMachine) DeviceAddress() int {
+	defer runtime.KeepAlive(hcdsm)
 	_r := objc.Send[int](objref.IDOf(hcdsm), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
 // ControllerInterface returns the controller interface.
 func (hcdsm *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
+	defer runtime.KeepAlive(hcdsm)
 	_r := objc.Send[objc.ID](objref.IDOf(hcdsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)
 }

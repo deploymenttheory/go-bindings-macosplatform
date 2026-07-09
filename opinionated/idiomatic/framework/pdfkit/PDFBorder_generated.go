@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func borderAdopt(id objc.ID) *Border {
 
 // Description returns the object's -description text.
 func (b *Border) Description() string {
+	defer runtime.KeepAlive(b)
 	return rt.Description(objref.IDOf(b))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (b *Border) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(b), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (b *Border) IsKind(className string) bool {
+	defer runtime.KeepAlive(b)
 	return rt.IsKind(objref.IDOf(b), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (b *Border) String() string {
+	defer runtime.KeepAlive(b)
 	return rt.Description(objref.IDOf(b))
 }
 
@@ -87,34 +94,41 @@ func (b *Border) WithLineWidth(lineWidth float64) *Border {
 
 // DrawInRect draws the border.
 func (b *Border) DrawInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(b)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("drawInRect:"), rect)
 }
 
 // Style returns the style.
 func (b *Border) Style() BorderStyle {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[BorderStyle](objref.IDOf(b), objc.RegisterName("style"))
 	return _r
 }
 
 // LineWidth returns the line width.
 func (b *Border) LineWidth() float64 {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("lineWidth"))
 	return _r
 }
 
 // DashPattern returns the dash pattern.
 func (b *Border) DashPattern() obj.Object {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("dashPattern"))
 	return obj.Wrap(_r)
 }
 
 // SetDashPattern wraps the corresponding Objective-C method.
 func (b *Border) SetDashPattern(dashPattern obj.Object) {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(dashPattern)
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDashPattern:"), objref.IDOf(dashPattern))
 }
 
 // BorderKeyValues returns the border key values.
 func (b *Border) BorderKeyValues() obj.Object {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("borderKeyValues"))
 	return obj.Wrap(_r)
 }

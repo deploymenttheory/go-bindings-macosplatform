@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewRecognizedTextObservation() *RecognizedTextObservation {
 
 // TopCandidates requests the n top candidates for a recognized text string.
 func (rto *RecognizedTextObservation) TopCandidates(maxCandidateCount int) []*RecognizedText {
+	defer runtime.KeepAlive(rto)
 	_r := objc.Send[objc.ID](objref.IDOf(rto), objc.RegisterName("topCandidates:"), maxCandidateCount)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RecognizedText { return RecognizedTextFromID(_id) })
 }

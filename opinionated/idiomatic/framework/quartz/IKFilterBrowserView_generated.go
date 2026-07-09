@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKFilterBrowserViewAdopt(id objc.ID) *IKFilterBrowserView {
 
 // Description returns the object's -description text.
 func (ifbv *IKFilterBrowserView) Description() string {
+	defer runtime.KeepAlive(ifbv)
 	return rt.Description(objref.IDOf(ifbv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ifbv *IKFilterBrowserView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ifbv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ifbv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ifbv *IKFilterBrowserView) IsKind(className string) bool {
+	defer runtime.KeepAlive(ifbv)
 	return rt.IsKind(objref.IDOf(ifbv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ifbv *IKFilterBrowserView) String() string {
+	defer runtime.KeepAlive(ifbv)
 	return rt.Description(objref.IDOf(ifbv))
 }
 
@@ -80,6 +87,7 @@ func NewIKFilterBrowserView() *IKFilterBrowserView {
 
 // SetPreviewState sets the preview state.
 func (ifbv *IKFilterBrowserView) SetPreviewState(inState bool) {
+	defer runtime.KeepAlive(ifbv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ifbv), objc.RegisterName("setPreviewState:"), inState)
 	})
@@ -88,6 +96,7 @@ func (ifbv *IKFilterBrowserView) SetPreviewState(inState bool) {
 
 // FilterName returns the name of the filter that is currently selected in the filter browser.
 func (ifbv *IKFilterBrowserView) FilterName() string {
+	defer runtime.KeepAlive(ifbv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

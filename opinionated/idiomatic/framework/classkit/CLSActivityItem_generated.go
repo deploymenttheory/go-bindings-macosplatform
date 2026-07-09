@@ -5,6 +5,8 @@
 package classkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func (ai *ActivityItem) WithTitle(title string) *ActivityItem {
 
 // Title returns title of what this ActivityItem represents. This will be the title associated with the activity item in the generated progress report.
 func (ai *ActivityItem) Title() string {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (ai *ActivityItem) Title() string {
 
 // Identifier returns an identifier that is unique within its owning activity The identifier can be used to look up existing activityItems in a given activity.
 func (ai *ActivityItem) Identifier() string {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

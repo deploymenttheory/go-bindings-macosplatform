@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -188,17 +190,23 @@ func (mps *MutableParagraphStyle) WithHeaderLevel(headerLevel int) *MutableParag
 
 // AddTabStop adds the specified tab stop to the paragraph.
 func (mps *MutableParagraphStyle) AddTabStop(anObject *TextTab) {
+	defer runtime.KeepAlive(mps)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("addTabStop:"), objref.IDOf(anObject))
 }
 
 // RemoveTabStop removes the first text tab with a location and type equal to the specified tab stop.
 func (mps *MutableParagraphStyle) RemoveTabStop(anObject *TextTab) {
+	defer runtime.KeepAlive(mps)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("removeTabStop:"), objref.IDOf(anObject))
 }
 
 // SetParagraphStyle replaces the subattributes of the paragraph with those in the specified paragraph style object.
-func (mps *MutableParagraphStyle) SetParagraphStyle(obj_ *ParagraphStyle) {
-	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setParagraphStyle:"), objref.IDOf(obj_))
+func (mps *MutableParagraphStyle) SetParagraphStyle(object *ParagraphStyle) {
+	defer runtime.KeepAlive(mps)
+	defer runtime.KeepAlive(object)
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setParagraphStyle:"), objref.IDOf(object))
 }
 
 var _ ParagraphStyleProvider = (*MutableParagraphStyle)(nil)

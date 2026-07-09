@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPasswordProviderAdopt(id objc.ID) *AuthorizationPasswordProvid
 
 // Description returns the object's -description text.
 func (app *AuthorizationPasswordProvider) Description() string {
+	defer runtime.KeepAlive(app)
 	return rt.Description(objref.IDOf(app))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (app *AuthorizationPasswordProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(app)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(app), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (app *AuthorizationPasswordProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(app)
 	return rt.IsKind(objref.IDOf(app), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (app *AuthorizationPasswordProvider) String() string {
+	defer runtime.KeepAlive(app)
 	return rt.Description(objref.IDOf(app))
 }
 
@@ -74,6 +81,7 @@ func NewAuthorizationPasswordProvider() *AuthorizationPasswordProvider {
 
 // CreateRequest creates a new password authorization request.
 func (app *AuthorizationPasswordProvider) CreateRequest() *AuthorizationPasswordRequest {
+	defer runtime.KeepAlive(app)
 	_r := objc.Send[objc.ID](objref.IDOf(app), objc.RegisterName("createRequest"))
 	return AuthorizationPasswordRequestFromID(_r)
 }

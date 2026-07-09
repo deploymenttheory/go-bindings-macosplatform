@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func webViewAdopt(id objc.ID) *WebView {
 
 // Description returns the object's -description text.
 func (wv *WebView) Description() string {
+	defer runtime.KeepAlive(wv)
 	return rt.Description(objref.IDOf(wv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wv *WebView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wv *WebView) IsKind(className string) bool {
+	defer runtime.KeepAlive(wv)
 	return rt.IsKind(objref.IDOf(wv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wv *WebView) String() string {
+	defer runtime.KeepAlive(wv)
 	return rt.Description(objref.IDOf(wv))
 }
 
@@ -128,6 +135,7 @@ func (wv *WebView) WithMediaStyle(mediaStyle string) *WebView {
 
 // WithPreferences sets the preferences used by this WebView. This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
 func (wv *WebView) WithPreferences(preferences *WebPreferences) *WebView {
+	defer runtime.KeepAlive(preferences)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setPreferences:"), objref.IDOf(preferences))
 	})
@@ -144,6 +152,7 @@ func (wv *WebView) WithPreferencesIdentifier(preferencesIdentifier string) *WebV
 
 // WithHostWindow sets the host window for the web view. Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
 func (wv *WebView) WithHostWindow(hostWindow obj.Object) *WebView {
+	defer runtime.KeepAlive(hostWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setHostWindow:"), objref.IDOf(hostWindow))
 	})
@@ -192,6 +201,7 @@ func (wv *WebView) WithEditable(editable bool) *WebView {
 
 // WithTypingStyle sets the typing style.
 func (wv *WebView) WithTypingStyle(typingStyle *DOMCSSStyleDeclaration) *WebView {
+	defer runtime.KeepAlive(typingStyle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setTypingStyle:"), objref.IDOf(typingStyle))
 	})
@@ -216,6 +226,7 @@ func (wv *WebView) WithContinuousSpellCheckingEnabled(continuousSpellCheckingEna
 
 // Close closes the receiver, unloading its web page and canceling any pending loads. Once the receiver has closed, it will no longer respond to requests or fire delegate methods. (However, the -close method itself may fire delegate methods.) A garbage collected application is required to call close when the receiver is no longer needed. The close method will be called automatically when the window or hostWindow closes and shouldCloseWithWindow returns YES. A non-garbage collected application can still call close, providing a convenient way to prevent receiver from doing any more loading and firing any future delegate methods.
 func (wv *WebView) Close() {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("close"))
 	})
@@ -224,6 +235,7 @@ func (wv *WebView) Close() {
 
 // SetMaintainsBackForwardList enable or disable the use of a backforward list for this webView.
 func (wv *WebView) SetMaintainsBackForwardList(flag bool) {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("setMaintainsBackForwardList:"), flag)
 	})
@@ -232,6 +244,7 @@ func (wv *WebView) SetMaintainsBackForwardList(flag bool) {
 
 // GoBack reports whether go back to the previous URL in the backforward list.
 func (wv *WebView) GoBack() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -245,6 +258,7 @@ func (wv *WebView) GoBack() bool {
 
 // GoForward reports whether go forward to the next URL in the backforward list.
 func (wv *WebView) GoForward() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -258,6 +272,8 @@ func (wv *WebView) GoForward() bool {
 
 // GoToBackForwardItem go back or forward to an item in the backforward list.
 func (wv *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -270,11 +286,12 @@ func (wv *WebView) GoToBackForwardItem(item *WebHistoryItem) bool {
 }
 
 // UserAgentForURL get the appropriate user-agent string for a particular URL.
-func (wv *WebView) UserAgentForURL(uRL string) string {
+func (wv *WebView) UserAgentForURL(url string) string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
-			_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("userAgentForURL:"), rt.FileURL(uRL))
+			_r := objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("userAgentForURL:"), rt.FileURL(url))
 			if _r == 0 {
 				return ""
 			}
@@ -287,6 +304,7 @@ func (wv *WebView) UserAgentForURL(uRL string) string {
 
 // StringByEvaluatingJavaScriptFromString wraps the corresponding Objective-C method.
 func (wv *WebView) StringByEvaluatingJavaScriptFromString(script string) string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -302,11 +320,12 @@ func (wv *WebView) StringByEvaluatingJavaScriptFromString(script string) string 
 }
 
 // SearchForDirectionCaseSensitiveWrap searches a document view for a string and highlights the string if it is found. Starts the search from the current selection.  Will search across all frames.
-func (wv *WebView) SearchForDirectionCaseSensitiveWrap(string_ string, forward bool, caseFlag bool, wrapFlag bool) bool {
+func (wv *WebView) SearchForDirectionCaseSensitiveWrap(str string, forward bool, caseFlag bool, wrapFlag bool) bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
-			_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("searchFor:direction:caseSensitive:wrap:"), purego.NSString(string_), forward, caseFlag, wrapFlag)
+			_r := objc.Send[bool](objref.IDOf(wv), objc.RegisterName("searchFor:direction:caseSensitive:wrap:"), purego.NSString(str), forward, caseFlag, wrapFlag)
 			return _r
 		}()
 	})
@@ -316,6 +335,7 @@ func (wv *WebView) SearchForDirectionCaseSensitiveWrap(string_ string, forward b
 
 // ElementAtPoint wraps the corresponding Objective-C method.
 func (wv *WebView) ElementAtPoint(point corefoundation.CGPoint) obj.Object {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -329,6 +349,9 @@ func (wv *WebView) ElementAtPoint(point corefoundation.CGPoint) obj.Object {
 
 // WriteSelectionWithPasteboardTypesToPasteboard writes the current selection to the pasteboard
 func (wv *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types obj.Object, pasteboard obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(types)
+	defer runtime.KeepAlive(pasteboard)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("writeSelectionWithPasteboardTypes:toPasteboard:"), objref.IDOf(types), objref.IDOf(pasteboard))
 	})
@@ -337,6 +360,8 @@ func (wv *WebView) WriteSelectionWithPasteboardTypesToPasteboard(types obj.Objec
 
 // PasteboardTypesForElement returns the pasteboard types that WebView can use for an element
 func (wv *WebView) PasteboardTypesForElement(element obj.Object) obj.Object {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(element)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -350,6 +375,10 @@ func (wv *WebView) PasteboardTypesForElement(element obj.Object) obj.Object {
 
 // WriteElementWithPasteboardTypesToPasteboard writes an element to the pasteboard
 func (wv *WebView) WriteElementWithPasteboardTypesToPasteboard(element obj.Object, types obj.Object, pasteboard obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(types)
+	defer runtime.KeepAlive(pasteboard)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("writeElement:withPasteboardTypes:toPasteboard:"), objref.IDOf(element), objref.IDOf(types), objref.IDOf(pasteboard))
 	})
@@ -358,6 +387,7 @@ func (wv *WebView) WriteElementWithPasteboardTypesToPasteboard(element obj.Objec
 
 // MoveDragCaretToPoint this method moves the caret that shows where something being dragged will be dropped. It may cause the WebView to scroll to make the new position of the drag caret visible.
 func (wv *WebView) MoveDragCaretToPoint(point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveDragCaretToPoint:"), point)
 	})
@@ -366,6 +396,7 @@ func (wv *WebView) MoveDragCaretToPoint(point corefoundation.CGPoint) {
 
 // RemoveDragCaret removes the drag caret from the WebView
 func (wv *WebView) RemoveDragCaret() {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("removeDragCaret"))
 	})
@@ -374,6 +405,7 @@ func (wv *WebView) RemoveDragCaret() {
 
 // ShouldCloseWithWindow reports whether the receiver closes when either it's window or hostWindow closes. Defaults to true in garbage collected applications, otherwise false to maintain backwards compatibility.
 func (wv *WebView) ShouldCloseWithWindow() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -387,6 +419,7 @@ func (wv *WebView) ShouldCloseWithWindow() bool {
 
 // MainFrame returns the top level frame. Note that even documents that are not framesets will have a mainFrame.
 func (wv *WebView) MainFrame() *WebFrame {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *WebFrame
 	purego.Main(func() {
 		_mainthread0 = func() *WebFrame {
@@ -400,6 +433,7 @@ func (wv *WebView) MainFrame() *WebFrame {
 
 // SelectedFrame returns the frame that has the active selection. Returns the frame that contains the first responder, if any. Otherwise returns the frame that contains a non-zero-length selection, if any. Returns nil if no frame meets these criteria.
 func (wv *WebView) SelectedFrame() *WebFrame {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *WebFrame
 	purego.Main(func() {
 		_mainthread0 = func() *WebFrame {
@@ -413,6 +447,7 @@ func (wv *WebView) SelectedFrame() *WebFrame {
 
 // BackForwardList returns the backforward list for this WebView.
 func (wv *WebView) BackForwardList() *WebBackForwardList {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *WebBackForwardList
 	purego.Main(func() {
 		_mainthread0 = func() *WebBackForwardList {
@@ -426,6 +461,7 @@ func (wv *WebView) BackForwardList() *WebBackForwardList {
 
 // TextSizeMultiplier returns the text size multipler.
 func (wv *WebView) TextSizeMultiplier() float32 {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -439,6 +475,7 @@ func (wv *WebView) TextSizeMultiplier() float32 {
 
 // ApplicationNameForUserAgent returns the name of the application as used in the user-agent string.
 func (wv *WebView) ApplicationNameForUserAgent() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -455,6 +492,7 @@ func (wv *WebView) ApplicationNameForUserAgent() string {
 
 // CustomUserAgent returns the custom user-agent string or nil if no custom user-agent string has been set. Setting this means that the webView should use this user-agent string instead of constructing a user-agent string for each URL. Setting it to nil causes the webView to construct the user-agent string for each URL for best results rendering web pages
 func (wv *WebView) CustomUserAgent() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -471,6 +509,7 @@ func (wv *WebView) CustomUserAgent() string {
 
 // SupportsTextEncoding reports whether if the document view of the current web page can support different text encodings.
 func (wv *WebView) SupportsTextEncoding() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -484,6 +523,7 @@ func (wv *WebView) SupportsTextEncoding() bool {
 
 // CustomTextEncodingName returns the custom text encoding name or nil if no custom text encoding name has been set. Make the page display with a different text encoding; stops any load in progress. The text encoding passed in overrides the normal text encoding smarts including what's specified in a web page's header or HTTP response. The text encoding automatically goes back to the default when the top level frame changes to a new location. Setting the text encoding name to nil makes the webView use default encoding rules.
 func (wv *WebView) CustomTextEncodingName() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -500,6 +540,7 @@ func (wv *WebView) CustomTextEncodingName() string {
 
 // MediaStyle returns the media style for the WebView. The mediaStyle will override the normal value of the CSS media property. Setting the value to nil will restore the normal value. The value will be nil unless explicitly set.
 func (wv *WebView) MediaStyle() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -516,6 +557,7 @@ func (wv *WebView) MediaStyle() string {
 
 // WindowScriptObject returns a WebScriptObject that represents the window object from the script environment.
 func (wv *WebView) WindowScriptObject() *WebScriptObject {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *WebScriptObject
 	purego.Main(func() {
 		_mainthread0 = func() *WebScriptObject {
@@ -529,6 +571,7 @@ func (wv *WebView) WindowScriptObject() *WebScriptObject {
 
 // Preferences returns the preferences used by this WebView. This method will return [WebPreferences standardPreferences] if no other instance of WebPreferences has been set.
 func (wv *WebView) Preferences() *WebPreferences {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *WebPreferences
 	purego.Main(func() {
 		_mainthread0 = func() *WebPreferences {
@@ -542,6 +585,7 @@ func (wv *WebView) Preferences() *WebPreferences {
 
 // PreferencesIdentifier returns the WebPreferences key prefix. If the WebPreferences for this WebView are stored in the user defaults database, this string will be used as a key prefix.
 func (wv *WebView) PreferencesIdentifier() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -558,6 +602,7 @@ func (wv *WebView) PreferencesIdentifier() string {
 
 // HostWindow returns the host window for the web view. Parts of WebKit (such as plug-ins and JavaScript) depend on a window to function properly. Set a host window so these parts continue to function even when the web view is not in an actual window.
 func (wv *WebView) HostWindow() obj.Object {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -571,6 +616,7 @@ func (wv *WebView) HostWindow() obj.Object {
 
 // GroupName returns the group name for this WebView. JavaScript may access named frames within the same group.
 func (wv *WebView) GroupName() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -587,6 +633,7 @@ func (wv *WebView) GroupName() string {
 
 // EstimatedProgress returns an estimate of the percent complete for a document load.  This value will range from 0 to 1.0 and, once a load completes, will remain at 1.0 until a new load starts, at which point it will be reset to 0.  The value is an estimate based on the total number of bytes expected to be received for a document, including all it's possible subresources.  For more accurate progress indication it is recommended that you implement a WebFrameLoadDelegate and a WebResourceLoadDelegate.
 func (wv *WebView) EstimatedProgress() float64 {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -600,6 +647,7 @@ func (wv *WebView) EstimatedProgress() float64 {
 
 // IsLoading reports whether there are any pending loads in this WebView.
 func (wv *WebView) IsLoading() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -613,6 +661,7 @@ func (wv *WebView) IsLoading() bool {
 
 // PasteboardTypesForSelection returns the pasteboard types that the WebView can use for the current selection
 func (wv *WebView) PasteboardTypesForSelection() obj.Object {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -626,6 +675,7 @@ func (wv *WebView) PasteboardTypesForSelection() obj.Object {
 
 // DrawsBackground reports whether the receiver draws a default white background when the loaded page has no background specified.
 func (wv *WebView) DrawsBackground() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -639,6 +689,7 @@ func (wv *WebView) DrawsBackground() bool {
 
 // ShouldUpdateWhileOffscreen reports whether the WebView is always updated even when it is not in a window that is currently visible. If set to false, then whenever the web view is not in a visible window, updates to the web page will not necessarily be rendered in the view. However, when the window is made visible, the view will be updated automatically. Not updating while hidden can improve performance. If set to is true, hidden web views are always updated. This is the default.
 func (wv *WebView) ShouldUpdateWhileOffscreen() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -652,6 +703,7 @@ func (wv *WebView) ShouldUpdateWhileOffscreen() bool {
 
 // MainFrameURL returns the main frame's current URL.
 func (wv *WebView) MainFrameURL() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -668,6 +720,7 @@ func (wv *WebView) MainFrameURL() string {
 
 // MainFrameDocument returns the main frame's DOMDocument.
 func (wv *WebView) MainFrameDocument() *DOMDocument {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *DOMDocument
 	purego.Main(func() {
 		_mainthread0 = func() *DOMDocument {
@@ -681,6 +734,7 @@ func (wv *WebView) MainFrameDocument() *DOMDocument {
 
 // MainFrameTitle returns the main frame's title if any, otherwise an empty string.
 func (wv *WebView) MainFrameTitle() string {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -697,6 +751,7 @@ func (wv *WebView) MainFrameTitle() string {
 
 // MainFrameIcon returns the site icon for the current page loaded in the mainFrame, or nil.
 func (wv *WebView) MainFrameIcon() obj.Object {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -710,6 +765,8 @@ func (wv *WebView) MainFrameIcon() obj.Object {
 
 // TakeStringURLFrom wraps the corresponding Objective-C method.
 func (wv *WebView) TakeStringURLFrom(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("takeStringURLFrom:"), objref.IDOf(sender))
 	})
@@ -718,6 +775,8 @@ func (wv *WebView) TakeStringURLFrom(sender obj.Object) {
 
 // StopLoading stops loading.
 func (wv *WebView) StopLoading(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
 	})
@@ -726,6 +785,8 @@ func (wv *WebView) StopLoading(sender obj.Object) {
 
 // Reload wraps the corresponding Objective-C method.
 func (wv *WebView) Reload(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("reload:"), objref.IDOf(sender))
 	})
@@ -734,6 +795,8 @@ func (wv *WebView) Reload(sender obj.Object) {
 
 // ReloadFromOrigin reloads from origin.
 func (wv *WebView) ReloadFromOrigin(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("reloadFromOrigin:"), objref.IDOf(sender))
 	})
@@ -742,6 +805,8 @@ func (wv *WebView) ReloadFromOrigin(sender obj.Object) {
 
 // GoBack2 wraps the corresponding Objective-C method.
 func (wv *WebView) GoBack2(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("goBack:"), objref.IDOf(sender))
 	})
@@ -750,6 +815,8 @@ func (wv *WebView) GoBack2(sender obj.Object) {
 
 // GoForward2 wraps the corresponding Objective-C method.
 func (wv *WebView) GoForward2(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("goForward:"), objref.IDOf(sender))
 	})
@@ -758,6 +825,8 @@ func (wv *WebView) GoForward2(sender obj.Object) {
 
 // MakeTextLarger makes text larger.
 func (wv *WebView) MakeTextLarger(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextLarger:"), objref.IDOf(sender))
 	})
@@ -766,6 +835,8 @@ func (wv *WebView) MakeTextLarger(sender obj.Object) {
 
 // MakeTextSmaller makes text smaller.
 func (wv *WebView) MakeTextSmaller(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextSmaller:"), objref.IDOf(sender))
 	})
@@ -774,6 +845,8 @@ func (wv *WebView) MakeTextSmaller(sender obj.Object) {
 
 // MakeTextStandardSize makes text standard size.
 func (wv *WebView) MakeTextStandardSize(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("makeTextStandardSize:"), objref.IDOf(sender))
 	})
@@ -782,6 +855,8 @@ func (wv *WebView) MakeTextStandardSize(sender obj.Object) {
 
 // ToggleContinuousSpellChecking toggles continuous spell checking.
 func (wv *WebView) ToggleContinuousSpellChecking(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("toggleContinuousSpellChecking:"), objref.IDOf(sender))
 	})
@@ -790,6 +865,8 @@ func (wv *WebView) ToggleContinuousSpellChecking(sender obj.Object) {
 
 // ToggleSmartInsertDelete toggles smart insert delete.
 func (wv *WebView) ToggleSmartInsertDelete(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("toggleSmartInsertDelete:"), objref.IDOf(sender))
 	})
@@ -798,6 +875,7 @@ func (wv *WebView) ToggleSmartInsertDelete(sender obj.Object) {
 
 // CanGoBack wraps the corresponding Objective-C method.
 func (wv *WebView) CanGoBack() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -811,6 +889,7 @@ func (wv *WebView) CanGoBack() bool {
 
 // CanGoForward wraps the corresponding Objective-C method.
 func (wv *WebView) CanGoForward() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -824,6 +903,7 @@ func (wv *WebView) CanGoForward() bool {
 
 // CanMakeTextLarger wraps the corresponding Objective-C method.
 func (wv *WebView) CanMakeTextLarger() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -837,6 +917,7 @@ func (wv *WebView) CanMakeTextLarger() bool {
 
 // CanMakeTextSmaller wraps the corresponding Objective-C method.
 func (wv *WebView) CanMakeTextSmaller() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -850,6 +931,7 @@ func (wv *WebView) CanMakeTextSmaller() bool {
 
 // CanMakeTextStandardSize wraps the corresponding Objective-C method.
 func (wv *WebView) CanMakeTextStandardSize() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -863,6 +945,8 @@ func (wv *WebView) CanMakeTextStandardSize() bool {
 
 // ComputedStyleForElementPseudoElement wraps the corresponding Objective-C method.
 func (wv *WebView) ComputedStyleForElementPseudoElement(element *DOMElement, pseudoElement string) *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(element)
 	var _mainthread0 *DOMCSSStyleDeclaration
 	purego.Main(func() {
 		_mainthread0 = func() *DOMCSSStyleDeclaration {
@@ -876,6 +960,7 @@ func (wv *WebView) ComputedStyleForElementPseudoElement(element *DOMElement, pse
 
 // EditableDOMRangeForPoint wraps the corresponding Objective-C method.
 func (wv *WebView) EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRange {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *DOMRange
 	purego.Main(func() {
 		_mainthread0 = func() *DOMRange {
@@ -889,6 +974,7 @@ func (wv *WebView) EditableDOMRangeForPoint(point corefoundation.CGPoint) *DOMRa
 
 // StyleDeclarationWithText wraps the corresponding Objective-C method.
 func (wv *WebView) StyleDeclarationWithText(text string) *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *DOMCSSStyleDeclaration
 	purego.Main(func() {
 		_mainthread0 = func() *DOMCSSStyleDeclaration {
@@ -902,6 +988,7 @@ func (wv *WebView) StyleDeclarationWithText(text string) *DOMCSSStyleDeclaration
 
 // SelectedDOMRange returns the selected dom range.
 func (wv *WebView) SelectedDOMRange() *DOMRange {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *DOMRange
 	purego.Main(func() {
 		_mainthread0 = func() *DOMRange {
@@ -915,6 +1002,7 @@ func (wv *WebView) SelectedDOMRange() *DOMRange {
 
 // MaintainsInactiveSelection wraps the corresponding Objective-C method.
 func (wv *WebView) MaintainsInactiveSelection() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -928,6 +1016,7 @@ func (wv *WebView) MaintainsInactiveSelection() bool {
 
 // IsEditable reports whether the object is editable.
 func (wv *WebView) IsEditable() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -941,6 +1030,7 @@ func (wv *WebView) IsEditable() bool {
 
 // TypingStyle returns the typing style.
 func (wv *WebView) TypingStyle() *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 *DOMCSSStyleDeclaration
 	purego.Main(func() {
 		_mainthread0 = func() *DOMCSSStyleDeclaration {
@@ -954,6 +1044,7 @@ func (wv *WebView) TypingStyle() *DOMCSSStyleDeclaration {
 
 // SmartInsertDeleteEnabled wraps the corresponding Objective-C method.
 func (wv *WebView) SmartInsertDeleteEnabled() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -967,6 +1058,7 @@ func (wv *WebView) SmartInsertDeleteEnabled() bool {
 
 // IsContinuousSpellCheckingEnabled reports whether the object is continuous spell checking enabled.
 func (wv *WebView) IsContinuousSpellCheckingEnabled() bool {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -980,6 +1072,7 @@ func (wv *WebView) IsContinuousSpellCheckingEnabled() bool {
 
 // SpellCheckerDocumentTag returns the spell checker document tag.
 func (wv *WebView) SpellCheckerDocumentTag() int {
+	defer runtime.KeepAlive(wv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -993,6 +1086,8 @@ func (wv *WebView) SpellCheckerDocumentTag() int {
 
 // ReplaceSelectionWithNode replaces selection with node.
 func (wv *WebView) ReplaceSelectionWithNode(node *DOMNode) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(node)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithNode:"), objref.IDOf(node))
 	})
@@ -1001,6 +1096,7 @@ func (wv *WebView) ReplaceSelectionWithNode(node *DOMNode) {
 
 // ReplaceSelectionWithText replaces selection with text.
 func (wv *WebView) ReplaceSelectionWithText(text string) {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithText:"), purego.NSString(text))
 	})
@@ -1009,6 +1105,7 @@ func (wv *WebView) ReplaceSelectionWithText(text string) {
 
 // ReplaceSelectionWithMarkupString replaces selection with markup string.
 func (wv *WebView) ReplaceSelectionWithMarkupString(markupString string) {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithMarkupString:"), purego.NSString(markupString))
 	})
@@ -1017,6 +1114,8 @@ func (wv *WebView) ReplaceSelectionWithMarkupString(markupString string) {
 
 // ReplaceSelectionWithArchive replaces selection with archive.
 func (wv *WebView) ReplaceSelectionWithArchive(archive *WebArchive) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(archive)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("replaceSelectionWithArchive:"), objref.IDOf(archive))
 	})
@@ -1025,6 +1124,7 @@ func (wv *WebView) ReplaceSelectionWithArchive(archive *WebArchive) {
 
 // DeleteSelection deletes selection.
 func (wv *WebView) DeleteSelection() {
+	defer runtime.KeepAlive(wv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("deleteSelection"))
 	})
@@ -1033,6 +1133,8 @@ func (wv *WebView) DeleteSelection() {
 
 // ApplyStyle applies style.
 func (wv *WebView) ApplyStyle(style *DOMCSSStyleDeclaration) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(style)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("applyStyle:"), objref.IDOf(style))
 	})
@@ -1041,6 +1143,8 @@ func (wv *WebView) ApplyStyle(style *DOMCSSStyleDeclaration) {
 
 // Copy wraps the corresponding Objective-C method.
 func (wv *WebView) Copy(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("copy:"), objref.IDOf(sender))
 	})
@@ -1049,6 +1153,8 @@ func (wv *WebView) Copy(sender obj.Object) {
 
 // Cut wraps the corresponding Objective-C method.
 func (wv *WebView) Cut(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("cut:"), objref.IDOf(sender))
 	})
@@ -1057,6 +1163,8 @@ func (wv *WebView) Cut(sender obj.Object) {
 
 // Paste wraps the corresponding Objective-C method.
 func (wv *WebView) Paste(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("paste:"), objref.IDOf(sender))
 	})
@@ -1065,6 +1173,8 @@ func (wv *WebView) Paste(sender obj.Object) {
 
 // CopyFont copies font.
 func (wv *WebView) CopyFont(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("copyFont:"), objref.IDOf(sender))
 	})
@@ -1073,6 +1183,8 @@ func (wv *WebView) CopyFont(sender obj.Object) {
 
 // PasteFont wraps the corresponding Objective-C method.
 func (wv *WebView) PasteFont(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteFont:"), objref.IDOf(sender))
 	})
@@ -1081,6 +1193,8 @@ func (wv *WebView) PasteFont(sender obj.Object) {
 
 // Delete wraps the corresponding Objective-C method.
 func (wv *WebView) Delete(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("delete:"), objref.IDOf(sender))
 	})
@@ -1089,6 +1203,8 @@ func (wv *WebView) Delete(sender obj.Object) {
 
 // PasteAsPlainText wraps the corresponding Objective-C method.
 func (wv *WebView) PasteAsPlainText(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteAsPlainText:"), objref.IDOf(sender))
 	})
@@ -1097,6 +1213,8 @@ func (wv *WebView) PasteAsPlainText(sender obj.Object) {
 
 // PasteAsRichText wraps the corresponding Objective-C method.
 func (wv *WebView) PasteAsRichText(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("pasteAsRichText:"), objref.IDOf(sender))
 	})
@@ -1105,6 +1223,8 @@ func (wv *WebView) PasteAsRichText(sender obj.Object) {
 
 // ChangeFont wraps the corresponding Objective-C method.
 func (wv *WebView) ChangeFont(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeFont:"), objref.IDOf(sender))
 	})
@@ -1113,6 +1233,8 @@ func (wv *WebView) ChangeFont(sender obj.Object) {
 
 // ChangeAttributes wraps the corresponding Objective-C method.
 func (wv *WebView) ChangeAttributes(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeAttributes:"), objref.IDOf(sender))
 	})
@@ -1121,6 +1243,8 @@ func (wv *WebView) ChangeAttributes(sender obj.Object) {
 
 // ChangeDocumentBackgroundColor wraps the corresponding Objective-C method.
 func (wv *WebView) ChangeDocumentBackgroundColor(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeDocumentBackgroundColor:"), objref.IDOf(sender))
 	})
@@ -1129,6 +1253,8 @@ func (wv *WebView) ChangeDocumentBackgroundColor(sender obj.Object) {
 
 // ChangeColor wraps the corresponding Objective-C method.
 func (wv *WebView) ChangeColor(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("changeColor:"), objref.IDOf(sender))
 	})
@@ -1137,6 +1263,8 @@ func (wv *WebView) ChangeColor(sender obj.Object) {
 
 // AlignCenter wraps the corresponding Objective-C method.
 func (wv *WebView) AlignCenter(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignCenter:"), objref.IDOf(sender))
 	})
@@ -1145,6 +1273,8 @@ func (wv *WebView) AlignCenter(sender obj.Object) {
 
 // AlignJustified wraps the corresponding Objective-C method.
 func (wv *WebView) AlignJustified(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignJustified:"), objref.IDOf(sender))
 	})
@@ -1153,6 +1283,8 @@ func (wv *WebView) AlignJustified(sender obj.Object) {
 
 // AlignLeft wraps the corresponding Objective-C method.
 func (wv *WebView) AlignLeft(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignLeft:"), objref.IDOf(sender))
 	})
@@ -1161,6 +1293,8 @@ func (wv *WebView) AlignLeft(sender obj.Object) {
 
 // AlignRight wraps the corresponding Objective-C method.
 func (wv *WebView) AlignRight(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("alignRight:"), objref.IDOf(sender))
 	})
@@ -1169,6 +1303,8 @@ func (wv *WebView) AlignRight(sender obj.Object) {
 
 // CheckSpelling wraps the corresponding Objective-C method.
 func (wv *WebView) CheckSpelling(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("checkSpelling:"), objref.IDOf(sender))
 	})
@@ -1177,6 +1313,8 @@ func (wv *WebView) CheckSpelling(sender obj.Object) {
 
 // ShowGuessPanel shows guess panel.
 func (wv *WebView) ShowGuessPanel(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("showGuessPanel:"), objref.IDOf(sender))
 	})
@@ -1185,6 +1323,8 @@ func (wv *WebView) ShowGuessPanel(sender obj.Object) {
 
 // PerformFindPanelAction performs find panel action.
 func (wv *WebView) PerformFindPanelAction(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("performFindPanelAction:"), objref.IDOf(sender))
 	})
@@ -1193,6 +1333,8 @@ func (wv *WebView) PerformFindPanelAction(sender obj.Object) {
 
 // StartSpeaking starts speaking.
 func (wv *WebView) StartSpeaking(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("startSpeaking:"), objref.IDOf(sender))
 	})
@@ -1201,6 +1343,8 @@ func (wv *WebView) StartSpeaking(sender obj.Object) {
 
 // StopSpeaking stops speaking.
 func (wv *WebView) StopSpeaking(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("stopSpeaking:"), objref.IDOf(sender))
 	})
@@ -1209,6 +1353,8 @@ func (wv *WebView) StopSpeaking(sender obj.Object) {
 
 // MoveToBeginningOfSentence moves to beginning of sentence.
 func (wv *WebView) MoveToBeginningOfSentence(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToBeginningOfSentence:"), objref.IDOf(sender))
 	})
@@ -1217,6 +1363,8 @@ func (wv *WebView) MoveToBeginningOfSentence(sender obj.Object) {
 
 // MoveToBeginningOfSentenceAndModifySelection moves to beginning of sentence and modify selection.
 func (wv *WebView) MoveToBeginningOfSentenceAndModifySelection(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToBeginningOfSentenceAndModifySelection:"), objref.IDOf(sender))
 	})
@@ -1225,6 +1373,8 @@ func (wv *WebView) MoveToBeginningOfSentenceAndModifySelection(sender obj.Object
 
 // MoveToEndOfSentence moves to end of sentence.
 func (wv *WebView) MoveToEndOfSentence(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToEndOfSentence:"), objref.IDOf(sender))
 	})
@@ -1233,6 +1383,8 @@ func (wv *WebView) MoveToEndOfSentence(sender obj.Object) {
 
 // MoveToEndOfSentenceAndModifySelection moves to end of sentence and modify selection.
 func (wv *WebView) MoveToEndOfSentenceAndModifySelection(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("moveToEndOfSentenceAndModifySelection:"), objref.IDOf(sender))
 	})
@@ -1241,6 +1393,8 @@ func (wv *WebView) MoveToEndOfSentenceAndModifySelection(sender obj.Object) {
 
 // SelectSentence selects sentence.
 func (wv *WebView) SelectSentence(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("selectSentence:"), objref.IDOf(sender))
 	})
@@ -1249,6 +1403,8 @@ func (wv *WebView) SelectSentence(sender obj.Object) {
 
 // OverWrite wraps the corresponding Objective-C method.
 func (wv *WebView) OverWrite(sender obj.Object) {
+	defer runtime.KeepAlive(wv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wv), objc.RegisterName("overWrite:"), objref.IDOf(sender))
 	})

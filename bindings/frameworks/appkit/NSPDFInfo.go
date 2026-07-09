@@ -51,8 +51,8 @@ func (o *NSPDFInfo) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *NSPDFInfo) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_nSPDFInfoSelSetURL, uRL.Ptr())
+func (o *NSPDFInfo) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_nSPDFInfoSelSetURL, url.Ptr())
 }
 
 func (o *NSPDFInfo) IsFileExtensionHidden() bool {

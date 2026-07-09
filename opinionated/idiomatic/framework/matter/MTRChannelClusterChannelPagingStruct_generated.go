@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRChannelClusterChannelPagingStructAdopt(id objc.ID) *MTRChannelClusterCha
 
 // Description returns the object's -description text.
 func (mcccps *MTRChannelClusterChannelPagingStruct) Description() string {
+	defer runtime.KeepAlive(mcccps)
 	return rt.Description(objref.IDOf(mcccps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccps *MTRChannelClusterChannelPagingStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccps *MTRChannelClusterChannelPagingStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccps)
 	return rt.IsKind(objref.IDOf(mcccps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccps *MTRChannelClusterChannelPagingStruct) String() string {
+	defer runtime.KeepAlive(mcccps)
 	return rt.Description(objref.IDOf(mcccps))
 }
 
@@ -72,24 +79,28 @@ func NewMTRChannelClusterChannelPagingStruct() *MTRChannelClusterChannelPagingSt
 
 // WithPreviousToken sets the previous token.
 func (mcccps *MTRChannelClusterChannelPagingStruct) WithPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
+	defer runtime.KeepAlive(previousToken)
 	objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("setPreviousToken:"), objref.IDOf(previousToken))
 	return mcccps
 }
 
 // WithNextToken sets the next token.
 func (mcccps *MTRChannelClusterChannelPagingStruct) WithNextToken(nextToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
+	defer runtime.KeepAlive(nextToken)
 	objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("setNextToken:"), objref.IDOf(nextToken))
 	return mcccps
 }
 
 // PreviousToken returns the previous token.
 func (mcccps *MTRChannelClusterChannelPagingStruct) PreviousToken() *MTRChannelClusterPageTokenStruct {
+	defer runtime.KeepAlive(mcccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("previousToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
 }
 
 // NextToken returns the next token.
 func (mcccps *MTRChannelClusterChannelPagingStruct) NextToken() *MTRChannelClusterPageTokenStruct {
+	defer runtime.KeepAlive(mcccps)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("nextToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
 }

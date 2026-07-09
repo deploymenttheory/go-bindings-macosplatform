@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func sliderAccessoryAdopt(id objc.ID) *SliderAccessory {
 
 // Description returns the object's -description text.
 func (sa *SliderAccessory) Description() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sa *SliderAccessory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sa *SliderAccessory) IsKind(className string) bool {
+	defer runtime.KeepAlive(sa)
 	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sa *SliderAccessory) String() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
@@ -78,6 +85,7 @@ func NewSliderAccessory() *SliderAccessory {
 
 // WithBehavior sets the effect on interaction with the accessory.
 func (sa *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
+	defer runtime.KeepAlive(behavior)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sa), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	})
@@ -94,6 +102,7 @@ func (sa *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
 
 // Behavior returns the effect on interaction with the accessory. The default value is `automaticBehavior`.
 func (sa *SliderAccessory) Behavior() *SliderAccessoryBehavior {
+	defer runtime.KeepAlive(sa)
 	var _mainthread0 *SliderAccessoryBehavior
 	purego.Main(func() {
 		_mainthread0 = func() *SliderAccessoryBehavior {
@@ -107,6 +116,7 @@ func (sa *SliderAccessory) Behavior() *SliderAccessoryBehavior {
 
 // IsEnabled reports whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
 func (sa *SliderAccessory) IsEnabled() bool {
+	defer runtime.KeepAlive(sa)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

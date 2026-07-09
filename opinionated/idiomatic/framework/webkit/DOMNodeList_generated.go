@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,12 +53,14 @@ func NewDOMNodeList() *DOMNodeList {
 
 // Item wraps the corresponding Objective-C method.
 func (dnl *DOMNodeList) Item(index int) *DOMNode {
+	defer runtime.KeepAlive(dnl)
 	_r := objc.Send[objc.ID](objref.IDOf(dnl), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // Length returns the length.
 func (dnl *DOMNodeList) Length() int {
+	defer runtime.KeepAlive(dnl)
 	_r := objc.Send[int](objref.IDOf(dnl), objc.RegisterName("length"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewForm() *Form {
 
 // WithPrototype sets the prototype cell that’s copied whenever the matrix creates a new cell.
 func (f *Form) WithPrototype(prototype CellProvider) *Form {
+	defer runtime.KeepAlive(prototype)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPrototype:"), objref.IDOf(prototype))
 	})
@@ -110,6 +113,7 @@ func (f *Form) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *For
 
 // WithBackgroundColor sets the background color of the matrix (the space between the cells).
 func (f *Form) WithBackgroundColor(backgroundColor *Color) *Form {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -118,6 +122,7 @@ func (f *Form) WithBackgroundColor(backgroundColor *Color) *Form {
 
 // WithCellBackgroundColor sets the background color of the matrix’s cells.
 func (f *Form) WithCellBackgroundColor(cellBackgroundColor *Color) *Form {
+	defer runtime.KeepAlive(cellBackgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCellBackgroundColor:"), objref.IDOf(cellBackgroundColor))
 	})
@@ -174,6 +179,7 @@ func (f *Form) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Form {
 
 // WithKeyCell sets the cell that will be clicked when the user presses the Space bar.
 func (f *Form) WithKeyCell(keyCell CellProvider) *Form {
+	defer runtime.KeepAlive(keyCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setKeyCell:"), objref.IDOf(keyCell))
 	})
@@ -182,6 +188,7 @@ func (f *Form) WithKeyCell(keyCell CellProvider) *Form {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (f *Form) WithTarget(target obj.Object) *Form {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -246,6 +253,7 @@ func (f *Form) WithControlSize(controlSize ControlSize) *Form {
 
 // WithFormatter sets the receiver’s formatter.
 func (f *Form) WithFormatter(formatter obj.Object) *Form {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -254,6 +262,7 @@ func (f *Form) WithFormatter(formatter obj.Object) *Form {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (f *Form) WithObjectValue(objectValue obj.Object) *Form {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -270,6 +279,7 @@ func (f *Form) WithStringValue(stringValue string) *Form {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (f *Form) WithAttributedStringValue(attributedStringValue obj.Object) *Form {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -310,6 +320,7 @@ func (f *Form) WithDoubleValue(doubleValue float64) *Form {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (f *Form) WithFont(font *Font) *Form {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -358,6 +369,7 @@ func (f *Form) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form {
 
 // WithCell sets the cell.
 func (f *Form) WithCell(cell CellProvider) *Form {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -503,6 +515,7 @@ func (f *Form) WithWantsLayer(wantsLayer bool) *Form {
 
 // WithLayer sets the layer.
 func (f *Form) WithLayer(layer obj.Object) *Form {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -552,6 +565,7 @@ func (f *Form) WithBackgroundFilters(items ...obj.Object) *Form {
 
 // WithCompositingFilter sets the compositing filter.
 func (f *Form) WithCompositingFilter(compositingFilter obj.Object) *Form {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -569,6 +583,7 @@ func (f *Form) WithContentFilters(items ...obj.Object) *Form {
 
 // WithShadow sets the shadow.
 func (f *Form) WithShadow(shadow *Shadow) *Form {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -617,6 +632,7 @@ func (f *Form) WithPreparedContentRect(preparedContentRect corefoundation.CGRect
 
 // WithNextKeyView sets the next key view.
 func (f *Form) WithNextKeyView(nextKeyView ViewProvider) *Form {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -666,6 +682,7 @@ func (f *Form) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (f *Form) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Form {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -722,6 +739,7 @@ func (f *Form) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRa
 
 // WithPressureConfiguration sets the pressure configuration.
 func (f *Form) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Form {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -730,6 +748,7 @@ func (f *Form) WithPressureConfiguration(pressureConfiguration *PressureConfigur
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (f *Form) WithNextResponder(nextResponder ResponderProvider) *Form {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -738,6 +757,7 @@ func (f *Form) WithNextResponder(nextResponder ResponderProvider) *Form {
 
 // WithMenu sets returns the responder’s menu.
 func (f *Form) WithMenu(menu *Menu) *Form {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -746,6 +766,7 @@ func (f *Form) WithMenu(menu *Menu) *Form {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (f *Form) WithUserActivity(userActivity obj.Object) *Form {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -754,6 +775,7 @@ func (f *Form) WithUserActivity(userActivity obj.Object) *Form {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (f *Form) WithTouchBar(touchBar *TouchBar) *Form {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -762,6 +784,7 @@ func (f *Form) WithTouchBar(touchBar *TouchBar) *Form {
 
 // IndexOfSelectedItem returns the index of the selected entry.
 func (f *Form) IndexOfSelectedItem() int {
+	defer runtime.KeepAlive(f)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -775,6 +798,7 @@ func (f *Form) IndexOfSelectedItem() int {
 
 // SetEntryWidth sets the width of all the entries in the receiver.
 func (f *Form) SetEntryWidth(width float64) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setEntryWidth:"), width)
 	})
@@ -783,6 +807,7 @@ func (f *Form) SetEntryWidth(width float64) {
 
 // SetInterlineSpacing sets the spacing between entries
 func (f *Form) SetInterlineSpacing(spacing float64) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setInterlineSpacing:"), spacing)
 	})
@@ -791,6 +816,7 @@ func (f *Form) SetInterlineSpacing(spacing float64) {
 
 // SetBordered sets whether the receiver’s entries should display a border around their editable text fields.
 func (f *Form) SetBordered(flag bool) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setBordered:"), flag)
 	})
@@ -799,6 +825,7 @@ func (f *Form) SetBordered(flag bool) {
 
 // SetBezeled sets whether the receiver’s entries should display a bezel around their editable text.
 func (f *Form) SetBezeled(flag bool) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setBezeled:"), flag)
 	})
@@ -807,6 +834,7 @@ func (f *Form) SetBezeled(flag bool) {
 
 // SetTitleAlignment sets the alignment for all of the entry titles.
 func (f *Form) SetTitleAlignment(mode TextAlignment) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTitleAlignment:"), mode)
 	})
@@ -815,6 +843,7 @@ func (f *Form) SetTitleAlignment(mode TextAlignment) {
 
 // SetTextAlignment sets the alignment for all of the receiver’s editable text.
 func (f *Form) SetTextAlignment(mode TextAlignment) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTextAlignment:"), mode)
 	})
@@ -823,6 +852,8 @@ func (f *Form) SetTextAlignment(mode TextAlignment) {
 
 // SetTitleFont sets the font for all of the entry titles.
 func (f *Form) SetTitleFont(fontObj *Font) {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(fontObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
 	})
@@ -831,6 +862,8 @@ func (f *Form) SetTitleFont(fontObj *Font) {
 
 // SetTextFont sets the font for all of the receiver’s editable text fields
 func (f *Form) SetTextFont(fontObj *Font) {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(fontObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTextFont:"), objref.IDOf(fontObj))
 	})
@@ -839,6 +872,7 @@ func (f *Form) SetTextFont(fontObj *Font) {
 
 // CellAtIndex returns the entry at the specified index.
 func (f *Form) CellAtIndex(index int) obj.Object {
+	defer runtime.KeepAlive(f)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -852,6 +886,7 @@ func (f *Form) CellAtIndex(index int) obj.Object {
 
 // DrawCellAtIndex displays the entry at the specified index.
 func (f *Form) DrawCellAtIndex(index int) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("drawCellAtIndex:"), index)
 	})
@@ -860,6 +895,7 @@ func (f *Form) DrawCellAtIndex(index int) {
 
 // AddEntry adds a new entry to the end of the receiver and gives it the specified title.
 func (f *Form) AddEntry(title string) *FormCell {
+	defer runtime.KeepAlive(f)
 	var _mainthread0 *FormCell
 	purego.Main(func() {
 		_mainthread0 = func() *FormCell {
@@ -873,6 +909,7 @@ func (f *Form) AddEntry(title string) *FormCell {
 
 // InsertEntryAtIndex inserts an entry with the specified title into the receiver.
 func (f *Form) InsertEntryAtIndex(title string, index int) *FormCell {
+	defer runtime.KeepAlive(f)
 	var _mainthread0 *FormCell
 	purego.Main(func() {
 		_mainthread0 = func() *FormCell {
@@ -886,6 +923,7 @@ func (f *Form) InsertEntryAtIndex(title string, index int) *FormCell {
 
 // RemoveEntryAtIndex removes and releases the entry at the specified index.
 func (f *Form) RemoveEntryAtIndex(index int) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("removeEntryAtIndex:"), index)
 	})
@@ -894,6 +932,7 @@ func (f *Form) RemoveEntryAtIndex(index int) {
 
 // IndexOfCellWithTag returns the index of the entry whose tag is tag.
 func (f *Form) IndexOfCellWithTag(tag int) int {
+	defer runtime.KeepAlive(f)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -907,6 +946,7 @@ func (f *Form) IndexOfCellWithTag(tag int) int {
 
 // SelectTextAtIndex selects the entry at the specified index.
 func (f *Form) SelectTextAtIndex(index int) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("selectTextAtIndex:"), index)
 	})
@@ -915,6 +955,7 @@ func (f *Form) SelectTextAtIndex(index int) {
 
 // SetTitleBaseWritingDirection sets the writing direction for the title of every control embedded in the form.
 func (f *Form) SetTitleBaseWritingDirection(writingDirection WritingDirection) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTitleBaseWritingDirection:"), writingDirection)
 	})
@@ -923,6 +964,7 @@ func (f *Form) SetTitleBaseWritingDirection(writingDirection WritingDirection) {
 
 // SetTextBaseWritingDirection sets the writing direction for the text content of every control embedded in the form.
 func (f *Form) SetTextBaseWritingDirection(writingDirection WritingDirection) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTextBaseWritingDirection:"), writingDirection)
 	})
@@ -931,6 +973,7 @@ func (f *Form) SetTextBaseWritingDirection(writingDirection WritingDirection) {
 
 // SetPreferredTextFieldWidth sets the preferred text field width used by Auto Layout.
 func (f *Form) SetPreferredTextFieldWidth(preferredWidth float64) {
+	defer runtime.KeepAlive(f)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setPreferredTextFieldWidth:"), preferredWidth)
 	})
@@ -939,6 +982,7 @@ func (f *Form) SetPreferredTextFieldWidth(preferredWidth float64) {
 
 // PreferredTextFieldWidth returns the preferred width of the form’s cells when using Auto Layout.
 func (f *Form) PreferredTextFieldWidth() float64 {
+	defer runtime.KeepAlive(f)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

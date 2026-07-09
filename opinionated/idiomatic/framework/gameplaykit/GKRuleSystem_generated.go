@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func ruleSystemAdopt(id objc.ID) *RuleSystem {
 
 // Description returns the object's -description text.
 func (rs *RuleSystem) Description() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rs *RuleSystem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rs *RuleSystem) IsKind(className string) bool {
+	defer runtime.KeepAlive(rs)
 	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rs *RuleSystem) String() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
@@ -74,43 +81,54 @@ func NewRuleSystem() *RuleSystem {
 
 // Evaluate evaluates the rule system, executing the list of rules in its agenda.
 func (rs *RuleSystem) Evaluate() {
+	defer runtime.KeepAlive(rs)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("evaluate"))
 }
 
 // AddRule adds the specified rule to the system.
 func (rs *RuleSystem) AddRule(rule *Rule) {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(rule)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("addRule:"), objref.IDOf(rule))
 }
 
 // AddRulesFromArray adds the specified list of rules to the system.
 func (rs *RuleSystem) AddRulesFromArray(rules []*Rule) {
+	defer runtime.KeepAlive(rs)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("addRulesFromArray:"), purego.SliceToNSArray(rules, func(_v *Rule) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveAllRules removes all rules from the system.
 func (rs *RuleSystem) RemoveAllRules() {
+	defer runtime.KeepAlive(rs)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("removeAllRules"))
 }
 
 // MinimumGradeForFacts returns the lowest membership grade among the specified facts.
 func (rs *RuleSystem) MinimumGradeForFacts(facts obj.Object) float32 {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(facts)
 	_r := objc.Send[float32](objref.IDOf(rs), objc.RegisterName("minimumGradeForFacts:"), objref.IDOf(facts))
 	return _r
 }
 
 // MaximumGradeForFacts returns the highest membership grade among the specified facts.
 func (rs *RuleSystem) MaximumGradeForFacts(facts obj.Object) float32 {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(facts)
 	_r := objc.Send[float32](objref.IDOf(rs), objc.RegisterName("maximumGradeForFacts:"), objref.IDOf(facts))
 	return _r
 }
 
 // Reset returns the rule system to its original agenda and clears all facts.
 func (rs *RuleSystem) Reset() {
+	defer runtime.KeepAlive(rs)
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("reset"))
 }
 
 // State returns the implementation-defined state. If any changes are made on this outside the system you must call evaluate to have the system take account of the changes.
 func (rs *RuleSystem) State() obj.Object {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
@@ -119,6 +137,7 @@ func (rs *RuleSystem) State() obj.Object {
 //
 // Rules returns the collection as a Go slice.
 func (rs *RuleSystem) Rules() []*Rule {
+	defer runtime.KeepAlive(rs)
 	_arr := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("rules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
@@ -127,6 +146,7 @@ func (rs *RuleSystem) Rules() []*Rule {
 //
 // Agenda returns the collection as a Go slice.
 func (rs *RuleSystem) Agenda() []*Rule {
+	defer runtime.KeepAlive(rs)
 	_arr := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("agenda"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
@@ -135,12 +155,14 @@ func (rs *RuleSystem) Agenda() []*Rule {
 //
 // Executed returns the collection as a Go slice.
 func (rs *RuleSystem) Executed() []*Rule {
+	defer runtime.KeepAlive(rs)
 	_arr := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("executed"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Rule { return RuleFromID(_id) })
 }
 
 // Facts returns the current set of facts. Facts have a grade of membership that is >= 0.0. Query the system for the individual grades of membership with gradeForFact:
 func (rs *RuleSystem) Facts() obj.Object {
+	defer runtime.KeepAlive(rs)
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("facts"))
 	return obj.Wrap(_r)
 }

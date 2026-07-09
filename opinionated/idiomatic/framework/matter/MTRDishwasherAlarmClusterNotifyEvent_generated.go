@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDishwasherAlarmClusterNotifyEventAdopt(id objc.ID) *MTRDishwasherAlarmCl
 
 // Description returns the object's -description text.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Description() string {
+	defer runtime.KeepAlive(mdacne)
 	return rt.Description(objref.IDOf(mdacne))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdacne)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdacne), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdacne)
 	return rt.IsKind(objref.IDOf(mdacne), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) String() string {
+	defer runtime.KeepAlive(mdacne)
 	return rt.Description(objref.IDOf(mdacne))
 }
 
@@ -72,48 +80,56 @@ func NewMTRDishwasherAlarmClusterNotifyEvent() *MTRDishwasherAlarmClusterNotifyE
 
 // WithActive sets the active.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithActive(active obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(active)
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setActive:"), objref.IDOf(active))
 	return mdacne
 }
 
 // WithInactive sets the inactive.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithInactive(inactive obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(inactive)
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setInactive:"), objref.IDOf(inactive))
 	return mdacne
 }
 
 // WithState sets the state.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithState(state obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(state)
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setState:"), objref.IDOf(state))
 	return mdacne
 }
 
 // WithMask sets the mask.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithMask(mask obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return mdacne
 }
 
 // Active returns the active.
-func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Active() obj.Object {
+func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Active() *foundation.Number {
+	defer runtime.KeepAlive(mdacne)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("active"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Inactive returns the inactive.
-func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Inactive() obj.Object {
+func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Inactive() *foundation.Number {
+	defer runtime.KeepAlive(mdacne)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("inactive"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // State returns the state.
-func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) State() obj.Object {
+func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) State() *foundation.Number {
+	defer runtime.KeepAlive(mdacne)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("state"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Mask returns the mask.
-func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Mask() obj.Object {
+func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Mask() *foundation.Number {
+	defer runtime.KeepAlive(mdacne)
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("mask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

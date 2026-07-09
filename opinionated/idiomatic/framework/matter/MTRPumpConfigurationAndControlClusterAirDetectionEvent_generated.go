@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRPumpConfigurationAndControlClusterAirDetectionEventAdopt(id objc.ID) *MT
 
 // Description returns the object's -description text.
 func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Description() string {
+	defer runtime.KeepAlive(mpcaccade)
 	return rt.Description(objref.IDOf(mpcaccade))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpcaccade)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpcaccade), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpcaccade)
 	return rt.IsKind(objref.IDOf(mpcaccade), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpcaccade *MTRPumpConfigurationAndControlClusterAirDetectionEvent) String() string {
+	defer runtime.KeepAlive(mpcaccade)
 	return rt.Description(objref.IDOf(mpcaccade))
 }
 

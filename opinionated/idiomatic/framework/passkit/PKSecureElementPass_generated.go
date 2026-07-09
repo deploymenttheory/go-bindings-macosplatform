@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func secureElementPassAdopt(id objc.ID) *SecureElementPass {
 
 // PrimaryAccountIdentifier returns the primary account identifier.
 func (sep *SecureElementPass) PrimaryAccountIdentifier() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("primaryAccountIdentifier"))
 	if _r == 0 {
 		return ""
@@ -56,6 +59,7 @@ func (sep *SecureElementPass) PrimaryAccountIdentifier() string {
 
 // PrimaryAccountNumberSuffix returns the primary account number suffix.
 func (sep *SecureElementPass) PrimaryAccountNumberSuffix() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("primaryAccountNumberSuffix"))
 	if _r == 0 {
 		return ""
@@ -65,6 +69,7 @@ func (sep *SecureElementPass) PrimaryAccountNumberSuffix() string {
 
 // DeviceAccountIdentifier returns the device account identifier.
 func (sep *SecureElementPass) DeviceAccountIdentifier() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
@@ -74,6 +79,7 @@ func (sep *SecureElementPass) DeviceAccountIdentifier() string {
 
 // DeviceAccountNumberSuffix returns the device account number suffix.
 func (sep *SecureElementPass) DeviceAccountNumberSuffix() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("deviceAccountNumberSuffix"))
 	if _r == 0 {
 		return ""
@@ -83,12 +89,14 @@ func (sep *SecureElementPass) DeviceAccountNumberSuffix() string {
 
 // PassActivationState returns the pass activation state.
 func (sep *SecureElementPass) PassActivationState() SecureElementPassActivationState {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[SecureElementPassActivationState](objref.IDOf(sep), objc.RegisterName("passActivationState"))
 	return _r
 }
 
 // DevicePassIdentifier returns the device pass identifier.
 func (sep *SecureElementPass) DevicePassIdentifier() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("devicePassIdentifier"))
 	if _r == 0 {
 		return ""
@@ -98,6 +106,7 @@ func (sep *SecureElementPass) DevicePassIdentifier() string {
 
 // PairedTerminalIdentifier returns the paired terminal identifier.
 func (sep *SecureElementPass) PairedTerminalIdentifier() string {
+	defer runtime.KeepAlive(sep)
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("pairedTerminalIdentifier"))
 	if _r == 0 {
 		return ""

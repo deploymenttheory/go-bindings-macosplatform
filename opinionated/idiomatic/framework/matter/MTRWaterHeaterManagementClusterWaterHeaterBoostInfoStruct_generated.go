@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Description() string {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	return rt.Description(objref.IDOf(mwhmcwhbis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcwhbis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcwhbis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	return rt.IsKind(objref.IDOf(mwhmcwhbis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) String() string {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	return rt.Description(objref.IDOf(mwhmcwhbis))
 }
 
@@ -72,72 +80,84 @@ func NewMTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct() *MTRWaterHea
 
 // WithDuration sets the duration.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithDuration(duration obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mwhmcwhbis
 }
 
 // WithOneShot sets the one shot.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithOneShot(oneShot obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(oneShot)
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setOneShot:"), objref.IDOf(oneShot))
 	return mwhmcwhbis
 }
 
 // WithEmergencyBoost sets the emergency boost.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithEmergencyBoost(emergencyBoost obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(emergencyBoost)
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setEmergencyBoost:"), objref.IDOf(emergencyBoost))
 	return mwhmcwhbis
 }
 
 // WithTemporarySetpoint sets the temporary setpoint.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTemporarySetpoint(temporarySetpoint obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(temporarySetpoint)
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTemporarySetpoint:"), objref.IDOf(temporarySetpoint))
 	return mwhmcwhbis
 }
 
 // WithTargetPercentage sets the target percentage.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetPercentage(targetPercentage obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(targetPercentage)
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTargetPercentage:"), objref.IDOf(targetPercentage))
 	return mwhmcwhbis
 }
 
 // WithTargetReheat sets the target reheat.
 func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) WithTargetReheat(targetReheat obj.Object) *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	defer runtime.KeepAlive(targetReheat)
 	objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("setTargetReheat:"), objref.IDOf(targetReheat))
 	return mwhmcwhbis
 }
 
 // Duration returns the duration.
-func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() obj.Object {
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OneShot returns the one shot.
-func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() obj.Object {
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) OneShot() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("oneShot"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EmergencyBoost returns the emergency boost.
-func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() obj.Object {
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) EmergencyBoost() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("emergencyBoost"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TemporarySetpoint returns the temporary setpoint.
-func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() obj.Object {
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TemporarySetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("temporarySetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TargetPercentage returns the target percentage.
-func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() obj.Object {
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetPercentage() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("targetPercentage"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TargetReheat returns the target reheat.
-func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() obj.Object {
+func (mwhmcwhbis *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) TargetReheat() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcwhbis)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcwhbis), objc.RegisterName("targetReheat"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

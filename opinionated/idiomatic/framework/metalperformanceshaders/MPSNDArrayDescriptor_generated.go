@@ -5,9 +5,11 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,22 +50,27 @@ func nDArrayDescriptorAdopt(id objc.ID) *NDArrayDescriptor {
 
 // Description returns the object's -description text.
 func (nad *NDArrayDescriptor) Description() string {
+	defer runtime.KeepAlive(nad)
 	return rt.Description(objref.IDOf(nad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nad *NDArrayDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nad *NDArrayDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(nad)
 	return rt.IsKind(objref.IDOf(nad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nad *NDArrayDescriptor) String() string {
+	defer runtime.KeepAlive(nad)
 	return rt.Description(objref.IDOf(nad))
 }
 
@@ -87,28 +94,33 @@ func (nad *NDArrayDescriptor) WithPreferPackedRows(preferPackedRows bool) *NDArr
 
 // LengthOfDimension the number of elements of type dataType in the indicated dimension. If dimensionIndex >= numberOfDimensions, 1 will be returned.
 func (nad *NDArrayDescriptor) LengthOfDimension(dimensionIndex int) int {
+	defer runtime.KeepAlive(nad)
 	_r := objc.Send[int](objref.IDOf(nad), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
 	return _r
 }
 
 // SliceRangeForDimension the slice dimensions for each dimension
 func (nad *NDArrayDescriptor) SliceRangeForDimension(dimensionIndex int) mpscore.MPSDimensionSlice {
+	defer runtime.KeepAlive(nad)
 	_r := objc.Send[mpscore.MPSDimensionSlice](objref.IDOf(nad), objc.RegisterName("sliceRangeForDimension:"), dimensionIndex)
 	return _r
 }
 
 // SliceDimensionWithSubrange the slice dimensions for each dimension
 func (nad *NDArrayDescriptor) SliceDimensionWithSubrange(dimensionIndex int, subRange mpscore.MPSDimensionSlice) {
+	defer runtime.KeepAlive(nad)
 	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("sliceDimension:withSubrange:"), dimensionIndex, subRange)
 }
 
 // TransposeDimensionWithDimension transpose two dimensions
 func (nad *NDArrayDescriptor) TransposeDimensionWithDimension(dimensionIndex int, dimensionIndex2 int) {
+	defer runtime.KeepAlive(nad)
 	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("transposeDimension:withDimension:"), dimensionIndex, dimensionIndex2)
 }
 
 // PermuteWithDimensionOrder permutes the dimensions of the current descriptor This permutation is applied on top of whatever transpostions/permutations that may have been performed on the descriptor before.
 func (nad *NDArrayDescriptor) PermuteWithDimensionOrder() (dimensionOrder int) {
+	defer runtime.KeepAlive(nad)
 	var _out0 int
 	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("permuteWithDimensionOrder:"), unsafe.Pointer(&_out0))
 	return _out0
@@ -118,30 +130,35 @@ func (nad *NDArrayDescriptor) PermuteWithDimensionOrder() (dimensionOrder int) {
 //
 // GetShape returns the collection as a Go slice.
 func (nad *NDArrayDescriptor) GetShape() []obj.Object {
+	defer runtime.KeepAlive(nad)
 	_arr := objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("getShape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReshapeWithDimensionCountDimensionSizes changes dimension sizes and number of dimensions on the current descriptor
 func (nad *NDArrayDescriptor) ReshapeWithDimensionCountDimensionSizes(numberOfDimensions int) (dimensionSizes int) {
+	defer runtime.KeepAlive(nad)
 	var _out0 int
 	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("reshapeWithDimensionCount:dimensionSizes:"), numberOfDimensions, unsafe.Pointer(&_out0))
 	return _out0
 }
 
 // ReshapeWithShape changes dimension sizes and number of dimensions on the current descriptor
-func (nad *NDArrayDescriptor) ReshapeWithShape(shape []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("reshapeWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (nad *NDArrayDescriptor) ReshapeWithShape(shape []*foundation.Number) {
+	defer runtime.KeepAlive(nad)
+	objc.Send[objc.ID](objref.IDOf(nad), objc.RegisterName("reshapeWithShape:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 }
 
 // NumberOfDimensions returns the number of dimensions in the NDArray. May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
 func (nad *NDArrayDescriptor) NumberOfDimensions() int {
+	defer runtime.KeepAlive(nad)
 	_r := objc.Send[int](objref.IDOf(nad), objc.RegisterName("numberOfDimensions"))
 	return _r
 }
 
 // PreferPackedRows reports whether if true, then new NDArrays created with this descriptor will pack the rows. Default: false.
 func (nad *NDArrayDescriptor) PreferPackedRows() bool {
+	defer runtime.KeepAlive(nad)
 	_r := objc.Send[bool](objref.IDOf(nad), objc.RegisterName("preferPackedRows"))
 	return _r
 }

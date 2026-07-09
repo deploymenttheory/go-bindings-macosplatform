@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func rNNRecurrentMatrixStateAdopt(id objc.ID) *RNNRecurrentMatrixState {
 
 // Description returns the object's -description text.
 func (rrms *RNNRecurrentMatrixState) Description() string {
+	defer runtime.KeepAlive(rrms)
 	return rt.Description(objref.IDOf(rrms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rrms *RNNRecurrentMatrixState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rrms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rrms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rrms *RNNRecurrentMatrixState) IsKind(className string) bool {
+	defer runtime.KeepAlive(rrms)
 	return rt.IsKind(objref.IDOf(rrms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rrms *RNNRecurrentMatrixState) String() string {
+	defer runtime.KeepAlive(rrms)
 	return rt.Description(objref.IDOf(rrms))
 }
 
@@ -72,12 +79,14 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 
 // GetRecurrentOutputMatrixForLayerIndex access the stored recurrent matrix data.
 func (rrms *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex int) obj.Object {
+	defer runtime.KeepAlive(rrms)
 	_r := objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("getRecurrentOutputMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
 // GetMemoryCellMatrixForLayerIndex access the stored memory cell matrix data (if present).
 func (rrms *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex int) obj.Object {
+	defer runtime.KeepAlive(rrms)
 	_r := objc.Send[objc.ID](objref.IDOf(rrms), objc.RegisterName("getMemoryCellMatrixForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }

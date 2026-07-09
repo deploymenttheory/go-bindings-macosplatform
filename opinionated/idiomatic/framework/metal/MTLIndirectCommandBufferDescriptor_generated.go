@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func indirectCommandBufferDescriptorAdopt(id objc.ID) *IndirectCommandBufferDesc
 
 // Description returns the object's -description text.
 func (icbd *IndirectCommandBufferDescriptor) Description() string {
+	defer runtime.KeepAlive(icbd)
 	return rt.Description(objref.IDOf(icbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (icbd *IndirectCommandBufferDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(icbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(icbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (icbd *IndirectCommandBufferDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(icbd)
 	return rt.IsKind(objref.IDOf(icbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (icbd *IndirectCommandBufferDescriptor) String() string {
+	defer runtime.KeepAlive(icbd)
 	return rt.Description(objref.IDOf(icbd))
 }
 
@@ -188,114 +195,133 @@ func (icbd *IndirectCommandBufferDescriptor) WithSupportColorAttachmentMapping(s
 
 // CommandTypes returns a bitfield of the command types that be encoded. MTLCommandTypeDispatch cannot be mixed with any other command type.
 func (icbd *IndirectCommandBufferDescriptor) CommandTypes() IndirectCommandType {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[IndirectCommandType](objref.IDOf(icbd), objc.RegisterName("commandTypes"))
 	return _r
 }
 
 // InheritPipelineState reports whether the render or compute pipeline are inherited from the encoder
 func (icbd *IndirectCommandBufferDescriptor) InheritPipelineState() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritPipelineState"))
 	return _r
 }
 
 // InheritBuffers reports whether the render or compute pipeline can set arguments.
 func (icbd *IndirectCommandBufferDescriptor) InheritBuffers() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritBuffers"))
 	return _r
 }
 
 // InheritDepthStencilState reports whether configures whether the indirect command buffer inherits the depth stencil state from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (icbd *IndirectCommandBufferDescriptor) InheritDepthStencilState() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritDepthStencilState"))
 	return _r
 }
 
 // InheritDepthBias reports whether configures whether the indirect command buffer inherits the depth bias from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (icbd *IndirectCommandBufferDescriptor) InheritDepthBias() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritDepthBias"))
 	return _r
 }
 
 // InheritDepthClipMode reports whether configures whether the indirect command buffer inherits the depth clip mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (icbd *IndirectCommandBufferDescriptor) InheritDepthClipMode() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritDepthClipMode"))
 	return _r
 }
 
 // InheritCullMode reports whether configures whether the indirect command buffer inherits the cull mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (icbd *IndirectCommandBufferDescriptor) InheritCullMode() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritCullMode"))
 	return _r
 }
 
 // InheritFrontFacingWinding reports whether configures whether the indirect command buffer inherits the front facing winding from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (icbd *IndirectCommandBufferDescriptor) InheritFrontFacingWinding() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritFrontFacingWinding"))
 	return _r
 }
 
 // InheritTriangleFillMode reports whether configures whether the indirect command buffer inherits the triangle fill mode from the encoder. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (icbd *IndirectCommandBufferDescriptor) InheritTriangleFillMode() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("inheritTriangleFillMode"))
 	return _r
 }
 
 // MaxVertexBufferBindCount returns the maximum bind index of vertex argument buffers that can be set per command.
 func (icbd *IndirectCommandBufferDescriptor) MaxVertexBufferBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxVertexBufferBindCount"))
 	return _r
 }
 
 // MaxFragmentBufferBindCount returns the maximum bind index of fragment argument buffers that can be set per command.
 func (icbd *IndirectCommandBufferDescriptor) MaxFragmentBufferBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxFragmentBufferBindCount"))
 	return _r
 }
 
 // MaxKernelBufferBindCount returns the maximum bind index of kernel (or tile) argument buffers that can be set per command.
 func (icbd *IndirectCommandBufferDescriptor) MaxKernelBufferBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxKernelBufferBindCount"))
 	return _r
 }
 
 // MaxKernelThreadgroupMemoryBindCount returns the maximum bind index of kernel (or tile) threadgroup memory that can be set per command. The default value is 31.
 func (icbd *IndirectCommandBufferDescriptor) MaxKernelThreadgroupMemoryBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxKernelThreadgroupMemoryBindCount"))
 	return _r
 }
 
 // MaxObjectBufferBindCount returns the maximum bind index of object stage buffers that can be set per render command.
 func (icbd *IndirectCommandBufferDescriptor) MaxObjectBufferBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxObjectBufferBindCount"))
 	return _r
 }
 
 // MaxMeshBufferBindCount returns the maximum bind index of mesh stage buffers that can be set per render command.
 func (icbd *IndirectCommandBufferDescriptor) MaxMeshBufferBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxMeshBufferBindCount"))
 	return _r
 }
 
 // MaxObjectThreadgroupMemoryBindCount returns the maximum bind index of object threadgroup memory that can be set per render command. The default value is 0.
 func (icbd *IndirectCommandBufferDescriptor) MaxObjectThreadgroupMemoryBindCount() int {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[int](objref.IDOf(icbd), objc.RegisterName("maxObjectThreadgroupMemoryBindCount"))
 	return _r
 }
 
 // SupportRayTracing reports whether the render or compute commands can use ray tracing. Default value is false.
 func (icbd *IndirectCommandBufferDescriptor) SupportRayTracing() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("supportRayTracing"))
 	return _r
 }
 
 // SupportDynamicAttributeStride reports whether allows binding pipelines that have at least one MTLBufferLayout with a stride of `MTLBufferLayoutStrideDynamic` will allow setting attributeStride in `setVertexBuffer` / `setKernelBuffer` calls
 func (icbd *IndirectCommandBufferDescriptor) SupportDynamicAttributeStride() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("supportDynamicAttributeStride"))
 	return _r
 }
 
 // SupportColorAttachmentMapping reports whether specifies if the indirect command buffer should support color attachment mapping.
 func (icbd *IndirectCommandBufferDescriptor) SupportColorAttachmentMapping() bool {
+	defer runtime.KeepAlive(icbd)
 	_r := objc.Send[bool](objref.IDOf(icbd), objc.RegisterName("supportColorAttachmentMapping"))
 	return _r
 }

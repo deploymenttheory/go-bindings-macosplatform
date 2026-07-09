@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func commandBufferDescriptorAdopt(id objc.ID) *CommandBufferDescriptor {
 
 // Description returns the object's -description text.
 func (cbd *CommandBufferDescriptor) Description() string {
+	defer runtime.KeepAlive(cbd)
 	return rt.Description(objref.IDOf(cbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cbd *CommandBufferDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cbd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cbd *CommandBufferDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(cbd)
 	return rt.IsKind(objref.IDOf(cbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cbd *CommandBufferDescriptor) String() string {
+	defer runtime.KeepAlive(cbd)
 	return rt.Description(objref.IDOf(cbd))
 }
 
@@ -86,12 +93,14 @@ func (cbd *CommandBufferDescriptor) WithErrorOptions(errorOptions CommandBufferE
 
 // RetainedReferences reports whether if true, the created command buffer holds strong references to objects needed for it to execute. If false, the created command buffer does not hold strong references to objects needed for it to execute.
 func (cbd *CommandBufferDescriptor) RetainedReferences() bool {
+	defer runtime.KeepAlive(cbd)
 	_r := objc.Send[bool](objref.IDOf(cbd), objc.RegisterName("retainedReferences"))
 	return _r
 }
 
 // ErrorOptions returns a set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
 func (cbd *CommandBufferDescriptor) ErrorOptions() CommandBufferErrorOption {
+	defer runtime.KeepAlive(cbd)
 	_r := objc.Send[CommandBufferErrorOption](objref.IDOf(cbd), objc.RegisterName("errorOptions"))
 	return _r
 }

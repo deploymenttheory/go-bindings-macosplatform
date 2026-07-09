@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func videoProcessorCadenceAdopt(id objc.ID) *VideoProcessorCadence {
 
 // Description returns the object's -description text.
 func (vpc *VideoProcessorCadence) Description() string {
+	defer runtime.KeepAlive(vpc)
 	return rt.Description(objref.IDOf(vpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vpc *VideoProcessorCadence) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vpc *VideoProcessorCadence) IsKind(className string) bool {
+	defer runtime.KeepAlive(vpc)
 	return rt.IsKind(objref.IDOf(vpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vpc *VideoProcessorCadence) String() string {
+	defer runtime.KeepAlive(vpc)
 	return rt.Description(objref.IDOf(vpc))
 }
 

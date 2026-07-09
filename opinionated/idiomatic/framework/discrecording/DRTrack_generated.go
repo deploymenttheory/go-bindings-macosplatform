@@ -5,6 +5,8 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func trackAdopt(id objc.ID) *Track {
 
 // Description returns the object's -description text.
 func (t *Track) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Track) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Track) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Track) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // NewTrackWithProducer initializes a DRTrack with the producer
 func NewTrackWithProducer(producer obj.Object) *Track {
+	defer runtime.KeepAlive(producer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProducer:"), objref.IDOf(producer))
 	return trackAdopt(_id)
@@ -75,46 +83,56 @@ func NewTrackWithProducer(producer obj.Object) *Track {
 
 // Properties returns the properties dictionary of the track.
 func (t *Track) Properties() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // SetProperties sets the properties dictionary of the track
 func (t *Track) SetProperties(properties obj.Object) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(properties)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setProperties:"), objref.IDOf(properties))
 }
 
 // TestProductionSpeedForInterval tests the production speed for a specified interval. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
 func (t *Track) TestProductionSpeedForInterval(interval float64) float32 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("testProductionSpeedForInterval:"), interval)
 	return _r
 }
 
 // TestProductionSpeedForLength tests the production speed for a specified byte count. Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's
 func (t *Track) TestProductionSpeedForLength(length uint32) float32 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("testProductionSpeedForLength:"), length)
 	return _r
 }
 
 // EstimateLength returns asks the track producer for a size estimate. This method calls the track producer to ask it to estimate the size needed for its data. For some types of track, this call may be very expensive. For example, a DRFilesystemTrack may need to iterate folders on disk to provide an accurate estimate, which (if a large number of files and folders are involved) can cause this call to take 30 seconds or more. Since your main thread should not be allowed to block for this long, you may wish to call this function on a separate thread.
 func (t *Track) EstimateLength() uint64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[uint64](objref.IDOf(t), objc.RegisterName("estimateLength"))
 	return _r
 }
 
 // Length returns the length of the track data. The length returned does not include the length of the pregap. Only the length of the track data itself is returned.
 func (t *Track) Length() *MSF {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("length"))
 	return MSFFromID(_r)
 }
 
 // PreGap returns the length of the pre gap. This is a simple wrapper to obtain the
 func (t *Track) PreGap() *MSF {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("preGap"))
 	return MSFFromID(_r)
 }
 
 // SetPreGap sets the length of the pre gap. This is a simple wrapper to set the
 func (t *Track) SetPreGap(preGap *MSF) {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(preGap)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreGap:"), objref.IDOf(preGap))
 }

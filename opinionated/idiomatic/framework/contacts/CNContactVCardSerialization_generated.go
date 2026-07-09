@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contactVCardSerializationAdopt(id objc.ID) *ContactVCardSerialization {
 
 // Description returns the object's -description text.
 func (cvcs *ContactVCardSerialization) Description() string {
+	defer runtime.KeepAlive(cvcs)
 	return rt.Description(objref.IDOf(cvcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvcs *ContactVCardSerialization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvcs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvcs *ContactVCardSerialization) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvcs)
 	return rt.IsKind(objref.IDOf(cvcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvcs *ContactVCardSerialization) String() string {
+	defer runtime.KeepAlive(cvcs)
 	return rt.Description(objref.IDOf(cvcs))
 }
 

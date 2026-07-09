@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,87 +51,116 @@ func mTRClusterDeviceEnergyManagementAdopt(id objc.ID) *MTRClusterDeviceEnergyMa
 
 // NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDeviceEnergyManagement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDeviceEnergyManagementAdopt(_id)
 }
 
 // ReadAttributeESATypeWithParams reads attribute esa type with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeESATypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeESACanGenerateWithParams reads attribute esa can generate with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeESACanGenerateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeESAStateWithParams reads attribute esa state with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeESAStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAbsMinPowerWithParams reads attribute abs min power with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAbsMinPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAbsMaxPowerWithParams reads attribute abs max power with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAbsMaxPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerAdjustmentCapabilityWithParams reads attribute power adjustment capability with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeForecastWithParams reads attribute forecast with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeForecastWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOptOutStateWithParams reads attribute opt out state with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeOptOutStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcdem *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdem), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterDeviceEnergyManagement)(nil)

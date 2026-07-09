@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +53,27 @@ func collectionViewLayoutInvalidationContextAdopt(id objc.ID) *CollectionViewLay
 
 // Description returns the object's -description text.
 func (cvlic *CollectionViewLayoutInvalidationContext) Description() string {
+	defer runtime.KeepAlive(cvlic)
 	return rt.Description(objref.IDOf(cvlic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvlic *CollectionViewLayoutInvalidationContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvlic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvlic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvlic *CollectionViewLayoutInvalidationContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvlic)
 	return rt.IsKind(objref.IDOf(cvlic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvlic *CollectionViewLayoutInvalidationContext) String() string {
+	defer runtime.KeepAlive(cvlic)
 	return rt.Description(objref.IDOf(cvlic))
 }
 
@@ -86,31 +94,37 @@ func (cvlic *CollectionViewLayoutInvalidationContext) WithContentSizeAdjustment(
 }
 
 // InvalidateItemsAtIndexPaths marks the specified items as invalid so that their layout information can be updated.
-func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths obj.Object) {
+func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cvlic)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateItemsAtIndexPaths:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // InvalidateSupplementaryElementsOfKindAtIndexPaths marks the specified supplementary views as invalid so that their layout information can be updated.
-func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object) {
+func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cvlic)
+	defer runtime.KeepAlive(elementKind)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateSupplementaryElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateSupplementaryElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // InvalidateDecorationElementsOfKindAtIndexPaths marks the specified decoration views as invalid so that their layout information can be updated.
-func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths obj.Object) {
+func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind obj.Object, indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cvlic)
+	defer runtime.KeepAlive(elementKind)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidateDecorationElementsOfKind:atIndexPaths:"), objref.IDOf(elementKind), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // InvalidateEverything wraps the corresponding Objective-C method.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateEverything() bool {
+	defer runtime.KeepAlive(cvlic)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -124,6 +138,7 @@ func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateEverything() boo
 
 // InvalidateDataSourceCounts wraps the corresponding Objective-C method.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts() bool {
+	defer runtime.KeepAlive(cvlic)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -135,13 +150,14 @@ func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts
 
 }
 
-// InvalidatedItemIndexPaths returns the invalidated item index paths.
-func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() obj.Object {
-	var _mainthread0 obj.Object
+// InvalidatedItemIndexPaths returns the order of the returned elements is unspecified.
+func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() []*foundation.IndexPath {
+	defer runtime.KeepAlive(cvlic)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedItemIndexPaths"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -150,6 +166,7 @@ func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths(
 
 // InvalidatedSupplementaryIndexPaths returns the invalidated supplementary index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() obj.Object {
+	defer runtime.KeepAlive(cvlic)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -163,6 +180,7 @@ func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIn
 
 // InvalidatedDecorationIndexPaths returns the invalidated decoration index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() obj.Object {
+	defer runtime.KeepAlive(cvlic)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -176,6 +194,7 @@ func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndex
 
 // ContentOffsetAdjustment returns the content offset adjustment.
 func (cvlic *CollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {
+	defer runtime.KeepAlive(cvlic)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -189,6 +208,7 @@ func (cvlic *CollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() 
 
 // ContentSizeAdjustment returns the content size adjustment.
 func (cvlic *CollectionViewLayoutInvalidationContext) ContentSizeAdjustment() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvlic)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {

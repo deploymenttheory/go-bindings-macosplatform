@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewDistanceConstraint() *DistanceConstraint {
 
 // WithTarget sets defines the target node to keep distance with.
 func (dc *DistanceConstraint) WithTarget(target NodeProvider) *DistanceConstraint {
+	defer runtime.KeepAlive(target)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return dc
 }
@@ -87,18 +90,21 @@ func (dc *DistanceConstraint) WithIncremental(incremental bool) *DistanceConstra
 
 // Target defines the target node to keep distance with.
 func (dc *DistanceConstraint) Target() *Node {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
 // MinimumDistance returns the minimum distance. Defaults to 0. Animatable.
 func (dc *DistanceConstraint) MinimumDistance() float64 {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[float64](objref.IDOf(dc), objc.RegisterName("minimumDistance"))
 	return _r
 }
 
 // MaximumDistance returns the minimum distance. Defaults to MAXFLOAT. Animatable.
 func (dc *DistanceConstraint) MaximumDistance() float64 {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[float64](objref.IDOf(dc), objc.RegisterName("maximumDistance"))
 	return _r
 }

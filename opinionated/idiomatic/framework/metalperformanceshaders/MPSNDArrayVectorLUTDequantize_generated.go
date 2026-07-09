@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +65,7 @@ func (navld *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorL
 
 // VectorAxis returns which axis in the destination will receive the vector component, must be less than 4.
 func (navld *NDArrayVectorLUTDequantize) VectorAxis() int {
+	defer runtime.KeepAlive(navld)
 	_r := objc.Send[int](objref.IDOf(navld), objc.RegisterName("vectorAxis"))
 	return _r
 }

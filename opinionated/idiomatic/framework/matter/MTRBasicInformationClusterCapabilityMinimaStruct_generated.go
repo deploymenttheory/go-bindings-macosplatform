@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func mTRBasicInformationClusterCapabilityMinimaStructAdopt(id objc.ID) *MTRBasic
 
 // Description returns the object's -description text.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) Description() string {
+	defer runtime.KeepAlive(mbiccms)
 	return rt.Description(objref.IDOf(mbiccms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbiccms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbiccms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbiccms)
 	return rt.IsKind(objref.IDOf(mbiccms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) String() string {
+	defer runtime.KeepAlive(mbiccms)
 	return rt.Description(objref.IDOf(mbiccms))
 }
 
 // WithCaseSessionsPerFabric sets the case sessions per fabric.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
+	defer runtime.KeepAlive(caseSessionsPerFabric)
 	objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 	return mbiccms
 }
 
 // WithSubscriptionsPerFabric sets the subscriptions per fabric.
 func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
+	defer runtime.KeepAlive(subscriptionsPerFabric)
 	objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 	return mbiccms
 }
 
 // CaseSessionsPerFabric returns the case sessions per fabric.
-func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() obj.Object {
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() *foundation.Number {
+	defer runtime.KeepAlive(mbiccms)
 	_r := objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("caseSessionsPerFabric"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SubscriptionsPerFabric returns the subscriptions per fabric.
-func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() obj.Object {
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() *foundation.Number {
+	defer runtime.KeepAlive(mbiccms)
 	_r := objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("subscriptionsPerFabric"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRBasicInformationClusterCapabilityMinimaStruct marks MTRBasicInformationClusterCapabilityMinimaStruct — and, by embedding promotion, its

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTROTASoftwareUpdateRequestorClusterProviderLocationAdopt(id objc.ID) *MTRO
 
 // Description returns the object's -description text.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) Description() string {
+	defer runtime.KeepAlive(msurcpl)
 	return rt.Description(objref.IDOf(msurcpl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msurcpl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msurcpl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) IsKind(className string) bool {
+	defer runtime.KeepAlive(msurcpl)
 	return rt.IsKind(objref.IDOf(msurcpl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) String() string {
+	defer runtime.KeepAlive(msurcpl)
 	return rt.Description(objref.IDOf(msurcpl))
 }
 
 // WithProviderNodeID sets the provider node ID.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
+	defer runtime.KeepAlive(providerNodeID)
 	objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return msurcpl
 }
 
 // WithEndpoint sets the endpoint.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return msurcpl
 }
 
 // WithFabricIndex sets the fabric index.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return msurcpl
 }
 
 // ProviderNodeID returns the provider node ID.
-func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) ProviderNodeID() obj.Object {
+func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) ProviderNodeID() *foundation.Number {
+	defer runtime.KeepAlive(msurcpl)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("providerNodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoint returns the endpoint.
-func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) Endpoint() obj.Object {
+func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(msurcpl)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) FabricIndex() obj.Object {
+func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(msurcpl)
 	_r := objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTROTASoftwareUpdateRequestorClusterProviderLocation marks MTROTASoftwareUpdateRequestorClusterProviderLocation — and, by embedding promotion, its

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewTableHeaderView() *TableHeaderView {
 
 // WithTableView sets the NSTableView instance that this table header view belongs to.
 func (thv *TableHeaderView) WithTableView(tableView TableViewProvider) *TableHeaderView {
+	defer runtime.KeepAlive(tableView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
 	})
@@ -207,6 +210,7 @@ func (thv *TableHeaderView) WithWantsLayer(wantsLayer bool) *TableHeaderView {
 
 // WithLayer sets the layer.
 func (thv *TableHeaderView) WithLayer(layer obj.Object) *TableHeaderView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -256,6 +260,7 @@ func (thv *TableHeaderView) WithBackgroundFilters(items ...obj.Object) *TableHea
 
 // WithCompositingFilter sets the compositing filter.
 func (thv *TableHeaderView) WithCompositingFilter(compositingFilter obj.Object) *TableHeaderView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -273,6 +278,7 @@ func (thv *TableHeaderView) WithContentFilters(items ...obj.Object) *TableHeader
 
 // WithShadow sets the shadow.
 func (thv *TableHeaderView) WithShadow(shadow *Shadow) *TableHeaderView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -321,6 +327,7 @@ func (thv *TableHeaderView) WithPreparedContentRect(preparedContentRect corefoun
 
 // WithNextKeyView sets the next key view.
 func (thv *TableHeaderView) WithNextKeyView(nextKeyView ViewProvider) *TableHeaderView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -370,6 +377,7 @@ func (thv *TableHeaderView) WithPrefersCompactControlSizeMetrics(prefersCompactC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (thv *TableHeaderView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableHeaderView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -426,6 +434,7 @@ func (thv *TableHeaderView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExte
 
 // WithPressureConfiguration sets the pressure configuration.
 func (thv *TableHeaderView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableHeaderView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -434,6 +443,7 @@ func (thv *TableHeaderView) WithPressureConfiguration(pressureConfiguration *Pre
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (thv *TableHeaderView) WithNextResponder(nextResponder ResponderProvider) *TableHeaderView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -442,6 +452,7 @@ func (thv *TableHeaderView) WithNextResponder(nextResponder ResponderProvider) *
 
 // WithMenu sets returns the responder’s menu.
 func (thv *TableHeaderView) WithMenu(menu *Menu) *TableHeaderView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -450,6 +461,7 @@ func (thv *TableHeaderView) WithMenu(menu *Menu) *TableHeaderView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (thv *TableHeaderView) WithUserActivity(userActivity obj.Object) *TableHeaderView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -458,6 +470,7 @@ func (thv *TableHeaderView) WithUserActivity(userActivity obj.Object) *TableHead
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (thv *TableHeaderView) WithTouchBar(touchBar *TouchBar) *TableHeaderView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -466,6 +479,7 @@ func (thv *TableHeaderView) WithTouchBar(touchBar *TouchBar) *TableHeaderView {
 
 // HeaderRectOfColumn returns the rectangle containing the header tile for the column at columnIndex.
 func (thv *TableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect {
+	defer runtime.KeepAlive(thv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -479,6 +493,7 @@ func (thv *TableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect
 
 // ColumnAtPoint returns the index of the column whose header lies under aPoint in the receiver, or –1 if no such column is found.
 func (thv *TableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(thv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -492,6 +507,7 @@ func (thv *TableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
 
 // TableView returns the table view.
 func (thv *TableHeaderView) TableView() *TableView {
+	defer runtime.KeepAlive(thv)
 	var _mainthread0 *TableView
 	purego.Main(func() {
 		_mainthread0 = func() *TableView {
@@ -505,6 +521,7 @@ func (thv *TableHeaderView) TableView() *TableView {
 
 // DraggedColumn returns the dragged column.
 func (thv *TableHeaderView) DraggedColumn() int {
+	defer runtime.KeepAlive(thv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -518,6 +535,7 @@ func (thv *TableHeaderView) DraggedColumn() int {
 
 // DraggedDistance returns the dragged distance.
 func (thv *TableHeaderView) DraggedDistance() float64 {
+	defer runtime.KeepAlive(thv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -531,6 +549,7 @@ func (thv *TableHeaderView) DraggedDistance() float64 {
 
 // ResizedColumn returns the resized column.
 func (thv *TableHeaderView) ResizedColumn() int {
+	defer runtime.KeepAlive(thv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

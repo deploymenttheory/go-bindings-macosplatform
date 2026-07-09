@@ -6,6 +6,8 @@ package foundation
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +52,27 @@ func uRLCacheAdopt(id objc.ID) *URLCache {
 
 // Description returns the object's -description text.
 func (uc *URLCache) Description() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uc *URLCache) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uc *URLCache) IsKind(className string) bool {
+	defer runtime.KeepAlive(uc)
 	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uc *URLCache) String() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
@@ -102,63 +109,79 @@ func (uc *URLCache) WithObservationInfo(observationInfo unsafe.Pointer) *URLCach
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uc *URLCache) WithScriptingProperties(scriptingProperties obj.Object) *URLCache {
-	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uc *URLCache) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLCache {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uc
 }
 
 // CachedResponseForRequest returns the NSCachedURLResponse stored in the cache with the given request. The method returns nil if there is no NSCachedURLResponse stored using the given request.
 func (uc *URLCache) CachedResponseForRequest(request *URLRequest) *CachedURLResponse {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(request)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("cachedResponseForRequest:"), objref.IDOf(request))
 	return CachedURLResponseFromID(_r)
 }
 
 // StoreCachedResponseForRequest stores the given NSCachedURLResponse in the cache using the given request.
 func (uc *URLCache) StoreCachedResponseForRequest(cachedResponse *CachedURLResponse, request *URLRequest) {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(cachedResponse)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("storeCachedResponse:forRequest:"), objref.IDOf(cachedResponse), objref.IDOf(request))
 }
 
 // RemoveCachedResponseForRequest removes the NSCachedURLResponse from the cache that is stored using the given request. No action is taken if there is no NSCachedURLResponse stored with the given request.
 func (uc *URLCache) RemoveCachedResponseForRequest(request *URLRequest) {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponseForRequest:"), objref.IDOf(request))
 }
 
 // RemoveAllCachedResponses clears the given cache, removing all NSCachedURLResponse objects that it stores.
 func (uc *URLCache) RemoveAllCachedResponses() {
+	defer runtime.KeepAlive(uc)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeAllCachedResponses"))
 }
 
 // RemoveCachedResponsesSinceDate clears the given cache of any cached responses since the provided date.
-func (uc *URLCache) RemoveCachedResponsesSinceDate(date *Date) {
-	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponsesSinceDate:"), objref.IDOf(date))
+func (uc *URLCache) RemoveCachedResponsesSinceDate(date time.Time) {
+	defer runtime.KeepAlive(uc)
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponsesSinceDate:"), rt.TimeToNSDate(date))
 }
 
 // MemoryCapacity returns in-memory capacity of the receiver. At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) MemoryCapacity() int {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("memoryCapacity"))
 	return _r
 }
 
 // DiskCapacity returns the on-disk capacity of the receiver. The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
 func (uc *URLCache) DiskCapacity() int {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("diskCapacity"))
 	return _r
 }
 
 // CurrentMemoryUsage returns the current amount of space consumed by the in-memory cache of the receiver. This size, measured in bytes, indicates the current usage of the in-memory cache.
 func (uc *URLCache) CurrentMemoryUsage() int {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("currentMemoryUsage"))
 	return _r
 }
 
 // CurrentDiskUsage returns the current amount of space consumed by the on-disk cache of the receiver. This size, measured in bytes, indicates the current usage of the on-disk cache.
 func (uc *URLCache) CurrentDiskUsage() int {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[int](objref.IDOf(uc), objc.RegisterName("currentDiskUsage"))
 	return _r
 }
 
 // StoreCachedResponseForDataTask wraps the corresponding Objective-C method.
 func (uc *URLCache) StoreCachedResponseForDataTask(cachedResponse *CachedURLResponse, dataTask *URLSessionDataTask) {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(cachedResponse)
+	defer runtime.KeepAlive(dataTask)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("storeCachedResponse:forDataTask:"), objref.IDOf(cachedResponse), objref.IDOf(dataTask))
 }
 
@@ -166,6 +189,8 @@ func (uc *URLCache) StoreCachedResponseForDataTask(cachedResponse *CachedURLResp
 //
 // GetCachedResponseForDataTask blocks until the operation completes or ctx is cancelled.
 func (uc *URLCache) GetCachedResponseForDataTask(ctx context.Context, dataTask *URLSessionDataTask) (result *CachedURLResponse, err error) {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(dataTask)
 	type _result struct {
 		val *CachedURLResponse
 		err error
@@ -188,5 +213,7 @@ func (uc *URLCache) GetCachedResponseForDataTask(ctx context.Context, dataTask *
 
 // RemoveCachedResponseForDataTask removes cached response for data task.
 func (uc *URLCache) RemoveCachedResponseForDataTask(dataTask *URLSessionDataTask) {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(dataTask)
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("removeCachedResponseForDataTask:"), objref.IDOf(dataTask))
 }

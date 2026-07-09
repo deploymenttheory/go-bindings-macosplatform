@@ -5,6 +5,8 @@
 package quicklookthumbnailing
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func thumbnailReplyAdopt(id objc.ID) *ThumbnailReply {
 
 // Description returns the object's -description text.
 func (tr *ThumbnailReply) Description() string {
+	defer runtime.KeepAlive(tr)
 	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tr *ThumbnailReply) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tr *ThumbnailReply) IsKind(className string) bool {
+	defer runtime.KeepAlive(tr)
 	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tr *ThumbnailReply) String() string {
+	defer runtime.KeepAlive(tr)
 	return rt.Description(objref.IDOf(tr))
 }
 
@@ -80,6 +87,7 @@ func (tr *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailRe
 
 // ExtensionBadge returns the extensionBadge is a short string identifying the file type used as a badge when producing an icon.
 func (tr *ThumbnailReply) ExtensionBadge() string {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("extensionBadge"))
 	if _r == 0 {
 		return ""

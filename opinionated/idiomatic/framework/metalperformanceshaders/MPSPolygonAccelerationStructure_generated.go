@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -89,30 +91,35 @@ func (pas *PolygonAccelerationStructure) WithLabel(label string) *PolygonAcceler
 
 // VertexStride returns offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
 func (pas *PolygonAccelerationStructure) VertexStride() int {
+	defer runtime.KeepAlive(pas)
 	_r := objc.Send[int](objref.IDOf(pas), objc.RegisterName("vertexStride"))
 	return _r
 }
 
 // VertexBufferOffset returns offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 func (pas *PolygonAccelerationStructure) VertexBufferOffset() int {
+	defer runtime.KeepAlive(pas)
 	_r := objc.Send[int](objref.IDOf(pas), objc.RegisterName("vertexBufferOffset"))
 	return _r
 }
 
 // IndexBufferOffset returns offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 func (pas *PolygonAccelerationStructure) IndexBufferOffset() int {
+	defer runtime.KeepAlive(pas)
 	_r := objc.Send[int](objref.IDOf(pas), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
 // MaskBufferOffset returns offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 func (pas *PolygonAccelerationStructure) MaskBufferOffset() int {
+	defer runtime.KeepAlive(pas)
 	_r := objc.Send[int](objref.IDOf(pas), objc.RegisterName("maskBufferOffset"))
 	return _r
 }
 
 // PolygonCount returns number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 func (pas *PolygonAccelerationStructure) PolygonCount() int {
+	defer runtime.KeepAlive(pas)
 	_r := objc.Send[int](objref.IDOf(pas), objc.RegisterName("polygonCount"))
 	return _r
 }
@@ -121,6 +128,7 @@ func (pas *PolygonAccelerationStructure) PolygonCount() int {
 //
 // PolygonBuffers returns the collection as a Go slice.
 func (pas *PolygonAccelerationStructure) PolygonBuffers() []obj.Object {
+	defer runtime.KeepAlive(pas)
 	_arr := objc.Send[objc.ID](objref.IDOf(pas), objc.RegisterName("polygonBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -54,18 +54,75 @@ func MethodName(selector string) string {
 	return name
 }
 
-// ParamName sanitises an ObjC parameter name for use as a Go argument name.
+// ParamName sanitises an ObjC or C parameter name for use as a Go argument
+// name: snake_case becomes camelCase (distributor_base_address →
+// distributorBaseAddress) and a leading upper-case word is lowered as a unit
+// (CPUCount → cpuCount, URLString → urlString, URLs → urls) rather than one
+// letter at a time (never cPUCount). A name that would collide with a Go
+// keyword, builtin, or common package name gets a trailing underscore.
 func ParamName(objcName string) string {
 	if objcName == "" {
 		return "arg"
 	}
-	r := []rune(objcName)
-	r[0] = unicode.ToLower(r[0])
-	name := string(r)
+	name := objcName
+	if strings.Contains(name, "_") {
+		name = snakeToCamel(name)
+	}
+	name = lowerLeadingWord(name)
+	if name == "" {
+		return "arg"
+	}
 	if goReservedWords[name] {
 		name += "_"
 	}
 	return name
+}
+
+// snakeToCamel converts a snake_case parameter name to camelCase: segments
+// after the first have their first letter capitalised; the first segment is
+// left for lowerLeadingWord to case. An underscore-only name collapses to "".
+func snakeToCamel(name string) string {
+	var sb strings.Builder
+	first := true
+	for segment := range strings.SplitSeq(name, "_") {
+		if segment == "" {
+			continue
+		}
+		if first {
+			sb.WriteString(segment)
+			first = false
+			continue
+		}
+		sb.WriteString(capitalise(segment))
+	}
+	return sb.String()
+}
+
+// lowerLeadingWord lowers a name's leading upper-case word as a unit. The word
+// is the leading run of capitals; when the run is followed by a lower-case
+// letter its last capital starts the next word and stays upper (URLString →
+// urlString, AVAsset → avAsset), except for a plural "s" directly after the
+// run (URLs → urls, IDs → ids).
+func lowerLeadingWord(name string) string {
+	runes := []rune(name)
+	if len(runes) == 0 || !unicode.IsUpper(runes[0]) {
+		return name
+	}
+	run := 1
+	for run < len(runes) && unicode.IsUpper(runes[run]) {
+		run++
+	}
+	if run > 1 && run < len(runes) && unicode.IsLetter(runes[run]) {
+		isPluralS := runes[run] == 's' &&
+			(run+1 == len(runes) || !unicode.IsLower(runes[run+1]))
+		if !isPluralS {
+			run-- // the run's last capital starts the following word
+		}
+	}
+	for i := range run {
+		runes[i] = unicode.ToLower(runes[i])
+	}
+	return string(runes)
 }
 
 // PackageName converts a framework name to a Go package name (lowercase).

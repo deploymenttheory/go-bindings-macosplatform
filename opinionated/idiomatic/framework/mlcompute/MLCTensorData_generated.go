@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tensorDataAdopt(id objc.ID) *TensorData {
 
 // Description returns the object's -description text.
 func (td *TensorData) Description() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (td *TensorData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(td)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(td), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (td *TensorData) IsKind(className string) bool {
+	defer runtime.KeepAlive(td)
 	return rt.IsKind(objref.IDOf(td), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (td *TensorData) String() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
@@ -74,6 +81,7 @@ func NewTensorData() *TensorData {
 
 // Length returns the size in bytes of the tensor data
 func (td *TensorData) Length() int {
+	defer runtime.KeepAlive(td)
 	_r := objc.Send[int](objref.IDOf(td), objc.RegisterName("length"))
 	return _r
 }

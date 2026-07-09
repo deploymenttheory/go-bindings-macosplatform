@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iOBluetoothSDPUUIDAdopt(id objc.ID) *IOBluetoothSDPUUID {
 
 // Description returns the object's -description text.
 func (ibs *IOBluetoothSDPUUID) Description() string {
+	defer runtime.KeepAlive(ibs)
 	return rt.Description(objref.IDOf(ibs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibs *IOBluetoothSDPUUID) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibs *IOBluetoothSDPUUID) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibs)
 	return rt.IsKind(objref.IDOf(ibs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibs *IOBluetoothSDPUUID) String() string {
+	defer runtime.KeepAlive(ibs)
 	return rt.Description(objref.IDOf(ibs))
 }
 
@@ -82,18 +89,22 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 
 // SDPUUIDRef returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.
 func (ibs *IOBluetoothSDPUUID) SDPUUIDRef() obj.Object {
+	defer runtime.KeepAlive(ibs)
 	_r := objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("getSDPUUIDRef"))
 	return obj.Wrap(_r)
 }
 
 // GetUUIDWithLength returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.
 func (ibs *IOBluetoothSDPUUID) GetUUIDWithLength(newLength int) *IOBluetoothSDPUUID {
+	defer runtime.KeepAlive(ibs)
 	_r := objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("getUUIDWithLength:"), newLength)
 	return IOBluetoothSDPUUIDFromID(_r)
 }
 
 // IsEqualToUUID compares the target IOBluetoothSDPUUID object with the given otherUUID object.
 func (ibs *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *IOBluetoothSDPUUID) bool {
+	defer runtime.KeepAlive(ibs)
+	defer runtime.KeepAlive(otherUUID)
 	_r := objc.Send[bool](objref.IDOf(ibs), objc.RegisterName("isEqualToUUID:"), objref.IDOf(otherUUID))
 	return _r
 }

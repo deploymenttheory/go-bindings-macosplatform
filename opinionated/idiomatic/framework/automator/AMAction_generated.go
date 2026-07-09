@@ -5,6 +5,7 @@
 package automator
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,34 +53,39 @@ func actionAdopt(id objc.ID) *Action {
 
 // Description returns the object's -description text.
 func (a *Action) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Action) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Action) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Action) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // NewActionWithDefinitionFromArchive initializes the action with the specified definition.
-func NewActionWithDefinitionFromArchive(dict obj.Object, archived bool) *Action {
+func NewActionWithDefinitionFromArchive(dict map[string]obj.Object, archived bool) *Action {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AMAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), objref.IDOf(dict), archived)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), rt.MapToDict(dict, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), archived)
 	return actionAdopt(_id)
 }
 
-// NewActionWithContentsOfURLError loads an Automator action from a file URL.
-func NewActionWithContentsOfURLError(fileURL string) (result *Action, err error) {
+// NewActionWithContentsOfURL loads an Automator action from a file URL.
+func NewActionWithContentsOfURL(fileURL string) (result *Action, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AMAction")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
@@ -115,12 +121,18 @@ func (a *Action) WithOutput(output unsafe.Pointer) *Action {
 
 // RunWithInputFromActionError requests the action to perform its task using the specified input from the specified action.
 func (a *Action) RunWithInputFromActionError(input obj.Object, anAction *Action, errorInfo obj.Object) obj.Object {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(input)
+	defer runtime.KeepAlive(anAction)
+	defer runtime.KeepAlive(errorInfo)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runWithInput:fromAction:error:"), objref.IDOf(input), objref.IDOf(anAction), objref.IDOf(errorInfo))
 	return obj.Wrap(_r)
 }
 
-// RunWithInputError requests the action to perform its task using the specified input.
-func (a *Action) RunWithInputError(input obj.Object) (result obj.Object, err error) {
+// RunWithInput requests the action to perform its task using the specified input.
+func (a *Action) RunWithInput(input obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(input)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runWithInput:error:"), objref.IDOf(input), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -131,83 +143,101 @@ func (a *Action) RunWithInputError(input obj.Object) (result obj.Object, err err
 
 // RunAsynchronouslyWithInput causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.
 func (a *Action) RunAsynchronouslyWithInput(input obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(input)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runAsynchronouslyWithInput:"), objref.IDOf(input))
 }
 
 // WillFinishRunning provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.
 func (a *Action) WillFinishRunning() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("willFinishRunning"))
 }
 
 // DidFinishRunningWithError sent by the action to itself when it has finished running asynchronously.
-func (a *Action) DidFinishRunningWithError(errorInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("didFinishRunningWithError:"), objref.IDOf(errorInfo))
+func (a *Action) DidFinishRunningWithError(errorInfo map[string]obj.Object) {
+	defer runtime.KeepAlive(a)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("didFinishRunningWithError:"), rt.MapToDict(errorInfo, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FinishRunningWithError causes the action to stop running and return an error, which, in turn, causes the workflow to stop.
-func (a *Action) FinishRunningWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("finishRunningWithError:"), error_)
+func (a *Action) FinishRunningWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(a)
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("finishRunningWithError:"), err)
 }
 
 // Stop stops the action from running.
 func (a *Action) Stop() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop"))
 }
 
 // Reset resets the action to its initial state.
 func (a *Action) Reset() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reset"))
 }
 
 // WriteToDictionary examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.
 func (a *Action) WriteToDictionary(dictionary obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(dictionary)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("writeToDictionary:"), objref.IDOf(dictionary))
 }
 
 // Opened allows the action to initialize its user interface.
 func (a *Action) Opened() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("opened"))
 }
 
 // Activated allows the action to synchronize its information with settings in another app.
 func (a *Action) Activated() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activated"))
 }
 
 // Closed invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.
 func (a *Action) Closed() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("closed"))
 }
 
 // UpdateParameters requests the action to update its stored set of parameters from the settings in the action’s user interface.
 func (a *Action) UpdateParameters() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateParameters"))
 }
 
 // ParametersUpdated requests the action to update its user interface from its stored parameters, which have changed.
 func (a *Action) ParametersUpdated() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("parametersUpdated"))
 }
 
 // LogMessageWithLevelFormat displays a message in Automator’s log area.
 func (a *Action) LogMessageWithLevelFormat(level LogLevel, format string) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("logMessageWithLevel:format:"), level, purego.NSString(format))
 }
 
 // IgnoresInput wraps the corresponding Objective-C method.
 func (a *Action) IgnoresInput() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("ignoresInput"))
 	return _r
 }
 
 // ProgressValue returns the progress value.
 func (a *Action) ProgressValue() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("progressValue"))
 	return _r
 }
 
 // IsStopped reports whether the object is stopped.
 func (a *Action) IsStopped() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isStopped"))
 	return _r
 }

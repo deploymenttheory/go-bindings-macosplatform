@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -60,28 +61,33 @@ func (ava *AnimatedVector3Array) WithInterpolation(interpolation AnimatedValueIn
 
 // SetFloat3ArrayCountAtTime wraps the corresponding Objective-C method.
 func (ava *AnimatedVector3Array) SetFloat3ArrayCountAtTime(array unsafe.Pointer, count int, time_ float64) {
+	defer runtime.KeepAlive(ava)
 	objc.Send[objc.ID](objref.IDOf(ava), objc.RegisterName("setFloat3Array:count:atTime:"), array, count, time_)
 }
 
 // SetDouble3ArrayCountAtTime wraps the corresponding Objective-C method.
 func (ava *AnimatedVector3Array) SetDouble3ArrayCountAtTime(array unsafe.Pointer, count int, time_ float64) {
+	defer runtime.KeepAlive(ava)
 	objc.Send[objc.ID](objref.IDOf(ava), objc.RegisterName("setDouble3Array:count:atTime:"), array, count, time_)
 }
 
 // GetFloat3ArrayMaxCountAtTime wraps the corresponding Objective-C method.
 func (ava *AnimatedVector3Array) GetFloat3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount int, time_ float64) int {
+	defer runtime.KeepAlive(ava)
 	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("getFloat3Array:maxCount:atTime:"), array, maxCount, time_)
 	return _r
 }
 
 // GetDouble3ArrayMaxCountAtTime wraps the corresponding Objective-C method.
 func (ava *AnimatedVector3Array) GetDouble3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount int, time_ float64) int {
+	defer runtime.KeepAlive(ava)
 	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("getDouble3Array:maxCount:atTime:"), array, maxCount, time_)
 	return _r
 }
 
 // ResetWithFloat3ArrayCountAtTimesCount resets with float3 array count at times count.
 func (ava *AnimatedVector3Array) ResetWithFloat3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount int, timesCount int) (timesArray float64) {
+	defer runtime.KeepAlive(ava)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(ava), objc.RegisterName("resetWithFloat3Array:count:atTimes:count:"), valuesArray, valuesCount, unsafe.Pointer(&_out0), timesCount)
 	return _out0
@@ -89,6 +95,7 @@ func (ava *AnimatedVector3Array) ResetWithFloat3ArrayCountAtTimesCount(valuesArr
 
 // ResetWithDouble3ArrayCountAtTimesCount resets with double3 array count at times count.
 func (ava *AnimatedVector3Array) ResetWithDouble3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount int, timesCount int) (timesArray float64) {
+	defer runtime.KeepAlive(ava)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(ava), objc.RegisterName("resetWithDouble3Array:count:atTimes:count:"), valuesArray, valuesCount, unsafe.Pointer(&_out0), timesCount)
 	return _out0
@@ -96,18 +103,21 @@ func (ava *AnimatedVector3Array) ResetWithDouble3ArrayCountAtTimesCount(valuesAr
 
 // GetFloat3ArrayMaxCount wraps the corresponding Objective-C method.
 func (ava *AnimatedVector3Array) GetFloat3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(ava)
 	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("getFloat3Array:maxCount:"), valuesArray, maxCount)
 	return _r
 }
 
 // GetDouble3ArrayMaxCount wraps the corresponding Objective-C method.
 func (ava *AnimatedVector3Array) GetDouble3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(ava)
 	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("getDouble3Array:maxCount:"), valuesArray, maxCount)
 	return _r
 }
 
 // ElementCount returns the element count.
 func (ava *AnimatedVector3Array) ElementCount() int {
+	defer runtime.KeepAlive(ava)
 	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("elementCount"))
 	return _r
 }

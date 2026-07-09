@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -110,12 +113,14 @@ func (tc *TreeController) WithSelectionIndexPaths(items ...obj.Object) *TreeCont
 
 // WithSelectionIndexPath sets the index path of the first selected object.
 func (tc *TreeController) WithSelectionIndexPath(selectionIndexPath obj.Object) *TreeController {
+	defer runtime.KeepAlive(selectionIndexPath)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setSelectionIndexPath:"), objref.IDOf(selectionIndexPath))
 	return tc
 }
 
 // WithContent sets the receiver’s content object.
 func (tc *TreeController) WithContent(content obj.Object) *TreeController {
+	defer runtime.KeepAlive(content)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return tc
 }
@@ -134,6 +139,7 @@ func (tc *TreeController) WithEditable(editable bool) *TreeController {
 
 // WithManagedObjectContext sets the receiver’s managed object context.
 func (tc *TreeController) WithManagedObjectContext(managedObjectContext obj.Object) *TreeController {
+	defer runtime.KeepAlive(managedObjectContext)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return tc
 }
@@ -146,6 +152,7 @@ func (tc *TreeController) WithEntityName(entityName string) *TreeController {
 
 // WithFetchPredicate sets the receiver’s fetch predicate.
 func (tc *TreeController) WithFetchPredicate(fetchPredicate obj.Object) *TreeController {
+	defer runtime.KeepAlive(fetchPredicate)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return tc
 }
@@ -158,68 +165,92 @@ func (tc *TreeController) WithUsesLazyFetching(usesLazyFetching bool) *TreeContr
 
 // RearrangeObjects use this method to trigger reordering of the tree controller’s content.
 func (tc *TreeController) RearrangeObjects() {
+	defer runtime.KeepAlive(tc)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("rearrangeObjects"))
 }
 
 // AddChild adds a child object to the currently selected item.
 func (tc *TreeController) AddChild(sender obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("addChild:"), objref.IDOf(sender))
 }
 
 // Insert creates a new object of the class specified by objectClass and inserts it into the tree controller’s content.
 func (tc *TreeController) Insert(sender obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("insert:"), objref.IDOf(sender))
 }
 
 // InsertChild creates a new object of the class specified by objectClass and inserts it into the tree controller’s content as a child of the current selection.
 func (tc *TreeController) InsertChild(sender obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("insertChild:"), objref.IDOf(sender))
 }
 
 // InsertObjectAtArrangedObjectIndexPath inserts object into the tree controller’s arranged objects array at the location specified by indexPath, and adds it to the tree controller’s content.
 func (tc *TreeController) InsertObjectAtArrangedObjectIndexPath(object obj.Object, indexPath obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(indexPath)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("insertObject:atArrangedObjectIndexPath:"), objref.IDOf(object), objref.IDOf(indexPath))
 }
 
 // InsertObjectsAtArrangedObjectIndexPaths inserts objects into the tree controller’s arranged objects array at the locations specified in indexPaths, and adds them to the tree controller’s content.
-func (tc *TreeController) InsertObjectsAtArrangedObjectIndexPaths(objects obj.Object, indexPaths []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("insertObjects:atArrangedObjectIndexPaths:"), objref.IDOf(objects), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (tc *TreeController) InsertObjectsAtArrangedObjectIndexPaths(objects obj.Object, indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(objects)
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("insertObjects:atArrangedObjectIndexPaths:"), objref.IDOf(objects), purego.SliceToNSArray(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveObjectAtArrangedObjectIndexPath removes the object at the specified indexPath in the tree controller’s arranged objects from the tree controller’s content.
 func (tc *TreeController) RemoveObjectAtArrangedObjectIndexPath(indexPath obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(indexPath)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("removeObjectAtArrangedObjectIndexPath:"), objref.IDOf(indexPath))
 }
 
 // RemoveObjectsAtArrangedObjectIndexPaths removes the objects at the specified indexPaths in the tree controller’s arranged objects from the tree controller’s content.
-func (tc *TreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("removeObjectsAtArrangedObjectIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (tc *TreeController) RemoveObjectsAtArrangedObjectIndexPaths(indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(tc)
+	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("removeObjectsAtArrangedObjectIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddSelectionIndexPaths adds the objects at the specified indexPaths in the tree controller’s content to the current selection.
-func (tc *TreeController) AddSelectionIndexPaths(indexPaths []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("addSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (tc *TreeController) AddSelectionIndexPaths(indexPaths []*foundation.IndexPath) bool {
+	defer runtime.KeepAlive(tc)
+	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("addSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // RemoveSelectionIndexPaths removes the objects at the specified index paths from the tree controller’s current selection.
-func (tc *TreeController) RemoveSelectionIndexPaths(indexPaths []obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("removeSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (tc *TreeController) RemoveSelectionIndexPaths(indexPaths []*foundation.IndexPath) bool {
+	defer runtime.KeepAlive(tc)
+	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("removeSelectionIndexPaths:"), purego.SliceToNSArray(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // MoveNodeToIndexPath moves the specified tree node to the new index path.
 func (tc *TreeController) MoveNodeToIndexPath(node *TreeNode, indexPath obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(node)
+	defer runtime.KeepAlive(indexPath)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("moveNode:toIndexPath:"), objref.IDOf(node), objref.IDOf(indexPath))
 }
 
 // MoveNodesToIndexPath moves the specified tree nodes to the new index path.
 func (tc *TreeController) MoveNodesToIndexPath(nodes []*TreeNode, startingIndexPath obj.Object) {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(startingIndexPath)
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("moveNodes:toIndexPath:"), purego.SliceToNSArray(nodes, func(_v *TreeNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(startingIndexPath))
 }
 
 // ChildrenKeyPathForNode returns the key path used to find the children in the specified tree node.
 func (tc *TreeController) ChildrenKeyPathForNode(node *TreeNode) string {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("childrenKeyPathForNode:"), objref.IDOf(node))
 	if _r == 0 {
 		return ""
@@ -229,6 +260,8 @@ func (tc *TreeController) ChildrenKeyPathForNode(node *TreeNode) string {
 
 // CountKeyPathForNode returns the key path that provides the number of children for a specified node.
 func (tc *TreeController) CountKeyPathForNode(node *TreeNode) string {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("countKeyPathForNode:"), objref.IDOf(node))
 	if _r == 0 {
 		return ""
@@ -238,6 +271,8 @@ func (tc *TreeController) CountKeyPathForNode(node *TreeNode) string {
 
 // LeafKeyPathForNode returns the key path that specifies whether the node is a leaf node.
 func (tc *TreeController) LeafKeyPathForNode(node *TreeNode) string {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("leafKeyPathForNode:"), objref.IDOf(node))
 	if _r == 0 {
 		return ""
@@ -247,12 +282,14 @@ func (tc *TreeController) LeafKeyPathForNode(node *TreeNode) string {
 
 // ArrangedObjects returns the arranged objects.
 func (tc *TreeController) ArrangedObjects() *TreeNode {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("arrangedObjects"))
 	return TreeNodeFromID(_r)
 }
 
 // ChildrenKeyPath returns the children key path.
 func (tc *TreeController) ChildrenKeyPath() string {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("childrenKeyPath"))
 	if _r == 0 {
 		return ""
@@ -262,6 +299,7 @@ func (tc *TreeController) ChildrenKeyPath() string {
 
 // CountKeyPath returns the count key path.
 func (tc *TreeController) CountKeyPath() string {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("countKeyPath"))
 	if _r == 0 {
 		return ""
@@ -271,6 +309,7 @@ func (tc *TreeController) CountKeyPath() string {
 
 // LeafKeyPath returns the leaf key path.
 func (tc *TreeController) LeafKeyPath() string {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("leafKeyPath"))
 	if _r == 0 {
 		return ""
@@ -282,48 +321,56 @@ func (tc *TreeController) LeafKeyPath() string {
 //
 // SortDescriptors returns the collection as a Go slice.
 func (tc *TreeController) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(tc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CanInsert wraps the corresponding Objective-C method.
 func (tc *TreeController) CanInsert() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("canInsert"))
 	return _r
 }
 
 // CanInsertChild wraps the corresponding Objective-C method.
 func (tc *TreeController) CanInsertChild() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("canInsertChild"))
 	return _r
 }
 
 // CanAddChild wraps the corresponding Objective-C method.
 func (tc *TreeController) CanAddChild() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("canAddChild"))
 	return _r
 }
 
 // AvoidsEmptySelection wraps the corresponding Objective-C method.
 func (tc *TreeController) AvoidsEmptySelection() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("avoidsEmptySelection"))
 	return _r
 }
 
 // PreservesSelection wraps the corresponding Objective-C method.
 func (tc *TreeController) PreservesSelection() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("preservesSelection"))
 	return _r
 }
 
 // SelectsInsertedObjects wraps the corresponding Objective-C method.
 func (tc *TreeController) SelectsInsertedObjects() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("selectsInsertedObjects"))
 	return _r
 }
 
 // AlwaysUsesMultipleValuesMarker wraps the corresponding Objective-C method.
 func (tc *TreeController) AlwaysUsesMultipleValuesMarker() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("alwaysUsesMultipleValuesMarker"))
 	return _r
 }
@@ -332,20 +379,23 @@ func (tc *TreeController) AlwaysUsesMultipleValuesMarker() bool {
 //
 // SelectionIndexPaths returns the collection as a Go slice.
 func (tc *TreeController) SelectionIndexPaths() []obj.Object {
+	defer runtime.KeepAlive(tc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("selectionIndexPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SelectionIndexPath returns the selection index path.
-func (tc *TreeController) SelectionIndexPath() obj.Object {
+func (tc *TreeController) SelectionIndexPath() *foundation.IndexPath {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("selectionIndexPath"))
-	return obj.Wrap(_r)
+	return foundation.IndexPathFromID(_r)
 }
 
 // SelectedNodes returns the selected nodes.
 //
 // SelectedNodes returns the collection as a Go slice.
 func (tc *TreeController) SelectedNodes() []*TreeNode {
+	defer runtime.KeepAlive(tc)
 	_arr := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("selectedNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }

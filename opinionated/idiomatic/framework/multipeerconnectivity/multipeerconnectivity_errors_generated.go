@@ -8,23 +8,23 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the MultipeerConnectivity error MCErrorUnknown.
-var ErrUnknown = errkit.New("MCErrorDomain", 0)
-
-// ErrNotConnected matches the MultipeerConnectivity error MCErrorNotConnected.
-var ErrNotConnected = errkit.New("MCErrorDomain", 1)
+// ErrCancelled matches the MultipeerConnectivity error MCErrorCancelled.
+var ErrCancelled = errkit.New("MCErrorDomain", 5)
 
 // ErrInvalidParameter matches the MultipeerConnectivity error MCErrorInvalidParameter.
 var ErrInvalidParameter = errkit.New("MCErrorDomain", 2)
 
-// ErrUnsupported matches the MultipeerConnectivity error MCErrorUnsupported.
-var ErrUnsupported = errkit.New("MCErrorDomain", 3)
+// ErrNotConnected matches the MultipeerConnectivity error MCErrorNotConnected.
+var ErrNotConnected = errkit.New("MCErrorDomain", 1)
 
 // ErrTimedOut matches the MultipeerConnectivity error MCErrorTimedOut.
 var ErrTimedOut = errkit.New("MCErrorDomain", 4)
 
-// ErrCancelled matches the MultipeerConnectivity error MCErrorCancelled.
-var ErrCancelled = errkit.New("MCErrorDomain", 5)
-
 // ErrUnavailable matches the MultipeerConnectivity error MCErrorUnavailable.
 var ErrUnavailable = errkit.New("MCErrorDomain", 6)
+
+// ErrUnknown matches the MultipeerConnectivity error MCErrorUnknown.
+var ErrUnknown = errkit.New("MCErrorDomain", 0)
+
+// ErrUnsupported matches the MultipeerConnectivity error MCErrorUnsupported.
+var ErrUnsupported = errkit.New("MCErrorDomain", 3)

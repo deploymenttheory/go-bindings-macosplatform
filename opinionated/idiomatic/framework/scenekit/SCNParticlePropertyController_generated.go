@@ -5,7 +5,10 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func particlePropertyControllerAdopt(id objc.ID) *ParticlePropertyController {
 
 // Description returns the object's -description text.
 func (ppc *ParticlePropertyController) Description() string {
+	defer runtime.KeepAlive(ppc)
 	return rt.Description(objref.IDOf(ppc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ppc *ParticlePropertyController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ppc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ppc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ppc *ParticlePropertyController) IsKind(className string) bool {
+	defer runtime.KeepAlive(ppc)
 	return rt.IsKind(objref.IDOf(ppc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ppc *ParticlePropertyController) String() string {
+	defer runtime.KeepAlive(ppc)
 	return rt.Description(objref.IDOf(ppc))
 }
 
@@ -74,6 +82,7 @@ func NewParticlePropertyController() *ParticlePropertyController {
 
 // WithAnimation sets the Core Animation object defining the behavior of the property animation.
 func (ppc *ParticlePropertyController) WithAnimation(animation obj.Object) *ParticlePropertyController {
+	defer runtime.KeepAlive(animation)
 	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setAnimation:"), objref.IDOf(animation))
 	return ppc
 }
@@ -98,48 +107,56 @@ func (ppc *ParticlePropertyController) WithInputBias(inputBias float64) *Particl
 
 // WithInputOrigin sets a node whose distance to each particle provides input values for the controller’s animation.
 func (ppc *ParticlePropertyController) WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController {
+	defer runtime.KeepAlive(inputOrigin)
 	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputOrigin:"), objref.IDOf(inputOrigin))
 	return ppc
 }
 
 // WithInputProperty sets a particle property that provides input values for this property controller’s animation.
 func (ppc *ParticlePropertyController) WithInputProperty(inputProperty obj.Object) *ParticlePropertyController {
+	defer runtime.KeepAlive(inputProperty)
 	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setInputProperty:"), objref.IDOf(inputProperty))
 	return ppc
 }
 
 // Animation returns the animation.
 func (ppc *ParticlePropertyController) Animation() obj.Object {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("animation"))
 	return obj.Wrap(_r)
 }
 
 // InputMode returns the input mode.
 func (ppc *ParticlePropertyController) InputMode() ParticleInputMode {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[ParticleInputMode](objref.IDOf(ppc), objc.RegisterName("inputMode"))
 	return _r
 }
 
 // InputScale returns the input scale.
 func (ppc *ParticlePropertyController) InputScale() float64 {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[float64](objref.IDOf(ppc), objc.RegisterName("inputScale"))
 	return _r
 }
 
 // InputBias returns the input bias.
 func (ppc *ParticlePropertyController) InputBias() float64 {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[float64](objref.IDOf(ppc), objc.RegisterName("inputBias"))
 	return _r
 }
 
 // InputOrigin returns the input origin.
 func (ppc *ParticlePropertyController) InputOrigin() *Node {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("inputOrigin"))
 	return NodeFromID(_r)
 }
 
 // InputProperty returns the input property.
-func (ppc *ParticlePropertyController) InputProperty() obj.Object {
+func (ppc *ParticlePropertyController) InputProperty() *foundation.String {
+	defer runtime.KeepAlive(ppc)
 	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("inputProperty"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

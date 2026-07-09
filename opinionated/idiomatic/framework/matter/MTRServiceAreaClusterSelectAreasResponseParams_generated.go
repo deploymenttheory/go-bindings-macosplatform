@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRServiceAreaClusterSelectAreasResponseParamsAdopt(id objc.ID) *MTRService
 
 // Description returns the object's -description text.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) Description() string {
+	defer runtime.KeepAlive(msacsarp)
 	return rt.Description(objref.IDOf(msacsarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msacsarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msacsarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(msacsarp)
 	return rt.IsKind(objref.IDOf(msacsarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) String() string {
+	defer runtime.KeepAlive(msacsarp)
 	return rt.Description(objref.IDOf(msacsarp))
 }
 
-// NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError initialize an MTRServiceAreaClusterSelectAreasResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRServiceAreaClusterSelectAreasResponseParams, err error) {
+// NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValue initialize an MTRServiceAreaClusterSelectAreasResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRServiceAreaClusterSelectAreasResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterSelectAreasResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError(res
 
 // WithStatus sets the status.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) WithStatus(status obj.Object) *MTRServiceAreaClusterSelectAreasResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return msacsarp
 }
@@ -91,13 +99,15 @@ func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) WithStatusText(s
 }
 
 // Status returns the status.
-func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) Status() obj.Object {
+func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(msacsarp)
 	_r := objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusText returns the status text.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) StatusText() string {
+	defer runtime.KeepAlive(msacsarp)
 	_r := objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""

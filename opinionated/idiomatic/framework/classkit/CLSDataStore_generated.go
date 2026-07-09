@@ -6,6 +6,7 @@ package classkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func dataStoreAdopt(id objc.ID) *DataStore {
 
 // Description returns the object's -description text.
 func (ds *DataStore) Description() string {
+	defer runtime.KeepAlive(ds)
 	return rt.Description(objref.IDOf(ds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ds *DataStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ds *DataStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(ds)
 	return rt.IsKind(objref.IDOf(ds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ds *DataStore) String() string {
+	defer runtime.KeepAlive(ds)
 	return rt.Description(objref.IDOf(ds))
 }
 
@@ -79,6 +85,7 @@ func NewDataStore() *DataStore {
 //
 // SaveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (ds *DataStore) SaveWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(ds)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -96,23 +103,27 @@ func (ds *DataStore) SaveWithCompletion(ctx context.Context) error {
 
 // CompleteAllAssignedActivitiesMatching marks all of the assigned and active activities for the given context path as complete.
 func (ds *DataStore) CompleteAllAssignedActivitiesMatching(contextPath []string) {
+	defer runtime.KeepAlive(ds)
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("completeAllAssignedActivitiesMatching:"), purego.SliceToNSArray(contextPath, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // MainAppContext returns fetch the top level context for the current app. The main context is automatically created. Add child contexts to this context to persist them in the data store.
 func (ds *DataStore) MainAppContext() *Context {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("mainAppContext"))
 	return ContextFromID(_r)
 }
 
 // ActiveContext returns the context that is currently active. If no context is active, this will return nil.
 func (ds *DataStore) ActiveContext() *Context {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("activeContext"))
 	return ContextFromID(_r)
 }
 
 // RunningActivity returns the most recently started activity that is running.
 func (ds *DataStore) RunningActivity() *Activity {
+	defer runtime.KeepAlive(ds)
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("runningActivity"))
 	return ActivityFromID(_r)
 }
@@ -121,6 +132,8 @@ func (ds *DataStore) RunningActivity() *Activity {
 //
 // ContextsMatchingPredicateCompletion blocks until the operation completes or ctx is cancelled.
 func (ds *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ds)
+	defer runtime.KeepAlive(predicate)
 	type _result struct {
 		val obj.Object
 		err error
@@ -146,6 +159,7 @@ func (ds *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, pr
 //
 // ContextsMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
 func (ds *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ds)
 	type _result struct {
 		val obj.Object
 		err error
@@ -169,6 +183,8 @@ func (ds *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Contex
 
 // RemoveContext marks a context for removal.
 func (ds *DataStore) RemoveContext(context_ *Context) {
+	defer runtime.KeepAlive(ds)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("removeContext:"), objref.IDOf(context_))
 }
 
@@ -176,6 +192,7 @@ func (ds *DataStore) RemoveContext(context_ *Context) {
 //
 // FetchActivityForURLCompletion blocks until the operation completes or ctx is cancelled.
 func (ds *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (result *Activity, err error) {
+	defer runtime.KeepAlive(ds)
 	type _result struct {
 		val *Activity
 		err error

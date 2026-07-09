@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func passwordCredentialIdentityAdopt(id objc.ID) *PasswordCredentialIdentity {
 
 // Description returns the object's -description text.
 func (pci *PasswordCredentialIdentity) Description() string {
+	defer runtime.KeepAlive(pci)
 	return rt.Description(objref.IDOf(pci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pci *PasswordCredentialIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pci *PasswordCredentialIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(pci)
 	return rt.IsKind(objref.IDOf(pci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pci *PasswordCredentialIdentity) String() string {
+	defer runtime.KeepAlive(pci)
 	return rt.Description(objref.IDOf(pci))
 }
 
 // NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier initializes a password credential identity.
 func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
+	defer runtime.KeepAlive(serviceIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialIdentity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:user:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(user), purego.NSString(recordIdentifier))
 	return passwordCredentialIdentityAdopt(_id)
@@ -81,12 +89,14 @@ func (pci *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIde
 
 // ServiceIdentifier get the service identifier.
 func (pci *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("serviceIdentifier"))
 	return CredentialServiceIdentifierFromID(_r)
 }
 
 // User get the user.
 func (pci *PasswordCredentialIdentity) User() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
@@ -96,6 +106,7 @@ func (pci *PasswordCredentialIdentity) User() string {
 
 // RecordIdentifier get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (pci *PasswordCredentialIdentity) RecordIdentifier() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
 		return ""
@@ -105,6 +116,7 @@ func (pci *PasswordCredentialIdentity) RecordIdentifier() string {
 
 // Rank get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
 func (pci *PasswordCredentialIdentity) Rank() int {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[int](objref.IDOf(pci), objc.RegisterName("rank"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (gml *GramMatrixLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Gra
 
 // Scale returns the scale factor
 func (gml *GramMatrixLayer) Scale() float32 {
+	defer runtime.KeepAlive(gml)
 	_r := objc.Send[float32](objref.IDOf(gml), objc.RegisterName("scale"))
 	return _r
 }

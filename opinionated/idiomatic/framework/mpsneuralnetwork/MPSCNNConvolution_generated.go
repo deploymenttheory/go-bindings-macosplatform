@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -83,71 +85,83 @@ func (cc *CNNConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelM
 
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
 func (cc *CNNConvolution) ReloadWeightsAndBiasesFromDataSource() {
+	defer runtime.KeepAlive(cc)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
 // InputFeatureChannels returns the number of feature channels per pixel in the input image.
 func (cc *CNNConvolution) InputFeatureChannels() int {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels per pixel in the output image.
 func (cc *CNNConvolution) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // Groups returns number of groups input and output channels are divided into.
 func (cc *CNNConvolution) Groups() int {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("groups"))
 	return _r
 }
 
 // SubPixelScaleFactor returns sub pixel scale factor which was passed in as part of MPSCNNConvolutionDescriptor when creating this MPSCNNConvolution object.
 func (cc *CNNConvolution) SubPixelScaleFactor() int {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("subPixelScaleFactor"))
 	return _r
 }
 
 // NeuronType returns the type of neuron to append to the convolution Please see class description for a full list. Default is MPSCNNNeuronTypeNone.
 func (cc *CNNConvolution) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(cc), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // NeuronParameterA returns parameter "a" for the neuron.  Default: 1.0f Please see class description for interpretation of a.
 func (cc *CNNConvolution) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns parameter "b" for the neuron.  Default: 1.0f Please see class description for interpretation of b.
 func (cc *CNNConvolution) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns parameter "c" for the neuron.  Default: 1.0f Please see class description for interpretation of c.
 func (cc *CNNConvolution) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // FusedNeuronDescriptor returns fused neuron descritor passed in convolution descriptor for fusion with convolution. Please see class description for interpretation of c.
 func (cc *CNNConvolution) FusedNeuronDescriptor() *NNNeuronDescriptor {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("fusedNeuronDescriptor"))
 	return NNNeuronDescriptorFromID(_r)
 }
 
 // ChannelMultiplier returns channel multiplier. For convolution created with MPSCNNDepthWiseConvolutionDescriptor, it is the number of output feature channels for each input channel. See MPSCNNDepthWiseConvolutionDescriptor for more details. Default is 0 which means regular CNN convolution.
 func (cc *CNNConvolution) ChannelMultiplier() int {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[int](objref.IDOf(cc), objc.RegisterName("channelMultiplier"))
 	return _r
 }
 
 // AccumulatorPrecisionOption returns precision of accumulator used in convolution. See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
 func (cc *CNNConvolution) AccumulatorPrecisionOption() NNConvolutionAccumulatorPrecisionOption {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[NNConvolutionAccumulatorPrecisionOption](objref.IDOf(cc), objc.RegisterName("accumulatorPrecisionOption"))
 	return _r
 }

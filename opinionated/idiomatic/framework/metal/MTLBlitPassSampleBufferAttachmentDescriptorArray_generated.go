@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func blitPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *BlitPassSam
 
 // Description returns the object's -description text.
 func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(bpsbada)
 	return rt.Description(objref.IDOf(bpsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bpsbada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bpsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(bpsbada)
 	return rt.IsKind(objref.IDOf(bpsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(bpsbada)
 	return rt.Description(objref.IDOf(bpsbada))
 }
 
@@ -74,11 +81,14 @@ func NewBlitPassSampleBufferAttachmentDescriptorArray() *BlitPassSampleBufferAtt
 
 // ObjectAtIndexedSubscript accesses one of the array’s blit pass sample buffer attachment descriptor instances.
 func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor {
+	defer runtime.KeepAlive(bpsbada)
 	_r := objc.Send[objc.ID](objref.IDOf(bpsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return BlitPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
 func (bpsbada *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(bpsbada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(bpsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

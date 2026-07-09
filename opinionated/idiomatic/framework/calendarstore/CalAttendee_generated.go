@@ -5,6 +5,8 @@
 package calendarstore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func calAttendeeAdopt(id objc.ID) *CalAttendee {
 
 // Description returns the object's -description text.
 func (ca *CalAttendee) Description() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ca *CalAttendee) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ca *CalAttendee) IsKind(className string) bool {
+	defer runtime.KeepAlive(ca)
 	return rt.IsKind(objref.IDOf(ca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ca *CalAttendee) String() string {
+	defer runtime.KeepAlive(ca)
 	return rt.Description(objref.IDOf(ca))
 }
 
@@ -71,13 +78,15 @@ func NewCalAttendee() *CalAttendee {
 }
 
 // Address returns the address.
-func (ca *CalAttendee) Address() obj.Object {
+func (ca *CalAttendee) Address() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("address"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CommonName returns the common name.
 func (ca *CalAttendee) CommonName() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("commonName"))
 	if _r == 0 {
 		return ""
@@ -87,6 +96,7 @@ func (ca *CalAttendee) CommonName() string {
 
 // Status returns the status.
 func (ca *CalAttendee) Status() string {
+	defer runtime.KeepAlive(ca)
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("status"))
 	if _r == 0 {
 		return ""

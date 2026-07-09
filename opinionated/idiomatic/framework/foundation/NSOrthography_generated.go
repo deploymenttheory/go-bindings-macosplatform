@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,34 +50,40 @@ func orthographyAdopt(id objc.ID) *Orthography {
 
 // Description returns the object's -description text.
 func (o *Orthography) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Orthography) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Orthography) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Orthography) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // NewOrthographyWithDominantScriptLanguageMap creates an orthography object with the specified dominant script and language map.
-func NewOrthographyWithDominantScriptLanguageMap(script string, map_ obj.Object) *Orthography {
+func NewOrthographyWithDominantScriptLanguageMap(script string, map_ map[string]obj.Object) *Orthography {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDominantScript:languageMap:"), purego.NSString(script), objref.IDOf(map_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDominantScript:languageMap:"), purego.NSString(script), rt.MapToDict(map_, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orthographyAdopt(_id)
 }
 
 // NewOrthographyWithCoder creates a new Orthography.
 func NewOrthographyWithCoder(coder *Coder) *Orthography {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrthography")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return orthographyAdopt(_id)
@@ -89,13 +96,14 @@ func (o *Orthography) WithObservationInfo(observationInfo unsafe.Pointer) *Ortho
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (o *Orthography) WithScriptingProperties(scriptingProperties obj.Object) *Orthography {
-	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (o *Orthography) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Orthography {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return o
 }
 
 // DominantScript returns the dominant script.
 func (o *Orthography) DominantScript() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantScript"))
 	if _r == 0 {
 		return ""
@@ -104,19 +112,22 @@ func (o *Orthography) DominantScript() string {
 }
 
 // LanguageMap returns the language map.
-func (o *Orthography) LanguageMap() obj.Object {
+func (o *Orthography) LanguageMap() map[string]obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("languageMap"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LanguagesForScript returns the list of languages for the specified script.
 func (o *Orthography) LanguagesForScript(script string) []string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("languagesForScript:"), purego.NSString(script))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DominantLanguageForScript returns the dominant language for the specified script.
 func (o *Orthography) DominantLanguageForScript(script string) string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantLanguageForScript:"), purego.NSString(script))
 	if _r == 0 {
 		return ""
@@ -126,6 +137,7 @@ func (o *Orthography) DominantLanguageForScript(script string) string {
 
 // DominantLanguage returns the dominant language.
 func (o *Orthography) DominantLanguage() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dominantLanguage"))
 	if _r == 0 {
 		return ""
@@ -137,6 +149,7 @@ func (o *Orthography) DominantLanguage() string {
 //
 // AllScripts returns the collection as a Go slice.
 func (o *Orthography) AllScripts() []string {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("allScripts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -145,6 +158,7 @@ func (o *Orthography) AllScripts() []string {
 //
 // AllLanguages returns the collection as a Go slice.
 func (o *Orthography) AllLanguages() []string {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("allLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

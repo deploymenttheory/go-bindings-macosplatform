@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterCluster
 
 // WithFabricIndex sets the fabric index.
 func (mtcctfsee *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mtcctfsee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mtcctfsee
 }

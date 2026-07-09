@@ -5,6 +5,9 @@
 package classkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,35 +52,42 @@ func objectAdopt(id objc.ID) *Object {
 
 // Description returns the object's -description text.
 func (o *Object) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Object) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Object) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Object) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // DateCreated returns the date this object was created.
-func (o *Object) DateCreated() obj.Object {
+func (o *Object) DateCreated() time.Time {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dateCreated"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DateLastModified returns the date this object was last modified.
-func (o *Object) DateLastModified() obj.Object {
+func (o *Object) DateLastModified() time.Time {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("dateLastModified"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // isObject marks Object — and, by embedding promotion, its

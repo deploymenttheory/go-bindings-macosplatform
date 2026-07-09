@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nWHostEndpointAdopt(id objc.ID) *NWHostEndpoint {
 
 // Description returns the object's -description text.
 func (nhe *NWHostEndpoint) Description() string {
+	defer runtime.KeepAlive(nhe)
 	return rt.Description(objref.IDOf(nhe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nhe *NWHostEndpoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nhe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nhe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nhe *NWHostEndpoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(nhe)
 	return rt.IsKind(objref.IDOf(nhe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nhe *NWHostEndpoint) String() string {
+	defer runtime.KeepAlive(nhe)
 	return rt.Description(objref.IDOf(nhe))
 }
 
@@ -74,6 +81,7 @@ func NewNWHostEndpoint() *NWHostEndpoint {
 
 // Hostname returns the endpoint's hostname.
 func (nhe *NWHostEndpoint) Hostname() string {
+	defer runtime.KeepAlive(nhe)
 	_r := objc.Send[objc.ID](objref.IDOf(nhe), objc.RegisterName("hostname"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (nhe *NWHostEndpoint) Hostname() string {
 
 // Port returns the endpoint's port.
 func (nhe *NWHostEndpoint) Port() string {
+	defer runtime.KeepAlive(nhe)
 	_r := objc.Send[objc.ID](objref.IDOf(nhe), objc.RegisterName("port"))
 	if _r == 0 {
 		return ""

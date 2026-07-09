@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func accelerationStructureGeometryDescriptorAdopt(id objc.ID) *AccelerationStruc
 
 // Description returns the object's -description text.
 func (asgd *AccelerationStructureGeometryDescriptor) Description() string {
+	defer runtime.KeepAlive(asgd)
 	return rt.Description(objref.IDOf(asgd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asgd *AccelerationStructureGeometryDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asgd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asgd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asgd *AccelerationStructureGeometryDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(asgd)
 	return rt.IsKind(objref.IDOf(asgd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asgd *AccelerationStructureGeometryDescriptor) String() string {
+	defer runtime.KeepAlive(asgd)
 	return rt.Description(objref.IDOf(asgd))
 }
 
@@ -112,24 +119,28 @@ func (asgd *AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSiz
 
 // IntersectionFunctionTableOffset returns the intersection function table offset.
 func (asgd *AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() int {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("intersectionFunctionTableOffset"))
 	return _r
 }
 
 // Opaque reports whether the geometry is opaque
 func (asgd *AccelerationStructureGeometryDescriptor) Opaque() bool {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[bool](objref.IDOf(asgd), objc.RegisterName("opaque"))
 	return _r
 }
 
 // AllowDuplicateIntersectionFunctionInvocation reports whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to true.
 func (asgd *AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[bool](objref.IDOf(asgd), objc.RegisterName("allowDuplicateIntersectionFunctionInvocation"))
 	return _r
 }
 
 // Label returns label
 func (asgd *AccelerationStructureGeometryDescriptor) Label() string {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[objc.ID](objref.IDOf(asgd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -139,18 +150,21 @@ func (asgd *AccelerationStructureGeometryDescriptor) Label() string {
 
 // PrimitiveDataBufferOffset returns primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
 func (asgd *AccelerationStructureGeometryDescriptor) PrimitiveDataBufferOffset() int {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("primitiveDataBufferOffset"))
 	return _r
 }
 
 // PrimitiveDataStride returns stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
 func (asgd *AccelerationStructureGeometryDescriptor) PrimitiveDataStride() int {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("primitiveDataStride"))
 	return _r
 }
 
 // PrimitiveDataElementSize returns size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
 func (asgd *AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() int {
+	defer runtime.KeepAlive(asgd)
 	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("primitiveDataElementSize"))
 	return _r
 }

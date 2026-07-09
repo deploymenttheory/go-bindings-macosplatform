@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func brailleTranslationResultAdopt(id objc.ID) *BrailleTranslationResult {
 
 // Description returns the object's -description text.
 func (btr *BrailleTranslationResult) Description() string {
+	defer runtime.KeepAlive(btr)
 	return rt.Description(objref.IDOf(btr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (btr *BrailleTranslationResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(btr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(btr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (btr *BrailleTranslationResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(btr)
 	return rt.IsKind(objref.IDOf(btr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (btr *BrailleTranslationResult) String() string {
+	defer runtime.KeepAlive(btr)
 	return rt.Description(objref.IDOf(btr))
 }
 
@@ -74,6 +81,7 @@ func NewBrailleTranslationResult() *BrailleTranslationResult {
 
 // ResultString returns the resulting string after translation or back-translation.
 func (btr *BrailleTranslationResult) ResultString() string {
+	defer runtime.KeepAlive(btr)
 	_r := objc.Send[objc.ID](objref.IDOf(btr), objc.RegisterName("resultString"))
 	if _r == 0 {
 		return ""
@@ -85,6 +93,7 @@ func (btr *BrailleTranslationResult) ResultString() string {
 //
 // LocationMap returns the collection as a Go slice.
 func (btr *BrailleTranslationResult) LocationMap() []obj.Object {
+	defer runtime.KeepAlive(btr)
 	_arr := objc.Send[objc.ID](objref.IDOf(btr), objc.RegisterName("locationMap"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

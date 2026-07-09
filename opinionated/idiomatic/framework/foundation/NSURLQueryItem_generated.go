@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLQueryItemAdopt(id objc.ID) *URLQueryItem {
 
 // Description returns the object's -description text.
 func (uqi *URLQueryItem) Description() string {
+	defer runtime.KeepAlive(uqi)
 	return rt.Description(objref.IDOf(uqi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uqi *URLQueryItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uqi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uqi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uqi *URLQueryItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(uqi)
 	return rt.IsKind(objref.IDOf(uqi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uqi *URLQueryItem) String() string {
+	defer runtime.KeepAlive(uqi)
 	return rt.Description(objref.IDOf(uqi))
 }
 
@@ -82,13 +88,14 @@ func (uqi *URLQueryItem) WithObservationInfo(observationInfo unsafe.Pointer) *UR
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uqi *URLQueryItem) WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem {
-	objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uqi *URLQueryItem) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLQueryItem {
+	objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uqi
 }
 
 // Name returns the name.
 func (uqi *URLQueryItem) Name() string {
+	defer runtime.KeepAlive(uqi)
 	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -98,6 +105,7 @@ func (uqi *URLQueryItem) Name() string {
 
 // Value returns the value.
 func (uqi *URLQueryItem) Value() string {
+	defer runtime.KeepAlive(uqi)
 	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

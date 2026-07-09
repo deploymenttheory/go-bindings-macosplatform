@@ -5,6 +5,8 @@
 package systemextensions
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func systemExtensionsWorkspaceAdopt(id objc.ID) *SystemExtensionsWorkspace {
 
 // Description returns the object's -description text.
 func (sew *SystemExtensionsWorkspace) Description() string {
+	defer runtime.KeepAlive(sew)
 	return rt.Description(objref.IDOf(sew))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sew *SystemExtensionsWorkspace) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sew)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sew), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sew *SystemExtensionsWorkspace) IsKind(className string) bool {
+	defer runtime.KeepAlive(sew)
 	return rt.IsKind(objref.IDOf(sew), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sew *SystemExtensionsWorkspace) String() string {
+	defer runtime.KeepAlive(sew)
 	return rt.Description(objref.IDOf(sew))
 }
 

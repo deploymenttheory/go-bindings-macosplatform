@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func predicateAdopt(id objc.ID) *Predicate {
 
 // Description returns the object's -description text.
 func (p *Predicate) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Predicate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Predicate) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Predicate) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -77,36 +83,43 @@ func (p *Predicate) WithObservationInfo(observationInfo unsafe.Pointer) *Predica
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (p *Predicate) WithScriptingProperties(scriptingProperties obj.Object) *Predicate {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (p *Predicate) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Predicate {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return p
 }
 
 // PredicateWithSubstitutionVariables returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
-func (p *Predicate) PredicateWithSubstitutionVariables(variables obj.Object) *Predicate {
-	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateWithSubstitutionVariables:"), objref.IDOf(variables))
+func (p *Predicate) PredicateWithSubstitutionVariables(variables map[string]obj.Object) *Predicate {
+	defer runtime.KeepAlive(p)
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateWithSubstitutionVariables:"), rt.MapToDict(variables, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return PredicateFromID(_r)
 }
 
-// EvaluateWithObject returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
-func (p *Predicate) EvaluateWithObject(object obj.Object) bool {
+// Evaluate returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
+func (p *Predicate) Evaluate(object obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(object)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("evaluateWithObject:"), objref.IDOf(object))
 	return _r
 }
 
 // EvaluateWithObjectSubstitutionVariables returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
-func (p *Predicate) EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("evaluateWithObject:substitutionVariables:"), objref.IDOf(object), objref.IDOf(bindings))
+func (p *Predicate) EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings map[string]obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("evaluateWithObject:substitutionVariables:"), objref.IDOf(object), rt.MapToDict(bindings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // AllowEvaluation forces a securely decoded predicate to allow evaluation.
 func (p *Predicate) AllowEvaluation() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("allowEvaluation"))
 }
 
 // PredicateFormat returns the predicate format.
 func (p *Predicate) PredicateFormat() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateFormat"))
 	if _r == 0 {
 		return ""

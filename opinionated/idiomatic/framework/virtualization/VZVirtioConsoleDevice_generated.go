@@ -5,8 +5,11 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,8 +54,19 @@ func NewVirtioConsoleDevice() *VirtioConsoleDevice {
 	return virtioConsoleDeviceAdopt(_id)
 }
 
+// WithDelegate sets the delegate object for the console device.
+func (vcd *VirtioConsoleDevice) WithDelegate(delegate VirtioConsoleDeviceDelegate) *VirtioConsoleDevice {
+	_shim := newVirtioConsoleDeviceDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(vcd), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(vcd), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return vcd
+}
+
 // Ports returns the console ports currently being used by this console device.
 func (vcd *VirtioConsoleDevice) Ports() *VirtioConsolePortArray {
+	defer runtime.KeepAlive(vcd)
 	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("ports"))
 	return VirtioConsolePortArrayFromID(_r)
 }

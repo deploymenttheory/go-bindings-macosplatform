@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTargetNavigatorClusterTargetUpdatedEventAdopt(id objc.ID) *MTRTargetNavi
 
 // Description returns the object's -description text.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) Description() string {
+	defer runtime.KeepAlive(mtnctue)
 	return rt.Description(objref.IDOf(mtnctue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtnctue)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtnctue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtnctue)
 	return rt.IsKind(objref.IDOf(mtnctue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) String() string {
+	defer runtime.KeepAlive(mtnctue)
 	return rt.Description(objref.IDOf(mtnctue))
 }
 
@@ -72,35 +80,41 @@ func NewMTRTargetNavigatorClusterTargetUpdatedEvent() *MTRTargetNavigatorCluster
 
 // WithCurrentTarget sets the current target.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithCurrentTarget(currentTarget obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
+	defer runtime.KeepAlive(currentTarget)
 	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
 	return mtnctue
 }
 
 // WithData sets the data.
-func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
-	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setData:"), objref.IDOf(data))
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data []byte) *MTRTargetNavigatorClusterTargetUpdatedEvent {
+	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return mtnctue
 }
 
 // TargetList returns the target list.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() obj.Object {
+	defer runtime.KeepAlive(mtnctue)
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("targetList"))
 	return obj.Wrap(_r)
 }
 
 // SetTargetList wraps the corresponding Objective-C method.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList obj.Object) {
+	defer runtime.KeepAlive(mtnctue)
+	defer runtime.KeepAlive(targetList)
 	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setTargetList:"), objref.IDOf(targetList))
 }
 
 // CurrentTarget returns the current target.
-func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() obj.Object {
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() *foundation.Number {
+	defer runtime.KeepAlive(mtnctue)
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("currentTarget"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
-func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() obj.Object {
+func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() []byte {
+	defer runtime.KeepAlive(mtnctue)
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

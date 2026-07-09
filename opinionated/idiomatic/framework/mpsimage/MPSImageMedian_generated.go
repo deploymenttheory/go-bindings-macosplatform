@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -65,6 +67,7 @@ func (im *ImageMedian) WithClipRect(clipRect metal.MTLRegion) *ImageMedian {
 
 // KernelDiameter returns the diameter in pixels of the filter window. The median filter is applied to a kernelDiameter x kernelDiameter window of pixels centered on the corresponding source pixel for each destination pixel.  The kernel diameter must be an odd number.
 func (im *ImageMedian) KernelDiameter() int {
+	defer runtime.KeepAlive(im)
 	_r := objc.Send[int](objref.IDOf(im), objc.RegisterName("kernelDiameter"))
 	return _r
 }

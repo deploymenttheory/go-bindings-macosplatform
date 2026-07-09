@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *Re
 
 // Description returns the object's -description text.
 func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) Description() string {
+	defer runtime.KeepAlive(rspsbada)
 	return rt.Description(objref.IDOf(rspsbada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rspsbada)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rspsbada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(rspsbada)
 	return rt.IsKind(objref.IDOf(rspsbada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) String() string {
+	defer runtime.KeepAlive(rspsbada)
 	return rt.Description(objref.IDOf(rspsbada))
 }
 
@@ -74,11 +81,14 @@ func NewResourceStatePassSampleBufferAttachmentDescriptorArray() *ResourceStateP
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified sample buffer attachment.
 func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
+	defer runtime.KeepAlive(rspsbada)
 	_r := objc.Send[objc.ID](objref.IDOf(rspsbada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return ResourceStatePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor object for the specified sample buffer attachment.
 func (rspsbada *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	defer runtime.KeepAlive(rspsbada)
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(rspsbada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }

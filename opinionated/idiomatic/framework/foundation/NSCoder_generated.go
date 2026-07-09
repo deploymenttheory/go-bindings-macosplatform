@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -53,22 +54,27 @@ func coderAdopt(id objc.ID) *Coder {
 
 // Description returns the object's -description text.
 func (c *Coder) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Coder) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Coder) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Coder) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -79,81 +85,100 @@ func (c *Coder) WithObservationInfo(observationInfo unsafe.Pointer) *Coder {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (c *Coder) WithScriptingProperties(scriptingProperties obj.Object) *Coder {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (c *Coder) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Coder {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return c
 }
 
 // EncodeValueOfObjCTypeAt encodes a value of the given type at the given address.
 func (c *Coder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeValueOfObjCType:at:"), type_, addr)
 }
 
 // EncodeDataObject encodes a given data object.
-func (c *Coder) EncodeDataObject(data *Data) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeDataObject:"), objref.IDOf(data))
+func (c *Coder) EncodeDataObject(data []byte) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeDataObject:"), rt.BytesToNSData(data))
 }
 
 // DecodeDataObject returns decodes and returns an NSData object that was previously encoded with encodeDataObject:. Subclasses must override this method.
-func (c *Coder) DecodeDataObject() *Data {
+func (c *Coder) DecodeDataObject() []byte {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeDataObject"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DecodeValueOfObjCTypeAtSize decodes a single value of a known type from the specified data buffer.
 func (c *Coder) DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size int) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeValueOfObjCType:at:size:"), type_, data, size)
 }
 
 // VersionForClassName this method is present for historical reasons and is not used with keyed archivers.
 func (c *Coder) VersionForClassName(className string) int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("versionForClassName:"), purego.NSString(className))
 	return _r
 }
 
 // EncodeObject encodes an object.
 func (c *Coder) EncodeObject(object obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeObject:"), objref.IDOf(object))
 }
 
 // EncodeRootObject an encoding method for subclasses to override to encode an interconnected group of objects, starting with the provided root object.
 func (c *Coder) EncodeRootObject(rootObject obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(rootObject)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeRootObject:"), objref.IDOf(rootObject))
 }
 
 // EncodeBycopyObject an encoding method for subclasses to override such that it creates a copy, rather than a proxy, when decoded.
 func (c *Coder) EncodeBycopyObject(anObject obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeBycopyObject:"), objref.IDOf(anObject))
 }
 
 // EncodeByrefObject an encoding method for subclasses to override such that it creates a proxy, rather than a copy, when decoded.
 func (c *Coder) EncodeByrefObject(anObject obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeByrefObject:"), objref.IDOf(anObject))
 }
 
 // EncodeConditionalObject an encoding method for subclasses to override to conditionally encode an object, preserving common references to it.
 func (c *Coder) EncodeConditionalObject(object obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeConditionalObject:"), objref.IDOf(object))
 }
 
 // EncodeArrayOfObjCTypeCountAt encodes an array of the given Objective-C type, provided the number of items and a pointer.
 func (c *Coder) EncodeArrayOfObjCTypeCountAt(type_ string, count int, array unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeArrayOfObjCType:count:at:"), type_, count, array)
 }
 
 // EncodeBytesLength encodes a buffer of data of an unspecified type.
 func (c *Coder) EncodeBytesLength(byteaddr unsafe.Pointer, length int) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeBytes:length:"), byteaddr, length)
 }
 
 // DecodeObject returns decodes and returns an object that was previously encoded with any of the encode…Object methods.
 func (c *Coder) DecodeObject() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeObject"))
 	return obj.Wrap(_r)
 }
 
-// DecodeTopLevelObjectAndReturnError decodes a previously-encoded object, populating an error if decoding fails.
-func (c *Coder) DecodeTopLevelObjectAndReturnError() (result obj.Object, err error) {
+// DecodeTopLevelObject decodes a previously-encoded object, populating an error if decoding fails.
+func (c *Coder) DecodeTopLevelObject() (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeTopLevelObjectAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -164,67 +189,83 @@ func (c *Coder) DecodeTopLevelObjectAndReturnError() (result obj.Object, err err
 
 // DecodeArrayOfObjCTypeCountAt decodes an array of count items, whose Objective-C type is given by itemType.
 func (c *Coder) DecodeArrayOfObjCTypeCountAt(itemType string, count int, array unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeArrayOfObjCType:count:at:"), itemType, count, array)
 }
 
 // EncodePropertyList encodes a property list.
 func (c *Coder) EncodePropertyList(aPropertyList obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(aPropertyList)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodePropertyList:"), objref.IDOf(aPropertyList))
 }
 
 // DecodePropertyList returns decodes a property list that was previously encoded with encodePropertyList:.
 func (c *Coder) DecodePropertyList() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodePropertyList"))
 	return obj.Wrap(_r)
 }
 
 // SetObjectZone this method is present for historical reasons and has no effect.
 func (c *Coder) SetObjectZone(zone unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectZone:"), zone)
 }
 
 // EncodeObjectForKey encodes an object and associates it with the string key.
 func (c *Coder) EncodeObjectForKey(object obj.Object, key string) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeObject:forKey:"), objref.IDOf(object), purego.NSString(key))
 }
 
 // EncodeConditionalObjectForKey an encoding method for subclasses to override to conditionally encode an object, preserving common references to it, only if it has been unconditionally encoded.
 func (c *Coder) EncodeConditionalObjectForKey(object obj.Object, key string) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeConditionalObject:forKey:"), objref.IDOf(object), purego.NSString(key))
 }
 
 // EncodeBoolForKey encodes a Boolean value and associates it with the string key.
 func (c *Coder) EncodeBoolForKey(value bool, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeBool:forKey:"), value, purego.NSString(key))
 }
 
 // EncodeIntForKey encodes a C integer value and associates it with the string key.
 func (c *Coder) EncodeIntForKey(value int, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeInt:forKey:"), value, purego.NSString(key))
 }
 
 // EncodeInt32ForKey encodes a 32-bit integer value and associates it with the string key.
 func (c *Coder) EncodeInt32ForKey(value int32, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeInt32:forKey:"), value, purego.NSString(key))
 }
 
 // EncodeInt64ForKey encodes a 64-bit integer value and associates it with the string key.
 func (c *Coder) EncodeInt64ForKey(value int64, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeInt64:forKey:"), value, purego.NSString(key))
 }
 
 // EncodeFloatForKey encodes a floating point value and associates it with the string key.
 func (c *Coder) EncodeFloatForKey(value float32, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeFloat:forKey:"), value, purego.NSString(key))
 }
 
 // EncodeDoubleForKey encodes a double-precision floating point value and associates it with the string key.
 func (c *Coder) EncodeDoubleForKey(value float64, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeDouble:forKey:"), value, purego.NSString(key))
 }
 
 // EncodeBytesLengthForKey encodes a buffer of data, given its length and a pointer, and associates it with a string key.
-func (c *Coder) EncodeBytesLengthForKey(length int, key string) (bytes_ uint8) {
+func (c *Coder) EncodeBytesLengthForKey(length int, key string) (data uint8) {
+	defer runtime.KeepAlive(c)
 	var _out0 uint8
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeBytes:length:forKey:"), unsafe.Pointer(&_out0), length, purego.NSString(key))
 	return _out0
@@ -232,18 +273,21 @@ func (c *Coder) EncodeBytesLengthForKey(length int, key string) (bytes_ uint8) {
 
 // ContainsValueForKey returns a Boolean value that indicates whether an encoded value is available for a string.
 func (c *Coder) ContainsValueForKey(key string) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("containsValueForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeObjectForKey decodes and returns a previously-encoded object that was previously encoded with encodeObject:forKey: or encodeConditionalObject:forKey: and associated with the string key.
 func (c *Coder) DecodeObjectForKey(key string) obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeObjectForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// DecodeTopLevelObjectForKeyError decodes the previously-encoded object associated by a key, populating an error if decoding fails.
-func (c *Coder) DecodeTopLevelObjectForKeyError(key string) (result obj.Object, err error) {
+// DecodeTopLevelObjectForKey decodes the previously-encoded object associated by a key, populating an error if decoding fails.
+func (c *Coder) DecodeTopLevelObjectForKey(key string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeTopLevelObjectForKey:error:"), purego.NSString(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -254,61 +298,71 @@ func (c *Coder) DecodeTopLevelObjectForKeyError(key string) (result obj.Object, 
 
 // DecodeBoolForKey decodes and returns a boolean value that was previously encoded with encodeBool:forKey: and associated with the string key.
 func (c *Coder) DecodeBoolForKey(key string) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("decodeBoolForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeIntForKey decodes and returns an int value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (c *Coder) DecodeIntForKey(key string) int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("decodeIntForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeInt32ForKey decodes and returns a 32-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (c *Coder) DecodeInt32ForKey(key string) int32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int32](objref.IDOf(c), objc.RegisterName("decodeInt32ForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeInt64ForKey decodes and returns a 64-bit integer value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (c *Coder) DecodeInt64ForKey(key string) int64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int64](objref.IDOf(c), objc.RegisterName("decodeInt64ForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeFloatForKey decodes and returns a float value that was previously encoded with encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
 func (c *Coder) DecodeFloatForKey(key string) float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("decodeFloatForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeDoubleForKey decodes and returns a double value that was previously encoded with either encodeFloat:forKey: or encodeDouble:forKey: and associated with the string key.
 func (c *Coder) DecodeDoubleForKey(key string) float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("decodeDoubleForKey:"), purego.NSString(key))
 	return _r
 }
 
 // EncodeIntegerForKey encodes an integer value and associates it with the string key.
 func (c *Coder) EncodeIntegerForKey(value int, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeInteger:forKey:"), value, purego.NSString(key))
 }
 
 // DecodeIntegerForKey decodes and returns an NSInteger value that was previously encoded with encodeInt:forKey:, encodeInteger:forKey:, encodeInt32:forKey:, or encodeInt64:forKey: and associated with the string key.
 func (c *Coder) DecodeIntegerForKey(key string) int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("decodeIntegerForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeObjectOfClassesForKey decodes an object for the key, restricted to the specified classes.
-func (c *Coder) DecodeObjectOfClassesForKey(classes obj.Object, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeObjectOfClasses:forKey:"), objref.IDOf(classes), purego.NSString(key))
+func (c *Coder) DecodeObjectOfClassesForKey(classes []obj.Object, key string) obj.Object {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeObjectOfClasses:forKey:"), rt.SliceToNSSet(classes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
-// DecodeTopLevelObjectOfClassesForKeyError decode an object as one of several expected types, failing if the archived type does not match.
-func (c *Coder) DecodeTopLevelObjectOfClassesForKeyError(classes obj.Object, key string) (result obj.Object, err error) {
+// DecodeTopLevelObjectOfClassesForKey decode an object as one of several expected types, failing if the archived type does not match.
+func (c *Coder) DecodeTopLevelObjectOfClassesForKey(classes []obj.Object, key string) (result obj.Object, err error) {
+	defer runtime.KeepAlive(c)
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeTopLevelObjectOfClasses:forKey:error:"), objref.IDOf(classes), purego.NSString(key), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeTopLevelObjectOfClasses:forKey:error:"), rt.SliceToNSSet(classes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(key), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -316,136 +370,161 @@ func (c *Coder) DecodeTopLevelObjectOfClassesForKeyError(classes obj.Object, key
 }
 
 // DecodeArrayOfObjectsOfClassesForKey decodes the \c NSArray object for the given \c key, which should be an \c NSArray, containing the given non-collection classes (no nested arrays or arrays of dictionaries, etc) from the coder.
-func (c *Coder) DecodeArrayOfObjectsOfClassesForKey(classes obj.Object, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeArrayOfObjectsOfClasses:forKey:"), objref.IDOf(classes), purego.NSString(key))
+func (c *Coder) DecodeArrayOfObjectsOfClassesForKey(classes []obj.Object, key string) obj.Object {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeArrayOfObjectsOfClasses:forKey:"), rt.SliceToNSSet(classes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey decodes the \c NSDictionary object for the given \c key, which should be an \c NSDictionary, with keys of the types given in \c keyClasses and objects of the given non-collection classes in \c objectClasses (no nested dictionaries or other dictionaries contained in the dictionary, etc) from the given coder.
-func (c *Coder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses obj.Object, objectClasses obj.Object, key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeDictionaryWithKeysOfClasses:objectsOfClasses:forKey:"), objref.IDOf(keyClasses), objref.IDOf(objectClasses), purego.NSString(key))
+func (c *Coder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses []obj.Object, objectClasses []obj.Object, key string) obj.Object {
+	defer runtime.KeepAlive(c)
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeDictionaryWithKeysOfClasses:objectsOfClasses:forKey:"), rt.SliceToNSSet(keyClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), rt.SliceToNSSet(objectClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // DecodePropertyListForKey returns a decoded property list for the specified key.
 func (c *Coder) DecodePropertyListForKey(key string) obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodePropertyListForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // FailWithError signals to this coder that the decode operation has failed.
-func (c *Coder) FailWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("failWithError:"), error_)
+func (c *Coder) FailWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("failWithError:"), err)
 }
 
 // SystemVersion returns the system version.
 func (c *Coder) SystemVersion() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("systemVersion"))
 	return _r
 }
 
 // AllowsKeyedCoding wraps the corresponding Objective-C method.
 func (c *Coder) AllowsKeyedCoding() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("allowsKeyedCoding"))
 	return _r
 }
 
 // RequiresSecureCoding wraps the corresponding Objective-C method.
 func (c *Coder) RequiresSecureCoding() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requiresSecureCoding"))
 	return _r
 }
 
-// AllowedClasses returns the allowed classes.
-func (c *Coder) AllowedClasses() obj.Object {
+// AllowedClasses returns the order of the returned elements is unspecified.
+func (c *Coder) AllowedClasses() []obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("allowedClasses"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DecodingFailurePolicy defines the behavior this NSCoder should take on decode failure (i.e. corrupt archive, invalid data, etc.). The default result of this property is NSDecodingFailurePolicyRaiseException, subclasses can change this to an alternative policy.
 func (c *Coder) DecodingFailurePolicy() DecodingFailurePolicy {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[DecodingFailurePolicy](objref.IDOf(c), objc.RegisterName("decodingFailurePolicy"))
 	return _r
 }
 
 // EncodeNXObject encodes an old-style object onto the coder.
 func (c *Coder) EncodeNXObject(object obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeNXObject:"), objref.IDOf(object))
 }
 
 // DecodeNXObject returns decodes an object previously written with encodeNXObject:.
 func (c *Coder) DecodeNXObject() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeNXObject"))
 	return obj.Wrap(_r)
 }
 
 // DecodeValueOfObjCTypeAt decodes a single value, whose Objective-C type is given by valueType.
 func (c *Coder) DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("decodeValueOfObjCType:at:"), type_, data)
 }
 
 // EncodePoint encodes a point.
 func (c *Coder) EncodePoint(point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodePoint:"), point)
 }
 
 // DecodePoint returns decodes and returns an NSPoint structure that was previously encoded with encodePoint:.
 func (c *Coder) DecodePoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(c), objc.RegisterName("decodePoint"))
 	return _r
 }
 
 // EncodeSize encodes a size structure.
 func (c *Coder) EncodeSize(size corefoundation.CGSize) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeSize:"), size)
 }
 
 // DecodeSize returns decodes and returns an NSSize structure that was previously encoded with encodeSize:.
 func (c *Coder) DecodeSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(c), objc.RegisterName("decodeSize"))
 	return _r
 }
 
 // EncodeRect encodes a rectangle structure.
 func (c *Coder) EncodeRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeRect:"), rect)
 }
 
 // DecodeRect returns decodes and returns an NSRect structure that was previously encoded with encodeRect:.
 func (c *Coder) DecodeRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("decodeRect"))
 	return _r
 }
 
 // EncodePointForKey encodes a point and associates it with the string key.
 func (c *Coder) EncodePointForKey(point corefoundation.CGPoint, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodePoint:forKey:"), point, purego.NSString(key))
 }
 
 // EncodeSizeForKey encodes a size structure and associates it with the given string key.
 func (c *Coder) EncodeSizeForKey(size corefoundation.CGSize, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeSize:forKey:"), size, purego.NSString(key))
 }
 
 // EncodeRectForKey encodes a rectangle structure and associates it with the string key.
 func (c *Coder) EncodeRectForKey(rect corefoundation.CGRect, key string) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("encodeRect:forKey:"), rect, purego.NSString(key))
 }
 
 // DecodePointForKey decodes and returns an NSPoint structure that was previously encoded with encodePoint:forKey:.
 func (c *Coder) DecodePointForKey(key string) corefoundation.CGPoint {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(c), objc.RegisterName("decodePointForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeSizeForKey decodes and returns an NSSize structure that was previously encoded with encodeSize:forKey:.
 func (c *Coder) DecodeSizeForKey(key string) corefoundation.CGSize {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(c), objc.RegisterName("decodeSizeForKey:"), purego.NSString(key))
 	return _r
 }
 
 // DecodeRectForKey decodes and returns an NSRect structure that was previously encoded with encodeRect:forKey:.
 func (c *Coder) DecodeRectForKey(key string) corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("decodeRectForKey:"), purego.NSString(key))
 	return _r
 }

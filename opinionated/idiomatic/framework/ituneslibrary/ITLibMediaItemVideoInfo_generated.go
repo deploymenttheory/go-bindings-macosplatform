@@ -5,6 +5,8 @@
 package ituneslibrary
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func libMediaItemVideoInfoAdopt(id objc.ID) *LibMediaItemVideoInfo {
 
 // Description returns the object's -description text.
 func (lmivi *LibMediaItemVideoInfo) Description() string {
+	defer runtime.KeepAlive(lmivi)
 	return rt.Description(objref.IDOf(lmivi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lmivi *LibMediaItemVideoInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lmivi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lmivi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lmivi *LibMediaItemVideoInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(lmivi)
 	return rt.IsKind(objref.IDOf(lmivi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lmivi *LibMediaItemVideoInfo) String() string {
+	defer runtime.KeepAlive(lmivi)
 	return rt.Description(objref.IDOf(lmivi))
 }
 
@@ -74,6 +81,7 @@ func NewLibMediaItemVideoInfo() *LibMediaItemVideoInfo {
 
 // Series returns the name of TV series the video is associated with (implies track is a TV show).
 func (lmivi *LibMediaItemVideoInfo) Series() string {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[objc.ID](objref.IDOf(lmivi), objc.RegisterName("series"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (lmivi *LibMediaItemVideoInfo) Series() string {
 
 // SortSeries returns the name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
 func (lmivi *LibMediaItemVideoInfo) SortSeries() string {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[objc.ID](objref.IDOf(lmivi), objc.RegisterName("sortSeries"))
 	if _r == 0 {
 		return ""
@@ -92,12 +101,14 @@ func (lmivi *LibMediaItemVideoInfo) SortSeries() string {
 
 // Season returns the name of TV season the video is associated with (implies the track is a TV show).
 func (lmivi *LibMediaItemVideoInfo) Season() int {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("season"))
 	return _r
 }
 
 // Episode returns the TV episode the video is associated with (implies the track is a TV show).
 func (lmivi *LibMediaItemVideoInfo) Episode() string {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[objc.ID](objref.IDOf(lmivi), objc.RegisterName("episode"))
 	if _r == 0 {
 		return ""
@@ -107,24 +118,28 @@ func (lmivi *LibMediaItemVideoInfo) Episode() string {
 
 // EpisodeOrder returns the TV episode order the video is associated with (implies the track is a TV show).
 func (lmivi *LibMediaItemVideoInfo) EpisodeOrder() int {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("episodeOrder"))
 	return _r
 }
 
 // IsHD reports whether the video is high definition.
 func (lmivi *LibMediaItemVideoInfo) IsHD() bool {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[bool](objref.IDOf(lmivi), objc.RegisterName("isHD"))
 	return _r
 }
 
 // VideoWidth returns the width of the video.
 func (lmivi *LibMediaItemVideoInfo) VideoWidth() int {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("videoWidth"))
 	return _r
 }
 
 // VideoHeight returns the height of the video.
 func (lmivi *LibMediaItemVideoInfo) VideoHeight() int {
+	defer runtime.KeepAlive(lmivi)
 	_r := objc.Send[int](objref.IDOf(lmivi), objc.RegisterName("videoHeight"))
 	return _r
 }

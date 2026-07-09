@@ -5,6 +5,8 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -110,30 +112,35 @@ func (uqc *UserQueryContext) WithSourceOptions(sourceOptions SearchQuerySourceOp
 
 // EnableRankedResults wraps the corresponding Objective-C method.
 func (uqc *UserQueryContext) EnableRankedResults() bool {
+	defer runtime.KeepAlive(uqc)
 	_r := objc.Send[bool](objref.IDOf(uqc), objc.RegisterName("enableRankedResults"))
 	return _r
 }
 
 // DisableSemanticSearch wraps the corresponding Objective-C method.
 func (uqc *UserQueryContext) DisableSemanticSearch() bool {
+	defer runtime.KeepAlive(uqc)
 	_r := objc.Send[bool](objref.IDOf(uqc), objc.RegisterName("disableSemanticSearch"))
 	return _r
 }
 
 // MaxResultCount returns the max result count.
 func (uqc *UserQueryContext) MaxResultCount() int {
+	defer runtime.KeepAlive(uqc)
 	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxResultCount"))
 	return _r
 }
 
 // MaxSuggestionCount returns the max suggestion count.
 func (uqc *UserQueryContext) MaxSuggestionCount() int {
+	defer runtime.KeepAlive(uqc)
 	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxSuggestionCount"))
 	return _r
 }
 
 // MaxRankedResultCount returns the max ranked result count.
 func (uqc *UserQueryContext) MaxRankedResultCount() int {
+	defer runtime.KeepAlive(uqc)
 	_r := objc.Send[int](objref.IDOf(uqc), objc.RegisterName("maxRankedResultCount"))
 	return _r
 }

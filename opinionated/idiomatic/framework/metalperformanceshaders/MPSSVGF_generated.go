@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -142,89 +144,105 @@ func (s *SVGF) WithLabel(label string) *SVGF {
 
 // EncodeWithCoder encodes with coder.
 func (s *SVGF) EncodeWithCoder(coder obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(coder)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // DepthWeight returns controls how samples' depths are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by exp(-abs(Z1 - Z2) / depthWeight). Must be greater than zero. Defaults to 1.0.
 func (s *SVGF) DepthWeight() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("depthWeight"))
 	return _r
 }
 
 // NormalWeight returns controls how samples' normals are compared during reprojection, variance estimation, and bilateral filtering. The final weight is given by pow(max(dot(N1, N2)), normalWeight). Must be greater than or equal to zero. Defaults to 128.
 func (s *SVGF) NormalWeight() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("normalWeight"))
 	return _r
 }
 
 // LuminanceWeight returns controls how samples' luminance values are compared during bilateral filtering. The final weight is given by exp(-abs(L1 - L2) / (luminanceWeight * luminanceVariance + EPSILON)). Must be greater than or equal to zero. Defaults to 4.
 func (s *SVGF) LuminanceWeight() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("luminanceWeight"))
 	return _r
 }
 
 // TemporalReprojectionBlendFactor returns when using MPSTemporalWeightingExponentialMovingAverage, how much to blend the current frame with the previous frame during reprojection. The final value is given by current * temporalReprojectionBlendFactor + previous * (1 - temporalReprojectionBlendFactor). Must be between zero and one, inclusive. Defaults to 0.2.
 func (s *SVGF) TemporalReprojectionBlendFactor() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("temporalReprojectionBlendFactor"))
 	return _r
 }
 
 // ReprojectionThreshold returns during reprojection, minimum combined depth and normal weight needed to consider a pixel from the previous frame consistent with a pixel from the current frame. Must be greater than or equal to zero. Defaults to 0.01.
 func (s *SVGF) ReprojectionThreshold() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("reprojectionThreshold"))
 	return _r
 }
 
 // MinimumFramesForVarianceEstimation returns the minimum number of frames which must be accumulated before variance can be computed directly from the accumulated luminance moments. If enough frames have not been accumulated, variance will be estimated with a spatial filter instead. Defaults to 4.
 func (s *SVGF) MinimumFramesForVarianceEstimation() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("minimumFramesForVarianceEstimation"))
 	return _r
 }
 
 // VarianceEstimationRadius returns the radius of the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Defaults to 3 resulting in a 7x7 filter.
 func (s *SVGF) VarianceEstimationRadius() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("varianceEstimationRadius"))
 	return _r
 }
 
 // VarianceEstimationSigma returns the sigma value of the Gaussian function used by the spatial filter used when not enough frames have been accumulated to compute variance from accumulated luminance moments. Must be greater than zero. Defaults to 2.0.
 func (s *SVGF) VarianceEstimationSigma() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("varianceEstimationSigma"))
 	return _r
 }
 
 // VariancePrefilterSigma returns the sigma value of the Gaussian function used by the variance pre-filter of the bilateral filter. Must be greater than zero. Defaults to 1.33.
 func (s *SVGF) VariancePrefilterSigma() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("variancePrefilterSigma"))
 	return _r
 }
 
 // VariancePrefilterRadius returns the radius of the variance pre-filter of the bilateral filter. Defaults to 1 resulting in a 3x3 filter.
 func (s *SVGF) VariancePrefilterRadius() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("variancePrefilterRadius"))
 	return _r
 }
 
 // BilateralFilterSigma returns the sigma value of the Gaussian function used by the bilateral filter. Must be greater than zero. Defaults to 1.2.
 func (s *SVGF) BilateralFilterSigma() float32 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float32](objref.IDOf(s), objc.RegisterName("bilateralFilterSigma"))
 	return _r
 }
 
 // BilateralFilterRadius returns the radius of the bilateral filter. Defaults to 2 resulting in a 5x5 filter.
 func (s *SVGF) BilateralFilterRadius() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("bilateralFilterRadius"))
 	return _r
 }
 
 // ChannelCount returns the number of channels to filter in the source image. Must be at least one and at most three. Defaults to 3.
 func (s *SVGF) ChannelCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("channelCount"))
 	return _r
 }
 
 // ChannelCount2 returns the number of channels to filter in the second source image. Must be at least one and at most three. Defaults to 3.
 func (s *SVGF) ChannelCount2() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("channelCount2"))
 	return _r
 }

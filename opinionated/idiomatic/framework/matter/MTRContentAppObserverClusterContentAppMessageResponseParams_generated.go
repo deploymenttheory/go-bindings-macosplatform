@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRContentAppObserverClusterContentAppMessageResponseParamsAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Description() string {
+	defer runtime.KeepAlive(mcaoccamrp)
 	return rt.Description(objref.IDOf(mcaoccamrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcaoccamrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcaoccamrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcaoccamrp)
 	return rt.IsKind(objref.IDOf(mcaoccamrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) String() string {
+	defer runtime.KeepAlive(mcaoccamrp)
 	return rt.Description(objref.IDOf(mcaoccamrp))
 }
 
-// NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseValueError initialize an MTRContentAppObserverClusterContentAppMessageResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRContentAppObserverClusterContentAppMessageResponseParams, err error) {
+// NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseValue initialize an MTRContentAppObserverClusterContentAppMessageResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRContentAppObserverClusterContentAppMessageResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRContentAppObserverClusterContentAppMessageResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRContentAppObserverClusterContentAppMessageResponseParamsWithResponseV
 
 // WithStatus sets the status.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) WithStatus(status obj.Object) *MTRContentAppObserverClusterContentAppMessageResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mcaoccamrp
 }
@@ -97,13 +105,15 @@ func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) W
 }
 
 // Status returns the status.
-func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() obj.Object {
+func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mcaoccamrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) Data() string {
+	defer runtime.KeepAlive(mcaoccamrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -113,6 +123,7 @@ func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) D
 
 // EncodingHint returns the encoding hint.
 func (mcaoccamrp *MTRContentAppObserverClusterContentAppMessageResponseParams) EncodingHint() string {
+	defer runtime.KeepAlive(mcaoccamrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcaoccamrp), objc.RegisterName("encodingHint"))
 	if _r == 0 {
 		return ""

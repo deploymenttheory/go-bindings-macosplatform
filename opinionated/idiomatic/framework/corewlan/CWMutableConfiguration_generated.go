@@ -5,6 +5,8 @@
 package corewlan
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewMutableConfiguration() *MutableConfiguration {
 
 // WithNetworkProfiles sets the preferred networks list.
 func (mc *MutableConfiguration) WithNetworkProfiles(networkProfiles obj.Object) *MutableConfiguration {
+	defer runtime.KeepAlive(networkProfiles)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setNetworkProfiles:"), objref.IDOf(networkProfiles))
 	return mc
 }

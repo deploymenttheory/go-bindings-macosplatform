@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -96,6 +97,7 @@ func (gpsr *GeneratePersonSegmentationRequest) WithRevision(revision int) *Gener
 //
 // SupportedOutputPixelFormats returns the collection as a Go slice.
 func (gpsr *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(gpsr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(gpsr), objc.RegisterName("supportedOutputPixelFormatsAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -106,12 +108,14 @@ func (gpsr *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() (re
 
 // QualityLevel returns the quality level selects which techniques will be used during the person segmentation. There are trade-offs between performance and accuracy.
 func (gpsr *GeneratePersonSegmentationRequest) QualityLevel() GeneratePersonSegmentationRequestQualityLevel {
+	defer runtime.KeepAlive(gpsr)
 	_r := objc.Send[GeneratePersonSegmentationRequestQualityLevel](objref.IDOf(gpsr), objc.RegisterName("qualityLevel"))
 	return _r
 }
 
 // OutputPixelFormat returns pixel format type of the output buffer. Valid values are kCVPixelFormatType_OneComponent32Float, kCVPixelFormatType_OneComponent16Half, and kCVPixelFormatType_OneComponent8. Default is kCVPixelFormatType_OneComponent8.
 func (gpsr *GeneratePersonSegmentationRequest) OutputPixelFormat() int {
+	defer runtime.KeepAlive(gpsr)
 	_r := objc.Send[int](objref.IDOf(gpsr), objc.RegisterName("outputPixelFormat"))
 	return _r
 }

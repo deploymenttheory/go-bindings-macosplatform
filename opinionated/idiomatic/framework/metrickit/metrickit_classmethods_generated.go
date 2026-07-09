@@ -5,23 +5,26 @@
 package metrickit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
 // MakeLogHandleWithCategory returns a log handle used for writing custom metric events.
-func MakeLogHandleWithCategory(category string) obj.Object {
+func MakeLogHandleWithCategory(category string) *foundation.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("makeLogHandleWithCategory:"), purego.NSString(category))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // ExtendLaunchMeasurementForTaskID starts to measure an extended launch task with the given task identifier.
 func ExtendLaunchMeasurementForTaskID(taskID obj.Object) error {
+	defer runtime.KeepAlive(taskID)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("MXMetricManager")), objc.RegisterName("extendLaunchMeasurementForTaskID:error:"), objref.IDOf(taskID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -32,6 +35,7 @@ func ExtendLaunchMeasurementForTaskID(taskID obj.Object) error {
 
 // FinishExtendedLaunchMeasurementForTaskID signals the end of an extended launch task.
 func FinishExtendedLaunchMeasurementForTaskID(taskID obj.Object) error {
+	defer runtime.KeepAlive(taskID)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("MXMetricManager")), objc.RegisterName("finishExtendedLaunchMeasurementForTaskID:error:"), objref.IDOf(taskID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

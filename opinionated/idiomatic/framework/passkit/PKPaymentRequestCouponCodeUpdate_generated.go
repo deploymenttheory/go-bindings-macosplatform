@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -85,30 +86,35 @@ func (prccu *PaymentRequestCouponCodeUpdate) WithMultiTokenContexts(items ...*Pa
 
 // WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
 func (prccu *PaymentRequestCouponCodeUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	defer runtime.KeepAlive(recurringPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 	return prccu
 }
 
 // WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
 func (prccu *PaymentRequestCouponCodeUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	defer runtime.KeepAlive(automaticReloadPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 	return prccu
 }
 
 // WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
 func (prccu *PaymentRequestCouponCodeUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestCouponCodeUpdate {
+	defer runtime.KeepAlive(deferredPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 	return prccu
 }
 
 // Errors returns the errors.
 func (prccu *PaymentRequestCouponCodeUpdate) Errors() []obj.Object {
+	defer runtime.KeepAlive(prccu)
 	_r := objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
 func (prccu *PaymentRequestCouponCodeUpdate) SetErrors() error {
+	defer runtime.KeepAlive(prccu)
 	var _nsErr uintptr
 	_ = objc.Send[objc.ID](objref.IDOf(prccu), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

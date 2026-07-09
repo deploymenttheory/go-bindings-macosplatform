@@ -344,8 +344,8 @@ func (o *NSBezierPath) CGPath() unsafe.Pointer {
 	return _ret
 }
 
-func (o *NSBezierPath) SetCGPath(cGPath unsafe.Pointer) {
-	o.Ptr().Send(_nSBezierPathSelSetCGPath, cGPath)
+func (o *NSBezierPath) SetCGPath(cgPath unsafe.Pointer) {
+	o.Ptr().Send(_nSBezierPathSelSetCGPath, cgPath)
 }
 
 func NSBezierPathDefaultMiterLimit() float64 {

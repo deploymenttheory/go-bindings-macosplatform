@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -89,6 +91,7 @@ func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) WithChannelDimensionIndex
 //
 // Strides returns the collection as a Go slice.
 func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) Strides() []obj.Object {
+	defer runtime.KeepAlive(gdcdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gdcdod), objc.RegisterName("strides"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -97,6 +100,7 @@ func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) Strides() []obj.Object {
 //
 // DilationRates returns the collection as a Go slice.
 func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) DilationRates() []obj.Object {
+	defer runtime.KeepAlive(gdcdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gdcdod), objc.RegisterName("dilationRates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -105,18 +109,21 @@ func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) DilationRates() []obj.Obj
 //
 // PaddingValues returns the collection as a Go slice.
 func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) PaddingValues() []obj.Object {
+	defer runtime.KeepAlive(gdcdod)
 	_arr := objc.Send[objc.ID](objref.IDOf(gdcdod), objc.RegisterName("paddingValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PaddingStyle returns the padding style for the operation. Default value: `MPSGraphPaddingStyleExplicit`.
 func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gdcdod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
 // ChannelDimensionIndex returns the axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions. For example the value of `-1` corresponds to `NDHWC`, `NHWC` layouts. This allows the placement of the channel index anywhere within the last 4 dimensions of the tensor. In case your weights are in a different layout you can bring them to the same layout as inputs using transposes or permutations. Default value: `-4`, corresponds to `NCDHW` and `CDHW` layouts.
 func (gdcdod *GraphDepthwiseConvolution3DOpDescriptor) ChannelDimensionIndex() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("channelDimensionIndex"))
 	return _r
 }

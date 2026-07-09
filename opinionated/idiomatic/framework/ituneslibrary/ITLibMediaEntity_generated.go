@@ -5,9 +5,11 @@
 package ituneslibrary
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -51,49 +53,58 @@ func libMediaEntityAdopt(id objc.ID) *LibMediaEntity {
 
 // Description returns the object's -description text.
 func (lme *LibMediaEntity) Description() string {
+	defer runtime.KeepAlive(lme)
 	return rt.Description(objref.IDOf(lme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lme *LibMediaEntity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lme)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lme *LibMediaEntity) IsKind(className string) bool {
+	defer runtime.KeepAlive(lme)
 	return rt.IsKind(objref.IDOf(lme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lme *LibMediaEntity) String() string {
+	defer runtime.KeepAlive(lme)
 	return rt.Description(objref.IDOf(lme))
 }
 
 // ValueForProperty gets the value for a specified media property key.
 func (lme *LibMediaEntity) ValueForProperty(property string) obj.Object {
+	defer runtime.KeepAlive(lme)
 	_r := objc.Send[objc.ID](objref.IDOf(lme), objc.RegisterName("valueForProperty:"), purego.NSString(property))
 	return obj.Wrap(_r)
 }
 
 // EnumerateValuesForPropertiesUsing executes a provided block with the fetched values for the item properties.
-func (lme *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(lme), objc.RegisterName("enumerateValuesForProperties:usingBlock:"), objref.IDOf(properties), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+func (lme *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties []string, block func(obj.Object, obj.Object, *bool)) {
+	defer runtime.KeepAlive(lme)
+	objc.Send[objc.ID](objref.IDOf(lme), objc.RegisterName("enumerateValuesForProperties:usingBlock:"), rt.SliceToNSSet(properties, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
 // EnumerateValuesExceptForPropertiesUsing executes a provided block with the fetched values for all properties in the entity except for the provided set.
-func (lme *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(lme), objc.RegisterName("enumerateValuesExceptForProperties:usingBlock:"), objref.IDOf(properties), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+func (lme *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties []string, block func(obj.Object, obj.Object, *bool)) {
+	defer runtime.KeepAlive(lme)
+	objc.Send[objc.ID](objref.IDOf(lme), objc.RegisterName("enumerateValuesExceptForProperties:usingBlock:"), rt.SliceToNSSet(properties, func(_v string) objc.ID { return purego.NSString(_v) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
 // PersistentID returns the unique identifier of this media entity.
-func (lme *LibMediaEntity) PersistentID() obj.Object {
+func (lme *LibMediaEntity) PersistentID() *foundation.Number {
+	defer runtime.KeepAlive(lme)
 	_r := objc.Send[objc.ID](objref.IDOf(lme), objc.RegisterName("persistentID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isLibMediaEntity marks LibMediaEntity — and, by embedding promotion, its

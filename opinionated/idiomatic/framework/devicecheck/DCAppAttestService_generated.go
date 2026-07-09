@@ -6,6 +6,7 @@ package devicecheck
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func appAttestServiceAdopt(id objc.ID) *AppAttestService {
 
 // Description returns the object's -description text.
 func (aas *AppAttestService) Description() string {
+	defer runtime.KeepAlive(aas)
 	return rt.Description(objref.IDOf(aas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aas *AppAttestService) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aas *AppAttestService) IsKind(className string) bool {
+	defer runtime.KeepAlive(aas)
 	return rt.IsKind(objref.IDOf(aas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aas *AppAttestService) String() string {
+	defer runtime.KeepAlive(aas)
 	return rt.Description(objref.IDOf(aas))
 }
 
@@ -79,6 +85,7 @@ func NewAppAttestService() *AppAttestService {
 //
 // GenerateKey blocks until the operation completes or ctx is cancelled.
 func (aas *AppAttestService) GenerateKey(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(aas)
 	type _result struct {
 		val string
 		err error
@@ -103,7 +110,8 @@ func (aas *AppAttestService) GenerateKey(ctx context.Context) (result string, er
 // AttestKeyClientDataHash asks Apple to attest to the validity of a generated cryptographic key.
 //
 // AttestKeyClientDataHash blocks until the operation completes or ctx is cancelled.
-func (aas *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
+func (aas *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId string, clientDataHash []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(aas)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,7 +123,7 @@ func (aas *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("attestKey:clientDataHash:completionHandler:"), purego.NSString(keyId), objref.IDOf(clientDataHash), _block)
+	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("attestKey:clientDataHash:completionHandler:"), purego.NSString(keyId), rt.BytesToNSData(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -128,7 +136,8 @@ func (aas *AppAttestService) AttestKeyClientDataHash(ctx context.Context, keyId 
 // GenerateAssertionClientDataHash creates a block of data that demonstrates the legitimacy of an instance of your app running on a device.
 //
 // GenerateAssertionClientDataHash blocks until the operation completes or ctx is cancelled.
-func (aas *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash obj.Object) (result obj.Object, err error) {
+func (aas *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context, keyId string, clientDataHash []byte) (result obj.Object, err error) {
+	defer runtime.KeepAlive(aas)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,7 +149,7 @@ func (aas *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("generateAssertion:clientDataHash:completionHandler:"), purego.NSString(keyId), objref.IDOf(clientDataHash), _block)
+	objc.Send[objc.ID](objref.IDOf(aas), objc.RegisterName("generateAssertion:clientDataHash:completionHandler:"), purego.NSString(keyId), rt.BytesToNSData(clientDataHash), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -152,6 +161,7 @@ func (aas *AppAttestService) GenerateAssertionClientDataHash(ctx context.Context
 
 // IsSupported reports whether a particular device provides the App Attest service. > Important: Not all device types support the App Attest service, so check > for support before using the service. > > If you read “DeviceCheck/DCAppAttestService/supported“ from an app running > on a Mac device, the value is > <doc://com.apple.documentation/documentation/swift/false>. This includes > Mac Catalyst apps, and iOS or iPadOS apps running on Apple silicon. If you read “DeviceCheck/DCAppAttestService/supported“ from within an app extension, the value might be <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>, depending on the extension type. However, most extensions don’t support App Attest. The “DeviceCheck/DCAppAttestService/generateKeyWithCompletionHandler:“ method fails when you call it from an app extension, regardless of the value of “DeviceCheck/DCAppAttestService/supported“. The only app extensions that support App Attest are watchOS extensions in watchOS 9 or later. For these extensions, you can use the results from “DeviceCheck/DCAppAttestService/supported“ to indicate whether your WatchKit extension bypasses attestation.
 func (aas *AppAttestService) IsSupported() bool {
+	defer runtime.KeepAlive(aas)
 	_r := objc.Send[bool](objref.IDOf(aas), objc.RegisterName("isSupported"))
 	return _r
 }

@@ -5,6 +5,9 @@
 package corelocation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func monitoringEventAdopt(id objc.ID) *MonitoringEvent {
 
 // Description returns the object's -description text.
 func (me *MonitoringEvent) Description() string {
+	defer runtime.KeepAlive(me)
 	return rt.Description(objref.IDOf(me))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (me *MonitoringEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(me)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(me), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (me *MonitoringEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(me)
 	return rt.IsKind(objref.IDOf(me), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (me *MonitoringEvent) String() string {
+	defer runtime.KeepAlive(me)
 	return rt.Description(objref.IDOf(me))
 }
 
@@ -74,6 +82,7 @@ func NewMonitoringEvent() *MonitoringEvent {
 
 // Identifier returns the identifier.
 func (me *MonitoringEvent) Identifier() string {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,78 +92,91 @@ func (me *MonitoringEvent) Identifier() string {
 
 // Refinement returns the refinement.
 func (me *MonitoringEvent) Refinement() *Condition {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("refinement"))
 	return ConditionFromID(_r)
 }
 
 // State returns the state.
 func (me *MonitoringEvent) State() MonitoringState {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[MonitoringState](objref.IDOf(me), objc.RegisterName("state"))
 	return _r
 }
 
 // Date returns the date.
-func (me *MonitoringEvent) Date() obj.Object {
+func (me *MonitoringEvent) Date() time.Time {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AuthorizationDenied wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) AuthorizationDenied() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationDenied"))
 	return _r
 }
 
 // AuthorizationDeniedGlobally wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) AuthorizationDeniedGlobally() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationDeniedGlobally"))
 	return _r
 }
 
 // AuthorizationRestricted wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) AuthorizationRestricted() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationRestricted"))
 	return _r
 }
 
 // InsufficientlyInUse wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) InsufficientlyInUse() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("insufficientlyInUse"))
 	return _r
 }
 
 // AccuracyLimited wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) AccuracyLimited() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("accuracyLimited"))
 	return _r
 }
 
 // ConditionUnsupported wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) ConditionUnsupported() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("conditionUnsupported"))
 	return _r
 }
 
 // ConditionLimitExceeded wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) ConditionLimitExceeded() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("conditionLimitExceeded"))
 	return _r
 }
 
 // PersistenceUnavailable wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) PersistenceUnavailable() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("persistenceUnavailable"))
 	return _r
 }
 
 // ServiceSessionRequired wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) ServiceSessionRequired() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("serviceSessionRequired"))
 	return _r
 }
 
 // AuthorizationRequestInProgress wraps the corresponding Objective-C method.
 func (me *MonitoringEvent) AuthorizationRequestInProgress() bool {
+	defer runtime.KeepAlive(me)
 	_r := objc.Send[bool](objref.IDOf(me), objc.RegisterName("authorizationRequestInProgress"))
 	return _r
 }

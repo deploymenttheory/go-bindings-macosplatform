@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,23 +56,27 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 
 // WithValue sets a value for the metaparameter.
 func (nmp *NumberMetaParameter) WithValue(value obj.Object) *NumberMetaParameter {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(nmp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return nmp
 }
 
 // FadeToValueDuration sets the value gradually over the given amount of time.
 func (nmp *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
+	defer runtime.KeepAlive(nmp)
 	objc.Send[objc.ID](objref.IDOf(nmp), objc.RegisterName("fadeToValue:duration:"), value, duration)
 }
 
 // Minimum returns the minimum value this metaparameter can be set to
 func (nmp *NumberMetaParameter) Minimum() float64 {
+	defer runtime.KeepAlive(nmp)
 	_r := objc.Send[float64](objref.IDOf(nmp), objc.RegisterName("minimum"))
 	return _r
 }
 
 // Maximum returns the maximum value this metaparameter can be set to
 func (nmp *NumberMetaParameter) Maximum() float64 {
+	defer runtime.KeepAlive(nmp)
 	_r := objc.Send[float64](objref.IDOf(nmp), objc.RegisterName("maximum"))
 	return _r
 }

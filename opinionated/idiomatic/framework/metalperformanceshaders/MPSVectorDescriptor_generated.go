@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vectorDescriptorAdopt(id objc.ID) *VectorDescriptor {
 
 // Description returns the object's -description text.
 func (vd *VectorDescriptor) Description() string {
+	defer runtime.KeepAlive(vd)
 	return rt.Description(objref.IDOf(vd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vd *VectorDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vd *VectorDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vd)
 	return rt.IsKind(objref.IDOf(vd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vd *VectorDescriptor) String() string {
+	defer runtime.KeepAlive(vd)
 	return rt.Description(objref.IDOf(vd))
 }
 
@@ -80,18 +87,21 @@ func (vd *VectorDescriptor) WithLength(length int) *VectorDescriptor {
 
 // Length returns the number of elements in the vector.
 func (vd *VectorDescriptor) Length() int {
+	defer runtime.KeepAlive(vd)
 	_r := objc.Send[int](objref.IDOf(vd), objc.RegisterName("length"))
 	return _r
 }
 
 // Vectors returns the number of vectors.
 func (vd *VectorDescriptor) Vectors() int {
+	defer runtime.KeepAlive(vd)
 	_r := objc.Send[int](objref.IDOf(vd), objc.RegisterName("vectors"))
 	return _r
 }
 
 // VectorBytes returns the stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
 func (vd *VectorDescriptor) VectorBytes() int {
+	defer runtime.KeepAlive(vd)
 	_r := objc.Send[int](objref.IDOf(vd), objc.RegisterName("vectorBytes"))
 	return _r
 }

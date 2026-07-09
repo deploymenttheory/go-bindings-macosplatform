@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEClusterFaultEventAdopt(id objc.ID) *MTREnergyEVSEClusterFaultE
 
 // Description returns the object's -description text.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) Description() string {
+	defer runtime.KeepAlive(meecfe)
 	return rt.Description(objref.IDOf(meecfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecfe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecfe)
 	return rt.IsKind(objref.IDOf(meecfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) String() string {
+	defer runtime.KeepAlive(meecfe)
 	return rt.Description(objref.IDOf(meecfe))
 }
 
@@ -72,48 +80,56 @@ func NewMTREnergyEVSEClusterFaultEvent() *MTREnergyEVSEClusterFaultEvent {
 
 // WithSessionID sets the session ID.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	defer runtime.KeepAlive(sessionID)
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecfe
 }
 
 // WithState sets the state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithState(state obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	defer runtime.KeepAlive(state)
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecfe
 }
 
 // WithFaultStatePreviousState sets the fault state previous state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithFaultStatePreviousState(faultStatePreviousState obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	defer runtime.KeepAlive(faultStatePreviousState)
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setFaultStatePreviousState:"), objref.IDOf(faultStatePreviousState))
 	return meecfe
 }
 
 // WithFaultStateCurrentState sets the fault state current state.
 func (meecfe *MTREnergyEVSEClusterFaultEvent) WithFaultStateCurrentState(faultStateCurrentState obj.Object) *MTREnergyEVSEClusterFaultEvent {
+	defer runtime.KeepAlive(faultStateCurrentState)
 	objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("setFaultStateCurrentState:"), objref.IDOf(faultStateCurrentState))
 	return meecfe
 }
 
 // SessionID returns the session ID.
-func (meecfe *MTREnergyEVSEClusterFaultEvent) SessionID() obj.Object {
+func (meecfe *MTREnergyEVSEClusterFaultEvent) SessionID() *foundation.Number {
+	defer runtime.KeepAlive(meecfe)
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("sessionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // State returns the state.
-func (meecfe *MTREnergyEVSEClusterFaultEvent) State() obj.Object {
+func (meecfe *MTREnergyEVSEClusterFaultEvent) State() *foundation.Number {
+	defer runtime.KeepAlive(meecfe)
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("state"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FaultStatePreviousState returns the fault state previous state.
-func (meecfe *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() obj.Object {
+func (meecfe *MTREnergyEVSEClusterFaultEvent) FaultStatePreviousState() *foundation.Number {
+	defer runtime.KeepAlive(meecfe)
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("faultStatePreviousState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FaultStateCurrentState returns the fault state current state.
-func (meecfe *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() obj.Object {
+func (meecfe *MTREnergyEVSEClusterFaultEvent) FaultStateCurrentState() *foundation.Number {
+	defer runtime.KeepAlive(meecfe)
 	_r := objc.Send[objc.ID](objref.IDOf(meecfe), objc.RegisterName("faultStateCurrentState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

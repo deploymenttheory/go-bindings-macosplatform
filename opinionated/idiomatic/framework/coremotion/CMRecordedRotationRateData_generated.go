@@ -5,9 +5,12 @@
 package coremotion
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,9 +56,10 @@ func NewRecordedRotationRateData() *RecordedRotationRateData {
 }
 
 // StartDate returns the start date.
-func (rrrd *RecordedRotationRateData) StartDate() obj.Object {
+func (rrrd *RecordedRotationRateData) StartDate() time.Time {
+	defer runtime.KeepAlive(rrrd)
 	_r := objc.Send[objc.ID](objref.IDOf(rrrd), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ RotationRateDataProvider = (*RecordedRotationRateData)(nil)

@@ -5,6 +5,9 @@
 package photos
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func contentEditingInputAdopt(id objc.ID) *ContentEditingInput {
 
 // Description returns the object's -description text.
 func (cei *ContentEditingInput) Description() string {
+	defer runtime.KeepAlive(cei)
 	return rt.Description(objref.IDOf(cei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cei *ContentEditingInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cei *ContentEditingInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(cei)
 	return rt.IsKind(objref.IDOf(cei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cei *ContentEditingInput) String() string {
+	defer runtime.KeepAlive(cei)
 	return rt.Description(objref.IDOf(cei))
 }
 
@@ -74,30 +82,35 @@ func NewContentEditingInput() *ContentEditingInput {
 
 // MediaType returns the media type.
 func (cei *ContentEditingInput) MediaType() AssetMediaType {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[AssetMediaType](objref.IDOf(cei), objc.RegisterName("mediaType"))
 	return _r
 }
 
 // MediaSubtypes returns the media subtypes.
 func (cei *ContentEditingInput) MediaSubtypes() AssetMediaSubtype {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[AssetMediaSubtype](objref.IDOf(cei), objc.RegisterName("mediaSubtypes"))
 	return _r
 }
 
 // CreationDate returns the creation date.
-func (cei *ContentEditingInput) CreationDate() obj.Object {
+func (cei *ContentEditingInput) CreationDate() time.Time {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ContentType returns the type of data provided as the asset's content editing input image or video.
 func (cei *ContentEditingInput) ContentType() obj.Object {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // UniformTypeIdentifier returns the uniform type identifier.
 func (cei *ContentEditingInput) UniformTypeIdentifier() string {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -107,42 +120,49 @@ func (cei *ContentEditingInput) UniformTypeIdentifier() string {
 
 // PlaybackStyle returns the playback style.
 func (cei *ContentEditingInput) PlaybackStyle() AssetPlaybackStyle {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(cei), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
 // AdjustmentData returns the adjustment data.
 func (cei *ContentEditingInput) AdjustmentData() *AdjustmentData {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)
 }
 
 // DisplaySizeImage returns the display size image.
 func (cei *ContentEditingInput) DisplaySizeImage() obj.Object {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("displaySizeImage"))
 	return obj.Wrap(_r)
 }
 
 // FullSizeImageURL returns the full size image URL.
-func (cei *ContentEditingInput) FullSizeImageURL() obj.Object {
+func (cei *ContentEditingInput) FullSizeImageURL() string {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("fullSizeImageURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // FullSizeImageOrientation returns the full size image orientation.
 func (cei *ContentEditingInput) FullSizeImageOrientation() int {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[int](objref.IDOf(cei), objc.RegisterName("fullSizeImageOrientation"))
 	return _r
 }
 
 // AudiovisualAsset returns the audiovisual asset.
 func (cei *ContentEditingInput) AudiovisualAsset() obj.Object {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("audiovisualAsset"))
 	return obj.Wrap(_r)
 }
 
 // LivePhoto returns the live photo.
 func (cei *ContentEditingInput) LivePhoto() *LivePhoto {
+	defer runtime.KeepAlive(cei)
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("livePhoto"))
 	return LivePhotoFromID(_r)
 }

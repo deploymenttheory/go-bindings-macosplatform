@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func orderedCollectionDifferenceAdopt(id objc.ID) *OrderedCollectionDifference {
 
 // Description returns the object's -description text.
 func (ocd *OrderedCollectionDifference) Description() string {
+	defer runtime.KeepAlive(ocd)
 	return rt.Description(objref.IDOf(ocd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ocd *OrderedCollectionDifference) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ocd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ocd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ocd *OrderedCollectionDifference) IsKind(className string) bool {
+	defer runtime.KeepAlive(ocd)
 	return rt.IsKind(objref.IDOf(ocd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ocd *OrderedCollectionDifference) String() string {
+	defer runtime.KeepAlive(ocd)
 	return rt.Description(objref.IDOf(ocd))
 }
 
@@ -77,6 +83,8 @@ func NewOrderedCollectionDifferenceWithChanges(changes []obj.Object) *OrderedCol
 
 // NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices, in addition to an array of ordered collection changes.
 func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *IndexSet, insertedObjects []obj.Object, removes *IndexSet, removedObjects []obj.Object, changes []obj.Object) *OrderedCollectionDifference {
+	defer runtime.KeepAlive(inserts)
+	defer runtime.KeepAlive(removes)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:additionalChanges:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(changes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedCollectionDifferenceAdopt(_id)
@@ -84,6 +92,8 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 
 // NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices.
 func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *IndexSet, insertedObjects []obj.Object, removes *IndexSet, removedObjects []obj.Object) *OrderedCollectionDifference {
+	defer runtime.KeepAlive(inserts)
+	defer runtime.KeepAlive(removes)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return orderedCollectionDifferenceAdopt(_id)
@@ -96,13 +106,14 @@ func (ocd *OrderedCollectionDifference) WithObservationInfo(observationInfo unsa
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ocd *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference {
-	objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ocd *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties map[string]obj.Object) *OrderedCollectionDifference {
+	objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ocd
 }
 
 // InverseDifference returns calculate the difference between two objects in the reverse direction of comparison.
 func (ocd *OrderedCollectionDifference) InverseDifference() obj.Object {
+	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("inverseDifference"))
 	return obj.Wrap(_r)
 }
@@ -111,6 +122,7 @@ func (ocd *OrderedCollectionDifference) InverseDifference() obj.Object {
 //
 // Insertions returns the collection as a Go slice.
 func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
+	defer runtime.KeepAlive(ocd)
 	_arr := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("insertions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -119,12 +131,14 @@ func (ocd *OrderedCollectionDifference) Insertions() []obj.Object {
 //
 // Removals returns the collection as a Go slice.
 func (ocd *OrderedCollectionDifference) Removals() []obj.Object {
+	defer runtime.KeepAlive(ocd)
 	_arr := objc.Send[objc.ID](objref.IDOf(ocd), objc.RegisterName("removals"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HasChanges reports whether the object has changes.
 func (ocd *OrderedCollectionDifference) HasChanges() bool {
+	defer runtime.KeepAlive(ocd)
 	_r := objc.Send[bool](objref.IDOf(ocd), objc.RegisterName("hasChanges"))
 	return _r
 }

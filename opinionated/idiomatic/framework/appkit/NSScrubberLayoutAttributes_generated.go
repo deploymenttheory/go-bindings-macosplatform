@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func scrubberLayoutAttributesAdopt(id objc.ID) *ScrubberLayoutAttributes {
 
 // Description returns the object's -description text.
 func (sla *ScrubberLayoutAttributes) Description() string {
+	defer runtime.KeepAlive(sla)
 	return rt.Description(objref.IDOf(sla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sla *ScrubberLayoutAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sla)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sla *ScrubberLayoutAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(sla)
 	return rt.IsKind(objref.IDOf(sla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sla *ScrubberLayoutAttributes) String() string {
+	defer runtime.KeepAlive(sla)
 	return rt.Description(objref.IDOf(sla))
 }
 
@@ -93,18 +100,21 @@ func (sla *ScrubberLayoutAttributes) WithAlpha(alpha float64) *ScrubberLayoutAtt
 
 // ItemIndex returns the item index.
 func (sla *ScrubberLayoutAttributes) ItemIndex() int {
+	defer runtime.KeepAlive(sla)
 	_r := objc.Send[int](objref.IDOf(sla), objc.RegisterName("itemIndex"))
 	return _r
 }
 
 // Frame returns the frame.
 func (sla *ScrubberLayoutAttributes) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(sla)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sla), objc.RegisterName("frame"))
 	return _r
 }
 
 // Alpha returns the alpha.
 func (sla *ScrubberLayoutAttributes) Alpha() float64 {
+	defer runtime.KeepAlive(sla)
 	_r := objc.Send[float64](objref.IDOf(sla), objc.RegisterName("alpha"))
 	return _r
 }

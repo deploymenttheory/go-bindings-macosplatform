@@ -5,6 +5,8 @@
 package syncservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func iSyncChangeAdopt(id objc.ID) *ISyncChange {
 
 // Description returns the object's -description text.
 func (isc *ISyncChange) Description() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isc *ISyncChange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isc *ISyncChange) IsKind(className string) bool {
+	defer runtime.KeepAlive(isc)
 	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isc *ISyncChange) String() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
 // NewISyncChangeWithChangeTypeRecordIdentifierChanges creates a new ISyncChange.
 func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes obj.Object) *ISyncChange {
+	defer runtime.KeepAlive(changes)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ISyncChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChangeType:recordIdentifier:changes:"), type_, purego.NSString(recordIdentifier), objref.IDOf(changes))
 	return iSyncChangeAdopt(_id)
@@ -73,12 +81,14 @@ func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdenti
 
 // Type returns the type.
 func (isc *ISyncChange) Type() int {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[int](objref.IDOf(isc), objc.RegisterName("type"))
 	return _r
 }
 
 // RecordIdentifier returns the record identifier.
 func (isc *ISyncChange) RecordIdentifier() string {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
 		return ""
@@ -88,12 +98,14 @@ func (isc *ISyncChange) RecordIdentifier() string {
 
 // Record returns the record.
 func (isc *ISyncChange) Record() obj.Object {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("record"))
 	return obj.Wrap(_r)
 }
 
 // Changes returns the changes.
 func (isc *ISyncChange) Changes() obj.Object {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("changes"))
 	return obj.Wrap(_r)
 }

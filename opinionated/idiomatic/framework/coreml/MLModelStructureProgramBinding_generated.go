@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramBindingAdopt(id objc.ID) *ModelStructureProgramBinding
 
 // Description returns the object's -description text.
 func (mspb *ModelStructureProgramBinding) Description() string {
+	defer runtime.KeepAlive(mspb)
 	return rt.Description(objref.IDOf(mspb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspb *ModelStructureProgramBinding) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspb *ModelStructureProgramBinding) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspb)
 	return rt.IsKind(objref.IDOf(mspb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspb *ModelStructureProgramBinding) String() string {
+	defer runtime.KeepAlive(mspb)
 	return rt.Description(objref.IDOf(mspb))
 }
 
@@ -74,6 +81,7 @@ func NewModelStructureProgramBinding() *ModelStructureProgramBinding {
 
 // Name returns the name of the variable in the Program.
 func (mspb *ModelStructureProgramBinding) Name() string {
+	defer runtime.KeepAlive(mspb)
 	_r := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (mspb *ModelStructureProgramBinding) Name() string {
 
 // Value returns the compile time constant value in the Program.
 func (mspb *ModelStructureProgramBinding) Value() *ModelStructureProgramValue {
+	defer runtime.KeepAlive(mspb)
 	_r := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("value"))
 	return ModelStructureProgramValueFromID(_r)
 }

@@ -5,6 +5,8 @@
 package oslog
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func logPositionAdopt(id objc.ID) *LogPosition {
 
 // Description returns the object's -description text.
 func (lp *LogPosition) Description() string {
+	defer runtime.KeepAlive(lp)
 	return rt.Description(objref.IDOf(lp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lp *LogPosition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lp *LogPosition) IsKind(className string) bool {
+	defer runtime.KeepAlive(lp)
 	return rt.IsKind(objref.IDOf(lp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lp *LogPosition) String() string {
+	defer runtime.KeepAlive(lp)
 	return rt.Description(objref.IDOf(lp))
 }
 

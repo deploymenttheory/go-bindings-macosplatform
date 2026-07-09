@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func mutableSetAdopt(id objc.ID) *MutableSet {
 
 // NewMutableSetWithCoder creates a new MutableSet.
 func NewMutableSetWithCoder(coder *Coder) *MutableSet {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return mutableSetAdopt(_id)
@@ -69,53 +72,65 @@ func (ms *MutableSet) WithObservationInfo(observationInfo unsafe.Pointer) *Mutab
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ms *MutableSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableSet {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ms *MutableSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableSet {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ms
 }
 
 // AddObject adds a given object to the set, if it is not already a member.
 func (ms *MutableSet) AddObject(object obj.Object) {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes a given object from the set.
 func (ms *MutableSet) RemoveObject(object obj.Object) {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // AddObjectsFromArray adds to the set each object contained in a given array that is not already a member.
 func (ms *MutableSet) AddObjectsFromArray(array []obj.Object) {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // IntersectSet removes from the receiving set each object that isn’t a member of another given set.
-func (ms *MutableSet) IntersectSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("intersectSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) IntersectSet(otherSet []obj.Object) {
+	defer runtime.KeepAlive(ms)
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("intersectSet:"), rt.SliceToNSSet(otherSet, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MinusSet removes each object in another given set from the receiving set, if present.
-func (ms *MutableSet) MinusSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("minusSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) MinusSet(otherSet []obj.Object) {
+	defer runtime.KeepAlive(ms)
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("minusSet:"), rt.SliceToNSSet(otherSet, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveAllObjects empties the set of all of its members.
 func (ms *MutableSet) RemoveAllObjects() {
+	defer runtime.KeepAlive(ms)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("removeAllObjects"))
 }
 
 // UnionSet adds each object in another given set to the receiving set, if not present.
-func (ms *MutableSet) UnionSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("unionSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) UnionSet(otherSet []obj.Object) {
+	defer runtime.KeepAlive(ms)
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("unionSet:"), rt.SliceToNSSet(otherSet, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetSet empties the receiving set, then adds each object contained in another given set.
-func (ms *MutableSet) SetSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) SetSet(otherSet []obj.Object) {
+	defer runtime.KeepAlive(ms)
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setSet:"), rt.SliceToNSSet(otherSet, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FilterUsingPredicate evaluates a given predicate against the set’s content and removes from the set those objects for which the predicate returns false.
 func (ms *MutableSet) FilterUsingPredicate(predicate *Predicate) {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(predicate))
 }
 

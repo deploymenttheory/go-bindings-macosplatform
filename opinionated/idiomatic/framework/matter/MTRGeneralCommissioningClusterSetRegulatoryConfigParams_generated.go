@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGeneralCommissioningClusterSetRegulatoryConfigParamsAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Description() string {
+	defer runtime.KeepAlive(mgccsrcp)
 	return rt.Description(objref.IDOf(mgccsrcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgccsrcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgccsrcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgccsrcp)
 	return rt.IsKind(objref.IDOf(mgccsrcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) String() string {
+	defer runtime.KeepAlive(mgccsrcp)
 	return rt.Description(objref.IDOf(mgccsrcp))
 }
 
@@ -72,6 +80,7 @@ func NewMTRGeneralCommissioningClusterSetRegulatoryConfigParams() *MTRGeneralCom
 
 // WithNewRegulatoryConfig sets the new regulatory config.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithNewRegulatoryConfig(newRegulatoryConfig obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
+	defer runtime.KeepAlive(newRegulatoryConfig)
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setNewRegulatoryConfig:"), objref.IDOf(newRegulatoryConfig))
 	return mgccsrcp
 }
@@ -84,30 +93,35 @@ func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithCou
 
 // WithBreadcrumb sets the breadcrumb.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithBreadcrumb(breadcrumb obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
+	defer runtime.KeepAlive(breadcrumb)
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mgccsrcp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgccsrcp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralCommissioningClusterSetRegulatoryConfigParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mgccsrcp
 }
 
 // NewRegulatoryConfig returns the new regulatory config.
-func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) NewRegulatoryConfig() obj.Object {
+func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) NewRegulatoryConfig() *foundation.Number {
+	defer runtime.KeepAlive(mgccsrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("getNewRegulatoryConfig"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CountryCode returns the country code.
 func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) CountryCode() string {
+	defer runtime.KeepAlive(mgccsrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
@@ -116,19 +130,22 @@ func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Country
 }
 
 // Breadcrumb returns the breadcrumb.
-func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Breadcrumb() obj.Object {
+func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) Breadcrumb() *foundation.Number {
+	defer runtime.KeepAlive(mgccsrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("breadcrumb"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgccsrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) ServerSideProcessingTimeout() obj.Object {
+func (mgccsrcp *MTRGeneralCommissioningClusterSetRegulatoryConfigParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mgccsrcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgccsrcp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

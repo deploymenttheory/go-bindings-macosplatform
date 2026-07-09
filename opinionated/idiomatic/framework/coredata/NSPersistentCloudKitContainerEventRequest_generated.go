@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (pckcer *PersistentCloudKitContainerEventRequest) WithAffectedStores(items 
 
 // ResultType returns the result type.
 func (pckcer *PersistentCloudKitContainerEventRequest) ResultType() PersistentCloudKitContainerEventResultType {
+	defer runtime.KeepAlive(pckcer)
 	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(pckcer), objc.RegisterName("resultType"))
 	return _r
 }

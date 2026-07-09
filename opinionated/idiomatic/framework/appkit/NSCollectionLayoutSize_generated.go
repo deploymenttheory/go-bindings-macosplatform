@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collectionLayoutSizeAdopt(id objc.ID) *CollectionLayoutSize {
 
 // Description returns the object's -description text.
 func (cls *CollectionLayoutSize) Description() string {
+	defer runtime.KeepAlive(cls)
 	return rt.Description(objref.IDOf(cls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cls *CollectionLayoutSize) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cls *CollectionLayoutSize) IsKind(className string) bool {
+	defer runtime.KeepAlive(cls)
 	return rt.IsKind(objref.IDOf(cls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cls *CollectionLayoutSize) String() string {
+	defer runtime.KeepAlive(cls)
 	return rt.Description(objref.IDOf(cls))
 }
 
@@ -80,6 +87,7 @@ func NewCollectionLayoutSize() *CollectionLayoutSize {
 
 // WidthDimension returns the width dimension.
 func (cls *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 *CollectionLayoutDimension
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutDimension {
@@ -93,6 +101,7 @@ func (cls *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
 
 // HeightDimension returns the height dimension.
 func (cls *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 *CollectionLayoutDimension
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutDimension {

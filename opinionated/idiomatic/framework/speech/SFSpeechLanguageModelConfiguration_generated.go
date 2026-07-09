@@ -5,7 +5,10 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func speechLanguageModelConfigurationAdopt(id objc.ID) *SpeechLanguageModelConfi
 
 // Description returns the object's -description text.
 func (slmc *SpeechLanguageModelConfiguration) Description() string {
+	defer runtime.KeepAlive(slmc)
 	return rt.Description(objref.IDOf(slmc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (slmc *SpeechLanguageModelConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(slmc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(slmc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (slmc *SpeechLanguageModelConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(slmc)
 	return rt.IsKind(objref.IDOf(slmc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (slmc *SpeechLanguageModelConfiguration) String() string {
+	defer runtime.KeepAlive(slmc)
 	return rt.Description(objref.IDOf(slmc))
 }
 
@@ -82,25 +90,29 @@ func NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary(languageMode
 
 // NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight creates a configuration with the locations of language model and vocabulary files, and custom weight.
 func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(languageModel string, vocabulary string, weight obj.Object) *SpeechLanguageModelConfiguration {
+	defer runtime.KeepAlive(weight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguageModel:vocabulary:weight:"), rt.FileURL(languageModel), rt.FileURL(vocabulary), objref.IDOf(weight))
 	return speechLanguageModelConfigurationAdopt(_id)
 }
 
 // LanguageModel returns the location of a compiled language model file.
-func (slmc *SpeechLanguageModelConfiguration) LanguageModel() obj.Object {
+func (slmc *SpeechLanguageModelConfiguration) LanguageModel() string {
+	defer runtime.KeepAlive(slmc)
 	_r := objc.Send[objc.ID](objref.IDOf(slmc), objc.RegisterName("languageModel"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Vocabulary returns the location of a compiled vocabulary file.
-func (slmc *SpeechLanguageModelConfiguration) Vocabulary() obj.Object {
+func (slmc *SpeechLanguageModelConfiguration) Vocabulary() string {
+	defer runtime.KeepAlive(slmc)
 	_r := objc.Send[objc.ID](objref.IDOf(slmc), objc.RegisterName("vocabulary"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Weight returns the relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
-func (slmc *SpeechLanguageModelConfiguration) Weight() obj.Object {
+func (slmc *SpeechLanguageModelConfiguration) Weight() *foundation.Number {
+	defer runtime.KeepAlive(slmc)
 	_r := objc.Send[objc.ID](objref.IDOf(slmc), objc.RegisterName("weight"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

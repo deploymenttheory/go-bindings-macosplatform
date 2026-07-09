@@ -6,9 +6,11 @@ package virtualization
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +52,33 @@ func macOSInstallerAdopt(id objc.ID) *MacOSInstaller {
 
 // Description returns the object's -description text.
 func (moi *MacOSInstaller) Description() string {
+	defer runtime.KeepAlive(moi)
 	return rt.Description(objref.IDOf(moi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moi *MacOSInstaller) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moi *MacOSInstaller) IsKind(className string) bool {
+	defer runtime.KeepAlive(moi)
 	return rt.IsKind(objref.IDOf(moi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moi *MacOSInstaller) String() string {
+	defer runtime.KeepAlive(moi)
 	return rt.Description(objref.IDOf(moi))
 }
 
 // NewMACOSInstallerWithVirtualMachineRestoreImageURL creates a macOS installer object.
 func NewMACOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *VirtualMachine, restoreImageFileURL string) *MacOSInstaller {
+	defer runtime.KeepAlive(virtualMachine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacOSInstaller")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVirtualMachine:restoreImageURL:"), objref.IDOf(virtualMachine), rt.FileURL(restoreImageFileURL))
 	return macOSInstallerAdopt(_id)
@@ -80,6 +88,7 @@ func NewMACOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *VirtualM
 //
 // Install blocks until the operation completes or ctx is cancelled.
 func (moi *MacOSInstaller) Install(ctx context.Context) error {
+	defer runtime.KeepAlive(moi)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -96,19 +105,22 @@ func (moi *MacOSInstaller) Install(ctx context.Context) error {
 }
 
 // Progress returns an NSProgress object that can be used to observe or cancel installation. If the progress object is cancelled before installation is started, an exception will be raised.
-func (moi *MacOSInstaller) Progress() obj.Object {
+func (moi *MacOSInstaller) Progress() *foundation.Progress {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("progress"))
-	return obj.Wrap(_r)
+	return foundation.ProgressFromID(_r)
 }
 
 // VirtualMachine returns the virtual machine that this installer was initialized with.
 func (moi *MacOSInstaller) VirtualMachine() *VirtualMachine {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("virtualMachine"))
 	return VirtualMachineFromID(_r)
 }
 
 // RestoreImageURL returns the restore image URL that this installer was initialized with.
-func (moi *MacOSInstaller) RestoreImageURL() obj.Object {
+func (moi *MacOSInstaller) RestoreImageURL() string {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("restoreImageURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

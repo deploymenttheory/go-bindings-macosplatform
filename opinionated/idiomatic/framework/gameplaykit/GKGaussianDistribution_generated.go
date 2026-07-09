@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewGaussianDistribution() *GaussianDistribution {
 
 // Mean returns the mean, or expected, value of the distribution. Values are more probable the closer to the mean they are.
 func (gd *GaussianDistribution) Mean() float32 {
+	defer runtime.KeepAlive(gd)
 	_r := objc.Send[float32](objref.IDOf(gd), objc.RegisterName("mean"))
 	return _r
 }
 
 // Deviation returns the deviation, often called 'sigma', is the deviation from the mean that would include roughly 68% of the distribution. The range of the distribution is [mean - 3 * deviation, mean + 3 * deviation]. Values beyond 3 deviations are considered so improbable that they are removed from the output set.
 func (gd *GaussianDistribution) Deviation() float32 {
+	defer runtime.KeepAlive(gd)
 	_r := objc.Send[float32](objref.IDOf(gd), objc.RegisterName("deviation"))
 	return _r
 }

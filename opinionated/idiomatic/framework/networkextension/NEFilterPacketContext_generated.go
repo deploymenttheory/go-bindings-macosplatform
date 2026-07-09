@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEFilterPacketContextAdopt(id objc.ID) *NEFilterPacketContext {
 
 // Description returns the object's -description text.
 func (nfpc *NEFilterPacketContext) Description() string {
+	defer runtime.KeepAlive(nfpc)
 	return rt.Description(objref.IDOf(nfpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfpc *NEFilterPacketContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfpc *NEFilterPacketContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfpc)
 	return rt.IsKind(objref.IDOf(nfpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfpc *NEFilterPacketContext) String() string {
+	defer runtime.KeepAlive(nfpc)
 	return rt.Description(objref.IDOf(nfpc))
 }
 

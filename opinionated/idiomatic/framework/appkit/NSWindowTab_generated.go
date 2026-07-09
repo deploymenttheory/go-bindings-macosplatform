@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func windowTabAdopt(id objc.ID) *WindowTab {
 
 // Description returns the object's -description text.
 func (wt *WindowTab) Description() string {
+	defer runtime.KeepAlive(wt)
 	return rt.Description(objref.IDOf(wt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wt *WindowTab) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wt *WindowTab) IsKind(className string) bool {
+	defer runtime.KeepAlive(wt)
 	return rt.IsKind(objref.IDOf(wt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wt *WindowTab) String() string {
+	defer runtime.KeepAlive(wt)
 	return rt.Description(objref.IDOf(wt))
 }
 
@@ -80,6 +88,7 @@ func (wt *WindowTab) WithTitle(title string) *WindowTab {
 
 // WithAttributedTitle sets the title for the window tab, specified as an attributed string.
 func (wt *WindowTab) WithAttributedTitle(attributedTitle obj.Object) *WindowTab {
+	defer runtime.KeepAlive(attributedTitle)
 	objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return wt
 }
@@ -92,12 +101,14 @@ func (wt *WindowTab) WithToolTip(toolTip string) *WindowTab {
 
 // WithAccessoryView sets an optional accessory view for the tab.
 func (wt *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
+	defer runtime.KeepAlive(accessoryView)
 	objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return wt
 }
 
 // Title returns the title.
 func (wt *WindowTab) Title() string {
+	defer runtime.KeepAlive(wt)
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -106,13 +117,15 @@ func (wt *WindowTab) Title() string {
 }
 
 // AttributedTitle returns the attributed title.
-func (wt *WindowTab) AttributedTitle() obj.Object {
+func (wt *WindowTab) AttributedTitle() *foundation.AttributedString {
+	defer runtime.KeepAlive(wt)
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("attributedTitle"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // ToolTip returns the tool tip.
 func (wt *WindowTab) ToolTip() string {
+	defer runtime.KeepAlive(wt)
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
@@ -122,6 +135,7 @@ func (wt *WindowTab) ToolTip() string {
 
 // AccessoryView returns the accessory view.
 func (wt *WindowTab) AccessoryView() *View {
+	defer runtime.KeepAlive(wt)
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }

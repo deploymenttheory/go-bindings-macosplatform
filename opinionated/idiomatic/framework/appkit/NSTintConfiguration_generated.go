@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tintConfigurationAdopt(id objc.ID) *TintConfiguration {
 
 // Description returns the object's -description text.
 func (tc *TintConfiguration) Description() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tc *TintConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tc *TintConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(tc)
 	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tc *TintConfiguration) String() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
@@ -74,18 +81,21 @@ func NewTintConfiguration() *TintConfiguration {
 
 // BaseTintColor returns the base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
 func (tc *TintConfiguration) BaseTintColor() *Color {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("baseTintColor"))
 	return ColorFromID(_r)
 }
 
 // EquivalentContentTintColor returns an equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
 func (tc *TintConfiguration) EquivalentContentTintColor() *Color {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("equivalentContentTintColor"))
 	return ColorFromID(_r)
 }
 
 // AdaptsToUserAccentColor reports whether if true, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
 func (tc *TintConfiguration) AdaptsToUserAccentColor() bool {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("adaptsToUserAccentColor"))
 	return _r
 }

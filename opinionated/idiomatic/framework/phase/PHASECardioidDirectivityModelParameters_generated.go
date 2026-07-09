@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -56,6 +58,7 @@ func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameter
 //
 // SubbandParameters returns the collection as a Go slice.
 func (cdmp *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {
+	defer runtime.KeepAlive(cdmp)
 	_arr := objc.Send[objc.ID](objref.IDOf(cdmp), objc.RegisterName("subbandParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CardioidDirectivityModelSubbandParameters {
 		return CardioidDirectivityModelSubbandParametersFromID(_id)

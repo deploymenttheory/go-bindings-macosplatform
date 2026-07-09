@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWaterHeaterModeClusterModeOptionStructAdopt(id objc.ID) *MTRWaterHeaterM
 
 // Description returns the object's -description text.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Description() string {
+	defer runtime.KeepAlive(mwhmcmos)
 	return rt.Description(objref.IDOf(mwhmcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcmos)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcmos)
 	return rt.IsKind(objref.IDOf(mwhmcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) String() string {
+	defer runtime.KeepAlive(mwhmcmos)
 	return rt.Description(objref.IDOf(mwhmcmos))
 }
 
@@ -78,12 +86,14 @@ func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) WithLabel(label strin
 
 // WithMode sets the mode.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRWaterHeaterModeClusterModeOptionStruct {
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mwhmcmos
 }
 
 // Label returns the label.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Label() string {
+	defer runtime.KeepAlive(mwhmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -92,18 +102,22 @@ func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Label() string {
 }
 
 // Mode returns the mode.
-func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Mode() obj.Object {
+func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) Mode() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("mode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ModeTags returns the mode tags.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) ModeTags() obj.Object {
+	defer runtime.KeepAlive(mwhmcmos)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
 func (mwhmcmos *MTRWaterHeaterModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	defer runtime.KeepAlive(mwhmcmos)
+	defer runtime.KeepAlive(modeTags)
 	objc.Send[objc.ID](objref.IDOf(mwhmcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }

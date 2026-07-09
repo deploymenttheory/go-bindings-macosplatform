@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collectionLayoutSectionAdopt(id objc.ID) *CollectionLayoutSection {
 
 // Description returns the object's -description text.
 func (cls *CollectionLayoutSection) Description() string {
+	defer runtime.KeepAlive(cls)
 	return rt.Description(objref.IDOf(cls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cls *CollectionLayoutSection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cls *CollectionLayoutSection) IsKind(className string) bool {
+	defer runtime.KeepAlive(cls)
 	return rt.IsKind(objref.IDOf(cls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cls *CollectionLayoutSection) String() string {
+	defer runtime.KeepAlive(cls)
 	return rt.Description(objref.IDOf(cls))
 }
 
@@ -122,6 +129,7 @@ func (cls *CollectionLayoutSection) WithDecorationItems(items ...*CollectionLayo
 
 // InterGroupSpacing returns the inter group spacing.
 func (cls *CollectionLayoutSection) InterGroupSpacing() float64 {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -135,6 +143,7 @@ func (cls *CollectionLayoutSection) InterGroupSpacing() float64 {
 
 // OrthogonalScrollingBehavior returns the orthogonal scrolling behavior.
 func (cls *CollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 CollectionLayoutSectionOrthogonalScrollingBehavior
 	purego.Main(func() {
 		_mainthread0 = func() CollectionLayoutSectionOrthogonalScrollingBehavior {
@@ -150,6 +159,7 @@ func (cls *CollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayo
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (cls *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 []*CollectionLayoutBoundarySupplementaryItem
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionLayoutBoundarySupplementaryItem {
@@ -164,6 +174,7 @@ func (cls *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLa
 
 // SupplementariesFollowContentInsets wraps the corresponding Objective-C method.
 func (cls *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -179,6 +190,7 @@ func (cls *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
 //
 // DecorationItems returns the collection as a Go slice.
 func (cls *CollectionLayoutSection) DecorationItems() []*CollectionLayoutDecorationItem {
+	defer runtime.KeepAlive(cls)
 	var _mainthread0 []*CollectionLayoutDecorationItem
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionLayoutDecorationItem {

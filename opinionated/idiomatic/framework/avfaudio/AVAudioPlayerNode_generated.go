@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,63 +55,85 @@ func NewAudioPlayerNode() *AudioPlayerNode {
 
 // ScheduleBufferCompletionHandler schedules the playing samples from an audio buffer.
 func (apn *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func()) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(buffer)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), completionHandler)
 }
 
 // ScheduleBufferAtTimeOptionsCompletionHandler schedules the playing samples from an audio buffer at the time and playback options you specify.
 func (apn *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func()) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(buffer)
+	defer runtime.KeepAlive(when)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionHandler)
 }
 
 // ScheduleFileAtTimeCompletionHandler schedules the playing of an entire audio file.
 func (apn *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func()) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(file)
+	defer runtime.KeepAlive(when)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), completionHandler)
 }
 
 // ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler schedules the playing of an audio file segment.
 func (apn *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func()) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(file)
+	defer runtime.KeepAlive(when)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), completionHandler)
 }
 
 // Stop clears all of the node’s events you schedule and stops playback.
 func (apn *AudioPlayerNode) Stop() {
+	defer runtime.KeepAlive(apn)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("stop"))
 }
 
 // PrepareWithFrameCount prepares the file regions or buffers you schedule for playback.
 func (apn *AudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
+	defer runtime.KeepAlive(apn)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("prepareWithFrameCount:"), frameCount)
 }
 
 // Play starts or resumes playback immediately.
 func (apn *AudioPlayerNode) Play() {
+	defer runtime.KeepAlive(apn)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("play"))
 }
 
 // PlayAtTime starts or resumes playback at a time you specify.
 func (apn *AudioPlayerNode) PlayAtTime(when *AudioTime) {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(when)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("playAtTime:"), objref.IDOf(when))
 }
 
 // Pause pauses the node’s playback.
 func (apn *AudioPlayerNode) Pause() {
+	defer runtime.KeepAlive(apn)
 	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("pause"))
 }
 
 // NodeTimeForPlayerTime converts from player time to node time.
 func (apn *AudioPlayerNode) NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(playerTime)
 	_r := objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("nodeTimeForPlayerTime:"), objref.IDOf(playerTime))
 	return AudioTimeFromID(_r)
 }
 
 // PlayerTimeForNodeTime converts from node time to player time.
 func (apn *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime {
+	defer runtime.KeepAlive(apn)
+	defer runtime.KeepAlive(nodeTime)
 	_r := objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("playerTimeForNodeTime:"), objref.IDOf(nodeTime))
 	return AudioTimeFromID(_r)
 }
 
 // IsPlaying reports whether the object is playing.
 func (apn *AudioPlayerNode) IsPlaying() bool {
+	defer runtime.KeepAlive(apn)
 	_r := objc.Send[bool](objref.IDOf(apn), objc.RegisterName("isPlaying"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func deviceAdopt(id objc.ID) *Device {
 
 // Description returns the object's -description text.
 func (d *Device) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Device) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Device) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Device) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -74,18 +81,21 @@ func NewDevice() *Device {
 
 // Type returns the type specified when the device is created Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
 func (d *Device) Type() DeviceType {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[DeviceType](objref.IDOf(d), objc.RegisterName("type"))
 	return _r
 }
 
 // ActualDeviceType returns the specific device selected. This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
 func (d *Device) ActualDeviceType() DeviceType {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[DeviceType](objref.IDOf(d), objc.RegisterName("actualDeviceType"))
 	return _r
 }
 
 // GPUDevices returns the GPU devices.
 func (d *Device) GPUDevices() []obj.Object {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("gpuDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

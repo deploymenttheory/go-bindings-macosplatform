@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -60,6 +61,7 @@ func (asa *AnimatedScalarArray) WithInterpolation(interpolation AnimatedValueInt
 
 // SetFloatArrayCountAtTime wraps the corresponding Objective-C method.
 func (asa *AnimatedScalarArray) SetFloatArrayCountAtTime(count int, time_ float64) (array float32) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float32
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setFloatArray:count:atTime:"), unsafe.Pointer(&_out0), count, time_)
 	return _out0
@@ -67,6 +69,7 @@ func (asa *AnimatedScalarArray) SetFloatArrayCountAtTime(count int, time_ float6
 
 // SetDoubleArrayCountAtTime wraps the corresponding Objective-C method.
 func (asa *AnimatedScalarArray) SetDoubleArrayCountAtTime(count int, time_ float64) (array float64) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float64
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setDoubleArray:count:atTime:"), unsafe.Pointer(&_out0), count, time_)
 	return _out0
@@ -74,6 +77,7 @@ func (asa *AnimatedScalarArray) SetDoubleArrayCountAtTime(count int, time_ float
 
 // GetFloatArrayMaxCountAtTime wraps the corresponding Objective-C method.
 func (asa *AnimatedScalarArray) GetFloatArrayMaxCountAtTime(maxCount int, time_ float64) (result int, array float32) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float32
 	_r := objc.Send[int](objref.IDOf(asa), objc.RegisterName("getFloatArray:maxCount:atTime:"), unsafe.Pointer(&_out0), maxCount, time_)
 	return _r, _out0
@@ -81,6 +85,7 @@ func (asa *AnimatedScalarArray) GetFloatArrayMaxCountAtTime(maxCount int, time_ 
 
 // GetDoubleArrayMaxCountAtTime wraps the corresponding Objective-C method.
 func (asa *AnimatedScalarArray) GetDoubleArrayMaxCountAtTime(maxCount int, time_ float64) (result int, array float64) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float64
 	_r := objc.Send[int](objref.IDOf(asa), objc.RegisterName("getDoubleArray:maxCount:atTime:"), unsafe.Pointer(&_out0), maxCount, time_)
 	return _r, _out0
@@ -88,6 +93,7 @@ func (asa *AnimatedScalarArray) GetDoubleArrayMaxCountAtTime(maxCount int, time_
 
 // ResetWithFloatArrayCountAtTimesCount resets with float array count at times count.
 func (asa *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float32, timesArray float64) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float32
 	var _out1 float64
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("resetWithFloatArray:count:atTimes:count:"), unsafe.Pointer(&_out0), valuesCount, unsafe.Pointer(&_out1), timesCount)
@@ -96,6 +102,7 @@ func (asa *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesCount
 
 // ResetWithDoubleArrayCountAtTimesCount resets with double array count at times count.
 func (asa *AnimatedScalarArray) ResetWithDoubleArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float64, timesArray float64) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float64
 	var _out1 float64
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("resetWithDoubleArray:count:atTimes:count:"), unsafe.Pointer(&_out0), valuesCount, unsafe.Pointer(&_out1), timesCount)
@@ -104,6 +111,7 @@ func (asa *AnimatedScalarArray) ResetWithDoubleArrayCountAtTimesCount(valuesCoun
 
 // GetFloatArrayMaxCount wraps the corresponding Objective-C method.
 func (asa *AnimatedScalarArray) GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float32
 	_r := objc.Send[int](objref.IDOf(asa), objc.RegisterName("getFloatArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0
@@ -111,6 +119,7 @@ func (asa *AnimatedScalarArray) GetFloatArrayMaxCount(maxCount int) (result int,
 
 // GetDoubleArrayMaxCount wraps the corresponding Objective-C method.
 func (asa *AnimatedScalarArray) GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64) {
+	defer runtime.KeepAlive(asa)
 	var _out0 float64
 	_r := objc.Send[int](objref.IDOf(asa), objc.RegisterName("getDoubleArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0
@@ -118,6 +127,7 @@ func (asa *AnimatedScalarArray) GetDoubleArrayMaxCount(maxCount int) (result int
 
 // ElementCount returns the element count.
 func (asa *AnimatedScalarArray) ElementCount() int {
+	defer runtime.KeepAlive(asa)
 	_r := objc.Send[int](objref.IDOf(asa), objc.RegisterName("elementCount"))
 	return _r
 }

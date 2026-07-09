@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,36 +56,42 @@ func NewLocationActivityMetric() *LocationActivityMetric {
 
 // CumulativeBestAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyBest. Dimensioned as NSUnitDuration.
 func (lam *LocationActivityMetric) CumulativeBestAccuracyTime() obj.Object {
+	defer runtime.KeepAlive(lam)
 	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeBestAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeBestAccuracyForNavigationTime returns cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. Dimensioned as NSUnitDuration.
 func (lam *LocationActivityMetric) CumulativeBestAccuracyForNavigationTime() obj.Object {
+	defer runtime.KeepAlive(lam)
 	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeBestAccuracyForNavigationTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeNearestTenMetersAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. Dimensioned as NSUnitDuration.
 func (lam *LocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() obj.Object {
+	defer runtime.KeepAlive(lam)
 	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeNearestTenMetersAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeHundredMetersAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. Dimensioned as NSUnitDuration.
 func (lam *LocationActivityMetric) CumulativeHundredMetersAccuracyTime() obj.Object {
+	defer runtime.KeepAlive(lam)
 	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeHundredMetersAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeKilometerAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyKilometer. Dimensioned as NSUnitDuration.
 func (lam *LocationActivityMetric) CumulativeKilometerAccuracyTime() obj.Object {
+	defer runtime.KeepAlive(lam)
 	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeKilometerAccuracyTime"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeThreeKilometersAccuracyTime returns cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. Dimensioned as NSUnitDuration.
 func (lam *LocationActivityMetric) CumulativeThreeKilometersAccuracyTime() obj.Object {
+	defer runtime.KeepAlive(lam)
 	_r := objc.Send[objc.ID](objref.IDOf(lam), objc.RegisterName("cumulativeThreeKilometersAccuracyTime"))
 	return obj.Wrap(_r)
 }

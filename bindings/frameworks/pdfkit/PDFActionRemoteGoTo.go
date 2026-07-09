@@ -74,6 +74,6 @@ func (o *PDFActionRemoteGoTo) URL() *foundation.NSURL {
 	return foundation.NSURLFromID(_ret)
 }
 
-func (o *PDFActionRemoteGoTo) SetURL(uRL *foundation.NSURL) {
-	o.Ptr().Send(_pDFActionRemoteGoToSelSetURL, uRL.Ptr())
+func (o *PDFActionRemoteGoTo) SetURL(url *foundation.NSURL) {
+	o.Ptr().Send(_pDFActionRemoteGoToSelSetURL, url.Ptr())
 }

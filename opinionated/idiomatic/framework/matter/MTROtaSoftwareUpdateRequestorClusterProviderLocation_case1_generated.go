@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,18 +54,21 @@ func NewMTROtaSoftwareUpdateRequestorClusterProviderLocation() *MTROtaSoftwareUp
 
 // WithProviderNodeID sets the provider node ID.
 func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	defer runtime.KeepAlive(providerNodeID)
 	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return mosurcpl
 }
 
 // WithEndpoint sets the endpoint.
 func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return mosurcpl
 }
 
 // WithFabricIndex sets the fabric index.
 func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mosurcpl
 }

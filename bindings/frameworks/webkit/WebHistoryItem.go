@@ -41,8 +41,8 @@ func WebHistoryItemFromID(id objc.ID) *WebHistoryItem {
 }
 
 // Initializes the receiver with a URL,URLString, a title specified by title and the last time this item was visited specified by time title, and time last visited.
-func (o *WebHistoryItem) InitWithURLStringTitleLastVisitedTimeInterval(uRLString *foundation.NSString, title *foundation.NSString, time_ float64) *WebHistoryItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelInitWithURLStringTitleLastVisitedTimeInterval, uRLString.Ptr(), title.Ptr(), time_)
+func (o *WebHistoryItem) InitWithURLStringTitleLastVisitedTimeInterval(urlString *foundation.NSString, title *foundation.NSString, time_ float64) *WebHistoryItem {
+	_ret := objc.Send[objc.ID](o.Ptr(), _webHistoryItemSelInitWithURLStringTitleLastVisitedTimeInterval, urlString.Ptr(), title.Ptr(), time_)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -83,18 +85,21 @@ func (cbi *ControllerButtonInput) WithUnmappedLocalizedName(unmappedLocalizedNam
 
 // Value returns a normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1].
 func (cbi *ControllerButtonInput) Value() float32 {
+	defer runtime.KeepAlive(cbi)
 	_r := objc.Send[float32](objref.IDOf(cbi), objc.RegisterName("value"))
 	return _r
 }
 
 // IsPressed reports whether buttons are mostly used in a digital sense, thus we have a recommended method for checking for pressed state instead of interpreting the value. As a general guideline a button is pressed if the value exceeds 0. However there may be hysterisis applied to counter noisy input values, thus incidental values around the threshold value may not trigger a change in pressed state. Others buttons may support two-stage actuation, where the button reports a value between 0 and 1 but is only considered pressed when its value is greater than some threshold other than 0.
 func (cbi *ControllerButtonInput) IsPressed() bool {
+	defer runtime.KeepAlive(cbi)
 	_r := objc.Send[bool](objref.IDOf(cbi), objc.RegisterName("isPressed"))
 	return _r
 }
 
 // IsTouched reports whether some buttons feature capacitive touch capabilities where the user can touch the button without pressing it. In such cases, a button will be touched before it is pressed. For buttons without capacitive sensing, the touched state is true if the value exceeds 0.
 func (cbi *ControllerButtonInput) IsTouched() bool {
+	defer runtime.KeepAlive(cbi)
 	_r := objc.Send[bool](objref.IDOf(cbi), objc.RegisterName("isTouched"))
 	return _r
 }

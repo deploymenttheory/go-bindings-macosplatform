@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func mTRTargetNavigatorClusterTargetInfoStructAdopt(id objc.ID) *MTRTargetNaviga
 
 // Description returns the object's -description text.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Description() string {
+	defer runtime.KeepAlive(mtnctis)
 	return rt.Description(objref.IDOf(mtnctis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtnctis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtnctis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtnctis)
 	return rt.IsKind(objref.IDOf(mtnctis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) String() string {
+	defer runtime.KeepAlive(mtnctis)
 	return rt.Description(objref.IDOf(mtnctis))
 }
 
 // WithIdentifier sets the identifier.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfoStruct {
+	defer runtime.KeepAlive(identifier)
 	objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return mtnctis
 }
@@ -79,13 +88,15 @@ func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) WithName(name string) 
 }
 
 // Identifier returns the identifier.
-func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() obj.Object {
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() *foundation.Number {
+	defer runtime.KeepAlive(mtnctis)
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
+	defer runtime.KeepAlive(mtnctis)
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

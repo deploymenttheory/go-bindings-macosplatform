@@ -5,15 +5,19 @@
 package eventkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AlarmWithAbsoluteDate creates and returns an alarm with an absolute date.
-func AlarmWithAbsoluteDate(date obj.Object) *Alarm {
-	_r := objc.Send[objc.ID](objc.ID(_class("EKAlarm")), objc.RegisterName("alarmWithAbsoluteDate:"), objref.IDOf(date))
+func AlarmWithAbsoluteDate(date time.Time) *Alarm {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKAlarm")), objc.RegisterName("alarmWithAbsoluteDate:"), rt.TimeToNSDate(date))
 	return AlarmFromID(_r)
 }
 
@@ -25,12 +29,14 @@ func AlarmWithRelativeOffset(offset float64) *Alarm {
 
 // CalendarForEntityTypeEventStore creates a new calendar that can contain the given entity type.
 func CalendarForEntityTypeEventStore(entityType EntityType, eventStore *EventStore) *Calendar {
+	defer runtime.KeepAlive(eventStore)
 	_r := objc.Send[objc.ID](objc.ID(_class("EKCalendar")), objc.RegisterName("calendarForEntityType:eventStore:"), entityType, objref.IDOf(eventStore))
 	return CalendarFromID(_r)
 }
 
 // EventWithEventStore creates and returns a new event belonging to a specified event store.
 func EventWithEventStore(eventStore *EventStore) *Event {
+	defer runtime.KeepAlive(eventStore)
 	_r := objc.Send[objc.ID](objc.ID(_class("EKEvent")), objc.RegisterName("eventWithEventStore:"), objref.IDOf(eventStore))
 	return EventFromID(_r)
 }
@@ -54,8 +60,8 @@ func DayOfWeekWeekNumber(dayOfTheWeek Weekday, weekNumber int) *RecurrenceDayOfW
 }
 
 // RecurrenceEndWithEndDate initializes and returns a date-based recurrence end with a given end date.
-func RecurrenceEndWithEndDate(endDate obj.Object) *RecurrenceEnd {
-	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("recurrenceEndWithEndDate:"), objref.IDOf(endDate))
+func RecurrenceEndWithEndDate(endDate time.Time) *RecurrenceEnd {
+	_r := objc.Send[objc.ID](objc.ID(_class("EKRecurrenceEnd")), objc.RegisterName("recurrenceEndWithEndDate:"), rt.TimeToNSDate(endDate))
 	return RecurrenceEndFromID(_r)
 }
 
@@ -67,6 +73,7 @@ func RecurrenceEndWithOccurrenceCount(occurrenceCount int) *RecurrenceEnd {
 
 // ReminderWithEventStore creates and returns a new reminder in the given event store.
 func ReminderWithEventStore(eventStore *EventStore) *Reminder {
+	defer runtime.KeepAlive(eventStore)
 	_r := objc.Send[objc.ID](objc.ID(_class("EKReminder")), objc.RegisterName("reminderWithEventStore:"), objref.IDOf(eventStore))
 	return ReminderFromID(_r)
 }
@@ -79,6 +86,7 @@ func LocationWithTitle(title string) *StructuredLocation {
 
 // LocationWithMapItem creates a new structured location with the specified map item.
 func LocationWithMapItem(mapItem obj.Object) *StructuredLocation {
+	defer runtime.KeepAlive(mapItem)
 	_r := objc.Send[objc.ID](objc.ID(_class("EKStructuredLocation")), objc.RegisterName("locationWithMapItem:"), objref.IDOf(mapItem))
 	return StructuredLocationFromID(_r)
 }

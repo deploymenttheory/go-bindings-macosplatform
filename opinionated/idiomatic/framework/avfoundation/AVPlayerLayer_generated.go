@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func playerLayerAdopt(id objc.ID) *PlayerLayer {
 
 // Description returns the object's -description text.
 func (pl *PlayerLayer) Description() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pl *PlayerLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pl *PlayerLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(pl)
 	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pl *PlayerLayer) String() string {
+	defer runtime.KeepAlive(pl)
 	return rt.Description(objref.IDOf(pl))
 }
 
@@ -75,58 +83,67 @@ func NewPlayerLayer() *PlayerLayer {
 
 // WithPlayer sets the player whose visual content the layer displays.
 func (pl *PlayerLayer) WithPlayer(player PlayerProvider) *PlayerLayer {
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	return pl
 }
 
 // WithVideoGravity sets a value that specifies how the layer displays the player’s visual content within the layer’s bounds.
 func (pl *PlayerLayer) WithVideoGravity(videoGravity obj.Object) *PlayerLayer {
+	defer runtime.KeepAlive(videoGravity)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 	return pl
 }
 
 // WithPixelBufferAttributes sets the attributes of the visual output that displays in the player layer during playback.
-func (pl *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *PlayerLayer {
-	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+func (pl *PlayerLayer) WithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *PlayerLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pl
 }
 
 // SetCaptionPreviewProfileIDPositionText starts displaying a caption preview with the specified accessibility profile.
 func (pl *PlayerLayer) SetCaptionPreviewProfileIDPositionText(profileID string, position corefoundation.CGPoint, text string) {
+	defer runtime.KeepAlive(pl)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setCaptionPreviewProfileID:position:text:"), purego.NSString(profileID), position, purego.NSString(text))
 }
 
 // StopShowingCaptionPreview stops showing the caption preview.
 func (pl *PlayerLayer) StopShowingCaptionPreview() {
+	defer runtime.KeepAlive(pl)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("stopShowingCaptionPreview"))
 }
 
 // Player indicates the instance of AVPlayer for which the AVPlayerLayer displays visual output
 func (pl *PlayerLayer) Player() *Player {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // VideoGravity returns a string defining how the video is displayed within an AVPlayerLayer bounds rect.
-func (pl *PlayerLayer) VideoGravity() obj.Object {
+func (pl *PlayerLayer) VideoGravity() *foundation.String {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("videoGravity"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // IsReadyForDisplay reports whether boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
 func (pl *PlayerLayer) IsReadyForDisplay() bool {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isReadyForDisplay"))
 	return _r
 }
 
 // VideoRect returns the current size and position of the video image as displayed within the receiver's bounds.
 func (pl *PlayerLayer) VideoRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pl), objc.RegisterName("videoRect"))
 	return _r
 }
 
 // PixelBufferAttributes returns the client requirements for the visual output displayed in AVPlayerLayer during playback. Pixel buffer attribute keys are defined in <CoreVideo/CVPixelBuffer.h> This property is key-value observable.
-func (pl *PlayerLayer) PixelBufferAttributes() obj.Object {
+func (pl *PlayerLayer) PixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("pixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

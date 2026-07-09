@@ -612,6 +612,33 @@ func (e PhotoSize) String() string {
 	}
 }
 
+// The possible states of a connection to a match.
+type PlayerConnectionState int64
+
+const (
+	// An undetermined state in which the player can’t receive data.
+	PlayerStateUnknown PlayerConnectionState = 0
+	// A state in which a player connects to the match and can receive data.
+	PlayerStateConnected PlayerConnectionState = 1
+	// A state in which a player disconnects from the match and can’t receive data.
+	PlayerStateDisconnected PlayerConnectionState = 2
+)
+
+// String returns the PlayerConnectionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e PlayerConnectionState) String() string {
+	switch e {
+	case PlayerStateUnknown:
+		return "PlayerStateUnknown"
+	case PlayerStateConnected:
+		return "PlayerStateConnected"
+	case PlayerStateDisconnected:
+		return "PlayerStateDisconnected"
+	default:
+		return fmt.Sprintf("PlayerConnectionState(%d)", int64(e))
+	}
+}
+
 // Describes the release state of an App Store Connect resource, such as an Achievement or Leaderboard.
 // Bitmask — values may be combined with |.
 type ReleaseState uint64

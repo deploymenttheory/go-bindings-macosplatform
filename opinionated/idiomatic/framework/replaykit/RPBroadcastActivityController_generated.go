@@ -5,8 +5,11 @@
 package replaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func broadcastActivityControllerAdopt(id objc.ID) *BroadcastActivityController {
 
 // Description returns the object's -description text.
 func (bac *BroadcastActivityController) Description() string {
+	defer runtime.KeepAlive(bac)
 	return rt.Description(objref.IDOf(bac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bac *BroadcastActivityController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bac *BroadcastActivityController) IsKind(className string) bool {
+	defer runtime.KeepAlive(bac)
 	return rt.IsKind(objref.IDOf(bac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bac *BroadcastActivityController) String() string {
+	defer runtime.KeepAlive(bac)
 	return rt.Description(objref.IDOf(bac))
 }
 
@@ -70,4 +78,14 @@ func (bac *BroadcastActivityController) String() string {
 func NewBroadcastActivityController() *BroadcastActivityController {
 	_id := objc.Send[objc.ID](objc.ID(_class("RPBroadcastActivityController")), objc.RegisterName("new"))
 	return broadcastActivityControllerAdopt(_id)
+}
+
+// WithDelegate sets the broadcast activity controller’s delegate object.
+func (bac *BroadcastActivityController) WithDelegate(delegate BroadcastActivityControllerDelegate) *BroadcastActivityController {
+	_shim := newBroadcastActivityControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(bac), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(bac), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return bac
 }

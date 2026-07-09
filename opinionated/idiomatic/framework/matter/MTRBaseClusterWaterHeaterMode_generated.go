@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,6 +52,9 @@ func mTRBaseClusterWaterHeaterModeAdopt(id objc.ID) *MTRBaseClusterWaterHeaterMo
 
 // NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterWaterHeaterMode {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterWaterHeaterMode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterWaterHeaterModeAdopt(_id)
@@ -60,6 +64,8 @@ func NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *MTRBaseDe
 //
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *MTRWaterHeaterModeClusterChangeToModeParams) (result *MTRWaterHeaterModeClusterChangeToModeResponseParams, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRWaterHeaterModeClusterChangeToModeResponseParams
 		err error
@@ -85,6 +91,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ChangeToModeWithParamsCompletion(ct
 //
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +117,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeSupportedModesWithComp
 //
 // SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeSupportedModesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -135,6 +144,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeSupportedModesWit
 //
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +170,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeCurrentModeWithComplet
 //
 // SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeCurrentModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -185,6 +197,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeCurrentModeWithPa
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -210,6 +223,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeGeneratedCommandListWi
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -235,6 +250,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeGeneratedCommandL
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -260,6 +276,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeAcceptedCommandListWit
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -285,6 +303,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeAcceptedCommandLi
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -310,6 +329,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeAttributeListWithCompl
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -335,6 +356,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeAttributeListWith
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -360,6 +382,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeFeatureMapWithCompleti
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -385,6 +409,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeFeatureMapWithPar
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
 	type _result struct {
 		val obj.Object
 		err error
@@ -410,6 +435,8 @@ func (mbcwhm *MTRBaseClusterWaterHeaterMode) ReadAttributeClusterRevisionWithCom
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterMode) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcwhm)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

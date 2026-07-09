@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func spatialVideoConfigurationAdopt(id objc.ID) *SpatialVideoConfiguration {
 
 // Description returns the object's -description text.
 func (svc *SpatialVideoConfiguration) Description() string {
+	defer runtime.KeepAlive(svc)
 	return rt.Description(objref.IDOf(svc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (svc *SpatialVideoConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(svc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(svc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (svc *SpatialVideoConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(svc)
 	return rt.IsKind(objref.IDOf(svc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (svc *SpatialVideoConfiguration) String() string {
+	defer runtime.KeepAlive(svc)
 	return rt.Description(objref.IDOf(svc))
 }
 
@@ -72,6 +80,7 @@ func NewSpatialVideoConfiguration() *SpatialVideoConfiguration {
 
 // NewSpatialVideoConfigurationWithFormatDescription initializes an AVSpatialVideoConfiguration with a format description. The format description is not stored. - Parameter formatDescription: Format description to use to initialize the AVSpatialVideoConfiguration. - Returns: An instance of AVSpatialVideoConfiguration
 func NewSpatialVideoConfigurationWithFormatDescription(formatDescription obj.Object) *SpatialVideoConfiguration {
+	defer runtime.KeepAlive(formatDescription)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpatialVideoConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatDescription:"), objref.IDOf(formatDescription))
 	return spatialVideoConfigurationAdopt(_id)
@@ -86,18 +95,21 @@ func (svc *SpatialVideoConfiguration) WithCameraCalibrationDataLensCollection(it
 
 // WithHorizontalFieldOfView sets specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
 func (svc *SpatialVideoConfiguration) WithHorizontalFieldOfView(horizontalFieldOfView obj.Object) *SpatialVideoConfiguration {
+	defer runtime.KeepAlive(horizontalFieldOfView)
 	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setHorizontalFieldOfView:"), objref.IDOf(horizontalFieldOfView))
 	return svc
 }
 
 // WithCameraSystemBaseline sets specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
 func (svc *SpatialVideoConfiguration) WithCameraSystemBaseline(cameraSystemBaseline obj.Object) *SpatialVideoConfiguration {
+	defer runtime.KeepAlive(cameraSystemBaseline)
 	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setCameraSystemBaseline:"), objref.IDOf(cameraSystemBaseline))
 	return svc
 }
 
 // WithDisparityAdjustment sets specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
 func (svc *SpatialVideoConfiguration) WithDisparityAdjustment(disparityAdjustment obj.Object) *SpatialVideoConfiguration {
+	defer runtime.KeepAlive(disparityAdjustment)
 	objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("setDisparityAdjustment:"), objref.IDOf(disparityAdjustment))
 	return svc
 }
@@ -106,24 +118,28 @@ func (svc *SpatialVideoConfiguration) WithDisparityAdjustment(disparityAdjustmen
 //
 // CameraCalibrationDataLensCollection returns the collection as a Go slice.
 func (svc *SpatialVideoConfiguration) CameraCalibrationDataLensCollection() []obj.Object {
+	defer runtime.KeepAlive(svc)
 	_arr := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("cameraCalibrationDataLensCollection"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HorizontalFieldOfView specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
-func (svc *SpatialVideoConfiguration) HorizontalFieldOfView() obj.Object {
+func (svc *SpatialVideoConfiguration) HorizontalFieldOfView() *foundation.Number {
+	defer runtime.KeepAlive(svc)
 	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("horizontalFieldOfView"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CameraSystemBaseline specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
-func (svc *SpatialVideoConfiguration) CameraSystemBaseline() obj.Object {
+func (svc *SpatialVideoConfiguration) CameraSystemBaseline() *foundation.Number {
+	defer runtime.KeepAlive(svc)
 	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("cameraSystemBaseline"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DisparityAdjustment specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
-func (svc *SpatialVideoConfiguration) DisparityAdjustment() obj.Object {
+func (svc *SpatialVideoConfiguration) DisparityAdjustment() *foundation.Number {
+	defer runtime.KeepAlive(svc)
 	_r := objc.Send[objc.ID](objref.IDOf(svc), objc.RegisterName("disparityAdjustment"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

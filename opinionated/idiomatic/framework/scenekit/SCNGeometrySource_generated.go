@@ -5,7 +5,10 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func geometrySourceAdopt(id objc.ID) *GeometrySource {
 
 // Description returns the object's -description text.
 func (gs *GeometrySource) Description() string {
+	defer runtime.KeepAlive(gs)
 	return rt.Description(objref.IDOf(gs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gs *GeometrySource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gs *GeometrySource) IsKind(className string) bool {
+	defer runtime.KeepAlive(gs)
 	return rt.IsKind(objref.IDOf(gs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gs *GeometrySource) String() string {
+	defer runtime.KeepAlive(gs)
 	return rt.Description(objref.IDOf(gs))
 }
 
@@ -73,49 +81,57 @@ func NewGeometrySource() *GeometrySource {
 }
 
 // Data returns the data for the geometry source
-func (gs *GeometrySource) Data() obj.Object {
+func (gs *GeometrySource) Data() []byte {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Semantic returns the semantic of the geometry source
-func (gs *GeometrySource) Semantic() obj.Object {
+func (gs *GeometrySource) Semantic() *foundation.String {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[objc.ID](objref.IDOf(gs), objc.RegisterName("semantic"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // VectorCount returns the number of vectors in the data.
 func (gs *GeometrySource) VectorCount() int {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("vectorCount"))
 	return _r
 }
 
 // FloatComponents reports whether a flag that indicates if vector components are floating point values.
 func (gs *GeometrySource) FloatComponents() bool {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[bool](objref.IDOf(gs), objc.RegisterName("floatComponents"))
 	return _r
 }
 
 // ComponentsPerVector returns the number of scalar components in each vector.
 func (gs *GeometrySource) ComponentsPerVector() int {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("componentsPerVector"))
 	return _r
 }
 
 // BytesPerComponent returns the size of a vector component in bytes.
 func (gs *GeometrySource) BytesPerComponent() int {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("bytesPerComponent"))
 	return _r
 }
 
 // DataOffset returns the offset from the beginning of the data. In bytes.
 func (gs *GeometrySource) DataOffset() int {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("dataOffset"))
 	return _r
 }
 
 // DataStride returns the number of bytes from a vector to the next one in the data.
 func (gs *GeometrySource) DataStride() int {
+	defer runtime.KeepAlive(gs)
 	_r := objc.Send[int](objref.IDOf(gs), objc.RegisterName("dataStride"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func scrollEdgeEffectStyleAdopt(id objc.ID) *ScrollEdgeEffectStyle {
 
 // Description returns the object's -description text.
 func (sees *ScrollEdgeEffectStyle) Description() string {
+	defer runtime.KeepAlive(sees)
 	return rt.Description(objref.IDOf(sees))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sees *ScrollEdgeEffectStyle) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sees)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sees), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sees *ScrollEdgeEffectStyle) IsKind(className string) bool {
+	defer runtime.KeepAlive(sees)
 	return rt.IsKind(objref.IDOf(sees), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sees *ScrollEdgeEffectStyle) String() string {
+	defer runtime.KeepAlive(sees)
 	return rt.Description(objref.IDOf(sees))
 }
 

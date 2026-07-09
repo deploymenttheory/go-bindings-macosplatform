@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func stencilDescriptorAdopt(id objc.ID) *StencilDescriptor {
 
 // Description returns the object's -description text.
 func (sd *StencilDescriptor) Description() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sd *StencilDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sd *StencilDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(sd)
 	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sd *StencilDescriptor) String() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
@@ -110,36 +117,42 @@ func (sd *StencilDescriptor) WithWriteMask(writeMask uint32) *StencilDescriptor 
 
 // StencilCompareFunction returns the stencil compare function.
 func (sd *StencilDescriptor) StencilCompareFunction() CompareFunction {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[CompareFunction](objref.IDOf(sd), objc.RegisterName("stencilCompareFunction"))
 	return _r
 }
 
 // StencilFailureOperation returns stencil is tested first.  stencilFailureOperation declares how the stencil buffer is updated when the stencil test fails.
 func (sd *StencilDescriptor) StencilFailureOperation() StencilOperation {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[StencilOperation](objref.IDOf(sd), objc.RegisterName("stencilFailureOperation"))
 	return _r
 }
 
 // DepthFailureOperation returns if stencil passes, depth is tested next.  Declare what happens when the depth test fails.
 func (sd *StencilDescriptor) DepthFailureOperation() StencilOperation {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[StencilOperation](objref.IDOf(sd), objc.RegisterName("depthFailureOperation"))
 	return _r
 }
 
 // DepthStencilPassOperation returns if both the stencil and depth tests pass, declare how the stencil buffer is updated.
 func (sd *StencilDescriptor) DepthStencilPassOperation() StencilOperation {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[StencilOperation](objref.IDOf(sd), objc.RegisterName("depthStencilPassOperation"))
 	return _r
 }
 
 // ReadMask returns the read mask.
 func (sd *StencilDescriptor) ReadMask() uint32 {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[uint32](objref.IDOf(sd), objc.RegisterName("readMask"))
 	return _r
 }
 
 // WriteMask returns the write mask.
 func (sd *StencilDescriptor) WriteMask() uint32 {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[uint32](objref.IDOf(sd), objc.RegisterName("writeMask"))
 	return _r
 }

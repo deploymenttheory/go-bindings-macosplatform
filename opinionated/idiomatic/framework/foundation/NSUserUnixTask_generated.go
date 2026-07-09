@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,18 +58,21 @@ func NewUserUnixTask() *UserUnixTask {
 
 // WithStandardInput sets the standard input stream.
 func (uut *UserUnixTask) WithStandardInput(standardInput *FileHandle) *UserUnixTask {
+	defer runtime.KeepAlive(standardInput)
 	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardInput:"), objref.IDOf(standardInput))
 	return uut
 }
 
 // WithStandardOutput sets the standard output stream.
 func (uut *UserUnixTask) WithStandardOutput(standardOutput *FileHandle) *UserUnixTask {
+	defer runtime.KeepAlive(standardOutput)
 	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardOutput:"), objref.IDOf(standardOutput))
 	return uut
 }
 
 // WithStandardError sets the standard error stream.
 func (uut *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixTask {
+	defer runtime.KeepAlive(standardError)
 	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setStandardError:"), objref.IDOf(standardError))
 	return uut
 }
@@ -79,25 +84,28 @@ func (uut *UserUnixTask) WithObservationInfo(observationInfo unsafe.Pointer) *Us
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (uut *UserUnixTask) WithScriptingProperties(scriptingProperties obj.Object) *UserUnixTask {
-	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (uut *UserUnixTask) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserUnixTask {
+	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return uut
 }
 
 // StandardInput returns the standard input.
 func (uut *UserUnixTask) StandardInput() *FileHandle {
+	defer runtime.KeepAlive(uut)
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardInput"))
 	return FileHandleFromID(_r)
 }
 
 // StandardOutput returns the standard output.
 func (uut *UserUnixTask) StandardOutput() *FileHandle {
+	defer runtime.KeepAlive(uut)
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardOutput"))
 	return FileHandleFromID(_r)
 }
 
 // StandardError returns the standard error.
 func (uut *UserUnixTask) StandardError() *FileHandle {
+	defer runtime.KeepAlive(uut)
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardError"))
 	return FileHandleFromID(_r)
 }

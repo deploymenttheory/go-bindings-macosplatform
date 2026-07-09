@@ -5,9 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,27 +52,33 @@ func assetImageGeneratorAdopt(id objc.ID) *AssetImageGenerator {
 
 // Description returns the object's -description text.
 func (aig *AssetImageGenerator) Description() string {
+	defer runtime.KeepAlive(aig)
 	return rt.Description(objref.IDOf(aig))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aig *AssetImageGenerator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aig)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aig), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aig *AssetImageGenerator) IsKind(className string) bool {
+	defer runtime.KeepAlive(aig)
 	return rt.IsKind(objref.IDOf(aig), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aig *AssetImageGenerator) String() string {
+	defer runtime.KeepAlive(aig)
 	return rt.Description(objref.IDOf(aig))
 }
 
 // NewAssetImageGeneratorWithAsset creates an object that generates images for times within a video asset.
 func NewAssetImageGeneratorWithAsset(asset *Asset) *AssetImageGenerator {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetImageGenerator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:"), objref.IDOf(asset))
 	return assetImageGeneratorAdopt(_id)
@@ -89,18 +98,21 @@ func (aig *AssetImageGenerator) WithMaximumSize(maximumSize corefoundation.CGSiz
 
 // WithApertureMode sets specifies the aperture mode for the generated image.
 func (aig *AssetImageGenerator) WithApertureMode(apertureMode obj.Object) *AssetImageGenerator {
+	defer runtime.KeepAlive(apertureMode)
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("setApertureMode:"), objref.IDOf(apertureMode))
 	return aig
 }
 
 // WithDynamicRangePolicy sets the dynamic range policy to use when generating images.
 func (aig *AssetImageGenerator) WithDynamicRangePolicy(dynamicRangePolicy obj.Object) *AssetImageGenerator {
+	defer runtime.KeepAlive(dynamicRangePolicy)
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("setDynamicRangePolicy:"), objref.IDOf(dynamicRangePolicy))
 	return aig
 }
 
 // WithVideoComposition sets a video composition to use when extracting images from assets with multiple video tracks.
 func (aig *AssetImageGenerator) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetImageGenerator {
+	defer runtime.KeepAlive(videoComposition)
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("setVideoComposition:"), objref.IDOf(videoComposition))
 	return aig
 }
@@ -119,53 +131,62 @@ func (aig *AssetImageGenerator) WithRequestedTimeToleranceAfter(requestedTimeTol
 
 // CancelAllCGImageGeneration cancels all pending image generation requests.
 func (aig *AssetImageGenerator) CancelAllCGImageGeneration() {
+	defer runtime.KeepAlive(aig)
 	objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("cancelAllCGImageGeneration"))
 }
 
 // Asset returns the asset.
 func (aig *AssetImageGenerator) Asset() *Asset {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
 // AppliesPreferredTrackTransform wraps the corresponding Objective-C method.
 func (aig *AssetImageGenerator) AppliesPreferredTrackTransform() bool {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[bool](objref.IDOf(aig), objc.RegisterName("appliesPreferredTrackTransform"))
 	return _r
 }
 
 // MaximumSize returns the maximum size.
 func (aig *AssetImageGenerator) MaximumSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(aig), objc.RegisterName("maximumSize"))
 	return _r
 }
 
 // ApertureMode returns the aperture mode.
-func (aig *AssetImageGenerator) ApertureMode() obj.Object {
+func (aig *AssetImageGenerator) ApertureMode() *foundation.String {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("apertureMode"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // DynamicRangePolicy returns configures the video dynamic range for the output CGImage Default is AVAssetImageGeneratorDynamicRangePolicyForceSDR
-func (aig *AssetImageGenerator) DynamicRangePolicy() obj.Object {
+func (aig *AssetImageGenerator) DynamicRangePolicy() *foundation.String {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("dynamicRangePolicy"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // VideoComposition specifies the video composition to use when extracting images from assets with multiple video tracks. If no videoComposition is specified, only the first enabled video track will be used. If a videoComposition is specified, the value of appliesPreferredTrackTransform is ignored. This property throws an exception if a video composition is set with any of the following property values: - "renderScale" is not equal to one - "renderSize" width or height is less than zero - "frameDuration" is invalid or less than or equal to zero - "sourceTrackIDForFrameTiming" is less than zero - "outputBufferDescription" is non-nil
 func (aig *AssetImageGenerator) VideoComposition() *VideoComposition {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)
 }
 
 // RequestedTimeToleranceBefore returns the requested time tolerance before.
 func (aig *AssetImageGenerator) RequestedTimeToleranceBefore() coremedia.CMTime {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aig), objc.RegisterName("requestedTimeToleranceBefore"))
 	return _r
 }
 
 // RequestedTimeToleranceAfter returns the requested time tolerance after.
 func (aig *AssetImageGenerator) RequestedTimeToleranceAfter() coremedia.CMTime {
+	defer runtime.KeepAlive(aig)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(aig), objc.RegisterName("requestedTimeToleranceAfter"))
 	return _r
 }

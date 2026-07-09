@@ -5,6 +5,8 @@
 package javaruntimesupport
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func renderServerAdopt(id objc.ID) *RenderServer {
 
 // Description returns the object's -description text.
 func (rs *RenderServer) Description() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rs *RenderServer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rs *RenderServer) IsKind(className string) bool {
+	defer runtime.KeepAlive(rs)
 	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rs *RenderServer) String() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 

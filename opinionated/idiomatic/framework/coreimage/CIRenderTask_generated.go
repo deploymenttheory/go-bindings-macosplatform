@@ -5,6 +5,7 @@
 package coreimage
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func renderTaskAdopt(id objc.ID) *RenderTask {
 
 // Description returns the object's -description text.
 func (rt_ *RenderTask) Description() string {
+	defer runtime.KeepAlive(rt_)
 	return rt.Description(objref.IDOf(rt_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rt_ *RenderTask) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rt_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rt_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rt_ *RenderTask) IsKind(className string) bool {
+	defer runtime.KeepAlive(rt_)
 	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rt_ *RenderTask) String() string {
+	defer runtime.KeepAlive(rt_)
 	return rt.Description(objref.IDOf(rt_))
 }
 
@@ -75,8 +81,9 @@ func NewRenderTask() *RenderTask {
 	return renderTaskAdopt(_id)
 }
 
-// WaitUntilCompletedAndReturnError waits until the CIRenderTask finishes and returns.
-func (rt_ *RenderTask) WaitUntilCompletedAndReturnError() (result *RenderInfo, err error) {
+// WaitUntilCompleted waits until the CIRenderTask finishes and returns.
+func (rt_ *RenderTask) WaitUntilCompleted() (result *RenderInfo, err error) {
+	defer runtime.KeepAlive(rt_)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("waitUntilCompletedAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

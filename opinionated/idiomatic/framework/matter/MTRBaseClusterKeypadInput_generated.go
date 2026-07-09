@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterKeypadInputAdopt(id objc.ID) *MTRBaseClusterKeypadInput {
 
 // NewMTRBaseClusterKeypadInputWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterKeypadInputWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterKeypadInput {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterKeypadInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterKeypadInputAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterKeypadInputWithDeviceEndpointIDQueue(device *MTRBaseDevice
 
 // NewMTRBaseClusterKeypadInputWithDeviceEndpointQueue creates a new MTRBaseClusterKeypadInput.
 func NewMTRBaseClusterKeypadInputWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterKeypadInput {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterKeypadInput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterKeypadInputAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterKeypadInputWithDeviceEndpointQueue(device *MTRBaseDevice, 
 //
 // SendKeyWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParamsCompletion(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams) (result *MTRKeypadInputClusterSendKeyResponseParams, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRKeypadInputClusterSendKeyResponseParams
 		err error
@@ -90,6 +98,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParamsCompletion(ctx context.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,8 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeGeneratedCommandListWithCom
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +151,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeGeneratedCommandListWi
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,8 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAcceptedCommandListWithComp
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +204,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAcceptedCommandListWit
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,8 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAttributeListWithCompletion
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +257,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAttributeListWithParam
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,8 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeFeatureMapWithCompletion(ct
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +310,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeFeatureMapWithParamsSu
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,8 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeClusterRevisionWithCompleti
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +363,8 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeClusterRevisionWithPar
 //
 // SendKeyWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParams(ctx context.Context, params *MTRKeypadInputClusterSendKeyParams) (result *MTRKeypadInputClusterSendKeyResponseParams, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRKeypadInputClusterSendKeyResponseParams
 		err error
@@ -365,6 +390,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SendKeyWithParams(ctx context.Context, p
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +416,10 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeGeneratedCommandList(ctx co
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +445,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeGeneratedCommandListWi
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +471,10 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAcceptedCommandList(ctx con
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +500,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAcceptedCommandListWit
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +526,10 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeAttributeList(ctx context.C
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +555,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeAttributeListWithMinIn
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +581,10 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeFeatureMap(ctx context.Cont
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +610,7 @@ func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeFeatureMapWithMinInter
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +636,10 @@ func (mbcki *MTRBaseClusterKeypadInput) ReadAttributeClusterRevision(ctx context
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcki *MTRBaseClusterKeypadInput) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcki)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

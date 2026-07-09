@@ -8,11 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeUnknownError matches the SoundAnalysis error SNErrorCodeUnknownError.
-var ErrCodeUnknownError = errkit.New("SNErrorDomain", 1)
-
-// ErrCodeOperationFailed matches the SoundAnalysis error SNErrorCodeOperationFailed.
-var ErrCodeOperationFailed = errkit.New("SNErrorDomain", 2)
+// ErrCodeInvalidFile matches the SoundAnalysis error SNErrorCodeInvalidFile.
+var ErrCodeInvalidFile = errkit.New("SNErrorDomain", 5)
 
 // ErrCodeInvalidFormat matches the SoundAnalysis error SNErrorCodeInvalidFormat.
 var ErrCodeInvalidFormat = errkit.New("SNErrorDomain", 3)
@@ -20,5 +17,8 @@ var ErrCodeInvalidFormat = errkit.New("SNErrorDomain", 3)
 // ErrCodeInvalidModel matches the SoundAnalysis error SNErrorCodeInvalidModel.
 var ErrCodeInvalidModel = errkit.New("SNErrorDomain", 4)
 
-// ErrCodeInvalidFile matches the SoundAnalysis error SNErrorCodeInvalidFile.
-var ErrCodeInvalidFile = errkit.New("SNErrorDomain", 5)
+// ErrCodeOperationFailed matches the SoundAnalysis error SNErrorCodeOperationFailed.
+var ErrCodeOperationFailed = errkit.New("SNErrorDomain", 2)
+
+// ErrCodeUnknownError matches the SoundAnalysis error SNErrorCodeUnknownError.
+var ErrCodeUnknownError = errkit.New("SNErrorDomain", 1)

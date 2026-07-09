@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tileGroupRuleAdopt(id objc.ID) *TileGroupRule {
 
 // Description returns the object's -description text.
 func (tgr *TileGroupRule) Description() string {
+	defer runtime.KeepAlive(tgr)
 	return rt.Description(objref.IDOf(tgr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tgr *TileGroupRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tgr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tgr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tgr *TileGroupRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(tgr)
 	return rt.IsKind(objref.IDOf(tgr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tgr *TileGroupRule) String() string {
+	defer runtime.KeepAlive(tgr)
 	return rt.Description(objref.IDOf(tgr))
 }
 
@@ -94,6 +101,7 @@ func (tgr *TileGroupRule) WithName(name string) *TileGroupRule {
 
 // Adjacency returns the adjacency mask used by this rule. Set this to the mask that covers the adjacent spaces that must be filled with tiles belonging to the same group for this rule met.
 func (tgr *TileGroupRule) Adjacency() TileAdjacencyMask {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[TileAdjacencyMask](objref.IDOf(tgr), objc.RegisterName("adjacency"))
 	return _r
 }
@@ -102,12 +110,14 @@ func (tgr *TileGroupRule) Adjacency() TileAdjacencyMask {
 //
 // TileDefinitions returns the collection as a Go slice.
 func (tgr *TileGroupRule) TileDefinitions() []*TileDefinition {
+	defer runtime.KeepAlive(tgr)
 	_arr := objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("tileDefinitions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileDefinition { return TileDefinitionFromID(_id) })
 }
 
 // Name returns client-assignable name for the tile group rule. Defaults to nil.
 func (tgr *TileGroupRule) Name() string {
+	defer runtime.KeepAlive(tgr)
 	_r := objc.Send[objc.ID](objref.IDOf(tgr), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(id objc.ID) *MTRG
 
 // Description returns the object's -description text.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Description() string {
+	defer runtime.KeepAlive(mgdchfce)
 	return rt.Description(objref.IDOf(mgdchfce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgdchfce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgdchfce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgdchfce)
 	return rt.IsKind(objref.IDOf(mgdchfce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) String() string {
+	defer runtime.KeepAlive(mgdchfce)
 	return rt.Description(objref.IDOf(mgdchfce))
 }
 
@@ -72,22 +79,28 @@ func NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent() *MTRGeneralDiagno
 
 // Current returns the current.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() obj.Object {
+	defer runtime.KeepAlive(mgdchfce)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current obj.Object) {
+	defer runtime.KeepAlive(mgdchfce)
+	defer runtime.KeepAlive(current)
 	objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous returns the previous.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() obj.Object {
+	defer runtime.KeepAlive(mgdchfce)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous obj.Object) {
+	defer runtime.KeepAlive(mgdchfce)
+	defer runtime.KeepAlive(previous)
 	objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }

@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func paymentInformationEventExtensionAdopt(id objc.ID) *PaymentInformationEventE
 
 // Description returns the object's -description text.
 func (piee *PaymentInformationEventExtension) Description() string {
+	defer runtime.KeepAlive(piee)
 	return rt.Description(objref.IDOf(piee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piee *PaymentInformationEventExtension) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piee)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piee *PaymentInformationEventExtension) IsKind(className string) bool {
+	defer runtime.KeepAlive(piee)
 	return rt.IsKind(objref.IDOf(piee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piee *PaymentInformationEventExtension) String() string {
+	defer runtime.KeepAlive(piee)
 	return rt.Description(objref.IDOf(piee))
 }
 

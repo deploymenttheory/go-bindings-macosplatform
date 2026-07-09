@@ -39,7 +39,7 @@ func MIDIUMPMutableEndpointFromID(id objc.ID) *MIDIUMPMutableEndpoint {
 }
 
 // @method		initWithName:deviceInfo:productInstanceID:MIDIProtocol:destinationCallback @brief		Initializer for creating a new MIDIUMPEndpoint. @param		name			        The UMP endpoint name. @param		deviceInfo		        The MIDI 2 device ID info for the UMP endpoint. @param		productInstanceID      The product instance ID, up to 42 characters. @param		MIDIProtocol	        The MIDI protocol. @param		destinationCallback The receive callback used to create the UMP endpoint's MIDI destination associated, which can be used to observe or process incoming MIDI traffic. @discussion	This operation will fail if the device ID information is malformed or if virtual MIDI endpoint creation is not allowed (for example, on iOS, if your app doesn't list 'audio' in UIBackgroundModes).
-func (o *MIDIUMPMutableEndpoint) InitWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback(name *foundation.NSString, deviceInfo *MIDI2DeviceInfo, productInstanceID *foundation.NSString, mIDIProtocol MIDIProtocolID, destinationCallback func(*MIDIEventList, unsafe.Pointer)) *MIDIUMPMutableEndpoint {
+func (o *MIDIUMPMutableEndpoint) InitWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback(name *foundation.NSString, deviceInfo *MIDI2DeviceInfo, productInstanceID *foundation.NSString, midiProtocol MIDIProtocolID, destinationCallback func(*MIDIEventList, unsafe.Pointer)) *MIDIUMPMutableEndpoint {
 	var __block_destinationCallback objc.Block
 	if destinationCallback != nil {
 		__block_destinationCallback = objc.NewBlock(func(_ objc.Block, blockParam0 *MIDIEventList, blockParam1 unsafe.Pointer) {
@@ -47,7 +47,7 @@ func (o *MIDIUMPMutableEndpoint) InitWithNameDeviceInfoProductInstanceIDMIDIProt
 		})
 		defer __block_destinationCallback.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableEndpointSelInitWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback, name.Ptr(), deviceInfo.Ptr(), productInstanceID.Ptr(), mIDIProtocol, __block_destinationCallback)
+	_ret := objc.Send[objc.ID](o.Ptr(), _mIDIUMPMutableEndpointSelInitWithNameDeviceInfoProductInstanceIDMIDIProtocolDestinationCallback, name.Ptr(), deviceInfo.Ptr(), productInstanceID.Ptr(), midiProtocol, __block_destinationCallback)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

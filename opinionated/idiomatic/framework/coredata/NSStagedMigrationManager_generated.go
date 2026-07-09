@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func stagedMigrationManagerAdopt(id objc.ID) *StagedMigrationManager {
 
 // Description returns the object's -description text.
 func (smm *StagedMigrationManager) Description() string {
+	defer runtime.KeepAlive(smm)
 	return rt.Description(objref.IDOf(smm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (smm *StagedMigrationManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(smm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(smm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (smm *StagedMigrationManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(smm)
 	return rt.IsKind(objref.IDOf(smm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (smm *StagedMigrationManager) String() string {
+	defer runtime.KeepAlive(smm)
 	return rt.Description(objref.IDOf(smm))
 }
 
@@ -77,12 +84,14 @@ func NewStagedMigrationManagerWithMigrationStages(stages []*MigrationStage) *Sta
 //
 // Stages returns the collection as a Go slice.
 func (smm *StagedMigrationManager) Stages() []*MigrationStage {
+	defer runtime.KeepAlive(smm)
 	_arr := objc.Send[objc.ID](objref.IDOf(smm), objc.RegisterName("stages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MigrationStage { return MigrationStageFromID(_id) })
 }
 
 // Container returns the container.
 func (smm *StagedMigrationManager) Container() *PersistentContainer {
+	defer runtime.KeepAlive(smm)
 	_r := objc.Send[objc.ID](objref.IDOf(smm), objc.RegisterName("container"))
 	return PersistentContainerFromID(_r)
 }

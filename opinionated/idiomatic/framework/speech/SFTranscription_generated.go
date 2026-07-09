@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func transcriptionAdopt(id objc.ID) *Transcription {
 
 // Description returns the object's -description text.
 func (t *Transcription) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Transcription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Transcription) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Transcription) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -74,6 +81,7 @@ func NewTranscription() *Transcription {
 
 // FormattedString returns the entire transcription of utterances, formatted into a single, user-displayable string.
 func (t *Transcription) FormattedString() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("formattedString"))
 	if _r == 0 {
 		return ""
@@ -85,18 +93,21 @@ func (t *Transcription) FormattedString() string {
 //
 // Segments returns the collection as a Go slice.
 func (t *Transcription) Segments() []*TranscriptionSegment {
+	defer runtime.KeepAlive(t)
 	_arr := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("segments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TranscriptionSegment { return TranscriptionSegmentFromID(_id) })
 }
 
 // SpeakingRate returns the number of words spoken per minute.
 func (t *Transcription) SpeakingRate() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("speakingRate"))
 	return _r
 }
 
 // AveragePauseDuration returns the average pause duration between words, measured in seconds.
 func (t *Transcription) AveragePauseDuration() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("averagePauseDuration"))
 	return _r
 }

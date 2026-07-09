@@ -62,9 +62,9 @@ func WebHistorySetOptionalSharedHistory(history *WebHistory) {
 }
 
 // Loads the contents of the specified web history file.
-func (o *WebHistory) LoadFromURLError(uRL *foundation.NSURL) (bool, error) {
+func (o *WebHistory) LoadFromURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _webHistorySelLoadFromURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _webHistorySelLoadFromURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -72,9 +72,9 @@ func (o *WebHistory) LoadFromURLError(uRL *foundation.NSURL) (bool, error) {
 }
 
 // Saves the web history to the specified file.
-func (o *WebHistory) SaveToURLError(uRL *foundation.NSURL) (bool, error) {
+func (o *WebHistory) SaveToURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _webHistorySelSaveToURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _webHistorySelSaveToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -106,8 +106,8 @@ func (o *WebHistory) OrderedItemsLastVisitedOnDay(calendarDate *foundation.NSCal
 }
 
 // Returns the web history item that corresponds to the specified web location.
-func (o *WebHistory) ItemForURL(uRL *foundation.NSURL) *WebHistoryItem {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webHistorySelItemForURL, uRL.Ptr())
+func (o *WebHistory) ItemForURL(url *foundation.NSURL) *WebHistoryItem {
+	_ret := objc.Send[objc.ID](o.Ptr(), _webHistorySelItemForURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

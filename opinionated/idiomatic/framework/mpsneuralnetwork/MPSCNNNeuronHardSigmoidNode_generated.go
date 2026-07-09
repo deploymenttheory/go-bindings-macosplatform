@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNNeuronHardSigmoidNodeAdopt(id objc.ID) *CNNNeuronHardSigmoidNode {
 
 // NewCNNNeuronHardSigmoidNodeWithSourceAB init a node representing a MPSCNNNeuronHardSigmoid kernel
 func NewCNNNeuronHardSigmoidNodeWithSourceAB(sourceNode *NNImageNode, a float32, b float32) *CNNNeuronHardSigmoidNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:a:b:"), objref.IDOf(sourceNode), a, b)
 	return cNNNeuronHardSigmoidNodeAdopt(_id)
@@ -54,6 +57,7 @@ func NewCNNNeuronHardSigmoidNodeWithSourceAB(sourceNode *NNImageNode, a float32,
 
 // NewCNNNeuronHardSigmoidNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronHardSigmoidNodeWithSource(sourceNode *NNImageNode) *CNNNeuronHardSigmoidNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronHardSigmoidNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronHardSigmoidNodeAdopt(_id)

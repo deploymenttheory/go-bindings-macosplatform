@@ -2320,7 +2320,7 @@
       },
       "packetDependencies": {
         "doc": "The buffer’s array of packet dependencies.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-3a6ln"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiocompressedbuffer/packetdependencies-5oae6"
       },
       "packetDescriptions": {
         "doc": "The buffer’s array of packet descriptions.",
@@ -2618,7 +2618,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the I/O node’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-57kv"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudioionode/withaudiounit(_:)-6i8ld"
       }
     },
     "AVAudioInputNode": {
@@ -2696,7 +2696,7 @@
     "AVAudioOutputNode": {
       "intendedSpatialExperience": {
         "doc": "The intended spatial experience for this output node.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3uznq"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiooutputnode/intendedspatialexperience-3ts59"
       }
     },
     "AVAudioPCMBuffer": {
@@ -2725,8 +2725,8 @@
         "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/framelength"
       },
       "init(copying:)": {
-        "doc": "Creates a mutable buffer by copying another PCM buffer’s audio data.",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/init(copying:)-68es5"
+        "doc": "Creates a mutable buffer by copying a read-only buffer’s audio data.",
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiopcmbuffer/init(copying:)-875xm"
       },
       "int16ChannelData": {
         "doc": "The buffer’s 16-bit integer audio samples.",
@@ -3334,7 +3334,7 @@
       },
       "withAudioUnit(_:)": {
         "doc": "Provides scoped access to the audio unit’s AudioUnit",
-        "url": "https://developer.apple.com/documentation/avfaudio/avaudiounit/withaudiounit(_:)-66uo7"
+        "url": "https://developer.apple.com/documentation/avfaudio/avaudiounit/withaudiounit(_:)-6c2ze"
       }
     },
     "AVAudioUnitComponent": {

@@ -11,11 +11,11 @@ import (
 // ErrEABluetoothAccessoryPickerAlreadyConnected matches the ExternalAccessory error EABluetoothAccessoryPickerAlreadyConnected.
 var ErrEABluetoothAccessoryPickerAlreadyConnected = errkit.New("EABluetoothAccessoryPickerErrorDomain", 0)
 
-// ErrEABluetoothAccessoryPickerResultNotFound matches the ExternalAccessory error EABluetoothAccessoryPickerResultNotFound.
-var ErrEABluetoothAccessoryPickerResultNotFound = errkit.New("EABluetoothAccessoryPickerErrorDomain", 1)
-
 // ErrEABluetoothAccessoryPickerResultCancelled matches the ExternalAccessory error EABluetoothAccessoryPickerResultCancelled.
 var ErrEABluetoothAccessoryPickerResultCancelled = errkit.New("EABluetoothAccessoryPickerErrorDomain", 2)
 
 // ErrEABluetoothAccessoryPickerResultFailed matches the ExternalAccessory error EABluetoothAccessoryPickerResultFailed.
 var ErrEABluetoothAccessoryPickerResultFailed = errkit.New("EABluetoothAccessoryPickerErrorDomain", 3)
+
+// ErrEABluetoothAccessoryPickerResultNotFound matches the ExternalAccessory error EABluetoothAccessoryPickerResultNotFound.
+var ErrEABluetoothAccessoryPickerResultNotFound = errkit.New("EABluetoothAccessoryPickerErrorDomain", 1)

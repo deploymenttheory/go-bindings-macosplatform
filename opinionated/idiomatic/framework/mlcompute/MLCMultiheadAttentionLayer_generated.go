@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (mal *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bo
 
 // Descriptor returns the multi-head attention descriptor
 func (mal *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
+	defer runtime.KeepAlive(mal)
 	_r := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("descriptor"))
 	return MultiheadAttentionDescriptorFromID(_r)
 }
@@ -73,6 +76,7 @@ func (mal *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
 //
 // Weights returns the collection as a Go slice.
 func (mal *MultiheadAttentionLayer) Weights() []*Tensor {
+	defer runtime.KeepAlive(mal)
 	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("weights"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -81,6 +85,7 @@ func (mal *MultiheadAttentionLayer) Weights() []*Tensor {
 //
 // Biases returns the collection as a Go slice.
 func (mal *MultiheadAttentionLayer) Biases() []*Tensor {
+	defer runtime.KeepAlive(mal)
 	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("biases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -89,6 +94,7 @@ func (mal *MultiheadAttentionLayer) Biases() []*Tensor {
 //
 // AttentionBiases returns the collection as a Go slice.
 func (mal *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
+	defer runtime.KeepAlive(mal)
 	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("attentionBiases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
@@ -97,6 +103,7 @@ func (mal *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
 //
 // WeightsParameters returns the collection as a Go slice.
 func (mal *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
+	defer runtime.KeepAlive(mal)
 	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("weightsParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }
@@ -105,6 +112,7 @@ func (mal *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
 //
 // BiasesParameters returns the collection as a Go slice.
 func (mal *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
+	defer runtime.KeepAlive(mal)
 	_arr := objc.Send[objc.ID](objref.IDOf(mal), objc.RegisterName("biasesParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TensorParameter { return TensorParameterFromID(_id) })
 }

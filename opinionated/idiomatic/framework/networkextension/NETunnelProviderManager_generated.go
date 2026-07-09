@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -116,12 +118,14 @@ func (ntpm *NETunnelProviderManager) WithLocalizedDescription(localizedDescripti
 
 // WithProtocol sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (ntpm *NETunnelProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NETunnelProviderManager {
+	defer runtime.KeepAlive(protocol)
 	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return ntpm
 }
 
 // WithProtocolConfiguration sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (ntpm *NETunnelProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager {
+	defer runtime.KeepAlive(protocolConfiguration)
 	objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return ntpm
 }
@@ -136,12 +140,14 @@ func (ntpm *NETunnelProviderManager) WithEnabled(enabled bool) *NETunnelProvider
 //
 // CopyAppRules returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) CopyAppRules() []*NEAppRule {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("copyAppRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
 
 // RoutingMethod returns the method by which network traffic is routed to the tunnel. The default is NETunnelProviderRoutingMethodDestinationIP.
 func (ntpm *NETunnelProviderManager) RoutingMethod() NETunnelProviderRoutingMethod {
+	defer runtime.KeepAlive(ntpm)
 	_r := objc.Send[NETunnelProviderRoutingMethod](objref.IDOf(ntpm), objc.RegisterName("routingMethod"))
 	return _r
 }
@@ -150,6 +156,7 @@ func (ntpm *NETunnelProviderManager) RoutingMethod() NETunnelProviderRoutingMeth
 //
 // SafariDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) SafariDomains() []string {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("safariDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -158,6 +165,7 @@ func (ntpm *NETunnelProviderManager) SafariDomains() []string {
 //
 // MailDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) MailDomains() []string {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("mailDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -166,6 +174,7 @@ func (ntpm *NETunnelProviderManager) MailDomains() []string {
 //
 // CalendarDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) CalendarDomains() []string {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("calendarDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -174,6 +183,7 @@ func (ntpm *NETunnelProviderManager) CalendarDomains() []string {
 //
 // ContactsDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) ContactsDomains() []string {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("contactsDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -182,6 +192,7 @@ func (ntpm *NETunnelProviderManager) ContactsDomains() []string {
 //
 // AppRules returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) AppRules() []*NEAppRule {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("appRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }
@@ -190,6 +201,7 @@ func (ntpm *NETunnelProviderManager) AppRules() []*NEAppRule {
 //
 // ExcludedDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) ExcludedDomains() []string {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("excludedDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -198,6 +210,7 @@ func (ntpm *NETunnelProviderManager) ExcludedDomains() []string {
 //
 // AssociatedDomains returns the collection as a Go slice.
 func (ntpm *NETunnelProviderManager) AssociatedDomains() []string {
+	defer runtime.KeepAlive(ntpm)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpm), objc.RegisterName("associatedDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

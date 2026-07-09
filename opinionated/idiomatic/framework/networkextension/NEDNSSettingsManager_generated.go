@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func nEDNSSettingsManagerAdopt(id objc.ID) *NEDNSSettingsManager {
 
 // Description returns the object's -description text.
 func (nsm *NEDNSSettingsManager) Description() string {
+	defer runtime.KeepAlive(nsm)
 	return rt.Description(objref.IDOf(nsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nsm *NEDNSSettingsManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nsm *NEDNSSettingsManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(nsm)
 	return rt.IsKind(objref.IDOf(nsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nsm *NEDNSSettingsManager) String() string {
+	defer runtime.KeepAlive(nsm)
 	return rt.Description(objref.IDOf(nsm))
 }
 
@@ -83,6 +89,7 @@ func (nsm *NEDNSSettingsManager) WithLocalizedDescription(localizedDescription s
 
 // WithDNSSettings sets an object that contains the configuration settings for a DNS server.
 func (nsm *NEDNSSettingsManager) WithDNSSettings(dnsSettings NEDNSSettingsProvider) *NEDNSSettingsManager {
+	defer runtime.KeepAlive(dnsSettings)
 	objc.Send[objc.ID](objref.IDOf(nsm), objc.RegisterName("setDnsSettings:"), objref.IDOf(dnsSettings))
 	return nsm
 }
@@ -98,6 +105,7 @@ func (nsm *NEDNSSettingsManager) WithOnDemandRules(items ...NEOnDemandRuleProvid
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nsm *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nsm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -117,6 +125,7 @@ func (nsm *NEDNSSettingsManager) LoadFromPreferences(ctx context.Context) error 
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nsm *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nsm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -136,6 +145,7 @@ func (nsm *NEDNSSettingsManager) RemoveFromPreferences(ctx context.Context) erro
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (nsm *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nsm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -153,6 +163,7 @@ func (nsm *NEDNSSettingsManager) SaveToPreferences(ctx context.Context) error {
 
 // LocalizedDescription returns a string containing a description of the DNS settings.
 func (nsm *NEDNSSettingsManager) LocalizedDescription() string {
+	defer runtime.KeepAlive(nsm)
 	_r := objc.Send[objc.ID](objref.IDOf(nsm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -162,6 +173,7 @@ func (nsm *NEDNSSettingsManager) LocalizedDescription() string {
 
 // DNSSettings returns an NEDNSSettings object containing the DNS resolver configuration to apply to the system.
 func (nsm *NEDNSSettingsManager) DNSSettings() *NEDNSSettings {
+	defer runtime.KeepAlive(nsm)
 	_r := objc.Send[objc.ID](objref.IDOf(nsm), objc.RegisterName("dnsSettings"))
 	return NEDNSSettingsFromID(_r)
 }
@@ -170,12 +182,14 @@ func (nsm *NEDNSSettingsManager) DNSSettings() *NEDNSSettings {
 //
 // OnDemandRules returns the collection as a Go slice.
 func (nsm *NEDNSSettingsManager) OnDemandRules() []*NEOnDemandRule {
+	defer runtime.KeepAlive(nsm)
 	_arr := objc.Send[objc.ID](objref.IDOf(nsm), objc.RegisterName("onDemandRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEOnDemandRule { return NEOnDemandRuleFromID(_id) })
 }
 
 // IsEnabled reports whether checks the enabled status of the DNS settings. DNS settings must be enabled by the user in Settings or System Preferences.
 func (nsm *NEDNSSettingsManager) IsEnabled() bool {
+	defer runtime.KeepAlive(nsm)
 	_r := objc.Send[bool](objref.IDOf(nsm), objc.RegisterName("isEnabled"))
 	return _r
 }

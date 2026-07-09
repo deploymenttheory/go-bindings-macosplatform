@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func credentialIdentityStoreStateAdopt(id objc.ID) *CredentialIdentityStoreState
 
 // Description returns the object's -description text.
 func (ciss *CredentialIdentityStoreState) Description() string {
+	defer runtime.KeepAlive(ciss)
 	return rt.Description(objref.IDOf(ciss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ciss *CredentialIdentityStoreState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ciss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ciss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ciss *CredentialIdentityStoreState) IsKind(className string) bool {
+	defer runtime.KeepAlive(ciss)
 	return rt.IsKind(objref.IDOf(ciss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ciss *CredentialIdentityStoreState) String() string {
+	defer runtime.KeepAlive(ciss)
 	return rt.Description(objref.IDOf(ciss))
 }
 
@@ -74,12 +81,14 @@ func NewCredentialIdentityStoreState() *CredentialIdentityStoreState {
 
 // IsEnabled reports whether get the enabled state of the credential identity store.
 func (ciss *CredentialIdentityStoreState) IsEnabled() bool {
+	defer runtime.KeepAlive(ciss)
 	_r := objc.Send[bool](objref.IDOf(ciss), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // SupportsIncrementalUpdates reports whether get whether the credential identity store supports incremental updates. You should examine the value returned by this property to find out if the credential identity store can accept incremental updates. If incremental updates are supported, you can update the credential identity store with only the new changes since the last time it was updated. Otherwise, you should update the credential identity store by adding all credential identities.
 func (ciss *CredentialIdentityStoreState) SupportsIncrementalUpdates() bool {
+	defer runtime.KeepAlive(ciss)
 	_r := objc.Send[bool](objref.IDOf(ciss), objc.RegisterName("supportsIncrementalUpdates"))
 	return _r
 }

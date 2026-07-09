@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,22 +53,27 @@ func nEProviderAdopt(id objc.ID) *NEProvider {
 
 // Description returns the object's -description text.
 func (np *NEProvider) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NEProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NEProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NEProvider) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
@@ -75,6 +81,7 @@ func (np *NEProvider) String() string {
 //
 // Sleep blocks until the operation completes or ctx is cancelled.
 func (np *NEProvider) Sleep(ctx context.Context) error {
+	defer runtime.KeepAlive(np)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -90,28 +97,36 @@ func (np *NEProvider) Sleep(ctx context.Context) error {
 
 // Wake handle a wake event.
 func (np *NEProvider) Wake() {
+	defer runtime.KeepAlive(np)
 	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("wake"))
 }
 
 // CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate create a TCP connection.
-func (np *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *NWTLSParameters, delegate obj.Object) *NWTCPConnection {
-	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate:"), remoteEndpoint, enableTLS, objref.IDOf(tLSParameters), objref.IDOf(delegate))
+func (np *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tlsParameters *NWTLSParameters, delegate obj.Object) *NWTCPConnection {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(tlsParameters)
+	defer runtime.KeepAlive(delegate)
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate:"), remoteEndpoint, enableTLS, objref.IDOf(tlsParameters), objref.IDOf(delegate))
 	return NWTCPConnectionFromID(_r)
 }
 
 // CreateUDPSessionToEndpointFromEndpoint creates a UDP session.
 func (np *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *NWHostEndpoint) *NWUDPSession {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(localEndpoint)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("createUDPSessionToEndpoint:fromEndpoint:"), remoteEndpoint, objref.IDOf(localEndpoint))
 	return NWUDPSessionFromID(_r)
 }
 
 // DisplayMessageCompletionHandler call this method from your NEProvider subclass if you want to display a message to the person using the app.
 func (np *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {
+	defer runtime.KeepAlive(np)
 	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("displayMessage:completionHandler:"), purego.NSString(message), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // DefaultPath returns the default path.
 func (np *NEProvider) DefaultPath() *NWPath {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("defaultPath"))
 	return NWPathFromID(_r)
 }

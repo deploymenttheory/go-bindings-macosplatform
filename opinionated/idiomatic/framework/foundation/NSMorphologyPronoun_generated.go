@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,34 @@ func morphologyPronounAdopt(id objc.ID) *MorphologyPronoun {
 
 // Description returns the object's -description text.
 func (mp *MorphologyPronoun) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MorphologyPronoun) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MorphologyPronoun) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MorphologyPronoun) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMorphologyPronounWithPronounMorphologyDependentMorphology creates a new MorphologyPronoun.
 func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string, morphology *Morphology, dependentMorphology *Morphology) *MorphologyPronoun {
+	defer runtime.KeepAlive(morphology)
+	defer runtime.KeepAlive(dependentMorphology)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMorphologyPronoun")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPronoun:morphology:dependentMorphology:"), purego.NSString(pronoun), objref.IDOf(morphology), objref.IDOf(dependentMorphology))
 	return morphologyPronounAdopt(_id)
@@ -82,13 +90,14 @@ func (mp *MorphologyPronoun) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mp *MorphologyPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun {
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mp *MorphologyPronoun) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MorphologyPronoun {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mp
 }
 
 // Pronoun returns the pronoun.
 func (mp *MorphologyPronoun) Pronoun() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("pronoun"))
 	if _r == 0 {
 		return ""
@@ -98,12 +107,14 @@ func (mp *MorphologyPronoun) Pronoun() string {
 
 // Morphology returns the morphology.
 func (mp *MorphologyPronoun) Morphology() *Morphology {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
 }
 
 // DependentMorphology returns the dependent morphology.
 func (mp *MorphologyPronoun) DependentMorphology() *Morphology {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("dependentMorphology"))
 	return MorphologyFromID(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,95 +50,110 @@ func mTRNetworkCommissioningClusterWiFiInterfaceScanResultStructAdopt(id objc.ID
 
 // Description returns the object's -description text.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Description() string {
+	defer runtime.KeepAlive(mnccwfisrs)
 	return rt.Description(objref.IDOf(mnccwfisrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mnccwfisrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mnccwfisrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mnccwfisrs)
 	return rt.IsKind(objref.IDOf(mnccwfisrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) String() string {
+	defer runtime.KeepAlive(mnccwfisrs)
 	return rt.Description(objref.IDOf(mnccwfisrs))
 }
 
 // WithSecurity sets the security.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	defer runtime.KeepAlive(security)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 	return mnccwfisrs
 }
 
 // WithSsid sets the ssid.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
-	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSsid(ssid []byte) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setSsid:"), rt.BytesToNSData(ssid))
 	return mnccwfisrs
 }
 
 // WithBssid sets the bssid.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
-	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithBssid(bssid []byte) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setBssid:"), rt.BytesToNSData(bssid))
 	return mnccwfisrs
 }
 
 // WithChannel sets the channel.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	defer runtime.KeepAlive(channel)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mnccwfisrs
 }
 
 // WithWiFiBand sets the wi fi band.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	defer runtime.KeepAlive(wiFiBand)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 	return mnccwfisrs
 }
 
 // WithRssi sets the rssi.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
+	defer runtime.KeepAlive(rssi)
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return mnccwfisrs
 }
 
 // Security returns the security.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Security() obj.Object {
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Security() *foundation.Number {
+	defer runtime.KeepAlive(mnccwfisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("security"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Ssid returns the ssid.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Ssid() obj.Object {
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Ssid() []byte {
+	defer runtime.KeepAlive(mnccwfisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("ssid"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Bssid returns the bssid.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Bssid() obj.Object {
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Bssid() []byte {
+	defer runtime.KeepAlive(mnccwfisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("bssid"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Channel returns the channel.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Channel() obj.Object {
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Channel() *foundation.Number {
+	defer runtime.KeepAlive(mnccwfisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("channel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // WiFiBand returns the wi fi band.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WiFiBand() obj.Object {
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WiFiBand() *foundation.Number {
+	defer runtime.KeepAlive(mnccwfisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("wiFiBand"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Rssi returns the rssi.
-func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Rssi() obj.Object {
+func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Rssi() *foundation.Number {
+	defer runtime.KeepAlive(mnccwfisrs)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("rssi"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct marks MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct — and, by embedding promotion, its

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func syncEnginePendingRecordZoneChangeAdopt(id objc.ID) *SyncEnginePendingRecord
 
 // Description returns the object's -description text.
 func (seprzc *SyncEnginePendingRecordZoneChange) Description() string {
+	defer runtime.KeepAlive(seprzc)
 	return rt.Description(objref.IDOf(seprzc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (seprzc *SyncEnginePendingRecordZoneChange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(seprzc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(seprzc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (seprzc *SyncEnginePendingRecordZoneChange) IsKind(className string) bool {
+	defer runtime.KeepAlive(seprzc)
 	return rt.IsKind(objref.IDOf(seprzc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (seprzc *SyncEnginePendingRecordZoneChange) String() string {
+	defer runtime.KeepAlive(seprzc)
 	return rt.Description(objref.IDOf(seprzc))
 }
 
 // NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a record zone change of the specified type for the given record.
 func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *RecordID, type_ SyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
+	defer runtime.KeepAlive(recordID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingRecordZoneChange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:type:"), objref.IDOf(recordID), type_)
 	return syncEnginePendingRecordZoneChangeAdopt(_id)
@@ -75,12 +83,14 @@ func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *RecordID, ty
 
 // RecordID returns the identifier of the modified record.
 func (seprzc *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
+	defer runtime.KeepAlive(seprzc)
 	_r := objc.Send[objc.ID](objref.IDOf(seprzc), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
 // Type returns the type of change to make.
 func (seprzc *SyncEnginePendingRecordZoneChange) Type() SyncEnginePendingRecordZoneChangeType {
+	defer runtime.KeepAlive(seprzc)
 	_r := objc.Send[SyncEnginePendingRecordZoneChangeType](objref.IDOf(seprzc), objc.RegisterName("type"))
 	return _r
 }

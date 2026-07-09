@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func filterBrowserViewAdopt(id objc.ID) *FilterBrowserView {
 
 // Description returns the object's -description text.
 func (fbv *FilterBrowserView) Description() string {
+	defer runtime.KeepAlive(fbv)
 	return rt.Description(objref.IDOf(fbv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fbv *FilterBrowserView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fbv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fbv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fbv *FilterBrowserView) IsKind(className string) bool {
+	defer runtime.KeepAlive(fbv)
 	return rt.IsKind(objref.IDOf(fbv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fbv *FilterBrowserView) String() string {
+	defer runtime.KeepAlive(fbv)
 	return rt.Description(objref.IDOf(fbv))
 }
 
@@ -78,6 +85,7 @@ func NewFilterBrowserView() *FilterBrowserView {
 
 // SetPreviewState use this method to show and hide the Preview Use this method to show and hide the Preview from the program.
 func (fbv *FilterBrowserView) SetPreviewState(inState bool) {
+	defer runtime.KeepAlive(fbv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(fbv), objc.RegisterName("setPreviewState:"), inState)
 	})
@@ -86,6 +94,7 @@ func (fbv *FilterBrowserView) SetPreviewState(inState bool) {
 
 // FilterName returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (fbv *FilterBrowserView) FilterName() string {
+	defer runtime.KeepAlive(fbv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

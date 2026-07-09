@@ -5,7 +5,11 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func storedValuePassBalanceAdopt(id objc.ID) *StoredValuePassBalance {
 
 // Description returns the object's -description text.
 func (svpb *StoredValuePassBalance) Description() string {
+	defer runtime.KeepAlive(svpb)
 	return rt.Description(objref.IDOf(svpb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (svpb *StoredValuePassBalance) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(svpb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(svpb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (svpb *StoredValuePassBalance) IsKind(className string) bool {
+	defer runtime.KeepAlive(svpb)
 	return rt.IsKind(objref.IDOf(svpb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (svpb *StoredValuePassBalance) String() string {
+	defer runtime.KeepAlive(svpb)
 	return rt.Description(objref.IDOf(svpb))
 }
 
@@ -74,18 +83,22 @@ func NewStoredValuePassBalance() *StoredValuePassBalance {
 
 // IsEqualToBalance returns a Boolean value that indicates whether two pass balance objects contain the same values.
 func (svpb *StoredValuePassBalance) IsEqualToBalance(balance *StoredValuePassBalance) bool {
+	defer runtime.KeepAlive(svpb)
+	defer runtime.KeepAlive(balance)
 	_r := objc.Send[bool](objref.IDOf(svpb), objc.RegisterName("isEqualToBalance:"), objref.IDOf(balance))
 	return _r
 }
 
 // Amount returns the amount.
-func (svpb *StoredValuePassBalance) Amount() obj.Object {
+func (svpb *StoredValuePassBalance) Amount() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(svpb)
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("amount"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }
 
 // CurrencyCode returns the currency code.
 func (svpb *StoredValuePassBalance) CurrencyCode() string {
+	defer runtime.KeepAlive(svpb)
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
@@ -94,13 +107,15 @@ func (svpb *StoredValuePassBalance) CurrencyCode() string {
 }
 
 // BalanceType returns the balance type.
-func (svpb *StoredValuePassBalance) BalanceType() obj.Object {
+func (svpb *StoredValuePassBalance) BalanceType() *foundation.String {
+	defer runtime.KeepAlive(svpb)
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("balanceType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ExpiryDate returns the expiry date.
-func (svpb *StoredValuePassBalance) ExpiryDate() obj.Object {
+func (svpb *StoredValuePassBalance) ExpiryDate() time.Time {
+	defer runtime.KeepAlive(svpb)
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("expiryDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

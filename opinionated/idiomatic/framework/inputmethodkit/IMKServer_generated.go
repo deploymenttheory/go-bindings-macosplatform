@@ -5,7 +5,10 @@
 package inputmethodkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func serverAdopt(id objc.ID) *Server {
 
 // Description returns the object's -description text.
 func (s *Server) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Server) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Server) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Server) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -74,19 +82,22 @@ func NewServerWithNameBundleIdentifier(name string, bundleIdentifier string) *Se
 }
 
 // Bundle returns an NSBundle object for the input method.
-func (s *Server) Bundle() obj.Object {
+func (s *Server) Bundle() *foundation.Bundle {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("bundle"))
-	return obj.Wrap(_r)
+	return foundation.BundleFromID(_r)
 }
 
 // PaletteWillTerminate reports whether call this before terminating a palette IM. Palettes need to be able to terminate. When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate. The palette can terminate safely if a value of true is returned. If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns false the palette should not terminate.
 func (s *Server) PaletteWillTerminate() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("paletteWillTerminate"))
 	return _r
 }
 
 // LastKeyEventWasDeadKey reports whether returns a BOOL indicating whether or not the last key press was a dead key.
 func (s *Server) LastKeyEventWasDeadKey() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("lastKeyEventWasDeadKey"))
 	return _r
 }

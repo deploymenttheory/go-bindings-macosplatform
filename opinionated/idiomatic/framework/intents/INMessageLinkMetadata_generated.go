@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func messageLinkMetadataAdopt(id objc.ID) *MessageLinkMetadata {
 
 // Description returns the object's -description text.
 func (mlm *MessageLinkMetadata) Description() string {
+	defer runtime.KeepAlive(mlm)
 	return rt.Description(objref.IDOf(mlm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mlm *MessageLinkMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mlm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mlm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mlm *MessageLinkMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(mlm)
 	return rt.IsKind(objref.IDOf(mlm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mlm *MessageLinkMetadata) String() string {
+	defer runtime.KeepAlive(mlm)
 	return rt.Description(objref.IDOf(mlm))
 }
 
@@ -103,6 +110,7 @@ func (mlm *MessageLinkMetadata) WithLinkURL(linkURL string) *MessageLinkMetadata
 
 // SiteName returns the site name.
 func (mlm *MessageLinkMetadata) SiteName() string {
+	defer runtime.KeepAlive(mlm)
 	_r := objc.Send[objc.ID](objref.IDOf(mlm), objc.RegisterName("siteName"))
 	if _r == 0 {
 		return ""
@@ -112,6 +120,7 @@ func (mlm *MessageLinkMetadata) SiteName() string {
 
 // Summary returns the summary.
 func (mlm *MessageLinkMetadata) Summary() string {
+	defer runtime.KeepAlive(mlm)
 	_r := objc.Send[objc.ID](objref.IDOf(mlm), objc.RegisterName("summary"))
 	if _r == 0 {
 		return ""
@@ -121,6 +130,7 @@ func (mlm *MessageLinkMetadata) Summary() string {
 
 // Title returns the title.
 func (mlm *MessageLinkMetadata) Title() string {
+	defer runtime.KeepAlive(mlm)
 	_r := objc.Send[objc.ID](objref.IDOf(mlm), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -130,6 +140,7 @@ func (mlm *MessageLinkMetadata) Title() string {
 
 // OpenGraphType returns the open graph type.
 func (mlm *MessageLinkMetadata) OpenGraphType() string {
+	defer runtime.KeepAlive(mlm)
 	_r := objc.Send[objc.ID](objref.IDOf(mlm), objc.RegisterName("openGraphType"))
 	if _r == 0 {
 		return ""
@@ -138,7 +149,8 @@ func (mlm *MessageLinkMetadata) OpenGraphType() string {
 }
 
 // LinkURL returns the link URL.
-func (mlm *MessageLinkMetadata) LinkURL() obj.Object {
+func (mlm *MessageLinkMetadata) LinkURL() string {
+	defer runtime.KeepAlive(mlm)
 	_r := objc.Send[objc.ID](objref.IDOf(mlm), objc.RegisterName("linkURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

@@ -47,8 +47,8 @@ func (o *TKSmartCardUserInteractionForPINOperation) PINCompletion() TKSmartCardP
 	return _ret
 }
 
-func (o *TKSmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion TKSmartCardPINCompletion) {
-	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetPINCompletion, pINCompletion)
+func (o *TKSmartCardUserInteractionForPINOperation) SetPINCompletion(pinCompletion TKSmartCardPINCompletion) {
+	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetPINCompletion, pinCompletion)
 }
 
 // List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
@@ -60,8 +60,8 @@ func (o *TKSmartCardUserInteractionForPINOperation) PINMessageIndices() *foundat
 	return foundation.NSArrayFromID[*foundation.NSNumber](_ret)
 }
 
-func (o *TKSmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber]) {
-	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetPINMessageIndices, pINMessageIndices.Ptr())
+func (o *TKSmartCardUserInteractionForPINOperation) SetPINMessageIndices(pinMessageIndices *foundation.NSArray[*foundation.NSNumber]) {
+	o.Ptr().Send(_tKSmartCardUserInteractionForPINOperationSelSetPINMessageIndices, pinMessageIndices.Ptr())
 }
 
 // Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale

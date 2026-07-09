@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -101,41 +103,48 @@ func (cct *CNNConvolutionTranspose) WithSourceFeatureChannelMaxCount(sourceFeatu
 
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.
 func (cct *CNNConvolutionTranspose) ReloadWeightsAndBiasesFromDataSource() {
+	defer runtime.KeepAlive(cct)
 	objc.Send[objc.ID](objref.IDOf(cct), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
 // InputFeatureChannels returns the number of feature channels per pixel in the input image.
 func (cct *CNNConvolutionTranspose) InputFeatureChannels() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels per pixel in the output image.
 func (cct *CNNConvolutionTranspose) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // KernelOffsetX returns offset in X from which the kernel starts sliding
 func (cct *CNNConvolutionTranspose) KernelOffsetX() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("kernelOffsetX"))
 	return _r
 }
 
 // KernelOffsetY returns offset in Y from which the kernel starts sliding
 func (cct *CNNConvolutionTranspose) KernelOffsetY() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("kernelOffsetY"))
 	return _r
 }
 
 // Groups returns number of groups input and output channels are divided into.
 func (cct *CNNConvolutionTranspose) Groups() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("groups"))
 	return _r
 }
 
 // AccumulatorPrecisionOption returns precision of accumulator used in convolution. See MPSNeuralNetworkTypes.h for discussion. Default is MPSNNConvolutionAccumulatorPrecisionOptionFloat.
 func (cct *CNNConvolutionTranspose) AccumulatorPrecisionOption() NNConvolutionAccumulatorPrecisionOption {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[NNConvolutionAccumulatorPrecisionOption](objref.IDOf(cct), objc.RegisterName("accumulatorPrecisionOption"))
 	return _r
 }

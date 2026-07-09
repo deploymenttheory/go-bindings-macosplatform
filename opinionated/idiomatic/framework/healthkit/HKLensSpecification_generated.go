@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,45 +51,54 @@ func lensSpecificationAdopt(id objc.ID) *LensSpecification {
 
 // Description returns the object's -description text.
 func (ls *LensSpecification) Description() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ls *LensSpecification) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ls *LensSpecification) IsKind(className string) bool {
+	defer runtime.KeepAlive(ls)
 	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ls *LensSpecification) String() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // Sphere returns the lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
 func (ls *LensSpecification) Sphere() *Quantity {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("sphere"))
 	return QuantityFromID(_r)
 }
 
 // Cylinder returns the lens power required to correct astigmatism. Can be positive or negative.
 func (ls *LensSpecification) Cylinder() *Quantity {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cylinder"))
 	return QuantityFromID(_r)
 }
 
 // Axis returns the angle along which cylindrical power should be positioned to correct astigmatism
 func (ls *LensSpecification) Axis() *Quantity {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("axis"))
 	return QuantityFromID(_r)
 }
 
 // AddPower returns the power adjustment applied to a multifocal lens to correct presbyopia
 func (ls *LensSpecification) AddPower() *Quantity {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("addPower"))
 	return QuantityFromID(_r)
 }

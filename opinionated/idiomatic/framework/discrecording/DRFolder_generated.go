@@ -5,6 +5,8 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -62,27 +64,34 @@ func NewFolderWithName(name string) *Folder {
 
 // MakeVirtual changes the real DRFolder object into a virtual DRFolder object. The virtual folder created in this way is a snapshot of the on-disk folder at the moment of the call.  The newly created virtual folder will contain <b>real</b> folder and file objects corresponding to the on-disk children of the original on-disk folder. If the on-disk folder is modified (eg, if the folder attributes change, or if children are added to or removed from the on-disk tree): <i>during</i> this call, the virtual folder <b>may or may not</b> reflect the changes. If modified <i>after</i> this call, the virtual folder <b>will</b> not reflect the changes.
 func (f *Folder) MakeVirtual() {
+	defer runtime.KeepAlive(f)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("makeVirtual"))
 }
 
 // AddChild adds an object reference (either a file or folder) as a child of a virtual folder object. This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children.
 func (f *Folder) AddChild(child *FSObject) {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
 // RemoveChild removes an object reference (either a file or folder) as a child of a virtual folder object. This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children.
 func (f *Folder) RemoveChild(child *FSObject) {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("removeChild:"), objref.IDOf(child))
 }
 
 // Count returns the number of children of a virtual folder. This method returns a shallow count of only those children that are immediately contained within the virtual folder. This method only applies to virtual folders.  Real folders are considered leaf nodes and should not be messaged with this call.
 func (f *Folder) Count() int {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("count"))
 	return _r
 }
 
 // Children returns an array containing the children of a virtual folder. The order of children in the array is arbitrary -- since the various filesystems being generated may have different sorting requirements, there is no one true way to sort the children.  The ordering will change only when children are added or removed.  You should sort the children according to the needs of your display, and in a consistent manner. This function only applies to virtual folders.  Real folders are considered leaf nodes and should not be passed into this call.
 func (f *Folder) Children() obj.Object {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("children"))
 	return obj.Wrap(_r)
 }

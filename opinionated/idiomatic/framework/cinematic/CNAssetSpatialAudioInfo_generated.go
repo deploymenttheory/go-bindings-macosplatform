@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func assetSpatialAudioInfoAdopt(id objc.ID) *AssetSpatialAudioInfo {
 
 // Description returns the object's -description text.
 func (asai *AssetSpatialAudioInfo) Description() string {
+	defer runtime.KeepAlive(asai)
 	return rt.Description(objref.IDOf(asai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asai *AssetSpatialAudioInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asai *AssetSpatialAudioInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(asai)
 	return rt.IsKind(objref.IDOf(asai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asai *AssetSpatialAudioInfo) String() string {
+	defer runtime.KeepAlive(asai)
 	return rt.Description(objref.IDOf(asai))
 }
 
@@ -72,42 +79,49 @@ func NewAssetSpatialAudioInfo() *AssetSpatialAudioInfo {
 
 // DefaultSpatialAudioTrack returns default `AVAssetTrack` containing Spatial Audio
 func (asai *AssetSpatialAudioInfo) DefaultSpatialAudioTrack() obj.Object {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[objc.ID](objref.IDOf(asai), objc.RegisterName("defaultSpatialAudioTrack"))
 	return obj.Wrap(_r)
 }
 
 // DefaultEffectIntensity returns default effect intensity value as provided by the system. Supported range is [0.0-1.0]
 func (asai *AssetSpatialAudioInfo) DefaultEffectIntensity() float32 {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[float32](objref.IDOf(asai), objc.RegisterName("defaultEffectIntensity"))
 	return _r
 }
 
 // DefaultRenderingStyle returns default rendering style as provided by the system
 func (asai *AssetSpatialAudioInfo) DefaultRenderingStyle() SpatialAudioRenderingStyle {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[SpatialAudioRenderingStyle](objref.IDOf(asai), objc.RegisterName("defaultRenderingStyle"))
 	return _r
 }
 
 // SpatialAudioMixMetadata returns the result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
-func (asai *AssetSpatialAudioInfo) SpatialAudioMixMetadata() obj.Object {
+func (asai *AssetSpatialAudioInfo) SpatialAudioMixMetadata() []byte {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[objc.ID](objref.IDOf(asai), objc.RegisterName("spatialAudioMixMetadata"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AudioMixWithEffectIntensityRenderingStyle returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
 func (asai *AssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle SpatialAudioRenderingStyle) obj.Object {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[objc.ID](objref.IDOf(asai), objc.RegisterName("audioMixWithEffectIntensity:renderingStyle:"), effectIntensity, renderingStyle)
 	return obj.Wrap(_r)
 }
 
 // AssetReaderOutputSettingsForContentType returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
-func (asai *AssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType SpatialAudioContentType) obj.Object {
+func (asai *AssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType SpatialAudioContentType) map[string]obj.Object {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[objc.ID](objref.IDOf(asai), objc.RegisterName("assetReaderOutputSettingsForContentType:"), contentType)
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AssetWriterInputSettingsForContentType returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
-func (asai *AssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType SpatialAudioContentType) obj.Object {
+func (asai *AssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType SpatialAudioContentType) map[string]obj.Object {
+	defer runtime.KeepAlive(asai)
 	_r := objc.Send[objc.ID](objref.IDOf(asai), objc.RegisterName("assetWriterInputSettingsForContentType:"), contentType)
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

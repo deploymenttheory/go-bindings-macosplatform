@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func spatialMixerDefinitionAdopt(id objc.ID) *SpatialMixerDefinition {
 
 // NewSpatialMixerDefinitionWithSpatialPipeline creates a mixer with the designated spatial pipeline.
 func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *SpatialPipeline) *SpatialMixerDefinition {
+	defer runtime.KeepAlive(spatialPipeline)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpatialPipeline:"), objref.IDOf(spatialPipeline))
 	return spatialMixerDefinitionAdopt(_id)
@@ -54,6 +57,7 @@ func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *SpatialPipeli
 
 // NewSpatialMixerDefinitionWithSpatialPipelineIdentifier creates a named mixer with the designated spatial pipeline.
 func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *SpatialPipeline, identifier string) *SpatialMixerDefinition {
+	defer runtime.KeepAlive(spatialPipeline)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpatialPipeline:identifier:"), objref.IDOf(spatialPipeline), purego.NSString(identifier))
 	return spatialMixerDefinitionAdopt(_id)
@@ -61,18 +65,21 @@ func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *Spa
 
 // WithDistanceModelParameters sets an effect that changes sound as it carries over a distance.
 func (smd *SpatialMixerDefinition) WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition {
+	defer runtime.KeepAlive(distanceModelParameters)
 	objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("setDistanceModelParameters:"), objref.IDOf(distanceModelParameters))
 	return smd
 }
 
 // WithListenerDirectivityModelParameters sets a data set that determines how well the listener hears depending on its direction relative to a sound source.
 func (smd *SpatialMixerDefinition) WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
+	defer runtime.KeepAlive(listenerDirectivityModelParameters)
 	objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("setListenerDirectivityModelParameters:"), objref.IDOf(listenerDirectivityModelParameters))
 	return smd
 }
 
 // WithSourceDirectivityModelParameters sets a data set that directs sound such that it’s louder when directed at the listener.
 func (smd *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
+	defer runtime.KeepAlive(sourceDirectivityModelParameters)
 	objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("setSourceDirectivityModelParameters:"), objref.IDOf(sourceDirectivityModelParameters))
 	return smd
 }
@@ -85,30 +92,35 @@ func (smd *SpatialMixerDefinition) WithGain(gain float64) *SpatialMixerDefinitio
 
 // WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
 func (smd *SpatialMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition {
+	defer runtime.KeepAlive(gainMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return smd
 }
 
 // SpatialPipeline returns spatial Pipeline.
 func (smd *SpatialMixerDefinition) SpatialPipeline() *SpatialPipeline {
+	defer runtime.KeepAlive(smd)
 	_r := objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("spatialPipeline"))
 	return SpatialPipelineFromID(_r)
 }
 
 // DistanceModelParameters returns distance model parameters (optional).
 func (smd *SpatialMixerDefinition) DistanceModelParameters() *DistanceModelParameters {
+	defer runtime.KeepAlive(smd)
 	_r := objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("distanceModelParameters"))
 	return DistanceModelParametersFromID(_r)
 }
 
 // ListenerDirectivityModelParameters returns listener directivity model parameters (optional).
 func (smd *SpatialMixerDefinition) ListenerDirectivityModelParameters() *DirectivityModelParameters {
+	defer runtime.KeepAlive(smd)
 	_r := objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("listenerDirectivityModelParameters"))
 	return DirectivityModelParametersFromID(_r)
 }
 
 // SourceDirectivityModelParameters returns source directivity model parameters (optional).
 func (smd *SpatialMixerDefinition) SourceDirectivityModelParameters() *DirectivityModelParameters {
+	defer runtime.KeepAlive(smd)
 	_r := objc.Send[objc.ID](objref.IDOf(smd), objc.RegisterName("sourceDirectivityModelParameters"))
 	return DirectivityModelParametersFromID(_r)
 }

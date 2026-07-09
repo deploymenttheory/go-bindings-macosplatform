@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func cNNNormalizationGammaAndBetaStateAdopt(id objc.ID) *CNNNormalizationGammaAn
 
 // Description returns the object's -description text.
 func (cngabs *CNNNormalizationGammaAndBetaState) Description() string {
+	defer runtime.KeepAlive(cngabs)
 	return rt.Description(objref.IDOf(cngabs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cngabs *CNNNormalizationGammaAndBetaState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cngabs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cngabs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cngabs *CNNNormalizationGammaAndBetaState) IsKind(className string) bool {
+	defer runtime.KeepAlive(cngabs)
 	return rt.IsKind(objref.IDOf(cngabs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cngabs *CNNNormalizationGammaAndBetaState) String() string {
+	defer runtime.KeepAlive(cngabs)
 	return rt.Description(objref.IDOf(cngabs))
 }
 

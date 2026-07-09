@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,6 +51,7 @@ func colorKernelAdopt(id objc.ID) *ColorKernel {
 
 // ApplyWithExtentArguments creates a new image using the kernel and specified arguments.
 func (ck *ColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args []obj.Object) *Image {
+	defer runtime.KeepAlive(ck)
 	_r := objc.Send[objc.ID](objref.IDOf(ck), objc.RegisterName("applyWithExtent:arguments:"), extent, purego.SliceToNSArray(args, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ImageFromID(_r)
 }

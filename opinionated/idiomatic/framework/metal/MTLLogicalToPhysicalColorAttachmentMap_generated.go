@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func logicalToPhysicalColorAttachmentMapAdopt(id objc.ID) *LogicalToPhysicalColo
 
 // Description returns the object's -description text.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) Description() string {
+	defer runtime.KeepAlive(ltpcam)
 	return rt.Description(objref.IDOf(ltpcam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ltpcam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ltpcam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) IsKind(className string) bool {
+	defer runtime.KeepAlive(ltpcam)
 	return rt.IsKind(objref.IDOf(ltpcam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) String() string {
+	defer runtime.KeepAlive(ltpcam)
 	return rt.Description(objref.IDOf(ltpcam))
 }
 
@@ -74,16 +81,19 @@ func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentM
 
 // SetPhysicalIndexForLogicalIndex maps a physical color attachment index to a logical index.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex int, logicalIndex int) {
+	defer runtime.KeepAlive(ltpcam)
 	objc.Send[objc.ID](objref.IDOf(ltpcam), objc.RegisterName("setPhysicalIndex:forLogicalIndex:"), physicalIndex, logicalIndex)
 }
 
 // GetPhysicalIndexForLogicalIndex queries the physical color attachment index corresponding to a logical index.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) GetPhysicalIndexForLogicalIndex(logicalIndex int) int {
+	defer runtime.KeepAlive(ltpcam)
 	_r := objc.Send[int](objref.IDOf(ltpcam), objc.RegisterName("getPhysicalIndexForLogicalIndex:"), logicalIndex)
 	return _r
 }
 
 // Reset wraps the corresponding Objective-C method.
 func (ltpcam *LogicalToPhysicalColorAttachmentMap) Reset() {
+	defer runtime.KeepAlive(ltpcam)
 	objc.Send[objc.ID](objref.IDOf(ltpcam), objc.RegisterName("reset"))
 }

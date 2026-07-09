@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,46 +49,54 @@ func encodedOutgoingMessageAdopt(id objc.ID) *EncodedOutgoingMessage {
 
 // Description returns the object's -description text.
 func (eom *EncodedOutgoingMessage) Description() string {
+	defer runtime.KeepAlive(eom)
 	return rt.Description(objref.IDOf(eom))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (eom *EncodedOutgoingMessage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(eom)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(eom), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (eom *EncodedOutgoingMessage) IsKind(className string) bool {
+	defer runtime.KeepAlive(eom)
 	return rt.IsKind(objref.IDOf(eom), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (eom *EncodedOutgoingMessage) String() string {
+	defer runtime.KeepAlive(eom)
 	return rt.Description(objref.IDOf(eom))
 }
 
 // NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
-func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData obj.Object, isSigned bool, isEncrypted bool) *EncodedOutgoingMessage {
+func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData []byte, isSigned bool, isEncrypted bool) *EncodedOutgoingMessage {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEncodedOutgoingMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawData:isSigned:isEncrypted:"), objref.IDOf(rawData), isSigned, isEncrypted)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawData:isSigned:isEncrypted:"), rt.BytesToNSData(rawData), isSigned, isEncrypted)
 	return encodedOutgoingMessageAdopt(_id)
 }
 
 // RawData returns the full encoded RFC822 message including headers and body.
-func (eom *EncodedOutgoingMessage) RawData() obj.Object {
+func (eom *EncodedOutgoingMessage) RawData() []byte {
+	defer runtime.KeepAlive(eom)
 	_r := objc.Send[objc.ID](objref.IDOf(eom), objc.RegisterName("rawData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IsSigned reports whether the encoded message is signed
 func (eom *EncodedOutgoingMessage) IsSigned() bool {
+	defer runtime.KeepAlive(eom)
 	_r := objc.Send[bool](objref.IDOf(eom), objc.RegisterName("isSigned"))
 	return _r
 }
 
 // IsEncrypted reports whether the encoded message is encrypted
 func (eom *EncodedOutgoingMessage) IsEncrypted() bool {
+	defer runtime.KeepAlive(eom)
 	_r := objc.Send[bool](objref.IDOf(eom), objc.RegisterName("isEncrypted"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,29 +50,34 @@ func authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(id objc.ID) *Aut
 
 // Description returns the object's -description text.
 func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Description() string {
+	defer runtime.KeepAlive(askpkcd)
 	return rt.Description(objref.IDOf(askpkcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(askpkcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(askpkcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(askpkcd)
 	return rt.IsKind(objref.IDOf(askpkcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) String() string {
+	defer runtime.KeepAlive(askpkcd)
 	return rt.Description(objref.IDOf(askpkcd))
 }
 
 // NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates the object with the credential ID and the array of transports.
-func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports(credentialID obj.Object, allowedTransports []obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports(credentialID []byte, allowedTransports []*foundation.String) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:transports:"), objref.IDOf(credentialID), purego.SliceToNSArray(allowedTransports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:transports:"), rt.BytesToNSData(credentialID), purego.SliceToNSArray(allowedTransports, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(_id)
 }
 
@@ -84,6 +92,7 @@ func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransp
 //
 // Transports returns the collection as a Go slice.
 func (askpkcd *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []obj.Object {
+	defer runtime.KeepAlive(askpkcd)
 	_arr := objc.Send[objc.ID](objref.IDOf(askpkcd), objc.RegisterName("transports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

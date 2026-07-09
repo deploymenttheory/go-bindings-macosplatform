@@ -34,8 +34,8 @@ func TKSmartCardTokenFromID(id objc.ID) *TKSmartCardToken {
 }
 
 // Initializes a smart card token with the specified smart card, application identifier, and token driver.
-func (o *TKSmartCardToken) InitWithSmartCardAIDInstanceIDTokenDriver(smartCard *TKSmartCard, aID *foundation.NSData, instanceID *foundation.NSString, tokenDriver *TKSmartCardTokenDriver) *TKSmartCardToken {
-	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSelInitWithSmartCardAIDInstanceIDTokenDriver, smartCard.Ptr(), aID.Ptr(), instanceID.Ptr(), tokenDriver.Ptr())
+func (o *TKSmartCardToken) InitWithSmartCardAIDInstanceIDTokenDriver(smartCard *TKSmartCard, aid *foundation.NSData, instanceID *foundation.NSString, tokenDriver *TKSmartCardTokenDriver) *TKSmartCardToken {
+	_ret := objc.Send[objc.ID](o.Ptr(), _tKSmartCardTokenSelInitWithSmartCardAIDInstanceIDTokenDriver, smartCard.Ptr(), aid.Ptr(), instanceID.Ptr(), tokenDriver.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

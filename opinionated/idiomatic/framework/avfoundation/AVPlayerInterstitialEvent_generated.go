@@ -5,8 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +52,27 @@ func playerInterstitialEventAdopt(id objc.ID) *PlayerInterstitialEvent {
 
 // Description returns the object's -description text.
 func (pie *PlayerInterstitialEvent) Description() string {
+	defer runtime.KeepAlive(pie)
 	return rt.Description(objref.IDOf(pie))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pie *PlayerInterstitialEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pie)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pie), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pie *PlayerInterstitialEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(pie)
 	return rt.IsKind(objref.IDOf(pie), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pie *PlayerInterstitialEvent) String() string {
+	defer runtime.KeepAlive(pie)
 	return rt.Description(objref.IDOf(pie))
 }
 
@@ -75,6 +84,7 @@ func NewPlayerInterstitialEvent() *PlayerInterstitialEvent {
 
 // WithPrimaryItem sets the player item that represents the primary content.
 func (pie *PlayerInterstitialEvent) WithPrimaryItem(primaryItem *PlayerItem) *PlayerInterstitialEvent {
+	defer runtime.KeepAlive(primaryItem)
 	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setPrimaryItem:"), objref.IDOf(primaryItem))
 	return pie
 }
@@ -92,8 +102,8 @@ func (pie *PlayerInterstitialEvent) WithTime(time_ coremedia.CMTime) *PlayerInte
 }
 
 // WithDate sets a date within the date range of the primary content that playback of interstitial content begins.
-func (pie *PlayerInterstitialEvent) WithDate(date obj.Object) *PlayerInterstitialEvent {
-	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setDate:"), objref.IDOf(date))
+func (pie *PlayerInterstitialEvent) WithDate(date time.Time) *PlayerInterstitialEvent {
+	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setDate:"), rt.TimeToNSDate(date))
 	return pie
 }
 
@@ -136,6 +146,7 @@ func (pie *PlayerInterstitialEvent) WithAlignsResumptionWithPrimarySegmentBounda
 
 // WithCue sets a cue to schedule interstitial event playback at a predefined position during primary playback.
 func (pie *PlayerInterstitialEvent) WithCue(cue obj.Object) *PlayerInterstitialEvent {
+	defer runtime.KeepAlive(cue)
 	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setCue:"), objref.IDOf(cue))
 	return pie
 }
@@ -148,6 +159,7 @@ func (pie *PlayerInterstitialEvent) WithWillPlayOnce(willPlayOnce bool) *PlayerI
 
 // WithUserDefinedAttributes sets attributes of the event that the vendor or app defines.
 func (pie *PlayerInterstitialEvent) WithUserDefinedAttributes(userDefinedAttributes obj.Object) *PlayerInterstitialEvent {
+	defer runtime.KeepAlive(userDefinedAttributes)
 	objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("setUserDefinedAttributes:"), objref.IDOf(userDefinedAttributes))
 	return pie
 }
@@ -190,12 +202,14 @@ func (pie *PlayerInterstitialEvent) WithPlannedDuration(plannedDuration coremedi
 
 // PrimaryItem returns an AVPlayerItem representing the primary content during the playback of which the interstitial event should occur. The primaryItem must have an AVAsset that provides an intrinsic mapping from its timeline to real-time dates.
 func (pie *PlayerInterstitialEvent) PrimaryItem() *PlayerItem {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("primaryItem"))
 	return PlayerItemFromID(_r)
 }
 
 // Identifier returns an external identifier for the event. If an event is set on an AVPlayerInterstitialEventController that already has an event with the same identifier, the old event will be replaced by the new one.
 func (pie *PlayerInterstitialEvent) Identifier() string {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -205,80 +219,93 @@ func (pie *PlayerInterstitialEvent) Identifier() string {
 
 // Time returns the time within the duration of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value equal to kCMTimeInvalid if the event was initialized with a date instead of a time.
 func (pie *PlayerInterstitialEvent) Time() coremedia.CMTime {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("time"))
 	return _r
 }
 
 // Date returns the date within the date range of the primary item at which playback of the primary content should be temporarily suspended and the interstitial items played. Will have a value of nil if the event was initialized with a time instead of a date.
-func (pie *PlayerInterstitialEvent) Date() obj.Object {
+func (pie *PlayerInterstitialEvent) Date() time.Time {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TemplateItems returns an array of AVPlayerItems with configurations that will be reproduced for the playback of interstitial content. If you want the instances of AVURLAsset used during interstitial playback to be identical to the ones you specify for templateItems in AVPlayerInterstitialEvents that you set on an AVPlayerInterstitialEventController, rather than equivalent AVURLAssets with the same URL, you must create them with a value for the key AVURLAssetPrimarySessionIdentifierKey that's equal to the httpSessionIdentifier of the primary AVPlayerItem's asset. See AVAsset.h. This is especially useful if you require the use of a custom AVAssetResourceLoader delegate for interstitial assets. An NSInvalidArgumentException will be raised if any of the template items employs an AVAsset that lacks a URL, such as an AVComposition.
 //
 // TemplateItems returns the collection as a Go slice.
 func (pie *PlayerInterstitialEvent) TemplateItems() []*PlayerItem {
+	defer runtime.KeepAlive(pie)
 	_arr := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("templateItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }
 
 // Restrictions indicates restrictions on the use of end user playback controls that are imposed by the event.
 func (pie *PlayerInterstitialEvent) Restrictions() PlayerInterstitialEventRestrictions {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[PlayerInterstitialEventRestrictions](objref.IDOf(pie), objc.RegisterName("restrictions"))
 	return _r
 }
 
 // ResumptionOffset specifies the offset in time at which playback of the primary item should resume after interstitial playback has finished. Definite numeric values are supported. The value kCMTimeIndefinite can also be used, in order to specify that the effective resumption time offset should accord with the wallclock time elapsed during interstitial playback; this value is typically suitable for live broadcasts. The default value is kCMTimeZero.
 func (pie *PlayerInterstitialEvent) ResumptionOffset() coremedia.CMTime {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("resumptionOffset"))
 	return _r
 }
 
 // PlayoutLimit specifies the offset in time at which playback of the interstitial event should end. Can be any positive numeric value, or invalid. The default value is kCMTimeInvalid, which means there is no limit.
 func (pie *PlayerInterstitialEvent) PlayoutLimit() coremedia.CMTime {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("playoutLimit"))
 	return _r
 }
 
 // AlignsStartWithPrimarySegmentBoundary reports whether specifies that the start time of interstitial playback should be snapped to a segment boundary of the primary asset If true, the start time or date of the interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 func (pie *PlayerInterstitialEvent) AlignsStartWithPrimarySegmentBoundary() bool {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[bool](objref.IDOf(pie), objc.RegisterName("alignsStartWithPrimarySegmentBoundary"))
 	return _r
 }
 
 // AlignsResumptionWithPrimarySegmentBoundary reports whether specifies that the resumption time of primary playback should be snapped to a segment boundary of the primary asset If true, the resumption time of primary playback following an interstitial will be adjusted to the nearest segment boundary when the primary player is playing an HTTP Live Streaming asset.
 func (pie *PlayerInterstitialEvent) AlignsResumptionWithPrimarySegmentBoundary() bool {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[bool](objref.IDOf(pie), objc.RegisterName("alignsResumptionWithPrimarySegmentBoundary"))
 	return _r
 }
 
 // Cue returns the cue property is used to schedule event playback at a predefined position of primary playback.
-func (pie *PlayerInterstitialEvent) Cue() obj.Object {
+func (pie *PlayerInterstitialEvent) Cue() *foundation.String {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("cue"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // WillPlayOnce reports whether specifies that the interstitial should be scheduled for playback once only, and suppressed for subsequent replay. The "once" provision takes effect at the start of interstitial playback. The interstitial will not be scheduled again even if the first playback is canceled before completion.
 func (pie *PlayerInterstitialEvent) WillPlayOnce() bool {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[bool](objref.IDOf(pie), objc.RegisterName("willPlayOnce"))
 	return _r
 }
 
 // UserDefinedAttributes returns attributes of the event defined by the content vendor or the client. Dictionary keys are attribute names. Dictionary values are attribute values.
 func (pie *PlayerInterstitialEvent) UserDefinedAttributes() obj.Object {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("userDefinedAttributes"))
 	return obj.Wrap(_r)
 }
 
 // AssetListResponse returns the asset list JSON response as a dictionary, or nil if no asset list response has been loaded for the event. If the AVPlayerInterstitialEvent's templateItems is empty and the assetListResponse is nil, then an asset list read is expected. If the AVPlayerInterstitialEvent's templateItems is not empty and the assetListResponse is nil, then an asset list read is not expected.
 func (pie *PlayerInterstitialEvent) AssetListResponse() obj.Object {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("assetListResponse"))
 	return obj.Wrap(_r)
 }
 
 // ScheduleIdentifier returns the identifier of the daterange-schedule that produced this event. nil if the event was not a product of a daterange-schedule.
 func (pie *PlayerInterstitialEvent) ScheduleIdentifier() string {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("scheduleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -288,30 +315,35 @@ func (pie *PlayerInterstitialEvent) ScheduleIdentifier() string {
 
 // TimelineOccupancy indicates this event's occupancy on AVPlayerItemIntegratedTimeline. The default value is AVPlayerInterstitialEventTimelineSinglePointOccupancy.
 func (pie *PlayerInterstitialEvent) TimelineOccupancy() PlayerInterstitialEventTimelineOccupancy {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[PlayerInterstitialEventTimelineOccupancy](objref.IDOf(pie), objc.RegisterName("timelineOccupancy"))
 	return _r
 }
 
 // SupplementsPrimaryContent reports whether indicates this event will supplement the primary content and should be presented unified with the primary item. The default value is false.
 func (pie *PlayerInterstitialEvent) SupplementsPrimaryContent() bool {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[bool](objref.IDOf(pie), objc.RegisterName("supplementsPrimaryContent"))
 	return _r
 }
 
 // ContentMayVary reports whether indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. Indicates this event's content is dynamic and server may respond with different interstitial assets for other particpants in coordinated playback. If this value is set to false and the primary asset is particpating in coordinated playback, this event will participate in coordinated playback as well. The default value is true.
 func (pie *PlayerInterstitialEvent) ContentMayVary() bool {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[bool](objref.IDOf(pie), objc.RegisterName("contentMayVary"))
 	return _r
 }
 
 // SkipControlTimeRange returns the time range within the duration of the interstitial event for which a skip button should be displayed. The start of the time range should indicate at which point the skip button should appear. The duration of the time range should indicate how long the skip button should be available. If this value is set to kCMTimePositiveInfinity, then the skip button will be available for the remainder of the interstitial's duration after appearing. If either the start or duration of the time range is kCMTimeInvalid, then the interstitial will NOT be eligible to be skipped.
 func (pie *PlayerInterstitialEvent) SkipControlTimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(pie), objc.RegisterName("skipControlTimeRange"))
 	return _r
 }
 
 // SkipControlLocalizedLabelBundleKey returns the key defined in the AVPlayerInterstitialEventController's localizedStringsBundle that points to the localized label for the skip button. If the value of the property is nil, the skip button may contain a generic label depending on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
 func (pie *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[objc.ID](objref.IDOf(pie), objc.RegisterName("skipControlLocalizedLabelBundleKey"))
 	if _r == 0 {
 		return ""
@@ -321,6 +353,7 @@ func (pie *PlayerInterstitialEvent) SkipControlLocalizedLabelBundleKey() string 
 
 // PlannedDuration indicates the event's planned duration. The default value is kCMTimeInvalid.
 func (pie *PlayerInterstitialEvent) PlannedDuration() coremedia.CMTime {
+	defer runtime.KeepAlive(pie)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pie), objc.RegisterName("plannedDuration"))
 	return _r
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRThermostatClusterPresetTypeStructAdopt(id objc.ID) *MTRThermostatCluster
 
 // Description returns the object's -description text.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) Description() string {
+	defer runtime.KeepAlive(mtcpts)
 	return rt.Description(objref.IDOf(mtcpts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcpts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcpts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcpts)
 	return rt.IsKind(objref.IDOf(mtcpts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) String() string {
+	defer runtime.KeepAlive(mtcpts)
 	return rt.Description(objref.IDOf(mtcpts))
 }
 
@@ -72,36 +80,42 @@ func NewMTRThermostatClusterPresetTypeStruct() *MTRThermostatClusterPresetTypeSt
 
 // WithPresetScenario sets the preset scenario.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetTypeStruct {
+	defer runtime.KeepAlive(presetScenario)
 	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
 	return mtcpts
 }
 
 // WithNumberOfPresets sets the number of presets.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithNumberOfPresets(numberOfPresets obj.Object) *MTRThermostatClusterPresetTypeStruct {
+	defer runtime.KeepAlive(numberOfPresets)
 	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
 	return mtcpts
 }
 
 // WithPresetTypeFeatures sets the preset type features.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithPresetTypeFeatures(presetTypeFeatures obj.Object) *MTRThermostatClusterPresetTypeStruct {
+	defer runtime.KeepAlive(presetTypeFeatures)
 	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
 	return mtcpts
 }
 
 // PresetScenario returns the preset scenario.
-func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetScenario() obj.Object {
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetScenario() *foundation.Number {
+	defer runtime.KeepAlive(mtcpts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("presetScenario"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NumberOfPresets returns the number of presets.
-func (mtcpts *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() obj.Object {
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() *foundation.Number {
+	defer runtime.KeepAlive(mtcpts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("numberOfPresets"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PresetTypeFeatures returns the preset type features.
-func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() obj.Object {
+func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() *foundation.Number {
+	defer runtime.KeepAlive(mtcpts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("presetTypeFeatures"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

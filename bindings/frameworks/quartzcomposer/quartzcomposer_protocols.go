@@ -59,8 +59,8 @@ type QCPlugInInputImageSource interface {
 	TextureColorSpace() unsafe.Pointer
 	TextureFlipped() bool
 	TextureMatrix() *float32
-	BindTextureRepresentationToCGLContextTextureUnitNormalizeCoordinates(cgl_ctx unsafe.Pointer, unit uint32, flag bool)
-	UnbindTextureRepresentationFromCGLContextTextureUnit(cgl_ctx unsafe.Pointer, unit uint32)
+	BindTextureRepresentationToCGLContextTextureUnitNormalizeCoordinates(cglCtx unsafe.Pointer, unit uint32, flag bool)
+	UnbindTextureRepresentationFromCGLContextTextureUnit(cglCtx unsafe.Pointer, unit uint32)
 	UnlockTextureRepresentation()
 }
 

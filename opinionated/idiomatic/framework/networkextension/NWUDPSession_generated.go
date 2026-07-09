@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,33 @@ func nWUDPSessionAdopt(id objc.ID) *NWUDPSession {
 
 // Description returns the object's -description text.
 func (ns *NWUDPSession) Description() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ns *NWUDPSession) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ns)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ns *NWUDPSession) IsKind(className string) bool {
+	defer runtime.KeepAlive(ns)
 	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ns *NWUDPSession) String() string {
+	defer runtime.KeepAlive(ns)
 	return rt.Description(objref.IDOf(ns))
 }
 
 // NewNWUDPSessionWithUpgradeForSession this convenience initializer can be used to create a new session based on the original session’s endpoint and parameters.
 func NewNWUDPSessionWithUpgradeForSession(session *NWUDPSession) *NWUDPSession {
+	defer runtime.KeepAlive(session)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NWUDPSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpgradeForSession:"), objref.IDOf(session))
 	return nWUDPSessionAdopt(_id)
@@ -78,20 +85,22 @@ func NewNWUDPSessionWithUpgradeForSession(session *NWUDPSession) *NWUDPSession {
 
 // TryNextResolvedEndpoint mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint.
 func (ns *NWUDPSession) TryNextResolvedEndpoint() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("tryNextResolvedEndpoint"))
 }
 
 // WriteMultipleDatagrams write multiple datagrams.
 //
 // WriteMultipleDatagrams blocks until the operation completes or ctx is cancelled.
-func (ns *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray []obj.Object) error {
+func (ns *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray [][]byte) error {
+	defer runtime.KeepAlive(ns)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("writeMultipleDatagrams:completionHandler:"), purego.SliceToNSArray(datagramArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("writeMultipleDatagrams:completionHandler:"), purego.SliceToNSArray(datagramArray, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -103,14 +112,15 @@ func (ns *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArra
 // WriteDatagram write a single datagram.
 //
 // WriteDatagram blocks until the operation completes or ctx is cancelled.
-func (ns *NWUDPSession) WriteDatagram(ctx context.Context, datagram obj.Object) error {
+func (ns *NWUDPSession) WriteDatagram(ctx context.Context, datagram []byte) error {
+	defer runtime.KeepAlive(ns)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("writeDatagram:completionHandler:"), objref.IDOf(datagram), _block)
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("writeDatagram:completionHandler:"), rt.BytesToNSData(datagram), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -121,35 +131,41 @@ func (ns *NWUDPSession) WriteDatagram(ctx context.Context, datagram obj.Object) 
 
 // Cancel cancel the session.
 func (ns *NWUDPSession) Cancel() {
+	defer runtime.KeepAlive(ns)
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("cancel"))
 }
 
 // State returns the current state of the UDP session. If the state is NWUDPSessionStateReady, then the connection is eligible for reading and writing. The state will be NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been rejected. Use KVO to watch for changes.
 func (ns *NWUDPSession) State() NWUDPSessionState {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[NWUDPSessionState](objref.IDOf(ns), objc.RegisterName("state"))
 	return _r
 }
 
 // IsViable reports whether the connection can read and write data, false otherwise. Use KVO to watch this property.
 func (ns *NWUDPSession) IsViable() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("isViable"))
 	return _r
 }
 
 // HasBetterPath reports whether there is another path available that is preferred over the currentPath. To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
 func (ns *NWUDPSession) HasBetterPath() bool {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("hasBetterPath"))
 	return _r
 }
 
 // CurrentPath returns the current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
 func (ns *NWUDPSession) CurrentPath() *NWPath {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("currentPath"))
 	return NWPathFromID(_r)
 }
 
 // MaximumDatagramLength returns the maximum size of a datagram to be written currently. If a datagram is written with a longer length, the datagram may be fragmented or encounter an error. Note that this value is not guaranteed to be the maximum datagram length for end-to-end communication across the network. Use KVO to watch for changes.
 func (ns *NWUDPSession) MaximumDatagramLength() int {
+	defer runtime.KeepAlive(ns)
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("maximumDatagramLength"))
 	return _r
 }

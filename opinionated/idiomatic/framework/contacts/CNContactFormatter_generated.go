@@ -5,7 +5,10 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func contactFormatterAdopt(id objc.ID) *ContactFormatter {
 
 // Description returns the object's -description text.
 func (cf *ContactFormatter) Description() string {
+	defer runtime.KeepAlive(cf)
 	return rt.Description(objref.IDOf(cf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cf *ContactFormatter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cf *ContactFormatter) IsKind(className string) bool {
+	defer runtime.KeepAlive(cf)
 	return rt.IsKind(objref.IDOf(cf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cf *ContactFormatter) String() string {
+	defer runtime.KeepAlive(cf)
 	return rt.Description(objref.IDOf(cf))
 }
 
@@ -80,6 +88,8 @@ func (cf *ContactFormatter) WithStyle(style ContactFormatterStyle) *ContactForma
 
 // StringFromContact formats the contact name.
 func (cf *ContactFormatter) StringFromContact(contact *Contact) string {
+	defer runtime.KeepAlive(cf)
+	defer runtime.KeepAlive(contact)
 	_r := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("stringFromContact:"), objref.IDOf(contact))
 	if _r == 0 {
 		return ""
@@ -88,13 +98,17 @@ func (cf *ContactFormatter) StringFromContact(contact *Contact) string {
 }
 
 // AttributedStringFromContactDefaultAttributes formats the contact name as an attributed string.
-func (cf *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object {
+func (cf *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(cf)
+	defer runtime.KeepAlive(contact)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("attributedStringFromContact:defaultAttributes:"), objref.IDOf(contact), objref.IDOf(attributes))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Style returns the style for a contact formatter instance. The default value is CNContactFormatterStyleFullName.
 func (cf *ContactFormatter) Style() ContactFormatterStyle {
+	defer runtime.KeepAlive(cf)
 	_r := objc.Send[ContactFormatterStyle](objref.IDOf(cf), objc.RegisterName("style"))
 	return _r
 }

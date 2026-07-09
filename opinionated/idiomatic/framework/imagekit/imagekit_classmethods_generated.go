@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -20,6 +22,7 @@ func FilterBrowserPanelWithStyleMask(styleMask int) obj.Object {
 
 // ViewWithFrameFilter the viewWithFrame method creates a view that retains the filter passed into it.
 func ViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) obj.Object {
+	defer runtime.KeepAlive(inFilter)
 	_r := objc.Send[objc.ID](objc.ID(_class("IKFilterUIView")), objc.RegisterName("viewWithFrame:filter:"), frameRect, objref.IDOf(inFilter))
 	return obj.Wrap(_r)
 }
@@ -50,5 +53,6 @@ func CanExportToApplication(applicationBundleIdentifier string) bool {
 
 // ExportSlideshowItemToApplication export an item to the given application. The item can be either: NSImage, NSString, NSURL, or a NSArray of NSImage / NSString / NSURL.
 func ExportSlideshowItemToApplication(item obj.Object, applicationBundleIdentifier string) {
+	defer runtime.KeepAlive(item)
 	objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("exportSlideshowItem:toApplication:"), objref.IDOf(item), purego.NSString(applicationBundleIdentifier))
 }

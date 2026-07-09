@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,55 @@ func mTRNetworkCommissioningClusterNetworkInfoStructAdopt(id objc.ID) *MTRNetwor
 
 // Description returns the object's -description text.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) Description() string {
+	defer runtime.KeepAlive(mnccnis)
 	return rt.Description(objref.IDOf(mnccnis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mnccnis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mnccnis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mnccnis)
 	return rt.IsKind(objref.IDOf(mnccnis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) String() string {
+	defer runtime.KeepAlive(mnccnis)
 	return rt.Description(objref.IDOf(mnccnis))
 }
 
 // WithNetworkID sets the network ID.
-func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
+func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) WithNetworkID(networkID []byte) *MTRNetworkCommissioningClusterNetworkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("setNetworkID:"), rt.BytesToNSData(networkID))
 	return mnccnis
 }
 
 // WithConnected sets the connected.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
+	defer runtime.KeepAlive(connected)
 	objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 	return mnccnis
 }
 
 // NetworkID returns the network ID.
-func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() obj.Object {
+func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() []byte {
+	defer runtime.KeepAlive(mnccnis)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("networkID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Connected returns the connected.
-func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() obj.Object {
+func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() *foundation.Number {
+	defer runtime.KeepAlive(mnccnis)
 	_r := objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("connected"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRNetworkCommissioningClusterNetworkInfoStruct marks MTRNetworkCommissioningClusterNetworkInfoStruct — and, by embedding promotion, its

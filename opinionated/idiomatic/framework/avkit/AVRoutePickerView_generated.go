@@ -5,8 +5,11 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func routePickerViewAdopt(id objc.ID) *RoutePickerView {
 
 // Description returns the object's -description text.
 func (rpv *RoutePickerView) Description() string {
+	defer runtime.KeepAlive(rpv)
 	return rt.Description(objref.IDOf(rpv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpv *RoutePickerView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpv *RoutePickerView) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpv)
 	return rt.IsKind(objref.IDOf(rpv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpv *RoutePickerView) String() string {
+	defer runtime.KeepAlive(rpv)
 	return rt.Description(objref.IDOf(rpv))
 }
 
@@ -78,8 +86,21 @@ func NewRoutePickerView() *RoutePickerView {
 	return _mainthread0
 }
 
+// WithDelegate sets the delegate object for the route picker.
+func (rpv *RoutePickerView) WithDelegate(delegate RoutePickerViewDelegate) *RoutePickerView {
+	_shim := newRoutePickerViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(rpv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(rpv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return rpv
+}
+
 // WithPlayer sets the player object to perform routing operations for.
 func (rpv *RoutePickerView) WithPlayer(player obj.Object) *RoutePickerView {
+	defer runtime.KeepAlive(player)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	})
@@ -96,6 +117,7 @@ func (rpv *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBorde
 
 // RoutePickerButtonColorForState returns the color of the picker button for the specified state.
 func (rpv *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object {
+	defer runtime.KeepAlive(rpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -109,6 +131,8 @@ func (rpv *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerView
 
 // SetRoutePickerButtonColorForState sets the route picker button color for the specified state.
 func (rpv *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState) {
+	defer runtime.KeepAlive(rpv)
+	defer runtime.KeepAlive(color)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rpv), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
 	})
@@ -117,6 +141,7 @@ func (rpv *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, 
 
 // Player returns the player for which to perform routing operations.
 func (rpv *RoutePickerView) Player() obj.Object {
+	defer runtime.KeepAlive(rpv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -130,6 +155,7 @@ func (rpv *RoutePickerView) Player() obj.Object {
 
 // IsRoutePickerButtonBordered reports whether the picker button has a border. Default is true.
 func (rpv *RoutePickerView) IsRoutePickerButtonBordered() bool {
+	defer runtime.KeepAlive(rpv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

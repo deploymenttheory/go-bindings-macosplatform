@@ -5,8 +5,12 @@
 package avkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +51,27 @@ func captureViewAdopt(id objc.ID) *CaptureView {
 
 // Description returns the object's -description text.
 func (cv *CaptureView) Description() string {
+	defer runtime.KeepAlive(cv)
 	return rt.Description(objref.IDOf(cv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cv *CaptureView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cv *CaptureView) IsKind(className string) bool {
+	defer runtime.KeepAlive(cv)
 	return rt.IsKind(objref.IDOf(cv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cv *CaptureView) String() string {
+	defer runtime.KeepAlive(cv)
 	return rt.Description(objref.IDOf(cv))
 }
 
@@ -78,6 +87,18 @@ func NewCaptureView() *CaptureView {
 	return _mainthread0
 }
 
+// WithDelegate sets the capture view’s delegate object.
+func (cv *CaptureView) WithDelegate(delegate CaptureViewDelegate) *CaptureView {
+	_shim := newCaptureViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return cv
+}
+
 // WithControlsStyle sets the style of the capture controls presented by the view.
 func (cv *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView {
 	purego.Main(func() {
@@ -88,6 +109,7 @@ func (cv *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle)
 
 // WithVideoGravity sets a string value that defines how the capture view displays video within its bounds.
 func (cv *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
+	defer runtime.KeepAlive(videoGravity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 	})
@@ -96,6 +118,8 @@ func (cv *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
 
 // SetSessionShowVideoPreviewShowAudioPreview sets the view’s capture session.
 func (cv *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(session)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
 	})
@@ -104,6 +128,7 @@ func (cv *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Ob
 
 // Session returns a capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
 func (cv *CaptureView) Session() obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -117,6 +142,7 @@ func (cv *CaptureView) Session() obj.Object {
 
 // FileOutput returns a capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
 func (cv *CaptureView) FileOutput() obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -130,6 +156,7 @@ func (cv *CaptureView) FileOutput() obj.Object {
 
 // ControlsStyle returns the style of the capture controls pane associated with the view.
 func (cv *CaptureView) ControlsStyle() CaptureViewControlsStyle {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 CaptureViewControlsStyle
 	purego.Main(func() {
 		_mainthread0 = func() CaptureViewControlsStyle {
@@ -142,12 +169,13 @@ func (cv *CaptureView) ControlsStyle() CaptureViewControlsStyle {
 }
 
 // VideoGravity returns a string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
-func (cv *CaptureView) VideoGravity() obj.Object {
-	var _mainthread0 obj.Object
+func (cv *CaptureView) VideoGravity() *foundation.String {
+	defer runtime.KeepAlive(cv)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("videoGravity"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0

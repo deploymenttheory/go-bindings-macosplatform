@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEProxyServerAdopt(id objc.ID) *NEProxyServer {
 
 // Description returns the object's -description text.
 func (nps *NEProxyServer) Description() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nps *NEProxyServer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nps *NEProxyServer) IsKind(className string) bool {
+	defer runtime.KeepAlive(nps)
 	return rt.IsKind(objref.IDOf(nps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nps *NEProxyServer) String() string {
+	defer runtime.KeepAlive(nps)
 	return rt.Description(objref.IDOf(nps))
 }
 
@@ -93,6 +100,7 @@ func (nps *NEProxyServer) WithPassword(password string) *NEProxyServer {
 
 // Address returns the string representation of the proxy server IP address.
 func (nps *NEProxyServer) Address() string {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("address"))
 	if _r == 0 {
 		return ""
@@ -102,18 +110,21 @@ func (nps *NEProxyServer) Address() string {
 
 // Port returns the TCP port of the proxy server.
 func (nps *NEProxyServer) Port() int {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[int](objref.IDOf(nps), objc.RegisterName("port"))
 	return _r
 }
 
 // AuthenticationRequired reports whether a flag indicating if the server requires authentication credentials.
 func (nps *NEProxyServer) AuthenticationRequired() bool {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[bool](objref.IDOf(nps), objc.RegisterName("authenticationRequired"))
 	return _r
 }
 
 // Username returns the username portion of the authentication credential to use when communicating with the proxy server.
 func (nps *NEProxyServer) Username() string {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
@@ -123,6 +134,7 @@ func (nps *NEProxyServer) Username() string {
 
 // Password returns the password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
 func (nps *NEProxyServer) Password() string {
+	defer runtime.KeepAlive(nps)
 	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""

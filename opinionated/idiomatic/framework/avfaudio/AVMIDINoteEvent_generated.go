@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -78,24 +80,28 @@ func (mne *MIDINoteEvent) WithDuration(duration float64) *MIDINoteEvent {
 
 // Channel returns the channel.
 func (mne *MIDINoteEvent) Channel() int {
+	defer runtime.KeepAlive(mne)
 	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("channel"))
 	return _r
 }
 
 // Key returns the key.
 func (mne *MIDINoteEvent) Key() int {
+	defer runtime.KeepAlive(mne)
 	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("key"))
 	return _r
 }
 
 // Velocity returns the velocity.
 func (mne *MIDINoteEvent) Velocity() int {
+	defer runtime.KeepAlive(mne)
 	_r := objc.Send[int](objref.IDOf(mne), objc.RegisterName("velocity"))
 	return _r
 }
 
 // Duration returns the duration.
 func (mne *MIDINoteEvent) Duration() float64 {
+	defer runtime.KeepAlive(mne)
 	_r := objc.Send[float64](objref.IDOf(mne), objc.RegisterName("duration"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineStateSerializationAdopt(id objc.ID) *SyncEngineStateSerialization
 
 // Description returns the object's -description text.
 func (sess *SyncEngineStateSerialization) Description() string {
+	defer runtime.KeepAlive(sess)
 	return rt.Description(objref.IDOf(sess))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sess *SyncEngineStateSerialization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sess)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sess), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sess *SyncEngineStateSerialization) IsKind(className string) bool {
+	defer runtime.KeepAlive(sess)
 	return rt.IsKind(objref.IDOf(sess), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sess *SyncEngineStateSerialization) String() string {
+	defer runtime.KeepAlive(sess)
 	return rt.Description(objref.IDOf(sess))
 }
 

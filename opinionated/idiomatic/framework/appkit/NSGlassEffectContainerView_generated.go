@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewGlassEffectContainerView() *GlassEffectContainerView {
 
 // WithContentView sets the view that contains descendant views to merge together when in proximity to each other.
 func (gecv *GlassEffectContainerView) WithContentView(contentView ViewProvider) *GlassEffectContainerView {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
@@ -215,6 +218,7 @@ func (gecv *GlassEffectContainerView) WithWantsLayer(wantsLayer bool) *GlassEffe
 
 // WithLayer sets the layer.
 func (gecv *GlassEffectContainerView) WithLayer(layer obj.Object) *GlassEffectContainerView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -264,6 +268,7 @@ func (gecv *GlassEffectContainerView) WithBackgroundFilters(items ...obj.Object)
 
 // WithCompositingFilter sets the compositing filter.
 func (gecv *GlassEffectContainerView) WithCompositingFilter(compositingFilter obj.Object) *GlassEffectContainerView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -281,6 +286,7 @@ func (gecv *GlassEffectContainerView) WithContentFilters(items ...obj.Object) *G
 
 // WithShadow sets the shadow.
 func (gecv *GlassEffectContainerView) WithShadow(shadow *Shadow) *GlassEffectContainerView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -329,6 +335,7 @@ func (gecv *GlassEffectContainerView) WithPreparedContentRect(preparedContentRec
 
 // WithNextKeyView sets the next key view.
 func (gecv *GlassEffectContainerView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffectContainerView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -378,6 +385,7 @@ func (gecv *GlassEffectContainerView) WithPrefersCompactControlSizeMetrics(prefe
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gecv *GlassEffectContainerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectContainerView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -434,6 +442,7 @@ func (gecv *GlassEffectContainerView) WithWantsExtendedDynamicRangeOpenGLSurface
 
 // WithPressureConfiguration sets the pressure configuration.
 func (gecv *GlassEffectContainerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectContainerView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -442,6 +451,7 @@ func (gecv *GlassEffectContainerView) WithPressureConfiguration(pressureConfigur
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (gecv *GlassEffectContainerView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectContainerView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -450,6 +460,7 @@ func (gecv *GlassEffectContainerView) WithNextResponder(nextResponder ResponderP
 
 // WithMenu sets returns the responder’s menu.
 func (gecv *GlassEffectContainerView) WithMenu(menu *Menu) *GlassEffectContainerView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -458,6 +469,7 @@ func (gecv *GlassEffectContainerView) WithMenu(menu *Menu) *GlassEffectContainer
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (gecv *GlassEffectContainerView) WithUserActivity(userActivity obj.Object) *GlassEffectContainerView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -466,6 +478,7 @@ func (gecv *GlassEffectContainerView) WithUserActivity(userActivity obj.Object) 
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (gecv *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gecv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -474,6 +487,7 @@ func (gecv *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEff
 
 // ContentView returns the view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
 func (gecv *GlassEffectContainerView) ContentView() *View {
+	defer runtime.KeepAlive(gecv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -487,6 +501,7 @@ func (gecv *GlassEffectContainerView) ContentView() *View {
 
 // Spacing returns the proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
 func (gecv *GlassEffectContainerView) Spacing() float64 {
+	defer runtime.KeepAlive(gecv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

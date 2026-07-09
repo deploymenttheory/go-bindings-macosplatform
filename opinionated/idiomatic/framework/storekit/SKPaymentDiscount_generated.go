@@ -5,7 +5,10 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,34 @@ func paymentDiscountAdopt(id objc.ID) *PaymentDiscount {
 
 // Description returns the object's -description text.
 func (pd *PaymentDiscount) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *PaymentDiscount) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *PaymentDiscount) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *PaymentDiscount) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp initializes the payment discount with a signature and the parameters used by the signature.
 func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identifier string, keyIdentifier string, nonce obj.Object, signature string, timestamp obj.Object) *PaymentDiscount {
+	defer runtime.KeepAlive(nonce)
+	defer runtime.KeepAlive(timestamp)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SKPaymentDiscount")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:keyIdentifier:nonce:signature:timestamp:"), purego.NSString(identifier), purego.NSString(keyIdentifier), objref.IDOf(nonce), purego.NSString(signature), objref.IDOf(timestamp))
 	return paymentDiscountAdopt(_id)
@@ -75,6 +85,7 @@ func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identi
 
 // Identifier returns the identifier.
 func (pd *PaymentDiscount) Identifier() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -84,6 +95,7 @@ func (pd *PaymentDiscount) Identifier() string {
 
 // KeyIdentifier returns the key identifier.
 func (pd *PaymentDiscount) KeyIdentifier() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("keyIdentifier"))
 	if _r == 0 {
 		return ""
@@ -92,13 +104,15 @@ func (pd *PaymentDiscount) KeyIdentifier() string {
 }
 
 // Nonce returns the nonce.
-func (pd *PaymentDiscount) Nonce() obj.Object {
+func (pd *PaymentDiscount) Nonce() *foundation.UUID {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("nonce"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Signature returns the signature.
 func (pd *PaymentDiscount) Signature() string {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("signature"))
 	if _r == 0 {
 		return ""
@@ -107,7 +121,8 @@ func (pd *PaymentDiscount) Signature() string {
 }
 
 // Timestamp returns the timestamp.
-func (pd *PaymentDiscount) Timestamp() obj.Object {
+func (pd *PaymentDiscount) Timestamp() *foundation.Number {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("timestamp"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

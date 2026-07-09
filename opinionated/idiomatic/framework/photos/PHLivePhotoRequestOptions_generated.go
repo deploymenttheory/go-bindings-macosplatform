@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func livePhotoRequestOptionsAdopt(id objc.ID) *LivePhotoRequestOptions {
 
 // Description returns the object's -description text.
 func (lpro *LivePhotoRequestOptions) Description() string {
+	defer runtime.KeepAlive(lpro)
 	return rt.Description(objref.IDOf(lpro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lpro *LivePhotoRequestOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lpro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lpro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lpro *LivePhotoRequestOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(lpro)
 	return rt.IsKind(objref.IDOf(lpro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lpro *LivePhotoRequestOptions) String() string {
+	defer runtime.KeepAlive(lpro)
 	return rt.Description(objref.IDOf(lpro))
 }
 
@@ -86,12 +93,14 @@ func (lpro *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllow
 
 // DeliveryMode returns the delivery mode.
 func (lpro *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
+	defer runtime.KeepAlive(lpro)
 	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(lpro), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
 // IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (lpro *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
+	defer runtime.KeepAlive(lpro)
 	_r := objc.Send[bool](objref.IDOf(lpro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }

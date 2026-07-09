@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func compositionAdopt(id objc.ID) *Composition {
 
 // Description returns the object's -description text.
 func (c *Composition) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Composition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Composition) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Composition) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -72,30 +79,35 @@ func NewComposition() *Composition {
 
 // Protocols returns the protocols.
 func (c *Composition) Protocols() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
 // Attributes returns the attributes.
 func (c *Composition) Attributes() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // InputKeys returns the input keys.
 func (c *Composition) InputKeys() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
 // OutputKeys returns the output keys.
 func (c *Composition) OutputKeys() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)
 }
 
 // Identifier returns the identifier.
 func (c *Composition) Identifier() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

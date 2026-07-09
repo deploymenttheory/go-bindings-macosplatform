@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,6 +58,7 @@ func NewSyncEngineSentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent
 //
 // SavedZones returns the collection as a Go slice.
 func (sesdce *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
+	defer runtime.KeepAlive(sesdce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sesdce), objc.RegisterName("savedZones"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
@@ -64,6 +67,7 @@ func (sesdce *SyncEngineSentDatabaseChangesEvent) SavedZones() []*RecordZone {
 //
 // FailedZoneSaves returns the collection as a Go slice.
 func (sesdce *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngineFailedZoneSave {
+	defer runtime.KeepAlive(sesdce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sesdce), objc.RegisterName("failedZoneSaves"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFailedZoneSave { return SyncEngineFailedZoneSaveFromID(_id) })
 }
@@ -72,12 +76,14 @@ func (sesdce *SyncEngineSentDatabaseChangesEvent) FailedZoneSaves() []*SyncEngin
 //
 // DeletedZoneIDs returns the collection as a Go slice.
 func (sesdce *SyncEngineSentDatabaseChangesEvent) DeletedZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(sesdce)
 	_arr := objc.Send[objc.ID](objref.IDOf(sesdce), objc.RegisterName("deletedZoneIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
 // FailedZoneDeletes returns the unique identifiers of the record zones CloudKit is unable to delete, and the reasons why.
 func (sesdce *SyncEngineSentDatabaseChangesEvent) FailedZoneDeletes() obj.Object {
+	defer runtime.KeepAlive(sesdce)
 	_r := objc.Send[objc.ID](objref.IDOf(sesdce), objc.RegisterName("failedZoneDeletes"))
 	return obj.Wrap(_r)
 }

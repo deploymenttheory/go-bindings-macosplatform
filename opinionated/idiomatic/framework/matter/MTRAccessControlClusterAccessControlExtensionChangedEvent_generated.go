@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessControlClusterAccessControlExtensionChangedEventAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) Description() string {
+	defer runtime.KeepAlive(maccacece)
 	return rt.Description(objref.IDOf(maccacece))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccacece)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccacece), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccacece)
 	return rt.IsKind(objref.IDOf(maccacece), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) String() string {
+	defer runtime.KeepAlive(maccacece)
 	return rt.Description(objref.IDOf(maccacece))
 }
 
@@ -72,60 +80,70 @@ func NewMTRAccessControlClusterAccessControlExtensionChangedEvent() *MTRAccessCo
 
 // WithAdminNodeID sets the admin node ID.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithAdminNodeID(adminNodeID obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	defer runtime.KeepAlive(adminNodeID)
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setAdminNodeID:"), objref.IDOf(adminNodeID))
 	return maccacece
 }
 
 // WithAdminPasscodeID sets the admin passcode ID.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithAdminPasscodeID(adminPasscodeID obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	defer runtime.KeepAlive(adminPasscodeID)
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setAdminPasscodeID:"), objref.IDOf(adminPasscodeID))
 	return maccacece
 }
 
 // WithChangeType sets the change type.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithChangeType(changeType obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	defer runtime.KeepAlive(changeType)
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setChangeType:"), objref.IDOf(changeType))
 	return maccacece
 }
 
 // WithLatestValue sets the latest value.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithLatestValue(latestValue MTRAccessControlClusterAccessControlExtensionStructProvider) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	defer runtime.KeepAlive(latestValue)
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setLatestValue:"), objref.IDOf(latestValue))
 	return maccacece
 }
 
 // WithFabricIndex sets the fabric index.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionChangedEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccacece
 }
 
 // AdminNodeID returns the admin node ID.
-func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminNodeID() obj.Object {
+func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminNodeID() *foundation.Number {
+	defer runtime.KeepAlive(maccacece)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("adminNodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AdminPasscodeID returns the admin passcode ID.
-func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminPasscodeID() obj.Object {
+func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) AdminPasscodeID() *foundation.Number {
+	defer runtime.KeepAlive(maccacece)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("adminPasscodeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ChangeType returns the change type.
-func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) ChangeType() obj.Object {
+func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) ChangeType() *foundation.Number {
+	defer runtime.KeepAlive(maccacece)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("changeType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LatestValue returns the latest value.
 func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlExtensionStruct {
+	defer runtime.KeepAlive(maccacece)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("latestValue"))
 	return MTRAccessControlClusterAccessControlExtensionStructFromID(_r)
 }
 
 // FabricIndex returns the fabric index.
-func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) FabricIndex() obj.Object {
+func (maccacece *MTRAccessControlClusterAccessControlExtensionChangedEvent) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(maccacece)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

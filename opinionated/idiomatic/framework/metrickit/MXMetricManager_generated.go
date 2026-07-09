@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func metricManagerAdopt(id objc.ID) *MetricManager {
 
 // Description returns the object's -description text.
 func (mm *MetricManager) Description() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mm *MetricManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mm *MetricManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(mm)
 	return rt.IsKind(objref.IDOf(mm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mm *MetricManager) String() string {
+	defer runtime.KeepAlive(mm)
 	return rt.Description(objref.IDOf(mm))
 }
 
@@ -76,6 +83,7 @@ func NewMetricManager() *MetricManager {
 //
 // PastPayloads returns the collection as a Go slice.
 func (mm *MetricManager) PastPayloads() []*MetricPayload {
+	defer runtime.KeepAlive(mm)
 	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("pastPayloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetricPayload { return MetricPayloadFromID(_id) })
 }
@@ -84,6 +92,7 @@ func (mm *MetricManager) PastPayloads() []*MetricPayload {
 //
 // PastDiagnosticPayloads returns the collection as a Go slice.
 func (mm *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {
+	defer runtime.KeepAlive(mm)
 	_arr := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("pastDiagnosticPayloads"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiagnosticPayload { return DiagnosticPayloadFromID(_id) })
 }

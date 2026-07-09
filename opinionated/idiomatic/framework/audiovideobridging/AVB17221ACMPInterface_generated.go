@@ -5,6 +5,7 @@
 package audiovideobridging
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -54,11 +55,14 @@ func NewAVB17221ACMPInterface() *AVB17221ACMPInterface {
 
 // RemoveHandlerForEntityID removed a handler  for messages to or from a specified EntityID.
 func (aai *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
+	defer runtime.KeepAlive(aai)
 	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeHandlerForEntityID:"), targetEntityID)
 }
 
 // SendACMPResponseMessage send an ACMP response message. This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads and while handling a received command.
 func (aai *AVB17221ACMPInterface) SendACMPResponseMessage(message *AVB17221ACMPMessage) error {
+	defer runtime.KeepAlive(aai)
+	defer runtime.KeepAlive(message)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendACMPResponseMessage:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -69,6 +73,7 @@ func (aai *AVB17221ACMPInterface) SendACMPResponseMessage(message *AVB17221ACMPM
 
 // MulticastDestinationAddress returns an AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
 func (aai *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
+	defer runtime.KeepAlive(aai)
 	_r := objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("multicastDestinationAddress"))
 	return MACAddressFromID(_r)
 }

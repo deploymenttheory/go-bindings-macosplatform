@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,33 +50,40 @@ func mTRChannelClusterChannelInfoStructAdopt(id objc.ID) *MTRChannelClusterChann
 
 // Description returns the object's -description text.
 func (mcccis *MTRChannelClusterChannelInfoStruct) Description() string {
+	defer runtime.KeepAlive(mcccis)
 	return rt.Description(objref.IDOf(mcccis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccis *MTRChannelClusterChannelInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccis *MTRChannelClusterChannelInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccis)
 	return rt.IsKind(objref.IDOf(mcccis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccis *MTRChannelClusterChannelInfoStruct) String() string {
+	defer runtime.KeepAlive(mcccis)
 	return rt.Description(objref.IDOf(mcccis))
 }
 
 // WithMajorNumber sets the major number.
 func (mcccis *MTRChannelClusterChannelInfoStruct) WithMajorNumber(majorNumber obj.Object) *MTRChannelClusterChannelInfoStruct {
+	defer runtime.KeepAlive(majorNumber)
 	objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("setMajorNumber:"), objref.IDOf(majorNumber))
 	return mcccis
 }
 
 // WithMinorNumber sets the minor number.
 func (mcccis *MTRChannelClusterChannelInfoStruct) WithMinorNumber(minorNumber obj.Object) *MTRChannelClusterChannelInfoStruct {
+	defer runtime.KeepAlive(minorNumber)
 	objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("setMinorNumber:"), objref.IDOf(minorNumber))
 	return mcccis
 }
@@ -104,24 +114,28 @@ func (mcccis *MTRChannelClusterChannelInfoStruct) WithIdentifier(identifier stri
 
 // WithType sets the type.
 func (mcccis *MTRChannelClusterChannelInfoStruct) WithType(type_ obj.Object) *MTRChannelClusterChannelInfoStruct {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mcccis
 }
 
 // MajorNumber returns the major number.
-func (mcccis *MTRChannelClusterChannelInfoStruct) MajorNumber() obj.Object {
+func (mcccis *MTRChannelClusterChannelInfoStruct) MajorNumber() *foundation.Number {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("majorNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinorNumber returns the minor number.
-func (mcccis *MTRChannelClusterChannelInfoStruct) MinorNumber() obj.Object {
+func (mcccis *MTRChannelClusterChannelInfoStruct) MinorNumber() *foundation.Number {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("minorNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mcccis *MTRChannelClusterChannelInfoStruct) Name() string {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -131,6 +145,7 @@ func (mcccis *MTRChannelClusterChannelInfoStruct) Name() string {
 
 // CallSign returns the call sign.
 func (mcccis *MTRChannelClusterChannelInfoStruct) CallSign() string {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("callSign"))
 	if _r == 0 {
 		return ""
@@ -140,6 +155,7 @@ func (mcccis *MTRChannelClusterChannelInfoStruct) CallSign() string {
 
 // AffiliateCallSign returns the affiliate call sign.
 func (mcccis *MTRChannelClusterChannelInfoStruct) AffiliateCallSign() string {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("affiliateCallSign"))
 	if _r == 0 {
 		return ""
@@ -149,6 +165,7 @@ func (mcccis *MTRChannelClusterChannelInfoStruct) AffiliateCallSign() string {
 
 // Identifier returns the identifier.
 func (mcccis *MTRChannelClusterChannelInfoStruct) Identifier() string {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -157,9 +174,10 @@ func (mcccis *MTRChannelClusterChannelInfoStruct) Identifier() string {
 }
 
 // Type returns the type.
-func (mcccis *MTRChannelClusterChannelInfoStruct) Type() obj.Object {
+func (mcccis *MTRChannelClusterChannelInfoStruct) Type() *foundation.Number {
+	defer runtime.KeepAlive(mcccis)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccis), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRChannelClusterChannelInfoStruct marks MTRChannelClusterChannelInfoStruct — and, by embedding promotion, its

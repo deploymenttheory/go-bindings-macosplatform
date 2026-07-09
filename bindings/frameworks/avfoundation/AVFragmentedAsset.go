@@ -33,8 +33,8 @@ func AVFragmentedAssetFromID(id objc.ID) *AVFragmentedAsset {
 }
 
 // Creates a fragmented asset for the media at the specified URL.
-func AVFragmentedAssetFragmentedAssetWithURLOptions(uRL *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVFragmentedAsset {
-	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAsset), _aVFragmentedAssetSelFragmentedAssetWithURLOptions, uRL.Ptr(), options.Ptr())
+func AVFragmentedAssetFragmentedAssetWithURLOptions(url *foundation.NSURL, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AVFragmentedAsset {
+	_ret := objc.Send[objc.ID](objc.ID(_clsAVFragmentedAsset), _aVFragmentedAssetSelFragmentedAssetWithURLOptions, url.Ptr(), options.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

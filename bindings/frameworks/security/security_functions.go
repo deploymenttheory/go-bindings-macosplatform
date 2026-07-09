@@ -1319,488 +1319,488 @@ func CMSEncoderUpdateContent(cmsEncoder unsafe.Pointer, content unsafe.Pointer, 
 	return _fnCMSEncoderUpdateContent(cmsEncoder, content, contentLen)
 }
 
-func CSSM_AC_AuthCompute(aCHandle int, baseAuthorizations *CssmTuplegroup, credentials *CssmTuplegroup, numberOfRequestors uint32, requestors *CssmList, requestedAuthorizationPeriod *CssmList, requestedAuthorization *CssmList, authorizationResult *CssmTuplegroup) int32 {
-	return _fnCSSM_AC_AuthCompute(aCHandle, baseAuthorizations, credentials, numberOfRequestors, requestors, requestedAuthorizationPeriod, requestedAuthorization, authorizationResult)
+func CSSM_AC_AuthCompute(acHandle int, baseAuthorizations *CssmTuplegroup, credentials *CssmTuplegroup, numberOfRequestors uint32, requestors *CssmList, requestedAuthorizationPeriod *CssmList, requestedAuthorization *CssmList, authorizationResult *CssmTuplegroup) int32 {
+	return _fnCSSM_AC_AuthCompute(acHandle, baseAuthorizations, credentials, numberOfRequestors, requestors, requestedAuthorizationPeriod, requestedAuthorization, authorizationResult)
 }
 
-func CSSM_AC_PassThrough(aCHandle int, tPHandle int, cLHandle int, cCHandle uint64, dBList *CssmDlDbList, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return _fnCSSM_AC_PassThrough(aCHandle, tPHandle, cLHandle, cCHandle, dBList, passThroughId, inputParams, outputParams)
+func CSSM_AC_PassThrough(acHandle int, tpHandle int, clHandle int, ccHandle uint64, dbList *CssmDlDbList, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	return _fnCSSM_AC_PassThrough(acHandle, tpHandle, clHandle, ccHandle, dbList, passThroughId, inputParams, outputParams)
 }
 
-func CSSM_CL_CertAbortCache(cLHandle int, certHandle int) int32 {
-	return _fnCSSM_CL_CertAbortCache(cLHandle, certHandle)
+func CSSM_CL_CertAbortCache(clHandle int, certHandle int) int32 {
+	return _fnCSSM_CL_CertAbortCache(clHandle, certHandle)
 }
 
-func CSSM_CL_CertAbortQuery(cLHandle int, resultsHandle int) int32 {
-	return _fnCSSM_CL_CertAbortQuery(cLHandle, resultsHandle)
+func CSSM_CL_CertAbortQuery(clHandle int, resultsHandle int) int32 {
+	return _fnCSSM_CL_CertAbortQuery(clHandle, resultsHandle)
 }
 
-func CSSM_CL_CertCache(cLHandle int, cert *CssmData, certHandle *int) int32 {
-	return _fnCSSM_CL_CertCache(cLHandle, cert, certHandle)
+func CSSM_CL_CertCache(clHandle int, cert *CssmData, certHandle *int) int32 {
+	return _fnCSSM_CL_CertCache(clHandle, cert, certHandle)
 }
 
-func CSSM_CL_CertCreateTemplate(cLHandle int, numberOfFields uint32, certFields *CssmField, certTemplate *CssmData) int32 {
-	return _fnCSSM_CL_CertCreateTemplate(cLHandle, numberOfFields, certFields, certTemplate)
+func CSSM_CL_CertCreateTemplate(clHandle int, numberOfFields uint32, certFields *CssmField, certTemplate *CssmData) int32 {
+	return _fnCSSM_CL_CertCreateTemplate(clHandle, numberOfFields, certFields, certTemplate)
 }
 
-func CSSM_CL_CertDescribeFormat(cLHandle int, numberOfFields *uint32, oidList **CssmData) int32 {
-	return _fnCSSM_CL_CertDescribeFormat(cLHandle, numberOfFields, oidList)
+func CSSM_CL_CertDescribeFormat(clHandle int, numberOfFields *uint32, oidList **CssmData) int32 {
+	return _fnCSSM_CL_CertDescribeFormat(clHandle, numberOfFields, oidList)
 }
 
-func CSSM_CL_CertGetAllFields(cLHandle int, cert *CssmData, numberOfFields *uint32, certFields **CssmField) int32 {
-	return _fnCSSM_CL_CertGetAllFields(cLHandle, cert, numberOfFields, certFields)
+func CSSM_CL_CertGetAllFields(clHandle int, cert *CssmData, numberOfFields *uint32, certFields **CssmField) int32 {
+	return _fnCSSM_CL_CertGetAllFields(clHandle, cert, numberOfFields, certFields)
 }
 
-func CSSM_CL_CertGetAllTemplateFields(cLHandle int, certTemplate *CssmData, numberOfFields *uint32, certFields **CssmField) int32 {
-	return _fnCSSM_CL_CertGetAllTemplateFields(cLHandle, certTemplate, numberOfFields, certFields)
+func CSSM_CL_CertGetAllTemplateFields(clHandle int, certTemplate *CssmData, numberOfFields *uint32, certFields **CssmField) int32 {
+	return _fnCSSM_CL_CertGetAllTemplateFields(clHandle, certTemplate, numberOfFields, certFields)
 }
 
-func CSSM_CL_CertGetFirstCachedFieldValue(cLHandle int, certHandle int, certField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
-	return _fnCSSM_CL_CertGetFirstCachedFieldValue(cLHandle, certHandle, certField, resultsHandle, numberOfMatchedFields, value)
+func CSSM_CL_CertGetFirstCachedFieldValue(clHandle int, certHandle int, certField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
+	return _fnCSSM_CL_CertGetFirstCachedFieldValue(clHandle, certHandle, certField, resultsHandle, numberOfMatchedFields, value)
 }
 
-func CSSM_CL_CertGetFirstFieldValue(cLHandle int, cert *CssmData, certField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
-	return _fnCSSM_CL_CertGetFirstFieldValue(cLHandle, cert, certField, resultsHandle, numberOfMatchedFields, value)
+func CSSM_CL_CertGetFirstFieldValue(clHandle int, cert *CssmData, certField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
+	return _fnCSSM_CL_CertGetFirstFieldValue(clHandle, cert, certField, resultsHandle, numberOfMatchedFields, value)
 }
 
-func CSSM_CL_CertGetKeyInfo(cLHandle int, cert *CssmData, key **CssmKey) int32 {
-	return _fnCSSM_CL_CertGetKeyInfo(cLHandle, cert, key)
+func CSSM_CL_CertGetKeyInfo(clHandle int, cert *CssmData, key **CssmKey) int32 {
+	return _fnCSSM_CL_CertGetKeyInfo(clHandle, cert, key)
 }
 
-func CSSM_CL_CertGetNextCachedFieldValue(cLHandle int, resultsHandle int, value **CssmData) int32 {
-	return _fnCSSM_CL_CertGetNextCachedFieldValue(cLHandle, resultsHandle, value)
+func CSSM_CL_CertGetNextCachedFieldValue(clHandle int, resultsHandle int, value **CssmData) int32 {
+	return _fnCSSM_CL_CertGetNextCachedFieldValue(clHandle, resultsHandle, value)
 }
 
-func CSSM_CL_CertGetNextFieldValue(cLHandle int, resultsHandle int, value **CssmData) int32 {
-	return _fnCSSM_CL_CertGetNextFieldValue(cLHandle, resultsHandle, value)
+func CSSM_CL_CertGetNextFieldValue(clHandle int, resultsHandle int, value **CssmData) int32 {
+	return _fnCSSM_CL_CertGetNextFieldValue(clHandle, resultsHandle, value)
 }
 
-func CSSM_CL_CertGroupFromVerifiedBundle(cLHandle int, cCHandle uint64, certBundle *CssmCertBundle, signerCert *CssmData, certGroup **CssmCertgroup) int32 {
-	return _fnCSSM_CL_CertGroupFromVerifiedBundle(cLHandle, cCHandle, certBundle, signerCert, certGroup)
+func CSSM_CL_CertGroupFromVerifiedBundle(clHandle int, ccHandle uint64, certBundle *CssmCertBundle, signerCert *CssmData, certGroup **CssmCertgroup) int32 {
+	return _fnCSSM_CL_CertGroupFromVerifiedBundle(clHandle, ccHandle, certBundle, signerCert, certGroup)
 }
 
-func CSSM_CL_CertGroupToSignedBundle(cLHandle int, cCHandle uint64, certGroupToBundle *CssmCertgroup, bundleInfo *CssmCertBundleHeader, signedBundle *CssmData) int32 {
-	return _fnCSSM_CL_CertGroupToSignedBundle(cLHandle, cCHandle, certGroupToBundle, bundleInfo, signedBundle)
+func CSSM_CL_CertGroupToSignedBundle(clHandle int, ccHandle uint64, certGroupToBundle *CssmCertgroup, bundleInfo *CssmCertBundleHeader, signedBundle *CssmData) int32 {
+	return _fnCSSM_CL_CertGroupToSignedBundle(clHandle, ccHandle, certGroupToBundle, bundleInfo, signedBundle)
 }
 
-func CSSM_CL_CertSign(cLHandle int, cCHandle uint64, certTemplate *CssmData, signScope *CssmField, scopeSize uint32, signedCert *CssmData) int32 {
-	return _fnCSSM_CL_CertSign(cLHandle, cCHandle, certTemplate, signScope, scopeSize, signedCert)
+func CSSM_CL_CertSign(clHandle int, ccHandle uint64, certTemplate *CssmData, signScope *CssmField, scopeSize uint32, signedCert *CssmData) int32 {
+	return _fnCSSM_CL_CertSign(clHandle, ccHandle, certTemplate, signScope, scopeSize, signedCert)
 }
 
-func CSSM_CL_CertVerify(cLHandle int, cCHandle uint64, certToBeVerified *CssmData, signerCert *CssmData, verifyScope *CssmField, scopeSize uint32) int32 {
-	return _fnCSSM_CL_CertVerify(cLHandle, cCHandle, certToBeVerified, signerCert, verifyScope, scopeSize)
+func CSSM_CL_CertVerify(clHandle int, ccHandle uint64, certToBeVerified *CssmData, signerCert *CssmData, verifyScope *CssmField, scopeSize uint32) int32 {
+	return _fnCSSM_CL_CertVerify(clHandle, ccHandle, certToBeVerified, signerCert, verifyScope, scopeSize)
 }
 
-func CSSM_CL_CertVerifyWithKey(cLHandle int, cCHandle uint64, certToBeVerified *CssmData) int32 {
-	return _fnCSSM_CL_CertVerifyWithKey(cLHandle, cCHandle, certToBeVerified)
+func CSSM_CL_CertVerifyWithKey(clHandle int, ccHandle uint64, certToBeVerified *CssmData) int32 {
+	return _fnCSSM_CL_CertVerifyWithKey(clHandle, ccHandle, certToBeVerified)
 }
 
-func CSSM_CL_CrlAbortCache(cLHandle int, crlHandle int) int32 {
-	return _fnCSSM_CL_CrlAbortCache(cLHandle, crlHandle)
+func CSSM_CL_CrlAbortCache(clHandle int, crlHandle int) int32 {
+	return _fnCSSM_CL_CrlAbortCache(clHandle, crlHandle)
 }
 
-func CSSM_CL_CrlAbortQuery(cLHandle int, resultsHandle int) int32 {
-	return _fnCSSM_CL_CrlAbortQuery(cLHandle, resultsHandle)
+func CSSM_CL_CrlAbortQuery(clHandle int, resultsHandle int) int32 {
+	return _fnCSSM_CL_CrlAbortQuery(clHandle, resultsHandle)
 }
 
-func CSSM_CL_CrlAddCert(cLHandle int, cCHandle uint64, cert *CssmData, numberOfFields uint32, crlEntryFields *CssmField, oldCrl *CssmData, newCrl *CssmData) int32 {
-	return _fnCSSM_CL_CrlAddCert(cLHandle, cCHandle, cert, numberOfFields, crlEntryFields, oldCrl, newCrl)
+func CSSM_CL_CrlAddCert(clHandle int, ccHandle uint64, cert *CssmData, numberOfFields uint32, crlEntryFields *CssmField, oldCrl *CssmData, newCrl *CssmData) int32 {
+	return _fnCSSM_CL_CrlAddCert(clHandle, ccHandle, cert, numberOfFields, crlEntryFields, oldCrl, newCrl)
 }
 
-func CSSM_CL_CrlCache(cLHandle int, crl *CssmData, crlHandle *int) int32 {
-	return _fnCSSM_CL_CrlCache(cLHandle, crl, crlHandle)
+func CSSM_CL_CrlCache(clHandle int, crl *CssmData, crlHandle *int) int32 {
+	return _fnCSSM_CL_CrlCache(clHandle, crl, crlHandle)
 }
 
-func CSSM_CL_CrlCreateTemplate(cLHandle int, numberOfFields uint32, crlTemplate *CssmField, newCrl *CssmData) int32 {
-	return _fnCSSM_CL_CrlCreateTemplate(cLHandle, numberOfFields, crlTemplate, newCrl)
+func CSSM_CL_CrlCreateTemplate(clHandle int, numberOfFields uint32, crlTemplate *CssmField, newCrl *CssmData) int32 {
+	return _fnCSSM_CL_CrlCreateTemplate(clHandle, numberOfFields, crlTemplate, newCrl)
 }
 
-func CSSM_CL_CrlDescribeFormat(cLHandle int, numberOfFields *uint32, oidList **CssmData) int32 {
-	return _fnCSSM_CL_CrlDescribeFormat(cLHandle, numberOfFields, oidList)
+func CSSM_CL_CrlDescribeFormat(clHandle int, numberOfFields *uint32, oidList **CssmData) int32 {
+	return _fnCSSM_CL_CrlDescribeFormat(clHandle, numberOfFields, oidList)
 }
 
-func CSSM_CL_CrlGetAllCachedRecordFields(cLHandle int, crlHandle int, crlRecordIndex *CssmData, numberOfFields *uint32, crlFields **CssmField) int32 {
-	return _fnCSSM_CL_CrlGetAllCachedRecordFields(cLHandle, crlHandle, crlRecordIndex, numberOfFields, crlFields)
+func CSSM_CL_CrlGetAllCachedRecordFields(clHandle int, crlHandle int, crlRecordIndex *CssmData, numberOfFields *uint32, crlFields **CssmField) int32 {
+	return _fnCSSM_CL_CrlGetAllCachedRecordFields(clHandle, crlHandle, crlRecordIndex, numberOfFields, crlFields)
 }
 
-func CSSM_CL_CrlGetAllFields(cLHandle int, crl *CssmData, numberOfCrlFields *uint32, crlFields **CssmField) int32 {
-	return _fnCSSM_CL_CrlGetAllFields(cLHandle, crl, numberOfCrlFields, crlFields)
+func CSSM_CL_CrlGetAllFields(clHandle int, crl *CssmData, numberOfCrlFields *uint32, crlFields **CssmField) int32 {
+	return _fnCSSM_CL_CrlGetAllFields(clHandle, crl, numberOfCrlFields, crlFields)
 }
 
-func CSSM_CL_CrlGetFirstCachedFieldValue(cLHandle int, crlHandle int, crlRecordIndex *CssmData, crlField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
-	return _fnCSSM_CL_CrlGetFirstCachedFieldValue(cLHandle, crlHandle, crlRecordIndex, crlField, resultsHandle, numberOfMatchedFields, value)
+func CSSM_CL_CrlGetFirstCachedFieldValue(clHandle int, crlHandle int, crlRecordIndex *CssmData, crlField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
+	return _fnCSSM_CL_CrlGetFirstCachedFieldValue(clHandle, crlHandle, crlRecordIndex, crlField, resultsHandle, numberOfMatchedFields, value)
 }
 
-func CSSM_CL_CrlGetFirstFieldValue(cLHandle int, crl *CssmData, crlField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
-	return _fnCSSM_CL_CrlGetFirstFieldValue(cLHandle, crl, crlField, resultsHandle, numberOfMatchedFields, value)
+func CSSM_CL_CrlGetFirstFieldValue(clHandle int, crl *CssmData, crlField *CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **CssmData) int32 {
+	return _fnCSSM_CL_CrlGetFirstFieldValue(clHandle, crl, crlField, resultsHandle, numberOfMatchedFields, value)
 }
 
-func CSSM_CL_CrlGetNextCachedFieldValue(cLHandle int, resultsHandle int, value **CssmData) int32 {
-	return _fnCSSM_CL_CrlGetNextCachedFieldValue(cLHandle, resultsHandle, value)
+func CSSM_CL_CrlGetNextCachedFieldValue(clHandle int, resultsHandle int, value **CssmData) int32 {
+	return _fnCSSM_CL_CrlGetNextCachedFieldValue(clHandle, resultsHandle, value)
 }
 
-func CSSM_CL_CrlGetNextFieldValue(cLHandle int, resultsHandle int, value **CssmData) int32 {
-	return _fnCSSM_CL_CrlGetNextFieldValue(cLHandle, resultsHandle, value)
+func CSSM_CL_CrlGetNextFieldValue(clHandle int, resultsHandle int, value **CssmData) int32 {
+	return _fnCSSM_CL_CrlGetNextFieldValue(clHandle, resultsHandle, value)
 }
 
-func CSSM_CL_CrlRemoveCert(cLHandle int, cert *CssmData, oldCrl *CssmData, newCrl *CssmData) int32 {
-	return _fnCSSM_CL_CrlRemoveCert(cLHandle, cert, oldCrl, newCrl)
+func CSSM_CL_CrlRemoveCert(clHandle int, cert *CssmData, oldCrl *CssmData, newCrl *CssmData) int32 {
+	return _fnCSSM_CL_CrlRemoveCert(clHandle, cert, oldCrl, newCrl)
 }
 
-func CSSM_CL_CrlSetFields(cLHandle int, numberOfFields uint32, crlTemplate *CssmField, oldCrl *CssmData, modifiedCrl *CssmData) int32 {
-	return _fnCSSM_CL_CrlSetFields(cLHandle, numberOfFields, crlTemplate, oldCrl, modifiedCrl)
+func CSSM_CL_CrlSetFields(clHandle int, numberOfFields uint32, crlTemplate *CssmField, oldCrl *CssmData, modifiedCrl *CssmData) int32 {
+	return _fnCSSM_CL_CrlSetFields(clHandle, numberOfFields, crlTemplate, oldCrl, modifiedCrl)
 }
 
-func CSSM_CL_CrlSign(cLHandle int, cCHandle uint64, unsignedCrl *CssmData, signScope *CssmField, scopeSize uint32, signedCrl *CssmData) int32 {
-	return _fnCSSM_CL_CrlSign(cLHandle, cCHandle, unsignedCrl, signScope, scopeSize, signedCrl)
+func CSSM_CL_CrlSign(clHandle int, ccHandle uint64, unsignedCrl *CssmData, signScope *CssmField, scopeSize uint32, signedCrl *CssmData) int32 {
+	return _fnCSSM_CL_CrlSign(clHandle, ccHandle, unsignedCrl, signScope, scopeSize, signedCrl)
 }
 
-func CSSM_CL_CrlVerify(cLHandle int, cCHandle uint64, crlToBeVerified *CssmData, signerCert *CssmData, verifyScope *CssmField, scopeSize uint32) int32 {
-	return _fnCSSM_CL_CrlVerify(cLHandle, cCHandle, crlToBeVerified, signerCert, verifyScope, scopeSize)
+func CSSM_CL_CrlVerify(clHandle int, ccHandle uint64, crlToBeVerified *CssmData, signerCert *CssmData, verifyScope *CssmField, scopeSize uint32) int32 {
+	return _fnCSSM_CL_CrlVerify(clHandle, ccHandle, crlToBeVerified, signerCert, verifyScope, scopeSize)
 }
 
-func CSSM_CL_CrlVerifyWithKey(cLHandle int, cCHandle uint64, crlToBeVerified *CssmData) int32 {
-	return _fnCSSM_CL_CrlVerifyWithKey(cLHandle, cCHandle, crlToBeVerified)
+func CSSM_CL_CrlVerifyWithKey(clHandle int, ccHandle uint64, crlToBeVerified *CssmData) int32 {
+	return _fnCSSM_CL_CrlVerifyWithKey(clHandle, ccHandle, crlToBeVerified)
 }
 
-func CSSM_CL_FreeFieldValue(cLHandle int, certOrCrlOid *CssmData, value *CssmData) int32 {
-	return _fnCSSM_CL_FreeFieldValue(cLHandle, certOrCrlOid, value)
+func CSSM_CL_FreeFieldValue(clHandle int, certOrCrlOid *CssmData, value *CssmData) int32 {
+	return _fnCSSM_CL_FreeFieldValue(clHandle, certOrCrlOid, value)
 }
 
-func CSSM_CL_FreeFields(cLHandle int, numberOfFields uint32, fields **CssmField) int32 {
-	return _fnCSSM_CL_FreeFields(cLHandle, numberOfFields, fields)
+func CSSM_CL_FreeFields(clHandle int, numberOfFields uint32, fields **CssmField) int32 {
+	return _fnCSSM_CL_FreeFields(clHandle, numberOfFields, fields)
 }
 
-func CSSM_CL_IsCertInCachedCrl(cLHandle int, cert *CssmData, crlHandle int, certFound *int32, crlRecordIndex *CssmData) int32 {
-	return _fnCSSM_CL_IsCertInCachedCrl(cLHandle, cert, crlHandle, certFound, crlRecordIndex)
+func CSSM_CL_IsCertInCachedCrl(clHandle int, cert *CssmData, crlHandle int, certFound *int32, crlRecordIndex *CssmData) int32 {
+	return _fnCSSM_CL_IsCertInCachedCrl(clHandle, cert, crlHandle, certFound, crlRecordIndex)
 }
 
-func CSSM_CL_IsCertInCrl(cLHandle int, cert *CssmData, crl *CssmData, certFound *int32) int32 {
-	return _fnCSSM_CL_IsCertInCrl(cLHandle, cert, crl, certFound)
+func CSSM_CL_IsCertInCrl(clHandle int, cert *CssmData, crl *CssmData, certFound *int32) int32 {
+	return _fnCSSM_CL_IsCertInCrl(clHandle, cert, crl, certFound)
 }
 
-func CSSM_CL_PassThrough(cLHandle int, cCHandle uint64, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return _fnCSSM_CL_PassThrough(cLHandle, cCHandle, passThroughId, inputParams, outputParams)
+func CSSM_CL_PassThrough(clHandle int, ccHandle uint64, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	return _fnCSSM_CL_PassThrough(clHandle, ccHandle, passThroughId, inputParams, outputParams)
 }
 
-func CSSM_CSP_ChangeLoginAcl(cSPHandle int, accessCred *CssmAccessCredentials, aclEdit *CssmAclEdit) int32 {
-	return _fnCSSM_CSP_ChangeLoginAcl(cSPHandle, accessCred, aclEdit)
+func CSSM_CSP_ChangeLoginAcl(cspHandle int, accessCred *CssmAccessCredentials, aclEdit *CssmAclEdit) int32 {
+	return _fnCSSM_CSP_ChangeLoginAcl(cspHandle, accessCred, aclEdit)
 }
 
-func CSSM_CSP_ChangeLoginOwner(cSPHandle int, accessCred *CssmAccessCredentials, newOwner *CssmAclOwnerPrototype) int32 {
-	return _fnCSSM_CSP_ChangeLoginOwner(cSPHandle, accessCred, newOwner)
+func CSSM_CSP_ChangeLoginOwner(cspHandle int, accessCred *CssmAccessCredentials, newOwner *CssmAclOwnerPrototype) int32 {
+	return _fnCSSM_CSP_ChangeLoginOwner(cspHandle, accessCred, newOwner)
 }
 
-func CSSM_CSP_CreateAsymmetricContext(cSPHandle int, algorithmID uint32, accessCred *CssmAccessCredentials, key *CssmKey, padding uint32, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateAsymmetricContext(cSPHandle, algorithmID, accessCred, key, padding, newContextHandle)
+func CSSM_CSP_CreateAsymmetricContext(cspHandle int, algorithmID uint32, accessCred *CssmAccessCredentials, key *CssmKey, padding uint32, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateAsymmetricContext(cspHandle, algorithmID, accessCred, key, padding, newContextHandle)
 }
 
-func CSSM_CSP_CreateDeriveKeyContext(cSPHandle int, algorithmID uint32, deriveKeyType uint32, deriveKeyLengthInBits uint32, accessCred *CssmAccessCredentials, baseKey *CssmKey, iterationCount uint32, salt *CssmData, seed *CssmCryptoData, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateDeriveKeyContext(cSPHandle, algorithmID, deriveKeyType, deriveKeyLengthInBits, accessCred, baseKey, iterationCount, salt, seed, newContextHandle)
+func CSSM_CSP_CreateDeriveKeyContext(cspHandle int, algorithmID uint32, deriveKeyType uint32, deriveKeyLengthInBits uint32, accessCred *CssmAccessCredentials, baseKey *CssmKey, iterationCount uint32, salt *CssmData, seed *CssmCryptoData, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateDeriveKeyContext(cspHandle, algorithmID, deriveKeyType, deriveKeyLengthInBits, accessCred, baseKey, iterationCount, salt, seed, newContextHandle)
 }
 
-func CSSM_CSP_CreateDigestContext(cSPHandle int, algorithmID uint32, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateDigestContext(cSPHandle, algorithmID, newContextHandle)
+func CSSM_CSP_CreateDigestContext(cspHandle int, algorithmID uint32, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateDigestContext(cspHandle, algorithmID, newContextHandle)
 }
 
-func CSSM_CSP_CreateKeyGenContext(cSPHandle int, algorithmID uint32, keySizeInBits uint32, seed *CssmCryptoData, salt *CssmData, startDate *CssmDate, endDate *CssmDate, params *CssmData, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateKeyGenContext(cSPHandle, algorithmID, keySizeInBits, seed, salt, startDate, endDate, params, newContextHandle)
+func CSSM_CSP_CreateKeyGenContext(cspHandle int, algorithmID uint32, keySizeInBits uint32, seed *CssmCryptoData, salt *CssmData, startDate *CssmDate, endDate *CssmDate, params *CssmData, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateKeyGenContext(cspHandle, algorithmID, keySizeInBits, seed, salt, startDate, endDate, params, newContextHandle)
 }
 
-func CSSM_CSP_CreateMacContext(cSPHandle int, algorithmID uint32, key *CssmKey, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateMacContext(cSPHandle, algorithmID, key, newContextHandle)
+func CSSM_CSP_CreateMacContext(cspHandle int, algorithmID uint32, key *CssmKey, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateMacContext(cspHandle, algorithmID, key, newContextHandle)
 }
 
-func CSSM_CSP_CreatePassThroughContext(cSPHandle int, key *CssmKey, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreatePassThroughContext(cSPHandle, key, newContextHandle)
+func CSSM_CSP_CreatePassThroughContext(cspHandle int, key *CssmKey, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreatePassThroughContext(cspHandle, key, newContextHandle)
 }
 
-func CSSM_CSP_CreateRandomGenContext(cSPHandle int, algorithmID uint32, seed *CssmCryptoData, length uint, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateRandomGenContext(cSPHandle, algorithmID, seed, length, newContextHandle)
+func CSSM_CSP_CreateRandomGenContext(cspHandle int, algorithmID uint32, seed *CssmCryptoData, length uint, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateRandomGenContext(cspHandle, algorithmID, seed, length, newContextHandle)
 }
 
-func CSSM_CSP_CreateSignatureContext(cSPHandle int, algorithmID uint32, accessCred *CssmAccessCredentials, key *CssmKey, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateSignatureContext(cSPHandle, algorithmID, accessCred, key, newContextHandle)
+func CSSM_CSP_CreateSignatureContext(cspHandle int, algorithmID uint32, accessCred *CssmAccessCredentials, key *CssmKey, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateSignatureContext(cspHandle, algorithmID, accessCred, key, newContextHandle)
 }
 
-func CSSM_CSP_CreateSymmetricContext(cSPHandle int, algorithmID uint32, mode uint32, accessCred *CssmAccessCredentials, key *CssmKey, initVector *CssmData, padding uint32, reserved unsafe.Pointer, newContextHandle *uint64) int32 {
-	return _fnCSSM_CSP_CreateSymmetricContext(cSPHandle, algorithmID, mode, accessCred, key, initVector, padding, reserved, newContextHandle)
+func CSSM_CSP_CreateSymmetricContext(cspHandle int, algorithmID uint32, mode uint32, accessCred *CssmAccessCredentials, key *CssmKey, initVector *CssmData, padding uint32, reserved unsafe.Pointer, newContextHandle *uint64) int32 {
+	return _fnCSSM_CSP_CreateSymmetricContext(cspHandle, algorithmID, mode, accessCred, key, initVector, padding, reserved, newContextHandle)
 }
 
-func CSSM_CSP_GetLoginAcl(cSPHandle int, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **CssmAclEntryInfo) int32 {
-	return _fnCSSM_CSP_GetLoginAcl(cSPHandle, selectionTag, numberOfAclInfos, aclInfos)
+func CSSM_CSP_GetLoginAcl(cspHandle int, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **CssmAclEntryInfo) int32 {
+	return _fnCSSM_CSP_GetLoginAcl(cspHandle, selectionTag, numberOfAclInfos, aclInfos)
 }
 
-func CSSM_CSP_GetLoginOwner(cSPHandle int, owner *CssmAclOwnerPrototype) int32 {
-	return _fnCSSM_CSP_GetLoginOwner(cSPHandle, owner)
+func CSSM_CSP_GetLoginOwner(cspHandle int, owner *CssmAclOwnerPrototype) int32 {
+	return _fnCSSM_CSP_GetLoginOwner(cspHandle, owner)
 }
 
-func CSSM_CSP_GetOperationalStatistics(cSPHandle int, statistics *CssmCspOperationalStatistics) int32 {
-	return _fnCSSM_CSP_GetOperationalStatistics(cSPHandle, statistics)
+func CSSM_CSP_GetOperationalStatistics(cspHandle int, statistics *CssmCspOperationalStatistics) int32 {
+	return _fnCSSM_CSP_GetOperationalStatistics(cspHandle, statistics)
 }
 
-func CSSM_CSP_Login(cSPHandle int, accessCred *CssmAccessCredentials, loginName *CssmData, reserved unsafe.Pointer) int32 {
-	return _fnCSSM_CSP_Login(cSPHandle, accessCred, loginName, reserved)
+func CSSM_CSP_Login(cspHandle int, accessCred *CssmAccessCredentials, loginName *CssmData, reserved unsafe.Pointer) int32 {
+	return _fnCSSM_CSP_Login(cspHandle, accessCred, loginName, reserved)
 }
 
-func CSSM_CSP_Logout(cSPHandle int) int32 {
-	return _fnCSSM_CSP_Logout(cSPHandle)
+func CSSM_CSP_Logout(cspHandle int) int32 {
+	return _fnCSSM_CSP_Logout(cspHandle)
 }
 
-func CSSM_CSP_ObtainPrivateKeyFromPublicKey(cSPHandle int, publicKey *CssmKey, privateKey *CssmKey) int32 {
-	return _fnCSSM_CSP_ObtainPrivateKeyFromPublicKey(cSPHandle, publicKey, privateKey)
+func CSSM_CSP_ObtainPrivateKeyFromPublicKey(cspHandle int, publicKey *CssmKey, privateKey *CssmKey) int32 {
+	return _fnCSSM_CSP_ObtainPrivateKeyFromPublicKey(cspHandle, publicKey, privateKey)
 }
 
-func CSSM_CSP_PassThrough(cCHandle uint64, passThroughId uint32, inData unsafe.Pointer, outData unsafe.Pointer) int32 {
-	return _fnCSSM_CSP_PassThrough(cCHandle, passThroughId, inData, outData)
+func CSSM_CSP_PassThrough(ccHandle uint64, passThroughId uint32, inData unsafe.Pointer, outData unsafe.Pointer) int32 {
+	return _fnCSSM_CSP_PassThrough(ccHandle, passThroughId, inData, outData)
 }
 
-func CSSM_ChangeKeyAcl(cSPHandle int, accessCred *CssmAccessCredentials, aclEdit *CssmAclEdit, key *CssmKey) int32 {
-	return _fnCSSM_ChangeKeyAcl(cSPHandle, accessCred, aclEdit, key)
+func CSSM_ChangeKeyAcl(cspHandle int, accessCred *CssmAccessCredentials, aclEdit *CssmAclEdit, key *CssmKey) int32 {
+	return _fnCSSM_ChangeKeyAcl(cspHandle, accessCred, aclEdit, key)
 }
 
-func CSSM_ChangeKeyOwner(cSPHandle int, accessCred *CssmAccessCredentials, key *CssmKey, newOwner *CssmAclOwnerPrototype) int32 {
-	return _fnCSSM_ChangeKeyOwner(cSPHandle, accessCred, key, newOwner)
+func CSSM_ChangeKeyOwner(cspHandle int, accessCred *CssmAccessCredentials, key *CssmKey, newOwner *CssmAclOwnerPrototype) int32 {
+	return _fnCSSM_ChangeKeyOwner(cspHandle, accessCred, key, newOwner)
 }
 
-func CSSM_DL_Authenticate(dLDBHandle CssmDlDbHandle, accessRequest uint32, accessCred *CssmAccessCredentials) int32 {
-	return _fnCSSM_DL_Authenticate(dLDBHandle, accessRequest, accessCred)
+func CSSM_DL_Authenticate(dldbHandle CssmDlDbHandle, accessRequest uint32, accessCred *CssmAccessCredentials) int32 {
+	return _fnCSSM_DL_Authenticate(dldbHandle, accessRequest, accessCred)
 }
 
-func CSSM_DL_ChangeDbAcl(dLDBHandle CssmDlDbHandle, accessCred *CssmAccessCredentials, aclEdit *CssmAclEdit) int32 {
-	return _fnCSSM_DL_ChangeDbAcl(dLDBHandle, accessCred, aclEdit)
+func CSSM_DL_ChangeDbAcl(dldbHandle CssmDlDbHandle, accessCred *CssmAccessCredentials, aclEdit *CssmAclEdit) int32 {
+	return _fnCSSM_DL_ChangeDbAcl(dldbHandle, accessCred, aclEdit)
 }
 
-func CSSM_DL_ChangeDbOwner(dLDBHandle CssmDlDbHandle, accessCred *CssmAccessCredentials, newOwner *CssmAclOwnerPrototype) int32 {
-	return _fnCSSM_DL_ChangeDbOwner(dLDBHandle, accessCred, newOwner)
+func CSSM_DL_ChangeDbOwner(dldbHandle CssmDlDbHandle, accessCred *CssmAccessCredentials, newOwner *CssmAclOwnerPrototype) int32 {
+	return _fnCSSM_DL_ChangeDbOwner(dldbHandle, accessCred, newOwner)
 }
 
-func CSSM_DL_CreateRelation(dLDBHandle CssmDlDbHandle, relationID uint32, relationName string, numberOfAttributes uint32, pAttributeInfo *CssmDbSchemaAttributeInfo, numberOfIndexes uint32, pIndexInfo *CssmDbSchemaIndexInfo) int32 {
-	return _fnCSSM_DL_CreateRelation(dLDBHandle, relationID, relationName, numberOfAttributes, pAttributeInfo, numberOfIndexes, pIndexInfo)
+func CSSM_DL_CreateRelation(dldbHandle CssmDlDbHandle, relationID uint32, relationName string, numberOfAttributes uint32, pAttributeInfo *CssmDbSchemaAttributeInfo, numberOfIndexes uint32, pIndexInfo *CssmDbSchemaIndexInfo) int32 {
+	return _fnCSSM_DL_CreateRelation(dldbHandle, relationID, relationName, numberOfAttributes, pAttributeInfo, numberOfIndexes, pIndexInfo)
 }
 
-func CSSM_DL_DataAbortQuery(dLDBHandle CssmDlDbHandle, resultsHandle int) int32 {
-	return _fnCSSM_DL_DataAbortQuery(dLDBHandle, resultsHandle)
+func CSSM_DL_DataAbortQuery(dldbHandle CssmDlDbHandle, resultsHandle int) int32 {
+	return _fnCSSM_DL_DataAbortQuery(dldbHandle, resultsHandle)
 }
 
-func CSSM_DL_DataDelete(dLDBHandle CssmDlDbHandle, uniqueRecordIdentifier *CssmDbUniqueRecord) int32 {
-	return _fnCSSM_DL_DataDelete(dLDBHandle, uniqueRecordIdentifier)
+func CSSM_DL_DataDelete(dldbHandle CssmDlDbHandle, uniqueRecordIdentifier *CssmDbUniqueRecord) int32 {
+	return _fnCSSM_DL_DataDelete(dldbHandle, uniqueRecordIdentifier)
 }
 
-func CSSM_DL_DataGetFirst(dLDBHandle CssmDlDbHandle, query *CssmQuery, resultsHandle *int, attributes *CssmDbRecordAttributeData, data *CssmData, uniqueId **CssmDbUniqueRecord) int32 {
-	return _fnCSSM_DL_DataGetFirst(dLDBHandle, query, resultsHandle, attributes, data, uniqueId)
+func CSSM_DL_DataGetFirst(dldbHandle CssmDlDbHandle, query *CssmQuery, resultsHandle *int, attributes *CssmDbRecordAttributeData, data *CssmData, uniqueId **CssmDbUniqueRecord) int32 {
+	return _fnCSSM_DL_DataGetFirst(dldbHandle, query, resultsHandle, attributes, data, uniqueId)
 }
 
-func CSSM_DL_DataGetFromUniqueRecordId(dLDBHandle CssmDlDbHandle, uniqueRecord *CssmDbUniqueRecord, attributes *CssmDbRecordAttributeData, data *CssmData) int32 {
-	return _fnCSSM_DL_DataGetFromUniqueRecordId(dLDBHandle, uniqueRecord, attributes, data)
+func CSSM_DL_DataGetFromUniqueRecordId(dldbHandle CssmDlDbHandle, uniqueRecord *CssmDbUniqueRecord, attributes *CssmDbRecordAttributeData, data *CssmData) int32 {
+	return _fnCSSM_DL_DataGetFromUniqueRecordId(dldbHandle, uniqueRecord, attributes, data)
 }
 
-func CSSM_DL_DataGetNext(dLDBHandle CssmDlDbHandle, resultsHandle int, attributes *CssmDbRecordAttributeData, data *CssmData, uniqueId **CssmDbUniqueRecord) int32 {
-	return _fnCSSM_DL_DataGetNext(dLDBHandle, resultsHandle, attributes, data, uniqueId)
+func CSSM_DL_DataGetNext(dldbHandle CssmDlDbHandle, resultsHandle int, attributes *CssmDbRecordAttributeData, data *CssmData, uniqueId **CssmDbUniqueRecord) int32 {
+	return _fnCSSM_DL_DataGetNext(dldbHandle, resultsHandle, attributes, data, uniqueId)
 }
 
-func CSSM_DL_DataInsert(dLDBHandle CssmDlDbHandle, recordType uint32, attributes *CssmDbRecordAttributeData, data *CssmData, uniqueId **CssmDbUniqueRecord) int32 {
-	return _fnCSSM_DL_DataInsert(dLDBHandle, recordType, attributes, data, uniqueId)
+func CSSM_DL_DataInsert(dldbHandle CssmDlDbHandle, recordType uint32, attributes *CssmDbRecordAttributeData, data *CssmData, uniqueId **CssmDbUniqueRecord) int32 {
+	return _fnCSSM_DL_DataInsert(dldbHandle, recordType, attributes, data, uniqueId)
 }
 
-func CSSM_DL_DataModify(dLDBHandle CssmDlDbHandle, recordType uint32, uniqueRecordIdentifier *CssmDbUniqueRecord, attributesToBeModified *CssmDbRecordAttributeData, dataToBeModified *CssmData, modifyMode uint32) int32 {
-	return _fnCSSM_DL_DataModify(dLDBHandle, recordType, uniqueRecordIdentifier, attributesToBeModified, dataToBeModified, modifyMode)
+func CSSM_DL_DataModify(dldbHandle CssmDlDbHandle, recordType uint32, uniqueRecordIdentifier *CssmDbUniqueRecord, attributesToBeModified *CssmDbRecordAttributeData, dataToBeModified *CssmData, modifyMode uint32) int32 {
+	return _fnCSSM_DL_DataModify(dldbHandle, recordType, uniqueRecordIdentifier, attributesToBeModified, dataToBeModified, modifyMode)
 }
 
-func CSSM_DL_DbClose(dLDBHandle CssmDlDbHandle) int32 {
-	return _fnCSSM_DL_DbClose(dLDBHandle)
+func CSSM_DL_DbClose(dldbHandle CssmDlDbHandle) int32 {
+	return _fnCSSM_DL_DbClose(dldbHandle)
 }
 
-func CSSM_DL_DbCreate(dLHandle int, dbName string, dbLocation *CssmNetAddress, dBInfo *CssmDbinfo, accessRequest uint32, credAndAclEntry *CssmResourceControlContext, openParameters unsafe.Pointer, dbHandle *int) int32 {
-	return _fnCSSM_DL_DbCreate(dLHandle, dbName, dbLocation, dBInfo, accessRequest, credAndAclEntry, openParameters, dbHandle)
+func CSSM_DL_DbCreate(dlHandle int, dbName string, dbLocation *CssmNetAddress, dbInfo *CssmDbinfo, accessRequest uint32, credAndAclEntry *CssmResourceControlContext, openParameters unsafe.Pointer, dbHandle *int) int32 {
+	return _fnCSSM_DL_DbCreate(dlHandle, dbName, dbLocation, dbInfo, accessRequest, credAndAclEntry, openParameters, dbHandle)
 }
 
-func CSSM_DL_DbDelete(dLHandle int, dbName string, dbLocation *CssmNetAddress, accessCred *CssmAccessCredentials) int32 {
-	return _fnCSSM_DL_DbDelete(dLHandle, dbName, dbLocation, accessCred)
+func CSSM_DL_DbDelete(dlHandle int, dbName string, dbLocation *CssmNetAddress, accessCred *CssmAccessCredentials) int32 {
+	return _fnCSSM_DL_DbDelete(dlHandle, dbName, dbLocation, accessCred)
 }
 
-func CSSM_DL_DbOpen(dLHandle int, dbName string, dbLocation *CssmNetAddress, accessRequest uint32, accessCred *CssmAccessCredentials, openParameters unsafe.Pointer, dbHandle *int) int32 {
-	return _fnCSSM_DL_DbOpen(dLHandle, dbName, dbLocation, accessRequest, accessCred, openParameters, dbHandle)
+func CSSM_DL_DbOpen(dlHandle int, dbName string, dbLocation *CssmNetAddress, accessRequest uint32, accessCred *CssmAccessCredentials, openParameters unsafe.Pointer, dbHandle *int) int32 {
+	return _fnCSSM_DL_DbOpen(dlHandle, dbName, dbLocation, accessRequest, accessCred, openParameters, dbHandle)
 }
 
-func CSSM_DL_DestroyRelation(dLDBHandle CssmDlDbHandle, relationID uint32) int32 {
-	return _fnCSSM_DL_DestroyRelation(dLDBHandle, relationID)
+func CSSM_DL_DestroyRelation(dldbHandle CssmDlDbHandle, relationID uint32) int32 {
+	return _fnCSSM_DL_DestroyRelation(dldbHandle, relationID)
 }
 
-func CSSM_DL_FreeNameList(dLHandle int, nameList *CssmNameList) int32 {
-	return _fnCSSM_DL_FreeNameList(dLHandle, nameList)
+func CSSM_DL_FreeNameList(dlHandle int, nameList *CssmNameList) int32 {
+	return _fnCSSM_DL_FreeNameList(dlHandle, nameList)
 }
 
-func CSSM_DL_FreeUniqueRecord(dLDBHandle CssmDlDbHandle, uniqueRecord *CssmDbUniqueRecord) int32 {
-	return _fnCSSM_DL_FreeUniqueRecord(dLDBHandle, uniqueRecord)
+func CSSM_DL_FreeUniqueRecord(dldbHandle CssmDlDbHandle, uniqueRecord *CssmDbUniqueRecord) int32 {
+	return _fnCSSM_DL_FreeUniqueRecord(dldbHandle, uniqueRecord)
 }
 
-func CSSM_DL_GetDbAcl(dLDBHandle CssmDlDbHandle, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **CssmAclEntryInfo) int32 {
-	return _fnCSSM_DL_GetDbAcl(dLDBHandle, selectionTag, numberOfAclInfos, aclInfos)
+func CSSM_DL_GetDbAcl(dldbHandle CssmDlDbHandle, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **CssmAclEntryInfo) int32 {
+	return _fnCSSM_DL_GetDbAcl(dldbHandle, selectionTag, numberOfAclInfos, aclInfos)
 }
 
-func CSSM_DL_GetDbNameFromHandle(dLDBHandle CssmDlDbHandle, dbName string) int32 {
-	return _fnCSSM_DL_GetDbNameFromHandle(dLDBHandle, dbName)
+func CSSM_DL_GetDbNameFromHandle(dldbHandle CssmDlDbHandle, dbName string) int32 {
+	return _fnCSSM_DL_GetDbNameFromHandle(dldbHandle, dbName)
 }
 
-func CSSM_DL_GetDbNames(dLHandle int, nameList **CssmNameList) int32 {
-	return _fnCSSM_DL_GetDbNames(dLHandle, nameList)
+func CSSM_DL_GetDbNames(dlHandle int, nameList **CssmNameList) int32 {
+	return _fnCSSM_DL_GetDbNames(dlHandle, nameList)
 }
 
-func CSSM_DL_GetDbOwner(dLDBHandle CssmDlDbHandle, owner *CssmAclOwnerPrototype) int32 {
-	return _fnCSSM_DL_GetDbOwner(dLDBHandle, owner)
+func CSSM_DL_GetDbOwner(dldbHandle CssmDlDbHandle, owner *CssmAclOwnerPrototype) int32 {
+	return _fnCSSM_DL_GetDbOwner(dldbHandle, owner)
 }
 
-func CSSM_DL_PassThrough(dLDBHandle CssmDlDbHandle, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return _fnCSSM_DL_PassThrough(dLDBHandle, passThroughId, inputParams, outputParams)
+func CSSM_DL_PassThrough(dldbHandle CssmDlDbHandle, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	return _fnCSSM_DL_PassThrough(dldbHandle, passThroughId, inputParams, outputParams)
 }
 
-func CSSM_DecryptData(cCHandle uint64, cipherBufs *CssmData, cipherBufCount uint32, clearBufs *CssmData, clearBufCount uint32, bytesDecrypted *uint, remData *CssmData) int32 {
-	return _fnCSSM_DecryptData(cCHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted, remData)
+func CSSM_DecryptData(ccHandle uint64, cipherBufs *CssmData, cipherBufCount uint32, clearBufs *CssmData, clearBufCount uint32, bytesDecrypted *uint, remData *CssmData) int32 {
+	return _fnCSSM_DecryptData(ccHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted, remData)
 }
 
-func CSSM_DecryptDataFinal(cCHandle uint64, remData *CssmData) int32 {
-	return _fnCSSM_DecryptDataFinal(cCHandle, remData)
+func CSSM_DecryptDataFinal(ccHandle uint64, remData *CssmData) int32 {
+	return _fnCSSM_DecryptDataFinal(ccHandle, remData)
 }
 
-func CSSM_DecryptDataInit(cCHandle uint64) int32 {
-	return _fnCSSM_DecryptDataInit(cCHandle)
+func CSSM_DecryptDataInit(ccHandle uint64) int32 {
+	return _fnCSSM_DecryptDataInit(ccHandle)
 }
 
-func CSSM_DecryptDataInitP(cCHandle uint64, privilege uint64) int32 {
-	return _fnCSSM_DecryptDataInitP(cCHandle, privilege)
+func CSSM_DecryptDataInitP(ccHandle uint64, privilege uint64) int32 {
+	return _fnCSSM_DecryptDataInitP(ccHandle, privilege)
 }
 
-func CSSM_DecryptDataP(cCHandle uint64, cipherBufs *CssmData, cipherBufCount uint32, clearBufs *CssmData, clearBufCount uint32, bytesDecrypted *uint, remData *CssmData, privilege uint64) int32 {
-	return _fnCSSM_DecryptDataP(cCHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted, remData, privilege)
+func CSSM_DecryptDataP(ccHandle uint64, cipherBufs *CssmData, cipherBufCount uint32, clearBufs *CssmData, clearBufCount uint32, bytesDecrypted *uint, remData *CssmData, privilege uint64) int32 {
+	return _fnCSSM_DecryptDataP(ccHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted, remData, privilege)
 }
 
-func CSSM_DecryptDataUpdate(cCHandle uint64, cipherBufs *CssmData, cipherBufCount uint32, clearBufs *CssmData, clearBufCount uint32, bytesDecrypted *uint) int32 {
-	return _fnCSSM_DecryptDataUpdate(cCHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted)
+func CSSM_DecryptDataUpdate(ccHandle uint64, cipherBufs *CssmData, cipherBufCount uint32, clearBufs *CssmData, clearBufCount uint32, bytesDecrypted *uint) int32 {
+	return _fnCSSM_DecryptDataUpdate(ccHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted)
 }
 
-func CSSM_DeleteContext(cCHandle uint64) int32 {
-	return _fnCSSM_DeleteContext(cCHandle)
+func CSSM_DeleteContext(ccHandle uint64) int32 {
+	return _fnCSSM_DeleteContext(ccHandle)
 }
 
-func CSSM_DeleteContextAttributes(cCHandle uint64, numberOfAttributes uint32, contextAttributes *CssmContextAttribute) int32 {
-	return _fnCSSM_DeleteContextAttributes(cCHandle, numberOfAttributes, contextAttributes)
+func CSSM_DeleteContextAttributes(ccHandle uint64, numberOfAttributes uint32, contextAttributes *CssmContextAttribute) int32 {
+	return _fnCSSM_DeleteContextAttributes(ccHandle, numberOfAttributes, contextAttributes)
 }
 
-func CSSM_DeriveKey(cCHandle uint64, param *CssmData, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, derivedKey *CssmKey) int32 {
-	return _fnCSSM_DeriveKey(cCHandle, param, keyUsage, keyAttr, keyLabel, credAndAclEntry, derivedKey)
+func CSSM_DeriveKey(ccHandle uint64, param *CssmData, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, derivedKey *CssmKey) int32 {
+	return _fnCSSM_DeriveKey(ccHandle, param, keyUsage, keyAttr, keyLabel, credAndAclEntry, derivedKey)
 }
 
-func CSSM_DigestData(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32, digest *CssmData) int32 {
-	return _fnCSSM_DigestData(cCHandle, dataBufs, dataBufCount, digest)
+func CSSM_DigestData(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32, digest *CssmData) int32 {
+	return _fnCSSM_DigestData(ccHandle, dataBufs, dataBufCount, digest)
 }
 
-func CSSM_DigestDataClone(cCHandle uint64, clonednewCCHandle *uint64) int32 {
-	return _fnCSSM_DigestDataClone(cCHandle, clonednewCCHandle)
+func CSSM_DigestDataClone(ccHandle uint64, clonednewCCHandle *uint64) int32 {
+	return _fnCSSM_DigestDataClone(ccHandle, clonednewCCHandle)
 }
 
-func CSSM_DigestDataFinal(cCHandle uint64, digest *CssmData) int32 {
-	return _fnCSSM_DigestDataFinal(cCHandle, digest)
+func CSSM_DigestDataFinal(ccHandle uint64, digest *CssmData) int32 {
+	return _fnCSSM_DigestDataFinal(ccHandle, digest)
 }
 
-func CSSM_DigestDataInit(cCHandle uint64) int32 {
-	return _fnCSSM_DigestDataInit(cCHandle)
+func CSSM_DigestDataInit(ccHandle uint64) int32 {
+	return _fnCSSM_DigestDataInit(ccHandle)
 }
 
-func CSSM_DigestDataUpdate(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
-	return _fnCSSM_DigestDataUpdate(cCHandle, dataBufs, dataBufCount)
+func CSSM_DigestDataUpdate(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
+	return _fnCSSM_DigestDataUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
-func CSSM_EncryptData(cCHandle uint64, clearBufs *CssmData, clearBufCount uint32, cipherBufs *CssmData, cipherBufCount uint32, bytesEncrypted *uint, remData *CssmData) int32 {
-	return _fnCSSM_EncryptData(cCHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted, remData)
+func CSSM_EncryptData(ccHandle uint64, clearBufs *CssmData, clearBufCount uint32, cipherBufs *CssmData, cipherBufCount uint32, bytesEncrypted *uint, remData *CssmData) int32 {
+	return _fnCSSM_EncryptData(ccHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted, remData)
 }
 
-func CSSM_EncryptDataFinal(cCHandle uint64, remData *CssmData) int32 {
-	return _fnCSSM_EncryptDataFinal(cCHandle, remData)
+func CSSM_EncryptDataFinal(ccHandle uint64, remData *CssmData) int32 {
+	return _fnCSSM_EncryptDataFinal(ccHandle, remData)
 }
 
-func CSSM_EncryptDataInit(cCHandle uint64) int32 {
-	return _fnCSSM_EncryptDataInit(cCHandle)
+func CSSM_EncryptDataInit(ccHandle uint64) int32 {
+	return _fnCSSM_EncryptDataInit(ccHandle)
 }
 
-func CSSM_EncryptDataInitP(cCHandle uint64, privilege uint64) int32 {
-	return _fnCSSM_EncryptDataInitP(cCHandle, privilege)
+func CSSM_EncryptDataInitP(ccHandle uint64, privilege uint64) int32 {
+	return _fnCSSM_EncryptDataInitP(ccHandle, privilege)
 }
 
-func CSSM_EncryptDataP(cCHandle uint64, clearBufs *CssmData, clearBufCount uint32, cipherBufs *CssmData, cipherBufCount uint32, bytesEncrypted *uint, remData *CssmData, privilege uint64) int32 {
-	return _fnCSSM_EncryptDataP(cCHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted, remData, privilege)
+func CSSM_EncryptDataP(ccHandle uint64, clearBufs *CssmData, clearBufCount uint32, cipherBufs *CssmData, cipherBufCount uint32, bytesEncrypted *uint, remData *CssmData, privilege uint64) int32 {
+	return _fnCSSM_EncryptDataP(ccHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted, remData, privilege)
 }
 
-func CSSM_EncryptDataUpdate(cCHandle uint64, clearBufs *CssmData, clearBufCount uint32, cipherBufs *CssmData, cipherBufCount uint32, bytesEncrypted *uint) int32 {
-	return _fnCSSM_EncryptDataUpdate(cCHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted)
+func CSSM_EncryptDataUpdate(ccHandle uint64, clearBufs *CssmData, clearBufCount uint32, cipherBufs *CssmData, cipherBufCount uint32, bytesEncrypted *uint) int32 {
+	return _fnCSSM_EncryptDataUpdate(ccHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted)
 }
 
 func CSSM_FreeContext(context_ *CssmContext) int32 {
 	return _fnCSSM_FreeContext(context_)
 }
 
-func CSSM_FreeKey(cSPHandle int, accessCred *CssmAccessCredentials, keyPtr *CssmKey, delete_ int32) int32 {
-	return _fnCSSM_FreeKey(cSPHandle, accessCred, keyPtr, delete_)
+func CSSM_FreeKey(cspHandle int, accessCred *CssmAccessCredentials, keyPtr *CssmKey, delete_ int32) int32 {
+	return _fnCSSM_FreeKey(cspHandle, accessCred, keyPtr, delete_)
 }
 
-func CSSM_GenerateAlgorithmParams(cCHandle uint64, paramBits uint32, param *CssmData) int32 {
-	return _fnCSSM_GenerateAlgorithmParams(cCHandle, paramBits, param)
+func CSSM_GenerateAlgorithmParams(ccHandle uint64, paramBits uint32, param *CssmData) int32 {
+	return _fnCSSM_GenerateAlgorithmParams(ccHandle, paramBits, param)
 }
 
-func CSSM_GenerateKey(cCHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, key *CssmKey) int32 {
-	return _fnCSSM_GenerateKey(cCHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key)
+func CSSM_GenerateKey(ccHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, key *CssmKey) int32 {
+	return _fnCSSM_GenerateKey(ccHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key)
 }
 
-func CSSM_GenerateKeyP(cCHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, key *CssmKey, privilege uint64) int32 {
-	return _fnCSSM_GenerateKeyP(cCHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key, privilege)
+func CSSM_GenerateKeyP(ccHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, key *CssmKey, privilege uint64) int32 {
+	return _fnCSSM_GenerateKeyP(ccHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key, privilege)
 }
 
-func CSSM_GenerateKeyPair(cCHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel *CssmData, publicKey *CssmKey, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, privateKey *CssmKey) int32 {
-	return _fnCSSM_GenerateKeyPair(cCHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey)
+func CSSM_GenerateKeyPair(ccHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel *CssmData, publicKey *CssmKey, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, privateKey *CssmKey) int32 {
+	return _fnCSSM_GenerateKeyPair(ccHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey)
 }
 
-func CSSM_GenerateKeyPairP(cCHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel *CssmData, publicKey *CssmKey, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, privateKey *CssmKey, privilege uint64) int32 {
-	return _fnCSSM_GenerateKeyPairP(cCHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey, privilege)
+func CSSM_GenerateKeyPairP(ccHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel *CssmData, publicKey *CssmKey, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, privateKey *CssmKey, privilege uint64) int32 {
+	return _fnCSSM_GenerateKeyPairP(ccHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey, privilege)
 }
 
-func CSSM_GenerateMac(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32, mac *CssmData) int32 {
-	return _fnCSSM_GenerateMac(cCHandle, dataBufs, dataBufCount, mac)
+func CSSM_GenerateMac(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32, mac *CssmData) int32 {
+	return _fnCSSM_GenerateMac(ccHandle, dataBufs, dataBufCount, mac)
 }
 
-func CSSM_GenerateMacFinal(cCHandle uint64, mac *CssmData) int32 {
-	return _fnCSSM_GenerateMacFinal(cCHandle, mac)
+func CSSM_GenerateMacFinal(ccHandle uint64, mac *CssmData) int32 {
+	return _fnCSSM_GenerateMacFinal(ccHandle, mac)
 }
 
-func CSSM_GenerateMacInit(cCHandle uint64) int32 {
-	return _fnCSSM_GenerateMacInit(cCHandle)
+func CSSM_GenerateMacInit(ccHandle uint64) int32 {
+	return _fnCSSM_GenerateMacInit(ccHandle)
 }
 
-func CSSM_GenerateMacUpdate(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
-	return _fnCSSM_GenerateMacUpdate(cCHandle, dataBufs, dataBufCount)
+func CSSM_GenerateMacUpdate(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
+	return _fnCSSM_GenerateMacUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
-func CSSM_GenerateRandom(cCHandle uint64, randomNumber *CssmData) int32 {
-	return _fnCSSM_GenerateRandom(cCHandle, randomNumber)
+func CSSM_GenerateRandom(ccHandle uint64, randomNumber *CssmData) int32 {
+	return _fnCSSM_GenerateRandom(ccHandle, randomNumber)
 }
 
 func CSSM_GetAPIMemoryFunctions(addInHandle int, appMemoryFuncs *CssmMemoryFuncs) int32 {
 	return _fnCSSM_GetAPIMemoryFunctions(addInHandle, appMemoryFuncs)
 }
 
-func CSSM_GetContext(cCHandle uint64, context_ **CssmContext) int32 {
-	return _fnCSSM_GetContext(cCHandle, context_)
+func CSSM_GetContext(ccHandle uint64, context_ **CssmContext) int32 {
+	return _fnCSSM_GetContext(ccHandle, context_)
 }
 
 func CSSM_GetContextAttribute(context_ *CssmContext, attributeType uint32, contextAttribute **CssmContextAttribute) int32 {
 	return _fnCSSM_GetContextAttribute(context_, attributeType, contextAttribute)
 }
 
-func CSSM_GetKeyAcl(cSPHandle int, key *CssmKey, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **CssmAclEntryInfo) int32 {
-	return _fnCSSM_GetKeyAcl(cSPHandle, key, selectionTag, numberOfAclInfos, aclInfos)
+func CSSM_GetKeyAcl(cspHandle int, key *CssmKey, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **CssmAclEntryInfo) int32 {
+	return _fnCSSM_GetKeyAcl(cspHandle, key, selectionTag, numberOfAclInfos, aclInfos)
 }
 
-func CSSM_GetKeyOwner(cSPHandle int, key *CssmKey, owner *CssmAclOwnerPrototype) int32 {
-	return _fnCSSM_GetKeyOwner(cSPHandle, key, owner)
+func CSSM_GetKeyOwner(cspHandle int, key *CssmKey, owner *CssmAclOwnerPrototype) int32 {
+	return _fnCSSM_GetKeyOwner(cspHandle, key, owner)
 }
 
 func CSSM_GetModuleGUIDFromHandle(moduleHandle int, moduleGUID *CssmGuid) int32 {
@@ -1815,8 +1815,8 @@ func CSSM_GetSubserviceUIDFromHandle(moduleHandle int, subserviceUID *CssmSubser
 	return _fnCSSM_GetSubserviceUIDFromHandle(moduleHandle, subserviceUID)
 }
 
-func CSSM_GetTimeValue(cSPHandle int, timeAlgorithm uint32, timeData *CssmData) int32 {
-	return _fnCSSM_GetTimeValue(cSPHandle, timeAlgorithm, timeData)
+func CSSM_GetTimeValue(cspHandle int, timeAlgorithm uint32, timeData *CssmData) int32 {
+	return _fnCSSM_GetTimeValue(cspHandle, timeAlgorithm, timeData)
 }
 
 func CSSM_Init(version *CssmVersion, scope uint32, callerGuid *CssmGuid, keyHierarchy uint32, pvcPolicy *uint32, reserved unsafe.Pointer) int32 {
@@ -1847,136 +1847,136 @@ func CSSM_ModuleUnload(moduleGuid *CssmGuid, appNotifyCallback unsafe.Pointer, a
 	return _fnCSSM_ModuleUnload(moduleGuid, appNotifyCallback, appNotifyCallbackCtx)
 }
 
-func CSSM_QueryKeySizeInBits(cSPHandle int, cCHandle uint64, key *CssmKey, keySize *CssmKeySize) int32 {
-	return _fnCSSM_QueryKeySizeInBits(cSPHandle, cCHandle, key, keySize)
+func CSSM_QueryKeySizeInBits(cspHandle int, ccHandle uint64, key *CssmKey, keySize *CssmKeySize) int32 {
+	return _fnCSSM_QueryKeySizeInBits(cspHandle, ccHandle, key, keySize)
 }
 
-func CSSM_QuerySize(cCHandle uint64, encrypt int32, querySizeCount uint32, dataBlockSizes *CssmQuerySizeData) int32 {
-	return _fnCSSM_QuerySize(cCHandle, encrypt, querySizeCount, dataBlockSizes)
+func CSSM_QuerySize(ccHandle uint64, encrypt int32, querySizeCount uint32, dataBlockSizes *CssmQuerySizeData) int32 {
+	return _fnCSSM_QuerySize(ccHandle, encrypt, querySizeCount, dataBlockSizes)
 }
 
-func CSSM_RetrieveCounter(cSPHandle int, counter *CssmData) int32 {
-	return _fnCSSM_RetrieveCounter(cSPHandle, counter)
+func CSSM_RetrieveCounter(cspHandle int, counter *CssmData) int32 {
+	return _fnCSSM_RetrieveCounter(cspHandle, counter)
 }
 
-func CSSM_RetrieveUniqueId(cSPHandle int, uniqueID *CssmData) int32 {
-	return _fnCSSM_RetrieveUniqueId(cSPHandle, uniqueID)
+func CSSM_RetrieveUniqueId(cspHandle int, uniqueID *CssmData) int32 {
+	return _fnCSSM_RetrieveUniqueId(cspHandle, uniqueID)
 }
 
-func CSSM_SetContext(cCHandle uint64, context_ *CssmContext) int32 {
-	return _fnCSSM_SetContext(cCHandle, context_)
+func CSSM_SetContext(ccHandle uint64, context_ *CssmContext) int32 {
+	return _fnCSSM_SetContext(ccHandle, context_)
 }
 
 func CSSM_SetPrivilege(privilege uint64) int32 {
 	return _fnCSSM_SetPrivilege(privilege)
 }
 
-func CSSM_SignData(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32, digestAlgorithm uint32, signature *CssmData) int32 {
-	return _fnCSSM_SignData(cCHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
+func CSSM_SignData(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32, digestAlgorithm uint32, signature *CssmData) int32 {
+	return _fnCSSM_SignData(ccHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
 }
 
-func CSSM_SignDataFinal(cCHandle uint64, signature *CssmData) int32 {
-	return _fnCSSM_SignDataFinal(cCHandle, signature)
+func CSSM_SignDataFinal(ccHandle uint64, signature *CssmData) int32 {
+	return _fnCSSM_SignDataFinal(ccHandle, signature)
 }
 
-func CSSM_SignDataInit(cCHandle uint64) int32 {
-	return _fnCSSM_SignDataInit(cCHandle)
+func CSSM_SignDataInit(ccHandle uint64) int32 {
+	return _fnCSSM_SignDataInit(ccHandle)
 }
 
-func CSSM_SignDataUpdate(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
-	return _fnCSSM_SignDataUpdate(cCHandle, dataBufs, dataBufCount)
+func CSSM_SignDataUpdate(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
+	return _fnCSSM_SignDataUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
-func CSSM_TP_ApplyCrlToDb(tPHandle int, cLHandle int, cSPHandle int, crlToBeApplied *CssmEncodedCrl, signerCertGroup *CssmCertgroup, applyCrlVerifyContext *CssmTpVerifyContext, applyCrlVerifyResult *CssmTpVerifyContextResult) int32 {
-	return _fnCSSM_TP_ApplyCrlToDb(tPHandle, cLHandle, cSPHandle, crlToBeApplied, signerCertGroup, applyCrlVerifyContext, applyCrlVerifyResult)
+func CSSM_TP_ApplyCrlToDb(tpHandle int, clHandle int, cspHandle int, crlToBeApplied *CssmEncodedCrl, signerCertGroup *CssmCertgroup, applyCrlVerifyContext *CssmTpVerifyContext, applyCrlVerifyResult *CssmTpVerifyContextResult) int32 {
+	return _fnCSSM_TP_ApplyCrlToDb(tpHandle, clHandle, cspHandle, crlToBeApplied, signerCertGroup, applyCrlVerifyContext, applyCrlVerifyResult)
 }
 
-func CSSM_TP_CertCreateTemplate(tPHandle int, cLHandle int, numberOfFields uint32, certFields *CssmField, certTemplate *CssmData) int32 {
-	return _fnCSSM_TP_CertCreateTemplate(tPHandle, cLHandle, numberOfFields, certFields, certTemplate)
+func CSSM_TP_CertCreateTemplate(tpHandle int, clHandle int, numberOfFields uint32, certFields *CssmField, certTemplate *CssmData) int32 {
+	return _fnCSSM_TP_CertCreateTemplate(tpHandle, clHandle, numberOfFields, certFields, certTemplate)
 }
 
-func CSSM_TP_CertGetAllTemplateFields(tPHandle int, cLHandle int, certTemplate *CssmData, numberOfFields *uint32, certFields **CssmField) int32 {
-	return _fnCSSM_TP_CertGetAllTemplateFields(tPHandle, cLHandle, certTemplate, numberOfFields, certFields)
+func CSSM_TP_CertGetAllTemplateFields(tpHandle int, clHandle int, certTemplate *CssmData, numberOfFields *uint32, certFields **CssmField) int32 {
+	return _fnCSSM_TP_CertGetAllTemplateFields(tpHandle, clHandle, certTemplate, numberOfFields, certFields)
 }
 
-func CSSM_TP_CertGroupConstruct(tPHandle int, cLHandle int, cSPHandle int, dBList *CssmDlDbList, constructParams unsafe.Pointer, certGroupFrag *CssmCertgroup, certGroup **CssmCertgroup) int32 {
-	return _fnCSSM_TP_CertGroupConstruct(tPHandle, cLHandle, cSPHandle, dBList, constructParams, certGroupFrag, certGroup)
+func CSSM_TP_CertGroupConstruct(tpHandle int, clHandle int, cspHandle int, dbList *CssmDlDbList, constructParams unsafe.Pointer, certGroupFrag *CssmCertgroup, certGroup **CssmCertgroup) int32 {
+	return _fnCSSM_TP_CertGroupConstruct(tpHandle, clHandle, cspHandle, dbList, constructParams, certGroupFrag, certGroup)
 }
 
-func CSSM_TP_CertGroupPrune(tPHandle int, cLHandle int, dBList *CssmDlDbList, orderedCertGroup *CssmCertgroup, prunedCertGroup **CssmCertgroup) int32 {
-	return _fnCSSM_TP_CertGroupPrune(tPHandle, cLHandle, dBList, orderedCertGroup, prunedCertGroup)
+func CSSM_TP_CertGroupPrune(tpHandle int, clHandle int, dbList *CssmDlDbList, orderedCertGroup *CssmCertgroup, prunedCertGroup **CssmCertgroup) int32 {
+	return _fnCSSM_TP_CertGroupPrune(tpHandle, clHandle, dbList, orderedCertGroup, prunedCertGroup)
 }
 
-func CSSM_TP_CertGroupToTupleGroup(tPHandle int, cLHandle int, certGroup *CssmCertgroup, tupleGroup **CssmTuplegroup) int32 {
-	return _fnCSSM_TP_CertGroupToTupleGroup(tPHandle, cLHandle, certGroup, tupleGroup)
+func CSSM_TP_CertGroupToTupleGroup(tpHandle int, clHandle int, certGroup *CssmCertgroup, tupleGroup **CssmTuplegroup) int32 {
+	return _fnCSSM_TP_CertGroupToTupleGroup(tpHandle, clHandle, certGroup, tupleGroup)
 }
 
-func CSSM_TP_CertGroupVerify(tPHandle int, cLHandle int, cSPHandle int, certGroupToBeVerified *CssmCertgroup, verifyContext *CssmTpVerifyContext, verifyContextResult *CssmTpVerifyContextResult) int32 {
-	return _fnCSSM_TP_CertGroupVerify(tPHandle, cLHandle, cSPHandle, certGroupToBeVerified, verifyContext, verifyContextResult)
+func CSSM_TP_CertGroupVerify(tpHandle int, clHandle int, cspHandle int, certGroupToBeVerified *CssmCertgroup, verifyContext *CssmTpVerifyContext, verifyContextResult *CssmTpVerifyContextResult) int32 {
+	return _fnCSSM_TP_CertGroupVerify(tpHandle, clHandle, cspHandle, certGroupToBeVerified, verifyContext, verifyContextResult)
 }
 
-func CSSM_TP_CertReclaimAbort(tPHandle int, keyCacheHandle uint64) int32 {
-	return _fnCSSM_TP_CertReclaimAbort(tPHandle, keyCacheHandle)
+func CSSM_TP_CertReclaimAbort(tpHandle int, keyCacheHandle uint64) int32 {
+	return _fnCSSM_TP_CertReclaimAbort(tpHandle, keyCacheHandle)
 }
 
-func CSSM_TP_CertReclaimKey(tPHandle int, certGroup *CssmCertgroup, certIndex uint32, keyCacheHandle uint64, cSPHandle int, credAndAclEntry *CssmResourceControlContext) int32 {
-	return _fnCSSM_TP_CertReclaimKey(tPHandle, certGroup, certIndex, keyCacheHandle, cSPHandle, credAndAclEntry)
+func CSSM_TP_CertReclaimKey(tpHandle int, certGroup *CssmCertgroup, certIndex uint32, keyCacheHandle uint64, cspHandle int, credAndAclEntry *CssmResourceControlContext) int32 {
+	return _fnCSSM_TP_CertReclaimKey(tpHandle, certGroup, certIndex, keyCacheHandle, cspHandle, credAndAclEntry)
 }
 
-func CSSM_TP_CertRemoveFromCrlTemplate(tPHandle int, cLHandle int, cSPHandle int, oldCrlTemplate *CssmData, certGroupToBeRemoved *CssmCertgroup, revokerCertGroup *CssmCertgroup, revokerVerifyContext *CssmTpVerifyContext, revokerVerifyResult *CssmTpVerifyContextResult, newCrlTemplate *CssmData) int32 {
-	return _fnCSSM_TP_CertRemoveFromCrlTemplate(tPHandle, cLHandle, cSPHandle, oldCrlTemplate, certGroupToBeRemoved, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, newCrlTemplate)
+func CSSM_TP_CertRemoveFromCrlTemplate(tpHandle int, clHandle int, cspHandle int, oldCrlTemplate *CssmData, certGroupToBeRemoved *CssmCertgroup, revokerCertGroup *CssmCertgroup, revokerVerifyContext *CssmTpVerifyContext, revokerVerifyResult *CssmTpVerifyContextResult, newCrlTemplate *CssmData) int32 {
+	return _fnCSSM_TP_CertRemoveFromCrlTemplate(tpHandle, clHandle, cspHandle, oldCrlTemplate, certGroupToBeRemoved, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, newCrlTemplate)
 }
 
-func CSSM_TP_CertRevoke(tPHandle int, cLHandle int, cSPHandle int, oldCrlTemplate *CssmData, certGroupToBeRevoked *CssmCertgroup, revokerCertGroup *CssmCertgroup, revokerVerifyContext *CssmTpVerifyContext, revokerVerifyResult *CssmTpVerifyContextResult, reason uint32, newCrlTemplate *CssmData) int32 {
-	return _fnCSSM_TP_CertRevoke(tPHandle, cLHandle, cSPHandle, oldCrlTemplate, certGroupToBeRevoked, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, reason, newCrlTemplate)
+func CSSM_TP_CertRevoke(tpHandle int, clHandle int, cspHandle int, oldCrlTemplate *CssmData, certGroupToBeRevoked *CssmCertgroup, revokerCertGroup *CssmCertgroup, revokerVerifyContext *CssmTpVerifyContext, revokerVerifyResult *CssmTpVerifyContextResult, reason uint32, newCrlTemplate *CssmData) int32 {
+	return _fnCSSM_TP_CertRevoke(tpHandle, clHandle, cspHandle, oldCrlTemplate, certGroupToBeRevoked, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, reason, newCrlTemplate)
 }
 
-func CSSM_TP_CertSign(tPHandle int, cLHandle int, cCHandle uint64, certTemplateToBeSigned *CssmData, signerCertGroup *CssmCertgroup, signerVerifyContext *CssmTpVerifyContext, signerVerifyResult *CssmTpVerifyContextResult, signedCert *CssmData) int32 {
-	return _fnCSSM_TP_CertSign(tPHandle, cLHandle, cCHandle, certTemplateToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCert)
+func CSSM_TP_CertSign(tpHandle int, clHandle int, ccHandle uint64, certTemplateToBeSigned *CssmData, signerCertGroup *CssmCertgroup, signerVerifyContext *CssmTpVerifyContext, signerVerifyResult *CssmTpVerifyContextResult, signedCert *CssmData) int32 {
+	return _fnCSSM_TP_CertSign(tpHandle, clHandle, ccHandle, certTemplateToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCert)
 }
 
-func CSSM_TP_ConfirmCredResult(tPHandle int, referenceIdentifier *CssmData, callerAuthCredentials *CssmTpCallerauthContext, responses *CssmTpConfirmResponse, preferredAuthority *CssmTpAuthorityId) int32 {
-	return _fnCSSM_TP_ConfirmCredResult(tPHandle, referenceIdentifier, callerAuthCredentials, responses, preferredAuthority)
+func CSSM_TP_ConfirmCredResult(tpHandle int, referenceIdentifier *CssmData, callerAuthCredentials *CssmTpCallerauthContext, responses *CssmTpConfirmResponse, preferredAuthority *CssmTpAuthorityId) int32 {
+	return _fnCSSM_TP_ConfirmCredResult(tpHandle, referenceIdentifier, callerAuthCredentials, responses, preferredAuthority)
 }
 
-func CSSM_TP_CrlCreateTemplate(tPHandle int, cLHandle int, numberOfFields uint32, crlFields *CssmField, newCrlTemplate *CssmData) int32 {
-	return _fnCSSM_TP_CrlCreateTemplate(tPHandle, cLHandle, numberOfFields, crlFields, newCrlTemplate)
+func CSSM_TP_CrlCreateTemplate(tpHandle int, clHandle int, numberOfFields uint32, crlFields *CssmField, newCrlTemplate *CssmData) int32 {
+	return _fnCSSM_TP_CrlCreateTemplate(tpHandle, clHandle, numberOfFields, crlFields, newCrlTemplate)
 }
 
-func CSSM_TP_CrlSign(tPHandle int, cLHandle int, cCHandle uint64, crlToBeSigned *CssmEncodedCrl, signerCertGroup *CssmCertgroup, signerVerifyContext *CssmTpVerifyContext, signerVerifyResult *CssmTpVerifyContextResult, signedCrl *CssmData) int32 {
-	return _fnCSSM_TP_CrlSign(tPHandle, cLHandle, cCHandle, crlToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCrl)
+func CSSM_TP_CrlSign(tpHandle int, clHandle int, ccHandle uint64, crlToBeSigned *CssmEncodedCrl, signerCertGroup *CssmCertgroup, signerVerifyContext *CssmTpVerifyContext, signerVerifyResult *CssmTpVerifyContextResult, signedCrl *CssmData) int32 {
+	return _fnCSSM_TP_CrlSign(tpHandle, clHandle, ccHandle, crlToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCrl)
 }
 
-func CSSM_TP_CrlVerify(tPHandle int, cLHandle int, cSPHandle int, crlToBeVerified *CssmEncodedCrl, signerCertGroup *CssmCertgroup, verifyContext *CssmTpVerifyContext, revokerVerifyResult *CssmTpVerifyContextResult) int32 {
-	return _fnCSSM_TP_CrlVerify(tPHandle, cLHandle, cSPHandle, crlToBeVerified, signerCertGroup, verifyContext, revokerVerifyResult)
+func CSSM_TP_CrlVerify(tpHandle int, clHandle int, cspHandle int, crlToBeVerified *CssmEncodedCrl, signerCertGroup *CssmCertgroup, verifyContext *CssmTpVerifyContext, revokerVerifyResult *CssmTpVerifyContextResult) int32 {
+	return _fnCSSM_TP_CrlVerify(tpHandle, clHandle, cspHandle, crlToBeVerified, signerCertGroup, verifyContext, revokerVerifyResult)
 }
 
-func CSSM_TP_FormRequest(tPHandle int, preferredAuthority *CssmTpAuthorityId, formType uint32, blankForm *CssmData) int32 {
-	return _fnCSSM_TP_FormRequest(tPHandle, preferredAuthority, formType, blankForm)
+func CSSM_TP_FormRequest(tpHandle int, preferredAuthority *CssmTpAuthorityId, formType uint32, blankForm *CssmData) int32 {
+	return _fnCSSM_TP_FormRequest(tpHandle, preferredAuthority, formType, blankForm)
 }
 
-func CSSM_TP_FormSubmit(tPHandle int, formType uint32, form *CssmData, clearanceAuthority *CssmTpAuthorityId, representedAuthority *CssmTpAuthorityId, credentials *CssmAccessCredentials) int32 {
-	return _fnCSSM_TP_FormSubmit(tPHandle, formType, form, clearanceAuthority, representedAuthority, credentials)
+func CSSM_TP_FormSubmit(tpHandle int, formType uint32, form *CssmData, clearanceAuthority *CssmTpAuthorityId, representedAuthority *CssmTpAuthorityId, credentials *CssmAccessCredentials) int32 {
+	return _fnCSSM_TP_FormSubmit(tpHandle, formType, form, clearanceAuthority, representedAuthority, credentials)
 }
 
-func CSSM_TP_PassThrough(tPHandle int, cLHandle int, cCHandle uint64, dBList *CssmDlDbList, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return _fnCSSM_TP_PassThrough(tPHandle, cLHandle, cCHandle, dBList, passThroughId, inputParams, outputParams)
+func CSSM_TP_PassThrough(tpHandle int, clHandle int, ccHandle uint64, dbList *CssmDlDbList, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
+	return _fnCSSM_TP_PassThrough(tpHandle, clHandle, ccHandle, dbList, passThroughId, inputParams, outputParams)
 }
 
-func CSSM_TP_ReceiveConfirmation(tPHandle int, referenceIdentifier *CssmData, responses **CssmTpConfirmResponse, elapsedTime *int32) int32 {
-	return _fnCSSM_TP_ReceiveConfirmation(tPHandle, referenceIdentifier, responses, elapsedTime)
+func CSSM_TP_ReceiveConfirmation(tpHandle int, referenceIdentifier *CssmData, responses **CssmTpConfirmResponse, elapsedTime *int32) int32 {
+	return _fnCSSM_TP_ReceiveConfirmation(tpHandle, referenceIdentifier, responses, elapsedTime)
 }
 
-func CSSM_TP_RetrieveCredResult(tPHandle int, referenceIdentifier *CssmData, callerAuthCredentials *CssmTpCallerauthContext, estimatedTime *int32, confirmationRequired *int32, retrieveOutput **CssmTpResultSet) int32 {
-	return _fnCSSM_TP_RetrieveCredResult(tPHandle, referenceIdentifier, callerAuthCredentials, estimatedTime, confirmationRequired, retrieveOutput)
+func CSSM_TP_RetrieveCredResult(tpHandle int, referenceIdentifier *CssmData, callerAuthCredentials *CssmTpCallerauthContext, estimatedTime *int32, confirmationRequired *int32, retrieveOutput **CssmTpResultSet) int32 {
+	return _fnCSSM_TP_RetrieveCredResult(tpHandle, referenceIdentifier, callerAuthCredentials, estimatedTime, confirmationRequired, retrieveOutput)
 }
 
-func CSSM_TP_SubmitCredRequest(tPHandle int, preferredAuthority *CssmTpAuthorityId, requestType uint32, requestInput *CssmTpRequestSet, callerAuthContext *CssmTpCallerauthContext, estimatedTime *int32, referenceIdentifier *CssmData) int32 {
-	return _fnCSSM_TP_SubmitCredRequest(tPHandle, preferredAuthority, requestType, requestInput, callerAuthContext, estimatedTime, referenceIdentifier)
+func CSSM_TP_SubmitCredRequest(tpHandle int, preferredAuthority *CssmTpAuthorityId, requestType uint32, requestInput *CssmTpRequestSet, callerAuthContext *CssmTpCallerauthContext, estimatedTime *int32, referenceIdentifier *CssmData) int32 {
+	return _fnCSSM_TP_SubmitCredRequest(tpHandle, preferredAuthority, requestType, requestInput, callerAuthContext, estimatedTime, referenceIdentifier)
 }
 
-func CSSM_TP_TupleGroupToCertGroup(tPHandle int, cLHandle int, tupleGroup *CssmTuplegroup, certTemplates **CssmCertgroup) int32 {
-	return _fnCSSM_TP_TupleGroupToCertGroup(tPHandle, cLHandle, tupleGroup, certTemplates)
+func CSSM_TP_TupleGroupToCertGroup(tpHandle int, clHandle int, tupleGroup *CssmTuplegroup, certTemplates **CssmCertgroup) int32 {
+	return _fnCSSM_TP_TupleGroupToCertGroup(tpHandle, clHandle, tupleGroup, certTemplates)
 }
 
 func CSSM_Terminate() int32 {
@@ -1987,60 +1987,60 @@ func CSSM_Unintroduce(moduleID *CssmGuid) int32 {
 	return _fnCSSM_Unintroduce(moduleID)
 }
 
-func CSSM_UnwrapKey(cCHandle uint64, publicKey *CssmKey, wrappedKey *CssmKey, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, unwrappedKey *CssmKey, descriptiveData *CssmData) int32 {
-	return _fnCSSM_UnwrapKey(cCHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData)
+func CSSM_UnwrapKey(ccHandle uint64, publicKey *CssmKey, wrappedKey *CssmKey, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, unwrappedKey *CssmKey, descriptiveData *CssmData) int32 {
+	return _fnCSSM_UnwrapKey(ccHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData)
 }
 
-func CSSM_UnwrapKeyP(cCHandle uint64, publicKey *CssmKey, wrappedKey *CssmKey, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, unwrappedKey *CssmKey, descriptiveData *CssmData, privilege uint64) int32 {
-	return _fnCSSM_UnwrapKeyP(cCHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData, privilege)
+func CSSM_UnwrapKeyP(ccHandle uint64, publicKey *CssmKey, wrappedKey *CssmKey, keyUsage uint32, keyAttr uint32, keyLabel *CssmData, credAndAclEntry *CssmResourceControlContext, unwrappedKey *CssmKey, descriptiveData *CssmData, privilege uint64) int32 {
+	return _fnCSSM_UnwrapKeyP(ccHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData, privilege)
 }
 
-func CSSM_UpdateContextAttributes(cCHandle uint64, numberOfAttributes uint32, contextAttributes *CssmContextAttribute) int32 {
-	return _fnCSSM_UpdateContextAttributes(cCHandle, numberOfAttributes, contextAttributes)
+func CSSM_UpdateContextAttributes(ccHandle uint64, numberOfAttributes uint32, contextAttributes *CssmContextAttribute) int32 {
+	return _fnCSSM_UpdateContextAttributes(ccHandle, numberOfAttributes, contextAttributes)
 }
 
-func CSSM_VerifyData(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32, digestAlgorithm uint32, signature *CssmData) int32 {
-	return _fnCSSM_VerifyData(cCHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
+func CSSM_VerifyData(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32, digestAlgorithm uint32, signature *CssmData) int32 {
+	return _fnCSSM_VerifyData(ccHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
 }
 
-func CSSM_VerifyDataFinal(cCHandle uint64, signature *CssmData) int32 {
-	return _fnCSSM_VerifyDataFinal(cCHandle, signature)
+func CSSM_VerifyDataFinal(ccHandle uint64, signature *CssmData) int32 {
+	return _fnCSSM_VerifyDataFinal(ccHandle, signature)
 }
 
-func CSSM_VerifyDataInit(cCHandle uint64) int32 {
-	return _fnCSSM_VerifyDataInit(cCHandle)
+func CSSM_VerifyDataInit(ccHandle uint64) int32 {
+	return _fnCSSM_VerifyDataInit(ccHandle)
 }
 
-func CSSM_VerifyDataUpdate(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
-	return _fnCSSM_VerifyDataUpdate(cCHandle, dataBufs, dataBufCount)
+func CSSM_VerifyDataUpdate(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
+	return _fnCSSM_VerifyDataUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
-func CSSM_VerifyDevice(cSPHandle int, deviceCert *CssmData) int32 {
-	return _fnCSSM_VerifyDevice(cSPHandle, deviceCert)
+func CSSM_VerifyDevice(cspHandle int, deviceCert *CssmData) int32 {
+	return _fnCSSM_VerifyDevice(cspHandle, deviceCert)
 }
 
-func CSSM_VerifyMac(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32, mac *CssmData) int32 {
-	return _fnCSSM_VerifyMac(cCHandle, dataBufs, dataBufCount, mac)
+func CSSM_VerifyMac(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32, mac *CssmData) int32 {
+	return _fnCSSM_VerifyMac(ccHandle, dataBufs, dataBufCount, mac)
 }
 
-func CSSM_VerifyMacFinal(cCHandle uint64, mac *CssmData) int32 {
-	return _fnCSSM_VerifyMacFinal(cCHandle, mac)
+func CSSM_VerifyMacFinal(ccHandle uint64, mac *CssmData) int32 {
+	return _fnCSSM_VerifyMacFinal(ccHandle, mac)
 }
 
-func CSSM_VerifyMacInit(cCHandle uint64) int32 {
-	return _fnCSSM_VerifyMacInit(cCHandle)
+func CSSM_VerifyMacInit(ccHandle uint64) int32 {
+	return _fnCSSM_VerifyMacInit(ccHandle)
 }
 
-func CSSM_VerifyMacUpdate(cCHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
-	return _fnCSSM_VerifyMacUpdate(cCHandle, dataBufs, dataBufCount)
+func CSSM_VerifyMacUpdate(ccHandle uint64, dataBufs *CssmData, dataBufCount uint32) int32 {
+	return _fnCSSM_VerifyMacUpdate(ccHandle, dataBufs, dataBufCount)
 }
 
-func CSSM_WrapKey(cCHandle uint64, accessCred *CssmAccessCredentials, key *CssmKey, descriptiveData *CssmData, wrappedKey *CssmKey) int32 {
-	return _fnCSSM_WrapKey(cCHandle, accessCred, key, descriptiveData, wrappedKey)
+func CSSM_WrapKey(ccHandle uint64, accessCred *CssmAccessCredentials, key *CssmKey, descriptiveData *CssmData, wrappedKey *CssmKey) int32 {
+	return _fnCSSM_WrapKey(ccHandle, accessCred, key, descriptiveData, wrappedKey)
 }
 
-func CSSM_WrapKeyP(cCHandle uint64, accessCred *CssmAccessCredentials, key *CssmKey, descriptiveData *CssmData, wrappedKey *CssmKey, privilege uint64) int32 {
-	return _fnCSSM_WrapKeyP(cCHandle, accessCred, key, descriptiveData, wrappedKey, privilege)
+func CSSM_WrapKeyP(ccHandle uint64, accessCred *CssmAccessCredentials, key *CssmKey, descriptiveData *CssmData, wrappedKey *CssmKey, privilege uint64) int32 {
+	return _fnCSSM_WrapKeyP(ccHandle, accessCred, key, descriptiveData, wrappedKey, privilege)
 }
 
 func MDS_Initialize(pCallerGuid *CssmGuid, pMemoryFunctions *CssmMemoryFuncs, pDlFunctions *MdsFuncs, hMds *int) int32 {
@@ -3403,8 +3403,8 @@ func SecKeychainUnlock(keychain unsafe.Pointer, passwordLength uint, password un
 }
 
 // @function SecPKCS12Import @abstract Imports the contents of a PKCS12 formatted blob. @param pkcs12_data The PKCS#12 formatted data to be imported. @param options A dictionary containing import options. A kSecImportExportPassphrase entry is required at minimum. Only password-based PKCS12 blobs are currently supported. @param items On return, an array containing a dictionary for every item extracted. Use kSecImportItem constants to access specific elements of these dictionaries. Your code must CFRelease the array when it is no longer needed. @result errSecSuccess in case of success. errSecDecode means either the blob can't be read or it is malformed. errSecAuthFailed means an incorrect password was supplied, or data in the container is damaged. @discussion The normal behavior of this function is to import items into process memory on iOS, and into the default keychain on macOS. You can modify this behavior with entries in the options dictionary. To specify a file-based keychain and legacy access control on macOS, provide kSecImportExportKeychain with a SecKeychainRef value, and/or kSecImportExportAccess with a SecAccessRef value. In macOS 14 and later, it is possible to specify the data protection keychain instead of a file-based keychain by including kSecUseDataProtectionKeychain with a value of kCFBooleanTrue. Starting with macOS 15 and iOS 18, kSecImportToMemoryOnly (with a value of kCFBooleanTrue) allows you to skip importing to the keychain on macOS and explicitly specify iOS behavior.
-func SecPKCS12Import(pkcs12_data unsafe.Pointer, options unsafe.Pointer, items unsafe.Pointer) int {
-	return _fnSecPKCS12Import(pkcs12_data, options, items)
+func SecPKCS12Import(pkcs12Data unsafe.Pointer, options unsafe.Pointer, items unsafe.Pointer) int {
+	return _fnSecPKCS12Import(pkcs12Data, options, items)
 }
 
 func SecPolicyCopyProperties(policyRef unsafe.Pointer) unsafe.Pointer {
@@ -4093,13 +4093,13 @@ func SecProtocolMetadataCopyServerName(metadata unsafe.Pointer) string {
 }
 
 // C function: sec_protocol_metadata_create_secret
-func SecProtocolMetadataCreateSecret(metadata unsafe.Pointer, label_len uint, label string, exporter_length uint) unsafe.Pointer {
-	return _sec_protocol_metadata_create_secret(metadata, label_len, label, exporter_length)
+func SecProtocolMetadataCreateSecret(metadata unsafe.Pointer, labelLen uint, label string, exporterLength uint) unsafe.Pointer {
+	return _sec_protocol_metadata_create_secret(metadata, labelLen, label, exporterLength)
 }
 
 // C function: sec_protocol_metadata_create_secret_with_context
-func SecProtocolMetadataCreateSecretWithContext(metadata unsafe.Pointer, label_len uint, label string, context_len uint, context_ *uint8, exporter_length uint) unsafe.Pointer {
-	return _sec_protocol_metadata_create_secret_with_context(metadata, label_len, label, context_len, context_, exporter_length)
+func SecProtocolMetadataCreateSecretWithContext(metadata unsafe.Pointer, labelLen uint, label string, contextLen uint, context_ *uint8, exporterLength uint) unsafe.Pointer {
+	return _sec_protocol_metadata_create_secret_with_context(metadata, labelLen, label, contextLen, context_, exporterLength)
 }
 
 // C function: sec_protocol_metadata_get_early_data_accepted
@@ -4145,13 +4145,13 @@ func SecProtocolMetadataPeersAreEqual(metadataA unsafe.Pointer, metadataB unsafe
 }
 
 // C function: sec_protocol_options_add_pre_shared_key
-func SecProtocolOptionsAddPreSharedKey(options unsafe.Pointer, psk unsafe.Pointer, psk_identity unsafe.Pointer) {
-	_sec_protocol_options_add_pre_shared_key(options, psk, psk_identity)
+func SecProtocolOptionsAddPreSharedKey(options unsafe.Pointer, psk unsafe.Pointer, pskIdentity unsafe.Pointer) {
+	_sec_protocol_options_add_pre_shared_key(options, psk, pskIdentity)
 }
 
 // C function: sec_protocol_options_add_tls_application_protocol
-func SecProtocolOptionsAddTlsApplicationProtocol(options unsafe.Pointer, application_protocol string) {
-	_sec_protocol_options_add_tls_application_protocol(options, application_protocol)
+func SecProtocolOptionsAddTlsApplicationProtocol(options unsafe.Pointer, applicationProtocol string) {
+	_sec_protocol_options_add_tls_application_protocol(options, applicationProtocol)
 }
 
 // C function: sec_protocol_options_add_tls_ciphersuite
@@ -4202,27 +4202,27 @@ func SecProtocolOptionsGetDefaultMinTlsProtocolVersion() Tls_protocol_version_t 
 }
 
 // C function: sec_protocol_options_set_challenge_block
-func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challenge_block func(unsafe.Pointer, objc.Block), challenge_queue unsafe.Pointer) {
-	var __block_challenge_block objc.Block
-	if challenge_block != nil {
-		__block_challenge_block = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 objc.Block) {
-			challenge_block(blockParam0, blockParam1)
+func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challengeBlock func(unsafe.Pointer, objc.Block), challengeQueue unsafe.Pointer) {
+	var __block_challengeBlock objc.Block
+	if challengeBlock != nil {
+		__block_challengeBlock = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 objc.Block) {
+			challengeBlock(blockParam0, blockParam1)
 		})
-		defer __block_challenge_block.Release()
+		defer __block_challengeBlock.Release()
 	}
-	_sec_protocol_options_set_challenge_block(options, __block_challenge_block, challenge_queue)
+	_sec_protocol_options_set_challenge_block(options, __block_challengeBlock, challengeQueue)
 }
 
 // C function: sec_protocol_options_set_key_update_block
-func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, key_update_block func(unsafe.Pointer, objc.Block), key_update_queue unsafe.Pointer) {
-	var __block_key_update_block objc.Block
-	if key_update_block != nil {
-		__block_key_update_block = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 objc.Block) {
-			key_update_block(blockParam0, blockParam1)
+func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, keyUpdateBlock func(unsafe.Pointer, objc.Block), keyUpdateQueue unsafe.Pointer) {
+	var __block_keyUpdateBlock objc.Block
+	if keyUpdateBlock != nil {
+		__block_keyUpdateBlock = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 objc.Block) {
+			keyUpdateBlock(blockParam0, blockParam1)
 		})
-		defer __block_key_update_block.Release()
+		defer __block_keyUpdateBlock.Release()
 	}
-	_sec_protocol_options_set_key_update_block(options, __block_key_update_block, key_update_queue)
+	_sec_protocol_options_set_key_update_block(options, __block_keyUpdateBlock, keyUpdateQueue)
 }
 
 // C function: sec_protocol_options_set_local_identity
@@ -4241,20 +4241,20 @@ func SecProtocolOptionsSetMinTlsProtocolVersion(options unsafe.Pointer, version 
 }
 
 // C function: sec_protocol_options_set_peer_authentication_required
-func SecProtocolOptionsSetPeerAuthenticationRequired(options unsafe.Pointer, peer_authentication_required bool) {
-	_sec_protocol_options_set_peer_authentication_required(options, peer_authentication_required)
+func SecProtocolOptionsSetPeerAuthenticationRequired(options unsafe.Pointer, peerAuthenticationRequired bool) {
+	_sec_protocol_options_set_peer_authentication_required(options, peerAuthenticationRequired)
 }
 
 // C function: sec_protocol_options_set_pre_shared_key_selection_block
-func SecProtocolOptionsSetPreSharedKeySelectionBlock(options unsafe.Pointer, psk_selection_block func(unsafe.Pointer, unsafe.Pointer, objc.Block), psk_selection_queue unsafe.Pointer) {
-	var __block_psk_selection_block objc.Block
-	if psk_selection_block != nil {
-		__block_psk_selection_block = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 unsafe.Pointer, blockParam2 objc.Block) {
-			psk_selection_block(blockParam0, blockParam1, blockParam2)
+func SecProtocolOptionsSetPreSharedKeySelectionBlock(options unsafe.Pointer, pskSelectionBlock func(unsafe.Pointer, unsafe.Pointer, objc.Block), pskSelectionQueue unsafe.Pointer) {
+	var __block_pskSelectionBlock objc.Block
+	if pskSelectionBlock != nil {
+		__block_pskSelectionBlock = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 unsafe.Pointer, blockParam2 objc.Block) {
+			pskSelectionBlock(blockParam0, blockParam1, blockParam2)
 		})
-		defer __block_psk_selection_block.Release()
+		defer __block_pskSelectionBlock.Release()
 	}
-	_sec_protocol_options_set_pre_shared_key_selection_block(options, __block_psk_selection_block, psk_selection_queue)
+	_sec_protocol_options_set_pre_shared_key_selection_block(options, __block_pskSelectionBlock, pskSelectionQueue)
 }
 
 // C function: sec_protocol_options_set_tls_diffie_hellman_parameters
@@ -4264,13 +4264,13 @@ func SecProtocolOptionsSetTlsDiffieHellmanParameters(options unsafe.Pointer, par
 }
 
 // C function: sec_protocol_options_set_tls_false_start_enabled
-func SecProtocolOptionsSetTlsFalseStartEnabled(options unsafe.Pointer, false_start_enabled bool) {
-	_sec_protocol_options_set_tls_false_start_enabled(options, false_start_enabled)
+func SecProtocolOptionsSetTlsFalseStartEnabled(options unsafe.Pointer, falseStartEnabled bool) {
+	_sec_protocol_options_set_tls_false_start_enabled(options, falseStartEnabled)
 }
 
 // C function: sec_protocol_options_set_tls_is_fallback_attempt
-func SecProtocolOptionsSetTlsIsFallbackAttempt(options unsafe.Pointer, is_fallback_attempt bool) {
-	_sec_protocol_options_set_tls_is_fallback_attempt(options, is_fallback_attempt)
+func SecProtocolOptionsSetTlsIsFallbackAttempt(options unsafe.Pointer, isFallbackAttempt bool) {
+	_sec_protocol_options_set_tls_is_fallback_attempt(options, isFallbackAttempt)
 }
 
 // C function: sec_protocol_options_set_tls_max_version
@@ -4284,50 +4284,50 @@ func SecProtocolOptionsSetTlsMinVersion(options unsafe.Pointer, version SSLProto
 }
 
 // C function: sec_protocol_options_set_tls_ocsp_enabled
-func SecProtocolOptionsSetTlsOcspEnabled(options unsafe.Pointer, ocsp_enabled bool) {
-	_sec_protocol_options_set_tls_ocsp_enabled(options, ocsp_enabled)
+func SecProtocolOptionsSetTlsOcspEnabled(options unsafe.Pointer, ocspEnabled bool) {
+	_sec_protocol_options_set_tls_ocsp_enabled(options, ocspEnabled)
 }
 
 // C function: sec_protocol_options_set_tls_pre_shared_key_identity_hint
-func SecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options unsafe.Pointer, psk_identity_hint unsafe.Pointer) {
-	_sec_protocol_options_set_tls_pre_shared_key_identity_hint(options, psk_identity_hint)
+func SecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options unsafe.Pointer, pskIdentityHint unsafe.Pointer) {
+	_sec_protocol_options_set_tls_pre_shared_key_identity_hint(options, pskIdentityHint)
 }
 
 // C function: sec_protocol_options_set_tls_renegotiation_enabled
-func SecProtocolOptionsSetTlsRenegotiationEnabled(options unsafe.Pointer, renegotiation_enabled bool) {
-	_sec_protocol_options_set_tls_renegotiation_enabled(options, renegotiation_enabled)
+func SecProtocolOptionsSetTlsRenegotiationEnabled(options unsafe.Pointer, renegotiationEnabled bool) {
+	_sec_protocol_options_set_tls_renegotiation_enabled(options, renegotiationEnabled)
 }
 
 // C function: sec_protocol_options_set_tls_resumption_enabled
-func SecProtocolOptionsSetTlsResumptionEnabled(options unsafe.Pointer, resumption_enabled bool) {
-	_sec_protocol_options_set_tls_resumption_enabled(options, resumption_enabled)
+func SecProtocolOptionsSetTlsResumptionEnabled(options unsafe.Pointer, resumptionEnabled bool) {
+	_sec_protocol_options_set_tls_resumption_enabled(options, resumptionEnabled)
 }
 
 // C function: sec_protocol_options_set_tls_sct_enabled
-func SecProtocolOptionsSetTlsSctEnabled(options unsafe.Pointer, sct_enabled bool) {
-	_sec_protocol_options_set_tls_sct_enabled(options, sct_enabled)
+func SecProtocolOptionsSetTlsSctEnabled(options unsafe.Pointer, sctEnabled bool) {
+	_sec_protocol_options_set_tls_sct_enabled(options, sctEnabled)
 }
 
 // C function: sec_protocol_options_set_tls_server_name
-func SecProtocolOptionsSetTlsServerName(options unsafe.Pointer, server_name string) {
-	_sec_protocol_options_set_tls_server_name(options, server_name)
+func SecProtocolOptionsSetTlsServerName(options unsafe.Pointer, serverName string) {
+	_sec_protocol_options_set_tls_server_name(options, serverName)
 }
 
 // C function: sec_protocol_options_set_tls_tickets_enabled
-func SecProtocolOptionsSetTlsTicketsEnabled(options unsafe.Pointer, tickets_enabled bool) {
-	_sec_protocol_options_set_tls_tickets_enabled(options, tickets_enabled)
+func SecProtocolOptionsSetTlsTicketsEnabled(options unsafe.Pointer, ticketsEnabled bool) {
+	_sec_protocol_options_set_tls_tickets_enabled(options, ticketsEnabled)
 }
 
 // C function: sec_protocol_options_set_verify_block
-func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verify_block func(unsafe.Pointer, unsafe.Pointer, objc.Block), verify_block_queue unsafe.Pointer) {
-	var __block_verify_block objc.Block
-	if verify_block != nil {
-		__block_verify_block = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 unsafe.Pointer, blockParam2 objc.Block) {
-			verify_block(blockParam0, blockParam1, blockParam2)
+func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verifyBlock func(unsafe.Pointer, unsafe.Pointer, objc.Block), verifyBlockQueue unsafe.Pointer) {
+	var __block_verifyBlock objc.Block
+	if verifyBlock != nil {
+		__block_verifyBlock = objc.NewBlock(func(_ objc.Block, blockParam0 unsafe.Pointer, blockParam1 unsafe.Pointer, blockParam2 objc.Block) {
+			verifyBlock(blockParam0, blockParam1, blockParam2)
 		})
-		defer __block_verify_block.Release()
+		defer __block_verifyBlock.Release()
 	}
-	_sec_protocol_options_set_verify_block(options, __block_verify_block, verify_block_queue)
+	_sec_protocol_options_set_verify_block(options, __block_verifyBlock, verifyBlockQueue)
 }
 
 // C function: sec_release

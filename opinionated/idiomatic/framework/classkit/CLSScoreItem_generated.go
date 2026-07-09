@@ -5,6 +5,8 @@
 package classkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -72,12 +74,14 @@ func (si *ScoreItem) WithTitle(title string) *ScoreItem {
 
 // Score returns score out of Should be between zero and
 func (si *ScoreItem) Score() float64 {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("score"))
 	return _r
 }
 
 // MaxScore returns total score possible. Must be greater than zero.
 func (si *ScoreItem) MaxScore() float64 {
+	defer runtime.KeepAlive(si)
 	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("maxScore"))
 	return _r
 }

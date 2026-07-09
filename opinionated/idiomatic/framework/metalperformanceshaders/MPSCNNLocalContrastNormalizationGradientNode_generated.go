@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,9 @@ func cNNLocalContrastNormalizationGradientNodeAdopt(id objc.ID) *CNNLocalContras
 
 // NewCNNLocalContrastNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight creates a new CNNLocalContrastNormalizationGradientNode.
 func NewCNNLocalContrastNormalizationGradientNodeWithSourceGradientSourceImageGradientStateKernelWidthKernelHeight(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, kernelWidth int, kernelHeight int) *CNNLocalContrastNormalizationGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNLocalContrastNormalizationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:kernelWidth:kernelHeight:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), kernelWidth, kernelHeight)
 	return cNNLocalContrastNormalizationGradientNodeAdopt(_id)
@@ -97,48 +102,56 @@ func (clcngn *CNNLocalContrastNormalizationGradientNode) WithLabel(label string)
 
 // Alpha returns the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
 func (clcngn *CNNLocalContrastNormalizationGradientNode) Alpha() float32 {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[float32](objref.IDOf(clcngn), objc.RegisterName("alpha"))
 	return _r
 }
 
 // Beta returns the value of beta.  Default is 0.5
 func (clcngn *CNNLocalContrastNormalizationGradientNode) Beta() float32 {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[float32](objref.IDOf(clcngn), objc.RegisterName("beta"))
 	return _r
 }
 
 // Delta returns the value of delta.  Default is 1/1024
 func (clcngn *CNNLocalContrastNormalizationGradientNode) Delta() float32 {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[float32](objref.IDOf(clcngn), objc.RegisterName("delta"))
 	return _r
 }
 
 // P0 returns the value of p0.  Default is 1.0
 func (clcngn *CNNLocalContrastNormalizationGradientNode) P0() float32 {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[float32](objref.IDOf(clcngn), objc.RegisterName("p0"))
 	return _r
 }
 
 // Pm returns the value of pm.  Default is 0.0
 func (clcngn *CNNLocalContrastNormalizationGradientNode) Pm() float32 {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[float32](objref.IDOf(clcngn), objc.RegisterName("pm"))
 	return _r
 }
 
 // Ps returns the value of ps.  Default is 1.0
 func (clcngn *CNNLocalContrastNormalizationGradientNode) Ps() float32 {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[float32](objref.IDOf(clcngn), objc.RegisterName("ps"))
 	return _r
 }
 
 // KernelWidth returns the kernel width.
 func (clcngn *CNNLocalContrastNormalizationGradientNode) KernelWidth() int {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[int](objref.IDOf(clcngn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the kernel height.
 func (clcngn *CNNLocalContrastNormalizationGradientNode) KernelHeight() int {
+	defer runtime.KeepAlive(clcngn)
 	_r := objc.Send[int](objref.IDOf(clcngn), objc.RegisterName("kernelHeight"))
 	return _r
 }

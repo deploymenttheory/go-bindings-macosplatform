@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func transformMatrixOpAdopt(id objc.ID) *TransformMatrixOp {
 
 // Description returns the object's -description text.
 func (tmo *TransformMatrixOp) Description() string {
+	defer runtime.KeepAlive(tmo)
 	return rt.Description(objref.IDOf(tmo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tmo *TransformMatrixOp) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tmo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tmo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tmo *TransformMatrixOp) IsKind(className string) bool {
+	defer runtime.KeepAlive(tmo)
 	return rt.IsKind(objref.IDOf(tmo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tmo *TransformMatrixOp) String() string {
+	defer runtime.KeepAlive(tmo)
 	return rt.Description(objref.IDOf(tmo))
 }
 
@@ -72,6 +79,7 @@ func NewTransformMatrixOp() *TransformMatrixOp {
 
 // Name returns the name.
 func (tmo *TransformMatrixOp) Name() string {
+	defer runtime.KeepAlive(tmo)
 	_r := objc.Send[objc.ID](objref.IDOf(tmo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (tmo *TransformMatrixOp) Name() string {
 
 // AnimatedValue returns the animated value.
 func (tmo *TransformMatrixOp) AnimatedValue() *AnimatedMatrix4x4 {
+	defer runtime.KeepAlive(tmo)
 	_r := objc.Send[objc.ID](objref.IDOf(tmo), objc.RegisterName("animatedValue"))
 	return AnimatedMatrix4x4FromID(_r)
 }

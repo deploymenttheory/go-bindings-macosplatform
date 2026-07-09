@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,30 +52,35 @@ func mTRContentLauncherClusterLauncherResponseParamsAdopt(id objc.ID) *MTRConten
 
 // Description returns the object's -description text.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Description() string {
+	defer runtime.KeepAlive(mclclrp)
 	return rt.Description(objref.IDOf(mclclrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclclrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclclrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclclrp)
 	return rt.IsKind(objref.IDOf(mclclrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) String() string {
+	defer runtime.KeepAlive(mclclrp)
 	return rt.Description(objref.IDOf(mclclrp))
 }
 
-// NewMTRContentLauncherClusterLauncherResponseParamsWithResponseValueError initialize an MTRContentLauncherClusterLauncherResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRContentLauncherClusterLauncherResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRContentLauncherClusterLauncherResponseParams, err error) {
+// NewMTRContentLauncherClusterLauncherResponseParamsWithResponseValue initialize an MTRContentLauncherClusterLauncherResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRContentLauncherClusterLauncherResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRContentLauncherClusterLauncherResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterLauncherResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,6 +89,7 @@ func NewMTRContentLauncherClusterLauncherResponseParamsWithResponseValueError(re
 
 // WithStatus sets the status.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) WithStatus(status obj.Object) *MTRContentLauncherClusterLauncherResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mclclrp
 }
@@ -94,18 +102,21 @@ func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) WithData(data st
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLauncherResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mclclrp
 }
 
 // Status returns the status.
-func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Status() obj.Object {
+func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mclclrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
 func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Data() string {
+	defer runtime.KeepAlive(mclclrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -114,9 +125,10 @@ func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) Data() string {
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mclclrp *MTRContentLauncherClusterLauncherResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mclclrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRContentLauncherClusterLauncherResponseParams marks MTRContentLauncherClusterLauncherResponseParams — and, by embedding promotion, its

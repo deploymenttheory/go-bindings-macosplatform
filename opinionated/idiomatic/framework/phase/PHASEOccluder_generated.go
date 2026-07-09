@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,6 +50,7 @@ func occluderAdopt(id objc.ID) *Occluder {
 
 // NewOccluderWithEngineShapes creates an occluder with the given engine and shapes.
 func NewOccluderWithEngineShapes(engine *Engine, shapes []*Shape) *Occluder {
+	defer runtime.KeepAlive(engine)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEOccluder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:shapes:"), objref.IDOf(engine), purego.SliceToNSArray(shapes, func(_v *Shape) objc.ID { return objref.IDOf(_v) }))
 	return occluderAdopt(_id)
@@ -70,6 +72,7 @@ func (o *Occluder) WithWorldTransform(worldTransform unsafe.Pointer) *Occluder {
 //
 // Shapes returns the collection as a Go slice.
 func (o *Occluder) Shapes() []*Shape {
+	defer runtime.KeepAlive(o)
 	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("shapes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }

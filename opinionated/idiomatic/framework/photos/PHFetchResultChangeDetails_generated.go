@@ -5,7 +5,10 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func fetchResultChangeDetailsAdopt(id objc.ID) *FetchResultChangeDetails {
 
 // Description returns the object's -description text.
 func (frcd *FetchResultChangeDetails) Description() string {
+	defer runtime.KeepAlive(frcd)
 	return rt.Description(objref.IDOf(frcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (frcd *FetchResultChangeDetails) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(frcd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(frcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (frcd *FetchResultChangeDetails) IsKind(className string) bool {
+	defer runtime.KeepAlive(frcd)
 	return rt.IsKind(objref.IDOf(frcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (frcd *FetchResultChangeDetails) String() string {
+	defer runtime.KeepAlive(frcd)
 	return rt.Description(objref.IDOf(frcd))
 }
 
@@ -74,65 +82,76 @@ func NewFetchResultChangeDetails() *FetchResultChangeDetails {
 
 // EnumerateMovesWith runs the specified block for each case where an object has moved from one index to another in the fetch result.
 func (frcd *FetchResultChangeDetails) EnumerateMovesWith(handler func(int, int)) {
+	defer runtime.KeepAlive(frcd)
 	objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("enumerateMovesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { handler(_b0, _b1) }))
 }
 
 // FetchResultBeforeChanges returns the fetch result before changes.
 func (frcd *FetchResultChangeDetails) FetchResultBeforeChanges() obj.Object {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("fetchResultBeforeChanges"))
 	return obj.Wrap(_r)
 }
 
 // FetchResultAfterChanges returns the fetch result after changes.
 func (frcd *FetchResultChangeDetails) FetchResultAfterChanges() obj.Object {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("fetchResultAfterChanges"))
 	return obj.Wrap(_r)
 }
 
 // HasIncrementalChanges reports whether the object has incremental changes.
 func (frcd *FetchResultChangeDetails) HasIncrementalChanges() bool {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[bool](objref.IDOf(frcd), objc.RegisterName("hasIncrementalChanges"))
 	return _r
 }
 
 // RemovedIndexes returns the removed indexes.
-func (frcd *FetchResultChangeDetails) RemovedIndexes() obj.Object {
+func (frcd *FetchResultChangeDetails) RemovedIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("removedIndexes"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // RemovedObjects returns the removed objects.
 func (frcd *FetchResultChangeDetails) RemovedObjects() []obj.Object {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("removedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // InsertedIndexes returns the inserted indexes.
-func (frcd *FetchResultChangeDetails) InsertedIndexes() obj.Object {
+func (frcd *FetchResultChangeDetails) InsertedIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("insertedIndexes"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // InsertedObjects returns the inserted objects.
 func (frcd *FetchResultChangeDetails) InsertedObjects() []obj.Object {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("insertedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ChangedIndexes returns the changed indexes.
-func (frcd *FetchResultChangeDetails) ChangedIndexes() obj.Object {
+func (frcd *FetchResultChangeDetails) ChangedIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("changedIndexes"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 // ChangedObjects returns the changed objects.
 func (frcd *FetchResultChangeDetails) ChangedObjects() []obj.Object {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[objc.ID](objref.IDOf(frcd), objc.RegisterName("changedObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HasMoves reports whether the object has moves.
 func (frcd *FetchResultChangeDetails) HasMoves() bool {
+	defer runtime.KeepAlive(frcd)
 	_r := objc.Send[bool](objref.IDOf(frcd), objc.RegisterName("hasMoves"))
 	return _r
 }

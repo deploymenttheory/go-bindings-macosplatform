@@ -5,10 +5,14 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -134,6 +138,7 @@ func (tl *TiledLayer) WithSublayers(items ...LayerProvider) *TiledLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (tl *TiledLayer) WithMask(mask LayerProvider) *TiledLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return tl
 }
@@ -146,6 +151,7 @@ func (tl *TiledLayer) WithMasksToBounds(masksToBounds bool) *TiledLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (tl *TiledLayer) WithContents(contents obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return tl
 }
@@ -158,6 +164,7 @@ func (tl *TiledLayer) WithContentsRect(contentsRect corefoundation.CGRect) *Tile
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (tl *TiledLayer) WithContentsGravity(contentsGravity obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return tl
 }
@@ -176,6 +183,7 @@ func (tl *TiledLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (tl *TiledLayer) WithContentsFormat(contentsFormat obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return tl
 }
@@ -188,12 +196,14 @@ func (tl *TiledLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicR
 
 // WithToneMapMode sets the tone map mode.
 func (tl *TiledLayer) WithToneMapMode(toneMapMode obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return tl
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (tl *TiledLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return tl
 }
@@ -206,12 +216,14 @@ func (tl *TiledLayer) WithContentsHeadroom(contentsHeadroom float64) *TiledLayer
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (tl *TiledLayer) WithMinificationFilter(minificationFilter obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return tl
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (tl *TiledLayer) WithMagnificationFilter(magnificationFilter obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return tl
 }
@@ -254,6 +266,7 @@ func (tl *TiledLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *T
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (tl *TiledLayer) WithBackgroundColor(backgroundColor obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return tl
 }
@@ -272,6 +285,7 @@ func (tl *TiledLayer) WithMaskedCorners(maskedCorners CornerMask) *TiledLayer {
 
 // WithCornerCurve sets the corner curve.
 func (tl *TiledLayer) WithCornerCurve(cornerCurve obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return tl
 }
@@ -284,6 +298,7 @@ func (tl *TiledLayer) WithBorderWidth(borderWidth float64) *TiledLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (tl *TiledLayer) WithBorderColor(borderColor obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return tl
 }
@@ -302,6 +317,7 @@ func (tl *TiledLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TiledLaye
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (tl *TiledLayer) WithCompositingFilter(compositingFilter obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return tl
 }
@@ -320,6 +336,7 @@ func (tl *TiledLayer) WithRasterizationScale(rasterizationScale float64) *TiledL
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (tl *TiledLayer) WithShadowColor(shadowColor obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return tl
 }
@@ -344,6 +361,7 @@ func (tl *TiledLayer) WithShadowRadius(shadowRadius float64) *TiledLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (tl *TiledLayer) WithShadowPath(shadowPath obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return tl
 }
@@ -355,8 +373,8 @@ func (tl *TiledLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *T
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (tl *TiledLayer) WithActions(actions obj.Object) *TiledLayer {
-	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (tl *TiledLayer) WithActions(actions map[string]obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return tl
 }
 
@@ -366,8 +384,19 @@ func (tl *TiledLayer) WithName(name string) *TiledLayer {
 	return tl
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (tl *TiledLayer) WithDelegate(delegate LayerDelegate) *TiledLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(tl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return tl
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (tl *TiledLayer) WithStyle(style obj.Object) *TiledLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return tl
 }
@@ -381,18 +410,21 @@ func (tl *TiledLayer) WithConstraints(items ...*Constraint) *TiledLayer {
 
 // LevelsOfDetail returns the levels of detail.
 func (tl *TiledLayer) LevelsOfDetail() int {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("levelsOfDetail"))
 	return _r
 }
 
 // LevelsOfDetailBias returns the levels of detail bias.
 func (tl *TiledLayer) LevelsOfDetailBias() int {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("levelsOfDetailBias"))
 	return _r
 }
 
 // TileSize returns the tile size.
 func (tl *TiledLayer) TileSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tl), objc.RegisterName("tileSize"))
 	return _r
 }

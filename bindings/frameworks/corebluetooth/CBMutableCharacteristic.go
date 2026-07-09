@@ -39,8 +39,8 @@ func CBMutableCharacteristicFromID(id objc.ID) *CBMutableCharacteristic {
 }
 
 // Creates a mutable characteristic with specified permissions, properties, and value.
-func (o *CBMutableCharacteristic) InitWithTypePropertiesValuePermissions(uUID *CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *CBMutableCharacteristic {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableCharacteristicSelInitWithTypePropertiesValuePermissions, uUID.Ptr(), properties, value.Ptr(), permissions)
+func (o *CBMutableCharacteristic) InitWithTypePropertiesValuePermissions(uuid *CBUUID, properties CBCharacteristicProperties, value *foundation.NSData, permissions CBAttributePermissions) *CBMutableCharacteristic {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cBMutableCharacteristicSelInitWithTypePropertiesValuePermissions, uuid.Ptr(), properties, value.Ptr(), permissions)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

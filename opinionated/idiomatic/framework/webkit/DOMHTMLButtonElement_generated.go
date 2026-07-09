@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -183,24 +185,28 @@ func (dbe *DOMHTMLButtonElement) WithTextContent(textContent string) *DOMHTMLBut
 
 // Autofocus wraps the corresponding Objective-C method.
 func (dbe *DOMHTMLButtonElement) Autofocus() bool {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[bool](objref.IDOf(dbe), objc.RegisterName("autofocus"))
 	return _r
 }
 
 // Disabled wraps the corresponding Objective-C method.
 func (dbe *DOMHTMLButtonElement) Disabled() bool {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[bool](objref.IDOf(dbe), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Form returns the form.
 func (dbe *DOMHTMLButtonElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Type returns the type.
 func (dbe *DOMHTMLButtonElement) Type() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -210,6 +216,7 @@ func (dbe *DOMHTMLButtonElement) Type() string {
 
 // Name returns the name.
 func (dbe *DOMHTMLButtonElement) Name() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -219,6 +226,7 @@ func (dbe *DOMHTMLButtonElement) Name() string {
 
 // Value returns the value.
 func (dbe *DOMHTMLButtonElement) Value() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -228,6 +236,7 @@ func (dbe *DOMHTMLButtonElement) Value() string {
 
 // WillValidate wraps the corresponding Objective-C method.
 func (dbe *DOMHTMLButtonElement) WillValidate() bool {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[bool](objref.IDOf(dbe), objc.RegisterName("willValidate"))
 	return _r
 }

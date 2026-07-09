@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,52 +49,61 @@ func nEPacketAdopt(id objc.ID) *NEPacket {
 
 // Description returns the object's -description text.
 func (np *NEPacket) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NEPacket) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NEPacket) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NEPacket) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // NewNEPacketWithDataProtocolFamily initializes a new NEPacket object with data and protocol family.
-func NewNEPacketWithDataProtocolFamily(data obj.Object, protocolFamily uint8) *NEPacket {
+func NewNEPacketWithDataProtocolFamily(data []byte, protocolFamily uint8) *NEPacket {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NEPacket")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:protocolFamily:"), objref.IDOf(data), protocolFamily)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:protocolFamily:"), rt.BytesToNSData(data), protocolFamily)
 	return nEPacketAdopt(_id)
 }
 
 // Data returns the data content of the packet.
-func (np *NEPacket) Data() obj.Object {
+func (np *NEPacket) Data() []byte {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ProtocolFamily returns the protocol family of the packet (such as AF_INET or AF_INET6).
 func (np *NEPacket) ProtocolFamily() uint8 {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[uint8](objref.IDOf(np), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
 // Direction returns the direction of the packet.
 func (np *NEPacket) Direction() NETrafficDirection {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[NETrafficDirection](objref.IDOf(np), objc.RegisterName("direction"))
 	return _r
 }
 
 // Metadata returns metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
 func (np *NEPacket) Metadata() *NEFlowMetaData {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("metadata"))
 	return NEFlowMetaDataFromID(_r)
 }

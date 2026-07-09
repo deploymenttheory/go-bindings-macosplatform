@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,24 +54,28 @@ func NewMTRTestClusterClusterTestFabricScoped() *MTRTestClusterClusterTestFabric
 
 // WithFabricSensitiveInt8u sets the fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	defer runtime.KeepAlive(fabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
 	return mtcctfs
 }
 
 // WithOptionalFabricSensitiveInt8u sets the optional fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	defer runtime.KeepAlive(optionalFabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
 	return mtcctfs
 }
 
 // WithNullableFabricSensitiveInt8u sets the nullable fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	defer runtime.KeepAlive(nullableFabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
 	return mtcctfs
 }
 
 // WithNullableOptionalFabricSensitiveInt8u sets the nullable optional fabric sensitive int8u.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	defer runtime.KeepAlive(nullableOptionalFabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
 	return mtcctfs
 }
@@ -82,12 +88,14 @@ func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveCharStr
 
 // WithFabricSensitiveStruct sets the fabric sensitive struct.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestFabricScoped {
+	defer runtime.KeepAlive(fabricSensitiveStruct)
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
 	return mtcctfs
 }
 
 // WithFabricIndex sets the fabric index.
 func (mtcctfs *MTRTestClusterClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScoped {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mtcctfs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mtcctfs
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRDoorLockClusterDlCredential() *MTRDoorLockClusterDlCredential {
 
 // WithCredentialType sets the credential type.
 func (mdlcdc *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential {
+	defer runtime.KeepAlive(credentialType)
 	objc.Send[objc.ID](objref.IDOf(mdlcdc), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 	return mdlcdc
 }
 
 // WithCredentialIndex sets the credential index.
 func (mdlcdc *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential {
+	defer runtime.KeepAlive(credentialIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcdc), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 	return mdlcdc
 }

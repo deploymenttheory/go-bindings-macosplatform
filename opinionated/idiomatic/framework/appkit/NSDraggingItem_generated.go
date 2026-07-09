@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func draggingItemAdopt(id objc.ID) *DraggingItem {
 
 // Description returns the object's -description text.
 func (di *DraggingItem) Description() string {
+	defer runtime.KeepAlive(di)
 	return rt.Description(objref.IDOf(di))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (di *DraggingItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(di), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (di *DraggingItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(di)
 	return rt.IsKind(objref.IDOf(di), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (di *DraggingItem) String() string {
+	defer runtime.KeepAlive(di)
 	return rt.Description(objref.IDOf(di))
 }
 
@@ -81,17 +88,21 @@ func (di *DraggingItem) WithDraggingFrame(draggingFrame corefoundation.CGRect) *
 
 // SetDraggingFrameContents sets the item’s dragging frame and contents.
 func (di *DraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, contents obj.Object) {
+	defer runtime.KeepAlive(di)
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setDraggingFrame:contents:"), frame, objref.IDOf(contents))
 }
 
 // Item returns the item.
 func (di *DraggingItem) Item() obj.Object {
+	defer runtime.KeepAlive(di)
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("item"))
 	return obj.Wrap(_r)
 }
 
 // DraggingFrame returns the dragging frame.
 func (di *DraggingItem) DraggingFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(di)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(di), objc.RegisterName("draggingFrame"))
 	return _r
 }
@@ -100,6 +111,7 @@ func (di *DraggingItem) DraggingFrame() corefoundation.CGRect {
 //
 // ImageComponents returns the collection as a Go slice.
 func (di *DraggingItem) ImageComponents() []*DraggingImageComponent {
+	defer runtime.KeepAlive(di)
 	_arr := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("imageComponents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
 }

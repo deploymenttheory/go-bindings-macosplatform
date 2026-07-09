@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,53 +49,64 @@ func syncEngineFetchChangesScopeAdopt(id objc.ID) *SyncEngineFetchChangesScope {
 
 // Description returns the object's -description text.
 func (sefcs *SyncEngineFetchChangesScope) Description() string {
+	defer runtime.KeepAlive(sefcs)
 	return rt.Description(objref.IDOf(sefcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sefcs *SyncEngineFetchChangesScope) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sefcs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sefcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sefcs *SyncEngineFetchChangesScope) IsKind(className string) bool {
+	defer runtime.KeepAlive(sefcs)
 	return rt.IsKind(objref.IDOf(sefcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sefcs *SyncEngineFetchChangesScope) String() string {
+	defer runtime.KeepAlive(sefcs)
 	return rt.Description(objref.IDOf(sefcs))
 }
 
 // NewSyncEngineFetchChangesScopeWithZoneIDs creates a scope that includes only the specified set of zones.
-func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs obj.Object) *SyncEngineFetchChangesScope {
+func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs []*RecordZoneID) *SyncEngineFetchChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), objref.IDOf(zoneIDs))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), rt.SliceToNSSet(zoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 	return syncEngineFetchChangesScopeAdopt(_id)
 }
 
 // NewSyncEngineFetchChangesScopeWithExcludedZoneIDs creates a scope that includes all zones except the specified excluded zones.
-func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs obj.Object) *SyncEngineFetchChangesScope {
+func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs []*RecordZoneID) *SyncEngineFetchChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), objref.IDOf(zoneIDs))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), rt.SliceToNSSet(zoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 	return syncEngineFetchChangesScopeAdopt(_id)
 }
 
 // ContainsZoneID returns true if the specified zone ID is included in this scope.
 func (sefcs *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *RecordZoneID) bool {
+	defer runtime.KeepAlive(sefcs)
+	defer runtime.KeepAlive(zoneID)
 	_r := objc.Send[bool](objref.IDOf(sefcs), objc.RegisterName("containsZoneID:"), objref.IDOf(zoneID))
 	return _r
 }
 
 // ZoneIDs returns a specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
-func (sefcs *SyncEngineFetchChangesScope) ZoneIDs() obj.Object {
+// The order of the returned elements is unspecified.
+func (sefcs *SyncEngineFetchChangesScope) ZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(sefcs)
 	_r := objc.Send[objc.ID](objref.IDOf(sefcs), objc.RegisterName("zoneIDs"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
 // ExcludedZoneIDs returns a specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
-func (sefcs *SyncEngineFetchChangesScope) ExcludedZoneIDs() obj.Object {
+// The order of the returned elements is unspecified.
+func (sefcs *SyncEngineFetchChangesScope) ExcludedZoneIDs() []*RecordZoneID {
+	defer runtime.KeepAlive(sefcs)
 	_r := objc.Send[objc.ID](objref.IDOf(sefcs), objc.RegisterName("excludedZoneIDs"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }

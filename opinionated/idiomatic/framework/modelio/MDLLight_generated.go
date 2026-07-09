@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -62,12 +63,14 @@ func (l *Light) WithColorSpace(colorSpace string) *Light {
 
 // WithParent sets the parent object that contains this object.
 func (l *Light) WithParent(parent ObjectProvider) *Light {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return l
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (l *Light) WithInstance(instance ObjectProvider) *Light {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return l
 }
@@ -80,24 +83,29 @@ func (l *Light) WithHidden(hidden bool) *Light {
 
 // IrradianceAtPoint returns the radiance of the light as received at a specific point in the same scene.
 func (l *Light) IrradianceAtPoint(point unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:"), point)
 	return obj.Wrap(_r)
 }
 
 // IrradianceAtPointColorSpace returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
 func (l *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace obj.Object) obj.Object {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(colorSpace)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("irradianceAtPoint:colorSpace:"), point, objref.IDOf(colorSpace))
 	return obj.Wrap(_r)
 }
 
 // LightType returns the light type.
 func (l *Light) LightType() LightType {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LightType](objref.IDOf(l), objc.RegisterName("lightType"))
 	return _r
 }
 
 // ColorSpace returns the color space.
 func (l *Light) ColorSpace() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("colorSpace"))
 	if _r == 0 {
 		return ""

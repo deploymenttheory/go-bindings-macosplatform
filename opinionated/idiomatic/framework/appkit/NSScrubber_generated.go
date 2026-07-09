@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -65,6 +66,7 @@ func NewScrubberWithFrame(frameRect corefoundation.CGRect) *Scrubber {
 
 // NewScrubberWithCoder initializes and returns a newly allocated scrubber object from a storyboard or nib file.
 func NewScrubberWithCoder(coder obj.Object) *Scrubber {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *Scrubber
 	purego.Main(func() {
 		_mainthread0 = func() *Scrubber {
@@ -78,6 +80,7 @@ func NewScrubberWithCoder(coder obj.Object) *Scrubber {
 
 // WithScrubberLayout sets an object used to describe the layout of items within the scrubber.
 func (s *Scrubber) WithScrubberLayout(scrubberLayout ScrubberLayoutProvider) *Scrubber {
+	defer runtime.KeepAlive(scrubberLayout)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScrubberLayout:"), objref.IDOf(scrubberLayout))
 	})
@@ -126,6 +129,7 @@ func (s *Scrubber) WithFloatsSelectionViews(floatsSelectionViews bool) *Scrubber
 
 // WithSelectionBackgroundStyle sets the style applied to the background of selected items.
 func (s *Scrubber) WithSelectionBackgroundStyle(selectionBackgroundStyle *ScrubberSelectionStyle) *Scrubber {
+	defer runtime.KeepAlive(selectionBackgroundStyle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSelectionBackgroundStyle:"), objref.IDOf(selectionBackgroundStyle))
 	})
@@ -134,6 +138,7 @@ func (s *Scrubber) WithSelectionBackgroundStyle(selectionBackgroundStyle *Scrubb
 
 // WithSelectionOverlayStyle sets the style overlaid on selected items.
 func (s *Scrubber) WithSelectionOverlayStyle(selectionOverlayStyle *ScrubberSelectionStyle) *Scrubber {
+	defer runtime.KeepAlive(selectionOverlayStyle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSelectionOverlayStyle:"), objref.IDOf(selectionOverlayStyle))
 	})
@@ -158,6 +163,7 @@ func (s *Scrubber) WithShowsAdditionalContentIndicators(showsAdditionalContentIn
 
 // WithBackgroundColor sets the color displayed behind the scrubber content.
 func (s *Scrubber) WithBackgroundColor(backgroundColor *Color) *Scrubber {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -166,6 +172,7 @@ func (s *Scrubber) WithBackgroundColor(backgroundColor *Color) *Scrubber {
 
 // WithBackgroundView sets a view that is displayed behind the scrubber content.
 func (s *Scrubber) WithBackgroundView(backgroundView ViewProvider) *Scrubber {
+	defer runtime.KeepAlive(backgroundView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundView:"), objref.IDOf(backgroundView))
 	})
@@ -311,6 +318,7 @@ func (s *Scrubber) WithWantsLayer(wantsLayer bool) *Scrubber {
 
 // WithLayer sets the layer.
 func (s *Scrubber) WithLayer(layer obj.Object) *Scrubber {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -360,6 +368,7 @@ func (s *Scrubber) WithBackgroundFilters(items ...obj.Object) *Scrubber {
 
 // WithCompositingFilter sets the compositing filter.
 func (s *Scrubber) WithCompositingFilter(compositingFilter obj.Object) *Scrubber {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -377,6 +386,7 @@ func (s *Scrubber) WithContentFilters(items ...obj.Object) *Scrubber {
 
 // WithShadow sets the shadow.
 func (s *Scrubber) WithShadow(shadow *Shadow) *Scrubber {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -425,6 +435,7 @@ func (s *Scrubber) WithPreparedContentRect(preparedContentRect corefoundation.CG
 
 // WithNextKeyView sets the next key view.
 func (s *Scrubber) WithNextKeyView(nextKeyView ViewProvider) *Scrubber {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -474,6 +485,7 @@ func (s *Scrubber) WithPrefersCompactControlSizeMetrics(prefersCompactControlSiz
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Scrubber) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Scrubber {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -530,6 +542,7 @@ func (s *Scrubber) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynam
 
 // WithPressureConfiguration sets the pressure configuration.
 func (s *Scrubber) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Scrubber {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -538,6 +551,7 @@ func (s *Scrubber) WithPressureConfiguration(pressureConfiguration *PressureConf
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (s *Scrubber) WithNextResponder(nextResponder ResponderProvider) *Scrubber {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -546,6 +560,7 @@ func (s *Scrubber) WithNextResponder(nextResponder ResponderProvider) *Scrubber 
 
 // WithMenu sets returns the responder’s menu.
 func (s *Scrubber) WithMenu(menu *Menu) *Scrubber {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -554,6 +569,7 @@ func (s *Scrubber) WithMenu(menu *Menu) *Scrubber {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (s *Scrubber) WithUserActivity(userActivity obj.Object) *Scrubber {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -562,6 +578,7 @@ func (s *Scrubber) WithUserActivity(userActivity obj.Object) *Scrubber {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (s *Scrubber) WithTouchBar(touchBar *TouchBar) *Scrubber {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -570,6 +587,7 @@ func (s *Scrubber) WithTouchBar(touchBar *TouchBar) *Scrubber {
 
 // ReloadData reloads the content of the entire scrubber, and deselects the currently selected item.
 func (s *Scrubber) ReloadData() {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reloadData"))
 	})
@@ -580,6 +598,7 @@ func (s *Scrubber) ReloadData() {
 //
 // PerformSequentialBatchUpdates blocks until the operation completes or ctx is cancelled.
 func (s *Scrubber) PerformSequentialBatchUpdates(ctx context.Context) error {
+	defer runtime.KeepAlive(s)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -595,6 +614,8 @@ func (s *Scrubber) PerformSequentialBatchUpdates(ctx context.Context) error {
 
 // InsertItemsAtIndexes inserts new items at the specified indexes into the scrubber.
 func (s *Scrubber) InsertItemsAtIndexes(indexes obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("insertItemsAtIndexes:"), objref.IDOf(indexes))
 	})
@@ -603,6 +624,8 @@ func (s *Scrubber) InsertItemsAtIndexes(indexes obj.Object) {
 
 // RemoveItemsAtIndexes removes the items at the specified indexes from the scrubber.
 func (s *Scrubber) RemoveItemsAtIndexes(indexes obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeItemsAtIndexes:"), objref.IDOf(indexes))
 	})
@@ -611,6 +634,8 @@ func (s *Scrubber) RemoveItemsAtIndexes(indexes obj.Object) {
 
 // ReloadItemsAtIndexes reloads the items at the specified indexes.
 func (s *Scrubber) ReloadItemsAtIndexes(indexes obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("reloadItemsAtIndexes:"), objref.IDOf(indexes))
 	})
@@ -619,6 +644,7 @@ func (s *Scrubber) ReloadItemsAtIndexes(indexes obj.Object) {
 
 // MoveItemAtIndexToIndex moves an item from one index to another in the scrubber.
 func (s *Scrubber) MoveItemAtIndexToIndex(oldIndex int, newIndex int) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("moveItemAtIndex:toIndex:"), oldIndex, newIndex)
 	})
@@ -627,6 +653,7 @@ func (s *Scrubber) MoveItemAtIndexToIndex(oldIndex int, newIndex int) {
 
 // ScrollItemAtIndexToAlignment scrolls an item to a specified alignment within the scrubber.
 func (s *Scrubber) ScrollItemAtIndexToAlignment(index int, alignment ScrubberAlignment) {
+	defer runtime.KeepAlive(s)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("scrollItemAtIndex:toAlignment:"), index, alignment)
 	})
@@ -635,6 +662,7 @@ func (s *Scrubber) ScrollItemAtIndexToAlignment(index int, alignment ScrubberAli
 
 // ItemViewForItemAtIndex returns the view for the item at the specified index.
 func (s *Scrubber) ItemViewForItemAtIndex(index int) *ScrubberItemView {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *ScrubberItemView
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberItemView {
@@ -648,6 +676,9 @@ func (s *Scrubber) ItemViewForItemAtIndex(index int) *ScrubberItemView {
 
 // RegisterNibForItemIdentifier registers a nib file for the scrubber to use when it creates new items in the scrubber.
 func (s *Scrubber) RegisterNibForItemIdentifier(nib *Nib, itemIdentifier obj.Object) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(nib)
+	defer runtime.KeepAlive(itemIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("registerNib:forItemIdentifier:"), objref.IDOf(nib), objref.IDOf(itemIdentifier))
 	})
@@ -656,6 +687,9 @@ func (s *Scrubber) RegisterNibForItemIdentifier(nib *Nib, itemIdentifier obj.Obj
 
 // MakeItemWithIdentifierOwner creates or returns a reusable item object with the specified identifier.
 func (s *Scrubber) MakeItemWithIdentifierOwner(itemIdentifier obj.Object, owner obj.Object) *ScrubberItemView {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(itemIdentifier)
+	defer runtime.KeepAlive(owner)
 	var _mainthread0 *ScrubberItemView
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberItemView {
@@ -669,6 +703,7 @@ func (s *Scrubber) MakeItemWithIdentifierOwner(itemIdentifier obj.Object, owner 
 
 // ScrubberLayout returns the scrubber layout.
 func (s *Scrubber) ScrubberLayout() *ScrubberLayout {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *ScrubberLayout
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberLayout {
@@ -682,6 +717,7 @@ func (s *Scrubber) ScrubberLayout() *ScrubberLayout {
 
 // NumberOfItems returns the number of items represented by the scrubber control.
 func (s *Scrubber) NumberOfItems() int {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -695,6 +731,7 @@ func (s *Scrubber) NumberOfItems() int {
 
 // HighlightedIndex returns the index of the currently highlighted item within the control. If there is no highlighted item, the value of this property is (-1).
 func (s *Scrubber) HighlightedIndex() int {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -708,6 +745,7 @@ func (s *Scrubber) HighlightedIndex() int {
 
 // SelectedIndex returns the index of the selected item within the control. If there is no selected item, the value of this property is (-1). Setting this property through the animator proxy will animate the selection change. Programmatic selection changes do not trigger delegate callbacks.
 func (s *Scrubber) SelectedIndex() int {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -721,6 +759,7 @@ func (s *Scrubber) SelectedIndex() int {
 
 // Mode describes the interaction mode for the scrubber control. See the
 func (s *Scrubber) Mode() ScrubberMode {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrubberMode
 	purego.Main(func() {
 		_mainthread0 = func() ScrubberMode {
@@ -734,6 +773,7 @@ func (s *Scrubber) Mode() ScrubberMode {
 
 // ItemAlignment returns if the value of
 func (s *Scrubber) ItemAlignment() ScrubberAlignment {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 ScrubberAlignment
 	purego.Main(func() {
 		_mainthread0 = func() ScrubberAlignment {
@@ -747,6 +787,7 @@ func (s *Scrubber) ItemAlignment() ScrubberAlignment {
 
 // IsContinuous reports whether when
 func (s *Scrubber) IsContinuous() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -760,6 +801,7 @@ func (s *Scrubber) IsContinuous() bool {
 
 // FloatsSelectionViews reports whether when
 func (s *Scrubber) FloatsSelectionViews() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -773,6 +815,7 @@ func (s *Scrubber) FloatsSelectionViews() bool {
 
 // SelectionBackgroundStyle specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is
 func (s *Scrubber) SelectionBackgroundStyle() *ScrubberSelectionStyle {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *ScrubberSelectionStyle
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberSelectionStyle {
@@ -786,6 +829,7 @@ func (s *Scrubber) SelectionBackgroundStyle() *ScrubberSelectionStyle {
 
 // SelectionOverlayStyle specifies a style of decoration to place above items that are selected and/or highlighted. The default value is
 func (s *Scrubber) SelectionOverlayStyle() *ScrubberSelectionStyle {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *ScrubberSelectionStyle
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberSelectionStyle {
@@ -799,6 +843,7 @@ func (s *Scrubber) SelectionOverlayStyle() *ScrubberSelectionStyle {
 
 // ShowsArrowButtons reports whether if
 func (s *Scrubber) ShowsArrowButtons() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -812,6 +857,7 @@ func (s *Scrubber) ShowsArrowButtons() bool {
 
 // ShowsAdditionalContentIndicators reports whether if
 func (s *Scrubber) ShowsAdditionalContentIndicators() bool {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -825,6 +871,7 @@ func (s *Scrubber) ShowsAdditionalContentIndicators() bool {
 
 // BackgroundColor returns if set,
 func (s *Scrubber) BackgroundColor() *Color {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -838,6 +885,7 @@ func (s *Scrubber) BackgroundColor() *Color {
 
 // BackgroundView returns if non-nil, the
 func (s *Scrubber) BackgroundView() *View {
+	defer runtime.KeepAlive(s)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {

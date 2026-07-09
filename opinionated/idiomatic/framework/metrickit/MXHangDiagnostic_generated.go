@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewHangDiagnostic() *HangDiagnostic {
 
 // CallStackTree returns the application call stack tree associated with the hang.
 func (hd *HangDiagnostic) CallStackTree() *CallStackTree {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[objc.ID](objref.IDOf(hd), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
 // HangDuration returns total hang duration for this diagnostic. Dimensioned as NSUnitDuration.
 func (hd *HangDiagnostic) HangDuration() obj.Object {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[objc.ID](objref.IDOf(hd), objc.RegisterName("hangDuration"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func computePlanCostAdopt(id objc.ID) *ComputePlanCost {
 
 // Description returns the object's -description text.
 func (cpc *ComputePlanCost) Description() string {
+	defer runtime.KeepAlive(cpc)
 	return rt.Description(objref.IDOf(cpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpc *ComputePlanCost) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpc *ComputePlanCost) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpc)
 	return rt.IsKind(objref.IDOf(cpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpc *ComputePlanCost) String() string {
+	defer runtime.KeepAlive(cpc)
 	return rt.Description(objref.IDOf(cpc))
 }
 
@@ -74,6 +81,7 @@ func NewComputePlanCost() *ComputePlanCost {
 
 // Weight returns the weight.
 func (cpc *ComputePlanCost) Weight() float64 {
+	defer runtime.KeepAlive(cpc)
 	_r := objc.Send[float64](objref.IDOf(cpc), objc.RegisterName("weight"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -61,6 +63,7 @@ func NewBatchInsertRequestWithEntityNameObjects(entityName string, dictionaries 
 
 // NewBatchInsertRequestWithEntityObjects creates a batch-insertion request for a managed entity, and provides an array of data dictionaries for insertion.
 func NewBatchInsertRequestWithEntityObjects(entity *EntityDescription, dictionaries []obj.Object) *BatchInsertRequest {
+	defer runtime.KeepAlive(entity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:objects:"), objref.IDOf(entity), purego.SliceToNSArray(dictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return batchInsertRequestAdopt(_id)
@@ -68,6 +71,7 @@ func NewBatchInsertRequestWithEntityObjects(entity *EntityDescription, dictionar
 
 // NewBatchInsertRequestWithEntityDictionaryHandler creates a batch-insertion request for a managed entity, and specifies a closure that provides data dictionaries for insertion.
 func NewBatchInsertRequestWithEntityDictionaryHandler(entity *EntityDescription, handler func(obj.Object) bool) *BatchInsertRequest {
+	defer runtime.KeepAlive(entity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:dictionaryHandler:"), objref.IDOf(entity), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return handler(obj.Wrap(_b0)) }))
 	return batchInsertRequestAdopt(_id)
@@ -75,6 +79,7 @@ func NewBatchInsertRequestWithEntityDictionaryHandler(entity *EntityDescription,
 
 // NewBatchInsertRequestWithEntityManagedObjectHandler creates a batch-insertion request for a managed entity, and specifies a closure that inserts data into the entity.
 func NewBatchInsertRequestWithEntityManagedObjectHandler(entity *EntityDescription, handler func(obj.Object) bool) *BatchInsertRequest {
+	defer runtime.KeepAlive(entity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchInsertRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:managedObjectHandler:"), objref.IDOf(entity), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) bool { return handler(obj.Wrap(_b0)) }))
 	return batchInsertRequestAdopt(_id)
@@ -128,6 +133,7 @@ func (bir *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvid
 
 // EntityName returns the entity name.
 func (bir *BatchInsertRequest) EntityName() string {
+	defer runtime.KeepAlive(bir)
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("entityName"))
 	if _r == 0 {
 		return ""
@@ -137,6 +143,7 @@ func (bir *BatchInsertRequest) EntityName() string {
 
 // Entity returns the entity.
 func (bir *BatchInsertRequest) Entity() *EntityDescription {
+	defer runtime.KeepAlive(bir)
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
@@ -145,12 +152,14 @@ func (bir *BatchInsertRequest) Entity() *EntityDescription {
 //
 // ObjectsToInsert returns the collection as a Go slice.
 func (bir *BatchInsertRequest) ObjectsToInsert() []obj.Object {
+	defer runtime.KeepAlive(bir)
 	_arr := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("objectsToInsert"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ResultType returns the result type.
 func (bir *BatchInsertRequest) ResultType() BatchInsertRequestResultType {
+	defer runtime.KeepAlive(bir)
 	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(bir), objc.RegisterName("resultType"))
 	return _r
 }

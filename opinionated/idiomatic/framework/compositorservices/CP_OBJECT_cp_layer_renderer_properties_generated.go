@@ -5,6 +5,8 @@
 package compositorservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func _cp_layer_renderer_propertiesAdopt(id objc.ID) *_cp_layer_renderer_properti
 
 // Description returns the object's -description text.
 func (clrp *_cp_layer_renderer_properties) Description() string {
+	defer runtime.KeepAlive(clrp)
 	return rt.Description(objref.IDOf(clrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (clrp *_cp_layer_renderer_properties) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(clrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(clrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (clrp *_cp_layer_renderer_properties) IsKind(className string) bool {
+	defer runtime.KeepAlive(clrp)
 	return rt.IsKind(objref.IDOf(clrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (clrp *_cp_layer_renderer_properties) String() string {
+	defer runtime.KeepAlive(clrp)
 	return rt.Description(objref.IDOf(clrp))
 }
 

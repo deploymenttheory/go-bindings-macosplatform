@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -171,18 +173,21 @@ func (dle *DOMHTMLOListElement) WithTextContent(textContent string) *DOMHTMLOLis
 
 // Compact wraps the corresponding Objective-C method.
 func (dle *DOMHTMLOListElement) Compact() bool {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[bool](objref.IDOf(dle), objc.RegisterName("compact"))
 	return _r
 }
 
 // Start returns the start.
 func (dle *DOMHTMLOListElement) Start() int {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[int](objref.IDOf(dle), objc.RegisterName("start"))
 	return _r
 }
 
 // Type returns the type.
 func (dle *DOMHTMLOListElement) Type() string {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[objc.ID](objref.IDOf(dle), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""

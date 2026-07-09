@@ -5,6 +5,7 @@
 package eventkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -73,6 +74,7 @@ func (sl *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
 
 // Title returns the title.
 func (sl *StructuredLocation) Title() string {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -82,6 +84,7 @@ func (sl *StructuredLocation) Title() string {
 
 // Radius returns the radius.
 func (sl *StructuredLocation) Radius() float64 {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("radius"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,12 @@ func nNLossGradientNodeAdopt(id objc.ID) *NNLossGradientNode {
 
 // NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
 func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *NNImageNode, sourceImage *NNImageNode, labels *NNImageNode, weights *NNImageNode, gradientState *NNGradientStateNode, descriptor *CNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(weights)
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:labels:weights:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(weights), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
 	return nNLossGradientNodeAdopt(_id)
@@ -54,6 +62,11 @@ func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsWeightsGradientStat
 
 // NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
 func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDescriptorIsLabelsGradientFilter(sourceGradient *NNImageNode, sourceImage *NNImageNode, labels *NNImageNode, gradientState *NNGradientStateNode, descriptor *CNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
+	defer runtime.KeepAlive(sourceGradient)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(labels)
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:labels:gradientState:lossDescriptor:isLabelsGradientFilter:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(labels), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
 	return nNLossGradientNodeAdopt(_id)
@@ -61,6 +74,8 @@ func NewNNLossGradientNodeWithSourceGradientSourceImageLabelsGradientStateLossDe
 
 // NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter creates a new NNLossGradientNode.
 func NewNNLossGradientNodeWithSourcesGradientStateLossDescriptorIsLabelsGradientFilter(sourceNodes []*NNImageNode, gradientState *NNGradientStateNode, descriptor *CNNLossDescriptor, isLabelsGradientFilter bool) *NNLossGradientNode {
+	defer runtime.KeepAlive(gradientState)
+	defer runtime.KeepAlive(descriptor)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNLossGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSources:gradientState:lossDescriptor:isLabelsGradientFilter:"), purego.SliceToNSArray(sourceNodes, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(gradientState), objref.IDOf(descriptor), isLabelsGradientFilter)
 	return nNLossGradientNodeAdopt(_id)
@@ -74,54 +89,63 @@ func (nlgn *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
 
 // LossType returns the loss type.
 func (nlgn *NNLossGradientNode) LossType() CNNLossType {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[CNNLossType](objref.IDOf(nlgn), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType returns the reduction type.
 func (nlgn *NNLossGradientNode) ReductionType() CNNReductionType {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[CNNReductionType](objref.IDOf(nlgn), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // NumberOfClasses returns the number of classes.
 func (nlgn *NNLossGradientNode) NumberOfClasses() int {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[int](objref.IDOf(nlgn), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
 func (nlgn *NNLossGradientNode) ReduceAcrossBatch() bool {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[bool](objref.IDOf(nlgn), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
 
 // Weight returns the weight.
 func (nlgn *NNLossGradientNode) Weight() float32 {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing returns the label smoothing.
 func (nlgn *NNLossGradientNode) LabelSmoothing() float32 {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // Epsilon returns the epsilon.
 func (nlgn *NNLossGradientNode) Epsilon() float32 {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta returns the delta.
 func (nlgn *NNLossGradientNode) Delta() float32 {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("delta"))
 	return _r
 }
 
 // IsLabelsGradientFilter reports whether the object is labels gradient filter.
 func (nlgn *NNLossGradientNode) IsLabelsGradientFilter() bool {
+	defer runtime.KeepAlive(nlgn)
 	_r := objc.Send[bool](objref.IDOf(nlgn), objc.RegisterName("isLabelsGradientFilter"))
 	return _r
 }

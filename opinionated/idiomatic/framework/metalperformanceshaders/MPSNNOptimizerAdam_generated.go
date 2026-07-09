@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,24 +79,28 @@ func (noa *NNOptimizerAdam) WithLabel(label string) *NNOptimizerAdam {
 
 // Beta1 returns the beta1 at which we update values Default value is 0.9
 func (noa *NNOptimizerAdam) Beta1() float64 {
+	defer runtime.KeepAlive(noa)
 	_r := objc.Send[float64](objref.IDOf(noa), objc.RegisterName("beta1"))
 	return _r
 }
 
 // Beta2 returns the beta2 at which we update values Default value is 0.999
 func (noa *NNOptimizerAdam) Beta2() float64 {
+	defer runtime.KeepAlive(noa)
 	_r := objc.Send[float64](objref.IDOf(noa), objc.RegisterName("beta2"))
 	return _r
 }
 
 // Epsilon returns the epsilon at which we update values This value is usually used to ensure to avoid divide by 0, default value is 1e-8
 func (noa *NNOptimizerAdam) Epsilon() float32 {
+	defer runtime.KeepAlive(noa)
 	_r := objc.Send[float32](objref.IDOf(noa), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // TimeStep returns current timeStep for the update, number of times update has occurred
 func (noa *NNOptimizerAdam) TimeStep() int {
+	defer runtime.KeepAlive(noa)
 	_r := objc.Send[int](objref.IDOf(noa), objc.RegisterName("timeStep"))
 	return _r
 }

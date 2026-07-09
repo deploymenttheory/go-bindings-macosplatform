@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func lookAroundSceneRequestAdopt(id objc.ID) *LookAroundSceneRequest {
 
 // Description returns the object's -description text.
 func (lasr *LookAroundSceneRequest) Description() string {
+	defer runtime.KeepAlive(lasr)
 	return rt.Description(objref.IDOf(lasr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lasr *LookAroundSceneRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lasr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lasr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lasr *LookAroundSceneRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(lasr)
 	return rt.IsKind(objref.IDOf(lasr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lasr *LookAroundSceneRequest) String() string {
+	defer runtime.KeepAlive(lasr)
 	return rt.Description(objref.IDOf(lasr))
 }
 
@@ -77,6 +83,7 @@ func NewLookAroundSceneRequestWithCoordinate(coordinate unsafe.Pointer) *LookAro
 
 // NewLookAroundSceneRequestWithMapItem creates a LookAround scene with the location described by the specified map item.
 func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequest {
+	defer runtime.KeepAlive(mapItem)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
 	return lookAroundSceneRequestAdopt(_id)
@@ -84,6 +91,7 @@ func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequ
 
 // Cancel cancels the pending scene request.
 func (lasr *LookAroundSceneRequest) Cancel() {
+	defer runtime.KeepAlive(lasr)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("cancel"))
 	})
@@ -92,18 +100,21 @@ func (lasr *LookAroundSceneRequest) Cancel() {
 
 // MapItem returns the map item.
 func (lasr *LookAroundSceneRequest) MapItem() *MapItem {
+	defer runtime.KeepAlive(lasr)
 	_r := objc.Send[objc.ID](objref.IDOf(lasr), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
 
 // IsCancelled reports whether the object is cancelled.
 func (lasr *LookAroundSceneRequest) IsCancelled() bool {
+	defer runtime.KeepAlive(lasr)
 	_r := objc.Send[bool](objref.IDOf(lasr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsLoading reports whether the object is loading.
 func (lasr *LookAroundSceneRequest) IsLoading() bool {
+	defer runtime.KeepAlive(lasr)
 	_r := objc.Send[bool](objref.IDOf(lasr), objc.RegisterName("isLoading"))
 	return _r
 }

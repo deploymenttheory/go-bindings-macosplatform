@@ -284,8 +284,8 @@ func (o *NSURLSessionConfiguration) TLSMinimumSupportedProtocol() security.SSLPr
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *NSURLSessionConfiguration) SetTLSMinimumSupportedProtocol(tLSMinimumSupportedProtocol security.SSLProtocol) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocol, tLSMinimumSupportedProtocol)
+func (o *NSURLSessionConfiguration) SetTLSMinimumSupportedProtocol(tlsMinimumSupportedProtocol security.SSLProtocol) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocol, tlsMinimumSupportedProtocol)
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
@@ -295,8 +295,8 @@ func (o *NSURLSessionConfiguration) TLSMaximumSupportedProtocol() security.SSLPr
 }
 
 // Deprecated: since macOS API_TO_BE_DEPRECATED.
-func (o *NSURLSessionConfiguration) SetTLSMaximumSupportedProtocol(tLSMaximumSupportedProtocol security.SSLProtocol) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocol, tLSMaximumSupportedProtocol)
+func (o *NSURLSessionConfiguration) SetTLSMaximumSupportedProtocol(tlsMaximumSupportedProtocol security.SSLProtocol) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocol, tlsMaximumSupportedProtocol)
 }
 
 func (o *NSURLSessionConfiguration) TLSMinimumSupportedProtocolVersion() security.Tls_protocol_version_t {
@@ -304,8 +304,8 @@ func (o *NSURLSessionConfiguration) TLSMinimumSupportedProtocolVersion() securit
 	return _ret
 }
 
-func (o *NSURLSessionConfiguration) SetTLSMinimumSupportedProtocolVersion(tLSMinimumSupportedProtocolVersion security.Tls_protocol_version_t) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocolVersion, tLSMinimumSupportedProtocolVersion)
+func (o *NSURLSessionConfiguration) SetTLSMinimumSupportedProtocolVersion(tlsMinimumSupportedProtocolVersion security.Tls_protocol_version_t) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMinimumSupportedProtocolVersion, tlsMinimumSupportedProtocolVersion)
 }
 
 func (o *NSURLSessionConfiguration) TLSMaximumSupportedProtocolVersion() security.Tls_protocol_version_t {
@@ -313,8 +313,8 @@ func (o *NSURLSessionConfiguration) TLSMaximumSupportedProtocolVersion() securit
 	return _ret
 }
 
-func (o *NSURLSessionConfiguration) SetTLSMaximumSupportedProtocolVersion(tLSMaximumSupportedProtocolVersion security.Tls_protocol_version_t) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocolVersion, tLSMaximumSupportedProtocolVersion)
+func (o *NSURLSessionConfiguration) SetTLSMaximumSupportedProtocolVersion(tlsMaximumSupportedProtocolVersion security.Tls_protocol_version_t) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetTLSMaximumSupportedProtocolVersion, tlsMaximumSupportedProtocolVersion)
 }
 
 // Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
@@ -324,8 +324,8 @@ func (o *NSURLSessionConfiguration) HTTPShouldUsePipelining() bool {
 }
 
 // Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
-func (o *NSURLSessionConfiguration) SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPShouldUsePipelining, hTTPShouldUsePipelining)
+func (o *NSURLSessionConfiguration) SetHTTPShouldUsePipelining(httpShouldUsePipelining bool) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPShouldUsePipelining, httpShouldUsePipelining)
 }
 
 // Deprecated: Only supported in the classic loader, please adopt HTTP/2 and HTTP/3 instead
@@ -334,8 +334,8 @@ func (o *NSURLSessionConfiguration) HTTPShouldSetCookies() bool {
 	return _ret
 }
 
-func (o *NSURLSessionConfiguration) SetHTTPShouldSetCookies(hTTPShouldSetCookies bool) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPShouldSetCookies, hTTPShouldSetCookies)
+func (o *NSURLSessionConfiguration) SetHTTPShouldSetCookies(httpShouldSetCookies bool) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPShouldSetCookies, httpShouldSetCookies)
 }
 
 func (o *NSURLSessionConfiguration) HTTPCookieAcceptPolicy() NSHTTPCookieAcceptPolicy {
@@ -343,8 +343,8 @@ func (o *NSURLSessionConfiguration) HTTPCookieAcceptPolicy() NSHTTPCookieAcceptP
 	return _ret
 }
 
-func (o *NSURLSessionConfiguration) SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy NSHTTPCookieAcceptPolicy) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPCookieAcceptPolicy, hTTPCookieAcceptPolicy)
+func (o *NSURLSessionConfiguration) SetHTTPCookieAcceptPolicy(httpCookieAcceptPolicy NSHTTPCookieAcceptPolicy) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPCookieAcceptPolicy, httpCookieAcceptPolicy)
 }
 
 func (o *NSURLSessionConfiguration) HTTPAdditionalHeaders() *NSDictionary[objc.ID, objc.ID] {
@@ -355,8 +355,8 @@ func (o *NSURLSessionConfiguration) HTTPAdditionalHeaders() *NSDictionary[objc.I
 	return NSDictionaryFromID[objc.ID, objc.ID](_ret)
 }
 
-func (o *NSURLSessionConfiguration) SetHTTPAdditionalHeaders(hTTPAdditionalHeaders *NSDictionary[objc.ID, objc.ID]) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders, hTTPAdditionalHeaders.Ptr())
+func (o *NSURLSessionConfiguration) SetHTTPAdditionalHeaders(httpAdditionalHeaders *NSDictionary[objc.ID, objc.ID]) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPAdditionalHeaders, httpAdditionalHeaders.Ptr())
 }
 
 func (o *NSURLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
@@ -364,8 +364,8 @@ func (o *NSURLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
 	return _ret
 }
 
-func (o *NSURLSessionConfiguration) SetHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPMaximumConnectionsPerHost, hTTPMaximumConnectionsPerHost)
+func (o *NSURLSessionConfiguration) SetHTTPMaximumConnectionsPerHost(httpMaximumConnectionsPerHost int) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPMaximumConnectionsPerHost, httpMaximumConnectionsPerHost)
 }
 
 func (o *NSURLSessionConfiguration) HTTPCookieStorage() *NSHTTPCookieStorage {
@@ -376,8 +376,8 @@ func (o *NSURLSessionConfiguration) HTTPCookieStorage() *NSHTTPCookieStorage {
 	return NSHTTPCookieStorageFromID(_ret)
 }
 
-func (o *NSURLSessionConfiguration) SetHTTPCookieStorage(hTTPCookieStorage *NSHTTPCookieStorage) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPCookieStorage, hTTPCookieStorage.Ptr())
+func (o *NSURLSessionConfiguration) SetHTTPCookieStorage(httpCookieStorage *NSHTTPCookieStorage) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetHTTPCookieStorage, httpCookieStorage.Ptr())
 }
 
 func (o *NSURLSessionConfiguration) URLCredentialStorage() *NSURLCredentialStorage {
@@ -388,8 +388,8 @@ func (o *NSURLSessionConfiguration) URLCredentialStorage() *NSURLCredentialStora
 	return NSURLCredentialStorageFromID(_ret)
 }
 
-func (o *NSURLSessionConfiguration) SetURLCredentialStorage(uRLCredentialStorage *NSURLCredentialStorage) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetURLCredentialStorage, uRLCredentialStorage.Ptr())
+func (o *NSURLSessionConfiguration) SetURLCredentialStorage(urlCredentialStorage *NSURLCredentialStorage) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetURLCredentialStorage, urlCredentialStorage.Ptr())
 }
 
 func (o *NSURLSessionConfiguration) URLCache() *NSURLCache {
@@ -400,8 +400,8 @@ func (o *NSURLSessionConfiguration) URLCache() *NSURLCache {
 	return NSURLCacheFromID(_ret)
 }
 
-func (o *NSURLSessionConfiguration) SetURLCache(uRLCache *NSURLCache) {
-	o.Ptr().Send(_nSURLSessionConfigurationSelSetURLCache, uRLCache.Ptr())
+func (o *NSURLSessionConfiguration) SetURLCache(urlCache *NSURLCache) {
+	o.Ptr().Send(_nSURLSessionConfigurationSelSetURLCache, urlCache.Ptr())
 }
 
 // Deprecated: Not supported

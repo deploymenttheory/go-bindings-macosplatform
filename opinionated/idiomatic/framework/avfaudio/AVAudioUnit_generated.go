@@ -5,6 +5,7 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,6 +53,7 @@ func audioUnitAdopt(id objc.ID) *AudioUnit {
 
 // LoadAudioUnitPresetAtURL loads an audio unit using a specified preset.
 func (au *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
+	defer runtime.KeepAlive(au)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(au), objc.RegisterName("loadAudioUnitPresetAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -62,12 +64,14 @@ func (au *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
 
 // AudioComponentDescription returns audioComponentDescription of the underlying audio unit.
 func (au *AudioUnit) AudioComponentDescription() obj.Object {
+	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("audioComponentDescription"))
 	return obj.Wrap(_r)
 }
 
 // Name returns name of the audio unit.
 func (au *AudioUnit) Name() string {
+	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -77,6 +81,7 @@ func (au *AudioUnit) Name() string {
 
 // ManufacturerName returns manufacturer name of the audio unit.
 func (au *AudioUnit) ManufacturerName() string {
+	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("manufacturerName"))
 	if _r == 0 {
 		return ""

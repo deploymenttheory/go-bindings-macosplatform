@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,6 +63,7 @@ func NewUserLocationView() *UserLocationView {
 
 // WithImage sets the image the annotation view displays.
 func (ulv *UserLocationView) WithImage(image obj.Object) *UserLocationView {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -141,6 +144,7 @@ func (ulv *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocati
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (ulv *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *UserLocationView {
+	defer runtime.KeepAlive(leftCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	})
@@ -149,6 +153,7 @@ func (ulv *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryVi
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (ulv *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *UserLocationView {
+	defer runtime.KeepAlive(rightCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	})
@@ -157,6 +162,7 @@ func (ulv *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessory
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (ulv *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *UserLocationView {
+	defer runtime.KeepAlive(detailCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ulv), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	})

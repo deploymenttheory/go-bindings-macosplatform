@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func updateContextAdopt(id objc.ID) *UpdateContext {
 
 // Description returns the object's -description text.
 func (uc *UpdateContext) Description() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uc *UpdateContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uc *UpdateContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(uc)
 	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uc *UpdateContext) String() string {
+	defer runtime.KeepAlive(uc)
 	return rt.Description(objref.IDOf(uc))
 }
 
@@ -74,30 +81,35 @@ func NewUpdateContext() *UpdateContext {
 
 // Task returns the task.
 func (uc *UpdateContext) Task() *UpdateTask {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("task"))
 	return UpdateTaskFromID(_r)
 }
 
 // Model returns the model.
 func (uc *UpdateContext) Model() *Model {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("model"))
 	return ModelFromID(_r)
 }
 
 // Event returns the event.
 func (uc *UpdateContext) Event() UpdateProgressEvent {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[UpdateProgressEvent](objref.IDOf(uc), objc.RegisterName("event"))
 	return _r
 }
 
 // Metrics returns the metrics.
 func (uc *UpdateContext) Metrics() obj.Object {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("metrics"))
 	return obj.Wrap(_r)
 }
 
 // Parameters returns the parameters.
 func (uc *UpdateContext) Parameters() obj.Object {
+	defer runtime.KeepAlive(uc)
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }

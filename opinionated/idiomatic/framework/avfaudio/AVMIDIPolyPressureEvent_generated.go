@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -72,12 +74,14 @@ func (mppe *MIDIPolyPressureEvent) WithChannel(channel int) *MIDIPolyPressureEve
 
 // Key returns the key.
 func (mppe *MIDIPolyPressureEvent) Key() int {
+	defer runtime.KeepAlive(mppe)
 	_r := objc.Send[int](objref.IDOf(mppe), objc.RegisterName("key"))
 	return _r
 }
 
 // Pressure returns the pressure.
 func (mppe *MIDIPolyPressureEvent) Pressure() int {
+	defer runtime.KeepAlive(mppe)
 	_r := objc.Send[int](objref.IDOf(mppe), objc.RegisterName("pressure"))
 	return _r
 }

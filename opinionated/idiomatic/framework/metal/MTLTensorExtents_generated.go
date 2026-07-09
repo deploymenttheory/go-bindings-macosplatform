@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tensorExtentsAdopt(id objc.ID) *TensorExtents {
 
 // Description returns the object's -description text.
 func (te *TensorExtents) Description() string {
+	defer runtime.KeepAlive(te)
 	return rt.Description(objref.IDOf(te))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (te *TensorExtents) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(te)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(te), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (te *TensorExtents) IsKind(className string) bool {
+	defer runtime.KeepAlive(te)
 	return rt.IsKind(objref.IDOf(te), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (te *TensorExtents) String() string {
+	defer runtime.KeepAlive(te)
 	return rt.Description(objref.IDOf(te))
 }
 
@@ -74,12 +81,14 @@ func NewTensorExtents() *TensorExtents {
 
 // ExtentAtDimensionIndex returns the extent at an index.
 func (te *TensorExtents) ExtentAtDimensionIndex(dimensionIndex int) int {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[int](objref.IDOf(te), objc.RegisterName("extentAtDimensionIndex:"), dimensionIndex)
 	return _r
 }
 
 // Rank returns obtains the rank of the tensor. The rank represents the number of dimensions.
 func (te *TensorExtents) Rank() int {
+	defer runtime.KeepAlive(te)
 	_r := objc.Send[int](objref.IDOf(te), objc.RegisterName("rank"))
 	return _r
 }

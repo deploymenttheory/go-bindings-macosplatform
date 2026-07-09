@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRChannelClusterCancelRecordProgramParamsAdopt(id objc.ID) *MTRChannelClus
 
 // Description returns the object's -description text.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) Description() string {
+	defer runtime.KeepAlive(mcccrpp)
 	return rt.Description(objref.IDOf(mcccrpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccrpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccrpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccrpp)
 	return rt.IsKind(objref.IDOf(mcccrpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) String() string {
+	defer runtime.KeepAlive(mcccrpp)
 	return rt.Description(objref.IDOf(mcccrpp))
 }
 
@@ -78,30 +86,34 @@ func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) WithProgramIdentifier
 
 // WithShouldRecordSeries sets the should record series.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) WithShouldRecordSeries(shouldRecordSeries obj.Object) *MTRChannelClusterCancelRecordProgramParams {
+	defer runtime.KeepAlive(shouldRecordSeries)
 	objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("setShouldRecordSeries:"), objref.IDOf(shouldRecordSeries))
 	return mcccrpp
 }
 
 // WithData sets the data.
-func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) WithData(data obj.Object) *MTRChannelClusterCancelRecordProgramParams {
-	objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("setData:"), objref.IDOf(data))
+func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) WithData(data []byte) *MTRChannelClusterCancelRecordProgramParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return mcccrpp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterCancelRecordProgramParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccrpp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterCancelRecordProgramParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccrpp
 }
 
 // ProgramIdentifier returns the program identifier.
 func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) ProgramIdentifier() string {
+	defer runtime.KeepAlive(mcccrpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("programIdentifier"))
 	if _r == 0 {
 		return ""
@@ -110,25 +122,29 @@ func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) ProgramIdentifier() s
 }
 
 // ShouldRecordSeries returns the should record series.
-func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) ShouldRecordSeries() obj.Object {
+func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) ShouldRecordSeries() *foundation.Number {
+	defer runtime.KeepAlive(mcccrpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("shouldRecordSeries"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
-func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) Data() obj.Object {
+func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) Data() []byte {
+	defer runtime.KeepAlive(mcccrpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccrpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccrpp *MTRChannelClusterCancelRecordProgramParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccrpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrpp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

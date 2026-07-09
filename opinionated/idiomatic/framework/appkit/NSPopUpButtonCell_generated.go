@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -62,6 +64,7 @@ func NewPopUpButtonCellTextCellPullsDown(stringValue string, pullDown bool) *Pop
 
 // NewPopUpButtonCellWithCoder creates a new PopUpButtonCell.
 func NewPopUpButtonCellWithCoder(coder obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *PopUpButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *PopUpButtonCell {
@@ -115,6 +118,7 @@ func (pubc *PopUpButtonCell) WithArrowPosition(arrowPosition PopUpArrowPosition)
 
 // WithMenuItem sets the menu item object associated with the cell.
 func (pubc *PopUpButtonCell) WithMenuItem(menuItem *MenuItem) *PopUpButtonCell {
+	defer runtime.KeepAlive(menuItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
 	})
@@ -163,6 +167,7 @@ func (pubc *PopUpButtonCell) WithShowsStateBy(showsStateBy CellStyleMask) *PopUp
 
 // WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
 func (pubc *PopUpButtonCell) WithAttributedTitle(attributedTitle obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(attributedTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	})
@@ -179,6 +184,7 @@ func (pubc *PopUpButtonCell) WithAlternateTitle(alternateTitle string) *PopUpBut
 
 // WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
 func (pubc *PopUpButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(attributedAlternateTitle)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	})
@@ -187,6 +193,7 @@ func (pubc *PopUpButtonCell) WithAttributedAlternateTitle(attributedAlternateTit
 
 // WithAlternateImage sets the image the button displays in its alternate state.
 func (pubc *PopUpButtonCell) WithAlternateImage(alternateImage *Image) *PopUpButtonCell {
+	defer runtime.KeepAlive(alternateImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	})
@@ -251,6 +258,7 @@ func (pubc *PopUpButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnly
 
 // WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
 func (pubc *PopUpButtonCell) WithSound(sound *Sound) *PopUpButtonCell {
+	defer runtime.KeepAlive(sound)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	})
@@ -259,6 +267,7 @@ func (pubc *PopUpButtonCell) WithSound(sound *Sound) *PopUpButtonCell {
 
 // WithBackgroundColor sets the background color of the button.
 func (pubc *PopUpButtonCell) WithBackgroundColor(backgroundColor *Color) *PopUpButtonCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -275,6 +284,7 @@ func (pubc *PopUpButtonCell) WithGradientType(gradientType GradientType) *PopUpB
 
 // WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
 func (pubc *PopUpButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *PopUpButtonCell {
+	defer runtime.KeepAlive(keyEquivalentFont)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 	})
@@ -283,6 +293,7 @@ func (pubc *PopUpButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *Pop
 
 // WithControlView sets the view associated with the cell.
 func (pubc *PopUpButtonCell) WithControlView(controlView ViewProvider) *PopUpButtonCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -307,6 +318,7 @@ func (pubc *PopUpButtonCell) WithState(state int) *PopUpButtonCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (pubc *PopUpButtonCell) WithTarget(target obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -411,6 +423,7 @@ func (pubc *PopUpButtonCell) WithWraps(wraps bool) *PopUpButtonCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (pubc *PopUpButtonCell) WithFont(font *Font) *PopUpButtonCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -419,6 +432,7 @@ func (pubc *PopUpButtonCell) WithFont(font *Font) *PopUpButtonCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (pubc *PopUpButtonCell) WithFormatter(formatter obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -427,6 +441,7 @@ func (pubc *PopUpButtonCell) WithFormatter(formatter obj.Object) *PopUpButtonCel
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (pubc *PopUpButtonCell) WithObjectValue(objectValue obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -475,6 +490,7 @@ func (pubc *PopUpButtonCell) WithIntegerValue(integerValue int) *PopUpButtonCell
 
 // WithImage sets the image displayed by the cell, if any.
 func (pubc *PopUpButtonCell) WithImage(image *Image) *PopUpButtonCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -491,6 +507,7 @@ func (pubc *PopUpButtonCell) WithControlSize(controlSize ControlSize) *PopUpButt
 
 // WithRepresentedObject sets the object represented by the cell.
 func (pubc *PopUpButtonCell) WithRepresentedObject(representedObject obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -499,6 +516,7 @@ func (pubc *PopUpButtonCell) WithRepresentedObject(representedObject obj.Object)
 
 // WithMenu sets the cell’s contextual menu.
 func (pubc *PopUpButtonCell) WithMenu(menu *Menu) *PopUpButtonCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -587,6 +605,7 @@ func (pubc *PopUpButtonCell) WithFocusRingType(focusRingType FocusRingType) *Pop
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (pubc *PopUpButtonCell) WithAttributedStringValue(attributedStringValue obj.Object) *PopUpButtonCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -635,6 +654,7 @@ func (pubc *PopUpButtonCell) WithControlTint(controlTint ControlTint) *PopUpButt
 
 // AddItemWithTitle adds an item with the specified title to the end of the menu.
 func (pubc *PopUpButtonCell) AddItemWithTitle(title string) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("addItemWithTitle:"), purego.NSString(title))
 	})
@@ -643,6 +663,7 @@ func (pubc *PopUpButtonCell) AddItemWithTitle(title string) {
 
 // AddItemsWithTitles adds multiple items to the end of the menu.
 func (pubc *PopUpButtonCell) AddItemsWithTitles(itemTitles []string) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("addItemsWithTitles:"), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
@@ -651,6 +672,7 @@ func (pubc *PopUpButtonCell) AddItemsWithTitles(itemTitles []string) {
 
 // InsertItemWithTitleAtIndex inserts an item at the specified position in the menu.
 func (pubc *PopUpButtonCell) InsertItemWithTitleAtIndex(title string, index int) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("insertItemWithTitle:atIndex:"), purego.NSString(title), index)
 	})
@@ -659,6 +681,7 @@ func (pubc *PopUpButtonCell) InsertItemWithTitleAtIndex(title string, index int)
 
 // RemoveItemWithTitle removes the item with the specified title from the menu.
 func (pubc *PopUpButtonCell) RemoveItemWithTitle(title string) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeItemWithTitle:"), purego.NSString(title))
 	})
@@ -667,6 +690,7 @@ func (pubc *PopUpButtonCell) RemoveItemWithTitle(title string) {
 
 // RemoveItemAtIndex removes the item at the specified index.
 func (pubc *PopUpButtonCell) RemoveItemAtIndex(index int) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeItemAtIndex:"), index)
 	})
@@ -675,6 +699,7 @@ func (pubc *PopUpButtonCell) RemoveItemAtIndex(index int) {
 
 // RemoveAllItems removes all items in the receiver’s item menu.
 func (pubc *PopUpButtonCell) RemoveAllItems() {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("removeAllItems"))
 	})
@@ -683,6 +708,8 @@ func (pubc *PopUpButtonCell) RemoveAllItems() {
 
 // IndexOfItem returns the index of the specified menu item.
 func (pubc *PopUpButtonCell) IndexOfItem(item *MenuItem) int {
+	defer runtime.KeepAlive(pubc)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -696,6 +723,7 @@ func (pubc *PopUpButtonCell) IndexOfItem(item *MenuItem) int {
 
 // IndexOfItemWithTitle returns the index of the item with the specified title.
 func (pubc *PopUpButtonCell) IndexOfItemWithTitle(title string) int {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -709,6 +737,7 @@ func (pubc *PopUpButtonCell) IndexOfItemWithTitle(title string) int {
 
 // IndexOfItemWithTag returns the index of the menu item with the specified tag.
 func (pubc *PopUpButtonCell) IndexOfItemWithTag(tag int) int {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -721,11 +750,13 @@ func (pubc *PopUpButtonCell) IndexOfItemWithTag(tag int) int {
 }
 
 // IndexOfItemWithRepresentedObject returns the index of the menu item that holds the specified represented object.
-func (pubc *PopUpButtonCell) IndexOfItemWithRepresentedObject(obj_ obj.Object) int {
+func (pubc *PopUpButtonCell) IndexOfItemWithRepresentedObject(object obj.Object) int {
+	defer runtime.KeepAlive(pubc)
+	defer runtime.KeepAlive(object)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
-			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithRepresentedObject:"), objref.IDOf(obj_))
+			_r := objc.Send[int](objref.IDOf(pubc), objc.RegisterName("indexOfItemWithRepresentedObject:"), objref.IDOf(object))
 			return _r
 		}()
 	})
@@ -735,6 +766,7 @@ func (pubc *PopUpButtonCell) IndexOfItemWithRepresentedObject(obj_ obj.Object) i
 
 // ItemAtIndex returns the menu item at the specified index.
 func (pubc *PopUpButtonCell) ItemAtIndex(index int) *MenuItem {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -748,6 +780,7 @@ func (pubc *PopUpButtonCell) ItemAtIndex(index int) *MenuItem {
 
 // ItemWithTitle returns the menu item with the specified title.
 func (pubc *PopUpButtonCell) ItemWithTitle(title string) *MenuItem {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -761,6 +794,8 @@ func (pubc *PopUpButtonCell) ItemWithTitle(title string) *MenuItem {
 
 // SelectItem selects the specified menu item.
 func (pubc *PopUpButtonCell) SelectItem(item *MenuItem) {
+	defer runtime.KeepAlive(pubc)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItem:"), objref.IDOf(item))
 	})
@@ -769,6 +804,7 @@ func (pubc *PopUpButtonCell) SelectItem(item *MenuItem) {
 
 // SelectItemAtIndex selects the item in the menu at the specified index.
 func (pubc *PopUpButtonCell) SelectItemAtIndex(index int) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItemAtIndex:"), index)
 	})
@@ -777,6 +813,7 @@ func (pubc *PopUpButtonCell) SelectItemAtIndex(index int) {
 
 // SelectItemWithTitle selects the item with the specified title.
 func (pubc *PopUpButtonCell) SelectItemWithTitle(title string) {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("selectItemWithTitle:"), purego.NSString(title))
 	})
@@ -785,6 +822,7 @@ func (pubc *PopUpButtonCell) SelectItemWithTitle(title string) {
 
 // SelectItemWithTag selects the menu item with the specified tag.
 func (pubc *PopUpButtonCell) SelectItemWithTag(tag int) bool {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -798,6 +836,7 @@ func (pubc *PopUpButtonCell) SelectItemWithTag(tag int) bool {
 
 // SynchronizeTitleAndSelectedItem synchronizes the pop-up button’s displayed item with the currently selected menu item.
 func (pubc *PopUpButtonCell) SynchronizeTitleAndSelectedItem() {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("synchronizeTitleAndSelectedItem"))
 	})
@@ -806,6 +845,7 @@ func (pubc *PopUpButtonCell) SynchronizeTitleAndSelectedItem() {
 
 // ItemTitleAtIndex returns the title of the item at the specified index.
 func (pubc *PopUpButtonCell) ItemTitleAtIndex(index int) string {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -822,6 +862,8 @@ func (pubc *PopUpButtonCell) ItemTitleAtIndex(index int) string {
 
 // AttachPopUpWithFrameInView sets up the receiver to display a menu.
 func (pubc *PopUpButtonCell) AttachPopUpWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(pubc)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("attachPopUpWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 	})
@@ -830,6 +872,7 @@ func (pubc *PopUpButtonCell) AttachPopUpWithFrameInView(cellFrame corefoundation
 
 // DismissPopUp dismisses the pop-up button’s menu by ordering its window out.
 func (pubc *PopUpButtonCell) DismissPopUp() {
+	defer runtime.KeepAlive(pubc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("dismissPopUp"))
 	})
@@ -838,6 +881,8 @@ func (pubc *PopUpButtonCell) DismissPopUp() {
 
 // PerformClickWithFrameInView displays the receiver’s menu and track mouse events in it.
 func (pubc *PopUpButtonCell) PerformClickWithFrameInView(frame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(pubc)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pubc), objc.RegisterName("performClickWithFrame:inView:"), frame, objref.IDOf(controlView))
 	})
@@ -846,6 +891,7 @@ func (pubc *PopUpButtonCell) PerformClickWithFrameInView(frame corefoundation.CG
 
 // PullsDown wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) PullsDown() bool {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -859,6 +905,7 @@ func (pubc *PopUpButtonCell) PullsDown() bool {
 
 // AutoenablesItems wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) AutoenablesItems() bool {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -872,6 +919,7 @@ func (pubc *PopUpButtonCell) AutoenablesItems() bool {
 
 // UsesItemFromMenu wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) UsesItemFromMenu() bool {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -885,6 +933,7 @@ func (pubc *PopUpButtonCell) UsesItemFromMenu() bool {
 
 // AltersStateOfSelectedItem wraps the corresponding Objective-C method.
 func (pubc *PopUpButtonCell) AltersStateOfSelectedItem() bool {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -900,6 +949,7 @@ func (pubc *PopUpButtonCell) AltersStateOfSelectedItem() bool {
 //
 // ItemArray returns the collection as a Go slice.
 func (pubc *PopUpButtonCell) ItemArray() []*MenuItem {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 []*MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() []*MenuItem {
@@ -912,6 +962,7 @@ func (pubc *PopUpButtonCell) ItemArray() []*MenuItem {
 
 // NumberOfItems returns the number of items.
 func (pubc *PopUpButtonCell) NumberOfItems() int {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -925,6 +976,7 @@ func (pubc *PopUpButtonCell) NumberOfItems() int {
 
 // LastItem returns the last item.
 func (pubc *PopUpButtonCell) LastItem() *MenuItem {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -938,6 +990,7 @@ func (pubc *PopUpButtonCell) LastItem() *MenuItem {
 
 // SelectedItem returns the selected item.
 func (pubc *PopUpButtonCell) SelectedItem() *MenuItem {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 *MenuItem
 	purego.Main(func() {
 		_mainthread0 = func() *MenuItem {
@@ -951,6 +1004,7 @@ func (pubc *PopUpButtonCell) SelectedItem() *MenuItem {
 
 // IndexOfSelectedItem returns the index of selected item.
 func (pubc *PopUpButtonCell) IndexOfSelectedItem() int {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -966,6 +1020,7 @@ func (pubc *PopUpButtonCell) IndexOfSelectedItem() int {
 //
 // ItemTitles returns the collection as a Go slice.
 func (pubc *PopUpButtonCell) ItemTitles() []string {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -978,6 +1033,7 @@ func (pubc *PopUpButtonCell) ItemTitles() []string {
 
 // TitleOfSelectedItem returns the title of selected item.
 func (pubc *PopUpButtonCell) TitleOfSelectedItem() string {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -994,6 +1050,7 @@ func (pubc *PopUpButtonCell) TitleOfSelectedItem() string {
 
 // ArrowPosition returns the arrow position.
 func (pubc *PopUpButtonCell) ArrowPosition() PopUpArrowPosition {
+	defer runtime.KeepAlive(pubc)
 	var _mainthread0 PopUpArrowPosition
 	purego.Main(func() {
 		_mainthread0 = func() PopUpArrowPosition {

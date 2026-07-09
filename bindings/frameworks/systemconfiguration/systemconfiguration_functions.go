@@ -448,8 +448,8 @@ func SCNetworkInterfaceCopyAll() unsafe.Pointer {
 	return _fnSCNetworkInterfaceCopyAll()
 }
 
-func SCNetworkInterfaceCopyMTU(interface_ unsafe.Pointer, mtu_cur *int32, mtu_min *int32, mtu_max *int32) uint8 {
-	return _fnSCNetworkInterfaceCopyMTU(interface_, mtu_cur, mtu_min, mtu_max)
+func SCNetworkInterfaceCopyMTU(interface_ unsafe.Pointer, mtuCur *int32, mtuMin *int32, mtuMax *int32) uint8 {
+	return _fnSCNetworkInterfaceCopyMTU(interface_, mtuCur, mtuMin, mtuMax)
 }
 
 func SCNetworkInterfaceCopyMediaOptions(interface_ unsafe.Pointer, current unsafe.Pointer, active unsafe.Pointer, available unsafe.Pointer, filter uint8) uint8 {

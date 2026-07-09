@@ -1,0 +1,24 @@
+{
+  "rename_methods": [
+    {"class": "NSString", "selector": "initWithContentsOfFile:encoding:error:", "go_name": "NewStringFromFile"},
+    {"class": "NSString", "selector": "initWithContentsOfURL:encoding:error:", "go_name": "NewStringFromURL"},
+    {"class": "NSString", "selector": "initWithData:encoding:", "go_name": "NewStringFromData"},
+    {"class": "NSString", "selector": "stringByReplacingOccurrencesOfString:withString:", "class_method": false, "go_name": "ReplaceAll"},
+    {"class": "NSString", "selector": "componentsSeparatedByCharactersInSet:", "class_method": false, "go_name": "SplitByCharacterSet"},
+    {"class": "NSString", "selector": "dataUsingEncoding:allowLossyConversion:", "class_method": false, "go_name": "Encode"},
+    {"class": "NSString", "selector": "writeToFile:atomically:encoding:error:", "class_method": false, "go_name": "WriteToFile"},
+    {"class": "NSString", "selector": "stringByAppendingPathComponent:", "class_method": false, "go_name": "AppendPathComponent"},
+    {"class": "NSString", "selector": "stringByAppendingPathExtension:", "class_method": false, "go_name": "AppendPathExtension"},
+    {"class": "NSString", "selector": "stringByAppendingString:", "class_method": false, "go_name": "Append"},
+    {"class": "NSString", "selector": "containsString:", "class_method": false, "go_name": "Contains"},
+    {"class": "NSData", "selector": "initWithContentsOfFile:options:error:", "go_name": "NewDataFromFile"},
+    {"class": "NSFileManager", "selector": "mountedVolumeURLsIncludingResourceValuesForKeys:options:", "class_method": false, "go_name": "MountedVolumes"},
+    {"class": "NSFileManager", "selector": "URLsForDirectory:inDomains:", "class_method": false, "go_name": "DirectoryURLs"},
+    {"class": "NSFileManager", "selector": "enumeratorAtPath:", "class_method": false, "go_name": "DirectoryEnumerator"},
+    {"class": "NSFileManager", "selector": "fileExistsAtPath:", "class_method": false, "go_name": "FileExists"},
+    {"class": "NSFileManager", "selector": "removeItemAtPath:error:", "class_method": false, "go_name": "RemoveItem"},
+    {"class": "NSFileManager", "selector": "copyItemAtPath:toPath:error:", "class_method": false, "go_name": "CopyItem"},
+    {"class": "NSFileManager", "selector": "moveItemAtPath:toPath:error:", "class_method": false, "go_name": "MoveItem"},
+    {"class": "NSFileManager", "selector": "createDirectoryAtPath:withIntermediateDirectories:attributes:error:", "class_method": false, "go_name": "CreateDirectory"}
+  ]
+}

@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialParametersAdopt(id objc.ID) *AuthorizationP
 
 // Description returns the object's -description text.
 func (apkcp *AuthorizationPublicKeyCredentialParameters) Description() string {
+	defer runtime.KeepAlive(apkcp)
 	return rt.Description(objref.IDOf(apkcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkcp *AuthorizationPublicKeyCredentialParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkcp *AuthorizationPublicKeyCredentialParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkcp)
 	return rt.IsKind(objref.IDOf(apkcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkcp *AuthorizationPublicKeyCredentialParameters) String() string {
+	defer runtime.KeepAlive(apkcp)
 	return rt.Description(objref.IDOf(apkcp))
 }
 
@@ -75,6 +82,7 @@ func NewAuthorizationPublicKeyCredentialParametersWithAlgorithm(algorithm int) *
 
 // Algorithm returns a COSE algorithm indentifier.
 func (apkcp *AuthorizationPublicKeyCredentialParameters) Algorithm() int {
+	defer runtime.KeepAlive(apkcp)
 	_r := objc.Send[int](objref.IDOf(apkcp), objc.RegisterName("algorithm"))
 	return _r
 }

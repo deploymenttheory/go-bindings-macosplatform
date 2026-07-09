@@ -6,9 +6,11 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func achievementDescriptionAdopt(id objc.ID) *AchievementDescription {
 
 // Description returns the object's -description text.
 func (ad *AchievementDescription) Description() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ad *AchievementDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ad *AchievementDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(ad)
 	return rt.IsKind(objref.IDOf(ad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ad *AchievementDescription) String() string {
+	defer runtime.KeepAlive(ad)
 	return rt.Description(objref.IDOf(ad))
 }
 
@@ -77,6 +84,7 @@ func NewAchievementDescription() *AchievementDescription {
 
 // Identifier returns the identifier.
 func (ad *AchievementDescription) Identifier() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -86,6 +94,7 @@ func (ad *AchievementDescription) Identifier() string {
 
 // GroupIdentifier returns the group identifier for the achievement, if one exists.
 func (ad *AchievementDescription) GroupIdentifier() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
@@ -95,6 +104,7 @@ func (ad *AchievementDescription) GroupIdentifier() string {
 
 // Title returns the title of the achievement.
 func (ad *AchievementDescription) Title() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -104,6 +114,7 @@ func (ad *AchievementDescription) Title() string {
 
 // AchievedDescription returns the description for an unachieved achievement.
 func (ad *AchievementDescription) AchievedDescription() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("achievedDescription"))
 	if _r == 0 {
 		return ""
@@ -113,6 +124,7 @@ func (ad *AchievementDescription) AchievedDescription() string {
 
 // UnachievedDescription returns the description for an achieved achievement.
 func (ad *AchievementDescription) UnachievedDescription() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("unachievedDescription"))
 	if _r == 0 {
 		return ""
@@ -122,36 +134,42 @@ func (ad *AchievementDescription) UnachievedDescription() string {
 
 // MaximumPoints returns maximum points available for completing this achievement.
 func (ad *AchievementDescription) MaximumPoints() int {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[int](objref.IDOf(ad), objc.RegisterName("maximumPoints"))
 	return _r
 }
 
 // IsHidden reports whether the achievement should be listed or displayed if not yet unhidden by the game.
 func (ad *AchievementDescription) IsHidden() bool {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // IsReplayable reports whether the achievement will be reported by the game when the user earns it again. This allows the achievement to be used for challenges when the recipient has previously earned it.
 func (ad *AchievementDescription) IsReplayable() bool {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[bool](objref.IDOf(ad), objc.RegisterName("isReplayable"))
 	return _r
 }
 
 // RarityPercent returns if present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
-func (ad *AchievementDescription) RarityPercent() obj.Object {
+func (ad *AchievementDescription) RarityPercent() *foundation.Number {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("rarityPercent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ReleaseState returns the release state of the achievement in App Store Connect.
 func (ad *AchievementDescription) ReleaseState() ReleaseState {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[ReleaseState](objref.IDOf(ad), objc.RegisterName("releaseState"))
 	return _r
 }
 
 // ActivityIdentifier returns the identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
 func (ad *AchievementDescription) ActivityIdentifier() string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("activityIdentifier"))
 	if _r == 0 {
 		return ""
@@ -160,15 +178,17 @@ func (ad *AchievementDescription) ActivityIdentifier() string {
 }
 
 // ActivityProperties returns the properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
-func (ad *AchievementDescription) ActivityProperties() obj.Object {
+func (ad *AchievementDescription) ActivityProperties() map[string]string {
+	defer runtime.KeepAlive(ad)
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("activityProperties"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LoadImage loads the image to display when the player completes the achievement.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (ad *AchievementDescription) LoadImage(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ad)
 	type _result struct {
 		val obj.Object
 		err error

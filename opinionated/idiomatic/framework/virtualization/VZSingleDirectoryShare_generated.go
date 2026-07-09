@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func singleDirectoryShareAdopt(id objc.ID) *SingleDirectoryShare {
 
 // NewSingleDirectoryShareWithDirectory creates a directory share with a directory that you specify on the host.
 func NewSingleDirectoryShareWithDirectory(directory *SharedDirectory) *SingleDirectoryShare {
+	defer runtime.KeepAlive(directory)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZSingleDirectoryShare")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectory:"), objref.IDOf(directory))
 	return singleDirectoryShareAdopt(_id)
@@ -54,6 +57,7 @@ func NewSingleDirectoryShareWithDirectory(directory *SharedDirectory) *SingleDir
 
 // Directory returns the directory.
 func (sds *SingleDirectoryShare) Directory() *SharedDirectory {
+	defer runtime.KeepAlive(sds)
 	_r := objc.Send[objc.ID](objref.IDOf(sds), objc.RegisterName("directory"))
 	return SharedDirectoryFromID(_r)
 }

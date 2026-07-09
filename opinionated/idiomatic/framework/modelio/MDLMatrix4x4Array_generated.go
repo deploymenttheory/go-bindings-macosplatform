@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -47,22 +48,27 @@ func matrix4x4ArrayAdopt(id objc.ID) *Matrix4x4Array {
 
 // Description returns the object's -description text.
 func (ma *Matrix4x4Array) Description() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ma *Matrix4x4Array) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ma *Matrix4x4Array) IsKind(className string) bool {
+	defer runtime.KeepAlive(ma)
 	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ma *Matrix4x4Array) String() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
@@ -75,39 +81,46 @@ func NewMatrix4x4ArrayWithElementCount(arrayElementCount int) *Matrix4x4Array {
 
 // Clear wraps the corresponding Objective-C method.
 func (ma *Matrix4x4Array) Clear() {
+	defer runtime.KeepAlive(ma)
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("clear"))
 }
 
 // SetFloat4x4ArrayCount wraps the corresponding Objective-C method.
 func (ma *Matrix4x4Array) SetFloat4x4ArrayCount(valuesArray unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(ma)
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setFloat4x4Array:count:"), valuesArray, count)
 }
 
 // SetDouble4x4ArrayCount wraps the corresponding Objective-C method.
 func (ma *Matrix4x4Array) SetDouble4x4ArrayCount(valuesArray unsafe.Pointer, count int) {
+	defer runtime.KeepAlive(ma)
 	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setDouble4x4Array:count:"), valuesArray, count)
 }
 
 // GetFloat4x4ArrayMaxCount wraps the corresponding Objective-C method.
 func (ma *Matrix4x4Array) GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("getFloat4x4Array:maxCount:"), valuesArray, maxCount)
 	return _r
 }
 
 // GetDouble4x4ArrayMaxCount wraps the corresponding Objective-C method.
 func (ma *Matrix4x4Array) GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount int) int {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("getDouble4x4Array:maxCount:"), valuesArray, maxCount)
 	return _r
 }
 
 // ElementCount returns the element count.
 func (ma *Matrix4x4Array) ElementCount() int {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("elementCount"))
 	return _r
 }
 
 // Precision returns the precision.
 func (ma *Matrix4x4Array) Precision() DataPrecision {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[DataPrecision](objref.IDOf(ma), objc.RegisterName("precision"))
 	return _r
 }

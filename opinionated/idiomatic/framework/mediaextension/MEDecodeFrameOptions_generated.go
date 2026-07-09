@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func decodeFrameOptionsAdopt(id objc.ID) *DecodeFrameOptions {
 
 // Description returns the object's -description text.
 func (dfo *DecodeFrameOptions) Description() string {
+	defer runtime.KeepAlive(dfo)
 	return rt.Description(objref.IDOf(dfo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dfo *DecodeFrameOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dfo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dfo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dfo *DecodeFrameOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(dfo)
 	return rt.IsKind(objref.IDOf(dfo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dfo *DecodeFrameOptions) String() string {
+	defer runtime.KeepAlive(dfo)
 	return rt.Description(objref.IDOf(dfo))
 }
 
@@ -86,12 +93,14 @@ func (dfo *DecodeFrameOptions) WithRealTimePlayback(realTimePlayback bool) *Deco
 
 // DoNotOutputFrame reports whether a hint to the video decoder that a CVImageBuffer should not be emitted for this frame. NULL will be returned instead.
 func (dfo *DecodeFrameOptions) DoNotOutputFrame() bool {
+	defer runtime.KeepAlive(dfo)
 	_r := objc.Send[bool](objref.IDOf(dfo), objc.RegisterName("doNotOutputFrame"))
 	return _r
 }
 
 // RealTimePlayback reports whether a hint to the video decoder that it would be OK to use a low-power mode that can not decode faster than 1x realtime. Note that this hint only takes the current decode session into account. For example, if multiple instances of a decoder are operating at once, it may not actually be OK to use such a low-power mode if real-time playback might not be sustained across all the streams. This hint will be set to false during all uses other than 1x forward real-time playback, including seeking, playback at other rates, and export.
 func (dfo *DecodeFrameOptions) RealTimePlayback() bool {
+	defer runtime.KeepAlive(dfo)
 	_r := objc.Send[bool](objref.IDOf(dfo), objc.RegisterName("realTimePlayback"))
 	return _r
 }

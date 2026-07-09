@@ -4,8 +4,25 @@
 
 // Package securityinterface provides a fluent Go API over the macOS SecurityInterface framework.
 //
-// Each With… method sets one property and returns its receiver, so configuration
-// calls can be chained.
+// # Construction
+//
+// New… functions create objects; each With… method sets one property and
+// returns its receiver, so configuration calls chain. A <Type>FromID
+// constructor adopts an Objective-C object obtained elsewhere.
+//
+// # Lifecycle
+//
+// A wrapper releases its Objective-C object automatically once the garbage
+// collector finds it unreachable. Call Release to relinquish the reference
+// deterministically (for objects holding scarce resources); Release is
+// idempotent, and afterwards the wrapper's methods are no-ops returning zero
+// values.
+//
+// # Main-thread requirements
+//
+// Methods, setters, and constructors of classes Apple isolates to the main
+// thread run there automatically; callers never need to arrange main-thread
+// dispatch for the generated API.
 //
 // # Types
 //

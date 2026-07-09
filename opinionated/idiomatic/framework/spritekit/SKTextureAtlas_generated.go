@@ -6,6 +6,7 @@ package spritekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func textureAtlasAdopt(id objc.ID) *TextureAtlas {
 
 // Description returns the object's -description text.
 func (ta *TextureAtlas) Description() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ta *TextureAtlas) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ta *TextureAtlas) IsKind(className string) bool {
+	defer runtime.KeepAlive(ta)
 	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ta *TextureAtlas) String() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
@@ -76,6 +82,7 @@ func NewTextureAtlas() *TextureAtlas {
 
 // TextureNamed creates a texture from data stored in the texture atlas.
 func (ta *TextureAtlas) TextureNamed(name string) *Texture {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("textureNamed:"), purego.NSString(name))
 	return TextureFromID(_r)
 }
@@ -84,6 +91,7 @@ func (ta *TextureAtlas) TextureNamed(name string) *Texture {
 //
 // Preload blocks until the operation completes or ctx is cancelled.
 func (ta *TextureAtlas) Preload(ctx context.Context) error {
+	defer runtime.KeepAlive(ta)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -101,6 +109,7 @@ func (ta *TextureAtlas) Preload(ctx context.Context) error {
 //
 // TextureNames returns the collection as a Go slice.
 func (ta *TextureAtlas) TextureNames() []string {
+	defer runtime.KeepAlive(ta)
 	_arr := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("textureNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

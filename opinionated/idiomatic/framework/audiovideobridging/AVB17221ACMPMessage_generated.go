@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func aVB17221ACMPMessageAdopt(id objc.ID) *AVB17221ACMPMessage {
 
 // Description returns the object's -description text.
 func (aam *AVB17221ACMPMessage) Description() string {
+	defer runtime.KeepAlive(aam)
 	return rt.Description(objref.IDOf(aam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aam *AVB17221ACMPMessage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aam *AVB17221ACMPMessage) IsKind(className string) bool {
+	defer runtime.KeepAlive(aam)
 	return rt.IsKind(objref.IDOf(aam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aam *AVB17221ACMPMessage) String() string {
+	defer runtime.KeepAlive(aam)
 	return rt.Description(objref.IDOf(aam))
 }
 
@@ -120,6 +127,7 @@ func (aam *AVB17221ACMPMessage) WithListenerUniqueID(listenerUniqueID uint16) *A
 
 // WithDestinationMAC sets the dest_mac field of the ACMP message.
 func (aam *AVB17221ACMPMessage) WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage {
+	defer runtime.KeepAlive(destinationMAC)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setDestinationMAC:"), objref.IDOf(destinationMAC))
 	return aam
 }
@@ -180,144 +188,168 @@ func (aam *AVB17221ACMPMessage) WithDestinationPort(destinationPort uint16) *AVB
 
 // WithSourceIPAddress sets the source_ip_address field of the ACMP message.
 func (aam *AVB17221ACMPMessage) WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage {
+	defer runtime.KeepAlive(sourceIPAddress)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceIPAddress:"), objref.IDOf(sourceIPAddress))
 	return aam
 }
 
 // WithDestinationIPAddress sets the destination_ip_address field of the ACMP message.
 func (aam *AVB17221ACMPMessage) WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage {
+	defer runtime.KeepAlive(destinationIPAddress)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setDestinationIPAddress:"), objref.IDOf(destinationIPAddress))
 	return aam
 }
 
 // WithSourceMAC sets the source_mac field of the ACMP message.
 func (aam *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage {
+	defer runtime.KeepAlive(sourceMAC)
 	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
 	return aam
 }
 
 // MessageType returns the message_type field of the ACMP message.
 func (aam *AVB17221ACMPMessage) MessageType() AVB17221ACMPMessageType {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221ACMPMessageType](objref.IDOf(aam), objc.RegisterName("messageType"))
 	return _r
 }
 
 // Status returns the status field of the ACMP message.
 func (aam *AVB17221ACMPMessage) Status() AVB17221ACMPStatusCode {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221ACMPStatusCode](objref.IDOf(aam), objc.RegisterName("status"))
 	return _r
 }
 
 // StreamID returns the stream_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) StreamID() uint64 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("streamID"))
 	return _r
 }
 
 // ControllerEntityID returns the controller_entity_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) ControllerEntityID() uint64 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("controllerEntityID"))
 	return _r
 }
 
 // TalkerEntityID returns the talker_entity_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) TalkerEntityID() uint64 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("talkerEntityID"))
 	return _r
 }
 
 // ListenerEntityID returns the listener_entity_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) ListenerEntityID() uint64 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("listenerEntityID"))
 	return _r
 }
 
 // TalkerUniqueID returns the talker_unique_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) TalkerUniqueID() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("talkerUniqueID"))
 	return _r
 }
 
 // ListenerUniqueID returns the listener_unique_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) ListenerUniqueID() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("listenerUniqueID"))
 	return _r
 }
 
 // DestinationMAC returns the dest_mac field of the ACMP message.
 func (aam *AVB17221ACMPMessage) DestinationMAC() *MACAddress {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("destinationMAC"))
 	return MACAddressFromID(_r)
 }
 
 // ConnectionCount returns the connection_count field of the ACMP message.
 func (aam *AVB17221ACMPMessage) ConnectionCount() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("connectionCount"))
 	return _r
 }
 
 // SequenceID returns the sequence_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) SequenceID() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("sequenceID"))
 	return _r
 }
 
 // Flags returns the flags field of the ACMP message.
 func (aam *AVB17221ACMPMessage) Flags() AVB17221ACMPFlags {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221ACMPFlags](objref.IDOf(aam), objc.RegisterName("flags"))
 	return _r
 }
 
 // VlanID returns the stream_vlan_id field of the ACMP message.
 func (aam *AVB17221ACMPMessage) VlanID() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("vlanID"))
 	return _r
 }
 
 // ConnectedListenersEntries returns the connected_listeners_entries field of the ACMP message.
 func (aam *AVB17221ACMPMessage) ConnectedListenersEntries() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("connectedListenersEntries"))
 	return _r
 }
 
 // ConnectedListenersEntriesValid reports whether the CL_ENTRIES_VALID flag in the flags field of the ACMP message.
 func (aam *AVB17221ACMPMessage) ConnectedListenersEntriesValid() bool {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[bool](objref.IDOf(aam), objc.RegisterName("connectedListenersEntriesValid"))
 	return _r
 }
 
 // IPFlags returns the ip_flags field of the ACMP message.
 func (aam *AVB17221ACMPMessage) IPFlags() AVB17221ACMPIPFlag {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[AVB17221ACMPIPFlag](objref.IDOf(aam), objc.RegisterName("ipFlags"))
 	return _r
 }
 
 // SourcePort returns the source_port field of the ACMP message.
 func (aam *AVB17221ACMPMessage) SourcePort() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("sourcePort"))
 	return _r
 }
 
 // DestinationPort returns the destination_port field of the ACMP message.
 func (aam *AVB17221ACMPMessage) DestinationPort() uint16 {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("destinationPort"))
 	return _r
 }
 
 // SourceIPAddress returns the source_ip_address field of the ACMP message.
 func (aam *AVB17221ACMPMessage) SourceIPAddress() *IPAddress {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("sourceIPAddress"))
 	return IPAddressFromID(_r)
 }
 
 // DestinationIPAddress returns the destination_ip_address field of the ACMP message.
 func (aam *AVB17221ACMPMessage) DestinationIPAddress() *IPAddress {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("destinationIPAddress"))
 	return IPAddressFromID(_r)
 }
 
 // SourceMAC returns the source_mac field of the ACMP message.
 func (aam *AVB17221ACMPMessage) SourceMAC() *MACAddress {
+	defer runtime.KeepAlive(aam)
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("sourceMAC"))
 	return MACAddressFromID(_r)
 }

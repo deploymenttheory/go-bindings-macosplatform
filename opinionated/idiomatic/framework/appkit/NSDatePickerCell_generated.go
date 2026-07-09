@@ -5,9 +5,14 @@
 package appkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,12 +52,12 @@ func datePickerCellAdopt(id objc.ID) *DatePickerCell {
 }
 
 // NewDatePickerCellTextCell creates a new DatePickerCell.
-func NewDatePickerCellTextCell(string_ string) *DatePickerCell {
+func NewDatePickerCellTextCell(str string) *DatePickerCell {
 	var _mainthread0 *DatePickerCell
 	purego.Main(func() {
 		_mainthread0 = func() *DatePickerCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSDatePickerCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return datePickerCellAdopt(_id)
 		}()
 	})
@@ -61,6 +66,7 @@ func NewDatePickerCellTextCell(string_ string) *DatePickerCell {
 
 // NewDatePickerCellWithCoder creates a new DatePickerCell.
 func NewDatePickerCellWithCoder(coder obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *DatePickerCell
 	purego.Main(func() {
 		_mainthread0 = func() *DatePickerCell {
@@ -90,6 +96,7 @@ func (dpc *DatePickerCell) WithDrawsBackground(drawsBackground bool) *DatePicker
 
 // WithBackgroundColor sets the cell’s background color.
 func (dpc *DatePickerCell) WithBackgroundColor(backgroundColor *Color) *DatePickerCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -98,6 +105,7 @@ func (dpc *DatePickerCell) WithBackgroundColor(backgroundColor *Color) *DatePick
 
 // WithTextColor sets the cell’s text color.
 func (dpc *DatePickerCell) WithTextColor(textColor *Color) *DatePickerCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -122,6 +130,7 @@ func (dpc *DatePickerCell) WithDatePickerElements(datePickerElements DatePickerE
 
 // WithCalendar sets the calendar used by the date picker.
 func (dpc *DatePickerCell) WithCalendar(calendar obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(calendar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	})
@@ -130,6 +139,7 @@ func (dpc *DatePickerCell) WithCalendar(calendar obj.Object) *DatePickerCell {
 
 // WithLocale sets the locale used to display dates.
 func (dpc *DatePickerCell) WithLocale(locale obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(locale)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	})
@@ -138,6 +148,7 @@ func (dpc *DatePickerCell) WithLocale(locale obj.Object) *DatePickerCell {
 
 // WithTimeZone sets the time zone used to display time-related values.
 func (dpc *DatePickerCell) WithTimeZone(timeZone obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(timeZone)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	})
@@ -145,9 +156,9 @@ func (dpc *DatePickerCell) WithTimeZone(timeZone obj.Object) *DatePickerCell {
 }
 
 // WithDateValue sets the date currently specified in the picker.
-func (dpc *DatePickerCell) WithDateValue(dateValue obj.Object) *DatePickerCell {
+func (dpc *DatePickerCell) WithDateValue(dateValue time.Time) *DatePickerCell {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setDateValue:"), objref.IDOf(dateValue))
+		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setDateValue:"), rt.TimeToNSDate(dateValue))
 	})
 	return dpc
 }
@@ -161,23 +172,24 @@ func (dpc *DatePickerCell) WithTimeInterval(timeInterval float64) *DatePickerCel
 }
 
 // WithMinDate sets the minimum date that the picker allows as input.
-func (dpc *DatePickerCell) WithMinDate(minDate obj.Object) *DatePickerCell {
+func (dpc *DatePickerCell) WithMinDate(minDate time.Time) *DatePickerCell {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setMinDate:"), objref.IDOf(minDate))
+		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setMinDate:"), rt.TimeToNSDate(minDate))
 	})
 	return dpc
 }
 
 // WithMaxDate sets the maximum date that the picker allows as input.
-func (dpc *DatePickerCell) WithMaxDate(maxDate obj.Object) *DatePickerCell {
+func (dpc *DatePickerCell) WithMaxDate(maxDate time.Time) *DatePickerCell {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setMaxDate:"), objref.IDOf(maxDate))
+		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setMaxDate:"), rt.TimeToNSDate(maxDate))
 	})
 	return dpc
 }
 
 // WithControlView sets the view associated with the cell.
 func (dpc *DatePickerCell) WithControlView(controlView ViewProvider) *DatePickerCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -202,6 +214,7 @@ func (dpc *DatePickerCell) WithState(state int) *DatePickerCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (dpc *DatePickerCell) WithTarget(target obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -306,6 +319,7 @@ func (dpc *DatePickerCell) WithWraps(wraps bool) *DatePickerCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (dpc *DatePickerCell) WithFont(font *Font) *DatePickerCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -314,6 +328,7 @@ func (dpc *DatePickerCell) WithFont(font *Font) *DatePickerCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (dpc *DatePickerCell) WithFormatter(formatter obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -322,6 +337,7 @@ func (dpc *DatePickerCell) WithFormatter(formatter obj.Object) *DatePickerCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (dpc *DatePickerCell) WithObjectValue(objectValue obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -370,6 +386,7 @@ func (dpc *DatePickerCell) WithIntegerValue(integerValue int) *DatePickerCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (dpc *DatePickerCell) WithImage(image *Image) *DatePickerCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -386,6 +403,7 @@ func (dpc *DatePickerCell) WithControlSize(controlSize ControlSize) *DatePickerC
 
 // WithRepresentedObject sets the object represented by the cell.
 func (dpc *DatePickerCell) WithRepresentedObject(representedObject obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -394,6 +412,7 @@ func (dpc *DatePickerCell) WithRepresentedObject(representedObject obj.Object) *
 
 // WithMenu sets the cell’s contextual menu.
 func (dpc *DatePickerCell) WithMenu(menu *Menu) *DatePickerCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -482,6 +501,7 @@ func (dpc *DatePickerCell) WithFocusRingType(focusRingType FocusRingType) *DateP
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (dpc *DatePickerCell) WithAttributedStringValue(attributedStringValue obj.Object) *DatePickerCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -530,6 +550,7 @@ func (dpc *DatePickerCell) WithControlTint(controlTint ControlTint) *DatePickerC
 
 // DatePickerStyle returns the date picker style.
 func (dpc *DatePickerCell) DatePickerStyle() DatePickerStyle {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 DatePickerStyle
 	purego.Main(func() {
 		_mainthread0 = func() DatePickerStyle {
@@ -543,6 +564,7 @@ func (dpc *DatePickerCell) DatePickerStyle() DatePickerStyle {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (dpc *DatePickerCell) DrawsBackground() bool {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -556,6 +578,7 @@ func (dpc *DatePickerCell) DrawsBackground() bool {
 
 // BackgroundColor returns the background color.
 func (dpc *DatePickerCell) BackgroundColor() *Color {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -569,6 +592,7 @@ func (dpc *DatePickerCell) BackgroundColor() *Color {
 
 // TextColor returns the text color.
 func (dpc *DatePickerCell) TextColor() *Color {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -582,6 +606,7 @@ func (dpc *DatePickerCell) TextColor() *Color {
 
 // DatePickerMode returns the date picker mode.
 func (dpc *DatePickerCell) DatePickerMode() DatePickerMode {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 DatePickerMode
 	purego.Main(func() {
 		_mainthread0 = func() DatePickerMode {
@@ -595,6 +620,7 @@ func (dpc *DatePickerCell) DatePickerMode() DatePickerMode {
 
 // DatePickerElements returns the date picker elements.
 func (dpc *DatePickerCell) DatePickerElements() DatePickerElementFlags {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 DatePickerElementFlags
 	purego.Main(func() {
 		_mainthread0 = func() DatePickerElementFlags {
@@ -607,12 +633,13 @@ func (dpc *DatePickerCell) DatePickerElements() DatePickerElementFlags {
 }
 
 // Calendar returns the calendar.
-func (dpc *DatePickerCell) Calendar() obj.Object {
-	var _mainthread0 obj.Object
+func (dpc *DatePickerCell) Calendar() *foundation.Calendar {
+	defer runtime.KeepAlive(dpc)
+	var _mainthread0 *foundation.Calendar
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Calendar {
 			_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("calendar"))
-			return obj.Wrap(_r)
+			return foundation.CalendarFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -620,12 +647,13 @@ func (dpc *DatePickerCell) Calendar() obj.Object {
 }
 
 // Locale returns the locale.
-func (dpc *DatePickerCell) Locale() obj.Object {
-	var _mainthread0 obj.Object
+func (dpc *DatePickerCell) Locale() *foundation.Locale {
+	defer runtime.KeepAlive(dpc)
+	var _mainthread0 *foundation.Locale
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Locale {
 			_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("locale"))
-			return obj.Wrap(_r)
+			return foundation.LocaleFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -633,12 +661,13 @@ func (dpc *DatePickerCell) Locale() obj.Object {
 }
 
 // TimeZone returns the time zone.
-func (dpc *DatePickerCell) TimeZone() obj.Object {
-	var _mainthread0 obj.Object
+func (dpc *DatePickerCell) TimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(dpc)
+	var _mainthread0 *foundation.TimeZone
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.TimeZone {
 			_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("timeZone"))
-			return obj.Wrap(_r)
+			return foundation.TimeZoneFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -646,12 +675,13 @@ func (dpc *DatePickerCell) TimeZone() obj.Object {
 }
 
 // DateValue returns the date value.
-func (dpc *DatePickerCell) DateValue() obj.Object {
-	var _mainthread0 obj.Object
+func (dpc *DatePickerCell) DateValue() time.Time {
+	defer runtime.KeepAlive(dpc)
+	var _mainthread0 time.Time
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() time.Time {
 			_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("dateValue"))
-			return obj.Wrap(_r)
+			return rt.NSDateToTime(_r)
 		}()
 	})
 	return _mainthread0
@@ -660,6 +690,7 @@ func (dpc *DatePickerCell) DateValue() obj.Object {
 
 // TimeInterval returns the time interval.
 func (dpc *DatePickerCell) TimeInterval() float64 {
+	defer runtime.KeepAlive(dpc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -672,12 +703,13 @@ func (dpc *DatePickerCell) TimeInterval() float64 {
 }
 
 // MinDate returns the min date.
-func (dpc *DatePickerCell) MinDate() obj.Object {
-	var _mainthread0 obj.Object
+func (dpc *DatePickerCell) MinDate() time.Time {
+	defer runtime.KeepAlive(dpc)
+	var _mainthread0 time.Time
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() time.Time {
 			_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("minDate"))
-			return obj.Wrap(_r)
+			return rt.NSDateToTime(_r)
 		}()
 	})
 	return _mainthread0
@@ -685,12 +717,13 @@ func (dpc *DatePickerCell) MinDate() obj.Object {
 }
 
 // MaxDate returns the max date.
-func (dpc *DatePickerCell) MaxDate() obj.Object {
-	var _mainthread0 obj.Object
+func (dpc *DatePickerCell) MaxDate() time.Time {
+	defer runtime.KeepAlive(dpc)
+	var _mainthread0 time.Time
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() time.Time {
 			_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("maxDate"))
-			return obj.Wrap(_r)
+			return rt.NSDateToTime(_r)
 		}()
 	})
 	return _mainthread0

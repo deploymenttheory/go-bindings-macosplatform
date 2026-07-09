@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func consolePortConfigurationAdopt(id objc.ID) *ConsolePortConfiguration {
 
 // Description returns the object's -description text.
 func (cpc *ConsolePortConfiguration) Description() string {
+	defer runtime.KeepAlive(cpc)
 	return rt.Description(objref.IDOf(cpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpc *ConsolePortConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpc *ConsolePortConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpc)
 	return rt.IsKind(objref.IDOf(cpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpc *ConsolePortConfiguration) String() string {
+	defer runtime.KeepAlive(cpc)
 	return rt.Description(objref.IDOf(cpc))
 }
 
 // WithAttachment sets the serial port attachment.
 func (cpc *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(cpc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return cpc
 }
 
 // Attachment returns the attachment.
 func (cpc *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
+	defer runtime.KeepAlive(cpc)
 	_r := objc.Send[objc.ID](objref.IDOf(cpc), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }

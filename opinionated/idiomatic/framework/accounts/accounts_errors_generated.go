@@ -8,62 +8,53 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the Accounts error ACErrorUnknown.
-var ErrUnknown = errkit.New("ACErrorDomain", 1)
-
-// ErrAccountMissingRequiredProperty matches the Accounts error ACErrorAccountMissingRequiredProperty.
-var ErrAccountMissingRequiredProperty = errkit.New("ACErrorDomain", 2)
-
-// ErrAccountAuthenticationFailed matches the Accounts error ACErrorAccountAuthenticationFailed.
-var ErrAccountAuthenticationFailed = errkit.New("ACErrorDomain", 3)
-
-// ErrAccountTypeInvalid matches the Accounts error ACErrorAccountTypeInvalid.
-var ErrAccountTypeInvalid = errkit.New("ACErrorDomain", 4)
-
-// ErrAccountAlreadyExists matches the Accounts error ACErrorAccountAlreadyExists.
-var ErrAccountAlreadyExists = errkit.New("ACErrorDomain", 5)
-
-// ErrAccountNotFound matches the Accounts error ACErrorAccountNotFound.
-var ErrAccountNotFound = errkit.New("ACErrorDomain", 6)
-
-// ErrPermissionDenied matches the Accounts error ACErrorPermissionDenied.
-var ErrPermissionDenied = errkit.New("ACErrorDomain", 7)
+// ErrAccessDeniedByProtectionPolicy matches the Accounts error ACErrorAccessDeniedByProtectionPolicy.
+var ErrAccessDeniedByProtectionPolicy = errkit.New("ACErrorDomain", 10)
 
 // ErrAccessInfoInvalid matches the Accounts error ACErrorAccessInfoInvalid.
 var ErrAccessInfoInvalid = errkit.New("ACErrorDomain", 8)
 
+// ErrAccountAlreadyExists matches the Accounts error ACErrorAccountAlreadyExists.
+var ErrAccountAlreadyExists = errkit.New("ACErrorDomain", 5)
+
+// ErrAccountAuthenticationFailed matches the Accounts error ACErrorAccountAuthenticationFailed.
+var ErrAccountAuthenticationFailed = errkit.New("ACErrorDomain", 3)
+
+// ErrAccountMissingRequiredProperty matches the Accounts error ACErrorAccountMissingRequiredProperty.
+var ErrAccountMissingRequiredProperty = errkit.New("ACErrorDomain", 2)
+
+// ErrAccountNotFound matches the Accounts error ACErrorAccountNotFound.
+var ErrAccountNotFound = errkit.New("ACErrorDomain", 6)
+
+// ErrAccountTypeInvalid matches the Accounts error ACErrorAccountTypeInvalid.
+var ErrAccountTypeInvalid = errkit.New("ACErrorDomain", 4)
+
 // ErrClientPermissionDenied matches the Accounts error ACErrorClientPermissionDenied.
 var ErrClientPermissionDenied = errkit.New("ACErrorDomain", 9)
-
-// ErrAccessDeniedByProtectionPolicy matches the Accounts error ACErrorAccessDeniedByProtectionPolicy.
-var ErrAccessDeniedByProtectionPolicy = errkit.New("ACErrorDomain", 10)
-
-// ErrCredentialNotFound matches the Accounts error ACErrorCredentialNotFound.
-var ErrCredentialNotFound = errkit.New("ACErrorDomain", 11)
-
-// ErrFetchCredentialFailed matches the Accounts error ACErrorFetchCredentialFailed.
-var ErrFetchCredentialFailed = errkit.New("ACErrorDomain", 12)
-
-// ErrStoreCredentialFailed matches the Accounts error ACErrorStoreCredentialFailed.
-var ErrStoreCredentialFailed = errkit.New("ACErrorDomain", 13)
-
-// ErrRemoveCredentialFailed matches the Accounts error ACErrorRemoveCredentialFailed.
-var ErrRemoveCredentialFailed = errkit.New("ACErrorDomain", 14)
-
-// ErrUpdatingNonexistentAccount matches the Accounts error ACErrorUpdatingNonexistentAccount.
-var ErrUpdatingNonexistentAccount = errkit.New("ACErrorDomain", 15)
-
-// ErrInvalidClientBundleID matches the Accounts error ACErrorInvalidClientBundleID.
-var ErrInvalidClientBundleID = errkit.New("ACErrorDomain", 16)
-
-// ErrDeniedByPlugin matches the Accounts error ACErrorDeniedByPlugin.
-var ErrDeniedByPlugin = errkit.New("ACErrorDomain", 17)
 
 // ErrCoreDataSaveFailed matches the Accounts error ACErrorCoreDataSaveFailed.
 var ErrCoreDataSaveFailed = errkit.New("ACErrorDomain", 18)
 
+// ErrCredentialItemNotExpired matches the Accounts error ACErrorCredentialItemNotExpired.
+var ErrCredentialItemNotExpired = errkit.New("ACErrorDomain", 23)
+
+// ErrCredentialItemNotFound matches the Accounts error ACErrorCredentialItemNotFound.
+var ErrCredentialItemNotFound = errkit.New("ACErrorDomain", 22)
+
+// ErrCredentialNotFound matches the Accounts error ACErrorCredentialNotFound.
+var ErrCredentialNotFound = errkit.New("ACErrorDomain", 11)
+
+// ErrDeniedByPlugin matches the Accounts error ACErrorDeniedByPlugin.
+var ErrDeniedByPlugin = errkit.New("ACErrorDomain", 17)
+
 // ErrFailedSerializingAccountInfo matches the Accounts error ACErrorFailedSerializingAccountInfo.
 var ErrFailedSerializingAccountInfo = errkit.New("ACErrorDomain", 19)
+
+// ErrFetchCredentialFailed matches the Accounts error ACErrorFetchCredentialFailed.
+var ErrFetchCredentialFailed = errkit.New("ACErrorDomain", 12)
+
+// ErrInvalidClientBundleID matches the Accounts error ACErrorInvalidClientBundleID.
+var ErrInvalidClientBundleID = errkit.New("ACErrorDomain", 16)
 
 // ErrInvalidCommand matches the Accounts error ACErrorInvalidCommand.
 var ErrInvalidCommand = errkit.New("ACErrorDomain", 20)
@@ -71,8 +62,17 @@ var ErrInvalidCommand = errkit.New("ACErrorDomain", 20)
 // ErrMissingTransportMessageID matches the Accounts error ACErrorMissingTransportMessageID.
 var ErrMissingTransportMessageID = errkit.New("ACErrorDomain", 21)
 
-// ErrCredentialItemNotFound matches the Accounts error ACErrorCredentialItemNotFound.
-var ErrCredentialItemNotFound = errkit.New("ACErrorDomain", 22)
+// ErrPermissionDenied matches the Accounts error ACErrorPermissionDenied.
+var ErrPermissionDenied = errkit.New("ACErrorDomain", 7)
 
-// ErrCredentialItemNotExpired matches the Accounts error ACErrorCredentialItemNotExpired.
-var ErrCredentialItemNotExpired = errkit.New("ACErrorDomain", 23)
+// ErrRemoveCredentialFailed matches the Accounts error ACErrorRemoveCredentialFailed.
+var ErrRemoveCredentialFailed = errkit.New("ACErrorDomain", 14)
+
+// ErrStoreCredentialFailed matches the Accounts error ACErrorStoreCredentialFailed.
+var ErrStoreCredentialFailed = errkit.New("ACErrorDomain", 13)
+
+// ErrUnknown matches the Accounts error ACErrorUnknown.
+var ErrUnknown = errkit.New("ACErrorDomain", 1)
+
+// ErrUpdatingNonexistentAccount matches the Accounts error ACErrorUpdatingNonexistentAccount.
+var ErrUpdatingNonexistentAccount = errkit.New("ACErrorDomain", 15)

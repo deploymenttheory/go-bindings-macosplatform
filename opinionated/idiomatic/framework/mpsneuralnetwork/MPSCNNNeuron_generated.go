@@ -5,11 +5,13 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,32 +80,37 @@ func (cn *CNNNeuron) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCou
 
 // NeuronType returns the neuron type.
 func (cn *CNNNeuron) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(cn)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(cn), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // A returns the a.
 func (cn *CNNNeuron) A() float32 {
+	defer runtime.KeepAlive(cn)
 	_r := objc.Send[float32](objref.IDOf(cn), objc.RegisterName("a"))
 	return _r
 }
 
 // B returns the b.
 func (cn *CNNNeuron) B() float32 {
+	defer runtime.KeepAlive(cn)
 	_r := objc.Send[float32](objref.IDOf(cn), objc.RegisterName("b"))
 	return _r
 }
 
 // C returns the c.
 func (cn *CNNNeuron) C() float32 {
+	defer runtime.KeepAlive(cn)
 	_r := objc.Send[float32](objref.IDOf(cn), objc.RegisterName("c"))
 	return _r
 }
 
 // Data returns the data.
-func (cn *CNNNeuron) Data() obj.Object {
+func (cn *CNNNeuron) Data() []byte {
+	defer runtime.KeepAlive(cn)
 	_r := objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // isCNNNeuron marks CNNNeuron — and, by embedding promotion, its

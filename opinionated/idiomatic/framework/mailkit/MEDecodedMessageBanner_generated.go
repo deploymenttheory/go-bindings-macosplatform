@@ -5,6 +5,8 @@
 package mailkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func decodedMessageBannerAdopt(id objc.ID) *DecodedMessageBanner {
 
 // Description returns the object's -description text.
 func (dmb *DecodedMessageBanner) Description() string {
+	defer runtime.KeepAlive(dmb)
 	return rt.Description(objref.IDOf(dmb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dmb *DecodedMessageBanner) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dmb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dmb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dmb *DecodedMessageBanner) IsKind(className string) bool {
+	defer runtime.KeepAlive(dmb)
 	return rt.IsKind(objref.IDOf(dmb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dmb *DecodedMessageBanner) String() string {
+	defer runtime.KeepAlive(dmb)
 	return rt.Description(objref.IDOf(dmb))
 }
 
@@ -73,6 +80,7 @@ func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string,
 
 // Title returns the title.
 func (dmb *DecodedMessageBanner) Title() string {
+	defer runtime.KeepAlive(dmb)
 	_r := objc.Send[objc.ID](objref.IDOf(dmb), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -82,6 +90,7 @@ func (dmb *DecodedMessageBanner) Title() string {
 
 // PrimaryActionTitle returns the primary action title.
 func (dmb *DecodedMessageBanner) PrimaryActionTitle() string {
+	defer runtime.KeepAlive(dmb)
 	_r := objc.Send[objc.ID](objref.IDOf(dmb), objc.RegisterName("primaryActionTitle"))
 	if _r == 0 {
 		return ""
@@ -91,6 +100,7 @@ func (dmb *DecodedMessageBanner) PrimaryActionTitle() string {
 
 // IsDismissable reports whether the object is dismissable.
 func (dmb *DecodedMessageBanner) IsDismissable() bool {
+	defer runtime.KeepAlive(dmb)
 	_r := objc.Send[bool](objref.IDOf(dmb), objc.RegisterName("isDismissable"))
 	return _r
 }

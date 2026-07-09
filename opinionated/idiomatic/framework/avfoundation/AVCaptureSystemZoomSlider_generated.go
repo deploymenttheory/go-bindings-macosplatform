@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func captureSystemZoomSliderAdopt(id objc.ID) *CaptureSystemZoomSlider {
 
 // NewCaptureSystemZoomSliderWithDevice creates a slider to control the video zoom factor of a capture device.
 func NewCaptureSystemZoomSliderWithDevice(device *CaptureDevice) *CaptureSystemZoomSlider {
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
 	return captureSystemZoomSliderAdopt(_id)
@@ -54,6 +57,7 @@ func NewCaptureSystemZoomSliderWithDevice(device *CaptureDevice) *CaptureSystemZ
 
 // NewCaptureSystemZoomSliderWithDeviceAction creates a slider to control the zoom level of the specified capture device with an action to respond to zoom changes.
 func NewCaptureSystemZoomSliderWithDeviceAction(device *CaptureDevice, action func(float64)) *CaptureSystemZoomSlider {
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), objref.IDOf(device), objc.NewBlock(func(_ objc.Block, _b0 float64) { action(_b0) }))
 	return captureSystemZoomSliderAdopt(_id)

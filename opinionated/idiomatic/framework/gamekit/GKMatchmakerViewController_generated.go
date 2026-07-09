@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func matchmakerViewControllerAdopt(id objc.ID) *MatchmakerViewController {
 
 // Description returns the object's -description text.
 func (mvc *MatchmakerViewController) Description() string {
+	defer runtime.KeepAlive(mvc)
 	return rt.Description(objref.IDOf(mvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mvc *MatchmakerViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mvc *MatchmakerViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(mvc)
 	return rt.IsKind(objref.IDOf(mvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mvc *MatchmakerViewController) String() string {
+	defer runtime.KeepAlive(mvc)
 	return rt.Description(objref.IDOf(mvc))
 }
 
 // NewMatchmakerViewControllerWithMatchRequest creates a matchmaker view controller for the local player to start inviting other players.
 func NewMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *MatchmakerViewController {
+	defer runtime.KeepAlive(request)
 	var _mainthread0 *MatchmakerViewController
 	purego.Main(func() {
 		_mainthread0 = func() *MatchmakerViewController {
@@ -81,6 +90,7 @@ func NewMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *Matchma
 
 // NewMatchmakerViewControllerWithInvite creates a matchmaker view controller to present to a player who accepts an invitation.
 func NewMatchmakerViewControllerWithInvite(invite *Invite) *MatchmakerViewController {
+	defer runtime.KeepAlive(invite)
 	var _mainthread0 *MatchmakerViewController
 	purego.Main(func() {
 		_mainthread0 = func() *MatchmakerViewController {
@@ -90,6 +100,18 @@ func NewMatchmakerViewControllerWithInvite(invite *Invite) *MatchmakerViewContro
 		}()
 	})
 	return _mainthread0
+}
+
+// WithMatchmakerDelegate sets the object that handles matchmaker view controller changes.
+func (mvc *MatchmakerViewController) WithMatchmakerDelegate(matchmakerDelegate MatchmakerViewControllerDelegate) *MatchmakerViewController {
+	_shim := newMatchmakerViewControllerDelegateShim(matchmakerDelegate)
+	_sel := objc.RegisterName("setMatchmakerDelegate:")
+	shim.Associate(objref.IDOf(mvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(mvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return mvc
 }
 
 // WithHosted sets a Boolean value that indicates whether the match is hosted or peer-to-peer.
@@ -126,6 +148,8 @@ func (mvc *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitat
 
 // AddPlayersToMatch invites additional players to join an existing match.
 func (mvc *MatchmakerViewController) AddPlayersToMatch(match *Match) {
+	defer runtime.KeepAlive(mvc)
+	defer runtime.KeepAlive(match)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("addPlayersToMatch:"), objref.IDOf(match))
 	})
@@ -134,6 +158,8 @@ func (mvc *MatchmakerViewController) AddPlayersToMatch(match *Match) {
 
 // SetHostedPlayerDidConnect updates the connection status of a player in a hosted game.
 func (mvc *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, connected bool) {
+	defer runtime.KeepAlive(mvc)
+	defer runtime.KeepAlive(player)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
 	})
@@ -142,6 +168,7 @@ func (mvc *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, c
 
 // MatchRequest returns the match request.
 func (mvc *MatchmakerViewController) MatchRequest() *MatchRequest {
+	defer runtime.KeepAlive(mvc)
 	var _mainthread0 *MatchRequest
 	purego.Main(func() {
 		_mainthread0 = func() *MatchRequest {
@@ -155,6 +182,7 @@ func (mvc *MatchmakerViewController) MatchRequest() *MatchRequest {
 
 // IsHosted reports whether set to true to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
 func (mvc *MatchmakerViewController) IsHosted() bool {
+	defer runtime.KeepAlive(mvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -168,6 +196,7 @@ func (mvc *MatchmakerViewController) IsHosted() bool {
 
 // MatchmakingMode returns this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
 func (mvc *MatchmakerViewController) MatchmakingMode() MatchmakingMode {
+	defer runtime.KeepAlive(mvc)
 	var _mainthread0 MatchmakingMode
 	purego.Main(func() {
 		_mainthread0 = func() MatchmakingMode {
@@ -181,6 +210,7 @@ func (mvc *MatchmakerViewController) MatchmakingMode() MatchmakingMode {
 
 // CanStartWithMinimumPlayers reports whether a BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is false, and the multiplayer match can only proceed after all players are connected. If the value is set to true, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
 func (mvc *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
+	defer runtime.KeepAlive(mvc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -194,6 +224,7 @@ func (mvc *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
 
 // DefaultInvitationMessage returns deprecated, set the message on the match request instead
 func (mvc *MatchmakerViewController) DefaultInvitationMessage() string {
+	defer runtime.KeepAlive(mvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -210,6 +241,7 @@ func (mvc *MatchmakerViewController) DefaultInvitationMessage() string {
 
 // SetHostedPlayerConnected updates a player’s status on the view to show that the player has connected or disconnected from your server.
 func (mvc *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
+	defer runtime.KeepAlive(mvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setHostedPlayer:connected:"), purego.NSString(playerID), connected)
 	})

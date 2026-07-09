@@ -5,6 +5,8 @@
 package systemextensions
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func systemExtensionManagerAdopt(id objc.ID) *SystemExtensionManager {
 
 // Description returns the object's -description text.
 func (sem *SystemExtensionManager) Description() string {
+	defer runtime.KeepAlive(sem)
 	return rt.Description(objref.IDOf(sem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sem *SystemExtensionManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sem)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sem *SystemExtensionManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(sem)
 	return rt.IsKind(objref.IDOf(sem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sem *SystemExtensionManager) String() string {
+	defer runtime.KeepAlive(sem)
 	return rt.Description(objref.IDOf(sem))
 }
 
@@ -74,5 +81,7 @@ func NewSystemExtensionManager() *SystemExtensionManager {
 
 // SubmitRequest submits a system extension request to the manager.
 func (sem *SystemExtensionManager) SubmitRequest(request *SystemExtensionRequest) {
+	defer runtime.KeepAlive(sem)
+	defer runtime.KeepAlive(request)
 	objc.Send[objc.ID](objref.IDOf(sem), objc.RegisterName("submitRequest:"), objref.IDOf(request))
 }

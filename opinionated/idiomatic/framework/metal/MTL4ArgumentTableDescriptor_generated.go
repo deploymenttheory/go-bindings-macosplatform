@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4ArgumentTableDescriptorAdopt(id objc.ID) *MTL4ArgumentTableDescriptor {
 
 // Description returns the object's -description text.
 func (matd *MTL4ArgumentTableDescriptor) Description() string {
+	defer runtime.KeepAlive(matd)
 	return rt.Description(objref.IDOf(matd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (matd *MTL4ArgumentTableDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(matd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(matd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (matd *MTL4ArgumentTableDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(matd)
 	return rt.IsKind(objref.IDOf(matd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (matd *MTL4ArgumentTableDescriptor) String() string {
+	defer runtime.KeepAlive(matd)
 	return rt.Description(objref.IDOf(matd))
 }
 
@@ -110,30 +117,35 @@ func (matd *MTL4ArgumentTableDescriptor) WithLabel(label string) *MTL4ArgumentTa
 
 // MaxBufferBindCount determines the number of buffer-binding slots for the argument table. The maximum value of this parameter is 31.
 func (matd *MTL4ArgumentTableDescriptor) MaxBufferBindCount() int {
+	defer runtime.KeepAlive(matd)
 	_r := objc.Send[int](objref.IDOf(matd), objc.RegisterName("maxBufferBindCount"))
 	return _r
 }
 
 // MaxTextureBindCount determines the number of texture-binding slots for the argument table. The maximum value of this parameter is 128.
 func (matd *MTL4ArgumentTableDescriptor) MaxTextureBindCount() int {
+	defer runtime.KeepAlive(matd)
 	_r := objc.Send[int](objref.IDOf(matd), objc.RegisterName("maxTextureBindCount"))
 	return _r
 }
 
 // MaxSamplerStateBindCount determines the number of sampler state-binding slots for the argument table. The maximum value of this parameter is 16.
 func (matd *MTL4ArgumentTableDescriptor) MaxSamplerStateBindCount() int {
+	defer runtime.KeepAlive(matd)
 	_r := objc.Send[int](objref.IDOf(matd), objc.RegisterName("maxSamplerStateBindCount"))
 	return _r
 }
 
 // SupportAttributeStrides reports whether controls whether Metal should reserve memory for attribute strides in the argument table. Set this value to true if you intend to provide dynamic attribute strides when binding vertex array buffers to the argument table by calling “MTL4ArgumentTable/setAddress:attributeStride:atIndex:“ The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
 func (matd *MTL4ArgumentTableDescriptor) SupportAttributeStrides() bool {
+	defer runtime.KeepAlive(matd)
 	_r := objc.Send[bool](objref.IDOf(matd), objc.RegisterName("supportAttributeStrides"))
 	return _r
 }
 
 // Label returns assigns an optional label with the argument table for debug purposes.
 func (matd *MTL4ArgumentTableDescriptor) Label() string {
+	defer runtime.KeepAlive(matd)
 	_r := objc.Send[objc.ID](objref.IDOf(matd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

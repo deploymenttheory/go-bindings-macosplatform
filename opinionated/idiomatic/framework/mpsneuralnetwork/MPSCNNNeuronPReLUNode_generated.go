@@ -5,9 +5,11 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,9 +49,10 @@ func cNNNeuronPReLUNodeAdopt(id objc.ID) *CNNNeuronPReLUNode {
 }
 
 // NewCNNNeuronPReLUNodeWithSourceAData init a node representing a MPSCNNNeuronTanH kernel For each pixel, applies the following function:
-func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode *NNImageNode, aData obj.Object) *CNNNeuronPReLUNode {
+func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode *NNImageNode, aData []byte) *CNNNeuronPReLUNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronPReLUNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:aData:"), objref.IDOf(sourceNode), objref.IDOf(aData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:aData:"), objref.IDOf(sourceNode), rt.BytesToNSData(aData))
 	return cNNNeuronPReLUNodeAdopt(_id)
 }
 

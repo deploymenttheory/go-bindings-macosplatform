@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(id objc.ID) *Auth
 
 // Description returns the object's -description text.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Description() string {
+	defer runtime.KeepAlive(askpkca)
 	return rt.Description(objref.IDOf(askpkca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(askpkca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(askpkca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsKind(className string) bool {
+	defer runtime.KeepAlive(askpkca)
 	return rt.IsKind(objref.IDOf(askpkca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) String() string {
+	defer runtime.KeepAlive(askpkca)
 	return rt.Description(objref.IDOf(askpkca))
 }
 
@@ -74,12 +81,14 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertion() *AuthorizationSec
 
 // AppID reports whether indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
+	defer runtime.KeepAlive(askpkca)
 	_r := objc.Send[bool](objref.IDOf(askpkca), objc.RegisterName("appID"))
 	return _r
 }
 
 // Prf returns the prf.
 func (askpkca *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	defer runtime.KeepAlive(askpkca)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkca), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)
 }

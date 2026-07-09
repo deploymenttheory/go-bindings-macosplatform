@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Description() string {
+	defer runtime.KeepAlive(mpcaccsfe)
 	return rt.Description(objref.IDOf(mpcaccsfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpcaccsfe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpcaccsfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpcaccsfe)
 	return rt.IsKind(objref.IDOf(mpcaccsfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) String() string {
+	defer runtime.KeepAlive(mpcaccsfe)
 	return rt.Description(objref.IDOf(mpcaccsfe))
 }
 

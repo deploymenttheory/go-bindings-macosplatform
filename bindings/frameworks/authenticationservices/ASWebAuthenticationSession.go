@@ -46,7 +46,7 @@ func ASWebAuthenticationSessionFromID(id objc.ID) *ASWebAuthenticationSession {
 
 // Creates a web authentication session instance.
 // Deprecated: Use initWithURL:callback:completionHandler: instead
-func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandler(uRL *foundation.NSURL, callbackURLScheme *foundation.NSString, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *ASWebAuthenticationSession {
+func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandler(url *foundation.NSURL, callbackURLScheme *foundation.NSString, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *ASWebAuthenticationSession {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -57,7 +57,7 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandl
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelInitWithURLCallbackURLSchemeCompletionHandler, uRL.Ptr(), callbackURLScheme.Ptr(), __block_completionHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelInitWithURLCallbackURLSchemeCompletionHandler, url.Ptr(), callbackURLScheme.Ptr(), __block_completionHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -65,7 +65,7 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackURLSchemeCompletionHandl
 }
 
 // Creates a web authentication session instance that uses a callback to evaluate a redirection URL.
-func (o *ASWebAuthenticationSession) InitWithURLCallbackCompletionHandler(uRL *foundation.NSURL, callback *ASWebAuthenticationSessionCallback, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *ASWebAuthenticationSession {
+func (o *ASWebAuthenticationSession) InitWithURLCallbackCompletionHandler(url *foundation.NSURL, callback *ASWebAuthenticationSessionCallback, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *ASWebAuthenticationSession {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -76,7 +76,7 @@ func (o *ASWebAuthenticationSession) InitWithURLCallbackCompletionHandler(uRL *f
 		})
 		defer __block_completionHandler.Release()
 	}
-	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelInitWithURLCallbackCompletionHandler, uRL.Ptr(), callback.Ptr(), __block_completionHandler)
+	_ret := objc.Send[objc.ID](o.Ptr(), _aSWebAuthenticationSessionSelInitWithURLCallbackCompletionHandler, url.Ptr(), callback.Ptr(), __block_completionHandler)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

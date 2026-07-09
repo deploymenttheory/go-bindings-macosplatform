@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterColorControlAdopt(id objc.ID) *MTRBaseClusterColorControl {
 
 // NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterColorControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterColorControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterColorControlAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue(device *MTRBaseDevic
 
 // NewMTRBaseClusterColorControlWithDeviceEndpointQueue creates a new MTRBaseClusterColorControl.
 func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterColorControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterColorControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterColorControlAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 //
 // ReadAttributeCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHueWithCompletion(c
 //
 // SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithParamsS
 //
 // ReadAttributeCurrentSaturationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturationWithCompl
 //
 // SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWith
 //
 // ReadAttributeRemainingTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTimeWithCompletio
 //
 // SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithPara
 //
 // ReadAttributeCurrentXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentXWithCompletion(ctx
 //
 // SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithParamsSub
 //
 // ReadAttributeCurrentYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentYWithCompletion(ctx
 //
 // SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithParamsSub
 //
 // ReadAttributeDriftCompensationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensationWithCompl
 //
 // SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWith
 //
 // ReadAttributeCompensationTextWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithCompletion(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val string
 		err error
@@ -390,6 +415,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationTextWithComple
 //
 // SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -415,6 +442,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithP
 //
 // ReadAttributeColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMiredsWith
 //
 // SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMired
 //
 // ReadAttributeColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorModeWithCompletion(ct
 //
 // SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithParamsSu
 //
 // ReadAttributeOptionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptionsWithCompletion(ctx 
 //
 // SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithParamsSubs
 //
 // ReadAttributeNumberOfPrimariesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimariesWithCompl
 //
 // SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +654,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWith
 //
 // ReadAttributePrimary1XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +680,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1XWithCompletion(ct
 //
 // SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +707,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithParamsSu
 //
 // ReadAttributePrimary1YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +733,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1YWithCompletion(ct
 //
 // SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +760,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithParamsSu
 //
 // ReadAttributePrimary1IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +786,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1IntensityWithCompl
 //
 // SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +813,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWith
 //
 // ReadAttributePrimary2XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +839,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2XWithCompletion(ct
 //
 // SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +866,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithParamsSu
 //
 // ReadAttributePrimary2YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +892,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2YWithCompletion(ct
 //
 // SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +919,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithParamsSu
 //
 // ReadAttributePrimary2IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +945,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2IntensityWithCompl
 //
 // SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +972,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWith
 //
 // ReadAttributePrimary3XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +998,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3XWithCompletion(ct
 //
 // SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1025,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithParamsSu
 //
 // ReadAttributePrimary3YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1051,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3YWithCompletion(ct
 //
 // SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1078,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithParamsSu
 //
 // ReadAttributePrimary3IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1104,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3IntensityWithCompl
 //
 // SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1131,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWith
 //
 // ReadAttributePrimary4XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1157,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4XWithCompletion(ct
 //
 // SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1184,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithParamsSu
 //
 // ReadAttributePrimary4YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1210,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4YWithCompletion(ct
 //
 // SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1237,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithParamsSu
 //
 // ReadAttributePrimary4IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1263,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4IntensityWithCompl
 //
 // SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1290,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWith
 //
 // ReadAttributePrimary5XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1316,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5XWithCompletion(ct
 //
 // SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1343,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithParamsSu
 //
 // ReadAttributePrimary5YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1369,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5YWithCompletion(ct
 //
 // SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1396,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithParamsSu
 //
 // ReadAttributePrimary5IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1422,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5IntensityWithCompl
 //
 // SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1449,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWith
 //
 // ReadAttributePrimary6XWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1475,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6XWithCompletion(ct
 //
 // SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1502,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithParamsSu
 //
 // ReadAttributePrimary6YWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1528,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6YWithCompletion(ct
 //
 // SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1555,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithParamsSu
 //
 // ReadAttributePrimary6IntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1581,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6IntensityWithCompl
 //
 // SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1608,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWith
 //
 // ReadAttributeWhitePointXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1634,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointXWithCompletion(
 //
 // SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1661,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithParams
 //
 // ReadAttributeWhitePointYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1687,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointYWithCompletion(
 //
 // SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1714,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithParams
 //
 // ReadAttributeColorPointRXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1740,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRXWithCompletion
 //
 // SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1767,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithParam
 //
 // ReadAttributeColorPointRYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1793,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRYWithCompletion
 //
 // SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1820,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithParam
 //
 // ReadAttributeColorPointRIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1846,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensityWithCo
 //
 // SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1873,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityW
 //
 // ReadAttributeColorPointGXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1899,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGXWithCompletion
 //
 // SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1926,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithParam
 //
 // ReadAttributeColorPointGYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1952,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGYWithCompletion
 //
 // SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1865,6 +1979,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithParam
 //
 // ReadAttributeColorPointGIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,6 +2005,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensityWithCo
 //
 // SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1915,6 +2032,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityW
 //
 // ReadAttributeColorPointBXWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1940,6 +2058,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBXWithCompletion
 //
 // SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1965,6 +2085,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithParam
 //
 // ReadAttributeColorPointBYWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1990,6 +2111,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBYWithCompletion
 //
 // SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2015,6 +2138,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithParam
 //
 // ReadAttributeColorPointBIntensityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2040,6 +2164,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensityWithCo
 //
 // SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2065,6 +2191,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityW
 //
 // ReadAttributeEnhancedCurrentHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2090,6 +2217,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHueWithComp
 //
 // SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2115,6 +2244,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWit
 //
 // ReadAttributeEnhancedColorModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2140,6 +2270,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorModeWithCompl
 //
 // SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2165,6 +2297,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWith
 //
 // ReadAttributeColorLoopActiveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,6 +2323,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActiveWithComplet
 //
 // SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2215,6 +2350,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithPa
 //
 // ReadAttributeColorLoopDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2240,6 +2376,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirectionWithComp
 //
 // SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2265,6 +2403,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWit
 //
 // ReadAttributeColorLoopTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2290,6 +2429,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTimeWithCompletio
 //
 // SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2315,6 +2456,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithPara
 //
 // ReadAttributeColorLoopStartEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2340,6 +2482,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHueW
 //
 // SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2365,6 +2509,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhance
 //
 // ReadAttributeColorLoopStoredEnhancedHueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2390,6 +2535,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue
 //
 // SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2415,6 +2562,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhanc
 //
 // ReadAttributeColorCapabilitiesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2440,6 +2588,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilitiesWithCompl
 //
 // SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2465,6 +2615,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWith
 //
 // ReadAttributeColorTempPhysicalMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2490,6 +2641,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds
 //
 // SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2515,6 +2668,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinM
 //
 // ReadAttributeColorTempPhysicalMaxMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2540,6 +2694,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds
 //
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2565,6 +2721,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxM
 //
 // ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2590,6 +2747,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinM
 //
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2615,6 +2774,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLeve
 //
 // ReadAttributeStartUpColorTemperatureMiredsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2640,6 +2800,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMir
 //
 // SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2665,6 +2827,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatu
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2690,6 +2853,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandListWithCo
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2715,6 +2880,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListW
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2740,6 +2906,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandListWithCom
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2765,6 +2933,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWi
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2790,6 +2959,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeListWithCompletio
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2815,6 +2986,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithPara
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2840,6 +3012,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMapWithCompletion(c
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2865,6 +3039,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithParamsS
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2890,6 +3065,8 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevisionWithComplet
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2915,6 +3092,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithPa
 //
 // ReadAttributeCurrentHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2940,6 +3118,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentHue(ctx context.Con
 //
 // SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2965,6 +3147,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentHueWithMinInte
 //
 // ReadAttributeCurrentSaturation blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2990,6 +3173,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentSaturation(ctx cont
 //
 // SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3015,6 +3202,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentSaturationWith
 //
 // ReadAttributeRemainingTime blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3040,6 +3228,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeRemainingTime(ctx context.
 //
 // SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3065,6 +3257,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeRemainingTimeWithMinI
 //
 // ReadAttributeCurrentX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3090,6 +3283,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentX(ctx context.Conte
 //
 // SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3115,6 +3312,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentXWithMinInterv
 //
 // ReadAttributeCurrentY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3140,6 +3338,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCurrentY(ctx context.Conte
 //
 // SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3165,6 +3367,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCurrentYWithMinInterv
 //
 // ReadAttributeDriftCompensation blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3190,6 +3393,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeDriftCompensation(ctx cont
 //
 // SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3215,6 +3422,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeDriftCompensationWith
 //
 // ReadAttributeCompensationText blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val string
 		err error
@@ -3240,6 +3448,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCompensationText(ctx conte
 //
 // SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val string
 		err error
@@ -3265,6 +3477,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCompensationTextWithM
 //
 // ReadAttributeColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3290,6 +3503,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTemperatureMireds(ctx
 //
 // SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3315,6 +3532,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTemperatureMired
 //
 // ReadAttributeColorMode blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3340,6 +3558,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorMode(ctx context.Cont
 //
 // SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3365,6 +3587,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorModeWithMinInter
 //
 // ReadAttributeOptions blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3390,6 +3613,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeOptions(ctx context.Contex
 //
 // SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3415,6 +3642,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeOptionsWithMinInterva
 //
 // ReadAttributeNumberOfPrimaries blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3440,6 +3668,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeNumberOfPrimaries(ctx cont
 //
 // SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3465,6 +3697,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeNumberOfPrimariesWith
 //
 // ReadAttributePrimary1X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3490,6 +3723,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1X(ctx context.Cont
 //
 // SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3515,6 +3752,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1XWithMinInter
 //
 // ReadAttributePrimary1Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3540,6 +3778,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Y(ctx context.Cont
 //
 // SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3565,6 +3807,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1YWithMinInter
 //
 // ReadAttributePrimary1Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3590,6 +3833,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary1Intensity(ctx cont
 //
 // SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3615,6 +3862,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary1IntensityWith
 //
 // ReadAttributePrimary2X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3640,6 +3888,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2X(ctx context.Cont
 //
 // SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3665,6 +3917,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2XWithMinInter
 //
 // ReadAttributePrimary2Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3690,6 +3943,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Y(ctx context.Cont
 //
 // SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3715,6 +3972,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2YWithMinInter
 //
 // ReadAttributePrimary2Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3740,6 +3998,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary2Intensity(ctx cont
 //
 // SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3765,6 +4027,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary2IntensityWith
 //
 // ReadAttributePrimary3X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3790,6 +4053,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3X(ctx context.Cont
 //
 // SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3815,6 +4082,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3XWithMinInter
 //
 // ReadAttributePrimary3Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3840,6 +4108,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Y(ctx context.Cont
 //
 // SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3865,6 +4137,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3YWithMinInter
 //
 // ReadAttributePrimary3Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3890,6 +4163,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary3Intensity(ctx cont
 //
 // SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3915,6 +4192,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary3IntensityWith
 //
 // ReadAttributePrimary4X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3940,6 +4218,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4X(ctx context.Cont
 //
 // SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3965,6 +4247,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4XWithMinInter
 //
 // ReadAttributePrimary4Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -3990,6 +4273,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Y(ctx context.Cont
 //
 // SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4015,6 +4302,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4YWithMinInter
 //
 // ReadAttributePrimary4Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4040,6 +4328,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary4Intensity(ctx cont
 //
 // SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4065,6 +4357,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary4IntensityWith
 //
 // ReadAttributePrimary5X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4090,6 +4383,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5X(ctx context.Cont
 //
 // SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4115,6 +4412,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5XWithMinInter
 //
 // ReadAttributePrimary5Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4140,6 +4438,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Y(ctx context.Cont
 //
 // SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4165,6 +4467,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5YWithMinInter
 //
 // ReadAttributePrimary5Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4190,6 +4493,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary5Intensity(ctx cont
 //
 // SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4215,6 +4522,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary5IntensityWith
 //
 // ReadAttributePrimary6X blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4240,6 +4548,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6X(ctx context.Cont
 //
 // SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4265,6 +4577,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6XWithMinInter
 //
 // ReadAttributePrimary6Y blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4290,6 +4603,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Y(ctx context.Cont
 //
 // SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4315,6 +4632,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6YWithMinInter
 //
 // ReadAttributePrimary6Intensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4340,6 +4658,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributePrimary6Intensity(ctx cont
 //
 // SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4365,6 +4687,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributePrimary6IntensityWith
 //
 // ReadAttributeWhitePointX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4390,6 +4713,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointX(ctx context.Co
 //
 // SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4415,6 +4742,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointXWithMinInt
 //
 // ReadAttributeWhitePointY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4440,6 +4768,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeWhitePointY(ctx context.Co
 //
 // SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4465,6 +4797,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeWhitePointYWithMinInt
 //
 // ReadAttributeColorPointRX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4490,6 +4823,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRX(ctx context.C
 //
 // SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4515,6 +4852,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRXWithMinIn
 //
 // ReadAttributeColorPointRY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4540,6 +4878,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRY(ctx context.C
 //
 // SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4565,6 +4907,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRYWithMinIn
 //
 // ReadAttributeColorPointRIntensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4590,6 +4933,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointRIntensity(ctx c
 //
 // SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4615,6 +4962,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointRIntensityW
 //
 // ReadAttributeColorPointGX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4640,6 +4988,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGX(ctx context.C
 //
 // SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4665,6 +5017,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGXWithMinIn
 //
 // ReadAttributeColorPointGY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4690,6 +5043,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGY(ctx context.C
 //
 // SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4715,6 +5072,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGYWithMinIn
 //
 // ReadAttributeColorPointGIntensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4740,6 +5098,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointGIntensity(ctx c
 //
 // SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4765,6 +5127,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointGIntensityW
 //
 // ReadAttributeColorPointBX blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4790,6 +5153,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBX(ctx context.C
 //
 // SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4815,6 +5182,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBXWithMinIn
 //
 // ReadAttributeColorPointBY blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4840,6 +5208,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBY(ctx context.C
 //
 // SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4865,6 +5237,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBYWithMinIn
 //
 // ReadAttributeColorPointBIntensity blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4890,6 +5263,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorPointBIntensity(ctx c
 //
 // SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4915,6 +5292,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorPointBIntensityW
 //
 // ReadAttributeEnhancedCurrentHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4940,6 +5318,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedCurrentHue(ctx con
 //
 // SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4965,6 +5347,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedCurrentHueWit
 //
 // ReadAttributeEnhancedColorMode blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -4990,6 +5373,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeEnhancedColorMode(ctx cont
 //
 // SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5015,6 +5402,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeEnhancedColorModeWith
 //
 // ReadAttributeColorLoopActive blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5040,6 +5428,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopActive(ctx contex
 //
 // SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5065,6 +5457,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopActiveWithMi
 //
 // ReadAttributeColorLoopDirection blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5090,6 +5483,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopDirection(ctx con
 //
 // SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5115,6 +5512,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopDirectionWit
 //
 // ReadAttributeColorLoopTime blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5140,6 +5538,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopTime(ctx context.
 //
 // SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5165,6 +5567,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopTimeWithMinI
 //
 // ReadAttributeColorLoopStartEnhancedHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5190,6 +5593,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStartEnhancedHue(
 //
 // SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5215,6 +5622,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStartEnhance
 //
 // ReadAttributeColorLoopStoredEnhancedHue blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5240,6 +5648,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorLoopStoredEnhancedHue
 //
 // SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhancedHueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5265,6 +5677,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorLoopStoredEnhanc
 //
 // ReadAttributeColorCapabilities blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5290,6 +5703,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorCapabilities(ctx cont
 //
 // SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5315,6 +5732,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorCapabilitiesWith
 //
 // ReadAttributeColorTempPhysicalMinMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5340,6 +5758,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMinMireds
 //
 // SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5365,6 +5787,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMinM
 //
 // ReadAttributeColorTempPhysicalMaxMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5390,6 +5813,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeColorTempPhysicalMaxMireds
 //
 // SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5415,6 +5842,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeColorTempPhysicalMaxM
 //
 // ReadAttributeCoupleColorTempToLevelMinMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMireds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5440,6 +5868,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeCoupleColorTempToLevelMinM
 //
 // SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLevelMinMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5465,6 +5897,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeCoupleColorTempToLeve
 //
 // ReadAttributeStartUpColorTemperatureMireds blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMireds(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5490,6 +5923,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeStartUpColorTemperatureMir
 //
 // SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatureMiredsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5515,6 +5952,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeStartUpColorTemperatu
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5540,6 +5978,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeGeneratedCommandList(ctx c
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5565,6 +6007,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeGeneratedCommandListW
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5590,6 +6033,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeAcceptedCommandList(ctx co
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5615,6 +6062,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAcceptedCommandListWi
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5640,6 +6088,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeAttributeList(ctx context.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5665,6 +6117,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeAttributeListWithMinI
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5690,6 +6143,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeFeatureMap(ctx context.Con
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5715,6 +6172,7 @@ func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeFeatureMapWithMinInte
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -5740,6 +6198,10 @@ func (mbccc *MTRBaseClusterColorControl) ReadAttributeClusterRevision(ctx contex
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterColorControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbccc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

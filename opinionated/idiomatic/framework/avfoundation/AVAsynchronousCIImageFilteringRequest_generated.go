@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func asynchronousCIImageFilteringRequestAdopt(id objc.ID) *AsynchronousCIImageFi
 
 // Description returns the object's -description text.
 func (acifr *AsynchronousCIImageFilteringRequest) Description() string {
+	defer runtime.KeepAlive(acifr)
 	return rt.Description(objref.IDOf(acifr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (acifr *AsynchronousCIImageFilteringRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(acifr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(acifr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (acifr *AsynchronousCIImageFilteringRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(acifr)
 	return rt.IsKind(objref.IDOf(acifr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (acifr *AsynchronousCIImageFilteringRequest) String() string {
+	defer runtime.KeepAlive(acifr)
 	return rt.Description(objref.IDOf(acifr))
 }
 
@@ -78,28 +84,35 @@ func NewAsynchronousCIImageFilteringRequest() *AsynchronousCIImageFilteringReque
 
 // FinishWithImageContext provides the filtered video frame image to AVFoundation for further processing or display.
 func (acifr *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage obj.Object, context_ obj.Object) {
+	defer runtime.KeepAlive(acifr)
+	defer runtime.KeepAlive(filteredImage)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("finishWithImage:context:"), objref.IDOf(filteredImage), objref.IDOf(context_))
 }
 
 // FinishWithError notifies AVFoundation that you cannot fulfill the image filtering request.
-func (acifr *AsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("finishWithError:"), error_)
+func (acifr *AsynchronousCIImageFilteringRequest) FinishWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(acifr)
+	objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("finishWithError:"), err)
 }
 
 // RenderSize returns width and height for rendering frames.
 func (acifr *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(acifr)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(acifr), objc.RegisterName("renderSize"))
 	return _r
 }
 
 // CompositionTime returns the time for which the frame should be filtered
 func (acifr *AsynchronousCIImageFilteringRequest) CompositionTime() coremedia.CMTime {
+	defer runtime.KeepAlive(acifr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(acifr), objc.RegisterName("compositionTime"))
 	return _r
 }
 
 // SourceImage returns CIImage for the first enabled source video track. Unlike AVAsynchronousVideoCompositionRequest, renderContext.renderTransform is already applied to the source image.
 func (acifr *AsynchronousCIImageFilteringRequest) SourceImage() obj.Object {
+	defer runtime.KeepAlive(acifr)
 	_r := objc.Send[objc.ID](objref.IDOf(acifr), objc.RegisterName("sourceImage"))
 	return obj.Wrap(_r)
 }

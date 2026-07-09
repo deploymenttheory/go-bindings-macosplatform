@@ -141,14 +141,14 @@ func (o *MDLTexture) InitWithDataTopLeftOriginNameDimensionsRowStrideChannelCoun
 }
 
 // Exports the texture data to an image file at the specified URL.
-func (o *MDLTexture) WriteToURL(uRL *foundation.NSURL) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mDLTextureSelWriteToURL, uRL.Ptr())
+func (o *MDLTexture) WriteToURL(url *foundation.NSURL) bool {
+	_ret := objc.Send[bool](o.Ptr(), _mDLTextureSelWriteToURL, url.Ptr())
 	return _ret
 }
 
 // write a particular level of a mipped texture to URL, deducing type from path extension
-func (o *MDLTexture) WriteToURLLevel(uRL *foundation.NSURL, level uint) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mDLTextureSelWriteToURLLevel, uRL.Ptr(), level)
+func (o *MDLTexture) WriteToURLLevel(url *foundation.NSURL, level uint) bool {
+	_ret := objc.Send[bool](o.Ptr(), _mDLTextureSelWriteToURLLevel, url.Ptr(), level)
 	return _ret
 }
 

@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func audioPlayerAdopt(id objc.ID) *AudioPlayer {
 
 // Description returns the object's -description text.
 func (ap *AudioPlayer) Description() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ap *AudioPlayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ap *AudioPlayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ap)
 	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ap *AudioPlayer) String() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
 // NewAudioPlayerWithSource initializes an audio player for playing the specified simple audio source.
 func NewAudioPlayerWithSource(source *AudioSource) *AudioPlayer {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
 	return audioPlayerAdopt(_id)
@@ -75,6 +83,7 @@ func NewAudioPlayerWithSource(source *AudioSource) *AudioPlayer {
 
 // NewAudioPlayerWithAVAudioNode initializes an audio player for playing the specified AVFoundation audio node.
 func NewAudioPlayerWithAVAudioNode(audioNode obj.Object) *AudioPlayer {
+	defer runtime.KeepAlive(audioNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), objref.IDOf(audioNode))
 	return audioPlayerAdopt(_id)
@@ -94,12 +103,14 @@ func (ap *AudioPlayer) WithDidFinishPlayback(didFinishPlayback func()) *AudioPla
 
 // AudioNode returns the audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
 func (ap *AudioPlayer) AudioNode() obj.Object {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("audioNode"))
 	return obj.Wrap(_r)
 }
 
 // AudioSource returns the audioSource if there is one.
 func (ap *AudioPlayer) AudioSource() *AudioSource {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("audioSource"))
 	return AudioSourceFromID(_r)
 }

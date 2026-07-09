@@ -5,8 +5,11 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func deviceBrowserAdopt(id objc.ID) *DeviceBrowser {
 
 // Description returns the object's -description text.
 func (db *DeviceBrowser) Description() string {
+	defer runtime.KeepAlive(db)
 	return rt.Description(objref.IDOf(db))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (db *DeviceBrowser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(db)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(db), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (db *DeviceBrowser) IsKind(className string) bool {
+	defer runtime.KeepAlive(db)
 	return rt.IsKind(objref.IDOf(db), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (db *DeviceBrowser) String() string {
+	defer runtime.KeepAlive(db)
 	return rt.Description(objref.IDOf(db))
 }
 
@@ -70,6 +78,16 @@ func (db *DeviceBrowser) String() string {
 func NewDeviceBrowser() *DeviceBrowser {
 	_id := objc.Send[objc.ID](objc.ID(_class("ICDeviceBrowser")), objc.RegisterName("new"))
 	return deviceBrowserAdopt(_id)
+}
+
+// WithDelegate sets the object that acts as the delegate of the device browser.
+func (db *DeviceBrowser) WithDelegate(delegate DeviceBrowserDelegate) *DeviceBrowser {
+	_shim := newDeviceBrowserDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(db), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(db), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return db
 }
 
 // WithBrowsedDeviceTypeMask sets a mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
@@ -80,22 +98,26 @@ func (db *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceT
 
 // Start tells the delegate to start looking for devices.
 func (db *DeviceBrowser) Start() {
+	defer runtime.KeepAlive(db)
 	objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("start"))
 }
 
 // Stop tells the delegate to stop looking for devices.
 func (db *DeviceBrowser) Stop() {
+	defer runtime.KeepAlive(db)
 	objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("stop"))
 }
 
 // IsBrowsing reports whether the device browser is browsing for devices.
 func (db *DeviceBrowser) IsBrowsing() bool {
+	defer runtime.KeepAlive(db)
 	_r := objc.Send[bool](objref.IDOf(db), objc.RegisterName("isBrowsing"))
 	return _r
 }
 
 // BrowsedDeviceTypeMask returns a mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
 func (db *DeviceBrowser) BrowsedDeviceTypeMask() DeviceTypeMask {
+	defer runtime.KeepAlive(db)
 	_r := objc.Send[DeviceTypeMask](objref.IDOf(db), objc.RegisterName("browsedDeviceTypeMask"))
 	return _r
 }
@@ -104,6 +126,7 @@ func (db *DeviceBrowser) BrowsedDeviceTypeMask() DeviceTypeMask {
 //
 // Devices returns the collection as a Go slice.
 func (db *DeviceBrowser) Devices() []*Device {
+	defer runtime.KeepAlive(db)
 	_arr := objc.Send[objc.ID](objref.IDOf(db), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Device { return DeviceFromID(_id) })
 }

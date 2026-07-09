@@ -6,11 +6,13 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -83,8 +85,8 @@ func (mro *ModifyRecordsOperation) WithSavePolicy(savePolicy RecordSavePolicy) *
 }
 
 // WithClientChangeTokenData sets a token that tracks local changes to records.
-func (mro *ModifyRecordsOperation) WithClientChangeTokenData(clientChangeTokenData obj.Object) *ModifyRecordsOperation {
-	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setClientChangeTokenData:"), objref.IDOf(clientChangeTokenData))
+func (mro *ModifyRecordsOperation) WithClientChangeTokenData(clientChangeTokenData []byte) *ModifyRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setClientChangeTokenData:"), rt.BytesToNSData(clientChangeTokenData))
 	return mro
 }
 
@@ -102,18 +104,21 @@ func (mro *ModifyRecordsOperation) WithPerRecordProgressBlock(perRecordProgressB
 
 // WithDatabase sets the database that the operation uses.
 func (mro *ModifyRecordsOperation) WithDatabase(database *Database) *ModifyRecordsOperation {
+	defer runtime.KeepAlive(database)
 	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return mro
 }
 
 // WithConfiguration sets the operation’s configuration.
 func (mro *ModifyRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordsOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return mro
 }
 
 // WithGroup sets the operation’s group.
 func (mro *ModifyRecordsOperation) WithGroup(group *OperationGroup) *ModifyRecordsOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return mro
 }
@@ -126,6 +131,7 @@ func (mro *ModifyRecordsOperation) WithLongLivedOperationWasPersistedBlock(longL
 
 // WithContainer sets the operation's container.
 func (mro *ModifyRecordsOperation) WithContainer(container *Container) *ModifyRecordsOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return mro
 }
@@ -158,6 +164,7 @@ func (mro *ModifyRecordsOperation) WithTimeoutIntervalForResource(timeoutInterva
 //
 // RecordsToSave returns the collection as a Go slice.
 func (mro *ModifyRecordsOperation) RecordsToSave() []*Record {
+	defer runtime.KeepAlive(mro)
 	_arr := objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("recordsToSave"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
@@ -166,24 +173,28 @@ func (mro *ModifyRecordsOperation) RecordsToSave() []*Record {
 //
 // RecordIDsToDelete returns the collection as a Go slice.
 func (mro *ModifyRecordsOperation) RecordIDsToDelete() []*RecordID {
+	defer runtime.KeepAlive(mro)
 	_arr := objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("recordIDsToDelete"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
 // SavePolicy returns the policy to use when saving changes to records. The server uses this property to determine how to proceed when saving record changes. The exact behavior depends on the policy you choose: - Use “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“ to only save a record when the change tag of the local copy matches that of the server's copy. If the server record's change tag is more recent, CloudKit discards the save and returns a “CKError/Code/serverRecordChanged“ error. - Use “CKModifyRecordsOperation/RecordSavePolicy/changedKeys“ to save only the fields of the record that contain changes. The server doesn't compare record change tags when using this policy. - Use “CKModifyRecordsOperation/RecordSavePolicy/allKeys“ to save every field of the record, even those without changes. The server doesn't compare record change tags when using this policy. If you change the property's value, do so before you execute the operation or submit the operation to a queue. The default value is “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“.
 func (mro *ModifyRecordsOperation) SavePolicy() RecordSavePolicy {
+	defer runtime.KeepAlive(mro)
 	_r := objc.Send[RecordSavePolicy](objref.IDOf(mro), objc.RegisterName("savePolicy"))
 	return _r
 }
 
 // ClientChangeTokenData returns a token that tracks local changes to records. The default value is `nil`. When you modify records from a fetch operation, specify a token using this property to indicate which version of the record you most recently modified. Compare the token you supply to the token in the next record fetch to confirm the server  successfully receives the device's most recent modify request. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
-func (mro *ModifyRecordsOperation) ClientChangeTokenData() obj.Object {
+func (mro *ModifyRecordsOperation) ClientChangeTokenData() []byte {
+	defer runtime.KeepAlive(mro)
 	_r := objc.Send[objc.ID](objref.IDOf(mro), objc.RegisterName("clientChangeTokenData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Atomic reports whether the entire operation fails when CloudKit can't update one or more records in a record zone. Modifying records atomically prevents you from updating your data in a way that leaves it in an inconsistent state. You use atomic updates when you want to write multiple records to the same record zone. If there's a failure to modify any of the records in a zone, CloudKit doesn't change the other records in that same zone. The record zone must have the “CKRecordZone/Capabilities/atomic“ capability for this behavior to apply. If a record zone doesn't support the atomic capability, setting this property has no effect. The default value of this property is <doc://com.apple.documentation/documentation/swift/true>, which causes all modifications within a single record zone to occur atomically. If your operation contains records in multiple record zones, a failure in one zone doesn't prevent modifications to records in a different zone. Changing the value of this property to <doc://com.apple.documentation/documentation/swift/false> causes CloudKit to modify records individually, regardless of whether the record zone supports atomic modifications.
 func (mro *ModifyRecordsOperation) Atomic() bool {
+	defer runtime.KeepAlive(mro)
 	_r := objc.Send[bool](objref.IDOf(mro), objc.RegisterName("atomic"))
 	return _r
 }
@@ -192,6 +203,7 @@ func (mro *ModifyRecordsOperation) Atomic() bool {
 //
 // SetPerRecordCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (mro *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Context) (result *Record, err error) {
+	defer runtime.KeepAlive(mro)
 	type _result struct {
 		val *Record
 		err error
@@ -217,6 +229,7 @@ func (mro *ModifyRecordsOperation) SetPerRecordCompletionBlock(ctx context.Conte
 //
 // SetPerRecordDeleteBlock blocks until the operation completes or ctx is cancelled.
 func (mro *ModifyRecordsOperation) SetPerRecordDeleteBlock(ctx context.Context) (result *RecordID, err error) {
+	defer runtime.KeepAlive(mro)
 	type _result struct {
 		val *RecordID
 		err error

@@ -30,6 +30,13 @@ type Method struct {
 	// RetTypes are the Go types of each captured-return local, parallel to
 	// RetVars, used only to declare them before the purego.Main call.
 	RetTypes []string
+
+	// KeepAlive names the receiver and object-typed parameters whose wrappers
+	// must outlive the Objective-C call: their pointer is read before the send,
+	// and without a keep-alive the collector could finalize (and release) the
+	// object mid-call. The template renders one defer runtime.KeepAlive per
+	// name at the top of the body.
+	KeepAlive []string
 }
 
 // AsyncMethod is an Objective-C completion-handler method surfaced as a blocking,
@@ -64,6 +71,9 @@ type AsyncMethod struct {
 	// ResultConvExpr is the right-hand side that converts the block's result
 	// parameter to ResultGoType (set only when HasResult).
 	ResultConvExpr string
+	// KeepAlive names the receiver and object-typed parameters kept alive until
+	// the method returns (see Method.KeepAlive).
+	KeepAlive []string
 }
 
 // SliceMethod is an Objective-C array-returning getter surfaced as a Go method
@@ -90,6 +100,9 @@ type SliceMethod struct {
 	// MainThread runs the Objective-C call on the main thread (purego.Main) when
 	// the selector is @MainActor-isolated.
 	MainThread bool
+	// KeepAlive names the receiver kept alive until the method returns (see
+	// Method.KeepAlive).
+	KeepAlive []string
 }
 
 // BoolNSErrorMethod is an Objective-C method returning a success flag plus an
@@ -109,4 +122,7 @@ type BoolNSErrorMethod struct {
 	// MainThread runs the Objective-C call on the main thread (purego.Main) when
 	// the selector is @MainActor-isolated.
 	MainThread bool
+	// KeepAlive names the receiver kept alive until the method returns (see
+	// Method.KeepAlive).
+	KeepAlive []string
 }

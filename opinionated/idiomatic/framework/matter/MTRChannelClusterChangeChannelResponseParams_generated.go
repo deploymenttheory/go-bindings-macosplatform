@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRChannelClusterChangeChannelResponseParamsAdopt(id objc.ID) *MTRChannelCl
 
 // Description returns the object's -description text.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Description() string {
+	defer runtime.KeepAlive(mccccrp)
 	return rt.Description(objref.IDOf(mccccrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccccrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccccrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccccrp)
 	return rt.IsKind(objref.IDOf(mccccrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) String() string {
+	defer runtime.KeepAlive(mccccrp)
 	return rt.Description(objref.IDOf(mccccrp))
 }
 
-// NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError initialize an MTRChannelClusterChangeChannelResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
+// NewMTRChannelClusterChangeChannelResponseParamsWithResponseValue initialize an MTRChannelClusterChangeChannelResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRChannelClusterChangeChannelResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterChangeChannelResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError(respo
 
 // WithStatus sets the status.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) WithStatus(status obj.Object) *MTRChannelClusterChangeChannelResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mccccrp
 }
@@ -92,18 +100,21 @@ func (mccccrp *MTRChannelClusterChangeChannelResponseParams) WithData(data strin
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mccccrp
 }
 
 // Status returns the status.
-func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Status() obj.Object {
+func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mccccrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
 func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Data() string {
+	defer runtime.KeepAlive(mccccrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -112,7 +123,8 @@ func (mccccrp *MTRChannelClusterChangeChannelResponseParams) Data() string {
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mccccrp *MTRChannelClusterChangeChannelResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mccccrp *MTRChannelClusterChangeChannelResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mccccrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

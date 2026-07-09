@@ -5,7 +5,10 @@
 package fileprovider
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func fileProviderDomainAdopt(id objc.ID) *FileProviderDomain {
 
 // Description returns the object's -description text.
 func (fpd *FileProviderDomain) Description() string {
+	defer runtime.KeepAlive(fpd)
 	return rt.Description(objref.IDOf(fpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpd *FileProviderDomain) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpd *FileProviderDomain) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpd)
 	return rt.IsKind(objref.IDOf(fpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpd *FileProviderDomain) String() string {
+	defer runtime.KeepAlive(fpd)
 	return rt.Description(objref.IDOf(fpd))
 }
 
 // NewFileProviderDomainWithIdentifierDisplayName creates a new file provider domain with the specified identifier and display name.
 func NewFileProviderDomainWithIdentifierDisplayName(identifier obj.Object, displayName string) *FileProviderDomain {
+	defer runtime.KeepAlive(identifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderDomain")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayName:"), objref.IDOf(identifier), purego.NSString(displayName))
 	return fileProviderDomainAdopt(_id)
@@ -75,6 +84,7 @@ func NewFileProviderDomainWithIdentifierDisplayName(identifier obj.Object, displ
 
 // NewFileProviderDomainWithDisplayNameUserInfoVolumeURL creates a new file provider domain with the specified URL and display name.
 func NewFileProviderDomainWithDisplayNameUserInfoVolumeURL(displayName string, userInfo obj.Object, volumeURL string) *FileProviderDomain {
+	defer runtime.KeepAlive(userInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderDomain")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:userInfo:volumeURL:"), purego.NSString(displayName), objref.IDOf(userInfo), rt.FileURL(volumeURL))
 	return fileProviderDomainAdopt(_id)
@@ -100,6 +110,7 @@ func (fpd *FileProviderDomain) WithSupportsSyncingTrash(supportsSyncingTrash boo
 
 // WithUserInfo sets a dictionary set by the client app. Keys must be strings, values must be [String, Number, Date, Data]
 func (fpd *FileProviderDomain) WithUserInfo(userInfo obj.Object) *FileProviderDomain {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return fpd
 }
@@ -117,13 +128,15 @@ func (fpd *FileProviderDomain) WithSupportsStringSearchRequest(supportsStringSea
 }
 
 // Identifier returns the identifier - as provided by the file provider extension.
-func (fpd *FileProviderDomain) Identifier() obj.Object {
+func (fpd *FileProviderDomain) Identifier() *foundation.String {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // DisplayName returns the display name shown by the system to represent this domain.
 func (fpd *FileProviderDomain) DisplayName() string {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -133,72 +146,84 @@ func (fpd *FileProviderDomain) DisplayName() string {
 
 // IsDisconnected reports whether if set, the domain is present, but disconnected from its extension. In this state, the user continues to be able to browse the domain's contents, but the extension doesn't receive updates on modifications to the files, nor is it consulted to update folder's contents. The disconnected state can be modified on an existing domain via the disconnectWithReason method on NSFileProviderManager.
 func (fpd *FileProviderDomain) IsDisconnected() bool {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[bool](objref.IDOf(fpd), objc.RegisterName("isDisconnected"))
 	return _r
 }
 
 // UserEnabled reports whether if user has disabled this domain from Files.app on iOS or System Settings on macOS, this will be set to false.
 func (fpd *FileProviderDomain) UserEnabled() bool {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[bool](objref.IDOf(fpd), objc.RegisterName("userEnabled"))
 	return _r
 }
 
 // IsHidden reports whether if this domain is not user visible. Typically, this can be used for dry-run migration. The files are still on disk though.
 func (fpd *FileProviderDomain) IsHidden() bool {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[bool](objref.IDOf(fpd), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // IsReplicated reports whether if the domain is a replicated domain. If set to true, it means the domain is replicated. By default, on macOS, the value will always be true. On iOS, it will depend on the way the NSFileProviderDomain object is contructed. Calling -[NSFileProviderDomain initWithIdentifier:displayName:] will initialize a replicated domain. -[NSFileProviderDomain initWithIdentifier:displayName:pathRelativeToDocumentStorage:] will initialize a non-replicated domain. To know whether a domain is replicated or not, users are advised to rely on the output of +[NSFileProviderManager getDomainsForProviderIdentifier:completionHandler:]
 func (fpd *FileProviderDomain) IsReplicated() bool {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[bool](objref.IDOf(fpd), objc.RegisterName("isReplicated"))
 	return _r
 }
 
 // TestingModes returns testing modes. Testing modes are exposed as a means for the provider to have more control over the system in a testing environment. Enabling a testing mode alters the behavior of the system and enables some APIs for that mode. A process must have the com.apple.developer.fileprovider.testing-mode entitlement in order to configure a domain with non-empty testing modes.
 func (fpd *FileProviderDomain) TestingModes() FileProviderDomainTestingModes {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[FileProviderDomainTestingModes](objref.IDOf(fpd), objc.RegisterName("testingModes"))
 	return _r
 }
 
 // BackingStoreIdentity returns identity of the backing store of the domain on the system. This property only applies for extensions that implement NSFileProviderReplicatedExtension. This provides an identifier that uniquely identifies the backing store used by the system for the domain. When this identifier has changed, the system has dropped its backing store and is building a new one. The system may decide to rebuild its backing store if it got corrupted. The backing store can also be rebuilt as a response to the provider calling `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`. It is guaranteed that calling reimport on the root item will cause the backing store to be rebuilt, but the system can also decide to do so when reimport is called on other items. When rebuilding the backing store, the system will invalidate any extension instance associated to that domain. As a consequence, the identity of the backing store associated with that domain is guaranteed to be stable for the lifetime of the NSFileProviderReplicatedExtension instance.
-func (fpd *FileProviderDomain) BackingStoreIdentity() obj.Object {
+func (fpd *FileProviderDomain) BackingStoreIdentity() []byte {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("backingStoreIdentity"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SupportsSyncingTrash reports whether the domain supports syncing the trash. The system supports syncing a trash folder (NSFileProviderTrashContainerItemIdentifier) to the extension. On iOS, this is surfaced to the user as "Recently Deleted" in the Files app. On macOS, this is surfaced to the user as the Trash in Finder. If the domain is configured with supportsSyncingTrash=YES, the system will reparent trashed files (which were located in the extension's domain) to NSFileProviderTrashContainerItemIdentifier. If the domain is configured with supportsSyncingTrash=NO, the system will decide how to handle the trashing operation (not guaranteed by API contract). This property is only applicable for NSFileProviderReplicatedExtension-based domains. This property defaults to true.
 func (fpd *FileProviderDomain) SupportsSyncingTrash() bool {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[bool](objref.IDOf(fpd), objc.RegisterName("supportsSyncingTrash"))
 	return _r
 }
 
 // VolumeUUID returns the volume UUID.
-func (fpd *FileProviderDomain) VolumeUUID() obj.Object {
+func (fpd *FileProviderDomain) VolumeUUID() *foundation.UUID {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("volumeUUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // UserInfo returns a dictionary set by the client app. Keys must be strings, values must be [String, Number, Date, Data]
 func (fpd *FileProviderDomain) UserInfo() obj.Object {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[objc.ID](objref.IDOf(fpd), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // ReplicatedKnownFolders returns list of known folders that are currently replicated by this domain.
 func (fpd *FileProviderDomain) ReplicatedKnownFolders() FileProviderKnownFolders {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[FileProviderKnownFolders](objref.IDOf(fpd), objc.RegisterName("replicatedKnownFolders"))
 	return _r
 }
 
 // SupportedKnownFolders returns list known folders that can be replicated by this domain.
 func (fpd *FileProviderDomain) SupportedKnownFolders() FileProviderKnownFolders {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[FileProviderKnownFolders](objref.IDOf(fpd), objc.RegisterName("supportedKnownFolders"))
 	return _r
 }
 
 // SupportsStringSearchRequest reports whether the system should use this domain's `NSFileProviderSearching` implementation to support search experiences. Defaults to false.
 func (fpd *FileProviderDomain) SupportsStringSearchRequest() bool {
+	defer runtime.KeepAlive(fpd)
 	_r := objc.Send[bool](objref.IDOf(fpd), objc.RegisterName("supportsStringSearchRequest"))
 	return _r
 }

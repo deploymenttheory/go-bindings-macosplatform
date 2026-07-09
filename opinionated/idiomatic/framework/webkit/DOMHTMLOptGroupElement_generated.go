@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -165,12 +167,14 @@ func (doge *DOMHTMLOptGroupElement) WithTextContent(textContent string) *DOMHTML
 
 // Disabled wraps the corresponding Objective-C method.
 func (doge *DOMHTMLOptGroupElement) Disabled() bool {
+	defer runtime.KeepAlive(doge)
 	_r := objc.Send[bool](objref.IDOf(doge), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Label returns the label.
 func (doge *DOMHTMLOptGroupElement) Label() string {
+	defer runtime.KeepAlive(doge)
 	_r := objc.Send[objc.ID](objref.IDOf(doge), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

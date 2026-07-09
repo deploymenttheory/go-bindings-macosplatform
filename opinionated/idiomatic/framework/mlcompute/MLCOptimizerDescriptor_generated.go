@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func optimizerDescriptorAdopt(id objc.ID) *OptimizerDescriptor {
 
 // Description returns the object's -description text.
 func (od *OptimizerDescriptor) Description() string {
+	defer runtime.KeepAlive(od)
 	return rt.Description(objref.IDOf(od))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (od *OptimizerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(od)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(od), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (od *OptimizerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(od)
 	return rt.IsKind(objref.IDOf(od), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (od *OptimizerDescriptor) String() string {
+	defer runtime.KeepAlive(od)
 	return rt.Description(objref.IDOf(od))
 }
 
@@ -74,60 +81,70 @@ func NewOptimizerDescriptor() *OptimizerDescriptor {
 
 // LearningRate returns the learning rate
 func (od *OptimizerDescriptor) LearningRate() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("learningRate"))
 	return _r
 }
 
 // GradientRescale returns the rescale value applied to gradients during optimizer update
 func (od *OptimizerDescriptor) GradientRescale() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
 // AppliesGradientClipping reports whether gradient clipping should be applied or not. The default is false
 func (od *OptimizerDescriptor) AppliesGradientClipping() bool {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[bool](objref.IDOf(od), objc.RegisterName("appliesGradientClipping"))
 	return _r
 }
 
 // GradientClipMax returns the maximum gradient value if gradient clipping is enabled before gradient is rescaled.
 func (od *OptimizerDescriptor) GradientClipMax() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
 // GradientClipMin returns the minimum gradient value if gradient clipping is enabled before gradient is rescaled.
 func (od *OptimizerDescriptor) GradientClipMin() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
 // RegularizationScale returns the regularization scale.
 func (od *OptimizerDescriptor) RegularizationScale() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("regularizationScale"))
 	return _r
 }
 
 // RegularizationType returns the regularization type.
 func (od *OptimizerDescriptor) RegularizationType() RegularizationType {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[RegularizationType](objref.IDOf(od), objc.RegisterName("regularizationType"))
 	return _r
 }
 
 // GradientClippingType returns the type of clipping applied to gradient
 func (od *OptimizerDescriptor) GradientClippingType() GradientClippingType {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[GradientClippingType](objref.IDOf(od), objc.RegisterName("gradientClippingType"))
 	return _r
 }
 
 // MaximumClippingNorm returns the maximum clipping value
 func (od *OptimizerDescriptor) MaximumClippingNorm() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("maximumClippingNorm"))
 	return _r
 }
 
 // CustomGlobalNorm returns used only with MLCGradientClippingTypeByGlobalNorm. If non zero, this norm will be used in place of global norm.
 func (od *OptimizerDescriptor) CustomGlobalNorm() float32 {
+	defer runtime.KeepAlive(od)
 	_r := objc.Send[float32](objref.IDOf(od), objc.RegisterName("customGlobalNorm"))
 	return _r
 }

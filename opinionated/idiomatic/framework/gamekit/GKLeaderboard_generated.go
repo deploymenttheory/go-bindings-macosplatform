@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,22 +53,27 @@ func leaderboardAdopt(id objc.ID) *Leaderboard {
 
 // Description returns the object's -description text.
 func (l *Leaderboard) Description() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (l *Leaderboard) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (l *Leaderboard) IsKind(className string) bool {
+	defer runtime.KeepAlive(l)
 	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (l *Leaderboard) String() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
@@ -124,6 +131,8 @@ func (l *Leaderboard) WithRange(range_ foundation.NSRange) *Leaderboard {
 //
 // SubmitScoreContextPlayer blocks until the operation completes or ctx is cancelled.
 func (l *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, context_ int, player *Player) error {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(player)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -141,6 +150,7 @@ func (l *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, c
 
 // Title returns localized title
 func (l *Leaderboard) Title() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -150,6 +160,7 @@ func (l *Leaderboard) Title() string {
 
 // GroupIdentifier set when leaderboards have been designated a game group; set when loadLeaderboardsWithCompletionHandler has been called for leaderboards that support game groups
 func (l *Leaderboard) GroupIdentifier() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
@@ -159,6 +170,7 @@ func (l *Leaderboard) GroupIdentifier() string {
 
 // BaseLeaderboardID returns leaderboard ID defined in App Store Connect that this instance is associated with
 func (l *Leaderboard) BaseLeaderboardID() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("baseLeaderboardID"))
 	if _r == 0 {
 		return ""
@@ -168,30 +180,35 @@ func (l *Leaderboard) BaseLeaderboardID() string {
 
 // Type returns type of leaderboard
 func (l *Leaderboard) Type() LeaderboardType {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LeaderboardType](objref.IDOf(l), objc.RegisterName("type"))
 	return _r
 }
 
 // StartDate returns date and time this instance started accepting score submissions (only applicable to recurring leaderboards)
-func (l *Leaderboard) StartDate() obj.Object {
+func (l *Leaderboard) StartDate() time.Time {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // NextStartDate returns date and time the next instance will start accepting score submissions (only applicable to recurring leaderboards)
-func (l *Leaderboard) NextStartDate() obj.Object {
+func (l *Leaderboard) NextStartDate() time.Time {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("nextStartDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Duration returns duration from startDate during which this leaderboard instance accepts score submissions (only applicable to recurring leaderboards)
 func (l *Leaderboard) Duration() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("duration"))
 	return _r
 }
 
 // LeaderboardDescription returns the description of this Leaderboard as configured by the developer in App Store Connect.
 func (l *Leaderboard) LeaderboardDescription() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("leaderboardDescription"))
 	if _r == 0 {
 		return ""
@@ -201,12 +218,14 @@ func (l *Leaderboard) LeaderboardDescription() string {
 
 // ReleaseState returns the release state of the leaderboard in App Store Connect.
 func (l *Leaderboard) ReleaseState() ReleaseState {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[ReleaseState](objref.IDOf(l), objc.RegisterName("releaseState"))
 	return _r
 }
 
 // ActivityIdentifier returns the identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.
 func (l *Leaderboard) ActivityIdentifier() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("activityIdentifier"))
 	if _r == 0 {
 		return ""
@@ -215,13 +234,15 @@ func (l *Leaderboard) ActivityIdentifier() string {
 }
 
 // ActivityProperties returns the properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.
-func (l *Leaderboard) ActivityProperties() obj.Object {
+func (l *Leaderboard) ActivityProperties() map[string]string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("activityProperties"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // IsHidden reports whether the current leaderboard isn't visible in Game Center views. You can still submit scores to a hidden leaderboard.
 func (l *Leaderboard) IsHidden() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isHidden"))
 	return _r
 }
@@ -230,6 +251,7 @@ func (l *Leaderboard) IsHidden() bool {
 //
 // LoadScores blocks until the operation completes or ctx is cancelled.
 func (l *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(l)
 	type _result struct {
 		val obj.Object
 		err error
@@ -253,6 +275,7 @@ func (l *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err er
 
 // Category returns the category.
 func (l *Leaderboard) Category() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
@@ -262,18 +285,21 @@ func (l *Leaderboard) Category() string {
 
 // TimeScope returns the time scope.
 func (l *Leaderboard) TimeScope() LeaderboardTimeScope {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(l), objc.RegisterName("timeScope"))
 	return _r
 }
 
 // PlayerScope returns filter on friends. Does not apply to leaderboard initialized with players.
 func (l *Leaderboard) PlayerScope() LeaderboardPlayerScope {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LeaderboardPlayerScope](objref.IDOf(l), objc.RegisterName("playerScope"))
 	return _r
 }
 
 // Identifier returns leaderboardID. If nil, fetch the aggregate leaderboard.
 func (l *Leaderboard) Identifier() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -283,6 +309,7 @@ func (l *Leaderboard) Identifier() string {
 
 // Range returns leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
 func (l *Leaderboard) Range() foundation.NSRange {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(l), objc.RegisterName("range"))
 	return _r
 }
@@ -291,24 +318,28 @@ func (l *Leaderboard) Range() foundation.NSRange {
 //
 // Scores returns the collection as a Go slice.
 func (l *Leaderboard) Scores() []*Score {
+	defer runtime.KeepAlive(l)
 	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scores"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Score { return ScoreFromID(_id) })
 }
 
 // MaxRange returns the maxRange which represents the size of the leaderboard is not valid until loadScores: has completed.
 func (l *Leaderboard) MaxRange() int {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("maxRange"))
 	return _r
 }
 
 // LocalPlayerScore returns the local player's score
 func (l *Leaderboard) LocalPlayerScore() *Score {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localPlayerScore"))
 	return ScoreFromID(_r)
 }
 
 // IsLoading reports whether this property is true if the leaderboard is currently loading
 func (l *Leaderboard) IsLoading() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isLoading"))
 	return _r
 }
@@ -317,6 +348,7 @@ func (l *Leaderboard) IsLoading() bool {
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
 func (l *Leaderboard) LoadImage(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(l)
 	type _result struct {
 		val obj.Object
 		err error

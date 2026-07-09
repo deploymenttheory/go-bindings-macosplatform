@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,39 +51,49 @@ func fontCollectionAdopt(id objc.ID) *FontCollection {
 
 // Description returns the object's -description text.
 func (fc *FontCollection) Description() string {
+	defer runtime.KeepAlive(fc)
 	return rt.Description(objref.IDOf(fc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fc *FontCollection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fc *FontCollection) IsKind(className string) bool {
+	defer runtime.KeepAlive(fc)
 	return rt.IsKind(objref.IDOf(fc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fc *FontCollection) String() string {
+	defer runtime.KeepAlive(fc)
 	return rt.Description(objref.IDOf(fc))
 }
 
 // MatchingDescriptorsWithOptions returns an array of font descriptors matching the logical descriptors with the given options.
 func (fc *FontCollection) MatchingDescriptorsWithOptions(options obj.Object) []*FontDescriptor {
+	defer runtime.KeepAlive(fc)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptorsWithOptions:"), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // MatchingDescriptorsForFamily returns an array of font descriptors matching the logical descriptors for the given font family.
 func (fc *FontCollection) MatchingDescriptorsForFamily(family string) []*FontDescriptor {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptorsForFamily:"), purego.NSString(family))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // MatchingDescriptorsForFamilyOptions returns an array of font descriptors matching the logical descriptors for the given font family and options.
 func (fc *FontCollection) MatchingDescriptorsForFamilyOptions(family string, options obj.Object) []*FontDescriptor {
+	defer runtime.KeepAlive(fc)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptorsForFamily:options:"), purego.NSString(family), objref.IDOf(options))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
@@ -90,6 +102,7 @@ func (fc *FontCollection) MatchingDescriptorsForFamilyOptions(family string, opt
 //
 // QueryDescriptors returns the collection as a Go slice.
 func (fc *FontCollection) QueryDescriptors() []*FontDescriptor {
+	defer runtime.KeepAlive(fc)
 	_arr := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("queryDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
@@ -98,6 +111,7 @@ func (fc *FontCollection) QueryDescriptors() []*FontDescriptor {
 //
 // ExclusionDescriptors returns the collection as a Go slice.
 func (fc *FontCollection) ExclusionDescriptors() []*FontDescriptor {
+	defer runtime.KeepAlive(fc)
 	_arr := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("exclusionDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
@@ -106,6 +120,7 @@ func (fc *FontCollection) ExclusionDescriptors() []*FontDescriptor {
 //
 // MatchingDescriptors returns the collection as a Go slice.
 func (fc *FontCollection) MatchingDescriptors() []*FontDescriptor {
+	defer runtime.KeepAlive(fc)
 	_arr := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("matchingDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }

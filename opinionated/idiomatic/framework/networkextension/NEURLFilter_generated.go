@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEURLFilterAdopt(id objc.ID) *NEURLFilter {
 
 // Description returns the object's -description text.
 func (nf *NEURLFilter) Description() string {
+	defer runtime.KeepAlive(nf)
 	return rt.Description(objref.IDOf(nf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nf *NEURLFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nf *NEURLFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(nf)
 	return rt.IsKind(objref.IDOf(nf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nf *NEURLFilter) String() string {
+	defer runtime.KeepAlive(nf)
 	return rt.Description(objref.IDOf(nf))
 }
 

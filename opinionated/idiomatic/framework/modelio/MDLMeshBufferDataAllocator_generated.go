@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func meshBufferDataAllocatorAdopt(id objc.ID) *MeshBufferDataAllocator {
 
 // Description returns the object's -description text.
 func (mbda *MeshBufferDataAllocator) Description() string {
+	defer runtime.KeepAlive(mbda)
 	return rt.Description(objref.IDOf(mbda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbda *MeshBufferDataAllocator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbda)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbda *MeshBufferDataAllocator) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbda)
 	return rt.IsKind(objref.IDOf(mbda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbda *MeshBufferDataAllocator) String() string {
+	defer runtime.KeepAlive(mbda)
 	return rt.Description(objref.IDOf(mbda))
 }
 

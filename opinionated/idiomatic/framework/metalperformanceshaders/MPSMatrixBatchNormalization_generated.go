@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -108,42 +110,49 @@ func (mbn *MatrixBatchNormalization) WithLabel(label string) *MatrixBatchNormali
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbn *MatrixBatchNormalization) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.  This is equivalent to the number of rows to consider from the primary source matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available number of inputs is used.  The value of NSUIntegerMax thus indicates that all available input rows (beginning at sourceMatrixOrigin.x) should be considered.
 func (mbn *MatrixBatchNormalization) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[int](objref.IDOf(mbn), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the input size to to use in the operation.  This is equivalent to the number of columns in the primary (input array) source matrix to consider and the number of channels to produce for the output matrix. This property is modifiable and defaults to NSUIntegerMax.  At encode time the larger of this property or the available input size is used. The value of NSUIntegerMax thus indicates that all available columns in the input array (beginning at sourceMatrixOrigin.y) should be considered. Defines also the number of output feature channels. Note: The value used in the operation will be MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
 func (mbn *MatrixBatchNormalization) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[int](objref.IDOf(mbn), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Epsilon returns a small value to add to the variance when normalizing the inputs.  Defaults to FLT_MIN upon initialization.
 func (mbn *MatrixBatchNormalization) Epsilon() float32 {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[float32](objref.IDOf(mbn), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // ComputeStatistics reports whether if true the batch statistics will be computed prior to performing the normalization. Otherwise the provided statistics will be used. Defaults to false at initialization time.
 func (mbn *MatrixBatchNormalization) ComputeStatistics() bool {
+	defer runtime.KeepAlive(mbn)
 	_r := objc.Send[bool](objref.IDOf(mbn), objc.RegisterName("computeStatistics"))
 	return _r
 }

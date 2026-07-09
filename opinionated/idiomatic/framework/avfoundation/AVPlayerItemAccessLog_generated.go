@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func playerItemAccessLogAdopt(id objc.ID) *PlayerItemAccessLog {
 
 // Description returns the object's -description text.
 func (pial *PlayerItemAccessLog) Description() string {
+	defer runtime.KeepAlive(pial)
 	return rt.Description(objref.IDOf(pial))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pial *PlayerItemAccessLog) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pial)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pial), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pial *PlayerItemAccessLog) IsKind(className string) bool {
+	defer runtime.KeepAlive(pial)
 	return rt.IsKind(objref.IDOf(pial), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pial *PlayerItemAccessLog) String() string {
+	defer runtime.KeepAlive(pial)
 	return rt.Description(objref.IDOf(pial))
 }
 
@@ -73,13 +80,15 @@ func NewPlayerItemAccessLog() *PlayerItemAccessLog {
 }
 
 // ExtendedLogData returns a serialized representation of the access log in the Extended Log File Format.
-func (pial *PlayerItemAccessLog) ExtendedLogData() obj.Object {
+func (pial *PlayerItemAccessLog) ExtendedLogData() []byte {
+	defer runtime.KeepAlive(pial)
 	_r := objc.Send[objc.ID](objref.IDOf(pial), objc.RegisterName("extendedLogData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ExtendedLogDataStringEncoding returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
 func (pial *PlayerItemAccessLog) ExtendedLogDataStringEncoding() int {
+	defer runtime.KeepAlive(pial)
 	_r := objc.Send[int](objref.IDOf(pial), objc.RegisterName("extendedLogDataStringEncoding"))
 	return _r
 }
@@ -88,6 +97,7 @@ func (pial *PlayerItemAccessLog) ExtendedLogDataStringEncoding() int {
 //
 // Events returns the collection as a Go slice.
 func (pial *PlayerItemAccessLog) Events() []*PlayerItemAccessLogEvent {
+	defer runtime.KeepAlive(pial)
 	_arr := objc.Send[objc.ID](objref.IDOf(pial), objc.RegisterName("events"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemAccessLogEvent { return PlayerItemAccessLogEventFromID(_id) })
 }

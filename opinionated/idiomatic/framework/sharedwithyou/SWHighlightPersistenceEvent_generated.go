@@ -5,6 +5,8 @@
 package sharedwithyou
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func highlightPersistenceEventAdopt(id objc.ID) *HighlightPersistenceEvent {
 
 // Description returns the object's -description text.
 func (hpe *HighlightPersistenceEvent) Description() string {
+	defer runtime.KeepAlive(hpe)
 	return rt.Description(objref.IDOf(hpe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hpe *HighlightPersistenceEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hpe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hpe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hpe *HighlightPersistenceEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(hpe)
 	return rt.IsKind(objref.IDOf(hpe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hpe *HighlightPersistenceEvent) String() string {
+	defer runtime.KeepAlive(hpe)
 	return rt.Description(objref.IDOf(hpe))
 }
 
 // NewHighlightPersistenceEventWithHighlightTrigger creates and initializes a persistence event.
 func NewHighlightPersistenceEventWithHighlightTrigger(highlight *Highlight, trigger HighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
+	defer runtime.KeepAlive(highlight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightPersistenceEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
 	return highlightPersistenceEventAdopt(_id)
@@ -75,6 +83,7 @@ func NewHighlightPersistenceEventWithHighlightTrigger(highlight *Highlight, trig
 
 // PersistenceEventTrigger returns the persistence event trigger.
 func (hpe *HighlightPersistenceEvent) PersistenceEventTrigger() HighlightPersistenceEventTrigger {
+	defer runtime.KeepAlive(hpe)
 	_r := objc.Send[HighlightPersistenceEventTrigger](objref.IDOf(hpe), objc.RegisterName("persistenceEventTrigger"))
 	return _r
 }

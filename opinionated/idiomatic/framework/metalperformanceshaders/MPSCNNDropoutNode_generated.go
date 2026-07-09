@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,6 +51,7 @@ func cNNDropoutNodeAdopt(id objc.ID) *CNNDropoutNode {
 
 // NewCNNDropoutNodeWithSource creates a new CNNDropoutNode.
 func NewCNNDropoutNodeWithSource(source obj.Object) *CNNDropoutNode {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
 	return cNNDropoutNodeAdopt(_id)
@@ -56,6 +59,7 @@ func NewCNNDropoutNodeWithSource(source obj.Object) *CNNDropoutNode {
 
 // NewCNNDropoutNodeWithSourceKeepProbability creates a new CNNDropoutNode.
 func NewCNNDropoutNodeWithSourceKeepProbability(source obj.Object, keepProbability float32) *CNNDropoutNode {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:"), objref.IDOf(source), keepProbability)
 	return cNNDropoutNodeAdopt(_id)
@@ -63,6 +67,7 @@ func NewCNNDropoutNodeWithSourceKeepProbability(source obj.Object, keepProbabili
 
 // NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels creates a new CNNDropoutNode.
 func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source obj.Object, keepProbability float32, seed int, maskStrideInPixels metal.MTLSize) *CNNDropoutNode {
+	defer runtime.KeepAlive(source)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:keepProbability:seed:maskStrideInPixels:"), objref.IDOf(source), keepProbability, seed, maskStrideInPixels)
 	return cNNDropoutNodeAdopt(_id)
@@ -76,18 +81,21 @@ func (cdn *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
 
 // KeepProbability returns the keep probability.
 func (cdn *CNNDropoutNode) KeepProbability() float32 {
+	defer runtime.KeepAlive(cdn)
 	_r := objc.Send[float32](objref.IDOf(cdn), objc.RegisterName("keepProbability"))
 	return _r
 }
 
 // Seed returns the seed.
 func (cdn *CNNDropoutNode) Seed() int {
+	defer runtime.KeepAlive(cdn)
 	_r := objc.Send[int](objref.IDOf(cdn), objc.RegisterName("seed"))
 	return _r
 }
 
 // MaskStrideInPixels returns the mask stride in pixels.
 func (cdn *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
+	defer runtime.KeepAlive(cdn)
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cdn), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }

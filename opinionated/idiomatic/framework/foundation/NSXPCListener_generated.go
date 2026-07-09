@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func xPCListenerAdopt(id objc.ID) *XPCListener {
 
 // Description returns the object's -description text.
 func (xl *XPCListener) Description() string {
+	defer runtime.KeepAlive(xl)
 	return rt.Description(objref.IDOf(xl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (xl *XPCListener) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(xl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(xl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (xl *XPCListener) IsKind(className string) bool {
+	defer runtime.KeepAlive(xl)
 	return rt.IsKind(objref.IDOf(xl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (xl *XPCListener) String() string {
+	defer runtime.KeepAlive(xl)
 	return rt.Description(objref.IDOf(xl))
 }
 
@@ -75,6 +82,16 @@ func NewXPCListenerWithMachServiceName(name string) *XPCListener {
 	return xPCListenerAdopt(_id)
 }
 
+// WithDelegate sets the delegate for the listener.
+func (xl *XPCListener) WithDelegate(delegate XPCListenerDelegate) *XPCListener {
+	_shim := newXPCListenerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(xl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(xl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return xl
+}
+
 // WithObservationInfo sets the observation info.
 func (xl *XPCListener) WithObservationInfo(observationInfo unsafe.Pointer) *XPCListener {
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setObservationInfo:"), observationInfo)
@@ -82,38 +99,44 @@ func (xl *XPCListener) WithObservationInfo(observationInfo unsafe.Pointer) *XPCL
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xl *XPCListener) WithScriptingProperties(scriptingProperties obj.Object) *XPCListener {
-	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xl *XPCListener) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XPCListener {
+	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xl
 }
 
 // Resume starts processing of incoming requests.
 func (xl *XPCListener) Resume() {
+	defer runtime.KeepAlive(xl)
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("resume"))
 }
 
 // Suspend suspends the listener.
 func (xl *XPCListener) Suspend() {
+	defer runtime.KeepAlive(xl)
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("suspend"))
 }
 
 // Activate activates the listener.
 func (xl *XPCListener) Activate() {
+	defer runtime.KeepAlive(xl)
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("activate"))
 }
 
 // Invalidate invalidates the listener.
 func (xl *XPCListener) Invalidate() {
+	defer runtime.KeepAlive(xl)
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("invalidate"))
 }
 
 // SetConnectionCodeSigningRequirement sets the code signing requirement for connections to this listener.
 func (xl *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
+	defer runtime.KeepAlive(xl)
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
 // Endpoint returns the endpoint.
 func (xl *XPCListener) Endpoint() *XPCListenerEndpoint {
+	defer runtime.KeepAlive(xl)
 	_r := objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)
 }

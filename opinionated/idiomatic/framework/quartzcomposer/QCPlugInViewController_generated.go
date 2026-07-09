@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func plugInViewControllerAdopt(id objc.ID) *PlugInViewController {
 
 // Description returns the object's -description text.
 func (pivc *PlugInViewController) Description() string {
+	defer runtime.KeepAlive(pivc)
 	return rt.Description(objref.IDOf(pivc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pivc *PlugInViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pivc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pivc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pivc *PlugInViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pivc)
 	return rt.IsKind(objref.IDOf(pivc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pivc *PlugInViewController) String() string {
+	defer runtime.KeepAlive(pivc)
 	return rt.Description(objref.IDOf(pivc))
 }
 
 // NewPlugInViewControllerWithPlugInViewNibName creates a new PlugInViewController.
 func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string) *PlugInViewController {
+	defer runtime.KeepAlive(plugIn)
 	var _mainthread0 *PlugInViewController
 	purego.Main(func() {
 		_mainthread0 = func() *PlugInViewController {
@@ -79,6 +87,7 @@ func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string
 
 // PlugIn returns the plug in.
 func (pivc *PlugInViewController) PlugIn() obj.Object {
+	defer runtime.KeepAlive(pivc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

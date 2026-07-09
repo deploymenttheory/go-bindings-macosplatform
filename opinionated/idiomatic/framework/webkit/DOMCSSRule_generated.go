@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,12 +53,14 @@ func (dr *DOMCSSRule) WithCSSText(cssText string) *DOMCSSRule {
 
 // Type returns the type.
 func (dr *DOMCSSRule) Type() uint16 {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[uint16](objref.IDOf(dr), objc.RegisterName("type"))
 	return _r
 }
 
 // CSSText returns the CSS text.
 func (dr *DOMCSSRule) CSSText() string {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cssText"))
 	if _r == 0 {
 		return ""
@@ -66,12 +70,14 @@ func (dr *DOMCSSRule) CSSText() string {
 
 // ParentStyleSheet returns the parent style sheet.
 func (dr *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("parentStyleSheet"))
 	return DOMCSSStyleSheetFromID(_r)
 }
 
 // ParentRule returns the parent rule.
 func (dr *DOMCSSRule) ParentRule() *DOMCSSRule {
+	defer runtime.KeepAlive(dr)
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("parentRule"))
 	return DOMCSSRuleFromID(_r)
 }

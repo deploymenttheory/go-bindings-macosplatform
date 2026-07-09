@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -77,12 +78,14 @@ func (fspo *FetchShareParticipantsOperation) WithShareParticipantFetchedBlock(sh
 
 // WithConfiguration sets the operation’s configuration.
 func (fspo *FetchShareParticipantsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareParticipantsOperation {
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return fspo
 }
 
 // WithGroup sets the operation’s group.
 func (fspo *FetchShareParticipantsOperation) WithGroup(group *OperationGroup) *FetchShareParticipantsOperation {
+	defer runtime.KeepAlive(group)
 	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return fspo
 }
@@ -95,6 +98,7 @@ func (fspo *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedB
 
 // WithContainer sets the operation's container.
 func (fspo *FetchShareParticipantsOperation) WithContainer(container *Container) *FetchShareParticipantsOperation {
+	defer runtime.KeepAlive(container)
 	objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return fspo
 }
@@ -127,6 +131,7 @@ func (fspo *FetchShareParticipantsOperation) WithTimeoutIntervalForResource(time
 //
 // UserIdentityLookupInfos returns the collection as a Go slice.
 func (fspo *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
+	defer runtime.KeepAlive(fspo)
 	_arr := objc.Send[objc.ID](objref.IDOf(fspo), objc.RegisterName("userIdentityLookupInfos"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
 }
@@ -135,6 +140,7 @@ func (fspo *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*UserId
 //
 // SetFetchShareParticipantsCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (fspo *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(fspo)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

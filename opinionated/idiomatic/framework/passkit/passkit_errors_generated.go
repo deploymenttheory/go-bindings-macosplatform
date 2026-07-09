@@ -8,26 +8,38 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrPKAddSecureElementPassGenericError matches the PassKit error PKAddSecureElementPassGenericError.
-var ErrPKAddSecureElementPassGenericError = errkit.New("PKAddSecureElementPassErrorDomain", 0)
+// ErrCodeSessionNotActive matches the PassKit error PKVehicleConnectionErrorCodeSessionNotActive.
+var ErrCodeSessionNotActive = errkit.New("PKVehicleConnectionErrorDomain", 2)
 
-// ErrPKAddSecureElementPassUserCanceledError matches the PassKit error PKAddSecureElementPassUserCanceledError.
-var ErrPKAddSecureElementPassUserCanceledError = errkit.New("PKAddSecureElementPassErrorDomain", 1)
+// ErrCodeSessionUnableToStart matches the PassKit error PKVehicleConnectionErrorCodeSessionUnableToStart.
+var ErrCodeSessionUnableToStart = errkit.New("PKVehicleConnectionErrorDomain", 1)
 
-// ErrPKAddSecureElementPassUnavailableError matches the PassKit error PKAddSecureElementPassUnavailableError.
-var ErrPKAddSecureElementPassUnavailableError = errkit.New("PKAddSecureElementPassErrorDomain", 2)
-
-// ErrPKAddSecureElementPassInvalidConfigurationError matches the PassKit error PKAddSecureElementPassInvalidConfigurationError.
-var ErrPKAddSecureElementPassInvalidConfigurationError = errkit.New("PKAddSecureElementPassErrorDomain", 3)
-
-// ErrPKAddSecureElementPassDeviceNotSupportedError matches the PassKit error PKAddSecureElementPassDeviceNotSupportedError.
-var ErrPKAddSecureElementPassDeviceNotSupportedError = errkit.New("PKAddSecureElementPassErrorDomain", 4)
+// ErrCodeUnknown matches the PassKit error PKVehicleConnectionErrorCodeUnknown.
+var ErrCodeUnknown = errkit.New("PKVehicleConnectionErrorDomain", 0)
 
 // ErrPKAddSecureElementPassDeviceNotReadyError matches the PassKit error PKAddSecureElementPassDeviceNotReadyError.
 var ErrPKAddSecureElementPassDeviceNotReadyError = errkit.New("PKAddSecureElementPassErrorDomain", 5)
 
+// ErrPKAddSecureElementPassDeviceNotSupportedError matches the PassKit error PKAddSecureElementPassDeviceNotSupportedError.
+var ErrPKAddSecureElementPassDeviceNotSupportedError = errkit.New("PKAddSecureElementPassErrorDomain", 4)
+
+// ErrPKAddSecureElementPassGenericError matches the PassKit error PKAddSecureElementPassGenericError.
+var ErrPKAddSecureElementPassGenericError = errkit.New("PKAddSecureElementPassErrorDomain", 0)
+
+// ErrPKAddSecureElementPassInvalidConfigurationError matches the PassKit error PKAddSecureElementPassInvalidConfigurationError.
+var ErrPKAddSecureElementPassInvalidConfigurationError = errkit.New("PKAddSecureElementPassErrorDomain", 3)
+
 // ErrPKAddSecureElementPassOSVersionNotSupportedError matches the PassKit error PKAddSecureElementPassOSVersionNotSupportedError.
 var ErrPKAddSecureElementPassOSVersionNotSupportedError = errkit.New("PKAddSecureElementPassErrorDomain", 6)
+
+// ErrPKAddSecureElementPassUnavailableError matches the PassKit error PKAddSecureElementPassUnavailableError.
+var ErrPKAddSecureElementPassUnavailableError = errkit.New("PKAddSecureElementPassErrorDomain", 2)
+
+// ErrPKAddSecureElementPassUserCanceledError matches the PassKit error PKAddSecureElementPassUserCanceledError.
+var ErrPKAddSecureElementPassUserCanceledError = errkit.New("PKAddSecureElementPassErrorDomain", 1)
+
+// ErrPKDisbursementRecipientContactInvalidError matches the PassKit error PKDisbursementRecipientContactInvalidError.
+var ErrPKDisbursementRecipientContactInvalidError = errkit.New("PKDisbursementErrorDomain", 2)
 
 // ErrPKDisbursementUnknownError matches the PassKit error PKDisbursementUnknownError.
 var ErrPKDisbursementUnknownError = errkit.New("PKDisbursementErrorDomain", -1)
@@ -35,17 +47,8 @@ var ErrPKDisbursementUnknownError = errkit.New("PKDisbursementErrorDomain", -1)
 // ErrPKDisbursementUnsupportedCardError matches the PassKit error PKDisbursementUnsupportedCardError.
 var ErrPKDisbursementUnsupportedCardError = errkit.New("PKDisbursementErrorDomain", 1)
 
-// ErrPKDisbursementRecipientContactInvalidError matches the PassKit error PKDisbursementRecipientContactInvalidError.
-var ErrPKDisbursementRecipientContactInvalidError = errkit.New("PKDisbursementErrorDomain", 2)
-
-// ErrPKUnknownError matches the PassKit error PKUnknownError.
-var ErrPKUnknownError = errkit.New("PKPassKitErrorDomain", -1)
-
 // ErrPKInvalidDataError matches the PassKit error PKInvalidDataError.
 var ErrPKInvalidDataError = errkit.New("PKPassKitErrorDomain", 1)
-
-// ErrPKUnsupportedVersionError matches the PassKit error PKUnsupportedVersionError.
-var ErrPKUnsupportedVersionError = errkit.New("PKPassKitErrorDomain", 2)
 
 // ErrPKInvalidSignature matches the PassKit error PKInvalidSignature.
 var ErrPKInvalidSignature = errkit.New("PKPassKitErrorDomain", 3)
@@ -53,35 +56,32 @@ var ErrPKInvalidSignature = errkit.New("PKPassKitErrorDomain", 3)
 // ErrPKNotEntitledError matches the PassKit error PKNotEntitledError.
 var ErrPKNotEntitledError = errkit.New("PKPassKitErrorDomain", 4)
 
-// ErrPKPaymentUnknownError matches the PassKit error PKPaymentUnknownError.
-var ErrPKPaymentUnknownError = errkit.New("PKPaymentErrorDomain", -1)
-
-// ErrPKPaymentShippingContactInvalidError matches the PassKit error PKPaymentShippingContactInvalidError.
-var ErrPKPaymentShippingContactInvalidError = errkit.New("PKPaymentErrorDomain", 1)
-
 // ErrPKPaymentBillingContactInvalidError matches the PassKit error PKPaymentBillingContactInvalidError.
 var ErrPKPaymentBillingContactInvalidError = errkit.New("PKPaymentErrorDomain", 2)
-
-// ErrPKPaymentShippingAddressUnserviceableError matches the PassKit error PKPaymentShippingAddressUnserviceableError.
-var ErrPKPaymentShippingAddressUnserviceableError = errkit.New("PKPaymentErrorDomain", 3)
-
-// ErrPKPaymentCouponCodeInvalidError matches the PassKit error PKPaymentCouponCodeInvalidError.
-var ErrPKPaymentCouponCodeInvalidError = errkit.New("PKPaymentErrorDomain", 4)
 
 // ErrPKPaymentCouponCodeExpiredError matches the PassKit error PKPaymentCouponCodeExpiredError.
 var ErrPKPaymentCouponCodeExpiredError = errkit.New("PKPaymentErrorDomain", 5)
 
-// ErrPKShareSecureElementPassUnknownError matches the PassKit error PKShareSecureElementPassUnknownError.
-var ErrPKShareSecureElementPassUnknownError = errkit.New("PKShareSecureElementPassErrorDomain", 0)
+// ErrPKPaymentCouponCodeInvalidError matches the PassKit error PKPaymentCouponCodeInvalidError.
+var ErrPKPaymentCouponCodeInvalidError = errkit.New("PKPaymentErrorDomain", 4)
+
+// ErrPKPaymentShippingAddressUnserviceableError matches the PassKit error PKPaymentShippingAddressUnserviceableError.
+var ErrPKPaymentShippingAddressUnserviceableError = errkit.New("PKPaymentErrorDomain", 3)
+
+// ErrPKPaymentShippingContactInvalidError matches the PassKit error PKPaymentShippingContactInvalidError.
+var ErrPKPaymentShippingContactInvalidError = errkit.New("PKPaymentErrorDomain", 1)
+
+// ErrPKPaymentUnknownError matches the PassKit error PKPaymentUnknownError.
+var ErrPKPaymentUnknownError = errkit.New("PKPaymentErrorDomain", -1)
 
 // ErrPKShareSecureElementPassSetupError matches the PassKit error PKShareSecureElementPassSetupError.
 var ErrPKShareSecureElementPassSetupError = errkit.New("PKShareSecureElementPassErrorDomain", 1)
 
-// ErrCodeUnknown matches the PassKit error PKVehicleConnectionErrorCodeUnknown.
-var ErrCodeUnknown = errkit.New("PKVehicleConnectionErrorDomain", 0)
+// ErrPKShareSecureElementPassUnknownError matches the PassKit error PKShareSecureElementPassUnknownError.
+var ErrPKShareSecureElementPassUnknownError = errkit.New("PKShareSecureElementPassErrorDomain", 0)
 
-// ErrCodeSessionUnableToStart matches the PassKit error PKVehicleConnectionErrorCodeSessionUnableToStart.
-var ErrCodeSessionUnableToStart = errkit.New("PKVehicleConnectionErrorDomain", 1)
+// ErrPKUnknownError matches the PassKit error PKUnknownError.
+var ErrPKUnknownError = errkit.New("PKPassKitErrorDomain", -1)
 
-// ErrCodeSessionNotActive matches the PassKit error PKVehicleConnectionErrorCodeSessionNotActive.
-var ErrCodeSessionNotActive = errkit.New("PKVehicleConnectionErrorDomain", 2)
+// ErrPKUnsupportedVersionError matches the PassKit error PKUnsupportedVersionError.
+var ErrPKUnsupportedVersionError = errkit.New("PKPassKitErrorDomain", 2)

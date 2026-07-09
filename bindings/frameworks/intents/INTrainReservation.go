@@ -36,8 +36,8 @@ func INTrainReservationFromID(id objc.ID) *INTrainReservation {
 }
 
 // Creates a train reservation with the specified contents and attributes.
-func (o *INTrainReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], uRL *foundation.NSURL, reservedSeat *INSeat, trainTrip *INTrainTrip) *INTrainReservation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), uRL.Ptr(), reservedSeat.Ptr(), trainTrip.Ptr())
+func (o *INTrainReservation) InitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip(itemReference *INSpeakableString, reservationNumber *foundation.NSString, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName *foundation.NSString, actions *foundation.NSArray[*INReservationAction], url *foundation.NSURL, reservedSeat *INSeat, trainTrip *INTrainTrip) *INTrainReservation {
+	_ret := objc.Send[objc.ID](o.Ptr(), _iNTrainReservationSelInitWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip, itemReference.Ptr(), reservationNumber.Ptr(), bookingTime.Ptr(), reservationStatus, reservationHolderName.Ptr(), actions.Ptr(), url.Ptr(), reservedSeat.Ptr(), trainTrip.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

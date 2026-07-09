@@ -8,11 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrNoExtensionFound matches the SafariServices error SFErrorNoExtensionFound.
-var ErrNoExtensionFound = errkit.New("SFErrorDomain", 1)
+// ErrLoadingInterrupted matches the SafariServices error SFErrorLoadingInterrupted.
+var ErrLoadingInterrupted = errkit.New("SFErrorDomain", 3)
 
 // ErrNoAttachmentFound matches the SafariServices error SFErrorNoAttachmentFound.
 var ErrNoAttachmentFound = errkit.New("SFErrorDomain", 2)
 
-// ErrLoadingInterrupted matches the SafariServices error SFErrorLoadingInterrupted.
-var ErrLoadingInterrupted = errkit.New("SFErrorDomain", 3)
+// ErrNoExtensionFound matches the SafariServices error SFErrorNoExtensionFound.
+var ErrNoExtensionFound = errkit.New("SFErrorDomain", 1)

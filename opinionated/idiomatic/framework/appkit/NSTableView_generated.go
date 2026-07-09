@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -63,6 +66,7 @@ func NewTableViewWithFrame(frameRect corefoundation.CGRect) *TableView {
 
 // NewTableViewWithCoder creates a new TableView.
 func NewTableViewWithCoder(coder obj.Object) *TableView {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *TableView
 	purego.Main(func() {
 		_mainthread0 = func() *TableView {
@@ -74,8 +78,33 @@ func NewTableViewWithCoder(coder obj.Object) *TableView {
 	return _mainthread0
 }
 
+// WithDataSource sets the object that provides the data displayed by the table view.
+func (tv *TableView) WithDataSource(dataSource TableViewDataSource) *TableView {
+	_shim := newTableViewDataSourceShim(dataSource)
+	_sel := objc.RegisterName("setDataSource:")
+	shim.Associate(objref.IDOf(tv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return tv
+}
+
+// WithDelegate sets the table view’s delegate.
+func (tv *TableView) WithDelegate(delegate TableViewDelegate) *TableView {
+	_shim := newTableViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return tv
+}
+
 // WithHeaderView sets the view object used to draw headers over columns.
 func (tv *TableView) WithHeaderView(headerView *TableHeaderView) *TableView {
+	defer runtime.KeepAlive(headerView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHeaderView:"), objref.IDOf(headerView))
 	})
@@ -84,6 +113,7 @@ func (tv *TableView) WithHeaderView(headerView *TableHeaderView) *TableView {
 
 // WithCornerView sets the view used to draw the area to the right of the column headers and above the vertical scroller of the enclosing scroll view.
 func (tv *TableView) WithCornerView(cornerView ViewProvider) *TableView {
+	defer runtime.KeepAlive(cornerView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCornerView:"), objref.IDOf(cornerView))
 	})
@@ -140,6 +170,7 @@ func (tv *TableView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBa
 
 // WithBackgroundColor sets the color used to draw the background of the table.
 func (tv *TableView) WithBackgroundColor(backgroundColor *Color) *TableView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -148,6 +179,7 @@ func (tv *TableView) WithBackgroundColor(backgroundColor *Color) *TableView {
 
 // WithGridColor sets the color used to draw grid lines.
 func (tv *TableView) WithGridColor(gridColor *Color) *TableView {
+	defer runtime.KeepAlive(gridColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setGridColor:"), objref.IDOf(gridColor))
 	})
@@ -181,6 +213,7 @@ func (tv *TableView) WithSortDescriptors(items ...obj.Object) *TableView {
 
 // WithHighlightedTableColumn sets the column highlighted in the table.
 func (tv *TableView) WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *TableView {
+	defer runtime.KeepAlive(highlightedTableColumn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setHighlightedTableColumn:"), objref.IDOf(highlightedTableColumn))
 	})
@@ -253,6 +286,7 @@ func (tv *TableView) WithDraggingDestinationFeedbackStyle(draggingDestinationFee
 
 // WithAutosaveName sets the name under which table information is automatically saved.
 func (tv *TableView) WithAutosaveName(autosaveName obj.Object) *TableView {
+	defer runtime.KeepAlive(autosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
 	})
@@ -301,6 +335,7 @@ func (tv *TableView) WithUsesAutomaticRowHeights(usesAutomaticRowHeights bool) *
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (tv *TableView) WithTarget(target obj.Object) *TableView {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -365,6 +400,7 @@ func (tv *TableView) WithControlSize(controlSize ControlSize) *TableView {
 
 // WithFormatter sets the receiver’s formatter.
 func (tv *TableView) WithFormatter(formatter obj.Object) *TableView {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -373,6 +409,7 @@ func (tv *TableView) WithFormatter(formatter obj.Object) *TableView {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (tv *TableView) WithObjectValue(objectValue obj.Object) *TableView {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -389,6 +426,7 @@ func (tv *TableView) WithStringValue(stringValue string) *TableView {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (tv *TableView) WithAttributedStringValue(attributedStringValue obj.Object) *TableView {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -429,6 +467,7 @@ func (tv *TableView) WithDoubleValue(doubleValue float64) *TableView {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (tv *TableView) WithFont(font *Font) *TableView {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -477,6 +516,7 @@ func (tv *TableView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *
 
 // WithCell sets the cell.
 func (tv *TableView) WithCell(cell CellProvider) *TableView {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -622,6 +662,7 @@ func (tv *TableView) WithWantsLayer(wantsLayer bool) *TableView {
 
 // WithLayer sets the layer.
 func (tv *TableView) WithLayer(layer obj.Object) *TableView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -671,6 +712,7 @@ func (tv *TableView) WithBackgroundFilters(items ...obj.Object) *TableView {
 
 // WithCompositingFilter sets the compositing filter.
 func (tv *TableView) WithCompositingFilter(compositingFilter obj.Object) *TableView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -688,6 +730,7 @@ func (tv *TableView) WithContentFilters(items ...obj.Object) *TableView {
 
 // WithShadow sets the shadow.
 func (tv *TableView) WithShadow(shadow *Shadow) *TableView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -736,6 +779,7 @@ func (tv *TableView) WithPreparedContentRect(preparedContentRect corefoundation.
 
 // WithNextKeyView sets the next key view.
 func (tv *TableView) WithNextKeyView(nextKeyView ViewProvider) *TableView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -785,6 +829,7 @@ func (tv *TableView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tv *TableView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -841,6 +886,7 @@ func (tv *TableView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tv *TableView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -849,6 +895,7 @@ func (tv *TableView) WithPressureConfiguration(pressureConfiguration *PressureCo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tv *TableView) WithNextResponder(nextResponder ResponderProvider) *TableView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -857,6 +904,7 @@ func (tv *TableView) WithNextResponder(nextResponder ResponderProvider) *TableVi
 
 // WithMenu sets returns the responder’s menu.
 func (tv *TableView) WithMenu(menu *Menu) *TableView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -865,6 +913,7 @@ func (tv *TableView) WithMenu(menu *Menu) *TableView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tv *TableView) WithUserActivity(userActivity obj.Object) *TableView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -873,6 +922,7 @@ func (tv *TableView) WithUserActivity(userActivity obj.Object) *TableView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tv *TableView) WithTouchBar(touchBar *TouchBar) *TableView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -881,6 +931,8 @@ func (tv *TableView) WithTouchBar(touchBar *TouchBar) *TableView {
 
 // NoteHeightOfRowsWithIndexesChanged informs the table view that the rows specified in indexSet have changed height.
 func (tv *TableView) NoteHeightOfRowsWithIndexesChanged(indexSet obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexSet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("noteHeightOfRowsWithIndexesChanged:"), objref.IDOf(indexSet))
 	})
@@ -889,6 +941,8 @@ func (tv *TableView) NoteHeightOfRowsWithIndexesChanged(indexSet obj.Object) {
 
 // AddTableColumn adds the specified column as the last column of the table view.
 func (tv *TableView) AddTableColumn(tableColumn *TableColumn) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tableColumn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("addTableColumn:"), objref.IDOf(tableColumn))
 	})
@@ -897,6 +951,8 @@ func (tv *TableView) AddTableColumn(tableColumn *TableColumn) {
 
 // RemoveTableColumn removes the specified column from the table view.
 func (tv *TableView) RemoveTableColumn(tableColumn *TableColumn) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tableColumn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("removeTableColumn:"), objref.IDOf(tableColumn))
 	})
@@ -905,6 +961,7 @@ func (tv *TableView) RemoveTableColumn(tableColumn *TableColumn) {
 
 // MoveColumnToColumn moves the column and heading at the specified index to the new specified index.
 func (tv *TableView) MoveColumnToColumn(oldIndex int, newIndex int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("moveColumn:toColumn:"), oldIndex, newIndex)
 	})
@@ -913,6 +970,8 @@ func (tv *TableView) MoveColumnToColumn(oldIndex int, newIndex int) {
 
 // ColumnWithIdentifier returns the index of the first column in the table view whose identifier is equal to the specified identifier.
 func (tv *TableView) ColumnWithIdentifier(identifier obj.Object) int {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -926,6 +985,8 @@ func (tv *TableView) ColumnWithIdentifier(identifier obj.Object) int {
 
 // TableColumnWithIdentifier returns the NSTableColumn object for the first column whose identifier is equal to the specified object.
 func (tv *TableView) TableColumnWithIdentifier(identifier obj.Object) *TableColumn {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 *TableColumn
 	purego.Main(func() {
 		_mainthread0 = func() *TableColumn {
@@ -939,6 +1000,7 @@ func (tv *TableView) TableColumnWithIdentifier(identifier obj.Object) *TableColu
 
 // Tile properly sizes the table view and its header view and marks it as needing display.
 func (tv *TableView) Tile() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("tile"))
 	})
@@ -947,6 +1009,7 @@ func (tv *TableView) Tile() {
 
 // SizeLastColumnToFit resizes the last column so the table view fits exactly within its enclosing clip view.
 func (tv *TableView) SizeLastColumnToFit() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("sizeLastColumnToFit"))
 	})
@@ -955,6 +1018,7 @@ func (tv *TableView) SizeLastColumnToFit() {
 
 // ScrollRowToVisible scrolls the view so the specified row is visible.
 func (tv *TableView) ScrollRowToVisible(row int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("scrollRowToVisible:"), row)
 	})
@@ -963,6 +1027,7 @@ func (tv *TableView) ScrollRowToVisible(row int) {
 
 // ScrollColumnToVisible scrolls the view so the specified column is visible.
 func (tv *TableView) ScrollColumnToVisible(column int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("scrollColumnToVisible:"), column)
 	})
@@ -971,6 +1036,7 @@ func (tv *TableView) ScrollColumnToVisible(column int) {
 
 // ReloadData marks the table view as needing redisplay, so it will reload the data for visible cells and draw the new values.
 func (tv *TableView) ReloadData() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("reloadData"))
 	})
@@ -979,6 +1045,7 @@ func (tv *TableView) ReloadData() {
 
 // NoteNumberOfRowsChanged informs the table view that the number of records in its data source has changed.
 func (tv *TableView) NoteNumberOfRowsChanged() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("noteNumberOfRowsChanged"))
 	})
@@ -987,6 +1054,9 @@ func (tv *TableView) NoteNumberOfRowsChanged() {
 
 // ReloadDataForRowIndexesColumnIndexes reloads the data for only the specified rows and columns.
 func (tv *TableView) ReloadDataForRowIndexesColumnIndexes(rowIndexes obj.Object, columnIndexes obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(rowIndexes)
+	defer runtime.KeepAlive(columnIndexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("reloadDataForRowIndexes:columnIndexes:"), objref.IDOf(rowIndexes), objref.IDOf(columnIndexes))
 	})
@@ -995,6 +1065,9 @@ func (tv *TableView) ReloadDataForRowIndexesColumnIndexes(rowIndexes obj.Object,
 
 // SetIndicatorImageInTableColumn sets the indicator image of the specified column.
 func (tv *TableView) SetIndicatorImageInTableColumn(image *Image, tableColumn *TableColumn) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(tableColumn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setIndicatorImage:inTableColumn:"), objref.IDOf(image), objref.IDOf(tableColumn))
 	})
@@ -1003,6 +1076,8 @@ func (tv *TableView) SetIndicatorImageInTableColumn(image *Image, tableColumn *T
 
 // IndicatorImageInTableColumn returns the indicator image of the specified table column.
 func (tv *TableView) IndicatorImageInTableColumn(tableColumn *TableColumn) *Image {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(tableColumn)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -1016,6 +1091,8 @@ func (tv *TableView) IndicatorImageInTableColumn(tableColumn *TableColumn) *Imag
 
 // CanDragRowsWithIndexesAtPoint returns a Boolean value indicating whether the table view allows dragging the rows with the drag initiated at the specified point.
 func (tv *TableView) CanDragRowsWithIndexesAtPoint(rowIndexes obj.Object, mouseDownPoint corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(rowIndexes)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1029,6 +1106,7 @@ func (tv *TableView) CanDragRowsWithIndexesAtPoint(rowIndexes obj.Object, mouseD
 
 // SetDraggingSourceOperationMaskForLocal sets the default operation mask returned by draggingSourceOperationMaskForLocal: to mask.
 func (tv *TableView) SetDraggingSourceOperationMaskForLocal(mask DragOperation, isLocal bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), mask, isLocal)
 	})
@@ -1037,6 +1115,7 @@ func (tv *TableView) SetDraggingSourceOperationMaskForLocal(mask DragOperation, 
 
 // SetDropRowDropOperation retargets the proposed drop operation.
 func (tv *TableView) SetDropRowDropOperation(row int, dropOperation TableViewDropOperation) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDropRow:dropOperation:"), row, dropOperation)
 	})
@@ -1045,6 +1124,8 @@ func (tv *TableView) SetDropRowDropOperation(row int, dropOperation TableViewDro
 
 // SelectAll selects all rows or all columns, according to whether rows or columns were most recently selected.
 func (tv *TableView) SelectAll(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 	})
@@ -1053,6 +1134,8 @@ func (tv *TableView) SelectAll(sender obj.Object) {
 
 // DeselectAll deselects all selected rows or columns if empty selection is allowed; otherwise does nothing.
 func (tv *TableView) DeselectAll(sender obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("deselectAll:"), objref.IDOf(sender))
 	})
@@ -1061,6 +1144,8 @@ func (tv *TableView) DeselectAll(sender obj.Object) {
 
 // SelectColumnIndexesByExtendingSelection sets the column selection using indexes possibly extending the selection.
 func (tv *TableView) SelectColumnIndexesByExtendingSelection(indexes obj.Object, extend bool) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectColumnIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
 	})
@@ -1069,6 +1154,8 @@ func (tv *TableView) SelectColumnIndexesByExtendingSelection(indexes obj.Object,
 
 // SelectRowIndexesByExtendingSelection sets the row selection using indexes extending the selection if specified.
 func (tv *TableView) SelectRowIndexesByExtendingSelection(indexes obj.Object, extend bool) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectRowIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
 	})
@@ -1077,6 +1164,7 @@ func (tv *TableView) SelectRowIndexesByExtendingSelection(indexes obj.Object, ex
 
 // DeselectColumn deselects the column at the specified index if it’s selected.
 func (tv *TableView) DeselectColumn(column int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("deselectColumn:"), column)
 	})
@@ -1085,6 +1173,7 @@ func (tv *TableView) DeselectColumn(column int) {
 
 // DeselectRow deselects the row at the specified index if it’s selected.
 func (tv *TableView) DeselectRow(row int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("deselectRow:"), row)
 	})
@@ -1093,6 +1182,7 @@ func (tv *TableView) DeselectRow(row int) {
 
 // IsColumnSelected returns a Boolean value that indicates whether the column at the specified index is selected.
 func (tv *TableView) IsColumnSelected(column int) bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1106,6 +1196,7 @@ func (tv *TableView) IsColumnSelected(column int) bool {
 
 // IsRowSelected returns a Boolean value that indicates whether the row at the specified index is selected.
 func (tv *TableView) IsRowSelected(row int) bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1119,6 +1210,7 @@ func (tv *TableView) IsRowSelected(row int) bool {
 
 // RectOfColumn returns the rectangle containing the column at the specified index.
 func (tv *TableView) RectOfColumn(column int) corefoundation.CGRect {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1132,6 +1224,7 @@ func (tv *TableView) RectOfColumn(column int) corefoundation.CGRect {
 
 // RectOfRow returns the rectangle containing the row at the specified index.
 func (tv *TableView) RectOfRow(row int) corefoundation.CGRect {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1144,12 +1237,13 @@ func (tv *TableView) RectOfRow(row int) corefoundation.CGRect {
 }
 
 // ColumnIndexesInRect returns the indexes of the table view’s columns that intersect the specified rectangle.
-func (tv *TableView) ColumnIndexesInRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (tv *TableView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.IndexSet {
+	defer runtime.KeepAlive(tv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("columnIndexesInRect:"), rect)
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1158,6 +1252,7 @@ func (tv *TableView) ColumnIndexesInRect(rect corefoundation.CGRect) obj.Object 
 
 // RowsInRect returns a range of indexes for the rows that lie wholly or partially within the vertical boundaries of the specified rectangle.
 func (tv *TableView) RowsInRect(rect corefoundation.CGRect) foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -1171,6 +1266,7 @@ func (tv *TableView) RowsInRect(rect corefoundation.CGRect) foundation.NSRange {
 
 // ColumnAtPoint returns the index of the column the specified point lies in.
 func (tv *TableView) ColumnAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1184,6 +1280,7 @@ func (tv *TableView) ColumnAtPoint(point corefoundation.CGPoint) int {
 
 // RowAtPoint returns the index of the row the specified point lies in.
 func (tv *TableView) RowAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1197,6 +1294,7 @@ func (tv *TableView) RowAtPoint(point corefoundation.CGPoint) int {
 
 // FrameOfCellAtColumnRow returns a rectangle locating the cell that lies at the intersection of the specified column and row.
 func (tv *TableView) FrameOfCellAtColumnRow(column int, row int) corefoundation.CGRect {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1210,6 +1308,8 @@ func (tv *TableView) FrameOfCellAtColumnRow(column int, row int) corefoundation.
 
 // EditColumnRowWithEventSelect edits the cell at the specified column and row using the specified event and selection behavior.
 func (tv *TableView) EditColumnRowWithEventSelect(column int, row int, event *Event, select_ bool) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("editColumn:row:withEvent:select:"), column, row, objref.IDOf(event), select_)
 	})
@@ -1218,6 +1318,7 @@ func (tv *TableView) EditColumnRowWithEventSelect(column int, row int, event *Ev
 
 // DrawRowClipRect draws the cells for the row at rowIndex in the columns that intersect clipRect.
 func (tv *TableView) DrawRowClipRect(row int, clipRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawRow:clipRect:"), row, clipRect)
 	})
@@ -1226,6 +1327,7 @@ func (tv *TableView) DrawRowClipRect(row int, clipRect corefoundation.CGRect) {
 
 // HighlightSelectionInClipRect highlights the region of the table view in the specified rectangle.
 func (tv *TableView) HighlightSelectionInClipRect(clipRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("highlightSelectionInClipRect:"), clipRect)
 	})
@@ -1234,6 +1336,7 @@ func (tv *TableView) HighlightSelectionInClipRect(clipRect corefoundation.CGRect
 
 // DrawGridInClipRect draws the grid lines within the supplied rectangle.
 func (tv *TableView) DrawGridInClipRect(clipRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawGridInClipRect:"), clipRect)
 	})
@@ -1242,6 +1345,7 @@ func (tv *TableView) DrawGridInClipRect(clipRect corefoundation.CGRect) {
 
 // DrawBackgroundInClipRect draws the background of the table view in the clip rect specified by the rectangle.
 func (tv *TableView) DrawBackgroundInClipRect(clipRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("drawBackgroundInClipRect:"), clipRect)
 	})
@@ -1250,6 +1354,7 @@ func (tv *TableView) DrawBackgroundInClipRect(clipRect corefoundation.CGRect) {
 
 // ViewAtColumnRowMakeIfNecessary returns a view at the specified row and column indexes, creating one if necessary.
 func (tv *TableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfNecessary bool) *View {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1263,6 +1368,7 @@ func (tv *TableView) ViewAtColumnRowMakeIfNecessary(column int, row int, makeIfN
 
 // RowViewAtRowMakeIfNecessary returns a row view at the specified index, creating one if necessary.
 func (tv *TableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) *TableRowView {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TableRowView
 	purego.Main(func() {
 		_mainthread0 = func() *TableRowView {
@@ -1276,6 +1382,8 @@ func (tv *TableView) RowViewAtRowMakeIfNecessary(row int, makeIfNecessary bool) 
 
 // RowForView returns the index of the row for the specified view.
 func (tv *TableView) RowForView(view *View) int {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1289,6 +1397,8 @@ func (tv *TableView) RowForView(view *View) int {
 
 // ColumnForView returns the column index for the specified view.
 func (tv *TableView) ColumnForView(view *View) int {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1302,6 +1412,9 @@ func (tv *TableView) ColumnForView(view *View) int {
 
 // MakeViewWithIdentifierOwner returns a new or existing view with the specified identifier.
 func (tv *TableView) MakeViewWithIdentifierOwner(identifier obj.Object, owner obj.Object) *View {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(owner)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1315,6 +1428,7 @@ func (tv *TableView) MakeViewWithIdentifierOwner(identifier obj.Object, owner ob
 
 // EnumerateAvailableRowViewsUsing allows the enumeration of all the table rows that are known to the table view.
 func (tv *TableView) EnumerateAvailableRowViewsUsing(handler func(obj.Object, int)) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("enumerateAvailableRowViewsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int) { handler(obj.Wrap(_b0), _b1) }))
 	})
@@ -1323,6 +1437,7 @@ func (tv *TableView) EnumerateAvailableRowViewsUsing(handler func(obj.Object, in
 
 // BeginUpdates begins a group of updates for the table view.
 func (tv *TableView) BeginUpdates() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("beginUpdates"))
 	})
@@ -1331,6 +1446,7 @@ func (tv *TableView) BeginUpdates() {
 
 // EndUpdates ends the group of updates for the table view.
 func (tv *TableView) EndUpdates() {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("endUpdates"))
 	})
@@ -1339,6 +1455,8 @@ func (tv *TableView) EndUpdates() {
 
 // InsertRowsAtIndexesWithAnimation inserts the rows using the specified animation.
 func (tv *TableView) InsertRowsAtIndexesWithAnimation(indexes obj.Object, animationOptions TableViewAnimationOptions) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("insertRowsAtIndexes:withAnimation:"), objref.IDOf(indexes), animationOptions)
 	})
@@ -1347,6 +1465,8 @@ func (tv *TableView) InsertRowsAtIndexesWithAnimation(indexes obj.Object, animat
 
 // RemoveRowsAtIndexesWithAnimation removes the rows using the specified animation.
 func (tv *TableView) RemoveRowsAtIndexesWithAnimation(indexes obj.Object, animationOptions TableViewAnimationOptions) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("removeRowsAtIndexes:withAnimation:"), objref.IDOf(indexes), animationOptions)
 	})
@@ -1355,6 +1475,7 @@ func (tv *TableView) RemoveRowsAtIndexesWithAnimation(indexes obj.Object, animat
 
 // MoveRowAtIndexToIndex moves the specified row to the new row location using animation.
 func (tv *TableView) MoveRowAtIndexToIndex(oldIndex int, newIndex int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("moveRowAtIndex:toIndex:"), oldIndex, newIndex)
 	})
@@ -1363,6 +1484,8 @@ func (tv *TableView) MoveRowAtIndexToIndex(oldIndex int, newIndex int) {
 
 // HideRowsAtIndexesWithAnimation hides the specified table rows.
 func (tv *TableView) HideRowsAtIndexesWithAnimation(indexes obj.Object, rowAnimation TableViewAnimationOptions) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("hideRowsAtIndexes:withAnimation:"), objref.IDOf(indexes), rowAnimation)
 	})
@@ -1371,6 +1494,8 @@ func (tv *TableView) HideRowsAtIndexesWithAnimation(indexes obj.Object, rowAnima
 
 // UnhideRowsAtIndexesWithAnimation unhides the specified table rows.
 func (tv *TableView) UnhideRowsAtIndexesWithAnimation(indexes obj.Object, rowAnimation TableViewAnimationOptions) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(indexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("unhideRowsAtIndexes:withAnimation:"), objref.IDOf(indexes), rowAnimation)
 	})
@@ -1379,6 +1504,9 @@ func (tv *TableView) UnhideRowsAtIndexesWithAnimation(indexes obj.Object, rowAni
 
 // RegisterNibForIdentifier registers a NIB for the specified identifier, so that view-based table views can use it to instantiate views.
 func (tv *TableView) RegisterNibForIdentifier(nib *Nib, identifier obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(nib)
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("registerNib:forIdentifier:"), objref.IDOf(nib), objref.IDOf(identifier))
 	})
@@ -1387,6 +1515,8 @@ func (tv *TableView) RegisterNibForIdentifier(nib *Nib, identifier obj.Object) {
 
 // DidAddRowViewForRow invoked when a row view is added to the table.
 func (tv *TableView) DidAddRowViewForRow(rowView *TableRowView, row int) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(rowView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("didAddRowView:forRow:"), objref.IDOf(rowView), row)
 	})
@@ -1395,6 +1525,8 @@ func (tv *TableView) DidAddRowViewForRow(rowView *TableRowView, row int) {
 
 // DidRemoveRowViewForRow invoked when a row view is removed from the table.
 func (tv *TableView) DidRemoveRowViewForRow(rowView *TableRowView, row int) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(rowView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("didRemoveRowView:forRow:"), objref.IDOf(rowView), row)
 	})
@@ -1403,6 +1535,7 @@ func (tv *TableView) DidRemoveRowViewForRow(rowView *TableRowView, row int) {
 
 // HeaderView returns the header view.
 func (tv *TableView) HeaderView() *TableHeaderView {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TableHeaderView
 	purego.Main(func() {
 		_mainthread0 = func() *TableHeaderView {
@@ -1416,6 +1549,7 @@ func (tv *TableView) HeaderView() *TableHeaderView {
 
 // CornerView returns the corner view.
 func (tv *TableView) CornerView() *View {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1429,6 +1563,7 @@ func (tv *TableView) CornerView() *View {
 
 // AllowsColumnReordering wraps the corresponding Objective-C method.
 func (tv *TableView) AllowsColumnReordering() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1442,6 +1577,7 @@ func (tv *TableView) AllowsColumnReordering() bool {
 
 // AllowsColumnResizing wraps the corresponding Objective-C method.
 func (tv *TableView) AllowsColumnResizing() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1455,6 +1591,7 @@ func (tv *TableView) AllowsColumnResizing() bool {
 
 // ColumnAutoresizingStyle returns the column autoresizing style.
 func (tv *TableView) ColumnAutoresizingStyle() TableViewColumnAutoresizingStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewColumnAutoresizingStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewColumnAutoresizingStyle {
@@ -1468,6 +1605,7 @@ func (tv *TableView) ColumnAutoresizingStyle() TableViewColumnAutoresizingStyle 
 
 // GridStyleMask returns the grid style mask.
 func (tv *TableView) GridStyleMask() TableViewGridLineStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewGridLineStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewGridLineStyle {
@@ -1481,6 +1619,7 @@ func (tv *TableView) GridStyleMask() TableViewGridLineStyle {
 
 // IntercellSpacing returns the intercell spacing.
 func (tv *TableView) IntercellSpacing() corefoundation.CGSize {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1494,6 +1633,7 @@ func (tv *TableView) IntercellSpacing() corefoundation.CGSize {
 
 // UsesAlternatingRowBackgroundColors wraps the corresponding Objective-C method.
 func (tv *TableView) UsesAlternatingRowBackgroundColors() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1507,6 +1647,7 @@ func (tv *TableView) UsesAlternatingRowBackgroundColors() bool {
 
 // BackgroundColor returns the background color.
 func (tv *TableView) BackgroundColor() *Color {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1520,6 +1661,7 @@ func (tv *TableView) BackgroundColor() *Color {
 
 // GridColor returns the grid color.
 func (tv *TableView) GridColor() *Color {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1533,6 +1675,7 @@ func (tv *TableView) GridColor() *Color {
 
 // RowSizeStyle returns the row size style.
 func (tv *TableView) RowSizeStyle() TableViewRowSizeStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewRowSizeStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewRowSizeStyle {
@@ -1546,6 +1689,7 @@ func (tv *TableView) RowSizeStyle() TableViewRowSizeStyle {
 
 // EffectiveRowSizeStyle returns the effective row size style.
 func (tv *TableView) EffectiveRowSizeStyle() TableViewRowSizeStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewRowSizeStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewRowSizeStyle {
@@ -1559,6 +1703,7 @@ func (tv *TableView) EffectiveRowSizeStyle() TableViewRowSizeStyle {
 
 // RowHeight returns the row height.
 func (tv *TableView) RowHeight() float64 {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1574,6 +1719,7 @@ func (tv *TableView) RowHeight() float64 {
 //
 // TableColumns returns the collection as a Go slice.
 func (tv *TableView) TableColumns() []*TableColumn {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []*TableColumn
 	purego.Main(func() {
 		_mainthread0 = func() []*TableColumn {
@@ -1586,6 +1732,7 @@ func (tv *TableView) TableColumns() []*TableColumn {
 
 // NumberOfColumns returns the number of columns.
 func (tv *TableView) NumberOfColumns() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1599,6 +1746,7 @@ func (tv *TableView) NumberOfColumns() int {
 
 // NumberOfRows returns the number of rows.
 func (tv *TableView) NumberOfRows() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1612,6 +1760,7 @@ func (tv *TableView) NumberOfRows() int {
 
 // EditedColumn returns the edited column.
 func (tv *TableView) EditedColumn() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1625,6 +1774,7 @@ func (tv *TableView) EditedColumn() int {
 
 // EditedRow returns the edited row.
 func (tv *TableView) EditedRow() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1638,6 +1788,7 @@ func (tv *TableView) EditedRow() int {
 
 // ClickedColumn returns the clicked column.
 func (tv *TableView) ClickedColumn() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1651,6 +1802,7 @@ func (tv *TableView) ClickedColumn() int {
 
 // ClickedRow returns the clicked row.
 func (tv *TableView) ClickedRow() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1666,6 +1818,7 @@ func (tv *TableView) ClickedRow() int {
 //
 // SortDescriptors returns the collection as a Go slice.
 func (tv *TableView) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -1678,6 +1831,7 @@ func (tv *TableView) SortDescriptors() []obj.Object {
 
 // HighlightedTableColumn returns the highlighted table column.
 func (tv *TableView) HighlightedTableColumn() *TableColumn {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *TableColumn
 	purego.Main(func() {
 		_mainthread0 = func() *TableColumn {
@@ -1691,6 +1845,7 @@ func (tv *TableView) HighlightedTableColumn() *TableColumn {
 
 // VerticalMotionCanBeginDrag wraps the corresponding Objective-C method.
 func (tv *TableView) VerticalMotionCanBeginDrag() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1704,6 +1859,7 @@ func (tv *TableView) VerticalMotionCanBeginDrag() bool {
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (tv *TableView) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1717,6 +1873,7 @@ func (tv *TableView) AllowsMultipleSelection() bool {
 
 // AllowsEmptySelection wraps the corresponding Objective-C method.
 func (tv *TableView) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1730,6 +1887,7 @@ func (tv *TableView) AllowsEmptySelection() bool {
 
 // AllowsColumnSelection wraps the corresponding Objective-C method.
 func (tv *TableView) AllowsColumnSelection() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1742,12 +1900,13 @@ func (tv *TableView) AllowsColumnSelection() bool {
 }
 
 // SelectedColumnIndexes returns the selected column indexes.
-func (tv *TableView) SelectedColumnIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (tv *TableView) SelectedColumnIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(tv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedColumnIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1755,12 +1914,13 @@ func (tv *TableView) SelectedColumnIndexes() obj.Object {
 }
 
 // SelectedRowIndexes returns the selected row indexes.
-func (tv *TableView) SelectedRowIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (tv *TableView) SelectedRowIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(tv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectedRowIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1769,6 +1929,7 @@ func (tv *TableView) SelectedRowIndexes() obj.Object {
 
 // SelectedColumn returns the selected column.
 func (tv *TableView) SelectedColumn() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1782,6 +1943,7 @@ func (tv *TableView) SelectedColumn() int {
 
 // SelectedRow returns the selected row.
 func (tv *TableView) SelectedRow() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1795,6 +1957,7 @@ func (tv *TableView) SelectedRow() int {
 
 // NumberOfSelectedColumns returns the number of selected columns.
 func (tv *TableView) NumberOfSelectedColumns() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1808,6 +1971,7 @@ func (tv *TableView) NumberOfSelectedColumns() int {
 
 // NumberOfSelectedRows returns the number of selected rows.
 func (tv *TableView) NumberOfSelectedRows() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1821,6 +1985,7 @@ func (tv *TableView) NumberOfSelectedRows() int {
 
 // AllowsTypeSelect wraps the corresponding Objective-C method.
 func (tv *TableView) AllowsTypeSelect() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1834,6 +1999,7 @@ func (tv *TableView) AllowsTypeSelect() bool {
 
 // Style returns the style.
 func (tv *TableView) Style() TableViewStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewStyle {
@@ -1847,6 +2013,7 @@ func (tv *TableView) Style() TableViewStyle {
 
 // EffectiveStyle returns the effective style.
 func (tv *TableView) EffectiveStyle() TableViewStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewStyle {
@@ -1860,6 +2027,7 @@ func (tv *TableView) EffectiveStyle() TableViewStyle {
 
 // SelectionHighlightStyle returns the selection highlight style.
 func (tv *TableView) SelectionHighlightStyle() TableViewSelectionHighlightStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewSelectionHighlightStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewSelectionHighlightStyle {
@@ -1873,6 +2041,7 @@ func (tv *TableView) SelectionHighlightStyle() TableViewSelectionHighlightStyle 
 
 // DraggingDestinationFeedbackStyle returns the dragging destination feedback style.
 func (tv *TableView) DraggingDestinationFeedbackStyle() TableViewDraggingDestinationFeedbackStyle {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 TableViewDraggingDestinationFeedbackStyle
 	purego.Main(func() {
 		_mainthread0 = func() TableViewDraggingDestinationFeedbackStyle {
@@ -1885,12 +2054,13 @@ func (tv *TableView) DraggingDestinationFeedbackStyle() TableViewDraggingDestina
 }
 
 // AutosaveName returns the autosave name.
-func (tv *TableView) AutosaveName() obj.Object {
-	var _mainthread0 obj.Object
+func (tv *TableView) AutosaveName() *foundation.String {
+	defer runtime.KeepAlive(tv)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("autosaveName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1899,6 +2069,7 @@ func (tv *TableView) AutosaveName() obj.Object {
 
 // AutosaveTableColumns wraps the corresponding Objective-C method.
 func (tv *TableView) AutosaveTableColumns() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1912,6 +2083,7 @@ func (tv *TableView) AutosaveTableColumns() bool {
 
 // FloatsGroupRows wraps the corresponding Objective-C method.
 func (tv *TableView) FloatsGroupRows() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1925,6 +2097,7 @@ func (tv *TableView) FloatsGroupRows() bool {
 
 // RowActionsVisible wraps the corresponding Objective-C method.
 func (tv *TableView) RowActionsVisible() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1937,12 +2110,13 @@ func (tv *TableView) RowActionsVisible() bool {
 }
 
 // HiddenRowIndexes returns the hidden row indexes.
-func (tv *TableView) HiddenRowIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (tv *TableView) HiddenRowIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(tv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("hiddenRowIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -1951,6 +2125,7 @@ func (tv *TableView) HiddenRowIndexes() obj.Object {
 
 // RegisteredNibsByIdentifier returns the registered nibs by identifier.
 func (tv *TableView) RegisteredNibsByIdentifier() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1964,6 +2139,7 @@ func (tv *TableView) RegisteredNibsByIdentifier() obj.Object {
 
 // UsesStaticContents wraps the corresponding Objective-C method.
 func (tv *TableView) UsesStaticContents() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1977,6 +2153,7 @@ func (tv *TableView) UsesStaticContents() bool {
 
 // UsesAutomaticRowHeights wraps the corresponding Objective-C method.
 func (tv *TableView) UsesAutomaticRowHeights() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1990,6 +2167,7 @@ func (tv *TableView) UsesAutomaticRowHeights() bool {
 
 // SetDrawsGrid sets whether the table view draws a grid.
 func (tv *TableView) SetDrawsGrid(flag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setDrawsGrid:"), flag)
 	})
@@ -1998,6 +2176,7 @@ func (tv *TableView) SetDrawsGrid(flag bool) {
 
 // DrawsGrid reports whether returns a Boolean value that indicates whether the table view draws a grid.
 func (tv *TableView) DrawsGrid() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2011,6 +2190,7 @@ func (tv *TableView) DrawsGrid() bool {
 
 // SelectColumnByExtendingSelection selects the column at the specified index, optionally extending any existing selection.
 func (tv *TableView) SelectColumnByExtendingSelection(column int, extend bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectColumn:byExtendingSelection:"), column, extend)
 	})
@@ -2019,6 +2199,7 @@ func (tv *TableView) SelectColumnByExtendingSelection(column int, extend bool) {
 
 // SelectRowByExtendingSelection selects a row at the specified index, optionally extending any existing selection.
 func (tv *TableView) SelectRowByExtendingSelection(row int, extend bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("selectRow:byExtendingSelection:"), row, extend)
 	})
@@ -2027,6 +2208,7 @@ func (tv *TableView) SelectRowByExtendingSelection(row int, extend bool) {
 
 // SelectedColumnEnumerator returns this method has been deprecated.
 func (tv *TableView) SelectedColumnEnumerator() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -2040,6 +2222,7 @@ func (tv *TableView) SelectedColumnEnumerator() obj.Object {
 
 // SelectedRowEnumerator returns this method has been deprecated.
 func (tv *TableView) SelectedRowEnumerator() obj.Object {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -2053,6 +2236,7 @@ func (tv *TableView) SelectedRowEnumerator() obj.Object {
 
 // SetAutoresizesAllColumnsToFit controls whether the table view proportionally resizes its columns to fit when its superview’s frame changes.
 func (tv *TableView) SetAutoresizesAllColumnsToFit(flag bool) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setAutoresizesAllColumnsToFit:"), flag)
 	})
@@ -2061,6 +2245,7 @@ func (tv *TableView) SetAutoresizesAllColumnsToFit(flag bool) {
 
 // AutoresizesAllColumnsToFit reports whether returns a Boolean value that indicates if the table view proportionally resizes its columns to fit when its superview’s frame changes.
 func (tv *TableView) AutoresizesAllColumnsToFit() bool {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2074,6 +2259,7 @@ func (tv *TableView) AutoresizesAllColumnsToFit() bool {
 
 // ColumnsInRect returns a range of indexes for the table view’s columns that lie wholly or partially within the horizontal boundaries of the specified rectangle.
 func (tv *TableView) ColumnsInRect(rect corefoundation.CGRect) foundation.NSRange {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -2087,6 +2273,7 @@ func (tv *TableView) ColumnsInRect(rect corefoundation.CGRect) foundation.NSRang
 
 // PreparedCellAtColumnRow returns the fully prepared cell that the table view will use for drawing or processing of the specified row and column.
 func (tv *TableView) PreparedCellAtColumnRow(column int, row int) *Cell {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 *Cell
 	purego.Main(func() {
 		_mainthread0 = func() *Cell {
@@ -2100,6 +2287,8 @@ func (tv *TableView) PreparedCellAtColumnRow(column int, row int) *Cell {
 
 // TextShouldBeginEditing queries the delegate to determine if the text should begin editing.
 func (tv *TableView) TextShouldBeginEditing(textObject *Text) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textObject)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2113,6 +2302,8 @@ func (tv *TableView) TextShouldBeginEditing(textObject *Text) bool {
 
 // TextShouldEndEditing validates the text object for the cell being edited by querying the delegate.queries the delegate using control:textShouldEndEditing:, returning the delegate’s response if it responds to that method.
 func (tv *TableView) TextShouldEndEditing(textObject *Text) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(textObject)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2126,6 +2317,8 @@ func (tv *TableView) TextShouldEndEditing(textObject *Text) bool {
 
 // TextDidBeginEditing posts an NSControlTextDidBeginEditingNotification to the default notification center.
 func (tv *TableView) TextDidBeginEditing(notification obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textDidBeginEditing:"), objref.IDOf(notification))
 	})
@@ -2134,6 +2327,8 @@ func (tv *TableView) TextDidBeginEditing(notification obj.Object) {
 
 // TextDidEndEditing updates the data source based on the newly edited value and selects another cell for editing if possible according to the character that ended editing (Return, Tab, Backtab).
 func (tv *TableView) TextDidEndEditing(notification obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textDidEndEditing:"), objref.IDOf(notification))
 	})
@@ -2142,6 +2337,8 @@ func (tv *TableView) TextDidEndEditing(notification obj.Object) {
 
 // TextDidChange sends textDidChange: to the edited cell and posts an NSControlTextDidChangeNotification to the default notification center.
 func (tv *TableView) TextDidChange(notification obj.Object) {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(notification)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("textDidChange:"), objref.IDOf(notification))
 	})
@@ -2150,6 +2347,8 @@ func (tv *TableView) TextDidChange(notification obj.Object) {
 
 // ShouldFocusCellAtColumnRow returns whether the fully prepared cell at the specified row and column can be made the focused cell.
 func (tv *TableView) ShouldFocusCellAtColumnRow(cell *Cell, column int, row int) bool {
+	defer runtime.KeepAlive(tv)
+	defer runtime.KeepAlive(cell)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2163,6 +2362,7 @@ func (tv *TableView) ShouldFocusCellAtColumnRow(cell *Cell, column int, row int)
 
 // FocusedColumn returns the currently focused column.
 func (tv *TableView) FocusedColumn() int {
+	defer runtime.KeepAlive(tv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -2176,6 +2376,7 @@ func (tv *TableView) FocusedColumn() int {
 
 // SetFocusedColumn sets the currently focused column to the specified index.
 func (tv *TableView) SetFocusedColumn(focusedColumn int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("setFocusedColumn:"), focusedColumn)
 	})
@@ -2184,6 +2385,7 @@ func (tv *TableView) SetFocusedColumn(focusedColumn int) {
 
 // PerformClickOnCellAtColumnRow performs a click action on the cell at the specified row and column.
 func (tv *TableView) PerformClickOnCellAtColumnRow(column int, row int) {
+	defer runtime.KeepAlive(tv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("performClickOnCellAtColumn:row:"), column, row)
 	})

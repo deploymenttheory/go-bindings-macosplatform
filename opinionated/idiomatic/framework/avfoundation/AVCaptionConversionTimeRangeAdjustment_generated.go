@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,12 +56,14 @@ func NewCaptionConversionTimeRangeAdjustment() *CaptionConversionTimeRangeAdjust
 
 // StartTimeOffset indicates the amount by which the timeRange.start of the captions must be adjusted in order to correct a problem. The value may any numeric value, positive, negative, or zero.
 func (cctra *CaptionConversionTimeRangeAdjustment) StartTimeOffset() coremedia.CMTime {
+	defer runtime.KeepAlive(cctra)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cctra), objc.RegisterName("startTimeOffset"))
 	return _r
 }
 
 // DurationOffset indicates the amount by which the timeRange.duration of the captions must be adjusted in order to correct a problem. The value may any numeric value, positive, negative, or zero.
 func (cctra *CaptionConversionTimeRangeAdjustment) DurationOffset() coremedia.CMTime {
+	defer runtime.KeepAlive(cctra)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(cctra), objc.RegisterName("durationOffset"))
 	return _r
 }

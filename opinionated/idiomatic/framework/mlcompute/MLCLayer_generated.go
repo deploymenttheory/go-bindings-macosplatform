@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func layerAdopt(id objc.ID) *Layer {
 
 // Description returns the object's -description text.
 func (l *Layer) Description() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (l *Layer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (l *Layer) IsKind(className string) bool {
+	defer runtime.KeepAlive(l)
 	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (l *Layer) String() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
@@ -82,12 +89,14 @@ func (l *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
 
 // LayerID returns the layer ID A unique number to identify each layer.  Assigned when the layer is created.
 func (l *Layer) LayerID() int {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("layerID"))
 	return _r
 }
 
 // Label returns a string to help identify this object.
 func (l *Layer) Label() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -97,12 +106,14 @@ func (l *Layer) Label() string {
 
 // IsDebuggingEnabled reports whether a flag to identify if we want to debug this layer when executing a graph that includes this layer If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is false. If isDebuggingEnabled is set to true, make sure to set options to enable debugging when compiling the graph. Otherwise this property may be ignored.
 func (l *Layer) IsDebuggingEnabled() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isDebuggingEnabled"))
 	return _r
 }
 
 // DeviceType returns the device type where this layer will be executed Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
 func (l *Layer) DeviceType() DeviceType {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[DeviceType](objref.IDOf(l), objc.RegisterName("deviceType"))
 	return _r
 }

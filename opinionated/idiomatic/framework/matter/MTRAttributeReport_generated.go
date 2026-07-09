@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTRAttributeReportAdopt(id objc.ID) *MTRAttributeReport {
 
 // Description returns the object's -description text.
 func (mar *MTRAttributeReport) Description() string {
+	defer runtime.KeepAlive(mar)
 	return rt.Description(objref.IDOf(mar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mar *MTRAttributeReport) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mar *MTRAttributeReport) IsKind(className string) bool {
+	defer runtime.KeepAlive(mar)
 	return rt.IsKind(objref.IDOf(mar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mar *MTRAttributeReport) String() string {
+	defer runtime.KeepAlive(mar)
 	return rt.Description(objref.IDOf(mar))
 }
 
-// NewMTRAttributeReportWithResponseValueError initialize an MTRAttributeReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an attribute response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/attribute combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
-func NewMTRAttributeReportWithResponseValueError(responseValue obj.Object) (result *MTRAttributeReport, err error) {
+// NewMTRAttributeReportWithResponseValue initialize an MTRAttributeReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an attribute response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/attribute combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
+func NewMTRAttributeReportWithResponseValue(responseValue map[string]obj.Object) (result *MTRAttributeReport, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAttributeReport")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,12 +86,14 @@ func NewMTRAttributeReportWithResponseValueError(responseValue obj.Object) (resu
 
 // Path returns the path.
 func (mar *MTRAttributeReport) Path() *MTRAttributePath {
+	defer runtime.KeepAlive(mar)
 	_r := objc.Send[objc.ID](objref.IDOf(mar), objc.RegisterName("path"))
 	return MTRAttributePathFromID(_r)
 }
 
 // Value returns value will be nil in the following cases: * There was an error.  In this case, "error" will not be nil. * The attribute is nullable and the value of the attribute is null. If value is not nil, the actual type of value will depend on the schema-defined (typically defined in the Matter specification) type of the attribute as follows: * list: NSArray of whatever type the list entries are. * struct: The corresponding structure interface defined by Matter.framework * octet string: NSData * string: NSString * discrete/analog types: NSNumber Derived types (in the Matter specification sense) are represented the same as the base type, except for "string" (which is a derived type of "octet string" in the specification).
 func (mar *MTRAttributeReport) Value() obj.Object {
+	defer runtime.KeepAlive(mar)
 	_r := objc.Send[objc.ID](objref.IDOf(mar), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }

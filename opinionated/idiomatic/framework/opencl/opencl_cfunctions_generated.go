@@ -740,7 +740,7 @@ func ClGetContextInfo(arg obj.Object, arg2 uint32, arg3 int, arg4 unsafe.Pointer
 var _fnClGetDAGNodeAPPLE func(objc.ID, objc.ID, unsafe.Pointer, unsafe.Pointer, int) int32
 
 // ClGetDAGNodeAPPLE calls the OpenCL framework function clGetDAGNodeAPPLE.
-func ClGetDAGNodeAPPLE(d obj.Object, f obj.Object, nargs int) (result int, args int, arg_indices uint32) {
+func ClGetDAGNodeAPPLE(d obj.Object, f obj.Object, nargs int) (result int, args int, argIndices uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnClGetDAGNodeAPPLE == nil {
 		ebipurego.RegisterLibFunc(&_fnClGetDAGNodeAPPLE, _lib, "clGetDAGNodeAPPLE")
@@ -1333,7 +1333,7 @@ func ClWaitForEvents(arg uint32, arg2 unsafe.Pointer) int32 {
 var _fnGclCopyImage func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // GclCopyImage calls the OpenCL framework function gcl_copy_image.
-func GclCopyImage(dst_image unsafe.Pointer, src_image unsafe.Pointer) (dst_origin int, src_origin int, region int) {
+func GclCopyImage(dstImage unsafe.Pointer, srcImage unsafe.Pointer) (dstOrigin int, srcOrigin int, region int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCopyImage == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCopyImage, _lib, "gcl_copy_image")
@@ -1341,35 +1341,35 @@ func GclCopyImage(dst_image unsafe.Pointer, src_image unsafe.Pointer) (dst_origi
 	var _out0 int
 	var _out1 int
 	var _out2 int
-	_fnGclCopyImage(dst_image, src_image, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
+	_fnGclCopyImage(dstImage, srcImage, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2))
 	return _out0, _out1, _out2
 }
 
 var _fnGclCopyImageToPtr func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // GclCopyImageToPtr calls the OpenCL framework function gcl_copy_image_to_ptr.
-func GclCopyImageToPtr(dst_ptr unsafe.Pointer, src_image unsafe.Pointer) (src_origin int, region int) {
+func GclCopyImageToPtr(dstPtr unsafe.Pointer, srcImage unsafe.Pointer) (srcOrigin int, region int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCopyImageToPtr == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCopyImageToPtr, _lib, "gcl_copy_image_to_ptr")
 	}
 	var _out0 int
 	var _out1 int
-	_fnGclCopyImageToPtr(dst_ptr, src_image, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_fnGclCopyImageToPtr(dstPtr, srcImage, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _out0, _out1
 }
 
 var _fnGclCopyPtrToImage func(objc.ID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // GclCopyPtrToImage calls the OpenCL framework function gcl_copy_ptr_to_image.
-func GclCopyPtrToImage(dst_image obj.Object, src_ptr unsafe.Pointer) (dst_origin int, region int) {
+func GclCopyPtrToImage(dstImage obj.Object, srcPtr unsafe.Pointer) (dstOrigin int, region int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCopyPtrToImage == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCopyPtrToImage, _lib, "gcl_copy_ptr_to_image")
 	}
 	var _out0 int
 	var _out1 int
-	_fnGclCopyPtrToImage(objref.IDOf(dst_image), src_ptr, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_fnGclCopyPtrToImage(objref.IDOf(dstImage), srcPtr, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _out0, _out1
 }
 
@@ -1388,12 +1388,12 @@ func GclCreateBufferFromPtr(ptr unsafe.Pointer) obj.Object {
 var _fnGclCreateKernelFromBlock func(unsafe.Pointer) objc.ID
 
 // GclCreateKernelFromBlock calls the OpenCL framework function gcl_create_kernel_from_block.
-func GclCreateKernelFromBlock(kernel_block_ptr unsafe.Pointer) obj.Object {
+func GclCreateKernelFromBlock(kernelBlockPtr unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclCreateKernelFromBlock == nil {
 		ebipurego.RegisterLibFunc(&_fnGclCreateKernelFromBlock, _lib, "gcl_create_kernel_from_block")
 	}
-	_ret := _fnGclCreateKernelFromBlock(kernel_block_ptr)
+	_ret := _fnGclCreateKernelFromBlock(kernelBlockPtr)
 	return obj.Wrap(_ret)
 }
 
@@ -1435,27 +1435,27 @@ func GclGetDeviceIdWithDispatchQueue(queue obj.Object) obj.Object {
 var _fnGclGetKernelBlockWorkgroupInfo func(unsafe.Pointer, uint32, int, unsafe.Pointer, unsafe.Pointer)
 
 // GclGetKernelBlockWorkgroupInfo calls the OpenCL framework function gcl_get_kernel_block_workgroup_info.
-func GclGetKernelBlockWorkgroupInfo(kernel_block_ptr unsafe.Pointer, param_name uint32, param_value_size int, param_value unsafe.Pointer) (param_value_size_ret int) {
+func GclGetKernelBlockWorkgroupInfo(kernelBlockPtr unsafe.Pointer, paramName uint32, paramValueSize int, paramValue unsafe.Pointer) (paramValueSizeRet int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclGetKernelBlockWorkgroupInfo == nil {
 		ebipurego.RegisterLibFunc(&_fnGclGetKernelBlockWorkgroupInfo, _lib, "gcl_get_kernel_block_workgroup_info")
 	}
 	var _out0 int
-	_fnGclGetKernelBlockWorkgroupInfo(kernel_block_ptr, param_name, param_value_size, param_value, unsafe.Pointer(&_out0))
+	_fnGclGetKernelBlockWorkgroupInfo(kernelBlockPtr, paramName, paramValueSize, paramValue, unsafe.Pointer(&_out0))
 	return _out0
 }
 
 var _fnGclGetSupportedImageFormats func(objc.ID, uint32, int, unsafe.Pointer, unsafe.Pointer)
 
 // GclGetSupportedImageFormats calls the OpenCL framework function gcl_get_supported_image_formats.
-func GclGetSupportedImageFormats(device_id obj.Object, image_type uint32, num_entries int) (image_formats ClImageFormat, num_image_formats uint32) {
+func GclGetSupportedImageFormats(deviceId obj.Object, imageType uint32, numEntries int) (imageFormats ClImageFormat, numImageFormats uint32) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclGetSupportedImageFormats == nil {
 		ebipurego.RegisterLibFunc(&_fnGclGetSupportedImageFormats, _lib, "gcl_get_supported_image_formats")
 	}
 	var _out0 ClImageFormat
 	var _out1 uint32
-	_fnGclGetSupportedImageFormats(objref.IDOf(device_id), image_type, num_entries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_fnGclGetSupportedImageFormats(objref.IDOf(deviceId), imageType, numEntries, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _out0, _out1
 }
 
@@ -1484,7 +1484,7 @@ func GclMemcpy(dst unsafe.Pointer, src unsafe.Pointer, size int) {
 var _fnGclMemcpyRect func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, int, int, int, int)
 
 // GclMemcpyRect calls the OpenCL framework function gcl_memcpy_rect.
-func GclMemcpyRect(dst unsafe.Pointer, src unsafe.Pointer, dst_row_pitch int, dst_slice_pitch int, src_row_pitch int, src_slice_pitch int) (dst_origin int, src_origin int, region int) {
+func GclMemcpyRect(dst unsafe.Pointer, src unsafe.Pointer, dstRowPitch int, dstSlicePitch int, srcRowPitch int, srcSlicePitch int) (dstOrigin int, srcOrigin int, region int) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclMemcpyRect == nil {
 		ebipurego.RegisterLibFunc(&_fnGclMemcpyRect, _lib, "gcl_memcpy_rect")
@@ -1492,7 +1492,7 @@ func GclMemcpyRect(dst unsafe.Pointer, src unsafe.Pointer, dst_row_pitch int, ds
 	var _out0 int
 	var _out1 int
 	var _out2 int
-	_fnGclMemcpyRect(dst, src, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), dst_row_pitch, dst_slice_pitch, src_row_pitch, src_slice_pitch)
+	_fnGclMemcpyRect(dst, src, unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), unsafe.Pointer(&_out2), dstRowPitch, dstSlicePitch, srcRowPitch, srcSlicePitch)
 	return _out0, _out1, _out2
 }
 
@@ -1521,12 +1521,12 @@ func GclRetainImage(image unsafe.Pointer) {
 var _fnGclSetFinalizer func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)
 
 // GclSetFinalizer calls the OpenCL framework function gcl_set_finalizer.
-func GclSetFinalizer(object unsafe.Pointer, cl_pfn_finalizer unsafe.Pointer, user_data unsafe.Pointer) {
+func GclSetFinalizer(object unsafe.Pointer, clPfnFinalizer unsafe.Pointer, userData unsafe.Pointer) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnGclSetFinalizer == nil {
 		ebipurego.RegisterLibFunc(&_fnGclSetFinalizer, _lib, "gcl_set_finalizer")
 	}
-	_fnGclSetFinalizer(object, cl_pfn_finalizer, user_data)
+	_fnGclSetFinalizer(object, clPfnFinalizer, userData)
 }
 
 var _fnGclStartTimer func() uint64

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func layoutConstraintAdopt(id objc.ID) *LayoutConstraint {
 
 // Description returns the object's -description text.
 func (lc *LayoutConstraint) Description() string {
+	defer runtime.KeepAlive(lc)
 	return rt.Description(objref.IDOf(lc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lc *LayoutConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lc *LayoutConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(lc)
 	return rt.IsKind(objref.IDOf(lc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lc *LayoutConstraint) String() string {
+	defer runtime.KeepAlive(lc)
 	return rt.Description(objref.IDOf(lc))
 }
 
@@ -104,78 +111,91 @@ func (lc *LayoutConstraint) WithIdentifier(identifier string) *LayoutConstraint 
 
 // Priority returns the priority.
 func (lc *LayoutConstraint) Priority() float32 {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[float32](objref.IDOf(lc), objc.RegisterName("priority"))
 	return _r
 }
 
 // ShouldBeArchived wraps the corresponding Objective-C method.
 func (lc *LayoutConstraint) ShouldBeArchived() bool {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[bool](objref.IDOf(lc), objc.RegisterName("shouldBeArchived"))
 	return _r
 }
 
 // FirstItem returns the first item.
 func (lc *LayoutConstraint) FirstItem() obj.Object {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("firstItem"))
 	return obj.Wrap(_r)
 }
 
 // SecondItem returns the second item.
 func (lc *LayoutConstraint) SecondItem() obj.Object {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("secondItem"))
 	return obj.Wrap(_r)
 }
 
 // FirstAttribute returns the first attribute.
 func (lc *LayoutConstraint) FirstAttribute() LayoutAttribute {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[LayoutAttribute](objref.IDOf(lc), objc.RegisterName("firstAttribute"))
 	return _r
 }
 
 // SecondAttribute returns the second attribute.
 func (lc *LayoutConstraint) SecondAttribute() LayoutAttribute {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[LayoutAttribute](objref.IDOf(lc), objc.RegisterName("secondAttribute"))
 	return _r
 }
 
 // FirstAnchor returns the first anchor.
 func (lc *LayoutConstraint) FirstAnchor() obj.Object {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("firstAnchor"))
 	return obj.Wrap(_r)
 }
 
 // SecondAnchor returns the second anchor.
 func (lc *LayoutConstraint) SecondAnchor() obj.Object {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("secondAnchor"))
 	return obj.Wrap(_r)
 }
 
 // Relation returns the relation.
 func (lc *LayoutConstraint) Relation() LayoutRelation {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[LayoutRelation](objref.IDOf(lc), objc.RegisterName("relation"))
 	return _r
 }
 
 // Multiplier returns the multiplier.
 func (lc *LayoutConstraint) Multiplier() float64 {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[float64](objref.IDOf(lc), objc.RegisterName("multiplier"))
 	return _r
 }
 
 // Constant returns the constant.
 func (lc *LayoutConstraint) Constant() float64 {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[float64](objref.IDOf(lc), objc.RegisterName("constant"))
 	return _r
 }
 
 // IsActive reports whether the object is active.
 func (lc *LayoutConstraint) IsActive() bool {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[bool](objref.IDOf(lc), objc.RegisterName("isActive"))
 	return _r
 }
 
 // Identifier returns the identifier.
 func (lc *LayoutConstraint) Identifier() string {
+	defer runtime.KeepAlive(lc)
 	_r := objc.Send[objc.ID](objref.IDOf(lc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

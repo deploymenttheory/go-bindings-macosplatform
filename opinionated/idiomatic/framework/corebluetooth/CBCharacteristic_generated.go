@@ -5,9 +5,11 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,38 +50,44 @@ func characteristicAdopt(id objc.ID) *Characteristic {
 
 // Service returns a back-pointer to the service this characteristic belongs to.
 func (c *Characteristic) Service() *Service {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("service"))
 	return ServiceFromID(_r)
 }
 
 // Properties returns the properties of the characteristic.
 func (c *Characteristic) Properties() CharacteristicProperties {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[CharacteristicProperties](objref.IDOf(c), objc.RegisterName("properties"))
 	return _r
 }
 
 // Value returns the value of the characteristic.
-func (c *Characteristic) Value() obj.Object {
+func (c *Characteristic) Value() []byte {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Descriptors returns a list of the CBDescriptors that have so far been discovered in this characteristic.
 //
 // Descriptors returns the collection as a Go slice.
 func (c *Characteristic) Descriptors() []*Descriptor {
+	defer runtime.KeepAlive(c)
 	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("descriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Descriptor { return DescriptorFromID(_id) })
 }
 
 // IsBroadcasted reports whether the characteristic is currently broadcasted or not.
 func (c *Characteristic) IsBroadcasted() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isBroadcasted"))
 	return _r
 }
 
 // IsNotifying reports whether the characteristic is currently notifying or not.
 func (c *Characteristic) IsNotifying() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isNotifying"))
 	return _r
 }

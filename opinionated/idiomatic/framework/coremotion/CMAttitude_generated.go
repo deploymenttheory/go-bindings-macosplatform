@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func attitudeAdopt(id objc.ID) *Attitude {
 
 // Description returns the object's -description text.
 func (a *Attitude) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Attitude) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Attitude) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Attitude) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -74,23 +81,28 @@ func NewAttitude() *Attitude {
 
 // MultiplyByInverseOfAttitude yields the change in attitude given a specific attitude.
 func (a *Attitude) MultiplyByInverseOfAttitude(attitude *Attitude) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(attitude)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("multiplyByInverseOfAttitude:"), objref.IDOf(attitude))
 }
 
 // Roll returns the roll.
 func (a *Attitude) Roll() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("roll"))
 	return _r
 }
 
 // Pitch returns the pitch.
 func (a *Attitude) Pitch() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("pitch"))
 	return _r
 }
 
 // Yaw returns the yaw.
 func (a *Attitude) Yaw() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("yaw"))
 	return _r
 }

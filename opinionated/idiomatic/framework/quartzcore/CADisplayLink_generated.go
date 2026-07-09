@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func displayLinkAdopt(id objc.ID) *DisplayLink {
 
 // Description returns the object's -description text.
 func (dl *DisplayLink) Description() string {
+	defer runtime.KeepAlive(dl)
 	return rt.Description(objref.IDOf(dl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dl *DisplayLink) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dl *DisplayLink) IsKind(className string) bool {
+	defer runtime.KeepAlive(dl)
 	return rt.IsKind(objref.IDOf(dl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dl *DisplayLink) String() string {
+	defer runtime.KeepAlive(dl)
 	return rt.Description(objref.IDOf(dl))
 }
 
@@ -80,39 +87,50 @@ func (dl *DisplayLink) WithPaused(paused bool) *DisplayLink {
 
 // AddToRunLoopForMode registers the display link with a run loop.
 func (dl *DisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	defer runtime.KeepAlive(dl)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes the display link from the run loop for the given mode.
 func (dl *DisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	defer runtime.KeepAlive(dl)
+	defer runtime.KeepAlive(runloop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // Invalidate removes the display link from all run loop modes.
 func (dl *DisplayLink) Invalidate() {
+	defer runtime.KeepAlive(dl)
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("invalidate"))
 }
 
 // Timestamp returns the timestamp.
 func (dl *DisplayLink) Timestamp() float64 {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("timestamp"))
 	return _r
 }
 
 // Duration returns the duration.
 func (dl *DisplayLink) Duration() float64 {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("duration"))
 	return _r
 }
 
 // TargetTimestamp returns the target timestamp.
 func (dl *DisplayLink) TargetTimestamp() float64 {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
 // IsPaused reports whether the object is paused.
 func (dl *DisplayLink) IsPaused() bool {
+	defer runtime.KeepAlive(dl)
 	_r := objc.Send[bool](objref.IDOf(dl), objc.RegisterName("isPaused"))
 	return _r
 }

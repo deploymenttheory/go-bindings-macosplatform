@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func functionStitchingGraphAdopt(id objc.ID) *FunctionStitchingGraph {
 
 // Description returns the object's -description text.
 func (fsg *FunctionStitchingGraph) Description() string {
+	defer runtime.KeepAlive(fsg)
 	return rt.Description(objref.IDOf(fsg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fsg *FunctionStitchingGraph) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fsg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fsg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fsg *FunctionStitchingGraph) IsKind(className string) bool {
+	defer runtime.KeepAlive(fsg)
 	return rt.IsKind(objref.IDOf(fsg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fsg *FunctionStitchingGraph) String() string {
+	defer runtime.KeepAlive(fsg)
 	return rt.Description(objref.IDOf(fsg))
 }
 
 // NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes creates a description of a new function call graph.
 func NewFunctionStitchingGraphWithFunctionNameNodesOutputNodeAttributes(functionName string, nodes []*FunctionStitchingFunctionNode, outputNode *FunctionStitchingFunctionNode, attributes []obj.Object) *FunctionStitchingGraph {
+	defer runtime.KeepAlive(outputNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingGraph")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFunctionName:nodes:outputNode:attributes:"), purego.NSString(functionName), purego.SliceToNSArray(nodes, func(_v *FunctionStitchingFunctionNode) objc.ID { return objref.IDOf(_v) }), objref.IDOf(outputNode), purego.SliceToNSArray(attributes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return functionStitchingGraphAdopt(_id)
@@ -88,12 +96,14 @@ func (fsg *FunctionStitchingGraph) WithNodes(items ...*FunctionStitchingFunction
 
 // WithOutputNode sets the node with the output that’s the output of the new stitched function.
 func (fsg *FunctionStitchingGraph) WithOutputNode(outputNode *FunctionStitchingFunctionNode) *FunctionStitchingGraph {
+	defer runtime.KeepAlive(outputNode)
 	objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("setOutputNode:"), objref.IDOf(outputNode))
 	return fsg
 }
 
 // FunctionName returns the function name.
 func (fsg *FunctionStitchingGraph) FunctionName() string {
+	defer runtime.KeepAlive(fsg)
 	_r := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("functionName"))
 	if _r == 0 {
 		return ""
@@ -105,23 +115,27 @@ func (fsg *FunctionStitchingGraph) FunctionName() string {
 //
 // Nodes returns the collection as a Go slice.
 func (fsg *FunctionStitchingGraph) Nodes() []*FunctionStitchingFunctionNode {
+	defer runtime.KeepAlive(fsg)
 	_arr := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("nodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingFunctionNode { return FunctionStitchingFunctionNodeFromID(_id) })
 }
 
 // OutputNode returns the output node.
 func (fsg *FunctionStitchingGraph) OutputNode() *FunctionStitchingFunctionNode {
+	defer runtime.KeepAlive(fsg)
 	_r := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("outputNode"))
 	return FunctionStitchingFunctionNodeFromID(_r)
 }
 
 // Attributes returns the attributes.
 func (fsg *FunctionStitchingGraph) Attributes() []obj.Object {
+	defer runtime.KeepAlive(fsg)
 	_r := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetAttributes wraps the corresponding Objective-C method.
 func (fsg *FunctionStitchingGraph) SetAttributes(attributes []obj.Object) {
+	defer runtime.KeepAlive(fsg)
 	objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }

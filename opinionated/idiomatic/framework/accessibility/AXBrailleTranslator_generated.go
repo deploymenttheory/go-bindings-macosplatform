@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func brailleTranslatorAdopt(id objc.ID) *BrailleTranslator {
 
 // Description returns the object's -description text.
 func (bt *BrailleTranslator) Description() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bt *BrailleTranslator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bt *BrailleTranslator) IsKind(className string) bool {
+	defer runtime.KeepAlive(bt)
 	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bt *BrailleTranslator) String() string {
+	defer runtime.KeepAlive(bt)
 	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBrailleTranslatorWithBrailleTable creates a new BrailleTranslator.
 func NewBrailleTranslatorWithBrailleTable(brailleTable *BrailleTable) *BrailleTranslator {
+	defer runtime.KeepAlive(brailleTable)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXBrailleTranslator")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrailleTable:"), objref.IDOf(brailleTable))
 	return brailleTranslatorAdopt(_id)
@@ -75,12 +83,14 @@ func NewBrailleTranslatorWithBrailleTable(brailleTable *BrailleTable) *BrailleTr
 
 // TranslatePrintText output Braille uses the unicode Braille characters (0x2800-0x28FF).
 func (bt *BrailleTranslator) TranslatePrintText(printText string) *BrailleTranslationResult {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("translatePrintText:"), purego.NSString(printText))
 	return BrailleTranslationResultFromID(_r)
 }
 
 // BackTranslateBraille input Braille should use the unicode Braille characters (0x2800-0x28FF).
 func (bt *BrailleTranslator) BackTranslateBraille(braille string) *BrailleTranslationResult {
+	defer runtime.KeepAlive(bt)
 	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("backTranslateBraille:"), purego.NSString(braille))
 	return BrailleTranslationResultFromID(_r)
 }

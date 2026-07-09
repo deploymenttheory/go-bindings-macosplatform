@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func hostAdopt(id objc.ID) *Host {
 
 // Description returns the object's -description text.
 func (h *Host) Description() string {
+	defer runtime.KeepAlive(h)
 	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (h *Host) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(h)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (h *Host) IsKind(className string) bool {
+	defer runtime.KeepAlive(h)
 	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (h *Host) String() string {
+	defer runtime.KeepAlive(h)
 	return rt.Description(objref.IDOf(h))
 }
 
@@ -81,19 +87,22 @@ func (h *Host) WithObservationInfo(observationInfo unsafe.Pointer) *Host {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (h *Host) WithScriptingProperties(scriptingProperties obj.Object) *Host {
-	objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (h *Host) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Host {
+	objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return h
 }
 
 // IsEqualToHost wraps the corresponding Objective-C method.
 func (h *Host) IsEqualToHost(aHost *Host) bool {
+	defer runtime.KeepAlive(h)
+	defer runtime.KeepAlive(aHost)
 	_r := objc.Send[bool](objref.IDOf(h), objc.RegisterName("isEqualToHost:"), objref.IDOf(aHost))
 	return _r
 }
 
 // Name returns the name.
 func (h *Host) Name() string {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -105,12 +114,14 @@ func (h *Host) Name() string {
 //
 // Names returns the collection as a Go slice.
 func (h *Host) Names() []string {
+	defer runtime.KeepAlive(h)
 	_arr := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("names"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Address returns the address.
 func (h *Host) Address() string {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("address"))
 	if _r == 0 {
 		return ""
@@ -122,12 +133,14 @@ func (h *Host) Address() string {
 //
 // Addresses returns the collection as a Go slice.
 func (h *Host) Addresses() []string {
+	defer runtime.KeepAlive(h)
 	_arr := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocalizedName returns the localized name.
 func (h *Host) LocalizedName() string {
+	defer runtime.KeepAlive(h)
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""

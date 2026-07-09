@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func basePlayerAdopt(id objc.ID) *BasePlayer {
 
 // Description returns the object's -description text.
 func (bp *BasePlayer) Description() string {
+	defer runtime.KeepAlive(bp)
 	return rt.Description(objref.IDOf(bp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bp *BasePlayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bp *BasePlayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(bp)
 	return rt.IsKind(objref.IDOf(bp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bp *BasePlayer) String() string {
+	defer runtime.KeepAlive(bp)
 	return rt.Description(objref.IDOf(bp))
 }
 
 // PlayerID returns the player ID.
 func (bp *BasePlayer) PlayerID() string {
+	defer runtime.KeepAlive(bp)
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
@@ -79,6 +87,7 @@ func (bp *BasePlayer) PlayerID() string {
 
 // DisplayName returns this player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
 func (bp *BasePlayer) DisplayName() string {
+	defer runtime.KeepAlive(bp)
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""

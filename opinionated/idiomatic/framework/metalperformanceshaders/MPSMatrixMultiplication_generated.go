@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -90,30 +92,35 @@ func (mm *MatrixMultiplication) WithLabel(label string) *MatrixMultiplication {
 
 // ResultMatrixOrigin returns the origin, relative to [0, 0] in the result matrix, at which to start writing (and reading if necessary) results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mm *MatrixMultiplication) ResultMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mm), objc.RegisterName("resultMatrixOrigin"))
 	return _r
 }
 
 // LeftMatrixOrigin returns the origin, relative to [0, 0] in the left input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mm *MatrixMultiplication) LeftMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mm), objc.RegisterName("leftMatrixOrigin"))
 	return _r
 }
 
 // RightMatrixOrigin returns the origin, relative to [0, 0] in the right input matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
 func (mm *MatrixMultiplication) RightMatrixOrigin() metal.MTLOrigin {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[metal.MTLOrigin](objref.IDOf(mm), objc.RegisterName("rightMatrixOrigin"))
 	return _r
 }
 
 // BatchStart returns the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 func (mm *MatrixMultiplication) BatchStart() int {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[int](objref.IDOf(mm), objc.RegisterName("batchStart"))
 	return _r
 }
 
 // BatchSize returns the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.
 func (mm *MatrixMultiplication) BatchSize() int {
+	defer runtime.KeepAlive(mm)
 	_r := objc.Send[int](objref.IDOf(mm), objc.RegisterName("batchSize"))
 	return _r
 }

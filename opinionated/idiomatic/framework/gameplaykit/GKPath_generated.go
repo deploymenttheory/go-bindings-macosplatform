@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func pathAdopt(id objc.ID) *Path {
 
 // Description returns the object's -description text.
 func (p *Path) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Path) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Path) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Path) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -103,18 +109,21 @@ func (p *Path) WithCyclical(cyclical bool) *Path {
 
 // Radius returns radius of the pathway.  Defines a spatial area that the path occupies. This can be though of as the union between rectangles between all points, and circles at each point
 func (p *Path) Radius() float32 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("radius"))
 	return _r
 }
 
 // NumPoints returns number of points in this path
 func (p *Path) NumPoints() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("numPoints"))
 	return _r
 }
 
 // IsCyclical reports whether does this path loop back on itself, creating a cycle?
 func (p *Path) IsCyclical() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCyclical"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,24 +49,28 @@ func collectionAdopt(id objc.ID) *Collection {
 
 // CanPerformEditOperation returns whether the collection supports the specified editing operation.
 func (c *Collection) CanPerformEditOperation(anOperation CollectionEditOperation) bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("canPerformEditOperation:"), anOperation)
 	return _r
 }
 
 // CanContainAssets wraps the corresponding Objective-C method.
 func (c *Collection) CanContainAssets() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("canContainAssets"))
 	return _r
 }
 
 // CanContainCollections wraps the corresponding Objective-C method.
 func (c *Collection) CanContainCollections() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("canContainCollections"))
 	return _r
 }
 
 // LocalizedTitle returns the localized title.
 func (c *Collection) LocalizedTitle() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""

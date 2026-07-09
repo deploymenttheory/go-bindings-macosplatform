@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4RenderPassDescriptorAdopt(id objc.ID) *MTL4RenderPassDescriptor {
 
 // Description returns the object's -description text.
 func (mrpd *MTL4RenderPassDescriptor) Description() string {
+	defer runtime.KeepAlive(mrpd)
 	return rt.Description(objref.IDOf(mrpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrpd *MTL4RenderPassDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrpd *MTL4RenderPassDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrpd)
 	return rt.IsKind(objref.IDOf(mrpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrpd *MTL4RenderPassDescriptor) String() string {
+	defer runtime.KeepAlive(mrpd)
 	return rt.Description(objref.IDOf(mrpd))
 }
 
@@ -74,12 +81,14 @@ func NewMTL4RenderPassDescriptor() *MTL4RenderPassDescriptor {
 
 // WithDepthAttachment sets accesses state information for a render attachment that stores depth data.
 func (mrpd *MTL4RenderPassDescriptor) WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *MTL4RenderPassDescriptor {
+	defer runtime.KeepAlive(depthAttachment)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setDepthAttachment:"), objref.IDOf(depthAttachment))
 	return mrpd
 }
 
 // WithStencilAttachment sets accesses state information for a render attachment that stores stencil data.
 func (mrpd *MTL4RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *MTL4RenderPassDescriptor {
+	defer runtime.KeepAlive(stencilAttachment)
 	objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("setStencilAttachment:"), objref.IDOf(stencilAttachment))
 	return mrpd
 }
@@ -146,78 +155,91 @@ func (mrpd *MTL4RenderPassDescriptor) WithSupportColorAttachmentMapping(supportC
 
 // ColorAttachments returns accesses the array of state information for render attachments that store color data.
 func (mrpd *MTL4RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachmentDescriptorArray {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("colorAttachments"))
 	return RenderPassColorAttachmentDescriptorArrayFromID(_r)
 }
 
 // DepthAttachment returns accesses state information for a render attachment that stores depth data.
 func (mrpd *MTL4RenderPassDescriptor) DepthAttachment() *RenderPassDepthAttachmentDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("depthAttachment"))
 	return RenderPassDepthAttachmentDescriptorFromID(_r)
 }
 
 // StencilAttachment returns accesses state information for a render attachment that stores stencil data.
 func (mrpd *MTL4RenderPassDescriptor) StencilAttachment() *RenderPassStencilAttachmentDescriptor {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mrpd), objc.RegisterName("stencilAttachment"))
 	return RenderPassStencilAttachmentDescriptorFromID(_r)
 }
 
 // RenderTargetArrayLength returns assigns the number of layers that all attachments this descriptor references have.
 func (mrpd *MTL4RenderPassDescriptor) RenderTargetArrayLength() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("renderTargetArrayLength"))
 	return _r
 }
 
 // ImageblockSampleLength returns assigns the per-sample size, in bytes, of the largest explicit imageblock layout in the render pass.
 func (mrpd *MTL4RenderPassDescriptor) ImageblockSampleLength() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("imageblockSampleLength"))
 	return _r
 }
 
 // ThreadgroupMemoryLength returns assigns the per-tile size, in bytes, of the persistent threadgroup memory allocation of this render pass.
 func (mrpd *MTL4RenderPassDescriptor) ThreadgroupMemoryLength() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("threadgroupMemoryLength"))
 	return _r
 }
 
 // TileWidth returns the width of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
 func (mrpd *MTL4RenderPassDescriptor) TileWidth() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("tileWidth"))
 	return _r
 }
 
 // TileHeight returns the height of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
 func (mrpd *MTL4RenderPassDescriptor) TileHeight() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("tileHeight"))
 	return _r
 }
 
 // DefaultRasterSampleCount sets the default raster sample count for the render pass when it references no attachments.
 func (mrpd *MTL4RenderPassDescriptor) DefaultRasterSampleCount() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("defaultRasterSampleCount"))
 	return _r
 }
 
 // RenderTargetWidth sets the width, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum width of all attachments. The default value of this property is `0`.
 func (mrpd *MTL4RenderPassDescriptor) RenderTargetWidth() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("renderTargetWidth"))
 	return _r
 }
 
 // RenderTargetHeight sets the height, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum height of all attachments. The default value of this property is `0`.
 func (mrpd *MTL4RenderPassDescriptor) RenderTargetHeight() int {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[int](objref.IDOf(mrpd), objc.RegisterName("renderTargetHeight"))
 	return _r
 }
 
 // VisibilityResultType determines if Metal accumulates visibility results between render encoders or resets them.
 func (mrpd *MTL4RenderPassDescriptor) VisibilityResultType() VisibilityResultType {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[VisibilityResultType](objref.IDOf(mrpd), objc.RegisterName("visibilityResultType"))
 	return _r
 }
 
 // SupportColorAttachmentMapping reports whether controls if the render pass supports color attachment mapping.
 func (mrpd *MTL4RenderPassDescriptor) SupportColorAttachmentMapping() bool {
+	defer runtime.KeepAlive(mrpd)
 	_r := objc.Send[bool](objref.IDOf(mrpd), objc.RegisterName("supportColorAttachmentMapping"))
 	return _r
 }

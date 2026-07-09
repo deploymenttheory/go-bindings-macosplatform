@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (ti *TemporaryImage) WithLabel(label string) *TemporaryImage {
 
 // ReadCount returns the read count.
 func (ti *TemporaryImage) ReadCount() int {
+	defer runtime.KeepAlive(ti)
 	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("readCount"))
 	return _r
 }

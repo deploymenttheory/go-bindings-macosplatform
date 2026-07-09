@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -52,12 +54,14 @@ func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths []string)
 
 // WithParent sets the parent object that contains this object.
 func (pja *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return pja
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (pja *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return pja
 }
@@ -72,24 +76,28 @@ func (pja *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
 //
 // JointPaths returns the collection as a Go slice.
 func (pja *PackedJointAnimation) JointPaths() []string {
+	defer runtime.KeepAlive(pja)
 	_arr := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Translations returns the translations.
 func (pja *PackedJointAnimation) Translations() *AnimatedVector3Array {
+	defer runtime.KeepAlive(pja)
 	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("translations"))
 	return AnimatedVector3ArrayFromID(_r)
 }
 
 // Rotations returns the rotations.
 func (pja *PackedJointAnimation) Rotations() *AnimatedQuaternionArray {
+	defer runtime.KeepAlive(pja)
 	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("rotations"))
 	return AnimatedQuaternionArrayFromID(_r)
 }
 
 // Scales returns the scales.
 func (pja *PackedJointAnimation) Scales() *AnimatedVector3Array {
+	defer runtime.KeepAlive(pja)
 	_r := objc.Send[objc.ID](objref.IDOf(pja), objc.RegisterName("scales"))
 	return AnimatedVector3ArrayFromID(_r)
 }

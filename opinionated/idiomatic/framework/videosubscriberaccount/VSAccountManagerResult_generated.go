@@ -5,6 +5,8 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vSAccountManagerResultAdopt(id objc.ID) *VSAccountManagerResult {
 
 // Description returns the object's -description text.
 func (vamr *VSAccountManagerResult) Description() string {
+	defer runtime.KeepAlive(vamr)
 	return rt.Description(objref.IDOf(vamr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vamr *VSAccountManagerResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vamr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vamr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vamr *VSAccountManagerResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(vamr)
 	return rt.IsKind(objref.IDOf(vamr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vamr *VSAccountManagerResult) String() string {
+	defer runtime.KeepAlive(vamr)
 	return rt.Description(objref.IDOf(vamr))
 }
 
@@ -74,5 +81,6 @@ func NewVSAccountManagerResult() *VSAccountManagerResult {
 
 // Cancel cancels an in-progress request for subscriber account information.
 func (vamr *VSAccountManagerResult) Cancel() {
+	defer runtime.KeepAlive(vamr)
 	objc.Send[objc.ID](objref.IDOf(vamr), objc.RegisterName("cancel"))
 }

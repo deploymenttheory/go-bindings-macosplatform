@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func captureResolvedPhotoSettingsAdopt(id objc.ID) *CaptureResolvedPhotoSettings
 
 // Description returns the object's -description text.
 func (crps *CaptureResolvedPhotoSettings) Description() string {
+	defer runtime.KeepAlive(crps)
 	return rt.Description(objref.IDOf(crps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (crps *CaptureResolvedPhotoSettings) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(crps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(crps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (crps *CaptureResolvedPhotoSettings) IsKind(className string) bool {
+	defer runtime.KeepAlive(crps)
 	return rt.IsKind(objref.IDOf(crps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (crps *CaptureResolvedPhotoSettings) String() string {
+	defer runtime.KeepAlive(crps)
 	return rt.Description(objref.IDOf(crps))
 }
 
@@ -75,24 +82,28 @@ func NewCaptureResolvedPhotoSettings() *CaptureResolvedPhotoSettings {
 
 // UniqueID returns uniqueID matches that of the AVCapturePhotoSettings instance you passed to -capturePhotoWithSettings:delegate:.
 func (crps *CaptureResolvedPhotoSettings) UniqueID() int64 {
+	defer runtime.KeepAlive(crps)
 	_r := objc.Send[int64](objref.IDOf(crps), objc.RegisterName("uniqueID"))
 	return _r
 }
 
 // PhotoDimensions returns the resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
 func (crps *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
+	defer runtime.KeepAlive(crps)
 	_r := objc.Send[coremedia.CMVideoDimensions](objref.IDOf(crps), objc.RegisterName("photoDimensions"))
 	return _r
 }
 
 // ExpectedPhotoCount indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
 func (crps *CaptureResolvedPhotoSettings) ExpectedPhotoCount() int {
+	defer runtime.KeepAlive(crps)
 	_r := objc.Send[int](objref.IDOf(crps), objc.RegisterName("expectedPhotoCount"))
 	return _r
 }
 
 // IsFastCapturePrioritizationEnabled reports whether fast capture prioritization will be employed when capturing the photo.
 func (crps *CaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bool {
+	defer runtime.KeepAlive(crps)
 	_r := objc.Send[bool](objref.IDOf(crps), objc.RegisterName("isFastCapturePrioritizationEnabled"))
 	return _r
 }

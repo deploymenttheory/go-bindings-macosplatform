@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterConstraintsStructAdopt(id objc.ID) *MTRDevi
 
 // Description returns the object's -description text.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) Description() string {
+	defer runtime.KeepAlive(mdemccs)
 	return rt.Description(objref.IDOf(mdemccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemccs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemccs)
 	return rt.IsKind(objref.IDOf(mdemccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) String() string {
+	defer runtime.KeepAlive(mdemccs)
 	return rt.Description(objref.IDOf(mdemccs))
 }
 
@@ -72,60 +80,70 @@ func NewMTRDeviceEnergyManagementClusterConstraintsStruct() *MTRDeviceEnergyMana
 
 // WithStartTime sets the start time.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithStartTime(startTime obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mdemccs
 }
 
 // WithDuration sets the duration.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemccs
 }
 
 // WithNominalPower sets the nominal power.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
+	defer runtime.KeepAlive(nominalPower)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return mdemccs
 }
 
 // WithMaximumEnergy sets the maximum energy.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithMaximumEnergy(maximumEnergy obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
+	defer runtime.KeepAlive(maximumEnergy)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setMaximumEnergy:"), objref.IDOf(maximumEnergy))
 	return mdemccs
 }
 
 // WithLoadControl sets the load control.
 func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) WithLoadControl(loadControl obj.Object) *MTRDeviceEnergyManagementClusterConstraintsStruct {
+	defer runtime.KeepAlive(loadControl)
 	objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("setLoadControl:"), objref.IDOf(loadControl))
 	return mdemccs
 }
 
 // StartTime returns the start time.
-func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) StartTime() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) Duration() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NominalPower returns the nominal power.
-func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) NominalPower() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) NominalPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("nominalPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaximumEnergy returns the maximum energy.
-func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) MaximumEnergy() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) MaximumEnergy() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("maximumEnergy"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LoadControl returns the load control.
-func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) LoadControl() obj.Object {
+func (mdemccs *MTRDeviceEnergyManagementClusterConstraintsStruct) LoadControl() *foundation.Number {
+	defer runtime.KeepAlive(mdemccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemccs), objc.RegisterName("loadControl"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

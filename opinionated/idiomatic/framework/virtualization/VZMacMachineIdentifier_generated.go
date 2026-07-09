@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func macMachineIdentifierAdopt(id objc.ID) *MacMachineIdentifier {
 
 // Description returns the object's -description text.
 func (mmi *MacMachineIdentifier) Description() string {
+	defer runtime.KeepAlive(mmi)
 	return rt.Description(objref.IDOf(mmi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmi *MacMachineIdentifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmi *MacMachineIdentifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmi)
 	return rt.IsKind(objref.IDOf(mmi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmi *MacMachineIdentifier) String() string {
+	defer runtime.KeepAlive(mmi)
 	return rt.Description(objref.IDOf(mmi))
 }
 
@@ -73,14 +80,15 @@ func NewMacMachineIdentifier() *MacMachineIdentifier {
 }
 
 // NewMACMachineIdentifierWithDataRepresentation create a machine identifier described by the specified data representation.
-func NewMACMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *MacMachineIdentifier {
+func NewMACMachineIdentifierWithDataRepresentation(dataRepresentation []byte) *MacMachineIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacMachineIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), rt.BytesToNSData(dataRepresentation))
 	return macMachineIdentifierAdopt(_id)
 }
 
 // DataRepresentation returns the data representation.
-func (mmi *MacMachineIdentifier) DataRepresentation() obj.Object {
+func (mmi *MacMachineIdentifier) DataRepresentation() []byte {
+	defer runtime.KeepAlive(mmi)
 	_r := objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

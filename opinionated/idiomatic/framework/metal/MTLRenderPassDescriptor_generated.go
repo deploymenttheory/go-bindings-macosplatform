@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPassDescriptorAdopt(id objc.ID) *RenderPassDescriptor {
 
 // Description returns the object's -description text.
 func (rpd *RenderPassDescriptor) Description() string {
+	defer runtime.KeepAlive(rpd)
 	return rt.Description(objref.IDOf(rpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpd *RenderPassDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpd *RenderPassDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpd)
 	return rt.IsKind(objref.IDOf(rpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpd *RenderPassDescriptor) String() string {
+	defer runtime.KeepAlive(rpd)
 	return rt.Description(objref.IDOf(rpd))
 }
 
@@ -74,12 +81,14 @@ func NewRenderPassDescriptor() *RenderPassDescriptor {
 
 // WithDepthAttachment sets state information for an attachment that stores depth data.
 func (rpd *RenderPassDescriptor) WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *RenderPassDescriptor {
+	defer runtime.KeepAlive(depthAttachment)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setDepthAttachment:"), objref.IDOf(depthAttachment))
 	return rpd
 }
 
 // WithStencilAttachment sets state information for an attachment that stores stencil data.
 func (rpd *RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *RenderPassDescriptor {
+	defer runtime.KeepAlive(stencilAttachment)
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("setStencilAttachment:"), objref.IDOf(stencilAttachment))
 	return rpd
 }
@@ -146,84 +155,98 @@ func (rpd *RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorA
 
 // ColorAttachments returns the color attachments.
 func (rpd *RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachmentDescriptorArray {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("colorAttachments"))
 	return RenderPassColorAttachmentDescriptorArrayFromID(_r)
 }
 
 // DepthAttachment returns the depth attachment.
 func (rpd *RenderPassDescriptor) DepthAttachment() *RenderPassDepthAttachmentDescriptor {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("depthAttachment"))
 	return RenderPassDepthAttachmentDescriptorFromID(_r)
 }
 
 // StencilAttachment returns the stencil attachment.
 func (rpd *RenderPassDescriptor) StencilAttachment() *RenderPassStencilAttachmentDescriptor {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("stencilAttachment"))
 	return RenderPassStencilAttachmentDescriptorFromID(_r)
 }
 
 // RenderTargetArrayLength returns the number of active layers
 func (rpd *RenderPassDescriptor) RenderTargetArrayLength() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("renderTargetArrayLength"))
 	return _r
 }
 
 // ImageblockSampleLength returns the per sample size in bytes of the largest explicit imageblock layout in the renderPass.
 func (rpd *RenderPassDescriptor) ImageblockSampleLength() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("imageblockSampleLength"))
 	return _r
 }
 
 // ThreadgroupMemoryLength returns the per tile size in bytes of the persistent threadgroup memory allocation.
 func (rpd *RenderPassDescriptor) ThreadgroupMemoryLength() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("threadgroupMemoryLength"))
 	return _r
 }
 
 // TileWidth returns the width in pixels of the tile. Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
 func (rpd *RenderPassDescriptor) TileWidth() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("tileWidth"))
 	return _r
 }
 
 // TileHeight returns the height in pixels of the tile. Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
 func (rpd *RenderPassDescriptor) TileHeight() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("tileHeight"))
 	return _r
 }
 
 // DefaultRasterSampleCount returns the raster sample count for the render pass when no attachments are given.
 func (rpd *RenderPassDescriptor) DefaultRasterSampleCount() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("defaultRasterSampleCount"))
 	return _r
 }
 
 // RenderTargetWidth returns the width in pixels to constrain the render target to. Defaults to 0. If non-zero the value must be smaller than or equal to the minimum width of all attachments.
 func (rpd *RenderPassDescriptor) RenderTargetWidth() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("renderTargetWidth"))
 	return _r
 }
 
 // RenderTargetHeight returns the height in pixels to constrain the render target to. Defaults to 0. If non-zero the value must be smaller than or equal to the minimum height of all attachments.
 func (rpd *RenderPassDescriptor) RenderTargetHeight() int {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("renderTargetHeight"))
 	return _r
 }
 
 // SampleBufferAttachments returns an array of sample buffers and associated sample indices.
 func (rpd *RenderPassDescriptor) SampleBufferAttachments() *RenderPassSampleBufferAttachmentDescriptorArray {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("sampleBufferAttachments"))
 	return RenderPassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
 
 // VisibilityResultType specifies if Metal accumulates visibility results between render encoders or resets them.
 func (rpd *RenderPassDescriptor) VisibilityResultType() VisibilityResultType {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[VisibilityResultType](objref.IDOf(rpd), objc.RegisterName("visibilityResultType"))
 	return _r
 }
 
 // SupportColorAttachmentMapping reports whether specifies if the render pass should support color attachment mapping.
 func (rpd *RenderPassDescriptor) SupportColorAttachmentMapping() bool {
+	defer runtime.KeepAlive(rpd)
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("supportColorAttachmentMapping"))
 	return _r
 }

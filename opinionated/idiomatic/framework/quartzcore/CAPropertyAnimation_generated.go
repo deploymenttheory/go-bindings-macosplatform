@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,13 +68,25 @@ func (pa *PropertyAnimation) WithCumulative(cumulative bool) *PropertyAnimation 
 
 // WithValueFunction sets an optional value function that is applied to interpolated values.
 func (pa *PropertyAnimation) WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation {
+	defer runtime.KeepAlive(valueFunction)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
 	return pa
 }
 
 // WithTimingFunction sets an optional timing function defining the pacing of the animation.
 func (pa *PropertyAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation {
+	defer runtime.KeepAlive(timingFunction)
 	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return pa
+}
+
+// WithDelegate sets specifies the receiver’s delegate object.
+func (pa *PropertyAnimation) WithDelegate(delegate AnimationDelegate) *PropertyAnimation {
+	_shim := newAnimationDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pa), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(pa), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return pa
 }
 
@@ -83,6 +98,7 @@ func (pa *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *
 
 // KeyPath returns the key path.
 func (pa *PropertyAnimation) KeyPath() string {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("keyPath"))
 	if _r == 0 {
 		return ""
@@ -92,18 +108,21 @@ func (pa *PropertyAnimation) KeyPath() string {
 
 // IsAdditive reports whether the object is additive.
 func (pa *PropertyAnimation) IsAdditive() bool {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[bool](objref.IDOf(pa), objc.RegisterName("isAdditive"))
 	return _r
 }
 
 // IsCumulative reports whether the object is cumulative.
 func (pa *PropertyAnimation) IsCumulative() bool {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[bool](objref.IDOf(pa), objc.RegisterName("isCumulative"))
 	return _r
 }
 
 // ValueFunction returns the value function.
 func (pa *PropertyAnimation) ValueFunction() *ValueFunction {
+	defer runtime.KeepAlive(pa)
 	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("valueFunction"))
 	return ValueFunctionFromID(_r)
 }

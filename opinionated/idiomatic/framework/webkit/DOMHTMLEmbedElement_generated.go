@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -189,6 +191,7 @@ func (dee *DOMHTMLEmbedElement) WithTextContent(textContent string) *DOMHTMLEmbe
 
 // Align returns the align.
 func (dee *DOMHTMLEmbedElement) Align() string {
+	defer runtime.KeepAlive(dee)
 	_r := objc.Send[objc.ID](objref.IDOf(dee), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -198,12 +201,14 @@ func (dee *DOMHTMLEmbedElement) Align() string {
 
 // Height returns the height.
 func (dee *DOMHTMLEmbedElement) Height() int {
+	defer runtime.KeepAlive(dee)
 	_r := objc.Send[int](objref.IDOf(dee), objc.RegisterName("height"))
 	return _r
 }
 
 // Name returns the name.
 func (dee *DOMHTMLEmbedElement) Name() string {
+	defer runtime.KeepAlive(dee)
 	_r := objc.Send[objc.ID](objref.IDOf(dee), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -213,6 +218,7 @@ func (dee *DOMHTMLEmbedElement) Name() string {
 
 // Src returns the src.
 func (dee *DOMHTMLEmbedElement) Src() string {
+	defer runtime.KeepAlive(dee)
 	_r := objc.Send[objc.ID](objref.IDOf(dee), objc.RegisterName("src"))
 	if _r == 0 {
 		return ""
@@ -222,6 +228,7 @@ func (dee *DOMHTMLEmbedElement) Src() string {
 
 // Type returns the type.
 func (dee *DOMHTMLEmbedElement) Type() string {
+	defer runtime.KeepAlive(dee)
 	_r := objc.Send[objc.ID](objref.IDOf(dee), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -231,6 +238,7 @@ func (dee *DOMHTMLEmbedElement) Type() string {
 
 // Width returns the width.
 func (dee *DOMHTMLEmbedElement) Width() int {
+	defer runtime.KeepAlive(dee)
 	_r := objc.Send[int](objref.IDOf(dee), objc.RegisterName("width"))
 	return _r
 }

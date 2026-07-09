@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterPowerAdjustStructAdopt(id objc.ID) *MTRDevi
 
 // Description returns the object's -description text.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) Description() string {
+	defer runtime.KeepAlive(mdemcpas)
 	return rt.Description(objref.IDOf(mdemcpas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcpas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcpas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcpas)
 	return rt.IsKind(objref.IDOf(mdemcpas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) String() string {
+	defer runtime.KeepAlive(mdemcpas)
 	return rt.Description(objref.IDOf(mdemcpas))
 }
 
@@ -72,48 +80,56 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustStruct() *MTRDeviceEnergyMana
 
 // WithMinPower sets the min power.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMinPower(minPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	defer runtime.KeepAlive(minPower)
 	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMinPower:"), objref.IDOf(minPower))
 	return mdemcpas
 }
 
 // WithMaxPower sets the max power.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxPower(maxPower obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	defer runtime.KeepAlive(maxPower)
 	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMaxPower:"), objref.IDOf(maxPower))
 	return mdemcpas
 }
 
 // WithMinDuration sets the min duration.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMinDuration(minDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	defer runtime.KeepAlive(minDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMinDuration:"), objref.IDOf(minDuration))
 	return mdemcpas
 }
 
 // WithMaxDuration sets the max duration.
 func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxDuration(maxDuration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustStruct {
+	defer runtime.KeepAlive(maxDuration)
 	objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("setMaxDuration:"), objref.IDOf(maxDuration))
 	return mdemcpas
 }
 
 // MinPower returns the min power.
-func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinPower() obj.Object {
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("minPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxPower returns the max power.
-func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxPower() obj.Object {
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxPower() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("maxPower"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinDuration returns the min duration.
-func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinDuration() obj.Object {
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("minDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxDuration returns the max duration.
-func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxDuration() obj.Object {
+func (mdemcpas *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxDuration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcpas)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcpas), objc.RegisterName("maxDuration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -80,18 +82,21 @@ func (prsmu *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ..
 
 // WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
 func (prsmu *PaymentRequestShippingMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	defer runtime.KeepAlive(recurringPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 	return prsmu
 }
 
 // WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
 func (prsmu *PaymentRequestShippingMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	defer runtime.KeepAlive(automaticReloadPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 	return prsmu
 }
 
 // WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
 func (prsmu *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	defer runtime.KeepAlive(deferredPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 	return prsmu
 }

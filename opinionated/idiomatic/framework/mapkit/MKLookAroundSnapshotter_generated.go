@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,34 @@ func lookAroundSnapshotterAdopt(id objc.ID) *LookAroundSnapshotter {
 
 // Description returns the object's -description text.
 func (las *LookAroundSnapshotter) Description() string {
+	defer runtime.KeepAlive(las)
 	return rt.Description(objref.IDOf(las))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (las *LookAroundSnapshotter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(las)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(las), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (las *LookAroundSnapshotter) IsKind(className string) bool {
+	defer runtime.KeepAlive(las)
 	return rt.IsKind(objref.IDOf(las), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (las *LookAroundSnapshotter) String() string {
+	defer runtime.KeepAlive(las)
 	return rt.Description(objref.IDOf(las))
 }
 
 // NewLookAroundSnapshotterWithSceneOptions create a new snapshotter object with the scene and options you specify.
 func NewLookAroundSnapshotterWithSceneOptions(scene *LookAroundScene, options *LookAroundSnapshotOptions) *LookAroundSnapshotter {
+	defer runtime.KeepAlive(scene)
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSnapshotter")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:options:"), objref.IDOf(scene), objref.IDOf(options))
 	return lookAroundSnapshotterAdopt(_id)
@@ -80,6 +88,7 @@ func NewLookAroundSnapshotterWithSceneOptions(scene *LookAroundScene, options *L
 //
 // GetSnapshot blocks until the operation completes or ctx is cancelled.
 func (las *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *LookAroundSnapshot, err error) {
+	defer runtime.KeepAlive(las)
 	type _result struct {
 		val *LookAroundSnapshot
 		err error
@@ -103,6 +112,7 @@ func (las *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *Look
 
 // Cancel cancels an in-progress snapshot request.
 func (las *LookAroundSnapshotter) Cancel() {
+	defer runtime.KeepAlive(las)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("cancel"))
 	})
@@ -111,6 +121,7 @@ func (las *LookAroundSnapshotter) Cancel() {
 
 // IsLoading reports whether the object is loading.
 func (las *LookAroundSnapshotter) IsLoading() bool {
+	defer runtime.KeepAlive(las)
 	_r := objc.Send[bool](objref.IDOf(las), objc.RegisterName("isLoading"))
 	return _r
 }

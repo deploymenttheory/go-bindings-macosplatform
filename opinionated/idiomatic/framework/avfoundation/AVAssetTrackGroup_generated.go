@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetTrackGroupAdopt(id objc.ID) *AssetTrackGroup {
 
 // Description returns the object's -description text.
 func (atg *AssetTrackGroup) Description() string {
+	defer runtime.KeepAlive(atg)
 	return rt.Description(objref.IDOf(atg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (atg *AssetTrackGroup) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(atg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(atg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (atg *AssetTrackGroup) IsKind(className string) bool {
+	defer runtime.KeepAlive(atg)
 	return rt.IsKind(objref.IDOf(atg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (atg *AssetTrackGroup) String() string {
+	defer runtime.KeepAlive(atg)
 	return rt.Description(objref.IDOf(atg))
 }
 
@@ -76,6 +83,7 @@ func NewAssetTrackGroup() *AssetTrackGroup {
 //
 // TrackIDs returns the collection as a Go slice.
 func (atg *AssetTrackGroup) TrackIDs() []obj.Object {
+	defer runtime.KeepAlive(atg)
 	_arr := objc.Send[objc.ID](objref.IDOf(atg), objc.RegisterName("trackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

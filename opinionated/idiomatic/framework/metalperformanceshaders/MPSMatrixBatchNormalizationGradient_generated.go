@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -108,36 +110,42 @@ func (mbng *MatrixBatchNormalizationGradient) WithLabel(label string) *MatrixBat
 
 // NeuronParameterA returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
 // NeuronParameterB returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
 // NeuronParameterC returns getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (mbng *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("neuronParameterC"))
 	return _r
 }
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array.
 func (mbng *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the number of feature channels in the input vectors.
 func (mbng *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[int](objref.IDOf(mbng), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Epsilon returns a small term added to the variance when normalizing the input.
 func (mbng *MatrixBatchNormalizationGradient) Epsilon() float32 {
+	defer runtime.KeepAlive(mbng)
 	_r := objc.Send[float32](objref.IDOf(mbng), objc.RegisterName("epsilon"))
 	return _r
 }

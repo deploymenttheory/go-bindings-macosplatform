@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func playerItemAccessLogEventAdopt(id objc.ID) *PlayerItemAccessLogEvent {
 
 // Description returns the object's -description text.
 func (piale *PlayerItemAccessLogEvent) Description() string {
+	defer runtime.KeepAlive(piale)
 	return rt.Description(objref.IDOf(piale))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piale *PlayerItemAccessLogEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piale)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piale), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piale *PlayerItemAccessLogEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(piale)
 	return rt.IsKind(objref.IDOf(piale), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piale *PlayerItemAccessLogEvent) String() string {
+	defer runtime.KeepAlive(piale)
 	return rt.Description(objref.IDOf(piale))
 }
 
@@ -74,24 +82,28 @@ func NewPlayerItemAccessLogEvent() *PlayerItemAccessLogEvent {
 
 // NumberOfSegmentsDownloaded returns a count of media segments downloaded. Value is negative if unknown. A count of media segments downloaded from the server to this client. Corresponds to "sc-count". This property is not observable. This property is deprecated. Use numberOfMediaRequests instead.
 func (piale *PlayerItemAccessLogEvent) NumberOfSegmentsDownloaded() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("numberOfSegmentsDownloaded"))
 	return _r
 }
 
 // NumberOfMediaRequests returns a count of media read requests. Value is negative if unknown. A count of media read requests from the server to this client. Corresponds to "sc-count". For HTTP live Streaming, a count of media segments downloaded from the server to this client. For progressive-style HTTP media downloads, a count of HTTP GET (byte-range) requests for the resource. This property is not observable.
 func (piale *PlayerItemAccessLogEvent) NumberOfMediaRequests() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("numberOfMediaRequests"))
 	return _r
 }
 
 // PlaybackStartDate returns the date/time at which playback began for this event. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
-func (piale *PlayerItemAccessLogEvent) PlaybackStartDate() obj.Object {
+func (piale *PlayerItemAccessLogEvent) PlaybackStartDate() time.Time {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[objc.ID](objref.IDOf(piale), objc.RegisterName("playbackStartDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // URI returns the URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) URI() string {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[objc.ID](objref.IDOf(piale), objc.RegisterName("URI"))
 	if _r == 0 {
 		return ""
@@ -101,6 +113,7 @@ func (piale *PlayerItemAccessLogEvent) URI() string {
 
 // ServerAddress returns the IP address of the server that was the source of the last delivered media segment. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) ServerAddress() string {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[objc.ID](objref.IDOf(piale), objc.RegisterName("serverAddress"))
 	if _r == 0 {
 		return ""
@@ -110,12 +123,14 @@ func (piale *PlayerItemAccessLogEvent) ServerAddress() string {
 
 // NumberOfServerAddressChanges returns a count of changes to the property serverAddress, see above, over the last uninterrupted period of playback. Value is negative if unknown. Corresponds to "s-ip-changes". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) NumberOfServerAddressChanges() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("numberOfServerAddressChanges"))
 	return _r
 }
 
 // PlaybackSessionID returns a GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) PlaybackSessionID() string {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[objc.ID](objref.IDOf(piale), objc.RegisterName("playbackSessionID"))
 	if _r == 0 {
 		return ""
@@ -125,108 +140,126 @@ func (piale *PlayerItemAccessLogEvent) PlaybackSessionID() string {
 
 // PlaybackStartOffset returns an offset into the playlist where the last uninterrupted period of playback began. Measured in seconds. Value is negative if unknown. Corresponds to "c-start-time". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) PlaybackStartOffset() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("playbackStartOffset"))
 	return _r
 }
 
 // SegmentsDownloadedDuration returns the accumulated duration of the media downloaded. Measured in seconds. Value is negative if unknown. Corresponds to "c-duration-downloaded". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) SegmentsDownloadedDuration() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("segmentsDownloadedDuration"))
 	return _r
 }
 
 // DurationWatched returns the accumulated duration of the media played. Measured in seconds. Value is negative if unknown. Corresponds to "c-duration-watched". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) DurationWatched() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("durationWatched"))
 	return _r
 }
 
 // NumberOfStalls returns the total number of playback stalls encountered. Value is negative if unknown. Corresponds to "c-stalls". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) NumberOfStalls() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("numberOfStalls"))
 	return _r
 }
 
 // NumberOfBytesTransferred returns the accumulated number of bytes transferred. Value is negative if unknown. Corresponds to "bytes". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) NumberOfBytesTransferred() int64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int64](objref.IDOf(piale), objc.RegisterName("numberOfBytesTransferred"))
 	return _r
 }
 
 // TransferDuration returns the accumulated duration of active network transfer of bytes. Measured in seconds. Value is negative if unknown. Corresponds to "c-transfer-duration". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) TransferDuration() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("transferDuration"))
 	return _r
 }
 
 // ObservedBitrate returns the empirical throughput across all media downloaded. Measured in bits per second. Value is negative if unknown. Corresponds to "c-observed-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) ObservedBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("observedBitrate"))
 	return _r
 }
 
 // IndicatedBitrate returns the throughput required to play the stream, as advertised by the server. Measured in bits per second. Value is negative if unknown. Corresponds to "sc-indicated-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) IndicatedBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("indicatedBitrate"))
 	return _r
 }
 
 // IndicatedAverageBitrate returns average throughput required to play the stream, as advertised by the server. Measured in bits per second. Value is negative if unknown. Corresponds to "sc-indicated-avg-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) IndicatedAverageBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("indicatedAverageBitrate"))
 	return _r
 }
 
 // AverageVideoBitrate returns the average bitrate of video track if it is unmuxed. Average bitrate of combined content if muxed. Measured in bits per second. Value is negative if unknown. Corresponds to "c-avg-video-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) AverageVideoBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("averageVideoBitrate"))
 	return _r
 }
 
 // AverageAudioBitrate returns the average bitrate of audio track. This is not available if audio is muxed with video. Measured in bits per second. Value is negative if unknown. Corresponds to "c-avg-audio-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) AverageAudioBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("averageAudioBitrate"))
 	return _r
 }
 
 // NumberOfDroppedVideoFrames returns the total number of dropped video frames. Value is negative if unknown. Corresponds to "c-frames-dropped". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) NumberOfDroppedVideoFrames() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("numberOfDroppedVideoFrames"))
 	return _r
 }
 
 // StartupTime returns the accumulated duration until player item is ready to play. Measured in seconds. Value is negative if unknown. Corresponds to "c-startup-time". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) StartupTime() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("startupTime"))
 	return _r
 }
 
 // DownloadOverdue returns the total number of times the download of the segments took too long. Value is negative if unknown. Corresponds to "c-overdue". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) DownloadOverdue() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("downloadOverdue"))
 	return _r
 }
 
 // ObservedMaxBitrate returns maximum observed segment download bit rate. Value is negative if unknown. Corresponds to "c-observed-max-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) ObservedMaxBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("observedMaxBitrate"))
 	return _r
 }
 
 // ObservedMinBitrate returns minimum observed segment download bit rate. Value is negative if unknown. Corresponds to "c-observed-min-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) ObservedMinBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("observedMinBitrate"))
 	return _r
 }
 
 // ObservedBitrateStandardDeviation returns standard deviation of observed segment download bit rates. Value is negative if unknown. Corresponds to "c-observed-bitrate-sd". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) ObservedBitrateStandardDeviation() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("observedBitrateStandardDeviation"))
 	return _r
 }
 
 // PlaybackType returns playback type (LIVE, VOD, FILE). If nil is returned the playback type is unknown. Corresponds to "s-playback-type". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) PlaybackType() string {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[objc.ID](objref.IDOf(piale), objc.RegisterName("playbackType"))
 	if _r == 0 {
 		return ""
@@ -236,12 +269,14 @@ func (piale *PlayerItemAccessLogEvent) PlaybackType() string {
 
 // MediaRequestsWWAN returns number of network read requests over WWAN. Value is negative if unknown. Corresponds to "sc-wwan-count". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) MediaRequestsWWAN() int {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[int](objref.IDOf(piale), objc.RegisterName("mediaRequestsWWAN"))
 	return _r
 }
 
 // SwitchBitrate returns bandwidth that caused us to switch (up or down). Value is negative if unknown. Corresponds to "c-switch-bitrate". This property is not observable.
 func (piale *PlayerItemAccessLogEvent) SwitchBitrate() float64 {
+	defer runtime.KeepAlive(piale)
 	_r := objc.Send[float64](objref.IDOf(piale), objc.RegisterName("switchBitrate"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func mediaItemArtworkAdopt(id objc.ID) *MediaItemArtwork {
 
 // Description returns the object's -description text.
 func (mia *MediaItemArtwork) Description() string {
+	defer runtime.KeepAlive(mia)
 	return rt.Description(objref.IDOf(mia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mia *MediaItemArtwork) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mia)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mia *MediaItemArtwork) IsKind(className string) bool {
+	defer runtime.KeepAlive(mia)
 	return rt.IsKind(objref.IDOf(mia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mia *MediaItemArtwork) String() string {
+	defer runtime.KeepAlive(mia)
 	return rt.Description(objref.IDOf(mia))
 }
 
@@ -75,18 +82,21 @@ func NewMediaItemArtwork() *MediaItemArtwork {
 
 // ImageWithSize returns the artwork image for an item at the given size.
 func (mia *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) obj.Object {
+	defer runtime.KeepAlive(mia)
 	_r := objc.Send[objc.ID](objref.IDOf(mia), objc.RegisterName("imageWithSize:"), size)
 	return obj.Wrap(_r)
 }
 
 // Bounds returns the bounds.
 func (mia *MediaItemArtwork) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(mia)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mia), objc.RegisterName("bounds"))
 	return _r
 }
 
 // ImageCropRect returns the image crop rect.
 func (mia *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(mia)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mia), objc.RegisterName("imageCropRect"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package externalaccessory
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accessoryManagerAdopt(id objc.ID) *AccessoryManager {
 
 // Description returns the object's -description text.
 func (am *AccessoryManager) Description() string {
+	defer runtime.KeepAlive(am)
 	return rt.Description(objref.IDOf(am))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (am *AccessoryManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(am)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(am), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (am *AccessoryManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(am)
 	return rt.IsKind(objref.IDOf(am), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (am *AccessoryManager) String() string {
+	defer runtime.KeepAlive(am)
 	return rt.Description(objref.IDOf(am))
 }
 

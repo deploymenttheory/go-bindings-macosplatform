@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func colorPickerAdopt(id objc.ID) *ColorPicker {
 
 // Description returns the object's -description text.
 func (cp *ColorPicker) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *ColorPicker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *ColorPicker) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *ColorPicker) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // NewColorPickerWithPickerMaskColorPanel initializes the color picker with the specified color panel and color picker mode mask.
 func NewColorPickerWithPickerMaskColorPanel(mask int, owningColorPanel *ColorPanel) *ColorPicker {
+	defer runtime.KeepAlive(owningColorPanel)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorPicker")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPickerMask:colorPanel:"), mask, objref.IDOf(owningColorPanel))
 	return colorPickerAdopt(_id)
@@ -76,6 +84,9 @@ func NewColorPickerWithPickerMaskColorPanel(mask int, owningColorPanel *ColorPan
 
 // InsertNewButtonImageIn sets the image used for the specified button cell.
 func (cp *ColorPicker) InsertNewButtonImageIn(newButtonImage *Image, buttonCell *ButtonCell) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(newButtonImage)
+	defer runtime.KeepAlive(buttonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("insertNewButtonImage:in:"), objref.IDOf(newButtonImage), objref.IDOf(buttonCell))
 	})
@@ -84,6 +95,8 @@ func (cp *ColorPicker) InsertNewButtonImageIn(newButtonImage *Image, buttonCell 
 
 // ViewSizeChanged overriden to respond to a size change.
 func (cp *ColorPicker) ViewSizeChanged(sender obj.Object) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("viewSizeChanged:"), objref.IDOf(sender))
 	})
@@ -92,6 +105,8 @@ func (cp *ColorPicker) ViewSizeChanged(sender obj.Object) {
 
 // AttachColorList overriden to attach a color list to a color picker.
 func (cp *ColorPicker) AttachColorList(colorList *ColorList) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(colorList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
 	})
@@ -100,6 +115,8 @@ func (cp *ColorPicker) AttachColorList(colorList *ColorList) {
 
 // DetachColorList overriden to detach a color list from a color picker.
 func (cp *ColorPicker) DetachColorList(colorList *ColorList) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(colorList)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
 	})
@@ -108,6 +125,7 @@ func (cp *ColorPicker) DetachColorList(colorList *ColorList) {
 
 // SetMode overriden to set the color picker’s mode.
 func (cp *ColorPicker) SetMode(mode ColorPanelMode) {
+	defer runtime.KeepAlive(cp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMode:"), mode)
 	})
@@ -116,18 +134,21 @@ func (cp *ColorPicker) SetMode(mode ColorPanelMode) {
 
 // ColorPanel returns the color panel.
 func (cp *ColorPicker) ColorPanel() *ColorPanel {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("colorPanel"))
 	return ColorPanelFromID(_r)
 }
 
 // ProvideNewButtonImage returns the provide new button image.
 func (cp *ColorPicker) ProvideNewButtonImage() *Image {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("provideNewButtonImage"))
 	return ImageFromID(_r)
 }
 
 // ButtonToolTip returns the button tool tip.
 func (cp *ColorPicker) ButtonToolTip() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("buttonToolTip"))
 	if _r == 0 {
 		return ""
@@ -137,6 +158,7 @@ func (cp *ColorPicker) ButtonToolTip() string {
 
 // MinContentSize returns the min content size.
 func (cp *ColorPicker) MinContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cp), objc.RegisterName("minContentSize"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func unitAdopt(id objc.ID) *Unit {
 
 // Description returns the object's -description text.
 func (u *Unit) Description() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (u *Unit) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (u *Unit) IsKind(className string) bool {
+	defer runtime.KeepAlive(u)
 	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (u *Unit) String() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
@@ -74,12 +81,14 @@ func NewUnit() *Unit {
 
 // IsNull reports whether returns a Boolean value indicating whether the unit is null.
 func (u *Unit) IsNull() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isNull"))
 	return _r
 }
 
 // UnitString returns a unique string representation for the unit that could be used with +unitFromString:
 func (u *Unit) UnitString() string {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitString"))
 	if _r == 0 {
 		return ""
@@ -89,24 +98,30 @@ func (u *Unit) UnitString() string {
 
 // UnitMultipliedByUnit creates a complex unit by multiplying the receiving unit with another unit.
 func (u *Unit) UnitMultipliedByUnit(unit *Unit) *Unit {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(unit)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitMultipliedByUnit:"), objref.IDOf(unit))
 	return UnitFromID(_r)
 }
 
 // UnitDividedByUnit creates a complex unit by dividing the receiving unit by another unit.
 func (u *Unit) UnitDividedByUnit(unit *Unit) *Unit {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(unit)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitDividedByUnit:"), objref.IDOf(unit))
 	return UnitFromID(_r)
 }
 
 // UnitRaisedToPower creates a complex unit by raising the unit to the given power.
 func (u *Unit) UnitRaisedToPower(power int) *Unit {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("unitRaisedToPower:"), power)
 	return UnitFromID(_r)
 }
 
 // ReciprocalUnit returns a complex unit representing the unit’s reciprocal.
 func (u *Unit) ReciprocalUnit() *Unit {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("reciprocalUnit"))
 	return UnitFromID(_r)
 }

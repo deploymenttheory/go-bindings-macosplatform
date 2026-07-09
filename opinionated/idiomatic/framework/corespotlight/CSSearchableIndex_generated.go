@@ -6,6 +6,7 @@ package corespotlight
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func searchableIndexAdopt(id objc.ID) *SearchableIndex {
 
 // Description returns the object's -description text.
 func (si *SearchableIndex) Description() string {
+	defer runtime.KeepAlive(si)
 	return rt.Description(objref.IDOf(si))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (si *SearchableIndex) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(si)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(si), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (si *SearchableIndex) IsKind(className string) bool {
+	defer runtime.KeepAlive(si)
 	return rt.IsKind(objref.IDOf(si), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (si *SearchableIndex) String() string {
+	defer runtime.KeepAlive(si)
 	return rt.Description(objref.IDOf(si))
 }
 
@@ -78,6 +84,7 @@ func NewSearchableIndexWithName(name string) *SearchableIndex {
 
 // NewSearchableIndexWithNameProtectionClass returns an on-device index with the specified name and data protection class.
 func NewSearchableIndexWithNameProtectionClass(name string, protectionClass obj.Object) *SearchableIndex {
+	defer runtime.KeepAlive(protectionClass)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableIndex")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:protectionClass:"), purego.NSString(name), objref.IDOf(protectionClass))
 	return searchableIndexAdopt(_id)
@@ -87,6 +94,7 @@ func NewSearchableIndexWithNameProtectionClass(name string, protectionClass obj.
 //
 // IndexSearchableItems blocks until the operation completes or ctx is cancelled.
 func (si *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*SearchableItem) error {
+	defer runtime.KeepAlive(si)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -106,6 +114,7 @@ func (si *SearchableIndex) IndexSearchableItems(ctx context.Context, items []*Se
 //
 // DeleteSearchableItemsWithIdentifiers blocks until the operation completes or ctx is cancelled.
 func (si *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers []string) error {
+	defer runtime.KeepAlive(si)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -125,6 +134,7 @@ func (si *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Cont
 //
 // DeleteSearchableItemsWithDomainIdentifiers blocks until the operation completes or ctx is cancelled.
 func (si *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers []string) error {
+	defer runtime.KeepAlive(si)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -144,6 +154,7 @@ func (si *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx contex
 //
 // DeleteAllSearchableItems blocks until the operation completes or ctx is cancelled.
 func (si *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
+	defer runtime.KeepAlive(si)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -161,20 +172,22 @@ func (si *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 
 // BeginIndexBatch begins a batch of updates to an index.
 func (si *SearchableIndex) BeginIndexBatch() {
+	defer runtime.KeepAlive(si)
 	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("beginIndexBatch"))
 }
 
 // EndIndexBatchWithExpectedClientStateNewClientState ends a batch of index updates and stores the specified state information.
 //
 // EndIndexBatchWithExpectedClientStateNewClientState blocks until the operation completes or ctx is cancelled.
-func (si *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState obj.Object, newClientState obj.Object) error {
+func (si *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState []byte, newClientState []byte) error {
+	defer runtime.KeepAlive(si)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:"), objref.IDOf(expectedClientState), objref.IDOf(newClientState), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("endIndexBatchWithExpectedClientState:newClientState:completionHandler:"), rt.BytesToNSData(expectedClientState), rt.BytesToNSData(newClientState), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -186,14 +199,15 @@ func (si *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ct
 // EndIndexBatchWithClientState ends a batch of index updates and stores the specified state information.
 //
 // EndIndexBatchWithClientState blocks until the operation completes or ctx is cancelled.
-func (si *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState obj.Object) error {
+func (si *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState []byte) error {
+	defer runtime.KeepAlive(si)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("endIndexBatchWithClientState:completionHandler:"), objref.IDOf(clientState), _block)
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("endIndexBatchWithClientState:completionHandler:"), rt.BytesToNSData(clientState), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -206,6 +220,7 @@ func (si *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, cli
 //
 // FetchLastClientState blocks until the operation completes or ctx is cancelled.
 func (si *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(si)
 	type _result struct {
 		val obj.Object
 		err error
@@ -231,6 +246,8 @@ func (si *SearchableIndex) FetchLastClientState(ctx context.Context) (result obj
 //
 // FetchDataForBundleIdentifierItemIdentifierContentType blocks until the operation completes or ctx is cancelled.
 func (si *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(si)
+	defer runtime.KeepAlive(contentType)
 	type _result struct {
 		val obj.Object
 		err error

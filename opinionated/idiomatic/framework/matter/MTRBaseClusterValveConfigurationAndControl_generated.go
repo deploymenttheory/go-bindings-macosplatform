@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterValveConfigurationAndControlAdopt(id objc.ID) *MTRBaseCluster
 
 // NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterValveConfigurationAndControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterValveConfigurationAndControlAdopt(_id)
@@ -58,6 +62,7 @@ func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(devi
 //
 // ReadAttributeOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -83,6 +88,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeOpenDura
 //
 // SubscribeAttributeOpenDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpenDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +115,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpe
 //
 // ReadAttributeDefaultOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultO
 //
 // SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOpenDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +168,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDef
 //
 // ReadAttributeAutoCloseTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +194,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAutoClos
 //
 // SubscribeAttributeAutoCloseTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAutoCloseTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +221,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAut
 //
 // ReadAttributeRemainingDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +247,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeRemainin
 //
 // SubscribeAttributeRemainingDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRemainingDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +274,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRem
 //
 // ReadAttributeCurrentStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +300,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentS
 //
 // SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +327,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCur
 //
 // ReadAttributeTargetStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +353,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetSt
 //
 // SubscribeAttributeTargetStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -358,6 +380,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTar
 //
 // ReadAttributeCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -383,6 +406,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentL
 //
 // SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCurrentLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -408,6 +433,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCur
 //
 // ReadAttributeTargetLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -433,6 +459,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetLe
 //
 // SubscribeAttributeTargetLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTargetLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -458,6 +486,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTar
 //
 // ReadAttributeDefaultOpenLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -483,6 +512,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultO
 //
 // SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDefaultOpenLevelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -508,6 +539,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDef
 //
 // ReadAttributeValveFaultWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeValveFaultWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -533,6 +565,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeValveFau
 //
 // SubscribeAttributeValveFaultWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeValveFaultWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -558,6 +592,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeVal
 //
 // ReadAttributeLevelStepWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeLevelStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -583,6 +618,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeLevelSte
 //
 // SubscribeAttributeLevelStepWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLevelStepWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -608,6 +645,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLev
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -633,6 +671,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeGenerate
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -658,6 +698,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGen
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -683,6 +724,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAccepted
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -708,6 +751,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcc
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -733,6 +777,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAttribut
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -758,6 +804,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAtt
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -783,6 +830,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeFeatureM
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -808,6 +857,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFea
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
 	type _result struct {
 		val obj.Object
 		err error
@@ -833,6 +883,8 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeClusterR
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcvcac)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

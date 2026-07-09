@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vectorAdopt(id objc.ID) *Vector {
 
 // Description returns the object's -description text.
 func (v_ *Vector) Description() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (v_ *Vector) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(v_)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (v_ *Vector) IsKind(className string) bool {
+	defer runtime.KeepAlive(v_)
 	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (v_ *Vector) String() string {
+	defer runtime.KeepAlive(v_)
 	return rt.Description(objref.IDOf(v_))
 }
 
@@ -82,6 +89,8 @@ func NewVectorWithRTheta(r float64, theta float64) *Vector {
 
 // NewVectorWithVectorHeadTail creates a new vector in Cartesian coordinate space.
 func NewVectorWithVectorHeadTail(head *Point, tail *Point) *Vector {
+	defer runtime.KeepAlive(head)
+	defer runtime.KeepAlive(tail)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVectorHead:tail:"), objref.IDOf(head), objref.IDOf(tail))
 	return vectorAdopt(_id)
@@ -89,36 +98,42 @@ func NewVectorWithVectorHeadTail(head *Point, tail *Point) *Vector {
 
 // X returns signed projection on X-axis, or X component of the vector. Sign determines direction the vector is facing in X direction.
 func (v_ *Vector) X() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("x"))
 	return _r
 }
 
 // Y returns signed projection on Y-axis, or Y component of the vector. Sign determines direction the vector is facing in Y direction.
 func (v_ *Vector) Y() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("y"))
 	return _r
 }
 
 // R returns radius, or absolute value, or length of the vector.
 func (v_ *Vector) R() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("r"))
 	return _r
 }
 
 // Theta returns angle between the vector direction and positive direction of X axis.
 func (v_ *Vector) Theta() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("theta"))
 	return _r
 }
 
 // Length returns a length, or absolute value, of the vector.
 func (v_ *Vector) Length() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("length"))
 	return _r
 }
 
 // SquaredLength returns a length ^ 2 of a vector.
 func (v_ *Vector) SquaredLength() float64 {
+	defer runtime.KeepAlive(v_)
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("squaredLength"))
 	return _r
 }

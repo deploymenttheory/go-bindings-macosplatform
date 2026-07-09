@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -52,6 +54,7 @@ func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSupers
 
 // BaseExpression returns the base expression.
 func (mess *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
+	defer runtime.KeepAlive(mess)
 	_r := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
@@ -60,6 +63,7 @@ func (mess *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
 //
 // SubscriptExpressions returns the collection as a Go slice.
 func (mess *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
+	defer runtime.KeepAlive(mess)
 	_arr := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("subscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
@@ -68,6 +72,7 @@ func (mess *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpressi
 //
 // SuperscriptExpressions returns the collection as a Go slice.
 func (mess *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {
+	defer runtime.KeepAlive(mess)
 	_arr := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("superscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }

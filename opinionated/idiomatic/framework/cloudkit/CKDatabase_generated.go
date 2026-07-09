@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func databaseAdopt(id objc.ID) *Database {
 
 // Description returns the object's -description text.
 func (d *Database) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Database) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Database) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Database) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
@@ -77,11 +83,14 @@ func NewDatabase() *Database {
 
 // AddOperation executes the specified operation in the current database.
 func (d *Database) AddOperation(operation *DatabaseOperation) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(operation)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
 // DatabaseScope returns the database scope.
 func (d *Database) DatabaseScope() DatabaseScope {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[DatabaseScope](objref.IDOf(d), objc.RegisterName("databaseScope"))
 	return _r
 }
@@ -90,6 +99,8 @@ func (d *Database) DatabaseScope() DatabaseScope {
 //
 // FetchRecordWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) FetchRecordWithID(ctx context.Context, recordID *RecordID) (result *Record, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(recordID)
 	type _result struct {
 		val *Record
 		err error
@@ -115,6 +126,8 @@ func (d *Database) FetchRecordWithID(ctx context.Context, recordID *RecordID) (r
 //
 // SaveRecord blocks until the operation completes or ctx is cancelled.
 func (d *Database) SaveRecord(ctx context.Context, record *Record) (result *Record, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(record)
 	type _result struct {
 		val *Record
 		err error
@@ -140,6 +153,8 @@ func (d *Database) SaveRecord(ctx context.Context, record *Record) (result *Reco
 //
 // DeleteRecordWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) DeleteRecordWithID(ctx context.Context, recordID *RecordID) (result *RecordID, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(recordID)
 	type _result struct {
 		val *RecordID
 		err error
@@ -165,6 +180,9 @@ func (d *Database) DeleteRecordWithID(ctx context.Context, recordID *RecordID) (
 //
 // PerformQueryInZoneWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) PerformQueryInZoneWithID(ctx context.Context, query *Query, zoneID *RecordZoneID) (result obj.Object, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(query)
+	defer runtime.KeepAlive(zoneID)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +208,7 @@ func (d *Database) PerformQueryInZoneWithID(ctx context.Context, query *Query, z
 //
 // FetchAllRecordZones blocks until the operation completes or ctx is cancelled.
 func (d *Database) FetchAllRecordZones(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(d)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +234,8 @@ func (d *Database) FetchAllRecordZones(ctx context.Context) (result obj.Object, 
 //
 // FetchRecordZoneWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (result *RecordZone, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(zoneID)
 	type _result struct {
 		val *RecordZone
 		err error
@@ -240,6 +261,8 @@ func (d *Database) FetchRecordZoneWithID(ctx context.Context, zoneID *RecordZone
 //
 // SaveRecordZone blocks until the operation completes or ctx is cancelled.
 func (d *Database) SaveRecordZone(ctx context.Context, zone *RecordZone) (result *RecordZone, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(zone)
 	type _result struct {
 		val *RecordZone
 		err error
@@ -265,6 +288,8 @@ func (d *Database) SaveRecordZone(ctx context.Context, zone *RecordZone) (result
 //
 // DeleteRecordZoneWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZoneID) (result *RecordZoneID, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(zoneID)
 	type _result struct {
 		val *RecordZoneID
 		err error
@@ -290,6 +315,8 @@ func (d *Database) DeleteRecordZoneWithID(ctx context.Context, zoneID *RecordZon
 //
 // FetchSubscriptionWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (result *Subscription, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(subscriptionID)
 	type _result struct {
 		val *Subscription
 		err error
@@ -315,6 +342,7 @@ func (d *Database) FetchSubscriptionWithID(ctx context.Context, subscriptionID o
 //
 // FetchAllSubscriptions blocks until the operation completes or ctx is cancelled.
 func (d *Database) FetchAllSubscriptions(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(d)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +368,8 @@ func (d *Database) FetchAllSubscriptions(ctx context.Context) (result obj.Object
 //
 // SaveSubscription blocks until the operation completes or ctx is cancelled.
 func (d *Database) SaveSubscription(ctx context.Context, subscription *Subscription) (result *Subscription, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(subscription)
 	type _result struct {
 		val *Subscription
 		err error
@@ -365,6 +395,8 @@ func (d *Database) SaveSubscription(ctx context.Context, subscription *Subscript
 //
 // DeleteSubscriptionWithID blocks until the operation completes or ctx is cancelled.
 func (d *Database) DeleteSubscriptionWithID(ctx context.Context, subscriptionID obj.Object) (result string, err error) {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(subscriptionID)
 	type _result struct {
 		val string
 		err error

@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,41 +51,49 @@ func tLVRecordAdopt(id objc.ID) *TLVRecord {
 
 // Description returns the object's -description text.
 func (tr *TLVRecord) Description() string {
+	defer runtime.KeepAlive(tr)
 	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tr *TLVRecord) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tr *TLVRecord) IsKind(className string) bool {
+	defer runtime.KeepAlive(tr)
 	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tr *TLVRecord) String() string {
+	defer runtime.KeepAlive(tr)
 	return rt.Description(objref.IDOf(tr))
 }
 
 // Tag returns tag value of the record.
 func (tr *TLVRecord) Tag() uint64 {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[uint64](objref.IDOf(tr), objc.RegisterName("tag"))
 	return _r
 }
 
 // Value returns value field of the record.
-func (tr *TLVRecord) Value() obj.Object {
+func (tr *TLVRecord) Value() []byte {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Data returns data object containing whole encoded record, including tag, length and value.
-func (tr *TLVRecord) Data() obj.Object {
+func (tr *TLVRecord) Data() []byte {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // isTLVRecord marks TLVRecord — and, by embedding promotion, its

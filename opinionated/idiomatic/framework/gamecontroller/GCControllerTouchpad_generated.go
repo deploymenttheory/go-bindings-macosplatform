@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -89,29 +91,34 @@ func (ct *ControllerTouchpad) WithUnmappedLocalizedName(unmappedLocalizedName st
 
 // SetValueForXAxisYAxisTouchDownButtonValue sets the input values of a snapshot of a touchpad.
 func (ct *ControllerTouchpad) SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32) {
+	defer runtime.KeepAlive(ct)
 	objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("setValueForXAxis:yAxis:touchDown:buttonValue:"), xAxis, yAxis, touchDown, buttonValue)
 }
 
 // Button returns button is the button built into the touch surface.
 func (ct *ControllerTouchpad) Button() *ControllerButtonInput {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("button"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // TouchSurface returns the touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched.
 func (ct *ControllerTouchpad) TouchSurface() *ControllerDirectionPad {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("touchSurface"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // TouchState indicates the current state of the touch event on the touchpad.
 func (ct *ControllerTouchpad) TouchState() TouchState {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[TouchState](objref.IDOf(ct), objc.RegisterName("touchState"))
 	return _r
 }
 
 // ReportsAbsoluteTouchSurfaceValues reports whether the touchpad can use the raw position values of its surface as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If false; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If true; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is true, meaning the touch surface's raw positional values are reported.
 func (ct *ControllerTouchpad) ReportsAbsoluteTouchSurfaceValues() bool {
+	defer runtime.KeepAlive(ct)
 	_r := objc.Send[bool](objref.IDOf(ct), objc.RegisterName("reportsAbsoluteTouchSurfaceValues"))
 	return _r
 }

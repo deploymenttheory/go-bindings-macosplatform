@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -60,13 +62,15 @@ func (t *Text) WithExtrusionDepth(extrusionDepth float64) *Text {
 }
 
 // WithString sets the string object whose text the geometry represents.
-func (t *Text) WithString(string_ obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), objref.IDOf(string_))
+func (t *Text) WithString(str obj.Object) *Text {
+	defer runtime.KeepAlive(str)
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), objref.IDOf(str))
 	return t
 }
 
 // WithFont sets the font that SceneKit uses to create geometry from the text.
 func (t *Text) WithFont(font obj.Object) *Text {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return t
 }
@@ -109,6 +113,7 @@ func (t *Text) WithChamferSegmentCount(chamferSegmentCount int) *Text {
 
 // WithChamferProfile sets a path that determines the cross-sectional contour of each chamfered edge.
 func (t *Text) WithChamferProfile(chamferProfile obj.Object) *Text {
+	defer runtime.KeepAlive(chamferProfile)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
 	return t
 }
@@ -134,6 +139,7 @@ func (t *Text) WithMaterials(items ...*Material) *Text {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (t *Text) WithFirstMaterial(firstMaterial *Material) *Text {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return t
 }
@@ -147,6 +153,7 @@ func (t *Text) WithLevelsOfDetail(items ...*LevelOfDetail) *Text {
 
 // WithTessellator sets the tessellator.
 func (t *Text) WithTessellator(tessellator *GeometryTessellator) *Text {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return t
 }
@@ -165,54 +172,63 @@ func (t *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (t *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return t
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (t *Text) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return t
 }
 
 // ExtrusionDepth returns the extrusion depth. Animatable. If the value is 0, we get a mono-sided, 2D version of the text.
 func (t *Text) ExtrusionDepth() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("extrusionDepth"))
 	return _r
 }
 
 // String returns the text to be represented. The text must be an instance of NSString or NSAttributedString. The default value is nil.
 func (t *Text) String() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("string"))
 	return obj.Wrap(_r)
 }
 
 // Font returns the font used to represent the text. The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
 func (t *Text) Font() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))
 	return obj.Wrap(_r)
 }
 
 // IsWrapped reports whether the text is wrapped to fit within the bounds. For the text to be wrapped you first need to set its bounds, otherwise the text is not wrapped. The default value is false.
 func (t *Text) IsWrapped() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isWrapped"))
 	return _r
 }
 
 // ContainerFrame returns a container within which the text may be wrapped or truncated. The text will start at the top-left corner of the rect. You need to set this property for text truncation or alignment to work. Getting this property when it has never been set returns CGRectZero.
 func (t *Text) ContainerFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(t), objc.RegisterName("containerFrame"))
 	return _r
 }
 
 // TextSize returns the bounding box size the receiver occupies.
 func (t *Text) TextSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("textSize"))
 	return _r
 }
 
 // TruncationMode describes how the text is truncated to fit within the bounds. For the text to be truncated you first need to set its bounds, otherwise the text is not truncated. The default value is kCATruncationNone. See truncation modes in CATextLayer.h.
 func (t *Text) TruncationMode() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("truncationMode"))
 	if _r == 0 {
 		return ""
@@ -222,6 +238,7 @@ func (t *Text) TruncationMode() string {
 
 // AlignmentMode determines how individual lines of text are horizontally aligned within the bounds. For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
 func (t *Text) AlignmentMode() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignmentMode"))
 	if _r == 0 {
 		return ""
@@ -231,24 +248,28 @@ func (t *Text) AlignmentMode() string {
 
 // ChamferRadius returns the chamfer radius. Animatable. Values are clamped to the range [0, extrusionDepth / 2]. The actual chamfer radius might be different to the one here specified: large values are clipped to a per-glyph max value. The default value is 0.
 func (t *Text) ChamferRadius() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("chamferRadius"))
 	return _r
 }
 
 // ChamferSegmentCount returns the number of chamfer subdivisions. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
 func (t *Text) ChamferSegmentCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("chamferSegmentCount"))
 	return _r
 }
 
 // ChamferProfile describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
 func (t *Text) ChamferProfile() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("chamferProfile"))
 	return obj.Wrap(_r)
 }
 
 // Flatness specifies the accuracy (or smoothness) with which fonts are rendered. Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
 func (t *Text) Flatness() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("flatness"))
 	return _r
 }

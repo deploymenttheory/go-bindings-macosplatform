@@ -5,9 +5,11 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,30 +54,35 @@ func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
 
 // BiometryType returns type of biometry supported by the device. This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check
 func (emb *EnvironmentMechanismBiometry) BiometryType() BiometryType {
+	defer runtime.KeepAlive(emb)
 	_r := objc.Send[BiometryType](objref.IDOf(emb), objc.RegisterName("biometryType"))
 	return _r
 }
 
 // IsEnrolled reports whether the user has enrolled this biometry. Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check
 func (emb *EnvironmentMechanismBiometry) IsEnrolled() bool {
+	defer runtime.KeepAlive(emb)
 	_r := objc.Send[bool](objref.IDOf(emb), objc.RegisterName("isEnrolled"))
 	return _r
 }
 
 // IsLockedOut reports whether biometry is locked out. The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
 func (emb *EnvironmentMechanismBiometry) IsLockedOut() bool {
+	defer runtime.KeepAlive(emb)
 	_r := objc.Send[bool](objref.IDOf(emb), objc.RegisterName("isLockedOut"))
 	return _r
 }
 
 // StateHash returns the application specific state of the biometric enrollment as returned by This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
-func (emb *EnvironmentMechanismBiometry) StateHash() obj.Object {
+func (emb *EnvironmentMechanismBiometry) StateHash() []byte {
+	defer runtime.KeepAlive(emb)
 	_r := objc.Send[objc.ID](objref.IDOf(emb), objc.RegisterName("stateHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // BuiltInSensorInaccessible reports whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
 func (emb *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
+	defer runtime.KeepAlive(emb)
 	_r := objc.Send[bool](objref.IDOf(emb), objc.RegisterName("builtInSensorInaccessible"))
 	return _r
 }

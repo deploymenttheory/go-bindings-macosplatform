@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRVCOperationalStateClusterErrorStateStructAdopt(id objc.ID) *MTRRVCOpera
 
 // Description returns the object's -description text.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) Description() string {
+	defer runtime.KeepAlive(moscess)
 	return rt.Description(objref.IDOf(moscess))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moscess)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moscess), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(moscess)
 	return rt.IsKind(objref.IDOf(moscess), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) String() string {
+	defer runtime.KeepAlive(moscess)
 	return rt.Description(objref.IDOf(moscess))
 }
 
@@ -72,6 +80,7 @@ func NewMTRRVCOperationalStateClusterErrorStateStruct() *MTRRVCOperationalStateC
 
 // WithErrorStateID sets the error state ID.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) WithErrorStateID(errorStateID obj.Object) *MTRRVCOperationalStateClusterErrorStateStruct {
+	defer runtime.KeepAlive(errorStateID)
 	objc.Send[objc.ID](objref.IDOf(moscess), objc.RegisterName("setErrorStateID:"), objref.IDOf(errorStateID))
 	return moscess
 }
@@ -89,13 +98,15 @@ func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) WithErrorStateDeta
 }
 
 // ErrorStateID returns the error state ID.
-func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateID() obj.Object {
+func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateID() *foundation.Number {
+	defer runtime.KeepAlive(moscess)
 	_r := objc.Send[objc.ID](objref.IDOf(moscess), objc.RegisterName("errorStateID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ErrorStateLabel returns the error state label.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateLabel() string {
+	defer runtime.KeepAlive(moscess)
 	_r := objc.Send[objc.ID](objref.IDOf(moscess), objc.RegisterName("errorStateLabel"))
 	if _r == 0 {
 		return ""
@@ -105,6 +116,7 @@ func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateLabel() 
 
 // ErrorStateDetails returns the error state details.
 func (moscess *MTRRVCOperationalStateClusterErrorStateStruct) ErrorStateDetails() string {
+	defer runtime.KeepAlive(moscess)
 	_r := objc.Send[objc.ID](objref.IDOf(moscess), objc.RegisterName("errorStateDetails"))
 	if _r == 0 {
 		return ""

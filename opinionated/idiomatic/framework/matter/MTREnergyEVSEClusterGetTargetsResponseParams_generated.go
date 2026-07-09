@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,30 +49,35 @@ func mTREnergyEVSEClusterGetTargetsResponseParamsAdopt(id objc.ID) *MTREnergyEVS
 
 // Description returns the object's -description text.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) Description() string {
+	defer runtime.KeepAlive(meecgtrp)
 	return rt.Description(objref.IDOf(meecgtrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecgtrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecgtrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecgtrp)
 	return rt.IsKind(objref.IDOf(meecgtrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) String() string {
+	defer runtime.KeepAlive(meecgtrp)
 	return rt.Description(objref.IDOf(meecgtrp))
 }
 
-// NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
+// NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValue initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterGetTargetsResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,11 +86,14 @@ func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(respo
 
 // ChargingTargetSchedules returns the charging target schedules.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() obj.Object {
+	defer runtime.KeepAlive(meecgtrp)
 	_r := objc.Send[objc.ID](objref.IDOf(meecgtrp), objc.RegisterName("chargingTargetSchedules"))
 	return obj.Wrap(_r)
 }
 
 // SetChargingTargetSchedules wraps the corresponding Objective-C method.
 func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules obj.Object) {
+	defer runtime.KeepAlive(meecgtrp)
+	defer runtime.KeepAlive(chargingTargetSchedules)
 	objc.Send[objc.ID](objref.IDOf(meecgtrp), objc.RegisterName("setChargingTargetSchedules:"), objref.IDOf(chargingTargetSchedules))
 }

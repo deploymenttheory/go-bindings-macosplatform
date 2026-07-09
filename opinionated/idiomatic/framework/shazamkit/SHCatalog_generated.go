@@ -5,6 +5,8 @@
 package shazamkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func catalogAdopt(id objc.ID) *Catalog {
 
 // Description returns the object's -description text.
 func (c *Catalog) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Catalog) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Catalog) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Catalog) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // MinimumQuerySignatureDuration returns the minimum duration of a query signature that you use to match reference signatures in the catalog.
 func (c *Catalog) MinimumQuerySignatureDuration() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("minimumQuerySignatureDuration"))
 	return _r
 }
 
 // MaximumQuerySignatureDuration returns the maximum duration of a query signature that you use to match reference signatures in the catalog.
 func (c *Catalog) MaximumQuerySignatureDuration() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("maximumQuerySignatureDuration"))
 	return _r
 }

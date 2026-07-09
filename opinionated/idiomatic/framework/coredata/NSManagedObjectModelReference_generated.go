@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func managedObjectModelReferenceAdopt(id objc.ID) *ManagedObjectModelReference {
 
 // Description returns the object's -description text.
 func (momr *ManagedObjectModelReference) Description() string {
+	defer runtime.KeepAlive(momr)
 	return rt.Description(objref.IDOf(momr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (momr *ManagedObjectModelReference) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(momr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(momr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (momr *ManagedObjectModelReference) IsKind(className string) bool {
+	defer runtime.KeepAlive(momr)
 	return rt.IsKind(objref.IDOf(momr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (momr *ManagedObjectModelReference) String() string {
+	defer runtime.KeepAlive(momr)
 	return rt.Description(objref.IDOf(momr))
 }
 
 // NewManagedObjectModelReferenceWithModelVersionChecksum creates an object model reference for the specified model.
 func NewManagedObjectModelReferenceWithModelVersionChecksum(model *ManagedObjectModel, versionChecksum string) *ManagedObjectModelReference {
+	defer runtime.KeepAlive(model)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithModel:versionChecksum:"), objref.IDOf(model), purego.NSString(versionChecksum))
 	return managedObjectModelReferenceAdopt(_id)
@@ -82,6 +90,8 @@ func NewManagedObjectModelReferenceWithFileURLVersionChecksum(fileURL string, ve
 
 // NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum creates an object model reference with the entities corresponding to the specified entity version hashes.
 func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum(versionHash obj.Object, bundle obj.Object, versionChecksum string) *ManagedObjectModelReference {
+	defer runtime.KeepAlive(versionHash)
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityVersionHashes:inBundle:versionChecksum:"), objref.IDOf(versionHash), objref.IDOf(bundle), purego.NSString(versionChecksum))
 	return managedObjectModelReferenceAdopt(_id)
@@ -89,6 +99,7 @@ func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksu
 
 // NewManagedObjectModelReferenceWithNameInBundleVersionChecksum creates an object model reference for the named model in the specified bundle.
 func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName string, bundle obj.Object, versionChecksum string) *ManagedObjectModelReference {
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:inBundle:versionChecksum:"), purego.NSString(modelName), objref.IDOf(bundle), purego.NSString(versionChecksum))
 	return managedObjectModelReferenceAdopt(_id)
@@ -96,12 +107,14 @@ func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName str
 
 // ResolvedModel returns the resolved model.
 func (momr *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
+	defer runtime.KeepAlive(momr)
 	_r := objc.Send[objc.ID](objref.IDOf(momr), objc.RegisterName("resolvedModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // VersionChecksum returns the version checksum.
 func (momr *ManagedObjectModelReference) VersionChecksum() string {
+	defer runtime.KeepAlive(momr)
 	_r := objc.Send[objc.ID](objref.IDOf(momr), objc.RegisterName("versionChecksum"))
 	if _r == 0 {
 		return ""

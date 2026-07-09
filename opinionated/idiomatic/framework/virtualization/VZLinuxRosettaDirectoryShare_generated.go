@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewLinuxRosettaDirectoryShare() *LinuxRosettaDirectoryShare {
 
 // WithOptions sets the value that enables translation caching and configures the socket communication type for Rosetta.
 func (lrds *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(lrds), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return lrds
 }
 
 // Options enable translation caching and configure the socket communication type for Rosetta.
 func (lrds *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
+	defer runtime.KeepAlive(lrds)
 	_r := objc.Send[objc.ID](objref.IDOf(lrds), objc.RegisterName("options"))
 	return LinuxRosettaCachingOptionsFromID(_r)
 }

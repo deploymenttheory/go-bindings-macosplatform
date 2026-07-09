@@ -5,10 +5,13 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +53,27 @@ func healthStoreAdopt(id objc.ID) *HealthStore {
 
 // Description returns the object's -description text.
 func (hs *HealthStore) Description() string {
+	defer runtime.KeepAlive(hs)
 	return rt.Description(objref.IDOf(hs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hs *HealthStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hs *HealthStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(hs)
 	return rt.IsKind(objref.IDOf(hs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hs *HealthStore) String() string {
+	defer runtime.KeepAlive(hs)
 	return rt.Description(objref.IDOf(hs))
 }
 
@@ -83,54 +91,65 @@ func (hs *HealthStore) WithWorkoutSessionMirroringStartHandler(workoutSessionMir
 
 // SupportsHealthRecords reports whether returns a Boolean value that indicates whether the current device supports clinical records.
 func (hs *HealthStore) SupportsHealthRecords() bool {
+	defer runtime.KeepAlive(hs)
 	_r := objc.Send[bool](objref.IDOf(hs), objc.RegisterName("supportsHealthRecords"))
 	return _r
 }
 
 // AuthorizationStatusForType returns the app’s authorization status for sharing the specified data type.
 func (hs *HealthStore) AuthorizationStatusForType(type_ *ObjectType) AuthorizationStatus {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(hs), objc.RegisterName("authorizationStatusForType:"), objref.IDOf(type_))
 	return _r
 }
 
 // EarliestPermittedSampleDate returns the earliest date that the framework permits your app to save or read samples.
-func (hs *HealthStore) EarliestPermittedSampleDate() obj.Object {
+func (hs *HealthStore) EarliestPermittedSampleDate() time.Time {
+	defer runtime.KeepAlive(hs)
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("earliestPermittedSampleDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ExecuteQuery starts executing the provided query.
 func (hs *HealthStore) ExecuteQuery(query *Query) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(query)
 	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("executeQuery:"), objref.IDOf(query))
 }
 
 // StopQuery stops a long-running query.
 func (hs *HealthStore) StopQuery(query *Query) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(query)
 	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("stopQuery:"), objref.IDOf(query))
 }
 
-// DateOfBirthWithError reads the user’s date of birth from the HealthKit store as a date value.
-func (hs *HealthStore) DateOfBirthWithError() (result obj.Object, err error) {
+// DateOfBirth reads the user’s date of birth from the HealthKit store as a date value.
+func (hs *HealthStore) DateOfBirth() (result time.Time, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("dateOfBirthWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+		return time.Time{}, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSDateToTime(_r), nil
 }
 
-// DateOfBirthComponentsWithError reads the user’s date of birth from the HealthKit store as date components.
-func (hs *HealthStore) DateOfBirthComponentsWithError() (result obj.Object, err error) {
+// DateOfBirthComponents reads the user’s date of birth from the HealthKit store as date components.
+func (hs *HealthStore) DateOfBirthComponents() (result *foundation.DateComponents, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("dateOfBirthComponentsWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.DateComponentsFromID(_r), nil
 }
 
-// BiologicalSexWithError reads someone’s biological sex from the HealthKit store.
-func (hs *HealthStore) BiologicalSexWithError() (result *BiologicalSexObject, err error) {
+// BiologicalSex reads someone’s biological sex from the HealthKit store.
+func (hs *HealthStore) BiologicalSex() (result *BiologicalSexObject, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("biologicalSexWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -139,8 +158,9 @@ func (hs *HealthStore) BiologicalSexWithError() (result *BiologicalSexObject, er
 	return BiologicalSexObjectFromID(_r), nil
 }
 
-// BloodTypeWithError reads the user’s blood type from the HealthKit store.
-func (hs *HealthStore) BloodTypeWithError() (result *BloodTypeObject, err error) {
+// BloodType reads the user’s blood type from the HealthKit store.
+func (hs *HealthStore) BloodType() (result *BloodTypeObject, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("bloodTypeWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -149,8 +169,9 @@ func (hs *HealthStore) BloodTypeWithError() (result *BloodTypeObject, err error)
 	return BloodTypeObjectFromID(_r), nil
 }
 
-// FitzpatrickSkinTypeWithError reads the user’s Fitzpatrick Skin Type from the HealthKit store.
-func (hs *HealthStore) FitzpatrickSkinTypeWithError() (result *FitzpatrickSkinTypeObject, err error) {
+// FitzpatrickSkinType reads the user’s Fitzpatrick Skin Type from the HealthKit store.
+func (hs *HealthStore) FitzpatrickSkinType() (result *FitzpatrickSkinTypeObject, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("fitzpatrickSkinTypeWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -159,8 +180,9 @@ func (hs *HealthStore) FitzpatrickSkinTypeWithError() (result *FitzpatrickSkinTy
 	return FitzpatrickSkinTypeObjectFromID(_r), nil
 }
 
-// WheelchairUseWithError reads the user’s wheelchair use from the HealthKit store.
-func (hs *HealthStore) WheelchairUseWithError() (result *WheelchairUseObject, err error) {
+// WheelchairUse reads the user’s wheelchair use from the HealthKit store.
+func (hs *HealthStore) WheelchairUse() (result *WheelchairUseObject, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("wheelchairUseWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -169,8 +191,9 @@ func (hs *HealthStore) WheelchairUseWithError() (result *WheelchairUseObject, er
 	return WheelchairUseObjectFromID(_r), nil
 }
 
-// ActivityMoveModeWithError returns the activity move mode for the current user.
-func (hs *HealthStore) ActivityMoveModeWithError() (result *ActivityMoveModeObject, err error) {
+// ActivityMoveMode returns the activity move mode for the current user.
+func (hs *HealthStore) ActivityMoveMode() (result *ActivityMoveModeObject, err error) {
+	defer runtime.KeepAlive(hs)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("activityMoveModeWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -181,10 +204,14 @@ func (hs *HealthStore) ActivityMoveModeWithError() (result *ActivityMoveModeObje
 
 // PauseWorkoutSession pauses the provided workout session.
 func (hs *HealthStore) PauseWorkoutSession(workoutSession *WorkoutSession) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(workoutSession)
 	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("pauseWorkoutSession:"), objref.IDOf(workoutSession))
 }
 
 // ResumeWorkoutSession resumes the provided workout session.
 func (hs *HealthStore) ResumeWorkoutSession(workoutSession *WorkoutSession) {
+	defer runtime.KeepAlive(hs)
+	defer runtime.KeepAlive(workoutSession)
 	objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("resumeWorkoutSession:"), objref.IDOf(workoutSession))
 }

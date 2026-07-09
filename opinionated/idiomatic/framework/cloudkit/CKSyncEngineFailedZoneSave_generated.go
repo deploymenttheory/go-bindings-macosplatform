@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func syncEngineFailedZoneSaveAdopt(id objc.ID) *SyncEngineFailedZoneSave {
 
 // Description returns the object's -description text.
 func (sefzs *SyncEngineFailedZoneSave) Description() string {
+	defer runtime.KeepAlive(sefzs)
 	return rt.Description(objref.IDOf(sefzs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sefzs *SyncEngineFailedZoneSave) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sefzs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sefzs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sefzs *SyncEngineFailedZoneSave) IsKind(className string) bool {
+	defer runtime.KeepAlive(sefzs)
 	return rt.IsKind(objref.IDOf(sefzs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sefzs *SyncEngineFailedZoneSave) String() string {
+	defer runtime.KeepAlive(sefzs)
 	return rt.Description(objref.IDOf(sefzs))
 }
 
@@ -74,6 +81,7 @@ func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
 
 // RecordZone returns the record zone that CloudKit is unable to modify.
 func (sefzs *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
+	defer runtime.KeepAlive(sefzs)
 	_r := objc.Send[objc.ID](objref.IDOf(sefzs), objc.RegisterName("recordZone"))
 	return RecordZoneFromID(_r)
 }

@@ -28,12 +28,12 @@ func MTKMetalVertexDescriptorFromModelIO(modelIODescriptor obj.Object) obj.Objec
 var _fnMTKMetalVertexDescriptorFromModelIOWithError func(objc.ID, unsafe.Pointer) objc.ID
 
 // MTKMetalVertexDescriptorFromModelIOWithError calls the MetalKit framework function MTKMetalVertexDescriptorFromModelIOWithError.
-func MTKMetalVertexDescriptorFromModelIOWithError(modelIODescriptor obj.Object, error_ unsafe.Pointer) obj.Object {
+func MTKMetalVertexDescriptorFromModelIOWithError(modelIODescriptor obj.Object, err unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTKMetalVertexDescriptorFromModelIOWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIOWithError, _lib, "MTKMetalVertexDescriptorFromModelIOWithError")
 	}
-	_ret := _fnMTKMetalVertexDescriptorFromModelIOWithError(objref.IDOf(modelIODescriptor), error_)
+	_ret := _fnMTKMetalVertexDescriptorFromModelIOWithError(objref.IDOf(modelIODescriptor), err)
 	return obj.Wrap(_ret)
 }
 
@@ -52,11 +52,11 @@ func MTKModelIOVertexDescriptorFromMetal(metalDescriptor obj.Object) obj.Object 
 var _fnMTKModelIOVertexDescriptorFromMetalWithError func(objc.ID, unsafe.Pointer) objc.ID
 
 // MTKModelIOVertexDescriptorFromMetalWithError calls the MetalKit framework function MTKModelIOVertexDescriptorFromMetalWithError.
-func MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor obj.Object, error_ unsafe.Pointer) obj.Object {
+func MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor obj.Object, err unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnMTKModelIOVertexDescriptorFromMetalWithError == nil {
 		ebipurego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetalWithError, _lib, "MTKModelIOVertexDescriptorFromMetalWithError")
 	}
-	_ret := _fnMTKModelIOVertexDescriptorFromMetalWithError(objref.IDOf(metalDescriptor), error_)
+	_ret := _fnMTKModelIOVertexDescriptorFromMetalWithError(objref.IDOf(metalDescriptor), err)
 	return obj.Wrap(_ret)
 }

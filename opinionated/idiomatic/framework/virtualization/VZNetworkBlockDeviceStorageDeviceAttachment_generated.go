@@ -5,12 +5,13 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -50,48 +51,62 @@ func networkBlockDeviceStorageDeviceAttachmentAdopt(id objc.ID) *NetworkBlockDev
 	return x
 }
 
-// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
-func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode DiskSynchronizationMode) (result *NetworkBlockDeviceStorageDeviceAttachment, err error) {
+// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationMode creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
+func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationMode(url string, timeout float64, forcedReadOnly bool, synchronizationMode DiskSynchronizationMode) (result *NetworkBlockDeviceStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), rt.FileURL(uRL), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), rt.FileURL(url), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
-func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (result *NetworkBlockDeviceStorageDeviceAttachment, err error) {
+// NewNetworkBlockDeviceStorageDeviceAttachmentWithURL creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
+func NewNetworkBlockDeviceStorageDeviceAttachmentWithURL(url string) (result *NetworkBlockDeviceStorageDeviceAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
+}
+
+// WithDelegate sets the object that receives messages about changes to the network block device attachment.
+func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) WithDelegate(delegate NetworkBlockDeviceStorageDeviceAttachmentDelegate) *NetworkBlockDeviceStorageDeviceAttachment {
+	_shim := newNetworkBlockDeviceStorageDeviceAttachmentDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(nbdsda), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(nbdsda), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return nbdsda
 }
 
 // URL returns URL referring to the NBD server to which the NBD client is to be connected.
-func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) URL() obj.Object {
+func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) URL() string {
+	defer runtime.KeepAlive(nbdsda)
 	_r := objc.Send[objc.ID](objref.IDOf(nbdsda), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Timeout returns the timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
 func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
+	defer runtime.KeepAlive(nbdsda)
 	_r := objc.Send[float64](objref.IDOf(nbdsda), objc.RegisterName("timeout"))
 	return _r
 }
 
 // IsForcedReadOnly reports whether the underlying disk attachment is forced to be read-only. The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to true will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
 func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
+	defer runtime.KeepAlive(nbdsda)
 	_r := objc.Send[bool](objref.IDOf(nbdsda), objc.RegisterName("isForcedReadOnly"))
 	return _r
 }
 
 // SynchronizationMode returns the mode in which the NBD client synchronizes data with the NBD server.
 func (nbdsda *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
+	defer runtime.KeepAlive(nbdsda)
 	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(nbdsda), objc.RegisterName("synchronizationMode"))
 	return _r
 }

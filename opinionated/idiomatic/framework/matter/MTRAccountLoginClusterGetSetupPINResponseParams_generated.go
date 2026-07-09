@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRAccountLoginClusterGetSetupPINResponseParamsAdopt(id objc.ID) *MTRAccoun
 
 // Description returns the object's -description text.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) Description() string {
+	defer runtime.KeepAlive(malcgsprp)
 	return rt.Description(objref.IDOf(malcgsprp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(malcgsprp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(malcgsprp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(malcgsprp)
 	return rt.IsKind(objref.IDOf(malcgsprp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) String() string {
+	defer runtime.KeepAlive(malcgsprp)
 	return rt.Description(objref.IDOf(malcgsprp))
 }
 
-// NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValueError initialize an MTRAccountLoginClusterGetSetupPINResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRAccountLoginClusterGetSetupPINResponseParams, err error) {
+// NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValue initialize an MTRAccountLoginClusterGetSetupPINResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRAccountLoginClusterGetSetupPINResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAccountLoginClusterGetSetupPINResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -86,12 +93,14 @@ func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) WithSetupPIN(s
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return malcgsprp
 }
 
 // SetupPIN returns the setup pin.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) SetupPIN() string {
+	defer runtime.KeepAlive(malcgsprp)
 	_r := objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setupPIN"))
 	if _r == 0 {
 		return ""
@@ -100,7 +109,8 @@ func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) SetupPIN() str
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(malcgsprp)
 	_r := objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

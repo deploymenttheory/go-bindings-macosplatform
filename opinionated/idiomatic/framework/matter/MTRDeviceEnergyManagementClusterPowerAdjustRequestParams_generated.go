@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterPowerAdjustRequestParamsAdopt(id objc.ID) *
 
 // Description returns the object's -description text.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Description() string {
+	defer runtime.KeepAlive(mdemcparp)
 	return rt.Description(objref.IDOf(mdemcparp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcparp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcparp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcparp)
 	return rt.IsKind(objref.IDOf(mdemcparp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) String() string {
+	defer runtime.KeepAlive(mdemcparp)
 	return rt.Description(objref.IDOf(mdemcparp))
 }
 
@@ -72,60 +80,70 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustRequestParams() *MTRDeviceEne
 
 // WithPower sets the power.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithPower(power obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	defer runtime.KeepAlive(power)
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setPower:"), objref.IDOf(power))
 	return mdemcparp
 }
 
 // WithDuration sets the duration.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcparp
 }
 
 // WithCause sets the cause.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	defer runtime.KeepAlive(cause)
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcparp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdemcparp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdemcparp
 }
 
 // Power returns the power.
-func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Power() obj.Object {
+func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Power() *foundation.Number {
+	defer runtime.KeepAlive(mdemcparp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("power"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Duration returns the duration.
-func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Duration() obj.Object {
+func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Duration() *foundation.Number {
+	defer runtime.KeepAlive(mdemcparp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cause returns the cause.
-func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Cause() obj.Object {
+func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Cause() *foundation.Number {
+	defer runtime.KeepAlive(mdemcparp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("cause"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdemcparp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mdemcparp *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdemcparp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcparp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

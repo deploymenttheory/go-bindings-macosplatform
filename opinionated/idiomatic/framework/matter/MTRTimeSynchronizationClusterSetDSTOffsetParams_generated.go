@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTimeSynchronizationClusterSetDSTOffsetParamsAdopt(id objc.ID) *MTRTimeSy
 
 // Description returns the object's -description text.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) Description() string {
+	defer runtime.KeepAlive(mtscsdop)
 	return rt.Description(objref.IDOf(mtscsdop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscsdop)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscsdop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscsdop)
 	return rt.IsKind(objref.IDOf(mtscsdop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) String() string {
+	defer runtime.KeepAlive(mtscsdop)
 	return rt.Description(objref.IDOf(mtscsdop))
 }
 
@@ -72,35 +80,42 @@ func NewMTRTimeSynchronizationClusterSetDSTOffsetParams() *MTRTimeSynchronizatio
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtscsdop
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtscsdop
 }
 
 // DstOffset returns the dst offset.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) DstOffset() obj.Object {
+	defer runtime.KeepAlive(mtscsdop)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("dstOffset"))
 	return obj.Wrap(_r)
 }
 
 // SetDstOffset wraps the corresponding Objective-C method.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetDstOffset(dstOffset obj.Object) {
+	defer runtime.KeepAlive(mtscsdop)
+	defer runtime.KeepAlive(dstOffset)
 	objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("setDstOffset:"), objref.IDOf(dstOffset))
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) TimedInvokeTimeoutMs() obj.Object {
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mtscsdop)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) ServerSideProcessingTimeout() obj.Object {
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mtscsdop)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

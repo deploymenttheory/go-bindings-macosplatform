@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -89,43 +91,51 @@ func (dsat *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalize
 
 // SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength sets the mode to provide feedback when the user tilts the trigger between the start and the end positions.
 func (dsat *DualSenseAdaptiveTrigger) SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32) {
+	defer runtime.KeepAlive(dsat)
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeSlopeFeedbackWithStartPosition:endPosition:startStrength:endStrength:"), startPosition, endPosition, startStrength, endStrength)
 }
 
 // SetModeFeedbackWithStartPositionResistiveStrength sets the mode to provide feedback when the user depresses the trigger at the start position or at a greater value.
 func (dsat *DualSenseAdaptiveTrigger) SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32) {
+	defer runtime.KeepAlive(dsat)
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:"), startPosition, resistiveStrength)
 }
 
 // SetModeWeaponWithStartPositionEndPositionResistiveStrength sets the mode to provide feedback when the user depresses the trigger between the start and the end positions.
 func (dsat *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32) {
+	defer runtime.KeepAlive(dsat)
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeWeaponWithStartPosition:endPosition:resistiveStrength:"), startPosition, endPosition, resistiveStrength)
 }
 
 // SetModeVibrationWithStartPositionAmplitudeFrequency sets the mode to vibrate when the user depresses the trigger at the start position or at a greater value.
 func (dsat *DualSenseAdaptiveTrigger) SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32) {
+	defer runtime.KeepAlive(dsat)
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:"), startPosition, amplitude, frequency)
 }
 
 // SetModeOff sets the mode to off and stops any trigger effect.
 func (dsat *DualSenseAdaptiveTrigger) SetModeOff() {
+	defer runtime.KeepAlive(dsat)
 	objc.Send[objc.ID](objref.IDOf(dsat), objc.RegisterName("setModeOff"))
 }
 
 // Mode returns the mode that the adaptive trigger is currently in. This property reflects the physical state of the triggers - and requires a response from the controller. It does not update immediately after calling -[GCDualSenseAdaptiveTrigger setMode...].
 func (dsat *DualSenseAdaptiveTrigger) Mode() DualSenseAdaptiveTriggerMode {
+	defer runtime.KeepAlive(dsat)
 	_r := objc.Send[DualSenseAdaptiveTriggerMode](objref.IDOf(dsat), objc.RegisterName("mode"))
 	return _r
 }
 
 // Status returns the current status of the adaptive trigger - whether it is ready to apply a load, is currently applying a load, or has finished applying a load.
 func (dsat *DualSenseAdaptiveTrigger) Status() DualSenseAdaptiveTriggerStatus {
+	defer runtime.KeepAlive(dsat)
 	_r := objc.Send[DualSenseAdaptiveTriggerStatus](objref.IDOf(dsat), objc.RegisterName("status"))
 	return _r
 }
 
 // ArmPosition returns a normalized float from [0-1], with 0 representing the lowest possible trigger arm position and 1 representing the maximum trigger arm position.
 func (dsat *DualSenseAdaptiveTrigger) ArmPosition() float32 {
+	defer runtime.KeepAlive(dsat)
 	_r := objc.Send[float32](objref.IDOf(dsat), objc.RegisterName("armPosition"))
 	return _r
 }

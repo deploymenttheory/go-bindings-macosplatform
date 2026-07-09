@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -47,9 +50,9 @@ func playerItemLegibleOutputAdopt(id objc.ID) *PlayerItemLegibleOutput {
 }
 
 // NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation creates an initialized legible-output object.
-func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes []obj.Object) *PlayerItemLegibleOutput {
+func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes []*foundation.Number) *PlayerItemLegibleOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemLegibleOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaSubtypesForNativeRepresentation:"), purego.SliceToNSArray(subtypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaSubtypesForNativeRepresentation:"), purego.SliceToNSArray(subtypes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return playerItemLegibleOutputAdopt(_id)
 }
 
@@ -61,6 +64,7 @@ func (pilo *PlayerItemLegibleOutput) WithAdvanceIntervalForDelegateInvocation(ad
 
 // WithTextStylingResolution sets a string identifier indicating the degree of text styling to be applied to attributed strings vended by the object.
 func (pilo *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput {
+	defer runtime.KeepAlive(textStylingResolution)
 	objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
 	return pilo
 }
@@ -72,21 +76,24 @@ func (pilo *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPla
 }
 
 // DelegateQueue returns the dispatch queue where the delegate is messaged. This property is not key-value observable.
-func (pilo *PlayerItemLegibleOutput) DelegateQueue() obj.Object {
+func (pilo *PlayerItemLegibleOutput) DelegateQueue() *foundation.Object {
+	defer runtime.KeepAlive(pilo)
 	_r := objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("delegateQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // AdvanceIntervalForDelegateInvocation returns permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (pilo *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	defer runtime.KeepAlive(pilo)
 	_r := objc.Send[float64](objref.IDOf(pilo), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
 // TextStylingResolution returns the text styling resolution.
-func (pilo *PlayerItemLegibleOutput) TextStylingResolution() obj.Object {
+func (pilo *PlayerItemLegibleOutput) TextStylingResolution() *foundation.String {
+	defer runtime.KeepAlive(pilo)
 	_r := objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("textStylingResolution"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 var _ PlayerItemOutputProvider = (*PlayerItemLegibleOutput)(nil)

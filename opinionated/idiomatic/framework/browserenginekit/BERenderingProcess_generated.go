@@ -5,10 +5,12 @@
 package browserenginekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func renderingProcessAdopt(id objc.ID) *RenderingProcess {
 
 // Description returns the object's -description text.
 func (rp *RenderingProcess) Description() string {
+	defer runtime.KeepAlive(rp)
 	return rt.Description(objref.IDOf(rp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rp *RenderingProcess) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rp *RenderingProcess) IsKind(className string) bool {
+	defer runtime.KeepAlive(rp)
 	return rt.IsKind(objref.IDOf(rp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rp *RenderingProcess) String() string {
+	defer runtime.KeepAlive(rp)
 	return rt.Description(objref.IDOf(rp))
 }
 
@@ -77,15 +84,17 @@ func NewRenderingProcess() *RenderingProcess {
 
 // Invalidate stops the rendering process.
 func (rp *RenderingProcess) Invalidate() {
+	defer runtime.KeepAlive(rp)
 	objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("invalidate"))
 }
 
-// MakeLibXPCConnectionError creates a new XPC connection to the extension process.
-func (rp *RenderingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
+// MakeLibXPCConnection creates a new XPC connection to the extension process.
+func (rp *RenderingProcess) MakeLibXPCConnection() (result *foundation.Object, err error) {
+	defer runtime.KeepAlive(rp)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.ObjectFromID(_r), nil
 }

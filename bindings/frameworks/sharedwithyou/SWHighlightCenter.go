@@ -46,7 +46,7 @@ func SWHighlightCenterFromID(id objc.ID) *SWHighlightCenter {
 }
 
 // Returns a highlight for a specified URL.
-func (o *SWHighlightCenter) GetHighlightForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*SWHighlight, unsafe.Pointer)) {
+func (o *SWHighlightCenter) GetHighlightForURLCompletionHandler(url *foundation.NSURL, completionHandler func(*SWHighlight, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -57,7 +57,7 @@ func (o *SWHighlightCenter) GetHighlightForURLCompletionHandler(uRL *foundation.
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_sWHighlightCenterSelGetHighlightForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_sWHighlightCenterSelGetHighlightForURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
 // Returns a collaboration highlight for a specified collaboration identifier.
@@ -74,7 +74,7 @@ func (o *SWHighlightCenter) CollaborationHighlightForIdentifierError(collaborati
 }
 
 // Returns a collaboration highlight for a specified URL.
-func (o *SWHighlightCenter) GetCollaborationHighlightForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*SWCollaborationHighlight, unsafe.Pointer)) {
+func (o *SWHighlightCenter) GetCollaborationHighlightForURLCompletionHandler(url *foundation.NSURL, completionHandler func(*SWCollaborationHighlight, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -85,7 +85,7 @@ func (o *SWHighlightCenter) GetCollaborationHighlightForURLCompletionHandler(uRL
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_sWHighlightCenterSelGetCollaborationHighlightForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_sWHighlightCenterSelGetCollaborationHighlightForURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
 // Posts a specified event to the highlight center for display.

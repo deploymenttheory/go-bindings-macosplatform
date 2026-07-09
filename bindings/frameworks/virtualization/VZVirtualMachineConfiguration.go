@@ -102,8 +102,8 @@ func (o *VZVirtualMachineConfiguration) CPUCount() uint {
 	return _ret
 }
 
-func (o *VZVirtualMachineConfiguration) SetCPUCount(cPUCount uint) {
-	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetCPUCount, cPUCount)
+func (o *VZVirtualMachineConfiguration) SetCPUCount(cpuCount uint) {
+	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetCPUCount, cpuCount)
 }
 
 // @abstract The hardware platform to use. @discussion Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration. When restoring from saved state you must ensure your configuration matches that of the saved virtual machine. @see VZGenericPlatformConfiguration @see VZMacPlatformConfiguration

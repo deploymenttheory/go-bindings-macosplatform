@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -92,6 +94,7 @@ func (cvflic *CollectionViewFlowLayoutInvalidationContext) WithContentSizeAdjust
 
 // InvalidateFlowLayoutDelegateMetrics wraps the corresponding Objective-C method.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutDelegateMetrics() bool {
+	defer runtime.KeepAlive(cvflic)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -105,6 +108,7 @@ func (cvflic *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutD
 
 // InvalidateFlowLayoutAttributes wraps the corresponding Objective-C method.
 func (cvflic *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutAttributes() bool {
+	defer runtime.KeepAlive(cvflic)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

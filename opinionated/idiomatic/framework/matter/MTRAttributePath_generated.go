@@ -5,9 +5,11 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,9 +53,10 @@ func NewMTRAttributePath() *MTRAttributePath {
 }
 
 // Attribute returns the attribute.
-func (map_ *MTRAttributePath) Attribute() obj.Object {
+func (map_ *MTRAttributePath) Attribute() *foundation.Number {
+	defer runtime.KeepAlive(map_)
 	_r := objc.Send[objc.ID](objref.IDOf(map_), objc.RegisterName("attribute"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 var _ MTRClusterPathProvider = (*MTRAttributePath)(nil)

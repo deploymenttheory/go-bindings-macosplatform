@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -69,13 +71,14 @@ func (mp *MachPort) WithObservationInfo(observationInfo unsafe.Pointer) *MachPor
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mp *MachPort) WithScriptingProperties(scriptingProperties obj.Object) *MachPort {
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mp *MachPort) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MachPort {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mp
 }
 
 // MachPort returns the mach port.
 func (mp *MachPort) MachPort() uint32 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[uint32](objref.IDOf(mp), objc.RegisterName("machPort"))
 	return _r
 }

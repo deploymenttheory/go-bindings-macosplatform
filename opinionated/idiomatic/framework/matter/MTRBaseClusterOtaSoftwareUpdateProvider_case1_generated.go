@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,8 @@ func mTRBaseClusterOtaSoftwareUpdateProviderAdopt(id objc.ID) *MTRBaseClusterOta
 
 // NewMTRBaseClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue creates a new MTRBaseClusterOtaSoftwareUpdateProvider.
 func NewMTRBaseClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterOtaSoftwareUpdateProvider {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOtaSoftwareUpdateProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterOtaSoftwareUpdateProviderAdopt(_id)
@@ -58,6 +61,8 @@ func NewMTRBaseClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *M
 //
 // QueryImageWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) QueryImageWithParams(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams) (result *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
 		err error
@@ -83,6 +88,8 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) QueryImageWithParams(ctx
 //
 // ApplyUpdateRequestWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParams(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) (result *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
 		err error
@@ -108,6 +115,7 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithPa
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +141,10 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeGeneratedCo
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +170,7 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeGenera
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +196,10 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeAcceptedCom
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +225,7 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeAccept
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +251,10 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeAttributeLi
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +280,7 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeAttrib
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +306,10 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeFeatureMap(
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +335,7 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeFeatur
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +361,10 @@ func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) ReadAttributeClusterRevi
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOtaSoftwareUpdateProvider) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

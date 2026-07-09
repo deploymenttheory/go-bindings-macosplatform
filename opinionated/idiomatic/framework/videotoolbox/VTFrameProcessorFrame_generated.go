@@ -5,6 +5,7 @@
 package videotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func frameProcessorFrameAdopt(id objc.ID) *FrameProcessorFrame {
 
 // Description returns the object's -description text.
 func (fpf *FrameProcessorFrame) Description() string {
+	defer runtime.KeepAlive(fpf)
 	return rt.Description(objref.IDOf(fpf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpf *FrameProcessorFrame) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpf *FrameProcessorFrame) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpf)
 	return rt.IsKind(objref.IDOf(fpf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpf *FrameProcessorFrame) String() string {
+	defer runtime.KeepAlive(fpf)
 	return rt.Description(objref.IDOf(fpf))
 }
 
@@ -78,6 +84,7 @@ func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer
 
 // PresentationTimeStamp returns presentation timestamp that you provided when you initialized the object.
 func (fpf *FrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
+	defer runtime.KeepAlive(fpf)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(fpf), objc.RegisterName("presentationTimeStamp"))
 	return _r
 }

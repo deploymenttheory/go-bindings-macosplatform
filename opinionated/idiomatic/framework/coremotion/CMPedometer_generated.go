@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pedometerAdopt(id objc.ID) *Pedometer {
 
 // Description returns the object's -description text.
 func (p *Pedometer) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Pedometer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Pedometer) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Pedometer) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -74,5 +81,6 @@ func NewPedometer() *Pedometer {
 
 // StopPedometerUpdates stops the delivery of recent pedestrian data updates to your app.
 func (p *Pedometer) StopPedometerUpdates() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("stopPedometerUpdates"))
 }

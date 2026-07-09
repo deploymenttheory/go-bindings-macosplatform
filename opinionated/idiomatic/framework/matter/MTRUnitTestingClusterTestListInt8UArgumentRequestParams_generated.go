@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,58 +50,70 @@ func mTRUnitTestingClusterTestListInt8UArgumentRequestParamsAdopt(id objc.ID) *M
 
 // Description returns the object's -description text.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Description() string {
+	defer runtime.KeepAlive(mutctliuarp)
 	return rt.Description(objref.IDOf(mutctliuarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctliuarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctliuarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctliuarp)
 	return rt.IsKind(objref.IDOf(mutctliuarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) String() string {
+	defer runtime.KeepAlive(mutctliuarp)
 	return rt.Description(objref.IDOf(mutctliuarp))
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mutctliuarp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mutctliuarp
 }
 
 // Arg1 returns the arg1.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Arg1() obj.Object {
+	defer runtime.KeepAlive(mutctliuarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
 // SetArg1 wraps the corresponding Objective-C method.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetArg1(arg1 obj.Object) {
+	defer runtime.KeepAlive(mutctliuarp)
+	defer runtime.KeepAlive(arg1)
 	objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mutctliuarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mutctliuarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestListInt8UArgumentRequestParams marks MTRUnitTestingClusterTestListInt8UArgumentRequestParams — and, by embedding promotion, its

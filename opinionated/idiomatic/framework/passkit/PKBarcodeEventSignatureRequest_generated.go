@@ -5,7 +5,11 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +49,27 @@ func barcodeEventSignatureRequestAdopt(id objc.ID) *BarcodeEventSignatureRequest
 
 // Description returns the object's -description text.
 func (besr *BarcodeEventSignatureRequest) Description() string {
+	defer runtime.KeepAlive(besr)
 	return rt.Description(objref.IDOf(besr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (besr *BarcodeEventSignatureRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(besr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(besr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (besr *BarcodeEventSignatureRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(besr)
 	return rt.IsKind(objref.IDOf(besr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (besr *BarcodeEventSignatureRequest) String() string {
+	defer runtime.KeepAlive(besr)
 	return rt.Description(objref.IDOf(besr))
 }
 
@@ -72,6 +81,7 @@ func NewBarcodeEventSignatureRequest() *BarcodeEventSignatureRequest {
 
 // DeviceAccountIdentifier returns the device account identifier.
 func (besr *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
 		return ""
@@ -81,6 +91,7 @@ func (besr *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
 
 // TransactionIdentifier returns the transaction identifier.
 func (besr *BarcodeEventSignatureRequest) TransactionIdentifier() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
 		return ""
@@ -90,6 +101,7 @@ func (besr *BarcodeEventSignatureRequest) TransactionIdentifier() string {
 
 // BarcodeIdentifier returns the barcode identifier.
 func (besr *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("barcodeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -99,6 +111,7 @@ func (besr *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
 
 // RawMerchantName returns the raw merchant name.
 func (besr *BarcodeEventSignatureRequest) RawMerchantName() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("rawMerchantName"))
 	if _r == 0 {
 		return ""
@@ -108,6 +121,7 @@ func (besr *BarcodeEventSignatureRequest) RawMerchantName() string {
 
 // MerchantName returns the merchant name.
 func (besr *BarcodeEventSignatureRequest) MerchantName() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("merchantName"))
 	if _r == 0 {
 		return ""
@@ -116,13 +130,15 @@ func (besr *BarcodeEventSignatureRequest) MerchantName() string {
 }
 
 // TransactionDate returns the transaction date.
-func (besr *BarcodeEventSignatureRequest) TransactionDate() obj.Object {
+func (besr *BarcodeEventSignatureRequest) TransactionDate() time.Time {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CurrencyCode returns the currency code.
 func (besr *BarcodeEventSignatureRequest) CurrencyCode() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
@@ -131,13 +147,15 @@ func (besr *BarcodeEventSignatureRequest) CurrencyCode() string {
 }
 
 // Amount returns the amount.
-func (besr *BarcodeEventSignatureRequest) Amount() obj.Object {
+func (besr *BarcodeEventSignatureRequest) Amount() *foundation.Number {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("amount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TransactionStatus returns the transaction status.
 func (besr *BarcodeEventSignatureRequest) TransactionStatus() string {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("transactionStatus"))
 	if _r == 0 {
 		return ""
@@ -146,7 +164,8 @@ func (besr *BarcodeEventSignatureRequest) TransactionStatus() string {
 }
 
 // PartialSignature returns the partial signature.
-func (besr *BarcodeEventSignatureRequest) PartialSignature() obj.Object {
+func (besr *BarcodeEventSignatureRequest) PartialSignature() []byte {
+	defer runtime.KeepAlive(besr)
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("partialSignature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

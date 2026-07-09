@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func activitySummaryAdopt(id objc.ID) *ActivitySummary {
 
 // Description returns the object's -description text.
 func (as *ActivitySummary) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *ActivitySummary) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *ActivitySummary) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *ActivitySummary) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
@@ -86,138 +94,162 @@ func (as *ActivitySummary) WithPaused(paused bool) *ActivitySummary {
 
 // WithActiveEnergyBurned sets the amount of active energy the user burned during the specified day.
 func (as *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(activeEnergyBurned)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setActiveEnergyBurned:"), objref.IDOf(activeEnergyBurned))
 	return as
 }
 
 // WithAppleMoveTime sets the amount of time the user spent performing activities that involve full-body movements during the specified day.
 func (as *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(appleMoveTime)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setAppleMoveTime:"), objref.IDOf(appleMoveTime))
 	return as
 }
 
 // WithAppleExerciseTime sets the amount of time that the user has spent exercising during the specified day.
 func (as *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(appleExerciseTime)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setAppleExerciseTime:"), objref.IDOf(appleExerciseTime))
 	return as
 }
 
 // WithAppleStandHours sets the number hours in the specified day during which the user has stood and moved for at least a minute per hour.
 func (as *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(appleStandHours)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setAppleStandHours:"), objref.IDOf(appleStandHours))
 	return as
 }
 
 // WithActiveEnergyBurnedGoal sets the user’s daily goal for active energy burned.
 func (as *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(activeEnergyBurnedGoal)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setActiveEnergyBurnedGoal:"), objref.IDOf(activeEnergyBurnedGoal))
 	return as
 }
 
 // WithAppleMoveTimeGoal sets the user’s daily goal for move time.
 func (as *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(appleMoveTimeGoal)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setAppleMoveTimeGoal:"), objref.IDOf(appleMoveTimeGoal))
 	return as
 }
 
 // WithAppleExerciseTimeGoal sets the user’s daily exercise goal.
 func (as *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(appleExerciseTimeGoal)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setAppleExerciseTimeGoal:"), objref.IDOf(appleExerciseTimeGoal))
 	return as
 }
 
 // WithExerciseTimeGoal sets the user’s daily goal for exercise time.
 func (as *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(exerciseTimeGoal)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setExerciseTimeGoal:"), objref.IDOf(exerciseTimeGoal))
 	return as
 }
 
 // WithAppleStandHoursGoal sets the user’s daily goal for stand hours.
 func (as *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(appleStandHoursGoal)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setAppleStandHoursGoal:"), objref.IDOf(appleStandHoursGoal))
 	return as
 }
 
 // WithStandHoursGoal sets the user’s daily goal for stand hours.
 func (as *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary {
+	defer runtime.KeepAlive(standHoursGoal)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setStandHoursGoal:"), objref.IDOf(standHoursGoal))
 	return as
 }
 
 // DateComponentsForCalendar date components that uniquely identify the day represented by the summary object.
-func (as *ActivitySummary) DateComponentsForCalendar(calendar obj.Object) obj.Object {
+func (as *ActivitySummary) DateComponentsForCalendar(calendar obj.Object) *foundation.DateComponents {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(calendar)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("dateComponentsForCalendar:"), objref.IDOf(calendar))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 // ActivityMoveMode returns the move mode of this activity summary The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
 func (as *ActivitySummary) ActivityMoveMode() ActivityMoveMode {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[ActivityMoveMode](objref.IDOf(as), objc.RegisterName("activityMoveMode"))
 	return _r
 }
 
 // IsPaused reports whether the paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
 func (as *ActivitySummary) IsPaused() bool {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[bool](objref.IDOf(as), objc.RegisterName("isPaused"))
 	return _r
 }
 
 // ActiveEnergyBurned returns the amount of active energy that the user burned. This quantity is compatible with energy units.
 func (as *ActivitySummary) ActiveEnergyBurned() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("activeEnergyBurned"))
 	return QuantityFromID(_r)
 }
 
 // AppleMoveTime returns the amount of move time that the user performed. This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
 func (as *ActivitySummary) AppleMoveTime() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("appleMoveTime"))
 	return QuantityFromID(_r)
 }
 
 // AppleExerciseTime returns the amount of exercise time that the user performed. This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
 func (as *ActivitySummary) AppleExerciseTime() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("appleExerciseTime"))
 	return QuantityFromID(_r)
 }
 
 // AppleStandHours returns the number of stand hours that the user earned. This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
 func (as *ActivitySummary) AppleStandHours() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("appleStandHours"))
 	return QuantityFromID(_r)
 }
 
 // ActiveEnergyBurnedGoal returns the user's active energy goal for the day. This quantity is compatible with energy units.
 func (as *ActivitySummary) ActiveEnergyBurnedGoal() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("activeEnergyBurnedGoal"))
 	return QuantityFromID(_r)
 }
 
 // AppleMoveTimeGoal returns the user's move time goal for the day. This quantity is compatible with time units.
 func (as *ActivitySummary) AppleMoveTimeGoal() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("appleMoveTimeGoal"))
 	return QuantityFromID(_r)
 }
 
 // AppleExerciseTimeGoal returns the user's exercise time goal for the day. This quantity is compatible with time units.
 func (as *ActivitySummary) AppleExerciseTimeGoal() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("appleExerciseTimeGoal"))
 	return QuantityFromID(_r)
 }
 
 // ExerciseTimeGoal returns the user's exercise time goal for the day. This quantity is compatible with time units.
 func (as *ActivitySummary) ExerciseTimeGoal() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("exerciseTimeGoal"))
 	return QuantityFromID(_r)
 }
 
 // AppleStandHoursGoal returns the user's active stand hours goal for the day. This quantity is compatible with the count unit.
 func (as *ActivitySummary) AppleStandHoursGoal() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("appleStandHoursGoal"))
 	return QuantityFromID(_r)
 }
 
 // StandHoursGoal returns the user's active stand hours goal for the day. This quantity is compatible with the count unit.
 func (as *ActivitySummary) StandHoursGoal() *Quantity {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("standHoursGoal"))
 	return QuantityFromID(_r)
 }

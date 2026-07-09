@@ -5,9 +5,12 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,18 +57,20 @@ func NewContainerIdentifier() *ContainerIdentifier {
 
 // WithUUID sets a UUID to uniquely identify this entity.
 func (ci *ContainerIdentifier) WithUUID(uuid obj.Object) *ContainerIdentifier {
+	defer runtime.KeepAlive(uuid)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return ci
 }
 
 // WithQualifier sets an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (ci *ContainerIdentifier) WithQualifier(qualifier obj.Object) *ContainerIdentifier {
-	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+func (ci *ContainerIdentifier) WithQualifier(qualifier []byte) *ContainerIdentifier {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setQualifier:"), rt.BytesToNSData(qualifier))
 	return ci
 }
 
 // VolumeIdentifier returns the volume identifier.
 func (ci *ContainerIdentifier) VolumeIdentifier() *VolumeIdentifier {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("volumeIdentifier"))
 	return VolumeIdentifierFromID(_r)
 }

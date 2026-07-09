@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -69,6 +71,16 @@ func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputSt
 	return outputStreamAdopt(_id)
 }
 
+// WithDelegate sets the delegate.
+func (os *OutputStream) WithDelegate(delegate StreamDelegate) *OutputStream {
+	_shim := newStreamDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(os), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(os), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return os
+}
+
 // WithObservationInfo sets the observation info.
 func (os *OutputStream) WithObservationInfo(observationInfo unsafe.Pointer) *OutputStream {
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setObservationInfo:"), observationInfo)
@@ -76,20 +88,22 @@ func (os *OutputStream) WithObservationInfo(observationInfo unsafe.Pointer) *Out
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (os *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
-	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (os *OutputStream) WithScriptingProperties(scriptingProperties map[string]obj.Object) *OutputStream {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return os
 }
 
 // WriteMaxLength writes max length.
-func (os *OutputStream) WriteMaxLength(len_ int) (result int, buffer uint8) {
+func (os *OutputStream) WriteMaxLength(length int) (result int, buffer uint8) {
+	defer runtime.KeepAlive(os)
 	var _out0 uint8
-	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("write:maxLength:"), unsafe.Pointer(&_out0), len_)
+	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("write:maxLength:"), unsafe.Pointer(&_out0), length)
 	return _r, _out0
 }
 
 // HasSpaceAvailable reports whether the object has space available.
 func (os *OutputStream) HasSpaceAvailable() bool {
+	defer runtime.KeepAlive(os)
 	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasSpaceAvailable"))
 	return _r
 }

@@ -51,6 +51,17 @@ func New(domain string, code int) *Error {
 	return &Error{domain: domain, code: code}
 }
 
+// FromCode converts a C status-code return (for example a Hypervisor
+// hv_return_t) into a Go error: nil when code equals success, otherwise an
+// [*Error] carrying the domain and code so callers can match generated
+// sentinels with errors.Is.
+func FromCode(domain string, code, success int64) error {
+	if code == success {
+		return nil
+	}
+	return New(domain, int(code))
+}
+
 // Domain returns the error domain (e.g. "VZErrorDomain").
 func (e *Error) Domain() string { return e.domain }
 

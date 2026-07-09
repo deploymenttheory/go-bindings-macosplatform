@@ -5,6 +5,8 @@
 package audiotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewParameterTree() *ParameterTree {
 
 // ParameterWithAddress searches the tree for a parameter with a specific address.
 func (pt *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("parameterWithAddress:"), address)
 	return ParameterFromID(_r)
 }
 
 // ParameterWithIDScopeElement searches the tree for a specific version 2 audio unit parameter.
 func (pt *ParameterTree) ParameterWithIDScopeElement(paramID int, scope int, element int) *Parameter {
+	defer runtime.KeepAlive(pt)
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("parameterWithID:scope:element:"), paramID, scope, element)
 	return ParameterFromID(_r)
 }

@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -73,6 +76,30 @@ func (lvc *LeaderboardViewController) WithCategory(category string) *Leaderboard
 	return lvc
 }
 
+// WithLeaderboardDelegate sets the view controller’s delegate.
+func (lvc *LeaderboardViewController) WithLeaderboardDelegate(leaderboardDelegate LeaderboardViewControllerDelegate) *LeaderboardViewController {
+	_shim := newLeaderboardViewControllerDelegateShim(leaderboardDelegate)
+	_sel := objc.RegisterName("setLeaderboardDelegate:")
+	shim.Associate(objref.IDOf(lvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return lvc
+}
+
+// WithGameCenterDelegate sets the view controller’s delegate.
+func (lvc *LeaderboardViewController) WithGameCenterDelegate(gameCenterDelegate GameCenterControllerDelegate) *LeaderboardViewController {
+	_shim := newGameCenterControllerDelegateShim(gameCenterDelegate)
+	_sel := objc.RegisterName("setGameCenterDelegate:")
+	shim.Associate(objref.IDOf(lvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return lvc
+}
+
 // WithViewState sets the view state.
 func (lvc *LeaderboardViewController) WithViewState(viewState GameCenterViewControllerState) *LeaderboardViewController {
 	purego.Main(func() {
@@ -107,6 +134,7 @@ func (lvc *LeaderboardViewController) WithLeaderboardCategory(leaderboardCategor
 
 // TimeScope returns the time scope.
 func (lvc *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
+	defer runtime.KeepAlive(lvc)
 	var _mainthread0 LeaderboardTimeScope
 	purego.Main(func() {
 		_mainthread0 = func() LeaderboardTimeScope {
@@ -120,6 +148,7 @@ func (lvc *LeaderboardViewController) TimeScope() LeaderboardTimeScope {
 
 // Category returns the category.
 func (lvc *LeaderboardViewController) Category() string {
+	defer runtime.KeepAlive(lvc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

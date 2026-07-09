@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func residencySetDescriptorAdopt(id objc.ID) *ResidencySetDescriptor {
 
 // Description returns the object's -description text.
 func (rsd *ResidencySetDescriptor) Description() string {
+	defer runtime.KeepAlive(rsd)
 	return rt.Description(objref.IDOf(rsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rsd *ResidencySetDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rsd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rsd *ResidencySetDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(rsd)
 	return rt.IsKind(objref.IDOf(rsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rsd *ResidencySetDescriptor) String() string {
+	defer runtime.KeepAlive(rsd)
 	return rt.Description(objref.IDOf(rsd))
 }
 
@@ -86,6 +93,7 @@ func (rsd *ResidencySetDescriptor) WithInitialCapacity(initialCapacity int) *Res
 
 // Label returns an optional label for the MTLResidencySet.
 func (rsd *ResidencySetDescriptor) Label() string {
+	defer runtime.KeepAlive(rsd)
 	_r := objc.Send[objc.ID](objref.IDOf(rsd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

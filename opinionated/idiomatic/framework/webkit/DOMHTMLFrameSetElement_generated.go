@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -165,6 +167,7 @@ func (dfse *DOMHTMLFrameSetElement) WithTextContent(textContent string) *DOMHTML
 
 // Cols returns the cols.
 func (dfse *DOMHTMLFrameSetElement) Cols() string {
+	defer runtime.KeepAlive(dfse)
 	_r := objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("cols"))
 	if _r == 0 {
 		return ""
@@ -174,6 +177,7 @@ func (dfse *DOMHTMLFrameSetElement) Cols() string {
 
 // Rows returns the rows.
 func (dfse *DOMHTMLFrameSetElement) Rows() string {
+	defer runtime.KeepAlive(dfse)
 	_r := objc.Send[objc.ID](objref.IDOf(dfse), objc.RegisterName("rows"))
 	if _r == 0 {
 		return ""

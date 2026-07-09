@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func filePromiseReceiverAdopt(id objc.ID) *FilePromiseReceiver {
 
 // Description returns the object's -description text.
 func (fpr *FilePromiseReceiver) Description() string {
+	defer runtime.KeepAlive(fpr)
 	return rt.Description(objref.IDOf(fpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpr *FilePromiseReceiver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpr *FilePromiseReceiver) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpr)
 	return rt.IsKind(objref.IDOf(fpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpr *FilePromiseReceiver) String() string {
+	defer runtime.KeepAlive(fpr)
 	return rt.Description(objref.IDOf(fpr))
 }
 
@@ -79,6 +85,9 @@ func NewFilePromiseReceiver() *FilePromiseReceiver {
 //
 // ReceivePromisedFilesAtDestinationOptionsOperationQueueReader blocks until the operation completes or ctx is cancelled.
 func (fpr *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperationQueueReader(ctx context.Context, destinationDir string, options obj.Object, operationQueue obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(fpr)
+	defer runtime.KeepAlive(options)
+	defer runtime.KeepAlive(operationQueue)
 	type _result struct {
 		val obj.Object
 		err error
@@ -104,6 +113,7 @@ func (fpr *FilePromiseReceiver) ReceivePromisedFilesAtDestinationOptionsOperatio
 //
 // FileTypes returns the collection as a Go slice.
 func (fpr *FilePromiseReceiver) FileTypes() []string {
+	defer runtime.KeepAlive(fpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("fileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -112,6 +122,7 @@ func (fpr *FilePromiseReceiver) FileTypes() []string {
 //
 // FileNames returns the collection as a Go slice.
 func (fpr *FilePromiseReceiver) FileNames() []string {
+	defer runtime.KeepAlive(fpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("fileNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

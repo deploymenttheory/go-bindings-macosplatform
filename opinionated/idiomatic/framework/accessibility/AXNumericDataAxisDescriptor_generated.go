@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func numericDataAxisDescriptorAdopt(id objc.ID) *NumericDataAxisDescriptor {
 
 // Description returns the object's -description text.
 func (ndad *NumericDataAxisDescriptor) Description() string {
+	defer runtime.KeepAlive(ndad)
 	return rt.Description(objref.IDOf(ndad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ndad *NumericDataAxisDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ndad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ndad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ndad *NumericDataAxisDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(ndad)
 	return rt.IsKind(objref.IDOf(ndad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ndad *NumericDataAxisDescriptor) String() string {
+	defer runtime.KeepAlive(ndad)
 	return rt.Description(objref.IDOf(ndad))
 }
 
@@ -99,18 +106,21 @@ func (ndad *NumericDataAxisDescriptor) WithGridlinePositions(items ...obj.Object
 
 // ScaleType returns the scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
 func (ndad *NumericDataAxisDescriptor) ScaleType() NumericDataAxisDescriptorScale {
+	defer runtime.KeepAlive(ndad)
 	_r := objc.Send[NumericDataAxisDescriptorScale](objref.IDOf(ndad), objc.RegisterName("scaleType"))
 	return _r
 }
 
 // LowerBound returns the minimum displayable value for the axis.
 func (ndad *NumericDataAxisDescriptor) LowerBound() float64 {
+	defer runtime.KeepAlive(ndad)
 	_r := objc.Send[float64](objref.IDOf(ndad), objc.RegisterName("lowerBound"))
 	return _r
 }
 
 // UpperBound returns the maximum displayable value for the axis.
 func (ndad *NumericDataAxisDescriptor) UpperBound() float64 {
+	defer runtime.KeepAlive(ndad)
 	_r := objc.Send[float64](objref.IDOf(ndad), objc.RegisterName("upperBound"))
 	return _r
 }
@@ -119,6 +129,7 @@ func (ndad *NumericDataAxisDescriptor) UpperBound() float64 {
 //
 // GridlinePositions returns the collection as a Go slice.
 func (ndad *NumericDataAxisDescriptor) GridlinePositions() []obj.Object {
+	defer runtime.KeepAlive(ndad)
 	_arr := objc.Send[objc.ID](objref.IDOf(ndad), objc.RegisterName("gridlinePositions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

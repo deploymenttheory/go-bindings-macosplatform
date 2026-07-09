@@ -5,6 +5,8 @@
 package storekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func productSubscriptionPeriodAdopt(id objc.ID) *ProductSubscriptionPeriod {
 
 // Description returns the object's -description text.
 func (psp *ProductSubscriptionPeriod) Description() string {
+	defer runtime.KeepAlive(psp)
 	return rt.Description(objref.IDOf(psp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (psp *ProductSubscriptionPeriod) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(psp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(psp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (psp *ProductSubscriptionPeriod) IsKind(className string) bool {
+	defer runtime.KeepAlive(psp)
 	return rt.IsKind(objref.IDOf(psp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (psp *ProductSubscriptionPeriod) String() string {
+	defer runtime.KeepAlive(psp)
 	return rt.Description(objref.IDOf(psp))
 }
 
@@ -74,12 +81,14 @@ func NewProductSubscriptionPeriod() *ProductSubscriptionPeriod {
 
 // NumberOfUnits returns the number of units.
 func (psp *ProductSubscriptionPeriod) NumberOfUnits() int {
+	defer runtime.KeepAlive(psp)
 	_r := objc.Send[int](objref.IDOf(psp), objc.RegisterName("numberOfUnits"))
 	return _r
 }
 
 // Unit returns the unit.
 func (psp *ProductSubscriptionPeriod) Unit() ProductPeriodUnit {
+	defer runtime.KeepAlive(psp)
 	_r := objc.Send[ProductPeriodUnit](objref.IDOf(psp), objc.RegisterName("unit"))
 	return _r
 }

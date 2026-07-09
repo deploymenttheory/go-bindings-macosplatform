@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func rNNMatrixInferenceLayerAdopt(id objc.ID) *RNNMatrixInferenceLayer {
 
 // Description returns the object's -description text.
 func (rmil *RNNMatrixInferenceLayer) Description() string {
+	defer runtime.KeepAlive(rmil)
 	return rt.Description(objref.IDOf(rmil))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rmil *RNNMatrixInferenceLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rmil)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rmil), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rmil *RNNMatrixInferenceLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(rmil)
 	return rt.IsKind(objref.IDOf(rmil), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rmil *RNNMatrixInferenceLayer) String() string {
+	defer runtime.KeepAlive(rmil)
 	return rt.Description(objref.IDOf(rmil))
 }
 
@@ -90,36 +97,42 @@ func (rmil *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalC
 
 // InputFeatureChannels returns the number of feature channels input vector/matrix.
 func (rmil *RNNMatrixInferenceLayer) InputFeatureChannels() int {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels in the output vector/matrix.
 func (rmil *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // NumberOfLayers returns number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
 func (rmil *RNNMatrixInferenceLayer) NumberOfLayers() int {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
 // RecurrentOutputIsTemporary reports whether how output states from
 func (rmil *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
 // StoreAllIntermediateStates reports whether if true then calls to
 func (rmil *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }
 
 // BidirectionalCombineMode defines how to combine the output-results, when encoding bidirectional layers using
 func (rmil *RNNMatrixInferenceLayer) BidirectionalCombineMode() RNNBidirectionalCombineMode {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[RNNBidirectionalCombineMode](objref.IDOf(rmil), objc.RegisterName("bidirectionalCombineMode"))
 	return _r
 }

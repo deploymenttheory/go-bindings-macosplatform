@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -55,12 +57,14 @@ func NewProjectAssetElement() *ProjectAssetElement {
 
 // CloudAssetIdentifier returns cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
 func (pae *ProjectAssetElement) CloudAssetIdentifier() obj.Object {
+	defer runtime.KeepAlive(pae)
 	_r := objc.Send[objc.ID](objref.IDOf(pae), objc.RegisterName("cloudAssetIdentifier"))
 	return obj.Wrap(_r)
 }
 
 // Annotation returns if a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
 func (pae *ProjectAssetElement) Annotation() string {
+	defer runtime.KeepAlive(pae)
 	_r := objc.Send[objc.ID](objref.IDOf(pae), objc.RegisterName("annotation"))
 	if _r == 0 {
 		return ""
@@ -70,6 +74,7 @@ func (pae *ProjectAssetElement) Annotation() string {
 
 // CropRect returns if the asset was presented to the user in a cropped manner in Photos either automatically or through user manipulation (pan & zoom) before the creation of the project, the visible image area shown to the user will be provided as a crop rect. As a fallback, Photos may suggest a general "safe crop" based on image content through this property. The rect is in unit coordinates with an upper left origin. Default value: {(0.0, 0.0), (1.0,1.0)}
 func (pae *ProjectAssetElement) CropRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(pae)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pae), objc.RegisterName("cropRect"))
 	return _r
 }
@@ -78,18 +83,21 @@ func (pae *ProjectAssetElement) CropRect() corefoundation.CGRect {
 //
 // RegionsOfInterest returns the collection as a Go slice.
 func (pae *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
+	defer runtime.KeepAlive(pae)
 	_arr := objc.Send[objc.ID](objref.IDOf(pae), objc.RegisterName("regionsOfInterest"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectRegionOfInterest { return ProjectRegionOfInterestFromID(_id) })
 }
 
 // HorizontallyFlipped reports whether the following properties are only used when the user creates a new project from an existing Apple Print Product. true if the asset was presented horizontally flipped in the originating project.
 func (pae *ProjectAssetElement) HorizontallyFlipped() bool {
+	defer runtime.KeepAlive(pae)
 	_r := objc.Send[bool](objref.IDOf(pae), objc.RegisterName("horizontallyFlipped"))
 	return _r
 }
 
 // VerticallyFlipped reports whether the asset was presented vertically flipped in the originating project.
 func (pae *ProjectAssetElement) VerticallyFlipped() bool {
+	defer runtime.KeepAlive(pae)
 	_r := objc.Send[bool](objref.IDOf(pae), objc.RegisterName("verticallyFlipped"))
 	return _r
 }

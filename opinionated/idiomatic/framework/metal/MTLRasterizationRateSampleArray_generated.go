@@ -5,7 +5,10 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func rasterizationRateSampleArrayAdopt(id objc.ID) *RasterizationRateSampleArray
 
 // Description returns the object's -description text.
 func (rrsa *RasterizationRateSampleArray) Description() string {
+	defer runtime.KeepAlive(rrsa)
 	return rt.Description(objref.IDOf(rrsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rrsa *RasterizationRateSampleArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rrsa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rrsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rrsa *RasterizationRateSampleArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(rrsa)
 	return rt.IsKind(objref.IDOf(rrsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rrsa *RasterizationRateSampleArray) String() string {
+	defer runtime.KeepAlive(rrsa)
 	return rt.Description(objref.IDOf(rrsa))
 }
 
@@ -73,12 +81,15 @@ func NewRasterizationRateSampleArray() *RasterizationRateSampleArray {
 }
 
 // ObjectAtIndexedSubscript retrieves the sample value at the specified index.
-func (rrsa *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index int) obj.Object {
+func (rrsa *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index int) *foundation.Number {
+	defer runtime.KeepAlive(rrsa)
 	_r := objc.Send[objc.ID](objref.IDOf(rrsa), objc.RegisterName("objectAtIndexedSubscript:"), index)
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript stores a sample value at the specified index.
 func (rrsa *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value obj.Object, index int) {
+	defer runtime.KeepAlive(rrsa)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(rrsa), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(value), index)
 }

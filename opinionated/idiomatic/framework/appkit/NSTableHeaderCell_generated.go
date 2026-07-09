@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,6 +63,7 @@ func NewTableHeaderCell() *TableHeaderCell {
 
 // WithBackgroundColor sets the color of the cell’s background.
 func (thc *TableHeaderCell) WithBackgroundColor(backgroundColor *Color) *TableHeaderCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -77,6 +80,7 @@ func (thc *TableHeaderCell) WithDrawsBackground(drawsBackground bool) *TableHead
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (thc *TableHeaderCell) WithTextColor(textColor *Color) *TableHeaderCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -101,6 +105,7 @@ func (thc *TableHeaderCell) WithPlaceholderString(placeholderString string) *Tab
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (thc *TableHeaderCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TableHeaderCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -118,6 +123,7 @@ func (thc *TableHeaderCell) WithAllowedInputSourceLocales(items ...obj.Object) *
 
 // WithControlView sets the view associated with the cell.
 func (thc *TableHeaderCell) WithControlView(controlView ViewProvider) *TableHeaderCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -142,6 +148,7 @@ func (thc *TableHeaderCell) WithState(state int) *TableHeaderCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (thc *TableHeaderCell) WithTarget(target obj.Object) *TableHeaderCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -246,6 +253,7 @@ func (thc *TableHeaderCell) WithWraps(wraps bool) *TableHeaderCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (thc *TableHeaderCell) WithFont(font *Font) *TableHeaderCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -254,6 +262,7 @@ func (thc *TableHeaderCell) WithFont(font *Font) *TableHeaderCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (thc *TableHeaderCell) WithFormatter(formatter obj.Object) *TableHeaderCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -262,6 +271,7 @@ func (thc *TableHeaderCell) WithFormatter(formatter obj.Object) *TableHeaderCell
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (thc *TableHeaderCell) WithObjectValue(objectValue obj.Object) *TableHeaderCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -310,6 +320,7 @@ func (thc *TableHeaderCell) WithIntegerValue(integerValue int) *TableHeaderCell 
 
 // WithImage sets the image displayed by the cell, if any.
 func (thc *TableHeaderCell) WithImage(image *Image) *TableHeaderCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -326,6 +337,7 @@ func (thc *TableHeaderCell) WithControlSize(controlSize ControlSize) *TableHeade
 
 // WithRepresentedObject sets the object represented by the cell.
 func (thc *TableHeaderCell) WithRepresentedObject(representedObject obj.Object) *TableHeaderCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -334,6 +346,7 @@ func (thc *TableHeaderCell) WithRepresentedObject(representedObject obj.Object) 
 
 // WithMenu sets the cell’s contextual menu.
 func (thc *TableHeaderCell) WithMenu(menu *Menu) *TableHeaderCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -422,6 +435,7 @@ func (thc *TableHeaderCell) WithFocusRingType(focusRingType FocusRingType) *Tabl
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (thc *TableHeaderCell) WithAttributedStringValue(attributedStringValue obj.Object) *TableHeaderCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -470,6 +484,8 @@ func (thc *TableHeaderCell) WithControlTint(controlTint ControlTint) *TableHeade
 
 // DrawSortIndicatorWithFrameInViewAscendingPriority draws a sorting indicator given a cell frame contained inside a view.
 func (thc *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *View, ascending bool, priority int) {
+	defer runtime.KeepAlive(thc)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(thc), objc.RegisterName("drawSortIndicatorWithFrame:inView:ascending:priority:"), cellFrame, objref.IDOf(controlView), ascending, priority)
 	})
@@ -478,6 +494,7 @@ func (thc *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(ce
 
 // SortIndicatorRectForBounds returns the location to display the sorting indicator given theRect.
 func (thc *TableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(thc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {

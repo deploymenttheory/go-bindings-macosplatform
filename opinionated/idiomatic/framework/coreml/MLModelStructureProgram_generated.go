@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramAdopt(id objc.ID) *ModelStructureProgram {
 
 // Description returns the object's -description text.
 func (msp *ModelStructureProgram) Description() string {
+	defer runtime.KeepAlive(msp)
 	return rt.Description(objref.IDOf(msp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msp *ModelStructureProgram) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msp *ModelStructureProgram) IsKind(className string) bool {
+	defer runtime.KeepAlive(msp)
 	return rt.IsKind(objref.IDOf(msp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msp *ModelStructureProgram) String() string {
+	defer runtime.KeepAlive(msp)
 	return rt.Description(objref.IDOf(msp))
 }
 
@@ -73,7 +80,8 @@ func NewModelStructureProgram() *ModelStructureProgram {
 }
 
 // Functions returns the functions.
-func (msp *ModelStructureProgram) Functions() obj.Object {
+func (msp *ModelStructureProgram) Functions() map[string]*ModelStructureProgramFunction {
+	defer runtime.KeepAlive(msp)
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("functions"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *ModelStructureProgramFunction { return ModelStructureProgramFunctionFromID(_id) })
 }

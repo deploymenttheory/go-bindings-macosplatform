@@ -5,7 +5,10 @@
 package installerplugins
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func installerSectionAdopt(id objc.ID) *InstallerSection {
 
 // Description returns the object's -description text.
 func (is *InstallerSection) Description() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (is *InstallerSection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (is *InstallerSection) IsKind(className string) bool {
+	defer runtime.KeepAlive(is)
 	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (is *InstallerSection) String() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
@@ -72,34 +80,41 @@ func NewInstallerSection() *InstallerSection {
 
 // WillLoadMainNib each InstallerSection object can define a default nib to be loaded by the Installer at the optimal time.  Before this default nib is loaded willLoadMainNib will be called.  didLoadMainNib is called when the nib is successfully loaded.  The nib may be loaded way before the content is display on the screen, so awakeFromNib methods should not assume the content is displayed to the user.  WillEnter/DidEnter method should be used to determine when views are actually "in view." A default nib is specified for a section in the Info.plist for the section using the NSMainNibFile key. A subclass can override this method to do any necessary work before the main nib is loaded or to actually load a custom nib if no default nib is specified.
 func (is *InstallerSection) WillLoadMainNib() {
+	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("willLoadMainNib"))
 }
 
 // DidLoadMainNib called immediatly after the default nib for the section is loaded. If no default nib is specified, didLoadMainNib is called immediately after willLoadMainNib is called. didLoadMainNib is called before the section's panes are in view.
 func (is *InstallerSection) DidLoadMainNib() {
+	defer runtime.KeepAlive(is)
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("didLoadMainNib"))
 }
 
 // SharedDictionary returns a global Mutable Dictionary which is global to the Install session. Use this dictionary to pass information between sections. This dictionary should not be used to store state for your section or its panes.
 func (is *InstallerSection) SharedDictionary() obj.Object {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("sharedDictionary"))
 	return obj.Wrap(_r)
 }
 
 // GotoPane this method causes the current pane to exit and "pane" to be made active.  This effectively replaces the current pane and does not place the current pane onto the pane stack. gotoPane does not invoke shouldExit method for the current pane. gotoPane is typically not overriden by a subclass.
 func (is *InstallerSection) GotoPane(pane *InstallerPane) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(pane)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("gotoPane:"), objref.IDOf(pane))
 	return _r
 }
 
 // Bundle returns this method returns the NSBundle in which the InstallerSection is located.  Since InstallerSection is not typically overriden, the bundle returned may not necessarily be the same bundle as the InstallerSection class. Use this method to gain access to bundle resources.
-func (is *InstallerSection) Bundle() obj.Object {
+func (is *InstallerSection) Bundle() *foundation.Bundle {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("bundle"))
-	return obj.Wrap(_r)
+	return foundation.BundleFromID(_r)
 }
 
 // Title returns the title for the section defined in the Info.plist file for the section's bundle.  The title retrieved using the "InstallerSectionTitle" key in the Info.plist for the section's bundle and that key must be present in the InfoPlist.strings file for title to be localized. Although subclasses can override this method and return a dynamic title at runtime, the title is only retrieved for display once (immediatly following the shouldLoad method, if shouldLoad returns YES).
 func (is *InstallerSection) Title() string {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -109,24 +124,28 @@ func (is *InstallerSection) Title() string {
 
 // FirstPane returns the first pane specified by the firstPane outlet.  This pane is the first pane entered when the section first becomes active.
 func (is *InstallerSection) FirstPane() *InstallerPane {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("firstPane"))
 	return InstallerPaneFromID(_r)
 }
 
 // ShouldLoad reports whether called when a section is first about to be fully loaded. By default this method returns true. A Subclass can override this method and determine at runtime if the section makes sense. Return false and the section will not be further loaded. sections are never fully unloaded.
 func (is *InstallerSection) ShouldLoad() bool {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("shouldLoad"))
 	return _r
 }
 
 // InstallerState returns the Installer State object for the current install session. Returns an object which describes the Installer choices and status at the given time.  Plugins cannot influence this state, it should only be used for informational purposes.  See InstallerState.h for more details.
 func (is *InstallerSection) InstallerState() *InstallerState {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("installerState"))
 	return InstallerStateFromID(_r)
 }
 
 // ActivePane returns the current active page for this section. If the section is active, it will return the current active page.  If the section is not active, nil will be returned.
 func (is *InstallerSection) ActivePane() *InstallerPane {
+	defer runtime.KeepAlive(is)
 	_r := objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("activePane"))
 	return InstallerPaneFromID(_r)
 }

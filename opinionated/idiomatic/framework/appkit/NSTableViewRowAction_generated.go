@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tableViewRowActionAdopt(id objc.ID) *TableViewRowAction {
 
 // Description returns the object's -description text.
 func (tvra *TableViewRowAction) Description() string {
+	defer runtime.KeepAlive(tvra)
 	return rt.Description(objref.IDOf(tvra))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tvra *TableViewRowAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tvra)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tvra), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tvra *TableViewRowAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(tvra)
 	return rt.IsKind(objref.IDOf(tvra), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tvra *TableViewRowAction) String() string {
+	defer runtime.KeepAlive(tvra)
 	return rt.Description(objref.IDOf(tvra))
 }
 
@@ -80,24 +87,28 @@ func (tvra *TableViewRowAction) WithTitle(title string) *TableViewRowAction {
 
 // WithBackgroundColor sets the background color of the action button.
 func (tvra *TableViewRowAction) WithBackgroundColor(backgroundColor *Color) *TableViewRowAction {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return tvra
 }
 
 // WithImage sets the image.
 func (tvra *TableViewRowAction) WithImage(image *Image) *TableViewRowAction {
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return tvra
 }
 
 // Style returns the style.
 func (tvra *TableViewRowAction) Style() TableViewRowActionStyle {
+	defer runtime.KeepAlive(tvra)
 	_r := objc.Send[TableViewRowActionStyle](objref.IDOf(tvra), objc.RegisterName("style"))
 	return _r
 }
 
 // Title returns the title.
 func (tvra *TableViewRowAction) Title() string {
+	defer runtime.KeepAlive(tvra)
 	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -107,12 +118,14 @@ func (tvra *TableViewRowAction) Title() string {
 
 // BackgroundColor returns the background color.
 func (tvra *TableViewRowAction) BackgroundColor() *Color {
+	defer runtime.KeepAlive(tvra)
 	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
 // Image returns the image.
 func (tvra *TableViewRowAction) Image() *Image {
+	defer runtime.KeepAlive(tvra)
 	_r := objc.Send[objc.ID](objref.IDOf(tvra), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }

@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func aVB17221EntityAdopt(id objc.ID) *AVB17221Entity {
 
 // Description returns the object's -description text.
 func (ae *AVB17221Entity) Description() string {
+	defer runtime.KeepAlive(ae)
 	return rt.Description(objref.IDOf(ae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ae *AVB17221Entity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ae)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ae *AVB17221Entity) IsKind(className string) bool {
+	defer runtime.KeepAlive(ae)
 	return rt.IsKind(objref.IDOf(ae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ae *AVB17221Entity) String() string {
+	defer runtime.KeepAlive(ae)
 	return rt.Description(objref.IDOf(ae))
 }
 
@@ -181,108 +188,126 @@ func (ae *AVB17221Entity) WithMACAddresses(items ...*MACAddress) *AVB17221Entity
 
 // WithEntityDiscovery sets the AVB17221EntityDiscovery object which discovered the entity.
 func (ae *AVB17221Entity) WithEntityDiscovery(entityDiscovery *AVB17221EntityDiscovery) *AVB17221Entity {
+	defer runtime.KeepAlive(entityDiscovery)
 	objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("setEntityDiscovery:"), objref.IDOf(entityDiscovery))
 	return ae
 }
 
 // IsLocalEntity reports whether the entity is published locally on the machine and false if the entity has been discovered on the network.
 func (ae *AVB17221Entity) IsLocalEntity() bool {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[bool](objref.IDOf(ae), objc.RegisterName("isLocalEntity"))
 	return _r
 }
 
 // TimeToLive returns the number of seconds left until the entity registration times out.
 func (ae *AVB17221Entity) TimeToLive() uint8 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint8](objref.IDOf(ae), objc.RegisterName("timeToLive"))
 	return _r
 }
 
 // EntityID returns the Unique Identifier (entity_id) of the entity.
 func (ae *AVB17221Entity) EntityID() uint64 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("entityID"))
 	return _r
 }
 
 // EntityModelID returns the Entity Model Unique Identifier (entity_model_id) of the entity.
 func (ae *AVB17221Entity) EntityModelID() uint64 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("entityModelID"))
 	return _r
 }
 
 // EntityCapabilities returns the entity_capabilities of the entity.
 func (ae *AVB17221Entity) EntityCapabilities() AVB17221ADPEntityCapabilities {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[AVB17221ADPEntityCapabilities](objref.IDOf(ae), objc.RegisterName("entityCapabilities"))
 	return _r
 }
 
 // TalkerStreamSources returns the number of stream sources the entity has.
 func (ae *AVB17221Entity) TalkerStreamSources() uint16 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("talkerStreamSources"))
 	return _r
 }
 
 // TalkerCapabilities returns the talker_capabilities of the entity.
 func (ae *AVB17221Entity) TalkerCapabilities() AVB17221ADPTalkerCapabilities {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[AVB17221ADPTalkerCapabilities](objref.IDOf(ae), objc.RegisterName("talkerCapabilities"))
 	return _r
 }
 
 // ListenerStreamSinks returns the number of stream sinks the entity has.
 func (ae *AVB17221Entity) ListenerStreamSinks() uint16 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("listenerStreamSinks"))
 	return _r
 }
 
 // ListenerCapabilities returns the listener_capabilities of the entity.
 func (ae *AVB17221Entity) ListenerCapabilities() AVB17221ADPListenerCapabilities {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[AVB17221ADPListenerCapabilities](objref.IDOf(ae), objc.RegisterName("listenerCapabilities"))
 	return _r
 }
 
 // ControllerCapabilities returns the controller_capabilities of the entity.
 func (ae *AVB17221Entity) ControllerCapabilities() AVB17221ADPControllerCapabilities {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[AVB17221ADPControllerCapabilities](objref.IDOf(ae), objc.RegisterName("controllerCapabilities"))
 	return _r
 }
 
 // AvailableIndex returns the available_index of the entity.
 func (ae *AVB17221Entity) AvailableIndex() uint32 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint32](objref.IDOf(ae), objc.RegisterName("availableIndex"))
 	return _r
 }
 
 // GPTPGrandmasterID returns the clock identifier of the IEEE Std 802.1AS-2011 grandmaster of the entity.
 func (ae *AVB17221Entity) GPTPGrandmasterID() uint64 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("gPTPGrandmasterID"))
 	return _r
 }
 
 // GPTPDomainNumber returns the domain number of the IEEE Std 802.1AS-2011 grandmaster of the entity.
 func (ae *AVB17221Entity) GPTPDomainNumber() uint8 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint8](objref.IDOf(ae), objc.RegisterName("gPTPDomainNumber"))
 	return _r
 }
 
 // IdentifyControlIndex returns the descriptor_index of the CONTROL which implements the IDENTIFY for the entity if supported.
 func (ae *AVB17221Entity) IdentifyControlIndex() uint16 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("identifyControlIndex"))
 	return _r
 }
 
 // InterfaceIndex returns the descriptor_index of the AVB_INTERFACE descriptor which is associated with this entity.
 func (ae *AVB17221Entity) InterfaceIndex() uint16 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("interfaceIndex"))
 	return _r
 }
 
 // AssociationID returns the association_id of the entity.
 func (ae *AVB17221Entity) AssociationID() uint64 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint64](objref.IDOf(ae), objc.RegisterName("associationID"))
 	return _r
 }
 
 // CurrentConfigurationIndex returns the descriptor_index of the current CONFIGURATION. This is only valid if entityCapabilities includes AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid
 func (ae *AVB17221Entity) CurrentConfigurationIndex() uint16 {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[uint16](objref.IDOf(ae), objc.RegisterName("currentConfigurationIndex"))
 	return _r
 }
@@ -291,12 +316,14 @@ func (ae *AVB17221Entity) CurrentConfigurationIndex() uint16 {
 //
 // MACAddresses returns the collection as a Go slice.
 func (ae *AVB17221Entity) MACAddresses() []*MACAddress {
+	defer runtime.KeepAlive(ae)
 	_arr := objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("macAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MACAddress { return MACAddressFromID(_id) })
 }
 
 // EntityDiscovery returns the AVB17221EntityDiscovery object which discovered the entity.
 func (ae *AVB17221Entity) EntityDiscovery() *AVB17221EntityDiscovery {
+	defer runtime.KeepAlive(ae)
 	_r := objc.Send[objc.ID](objref.IDOf(ae), objc.RegisterName("entityDiscovery"))
 	return AVB17221EntityDiscoveryFromID(_r)
 }

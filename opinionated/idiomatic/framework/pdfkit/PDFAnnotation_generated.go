@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,27 +53,34 @@ func annotationAdopt(id objc.ID) *Annotation {
 
 // Description returns the object's -description text.
 func (a *Annotation) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Annotation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Annotation) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Annotation) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // NewAnnotationWithBoundsForTypeWithProperties creates a PDF annotation with the specified bounds, type, and optional properties.
 func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType obj.Object, properties obj.Object) *Annotation {
+	defer runtime.KeepAlive(annotationType)
+	defer runtime.KeepAlive(properties)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBounds:forType:withProperties:"), bounds, objref.IDOf(annotationType), objref.IDOf(properties))
 	return annotationAdopt(_id)
@@ -80,6 +88,8 @@ func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, 
 
 // NewAnnotationWithDictionaryForPage creates a new Annotation.
 func NewAnnotationWithDictionaryForPage(dictionary obj.Object, page *Page) *Annotation {
+	defer runtime.KeepAlive(dictionary)
+	defer runtime.KeepAlive(page)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFAnnotation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:forPage:"), objref.IDOf(dictionary), objref.IDOf(page))
 	return annotationAdopt(_id)
@@ -94,6 +104,7 @@ func NewAnnotationWithBounds(bounds corefoundation.CGRect) *Annotation {
 
 // WithPage sets returns the page that the annotation is associated with.
 func (a *Annotation) WithPage(page *Page) *Annotation {
+	defer runtime.KeepAlive(page)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return a
 }
@@ -178,18 +189,21 @@ func (a *Annotation) WithMouseUpAction(mouseUpAction unsafe.Pointer) *Annotation
 
 // WithFont sets the font the annotation uses to display text.
 func (a *Annotation) WithFont(font obj.Object) *Annotation {
+	defer runtime.KeepAlive(font)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return a
 }
 
 // WithFontColor sets the font color the annotation uses to display text.
 func (a *Annotation) WithFontColor(fontColor obj.Object) *Annotation {
+	defer runtime.KeepAlive(fontColor)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return a
 }
 
 // WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
 func (a *Annotation) WithInteriorColor(interiorColor obj.Object) *Annotation {
+	defer runtime.KeepAlive(interiorColor)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return a
 }
@@ -239,6 +253,7 @@ func (a *Annotation) WithMarkupType(markupType MarkupType) *Annotation {
 
 // WithWidgetFieldType sets the type of widget annotation, such as button, choice, or text.
 func (a *Annotation) WithWidgetFieldType(widgetFieldType obj.Object) *Annotation {
+	defer runtime.KeepAlive(widgetFieldType)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWidgetFieldType:"), objref.IDOf(widgetFieldType))
 	return a
 }
@@ -337,13 +352,14 @@ func (a *Annotation) WithOpen(open bool) *Annotation {
 
 // WithDestination sets the destination for a link annotation.
 func (a *Annotation) WithDestination(destination *Destination) *Annotation {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return a
 }
 
 // WithURL sets a URL for a link annotation.
-func (a *Annotation) WithURL(uRL string) *Annotation {
-	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (a *Annotation) WithURL(url string) *Annotation {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return a
 }
 
@@ -361,6 +377,7 @@ func (a *Annotation) WithCaption(caption string) *Annotation {
 
 // WithBackgroundColor sets the color of the widget’s background.
 func (a *Annotation) WithBackgroundColor(backgroundColor obj.Object) *Annotation {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return a
 }
@@ -373,46 +390,61 @@ func (a *Annotation) WithStampName(stampName string) *Annotation {
 
 // DrawWithBoxInContext draws the annotation in a graphics context using page-space coordinates relative to the origin of the specified box.
 func (a *Annotation) DrawWithBoxInContext(box DisplayBox, context_ obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:inContext:"), box, objref.IDOf(context_))
 }
 
 // SetValueForAnnotationKey sets a value in the annotation’s dictionary.
 func (a *Annotation) SetValueForAnnotationKey(value obj.Object, key obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(value)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setValue:forAnnotationKey:"), objref.IDOf(value), objref.IDOf(key))
 	return _r
 }
 
 // SetBooleanForAnnotationKey sets a Boolean value in the annotation’s dictionary.
 func (a *Annotation) SetBooleanForAnnotationKey(value bool, key obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setBoolean:forAnnotationKey:"), value, objref.IDOf(key))
 	return _r
 }
 
 // SetRectForAnnotationKey sets a rectangle value in the annotation’s dictionary.
 func (a *Annotation) SetRectForAnnotationKey(value corefoundation.CGRect, key obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("setRect:forAnnotationKey:"), value, objref.IDOf(key))
 	return _r
 }
 
 // ValueForAnnotationKey returns a deep copy of the key-value pairs of properties for the specified key.
 func (a *Annotation) ValueForAnnotationKey(key obj.Object) obj.Object {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("valueForAnnotationKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // RemoveValueForAnnotationKey removes a value from the annotation’s dictionary.
 func (a *Annotation) RemoveValueForAnnotationKey(key obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeValueForAnnotationKey:"), objref.IDOf(key))
 }
 
 // Page returns the page.
 func (a *Annotation) Page() *Page {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
 // Type returns the type.
 func (a *Annotation) Type() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -422,98 +454,117 @@ func (a *Annotation) Type() string {
 
 // Bounds returns the bounds.
 func (a *Annotation) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(a), objc.RegisterName("bounds"))
 	return _r
 }
 
 // ShouldDisplay wraps the corresponding Objective-C method.
 func (a *Annotation) ShouldDisplay() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("shouldDisplay"))
 	return _r
 }
 
 // ShouldPrint wraps the corresponding Objective-C method.
 func (a *Annotation) ShouldPrint() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("shouldPrint"))
 	return _r
 }
 
 // HasAppearanceStream reports whether the object has appearance stream.
 func (a *Annotation) HasAppearanceStream() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasAppearanceStream"))
 	return _r
 }
 
 // IsHighlighted reports whether the object is highlighted.
 func (a *Annotation) IsHighlighted() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
 // RemoveAllAppearanceStreams removes all appearance streams.
 func (a *Annotation) RemoveAllAppearanceStreams() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeAllAppearanceStreams"))
 }
 
 // DrawWithBox draws with box.
 func (a *Annotation) DrawWithBox(box DisplayBox) {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("drawWithBox:"), box)
 }
 
 // AddBezierPath adds a bezier path to the ink annotation.
 func (a *Annotation) AddBezierPath(path obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addBezierPath:"), objref.IDOf(path))
 }
 
 // RemoveBezierPath removes a bezier path from an ink annotation.
 func (a *Annotation) RemoveBezierPath(path obj.Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeBezierPath:"), objref.IDOf(path))
 }
 
 // Font returns the font.
 func (a *Annotation) Font() obj.Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("font"))
 	return obj.Wrap(_r)
 }
 
 // FontColor returns the font color.
 func (a *Annotation) FontColor() obj.Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fontColor"))
 	return obj.Wrap(_r)
 }
 
 // InteriorColor returns the interior color.
 func (a *Annotation) InteriorColor() obj.Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("interiorColor"))
 	return obj.Wrap(_r)
 }
 
 // StartPoint returns the start point.
 func (a *Annotation) StartPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(a), objc.RegisterName("startPoint"))
 	return _r
 }
 
 // EndPoint returns the end point.
 func (a *Annotation) EndPoint() corefoundation.CGPoint {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(a), objc.RegisterName("endPoint"))
 	return _r
 }
 
 // StartLineStyle returns the start line style.
 func (a *Annotation) StartLineStyle() LineStyle {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[LineStyle](objref.IDOf(a), objc.RegisterName("startLineStyle"))
 	return _r
 }
 
 // EndLineStyle returns the end line style.
 func (a *Annotation) EndLineStyle() LineStyle {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[LineStyle](objref.IDOf(a), objc.RegisterName("endLineStyle"))
 	return _r
 }
 
 // IconType returns the icon type.
 func (a *Annotation) IconType() TextAnnotationIconType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[TextAnnotationIconType](objref.IDOf(a), objc.RegisterName("iconType"))
 	return _r
 }
@@ -522,18 +573,21 @@ func (a *Annotation) IconType() TextAnnotationIconType {
 //
 // QuadrilateralPoints returns the collection as a Go slice.
 func (a *Annotation) QuadrilateralPoints() []obj.Object {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("quadrilateralPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MarkupType returns the markup type.
 func (a *Annotation) MarkupType() MarkupType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[MarkupType](objref.IDOf(a), objc.RegisterName("markupType"))
 	return _r
 }
 
 // WidgetFieldType returns the widget field type.
 func (a *Annotation) WidgetFieldType() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetFieldType"))
 	if _r == 0 {
 		return ""
@@ -543,42 +597,49 @@ func (a *Annotation) WidgetFieldType() string {
 
 // WidgetControlType returns the widget control type.
 func (a *Annotation) WidgetControlType() WidgetControlType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[WidgetControlType](objref.IDOf(a), objc.RegisterName("widgetControlType"))
 	return _r
 }
 
 // IsMultiline reports whether the object is multiline.
 func (a *Annotation) IsMultiline() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isMultiline"))
 	return _r
 }
 
 // IsActivatableTextField reports whether the object is activatable text field.
 func (a *Annotation) IsActivatableTextField() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActivatableTextField"))
 	return _r
 }
 
 // IsPasswordField reports whether the object is password field.
 func (a *Annotation) IsPasswordField() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isPasswordField"))
 	return _r
 }
 
 // HasComb reports whether the object has comb.
 func (a *Annotation) HasComb() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasComb"))
 	return _r
 }
 
 // MaximumLength returns the maximum length.
 func (a *Annotation) MaximumLength() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("maximumLength"))
 	return _r
 }
 
 // WidgetStringValue returns the widget string value.
 func (a *Annotation) WidgetStringValue() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetStringValue"))
 	if _r == 0 {
 		return ""
@@ -588,6 +649,7 @@ func (a *Annotation) WidgetStringValue() string {
 
 // WidgetDefaultStringValue returns the widget default string value.
 func (a *Annotation) WidgetDefaultStringValue() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("widgetDefaultStringValue"))
 	if _r == 0 {
 		return ""
@@ -597,24 +659,28 @@ func (a *Annotation) WidgetDefaultStringValue() string {
 
 // AllowsToggleToOff wraps the corresponding Objective-C method.
 func (a *Annotation) AllowsToggleToOff() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("allowsToggleToOff"))
 	return _r
 }
 
 // RadiosInUnison wraps the corresponding Objective-C method.
 func (a *Annotation) RadiosInUnison() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("radiosInUnison"))
 	return _r
 }
 
 // IsReadOnly reports whether the object is read only.
 func (a *Annotation) IsReadOnly() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
 // IsListChoice reports whether the object is list choice.
 func (a *Annotation) IsListChoice() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isListChoice"))
 	return _r
 }
@@ -623,6 +689,7 @@ func (a *Annotation) IsListChoice() bool {
 //
 // Choices returns the collection as a Go slice.
 func (a *Annotation) Choices() []string {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("choices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -631,18 +698,21 @@ func (a *Annotation) Choices() []string {
 //
 // Values returns the collection as a Go slice.
 func (a *Annotation) Values() []string {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("values"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ButtonWidgetState returns the button widget state.
 func (a *Annotation) ButtonWidgetState() WidgetCellState {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[WidgetCellState](objref.IDOf(a), objc.RegisterName("buttonWidgetState"))
 	return _r
 }
 
 // ButtonWidgetStateString returns the button widget state string.
 func (a *Annotation) ButtonWidgetStateString() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("buttonWidgetStateString"))
 	if _r == 0 {
 		return ""
@@ -652,6 +722,7 @@ func (a *Annotation) ButtonWidgetStateString() string {
 
 // IsOpen reports whether the object is open.
 func (a *Annotation) IsOpen() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isOpen"))
 	return _r
 }
@@ -660,24 +731,28 @@ func (a *Annotation) IsOpen() bool {
 //
 // Paths returns the collection as a Go slice.
 func (a *Annotation) Paths() []obj.Object {
+	defer runtime.KeepAlive(a)
 	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("paths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Destination returns the destination.
 func (a *Annotation) Destination() *Destination {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }
 
 // URL returns the URL.
-func (a *Annotation) URL() obj.Object {
+func (a *Annotation) URL() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // FieldName returns the field name.
 func (a *Annotation) FieldName() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fieldName"))
 	if _r == 0 {
 		return ""
@@ -687,6 +762,7 @@ func (a *Annotation) FieldName() string {
 
 // Caption returns the caption.
 func (a *Annotation) Caption() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("caption"))
 	if _r == 0 {
 		return ""
@@ -696,12 +772,14 @@ func (a *Annotation) Caption() string {
 
 // BackgroundColor returns the background color.
 func (a *Annotation) BackgroundColor() obj.Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
 // StampName returns the stamp name.
 func (a *Annotation) StampName() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stampName"))
 	if _r == 0 {
 		return ""

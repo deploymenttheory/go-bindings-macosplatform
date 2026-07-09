@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -143,48 +145,56 @@ func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataE
 
 // VertexBufferOffset returns vertex buffer offset. Must be a multiple of the vertex stride and must be aligned to the platform's buffer offset alignment.
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) VertexBufferOffset() int {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("vertexBufferOffset"))
 	return _r
 }
 
 // VertexFormat returns format type of the vertex buffer. Defaults to MTLAttributeFormatFloat3 (packed).
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) VertexFormat() AttributeFormat {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[AttributeFormat](objref.IDOf(astgd), objc.RegisterName("vertexFormat"))
 	return _r
 }
 
 // VertexStride returns stride, in bytes, between vertices in the vertex buffer. Must be a multiple of the vertex format data type size and must be aligned to the vertex format data type's alignment. Defaults to 0, which will result in a stride of the vertex format data size.
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) VertexStride() int {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("vertexStride"))
 	return _r
 }
 
 // IndexBufferOffset returns index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) IndexBufferOffset() int {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
 // IndexType returns index type
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) IndexType() IndexType {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[IndexType](objref.IDOf(astgd), objc.RegisterName("indexType"))
 	return _r
 }
 
 // TriangleCount returns number of triangles
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) TriangleCount() int {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("triangleCount"))
 	return _r
 }
 
 // TransformationMatrixBufferOffset returns transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBufferOffset() int {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("transformationMatrixBufferOffset"))
 	return _r
 }
 
 // TransformationMatrixLayout returns matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
 func (astgd *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MatrixLayout {
+	defer runtime.KeepAlive(astgd)
 	_r := objc.Send[MatrixLayout](objref.IDOf(astgd), objc.RegisterName("transformationMatrixLayout"))
 	return _r
 }

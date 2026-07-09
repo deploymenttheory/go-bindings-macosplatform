@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 )
 
 // supportFS embeds the static source of the idiomatic layer's support packages.
@@ -34,6 +34,7 @@ var supportFiles = []supportFile{
 	{src: "errkit.txt", rel: "errkit/errkit_generated.go"},
 	{src: "obj.txt", rel: "obj/obj_generated.go"},
 	{src: "dispatch.txt", rel: "internal/dispatch/dispatch_generated.go"},
+	{src: "shim.txt", rel: "internal/shim/shim_generated.go"},
 }
 
 // EmitSupportPackages writes the idiomatic layer's hand-independent support

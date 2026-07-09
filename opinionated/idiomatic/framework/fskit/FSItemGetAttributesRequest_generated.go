@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func itemGetAttributesRequestAdopt(id objc.ID) *ItemGetAttributesRequest {
 
 // Description returns the object's -description text.
 func (igar *ItemGetAttributesRequest) Description() string {
+	defer runtime.KeepAlive(igar)
 	return rt.Description(objref.IDOf(igar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (igar *ItemGetAttributesRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(igar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(igar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (igar *ItemGetAttributesRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(igar)
 	return rt.IsKind(objref.IDOf(igar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (igar *ItemGetAttributesRequest) String() string {
+	defer runtime.KeepAlive(igar)
 	return rt.Description(objref.IDOf(igar))
 }
 
@@ -78,12 +85,14 @@ func (igar *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes Item
 
 // IsAttributeWanted a method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
 func (igar *ItemGetAttributesRequest) IsAttributeWanted(attribute ItemAttribute) bool {
+	defer runtime.KeepAlive(igar)
 	_r := objc.Send[bool](objref.IDOf(igar), objc.RegisterName("isAttributeWanted:"), attribute)
 	return _r
 }
 
 // WantedAttributes returns the attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 func (igar *ItemGetAttributesRequest) WantedAttributes() ItemAttribute {
+	defer runtime.KeepAlive(igar)
 	_r := objc.Send[ItemAttribute](objref.IDOf(igar), objc.RegisterName("wantedAttributes"))
 	return _r
 }

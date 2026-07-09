@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,30 +52,35 @@ func mTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsAdopt(id ob
 
 // Description returns the object's -description text.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Description() string {
+	defer runtime.KeepAlive(mutctetfserp)
 	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctetfserp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctetfserp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctetfserp)
 	return rt.IsKind(objref.IDOf(mutctetfserp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) String() string {
+	defer runtime.KeepAlive(mutctetfserp)
 	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
-// NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+// NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValue initialize an MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,26 +89,30 @@ func NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResp
 
 // WithValue sets the value.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mutctetfserp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mutctetfserp
 }
 
 // Value returns the value.
-func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Value() obj.Object {
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Value() *foundation.Number {
+	defer runtime.KeepAlive(mutctetfserp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mutctetfserp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams marks MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams — and, by embedding promotion, its

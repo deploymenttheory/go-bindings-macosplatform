@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func managedObjectIDAdopt(id objc.ID) *ManagedObjectID {
 
 // Description returns the object's -description text.
 func (moi *ManagedObjectID) Description() string {
+	defer runtime.KeepAlive(moi)
 	return rt.Description(objref.IDOf(moi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moi *ManagedObjectID) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moi *ManagedObjectID) IsKind(className string) bool {
+	defer runtime.KeepAlive(moi)
 	return rt.IsKind(objref.IDOf(moi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moi *ManagedObjectID) String() string {
+	defer runtime.KeepAlive(moi)
 	return rt.Description(objref.IDOf(moi))
 }
 
@@ -73,25 +80,29 @@ func NewManagedObjectID() *ManagedObjectID {
 }
 
 // URIRepresentation returns a URI that provides an archiveable reference to the object for the object ID.
-func (moi *ManagedObjectID) URIRepresentation() obj.Object {
+func (moi *ManagedObjectID) URIRepresentation() string {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("URIRepresentation"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Entity returns the entity.
 func (moi *ManagedObjectID) Entity() *EntityDescription {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // PersistentStore returns the persistent store.
 func (moi *ManagedObjectID) PersistentStore() *PersistentStore {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[objc.ID](objref.IDOf(moi), objc.RegisterName("persistentStore"))
 	return PersistentStoreFromID(_r)
 }
 
 // IsTemporaryID reports whether the object is temporary ID.
 func (moi *ManagedObjectID) IsTemporaryID() bool {
+	defer runtime.KeepAlive(moi)
 	_r := objc.Send[bool](objref.IDOf(moi), objc.RegisterName("isTemporaryID"))
 	return _r
 }

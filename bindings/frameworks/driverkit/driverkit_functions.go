@@ -185,24 +185,24 @@ func IOMalloc(length uint) unsafe.Pointer {
 	return _fnIOMalloc(length)
 }
 
-func IOMallocTyped(length uint, type_id uint64) unsafe.Pointer {
-	return _fnIOMallocTyped(length, type_id)
+func IOMallocTyped(length uint, typeId uint64) unsafe.Pointer {
+	return _fnIOMallocTyped(length, typeId)
 }
 
 func IOMallocZero(length uint) unsafe.Pointer {
 	return _fnIOMallocZero(length)
 }
 
-func IOMallocZeroTyped(length uint, type_id uint64) unsafe.Pointer {
-	return _fnIOMallocZeroTyped(length, type_id)
+func IOMallocZeroTyped(length uint, typeId uint64) unsafe.Pointer {
+	return _fnIOMallocZeroTyped(length, typeId)
 }
 
-func IOParseBootArgNumber(arg_string string, arg_ptr unsafe.Pointer, max_len int) bool {
-	return _fnIOParseBootArgNumber(arg_string, arg_ptr, max_len)
+func IOParseBootArgNumber(argString string, argPtr unsafe.Pointer, maxLen int) bool {
+	return _fnIOParseBootArgNumber(argString, argPtr, maxLen)
 }
 
-func IOParseBootArgString(arg_string string, arg_ptr string, strlen int) bool {
-	return _fnIOParseBootArgString(arg_string, arg_ptr, strlen)
+func IOParseBootArgString(argString string, argPtr string, strlen int) bool {
+	return _fnIOParseBootArgString(argString, argPtr, strlen)
 }
 
 func IORPCMessageFromMach(msg *IORPCMessageMach, reply bool) *IORPCMessage {
@@ -549,8 +549,8 @@ func Insque(entry *QueueEntry, pred *QueueEntry) {
 }
 
 // C function: movqueue
-func Movqueue(_old *QueueEntry, _new *QueueEntry) {
-	_movqueue(_old, _new)
+func Movqueue(old *QueueEntry, new_ *QueueEntry) {
+	_movqueue(old, new_)
 }
 
 // C function: re_queue_head

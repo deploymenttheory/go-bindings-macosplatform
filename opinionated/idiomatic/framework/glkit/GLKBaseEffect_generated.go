@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func baseEffectAdopt(id objc.ID) *BaseEffect {
 
 // Description returns the object's -description text.
 func (be *BaseEffect) Description() string {
+	defer runtime.KeepAlive(be)
 	return rt.Description(objref.IDOf(be))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (be *BaseEffect) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(be)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(be), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (be *BaseEffect) IsKind(className string) bool {
+	defer runtime.KeepAlive(be)
 	return rt.IsKind(objref.IDOf(be), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (be *BaseEffect) String() string {
+	defer runtime.KeepAlive(be)
 	return rt.Description(objref.IDOf(be))
 }
 
@@ -121,71 +127,83 @@ func (be *BaseEffect) WithLabel(label string) *BaseEffect {
 
 // PrepareToDraw prepares an effect for rendering.
 func (be *BaseEffect) PrepareToDraw() {
+	defer runtime.KeepAlive(be)
 	objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("prepareToDraw"))
 }
 
 // ColorMaterialEnabled returns the color material enabled.
 func (be *BaseEffect) ColorMaterialEnabled() uint8 {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[uint8](objref.IDOf(be), objc.RegisterName("colorMaterialEnabled"))
 	return _r
 }
 
 // LightModelTwoSided returns the light model two sided.
 func (be *BaseEffect) LightModelTwoSided() uint8 {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[uint8](objref.IDOf(be), objc.RegisterName("lightModelTwoSided"))
 	return _r
 }
 
 // UseConstantColor returns the use constant color.
 func (be *BaseEffect) UseConstantColor() uint8 {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[uint8](objref.IDOf(be), objc.RegisterName("useConstantColor"))
 	return _r
 }
 
 // Transform returns the transform.
 func (be *BaseEffect) Transform() *EffectPropertyTransform {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }
 
 // Light0 returns the light0.
 func (be *BaseEffect) Light0() *EffectPropertyLight {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("light0"))
 	return EffectPropertyLightFromID(_r)
 }
 
 // Light1 returns the light1.
 func (be *BaseEffect) Light1() *EffectPropertyLight {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("light1"))
 	return EffectPropertyLightFromID(_r)
 }
 
 // Light2 returns the light2.
 func (be *BaseEffect) Light2() *EffectPropertyLight {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("light2"))
 	return EffectPropertyLightFromID(_r)
 }
 
 // LightingType returns the lighting type.
 func (be *BaseEffect) LightingType() LightingType {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[LightingType](objref.IDOf(be), objc.RegisterName("lightingType"))
 	return _r
 }
 
 // Material returns the material.
 func (be *BaseEffect) Material() *EffectPropertyMaterial {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("material"))
 	return EffectPropertyMaterialFromID(_r)
 }
 
 // Texture2d0 returns the texture2d0.
 func (be *BaseEffect) Texture2d0() *EffectPropertyTexture {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("texture2d0"))
 	return EffectPropertyTextureFromID(_r)
 }
 
 // Texture2d1 returns the texture2d1.
 func (be *BaseEffect) Texture2d1() *EffectPropertyTexture {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("texture2d1"))
 	return EffectPropertyTextureFromID(_r)
 }
@@ -194,18 +212,21 @@ func (be *BaseEffect) Texture2d1() *EffectPropertyTexture {
 //
 // TextureOrder returns the collection as a Go slice.
 func (be *BaseEffect) TextureOrder() []*EffectPropertyTexture {
+	defer runtime.KeepAlive(be)
 	_arr := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("textureOrder"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EffectPropertyTexture { return EffectPropertyTextureFromID(_id) })
 }
 
 // Fog returns the fog.
 func (be *BaseEffect) Fog() *EffectPropertyFog {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("fog"))
 	return EffectPropertyFogFromID(_r)
 }
 
 // Label returns the label.
 func (be *BaseEffect) Label() string {
+	defer runtime.KeepAlive(be)
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

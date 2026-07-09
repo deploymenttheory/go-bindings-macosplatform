@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mutableFileDataBufferAdopt(id objc.ID) *MutableFileDataBuffer {
 
 // Description returns the object's -description text.
 func (mfdb *MutableFileDataBuffer) Description() string {
+	defer runtime.KeepAlive(mfdb)
 	return rt.Description(objref.IDOf(mfdb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mfdb *MutableFileDataBuffer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mfdb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mfdb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mfdb *MutableFileDataBuffer) IsKind(className string) bool {
+	defer runtime.KeepAlive(mfdb)
 	return rt.IsKind(objref.IDOf(mfdb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mfdb *MutableFileDataBuffer) String() string {
+	defer runtime.KeepAlive(mfdb)
 	return rt.Description(objref.IDOf(mfdb))
 }
 
@@ -74,6 +81,7 @@ func NewMutableFileDataBuffer() *MutableFileDataBuffer {
 
 // Length returns the data length of the buffer.
 func (mfdb *MutableFileDataBuffer) Length() int {
+	defer runtime.KeepAlive(mfdb)
 	_r := objc.Send[int](objref.IDOf(mfdb), objc.RegisterName("length"))
 	return _r
 }

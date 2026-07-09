@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func wKNavigationResponseAdopt(id objc.ID) *WKNavigationResponse {
 
 // Description returns the object's -description text.
 func (wnr *WKNavigationResponse) Description() string {
+	defer runtime.KeepAlive(wnr)
 	return rt.Description(objref.IDOf(wnr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wnr *WKNavigationResponse) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wnr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wnr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wnr *WKNavigationResponse) IsKind(className string) bool {
+	defer runtime.KeepAlive(wnr)
 	return rt.IsKind(objref.IDOf(wnr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wnr *WKNavigationResponse) String() string {
+	defer runtime.KeepAlive(wnr)
 	return rt.Description(objref.IDOf(wnr))
 }
 
@@ -80,6 +88,7 @@ func NewWKNavigationResponse() *WKNavigationResponse {
 
 // IsForMainFrame reports whether the frame being navigated is the main frame.
 func (wnr *WKNavigationResponse) IsForMainFrame() bool {
+	defer runtime.KeepAlive(wnr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -92,12 +101,13 @@ func (wnr *WKNavigationResponse) IsForMainFrame() bool {
 }
 
 // Response returns the frame's response.
-func (wnr *WKNavigationResponse) Response() obj.Object {
-	var _mainthread0 obj.Object
+func (wnr *WKNavigationResponse) Response() *foundation.URLResponse {
+	defer runtime.KeepAlive(wnr)
+	var _mainthread0 *foundation.URLResponse
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.URLResponse {
 			_r := objc.Send[objc.ID](objref.IDOf(wnr), objc.RegisterName("response"))
-			return obj.Wrap(_r)
+			return foundation.URLResponseFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -106,6 +116,7 @@ func (wnr *WKNavigationResponse) Response() obj.Object {
 
 // CanShowMIMEType reports whether webKit can display the response's MIME type natively. Allowing a navigation response with a MIME type that can't be shown will cause the navigation to fail.
 func (wnr *WKNavigationResponse) CanShowMIMEType() bool {
+	defer runtime.KeepAlive(wnr)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

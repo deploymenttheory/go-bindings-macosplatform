@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func mediaTimingFunctionAdopt(id objc.ID) *MediaTimingFunction {
 
 // Description returns the object's -description text.
 func (mtf *MediaTimingFunction) Description() string {
+	defer runtime.KeepAlive(mtf)
 	return rt.Description(objref.IDOf(mtf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtf *MediaTimingFunction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtf *MediaTimingFunction) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtf)
 	return rt.IsKind(objref.IDOf(mtf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtf *MediaTimingFunction) String() string {
+	defer runtime.KeepAlive(mtf)
 	return rt.Description(objref.IDOf(mtf))
 }
 
@@ -77,6 +83,7 @@ func NewMediaTimingFunctionWithControlPoints(c1x float32, c1y float32, c2x float
 
 // GetControlPointAtIndexValues returns the control point for the specified index.
 func (mtf *MediaTimingFunction) GetControlPointAtIndexValues(idx int) (ptr float32) {
+	defer runtime.KeepAlive(mtf)
 	var _out0 float32
 	objc.Send[objc.ID](objref.IDOf(mtf), objc.RegisterName("getControlPointAtIndex:values:"), idx, unsafe.Pointer(&_out0))
 	return _out0

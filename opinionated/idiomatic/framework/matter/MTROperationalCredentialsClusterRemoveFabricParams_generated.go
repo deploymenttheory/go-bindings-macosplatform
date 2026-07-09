@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROperationalCredentialsClusterRemoveFabricParamsAdopt(id objc.ID) *MTROpe
 
 // Description returns the object's -description text.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) Description() string {
+	defer runtime.KeepAlive(moccrfp)
 	return rt.Description(objref.IDOf(moccrfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moccrfp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moccrfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(moccrfp)
 	return rt.IsKind(objref.IDOf(moccrfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) String() string {
+	defer runtime.KeepAlive(moccrfp)
 	return rt.Description(objref.IDOf(moccrfp))
 }
 
@@ -72,36 +80,42 @@ func NewMTROperationalCredentialsClusterRemoveFabricParams() *MTROperationalCred
 
 // WithFabricIndex sets the fabric index.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return moccrfp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return moccrfp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return moccrfp
 }
 
 // FabricIndex returns the fabric index.
-func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() obj.Object {
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(moccrfp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() obj.Object {
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(moccrfp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() obj.Object {
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(moccrfp)
 	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

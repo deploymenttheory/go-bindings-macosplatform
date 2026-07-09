@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func pickerConfigurationAdopt(id objc.ID) *PickerConfiguration {
 
 // Description returns the object's -description text.
 func (pc *PickerConfiguration) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PickerConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PickerConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PickerConfiguration) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -72,6 +79,7 @@ func NewPickerConfiguration() *PickerConfiguration {
 
 // NewPickerConfigurationWithPhotoLibrary initializes a new configuration with the \c photoLibrary the picker should use.
 func NewPickerConfigurationWithPhotoLibrary(photoLibrary obj.Object) *PickerConfiguration {
+	defer runtime.KeepAlive(photoLibrary)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHPickerConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPhotoLibrary:"), objref.IDOf(photoLibrary))
 	return pickerConfigurationAdopt(_id)
@@ -97,6 +105,7 @@ func (pc *PickerConfiguration) WithSelectionLimit(selectionLimit int) *PickerCon
 
 // WithFilter sets types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
 func (pc *PickerConfiguration) WithFilter(filter *PickerFilter) *PickerConfiguration {
+	defer runtime.KeepAlive(filter)
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	return pc
 }
@@ -122,24 +131,28 @@ func (pc *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities Pic
 
 // PreferredAssetRepresentationMode returns the preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
 func (pc *PickerConfiguration) PreferredAssetRepresentationMode() PickerConfigurationAssetRepresentationMode {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[PickerConfigurationAssetRepresentationMode](objref.IDOf(pc), objc.RegisterName("preferredAssetRepresentationMode"))
 	return _r
 }
 
 // Selection returns the selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
 func (pc *PickerConfiguration) Selection() PickerConfigurationSelection {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[PickerConfigurationSelection](objref.IDOf(pc), objc.RegisterName("selection"))
 	return _r
 }
 
 // SelectionLimit returns the maximum number of assets that can be selected. Default is 1. Setting \c selectionLimit to 0 means maximum supported by the system.
 func (pc *PickerConfiguration) SelectionLimit() int {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("selectionLimit"))
 	return _r
 }
 
 // Filter returns types of assets that can be shown. Default is \c nil. Setting \c filter to \c nil means all asset types can be shown.
 func (pc *PickerConfiguration) Filter() *PickerFilter {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("filter"))
 	return PickerFilterFromID(_r)
 }
@@ -148,18 +161,21 @@ func (pc *PickerConfiguration) Filter() *PickerFilter {
 //
 // PreselectedAssetIdentifiers returns the collection as a Go slice.
 func (pc *PickerConfiguration) PreselectedAssetIdentifiers() []string {
+	defer runtime.KeepAlive(pc)
 	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("preselectedAssetIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Mode returns the mode of the picker. Default is \c PHPickerModeDefault.
 func (pc *PickerConfiguration) Mode() PickerMode {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[PickerMode](objref.IDOf(pc), objc.RegisterName("mode"))
 	return _r
 }
 
 // DisabledCapabilities returns capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
 func (pc *PickerConfiguration) DisabledCapabilities() PickerCapabilities {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[PickerCapabilities](objref.IDOf(pc), objc.RegisterName("disabledCapabilities"))
 	return _r
 }

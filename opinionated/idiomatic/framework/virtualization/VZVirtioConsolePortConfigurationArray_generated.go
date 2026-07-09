@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func virtioConsolePortConfigurationArrayAdopt(id objc.ID) *VirtioConsolePortConf
 
 // Description returns the object's -description text.
 func (vcpca *VirtioConsolePortConfigurationArray) Description() string {
+	defer runtime.KeepAlive(vcpca)
 	return rt.Description(objref.IDOf(vcpca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcpca *VirtioConsolePortConfigurationArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcpca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcpca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcpca *VirtioConsolePortConfigurationArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcpca)
 	return rt.IsKind(objref.IDOf(vcpca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcpca *VirtioConsolePortConfigurationArray) String() string {
+	defer runtime.KeepAlive(vcpca)
 	return rt.Description(objref.IDOf(vcpca))
 }
 
@@ -80,17 +87,21 @@ func (vcpca *VirtioConsolePortConfigurationArray) WithMaximumPortCount(maximumPo
 
 // ObjectAtIndexedSubscript returns the Virtio console port configuration as the specified index.
 func (vcpca *VirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePortConfiguration {
+	defer runtime.KeepAlive(vcpca)
 	_r := objc.Send[objc.ID](objref.IDOf(vcpca), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
 	return VirtioConsolePortConfigurationFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript set a port configuration at the specified index.
 func (vcpca *VirtioConsolePortConfigurationArray) SetObjectAtIndexedSubscript(configuration *VirtioConsolePortConfiguration, portIndex int) {
+	defer runtime.KeepAlive(vcpca)
+	defer runtime.KeepAlive(configuration)
 	objc.Send[objc.ID](objref.IDOf(vcpca), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(configuration), portIndex)
 }
 
 // MaximumPortCount returns the maximum number of ports allocated by this device. The default is the number of ports attached to this device.
 func (vcpca *VirtioConsolePortConfigurationArray) MaximumPortCount() uint32 {
+	defer runtime.KeepAlive(vcpca)
 	_r := objc.Send[uint32](objref.IDOf(vcpca), objc.RegisterName("maximumPortCount"))
 	return _r
 }

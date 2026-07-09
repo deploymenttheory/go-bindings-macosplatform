@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -73,12 +75,14 @@ func (sr *StatefulRequest) WithRevision(revision int) *StatefulRequest {
 
 // MinimumLatencyFrameCount returns the minimum number of frames that the request has to process on before reporting back any observation. This information is provided by the request once initialized with its required paramters. Video based request often need a minimum number of frames before they can report back any observation. An example would be that a movement detection requires at least 5 frames to be detected. The minimumLatencyFrameCount for that request would report 5 and only after 5 frames have been processed an observation would be returned in the results. This latency is indicative of how responsive a request is in respect to the incoming data.
 func (sr *StatefulRequest) MinimumLatencyFrameCount() int {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[int](objref.IDOf(sr), objc.RegisterName("minimumLatencyFrameCount"))
 	return _r
 }
 
 // FrameAnalysisSpacing returns the reciprocal of maximum rate at which buffers will be processed. The request will not process buffers that fall within the `frameAnalysisSpacing` after it has performed the analysis. The analysis is not done by wall time but by analysis of of the time stamps of the samplebuffers being processed.
 func (sr *StatefulRequest) FrameAnalysisSpacing() coremedia.CMTime {
+	defer runtime.KeepAlive(sr)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(sr), objc.RegisterName("frameAnalysisSpacing"))
 	return _r
 }

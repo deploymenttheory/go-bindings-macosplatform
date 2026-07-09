@@ -5,9 +5,12 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,14 +57,15 @@ func NewFileWithPath(path string) *File {
 }
 
 // NewFileWithNameData initializes a virtual file object This type of DRFile burns the data passed in to the output disc, creating a file with the passed in name.
-func NewFileWithNameData(name string, data obj.Object) *File {
+func NewFileWithNameData(name string, data []byte) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(name), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(name), rt.BytesToNSData(data))
 	return fileAdopt(_id)
 }
 
 // NewFileWithNameDataProducer initializes a virtual file object This type of DRFile burns the data produced to the output disc, creating a file with the passed in name.
 func NewFileWithNameDataProducer(name string, producer obj.Object) *File {
+	defer runtime.KeepAlive(producer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:dataProducer:"), purego.NSString(name), objref.IDOf(producer))
 	return fileAdopt(_id)
@@ -69,6 +73,7 @@ func NewFileWithNameDataProducer(name string, producer obj.Object) *File {
 
 // NewFileWithLinkTypePointingToInFilesystem initializes a file object to point to another file on the output disc.
 func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *FSObject, filesystem string) *File {
+	defer runtime.KeepAlive(original)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLinkType:pointingTo:inFilesystem:"), purego.NSString(linkType), objref.IDOf(original), purego.NSString(filesystem))
 	return fileAdopt(_id)

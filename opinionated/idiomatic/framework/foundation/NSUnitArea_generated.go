@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,8 +62,8 @@ func (ua *UnitArea) WithObservationInfo(observationInfo unsafe.Pointer) *UnitAre
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ua *UnitArea) WithScriptingProperties(scriptingProperties obj.Object) *UnitArea {
-	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ua *UnitArea) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UnitArea {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ua
 }
 

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,124 +47,137 @@ func attestationInfoAdopt(id objc.ID) *AttestationInfo {
 
 // Description returns the object's -description text.
 func (ai *AttestationInfo) Description() string {
+	defer runtime.KeepAlive(ai)
 	return rt.Description(objref.IDOf(ai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ai *AttestationInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ai *AttestationInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(ai)
 	return rt.IsKind(objref.IDOf(ai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ai *AttestationInfo) String() string {
+	defer runtime.KeepAlive(ai)
 	return rt.Description(objref.IDOf(ai))
 }
 
 // NewAttestationInfoWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo creates a new AttestationInfo.
-func NewAttestationInfoWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo(challenge obj.Object, nonce obj.Object, elements obj.Object, elementsSignature obj.Object, dac obj.Object, pai obj.Object, certificationDeclaration obj.Object, firmwareInfo obj.Object) *AttestationInfo {
+func NewAttestationInfoWithChallengeNonceElementsElementsSignatureDacPaiCertificationDeclarationFirmwareInfo(challenge []byte, nonce []byte, elements []byte, elementsSignature []byte, dac []byte, pai []byte, certificationDeclaration []byte, firmwareInfo []byte) *AttestationInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AttestationInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChallenge:nonce:elements:elementsSignature:dac:pai:certificationDeclaration:firmwareInfo:"), objref.IDOf(challenge), objref.IDOf(nonce), objref.IDOf(elements), objref.IDOf(elementsSignature), objref.IDOf(dac), objref.IDOf(pai), objref.IDOf(certificationDeclaration), objref.IDOf(firmwareInfo))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChallenge:nonce:elements:elementsSignature:dac:pai:certificationDeclaration:firmwareInfo:"), rt.BytesToNSData(challenge), rt.BytesToNSData(nonce), rt.BytesToNSData(elements), rt.BytesToNSData(elementsSignature), rt.BytesToNSData(dac), rt.BytesToNSData(pai), rt.BytesToNSData(certificationDeclaration), rt.BytesToNSData(firmwareInfo))
 	return attestationInfoAdopt(_id)
 }
 
 // WithChallenge sets the challenge.
-func (ai *AttestationInfo) WithChallenge(challenge obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setChallenge:"), objref.IDOf(challenge))
+func (ai *AttestationInfo) WithChallenge(challenge []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setChallenge:"), rt.BytesToNSData(challenge))
 	return ai
 }
 
 // WithNonce sets the nonce.
-func (ai *AttestationInfo) WithNonce(nonce obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
+func (ai *AttestationInfo) WithNonce(nonce []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setNonce:"), rt.BytesToNSData(nonce))
 	return ai
 }
 
 // WithElements sets the elements.
-func (ai *AttestationInfo) WithElements(elements obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setElements:"), objref.IDOf(elements))
+func (ai *AttestationInfo) WithElements(elements []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setElements:"), rt.BytesToNSData(elements))
 	return ai
 }
 
 // WithElementsSignature sets the elements signature.
-func (ai *AttestationInfo) WithElementsSignature(elementsSignature obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
+func (ai *AttestationInfo) WithElementsSignature(elementsSignature []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setElementsSignature:"), rt.BytesToNSData(elementsSignature))
 	return ai
 }
 
 // WithDac sets the dac.
-func (ai *AttestationInfo) WithDac(dac obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setDac:"), objref.IDOf(dac))
+func (ai *AttestationInfo) WithDac(dac []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setDac:"), rt.BytesToNSData(dac))
 	return ai
 }
 
 // WithPai sets the pai.
-func (ai *AttestationInfo) WithPai(pai obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setPai:"), objref.IDOf(pai))
+func (ai *AttestationInfo) WithPai(pai []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setPai:"), rt.BytesToNSData(pai))
 	return ai
 }
 
 // WithCertificationDeclaration sets the certification declaration.
-func (ai *AttestationInfo) WithCertificationDeclaration(certificationDeclaration obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setCertificationDeclaration:"), objref.IDOf(certificationDeclaration))
+func (ai *AttestationInfo) WithCertificationDeclaration(certificationDeclaration []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setCertificationDeclaration:"), rt.BytesToNSData(certificationDeclaration))
 	return ai
 }
 
 // WithFirmwareInfo sets the firmware info.
-func (ai *AttestationInfo) WithFirmwareInfo(firmwareInfo obj.Object) *AttestationInfo {
-	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setFirmwareInfo:"), objref.IDOf(firmwareInfo))
+func (ai *AttestationInfo) WithFirmwareInfo(firmwareInfo []byte) *AttestationInfo {
+	objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("setFirmwareInfo:"), rt.BytesToNSData(firmwareInfo))
 	return ai
 }
 
 // Challenge returns the challenge.
-func (ai *AttestationInfo) Challenge() obj.Object {
+func (ai *AttestationInfo) Challenge() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("challenge"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Nonce returns the nonce.
-func (ai *AttestationInfo) Nonce() obj.Object {
+func (ai *AttestationInfo) Nonce() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("nonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Elements returns the elements.
-func (ai *AttestationInfo) Elements() obj.Object {
+func (ai *AttestationInfo) Elements() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("elements"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ElementsSignature returns the elements signature.
-func (ai *AttestationInfo) ElementsSignature() obj.Object {
+func (ai *AttestationInfo) ElementsSignature() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("elementsSignature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Dac returns the dac.
-func (ai *AttestationInfo) Dac() obj.Object {
+func (ai *AttestationInfo) Dac() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("dac"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Pai returns the pai.
-func (ai *AttestationInfo) Pai() obj.Object {
+func (ai *AttestationInfo) Pai() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("pai"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CertificationDeclaration returns the certification declaration.
-func (ai *AttestationInfo) CertificationDeclaration() obj.Object {
+func (ai *AttestationInfo) CertificationDeclaration() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("certificationDeclaration"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FirmwareInfo returns the firmware info.
-func (ai *AttestationInfo) FirmwareInfo() obj.Object {
+func (ai *AttestationInfo) FirmwareInfo() []byte {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("firmwareInfo"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

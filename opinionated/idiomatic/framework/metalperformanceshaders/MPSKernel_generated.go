@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func kernelAdopt(id objc.ID) *Kernel {
 
 // Description returns the object's -description text.
 func (k *Kernel) Description() string {
+	defer runtime.KeepAlive(k)
 	return rt.Description(objref.IDOf(k))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (k *Kernel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(k)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(k), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (k *Kernel) IsKind(className string) bool {
+	defer runtime.KeepAlive(k)
 	return rt.IsKind(objref.IDOf(k), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (k *Kernel) String() string {
+	defer runtime.KeepAlive(k)
 	return rt.Description(objref.IDOf(k))
 }
 
 // NewKernelWithCoder called by NSCoder to decode MPSKernels This isn't the right interface to decode a MPSKernel, but it is the one that NSCoder uses. To enable your NSCoder (e.g. NSKeyedUnarchiver) to set which device to use extend the object to adopt the MPSDeviceProvider protocol. Otherwise, the Metal system default device will be used.
 func NewKernelWithCoder(aDecoder obj.Object) *Kernel {
+	defer runtime.KeepAlive(aDecoder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSKernel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
 	return kernelAdopt(_id)
@@ -83,6 +91,7 @@ func (k *Kernel) WithLabel(label string) *Kernel {
 
 // Label returns a string to help identify this object.
 func (k *Kernel) Label() string {
+	defer runtime.KeepAlive(k)
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func notificationTriggerAdopt(id objc.ID) *NotificationTrigger {
 
 // Description returns the object's -description text.
 func (nt *NotificationTrigger) Description() string {
+	defer runtime.KeepAlive(nt)
 	return rt.Description(objref.IDOf(nt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nt *NotificationTrigger) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nt *NotificationTrigger) IsKind(className string) bool {
+	defer runtime.KeepAlive(nt)
 	return rt.IsKind(objref.IDOf(nt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nt *NotificationTrigger) String() string {
+	defer runtime.KeepAlive(nt)
 	return rt.Description(objref.IDOf(nt))
 }
 
 // Repeats wraps the corresponding Objective-C method.
 func (nt *NotificationTrigger) Repeats() bool {
+	defer runtime.KeepAlive(nt)
 	_r := objc.Send[bool](objref.IDOf(nt), objc.RegisterName("repeats"))
 	return _r
 }

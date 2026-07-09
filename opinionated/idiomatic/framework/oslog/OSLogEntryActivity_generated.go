@@ -5,6 +5,8 @@
 package oslog
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewLogEntryActivity() *LogEntryActivity {
 
 // ParentActivityIdentifier returns this parent activity's activity ID.
 func (lea *LogEntryActivity) ParentActivityIdentifier() uint64 {
+	defer runtime.KeepAlive(lea)
 	_r := objc.Send[uint64](objref.IDOf(lea), objc.RegisterName("parentActivityIdentifier"))
 	return _r
 }

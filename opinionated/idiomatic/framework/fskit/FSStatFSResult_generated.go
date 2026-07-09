@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func statFSResultAdopt(id objc.ID) *StatFSResult {
 
 // Description returns the object's -description text.
 func (sfr *StatFSResult) Description() string {
+	defer runtime.KeepAlive(sfr)
 	return rt.Description(objref.IDOf(sfr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sfr *StatFSResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sfr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sfr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sfr *StatFSResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(sfr)
 	return rt.IsKind(objref.IDOf(sfr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sfr *StatFSResult) String() string {
+	defer runtime.KeepAlive(sfr)
 	return rt.Description(objref.IDOf(sfr))
 }
 
@@ -153,84 +160,98 @@ func (sfr *StatFSResult) WithFileSystemSubType(fileSystemSubType int) *StatFSRes
 
 // BlockSize returns a property for the volume's block size, in bytes. This value defaults to `4096`. Zero isn't a valid block size.
 func (sfr *StatFSResult) BlockSize() int {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[int](objref.IDOf(sfr), objc.RegisterName("blockSize"))
 	return _r
 }
 
 // IOSize returns a property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
 func (sfr *StatFSResult) IOSize() int {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[int](objref.IDOf(sfr), objc.RegisterName("ioSize"))
 	return _r
 }
 
 // TotalBlocks returns a property for the volume's total data block count.
 func (sfr *StatFSResult) TotalBlocks() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("totalBlocks"))
 	return _r
 }
 
 // AvailableBlocks returns a property for the number of free blocks available to a non-superuser on the volume.
 func (sfr *StatFSResult) AvailableBlocks() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("availableBlocks"))
 	return _r
 }
 
 // FreeBlocks returns a property for the number of free blocks in the volume.
 func (sfr *StatFSResult) FreeBlocks() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("freeBlocks"))
 	return _r
 }
 
 // UsedBlocks returns a property for the number of used blocks in the volume.
 func (sfr *StatFSResult) UsedBlocks() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("usedBlocks"))
 	return _r
 }
 
 // TotalBytes returns a property for the total size, in bytes, of the volume.
 func (sfr *StatFSResult) TotalBytes() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("totalBytes"))
 	return _r
 }
 
 // AvailableBytes returns a property for the amount of space available to users, in bytes, in the volume.
 func (sfr *StatFSResult) AvailableBytes() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("availableBytes"))
 	return _r
 }
 
 // FreeBytes returns a property for the amount of free space, in bytes, in the volume.
 func (sfr *StatFSResult) FreeBytes() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("freeBytes"))
 	return _r
 }
 
 // UsedBytes returns a property for the amount of used space, in bytes, in the volume.
 func (sfr *StatFSResult) UsedBytes() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("usedBytes"))
 	return _r
 }
 
 // TotalFiles returns a property for the total number of file slots in the volume,
 func (sfr *StatFSResult) TotalFiles() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("totalFiles"))
 	return _r
 }
 
 // FreeFiles returns a property for the total number of free file slots in the volume.
 func (sfr *StatFSResult) FreeFiles() uint64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[uint64](objref.IDOf(sfr), objc.RegisterName("freeFiles"))
 	return _r
 }
 
 // FileSystemSubType returns a property for the file system's subtype or flavor. Match this value to the `FSPersonalities`'s `FSSubType` attribute, if it exists within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`.
 func (sfr *StatFSResult) FileSystemSubType() int {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[int](objref.IDOf(sfr), objc.RegisterName("fileSystemSubType"))
 	return _r
 }
 
 // FileSystemTypeName returns a property for the file system type name. Match this value to the `FSShortName` attribute within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
 func (sfr *StatFSResult) FileSystemTypeName() string {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[objc.ID](objref.IDOf(sfr), objc.RegisterName("fileSystemTypeName"))
 	if _r == 0 {
 		return ""

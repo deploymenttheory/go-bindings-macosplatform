@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +51,9 @@ func mTRClusterDoorLockAdopt(id objc.ID) *MTRClusterDoorLock {
 
 // NewMTRClusterDoorLockWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDoorLockWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDoorLock {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDoorLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDoorLockAdopt(_id)
@@ -56,6 +61,8 @@ func NewMTRClusterDoorLockWithDeviceEndpointIDQueue(device *MTRDevice, endpointI
 
 // NewMTRClusterDoorLockWithDeviceEndpointQueue creates a new MTRClusterDoorLock.
 func NewMTRClusterDoorLockWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterDoorLock {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDoorLock")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterDoorLockAdopt(_id)
@@ -65,6 +72,9 @@ func NewMTRClusterDoorLockWithDeviceEndpointQueue(device *MTRDevice, endpoint ui
 //
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -90,6 +100,9 @@ func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpect
 //
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -115,6 +128,9 @@ func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpect
 //
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -140,6 +156,9 @@ func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpect
 //
 // GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -165,6 +184,9 @@ func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInte
 //
 // SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -190,6 +212,9 @@ func (mcdl *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedVal
 //
 // GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error
@@ -212,489 +237,682 @@ func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpec
 }
 
 // ReadAttributeLockStateWithParams reads attribute lock state with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeLockStateWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeLockStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLockStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLockTypeWithParams reads attribute lock type with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeLockTypeWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeLockTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLockTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActuatorEnabledWithParams reads attribute actuator enabled with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeActuatorEnabledWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeActuatorEnabledWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeActuatorEnabledWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDoorStateWithParams reads attribute door state with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeDoorStateWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeDoorStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDoorStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDoorOpenEventsWithParams reads attribute door open events with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeDoorOpenEventsWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeDoorOpenEventsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDoorOpenEventsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDoorOpenEventsWithValueExpectedValueInterval writes attribute door open events with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams writes attribute door open events with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorOpenEventsWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorOpenEventsWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeDoorClosedEventsWithParams reads attribute door closed events with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeDoorClosedEventsWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeDoorClosedEventsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDoorClosedEventsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDoorClosedEventsWithValueExpectedValueInterval writes attribute door closed events with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams writes attribute door closed events with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeDoorClosedEventsWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeDoorClosedEventsWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOpenPeriodWithParams reads attribute open period with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeOpenPeriodWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeOpenPeriodWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeOpenPeriodWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOpenPeriodWithValueExpectedValueInterval writes attribute open period with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams writes attribute open period with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOpenPeriodWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOpenPeriodWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNumberOfTotalUsersSupportedWithParams reads attribute number of total users supported with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfTotalUsersSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfPINUsersSupportedWithParams reads attribute number of pin users supported with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfPINUsersSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfRFIDUsersSupportedWithParams reads attribute number of rfid users supported with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfRFIDUsersSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams reads attribute number of week day schedules supported per user with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfWeekDaySchedulesSupportedPerUserWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams reads attribute number of year day schedules supported per user with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfYearDaySchedulesSupportedPerUserWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfHolidaySchedulesSupportedWithParams reads attribute number of holiday schedules supported with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfHolidaySchedulesSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxPINCodeLengthWithParams reads attribute max pin code length with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeMaxPINCodeLengthWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeMaxPINCodeLengthWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMaxPINCodeLengthWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinPINCodeLengthWithParams reads attribute min pin code length with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeMinPINCodeLengthWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeMinPINCodeLengthWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMinPINCodeLengthWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxRFIDCodeLengthWithParams reads attribute max rfid code length with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMaxRFIDCodeLengthWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinRFIDCodeLengthWithParams reads attribute min rfid code length with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeMinRFIDCodeLengthWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCredentialRulesSupportWithParams reads attribute credential rules support with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeCredentialRulesSupportWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeCredentialRulesSupportWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeCredentialRulesSupportWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfCredentialsSupportedPerUserWithParams reads attribute number of credentials supported per user with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfCredentialsSupportedPerUserWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLanguageWithParams reads attribute language with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeLanguageWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeLanguageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLanguageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeLanguageWithValueExpectedValueInterval writes attribute language with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLanguageWithValueExpectedValueIntervalParams writes attribute language with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLanguageWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLanguageWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLEDSettingsWithParams reads attribute led settings with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeLEDSettingsWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeLEDSettingsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLEDSettingsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeLEDSettingsWithValueExpectedValueInterval writes attribute led settings with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams writes attribute led settings with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLEDSettingsWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLEDSettingsWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAutoRelockTimeWithParams reads attribute auto relock time with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAutoRelockTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAutoRelockTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAutoRelockTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeAutoRelockTimeWithValueExpectedValueInterval writes attribute auto relock time with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams writes attribute auto relock time with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeAutoRelockTimeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeAutoRelockTimeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSoundVolumeWithParams reads attribute sound volume with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeSoundVolumeWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeSoundVolumeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeSoundVolumeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeSoundVolumeWithValueExpectedValueInterval writes attribute sound volume with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams writes attribute sound volume with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSoundVolumeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSoundVolumeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOperatingModeWithParams reads attribute operating mode with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeOperatingModeWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeOperatingModeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeOperatingModeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOperatingModeWithValueExpectedValueInterval writes attribute operating mode with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOperatingModeWithValueExpectedValueIntervalParams writes attribute operating mode with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeOperatingModeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeOperatingModeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSupportedOperatingModesWithParams reads attribute supported operating modes with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeSupportedOperatingModesWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeSupportedOperatingModesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeSupportedOperatingModesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDefaultConfigurationRegisterWithParams reads attribute default configuration register with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeDefaultConfigurationRegisterWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeEnableLocalProgrammingWithParams reads attribute enable local programming with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeEnableLocalProgrammingWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnableLocalProgrammingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnableLocalProgrammingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval writes attribute enable local programming with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams writes attribute enable local programming with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableLocalProgrammingWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableLocalProgrammingWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnableOneTouchLockingWithParams reads attribute enable one touch locking with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeEnableOneTouchLockingWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnableOneTouchLockingWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnableOneTouchLockingWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval writes attribute enable one touch locking with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams writes attribute enable one touch locking with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableOneTouchLockingWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableOneTouchLockingWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnableInsideStatusLEDWithParams reads attribute enable inside status led with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnableInsideStatusLEDWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval writes attribute enable inside status led with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams writes attribute enable inside status led with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnableInsideStatusLEDWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnableInsideStatusLEDWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnablePrivacyModeButtonWithParams reads attribute enable privacy mode button with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeEnablePrivacyModeButtonWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval writes attribute enable privacy mode button with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams writes attribute enable privacy mode button with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeEnablePrivacyModeButtonWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeEnablePrivacyModeButtonWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLocalProgrammingFeaturesWithParams reads attribute local programming features with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeLocalProgrammingFeaturesWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval writes attribute local programming features with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams writes attribute local programming features with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeLocalProgrammingFeaturesWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeLocalProgrammingFeaturesWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeWrongCodeEntryLimitWithParams reads attribute wrong code entry limit with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeWrongCodeEntryLimitWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval writes attribute wrong code entry limit with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams writes attribute wrong code entry limit with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeWrongCodeEntryLimitWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeWrongCodeEntryLimitWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUserCodeTemporaryDisableTimeWithParams reads attribute user code temporary disable time with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeUserCodeTemporaryDisableTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval writes attribute user code temporary disable time with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams writes attribute user code temporary disable time with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeUserCodeTemporaryDisableTimeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeUserCodeTemporaryDisableTimeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSendPINOverTheAirWithParams reads attribute send pin over the air with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeSendPINOverTheAirWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeSendPINOverTheAirWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeSendPINOverTheAirWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval writes attribute send pin over the air with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams writes attribute send pin over the air with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeSendPINOverTheAirWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeSendPINOverTheAirWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRequirePINforRemoteOperationWithParams reads attribute require pi nfor remote operation with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeRequirePINforRemoteOperationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval writes attribute require pi nfor remote operation with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams writes attribute require pi nfor remote operation with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeRequirePINforRemoteOperationWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeRequirePINforRemoteOperationWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeExpiringUserTimeoutWithParams reads attribute expiring user timeout with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeExpiringUserTimeoutWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeExpiringUserTimeoutWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeExpiringUserTimeoutWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval writes attribute expiring user timeout with value expected value interval.
-func (mcdl *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcdl *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams writes attribute expiring user timeout with value expected value interval params.
-func (mcdl *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcdl *MTRClusterDoorLock) WriteAttributeExpiringUserTimeoutWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("writeAttributeExpiringUserTimeoutWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAliroReaderVerificationKeyWithParams reads attribute aliro reader verification key with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroReaderVerificationKeyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAliroReaderGroupIdentifierWithParams reads attribute aliro reader group identifier with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroReaderGroupIdentifierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAliroReaderGroupSubIdentifierWithParams reads attribute aliro reader group sub identifier with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroReaderGroupSubIdentifierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams reads attribute aliro expedited transaction supported protocol versions with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAliroGroupResolvingKeyWithParams reads attribute aliro group resolving key with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroGroupResolvingKeyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams reads attribute aliro supported bleuwb protocol versions with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroSupportedBLEUWBProtocolVersionsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAliroBLEAdvertisingVersionWithParams reads attribute aliro ble advertising version with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAliroBLEAdvertisingVersionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams reads attribute number of aliro credential issuer keys supported with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfAliroCredentialIssuerKeysSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams reads attribute number of aliro endpoint keys supported with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeNumberOfAliroEndpointKeysSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcdl *MTRClusterDoorLock) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcdl *MTRClusterDoorLock) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcdl), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetWeekDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetWeekDayScheduleResponseParams
 		err error
@@ -720,6 +938,9 @@ func (mcdl *MTRClusterDoorLock) GetWeekDayScheduleWithParamsExpectedValuesExpect
 //
 // GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetYearDayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetYearDayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetYearDayScheduleResponseParams
 		err error
@@ -745,6 +966,9 @@ func (mcdl *MTRClusterDoorLock) GetYearDayScheduleWithParamsExpectedValuesExpect
 //
 // GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetHolidayScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetHolidayScheduleResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetHolidayScheduleResponseParams
 		err error
@@ -770,6 +994,9 @@ func (mcdl *MTRClusterDoorLock) GetHolidayScheduleWithParamsExpectedValuesExpect
 //
 // GetUserWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetUserParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetUserResponseParams
 		err error
@@ -795,6 +1022,9 @@ func (mcdl *MTRClusterDoorLock) GetUserWithParamsExpectedValuesExpectedValueInte
 //
 // SetCredentialWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterSetCredentialParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterSetCredentialResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterSetCredentialResponseParams
 		err error
@@ -820,6 +1050,9 @@ func (mcdl *MTRClusterDoorLock) SetCredentialWithParamsExpectedValuesExpectedVal
 //
 // GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcdl *MTRClusterDoorLock) GetCredentialStatusWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRDoorLockClusterGetCredentialStatusParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRDoorLockClusterGetCredentialStatusResponseParams, err error) {
+	defer runtime.KeepAlive(mcdl)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRDoorLockClusterGetCredentialStatusResponseParams
 		err error

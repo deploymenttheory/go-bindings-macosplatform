@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,44 +63,55 @@ func (mas *MutableAttributedString) WithObservationInfo(observationInfo unsafe.P
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mas *MutableAttributedString) WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString {
-	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mas *MutableAttributedString) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableAttributedString {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mas
 }
 
 // InsertAttributedStringAtIndex inserts the characters and attributes of the given attributed string into the receiver at the given index.
 func (mas *MutableAttributedString) InsertAttributedStringAtIndex(attrString *AttributedString, loc int) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(attrString)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("insertAttributedString:atIndex:"), objref.IDOf(attrString), loc)
 }
 
 // AppendAttributedString adds the characters and attributes of a given attributed string to the end of the receiver.
 func (mas *MutableAttributedString) AppendAttributedString(attrString *AttributedString) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(attrString)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("appendAttributedString:"), objref.IDOf(attrString))
 }
 
 // SetAttributedString replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
 func (mas *MutableAttributedString) SetAttributedString(attrString *AttributedString) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(attrString)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setAttributedString:"), objref.IDOf(attrString))
 }
 
 // BeginEditing begins the buffering of changes to the string’s characters and attributes.
 func (mas *MutableAttributedString) BeginEditing() {
+	defer runtime.KeepAlive(mas)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("beginEditing"))
 }
 
 // EndEditing ends the buffering of changes to the string’s characters and attributes.
 func (mas *MutableAttributedString) EndEditing() {
+	defer runtime.KeepAlive(mas)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("endEditing"))
 }
 
 // MutableString returns the mutable string.
 func (mas *MutableAttributedString) MutableString() *MutableString {
+	defer runtime.KeepAlive(mas)
 	_r := objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("mutableString"))
 	return MutableStringFromID(_r)
 }
 
 // AppendLocalizedFormat formats the specified string and arguments with the current locale, then appends the result to the receiver.
 func (mas *MutableAttributedString) AppendLocalizedFormat(format *AttributedString) {
+	defer runtime.KeepAlive(mas)
+	defer runtime.KeepAlive(format)
 	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("appendLocalizedFormat:"), objref.IDOf(format))
 }
 

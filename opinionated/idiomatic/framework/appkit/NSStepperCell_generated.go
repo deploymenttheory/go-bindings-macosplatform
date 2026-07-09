@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -100,6 +102,7 @@ func (sc *StepperCell) WithAutorepeat(autorepeat bool) *StepperCell {
 
 // WithControlView sets the view associated with the cell.
 func (sc *StepperCell) WithControlView(controlView ViewProvider) *StepperCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -124,6 +127,7 @@ func (sc *StepperCell) WithState(state int) *StepperCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (sc *StepperCell) WithTarget(target obj.Object) *StepperCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -228,6 +232,7 @@ func (sc *StepperCell) WithWraps(wraps bool) *StepperCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (sc *StepperCell) WithFont(font *Font) *StepperCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -236,6 +241,7 @@ func (sc *StepperCell) WithFont(font *Font) *StepperCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (sc *StepperCell) WithFormatter(formatter obj.Object) *StepperCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -244,6 +250,7 @@ func (sc *StepperCell) WithFormatter(formatter obj.Object) *StepperCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (sc *StepperCell) WithObjectValue(objectValue obj.Object) *StepperCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -292,6 +299,7 @@ func (sc *StepperCell) WithIntegerValue(integerValue int) *StepperCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (sc *StepperCell) WithImage(image *Image) *StepperCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -308,6 +316,7 @@ func (sc *StepperCell) WithControlSize(controlSize ControlSize) *StepperCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (sc *StepperCell) WithRepresentedObject(representedObject obj.Object) *StepperCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -316,6 +325,7 @@ func (sc *StepperCell) WithRepresentedObject(representedObject obj.Object) *Step
 
 // WithMenu sets the cell’s contextual menu.
 func (sc *StepperCell) WithMenu(menu *Menu) *StepperCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -404,6 +414,7 @@ func (sc *StepperCell) WithFocusRingType(focusRingType FocusRingType) *StepperCe
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (sc *StepperCell) WithAttributedStringValue(attributedStringValue obj.Object) *StepperCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -452,6 +463,7 @@ func (sc *StepperCell) WithControlTint(controlTint ControlTint) *StepperCell {
 
 // MinValue returns the min value.
 func (sc *StepperCell) MinValue() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -465,6 +477,7 @@ func (sc *StepperCell) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (sc *StepperCell) MaxValue() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -478,6 +491,7 @@ func (sc *StepperCell) MaxValue() float64 {
 
 // Increment returns the increment.
 func (sc *StepperCell) Increment() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -491,6 +505,7 @@ func (sc *StepperCell) Increment() float64 {
 
 // ValueWraps wraps the corresponding Objective-C method.
 func (sc *StepperCell) ValueWraps() bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -504,6 +519,7 @@ func (sc *StepperCell) ValueWraps() bool {
 
 // Autorepeat wraps the corresponding Objective-C method.
 func (sc *StepperCell) Autorepeat() bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

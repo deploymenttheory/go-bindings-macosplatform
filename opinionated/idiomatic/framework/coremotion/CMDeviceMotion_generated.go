@@ -5,6 +5,8 @@
 package coremotion
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func NewDeviceMotion() *DeviceMotion {
 
 // Attitude returns the attitude.
 func (dm *DeviceMotion) Attitude() *Attitude {
+	defer runtime.KeepAlive(dm)
 	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("attitude"))
 	return AttitudeFromID(_r)
 }
 
 // Heading returns the heading.
 func (dm *DeviceMotion) Heading() float64 {
+	defer runtime.KeepAlive(dm)
 	_r := objc.Send[float64](objref.IDOf(dm), objc.RegisterName("heading"))
 	return _r
 }
 
 // SensorLocation returns the sensor location.
 func (dm *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
+	defer runtime.KeepAlive(dm)
 	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(dm), objc.RegisterName("sensorLocation"))
 	return _r
 }

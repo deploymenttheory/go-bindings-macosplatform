@@ -5,10 +5,12 @@
 package browserenginekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func networkingProcessAdopt(id objc.ID) *NetworkingProcess {
 
 // Description returns the object's -description text.
 func (np *NetworkingProcess) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NetworkingProcess) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NetworkingProcess) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NetworkingProcess) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
@@ -77,15 +84,17 @@ func NewNetworkingProcess() *NetworkingProcess {
 
 // Invalidate stops the networking process.
 func (np *NetworkingProcess) Invalidate() {
+	defer runtime.KeepAlive(np)
 	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("invalidate"))
 }
 
-// MakeLibXPCConnectionError creates a new XPC connection to the extension process.
-func (np *NetworkingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
+// MakeLibXPCConnection creates a new XPC connection to the extension process.
+func (np *NetworkingProcess) MakeLibXPCConnection() (result *foundation.Object, err error) {
+	defer runtime.KeepAlive(np)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.ObjectFromID(_r), nil
 }

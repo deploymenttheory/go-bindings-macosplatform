@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -122,12 +124,14 @@ func (nappm *NEAppProxyProviderManager) WithLocalizedDescription(localizedDescri
 
 // WithProtocol sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (nappm *NEAppProxyProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager {
+	defer runtime.KeepAlive(protocol)
 	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
 	return nappm
 }
 
 // WithProtocolConfiguration sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
 func (nappm *NEAppProxyProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager {
+	defer runtime.KeepAlive(protocolConfiguration)
 	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
 	return nappm
 }

@@ -5,6 +5,8 @@
 package iousbhost
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,39 +51,47 @@ func hostIOSourceAdopt(id objc.ID) *HostIOSource {
 
 // Description returns the object's -description text.
 func (his *HostIOSource) Description() string {
+	defer runtime.KeepAlive(his)
 	return rt.Description(objref.IDOf(his))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (his *HostIOSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(his)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(his), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (his *HostIOSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(his)
 	return rt.IsKind(objref.IDOf(his), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (his *HostIOSource) String() string {
+	defer runtime.KeepAlive(his)
 	return rt.Description(objref.IDOf(his))
 }
 
 // HostInterface returns retrieve the source's IOUSBHostInterface
 func (his *HostIOSource) HostInterface() *HostInterface {
+	defer runtime.KeepAlive(his)
 	_r := objc.Send[objc.ID](objref.IDOf(his), objc.RegisterName("hostInterface"))
 	return HostInterfaceFromID(_r)
 }
 
 // DeviceAddress returns retrieve the device's address
 func (his *HostIOSource) DeviceAddress() int {
+	defer runtime.KeepAlive(his)
 	_r := objc.Send[int](objref.IDOf(his), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
 // EndpointAddress returns retrieve the IOSource's endpoint address
 func (his *HostIOSource) EndpointAddress() int {
+	defer runtime.KeepAlive(his)
 	_r := objc.Send[int](objref.IDOf(his), objc.RegisterName("endpointAddress"))
 	return _r
 }

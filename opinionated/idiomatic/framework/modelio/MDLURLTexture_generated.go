@@ -5,9 +5,10 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,15 +49,15 @@ func uRLTextureAdopt(id objc.ID) *URLTexture {
 }
 
 // NewURLTextureWithURLName initializes a texture that loads its texel data from a file at the specified URL.
-func NewURLTextureWithURLName(uRL string, name string) *URLTexture {
+func NewURLTextureWithURLName(url string, name string) *URLTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLURLTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:name:"), rt.FileURL(uRL), purego.NSString(name))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:name:"), rt.FileURL(url), purego.NSString(name))
 	return uRLTextureAdopt(_id)
 }
 
 // WithURL sets the URL from which to load texture data.
-func (ut *URLTexture) WithURL(uRL string) *URLTexture {
-	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (ut *URLTexture) WithURL(url string) *URLTexture {
+	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return ut
 }
 
@@ -73,9 +74,10 @@ func (ut *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
 }
 
 // URL returns the URL.
-func (ut *URLTexture) URL() obj.Object {
+func (ut *URLTexture) URL() string {
+	defer runtime.KeepAlive(ut)
 	_r := objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ TextureProvider = (*URLTexture)(nil)

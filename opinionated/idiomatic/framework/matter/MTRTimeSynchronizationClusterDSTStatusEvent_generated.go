@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTimeSynchronizationClusterDSTStatusEventAdopt(id objc.ID) *MTRTimeSynchr
 
 // Description returns the object's -description text.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) Description() string {
+	defer runtime.KeepAlive(mtscdse)
 	return rt.Description(objref.IDOf(mtscdse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscdse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscdse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscdse)
 	return rt.IsKind(objref.IDOf(mtscdse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) String() string {
+	defer runtime.KeepAlive(mtscdse)
 	return rt.Description(objref.IDOf(mtscdse))
 }
 
@@ -72,12 +80,14 @@ func NewMTRTimeSynchronizationClusterDSTStatusEvent() *MTRTimeSynchronizationClu
 
 // WithDstOffsetActive sets the dst offset active.
 func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) WithDstOffsetActive(dstOffsetActive obj.Object) *MTRTimeSynchronizationClusterDSTStatusEvent {
+	defer runtime.KeepAlive(dstOffsetActive)
 	objc.Send[objc.ID](objref.IDOf(mtscdse), objc.RegisterName("setDstOffsetActive:"), objref.IDOf(dstOffsetActive))
 	return mtscdse
 }
 
 // DstOffsetActive returns the dst offset active.
-func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() obj.Object {
+func (mtscdse *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() *foundation.Number {
+	defer runtime.KeepAlive(mtscdse)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdse), objc.RegisterName("dstOffsetActive"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,9 @@
 package imagecapturecore
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,59 +52,71 @@ func cameraItemAdopt(id objc.ID) *CameraItem {
 
 // Description returns the object's -description text.
 func (ci *CameraItem) Description() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ci *CameraItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ci *CameraItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(ci)
 	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ci *CameraItem) String() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // RequestThumbnail requests a thumbnail for the item.
 func (ci *CameraItem) RequestThumbnail() {
+	defer runtime.KeepAlive(ci)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("requestThumbnail"))
 }
 
 // RequestMetadata requests metadata for the item.
 func (ci *CameraItem) RequestMetadata() {
+	defer runtime.KeepAlive(ci)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("requestMetadata"))
 }
 
 // FlushThumbnailCache deletes the item’s cached thumbnail.
 func (ci *CameraItem) FlushThumbnailCache() {
+	defer runtime.KeepAlive(ci)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("flushThumbnailCache"))
 }
 
 // FlushMetadataCache deletes the item’s cached metadata.
 func (ci *CameraItem) FlushMetadataCache() {
+	defer runtime.KeepAlive(ci)
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("flushMetadataCache"))
 }
 
 // Device returns ￼Parent device of this item.
 func (ci *CameraItem) Device() *CameraDevice {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("device"))
 	return CameraDeviceFromID(_r)
 }
 
 // ParentFolder returns ￼Parent folder of this folder. The root folder's parentFolder is nil.
 func (ci *CameraItem) ParentFolder() *CameraFolder {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("parentFolder"))
 	return CameraFolderFromID(_r)
 }
 
 // Name returns ￼Name of this item.
 func (ci *CameraItem) Name() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -111,6 +126,7 @@ func (ci *CameraItem) Name() string {
 
 // UTI returns ￼Item UTI. This is an Uniform Type Identifier string. It is one of: kUTTypeFolder, kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
 func (ci *CameraItem) UTI() string {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("UTI"))
 	if _r == 0 {
 		return ""
@@ -120,72 +136,84 @@ func (ci *CameraItem) UTI() string {
 
 // IsLocked reports whether ￼Indicates the protection state of this item. It is locked if the storage card in the camera is locked.
 func (ci *CameraItem) IsLocked() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isLocked"))
 	return _r
 }
 
 // IsRaw reports whether ￼Indicates if the file is a raw image file.
 func (ci *CameraItem) IsRaw() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isRaw"))
 	return _r
 }
 
 // IsInTemporaryStore reports whether ￼Indicates if this folder is in a temporary store. A temporary store may be used by the device when images are captures on the device when it is tethered to the computer.
 func (ci *CameraItem) IsInTemporaryStore() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("isInTemporaryStore"))
 	return _r
 }
 
 // CreationDate returns ￼Creation date of this file. This information is usually the same as the EXIF creation date.
-func (ci *CameraItem) CreationDate() obj.Object {
+func (ci *CameraItem) CreationDate() time.Time {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ModificationDate returns ￼Modification date of this file. This information is usually the same as the EXIF modification date.
-func (ci *CameraItem) ModificationDate() obj.Object {
+func (ci *CameraItem) ModificationDate() time.Time {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("modificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Thumbnail returns ￼Thumbnail for the item. The value of this property is NULL unless a 'requestThumbnail' message is sent to this object.
 func (ci *CameraItem) Thumbnail() obj.Object {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("thumbnail"))
 	return obj.Wrap(_r)
 }
 
 // Metadata returns ￼Metadata for the item. The value of this property is NULL unless a 'requestMetadata' message is sent to this object.
 func (ci *CameraItem) Metadata() obj.Object {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
 
 // UserData returns ￼A mutable dictionary to store arbitrary key-value pairs associated with a camera item object. This can be used by view objects that bind to this object to store "house-keeping" information.
 func (ci *CameraItem) UserData() obj.Object {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("userData"))
 	return obj.Wrap(_r)
 }
 
 // PtpObjectHandle returns PTP object handle value if the item is on a camera that uses PTP protocol. The value of this property is set to 0 if the camera does not use PTP protocol.
 func (ci *CameraItem) PtpObjectHandle() int {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[int](objref.IDOf(ci), objc.RegisterName("ptpObjectHandle"))
 	return _r
 }
 
 // WasAddedAfterContentCatalogCompleted reports whether this property is set if the file is captured on the device after the device's content is fully enumerated. This does not apply to files added as a result of adding a new store to the device.
 func (ci *CameraItem) WasAddedAfterContentCatalogCompleted() bool {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("wasAddedAfterContentCatalogCompleted"))
 	return _r
 }
 
 // ThumbnailIfAvailable returns the thumbnail if available.
 func (ci *CameraItem) ThumbnailIfAvailable() obj.Object {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("thumbnailIfAvailable"))
 	return obj.Wrap(_r)
 }
 
 // LargeThumbnailIfAvailable returns the large thumbnail if available.
 func (ci *CameraItem) LargeThumbnailIfAvailable() obj.Object {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("largeThumbnailIfAvailable"))
 	return obj.Wrap(_r)
 }

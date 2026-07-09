@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewRecordZoneNotification() *RecordZoneNotification {
 
 // RecordZoneID returns the ID of the record zone that has changes.
 func (rzn *RecordZoneNotification) RecordZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(rzn)
 	_r := objc.Send[objc.ID](objref.IDOf(rzn), objc.RegisterName("recordZoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
 // DatabaseScope returns the type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
 func (rzn *RecordZoneNotification) DatabaseScope() DatabaseScope {
+	defer runtime.KeepAlive(rzn)
 	_r := objc.Send[DatabaseScope](objref.IDOf(rzn), objc.RegisterName("databaseScope"))
 	return _r
 }

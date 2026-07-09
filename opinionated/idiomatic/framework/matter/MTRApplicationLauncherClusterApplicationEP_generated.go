@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRApplicationLauncherClusterApplicationEP() *MTRApplicationLauncherClus
 
 // WithApplication sets the application.
 func (malcae *MTRApplicationLauncherClusterApplicationEP) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP {
+	defer runtime.KeepAlive(application)
 	objc.Send[objc.ID](objref.IDOf(malcae), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malcae
 }
 
 // WithEndpoint sets the endpoint.
 func (malcae *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint obj.Object) *MTRApplicationLauncherClusterApplicationEP {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(malcae), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return malcae
 }

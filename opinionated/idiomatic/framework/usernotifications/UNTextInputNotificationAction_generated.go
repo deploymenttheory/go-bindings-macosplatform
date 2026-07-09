@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewTextInputNotificationAction() *TextInputNotificationAction {
 
 // TextInputButtonTitle returns the text input button title.
 func (tina *TextInputNotificationAction) TextInputButtonTitle() string {
+	defer runtime.KeepAlive(tina)
 	_r := objc.Send[objc.ID](objref.IDOf(tina), objc.RegisterName("textInputButtonTitle"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (tina *TextInputNotificationAction) TextInputButtonTitle() string {
 
 // TextInputPlaceholder returns the text input placeholder.
 func (tina *TextInputNotificationAction) TextInputPlaceholder() string {
+	defer runtime.KeepAlive(tina)
 	_r := objc.Send[objc.ID](objref.IDOf(tina), objc.RegisterName("textInputPlaceholder"))
 	if _r == 0 {
 		return ""

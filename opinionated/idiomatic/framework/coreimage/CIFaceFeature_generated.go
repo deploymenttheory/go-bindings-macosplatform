@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,90 +56,105 @@ func NewFaceFeature() *FaceFeature {
 
 // HasLeftEyePosition reports whether the detector found the face’s left eye.
 func (ff *FaceFeature) HasLeftEyePosition() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasLeftEyePosition"))
 	return _r
 }
 
 // LeftEyePosition returns the image coordinate of the center of the left eye. > Note: The left eye is on the left side of the face from the observer's perspective. It is not the left eye from the subject's perspective.
 func (ff *FaceFeature) LeftEyePosition() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ff), objc.RegisterName("leftEyePosition"))
 	return _r
 }
 
 // HasRightEyePosition reports whether the detector found the face’s right eye.
 func (ff *FaceFeature) HasRightEyePosition() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasRightEyePosition"))
 	return _r
 }
 
 // RightEyePosition returns the image coordinate of the center of the right eye. > Note: The right eye is on the right side of the face from the observer's perspective. It is not the right eye from the subject's perspective.
 func (ff *FaceFeature) RightEyePosition() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ff), objc.RegisterName("rightEyePosition"))
 	return _r
 }
 
 // HasMouthPosition reports whether the detector found the face’s mouth.
 func (ff *FaceFeature) HasMouthPosition() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasMouthPosition"))
 	return _r
 }
 
 // MouthPosition returns the image coordinate of the center of the mouth.
 func (ff *FaceFeature) MouthPosition() corefoundation.CGPoint {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ff), objc.RegisterName("mouthPosition"))
 	return _r
 }
 
 // HasTrackingID reports whether the face object has a tracking ID.
 func (ff *FaceFeature) HasTrackingID() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasTrackingID"))
 	return _r
 }
 
 // TrackingID returns the tracking identifier of the face object. Core Image provides a tracking identifier for faces it detects in a video stream, which you can use to identify when a CIFaceFeature objects detected in one video frame is the same face detected in a previous video frame. This identifier persists only as long as a face is in the frame and is not associated with a specific face. In other words, if a face moves out of the video frame and comes back into the frame later, another ID is assigned. (Core Image detects faces, but does not recognize specific faces.)
 func (ff *FaceFeature) TrackingID() int {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[int](objref.IDOf(ff), objc.RegisterName("trackingID"))
 	return _r
 }
 
 // HasTrackingFrameCount reports whether a Boolean value that indicates the face object has a tracking frame count.
 func (ff *FaceFeature) HasTrackingFrameCount() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasTrackingFrameCount"))
 	return _r
 }
 
 // TrackingFrameCount returns the tracking frame count of the face.
 func (ff *FaceFeature) TrackingFrameCount() int {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[int](objref.IDOf(ff), objc.RegisterName("trackingFrameCount"))
 	return _r
 }
 
 // HasFaceAngle reports whether information about face rotation is available.
 func (ff *FaceFeature) HasFaceAngle() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasFaceAngle"))
 	return _r
 }
 
 // FaceAngle returns the rotation of the face. Rotation is measured counterclockwise in degrees, with zero indicating that a line drawn between the eyes is horizontal relative to the image orientation.
 func (ff *FaceFeature) FaceAngle() float32 {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[float32](objref.IDOf(ff), objc.RegisterName("faceAngle"))
 	return _r
 }
 
 // HasSmile reports whether a smile is detected in the face. To detect smiles, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorSmile“ option set to true.
 func (ff *FaceFeature) HasSmile() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("hasSmile"))
 	return _r
 }
 
 // LeftEyeClosed reports whether a closed left eye is detected in the face. To detect closed eyes, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorEyeBlink“ option set to true.
 func (ff *FaceFeature) LeftEyeClosed() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("leftEyeClosed"))
 	return _r
 }
 
 // RightEyeClosed reports whether a closed right eye is detected in the face. To detect closed eyes, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorEyeBlink“ option set to true.
 func (ff *FaceFeature) RightEyeClosed() bool {
+	defer runtime.KeepAlive(ff)
 	_r := objc.Send[bool](objref.IDOf(ff), objc.RegisterName("rightEyeClosed"))
 	return _r
 }

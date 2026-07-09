@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,24 +54,28 @@ func NewMTROtaSoftwareUpdateRequestorClusterStateTransitionEvent() *MTROtaSoftwa
 
 // WithPreviousState sets the previous state.
 func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	defer runtime.KeepAlive(previousState)
 	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setPreviousState:"), objref.IDOf(previousState))
 	return mosurcste
 }
 
 // WithNewState sets the new state.
 func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	defer runtime.KeepAlive(newState)
 	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return mosurcste
 }
 
 // WithReason sets the reason.
 func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	defer runtime.KeepAlive(reason)
 	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setReason:"), objref.IDOf(reason))
 	return mosurcste
 }
 
 // WithTargetSoftwareVersion sets the target software version.
 func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	defer runtime.KeepAlive(targetSoftwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setTargetSoftwareVersion:"), objref.IDOf(targetSoftwareVersion))
 	return mosurcste
 }

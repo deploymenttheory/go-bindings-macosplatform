@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,18 +65,21 @@ func (ccn *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
 
 // TrainingStyle returns the training style of the forward node will be propagated to gradient nodes made from it
 func (ccn *CNNConvolutionNode) TrainingStyle() NNTrainingStyle {
+	defer runtime.KeepAlive(ccn)
 	_r := objc.Send[NNTrainingStyle](objref.IDOf(ccn), objc.RegisterName("trainingStyle"))
 	return _r
 }
 
 // AccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
 func (ccn *CNNConvolutionNode) AccumulatorPrecision() NNConvolutionAccumulatorPrecisionOption {
+	defer runtime.KeepAlive(ccn)
 	_r := objc.Send[NNConvolutionAccumulatorPrecisionOption](objref.IDOf(ccn), objc.RegisterName("accumulatorPrecision"))
 	return _r
 }
 
 // ConvolutionGradientState returns a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
 func (ccn *CNNConvolutionNode) ConvolutionGradientState() *CNNConvolutionGradientStateNode {
+	defer runtime.KeepAlive(ccn)
 	_r := objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("convolutionGradientState"))
 	return CNNConvolutionGradientStateNodeFromID(_r)
 }

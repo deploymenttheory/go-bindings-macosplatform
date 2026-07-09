@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,27 +52,33 @@ func touchBarItemAdopt(id objc.ID) *TouchBarItem {
 
 // Description returns the object's -description text.
 func (tbi *TouchBarItem) Description() string {
+	defer runtime.KeepAlive(tbi)
 	return rt.Description(objref.IDOf(tbi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tbi *TouchBarItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tbi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tbi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tbi *TouchBarItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(tbi)
 	return rt.IsKind(objref.IDOf(tbi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tbi *TouchBarItem) String() string {
+	defer runtime.KeepAlive(tbi)
 	return rt.Description(objref.IDOf(tbi))
 }
 
 // NewTouchBarItemWithIdentifier creates a new item with the specified identifier.
 func NewTouchBarItemWithIdentifier(identifier obj.Object) *TouchBarItem {
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 *TouchBarItem
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBarItem {
@@ -83,6 +92,7 @@ func NewTouchBarItemWithIdentifier(identifier obj.Object) *TouchBarItem {
 
 // NewTouchBarItemWithCoder initializes and returns a new item from a storyboard or nib file.
 func NewTouchBarItemWithCoder(coder obj.Object) *TouchBarItem {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *TouchBarItem
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBarItem {
@@ -103,12 +113,13 @@ func (tbi *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *Tou
 }
 
 // Identifier returns the identifier.
-func (tbi *TouchBarItem) Identifier() obj.Object {
-	var _mainthread0 obj.Object
+func (tbi *TouchBarItem) Identifier() *foundation.String {
+	defer runtime.KeepAlive(tbi)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tbi), objc.RegisterName("identifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -117,6 +128,7 @@ func (tbi *TouchBarItem) Identifier() obj.Object {
 
 // VisibilityPriority returns the visibility priority.
 func (tbi *TouchBarItem) VisibilityPriority() float32 {
+	defer runtime.KeepAlive(tbi)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -130,6 +142,7 @@ func (tbi *TouchBarItem) VisibilityPriority() float32 {
 
 // View returns the view.
 func (tbi *TouchBarItem) View() *View {
+	defer runtime.KeepAlive(tbi)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -143,6 +156,7 @@ func (tbi *TouchBarItem) View() *View {
 
 // ViewController returns the view controller.
 func (tbi *TouchBarItem) ViewController() *ViewController {
+	defer runtime.KeepAlive(tbi)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -156,6 +170,7 @@ func (tbi *TouchBarItem) ViewController() *ViewController {
 
 // CustomizationLabel returns the user visible string identifying this item during customization. By default this method returns the empty string.
 func (tbi *TouchBarItem) CustomizationLabel() string {
+	defer runtime.KeepAlive(tbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -172,6 +187,7 @@ func (tbi *TouchBarItem) CustomizationLabel() string {
 
 // IsVisible reports whether the object is visible.
 func (tbi *TouchBarItem) IsVisible() bool {
+	defer runtime.KeepAlive(tbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,8 +5,11 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,6 +51,8 @@ func iOBluetoothHandsFreeAudioGatewayAdopt(id objc.ID) *IOBluetoothHandsFreeAudi
 
 // NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate creates an object that controls a connected Bluetooth hands-free phone or headset.
 func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *IOBluetoothDevice, inDelegate obj.Object) *IOBluetoothHandsFreeAudioGateway {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(inDelegate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothHandsFreeAudioGateway")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:delegate:"), objref.IDOf(device), objref.IDOf(inDelegate))
 	return iOBluetoothHandsFreeAudioGatewayAdopt(_id)
@@ -83,28 +88,43 @@ func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithOutputMuted(outputMuted bool
 	return ibhfag
 }
 
+// WithDelegate sets return the delegate
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithDelegate(delegate IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeAudioGateway {
+	_shim := newIOBluetoothHandsFreeDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ibhfag), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ibhfag), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ibhfag
+}
+
 // CreateIndicatorMinMaxCurrentValue sends a request to the Bluetooth device to show or update a status indicator.
 func (ibhfag *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
+	defer runtime.KeepAlive(ibhfag)
 	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("createIndicator:min:max:currentValue:"), purego.NSString(indicatorName), minValue, maxValue, currentValue)
 }
 
 // ProcessATCommand processes a command from a connected Bluetooth hands-free phone or headset.
 func (ibhfag *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand string) {
+	defer runtime.KeepAlive(ibhfag)
 	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("processATCommand:"), purego.NSString(atCommand))
 }
 
 // SendOKResponse sends a success message to a connected Bluetooth hands-free phone or headset.
 func (ibhfag *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
+	defer runtime.KeepAlive(ibhfag)
 	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("sendOKResponse"))
 }
 
 // SendResponse sends data followed by a success message to a connected Bluetooth hands-free phone or headset.
 func (ibhfag *IOBluetoothHandsFreeAudioGateway) SendResponse(response string) {
+	defer runtime.KeepAlive(ibhfag)
 	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("sendResponse:"), purego.NSString(response))
 }
 
 // SendResponseWithOK sends data followed by an optional success message to a connected Bluetooth hands-free phone or headset.
 func (ibhfag *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, withOK bool) {
+	defer runtime.KeepAlive(ibhfag)
 	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("sendResponse:withOK:"), purego.NSString(response), withOK)
 }
 

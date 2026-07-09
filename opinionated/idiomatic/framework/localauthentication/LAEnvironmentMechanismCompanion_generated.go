@@ -5,9 +5,11 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,14 +54,16 @@ func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
 
 // Type returns type of the companion.
 func (emc *EnvironmentMechanismCompanion) Type() CompanionType {
+	defer runtime.KeepAlive(emc)
 	_r := objc.Send[CompanionType](objref.IDOf(emc), objc.RegisterName("type"))
 	return _r
 }
 
 // StateHash returns hash of the current companion pairing as returned by If no companion are paired for this companion type,
-func (emc *EnvironmentMechanismCompanion) StateHash() obj.Object {
+func (emc *EnvironmentMechanismCompanion) StateHash() []byte {
+	defer runtime.KeepAlive(emc)
 	_r := objc.Send[objc.ID](objref.IDOf(emc), objc.RegisterName("stateHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ EnvironmentMechanismProvider = (*EnvironmentMechanismCompanion)(nil)

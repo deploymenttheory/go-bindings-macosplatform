@@ -5,9 +5,11 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,12 +56,14 @@ func NewCrashDiagnostic() *CrashDiagnostic {
 
 // CallStackTree returns the application call stack tree associated with this crash. This call stack tree includes those stack frames present at the time of the crash.
 func (cd *CrashDiagnostic) CallStackTree() *CallStackTree {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
 // TerminationReason returns the termination reason associated with this crash. Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
 func (cd *CrashDiagnostic) TerminationReason() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("terminationReason"))
 	if _r == 0 {
 		return ""
@@ -69,6 +73,7 @@ func (cd *CrashDiagnostic) TerminationReason() string {
 
 // VirtualMemoryRegionInfo returns details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. This property is set when a bad memory access crash occurs.
 func (cd *CrashDiagnostic) VirtualMemoryRegionInfo() string {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("virtualMemoryRegionInfo"))
 	if _r == 0 {
 		return ""
@@ -77,25 +82,29 @@ func (cd *CrashDiagnostic) VirtualMemoryRegionInfo() string {
 }
 
 // ExceptionType returns the name of the Mach exception that terminated the app.
-func (cd *CrashDiagnostic) ExceptionType() obj.Object {
+func (cd *CrashDiagnostic) ExceptionType() *foundation.Number {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("exceptionType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExceptionCode returns processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers
-func (cd *CrashDiagnostic) ExceptionCode() obj.Object {
+func (cd *CrashDiagnostic) ExceptionCode() *foundation.Number {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("exceptionCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Signal returns the signal associated with this crash.
-func (cd *CrashDiagnostic) Signal() obj.Object {
+func (cd *CrashDiagnostic) Signal() *foundation.Number {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("signal"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExceptionReason returns the MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
 func (cd *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("exceptionReason"))
 	return CrashDiagnosticObjectiveCExceptionReasonFromID(_r)
 }

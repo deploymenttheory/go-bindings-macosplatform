@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func rightStoreAdopt(id objc.ID) *RightStore {
 
 // Description returns the object's -description text.
 func (rs *RightStore) Description() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rs *RightStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rs *RightStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(rs)
 	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rs *RightStore) String() string {
+	defer runtime.KeepAlive(rs)
 	return rt.Description(objref.IDOf(rs))
 }
 
@@ -79,6 +85,7 @@ func NewRightStore() *RightStore {
 //
 // RightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (rs *RightStore) RightForIdentifierCompletion(ctx context.Context, identifier string) (result *PersistedRight, err error) {
+	defer runtime.KeepAlive(rs)
 	type _result struct {
 		val *PersistedRight
 		err error
@@ -104,6 +111,8 @@ func (rs *RightStore) RightForIdentifierCompletion(ctx context.Context, identifi
 //
 // SaveRightIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (rs *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *Right, identifier string) (result *PersistedRight, err error) {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(right)
 	type _result struct {
 		val *PersistedRight
 		err error
@@ -128,7 +137,9 @@ func (rs *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *
 // SaveRightIdentifierSecretCompletion saves a right to a persistent store along with secret data you supply.
 //
 // SaveRightIdentifierSecretCompletion blocks until the operation completes or ctx is cancelled.
-func (rs *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *Right, identifier string, secret obj.Object) (result *PersistedRight, err error) {
+func (rs *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *Right, identifier string, secret []byte) (result *PersistedRight, err error) {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(right)
 	type _result struct {
 		val *PersistedRight
 		err error
@@ -140,7 +151,7 @@ func (rs *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, r
 		_o.val = PersistedRightFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("saveRight:identifier:secret:completion:"), objref.IDOf(right), purego.NSString(identifier), objref.IDOf(secret), _block)
+	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("saveRight:identifier:secret:completion:"), objref.IDOf(right), purego.NSString(identifier), rt.BytesToNSData(secret), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,6 +165,8 @@ func (rs *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, r
 //
 // RemoveRightCompletion blocks until the operation completes or ctx is cancelled.
 func (rs *RightStore) RemoveRightCompletion(ctx context.Context, right *PersistedRight) error {
+	defer runtime.KeepAlive(rs)
+	defer runtime.KeepAlive(right)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -173,6 +186,7 @@ func (rs *RightStore) RemoveRightCompletion(ctx context.Context, right *Persiste
 //
 // RemoveRightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (rs *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, identifier string) error {
+	defer runtime.KeepAlive(rs)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -192,6 +206,7 @@ func (rs *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, id
 //
 // RemoveAllRightsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (rs *RightStore) RemoveAllRightsWithCompletion(ctx context.Context) error {
+	defer runtime.KeepAlive(rs)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

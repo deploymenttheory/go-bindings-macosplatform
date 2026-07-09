@@ -5,6 +5,7 @@
 package avfaudio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func audioApplicationAdopt(id objc.ID) *AudioApplication {
 
 // Description returns the object's -description text.
 func (aa *AudioApplication) Description() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aa *AudioApplication) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aa *AudioApplication) IsKind(className string) bool {
+	defer runtime.KeepAlive(aa)
 	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aa *AudioApplication) String() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
@@ -77,6 +83,7 @@ func NewAudioApplication() *AudioApplication {
 
 // SetInputMuted sets a Boolean value that indicates whether the app’s audio input is in a muted state.
 func (aa *AudioApplication) SetInputMuted(muted bool) error {
+	defer runtime.KeepAlive(aa)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aa), objc.RegisterName("setInputMuted:error:"), muted, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +94,7 @@ func (aa *AudioApplication) SetInputMuted(muted bool) error {
 
 // SetInputMuteStateChangeHandler sets a callback to handle changes to application-level audio muting states.
 func (aa *AudioApplication) SetInputMuteStateChangeHandler(inputMuteHandler func(bool) bool) error {
+	defer runtime.KeepAlive(aa)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aa), objc.RegisterName("setInputMuteStateChangeHandler:error:"), objc.NewBlock(func(_ objc.Block, _b0 bool) bool { return inputMuteHandler(_b0) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,12 +105,14 @@ func (aa *AudioApplication) SetInputMuteStateChangeHandler(inputMuteHandler func
 
 // IsInputMuted reports whether get the input muted state - return value is boolean 0 for unmuted or value 1 for muted (input samples zeroed out)
 func (aa *AudioApplication) IsInputMuted() bool {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[bool](objref.IDOf(aa), objc.RegisterName("isInputMuted"))
 	return _r
 }
 
 // RecordPermission returns an enum indicating whether the user has granted or denied permission to record, or has not been asked
 func (aa *AudioApplication) RecordPermission() AudioApplicationRecordPermission {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[AudioApplicationRecordPermission](objref.IDOf(aa), objc.RegisterName("recordPermission"))
 	return _r
 }

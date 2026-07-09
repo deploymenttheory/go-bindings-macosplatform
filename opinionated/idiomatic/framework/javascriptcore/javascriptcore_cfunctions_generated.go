@@ -40,12 +40,12 @@ func JSBigIntCreateWithInt64(ctx obj.Object, integer int64, exception unsafe.Poi
 var _fnJSBigIntCreateWithString func(objc.ID, objc.ID, unsafe.Pointer) objc.ID
 
 // JSBigIntCreateWithString calls the JavaScriptCore framework function JSBigIntCreateWithString.
-func JSBigIntCreateWithString(ctx obj.Object, string_ obj.Object, exception unsafe.Pointer) obj.Object {
+func JSBigIntCreateWithString(ctx obj.Object, str obj.Object, exception unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSBigIntCreateWithString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSBigIntCreateWithString, _lib, "JSBigIntCreateWithString")
 	}
-	_ret := _fnJSBigIntCreateWithString(objref.IDOf(ctx), objref.IDOf(string_), exception)
+	_ret := _fnJSBigIntCreateWithString(objref.IDOf(ctx), objref.IDOf(str), exception)
 	return obj.Wrap(_ret)
 }
 
@@ -514,12 +514,12 @@ func JSObjectMakeArray(ctx obj.Object, argumentCount int, arguments unsafe.Point
 var _fnJSObjectMakeArrayBufferWithBytesNoCopy func(objc.ID, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeArrayBufferWithBytesNoCopy calls the JavaScriptCore framework function JSObjectMakeArrayBufferWithBytesNoCopy.
-func JSObjectMakeArrayBufferWithBytesNoCopy(ctx obj.Object, bytes_ unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeArrayBufferWithBytesNoCopy(ctx obj.Object, data unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeArrayBufferWithBytesNoCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeArrayBufferWithBytesNoCopy, _lib, "JSObjectMakeArrayBufferWithBytesNoCopy")
 	}
-	_ret := _fnJSObjectMakeArrayBufferWithBytesNoCopy(objref.IDOf(ctx), bytes_, byteLength, bytesDeallocator, deallocatorContext, exception)
+	_ret := _fnJSObjectMakeArrayBufferWithBytesNoCopy(objref.IDOf(ctx), data, byteLength, bytesDeallocator, deallocatorContext, exception)
 	return obj.Wrap(_ret)
 }
 
@@ -646,12 +646,12 @@ func JSObjectMakeTypedArrayWithArrayBufferAndOffset(ctx obj.Object, arrayType Ty
 var _fnJSObjectMakeTypedArrayWithBytesNoCopy func(objc.ID, TypedArrayType, unsafe.Pointer, int, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) objc.ID
 
 // JSObjectMakeTypedArrayWithBytesNoCopy calls the JavaScriptCore framework function JSObjectMakeTypedArrayWithBytesNoCopy.
-func JSObjectMakeTypedArrayWithBytesNoCopy(ctx obj.Object, arrayType TypedArrayType, bytes_ unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) obj.Object {
+func JSObjectMakeTypedArrayWithBytesNoCopy(ctx obj.Object, arrayType TypedArrayType, data unsafe.Pointer, byteLength int, bytesDeallocator unsafe.Pointer, deallocatorContext unsafe.Pointer, exception unsafe.Pointer) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSObjectMakeTypedArrayWithBytesNoCopy == nil {
 		ebipurego.RegisterLibFunc(&_fnJSObjectMakeTypedArrayWithBytesNoCopy, _lib, "JSObjectMakeTypedArrayWithBytesNoCopy")
 	}
-	_ret := _fnJSObjectMakeTypedArrayWithBytesNoCopy(objref.IDOf(ctx), arrayType, bytes_, byteLength, bytesDeallocator, deallocatorContext, exception)
+	_ret := _fnJSObjectMakeTypedArrayWithBytesNoCopy(objref.IDOf(ctx), arrayType, data, byteLength, bytesDeallocator, deallocatorContext, exception)
 	return obj.Wrap(_ret)
 }
 
@@ -770,24 +770,24 @@ func JSPropertyNameArrayRetain(array obj.Object) obj.Object {
 var _fnJSStringCopyCFString func(objc.ID, objc.ID) objc.ID
 
 // JSStringCopyCFString calls the JavaScriptCore framework function JSStringCopyCFString.
-func JSStringCopyCFString(alloc obj.Object, string_ obj.Object) obj.Object {
+func JSStringCopyCFString(alloc obj.Object, str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCopyCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCopyCFString, _lib, "JSStringCopyCFString")
 	}
-	_ret := _fnJSStringCopyCFString(objref.IDOf(alloc), objref.IDOf(string_))
+	_ret := _fnJSStringCopyCFString(objref.IDOf(alloc), objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
 var _fnJSStringCreateWithCFString func(objc.ID) objc.ID
 
 // JSStringCreateWithCFString calls the JavaScriptCore framework function JSStringCreateWithCFString.
-func JSStringCreateWithCFString(string_ obj.Object) obj.Object {
+func JSStringCreateWithCFString(str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCreateWithCFString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithCFString, _lib, "JSStringCreateWithCFString")
 	}
-	_ret := _fnJSStringCreateWithCFString(objref.IDOf(string_))
+	_ret := _fnJSStringCreateWithCFString(objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
@@ -807,46 +807,46 @@ func JSStringCreateWithCharacters(numChars int) (result obj.Object, chars uint16
 var _fnJSStringCreateWithUTF8CString func(string) objc.ID
 
 // JSStringCreateWithUTF8CString calls the JavaScriptCore framework function JSStringCreateWithUTF8CString.
-func JSStringCreateWithUTF8CString(string_ string) obj.Object {
+func JSStringCreateWithUTF8CString(str string) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringCreateWithUTF8CString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringCreateWithUTF8CString, _lib, "JSStringCreateWithUTF8CString")
 	}
-	_ret := _fnJSStringCreateWithUTF8CString(string_)
+	_ret := _fnJSStringCreateWithUTF8CString(str)
 	return obj.Wrap(_ret)
 }
 
 var _fnJSStringGetLength func(objc.ID) int
 
 // JSStringGetLength calls the JavaScriptCore framework function JSStringGetLength.
-func JSStringGetLength(string_ obj.Object) int {
+func JSStringGetLength(str obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetLength == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetLength, _lib, "JSStringGetLength")
 	}
-	return _fnJSStringGetLength(objref.IDOf(string_))
+	return _fnJSStringGetLength(objref.IDOf(str))
 }
 
 var _fnJSStringGetMaximumUTF8CStringSize func(objc.ID) int
 
 // JSStringGetMaximumUTF8CStringSize calls the JavaScriptCore framework function JSStringGetMaximumUTF8CStringSize.
-func JSStringGetMaximumUTF8CStringSize(string_ obj.Object) int {
+func JSStringGetMaximumUTF8CStringSize(str obj.Object) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetMaximumUTF8CStringSize == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetMaximumUTF8CStringSize, _lib, "JSStringGetMaximumUTF8CStringSize")
 	}
-	return _fnJSStringGetMaximumUTF8CStringSize(objref.IDOf(string_))
+	return _fnJSStringGetMaximumUTF8CStringSize(objref.IDOf(str))
 }
 
 var _fnJSStringGetUTF8CString func(objc.ID, string, int) int
 
 // JSStringGetUTF8CString calls the JavaScriptCore framework function JSStringGetUTF8CString.
-func JSStringGetUTF8CString(string_ obj.Object, buffer string, bufferSize int) int {
+func JSStringGetUTF8CString(str obj.Object, buffer string, bufferSize int) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringGetUTF8CString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringGetUTF8CString, _lib, "JSStringGetUTF8CString")
 	}
-	return _fnJSStringGetUTF8CString(objref.IDOf(string_), buffer, bufferSize)
+	return _fnJSStringGetUTF8CString(objref.IDOf(str), buffer, bufferSize)
 }
 
 var _fnJSStringIsEqual func(objc.ID, objc.ID) bool
@@ -874,23 +874,23 @@ func JSStringIsEqualToUTF8CString(a obj.Object, b string) bool {
 var _fnJSStringRelease func(objc.ID)
 
 // JSStringRelease calls the JavaScriptCore framework function JSStringRelease.
-func JSStringRelease(string_ obj.Object) {
+func JSStringRelease(str obj.Object) {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringRelease == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringRelease, _lib, "JSStringRelease")
 	}
-	_fnJSStringRelease(objref.IDOf(string_))
+	_fnJSStringRelease(objref.IDOf(str))
 }
 
 var _fnJSStringRetain func(objc.ID) objc.ID
 
 // JSStringRetain calls the JavaScriptCore framework function JSStringRetain.
-func JSStringRetain(string_ obj.Object) obj.Object {
+func JSStringRetain(str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSStringRetain == nil {
 		ebipurego.RegisterLibFunc(&_fnJSStringRetain, _lib, "JSStringRetain")
 	}
-	_ret := _fnJSStringRetain(objref.IDOf(string_))
+	_ret := _fnJSStringRetain(objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
@@ -1141,12 +1141,12 @@ func JSValueMakeBoolean(ctx obj.Object, boolean bool) obj.Object {
 var _fnJSValueMakeFromJSONString func(objc.ID, objc.ID) objc.ID
 
 // JSValueMakeFromJSONString calls the JavaScriptCore framework function JSValueMakeFromJSONString.
-func JSValueMakeFromJSONString(ctx obj.Object, string_ obj.Object) obj.Object {
+func JSValueMakeFromJSONString(ctx obj.Object, str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeFromJSONString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeFromJSONString, _lib, "JSValueMakeFromJSONString")
 	}
-	_ret := _fnJSValueMakeFromJSONString(objref.IDOf(ctx), objref.IDOf(string_))
+	_ret := _fnJSValueMakeFromJSONString(objref.IDOf(ctx), objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 
@@ -1177,12 +1177,12 @@ func JSValueMakeNumber(ctx obj.Object, number float64) obj.Object {
 var _fnJSValueMakeString func(objc.ID, objc.ID) objc.ID
 
 // JSValueMakeString calls the JavaScriptCore framework function JSValueMakeString.
-func JSValueMakeString(ctx obj.Object, string_ obj.Object) obj.Object {
+func JSValueMakeString(ctx obj.Object, str obj.Object) obj.Object {
 	_loadOnce.Do(_loadLibrary)
 	if _fnJSValueMakeString == nil {
 		ebipurego.RegisterLibFunc(&_fnJSValueMakeString, _lib, "JSValueMakeString")
 	}
-	_ret := _fnJSValueMakeString(objref.IDOf(ctx), objref.IDOf(string_))
+	_ret := _fnJSValueMakeString(objref.IDOf(ctx), objref.IDOf(str))
 	return obj.Wrap(_ret)
 }
 

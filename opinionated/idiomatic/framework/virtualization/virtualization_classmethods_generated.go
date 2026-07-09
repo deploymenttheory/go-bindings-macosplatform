@@ -141,9 +141,9 @@ func CanonicalizedNameFromName(name string) string {
 }
 
 // ValidateURL checks if the URL is a valid network block device URL.
-func ValidateURL(uRL string) error {
+func ValidateURL(url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("validateURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("validateURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}

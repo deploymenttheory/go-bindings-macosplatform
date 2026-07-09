@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func safariExtensionHandlerAdopt(id objc.ID) *SafariExtensionHandler {
 
 // Description returns the object's -description text.
 func (seh *SafariExtensionHandler) Description() string {
+	defer runtime.KeepAlive(seh)
 	return rt.Description(objref.IDOf(seh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (seh *SafariExtensionHandler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(seh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(seh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (seh *SafariExtensionHandler) IsKind(className string) bool {
+	defer runtime.KeepAlive(seh)
 	return rt.IsKind(objref.IDOf(seh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (seh *SafariExtensionHandler) String() string {
+	defer runtime.KeepAlive(seh)
 	return rt.Description(objref.IDOf(seh))
 }
 

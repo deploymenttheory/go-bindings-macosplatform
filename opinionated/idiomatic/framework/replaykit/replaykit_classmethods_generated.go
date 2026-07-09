@@ -6,6 +6,7 @@ package replaykit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -19,6 +20,7 @@ import (
 //
 // ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier blocks until the operation completes or ctx is cancelled.
 func ShowBroadcastPickerAtPointFromWindowPreferredExtensionIdentifier(ctx context.Context, point corefoundation.CGPoint, window obj.Object, preferredExtension string) (result *BroadcastActivityController, err error) {
+	defer runtime.KeepAlive(window)
 	type _result struct {
 		val *BroadcastActivityController
 		err error

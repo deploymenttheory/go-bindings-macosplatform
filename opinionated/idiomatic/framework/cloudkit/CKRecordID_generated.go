@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func recordIDAdopt(id objc.ID) *RecordID {
 
 // Description returns the object's -description text.
 func (ri *RecordID) Description() string {
+	defer runtime.KeepAlive(ri)
 	return rt.Description(objref.IDOf(ri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ri *RecordID) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ri)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ri *RecordID) IsKind(className string) bool {
+	defer runtime.KeepAlive(ri)
 	return rt.IsKind(objref.IDOf(ri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ri *RecordID) String() string {
+	defer runtime.KeepAlive(ri)
 	return rt.Description(objref.IDOf(ri))
 }
 
@@ -75,6 +82,7 @@ func NewRecordIDWithRecordName(recordName string) *RecordID {
 
 // NewRecordIDWithRecordNameZoneID creates a new record ID with the specified name and zone information.
 func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *RecordZoneID) *RecordID {
+	defer runtime.KeepAlive(zoneID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordID")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordName:zoneID:"), purego.NSString(recordName), objref.IDOf(zoneID))
 	return recordIDAdopt(_id)
@@ -82,6 +90,7 @@ func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *RecordZoneID) *R
 
 // RecordName returns the unique name of the record. For share records that manage a shared record zone, this property's value is always “CKRecordNameZoneWideShare“.
 func (ri *RecordID) RecordName() string {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("recordName"))
 	if _r == 0 {
 		return ""
@@ -91,6 +100,7 @@ func (ri *RecordID) RecordName() string {
 
 // ZoneID returns the ID of the zone that contains the record.
 func (ri *RecordID) ZoneID() *RecordZoneID {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }

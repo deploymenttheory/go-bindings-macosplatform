@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func characterSetAdopt(id objc.ID) *CharacterSet {
 
 // Description returns the object's -description text.
 func (cs *CharacterSet) Description() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cs *CharacterSet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cs *CharacterSet) IsKind(className string) bool {
+	defer runtime.KeepAlive(cs)
 	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cs *CharacterSet) String() string {
+	defer runtime.KeepAlive(cs)
 	return rt.Description(objref.IDOf(cs))
 }
 
 // NewCharacterSetWithCoder creates a new CharacterSet.
 func NewCharacterSetWithCoder(coder *Coder) *CharacterSet {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return characterSetAdopt(_id)
@@ -84,43 +91,50 @@ func (cs *CharacterSet) WithObservationInfo(observationInfo unsafe.Pointer) *Cha
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cs *CharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *CharacterSet {
-	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cs *CharacterSet) WithScriptingProperties(scriptingProperties map[string]obj.Object) *CharacterSet {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cs
 }
 
 // CharacterIsMember returns a Boolean value that indicates whether a given character is in the receiver.
 func (cs *CharacterSet) CharacterIsMember(aCharacter uint16) bool {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("characterIsMember:"), aCharacter)
 	return _r
 }
 
 // LongCharacterIsMember returns a Boolean value that indicates whether a given long character is a member of the receiver.
 func (cs *CharacterSet) LongCharacterIsMember(theLongChar int) bool {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("longCharacterIsMember:"), theLongChar)
 	return _r
 }
 
 // IsSupersetOfSet returns a Boolean value that indicates whether the receiver is a superset of another given character set.
 func (cs *CharacterSet) IsSupersetOfSet(theOtherSet *CharacterSet) bool {
+	defer runtime.KeepAlive(cs)
+	defer runtime.KeepAlive(theOtherSet)
 	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("isSupersetOfSet:"), objref.IDOf(theOtherSet))
 	return _r
 }
 
 // HasMemberInPlane returns a Boolean value that indicates whether the receiver has at least one member in a given character plane.
 func (cs *CharacterSet) HasMemberInPlane(thePlane uint8) bool {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[bool](objref.IDOf(cs), objc.RegisterName("hasMemberInPlane:"), thePlane)
 	return _r
 }
 
 // BitmapRepresentation returns the bitmap representation.
-func (cs *CharacterSet) BitmapRepresentation() *Data {
+func (cs *CharacterSet) BitmapRepresentation() []byte {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("bitmapRepresentation"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // InvertedSet returns the inverted set.
 func (cs *CharacterSet) InvertedSet() *CharacterSet {
+	defer runtime.KeepAlive(cs)
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("invertedSet"))
 	return CharacterSetFromID(_r)
 }

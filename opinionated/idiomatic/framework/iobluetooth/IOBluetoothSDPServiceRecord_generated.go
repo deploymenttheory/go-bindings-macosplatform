@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,34 @@ func iOBluetoothSDPServiceRecordAdopt(id objc.ID) *IOBluetoothSDPServiceRecord {
 
 // Description returns the object's -description text.
 func (ibssr *IOBluetoothSDPServiceRecord) Description() string {
+	defer runtime.KeepAlive(ibssr)
 	return rt.Description(objref.IDOf(ibssr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibssr *IOBluetoothSDPServiceRecord) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibssr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibssr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibssr *IOBluetoothSDPServiceRecord) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibssr)
 	return rt.IsKind(objref.IDOf(ibssr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibssr *IOBluetoothSDPServiceRecord) String() string {
+	defer runtime.KeepAlive(ibssr)
 	return rt.Description(objref.IDOf(ibssr))
 }
 
 // NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice returns an initialized IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.
 func NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict obj.Object, device *IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
+	defer runtime.KeepAlive(serviceDict)
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPServiceRecord")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceDictionary:device:"), objref.IDOf(serviceDict), objref.IDOf(device))
 	return iOBluetoothSDPServiceRecordAdopt(_id)
@@ -77,36 +85,42 @@ func NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict obj.O
 
 // RemoveServiceRecord returns removes the service from the local SDP server.
 func (ibssr *IOBluetoothSDPServiceRecord) RemoveServiceRecord() int {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[int](objref.IDOf(ibssr), objc.RegisterName("removeServiceRecord"))
 	return _r
 }
 
 // SDPServiceRecordRef returns an IOBluetoothSDPServiceRecordRef representation of the target IOBluetoothSDPServiceRecord object.
 func (ibssr *IOBluetoothSDPServiceRecord) SDPServiceRecordRef() obj.Object {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getSDPServiceRecordRef"))
 	return obj.Wrap(_r)
 }
 
 // GetDevice returns the get device.
 func (ibssr *IOBluetoothSDPServiceRecord) GetDevice() *IOBluetoothDevice {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
 // GetAttributes returns the get attributes.
 func (ibssr *IOBluetoothSDPServiceRecord) GetAttributes() obj.Object {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getAttributes"))
 	return obj.Wrap(_r)
 }
 
 // GetAttributeDataElement returns the data element for the given attribute ID in the target service.
 func (ibssr *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID uint16) *IOBluetoothSDPDataElement {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getAttributeDataElement:"), attributeID)
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
 // ServiceName returns the name of the service.
 func (ibssr *IOBluetoothSDPServiceRecord) ServiceName() string {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getServiceName"))
 	if _r == 0 {
 		return ""
@@ -116,6 +130,7 @@ func (ibssr *IOBluetoothSDPServiceRecord) ServiceName() string {
 
 // GetRFCOMMChannelID allows the discovery of the RFCOMM channel ID assigned to the service.
 func (ibssr *IOBluetoothSDPServiceRecord) GetRFCOMMChannelID() (result int, rfcommChannelID uint8) {
+	defer runtime.KeepAlive(ibssr)
 	var _out0 uint8
 	_r := objc.Send[int](objref.IDOf(ibssr), objc.RegisterName("getRFCOMMChannelID:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -123,6 +138,7 @@ func (ibssr *IOBluetoothSDPServiceRecord) GetRFCOMMChannelID() (result int, rfco
 
 // GetL2CAPPSM allows the discovery of the L2CAP PSM assigned to the service.
 func (ibssr *IOBluetoothSDPServiceRecord) GetL2CAPPSM() (result int, outPSM uint16) {
+	defer runtime.KeepAlive(ibssr)
 	var _out0 uint16
 	_r := objc.Send[int](objref.IDOf(ibssr), objc.RegisterName("getL2CAPPSM:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -130,6 +146,7 @@ func (ibssr *IOBluetoothSDPServiceRecord) GetL2CAPPSM() (result int, outPSM uint
 
 // GetServiceRecordHandle allows the discovery of the service record handle assigned to the service.
 func (ibssr *IOBluetoothSDPServiceRecord) GetServiceRecordHandle() (result int, outServiceRecordHandle uint32) {
+	defer runtime.KeepAlive(ibssr)
 	var _out0 uint32
 	_r := objc.Send[int](objref.IDOf(ibssr), objc.RegisterName("getServiceRecordHandle:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -137,48 +154,59 @@ func (ibssr *IOBluetoothSDPServiceRecord) GetServiceRecordHandle() (result int, 
 
 // MatchesUUID16 returns TRUE the UUID16 is found in the target service.
 func (ibssr *IOBluetoothSDPServiceRecord) MatchesUUID16(uuid16 uint16) bool {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[bool](objref.IDOf(ibssr), objc.RegisterName("matchesUUID16:"), uuid16)
 	return _r
 }
 
 // MatchesUUIDArray returns TRUE if ALL of the UUIDs in the given array is found in the target service.
 func (ibssr *IOBluetoothSDPServiceRecord) MatchesUUIDArray(uuidArray obj.Object) bool {
+	defer runtime.KeepAlive(ibssr)
+	defer runtime.KeepAlive(uuidArray)
 	_r := objc.Send[bool](objref.IDOf(ibssr), objc.RegisterName("matchesUUIDArray:"), objref.IDOf(uuidArray))
 	return _r
 }
 
 // MatchesSearchArray returns TRUE any of the UUID arrays in the search array match the target service.
 func (ibssr *IOBluetoothSDPServiceRecord) MatchesSearchArray(searchArray obj.Object) bool {
+	defer runtime.KeepAlive(ibssr)
+	defer runtime.KeepAlive(searchArray)
 	_r := objc.Send[bool](objref.IDOf(ibssr), objc.RegisterName("matchesSearchArray:"), objref.IDOf(searchArray))
 	return _r
 }
 
 // HasServiceFromArray returns TRUE if any one of the UUIDs in the given array is found in the target service.
 func (ibssr *IOBluetoothSDPServiceRecord) HasServiceFromArray(array obj.Object) bool {
+	defer runtime.KeepAlive(ibssr)
+	defer runtime.KeepAlive(array)
 	_r := objc.Send[bool](objref.IDOf(ibssr), objc.RegisterName("hasServiceFromArray:"), objref.IDOf(array))
 	return _r
 }
 
 // Device returns the device.
 func (ibssr *IOBluetoothSDPServiceRecord) Device() *IOBluetoothDevice {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("device"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
 // Attributes returns the attributes.
 func (ibssr *IOBluetoothSDPServiceRecord) Attributes() obj.Object {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // SortedAttributes returns the sorted attributes.
 func (ibssr *IOBluetoothSDPServiceRecord) SortedAttributes() obj.Object {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("sortedAttributes"))
 	return obj.Wrap(_r)
 }
 
 // HandsFreeSupportedFeatures returns the hands free supported features Returns the hands free supported features bitmap stored in the SDP record. See “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.”
 func (ibssr *IOBluetoothSDPServiceRecord) HandsFreeSupportedFeatures() uint16 {
+	defer runtime.KeepAlive(ibssr)
 	_r := objc.Send[uint16](objref.IDOf(ibssr), objc.RegisterName("handsFreeSupportedFeatures"))
 	return _r
 }

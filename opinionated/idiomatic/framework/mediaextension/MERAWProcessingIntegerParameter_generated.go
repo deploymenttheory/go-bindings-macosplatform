@@ -5,6 +5,7 @@
 package mediaextension
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -93,6 +94,7 @@ func (rpip *RAWProcessingIntegerParameter) WithEnabled(enabled bool) *RAWProcess
 
 // HasNeutralValue return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
 func (rpip *RAWProcessingIntegerParameter) HasNeutralValue() (ok bool, outNeutralValue int64) {
+	defer runtime.KeepAlive(rpip)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(rpip), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -100,6 +102,7 @@ func (rpip *RAWProcessingIntegerParameter) HasNeutralValue() (ok bool, outNeutra
 
 // HasCameraValue return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
 func (rpip *RAWProcessingIntegerParameter) HasCameraValue() (ok bool, outCameraValue int64) {
+	defer runtime.KeepAlive(rpip)
 	var _out0 int64
 	_r := objc.Send[bool](objref.IDOf(rpip), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
@@ -107,18 +110,21 @@ func (rpip *RAWProcessingIntegerParameter) HasCameraValue() (ok bool, outCameraV
 
 // MaximumValue returns the maximum value for this parameter.
 func (rpip *RAWProcessingIntegerParameter) MaximumValue() int {
+	defer runtime.KeepAlive(rpip)
 	_r := objc.Send[int](objref.IDOf(rpip), objc.RegisterName("maximumValue"))
 	return _r
 }
 
 // MinimumValue returns the minimum value for this parameter.
 func (rpip *RAWProcessingIntegerParameter) MinimumValue() int {
+	defer runtime.KeepAlive(rpip)
 	_r := objc.Send[int](objref.IDOf(rpip), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (rpip *RAWProcessingIntegerParameter) CurrentValue() int {
+	defer runtime.KeepAlive(rpip)
 	_r := objc.Send[int](objref.IDOf(rpip), objc.RegisterName("currentValue"))
 	return _r
 }

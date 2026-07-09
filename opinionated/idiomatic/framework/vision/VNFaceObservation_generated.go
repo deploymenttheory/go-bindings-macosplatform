@@ -5,9 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,32 +56,37 @@ func NewFaceObservation() *FaceObservation {
 
 // Landmarks returns the face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
 func (fo *FaceObservation) Landmarks() *FaceLandmarks2D {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("landmarks"))
 	return FaceLandmarks2DFromID(_r)
 }
 
 // FaceCaptureQuality returns the capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
-func (fo *FaceObservation) FaceCaptureQuality() obj.Object {
+func (fo *FaceObservation) FaceCaptureQuality() *foundation.Number {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("faceCaptureQuality"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Roll returns face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
-func (fo *FaceObservation) Roll() obj.Object {
+func (fo *FaceObservation) Roll() *foundation.Number {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("roll"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Yaw returns face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
-func (fo *FaceObservation) Yaw() obj.Object {
+func (fo *FaceObservation) Yaw() *foundation.Number {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("yaw"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Pitch returns face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
-func (fo *FaceObservation) Pitch() obj.Object {
+func (fo *FaceObservation) Pitch() *foundation.Number {
+	defer runtime.KeepAlive(fo)
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("pitch"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 var _ DetectedObjectObservationProvider = (*FaceObservation)(nil)

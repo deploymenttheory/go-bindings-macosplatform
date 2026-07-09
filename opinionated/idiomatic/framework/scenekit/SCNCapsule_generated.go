@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -96,6 +98,7 @@ func (c *Capsule) WithMaterials(items ...*Material) *Capsule {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (c *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return c
 }
@@ -109,6 +112,7 @@ func (c *Capsule) WithLevelsOfDetail(items ...*LevelOfDetail) *Capsule {
 
 // WithTessellator sets the tessellator.
 func (c *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return c
 }
@@ -127,42 +131,49 @@ func (c *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *C
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (c *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return c
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (c *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return c
 }
 
 // CapRadius returns the cap radius of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (c *Capsule) CapRadius() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("capRadius"))
 	return _r
 }
 
 // Height returns the height of the capsule. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 2.
 func (c *Capsule) Height() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("height"))
 	return _r
 }
 
 // RadialSegmentCount returns the number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (c *Capsule) RadialSegmentCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("radialSegmentCount"))
 	return _r
 }
 
 // HeightSegmentCount returns the number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (c *Capsule) HeightSegmentCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("heightSegmentCount"))
 	return _r
 }
 
 // CapSegmentCount returns the number of subdivisions in the cap. Animatable. If the value is less than 2, the behavior is undefined. The default value is 24.
 func (c *Capsule) CapSegmentCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("capSegmentCount"))
 	return _r
 }

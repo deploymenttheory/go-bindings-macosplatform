@@ -5,6 +5,8 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func moduleIdentityAdopt(id objc.ID) *ModuleIdentity {
 
 // Description returns the object's -description text.
 func (mi *ModuleIdentity) Description() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mi *ModuleIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mi *ModuleIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(mi)
 	return rt.IsKind(objref.IDOf(mi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mi *ModuleIdentity) String() string {
+	defer runtime.KeepAlive(mi)
 	return rt.Description(objref.IDOf(mi))
 }
 
@@ -74,6 +81,7 @@ func NewModuleIdentity() *ModuleIdentity {
 
 // BundleIdentifier returns the module's bundle identifier.
 func (mi *ModuleIdentity) BundleIdentifier() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -82,13 +90,15 @@ func (mi *ModuleIdentity) BundleIdentifier() string {
 }
 
 // URL returns the module's URL.
-func (mi *ModuleIdentity) URL() obj.Object {
+func (mi *ModuleIdentity) URL() string {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsEnabled reports whether the object is enabled.
 func (mi *ModuleIdentity) IsEnabled() bool {
+	defer runtime.KeepAlive(mi)
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isEnabled"))
 	return _r
 }

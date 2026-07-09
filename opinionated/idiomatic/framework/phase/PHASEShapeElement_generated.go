@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func shapeElementAdopt(id objc.ID) *ShapeElement {
 
 // Description returns the object's -description text.
 func (se *ShapeElement) Description() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (se *ShapeElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (se *ShapeElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(se)
 	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (se *ShapeElement) String() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
@@ -74,12 +81,14 @@ func NewShapeElement() *ShapeElement {
 
 // WithMaterial sets the shape's material defines the acoustical properties of this element.
 func (se *ShapeElement) WithMaterial(material *Material) *ShapeElement {
+	defer runtime.KeepAlive(material)
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("setMaterial:"), objref.IDOf(material))
 	return se
 }
 
 // Material returns the material.
 func (se *ShapeElement) Material() *Material {
+	defer runtime.KeepAlive(se)
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("material"))
 	return MaterialFromID(_r)
 }

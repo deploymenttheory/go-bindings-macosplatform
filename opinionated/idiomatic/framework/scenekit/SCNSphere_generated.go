@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -84,6 +86,7 @@ func (s *Sphere) WithMaterials(items ...*Material) *Sphere {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (s *Sphere) WithFirstMaterial(firstMaterial *Material) *Sphere {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return s
 }
@@ -97,6 +100,7 @@ func (s *Sphere) WithLevelsOfDetail(items ...*LevelOfDetail) *Sphere {
 
 // WithTessellator sets the tessellator.
 func (s *Sphere) WithTessellator(tessellator *GeometryTessellator) *Sphere {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return s
 }
@@ -115,30 +119,35 @@ func (s *Sphere) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sp
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (s *Sphere) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return s
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (s *Sphere) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return s
 }
 
 // Radius returns the sphere radius. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (s *Sphere) Radius() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("radius"))
 	return _r
 }
 
 // IsGeodesic reports whether indicate if the geometry is a geosphere. The default value is false.
 func (s *Sphere) IsGeodesic() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isGeodesic"))
 	return _r
 }
 
 // SegmentCount returns the number of segments along both spherical coordinates. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (s *Sphere) SegmentCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("segmentCount"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,12 +68,14 @@ func (vgsc *VirtioGraphicsScanoutConfiguration) WithHeightInPixels(heightInPixel
 
 // WidthInPixels returns the width of the scanout, in pixels.
 func (vgsc *VirtioGraphicsScanoutConfiguration) WidthInPixels() int {
+	defer runtime.KeepAlive(vgsc)
 	_r := objc.Send[int](objref.IDOf(vgsc), objc.RegisterName("widthInPixels"))
 	return _r
 }
 
 // HeightInPixels returns the height of the scanout, in pixels.
 func (vgsc *VirtioGraphicsScanoutConfiguration) HeightInPixels() int {
+	defer runtime.KeepAlive(vgsc)
 	_r := objc.Send[int](objref.IDOf(vgsc), objc.RegisterName("heightInPixels"))
 	return _r
 }

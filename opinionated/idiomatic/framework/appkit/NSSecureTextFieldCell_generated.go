@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -68,6 +70,7 @@ func (stfc *SecureTextFieldCell) WithEchosBullets(echosBullets bool) *SecureText
 
 // WithBackgroundColor sets the color of the cell’s background.
 func (stfc *SecureTextFieldCell) WithBackgroundColor(backgroundColor *Color) *SecureTextFieldCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -84,6 +87,7 @@ func (stfc *SecureTextFieldCell) WithDrawsBackground(drawsBackground bool) *Secu
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (stfc *SecureTextFieldCell) WithTextColor(textColor *Color) *SecureTextFieldCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -108,6 +112,7 @@ func (stfc *SecureTextFieldCell) WithPlaceholderString(placeholderString string)
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (stfc *SecureTextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SecureTextFieldCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -125,6 +130,7 @@ func (stfc *SecureTextFieldCell) WithAllowedInputSourceLocales(items ...obj.Obje
 
 // WithControlView sets the view associated with the cell.
 func (stfc *SecureTextFieldCell) WithControlView(controlView ViewProvider) *SecureTextFieldCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -149,6 +155,7 @@ func (stfc *SecureTextFieldCell) WithState(state int) *SecureTextFieldCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (stfc *SecureTextFieldCell) WithTarget(target obj.Object) *SecureTextFieldCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -253,6 +260,7 @@ func (stfc *SecureTextFieldCell) WithWraps(wraps bool) *SecureTextFieldCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (stfc *SecureTextFieldCell) WithFont(font *Font) *SecureTextFieldCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -261,6 +269,7 @@ func (stfc *SecureTextFieldCell) WithFont(font *Font) *SecureTextFieldCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (stfc *SecureTextFieldCell) WithFormatter(formatter obj.Object) *SecureTextFieldCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -269,6 +278,7 @@ func (stfc *SecureTextFieldCell) WithFormatter(formatter obj.Object) *SecureText
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (stfc *SecureTextFieldCell) WithObjectValue(objectValue obj.Object) *SecureTextFieldCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -317,6 +327,7 @@ func (stfc *SecureTextFieldCell) WithIntegerValue(integerValue int) *SecureTextF
 
 // WithImage sets the image displayed by the cell, if any.
 func (stfc *SecureTextFieldCell) WithImage(image *Image) *SecureTextFieldCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -333,6 +344,7 @@ func (stfc *SecureTextFieldCell) WithControlSize(controlSize ControlSize) *Secur
 
 // WithRepresentedObject sets the object represented by the cell.
 func (stfc *SecureTextFieldCell) WithRepresentedObject(representedObject obj.Object) *SecureTextFieldCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -341,6 +353,7 @@ func (stfc *SecureTextFieldCell) WithRepresentedObject(representedObject obj.Obj
 
 // WithMenu sets the cell’s contextual menu.
 func (stfc *SecureTextFieldCell) WithMenu(menu *Menu) *SecureTextFieldCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -429,6 +442,7 @@ func (stfc *SecureTextFieldCell) WithFocusRingType(focusRingType FocusRingType) 
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (stfc *SecureTextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *SecureTextFieldCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -477,6 +491,7 @@ func (stfc *SecureTextFieldCell) WithControlTint(controlTint ControlTint) *Secur
 
 // EchosBullets wraps the corresponding Objective-C method.
 func (stfc *SecureTextFieldCell) EchosBullets() bool {
+	defer runtime.KeepAlive(stfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

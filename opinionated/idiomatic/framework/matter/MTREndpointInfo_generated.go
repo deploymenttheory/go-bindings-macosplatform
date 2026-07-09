@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func mTREndpointInfoAdopt(id objc.ID) *MTREndpointInfo {
 
 // Description returns the object's -description text.
 func (mei *MTREndpointInfo) Description() string {
+	defer runtime.KeepAlive(mei)
 	return rt.Description(objref.IDOf(mei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mei *MTREndpointInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mei *MTREndpointInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mei)
 	return rt.IsKind(objref.IDOf(mei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mei *MTREndpointInfo) String() string {
+	defer runtime.KeepAlive(mei)
 	return rt.Description(objref.IDOf(mei))
 }
 
@@ -73,15 +81,17 @@ func NewMTREndpointInfo() *MTREndpointInfo {
 }
 
 // EndpointID returns the endpoint ID.
-func (mei *MTREndpointInfo) EndpointID() obj.Object {
+func (mei *MTREndpointInfo) EndpointID() *foundation.Number {
+	defer runtime.KeepAlive(mei)
 	_r := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("endpointID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DeviceTypes returns the device types.
 //
 // DeviceTypes returns the collection as a Go slice.
 func (mei *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
+	defer runtime.KeepAlive(mei)
 	_arr := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("deviceTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
@@ -90,6 +100,7 @@ func (mei *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
 //
 // PartsList returns the collection as a Go slice.
 func (mei *MTREndpointInfo) PartsList() []obj.Object {
+	defer runtime.KeepAlive(mei)
 	_arr := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("partsList"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -98,6 +109,7 @@ func (mei *MTREndpointInfo) PartsList() []obj.Object {
 //
 // Children returns the collection as a Go slice.
 func (mei *MTREndpointInfo) Children() []*MTREndpointInfo {
+	defer runtime.KeepAlive(mei)
 	_arr := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTREndpointInfo { return MTREndpointInfoFromID(_id) })
 }

@@ -41,7 +41,7 @@ func LPMetadataProviderFromID(id objc.ID) *LPMetadataProvider {
 }
 
 // Fetches metadata for the given URL.
-func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(uRL *foundation.NSURL, completionHandler func(*LPLinkMetadata, unsafe.Pointer)) {
+func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(url *foundation.NSURL, completionHandler func(*LPLinkMetadata, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
 		__block_completionHandler = objc.NewBlock(func(_ objc.Block, blockParam0 objc.ID, blockParam1 unsafe.Pointer) {
@@ -52,7 +52,7 @@ func (o *LPMetadataProvider) StartFetchingMetadataForURLCompletionHandler(uRL *f
 		})
 		defer __block_completionHandler.Release()
 	}
-	o.Ptr().Send(_lPMetadataProviderSelStartFetchingMetadataForURLCompletionHandler, uRL.Ptr(), __block_completionHandler)
+	o.Ptr().Send(_lPMetadataProviderSelStartFetchingMetadataForURLCompletionHandler, url.Ptr(), __block_completionHandler)
 }
 
 // Fetches metadata for the given NSURLRequest.

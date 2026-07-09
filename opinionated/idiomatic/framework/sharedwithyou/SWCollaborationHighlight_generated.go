@@ -5,9 +5,13 @@
 package sharedwithyou
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,6 +58,7 @@ func NewCollaborationHighlight() *CollaborationHighlight {
 
 // CollaborationIdentifier returns unique identifier as provided by the app hosting the collaboration This identifier is unique across platforms and shares
 func (ch *CollaborationHighlight) CollaborationIdentifier() string {
+	defer runtime.KeepAlive(ch)
 	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("collaborationIdentifier"))
 	if _r == 0 {
 		return ""
@@ -63,6 +68,7 @@ func (ch *CollaborationHighlight) CollaborationIdentifier() string {
 
 // Title returns title of the collaboration highlight Title of the collaboration if provided by the app hosting the collaboration
 func (ch *CollaborationHighlight) Title() string {
+	defer runtime.KeepAlive(ch)
 	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -71,13 +77,15 @@ func (ch *CollaborationHighlight) Title() string {
 }
 
 // CreationDate returns date when the file was created
-func (ch *CollaborationHighlight) CreationDate() obj.Object {
+func (ch *CollaborationHighlight) CreationDate() time.Time {
+	defer runtime.KeepAlive(ch)
 	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ContentType returns UTI type for this collaboration highlight
 func (ch *CollaborationHighlight) ContentType() obj.Object {
+	defer runtime.KeepAlive(ch)
 	_r := objc.Send[objc.ID](objref.IDOf(ch), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }

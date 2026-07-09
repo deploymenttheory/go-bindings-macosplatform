@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTRContentLauncherClusterAdditionalInfoStructAdopt(id objc.ID) *MTRContentL
 
 // Description returns the object's -description text.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Description() string {
+	defer runtime.KeepAlive(mclcais)
 	return rt.Description(objref.IDOf(mclcais))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclcais)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclcais), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclcais)
 	return rt.IsKind(objref.IDOf(mclcais), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) String() string {
+	defer runtime.KeepAlive(mclcais)
 	return rt.Description(objref.IDOf(mclcais))
 }
 
@@ -80,6 +87,7 @@ func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) WithValue(value st
 
 // Name returns the name.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
+	defer runtime.KeepAlive(mclcais)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -89,6 +97,7 @@ func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Name() string {
 
 // Value returns the value.
 func (mclcais *MTRContentLauncherClusterAdditionalInfoStruct) Value() string {
+	defer runtime.KeepAlive(mclcais)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcais), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""

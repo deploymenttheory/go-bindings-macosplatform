@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewSkipIntervalCommandEvent() *SkipIntervalCommandEvent {
 
 // Interval returns the interval.
 func (sice *SkipIntervalCommandEvent) Interval() float64 {
+	defer runtime.KeepAlive(sice)
 	_r := objc.Send[float64](objref.IDOf(sice), objc.RegisterName("interval"))
 	return _r
 }

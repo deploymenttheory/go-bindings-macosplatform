@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func transformRotateXOpAdopt(id objc.ID) *TransformRotateXOp {
 
 // Description returns the object's -description text.
 func (trxo *TransformRotateXOp) Description() string {
+	defer runtime.KeepAlive(trxo)
 	return rt.Description(objref.IDOf(trxo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (trxo *TransformRotateXOp) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(trxo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(trxo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (trxo *TransformRotateXOp) IsKind(className string) bool {
+	defer runtime.KeepAlive(trxo)
 	return rt.IsKind(objref.IDOf(trxo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (trxo *TransformRotateXOp) String() string {
+	defer runtime.KeepAlive(trxo)
 	return rt.Description(objref.IDOf(trxo))
 }
 
@@ -72,6 +79,7 @@ func NewTransformRotateXOp() *TransformRotateXOp {
 
 // Name returns the name.
 func (trxo *TransformRotateXOp) Name() string {
+	defer runtime.KeepAlive(trxo)
 	_r := objc.Send[objc.ID](objref.IDOf(trxo), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -81,6 +89,7 @@ func (trxo *TransformRotateXOp) Name() string {
 
 // AnimatedValue returns the animated value.
 func (trxo *TransformRotateXOp) AnimatedValue() *AnimatedScalar {
+	defer runtime.KeepAlive(trxo)
 	_r := objc.Send[objc.ID](objref.IDOf(trxo), objc.RegisterName("animatedValue"))
 	return AnimatedScalarFromID(_r)
 }

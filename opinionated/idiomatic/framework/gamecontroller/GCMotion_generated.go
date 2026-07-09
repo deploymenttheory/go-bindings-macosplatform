@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func motionAdopt(id objc.ID) *Motion {
 
 // Description returns the object's -description text.
 func (m *Motion) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Motion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Motion) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Motion) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -80,47 +87,56 @@ func (m *Motion) WithSensorsActive(sensorsActive bool) *Motion {
 
 // SetStateFromMotion copies the input values from a specified motion profile to a snapshot of a motion profile.
 func (m *Motion) SetStateFromMotion(motion *Motion) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(motion)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setStateFromMotion:"), objref.IDOf(motion))
 }
 
 // Controller returns a profile keeps a reference to the controller that it is mapping input from.
 func (m *Motion) Controller() *Controller {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
 // SensorsRequireManualActivation reports whether if this property is returns true, you are responsible for setting sensorsActive to true when you need motion data from the controller. Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property will return false.
 func (m *Motion) SensorsRequireManualActivation() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("sensorsRequireManualActivation"))
 	return _r
 }
 
 // SensorsActive reports whether set this property to true when you wish to receive motion data from the controller. When you set this property to false, the motion sensors will be disabled and the GCMotion profile will not be updated.
 func (m *Motion) SensorsActive() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("sensorsActive"))
 	return _r
 }
 
 // HasGravityAndUserAcceleration reports whether the controller is capable of reporting gravity and user acceleration separately.
 func (m *Motion) HasGravityAndUserAcceleration() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasGravityAndUserAcceleration"))
 	return _r
 }
 
 // HasAttitudeAndRotationRate reports whether the controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
 func (m *Motion) HasAttitudeAndRotationRate() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasAttitudeAndRotationRate"))
 	return _r
 }
 
 // HasAttitude reports whether the controller generating the motion data has sensors that can accurately determine the current attitude. If this is enabled the motion data for attitude is usable for inputs.
 func (m *Motion) HasAttitude() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasAttitude"))
 	return _r
 }
 
 // HasRotationRate reports whether the controller generating the motion data has sensors that can accurately determine the current rotation rate. If this is enabled the motion data for rotation rate is usable for inputs.
 func (m *Motion) HasRotationRate() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("hasRotationRate"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func animationPlayerAdopt(id objc.ID) *AnimationPlayer {
 
 // Description returns the object's -description text.
 func (ap *AnimationPlayer) Description() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ap *AnimationPlayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ap *AnimationPlayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ap)
 	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ap *AnimationPlayer) String() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
@@ -90,39 +97,46 @@ func (ap *AnimationPlayer) WithPaused(paused bool) *AnimationPlayer {
 
 // Play set paused to NO and restart playing from the beginning of the animation.
 func (ap *AnimationPlayer) Play() {
+	defer runtime.KeepAlive(ap)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("play"))
 }
 
 // Stop stop the animation.
 func (ap *AnimationPlayer) Stop() {
+	defer runtime.KeepAlive(ap)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("stop"))
 }
 
 // StopWithBlendOutDuration stop the animation and smoothly blend out the animation over the specified duration.
 func (ap *AnimationPlayer) StopWithBlendOutDuration(duration float64) {
+	defer runtime.KeepAlive(ap)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("stopWithBlendOutDuration:"), duration)
 }
 
 // Animation returns the played animation
 func (ap *AnimationPlayer) Animation() *Animation {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("animation"))
 	return AnimationFromID(_r)
 }
 
 // Speed returns the speed to play the animation at. Defaults to 1.0. Animatable
 func (ap *AnimationPlayer) Speed() float64 {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[float64](objref.IDOf(ap), objc.RegisterName("speed"))
 	return _r
 }
 
 // BlendFactor returns controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
 func (ap *AnimationPlayer) BlendFactor() float64 {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[float64](objref.IDOf(ap), objc.RegisterName("blendFactor"))
 	return _r
 }
 
 // Paused reports whether specifies if the animation is paused. Defaults to false.
 func (ap *AnimationPlayer) Paused() bool {
+	defer runtime.KeepAlive(ap)
 	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("paused"))
 	return _r
 }

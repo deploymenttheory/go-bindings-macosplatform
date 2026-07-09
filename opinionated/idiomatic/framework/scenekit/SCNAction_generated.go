@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func actionAdopt(id objc.ID) *Action {
 
 // Description returns the object's -description text.
 func (a *Action) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Action) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Action) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Action) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -92,24 +99,28 @@ func (a *Action) WithSpeed(speed float64) *Action {
 
 // ReversedAction creates an action that reverses the behavior of another action.
 func (a *Action) ReversedAction() *Action {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reversedAction"))
 	return ActionFromID(_r)
 }
 
 // Duration returns this is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
 func (a *Action) Duration() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
 // TimingMode returns the timing mode used to execute an action.
 func (a *Action) TimingMode() ActionTimingMode {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[ActionTimingMode](objref.IDOf(a), objc.RegisterName("timingMode"))
 	return _r
 }
 
 // Speed returns a speed factor that modifies how fast an action runs. Defaults to 1.
 func (a *Action) Speed() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("speed"))
 	return _r
 }

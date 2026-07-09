@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipants
 
 // CollaborationMetadata returns the collaboration metadata.
 func (ucpa *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
+	defer runtime.KeepAlive(ucpa)
 	_r := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
 }
@@ -61,6 +64,7 @@ func (ucpa *UpdateCollaborationParticipantsAction) CollaborationMetadata() *Coll
 //
 // AddedIdentities returns the collection as a Go slice.
 func (ucpa *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
+	defer runtime.KeepAlive(ucpa)
 	_arr := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("addedIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
@@ -69,6 +73,7 @@ func (ucpa *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonId
 //
 // RemovedIdentities returns the collection as a Go slice.
 func (ucpa *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {
+	defer runtime.KeepAlive(ucpa)
 	_arr := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("removedIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }

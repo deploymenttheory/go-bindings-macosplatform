@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,34 @@ func progressAdopt(id objc.ID) *Progress {
 
 // Description returns the object's -description text.
 func (p *Progress) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Progress) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Progress) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Progress) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // NewProgressWithParentUserInfo creates a new Progress.
 func NewProgressWithParentUserInfo(parentProgressOrNil *Progress, userInfoOrNil obj.Object) *Progress {
+	defer runtime.KeepAlive(parentProgressOrNil)
+	defer runtime.KeepAlive(userInfoOrNil)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParent:userInfo:"), objref.IDOf(parentProgressOrNil), objref.IDOf(userInfoOrNil))
 	return progressAdopt(_id)
@@ -90,12 +98,14 @@ func (p *Progress) WithCompletedUnitCount(completedUnitCount int64) *Progress {
 
 // WithLocalizedDescription sets the localized description.
 func (p *Progress) WithLocalizedDescription(localizedDescription StringProvider) *Progress {
+	defer runtime.KeepAlive(localizedDescription)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setLocalizedDescription:"), objref.IDOf(localizedDescription))
 	return p
 }
 
 // WithLocalizedAdditionalDescription sets the localized additional description.
 func (p *Progress) WithLocalizedAdditionalDescription(localizedAdditionalDescription StringProvider) *Progress {
+	defer runtime.KeepAlive(localizedAdditionalDescription)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setLocalizedAdditionalDescription:"), objref.IDOf(localizedAdditionalDescription))
 	return p
 }
@@ -132,24 +142,28 @@ func (p *Progress) WithResumingHandler(resumingHandler func()) *Progress {
 
 // WithKind sets the kind.
 func (p *Progress) WithKind(kind StringProvider) *Progress {
+	defer runtime.KeepAlive(kind)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setKind:"), objref.IDOf(kind))
 	return p
 }
 
 // WithEstimatedTimeRemaining sets a value that indicates the estimated amount of time remaining to complete the progress.
 func (p *Progress) WithEstimatedTimeRemaining(estimatedTimeRemaining NumberProvider) *Progress {
+	defer runtime.KeepAlive(estimatedTimeRemaining)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setEstimatedTimeRemaining:"), objref.IDOf(estimatedTimeRemaining))
 	return p
 }
 
 // WithThroughput sets a value that represents the speed of data processing, in bytes per second.
 func (p *Progress) WithThroughput(throughput NumberProvider) *Progress {
+	defer runtime.KeepAlive(throughput)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setThroughput:"), objref.IDOf(throughput))
 	return p
 }
 
 // WithFileOperationKind sets the file operation kind.
 func (p *Progress) WithFileOperationKind(fileOperationKind StringProvider) *Progress {
+	defer runtime.KeepAlive(fileOperationKind)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileOperationKind:"), objref.IDOf(fileOperationKind))
 	return p
 }
@@ -162,12 +176,14 @@ func (p *Progress) WithFileURL(fileURL string) *Progress {
 
 // WithFileTotalCount sets the total number of files for a file progress object.
 func (p *Progress) WithFileTotalCount(fileTotalCount NumberProvider) *Progress {
+	defer runtime.KeepAlive(fileTotalCount)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileTotalCount:"), objref.IDOf(fileTotalCount))
 	return p
 }
 
 // WithFileCompletedCount sets the number of completed files for a file progress object.
 func (p *Progress) WithFileCompletedCount(fileCompletedCount NumberProvider) *Progress {
+	defer runtime.KeepAlive(fileCompletedCount)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setFileCompletedCount:"), objref.IDOf(fileCompletedCount))
 	return p
 }
@@ -179,13 +195,14 @@ func (p *Progress) WithObservationInfo(observationInfo unsafe.Pointer) *Progress
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (p *Progress) WithScriptingProperties(scriptingProperties obj.Object) *Progress {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (p *Progress) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Progress {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return p
 }
 
 // BecomeCurrentWithPendingUnitCount wraps the corresponding Objective-C method.
 func (p *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("becomeCurrentWithPendingUnitCount:"), unitCount)
 }
 
@@ -193,6 +210,7 @@ func (p *Progress) BecomeCurrentWithPendingUnitCount(unitCount int64) {
 //
 // PerformAsCurrentWithPendingUnitCountUsing blocks until the operation completes or ctx is cancelled.
 func (p *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context, unitCount int64) error {
+	defer runtime.KeepAlive(p)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -208,58 +226,72 @@ func (p *Progress) PerformAsCurrentWithPendingUnitCountUsing(ctx context.Context
 
 // ResignCurrent wraps the corresponding Objective-C method.
 func (p *Progress) ResignCurrent() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("resignCurrent"))
 }
 
 // AddChildWithPendingUnitCount adds child with pending unit count.
 func (p *Progress) AddChildWithPendingUnitCount(child *Progress, inUnitCount int64) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addChild:withPendingUnitCount:"), objref.IDOf(child), inUnitCount)
 }
 
 // SetUserInfoObjectForKey wraps the corresponding Objective-C method.
 func (p *Progress) SetUserInfoObjectForKey(objectOrNil obj.Object, key *String) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(objectOrNil)
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setUserInfoObject:forKey:"), objref.IDOf(objectOrNil), objref.IDOf(key))
 }
 
 // Cancel wraps the corresponding Objective-C method.
 func (p *Progress) Cancel() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("cancel"))
 }
 
 // Pause wraps the corresponding Objective-C method.
 func (p *Progress) Pause() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pause"))
 }
 
 // Resume wraps the corresponding Objective-C method.
 func (p *Progress) Resume() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("resume"))
 }
 
 // Publish wraps the corresponding Objective-C method.
 func (p *Progress) Publish() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("publish"))
 }
 
 // Unpublish wraps the corresponding Objective-C method.
 func (p *Progress) Unpublish() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("unpublish"))
 }
 
 // TotalUnitCount returns the total unit count.
 func (p *Progress) TotalUnitCount() int64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int64](objref.IDOf(p), objc.RegisterName("totalUnitCount"))
 	return _r
 }
 
 // CompletedUnitCount returns the completed unit count.
 func (p *Progress) CompletedUnitCount() int64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int64](objref.IDOf(p), objc.RegisterName("completedUnitCount"))
 	return _r
 }
 
 // LocalizedDescription returns the localized description.
 func (p *Progress) LocalizedDescription() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -269,6 +301,7 @@ func (p *Progress) LocalizedDescription() string {
 
 // LocalizedAdditionalDescription returns the localized additional description.
 func (p *Progress) LocalizedAdditionalDescription() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedAdditionalDescription"))
 	if _r == 0 {
 		return ""
@@ -278,96 +311,112 @@ func (p *Progress) LocalizedAdditionalDescription() string {
 
 // IsCancellable reports whether the object is cancellable.
 func (p *Progress) IsCancellable() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCancellable"))
 	return _r
 }
 
 // IsPausable reports whether the object is pausable.
 func (p *Progress) IsPausable() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isPausable"))
 	return _r
 }
 
 // IsCancelled reports whether the object is cancelled.
 func (p *Progress) IsCancelled() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsPaused reports whether the object is paused.
 func (p *Progress) IsPaused() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isPaused"))
 	return _r
 }
 
 // IsIndeterminate reports whether the object is indeterminate.
 func (p *Progress) IsIndeterminate() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isIndeterminate"))
 	return _r
 }
 
 // FractionCompleted returns the fraction completed.
 func (p *Progress) FractionCompleted() float64 {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[float64](objref.IDOf(p), objc.RegisterName("fractionCompleted"))
 	return _r
 }
 
 // IsFinished reports whether the object is finished.
 func (p *Progress) IsFinished() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFinished"))
 	return _r
 }
 
 // UserInfo returns the user info.
 func (p *Progress) UserInfo() obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // Kind returns the kind.
 func (p *Progress) Kind() *String {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("kind"))
 	return StringFromID(_r)
 }
 
 // EstimatedTimeRemaining returns the estimated time remaining.
 func (p *Progress) EstimatedTimeRemaining() *Number {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("estimatedTimeRemaining"))
 	return NumberFromID(_r)
 }
 
 // Throughput returns the throughput.
 func (p *Progress) Throughput() *Number {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("throughput"))
 	return NumberFromID(_r)
 }
 
 // FileOperationKind returns the file operation kind.
 func (p *Progress) FileOperationKind() *String {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileOperationKind"))
 	return StringFromID(_r)
 }
 
 // FileURL returns the file URL.
-func (p *Progress) FileURL() *URL {
+func (p *Progress) FileURL() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileURL"))
-	return URLFromID(_r)
+	return rt.URLString(_r)
 }
 
 // FileTotalCount returns the file total count.
 func (p *Progress) FileTotalCount() *Number {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileTotalCount"))
 	return NumberFromID(_r)
 }
 
 // FileCompletedCount returns the file completed count.
 func (p *Progress) FileCompletedCount() *Number {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileCompletedCount"))
 	return NumberFromID(_r)
 }
 
 // IsOld reports whether the object is old.
 func (p *Progress) IsOld() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isOld"))
 	return _r
 }

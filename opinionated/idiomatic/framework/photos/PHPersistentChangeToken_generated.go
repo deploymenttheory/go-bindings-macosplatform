@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func persistentChangeTokenAdopt(id objc.ID) *PersistentChangeToken {
 
 // Description returns the object's -description text.
 func (pct *PersistentChangeToken) Description() string {
+	defer runtime.KeepAlive(pct)
 	return rt.Description(objref.IDOf(pct))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pct *PersistentChangeToken) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pct)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pct), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pct *PersistentChangeToken) IsKind(className string) bool {
+	defer runtime.KeepAlive(pct)
 	return rt.IsKind(objref.IDOf(pct), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pct *PersistentChangeToken) String() string {
+	defer runtime.KeepAlive(pct)
 	return rt.Description(objref.IDOf(pct))
 }
 

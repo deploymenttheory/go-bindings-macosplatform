@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func virtualMachineConfigurationAdopt(id objc.ID) *VirtualMachineConfiguration {
 
 // Description returns the object's -description text.
 func (vmc *VirtualMachineConfiguration) Description() string {
+	defer runtime.KeepAlive(vmc)
 	return rt.Description(objref.IDOf(vmc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vmc *VirtualMachineConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vmc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vmc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vmc *VirtualMachineConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(vmc)
 	return rt.IsKind(objref.IDOf(vmc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vmc *VirtualMachineConfiguration) String() string {
+	defer runtime.KeepAlive(vmc)
 	return rt.Description(objref.IDOf(vmc))
 }
 
@@ -77,6 +83,7 @@ func NewVirtualMachineConfiguration() *VirtualMachineConfiguration {
 
 // WithBootLoader sets the guest system to boot when the VM starts.
 func (vmc *VirtualMachineConfiguration) WithBootLoader(bootLoader BootLoaderProvider) *VirtualMachineConfiguration {
+	defer runtime.KeepAlive(bootLoader)
 	objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("setBootLoader:"), objref.IDOf(bootLoader))
 	return vmc
 }
@@ -88,13 +95,14 @@ func (vmc *VirtualMachineConfiguration) WithMemorySize(memorySize uint64) *Virtu
 }
 
 // WithCPUCount sets the number of CPUs you make available to the guest operating system.
-func (vmc *VirtualMachineConfiguration) WithCPUCount(cPUCount int) *VirtualMachineConfiguration {
-	objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("setCPUCount:"), cPUCount)
+func (vmc *VirtualMachineConfiguration) WithCPUCount(cpuCount int) *VirtualMachineConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("setCPUCount:"), cpuCount)
 	return vmc
 }
 
 // WithPlatform sets the hardware platform to use.
 func (vmc *VirtualMachineConfiguration) WithPlatform(platform PlatformConfigurationProvider) *VirtualMachineConfiguration {
+	defer runtime.KeepAlive(platform)
 	objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("setPlatform:"), objref.IDOf(platform))
 	return vmc
 }
@@ -192,24 +200,28 @@ func (vmc *VirtualMachineConfiguration) WithUSBControllers(items ...USBControlle
 
 // BootLoader returns boot loader used when the virtual machine starts.
 func (vmc *VirtualMachineConfiguration) BootLoader() *BootLoader {
+	defer runtime.KeepAlive(vmc)
 	_r := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("bootLoader"))
 	return BootLoaderFromID(_r)
 }
 
 // MemorySize returns virtual machine memory size in bytes. The memory size must be a multiple of a 1 megabyte (1024 * 1024 bytes) between VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.maximumAllowedMemorySize. The memorySize represents the total physical memory seen by a guest OS running in the virtual machine. Not all memory is allocated on start, the virtual machine allocates memory on demand.
 func (vmc *VirtualMachineConfiguration) MemorySize() uint64 {
+	defer runtime.KeepAlive(vmc)
 	_r := objc.Send[uint64](objref.IDOf(vmc), objc.RegisterName("memorySize"))
 	return _r
 }
 
 // CPUCount returns number of CPUs. The number of CPUs must be a value between VZVirtualMachineConfiguration.minimumAllowedCPUCount and VZVirtualMachineConfiguration.maximumAllowedCPUCount.
 func (vmc *VirtualMachineConfiguration) CPUCount() int {
+	defer runtime.KeepAlive(vmc)
 	_r := objc.Send[int](objref.IDOf(vmc), objc.RegisterName("CPUCount"))
 	return _r
 }
 
 // Platform returns the hardware platform to use. Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration. When restoring from saved state you must ensure your configuration matches that of the saved virtual machine.
 func (vmc *VirtualMachineConfiguration) Platform() *PlatformConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_r := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("platform"))
 	return PlatformConfigurationFromID(_r)
 }
@@ -218,6 +230,7 @@ func (vmc *VirtualMachineConfiguration) Platform() *PlatformConfiguration {
 //
 // AudioDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("audioDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioDeviceConfiguration { return AudioDeviceConfigurationFromID(_id) })
 }
@@ -226,6 +239,7 @@ func (vmc *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfigurati
 //
 // ConsoleDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("consoleDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConsoleDeviceConfiguration { return ConsoleDeviceConfigurationFromID(_id) })
 }
@@ -234,6 +248,7 @@ func (vmc *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfigu
 //
 // DirectorySharingDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectorySharingDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("directorySharingDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DirectorySharingDeviceConfiguration {
 		return DirectorySharingDeviceConfigurationFromID(_id)
@@ -244,6 +259,7 @@ func (vmc *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectorySh
 //
 // EntropyDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("entropyDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntropyDeviceConfiguration { return EntropyDeviceConfigurationFromID(_id) })
 }
@@ -252,6 +268,7 @@ func (vmc *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfigu
 //
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("memoryBalloonDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MemoryBalloonDeviceConfiguration {
 		return MemoryBalloonDeviceConfigurationFromID(_id)
@@ -262,6 +279,7 @@ func (vmc *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonD
 //
 // NetworkDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("networkDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NetworkDeviceConfiguration { return NetworkDeviceConfigurationFromID(_id) })
 }
@@ -270,6 +288,7 @@ func (vmc *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfigu
 //
 // SerialPorts returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("serialPorts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SerialPortConfiguration { return SerialPortConfigurationFromID(_id) })
 }
@@ -278,6 +297,7 @@ func (vmc *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration
 //
 // SocketDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("socketDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SocketDeviceConfiguration { return SocketDeviceConfigurationFromID(_id) })
 }
@@ -286,6 +306,7 @@ func (vmc *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfigura
 //
 // StorageDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("storageDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StorageDeviceConfiguration { return StorageDeviceConfigurationFromID(_id) })
 }
@@ -294,6 +315,7 @@ func (vmc *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfigu
 //
 // Keyboards returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("keyboards"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *KeyboardConfiguration { return KeyboardConfigurationFromID(_id) })
 }
@@ -302,6 +324,7 @@ func (vmc *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
 //
 // PointingDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("pointingDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PointingDeviceConfiguration { return PointingDeviceConfigurationFromID(_id) })
 }
@@ -310,6 +333,7 @@ func (vmc *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfi
 //
 // GraphicsDevices returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("graphicsDevices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDeviceConfiguration { return GraphicsDeviceConfigurationFromID(_id) })
 }
@@ -318,6 +342,7 @@ func (vmc *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfi
 //
 // USBControllers returns the collection as a Go slice.
 func (vmc *VirtualMachineConfiguration) USBControllers() []*USBControllerConfiguration {
+	defer runtime.KeepAlive(vmc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vmc), objc.RegisterName("usbControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *USBControllerConfiguration { return USBControllerConfigurationFromID(_id) })
 }
@@ -326,6 +351,7 @@ func (vmc *VirtualMachineConfiguration) USBControllers() []*USBControllerConfigu
 //
 // Validate returns an error if the operation did not succeed.
 func (vmc *VirtualMachineConfiguration) Validate() error {
+	defer runtime.KeepAlive(vmc)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(vmc), objc.RegisterName("validateWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -338,6 +364,7 @@ func (vmc *VirtualMachineConfiguration) Validate() error {
 //
 // ValidateSaveRestoreSupport returns an error if the operation did not succeed.
 func (vmc *VirtualMachineConfiguration) ValidateSaveRestoreSupport() error {
+	defer runtime.KeepAlive(vmc)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(vmc), objc.RegisterName("validateSaveRestoreSupportWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,30 +67,35 @@ func (ao *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping boo
 
 // Beta1 returns coefficent used for computing running averages of gradient. The default is 0.9.
 func (ao *AdamOptimizer) Beta1() float32 {
+	defer runtime.KeepAlive(ao)
 	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("beta1"))
 	return _r
 }
 
 // Beta2 returns coefficent used for computing running averages of square of gradient. The default is 0.999.
 func (ao *AdamOptimizer) Beta2() float32 {
+	defer runtime.KeepAlive(ao)
 	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("beta2"))
 	return _r
 }
 
 // Epsilon returns the epsilon.
 func (ao *AdamOptimizer) Epsilon() float32 {
+	defer runtime.KeepAlive(ao)
 	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // UsesAMSGrad reports whether to use the AMSGrad variant of this algorithm The default is false
 func (ao *AdamOptimizer) UsesAMSGrad() bool {
+	defer runtime.KeepAlive(ao)
 	_r := objc.Send[bool](objref.IDOf(ao), objc.RegisterName("usesAMSGrad"))
 	return _r
 }
 
 // TimeStep returns the current timestep used for the update. The default is 1.
 func (ao *AdamOptimizer) TimeStep() int {
+	defer runtime.KeepAlive(ao)
 	_r := objc.Send[int](objref.IDOf(ao), objc.RegisterName("timeStep"))
 	return _r
 }

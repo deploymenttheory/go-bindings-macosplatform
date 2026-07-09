@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -119,71 +121,83 @@ func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weights
 
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom sets the explicit padding values.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft int, paddingRight int, paddingTop int, paddingBottom int) {
+	defer runtime.KeepAlive(gdcdod)
 	objc.Send[objc.ID](objref.IDOf(gdcdod), objc.RegisterName("setExplicitPaddingWithPaddingLeft:paddingRight:paddingTop:paddingBottom:"), paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
 // StrideInX returns the stride for the x dimension. Default value: 1.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) StrideInX() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY returns the stride for the y dimension. Default value: 1.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) StrideInY() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("strideInY"))
 	return _r
 }
 
 // DilationRateInX returns the dilation rate for the x dimension. Default value: 1.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInX() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
 // DilationRateInY returns the dilation rate for the y dimension. Default value: 1.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInY() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
 // PaddingLeft returns the explicit padding value for the x dimension the operation adds before the data. Default value: 0.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) PaddingLeft() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
 // PaddingRight returns the explicit padding value for the x dimension operation adds after the data. Default value: 0.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) PaddingRight() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("paddingRight"))
 	return _r
 }
 
 // PaddingTop returns the explicit padding value for the y dimension operation adds before the data. Default value: 0.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) PaddingTop() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("paddingTop"))
 	return _r
 }
 
 // PaddingBottom returns the explicit padding value for the y dimension operation adds after the data. Default value: 0.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) PaddingBottom() int {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[int](objref.IDOf(gdcdod), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
 // PaddingStyle returns the padding style for the operation. Default value is `MPSGraphPaddingStyleExplicit`.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gdcdod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
 // DataLayout returns the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) DataLayout() GraphTensorNamedDataLayout {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(gdcdod), objc.RegisterName("dataLayout"))
 	return _r
 }
 
 // WeightsLayout returns the data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
 func (gdcdod *GraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() GraphTensorNamedDataLayout {
+	defer runtime.KeepAlive(gdcdod)
 	_r := objc.Send[GraphTensorNamedDataLayout](objref.IDOf(gdcdod), objc.RegisterName("weightsLayout"))
 	return _r
 }

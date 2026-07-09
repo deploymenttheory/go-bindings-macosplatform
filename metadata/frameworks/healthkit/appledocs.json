@@ -4089,8 +4089,8 @@
         "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/scheduletype-swift.enum"
       },
       "doseQuantity": {
-        "doc": "The quantity of the medication taken.",
-        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/dosequantity-4cb5m"
+        "doc": "The dose quantity the person reports as taken.",
+        "url": "https://developer.apple.com/documentation/healthkit/hkmedicationdoseevent/dosequantity-52hxr"
       },
       "logStatus": {
         "doc": "The log status the system assigns to this dose event.",

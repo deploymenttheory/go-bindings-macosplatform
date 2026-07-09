@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func keyValueSharedObserversAdopt(id objc.ID) *KeyValueSharedObservers {
 
 // Description returns the object's -description text.
 func (kvso *KeyValueSharedObservers) Description() string {
+	defer runtime.KeepAlive(kvso)
 	return rt.Description(objref.IDOf(kvso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (kvso *KeyValueSharedObservers) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(kvso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(kvso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (kvso *KeyValueSharedObservers) IsKind(className string) bool {
+	defer runtime.KeepAlive(kvso)
 	return rt.IsKind(objref.IDOf(kvso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (kvso *KeyValueSharedObservers) String() string {
+	defer runtime.KeepAlive(kvso)
 	return rt.Description(objref.IDOf(kvso))
 }
 
@@ -81,18 +87,21 @@ func (kvso *KeyValueSharedObservers) WithObservationInfo(observationInfo unsafe.
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (kvso *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
-	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (kvso *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties map[string]obj.Object) *KeyValueSharedObservers {
+	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return kvso
 }
 
 // AddSharedObserverForKeyOptionsContext add a new observer to the collection.
 func (kvso *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *Object, key string, options KeyValueObservingOptions, context_ unsafe.Pointer) {
+	defer runtime.KeepAlive(kvso)
+	defer runtime.KeepAlive(observer)
 	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("addSharedObserver:forKey:options:context:"), objref.IDOf(observer), purego.NSString(key), options, context_)
 }
 
 // Snapshot returns a momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
 func (kvso *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
+	defer runtime.KeepAlive(kvso)
 	_r := objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("snapshot"))
 	return KeyValueSharedObserversSnapshotFromID(_r)
 }

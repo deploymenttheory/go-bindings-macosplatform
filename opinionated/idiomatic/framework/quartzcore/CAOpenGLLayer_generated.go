@@ -5,10 +5,14 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,6 +65,7 @@ func (ogl *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
 
 // WithColorspace sets the layer’s colorspace in Core Graphics.
 func (ogl *OpenGLLayer) WithColorspace(colorspace obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(colorspace)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
 	return ogl
 }
@@ -128,6 +133,7 @@ func (ogl *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (ogl *OpenGLLayer) WithMask(mask LayerProvider) *OpenGLLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return ogl
 }
@@ -140,6 +146,7 @@ func (ogl *OpenGLLayer) WithMasksToBounds(masksToBounds bool) *OpenGLLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (ogl *OpenGLLayer) WithContents(contents obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return ogl
 }
@@ -152,6 +159,7 @@ func (ogl *OpenGLLayer) WithContentsRect(contentsRect corefoundation.CGRect) *Op
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (ogl *OpenGLLayer) WithContentsGravity(contentsGravity obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return ogl
 }
@@ -170,6 +178,7 @@ func (ogl *OpenGLLayer) WithContentsCenter(contentsCenter corefoundation.CGRect)
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (ogl *OpenGLLayer) WithContentsFormat(contentsFormat obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return ogl
 }
@@ -182,12 +191,14 @@ func (ogl *OpenGLLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynami
 
 // WithToneMapMode sets the tone map mode.
 func (ogl *OpenGLLayer) WithToneMapMode(toneMapMode obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return ogl
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (ogl *OpenGLLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return ogl
 }
@@ -200,12 +211,14 @@ func (ogl *OpenGLLayer) WithContentsHeadroom(contentsHeadroom float64) *OpenGLLa
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (ogl *OpenGLLayer) WithMinificationFilter(minificationFilter obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return ogl
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (ogl *OpenGLLayer) WithMagnificationFilter(magnificationFilter obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return ogl
 }
@@ -248,6 +261,7 @@ func (ogl *OpenGLLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) 
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (ogl *OpenGLLayer) WithBackgroundColor(backgroundColor obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return ogl
 }
@@ -266,6 +280,7 @@ func (ogl *OpenGLLayer) WithMaskedCorners(maskedCorners CornerMask) *OpenGLLayer
 
 // WithCornerCurve sets the corner curve.
 func (ogl *OpenGLLayer) WithCornerCurve(cornerCurve obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return ogl
 }
@@ -278,6 +293,7 @@ func (ogl *OpenGLLayer) WithBorderWidth(borderWidth float64) *OpenGLLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (ogl *OpenGLLayer) WithBorderColor(borderColor obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return ogl
 }
@@ -296,6 +312,7 @@ func (ogl *OpenGLLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLL
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (ogl *OpenGLLayer) WithCompositingFilter(compositingFilter obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return ogl
 }
@@ -314,6 +331,7 @@ func (ogl *OpenGLLayer) WithRasterizationScale(rasterizationScale float64) *Open
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (ogl *OpenGLLayer) WithShadowColor(shadowColor obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return ogl
 }
@@ -338,6 +356,7 @@ func (ogl *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (ogl *OpenGLLayer) WithShadowPath(shadowPath obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return ogl
 }
@@ -349,8 +368,8 @@ func (ogl *OpenGLLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) 
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (ogl *OpenGLLayer) WithActions(actions obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (ogl *OpenGLLayer) WithActions(actions map[string]obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ogl
 }
 
@@ -360,8 +379,19 @@ func (ogl *OpenGLLayer) WithName(name string) *OpenGLLayer {
 	return ogl
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (ogl *OpenGLLayer) WithDelegate(delegate LayerDelegate) *OpenGLLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ogl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ogl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ogl
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (ogl *OpenGLLayer) WithStyle(style obj.Object) *OpenGLLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return ogl
 }
@@ -375,34 +405,43 @@ func (ogl *OpenGLLayer) WithConstraints(items ...*Constraint) *OpenGLLayer {
 
 // CopyCGLPixelFormatForDisplayMask returns the OpenGL pixel format suitable for rendering to the set of displays specified by the display mask.
 func (ogl *OpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) obj.Object {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("copyCGLPixelFormatForDisplayMask:"), mask)
 	return obj.Wrap(_r)
 }
 
 // ReleaseCGLPixelFormat releases the specified OpenGL pixel format object.
 func (ogl *OpenGLLayer) ReleaseCGLPixelFormat(pf obj.Object) {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(pf)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("releaseCGLPixelFormat:"), objref.IDOf(pf))
 }
 
 // CopyCGLContextForPixelFormat returns the rendering context the receiver requires for the specified pixel format.
 func (ogl *OpenGLLayer) CopyCGLContextForPixelFormat(pf obj.Object) obj.Object {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("copyCGLContextForPixelFormat:"), objref.IDOf(pf))
 	return obj.Wrap(_r)
 }
 
 // ReleaseCGLContext releases the specified rendering context.
 func (ogl *OpenGLLayer) ReleaseCGLContext(ctx obj.Object) {
+	defer runtime.KeepAlive(ogl)
+	defer runtime.KeepAlive(ctx)
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("releaseCGLContext:"), objref.IDOf(ctx))
 }
 
 // IsAsynchronous reports whether the object is asynchronous.
 func (ogl *OpenGLLayer) IsAsynchronous() bool {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[bool](objref.IDOf(ogl), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
 // Colorspace returns the colorspace.
 func (ogl *OpenGLLayer) Colorspace() obj.Object {
+	defer runtime.KeepAlive(ogl)
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("colorspace"))
 	return obj.Wrap(_r)
 }

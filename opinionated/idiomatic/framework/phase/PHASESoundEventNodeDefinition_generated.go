@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,7 @@ func soundEventNodeDefinitionAdopt(id objc.ID) *SoundEventNodeDefinition {
 //
 // Children returns the collection as a Go slice.
 func (send *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
+	defer runtime.KeepAlive(send)
 	_arr := objc.Send[objc.ID](objref.IDOf(send), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SoundEventNodeDefinition { return SoundEventNodeDefinitionFromID(_id) })
 }

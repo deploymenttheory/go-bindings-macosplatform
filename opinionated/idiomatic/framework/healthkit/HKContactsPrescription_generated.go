@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,18 +55,21 @@ func NewContactsPrescription() *ContactsPrescription {
 
 // RightEye returns the right eye lens specification
 func (cp *ContactsPrescription) RightEye() *ContactsLensSpecification {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("rightEye"))
 	return ContactsLensSpecificationFromID(_r)
 }
 
 // LeftEye returns the left eye lens specification
 func (cp *ContactsPrescription) LeftEye() *ContactsLensSpecification {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("leftEye"))
 	return ContactsLensSpecificationFromID(_r)
 }
 
 // Brand returns the prescribed brand after contact lens fitting
 func (cp *ContactsPrescription) Brand() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("brand"))
 	if _r == 0 {
 		return ""

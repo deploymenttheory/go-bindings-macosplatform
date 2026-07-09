@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
@@ -49,22 +51,27 @@ func cameraAdopt(id objc.ID) *Camera {
 
 // Description returns the object's -description text.
 func (c *Camera) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Camera) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Camera) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Camera) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -400,18 +407,21 @@ func (c *Camera) WithFocalDistance(focalDistance float64) *Camera {
 
 // ProjectionTransform returns the projection transform.
 func (c *Camera) ProjectionTransform() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(c), objc.RegisterName("projectionTransform"))
 	return _r
 }
 
 // ProjectionTransformWithViewportSize wraps the corresponding Objective-C method.
 func (c *Camera) ProjectionTransformWithViewportSize(viewportSize corefoundation.CGSize) quartzcore.CATransform3D {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(c), objc.RegisterName("projectionTransformWithViewportSize:"), viewportSize)
 	return _r
 }
 
 // Name determines the name of the receiver.
 func (c *Camera) Name() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -421,318 +431,371 @@ func (c *Camera) Name() string {
 
 // FieldOfView determines the receiver's field of view (in degree). Defaults to 60°. Animatable. The fieldOfView is automatically updated when the sensorHeight or focalLength are set. Setting the fieldOfView will update the focalLength according to the new fieldOfView and the current sensorHeight.
 func (c *Camera) FieldOfView() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("fieldOfView"))
 	return _r
 }
 
 // ProjectionDirection determines whether the fieldOfView (or orthographicScale) is vertical or horizontal. Defaults to vertical.
 func (c *Camera) ProjectionDirection() CameraProjectionDirection {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[CameraProjectionDirection](objref.IDOf(c), objc.RegisterName("projectionDirection"))
 	return _r
 }
 
 // FocalLength determines the receiver's focal length in millimeter. Defaults to 50mm. Animatable. The focalLength is automatically updated when the sensorHeight or fieldOfView are set. Setting the focalLength will update the fieldOfView according to the new focalLength and the current sensorHeight.
 func (c *Camera) FocalLength() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("focalLength"))
 	return _r
 }
 
 // SensorHeight determines the vertical size of the sensor in millimeter. Defaults to 24mm. Animatable. Setting the sensorHeight will automatically update the fieldOfView according to the new sensorHeight and the current focalLength.
 func (c *Camera) SensorHeight() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("sensorHeight"))
 	return _r
 }
 
 // ZNear determines the receiver's near value. Animatable. The near value determines the minimal distance between the camera and a visible surface. If a surface is closer to the camera than this minimal distance, then the surface is clipped. The near value must be different than zero. Defaults to 1.
 func (c *Camera) ZNear() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("zNear"))
 	return _r
 }
 
 // ZFar determines the receiver's far value. Animatable. The far value determines the maximal distance between the camera and a visible surface. If a surface is further from the camera than this maximal distance, then the surface is clipped. Defaults to 100.
 func (c *Camera) ZFar() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("zFar"))
 	return _r
 }
 
 // AutomaticallyAdjustsZRange reports whether the receiver automatically adjusts the zFar value. Defaults to false. When set to true, the near and far planes are automatically set to fit the bounding box of the entire scene at render time.
 func (c *Camera) AutomaticallyAdjustsZRange() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("automaticallyAdjustsZRange"))
 	return _r
 }
 
 // UsesOrthographicProjection reports whether the receiver uses an orthographic projection or not. Defaults to false.
 func (c *Camera) UsesOrthographicProjection() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("usesOrthographicProjection"))
 	return _r
 }
 
 // OrthographicScale determines the receiver's orthographic scale value. Animatable. Defaults to 1. This setting determines the size of the camera's visible area. This is only enabled when usesOrthographicProjection is set to YES.
 func (c *Camera) OrthographicScale() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("orthographicScale"))
 	return _r
 }
 
 // WantsDepthOfField reports whether determines if the receiver has depth of field. Defaults to false.
 func (c *Camera) WantsDepthOfField() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("wantsDepthOfField"))
 	return _r
 }
 
 // FocusDistance determines the receiver's focus distance. Animatable. Defaults to 2.5
 func (c *Camera) FocusDistance() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("focusDistance"))
 	return _r
 }
 
 // FocalBlurSampleCount determines the receiver's sample count for depth of field effect. Defaults to 25.
 func (c *Camera) FocalBlurSampleCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("focalBlurSampleCount"))
 	return _r
 }
 
 // FStop determines the receiver's fstop. Animatable. Defaults to 5.6.
 func (c *Camera) FStop() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("fStop"))
 	return _r
 }
 
 // ApertureBladeCount determines the receiver's blade count of the aperture. Defaults to 6.
 func (c *Camera) ApertureBladeCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("apertureBladeCount"))
 	return _r
 }
 
 // MotionBlurIntensity determines the intensity of the motion blur. Animatable. Defaults to 0. An intensity of zero means no motion blur. The intensity should not exceeed 1.
 func (c *Camera) MotionBlurIntensity() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("motionBlurIntensity"))
 	return _r
 }
 
 // ScreenSpaceAmbientOcclusionIntensity determines the intensity of the screen space ambient occlusion. Animatable. defaults to 0.
 func (c *Camera) ScreenSpaceAmbientOcclusionIntensity() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("screenSpaceAmbientOcclusionIntensity"))
 	return _r
 }
 
 // ScreenSpaceAmbientOcclusionRadius determines the screen space ambient occlusion radius in scene unit. Animatable. defaults to 5.
 func (c *Camera) ScreenSpaceAmbientOcclusionRadius() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("screenSpaceAmbientOcclusionRadius"))
 	return _r
 }
 
 // ScreenSpaceAmbientOcclusionBias determines self occlusion bias in scene unit. defaults to 0.03.
 func (c *Camera) ScreenSpaceAmbientOcclusionBias() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("screenSpaceAmbientOcclusionBias"))
 	return _r
 }
 
 // ScreenSpaceAmbientOcclusionDepthThreshold determines the depth blur threshold in scene unit. defaults to 0.2.
 func (c *Camera) ScreenSpaceAmbientOcclusionDepthThreshold() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("screenSpaceAmbientOcclusionDepthThreshold"))
 	return _r
 }
 
 // ScreenSpaceAmbientOcclusionNormalThreshold determines the normal blur threshold. defaults to 0.3.
 func (c *Camera) ScreenSpaceAmbientOcclusionNormalThreshold() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("screenSpaceAmbientOcclusionNormalThreshold"))
 	return _r
 }
 
 // WantsHDR reports whether determines if the receiver has a high dynamic range. Defaults to false.
 func (c *Camera) WantsHDR() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("wantsHDR"))
 	return _r
 }
 
 // ExposureOffset determines the logarithmic exposure biasing, in EV. Defaults to 0.
 func (c *Camera) ExposureOffset() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("exposureOffset"))
 	return _r
 }
 
 // AverageGray determines the average gray level desired in the final image. Defaults to 0.18.
 func (c *Camera) AverageGray() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("averageGray"))
 	return _r
 }
 
 // WhitePoint determines the smallest luminance level that will be mapped to white in the final image. Defaults to 1.
 func (c *Camera) WhitePoint() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("whitePoint"))
 	return _r
 }
 
 // WantsExposureAdaptation reports whether determines if the receiver should simulate an eye and continuously adjust to luminance. Defaults to true.
 func (c *Camera) WantsExposureAdaptation() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("wantsExposureAdaptation"))
 	return _r
 }
 
 // ExposureAdaptationBrighteningSpeedFactor determines the exposure adaptation speed when going from bright areas to dark areas. Defaults to 0.4.
 func (c *Camera) ExposureAdaptationBrighteningSpeedFactor() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("exposureAdaptationBrighteningSpeedFactor"))
 	return _r
 }
 
 // ExposureAdaptationDarkeningSpeedFactor determines the exposure adaptation speed when going from dark areas to bright areas. Defaults to 0.6.
 func (c *Camera) ExposureAdaptationDarkeningSpeedFactor() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("exposureAdaptationDarkeningSpeedFactor"))
 	return _r
 }
 
 // MinimumExposure determines the minimum exposure offset of the adaptation, in EV. Defaults to -15.
 func (c *Camera) MinimumExposure() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("minimumExposure"))
 	return _r
 }
 
 // MaximumExposure determines the maximum exposure offset of the adaptation, in EV. Defaults to -15.
 func (c *Camera) MaximumExposure() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("maximumExposure"))
 	return _r
 }
 
 // BloomThreshold determines the luminance threshold for the bloom effect. Animatable. Defaults to 1.
 func (c *Camera) BloomThreshold() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("bloomThreshold"))
 	return _r
 }
 
 // BloomIterationCount determines the number of blur iterations. Defaults to 1.
 func (c *Camera) BloomIterationCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("bloomIterationCount"))
 	return _r
 }
 
 // BloomIterationSpread determines how the bloom iterations are spread. Defaults to 0.
 func (c *Camera) BloomIterationSpread() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("bloomIterationSpread"))
 	return _r
 }
 
 // BloomIntensity determines the intensity of the bloom effect. Animatable. Defaults to 0 (no effect).
 func (c *Camera) BloomIntensity() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("bloomIntensity"))
 	return _r
 }
 
 // BloomBlurRadius determines the radius of the bloom effect in points. Animatable. Defaults to 4.
 func (c *Camera) BloomBlurRadius() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("bloomBlurRadius"))
 	return _r
 }
 
 // VignettingPower returns controls the shape of the vignetting effect. Defaults to 0 (no effect).
 func (c *Camera) VignettingPower() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("vignettingPower"))
 	return _r
 }
 
 // VignettingIntensity returns controls the intensity of the vignetting effect. Defaults to 0 (no effect).
 func (c *Camera) VignettingIntensity() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("vignettingIntensity"))
 	return _r
 }
 
 // ColorFringeStrength returns controls the strength of the color shift effect. Defaults to 0 (no effect).
 func (c *Camera) ColorFringeStrength() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("colorFringeStrength"))
 	return _r
 }
 
 // ColorFringeIntensity returns controls the intensity of the color shift effect. Defaults to 1.
 func (c *Camera) ColorFringeIntensity() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("colorFringeIntensity"))
 	return _r
 }
 
 // Saturation returns controls the overall saturation of the scene. Defaults to 1 (no effect).
 func (c *Camera) Saturation() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("saturation"))
 	return _r
 }
 
 // Contrast returns controls the overall contrast of the scene. Defaults to 0 (no effect).
 func (c *Camera) Contrast() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("contrast"))
 	return _r
 }
 
 // GrainIntensity returns controls the intensity of the grain. Defaults to 0 (no effect).
 func (c *Camera) GrainIntensity() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("grainIntensity"))
 	return _r
 }
 
 // GrainScale returns controls the scale of the grain. Defaults to 1.
 func (c *Camera) GrainScale() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("grainScale"))
 	return _r
 }
 
 // GrainIsColored reports whether determines if the grain is colored or not. Defaults to false.
 func (c *Camera) GrainIsColored() bool {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("grainIsColored"))
 	return _r
 }
 
 // WhiteBalanceTemperature returns controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
 func (c *Camera) WhiteBalanceTemperature() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("whiteBalanceTemperature"))
 	return _r
 }
 
 // WhiteBalanceTint returns controls the overall white balance tint of the scene. Defaults to 0 (no effect).
 func (c *Camera) WhiteBalanceTint() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("whiteBalanceTint"))
 	return _r
 }
 
 // ColorGrading specifies a lookup texture to apply color grading. The contents must a 2D image representing `n` slices of a unit color cube texture, arranged in an horizontal row of `n` images. For instance, a color cube of dimension 16x16x16 should be provided as an image of size 256x16.
 func (c *Camera) ColorGrading() *MaterialProperty {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorGrading"))
 	return MaterialPropertyFromID(_r)
 }
 
 // CategoryBitMask determines the node categories that are visible from the receiver. Defaults to all bits set.
 func (c *Camera) CategoryBitMask() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
 // FocalBlurRadius determines the receiver's focal radius. Animatable. Determines the maximum amount of blur for objects out of focus. Defaults to 0.
 func (c *Camera) FocalBlurRadius() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("focalBlurRadius"))
 	return _r
 }
 
 // XFov determines the receiver's field of view on the X axis (in degree). Animatable. When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
 func (c *Camera) XFov() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("xFov"))
 	return _r
 }
 
 // YFov determines the receiver's field of view on the Y axis (in degree). Animatable. When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
 func (c *Camera) YFov() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("yFov"))
 	return _r
 }
 
 // Aperture determines the receiver's aperture. Animatable. Defaults to 1/8.0.
 func (c *Camera) Aperture() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("aperture"))
 	return _r
 }
 
 // FocalSize determines the receiver's focal size. Animatable. Determines the size of the area around focalDistance where the objects are in focus. Defaults to 0.
 func (c *Camera) FocalSize() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("focalSize"))
 	return _r
 }
 
 // FocalDistance determines the receiver's focal distance. Animatable. When non zero, the focal distance determines how the camera focuses the objects in the 3d scene. Defaults to 10.0 prior to macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to 2.5 otherwise.
 func (c *Camera) FocalDistance() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("focalDistance"))
 	return _r
 }

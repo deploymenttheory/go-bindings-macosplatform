@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRPumpConfigurationAndControlClusterLeakageEventAdopt(id objc.ID) *MTRPump
 
 // Description returns the object's -description text.
 func (mpcaccle *MTRPumpConfigurationAndControlClusterLeakageEvent) Description() string {
+	defer runtime.KeepAlive(mpcaccle)
 	return rt.Description(objref.IDOf(mpcaccle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mpcaccle *MTRPumpConfigurationAndControlClusterLeakageEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mpcaccle)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mpcaccle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mpcaccle *MTRPumpConfigurationAndControlClusterLeakageEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mpcaccle)
 	return rt.IsKind(objref.IDOf(mpcaccle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mpcaccle *MTRPumpConfigurationAndControlClusterLeakageEvent) String() string {
+	defer runtime.KeepAlive(mpcaccle)
 	return rt.Description(objref.IDOf(mpcaccle))
 }
 

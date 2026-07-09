@@ -6,11 +6,14 @@ package multipeerconnectivity
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,27 +54,33 @@ func sessionAdopt(id objc.ID) *Session {
 
 // Description returns the object's -description text.
 func (s *Session) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Session) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Session) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Session) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // NewSessionWithPeer creates a Multipeer Connectivity session.
 func NewSessionWithPeer(myPeerID *PeerID) *Session {
+	defer runtime.KeepAlive(myPeerID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:"), objref.IDOf(myPeerID))
 	return sessionAdopt(_id)
@@ -79,15 +88,28 @@ func NewSessionWithPeer(myPeerID *PeerID) *Session {
 
 // NewSessionWithPeerSecurityIdentityEncryptionPreference creates a Multipeer Connectivity session, providing security information.
 func NewSessionWithPeerSecurityIdentityEncryptionPreference(myPeerID *PeerID, identity obj.Object, encryptionPreference EncryptionPreference) *Session {
+	defer runtime.KeepAlive(myPeerID)
+	defer runtime.KeepAlive(identity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MCSession")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:securityIdentity:encryptionPreference:"), objref.IDOf(myPeerID), objref.IDOf(identity), encryptionPreference)
 	return sessionAdopt(_id)
 }
 
+// WithDelegate sets the delegate object that handles session-related events.
+func (s *Session) WithDelegate(delegate SessionDelegate) *Session {
+	_shim := newSessionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(s), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(s), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return s
+}
+
 // SendDataToPeersWithMode sends a message to nearby peers.
-func (s *Session) SendDataToPeersWithMode(data obj.Object, peerIDs []*PeerID, mode SessionSendDataMode) error {
+func (s *Session) SendDataToPeersWithMode(data []byte, peerIDs []*PeerID, mode SessionSendDataMode) error {
+	defer runtime.KeepAlive(s)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("sendData:toPeers:withMode:error:"), objref.IDOf(data), purego.SliceToNSArray(peerIDs, func(_v *PeerID) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("sendData:toPeers:withMode:error:"), rt.BytesToNSData(data), purego.SliceToNSArray(peerIDs, func(_v *PeerID) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -96,33 +118,39 @@ func (s *Session) SendDataToPeersWithMode(data obj.Object, peerIDs []*PeerID, mo
 
 // Disconnect disconnects the local peer from the session.
 func (s *Session) Disconnect() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("disconnect"))
 }
 
-// StartStreamWithNameToPeerError opens a byte stream to a nearby peer.
-func (s *Session) StartStreamWithNameToPeerError(streamName string, peerID *PeerID) (result obj.Object, err error) {
+// StartStreamWithNameToPeer opens a byte stream to a nearby peer.
+func (s *Session) StartStreamWithNameToPeer(streamName string, peerID *PeerID) (result *foundation.OutputStream, err error) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(peerID)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startStreamWithName:toPeer:error:"), purego.NSString(streamName), objref.IDOf(peerID), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return foundation.OutputStreamFromID(_r), nil
 }
 
 // MyPeerID returns the my peer ID.
 func (s *Session) MyPeerID() *PeerID {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
 // SecurityIdentity returns the security identity.
 func (s *Session) SecurityIdentity() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("securityIdentity"))
 	return obj.Wrap(_r)
 }
 
 // EncryptionPreference returns the encryption preference.
 func (s *Session) EncryptionPreference() EncryptionPreference {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[EncryptionPreference](objref.IDOf(s), objc.RegisterName("encryptionPreference"))
 	return _r
 }
@@ -131,6 +159,7 @@ func (s *Session) EncryptionPreference() EncryptionPreference {
 //
 // ConnectedPeers returns the collection as a Go slice.
 func (s *Session) ConnectedPeers() []*PeerID {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("connectedPeers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PeerID { return PeerIDFromID(_id) })
 }
@@ -139,6 +168,8 @@ func (s *Session) ConnectedPeers() []*PeerID {
 //
 // NearbyConnectionDataForPeer blocks until the operation completes or ctx is cancelled.
 func (s *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerID) (result obj.Object, err error) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(peerID)
 	type _result struct {
 		val obj.Object
 		err error
@@ -161,11 +192,15 @@ func (s *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *PeerI
 }
 
 // ConnectPeerWithNearbyConnectionData call this method to connect a peer to the session when using your own service discovery code instead of an MCNearbyServiceBrowser or MCBrowserViewController object.
-func (s *Session) ConnectPeerWithNearbyConnectionData(peerID *PeerID, data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("connectPeer:withNearbyConnectionData:"), objref.IDOf(peerID), objref.IDOf(data))
+func (s *Session) ConnectPeerWithNearbyConnectionData(peerID *PeerID, data []byte) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(peerID)
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("connectPeer:withNearbyConnectionData:"), objref.IDOf(peerID), rt.BytesToNSData(data))
 }
 
 // CancelConnectPeer cancels an attempt to connect to a peer.
 func (s *Session) CancelConnectPeer(peerID *PeerID) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(peerID)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("cancelConnectPeer:"), objref.IDOf(peerID))
 }

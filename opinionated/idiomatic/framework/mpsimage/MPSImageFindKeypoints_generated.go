@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func imageFindKeypointsAdopt(id objc.ID) *ImageFindKeypoints {
 
 // Description returns the object's -description text.
 func (ifk *ImageFindKeypoints) Description() string {
+	defer runtime.KeepAlive(ifk)
 	return rt.Description(objref.IDOf(ifk))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ifk *ImageFindKeypoints) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ifk)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ifk), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ifk *ImageFindKeypoints) IsKind(className string) bool {
+	defer runtime.KeepAlive(ifk)
 	return rt.IsKind(objref.IDOf(ifk), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ifk *ImageFindKeypoints) String() string {
+	defer runtime.KeepAlive(ifk)
 	return rt.Description(objref.IDOf(ifk))
 }
 

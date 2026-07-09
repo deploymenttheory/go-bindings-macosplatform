@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAttributeRequestPathAdopt(id objc.ID) *MTRAttributeRequestPath {
 
 // Description returns the object's -description text.
 func (marp *MTRAttributeRequestPath) Description() string {
+	defer runtime.KeepAlive(marp)
 	return rt.Description(objref.IDOf(marp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (marp *MTRAttributeRequestPath) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(marp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(marp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (marp *MTRAttributeRequestPath) IsKind(className string) bool {
+	defer runtime.KeepAlive(marp)
 	return rt.IsKind(objref.IDOf(marp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (marp *MTRAttributeRequestPath) String() string {
+	defer runtime.KeepAlive(marp)
 	return rt.Description(objref.IDOf(marp))
 }
 
@@ -71,19 +79,22 @@ func NewMTRAttributeRequestPath() *MTRAttributeRequestPath {
 }
 
 // Endpoint returns the endpoint.
-func (marp *MTRAttributeRequestPath) Endpoint() obj.Object {
+func (marp *MTRAttributeRequestPath) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(marp)
 	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cluster returns the cluster.
-func (marp *MTRAttributeRequestPath) Cluster() obj.Object {
+func (marp *MTRAttributeRequestPath) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(marp)
 	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Attribute returns the attribute.
-func (marp *MTRAttributeRequestPath) Attribute() obj.Object {
+func (marp *MTRAttributeRequestPath) Attribute() *foundation.Number {
+	defer runtime.KeepAlive(marp)
 	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("attribute"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

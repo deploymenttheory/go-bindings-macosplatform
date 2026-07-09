@@ -5,9 +5,11 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,27 +55,29 @@ func NewARC4RandomSource() *ARC4RandomSource {
 }
 
 // NewARC4RandomSourceWithSeed initializes a random source with the specified seed data.
-func NewARC4RandomSourceWithSeed(seed obj.Object) *ARC4RandomSource {
+func NewARC4RandomSourceWithSeed(seed []byte) *ARC4RandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKARC4RandomSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), objref.IDOf(seed))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), rt.BytesToNSData(seed))
 	return aRC4RandomSourceAdopt(_id)
 }
 
 // WithSeed sets the seed data that determines the random source’s behavior.
-func (ars *ARC4RandomSource) WithSeed(seed obj.Object) *ARC4RandomSource {
-	objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("setSeed:"), objref.IDOf(seed))
+func (ars *ARC4RandomSource) WithSeed(seed []byte) *ARC4RandomSource {
+	objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("setSeed:"), rt.BytesToNSData(seed))
 	return ars
 }
 
 // DropValuesWithCount skips the specified number of values in the random sequence.
 func (ars *ARC4RandomSource) DropValuesWithCount(count int) {
+	defer runtime.KeepAlive(ars)
 	objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("dropValuesWithCount:"), count)
 }
 
 // Seed returns the seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
-func (ars *ARC4RandomSource) Seed() obj.Object {
+func (ars *ARC4RandomSource) Seed() []byte {
+	defer runtime.KeepAlive(ars)
 	_r := objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("seed"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ RandomSourceProvider = (*ARC4RandomSource)(nil)

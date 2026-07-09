@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func monteCarloStrategistAdopt(id objc.ID) *MonteCarloStrategist {
 
 // Description returns the object's -description text.
 func (mcs *MonteCarloStrategist) Description() string {
+	defer runtime.KeepAlive(mcs)
 	return rt.Description(objref.IDOf(mcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcs *MonteCarloStrategist) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcs *MonteCarloStrategist) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcs)
 	return rt.IsKind(objref.IDOf(mcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcs *MonteCarloStrategist) String() string {
+	defer runtime.KeepAlive(mcs)
 	return rt.Description(objref.IDOf(mcs))
 }
 
@@ -86,12 +93,14 @@ func (mcs *MonteCarloStrategist) WithExplorationParameter(explorationParameter i
 
 // Budget returns the maximum number of samples that will be processed when searching for a move.
 func (mcs *MonteCarloStrategist) Budget() int {
+	defer runtime.KeepAlive(mcs)
 	_r := objc.Send[int](objref.IDOf(mcs), objc.RegisterName("budget"))
 	return _r
 }
 
 // ExplorationParameter returns a weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
 func (mcs *MonteCarloStrategist) ExplorationParameter() int {
+	defer runtime.KeepAlive(mcs)
 	_r := objc.Send[int](objref.IDOf(mcs), objc.RegisterName("explorationParameter"))
 	return _r
 }

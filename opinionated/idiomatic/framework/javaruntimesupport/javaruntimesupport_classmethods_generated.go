@@ -5,6 +5,8 @@
 package javaruntimesupport
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -13,6 +15,7 @@ import (
 
 // RegisterAWTAppWithOptions registers awt app with options.
 func RegisterAWTAppWithOptions(options obj.Object) {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("registerAWTAppWithOptions:"), objref.IDOf(options))
 }
 

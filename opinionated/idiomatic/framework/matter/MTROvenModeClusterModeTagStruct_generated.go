@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROvenModeClusterModeTagStructAdopt(id objc.ID) *MTROvenModeClusterModeTag
 
 // Description returns the object's -description text.
 func (momcmts *MTROvenModeClusterModeTagStruct) Description() string {
+	defer runtime.KeepAlive(momcmts)
 	return rt.Description(objref.IDOf(momcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (momcmts *MTROvenModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(momcmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(momcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (momcmts *MTROvenModeClusterModeTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(momcmts)
 	return rt.IsKind(objref.IDOf(momcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (momcmts *MTROvenModeClusterModeTagStruct) String() string {
+	defer runtime.KeepAlive(momcmts)
 	return rt.Description(objref.IDOf(momcmts))
 }
 
@@ -72,24 +80,28 @@ func NewMTROvenModeClusterModeTagStruct() *MTROvenModeClusterModeTagStruct {
 
 // WithMfgCode sets the mfg code.
 func (momcmts *MTROvenModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTROvenModeClusterModeTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(momcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return momcmts
 }
 
 // WithValue sets the value.
 func (momcmts *MTROvenModeClusterModeTagStruct) WithValue(value obj.Object) *MTROvenModeClusterModeTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(momcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return momcmts
 }
 
 // MfgCode returns the mfg code.
-func (momcmts *MTROvenModeClusterModeTagStruct) MfgCode() obj.Object {
+func (momcmts *MTROvenModeClusterModeTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(momcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(momcmts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (momcmts *MTROvenModeClusterModeTagStruct) Value() obj.Object {
+func (momcmts *MTROvenModeClusterModeTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(momcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(momcmts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

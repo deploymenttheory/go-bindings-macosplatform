@@ -5,9 +5,13 @@
 package datadetection
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,32 +58,37 @@ func NewMatchCalendarEvent() *MatchCalendarEvent {
 
 // IsAllDay reports whether the event is an all-day event.
 func (mce *MatchCalendarEvent) IsAllDay() bool {
+	defer runtime.KeepAlive(mce)
 	_r := objc.Send[bool](objref.IDOf(mce), objc.RegisterName("isAllDay"))
 	return _r
 }
 
 // StartDate returns a date that represents the start of the event.
-func (mce *MatchCalendarEvent) StartDate() obj.Object {
+func (mce *MatchCalendarEvent) StartDate() time.Time {
+	defer runtime.KeepAlive(mce)
 	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StartTimeZone returns the time zone for the event’s start date.
-func (mce *MatchCalendarEvent) StartTimeZone() obj.Object {
+func (mce *MatchCalendarEvent) StartTimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(mce)
 	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("startTimeZone"))
-	return obj.Wrap(_r)
+	return foundation.TimeZoneFromID(_r)
 }
 
 // EndDate returns a date that represents the end of the event.
-func (mce *MatchCalendarEvent) EndDate() obj.Object {
+func (mce *MatchCalendarEvent) EndDate() time.Time {
+	defer runtime.KeepAlive(mce)
 	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndTimeZone returns the time zone for the event’s end date.
-func (mce *MatchCalendarEvent) EndTimeZone() obj.Object {
+func (mce *MatchCalendarEvent) EndTimeZone() *foundation.TimeZone {
+	defer runtime.KeepAlive(mce)
 	_r := objc.Send[objc.ID](objref.IDOf(mce), objc.RegisterName("endTimeZone"))
-	return obj.Wrap(_r)
+	return foundation.TimeZoneFromID(_r)
 }
 
 var _ MatchProvider = (*MatchCalendarEvent)(nil)

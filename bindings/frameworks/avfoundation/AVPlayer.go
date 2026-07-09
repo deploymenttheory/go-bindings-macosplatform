@@ -117,11 +117,11 @@ func (o *AVPlayer) Init() *AVPlayer {
 }
 
 // Returns a new player to play a single audiovisual resource referenced by a given URL.
-func AVPlayerPlayerWithURL(uRL *foundation.NSURL) *AVPlayer {
+func AVPlayerPlayerWithURL(url *foundation.NSURL) *AVPlayer {
 	var _mainthread0 *AVPlayer
 	purego.Main(func() {
 		_mainthread0 = func() *AVPlayer {
-			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithURL, uRL.Ptr())
+			_ret := objc.Send[objc.ID](objc.ID(_clsAVPlayer), _aVPlayerSelPlayerWithURL, url.Ptr())
 			if _ret != 0 {
 				_ret.Send(objc.RegisterName("retain"))
 			}
@@ -147,8 +147,8 @@ func AVPlayerPlayerWithPlayerItem(item *AVPlayerItem) *AVPlayer {
 }
 
 // Creates a new player to play a single audiovisual resource referenced by a given URL.
-func (o *AVPlayer) InitWithURL(uRL *foundation.NSURL) *AVPlayer {
-	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelInitWithURL, uRL.Ptr())
+func (o *AVPlayer) InitWithURL(url *foundation.NSURL) *AVPlayer {
+	_ret := objc.Send[objc.ID](o.Ptr(), _aVPlayerSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

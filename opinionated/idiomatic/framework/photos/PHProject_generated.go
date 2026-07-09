@@ -5,9 +5,11 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,13 +55,15 @@ func NewProject() *Project {
 }
 
 // ProjectExtensionData returns the project extension data.
-func (p *Project) ProjectExtensionData() obj.Object {
+func (p *Project) ProjectExtensionData() []byte {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("projectExtensionData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // HasProjectPreview reports whether property to determine if a project preview was previously set. Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
 func (p *Project) HasProjectPreview() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("hasProjectPreview"))
 	return _r
 }

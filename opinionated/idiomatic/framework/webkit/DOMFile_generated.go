@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewDOMFile() *DOMFile {
 
 // Name returns the name.
 func (df *DOMFile) Name() string {
+	defer runtime.KeepAlive(df)
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

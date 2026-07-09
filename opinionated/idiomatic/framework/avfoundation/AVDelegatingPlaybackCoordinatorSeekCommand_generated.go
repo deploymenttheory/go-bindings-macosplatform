@@ -5,10 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,26 +58,30 @@ func NewDelegatingPlaybackCoordinatorSeekCommand() *DelegatingPlaybackCoordinato
 
 // ItemTime returns the time to seek the currentItem to. Playback should never automatically resume after seeking to this time. The coordinator will issue a new PlayCommand when everyone else is ready to resume.
 func (dpcsc *DelegatingPlaybackCoordinatorSeekCommand) ItemTime() coremedia.CMTime {
+	defer runtime.KeepAlive(dpcsc)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(dpcsc), objc.RegisterName("itemTime"))
 	return _r
 }
 
 // ShouldBufferInAnticipationOfPlayback reports whether indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback, playback is expected to eventually resume at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If true, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
 func (dpcsc *DelegatingPlaybackCoordinatorSeekCommand) ShouldBufferInAnticipationOfPlayback() bool {
+	defer runtime.KeepAlive(dpcsc)
 	_r := objc.Send[bool](objref.IDOf(dpcsc), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
 	return _r
 }
 
 // AnticipatedPlaybackRate returns the rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
 func (dpcsc *DelegatingPlaybackCoordinatorSeekCommand) AnticipatedPlaybackRate() float32 {
+	defer runtime.KeepAlive(dpcsc)
 	_r := objc.Send[float32](objref.IDOf(dpcsc), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
 }
 
 // CompletionDueDate returns communicates when the coordinator expects the command's completion handler at the latest. A seek command expecting buffering in anticipation of playback does expect the receiver to fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
-func (dpcsc *DelegatingPlaybackCoordinatorSeekCommand) CompletionDueDate() obj.Object {
+func (dpcsc *DelegatingPlaybackCoordinatorSeekCommand) CompletionDueDate() time.Time {
+	defer runtime.KeepAlive(dpcsc)
 	_r := objc.Send[objc.ID](objref.IDOf(dpcsc), objc.RegisterName("completionDueDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorSeekCommand)(nil)

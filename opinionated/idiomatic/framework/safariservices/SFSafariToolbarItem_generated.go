@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func safariToolbarItemAdopt(id objc.ID) *SafariToolbarItem {
 
 // Description returns the object's -description text.
 func (sti *SafariToolbarItem) Description() string {
+	defer runtime.KeepAlive(sti)
 	return rt.Description(objref.IDOf(sti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sti *SafariToolbarItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sti)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sti *SafariToolbarItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(sti)
 	return rt.IsKind(objref.IDOf(sti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sti *SafariToolbarItem) String() string {
+	defer runtime.KeepAlive(sti)
 	return rt.Description(objref.IDOf(sti))
 }
 
@@ -74,30 +81,37 @@ func NewSafariToolbarItem() *SafariToolbarItem {
 
 // SetEnabledWithBadgeText sets the enabled state and the badge text for the toolbar item.
 func (sti *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
+	defer runtime.KeepAlive(sti)
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setEnabled:withBadgeText:"), enabled, purego.NSString(badgeText))
 }
 
 // SetEnabled sets whether the toolbar item is enabled.
 func (sti *SafariToolbarItem) SetEnabled(enabled bool) {
+	defer runtime.KeepAlive(sti)
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // SetBadgeText sets the badge text for the toolbar item.
 func (sti *SafariToolbarItem) SetBadgeText(badgeText string) {
+	defer runtime.KeepAlive(sti)
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBadgeText:"), purego.NSString(badgeText))
 }
 
 // SetImage sets the image displayed in the toolbar button.
 func (sti *SafariToolbarItem) SetImage(image obj.Object) {
+	defer runtime.KeepAlive(sti)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
 // SetLabel sets the label for the toolbar button. Setting the label to nil will set the default label.
 func (sti *SafariToolbarItem) SetLabel(label string) {
+	defer runtime.KeepAlive(sti)
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // ShowPopover shows the popover associated with this toolbar button.
 func (sti *SafariToolbarItem) ShowPopover() {
+	defer runtime.KeepAlive(sti)
 	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("showPopover"))
 }

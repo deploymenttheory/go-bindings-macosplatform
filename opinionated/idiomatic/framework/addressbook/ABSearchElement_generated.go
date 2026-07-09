@@ -5,6 +5,8 @@
 package addressbook
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func searchElementAdopt(id objc.ID) *SearchElement {
 
 // Description returns the object's -description text.
 func (se *SearchElement) Description() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (se *SearchElement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (se *SearchElement) IsKind(className string) bool {
+	defer runtime.KeepAlive(se)
 	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (se *SearchElement) String() string {
+	defer runtime.KeepAlive(se)
 	return rt.Description(objref.IDOf(se))
 }
 
@@ -74,6 +81,8 @@ func NewSearchElement() *SearchElement {
 
 // MatchesRecord tests whether or not a record matches a search element.
 func (se *SearchElement) MatchesRecord(record *Record) bool {
+	defer runtime.KeepAlive(se)
+	defer runtime.KeepAlive(record)
 	_r := objc.Send[bool](objref.IDOf(se), objc.RegisterName("matchesRecord:"), objref.IDOf(record))
 	return _r
 }

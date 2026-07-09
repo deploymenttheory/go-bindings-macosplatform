@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func stateAdopt(id objc.ID) *State {
 
 // Description returns the object's -description text.
 func (s *State) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *State) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *State) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *State) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -89,42 +96,51 @@ func (s *State) WithLabel(label string) *State {
 
 // BufferSizeAtIndex return the buffer size of the MTLBuffer at index or 0 if it is not a MTLBuffer Does not force allocation of the MTLResource
 func (s *State) BufferSizeAtIndex(index int) int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("bufferSizeAtIndex:"), index)
 	return _r
 }
 
 // ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSState instantiation and MTLTexture or MTLBuffer is not included. It only measures the size of the allocation used to hold the texels in the texture or bytes in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithResource: is used, most MPSStates are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned.
 func (s *State) ResourceSize() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("resourceSize"))
 	return _r
 }
 
 // DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor determine padding and sizing of result images A MPSState has the opportunity to reconfigure the MPSImageDescriptor used to create the filter result state and set the MPSKernel.offset to the correct value.  By default, the MPSState does not modify the descriptor. There is a order of operations defined for who may update the descriptor: 1) Default padding code runs based on the MPSNNPaddingMethod in the MPSCNNKernel.padding. This creates the descriptor and picks a starting value for the MPSCNNKernel.offset. 2) MPSStates are called in order to apply this function and update the offset. 3) The MPSNNPadding custom padding method of the same name is called. 4) Some code that may prove helpful:
 func (s *State) DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages []obj.Object, sourceStates []obj.Object, kernel obj.Object, inDescriptor obj.Object) obj.Object {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(kernel)
+	defer runtime.KeepAlive(inDescriptor)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("destinationImageDescriptorForSourceImages:sourceStates:forKernel:suggestedDescriptor:"), purego.SliceToNSArray(sourceImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(kernel), objref.IDOf(inDescriptor))
 	return obj.Wrap(_r)
 }
 
 // ResourceCount returns the number of MTLResource objects held by the state
 func (s *State) ResourceCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("resourceCount"))
 	return _r
 }
 
 // ReadCount returns the read count.
 func (s *State) ReadCount() int {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("readCount"))
 	return _r
 }
 
 // IsTemporary reports whether the object is temporary.
 func (s *State) IsTemporary() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isTemporary"))
 	return _r
 }
 
 // Label returns a string to help identify this object.
 func (s *State) Label() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

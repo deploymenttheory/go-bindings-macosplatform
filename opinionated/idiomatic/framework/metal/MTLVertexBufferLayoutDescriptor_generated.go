@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vertexBufferLayoutDescriptorAdopt(id objc.ID) *VertexBufferLayoutDescriptor
 
 // Description returns the object's -description text.
 func (vbld *VertexBufferLayoutDescriptor) Description() string {
+	defer runtime.KeepAlive(vbld)
 	return rt.Description(objref.IDOf(vbld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vbld *VertexBufferLayoutDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vbld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vbld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vbld *VertexBufferLayoutDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vbld)
 	return rt.IsKind(objref.IDOf(vbld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vbld *VertexBufferLayoutDescriptor) String() string {
+	defer runtime.KeepAlive(vbld)
 	return rt.Description(objref.IDOf(vbld))
 }
 
@@ -92,18 +99,21 @@ func (vbld *VertexBufferLayoutDescriptor) WithStepRate(stepRate int) *VertexBuff
 
 // Stride returns the stride.
 func (vbld *VertexBufferLayoutDescriptor) Stride() int {
+	defer runtime.KeepAlive(vbld)
 	_r := objc.Send[int](objref.IDOf(vbld), objc.RegisterName("stride"))
 	return _r
 }
 
 // StepFunction returns the step function.
 func (vbld *VertexBufferLayoutDescriptor) StepFunction() VertexStepFunction {
+	defer runtime.KeepAlive(vbld)
 	_r := objc.Send[VertexStepFunction](objref.IDOf(vbld), objc.RegisterName("stepFunction"))
 	return _r
 }
 
 // StepRate returns the step rate.
 func (vbld *VertexBufferLayoutDescriptor) StepRate() int {
+	defer runtime.KeepAlive(vbld)
 	_r := objc.Send[int](objref.IDOf(vbld), objc.RegisterName("stepRate"))
 	return _r
 }

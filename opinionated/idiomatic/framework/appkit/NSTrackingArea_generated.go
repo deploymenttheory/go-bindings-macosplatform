@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,34 @@ func trackingAreaAdopt(id objc.ID) *TrackingArea {
 
 // Description returns the object's -description text.
 func (ta *TrackingArea) Description() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ta *TrackingArea) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ta)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ta *TrackingArea) IsKind(className string) bool {
+	defer runtime.KeepAlive(ta)
 	return rt.IsKind(objref.IDOf(ta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ta *TrackingArea) String() string {
+	defer runtime.KeepAlive(ta)
 	return rt.Description(objref.IDOf(ta))
 }
 
 // NewTrackingAreaWithRectOptionsOwnerUserInfo initializes and returns an object defining a region of a view to receive mouse-tracking events, mouse-moved events, cursor-update events, or possibly all these events.
 func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options TrackingAreaOptions, owner obj.Object, userInfo obj.Object) *TrackingArea {
+	defer runtime.KeepAlive(owner)
+	defer runtime.KeepAlive(userInfo)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTrackingArea")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRect:options:owner:userInfo:"), rect, options, objref.IDOf(owner), objref.IDOf(userInfo))
 	return trackingAreaAdopt(_id)
@@ -76,24 +85,28 @@ func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, opt
 
 // Rect returns the rect.
 func (ta *TrackingArea) Rect() corefoundation.CGRect {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ta), objc.RegisterName("rect"))
 	return _r
 }
 
 // Options returns the options.
 func (ta *TrackingArea) Options() TrackingAreaOptions {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[TrackingAreaOptions](objref.IDOf(ta), objc.RegisterName("options"))
 	return _r
 }
 
 // Owner returns the owner.
 func (ta *TrackingArea) Owner() obj.Object {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("owner"))
 	return obj.Wrap(_r)
 }
 
 // UserInfo returns the user info.
 func (ta *TrackingArea) UserInfo() obj.Object {
+	defer runtime.KeepAlive(ta)
 	_r := objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }

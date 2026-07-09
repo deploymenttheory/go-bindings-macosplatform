@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRBooleanStateConfigurationClusterAlarmsStateChangedEventAdopt(id objc.ID)
 
 // Description returns the object's -description text.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) Description() string {
+	defer runtime.KeepAlive(mbsccasce)
 	return rt.Description(objref.IDOf(mbsccasce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbsccasce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbsccasce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbsccasce)
 	return rt.IsKind(objref.IDOf(mbsccasce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) String() string {
+	defer runtime.KeepAlive(mbsccasce)
 	return rt.Description(objref.IDOf(mbsccasce))
 }
 
@@ -72,24 +80,28 @@ func NewMTRBooleanStateConfigurationClusterAlarmsStateChangedEvent() *MTRBoolean
 
 // WithAlarmsActive sets the alarms active.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsActive(alarmsActive obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
+	defer runtime.KeepAlive(alarmsActive)
 	objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("setAlarmsActive:"), objref.IDOf(alarmsActive))
 	return mbsccasce
 }
 
 // WithAlarmsSuppressed sets the alarms suppressed.
 func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) WithAlarmsSuppressed(alarmsSuppressed obj.Object) *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent {
+	defer runtime.KeepAlive(alarmsSuppressed)
 	objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("setAlarmsSuppressed:"), objref.IDOf(alarmsSuppressed))
 	return mbsccasce
 }
 
 // AlarmsActive returns the alarms active.
-func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() obj.Object {
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsActive() *foundation.Number {
+	defer runtime.KeepAlive(mbsccasce)
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("alarmsActive"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AlarmsSuppressed returns the alarms suppressed.
-func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() obj.Object {
+func (mbsccasce *MTRBooleanStateConfigurationClusterAlarmsStateChangedEvent) AlarmsSuppressed() *foundation.Number {
+	defer runtime.KeepAlive(mbsccasce)
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccasce), objc.RegisterName("alarmsSuppressed"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

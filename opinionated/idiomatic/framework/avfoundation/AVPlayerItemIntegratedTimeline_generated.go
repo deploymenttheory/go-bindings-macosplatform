@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +51,27 @@ func playerItemIntegratedTimelineAdopt(id objc.ID) *PlayerItemIntegratedTimeline
 
 // Description returns the object's -description text.
 func (piit *PlayerItemIntegratedTimeline) Description() string {
+	defer runtime.KeepAlive(piit)
 	return rt.Description(objref.IDOf(piit))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piit *PlayerItemIntegratedTimeline) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piit)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piit), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piit *PlayerItemIntegratedTimeline) IsKind(className string) bool {
+	defer runtime.KeepAlive(piit)
 	return rt.IsKind(objref.IDOf(piit), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piit *PlayerItemIntegratedTimeline) String() string {
+	defer runtime.KeepAlive(piit)
 	return rt.Description(objref.IDOf(piit))
 }
 
@@ -75,28 +83,33 @@ func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
 
 // CurrentSnapshot returns this property provides an immutable representation of the timeline state at time of request. Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
 func (piit *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
+	defer runtime.KeepAlive(piit)
 	_r := objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("currentSnapshot"))
 	return PlayerItemIntegratedTimelineSnapshotFromID(_r)
 }
 
 // CurrentTime returns the current time on the integrated timeline. Returns the current time on the integrated timeline. During playback of interstitial events that occupy a single point, currentTime will not change.
 func (piit *PlayerItemIntegratedTimeline) CurrentTime() coremedia.CMTime {
+	defer runtime.KeepAlive(piit)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(piit), objc.RegisterName("currentTime"))
 	return _r
 }
 
 // CurrentDate returns the date of current playback, or nil if playback is not mapped to any date.
-func (piit *PlayerItemIntegratedTimeline) CurrentDate() obj.Object {
+func (piit *PlayerItemIntegratedTimeline) CurrentDate() time.Time {
+	defer runtime.KeepAlive(piit)
 	_r := objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("currentDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // SeekToTimeToleranceBeforeToleranceAfterCompletionHandler seeks to a particular time in the integrated time domain.
 func (piit *PlayerItemIntegratedTimeline) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	defer runtime.KeepAlive(piit)
 	objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("seekToTime:toleranceBefore:toleranceAfter:completionHandler:"), time_, toleranceBefore, toleranceAfter, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // SeekToDateCompletionHandler seeks to a particular date in the integrated time domain.
-func (piit *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (piit *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date time.Time, completionHandler func(bool)) {
+	defer runtime.KeepAlive(piit)
+	objc.Send[objc.ID](objref.IDOf(piit), objc.RegisterName("seekToDate:completionHandler:"), rt.TimeToNSDate(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }

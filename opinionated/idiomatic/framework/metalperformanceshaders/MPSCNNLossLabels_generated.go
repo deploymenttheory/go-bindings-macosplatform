@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,18 +68,21 @@ func (cll *CNNLossLabels) WithLabel(label string) *CNNLossLabels {
 
 // LossImage returns loss image accessor method.
 func (cll *CNNLossLabels) LossImage() obj.Object {
+	defer runtime.KeepAlive(cll)
 	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("lossImage"))
 	return obj.Wrap(_r)
 }
 
 // LabelsImage returns labels image accessor method.
 func (cll *CNNLossLabels) LabelsImage() obj.Object {
+	defer runtime.KeepAlive(cll)
 	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("labelsImage"))
 	return obj.Wrap(_r)
 }
 
 // WeightsImage returns weights image accessor method.
 func (cll *CNNLossLabels) WeightsImage() obj.Object {
+	defer runtime.KeepAlive(cll)
 	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("weightsImage"))
 	return obj.Wrap(_r)
 }

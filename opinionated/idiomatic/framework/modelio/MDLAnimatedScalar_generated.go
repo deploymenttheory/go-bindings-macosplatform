@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -59,28 +60,33 @@ func (as *AnimatedScalar) WithInterpolation(interpolation AnimatedValueInterpola
 
 // SetFloatAtTime wraps the corresponding Objective-C method.
 func (as *AnimatedScalar) SetFloatAtTime(value float32, time_ float64) {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setFloat:atTime:"), value, time_)
 }
 
 // SetDoubleAtTime wraps the corresponding Objective-C method.
 func (as *AnimatedScalar) SetDoubleAtTime(value float64, time_ float64) {
+	defer runtime.KeepAlive(as)
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setDouble:atTime:"), value, time_)
 }
 
 // FloatAtTime wraps the corresponding Objective-C method.
 func (as *AnimatedScalar) FloatAtTime(time_ float64) float32 {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("floatAtTime:"), time_)
 	return _r
 }
 
 // DoubleAtTime wraps the corresponding Objective-C method.
 func (as *AnimatedScalar) DoubleAtTime(time_ float64) float64 {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[float64](objref.IDOf(as), objc.RegisterName("doubleAtTime:"), time_)
 	return _r
 }
 
 // ResetWithFloatArrayAtTimesCount resets with float array at times count.
 func (as *AnimatedScalar) ResetWithFloatArrayAtTimesCount(count int) (valuesArray float32, timesArray float64) {
+	defer runtime.KeepAlive(as)
 	var _out0 float32
 	var _out1 float64
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("resetWithFloatArray:atTimes:count:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), count)
@@ -89,6 +95,7 @@ func (as *AnimatedScalar) ResetWithFloatArrayAtTimesCount(count int) (valuesArra
 
 // ResetWithDoubleArrayAtTimesCount resets with double array at times count.
 func (as *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(count int) (valuesArray float64, timesArray float64) {
+	defer runtime.KeepAlive(as)
 	var _out0 float64
 	var _out1 float64
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("resetWithDoubleArray:atTimes:count:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), count)
@@ -97,6 +104,7 @@ func (as *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(count int) (valuesArr
 
 // GetFloatArrayMaxCount wraps the corresponding Objective-C method.
 func (as *AnimatedScalar) GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32) {
+	defer runtime.KeepAlive(as)
 	var _out0 float32
 	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("getFloatArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0
@@ -104,6 +112,7 @@ func (as *AnimatedScalar) GetFloatArrayMaxCount(maxCount int) (result int, value
 
 // GetDoubleArrayMaxCount wraps the corresponding Objective-C method.
 func (as *AnimatedScalar) GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64) {
+	defer runtime.KeepAlive(as)
 	var _out0 float64
 	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("getDoubleArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0

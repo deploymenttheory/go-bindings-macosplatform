@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func fetchRequestExpressionAdopt(id objc.ID) *FetchRequestExpression {
 
 // Description returns the object's -description text.
 func (fre *FetchRequestExpression) Description() string {
+	defer runtime.KeepAlive(fre)
 	return rt.Description(objref.IDOf(fre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fre *FetchRequestExpression) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fre *FetchRequestExpression) IsKind(className string) bool {
+	defer runtime.KeepAlive(fre)
 	return rt.IsKind(objref.IDOf(fre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fre *FetchRequestExpression) String() string {
+	defer runtime.KeepAlive(fre)
 	return rt.Description(objref.IDOf(fre))
 }
 
@@ -73,19 +81,22 @@ func NewFetchRequestExpression() *FetchRequestExpression {
 }
 
 // RequestExpression returns the request expression.
-func (fre *FetchRequestExpression) RequestExpression() obj.Object {
+func (fre *FetchRequestExpression) RequestExpression() *foundation.Expression {
+	defer runtime.KeepAlive(fre)
 	_r := objc.Send[objc.ID](objref.IDOf(fre), objc.RegisterName("requestExpression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 // ContextExpression returns the context expression.
-func (fre *FetchRequestExpression) ContextExpression() obj.Object {
+func (fre *FetchRequestExpression) ContextExpression() *foundation.Expression {
+	defer runtime.KeepAlive(fre)
 	_r := objc.Send[objc.ID](objref.IDOf(fre), objc.RegisterName("contextExpression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }
 
 // IsCountOnlyRequest reports whether the object is count only request.
 func (fre *FetchRequestExpression) IsCountOnlyRequest() bool {
+	defer runtime.KeepAlive(fre)
 	_r := objc.Send[bool](objref.IDOf(fre), objc.RegisterName("isCountOnlyRequest"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func aggregateAssetDownloadTaskAdopt(id objc.ID) *AggregateAssetDownloadTask {
 
 // Description returns the object's -description text.
 func (aadt *AggregateAssetDownloadTask) Description() string {
+	defer runtime.KeepAlive(aadt)
 	return rt.Description(objref.IDOf(aadt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aadt *AggregateAssetDownloadTask) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aadt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aadt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aadt *AggregateAssetDownloadTask) IsKind(className string) bool {
+	defer runtime.KeepAlive(aadt)
 	return rt.IsKind(objref.IDOf(aadt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aadt *AggregateAssetDownloadTask) String() string {
+	defer runtime.KeepAlive(aadt)
 	return rt.Description(objref.IDOf(aadt))
 }
 
@@ -74,6 +81,7 @@ func NewAggregateAssetDownloadTask() *AggregateAssetDownloadTask {
 
 // URLAsset returns the asset supplied to the download task upon initialization.
 func (aadt *AggregateAssetDownloadTask) URLAsset() *URLAsset {
+	defer runtime.KeepAlive(aadt)
 	_r := objc.Send[objc.ID](objref.IDOf(aadt), objc.RegisterName("URLAsset"))
 	return URLAssetFromID(_r)
 }

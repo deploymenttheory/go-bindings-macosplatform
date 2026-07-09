@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,48 +53,53 @@ func dataAdopt(id objc.ID) *Data {
 
 // Description returns the object's -description text.
 func (d *Data) Description() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (d *Data) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(d)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (d *Data) IsKind(className string) bool {
+	defer runtime.KeepAlive(d)
 	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (d *Data) String() string {
+	defer runtime.KeepAlive(d)
 	return rt.Description(objref.IDOf(d))
 }
 
 // NewDataWithBytesLength initializes a data object filled with a given number of bytes copied from a given buffer.
-func NewDataWithBytesLength(bytes_ unsafe.Pointer, length int) *Data {
+func NewDataWithBytesLength(data unsafe.Pointer, length int) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), bytes_, length)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), data, length)
 	return dataAdopt(_id)
 }
 
 // NewDataWithBytesNoCopyLength initializes a data object filled with a given number of bytes of data from a given buffer.
-func NewDataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *Data {
+func NewDataWithBytesNoCopyLength(data unsafe.Pointer, length int) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:"), bytes_, length)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:"), data, length)
 	return dataAdopt(_id)
 }
 
 // NewDataWithBytesNoCopyLengthFreeWhenDone initializes a newly allocated data object by adding the given number of bytes from the given buffer.
-func NewDataWithBytesNoCopyLengthFreeWhenDone(bytes_ unsafe.Pointer, length int, b bool) *Data {
+func NewDataWithBytesNoCopyLengthFreeWhenDone(data unsafe.Pointer, length int, b bool) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:freeWhenDone:"), bytes_, length, b)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytesNoCopy:length:freeWhenDone:"), data, length, b)
 	return dataAdopt(_id)
 }
 
-// NewDataWithContentsOfFileOptionsError initializes a data object with the content of the file at a given path.
-func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
+// NewDataFromFile initializes a data object with the content of the file at a given path.
+func NewDataFromFile(path string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:options:error:"), purego.NSString(path), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -103,8 +109,8 @@ func NewDataWithContentsOfFileOptionsError(path string, readOptionsMask DataRead
 	return dataAdopt(_id), nil
 }
 
-// NewDataWithContentsOfURLOptionsError creates a data object from the data at the provided file URL using specific reading options.
-func NewDataWithContentsOfURLOptionsError(url string, readOptionsMask DataReadingOptions) (result *Data, err error) {
+// NewDataWithContentsOfURLOptions creates a data object from the data at the provided file URL using specific reading options.
+func NewDataWithContentsOfURLOptions(url string, readOptionsMask DataReadingOptions) (result *Data, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:options:error:"), rt.FileURL(url), readOptionsMask, unsafe.Pointer(&_nsErr))
@@ -129,9 +135,9 @@ func NewDataWithContentsOfURL(url string) *Data {
 }
 
 // NewDataWithData initializes a data object with the contents of another data object.
-func NewDataWithData(data *Data) *Data {
+func NewDataWithData(data []byte) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return dataAdopt(_id)
 }
 
@@ -143,9 +149,9 @@ func NewDataWithBase64EncodedStringOptions(base64String string, options DataBase
 }
 
 // NewDataWithBase64EncodedDataOptions initializes a data object with the given Base64 encoded data.
-func NewDataWithBase64EncodedDataOptions(base64Data *Data, options DataBase64DecodingOptions) *Data {
+func NewDataWithBase64EncodedDataOptions(base64Data []byte, options DataBase64DecodingOptions) *Data {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedData:options:"), objref.IDOf(base64Data), options)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase64EncodedData:options:"), rt.BytesToNSData(base64Data), options)
 	return dataAdopt(_id)
 }
 
@@ -170,42 +176,48 @@ func (d *Data) WithObservationInfo(observationInfo unsafe.Pointer) *Data {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (d *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (d *Data) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Data {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return d
 }
 
 // Length returns the length.
 func (d *Data) Length() int {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("length"))
 	return _r
 }
 
 // GetBytesLength copies a number of bytes from the start of the data object into a given buffer.
 func (d *Data) GetBytesLength(buffer unsafe.Pointer, length int) {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getBytes:length:"), buffer, length)
 }
 
 // IsEqualToData returns a Boolean value indicating whether this data object is the same as another.
-func (d *Data) IsEqualToData(other *Data) bool {
-	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToData:"), objref.IDOf(other))
+func (d *Data) IsEqualToData(other []byte) bool {
+	defer runtime.KeepAlive(d)
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToData:"), rt.BytesToNSData(other))
 	return _r
 }
 
 // WriteToFileAtomically writes the data object’s bytes to the file specified by a given path.
 func (d *Data) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
 // WriteToURLAtomically writes the data object’s bytes to the location specified by a given URL.
 func (d *Data) WriteToURLAtomically(url string, atomically bool) bool {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
-// WriteToFileOptions writes the data object’s bytes to the file specified by a given path.
-func (d *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptions) error {
+// WriteToFile writes the data object’s bytes to the file specified by a given path.
+func (d *Data) WriteToFile(path string, writeOptionsMask DataWritingOptions) error {
+	defer runtime.KeepAlive(d)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:options:error:"), purego.NSString(path), writeOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -214,8 +226,9 @@ func (d *Data) WriteToFileOptions(path string, writeOptionsMask DataWritingOptio
 	return nil
 }
 
-// WriteToURLOptions writes the data object’s bytes to the location specified by a given URL.
-func (d *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions) error {
+// WriteToURL writes the data object’s bytes to the location specified by a given URL.
+func (d *Data) WriteToURL(url string, writeOptionsMask DataWritingOptions) error {
+	defer runtime.KeepAlive(d)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:options:error:"), rt.FileURL(url), writeOptionsMask, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -224,8 +237,9 @@ func (d *Data) WriteToURLOptions(url string, writeOptionsMask DataWritingOptions
 	return nil
 }
 
-// Base64EncodedStringWithOptions creates a Base64 encoded string from the string using the given options.
-func (d *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions) string {
+// Base64EncodedStringWith creates a Base64 encoded string from the string using the given options.
+func (d *Data) Base64EncodedStringWith(options DataBase64EncodingOptions) string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("base64EncodedStringWithOptions:"), options)
 	if _r == 0 {
 		return ""
@@ -233,14 +247,16 @@ func (d *Data) Base64EncodedStringWithOptions(options DataBase64EncodingOptions)
 	return purego.GoString(_r)
 }
 
-// Base64EncodedDataWithOptions creates a Base64, UTF-8 encoded data object from the string using the given options.
-func (d *Data) Base64EncodedDataWithOptions(options DataBase64EncodingOptions) *Data {
+// Base64EncodedDataWith creates a Base64, UTF-8 encoded data object from the string using the given options.
+func (d *Data) Base64EncodedDataWith(options DataBase64EncodingOptions) []byte {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("base64EncodedDataWithOptions:"), options)
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
-// DecompressedDataUsingAlgorithmError returns a new data object by decompressing data object’s bytes.
-func (d *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
+// DecompressedDataUsingAlgorithm returns a new data object by decompressing data object’s bytes.
+func (d *Data) DecompressedDataUsingAlgorithm(algorithm DataCompressionAlgorithm) (result *Data, err error) {
+	defer runtime.KeepAlive(d)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("decompressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -249,8 +265,9 @@ func (d *Data) DecompressedDataUsingAlgorithmError(algorithm DataCompressionAlgo
 	return DataFromID(_r), nil
 }
 
-// CompressedDataUsingAlgorithmError returns a new data object by compressing the data object’s bytes.
-func (d *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgorithm) (result *Data, err error) {
+// CompressedDataUsingAlgorithm returns a new data object by compressing the data object’s bytes.
+func (d *Data) CompressedDataUsingAlgorithm(algorithm DataCompressionAlgorithm) (result *Data, err error) {
+	defer runtime.KeepAlive(d)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("compressedDataUsingAlgorithm:error:"), algorithm, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -261,11 +278,13 @@ func (d *Data) CompressedDataUsingAlgorithmError(algorithm DataCompressionAlgori
 
 // GetBytes copies a data object’s contents into a given buffer.
 func (d *Data) GetBytes(buffer unsafe.Pointer) {
+	defer runtime.KeepAlive(d)
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("getBytes:"), buffer)
 }
 
 // Base64Encoding returns initializes a Base64 encoded string from the string.
 func (d *Data) Base64Encoding() string {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("base64Encoding"))
 	if _r == 0 {
 		return ""

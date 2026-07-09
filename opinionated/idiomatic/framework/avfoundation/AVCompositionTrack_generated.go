@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,7 @@ func compositionTrackAdopt(id objc.ID) *CompositionTrack {
 //
 // FormatDescriptionReplacements returns the collection as a Go slice.
 func (ct *CompositionTrack) FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement {
+	defer runtime.KeepAlive(ct)
 	_arr := objc.Send[objc.ID](objref.IDOf(ct), objc.RegisterName("formatDescriptionReplacements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CompositionTrackFormatDescriptionReplacement {
 		return CompositionTrackFormatDescriptionReplacementFromID(_id)

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -64,6 +65,7 @@ func NewMutableDictionaryWithCapacity(numItems int) *MutableDictionary {
 
 // NewMutableDictionaryWithCoder creates a new MutableDictionary.
 func NewMutableDictionaryWithCoder(coder *Coder) *MutableDictionary {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableDictionary")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return mutableDictionaryAdopt(_id)
@@ -90,39 +92,49 @@ func (md *MutableDictionary) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (md *MutableDictionary) WithScriptingProperties(scriptingProperties obj.Object) *MutableDictionary {
-	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (md *MutableDictionary) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MutableDictionary {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return md
 }
 
 // RemoveObjectForKey removes a given key and its associated value from the dictionary.
 func (md *MutableDictionary) RemoveObjectForKey(aKey obj.Object) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(aKey)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("removeObjectForKey:"), objref.IDOf(aKey))
 }
 
 // AddEntriesFromDictionary adds to the receiving dictionary the entries from another dictionary.
 func (md *MutableDictionary) AddEntriesFromDictionary(otherDictionary obj.Object) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(otherDictionary)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("addEntriesFromDictionary:"), objref.IDOf(otherDictionary))
 }
 
 // RemoveAllObjects empties the dictionary of its entries.
 func (md *MutableDictionary) RemoveAllObjects() {
+	defer runtime.KeepAlive(md)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("removeAllObjects"))
 }
 
 // RemoveObjectsForKeys removes from the dictionary entries specified by elements in a given array.
 func (md *MutableDictionary) RemoveObjectsForKeys(keyArray []obj.Object) {
+	defer runtime.KeepAlive(md)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("removeObjectsForKeys:"), purego.SliceToNSArray(keyArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetDictionary sets the contents of the receiving dictionary to entries in a given dictionary.
 func (md *MutableDictionary) SetDictionary(otherDictionary obj.Object) {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(otherDictionary)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setDictionary:"), objref.IDOf(otherDictionary))
 }
 
 // Set stores value under key (an object) and returns the receiver so calls can
 // be chained.
 func (md *MutableDictionary) Set(key, value obj.Object) *MutableDictionary {
+	defer runtime.KeepAlive(key)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), objref.IDOf(key))
 	return md
 }
@@ -130,6 +142,7 @@ func (md *MutableDictionary) Set(key, value obj.Object) *MutableDictionary {
 // SetString stores value under the given string key and returns the receiver so
 // calls can be chained.
 func (md *MutableDictionary) SetString(key string, value obj.Object) *MutableDictionary {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setObject:forKey:"), objref.IDOf(value), purego.NSString(key))
 	return md
 }
@@ -137,6 +150,7 @@ func (md *MutableDictionary) SetString(key string, value obj.Object) *MutableDic
 // Get returns the value stored under the given string key, or nil when there is
 // none.
 func (md *MutableDictionary) Get(key string) obj.Object {
+	defer runtime.KeepAlive(md)
 	return obj.Wrap(objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("objectForKey:"), purego.NSString(key)))
 }
 

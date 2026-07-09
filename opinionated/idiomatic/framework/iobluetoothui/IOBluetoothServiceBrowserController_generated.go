@@ -5,6 +5,8 @@
 package iobluetoothui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func bluetoothServiceBrowserControllerAdopt(id objc.ID) *BluetoothServiceBrowser
 
 // Description returns the object's -description text.
 func (bsbc *BluetoothServiceBrowserController) Description() string {
+	defer runtime.KeepAlive(bsbc)
 	return rt.Description(objref.IDOf(bsbc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bsbc *BluetoothServiceBrowserController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bsbc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bsbc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bsbc *BluetoothServiceBrowserController) IsKind(className string) bool {
+	defer runtime.KeepAlive(bsbc)
 	return rt.IsKind(objref.IDOf(bsbc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bsbc *BluetoothServiceBrowserController) String() string {
+	defer runtime.KeepAlive(bsbc)
 	return rt.Description(objref.IDOf(bsbc))
 }
 
@@ -80,6 +87,8 @@ func NewBluetoothServiceBrowserController() *BluetoothServiceBrowserController {
 
 // Discover invoke an already created window controller to display, and run the modal dialog.
 func (bsbc *BluetoothServiceBrowserController) Discover(outRecord obj.Object) int {
+	defer runtime.KeepAlive(bsbc)
+	defer runtime.KeepAlive(outRecord)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -93,6 +102,9 @@ func (bsbc *BluetoothServiceBrowserController) Discover(outRecord obj.Object) in
 
 // DiscoverAsSheetForWindowWithRecord invoke an already created window controller to display, and run the modal dialog.
 func (bsbc *BluetoothServiceBrowserController) DiscoverAsSheetForWindowWithRecord(sheetWindow obj.Object, outRecord obj.Object) int {
+	defer runtime.KeepAlive(bsbc)
+	defer runtime.KeepAlive(sheetWindow)
+	defer runtime.KeepAlive(outRecord)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -106,6 +118,7 @@ func (bsbc *BluetoothServiceBrowserController) DiscoverAsSheetForWindowWithRecor
 
 // SetOptions modify the options for the window controller.
 func (bsbc *BluetoothServiceBrowserController) SetOptions(inOptions uint32) {
+	defer runtime.KeepAlive(bsbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setOptions:"), inOptions)
 	})
@@ -114,6 +127,7 @@ func (bsbc *BluetoothServiceBrowserController) SetOptions(inOptions uint32) {
 
 // RunModal returns runs the service browser panel in a modal session to allow the user to select a service on a Bluetooth device.
 func (bsbc *BluetoothServiceBrowserController) RunModal() int {
+	defer runtime.KeepAlive(bsbc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -127,6 +141,7 @@ func (bsbc *BluetoothServiceBrowserController) RunModal() int {
 
 // Results returns the result of the user’s selection.
 func (bsbc *BluetoothServiceBrowserController) Results() obj.Object {
+	defer runtime.KeepAlive(bsbc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -140,6 +155,7 @@ func (bsbc *BluetoothServiceBrowserController) Results() obj.Object {
 
 // Options returns the option bits that control the panel’s behavior.
 func (bsbc *BluetoothServiceBrowserController) Options() uint32 {
+	defer runtime.KeepAlive(bsbc)
 	var _mainthread0 uint32
 	purego.Main(func() {
 		_mainthread0 = func() uint32 {
@@ -153,6 +169,8 @@ func (bsbc *BluetoothServiceBrowserController) Options() uint32 {
 
 // AddAllowedUUID adds a UUID to the list of UUIDs that are used to validate the user’s selection.
 func (bsbc *BluetoothServiceBrowserController) AddAllowedUUID(allowedUUID obj.Object) {
+	defer runtime.KeepAlive(bsbc)
+	defer runtime.KeepAlive(allowedUUID)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("addAllowedUUID:"), objref.IDOf(allowedUUID))
 	})
@@ -161,6 +179,8 @@ func (bsbc *BluetoothServiceBrowserController) AddAllowedUUID(allowedUUID obj.Ob
 
 // AddAllowedUUIDArray adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
 func (bsbc *BluetoothServiceBrowserController) AddAllowedUUIDArray(allowedUUIDArray obj.Object) {
+	defer runtime.KeepAlive(bsbc)
+	defer runtime.KeepAlive(allowedUUIDArray)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("addAllowedUUIDArray:"), objref.IDOf(allowedUUIDArray))
 	})
@@ -169,6 +189,7 @@ func (bsbc *BluetoothServiceBrowserController) AddAllowedUUIDArray(allowedUUIDAr
 
 // ClearAllowedUUIDs resets the controller back to the default state where it will accept any device the user selects.
 func (bsbc *BluetoothServiceBrowserController) ClearAllowedUUIDs() {
+	defer runtime.KeepAlive(bsbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("clearAllowedUUIDs"))
 	})
@@ -177,6 +198,7 @@ func (bsbc *BluetoothServiceBrowserController) ClearAllowedUUIDs() {
 
 // SetTitle sets the title of the panel when not run as a sheet.
 func (bsbc *BluetoothServiceBrowserController) SetTitle(windowTitle string) {
+	defer runtime.KeepAlive(bsbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 	})
@@ -185,6 +207,7 @@ func (bsbc *BluetoothServiceBrowserController) SetTitle(windowTitle string) {
 
 // Title returns the title of the device selector panel.
 func (bsbc *BluetoothServiceBrowserController) Title() string {
+	defer runtime.KeepAlive(bsbc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -201,6 +224,7 @@ func (bsbc *BluetoothServiceBrowserController) Title() string {
 
 // SetDescriptionText sets the description text that appears in the device selector panel.
 func (bsbc *BluetoothServiceBrowserController) SetDescriptionText(descriptionText string) {
+	defer runtime.KeepAlive(bsbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 	})
@@ -209,6 +233,7 @@ func (bsbc *BluetoothServiceBrowserController) SetDescriptionText(descriptionTex
 
 // DescriptionText returns the description text that appears in the device selector panel.
 func (bsbc *BluetoothServiceBrowserController) DescriptionText() string {
+	defer runtime.KeepAlive(bsbc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -225,6 +250,7 @@ func (bsbc *BluetoothServiceBrowserController) DescriptionText() string {
 
 // SetPrompt sets the title of the default/select button in the device selector panel.
 func (bsbc *BluetoothServiceBrowserController) SetPrompt(prompt string) {
+	defer runtime.KeepAlive(bsbc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bsbc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 	})
@@ -233,6 +259,7 @@ func (bsbc *BluetoothServiceBrowserController) SetPrompt(prompt string) {
 
 // Prompt returns the title of the default/select button in the device selector panel.
 func (bsbc *BluetoothServiceBrowserController) Prompt() string {
+	defer runtime.KeepAlive(bsbc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

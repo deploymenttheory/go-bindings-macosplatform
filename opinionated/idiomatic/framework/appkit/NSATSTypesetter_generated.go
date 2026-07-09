@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -87,12 +88,14 @@ func (at *ATSTypesetter) WithBidiProcessingEnabled(bidiProcessingEnabled bool) *
 
 // WithAttributedString sets returns the text backing store, usually an instance of NSTextStorage.
 func (at *ATSTypesetter) WithAttributedString(attributedString obj.Object) *ATSTypesetter {
+	defer runtime.KeepAlive(attributedString)
 	objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
 	return at
 }
 
 // GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits extracts the information needed to lay out the glyphs in the given glyph buffer from the given glyph range.
 func (at *ATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange) (result int, glyphBuffer int, charIndexBuffer int, inscribeBuffer GlyphInscription, elasticBuffer bool) {
+	defer runtime.KeepAlive(at)
 	var _out0 int
 	var _out1 int
 	var _out2 GlyphInscription

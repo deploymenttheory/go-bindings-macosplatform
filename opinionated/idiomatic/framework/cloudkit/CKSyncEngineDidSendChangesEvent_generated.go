@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewSyncEngineDidSendChangesEvent() *SyncEngineDidSendChangesEvent {
 
 // Context returns the context.
 func (sedsce *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext {
+	defer runtime.KeepAlive(sedsce)
 	_r := objc.Send[objc.ID](objref.IDOf(sedsce), objc.RegisterName("context"))
 	return SyncEngineSendChangesContextFromID(_r)
 }

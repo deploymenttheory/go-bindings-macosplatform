@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -143,23 +145,27 @@ func (cctg *CNNConvolutionTransposeGradient) WithLabel(label string) *CNNConvolu
 
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionGradientState object. Data provider passed in init call is used for this purpose.
 func (cctg *CNNConvolutionTransposeGradient) ReloadWeightsAndBiasesFromDataSource() {
+	defer runtime.KeepAlive(cctg)
 	objc.Send[objc.ID](objref.IDOf(cctg), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
 // SourceGradientFeatureChannels returns the number of feature channels per pixel in the gradient image (primarySource) of encode call. This is same is outputFeatureChannels or the feature channels of destination image in forward convolution i.e. dataSource.descriptor.outputFeatureChannels
 func (cctg *CNNConvolutionTransposeGradient) SourceGradientFeatureChannels() int {
+	defer runtime.KeepAlive(cctg)
 	_r := objc.Send[int](objref.IDOf(cctg), objc.RegisterName("sourceGradientFeatureChannels"))
 	return _r
 }
 
 // SourceImageFeatureChannels returns the number of feature channels per pixel in the input image to forward convolution which is used here as secondarySource. This is same as dataSource.descriptor.inputFeatureChannels. This is also the number of feature channels in destinatin image here i.e. gradient with respect to data.
 func (cctg *CNNConvolutionTransposeGradient) SourceImageFeatureChannels() int {
+	defer runtime.KeepAlive(cctg)
 	_r := objc.Send[int](objref.IDOf(cctg), objc.RegisterName("sourceImageFeatureChannels"))
 	return _r
 }
 
 // Groups returns number of groups input and output channels are divided into.
 func (cctg *CNNConvolutionTransposeGradient) Groups() int {
+	defer runtime.KeepAlive(cctg)
 	_r := objc.Send[int](objref.IDOf(cctg), objc.RegisterName("groups"))
 	return _r
 }

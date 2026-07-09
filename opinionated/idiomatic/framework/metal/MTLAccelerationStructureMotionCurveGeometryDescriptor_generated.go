@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -181,24 +183,28 @@ func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveD
 //
 // ControlPointBuffers returns the collection as a Go slice.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointBuffers() []*MotionKeyframeData {
+	defer runtime.KeepAlive(asmcgd)
 	_arr := objc.Send[objc.ID](objref.IDOf(asmcgd), objc.RegisterName("controlPointBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MotionKeyframeData { return MotionKeyframeDataFromID(_id) })
 }
 
 // ControlPointCount returns number of control points in the control point buffers
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointCount() int {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[int](objref.IDOf(asmcgd), objc.RegisterName("controlPointCount"))
 	return _r
 }
 
 // ControlPointStride returns stride, in bytes, between control points in the control point buffer. Must be a multiple of the control point format's element size and must be at least the control point format's size. Defaults to 0 bytes, indicating that the control points are tightly packed.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointStride() int {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[int](objref.IDOf(asmcgd), objc.RegisterName("controlPointStride"))
 	return _r
 }
 
 // ControlPointFormat returns format of the control points in the control point buffer. Defaults to MTLAttributeFormatFloat3 (packed).
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointFormat() AttributeFormat {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[AttributeFormat](objref.IDOf(asmcgd), objc.RegisterName("controlPointFormat"))
 	return _r
 }
@@ -207,60 +213,70 @@ func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) ControlPointFo
 //
 // RadiusBuffers returns the collection as a Go slice.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) RadiusBuffers() []*MotionKeyframeData {
+	defer runtime.KeepAlive(asmcgd)
 	_arr := objc.Send[objc.ID](objref.IDOf(asmcgd), objc.RegisterName("radiusBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MotionKeyframeData { return MotionKeyframeDataFromID(_id) })
 }
 
 // RadiusFormat returns format of the radii in the radius buffer. Defaults to MTLAttributeFormatFloat.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[AttributeFormat](objref.IDOf(asmcgd), objc.RegisterName("radiusFormat"))
 	return _r
 }
 
 // RadiusStride returns stride, in bytes, between radii in the radius buffer. Must be a multiple of 4 bytes. Defaults to 4 bytes.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) RadiusStride() int {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[int](objref.IDOf(asmcgd), objc.RegisterName("radiusStride"))
 	return _r
 }
 
 // IndexBufferOffset returns index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) IndexBufferOffset() int {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[int](objref.IDOf(asmcgd), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
 // IndexType returns index type
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) IndexType() IndexType {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[IndexType](objref.IDOf(asmcgd), objc.RegisterName("indexType"))
 	return _r
 }
 
 // SegmentCount returns number of curve segments
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) SegmentCount() int {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[int](objref.IDOf(asmcgd), objc.RegisterName("segmentCount"))
 	return _r
 }
 
 // SegmentControlPointCount returns number of control points per curve segment. Must be 2, 3, or 4.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) SegmentControlPointCount() int {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[int](objref.IDOf(asmcgd), objc.RegisterName("segmentControlPointCount"))
 	return _r
 }
 
 // CurveType returns curve type. Defaults to MTLCurveTypeRound.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) CurveType() CurveType {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[CurveType](objref.IDOf(asmcgd), objc.RegisterName("curveType"))
 	return _r
 }
 
 // CurveBasis returns curve basis. Defaults to MTLCurveBasisBSpline.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) CurveBasis() CurveBasis {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[CurveBasis](objref.IDOf(asmcgd), objc.RegisterName("curveBasis"))
 	return _r
 }
 
 // CurveEndCaps returns type of curve end caps. Defaults to MTLCurveEndCapsNone.
 func (asmcgd *AccelerationStructureMotionCurveGeometryDescriptor) CurveEndCaps() CurveEndCaps {
+	defer runtime.KeepAlive(asmcgd)
 	_r := objc.Send[CurveEndCaps](objref.IDOf(asmcgd), objc.RegisterName("curveEndCaps"))
 	return _r
 }

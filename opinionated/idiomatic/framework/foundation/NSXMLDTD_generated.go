@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,37 +58,43 @@ func NewXMLDTD() *XMLDTD {
 
 // WithPublicID sets sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
 func (x *XMLDTD) WithPublicID(publicID StringProvider) *XMLDTD {
+	defer runtime.KeepAlive(publicID)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicID:"), objref.IDOf(publicID))
 	return x
 }
 
 // WithSystemID sets sets the system id. This should be a URL that points to a valid DTD.
 func (x *XMLDTD) WithSystemID(systemID StringProvider) *XMLDTD {
+	defer runtime.KeepAlive(systemID)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemID:"), objref.IDOf(systemID))
 	return x
 }
 
 // WithName sets sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
 func (x *XMLDTD) WithName(name StringProvider) *XMLDTD {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
 // WithObjectValue sets sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
 func (x *XMLDTD) WithObjectValue(objectValue obj.Object) *XMLDTD {
+	defer runtime.KeepAlive(objectValue)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // WithStringValue sets sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
 func (x *XMLDTD) WithStringValue(stringValue StringProvider) *XMLDTD {
+	defer runtime.KeepAlive(stringValue)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
 	return x
 }
 
 // WithURI sets set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-func (x *XMLDTD) WithURI(uRI StringProvider) *XMLDTD {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uRI))
+func (x *XMLDTD) WithURI(uri StringProvider) *XMLDTD {
+	defer runtime.KeepAlive(uri)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uri))
 	return x
 }
 
@@ -97,67 +105,81 @@ func (x *XMLDTD) WithObservationInfo(observationInfo unsafe.Pointer) *XMLDTD {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (x *XMLDTD) WithScriptingProperties(scriptingProperties obj.Object) *XMLDTD {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (x *XMLDTD) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XMLDTD {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return x
 }
 
 // InsertChildAtIndex inserts a child at a particular index.
 func (x *XMLDTD) InsertChildAtIndex(child *XMLNode, index int) {
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
 // InsertChildrenAtIndex insert several children at a particular index.
 func (x *XMLDTD) InsertChildrenAtIndex(children []*XMLNode, index int) {
+	defer runtime.KeepAlive(x)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildren:atIndex:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }), index)
 }
 
 // RemoveChildAtIndex removes a child at a particular index.
 func (x *XMLDTD) RemoveChildAtIndex(index int) {
+	defer runtime.KeepAlive(x)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildAtIndex:"), index)
 }
 
 // SetChildren removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
 func (x *XMLDTD) SetChildren(children []*XMLNode) {
+	defer runtime.KeepAlive(x)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildren:"), purego.SliceToNSArray(children, func(_v *XMLNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddChild adds a child to the end of the existing children.
 func (x *XMLDTD) AddChild(child *XMLNode) {
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
 // ReplaceChildAtIndexWithNode replaces a child at a particular index with another child.
 func (x *XMLDTD) ReplaceChildAtIndexWithNode(index int, node *XMLNode) {
+	defer runtime.KeepAlive(x)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceChildAtIndex:withNode:"), index, objref.IDOf(node))
 }
 
 // EntityDeclarationForName returns the entity declaration matching this name.
 func (x *XMLDTD) EntityDeclarationForName(name string) *XMLDTDNode {
+	defer runtime.KeepAlive(x)
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityDeclarationForName:"), purego.NSString(name))
 	return XMLDTDNodeFromID(_r)
 }
 
 // NotationDeclarationForName returns the notation declaration matching this name.
 func (x *XMLDTD) NotationDeclarationForName(name string) *XMLDTDNode {
+	defer runtime.KeepAlive(x)
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notationDeclarationForName:"), purego.NSString(name))
 	return XMLDTDNodeFromID(_r)
 }
 
 // ElementDeclarationForName returns the element declaration matching this name.
 func (x *XMLDTD) ElementDeclarationForName(name string) *XMLDTDNode {
+	defer runtime.KeepAlive(x)
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementDeclarationForName:"), purego.NSString(name))
 	return XMLDTDNodeFromID(_r)
 }
 
 // AttributeDeclarationForNameElementName returns the attribute declaration matching this name.
 func (x *XMLDTD) AttributeDeclarationForNameElementName(name string, elementName string) *XMLDTDNode {
+	defer runtime.KeepAlive(x)
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeDeclarationForName:elementName:"), purego.NSString(name), purego.NSString(elementName))
 	return XMLDTDNodeFromID(_r)
 }
 
 // PublicID sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set.
 func (x *XMLDTD) PublicID() string {
+	defer runtime.KeepAlive(x)
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicID"))
 	if _r == 0 {
 		return ""
@@ -167,6 +189,7 @@ func (x *XMLDTD) PublicID() string {
 
 // SystemID sets the system id. This should be a URL that points to a valid DTD.
 func (x *XMLDTD) SystemID() string {
+	defer runtime.KeepAlive(x)
 	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemID"))
 	if _r == 0 {
 		return ""

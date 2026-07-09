@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetVariantVideoLayoutAttributesAdopt(id objc.ID) *AssetVariantVideoLayout
 
 // Description returns the object's -description text.
 func (avvla *AssetVariantVideoLayoutAttributes) Description() string {
+	defer runtime.KeepAlive(avvla)
 	return rt.Description(objref.IDOf(avvla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avvla *AssetVariantVideoLayoutAttributes) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avvla)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avvla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avvla *AssetVariantVideoLayoutAttributes) IsKind(className string) bool {
+	defer runtime.KeepAlive(avvla)
 	return rt.IsKind(objref.IDOf(avvla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avvla *AssetVariantVideoLayoutAttributes) String() string {
+	defer runtime.KeepAlive(avvla)
 	return rt.Description(objref.IDOf(avvla))
 }
 

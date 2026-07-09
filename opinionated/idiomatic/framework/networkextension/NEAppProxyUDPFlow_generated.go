@@ -6,12 +6,15 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,6 +61,7 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 
 // WithNetworkInterface sets the network interface, if any, used by this flow.
 func (napuf *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyUDPFlow {
+	defer runtime.KeepAlive(networkInterface)
 	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return napuf
 }
@@ -65,14 +69,15 @@ func (napuf *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface obj.Object
 // WriteDatagramsSentByFlowEndpoints write datagrams to the flow.
 //
 // WriteDatagramsSentByFlowEndpoints blocks until the operation completes or ctx is cancelled.
-func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints unsafe.Pointer) error {
+func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams [][]byte, remoteEndpoints unsafe.Pointer) error {
+	defer runtime.KeepAlive(napuf)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("writeDatagrams:sentByFlowEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), remoteEndpoints, _block)
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("writeDatagrams:sentByFlowEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }), remoteEndpoints, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -84,14 +89,15 @@ func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Co
 // WriteDatagramsSentByEndpoints write datagrams to the flow.
 //
 // WriteDatagramsSentByEndpoints blocks until the operation completes or ctx is cancelled.
-func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams []obj.Object, remoteEndpoints []obj.Object) error {
+func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams [][]byte, remoteEndpoints []obj.Object) error {
+	defer runtime.KeepAlive(napuf)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(remoteEndpoints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("writeDatagrams:sentByEndpoints:completionHandler:"), purego.SliceToNSArray(datagrams, func(_v []byte) objc.ID { return rt.BytesToNSData(_v) }), purego.SliceToNSArray(remoteEndpoints, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -101,9 +107,10 @@ func (napuf *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Contex
 }
 
 // LocalFlowEndpoint returns an `nw_endpoint_t` object containing the local endpoint of the flow's corresponding socket.
-func (napuf *NEAppProxyUDPFlow) LocalFlowEndpoint() obj.Object {
+func (napuf *NEAppProxyUDPFlow) LocalFlowEndpoint() *foundation.Object {
+	defer runtime.KeepAlive(napuf)
 	_r := objc.Send[objc.ID](objref.IDOf(napuf), objc.RegisterName("localFlowEndpoint"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyUDPFlow)(nil)

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -63,12 +65,14 @@ func (mr *MatrixRandom) WithLabel(label string) *MatrixRandom {
 
 // BatchStart returns the starting index in the destination batch.
 func (mr *MatrixRandom) BatchStart() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchStart"))
 	return _r
 }
 
 // BatchSize returns the size of the batch to process.
 func (mr *MatrixRandom) BatchSize() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchSize"))
 	return _r
 }

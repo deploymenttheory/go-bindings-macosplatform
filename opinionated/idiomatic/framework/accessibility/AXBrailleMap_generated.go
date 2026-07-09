@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func brailleMapAdopt(id objc.ID) *BrailleMap {
 
 // Description returns the object's -description text.
 func (bm *BrailleMap) Description() string {
+	defer runtime.KeepAlive(bm)
 	return rt.Description(objref.IDOf(bm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bm *BrailleMap) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bm *BrailleMap) IsKind(className string) bool {
+	defer runtime.KeepAlive(bm)
 	return rt.IsKind(objref.IDOf(bm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bm *BrailleMap) String() string {
+	defer runtime.KeepAlive(bm)
 	return rt.Description(objref.IDOf(bm))
 }
 
@@ -75,22 +82,27 @@ func NewBrailleMap() *BrailleMap {
 
 // SetHeightAtPoint sets the height of an individual pin on the braille display.
 func (bm *BrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(bm)
 	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("setHeight:atPoint:"), status, point)
 }
 
 // HeightAtPoint retrieves the height of an individual pin on the braille display.
 func (bm *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
+	defer runtime.KeepAlive(bm)
 	_r := objc.Send[float32](objref.IDOf(bm), objc.RegisterName("heightAtPoint:"), point)
 	return _r
 }
 
 // PresentImage converts the data from the image you specify into the braille map.
 func (bm *BrailleMap) PresentImage(image obj.Object) {
+	defer runtime.KeepAlive(bm)
+	defer runtime.KeepAlive(image)
 	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("presentImage:"), objref.IDOf(image))
 }
 
 // Dimensions returns the dimensions.
 func (bm *BrailleMap) Dimensions() corefoundation.CGSize {
+	defer runtime.KeepAlive(bm)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(bm), objc.RegisterName("dimensions"))
 	return _r
 }

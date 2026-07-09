@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -68,6 +70,7 @@ func (clg *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayo
 
 // WithInterItemSpacing sets the amount of space between the items in the group.
 func (clg *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup {
+	defer runtime.KeepAlive(interItemSpacing)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setInterItemSpacing:"), objref.IDOf(interItemSpacing))
 	})
@@ -76,6 +79,7 @@ func (clg *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *Collect
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clg *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
+	defer runtime.KeepAlive(edgeSpacing)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	})
@@ -84,6 +88,7 @@ func (clg *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutE
 
 // VisualDescription returns a string with an ASCII representation of the group.
 func (clg *CollectionLayoutGroup) VisualDescription() string {
+	defer runtime.KeepAlive(clg)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -100,6 +105,7 @@ func (clg *CollectionLayoutGroup) VisualDescription() string {
 
 // InterItemSpacing returns the inter item spacing.
 func (clg *CollectionLayoutGroup) InterItemSpacing() *CollectionLayoutSpacing {
+	defer runtime.KeepAlive(clg)
 	var _mainthread0 *CollectionLayoutSpacing
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutSpacing {
@@ -115,6 +121,7 @@ func (clg *CollectionLayoutGroup) InterItemSpacing() *CollectionLayoutSpacing {
 //
 // Subitems returns the collection as a Go slice.
 func (clg *CollectionLayoutGroup) Subitems() []*CollectionLayoutItem {
+	defer runtime.KeepAlive(clg)
 	var _mainthread0 []*CollectionLayoutItem
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionLayoutItem {

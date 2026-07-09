@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -73,15 +76,17 @@ func (cmo *CaptureMetadataOutput) WithDeferredStartEnabled(deferredStartEnabled 
 }
 
 // MetadataObjectsCallbackQueue returns the dispatch queue on which all metadata object delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setMetadataObjectsDelegate:queue: method.
-func (cmo *CaptureMetadataOutput) MetadataObjectsCallbackQueue() obj.Object {
+func (cmo *CaptureMetadataOutput) MetadataObjectsCallbackQueue() *foundation.Object {
+	defer runtime.KeepAlive(cmo)
 	_r := objc.Send[objc.ID](objref.IDOf(cmo), objc.RegisterName("metadataObjectsCallbackQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // AvailableMetadataObjectTypes indicates the receiver's supported metadata object types. The value of this property is an NSArray of NSStrings corresponding to AVMetadataObjectType strings defined in AVMetadataObject.h -- one for each metadata object type supported by the receiver. Available metadata object types are dependent on the capabilities of the AVCaptureInputPort to which this receiver's AVCaptureConnection is connected. Clients may specify the types of objects they would like to process by calling setMetadataObjectTypes:. This property is key-value observable.
 //
 // AvailableMetadataObjectTypes returns the collection as a Go slice.
 func (cmo *CaptureMetadataOutput) AvailableMetadataObjectTypes() []obj.Object {
+	defer runtime.KeepAlive(cmo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cmo), objc.RegisterName("availableMetadataObjectTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -90,12 +95,14 @@ func (cmo *CaptureMetadataOutput) AvailableMetadataObjectTypes() []obj.Object {
 //
 // MetadataObjectTypes returns the collection as a Go slice.
 func (cmo *CaptureMetadataOutput) MetadataObjectTypes() []obj.Object {
+	defer runtime.KeepAlive(cmo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cmo), objc.RegisterName("metadataObjectTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RectOfInterest specifies a rectangle of interest for limiting the search area for visual metadata. The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned. As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
 func (cmo *CaptureMetadataOutput) RectOfInterest() corefoundation.CGRect {
+	defer runtime.KeepAlive(cmo)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cmo), objc.RegisterName("rectOfInterest"))
 	return _r
 }
@@ -104,6 +111,7 @@ func (cmo *CaptureMetadataOutput) RectOfInterest() corefoundation.CGRect {
 //
 // RequiredMetadataObjectTypesForCinematicVideoCapture returns the collection as a Go slice.
 func (cmo *CaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapture() []obj.Object {
+	defer runtime.KeepAlive(cmo)
 	_arr := objc.Send[objc.ID](objref.IDOf(cmo), objc.RegisterName("requiredMetadataObjectTypesForCinematicVideoCapture"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

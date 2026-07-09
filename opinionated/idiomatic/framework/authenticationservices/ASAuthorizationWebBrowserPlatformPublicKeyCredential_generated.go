@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationWebBrowserPlatformPublicKeyCredentialAdopt(id objc.ID) *Author
 
 // Description returns the object's -description text.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) Description() string {
+	defer runtime.KeepAlive(awbppkc)
 	return rt.Description(objref.IDOf(awbppkc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(awbppkc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(awbppkc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) IsKind(className string) bool {
+	defer runtime.KeepAlive(awbppkc)
 	return rt.IsKind(objref.IDOf(awbppkc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) String() string {
+	defer runtime.KeepAlive(awbppkc)
 	return rt.Description(objref.IDOf(awbppkc))
 }
 
@@ -74,6 +81,7 @@ func NewAuthorizationWebBrowserPlatformPublicKeyCredential() *AuthorizationWebBr
 
 // Name returns the user name of the saved credential.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
+	defer runtime.KeepAlive(awbppkc)
 	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string
 
 // CustomTitle returns a user-specified title for the credential.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
+	defer runtime.KeepAlive(awbppkc)
 	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("customTitle"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle()
 
 // RelyingParty returns the "relying party" (generally website) the credential was saved for.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
+	defer runtime.KeepAlive(awbppkc)
 	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("relyingParty"))
 	if _r == 0 {
 		return ""
@@ -100,19 +110,22 @@ func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty(
 }
 
 // CredentialID returns a unique identifier for this credential.
-func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() obj.Object {
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() []byte {
+	defer runtime.KeepAlive(awbppkc)
 	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("credentialID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // UserHandle returns a unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
-func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() obj.Object {
+func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() []byte {
+	defer runtime.KeepAlive(awbppkc)
 	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("userHandle"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ProviderName returns the localized name of the credential provider that provided this passkey.
 func (awbppkc *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
+	defer runtime.KeepAlive(awbppkc)
 	_r := objc.Send[objc.ID](objref.IDOf(awbppkc), objc.RegisterName("providerName"))
 	if _r == 0 {
 		return ""

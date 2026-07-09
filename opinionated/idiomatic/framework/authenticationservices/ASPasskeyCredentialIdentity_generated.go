@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,29 +49,34 @@ func passkeyCredentialIdentityAdopt(id objc.ID) *PasskeyCredentialIdentity {
 
 // Description returns the object's -description text.
 func (pci *PasskeyCredentialIdentity) Description() string {
+	defer runtime.KeepAlive(pci)
 	return rt.Description(objref.IDOf(pci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pci *PasskeyCredentialIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pci *PasskeyCredentialIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(pci)
 	return rt.IsKind(objref.IDOf(pci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pci *PasskeyCredentialIdentity) String() string {
+	defer runtime.KeepAlive(pci)
 	return rt.Description(objref.IDOf(pci))
 }
 
 // NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier initializes a passkey credential identity.
-func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID obj.Object, userHandle obj.Object, recordIdentifier string) *PasskeyCredentialIdentity {
+func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID []byte, userHandle []byte, recordIdentifier string) *PasskeyCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), objref.IDOf(credentialID), objref.IDOf(userHandle), purego.NSString(recordIdentifier))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), rt.BytesToNSData(credentialID), rt.BytesToNSData(userHandle), purego.NSString(recordIdentifier))
 	return passkeyCredentialIdentityAdopt(_id)
 }
 
@@ -81,6 +88,7 @@ func (pci *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdent
 
 // RelyingPartyIdentifier returns the relying party identifier of this passkey credential. This field is reported as the serviceIdentifier property of ASCredentialIdentity.
 func (pci *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""
@@ -90,6 +98,7 @@ func (pci *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
 
 // UserName returns the user name of this passkey credential. This field is reported as the user property of ASCredentialIdentity.
 func (pci *PasskeyCredentialIdentity) UserName() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("userName"))
 	if _r == 0 {
 		return ""
@@ -98,19 +107,22 @@ func (pci *PasskeyCredentialIdentity) UserName() string {
 }
 
 // CredentialID returns the credential ID of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
-func (pci *PasskeyCredentialIdentity) CredentialID() obj.Object {
+func (pci *PasskeyCredentialIdentity) CredentialID() []byte {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("credentialID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // UserHandle returns the user handle of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
-func (pci *PasskeyCredentialIdentity) UserHandle() obj.Object {
+func (pci *PasskeyCredentialIdentity) UserHandle() []byte {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("userHandle"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // RecordIdentifier get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (pci *PasskeyCredentialIdentity) RecordIdentifier() string {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[objc.ID](objref.IDOf(pci), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
 		return ""
@@ -120,6 +132,7 @@ func (pci *PasskeyCredentialIdentity) RecordIdentifier() string {
 
 // Rank get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
 func (pci *PasskeyCredentialIdentity) Rank() int {
+	defer runtime.KeepAlive(pci)
 	_r := objc.Send[int](objref.IDOf(pci), objc.RegisterName("rank"))
 	return _r
 }

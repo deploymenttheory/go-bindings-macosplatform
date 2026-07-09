@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4BinaryFunctionDescriptorAdopt(id objc.ID) *MTL4BinaryFunctionDescriptor
 
 // Description returns the object's -description text.
 func (mbfd *MTL4BinaryFunctionDescriptor) Description() string {
+	defer runtime.KeepAlive(mbfd)
 	return rt.Description(objref.IDOf(mbfd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbfd *MTL4BinaryFunctionDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbfd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbfd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbfd *MTL4BinaryFunctionDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbfd)
 	return rt.IsKind(objref.IDOf(mbfd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbfd *MTL4BinaryFunctionDescriptor) String() string {
+	defer runtime.KeepAlive(mbfd)
 	return rt.Description(objref.IDOf(mbfd))
 }
 
@@ -80,6 +87,7 @@ func (mbfd *MTL4BinaryFunctionDescriptor) WithName(name string) *MTL4BinaryFunct
 
 // WithFunctionDescriptor sets provides the function descriptor corresponding to the function to compile into a binary function.
 func (mbfd *MTL4BinaryFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4BinaryFunctionDescriptor {
+	defer runtime.KeepAlive(functionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mbfd), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
 	return mbfd
 }
@@ -92,6 +100,7 @@ func (mbfd *MTL4BinaryFunctionDescriptor) WithOptions(options MTL4BinaryFunction
 
 // Name returns associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a “MTL4Archive“ instance.
 func (mbfd *MTL4BinaryFunctionDescriptor) Name() string {
+	defer runtime.KeepAlive(mbfd)
 	_r := objc.Send[objc.ID](objref.IDOf(mbfd), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -101,12 +110,14 @@ func (mbfd *MTL4BinaryFunctionDescriptor) Name() string {
 
 // FunctionDescriptor provides the function descriptor corresponding to the function to compile into a binary function.
 func (mbfd *MTL4BinaryFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(mbfd)
 	_r := objc.Send[objc.ID](objref.IDOf(mbfd), objc.RegisterName("functionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
 // Options returns configure the options to use at binary function creation time.
 func (mbfd *MTL4BinaryFunctionDescriptor) Options() MTL4BinaryFunctionOptions {
+	defer runtime.KeepAlive(mbfd)
 	_r := objc.Send[MTL4BinaryFunctionOptions](objref.IDOf(mbfd), objc.RegisterName("options"))
 	return _r
 }

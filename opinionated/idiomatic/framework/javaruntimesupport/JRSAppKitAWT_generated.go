@@ -5,6 +5,8 @@
 package javaruntimesupport
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func appKitAWTAdopt(id objc.ID) *AppKitAWT {
 
 // Description returns the object's -description text.
 func (aka *AppKitAWT) Description() string {
+	defer runtime.KeepAlive(aka)
 	return rt.Description(objref.IDOf(aka))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aka *AppKitAWT) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aka)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aka), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aka *AppKitAWT) IsKind(className string) bool {
+	defer runtime.KeepAlive(aka)
 	return rt.IsKind(objref.IDOf(aka), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aka *AppKitAWT) String() string {
+	defer runtime.KeepAlive(aka)
 	return rt.Description(objref.IDOf(aka))
 }
 

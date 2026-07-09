@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -62,6 +65,7 @@ func NewOutlineView() *OutlineView {
 
 // WithOutlineTableColumn sets the table column in which hierarchical data is displayed.
 func (ov *OutlineView) WithOutlineTableColumn(outlineTableColumn *TableColumn) *OutlineView {
+	defer runtime.KeepAlive(outlineTableColumn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setOutlineTableColumn:"), objref.IDOf(outlineTableColumn))
 	})
@@ -108,8 +112,33 @@ func (ov *OutlineView) WithStronglyReferencesItems(stronglyReferencesItems bool)
 	return ov
 }
 
+// WithDataSource sets the object that provides the data displayed by the table view.
+func (ov *OutlineView) WithDataSource(dataSource TableViewDataSource) *OutlineView {
+	_shim := newTableViewDataSourceShim(dataSource)
+	_sel := objc.RegisterName("setDataSource:")
+	shim.Associate(objref.IDOf(ov), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ov), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return ov
+}
+
+// WithDelegate sets the table view’s delegate.
+func (ov *OutlineView) WithDelegate(delegate TableViewDelegate) *OutlineView {
+	_shim := newTableViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ov), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(ov), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return ov
+}
+
 // WithHeaderView sets the view object used to draw headers over columns.
 func (ov *OutlineView) WithHeaderView(headerView *TableHeaderView) *OutlineView {
+	defer runtime.KeepAlive(headerView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setHeaderView:"), objref.IDOf(headerView))
 	})
@@ -118,6 +147,7 @@ func (ov *OutlineView) WithHeaderView(headerView *TableHeaderView) *OutlineView 
 
 // WithCornerView sets the view used to draw the area to the right of the column headers and above the vertical scroller of the enclosing scroll view.
 func (ov *OutlineView) WithCornerView(cornerView ViewProvider) *OutlineView {
+	defer runtime.KeepAlive(cornerView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCornerView:"), objref.IDOf(cornerView))
 	})
@@ -174,6 +204,7 @@ func (ov *OutlineView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRow
 
 // WithBackgroundColor sets the color used to draw the background of the table.
 func (ov *OutlineView) WithBackgroundColor(backgroundColor *Color) *OutlineView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -182,6 +213,7 @@ func (ov *OutlineView) WithBackgroundColor(backgroundColor *Color) *OutlineView 
 
 // WithGridColor sets the color used to draw grid lines.
 func (ov *OutlineView) WithGridColor(gridColor *Color) *OutlineView {
+	defer runtime.KeepAlive(gridColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setGridColor:"), objref.IDOf(gridColor))
 	})
@@ -215,6 +247,7 @@ func (ov *OutlineView) WithSortDescriptors(items ...obj.Object) *OutlineView {
 
 // WithHighlightedTableColumn sets the column highlighted in the table.
 func (ov *OutlineView) WithHighlightedTableColumn(highlightedTableColumn *TableColumn) *OutlineView {
+	defer runtime.KeepAlive(highlightedTableColumn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setHighlightedTableColumn:"), objref.IDOf(highlightedTableColumn))
 	})
@@ -287,6 +320,7 @@ func (ov *OutlineView) WithDraggingDestinationFeedbackStyle(draggingDestinationF
 
 // WithAutosaveName sets the name under which table information is automatically saved.
 func (ov *OutlineView) WithAutosaveName(autosaveName obj.Object) *OutlineView {
+	defer runtime.KeepAlive(autosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
 	})
@@ -335,6 +369,7 @@ func (ov *OutlineView) WithUsesAutomaticRowHeights(usesAutomaticRowHeights bool)
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (ov *OutlineView) WithTarget(target obj.Object) *OutlineView {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -399,6 +434,7 @@ func (ov *OutlineView) WithControlSize(controlSize ControlSize) *OutlineView {
 
 // WithFormatter sets the receiver’s formatter.
 func (ov *OutlineView) WithFormatter(formatter obj.Object) *OutlineView {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -407,6 +443,7 @@ func (ov *OutlineView) WithFormatter(formatter obj.Object) *OutlineView {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (ov *OutlineView) WithObjectValue(objectValue obj.Object) *OutlineView {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -423,6 +460,7 @@ func (ov *OutlineView) WithStringValue(stringValue string) *OutlineView {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (ov *OutlineView) WithAttributedStringValue(attributedStringValue obj.Object) *OutlineView {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -463,6 +501,7 @@ func (ov *OutlineView) WithDoubleValue(doubleValue float64) *OutlineView {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (ov *OutlineView) WithFont(font *Font) *OutlineView {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -511,6 +550,7 @@ func (ov *OutlineView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool)
 
 // WithCell sets the cell.
 func (ov *OutlineView) WithCell(cell CellProvider) *OutlineView {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -656,6 +696,7 @@ func (ov *OutlineView) WithWantsLayer(wantsLayer bool) *OutlineView {
 
 // WithLayer sets the layer.
 func (ov *OutlineView) WithLayer(layer obj.Object) *OutlineView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -705,6 +746,7 @@ func (ov *OutlineView) WithBackgroundFilters(items ...obj.Object) *OutlineView {
 
 // WithCompositingFilter sets the compositing filter.
 func (ov *OutlineView) WithCompositingFilter(compositingFilter obj.Object) *OutlineView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -722,6 +764,7 @@ func (ov *OutlineView) WithContentFilters(items ...obj.Object) *OutlineView {
 
 // WithShadow sets the shadow.
 func (ov *OutlineView) WithShadow(shadow *Shadow) *OutlineView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -770,6 +813,7 @@ func (ov *OutlineView) WithPreparedContentRect(preparedContentRect corefoundatio
 
 // WithNextKeyView sets the next key view.
 func (ov *OutlineView) WithNextKeyView(nextKeyView ViewProvider) *OutlineView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -819,6 +863,7 @@ func (ov *OutlineView) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (ov *OutlineView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OutlineView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -875,6 +920,7 @@ func (ov *OutlineView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedD
 
 // WithPressureConfiguration sets the pressure configuration.
 func (ov *OutlineView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OutlineView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -883,6 +929,7 @@ func (ov *OutlineView) WithPressureConfiguration(pressureConfiguration *Pressure
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (ov *OutlineView) WithNextResponder(nextResponder ResponderProvider) *OutlineView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -891,6 +938,7 @@ func (ov *OutlineView) WithNextResponder(nextResponder ResponderProvider) *Outli
 
 // WithMenu sets returns the responder’s menu.
 func (ov *OutlineView) WithMenu(menu *Menu) *OutlineView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -899,6 +947,7 @@ func (ov *OutlineView) WithMenu(menu *Menu) *OutlineView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (ov *OutlineView) WithUserActivity(userActivity obj.Object) *OutlineView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -907,6 +956,7 @@ func (ov *OutlineView) WithUserActivity(userActivity obj.Object) *OutlineView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (ov *OutlineView) WithTouchBar(touchBar *TouchBar) *OutlineView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -915,6 +965,8 @@ func (ov *OutlineView) WithTouchBar(touchBar *TouchBar) *OutlineView {
 
 // IsExpandable returns a Boolean value that indicates whether a given item is expandable.
 func (ov *OutlineView) IsExpandable(item obj.Object) bool {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -928,6 +980,8 @@ func (ov *OutlineView) IsExpandable(item obj.Object) bool {
 
 // NumberOfChildrenOfItem returns the number of children for the specified parent item.
 func (ov *OutlineView) NumberOfChildrenOfItem(item obj.Object) int {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -941,6 +995,8 @@ func (ov *OutlineView) NumberOfChildrenOfItem(item obj.Object) int {
 
 // ChildOfItem returns the specified child of an item.
 func (ov *OutlineView) ChildOfItem(index int, item obj.Object) obj.Object {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -954,6 +1010,8 @@ func (ov *OutlineView) ChildOfItem(index int, item obj.Object) obj.Object {
 
 // ExpandItemExpandChildren expands a specified item and, optionally, its children.
 func (ov *OutlineView) ExpandItemExpandChildren(item obj.Object, expandChildren bool) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("expandItem:expandChildren:"), objref.IDOf(item), expandChildren)
 	})
@@ -962,6 +1020,8 @@ func (ov *OutlineView) ExpandItemExpandChildren(item obj.Object, expandChildren 
 
 // ExpandItem expands a given item.
 func (ov *OutlineView) ExpandItem(item obj.Object) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("expandItem:"), objref.IDOf(item))
 	})
@@ -970,6 +1030,8 @@ func (ov *OutlineView) ExpandItem(item obj.Object) {
 
 // CollapseItemCollapseChildren collapses a given item and, optionally, its children.
 func (ov *OutlineView) CollapseItemCollapseChildren(item obj.Object, collapseChildren bool) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("collapseItem:collapseChildren:"), objref.IDOf(item), collapseChildren)
 	})
@@ -978,6 +1040,8 @@ func (ov *OutlineView) CollapseItemCollapseChildren(item obj.Object, collapseChi
 
 // CollapseItem collapses a given item.
 func (ov *OutlineView) CollapseItem(item obj.Object) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("collapseItem:"), objref.IDOf(item))
 	})
@@ -986,6 +1050,8 @@ func (ov *OutlineView) CollapseItem(item obj.Object) {
 
 // ReloadItemReloadChildren reloads a given item and, optionally, its children.
 func (ov *OutlineView) ReloadItemReloadChildren(item obj.Object, reloadChildren bool) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("reloadItem:reloadChildren:"), objref.IDOf(item), reloadChildren)
 	})
@@ -994,6 +1060,8 @@ func (ov *OutlineView) ReloadItemReloadChildren(item obj.Object, reloadChildren 
 
 // ReloadItem reloads and redisplays the data for the given item.
 func (ov *OutlineView) ReloadItem(item obj.Object) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("reloadItem:"), objref.IDOf(item))
 	})
@@ -1002,6 +1070,8 @@ func (ov *OutlineView) ReloadItem(item obj.Object) {
 
 // ParentForItem returns the parent for a given item.
 func (ov *OutlineView) ParentForItem(item obj.Object) obj.Object {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1015,6 +1085,8 @@ func (ov *OutlineView) ParentForItem(item obj.Object) obj.Object {
 
 // ChildIndexForItem returns the child index of the specified item within its parent.
 func (ov *OutlineView) ChildIndexForItem(item obj.Object) int {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1028,6 +1100,7 @@ func (ov *OutlineView) ChildIndexForItem(item obj.Object) int {
 
 // ItemAtRow returns the item associated with a given row.
 func (ov *OutlineView) ItemAtRow(row int) obj.Object {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1041,6 +1114,8 @@ func (ov *OutlineView) ItemAtRow(row int) obj.Object {
 
 // RowForItem returns the row associated with a given item.
 func (ov *OutlineView) RowForItem(item obj.Object) int {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1054,6 +1129,8 @@ func (ov *OutlineView) RowForItem(item obj.Object) int {
 
 // LevelForItem returns the indentation level for a given item.
 func (ov *OutlineView) LevelForItem(item obj.Object) int {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1067,6 +1144,7 @@ func (ov *OutlineView) LevelForItem(item obj.Object) int {
 
 // LevelForRow returns the indentation level for a given row.
 func (ov *OutlineView) LevelForRow(row int) int {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1080,6 +1158,8 @@ func (ov *OutlineView) LevelForRow(row int) int {
 
 // IsItemExpanded returns a Boolean value that indicates whether a given item is expanded.
 func (ov *OutlineView) IsItemExpanded(item obj.Object) bool {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1093,6 +1173,7 @@ func (ov *OutlineView) IsItemExpanded(item obj.Object) bool {
 
 // FrameOfOutlineCellAtRow returns the frame of the outline cell for a given row.
 func (ov *OutlineView) FrameOfOutlineCellAtRow(row int) corefoundation.CGRect {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1106,6 +1187,8 @@ func (ov *OutlineView) FrameOfOutlineCellAtRow(row int) corefoundation.CGRect {
 
 // SetDropItemDropChildIndex used to “retarget” a proposed drop.
 func (ov *OutlineView) SetDropItemDropChildIndex(item obj.Object, index int) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(item)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("setDropItem:dropChildIndex:"), objref.IDOf(item), index)
 	})
@@ -1114,6 +1197,7 @@ func (ov *OutlineView) SetDropItemDropChildIndex(item obj.Object, index int) {
 
 // ShouldCollapseAutoExpandedItemsForDeposited returns a Boolean value that indicates whether auto-expanded items should return to their original collapsed state.
 func (ov *OutlineView) ShouldCollapseAutoExpandedItemsForDeposited(deposited bool) bool {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1127,6 +1211,9 @@ func (ov *OutlineView) ShouldCollapseAutoExpandedItemsForDeposited(deposited boo
 
 // InsertItemsAtIndexesInParentWithAnimation inserts new items at the given indexes in the given parent with the specified optional animations.
 func (ov *OutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes obj.Object, parent obj.Object, animationOptions TableViewAnimationOptions) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(indexes)
+	defer runtime.KeepAlive(parent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("insertItemsAtIndexes:inParent:withAnimation:"), objref.IDOf(indexes), objref.IDOf(parent), animationOptions)
 	})
@@ -1135,6 +1222,9 @@ func (ov *OutlineView) InsertItemsAtIndexesInParentWithAnimation(indexes obj.Obj
 
 // RemoveItemsAtIndexesInParentWithAnimation removes items at the given indexes in the given parent with the specified optional animations.
 func (ov *OutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes obj.Object, parent obj.Object, animationOptions TableViewAnimationOptions) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(indexes)
+	defer runtime.KeepAlive(parent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("removeItemsAtIndexes:inParent:withAnimation:"), objref.IDOf(indexes), objref.IDOf(parent), animationOptions)
 	})
@@ -1143,6 +1233,9 @@ func (ov *OutlineView) RemoveItemsAtIndexesInParentWithAnimation(indexes obj.Obj
 
 // MoveItemAtIndexInParentToIndexInParent moves an item at a given index in the given parent to a new index in a new parent.
 func (ov *OutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, oldParent obj.Object, toIndex int, newParent obj.Object) {
+	defer runtime.KeepAlive(ov)
+	defer runtime.KeepAlive(oldParent)
+	defer runtime.KeepAlive(newParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ov), objc.RegisterName("moveItemAtIndex:inParent:toIndex:inParent:"), fromIndex, objref.IDOf(oldParent), toIndex, objref.IDOf(newParent))
 	})
@@ -1151,6 +1244,7 @@ func (ov *OutlineView) MoveItemAtIndexInParentToIndexInParent(fromIndex int, old
 
 // OutlineTableColumn returns the outline table column.
 func (ov *OutlineView) OutlineTableColumn() *TableColumn {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 *TableColumn
 	purego.Main(func() {
 		_mainthread0 = func() *TableColumn {
@@ -1164,6 +1258,7 @@ func (ov *OutlineView) OutlineTableColumn() *TableColumn {
 
 // IndentationPerLevel returns the indentation per level.
 func (ov *OutlineView) IndentationPerLevel() float64 {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1177,6 +1272,7 @@ func (ov *OutlineView) IndentationPerLevel() float64 {
 
 // IndentationMarkerFollowsCell wraps the corresponding Objective-C method.
 func (ov *OutlineView) IndentationMarkerFollowsCell() bool {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1190,6 +1286,7 @@ func (ov *OutlineView) IndentationMarkerFollowsCell() bool {
 
 // AutoresizesOutlineColumn wraps the corresponding Objective-C method.
 func (ov *OutlineView) AutoresizesOutlineColumn() bool {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1203,6 +1300,7 @@ func (ov *OutlineView) AutoresizesOutlineColumn() bool {
 
 // AutosaveExpandedItems wraps the corresponding Objective-C method.
 func (ov *OutlineView) AutosaveExpandedItems() bool {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1216,6 +1314,7 @@ func (ov *OutlineView) AutosaveExpandedItems() bool {
 
 // StronglyReferencesItems wraps the corresponding Objective-C method.
 func (ov *OutlineView) StronglyReferencesItems() bool {
+	defer runtime.KeepAlive(ov)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

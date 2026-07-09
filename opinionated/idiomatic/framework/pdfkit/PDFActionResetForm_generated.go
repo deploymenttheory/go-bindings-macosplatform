@@ -5,6 +5,8 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -69,12 +71,14 @@ func (arf *ActionResetForm) WithFieldsIncludedAreCleared(fieldsIncludedAreCleare
 //
 // Fields returns the collection as a Go slice.
 func (arf *ActionResetForm) Fields() []string {
+	defer runtime.KeepAlive(arf)
 	_arr := objc.Send[objc.ID](objref.IDOf(arf), objc.RegisterName("fields"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FieldsIncludedAreCleared wraps the corresponding Objective-C method.
 func (arf *ActionResetForm) FieldsIncludedAreCleared() bool {
+	defer runtime.KeepAlive(arf)
 	_r := objc.Send[bool](objref.IDOf(arf), objc.RegisterName("fieldsIncludedAreCleared"))
 	return _r
 }

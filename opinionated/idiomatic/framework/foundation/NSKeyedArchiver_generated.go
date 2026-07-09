@@ -5,11 +5,14 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -63,9 +66,20 @@ func NewKeyedArchiverRequiringSecureCoding(requiresSecureCoding bool) *KeyedArch
 
 // NewKeyedArchiverForWritingWithMutableData initializes an archiver to encode data into a given a mutable-data object.
 func NewKeyedArchiverForWritingWithMutableData(data *MutableData) *KeyedArchiver {
+	defer runtime.KeepAlive(data)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), objref.IDOf(data))
 	return keyedArchiverAdopt(_id)
+}
+
+// WithDelegate sets the archiver’s delegate.
+func (ka *KeyedArchiver) WithDelegate(delegate KeyedArchiverDelegate) *KeyedArchiver {
+	_shim := newKeyedArchiverDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ka), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ka), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ka
 }
 
 // WithOutputFormat sets the format in which the receiver encodes its data.
@@ -87,26 +101,29 @@ func (ka *KeyedArchiver) WithObservationInfo(observationInfo unsafe.Pointer) *Ke
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ka *KeyedArchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver {
-	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ka *KeyedArchiver) WithScriptingProperties(scriptingProperties map[string]obj.Object) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ka
 }
 
 // FinishEncoding instructs the receiver to construct the final data stream.
 func (ka *KeyedArchiver) FinishEncoding() {
+	defer runtime.KeepAlive(ka)
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("finishEncoding"))
 }
 
 // OutputFormat returns the output format.
 func (ka *KeyedArchiver) OutputFormat() PropertyListFormat {
+	defer runtime.KeepAlive(ka)
 	_r := objc.Send[PropertyListFormat](objref.IDOf(ka), objc.RegisterName("outputFormat"))
 	return _r
 }
 
 // EncodedData returns if encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
-func (ka *KeyedArchiver) EncodedData() *Data {
+func (ka *KeyedArchiver) EncodedData() []byte {
+	defer runtime.KeepAlive(ka)
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("encodedData"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ CoderProvider = (*KeyedArchiver)(nil)

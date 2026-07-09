@@ -5,6 +5,8 @@
 package accounts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accountTypeAdopt(id objc.ID) *AccountType {
 
 // Description returns the object's -description text.
 func (at *AccountType) Description() string {
+	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (at *AccountType) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(at)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(at), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (at *AccountType) IsKind(className string) bool {
+	defer runtime.KeepAlive(at)
 	return rt.IsKind(objref.IDOf(at), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (at *AccountType) String() string {
+	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
 }
 
@@ -74,6 +81,7 @@ func NewAccountType() *AccountType {
 
 // AccountTypeDescription returns the account type description.
 func (at *AccountType) AccountTypeDescription() string {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("accountTypeDescription"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (at *AccountType) AccountTypeDescription() string {
 
 // Identifier returns the identifier.
 func (at *AccountType) Identifier() string {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (at *AccountType) Identifier() string {
 
 // AccessGranted wraps the corresponding Objective-C method.
 func (at *AccountType) AccessGranted() bool {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("accessGranted"))
 	return _r
 }

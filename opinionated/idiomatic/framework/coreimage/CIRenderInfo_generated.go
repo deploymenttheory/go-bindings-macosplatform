@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderInfoAdopt(id objc.ID) *RenderInfo {
 
 // Description returns the object's -description text.
 func (ri *RenderInfo) Description() string {
+	defer runtime.KeepAlive(ri)
 	return rt.Description(objref.IDOf(ri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ri *RenderInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ri)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ri *RenderInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(ri)
 	return rt.IsKind(objref.IDOf(ri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ri *RenderInfo) String() string {
+	defer runtime.KeepAlive(ri)
 	return rt.Description(objref.IDOf(ri))
 }
 
@@ -74,24 +81,28 @@ func NewRenderInfo() *RenderInfo {
 
 // KernelExecutionTime returns the kernel execution time.
 func (ri *RenderInfo) KernelExecutionTime() float64 {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[float64](objref.IDOf(ri), objc.RegisterName("kernelExecutionTime"))
 	return _r
 }
 
 // KernelCompileTime returns the kernel compile time.
 func (ri *RenderInfo) KernelCompileTime() float64 {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[float64](objref.IDOf(ri), objc.RegisterName("kernelCompileTime"))
 	return _r
 }
 
 // PassCount returns the pass count.
 func (ri *RenderInfo) PassCount() int {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("passCount"))
 	return _r
 }
 
 // PixelsProcessed returns the pixels processed.
 func (ri *RenderInfo) PixelsProcessed() int {
+	defer runtime.KeepAlive(ri)
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("pixelsProcessed"))
 	return _r
 }

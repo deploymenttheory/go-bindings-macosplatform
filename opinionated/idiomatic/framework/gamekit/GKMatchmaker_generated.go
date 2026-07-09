@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func matchmakerAdopt(id objc.ID) *Matchmaker {
 
 // Description returns the object's -description text.
 func (m *Matchmaker) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Matchmaker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Matchmaker) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Matchmaker) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -85,6 +91,8 @@ func (m *Matchmaker) WithInviteHandler(inviteHandler func(obj.Object, obj.Object
 //
 // MatchForInvite blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) MatchForInvite(ctx context.Context, invite *Invite) (result *Match, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(invite)
 	type _result struct {
 		val *Match
 		err error
@@ -110,6 +118,8 @@ func (m *Matchmaker) MatchForInvite(ctx context.Context, invite *Invite) (result
 //
 // FindMatchForRequest blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) FindMatchForRequest(ctx context.Context, request *MatchRequest) (result *Match, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *Match
 		err error
@@ -135,6 +145,8 @@ func (m *Matchmaker) FindMatchForRequest(ctx context.Context, request *MatchRequ
 //
 // FindPlayersForHostedRequest blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *MatchRequest) (result obj.Object, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val obj.Object
 		err error
@@ -160,6 +172,8 @@ func (m *Matchmaker) FindPlayersForHostedRequest(ctx context.Context, request *M
 //
 // FindMatchedPlayers blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) FindMatchedPlayers(ctx context.Context, request *MatchRequest) (result *MatchedPlayers, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *MatchedPlayers
 		err error
@@ -185,6 +199,9 @@ func (m *Matchmaker) FindMatchedPlayers(ctx context.Context, request *MatchReque
 //
 // AddPlayersToMatchMatchRequest blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *Match, matchRequest *MatchRequest) error {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(match)
+	defer runtime.KeepAlive(matchRequest)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -202,26 +219,33 @@ func (m *Matchmaker) AddPlayersToMatchMatchRequest(ctx context.Context, match *M
 
 // Cancel cancels a matchmaking request.
 func (m *Matchmaker) Cancel() {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancel"))
 }
 
 // CancelPendingInviteToPlayer cancels a pending invitation to another player.
 func (m *Matchmaker) CancelPendingInviteToPlayer(player *Player) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancelPendingInviteToPlayer:"), objref.IDOf(player))
 }
 
 // FinishMatchmakingForMatch informs the server when programmatic matchmaking finishes.
 func (m *Matchmaker) FinishMatchmakingForMatch(match *Match) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(match)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("finishMatchmakingForMatch:"), objref.IDOf(match))
 }
 
 // StartBrowsingForNearbyPlayersWithHandler finds nearby players through Bluetooth or WiFi on the same subnet.
 func (m *Matchmaker) StartBrowsingForNearbyPlayersWithHandler(reachableHandler func(obj.Object, bool)) {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("startBrowsingForNearbyPlayersWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { reachableHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // StopBrowsingForNearbyPlayers stops finding nearby players.
 func (m *Matchmaker) StopBrowsingForNearbyPlayers() {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("stopBrowsingForNearbyPlayers"))
 }
 
@@ -229,6 +253,7 @@ func (m *Matchmaker) StopBrowsingForNearbyPlayers() {
 //
 // StartGroupActivityWithPlayerHandler blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (result *Player, err error) {
+	defer runtime.KeepAlive(m)
 	type _result struct {
 		val *Player
 		err error
@@ -251,16 +276,19 @@ func (m *Matchmaker) StartGroupActivityWithPlayerHandler(ctx context.Context) (r
 
 // StopGroupActivity ends a SharePlay activity for the entire group, which the local player activates.
 func (m *Matchmaker) StopGroupActivity() {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("stopGroupActivity"))
 }
 
 // StartBrowsingForNearbyPlayersWithReachableHandler * This method is obsolete. It will never be invoked and its implementation does nothing**
 func (m *Matchmaker) StartBrowsingForNearbyPlayersWithReachableHandler(reachableHandler func(obj.Object, bool)) {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("startBrowsingForNearbyPlayersWithReachableHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 bool) { reachableHandler(obj.Wrap(_b0), _b1) }))
 }
 
 // CancelInviteToPlayer * This method is obsolete. It will never be invoked and its implementation does nothing**
 func (m *Matchmaker) CancelInviteToPlayer(playerID string) {
+	defer runtime.KeepAlive(m)
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("cancelInviteToPlayer:"), purego.NSString(playerID))
 }
 
@@ -268,6 +296,8 @@ func (m *Matchmaker) CancelInviteToPlayer(playerID string) {
 //
 // FindPlayersForHostedMatchRequest blocks until the operation completes or ctx is cancelled.
 func (m *Matchmaker) FindPlayersForHostedMatchRequest(ctx context.Context, request *MatchRequest) (result obj.Object, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val obj.Object
 		err error

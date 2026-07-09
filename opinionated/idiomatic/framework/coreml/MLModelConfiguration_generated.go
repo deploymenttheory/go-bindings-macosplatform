@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
 
 // Description returns the object's -description text.
 func (mc *ModelConfiguration) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *ModelConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *ModelConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *ModelConfiguration) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -86,6 +93,7 @@ func (mc *ModelConfiguration) WithComputeUnits(computeUnits ComputeUnits) *Model
 
 // WithOptimizationHints sets a group of hints for CoreML to optimize
 func (mc *ModelConfiguration) WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration {
+	defer runtime.KeepAlive(optimizationHints)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setOptimizationHints:"), objref.IDOf(optimizationHints))
 	return mc
 }
@@ -98,6 +106,7 @@ func (mc *ModelConfiguration) WithAllowLowPrecisionAccumulationOnGPU(allowLowPre
 
 // WithParameters sets a dictionary of configuration settings your app can override when loading a model.
 func (mc *ModelConfiguration) WithParameters(parameters obj.Object) *ModelConfiguration {
+	defer runtime.KeepAlive(parameters)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return mc
 }
@@ -110,6 +119,7 @@ func (mc *ModelConfiguration) WithFunctionName(functionName string) *ModelConfig
 
 // ModelDisplayName returns a human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
 func (mc *ModelConfiguration) ModelDisplayName() string {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("modelDisplayName"))
 	if _r == 0 {
 		return ""
@@ -119,30 +129,35 @@ func (mc *ModelConfiguration) ModelDisplayName() string {
 
 // ComputeUnits returns the compute units.
 func (mc *ModelConfiguration) ComputeUnits() ComputeUnits {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[ComputeUnits](objref.IDOf(mc), objc.RegisterName("computeUnits"))
 	return _r
 }
 
 // OptimizationHints returns a group of hints for CoreML to optimize
 func (mc *ModelConfiguration) OptimizationHints() *OptimizationHints {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("optimizationHints"))
 	return OptimizationHintsFromID(_r)
 }
 
 // AllowLowPrecisionAccumulationOnGPU reports whether set to true to allow low precision accumulation on GPU when available. Defaults to false
 func (mc *ModelConfiguration) AllowLowPrecisionAccumulationOnGPU() bool {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("allowLowPrecisionAccumulationOnGPU"))
 	return _r
 }
 
 // Parameters returns the parameters.
 func (mc *ModelConfiguration) Parameters() obj.Object {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
 
 // FunctionName returns the function name.
 func (mc *ModelConfiguration) FunctionName() string {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("functionName"))
 	if _r == 0 {
 		return ""

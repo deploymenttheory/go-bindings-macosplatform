@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterLevelControlAdopt(id objc.ID) *MTRClusterLevelControl {
 
 // NewMTRClusterLevelControlWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterLevelControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterLevelControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLevelControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterLevelControlAdopt(_id)
@@ -53,193 +59,268 @@ func NewMTRClusterLevelControlWithDeviceEndpointIDQueue(device *MTRDevice, endpo
 
 // NewMTRClusterLevelControlWithDeviceEndpointQueue creates a new MTRClusterLevelControl.
 func NewMTRClusterLevelControlWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterLevelControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLevelControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterLevelControlAdopt(_id)
 }
 
 // ReadAttributeCurrentLevelWithParams reads attribute current level with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeCurrentLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRemainingTimeWithParams reads attribute remaining time with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeRemainingTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeRemainingTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinLevelWithParams reads attribute min level with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeMinLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMinLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxLevelWithParams reads attribute max level with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeMaxLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMaxLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentFrequencyWithParams reads attribute current frequency with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeCurrentFrequencyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinFrequencyWithParams reads attribute min frequency with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeMinFrequencyWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeMinFrequencyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMinFrequencyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaxFrequencyWithParams reads attribute max frequency with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMaxFrequencyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOptionsWithParams reads attribute options with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeOptionsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOptionsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOptionsWithValueExpectedValueInterval writes attribute options with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOptionsWithValueExpectedValueIntervalParams writes attribute options with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOnOffTransitionTimeWithParams reads attribute on off transition time with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOnOffTransitionTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval writes attribute on off transition time with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams writes attribute on off transition time with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOnLevelWithParams reads attribute on level with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeOnLevelWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeOnLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOnLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOnLevelWithValueExpectedValueInterval writes attribute on level with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOnLevelWithValueExpectedValueIntervalParams writes attribute on level with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOnTransitionTimeWithParams reads attribute on transition time with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOnTransitionTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOnTransitionTimeWithValueExpectedValueInterval writes attribute on transition time with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams writes attribute on transition time with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOffTransitionTimeWithParams reads attribute off transition time with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOffTransitionTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOffTransitionTimeWithValueExpectedValueInterval writes attribute off transition time with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams writes attribute off transition time with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeDefaultMoveRateWithParams reads attribute default move rate with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeDefaultMoveRateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDefaultMoveRateWithValueExpectedValueInterval writes attribute default move rate with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams writes attribute default move rate with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeStartUpCurrentLevelWithParams reads attribute start up current level with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeStartUpCurrentLevelWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval writes attribute start up current level with value expected value interval.
-func (mclc *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams writes attribute start up current level with value expected value interval params.
-func (mclc *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mclc *MTRClusterLevelControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mclc *MTRClusterLevelControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mclc)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterLevelControl)(nil)

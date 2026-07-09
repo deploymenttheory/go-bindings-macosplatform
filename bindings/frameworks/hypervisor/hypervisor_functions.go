@@ -109,33 +109,33 @@ func HvGicConfigCreate() unsafe.Pointer {
 }
 
 // C function: hv_gic_config_set_distributor_base
-func HvGicConfigSetDistributorBase(config *foundation.NSObject, distributor_base_address uint64) int {
-	return _hv_gic_config_set_distributor_base(config.Ptr(), distributor_base_address)
+func HvGicConfigSetDistributorBase(config *foundation.NSObject, distributorBaseAddress uint64) int {
+	return _hv_gic_config_set_distributor_base(config.Ptr(), distributorBaseAddress)
 }
 
 // C function: hv_gic_config_set_msi_interrupt_range
-func HvGicConfigSetMsiInterruptRange(config *foundation.NSObject, msi_intid_base uint32, msi_intid_count uint32) int {
-	return _hv_gic_config_set_msi_interrupt_range(config.Ptr(), msi_intid_base, msi_intid_count)
+func HvGicConfigSetMsiInterruptRange(config *foundation.NSObject, msiIntidBase uint32, msiIntidCount uint32) int {
+	return _hv_gic_config_set_msi_interrupt_range(config.Ptr(), msiIntidBase, msiIntidCount)
 }
 
 // C function: hv_gic_config_set_msi_region_base
-func HvGicConfigSetMsiRegionBase(config *foundation.NSObject, msi_region_base_address uint64) int {
-	return _hv_gic_config_set_msi_region_base(config.Ptr(), msi_region_base_address)
+func HvGicConfigSetMsiRegionBase(config *foundation.NSObject, msiRegionBaseAddress uint64) int {
+	return _hv_gic_config_set_msi_region_base(config.Ptr(), msiRegionBaseAddress)
 }
 
 // C function: hv_gic_config_set_redistributor_base
-func HvGicConfigSetRedistributorBase(config *foundation.NSObject, redistributor_base_address uint64) int {
-	return _hv_gic_config_set_redistributor_base(config.Ptr(), redistributor_base_address)
+func HvGicConfigSetRedistributorBase(config *foundation.NSObject, redistributorBaseAddress uint64) int {
+	return _hv_gic_config_set_redistributor_base(config.Ptr(), redistributorBaseAddress)
 }
 
 // C function: hv_gic_create
-func HvGicCreate(gic_config *foundation.NSObject) int {
-	return _hv_gic_create(gic_config.Ptr())
+func HvGicCreate(gicConfig *foundation.NSObject) int {
+	return _hv_gic_create(gicConfig.Ptr())
 }
 
 // C function: hv_gic_get_distributor_base_alignment
-func HvGicGetDistributorBaseAlignment(distributor_base_alignment *uint) int {
-	return _hv_gic_get_distributor_base_alignment(distributor_base_alignment)
+func HvGicGetDistributorBaseAlignment(distributorBaseAlignment *uint) int {
+	return _hv_gic_get_distributor_base_alignment(distributorBaseAlignment)
 }
 
 // C function: hv_gic_get_distributor_reg
@@ -144,8 +144,8 @@ func HvGicGetDistributorReg(reg Hv_gic_distributor_reg_t, value *uint64) int {
 }
 
 // C function: hv_gic_get_distributor_size
-func HvGicGetDistributorSize(distributor_size *uint) int {
-	return _hv_gic_get_distributor_size(distributor_size)
+func HvGicGetDistributorSize(distributorSize *uint) int {
+	return _hv_gic_get_distributor_size(distributorSize)
 }
 
 // C function: hv_gic_get_icc_reg
@@ -174,23 +174,23 @@ func HvGicGetMsiReg(reg Hv_gic_msi_reg_t, value *uint64) int {
 }
 
 // C function: hv_gic_get_msi_region_base_alignment
-func HvGicGetMsiRegionBaseAlignment(msi_region_base_alignment *uint) int {
-	return _hv_gic_get_msi_region_base_alignment(msi_region_base_alignment)
+func HvGicGetMsiRegionBaseAlignment(msiRegionBaseAlignment *uint) int {
+	return _hv_gic_get_msi_region_base_alignment(msiRegionBaseAlignment)
 }
 
 // C function: hv_gic_get_msi_region_size
-func HvGicGetMsiRegionSize(msi_region_size *uint) int {
-	return _hv_gic_get_msi_region_size(msi_region_size)
+func HvGicGetMsiRegionSize(msiRegionSize *uint) int {
+	return _hv_gic_get_msi_region_size(msiRegionSize)
 }
 
 // C function: hv_gic_get_redistributor_base
-func HvGicGetRedistributorBase(vcpu uint64, redistributor_base_address *uint64) int {
-	return _hv_gic_get_redistributor_base(vcpu, redistributor_base_address)
+func HvGicGetRedistributorBase(vcpu uint64, redistributorBaseAddress *uint64) int {
+	return _hv_gic_get_redistributor_base(vcpu, redistributorBaseAddress)
 }
 
 // C function: hv_gic_get_redistributor_base_alignment
-func HvGicGetRedistributorBaseAlignment(redistributor_base_alignment *uint) int {
-	return _hv_gic_get_redistributor_base_alignment(redistributor_base_alignment)
+func HvGicGetRedistributorBaseAlignment(redistributorBaseAlignment *uint) int {
+	return _hv_gic_get_redistributor_base_alignment(redistributorBaseAlignment)
 }
 
 // C function: hv_gic_get_redistributor_reg
@@ -199,18 +199,18 @@ func HvGicGetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t, value
 }
 
 // C function: hv_gic_get_redistributor_region_size
-func HvGicGetRedistributorRegionSize(redistributor_region_size *uint) int {
-	return _hv_gic_get_redistributor_region_size(redistributor_region_size)
+func HvGicGetRedistributorRegionSize(redistributorRegionSize *uint) int {
+	return _hv_gic_get_redistributor_region_size(redistributorRegionSize)
 }
 
 // C function: hv_gic_get_redistributor_size
-func HvGicGetRedistributorSize(redistributor_size *uint) int {
-	return _hv_gic_get_redistributor_size(redistributor_size)
+func HvGicGetRedistributorSize(redistributorSize *uint) int {
+	return _hv_gic_get_redistributor_size(redistributorSize)
 }
 
 // C function: hv_gic_get_spi_interrupt_range
-func HvGicGetSpiInterruptRange(spi_intid_base *uint32, spi_intid_count *uint32) int {
-	return _hv_gic_get_spi_interrupt_range(spi_intid_base, spi_intid_count)
+func HvGicGetSpiInterruptRange(spiIntidBase *uint32, spiIntidCount *uint32) int {
+	return _hv_gic_get_spi_interrupt_range(spiIntidBase, spiIntidCount)
 }
 
 // C function: hv_gic_reset
@@ -259,8 +259,8 @@ func HvGicSetSpi(intid uint32, level bool) int {
 }
 
 // C function: hv_gic_set_state
-func HvGicSetState(gic_state_data unsafe.Pointer, gic_state_size uint) int {
-	return _hv_gic_set_state(gic_state_data, gic_state_size)
+func HvGicSetState(gicStateData unsafe.Pointer, gicStateSize uint) int {
+	return _hv_gic_set_state(gicStateData, gicStateSize)
 }
 
 // C function: hv_gic_state_create
@@ -269,13 +269,13 @@ func HvGicStateCreate() unsafe.Pointer {
 }
 
 // C function: hv_gic_state_get_data
-func HvGicStateGetData(state *foundation.NSObject, gic_state_data unsafe.Pointer) int {
-	return _hv_gic_state_get_data(state.Ptr(), gic_state_data)
+func HvGicStateGetData(state *foundation.NSObject, gicStateData unsafe.Pointer) int {
+	return _hv_gic_state_get_data(state.Ptr(), gicStateData)
 }
 
 // C function: hv_gic_state_get_size
-func HvGicStateGetSize(state *foundation.NSObject, gic_state_size *uint) int {
-	return _hv_gic_state_get_size(state.Ptr(), gic_state_size)
+func HvGicStateGetSize(state *foundation.NSObject, gicStateSize *uint) int {
+	return _hv_gic_state_get_size(state.Ptr(), gicStateSize)
 }
 
 // C function: hv_sme_config_get_max_svl_bytes
@@ -289,13 +289,13 @@ func HvVcpuConfigCreate() unsafe.Pointer {
 }
 
 // C function: hv_vcpu_config_get_ccsidr_el1_sys_reg_values
-func HvVcpuConfigGetCcsidrEl1SysRegValues(config *foundation.NSObject, cache_type Hv_cache_type_t, values *uint64) int {
-	return _hv_vcpu_config_get_ccsidr_el1_sys_reg_values(config.Ptr(), cache_type, values)
+func HvVcpuConfigGetCcsidrEl1SysRegValues(config *foundation.NSObject, cacheType Hv_cache_type_t, values *uint64) int {
+	return _hv_vcpu_config_get_ccsidr_el1_sys_reg_values(config.Ptr(), cacheType, values)
 }
 
 // C function: hv_vcpu_config_get_feature_reg
-func HvVcpuConfigGetFeatureReg(config *foundation.NSObject, feature_reg Hv_feature_reg_t, value *uint64) int {
-	return _hv_vcpu_config_get_feature_reg(config.Ptr(), feature_reg, value)
+func HvVcpuConfigGetFeatureReg(config *foundation.NSObject, featureReg Hv_feature_reg_t, value *uint64) int {
+	return _hv_vcpu_config_get_feature_reg(config.Ptr(), featureReg, value)
 }
 
 // C function: hv_vcpu_create
@@ -334,8 +334,8 @@ func HvVcpuGetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value *uint8, length uint
 }
 
 // C function: hv_vcpu_get_sme_state
-func HvVcpuGetSmeState(vcpu uint64, sme_state *HvVcpuSmeStateT) int {
-	return _hv_vcpu_get_sme_state(vcpu, sme_state)
+func HvVcpuGetSmeState(vcpu uint64, smeState *HvVcpuSmeStateT) int {
+	return _hv_vcpu_get_sme_state(vcpu, smeState)
 }
 
 // C function: hv_vcpu_get_sme_z_reg
@@ -369,13 +369,13 @@ func HvVcpuGetTrapDebugRegAccesses(vcpu uint64, value *bool) int {
 }
 
 // C function: hv_vcpu_get_vtimer_mask
-func HvVcpuGetVtimerMask(vcpu uint64, vtimer_is_masked *bool) int {
-	return _hv_vcpu_get_vtimer_mask(vcpu, vtimer_is_masked)
+func HvVcpuGetVtimerMask(vcpu uint64, vtimerIsMasked *bool) int {
+	return _hv_vcpu_get_vtimer_mask(vcpu, vtimerIsMasked)
 }
 
 // C function: hv_vcpu_get_vtimer_offset
-func HvVcpuGetVtimerOffset(vcpu uint64, vtimer_offset *uint64) int {
-	return _hv_vcpu_get_vtimer_offset(vcpu, vtimer_offset)
+func HvVcpuGetVtimerOffset(vcpu uint64, vtimerOffset *uint64) int {
+	return _hv_vcpu_get_vtimer_offset(vcpu, vtimerOffset)
 }
 
 // C function: hv_vcpu_run
@@ -404,8 +404,8 @@ func HvVcpuSetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value *uint8, length uint
 }
 
 // C function: hv_vcpu_set_sme_state
-func HvVcpuSetSmeState(vcpu uint64, sme_state *HvVcpuSmeStateT) int {
-	return _hv_vcpu_set_sme_state(vcpu, sme_state)
+func HvVcpuSetSmeState(vcpu uint64, smeState *HvVcpuSmeStateT) int {
+	return _hv_vcpu_set_sme_state(vcpu, smeState)
 }
 
 // C function: hv_vcpu_set_sme_z_reg
@@ -439,18 +439,18 @@ func HvVcpuSetTrapDebugRegAccesses(vcpu uint64, value bool) int {
 }
 
 // C function: hv_vcpu_set_vtimer_mask
-func HvVcpuSetVtimerMask(vcpu uint64, vtimer_is_masked bool) int {
-	return _hv_vcpu_set_vtimer_mask(vcpu, vtimer_is_masked)
+func HvVcpuSetVtimerMask(vcpu uint64, vtimerIsMasked bool) int {
+	return _hv_vcpu_set_vtimer_mask(vcpu, vtimerIsMasked)
 }
 
 // C function: hv_vcpu_set_vtimer_offset
-func HvVcpuSetVtimerOffset(vcpu uint64, vtimer_offset uint64) int {
-	return _hv_vcpu_set_vtimer_offset(vcpu, vtimer_offset)
+func HvVcpuSetVtimerOffset(vcpu uint64, vtimerOffset uint64) int {
+	return _hv_vcpu_set_vtimer_offset(vcpu, vtimerOffset)
 }
 
 // C function: hv_vcpus_exit
-func HvVcpusExit(vcpus *uint64, vcpu_count uint32) int {
-	return _hv_vcpus_exit(vcpus, vcpu_count)
+func HvVcpusExit(vcpus *uint64, vcpuCount uint32) int {
+	return _hv_vcpus_exit(vcpus, vcpuCount)
 }
 
 // C function: hv_vm_allocate
@@ -469,18 +469,18 @@ func HvVmConfigGetDefaultIpaGranule(granule *Hv_ipa_granule_t) int {
 }
 
 // C function: hv_vm_config_get_default_ipa_size
-func HvVmConfigGetDefaultIpaSize(ipa_bit_length *uint32) int {
-	return _hv_vm_config_get_default_ipa_size(ipa_bit_length)
+func HvVmConfigGetDefaultIpaSize(ipaBitLength *uint32) int {
+	return _hv_vm_config_get_default_ipa_size(ipaBitLength)
 }
 
 // C function: hv_vm_config_get_el2_enabled
-func HvVmConfigGetEl2Enabled(config *foundation.NSObject, el2_enabled *bool) int {
-	return _hv_vm_config_get_el2_enabled(config.Ptr(), el2_enabled)
+func HvVmConfigGetEl2Enabled(config *foundation.NSObject, el2Enabled *bool) int {
+	return _hv_vm_config_get_el2_enabled(config.Ptr(), el2Enabled)
 }
 
 // C function: hv_vm_config_get_el2_supported
-func HvVmConfigGetEl2Supported(el2_supported *bool) int {
-	return _hv_vm_config_get_el2_supported(el2_supported)
+func HvVmConfigGetEl2Supported(el2Supported *bool) int {
+	return _hv_vm_config_get_el2_supported(el2Supported)
 }
 
 // C function: hv_vm_config_get_ipa_granule
@@ -489,18 +489,18 @@ func HvVmConfigGetIpaGranule(config *foundation.NSObject, granule *Hv_ipa_granul
 }
 
 // C function: hv_vm_config_get_ipa_size
-func HvVmConfigGetIpaSize(config *foundation.NSObject, ipa_bit_length *uint32) int {
-	return _hv_vm_config_get_ipa_size(config.Ptr(), ipa_bit_length)
+func HvVmConfigGetIpaSize(config *foundation.NSObject, ipaBitLength *uint32) int {
+	return _hv_vm_config_get_ipa_size(config.Ptr(), ipaBitLength)
 }
 
 // C function: hv_vm_config_get_max_ipa_size
-func HvVmConfigGetMaxIpaSize(ipa_bit_length *uint32) int {
-	return _hv_vm_config_get_max_ipa_size(ipa_bit_length)
+func HvVmConfigGetMaxIpaSize(ipaBitLength *uint32) int {
+	return _hv_vm_config_get_max_ipa_size(ipaBitLength)
 }
 
 // C function: hv_vm_config_set_el2_enabled
-func HvVmConfigSetEl2Enabled(config *foundation.NSObject, el2_enabled bool) int {
-	return _hv_vm_config_set_el2_enabled(config.Ptr(), el2_enabled)
+func HvVmConfigSetEl2Enabled(config *foundation.NSObject, el2Enabled bool) int {
+	return _hv_vm_config_set_el2_enabled(config.Ptr(), el2Enabled)
 }
 
 // C function: hv_vm_config_set_ipa_granule
@@ -509,8 +509,8 @@ func HvVmConfigSetIpaGranule(config *foundation.NSObject, granule Hv_ipa_granule
 }
 
 // C function: hv_vm_config_set_ipa_size
-func HvVmConfigSetIpaSize(config *foundation.NSObject, ipa_bit_length uint32) int {
-	return _hv_vm_config_set_ipa_size(config.Ptr(), ipa_bit_length)
+func HvVmConfigSetIpaSize(config *foundation.NSObject, ipaBitLength uint32) int {
+	return _hv_vm_config_set_ipa_size(config.Ptr(), ipaBitLength)
 }
 
 // C function: hv_vm_create
@@ -529,8 +529,8 @@ func HvVmDestroy() int {
 }
 
 // C function: hv_vm_get_max_vcpu_count
-func HvVmGetMaxVcpuCount(max_vcpu_count *uint32) int {
-	return _hv_vm_get_max_vcpu_count(max_vcpu_count)
+func HvVmGetMaxVcpuCount(maxVcpuCount *uint32) int {
+	return _hv_vm_get_max_vcpu_count(maxVcpuCount)
 }
 
 // C function: hv_vm_map

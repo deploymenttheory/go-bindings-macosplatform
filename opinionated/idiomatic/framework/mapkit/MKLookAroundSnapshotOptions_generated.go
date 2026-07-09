@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func lookAroundSnapshotOptionsAdopt(id objc.ID) *LookAroundSnapshotOptions {
 
 // Description returns the object's -description text.
 func (laso *LookAroundSnapshotOptions) Description() string {
+	defer runtime.KeepAlive(laso)
 	return rt.Description(objref.IDOf(laso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (laso *LookAroundSnapshotOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(laso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(laso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (laso *LookAroundSnapshotOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(laso)
 	return rt.IsKind(objref.IDOf(laso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (laso *LookAroundSnapshotOptions) String() string {
+	defer runtime.KeepAlive(laso)
 	return rt.Description(objref.IDOf(laso))
 }
 
@@ -75,6 +82,7 @@ func NewLookAroundSnapshotOptions() *LookAroundSnapshotOptions {
 
 // WithPointOfInterestFilter sets the point of interest filter.
 func (laso *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return laso
 }
@@ -87,12 +95,14 @@ func (laso *LookAroundSnapshotOptions) WithSize(size corefoundation.CGSize) *Loo
 
 // PointOfInterestFilter returns the point of interest filter.
 func (laso *LookAroundSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(laso)
 	_r := objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
 // Size returns the size.
 func (laso *LookAroundSnapshotOptions) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(laso)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(laso), objc.RegisterName("size"))
 	return _r
 }

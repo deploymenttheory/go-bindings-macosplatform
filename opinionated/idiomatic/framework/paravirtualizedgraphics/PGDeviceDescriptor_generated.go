@@ -5,6 +5,8 @@
 package paravirtualizedgraphics
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pGDeviceDescriptorAdopt(id objc.ID) *PGDeviceDescriptor {
 
 // Description returns the object's -description text.
 func (pdd *PGDeviceDescriptor) Description() string {
+	defer runtime.KeepAlive(pdd)
 	return rt.Description(objref.IDOf(pdd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pdd *PGDeviceDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pdd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pdd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pdd *PGDeviceDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(pdd)
 	return rt.IsKind(objref.IDOf(pdd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pdd *PGDeviceDescriptor) String() string {
+	defer runtime.KeepAlive(pdd)
 	return rt.Description(objref.IDOf(pdd))
 }
 
@@ -92,12 +99,14 @@ func (pdd *PGDeviceDescriptor) WithDisplayPortCount(displayPortCount uint32) *PG
 
 // MmioLength returns the length, of the memory that backs the APPLEGPU_BAR_MMIO By default, the value of mmioLength will be the recommended default size for the MMIO memory.
 func (pdd *PGDeviceDescriptor) MmioLength() int {
+	defer runtime.KeepAlive(pdd)
 	_r := objc.Send[int](objref.IDOf(pdd), objc.RegisterName("mmioLength"))
 	return _r
 }
 
 // DisplayPortCount returns the number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
 func (pdd *PGDeviceDescriptor) DisplayPortCount() uint32 {
+	defer runtime.KeepAlive(pdd)
 	_r := objc.Send[uint32](objref.IDOf(pdd), objc.RegisterName("displayPortCount"))
 	return _r
 }

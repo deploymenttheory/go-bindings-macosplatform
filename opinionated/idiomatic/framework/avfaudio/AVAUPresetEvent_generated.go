@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func aUPresetEventAdopt(id objc.ID) *AUPresetEvent {
 
 // NewAUPresetEventWithScopeElementDictionary creates an event with the scope, element, and dictionary for the preset.
 func NewAUPresetEventWithScopeElementDictionary(scope int, element int, presetDictionary obj.Object) *AUPresetEvent {
+	defer runtime.KeepAlive(presetDictionary)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAUPresetEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:element:dictionary:"), scope, element, objref.IDOf(presetDictionary))
 	return aUPresetEventAdopt(_id)
@@ -67,18 +70,21 @@ func (ape *AUPresetEvent) WithElement(element int) *AUPresetEvent {
 
 // Scope returns the scope.
 func (ape *AUPresetEvent) Scope() int {
+	defer runtime.KeepAlive(ape)
 	_r := objc.Send[int](objref.IDOf(ape), objc.RegisterName("scope"))
 	return _r
 }
 
 // Element returns the element.
 func (ape *AUPresetEvent) Element() int {
+	defer runtime.KeepAlive(ape)
 	_r := objc.Send[int](objref.IDOf(ape), objc.RegisterName("element"))
 	return _r
 }
 
 // PresetDictionary returns the preset dictionary.
 func (ape *AUPresetEvent) PresetDictionary() obj.Object {
+	defer runtime.KeepAlive(ape)
 	_r := objc.Send[objc.ID](objref.IDOf(ape), objc.RegisterName("presetDictionary"))
 	return obj.Wrap(_r)
 }

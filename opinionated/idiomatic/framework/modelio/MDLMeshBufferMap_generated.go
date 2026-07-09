@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,28 +50,33 @@ func meshBufferMapAdopt(id objc.ID) *MeshBufferMap {
 
 // Description returns the object's -description text.
 func (mbm *MeshBufferMap) Description() string {
+	defer runtime.KeepAlive(mbm)
 	return rt.Description(objref.IDOf(mbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbm *MeshBufferMap) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbm *MeshBufferMap) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbm)
 	return rt.IsKind(objref.IDOf(mbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbm *MeshBufferMap) String() string {
+	defer runtime.KeepAlive(mbm)
 	return rt.Description(objref.IDOf(mbm))
 }
 
 // NewMeshBufferMapWithBytesDeallocator initializes a buffer map object to manage access to the specified memory.
-func NewMeshBufferMapWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator func()) *MeshBufferMap {
+func NewMeshBufferMapWithBytesDeallocator(data unsafe.Pointer, deallocator func()) *MeshBufferMap {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferMap")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:deallocator:"), bytes_, objc.NewBlock(func(_ objc.Block) { deallocator() }))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:deallocator:"), data, objc.NewBlock(func(_ objc.Block) { deallocator() }))
 	return meshBufferMapAdopt(_id)
 }

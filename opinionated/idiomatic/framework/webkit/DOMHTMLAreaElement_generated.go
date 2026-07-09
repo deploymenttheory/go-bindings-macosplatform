@@ -5,9 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -190,6 +192,7 @@ func (dae *DOMHTMLAreaElement) WithTextContent(textContent string) *DOMHTMLAreaE
 
 // Alt returns the alt.
 func (dae *DOMHTMLAreaElement) Alt() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("alt"))
 	if _r == 0 {
 		return ""
@@ -199,6 +202,7 @@ func (dae *DOMHTMLAreaElement) Alt() string {
 
 // Coords returns the coords.
 func (dae *DOMHTMLAreaElement) Coords() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("coords"))
 	if _r == 0 {
 		return ""
@@ -208,12 +212,14 @@ func (dae *DOMHTMLAreaElement) Coords() string {
 
 // NoHref wraps the corresponding Objective-C method.
 func (dae *DOMHTMLAreaElement) NoHref() bool {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[bool](objref.IDOf(dae), objc.RegisterName("noHref"))
 	return _r
 }
 
 // Shape returns the shape.
 func (dae *DOMHTMLAreaElement) Shape() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("shape"))
 	if _r == 0 {
 		return ""
@@ -223,6 +229,7 @@ func (dae *DOMHTMLAreaElement) Shape() string {
 
 // Target returns the target.
 func (dae *DOMHTMLAreaElement) Target() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""
@@ -231,13 +238,15 @@ func (dae *DOMHTMLAreaElement) Target() string {
 }
 
 // AbsoluteLinkURL returns the absolute link URL.
-func (dae *DOMHTMLAreaElement) AbsoluteLinkURL() obj.Object {
+func (dae *DOMHTMLAreaElement) AbsoluteLinkURL() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("absoluteLinkURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Href returns the href.
 func (dae *DOMHTMLAreaElement) Href() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
@@ -247,6 +256,7 @@ func (dae *DOMHTMLAreaElement) Href() string {
 
 // Protocol returns the protocol.
 func (dae *DOMHTMLAreaElement) Protocol() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("protocol"))
 	if _r == 0 {
 		return ""
@@ -256,6 +266,7 @@ func (dae *DOMHTMLAreaElement) Protocol() string {
 
 // Host returns the host.
 func (dae *DOMHTMLAreaElement) Host() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
@@ -265,6 +276,7 @@ func (dae *DOMHTMLAreaElement) Host() string {
 
 // Hostname returns the hostname.
 func (dae *DOMHTMLAreaElement) Hostname() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hostname"))
 	if _r == 0 {
 		return ""
@@ -274,6 +286,7 @@ func (dae *DOMHTMLAreaElement) Hostname() string {
 
 // Port returns the port.
 func (dae *DOMHTMLAreaElement) Port() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("port"))
 	if _r == 0 {
 		return ""
@@ -283,6 +296,7 @@ func (dae *DOMHTMLAreaElement) Port() string {
 
 // Pathname returns the pathname.
 func (dae *DOMHTMLAreaElement) Pathname() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("pathname"))
 	if _r == 0 {
 		return ""
@@ -292,6 +306,7 @@ func (dae *DOMHTMLAreaElement) Pathname() string {
 
 // Search returns the search.
 func (dae *DOMHTMLAreaElement) Search() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("search"))
 	if _r == 0 {
 		return ""
@@ -301,6 +316,7 @@ func (dae *DOMHTMLAreaElement) Search() string {
 
 // HashName returns the hash name.
 func (dae *DOMHTMLAreaElement) HashName() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hashName"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func autoreleasePoolAdopt(id objc.ID) *AutoreleasePool {
 
 // Description returns the object's -description text.
 func (ap *AutoreleasePool) Description() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ap *AutoreleasePool) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ap *AutoreleasePool) IsKind(className string) bool {
+	defer runtime.KeepAlive(ap)
 	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ap *AutoreleasePool) String() string {
+	defer runtime.KeepAlive(ap)
 	return rt.Description(objref.IDOf(ap))
 }
 
@@ -81,17 +87,20 @@ func (ap *AutoreleasePool) WithObservationInfo(observationInfo unsafe.Pointer) *
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ap *AutoreleasePool) WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool {
-	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ap *AutoreleasePool) WithScriptingProperties(scriptingProperties map[string]obj.Object) *AutoreleasePool {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ap
 }
 
 // AddObject adds a given object to the receiver
 func (ap *AutoreleasePool) AddObject(anObject obj.Object) {
+	defer runtime.KeepAlive(ap)
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
 // Drain in a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
 func (ap *AutoreleasePool) Drain() {
+	defer runtime.KeepAlive(ap)
 	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("drain"))
 }

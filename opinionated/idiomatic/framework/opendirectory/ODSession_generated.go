@@ -5,6 +5,7 @@
 package opendirectory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,33 @@ func sessionAdopt(id objc.ID) *Session {
 
 // Description returns the object's -description text.
 func (s *Session) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Session) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Session) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Session) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
-// NewSessionWithOptionsError creates a session object directed over proxy to another host.
-func NewSessionWithOptionsError(inOptions obj.Object) (result *Session, err error) {
+// NewSessionWithOptions creates a session object directed over proxy to another host.
+func NewSessionWithOptions(inOptions obj.Object) (result *Session, err error) {
+	defer runtime.KeepAlive(inOptions)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:error:"), objref.IDOf(inOptions), unsafe.Pointer(&_nsErr))
@@ -80,8 +87,9 @@ func NewSessionWithOptionsError(inOptions obj.Object) (result *Session, err erro
 	return sessionAdopt(_id), nil
 }
 
-// NodeNamesAndReturnError returns the node names that are registered with this session.
-func (s *Session) NodeNamesAndReturnError() (result obj.Object, err error) {
+// NodeNames returns the node names that are registered with this session.
+func (s *Session) NodeNames() (result obj.Object, err error) {
+	defer runtime.KeepAlive(s)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("nodeNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -90,8 +98,9 @@ func (s *Session) NodeNamesAndReturnError() (result obj.Object, err error) {
 	return obj.Wrap(_r), nil
 }
 
-// ConfigurationAuthorizationAllowingUserInteractionError returns an authorization appropriate for managing configurations. Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return nil and no error.
-func (s *Session) ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (result obj.Object, err error) {
+// ConfigurationAuthorizationAllowingUserInteraction returns an authorization appropriate for managing configurations. Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return nil and no error.
+func (s *Session) ConfigurationAuthorizationAllowingUserInteraction(allowInteraction bool) (result obj.Object, err error) {
+	defer runtime.KeepAlive(s)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("configurationAuthorizationAllowingUserInteraction:error:"), allowInteraction, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -102,12 +111,16 @@ func (s *Session) ConfigurationAuthorizationAllowingUserInteractionError(allowIn
 
 // ConfigurationForNodename reads the configuration for a given nodename. Reads the configuration for a given nodename.
 func (s *Session) ConfigurationForNodename(nodename string) *Configuration {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("configurationForNodename:"), purego.NSString(nodename))
 	return ConfigurationFromID(_r)
 }
 
 // AddConfigurationAuthorization adds a new configuration to the existing ODSession. Adds a new configuration to the existing ODSession.  An SFAuthorization can be provided if necessary.
 func (s *Session) AddConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(configuration)
+	defer runtime.KeepAlive(authorization)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("addConfiguration:authorization:error:"), objref.IDOf(configuration), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -118,6 +131,9 @@ func (s *Session) AddConfigurationAuthorization(configuration *Configuration, au
 
 // DeleteConfigurationAuthorization deletes an existing configuration from the ODSession. Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
 func (s *Session) DeleteConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(configuration)
+	defer runtime.KeepAlive(authorization)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("deleteConfiguration:authorization:error:"), objref.IDOf(configuration), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -128,6 +144,8 @@ func (s *Session) DeleteConfigurationAuthorization(configuration *Configuration,
 
 // DeleteConfigurationWithNodenameAuthorization deletes an existing configuration from the ODSession. Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
 func (s *Session) DeleteConfigurationWithNodenameAuthorization(nodename string, authorization obj.Object) error {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(authorization)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(s), objc.RegisterName("deleteConfigurationWithNodename:authorization:error:"), purego.NSString(nodename), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -138,12 +156,14 @@ func (s *Session) DeleteConfigurationWithNodenameAuthorization(nodename string, 
 
 // ConfigurationTemplateNames returns a list of names as NSStrings for all available configuration templates. Returns a list of names as NSStrings for all available configuration templates.  Configuration templates have pre-configured modules and/or mappings.  Useful for re-using existing configurations that may change with operating system without changing the actual configuration.
 func (s *Session) ConfigurationTemplateNames() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("configurationTemplateNames"))
 	return obj.Wrap(_r)
 }
 
 // MappingTemplateNames returns a list names as NSStrings for all available mapping templates. Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
 func (s *Session) MappingTemplateNames() obj.Object {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mappingTemplateNames"))
 	return obj.Wrap(_r)
 }

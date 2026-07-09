@@ -57,8 +57,8 @@ func (o *WebDataSource) InitWithRequest(request *foundation.NSURLRequest) *WebDa
 }
 
 // Returns a subresource for the given URL.
-func (o *WebDataSource) SubresourceForURL(uRL *foundation.NSURL) *WebResource {
-	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelSubresourceForURL, uRL.Ptr())
+func (o *WebDataSource) SubresourceForURL(url *foundation.NSURL) *WebResource {
+	_ret := objc.Send[objc.ID](o.Ptr(), _webDataSourceSelSubresourceForURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

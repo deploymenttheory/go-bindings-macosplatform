@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func synchronizedLayerAdopt(id objc.ID) *SynchronizedLayer {
 
 // Description returns the object's -description text.
 func (sl *SynchronizedLayer) Description() string {
+	defer runtime.KeepAlive(sl)
 	return rt.Description(objref.IDOf(sl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sl *SynchronizedLayer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sl *SynchronizedLayer) IsKind(className string) bool {
+	defer runtime.KeepAlive(sl)
 	return rt.IsKind(objref.IDOf(sl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sl *SynchronizedLayer) String() string {
+	defer runtime.KeepAlive(sl)
 	return rt.Description(objref.IDOf(sl))
 }
 
@@ -74,12 +81,14 @@ func NewSynchronizedLayer() *SynchronizedLayer {
 
 // WithPlayerItem sets the player item to which the timing of the layer is synchronized.
 func (sl *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
+	defer runtime.KeepAlive(playerItem)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
 	return sl
 }
 
 // PlayerItem returns the player item.
 func (sl *SynchronizedLayer) PlayerItem() *PlayerItem {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("playerItem"))
 	return PlayerItemFromID(_r)
 }

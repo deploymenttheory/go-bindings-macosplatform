@@ -5,6 +5,7 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,27 +51,34 @@ func managedObjectAdopt(id objc.ID) *ManagedObject {
 
 // Description returns the object's -description text.
 func (mo *ManagedObject) Description() string {
+	defer runtime.KeepAlive(mo)
 	return rt.Description(objref.IDOf(mo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mo *ManagedObject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mo *ManagedObject) IsKind(className string) bool {
+	defer runtime.KeepAlive(mo)
 	return rt.IsKind(objref.IDOf(mo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mo *ManagedObject) String() string {
+	defer runtime.KeepAlive(mo)
 	return rt.Description(objref.IDOf(mo))
 }
 
 // NewManagedObjectWithEntityInsertIntoManagedObjectContext initializes a managed object from an entity description and inserts it into the specified managed object context.
 func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *EntityDescription, context_ *ManagedObjectContext) *ManagedObject {
+	defer runtime.KeepAlive(entity)
+	defer runtime.KeepAlive(context_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:insertIntoManagedObjectContext:"), objref.IDOf(entity), objref.IDOf(context_))
 	return managedObjectAdopt(_id)
@@ -78,6 +86,7 @@ func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *EntityDesc
 
 // NewManagedObjectWithContext initializes a managed object subclass and inserts it into the specified managed object context.
 func NewManagedObjectWithContext(moc *ManagedObjectContext) *ManagedObject {
+	defer runtime.KeepAlive(moc)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(moc))
 	return managedObjectAdopt(_id)
@@ -85,99 +94,118 @@ func NewManagedObjectWithContext(moc *ManagedObjectContext) *ManagedObject {
 
 // HasFaultForRelationshipNamed returns a Boolean value that indicates whether the relationship for a given key is a fault.
 func (mo *ManagedObject) HasFaultForRelationshipNamed(key string) bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("hasFaultForRelationshipNamed:"), purego.NSString(key))
 	return _r
 }
 
 // ObjectIDsForRelationshipNamed returns the object IDs for all of the managed objects that are in the named relationship.
 func (mo *ManagedObject) ObjectIDsForRelationshipNamed(key string) []*ManagedObjectID {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("objectIDsForRelationshipNamed:"), purego.NSString(key))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObjectID { return ManagedObjectIDFromID(_id) })
 }
 
 // WillAccessValueForKey provides support for key-value observing access notification.
 func (mo *ManagedObject) WillAccessValueForKey(key string) {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("willAccessValueForKey:"), purego.NSString(key))
 }
 
 // DidAccessValueForKey provides support for key-value observing access notification.
 func (mo *ManagedObject) DidAccessValueForKey(key string) {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("didAccessValueForKey:"), purego.NSString(key))
 }
 
 // AwakeFromFetch provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.
 func (mo *ManagedObject) AwakeFromFetch() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("awakeFromFetch"))
 }
 
 // AwakeFromInsert provides an opportunity to add code into the life cycle of the managed object when initially creating it.
 func (mo *ManagedObject) AwakeFromInsert() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("awakeFromInsert"))
 }
 
 // AwakeFromSnapshotEvents provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.
 func (mo *ManagedObject) AwakeFromSnapshotEvents(flags SnapshotEventType) {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("awakeFromSnapshotEvents:"), flags)
 }
 
 // PrepareForDeletion provides an opportunity to add code into the life cycle of the managed object before deleting it.
 func (mo *ManagedObject) PrepareForDeletion() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("prepareForDeletion"))
 }
 
 // WillSave provides an opportunity to add code into the life cycle of the managed object before saving it.
 func (mo *ManagedObject) WillSave() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("willSave"))
 }
 
 // DidSave provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.
 func (mo *ManagedObject) DidSave() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("didSave"))
 }
 
 // WillTurnIntoFault provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.
 func (mo *ManagedObject) WillTurnIntoFault() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("willTurnIntoFault"))
 }
 
 // DidTurnIntoFault provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.
 func (mo *ManagedObject) DidTurnIntoFault() {
+	defer runtime.KeepAlive(mo)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("didTurnIntoFault"))
 }
 
 // PrimitiveValueForKey returns the value for the specified property from the managed object’s private internal storage .
 func (mo *ManagedObject) PrimitiveValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("primitiveValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetPrimitiveValueForKey sets the value of a given property in the managed object’s private internal storage.
 func (mo *ManagedObject) SetPrimitiveValueForKey(value obj.Object, key string) {
+	defer runtime.KeepAlive(mo)
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("setPrimitiveValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // CommittedValuesForKeys returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.
-func (mo *ManagedObject) CommittedValuesForKeys(keys []string) obj.Object {
+func (mo *ManagedObject) CommittedValuesForKeys(keys []string) map[string]obj.Object {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("committedValuesForKeys:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ChangedValues returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
-func (mo *ManagedObject) ChangedValues() obj.Object {
+func (mo *ManagedObject) ChangedValues() map[string]obj.Object {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("changedValues"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ChangedValuesForCurrentEvent returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
-func (mo *ManagedObject) ChangedValuesForCurrentEvent() obj.Object {
+func (mo *ManagedObject) ChangedValuesForCurrentEvent() map[string]obj.Object {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("changedValuesForCurrentEvent"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ValidateForDelete determines whether the managed object can be deleted in its current state.
 //
 // ValidateForDelete returns an error if the operation did not succeed.
 func (mo *ManagedObject) ValidateForDelete() error {
+	defer runtime.KeepAlive(mo)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(mo), objc.RegisterName("validateForDelete:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -190,6 +218,7 @@ func (mo *ManagedObject) ValidateForDelete() error {
 //
 // ValidateForInsert returns an error if the operation did not succeed.
 func (mo *ManagedObject) ValidateForInsert() error {
+	defer runtime.KeepAlive(mo)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(mo), objc.RegisterName("validateForInsert:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -202,6 +231,7 @@ func (mo *ManagedObject) ValidateForInsert() error {
 //
 // ValidateForUpdate returns an error if the operation did not succeed.
 func (mo *ManagedObject) ValidateForUpdate() error {
+	defer runtime.KeepAlive(mo)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(mo), objc.RegisterName("validateForUpdate:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -212,60 +242,70 @@ func (mo *ManagedObject) ValidateForUpdate() error {
 
 // ManagedObjectContext returns the managed object context.
 func (mo *ManagedObject) ManagedObjectContext() *ManagedObjectContext {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
 // Entity returns the entity.
 func (mo *ManagedObject) Entity() *EntityDescription {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // ObjectID returns the object ID.
 func (mo *ManagedObject) ObjectID() *ManagedObjectID {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[objc.ID](objref.IDOf(mo), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
 // IsInserted reports whether the object is inserted.
 func (mo *ManagedObject) IsInserted() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isInserted"))
 	return _r
 }
 
 // IsUpdated reports whether the object is updated.
 func (mo *ManagedObject) IsUpdated() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isUpdated"))
 	return _r
 }
 
 // IsDeleted reports whether the object is deleted.
 func (mo *ManagedObject) IsDeleted() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isDeleted"))
 	return _r
 }
 
 // HasChanges reports whether the object has changes.
 func (mo *ManagedObject) HasChanges() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("hasChanges"))
 	return _r
 }
 
 // HasPersistentChangedValues reports whether the object has persistent changed values.
 func (mo *ManagedObject) HasPersistentChangedValues() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("hasPersistentChangedValues"))
 	return _r
 }
 
 // IsFault reports whether the object is fault.
 func (mo *ManagedObject) IsFault() bool {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[bool](objref.IDOf(mo), objc.RegisterName("isFault"))
 	return _r
 }
 
 // FaultingState returns the faulting state.
 func (mo *ManagedObject) FaultingState() int {
+	defer runtime.KeepAlive(mo)
 	_r := objc.Send[int](objref.IDOf(mo), objc.RegisterName("faultingState"))
 	return _r
 }

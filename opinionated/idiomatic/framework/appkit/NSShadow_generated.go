@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func shadowAdopt(id objc.ID) *Shadow {
 
 // Description returns the object's -description text.
 func (s *Shadow) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Shadow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Shadow) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Shadow) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -87,29 +94,34 @@ func (s *Shadow) WithShadowBlurRadius(shadowBlurRadius float64) *Shadow {
 
 // WithShadowColor sets the color of the shadow.
 func (s *Shadow) WithShadowColor(shadowColor *Color) *Shadow {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return s
 }
 
 // Set sets the shadow of subsequent drawing operations to the current shadow.
 func (s *Shadow) Set() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("set"))
 }
 
 // ShadowOffset returns the shadow offset.
 func (s *Shadow) ShadowOffset() corefoundation.CGSize {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(s), objc.RegisterName("shadowOffset"))
 	return _r
 }
 
 // ShadowBlurRadius returns the shadow blur radius.
 func (s *Shadow) ShadowBlurRadius() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("shadowBlurRadius"))
 	return _r
 }
 
 // ShadowColor returns the shadow color.
 func (s *Shadow) ShadowColor() *Color {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("shadowColor"))
 	return ColorFromID(_r)
 }

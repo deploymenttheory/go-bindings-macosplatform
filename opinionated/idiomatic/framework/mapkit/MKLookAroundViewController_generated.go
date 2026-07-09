@@ -5,8 +5,11 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func lookAroundViewControllerAdopt(id objc.ID) *LookAroundViewController {
 
 // Description returns the object's -description text.
 func (lavc *LookAroundViewController) Description() string {
+	defer runtime.KeepAlive(lavc)
 	return rt.Description(objref.IDOf(lavc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lavc *LookAroundViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lavc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lavc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lavc *LookAroundViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(lavc)
 	return rt.IsKind(objref.IDOf(lavc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lavc *LookAroundViewController) String() string {
+	defer runtime.KeepAlive(lavc)
 	return rt.Description(objref.IDOf(lavc))
 }
 
 // NewLookAroundViewControllerWithScene creates a new LookAround view controller with the specified scene.
 func NewLookAroundViewControllerWithScene(scene *LookAroundScene) *LookAroundViewController {
+	defer runtime.KeepAlive(scene)
 	var _mainthread0 *LookAroundViewController
 	purego.Main(func() {
 		_mainthread0 = func() *LookAroundViewController {
@@ -81,6 +90,7 @@ func NewLookAroundViewControllerWithScene(scene *LookAroundScene) *LookAroundVie
 
 // NewLookAroundViewControllerWithNibNameBundle creates a new LookAround view controller from the specified nib and bundle.
 func NewLookAroundViewControllerWithNibNameBundle(nibNameOrNil string, nibBundleOrNil obj.Object) *LookAroundViewController {
+	defer runtime.KeepAlive(nibBundleOrNil)
 	var _mainthread0 *LookAroundViewController
 	purego.Main(func() {
 		_mainthread0 = func() *LookAroundViewController {
@@ -94,6 +104,7 @@ func NewLookAroundViewControllerWithNibNameBundle(nibNameOrNil string, nibBundle
 
 // NewLookAroundViewControllerWithCoder creates a new LookAround view controller object from a coder object provided by a storyboard or nib file.
 func NewLookAroundViewControllerWithCoder(coder obj.Object) *LookAroundViewController {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *LookAroundViewController
 	purego.Main(func() {
 		_mainthread0 = func() *LookAroundViewController {
@@ -105,8 +116,21 @@ func NewLookAroundViewControllerWithCoder(coder obj.Object) *LookAroundViewContr
 	return _mainthread0
 }
 
+// WithDelegate sets an object you provide to receive events related to the user’s interaction with the LookAround view controller.
+func (lavc *LookAroundViewController) WithDelegate(delegate LookAroundViewControllerDelegate) *LookAroundViewController {
+	_shim := newLookAroundViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(lavc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(lavc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return lavc
+}
+
 // WithScene sets the LookAround scene.
 func (lavc *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
+	defer runtime.KeepAlive(scene)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	})
@@ -131,6 +155,7 @@ func (lavc *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) 
 
 // WithPointOfInterestFilter sets the filter used to determine the points of interest shown on the map.
 func (lavc *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	})
@@ -147,6 +172,7 @@ func (lavc *LookAroundViewController) WithBadgePosition(badgePosition LookAround
 
 // Scene returns the scene.
 func (lavc *LookAroundViewController) Scene() *LookAroundScene {
+	defer runtime.KeepAlive(lavc)
 	var _mainthread0 *LookAroundScene
 	purego.Main(func() {
 		_mainthread0 = func() *LookAroundScene {
@@ -160,6 +186,7 @@ func (lavc *LookAroundViewController) Scene() *LookAroundScene {
 
 // IsNavigationEnabled reports whether the object is navigation enabled.
 func (lavc *LookAroundViewController) IsNavigationEnabled() bool {
+	defer runtime.KeepAlive(lavc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -173,6 +200,7 @@ func (lavc *LookAroundViewController) IsNavigationEnabled() bool {
 
 // ShowsRoadLabels wraps the corresponding Objective-C method.
 func (lavc *LookAroundViewController) ShowsRoadLabels() bool {
+	defer runtime.KeepAlive(lavc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -186,6 +214,7 @@ func (lavc *LookAroundViewController) ShowsRoadLabels() bool {
 
 // PointOfInterestFilter returns the point of interest filter.
 func (lavc *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(lavc)
 	var _mainthread0 *PointOfInterestFilter
 	purego.Main(func() {
 		_mainthread0 = func() *PointOfInterestFilter {
@@ -199,6 +228,7 @@ func (lavc *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFi
 
 // BadgePosition returns the badge position.
 func (lavc *LookAroundViewController) BadgePosition() LookAroundBadgePosition {
+	defer runtime.KeepAlive(lavc)
 	var _mainthread0 LookAroundBadgePosition
 	purego.Main(func() {
 		_mainthread0 = func() LookAroundBadgePosition {

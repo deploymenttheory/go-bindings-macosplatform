@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func dateComponentsAdopt(id objc.ID) *DateComponents {
 
 // Description returns the object's -description text.
 func (dc *DateComponents) Description() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dc *DateComponents) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dc *DateComponents) IsKind(className string) bool {
+	defer runtime.KeepAlive(dc)
 	return rt.IsKind(objref.IDOf(dc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dc *DateComponents) String() string {
+	defer runtime.KeepAlive(dc)
 	return rt.Description(objref.IDOf(dc))
 }
 
@@ -76,12 +83,14 @@ func NewDateComponents() *DateComponents {
 
 // WithCalendar sets the calendar used to interpret the date components.
 func (dc *DateComponents) WithCalendar(calendar *Calendar) *DateComponents {
+	defer runtime.KeepAlive(calendar)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return dc
 }
 
 // WithTimeZone sets the time zone used to interpret the date components.
 func (dc *DateComponents) WithTimeZone(timeZone *TimeZone) *DateComponents {
+	defer runtime.KeepAlive(timeZone)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return dc
 }
@@ -195,161 +204,188 @@ func (dc *DateComponents) WithObservationInfo(observationInfo unsafe.Pointer) *D
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dc *DateComponents) WithScriptingProperties(scriptingProperties obj.Object) *DateComponents {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dc *DateComponents) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DateComponents {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dc
 }
 
 // Week returns the number of weeks.
 func (dc *DateComponents) Week() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("week"))
 	return _r
 }
 
 // SetWeek sets the number of weeks.
 func (dc *DateComponents) SetWeek(v int) {
+	defer runtime.KeepAlive(dc)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setWeek:"), v)
 }
 
 // SetValueForComponent sets a value for a given calendar unit.
 func (dc *DateComponents) SetValueForComponent(value int, unit CalendarUnit) {
+	defer runtime.KeepAlive(dc)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setValue:forComponent:"), value, unit)
 }
 
 // ValueForComponent returns the value for a given calendar unit.
 func (dc *DateComponents) ValueForComponent(unit CalendarUnit) int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("valueForComponent:"), unit)
 	return _r
 }
 
 // IsValidDateInCalendar returns a Boolean value that indicates whether the current combination of properties represents a date which exists in the specified calendar.
 func (dc *DateComponents) IsValidDateInCalendar(calendar *Calendar) bool {
+	defer runtime.KeepAlive(dc)
+	defer runtime.KeepAlive(calendar)
 	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("isValidDateInCalendar:"), objref.IDOf(calendar))
 	return _r
 }
 
 // Calendar returns the calendar.
 func (dc *DateComponents) Calendar() *Calendar {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
 // TimeZone returns the time zone.
 func (dc *DateComponents) TimeZone() *TimeZone {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
 // Era returns the era.
 func (dc *DateComponents) Era() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("era"))
 	return _r
 }
 
 // Year returns the year.
 func (dc *DateComponents) Year() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("year"))
 	return _r
 }
 
 // Month returns the month.
 func (dc *DateComponents) Month() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("month"))
 	return _r
 }
 
 // Day returns the day.
 func (dc *DateComponents) Day() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("day"))
 	return _r
 }
 
 // Hour returns the hour.
 func (dc *DateComponents) Hour() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("hour"))
 	return _r
 }
 
 // Minute returns the minute.
 func (dc *DateComponents) Minute() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("minute"))
 	return _r
 }
 
 // Second returns the second.
 func (dc *DateComponents) Second() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("second"))
 	return _r
 }
 
 // Nanosecond returns the nanosecond.
 func (dc *DateComponents) Nanosecond() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("nanosecond"))
 	return _r
 }
 
 // Weekday returns the weekday.
 func (dc *DateComponents) Weekday() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekday"))
 	return _r
 }
 
 // WeekdayOrdinal returns the weekday ordinal.
 func (dc *DateComponents) WeekdayOrdinal() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekdayOrdinal"))
 	return _r
 }
 
 // Quarter returns the quarter.
 func (dc *DateComponents) Quarter() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("quarter"))
 	return _r
 }
 
 // WeekOfMonth returns the week of month.
 func (dc *DateComponents) WeekOfMonth() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekOfMonth"))
 	return _r
 }
 
 // WeekOfYear returns the week of year.
 func (dc *DateComponents) WeekOfYear() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("weekOfYear"))
 	return _r
 }
 
 // YearForWeekOfYear returns the year for week of year.
 func (dc *DateComponents) YearForWeekOfYear() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("yearForWeekOfYear"))
 	return _r
 }
 
 // DayOfYear returns the day of year.
 func (dc *DateComponents) DayOfYear() int {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("dayOfYear"))
 	return _r
 }
 
 // IsLeapMonth reports whether the object is leap month.
 func (dc *DateComponents) IsLeapMonth() bool {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("isLeapMonth"))
 	return _r
 }
 
 // IsRepeatedDay reports whether the object is repeated day.
 func (dc *DateComponents) IsRepeatedDay() bool {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("isRepeatedDay"))
 	return _r
 }
 
 // Date returns the date.
-func (dc *DateComponents) Date() *Date {
+func (dc *DateComponents) Date() time.Time {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("date"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // IsValidDate reports whether the object is valid date.
 func (dc *DateComponents) IsValidDate() bool {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[bool](objref.IDOf(dc), objc.RegisterName("isValidDate"))
 	return _r
 }

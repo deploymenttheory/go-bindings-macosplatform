@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDishwasherModeClusterModeTagStructAdopt(id objc.ID) *MTRDishwasherModeCl
 
 // Description returns the object's -description text.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) Description() string {
+	defer runtime.KeepAlive(mdmcmts)
 	return rt.Description(objref.IDOf(mdmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdmcmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdmcmts)
 	return rt.IsKind(objref.IDOf(mdmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) String() string {
+	defer runtime.KeepAlive(mdmcmts)
 	return rt.Description(objref.IDOf(mdmcmts))
 }
 
@@ -72,24 +80,28 @@ func NewMTRDishwasherModeClusterModeTagStruct() *MTRDishwasherModeClusterModeTag
 
 // WithMfgCode sets the mfg code.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDishwasherModeClusterModeTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mdmcmts
 }
 
 // WithValue sets the value.
 func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDishwasherModeClusterModeTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mdmcmts
 }
 
 // MfgCode returns the mfg code.
-func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) MfgCode() obj.Object {
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(mdmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) Value() obj.Object {
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(mdmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

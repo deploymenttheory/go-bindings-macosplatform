@@ -5,6 +5,9 @@
 package metrickit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func metricPayloadAdopt(id objc.ID) *MetricPayload {
 
 // Description returns the object's -description text.
 func (mp *MetricPayload) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MetricPayload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MetricPayload) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MetricPayload) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
@@ -73,19 +81,22 @@ func NewMetricPayload() *MetricPayload {
 }
 
 // JSONRepresentation returns the contents of the payload in JSON format.
-func (mp *MetricPayload) JSONRepresentation() obj.Object {
+func (mp *MetricPayload) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DictionaryRepresentation returns the results of the payload as a dictionary.
 func (mp *MetricPayload) DictionaryRepresentation() obj.Object {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // LatestApplicationVersion returns an NSString representation of the application version from which this payload was generated. If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.
 func (mp *MetricPayload) LatestApplicationVersion() string {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("latestApplicationVersion"))
 	if _r == 0 {
 		return ""
@@ -95,102 +106,119 @@ func (mp *MetricPayload) LatestApplicationVersion() string {
 
 // IncludesMultipleApplicationVersions wraps the corresponding Objective-C method.
 func (mp *MetricPayload) IncludesMultipleApplicationVersions() bool {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[bool](objref.IDOf(mp), objc.RegisterName("includesMultipleApplicationVersions"))
 	return _r
 }
 
 // TimeStampBegin returns an NSDate object that indicates the time which the payload was generated.
-func (mp *MetricPayload) TimeStampBegin() obj.Object {
+func (mp *MetricPayload) TimeStampBegin() time.Time {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("timeStampBegin"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeStampEnd returns an NSDate object that indicates the time which the payload was generated.
-func (mp *MetricPayload) TimeStampEnd() obj.Object {
+func (mp *MetricPayload) TimeStampEnd() time.Time {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("timeStampEnd"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CPUMetrics returns an object containing CPU metrics for this application.
 func (mp *MetricPayload) CPUMetrics() *CPUMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("cpuMetrics"))
 	return CPUMetricFromID(_r)
 }
 
 // GPUMetrics returns an object containing GPU metrics for this application.
 func (mp *MetricPayload) GPUMetrics() *GPUMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("gpuMetrics"))
 	return GPUMetricFromID(_r)
 }
 
 // CellularConditionMetrics returns an object containing a cellular condition metrics for this application.
 func (mp *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("cellularConditionMetrics"))
 	return CellularConditionMetricFromID(_r)
 }
 
 // ApplicationTimeMetrics returns an object containing running mode metrics for this application.
 func (mp *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationTimeMetrics"))
 	return AppRunTimeMetricFromID(_r)
 }
 
 // LocationActivityMetrics returns an object containing location activity metrics for this application.
 func (mp *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("locationActivityMetrics"))
 	return LocationActivityMetricFromID(_r)
 }
 
 // NetworkTransferMetrics returns an object containing network transfer metrics for this application.
 func (mp *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("networkTransferMetrics"))
 	return NetworkTransferMetricFromID(_r)
 }
 
 // ApplicationLaunchMetrics returns an object containing launch metrics for this application.
 func (mp *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationLaunchMetrics"))
 	return AppLaunchMetricFromID(_r)
 }
 
 // ApplicationResponsivenessMetrics returns an object containing hang metrics for this application.
 func (mp *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationResponsivenessMetrics"))
 	return AppResponsivenessMetricFromID(_r)
 }
 
 // DiskIOMetrics returns an object containing disk IO metrics for this application.
 func (mp *MetricPayload) DiskIOMetrics() *DiskIOMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("diskIOMetrics"))
 	return DiskIOMetricFromID(_r)
 }
 
 // MemoryMetrics returns an object containing memory metrics for this application.
 func (mp *MetricPayload) MemoryMetrics() *MemoryMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("memoryMetrics"))
 	return MemoryMetricFromID(_r)
 }
 
 // DisplayMetrics returns an object containing display metrics for this application.
 func (mp *MetricPayload) DisplayMetrics() *DisplayMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("displayMetrics"))
 	return DisplayMetricFromID(_r)
 }
 
 // AnimationMetrics returns an object containing animation metrics for this application.
 func (mp *MetricPayload) AnimationMetrics() *AnimationMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("animationMetrics"))
 	return AnimationMetricFromID(_r)
 }
 
 // ApplicationExitMetrics returns an object containing exit metrics for this application.
 func (mp *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationExitMetrics"))
 	return AppExitMetricFromID(_r)
 }
 
 // DiskSpaceUsageMetrics returns an object containing disk space usage metrics for this application.
 func (mp *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("diskSpaceUsageMetrics"))
 	return DiskSpaceUsageMetricFromID(_r)
 }
@@ -199,12 +227,14 @@ func (mp *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
 //
 // SignpostMetrics returns the collection as a Go slice.
 func (mp *MetricPayload) SignpostMetrics() []*SignpostMetric {
+	defer runtime.KeepAlive(mp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("signpostMetrics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SignpostMetric { return SignpostMetricFromID(_id) })
 }
 
 // MetaData returns an object containing extra metadata for this payload.
 func (mp *MetricPayload) MetaData() *MetaData {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("metaData"))
 	return MetaDataFromID(_r)
 }

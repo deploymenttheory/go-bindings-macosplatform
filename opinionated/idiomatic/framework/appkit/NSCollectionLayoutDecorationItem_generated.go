@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -67,6 +69,7 @@ func (cldi *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLa
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (cldi *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
+	defer runtime.KeepAlive(edgeSpacing)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	})
@@ -75,6 +78,7 @@ func (cldi *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *Collect
 
 // ZIndex returns the z index.
 func (cldi *CollectionLayoutDecorationItem) ZIndex() int {
+	defer runtime.KeepAlive(cldi)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -88,6 +92,7 @@ func (cldi *CollectionLayoutDecorationItem) ZIndex() int {
 
 // ElementKind returns the element kind.
 func (cldi *CollectionLayoutDecorationItem) ElementKind() string {
+	defer runtime.KeepAlive(cldi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

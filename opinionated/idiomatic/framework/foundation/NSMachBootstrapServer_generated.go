@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,13 +63,14 @@ func (mbs *MachBootstrapServer) WithObservationInfo(observationInfo unsafe.Point
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mbs *MachBootstrapServer) WithScriptingProperties(scriptingProperties obj.Object) *MachBootstrapServer {
-	objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mbs *MachBootstrapServer) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MachBootstrapServer {
+	objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mbs
 }
 
 // ServicePortWithName looks up and returns the port for the vended service that is registered under the specified name.
 func (mbs *MachBootstrapServer) ServicePortWithName(name string) *Port {
+	defer runtime.KeepAlive(mbs)
 	_r := objc.Send[objc.ID](objref.IDOf(mbs), objc.RegisterName("servicePortWithName:"), purego.NSString(name))
 	return PortFromID(_r)
 }

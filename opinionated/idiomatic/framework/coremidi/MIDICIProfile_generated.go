@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,41 +49,47 @@ func cIProfileAdopt(id objc.ID) *CIProfile {
 
 // Description returns the object's -description text.
 func (cp *CIProfile) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *CIProfile) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *CIProfile) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *CIProfile) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // NewCIProfileWithData creates a MIDI profile for the specified data.
-func NewCIProfileWithData(data obj.Object) *CIProfile {
+func NewCIProfileWithData(data []byte) *CIProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return cIProfileAdopt(_id)
 }
 
 // NewCIProfileWithDataName creates a named MIDI profile for the specified data.
-func NewCIProfileWithDataName(data obj.Object, inName string) *CIProfile {
+func NewCIProfileWithDataName(data []byte, inName string) *CIProfile {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:name:"), objref.IDOf(data), purego.NSString(inName))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:name:"), rt.BytesToNSData(data), purego.NSString(inName))
 	return cIProfileAdopt(_id)
 }
 
 // Name returns an NSString describing the profile.
 func (cp *CIProfile) Name() string {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -90,7 +98,8 @@ func (cp *CIProfile) Name() string {
 }
 
 // ProfileID returns the unique 5-byte profile identifier representing the profile.
-func (cp *CIProfile) ProfileID() obj.Object {
+func (cp *CIProfile) ProfileID() []byte {
+	defer runtime.KeepAlive(cp)
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("profileID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

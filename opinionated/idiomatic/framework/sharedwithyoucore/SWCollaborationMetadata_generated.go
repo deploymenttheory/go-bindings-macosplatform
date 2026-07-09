@@ -5,7 +5,10 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func collaborationMetadataAdopt(id objc.ID) *CollaborationMetadata {
 
 // Description returns the object's -description text.
 func (cm *CollaborationMetadata) Description() string {
+	defer runtime.KeepAlive(cm)
 	return rt.Description(objref.IDOf(cm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cm *CollaborationMetadata) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cm *CollaborationMetadata) IsKind(className string) bool {
+	defer runtime.KeepAlive(cm)
 	return rt.IsKind(objref.IDOf(cm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cm *CollaborationMetadata) String() string {
+	defer runtime.KeepAlive(cm)
 	return rt.Description(objref.IDOf(cm))
 }
 
@@ -74,6 +82,7 @@ func NewCollaborationMetadata() *CollaborationMetadata {
 
 // NewCollaborationMetadataWithLocalIdentifier creates and initializes a collaboration metadata object for the specified local identifier.
 func NewCollaborationMetadataWithLocalIdentifier(localIdentifier obj.Object) *CollaborationMetadata {
+	defer runtime.KeepAlive(localIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationMetadata")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalIdentifier:"), objref.IDOf(localIdentifier))
 	return collaborationMetadataAdopt(_id)
@@ -81,6 +90,7 @@ func NewCollaborationMetadataWithLocalIdentifier(localIdentifier obj.Object) *Co
 
 // NewCollaborationMetadataWithCollaborationIdentifier creates and initializes a collaboration metadata object for the specified global identifier.
 func NewCollaborationMetadataWithCollaborationIdentifier(collaborationIdentifier obj.Object) *CollaborationMetadata {
+	defer runtime.KeepAlive(collaborationIdentifier)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationMetadata")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCollaborationIdentifier:"), objref.IDOf(collaborationIdentifier))
 	return collaborationMetadataAdopt(_id)
@@ -94,12 +104,14 @@ func (cm *CollaborationMetadata) WithTitle(title string) *CollaborationMetadata 
 
 // WithDefaultShareOptions sets the collaboration options that the content supports.
 func (cm *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) *CollaborationMetadata {
+	defer runtime.KeepAlive(defaultShareOptions)
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("setDefaultShareOptions:"), objref.IDOf(defaultShareOptions))
 	return cm
 }
 
 // WithUserSelectedShareOptions sets the selected collaboration options from the person who sends the invitation.
 func (cm *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) *CollaborationMetadata {
+	defer runtime.KeepAlive(userSelectedShareOptions)
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("setUserSelectedShareOptions:"), objref.IDOf(userSelectedShareOptions))
 	return cm
 }
@@ -112,24 +124,28 @@ func (cm *CollaborationMetadata) WithInitiatorHandle(initiatorHandle string) *Co
 
 // WithInitiatorNameComponents sets the name of the person who initiates the collaboration.
 func (cm *CollaborationMetadata) WithInitiatorNameComponents(initiatorNameComponents obj.Object) *CollaborationMetadata {
+	defer runtime.KeepAlive(initiatorNameComponents)
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("setInitiatorNameComponents:"), objref.IDOf(initiatorNameComponents))
 	return cm
 }
 
 // CollaborationIdentifier returns globally unique identifier for the item represented by this metadata. This identifier is unique across platforms and shares of the same item.
-func (cm *CollaborationMetadata) CollaborationIdentifier() obj.Object {
+func (cm *CollaborationMetadata) CollaborationIdentifier() *foundation.String {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("collaborationIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // LocalIdentifier returns locally unique identifier for the item represented by this metadata. Use this identifier to uniquely identify this metadata before a collaborationIdentifier can be created
-func (cm *CollaborationMetadata) LocalIdentifier() obj.Object {
+func (cm *CollaborationMetadata) LocalIdentifier() *foundation.String {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("localIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Title returns title of the content. Title of the collaboration if provided by the app which owns the collaboration item.
 func (cm *CollaborationMetadata) Title() string {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -139,12 +155,14 @@ func (cm *CollaborationMetadata) Title() string {
 
 // DefaultShareOptions returns the collaboration options that this content supports (updated).
 func (cm *CollaborationMetadata) DefaultShareOptions() *CollaborationShareOptions {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("defaultShareOptions"))
 	return CollaborationShareOptionsFromID(_r)
 }
 
 // UserSelectedShareOptions returns the collaboration options that the user selected when sending the invite (updated).
 func (cm *CollaborationMetadata) UserSelectedShareOptions() *CollaborationShareOptions {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("userSelectedShareOptions"))
 	return CollaborationShareOptionsFromID(_r)
 }

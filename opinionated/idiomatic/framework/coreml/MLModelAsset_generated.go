@@ -6,6 +6,7 @@ package coreml
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func modelAssetAdopt(id objc.ID) *ModelAsset {
 
 // Description returns the object's -description text.
 func (ma *ModelAsset) Description() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ma *ModelAsset) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ma *ModelAsset) IsKind(className string) bool {
+	defer runtime.KeepAlive(ma)
 	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ma *ModelAsset) String() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
@@ -79,6 +85,7 @@ func NewModelAsset() *ModelAsset {
 //
 // ModelDescription blocks until the operation completes or ctx is cancelled.
 func (ma *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescription, err error) {
+	defer runtime.KeepAlive(ma)
 	type _result struct {
 		val *ModelDescription
 		err error
@@ -104,6 +111,7 @@ func (ma *ModelAsset) ModelDescription(ctx context.Context) (result *ModelDescri
 //
 // ModelDescriptionOfFunctionNamed blocks until the operation completes or ctx is cancelled.
 func (ma *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, functionName string) (result *ModelDescription, err error) {
+	defer runtime.KeepAlive(ma)
 	type _result struct {
 		val *ModelDescription
 		err error
@@ -129,6 +137,7 @@ func (ma *ModelAsset) ModelDescriptionOfFunctionNamed(ctx context.Context, funct
 //
 // FunctionNames blocks until the operation completes or ctx is cancelled.
 func (ma *ModelAsset) FunctionNames(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ma)
 	type _result struct {
 		val obj.Object
 		err error

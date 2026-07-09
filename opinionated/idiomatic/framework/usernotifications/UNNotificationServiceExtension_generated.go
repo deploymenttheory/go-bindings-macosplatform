@@ -6,6 +6,7 @@ package usernotifications
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func notificationServiceExtensionAdopt(id objc.ID) *NotificationServiceExtension
 
 // Description returns the object's -description text.
 func (nse *NotificationServiceExtension) Description() string {
+	defer runtime.KeepAlive(nse)
 	return rt.Description(objref.IDOf(nse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nse *NotificationServiceExtension) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nse *NotificationServiceExtension) IsKind(className string) bool {
+	defer runtime.KeepAlive(nse)
 	return rt.IsKind(objref.IDOf(nse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nse *NotificationServiceExtension) String() string {
+	defer runtime.KeepAlive(nse)
 	return rt.Description(objref.IDOf(nse))
 }
 
@@ -78,6 +84,8 @@ func NewNotificationServiceExtension() *NotificationServiceExtension {
 //
 // DidReceiveNotificationRequestWithContentHandler blocks until the operation completes or ctx is cancelled.
 func (nse *NotificationServiceExtension) DidReceiveNotificationRequestWithContentHandler(ctx context.Context, request *NotificationRequest) (result *NotificationContent, err error) {
+	defer runtime.KeepAlive(nse)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *NotificationContent
 		err error
@@ -100,5 +108,6 @@ func (nse *NotificationServiceExtension) DidReceiveNotificationRequestWithConten
 
 // ServiceExtensionTimeWillExpire tells you that the system is terminating your extension.
 func (nse *NotificationServiceExtension) ServiceExtensionTimeWillExpire() {
+	defer runtime.KeepAlive(nse)
 	objc.Send[objc.ID](objref.IDOf(nse), objc.RegisterName("serviceExtensionTimeWillExpire"))
 }

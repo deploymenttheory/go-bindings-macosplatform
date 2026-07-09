@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,63 +52,72 @@ func movieAdopt(id objc.ID) *Movie {
 }
 
 // NewMovieWithURLOptions creates a movie object from a movie header stored in a QuickTime movie file of ISO base media file.
-func NewMovieWithURLOptions(uRL string, options obj.Object) *Movie {
+func NewMovieWithURLOptions(url string, options map[string]obj.Object) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMovie")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(uRL), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(url), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return movieAdopt(_id)
 }
 
 // NewMovieWithDataOptions creates a movie object from a movie file’s data.
-func NewMovieWithDataOptions(data obj.Object, options obj.Object) *Movie {
+func NewMovieWithDataOptions(data []byte, options map[string]obj.Object) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMovie")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), rt.BytesToNSData(data), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return movieAdopt(_id)
 }
 
 // URL returns the URL with which the instance of AVMovie was initialized; may be nil.
-func (m *Movie) URL() obj.Object {
+func (m *Movie) URL() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Data returns the data block with which the instance of AVMovie was initialized; may be nil.
-func (m *Movie) Data() obj.Object {
+func (m *Movie) Data() []byte {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DefaultMediaDataStorage returns the default storage container for media data added to a movie. The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
 func (m *Movie) DefaultMediaDataStorage() *MediaDataStorage {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("defaultMediaDataStorage"))
 	return MediaDataStorageFromID(_r)
 }
 
 // CanContainMovieFragments reports whether the movie file is capable of being extended by fragments. The value of this property is true if an 'mvex' box is present in the 'moov' box. The 'mvex' box is necessary in order to signal the possible presence of later 'moof' boxes.
 func (m *Movie) CanContainMovieFragments() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("canContainMovieFragments"))
 	return _r
 }
 
 // ContainsMovieFragments reports whether the movie file is extended by at least one movie fragment. The value of this property is true if canContainMovieFragments is true and at least one 'moof' box is present after the 'moov' box.
 func (m *Movie) ContainsMovieFragments() bool {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("containsMovieFragments"))
 	return _r
 }
 
-// MovieHeaderWithFileTypeError creates a header for a movie for the specified file type.
-func (m *Movie) MovieHeaderWithFileTypeError(fileType obj.Object) (result obj.Object, err error) {
+// MovieHeaderWithFileType creates a header for a movie for the specified file type.
+func (m *Movie) MovieHeaderWithFileType(fileType obj.Object) (result []byte, err error) {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(fileType)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("movieHeaderWithFileType:error:"), objref.IDOf(fileType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return obj.Wrap(_r), nil
+	return rt.NSDataToBytes(_r), nil
 }
 
-// WriteMovieHeaderToURLFileTypeOptions writes the movie header to the specified URL.
-func (m *Movie) WriteMovieHeaderToURLFileTypeOptions(uRL string, fileType obj.Object, options MovieWritingOptions) error {
+// WriteMovieHeaderToURLFileType writes the movie header to the specified URL.
+func (m *Movie) WriteMovieHeaderToURLFileType(url string, fileType obj.Object, options MovieWritingOptions) error {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(fileType)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("writeMovieHeaderToURL:fileType:options:error:"), rt.FileURL(uRL), objref.IDOf(fileType), options, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("writeMovieHeaderToURL:fileType:options:error:"), rt.FileURL(url), objref.IDOf(fileType), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -116,6 +126,8 @@ func (m *Movie) WriteMovieHeaderToURLFileTypeOptions(uRL string, fileType obj.Ob
 
 // IsCompatibleWithFileType returns a Boolean value that indicates whether the system can create a movie header of the specified type.
 func (m *Movie) IsCompatibleWithFileType(fileType obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(fileType)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isCompatibleWithFileType:"), objref.IDOf(fileType))
 	return _r
 }

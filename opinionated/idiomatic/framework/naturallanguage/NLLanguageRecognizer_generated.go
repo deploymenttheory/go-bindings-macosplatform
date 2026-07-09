@@ -5,7 +5,10 @@
 package naturallanguage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func languageRecognizerAdopt(id objc.ID) *LanguageRecognizer {
 
 // Description returns the object's -description text.
 func (lr *LanguageRecognizer) Description() string {
+	defer runtime.KeepAlive(lr)
 	return rt.Description(objref.IDOf(lr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lr *LanguageRecognizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lr *LanguageRecognizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(lr)
 	return rt.IsKind(objref.IDOf(lr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lr *LanguageRecognizer) String() string {
+	defer runtime.KeepAlive(lr)
 	return rt.Description(objref.IDOf(lr))
 }
 
@@ -74,6 +82,7 @@ func NewLanguageRecognizer() *LanguageRecognizer {
 
 // WithLanguageHints sets a dictionary that maps languages to their probabilities in the language identification process.
 func (lr *LanguageRecognizer) WithLanguageHints(languageHints obj.Object) *LanguageRecognizer {
+	defer runtime.KeepAlive(languageHints)
 	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("setLanguageHints:"), objref.IDOf(languageHints))
 	return lr
 }
@@ -86,29 +95,34 @@ func (lr *LanguageRecognizer) WithLanguageConstraints(items ...obj.Object) *Lang
 }
 
 // ProcessString analyzes the piece of text to determine its dominant language.
-func (lr *LanguageRecognizer) ProcessString(string_ string) {
-	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("processString:"), purego.NSString(string_))
+func (lr *LanguageRecognizer) ProcessString(str string) {
+	defer runtime.KeepAlive(lr)
+	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("processString:"), purego.NSString(str))
 }
 
 // Reset resets the recognizer to its initial state.
 func (lr *LanguageRecognizer) Reset() {
+	defer runtime.KeepAlive(lr)
 	objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("reset"))
 }
 
 // LanguageHypothesesWithMaximum generates the probabilities of possible languages for the processed text.
 func (lr *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses int) obj.Object {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageHypothesesWithMaximum:"), maxHypotheses)
 	return obj.Wrap(_r)
 }
 
 // DominantLanguage returns the dominant language.
-func (lr *LanguageRecognizer) DominantLanguage() obj.Object {
+func (lr *LanguageRecognizer) DominantLanguage() *foundation.String {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("dominantLanguage"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // LanguageHints returns the language hints.
 func (lr *LanguageRecognizer) LanguageHints() obj.Object {
+	defer runtime.KeepAlive(lr)
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageHints"))
 	return obj.Wrap(_r)
 }
@@ -117,6 +131,7 @@ func (lr *LanguageRecognizer) LanguageHints() obj.Object {
 //
 // LanguageConstraints returns the collection as a Go slice.
 func (lr *LanguageRecognizer) LanguageConstraints() []obj.Object {
+	defer runtime.KeepAlive(lr)
 	_arr := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageConstraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

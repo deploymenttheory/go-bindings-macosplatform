@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func networkDeviceAttachmentAdopt(id objc.ID) *NetworkDeviceAttachment {
 
 // Description returns the object's -description text.
 func (nda *NetworkDeviceAttachment) Description() string {
+	defer runtime.KeepAlive(nda)
 	return rt.Description(objref.IDOf(nda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nda *NetworkDeviceAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nda)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nda *NetworkDeviceAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(nda)
 	return rt.IsKind(objref.IDOf(nda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nda *NetworkDeviceAttachment) String() string {
+	defer runtime.KeepAlive(nda)
 	return rt.Description(objref.IDOf(nda))
 }
 

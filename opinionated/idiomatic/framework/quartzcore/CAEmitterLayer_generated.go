@@ -5,10 +5,15 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -98,18 +103,21 @@ func (el *EmitterLayer) WithEmitterDepth(emitterDepth float64) *EmitterLayer {
 
 // WithEmitterShape sets specifies the emitter shape.
 func (el *EmitterLayer) WithEmitterShape(emitterShape obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(emitterShape)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setEmitterShape:"), objref.IDOf(emitterShape))
 	return el
 }
 
 // WithEmitterMode sets specifies the emitter mode.
 func (el *EmitterLayer) WithEmitterMode(emitterMode obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(emitterMode)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setEmitterMode:"), objref.IDOf(emitterMode))
 	return el
 }
 
 // WithRenderMode sets defines how particle cells are rendered into the layer.
 func (el *EmitterLayer) WithRenderMode(renderMode obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(renderMode)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setRenderMode:"), objref.IDOf(renderMode))
 	return el
 }
@@ -207,6 +215,7 @@ func (el *EmitterLayer) WithSublayers(items ...LayerProvider) *EmitterLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (el *EmitterLayer) WithMask(mask LayerProvider) *EmitterLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return el
 }
@@ -219,6 +228,7 @@ func (el *EmitterLayer) WithMasksToBounds(masksToBounds bool) *EmitterLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (el *EmitterLayer) WithContents(contents obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return el
 }
@@ -231,6 +241,7 @@ func (el *EmitterLayer) WithContentsRect(contentsRect corefoundation.CGRect) *Em
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (el *EmitterLayer) WithContentsGravity(contentsGravity obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return el
 }
@@ -249,6 +260,7 @@ func (el *EmitterLayer) WithContentsCenter(contentsCenter corefoundation.CGRect)
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (el *EmitterLayer) WithContentsFormat(contentsFormat obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return el
 }
@@ -261,12 +273,14 @@ func (el *EmitterLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynami
 
 // WithToneMapMode sets the tone map mode.
 func (el *EmitterLayer) WithToneMapMode(toneMapMode obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return el
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (el *EmitterLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return el
 }
@@ -279,12 +293,14 @@ func (el *EmitterLayer) WithContentsHeadroom(contentsHeadroom float64) *EmitterL
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (el *EmitterLayer) WithMinificationFilter(minificationFilter obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return el
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (el *EmitterLayer) WithMagnificationFilter(magnificationFilter obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return el
 }
@@ -327,6 +343,7 @@ func (el *EmitterLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) 
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (el *EmitterLayer) WithBackgroundColor(backgroundColor obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return el
 }
@@ -345,6 +362,7 @@ func (el *EmitterLayer) WithMaskedCorners(maskedCorners CornerMask) *EmitterLaye
 
 // WithCornerCurve sets the corner curve.
 func (el *EmitterLayer) WithCornerCurve(cornerCurve obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return el
 }
@@ -357,6 +375,7 @@ func (el *EmitterLayer) WithBorderWidth(borderWidth float64) *EmitterLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (el *EmitterLayer) WithBorderColor(borderColor obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return el
 }
@@ -375,6 +394,7 @@ func (el *EmitterLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *Emitter
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (el *EmitterLayer) WithCompositingFilter(compositingFilter obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return el
 }
@@ -393,6 +413,7 @@ func (el *EmitterLayer) WithRasterizationScale(rasterizationScale float64) *Emit
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (el *EmitterLayer) WithShadowColor(shadowColor obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return el
 }
@@ -417,6 +438,7 @@ func (el *EmitterLayer) WithShadowRadius(shadowRadius float64) *EmitterLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (el *EmitterLayer) WithShadowPath(shadowPath obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return el
 }
@@ -428,8 +450,8 @@ func (el *EmitterLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) 
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (el *EmitterLayer) WithActions(actions obj.Object) *EmitterLayer {
-	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (el *EmitterLayer) WithActions(actions map[string]obj.Object) *EmitterLayer {
+	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return el
 }
 
@@ -439,8 +461,19 @@ func (el *EmitterLayer) WithName(name string) *EmitterLayer {
 	return el
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (el *EmitterLayer) WithDelegate(delegate LayerDelegate) *EmitterLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(el), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(el), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return el
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (el *EmitterLayer) WithStyle(style obj.Object) *EmitterLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return el
 }
@@ -456,90 +489,105 @@ func (el *EmitterLayer) WithConstraints(items ...*Constraint) *EmitterLayer {
 //
 // EmitterCells returns the collection as a Go slice.
 func (el *EmitterLayer) EmitterCells() []*EmitterCell {
+	defer runtime.KeepAlive(el)
 	_arr := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("emitterCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmitterCell { return EmitterCellFromID(_id) })
 }
 
 // BirthRate returns the birth rate.
 func (el *EmitterLayer) BirthRate() float32 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("birthRate"))
 	return _r
 }
 
 // Lifetime returns the lifetime.
 func (el *EmitterLayer) Lifetime() float32 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("lifetime"))
 	return _r
 }
 
 // EmitterPosition returns the emitter position.
 func (el *EmitterLayer) EmitterPosition() corefoundation.CGPoint {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(el), objc.RegisterName("emitterPosition"))
 	return _r
 }
 
 // EmitterZPosition returns the emitter z position.
 func (el *EmitterLayer) EmitterZPosition() float64 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float64](objref.IDOf(el), objc.RegisterName("emitterZPosition"))
 	return _r
 }
 
 // EmitterSize returns the emitter size.
 func (el *EmitterLayer) EmitterSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(el), objc.RegisterName("emitterSize"))
 	return _r
 }
 
 // EmitterDepth returns the emitter depth.
 func (el *EmitterLayer) EmitterDepth() float64 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float64](objref.IDOf(el), objc.RegisterName("emitterDepth"))
 	return _r
 }
 
 // EmitterShape returns the emitter shape.
-func (el *EmitterLayer) EmitterShape() obj.Object {
+func (el *EmitterLayer) EmitterShape() *foundation.String {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("emitterShape"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // EmitterMode returns the emitter mode.
-func (el *EmitterLayer) EmitterMode() obj.Object {
+func (el *EmitterLayer) EmitterMode() *foundation.String {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("emitterMode"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // RenderMode returns the render mode.
-func (el *EmitterLayer) RenderMode() obj.Object {
+func (el *EmitterLayer) RenderMode() *foundation.String {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[objc.ID](objref.IDOf(el), objc.RegisterName("renderMode"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // PreservesDepth wraps the corresponding Objective-C method.
 func (el *EmitterLayer) PreservesDepth() bool {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[bool](objref.IDOf(el), objc.RegisterName("preservesDepth"))
 	return _r
 }
 
 // Velocity returns the velocity.
 func (el *EmitterLayer) Velocity() float32 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("velocity"))
 	return _r
 }
 
 // Scale returns the scale.
 func (el *EmitterLayer) Scale() float32 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("scale"))
 	return _r
 }
 
 // Spin returns the spin.
 func (el *EmitterLayer) Spin() float32 {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[float32](objref.IDOf(el), objc.RegisterName("spin"))
 	return _r
 }
 
 // Seed returns the seed.
 func (el *EmitterLayer) Seed() int {
+	defer runtime.KeepAlive(el)
 	_r := objc.Send[int](objref.IDOf(el), objc.RegisterName("seed"))
 	return _r
 }

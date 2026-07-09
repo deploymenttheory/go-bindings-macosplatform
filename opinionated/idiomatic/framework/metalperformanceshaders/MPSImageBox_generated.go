@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -67,12 +69,14 @@ func (ib *ImageBox) WithLabel(label string) *ImageBox {
 
 // KernelHeight returns the height of the filter window.
 func (ib *ImageBox) KernelHeight() int {
+	defer runtime.KeepAlive(ib)
 	_r := objc.Send[int](objref.IDOf(ib), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // KernelWidth returns the width of the filter window.
 func (ib *ImageBox) KernelWidth() int {
+	defer runtime.KeepAlive(ib)
 	_r := objc.Send[int](objref.IDOf(ib), objc.RegisterName("kernelWidth"))
 	return _r
 }

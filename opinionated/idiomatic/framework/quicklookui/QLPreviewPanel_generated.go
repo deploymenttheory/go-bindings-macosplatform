@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func previewPanelAdopt(id objc.ID) *PreviewPanel {
 
 // Description returns the object's -description text.
 func (pp *PreviewPanel) Description() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pp *PreviewPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pp *PreviewPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(pp)
 	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pp *PreviewPanel) String() string {
+	defer runtime.KeepAlive(pp)
 	return rt.Description(objref.IDOf(pp))
 }
 
@@ -88,6 +95,7 @@ func (pp *PreviewPanel) WithCurrentPreviewItemIndex(currentPreviewItemIndex int)
 
 // WithDisplayState sets the preview panel’s display state.
 func (pp *PreviewPanel) WithDisplayState(displayState obj.Object) *PreviewPanel {
+	defer runtime.KeepAlive(displayState)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
 	})
@@ -96,6 +104,7 @@ func (pp *PreviewPanel) WithDisplayState(displayState obj.Object) *PreviewPanel 
 
 // UpdateController asks the preview panel to update its current controller.
 func (pp *PreviewPanel) UpdateController() {
+	defer runtime.KeepAlive(pp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("updateController"))
 	})
@@ -104,6 +113,7 @@ func (pp *PreviewPanel) UpdateController() {
 
 // ReloadData asks the preview panel to reload its data from its data source.
 func (pp *PreviewPanel) ReloadData() {
+	defer runtime.KeepAlive(pp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("reloadData"))
 	})
@@ -112,6 +122,7 @@ func (pp *PreviewPanel) ReloadData() {
 
 // RefreshCurrentPreviewItem asks the preview panel to recompute the preview of the current preview item.
 func (pp *PreviewPanel) RefreshCurrentPreviewItem() {
+	defer runtime.KeepAlive(pp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("refreshCurrentPreviewItem"))
 	})
@@ -120,6 +131,9 @@ func (pp *PreviewPanel) RefreshCurrentPreviewItem() {
 
 // EnterFullScreenModeWithOptions instructs the panel to enter full screen mode.
 func (pp *PreviewPanel) EnterFullScreenModeWithOptions(screen obj.Object, options obj.Object) bool {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(screen)
+	defer runtime.KeepAlive(options)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -133,6 +147,8 @@ func (pp *PreviewPanel) EnterFullScreenModeWithOptions(screen obj.Object, option
 
 // ExitFullScreenModeWithOptions instructs the panel to exit full screen mode.
 func (pp *PreviewPanel) ExitFullScreenModeWithOptions(options obj.Object) {
+	defer runtime.KeepAlive(pp)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("exitFullScreenModeWithOptions:"), objref.IDOf(options))
 	})
@@ -141,6 +157,7 @@ func (pp *PreviewPanel) ExitFullScreenModeWithOptions(options obj.Object) {
 
 // CurrentController returns the current first responder accepting to control the preview panel. You should never change the preview panel’s state (for example, its delegate, datasource, and so on) if you aren’t controlling it.
 func (pp *PreviewPanel) CurrentController() obj.Object {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -154,6 +171,7 @@ func (pp *PreviewPanel) CurrentController() obj.Object {
 
 // CurrentPreviewItemIndex returns the index of the current preview item. The value is `NSNotFound` if there’s no current preview item.
 func (pp *PreviewPanel) CurrentPreviewItemIndex() int {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -167,6 +185,7 @@ func (pp *PreviewPanel) CurrentPreviewItemIndex() int {
 
 // DisplayState returns the preview panel’s display state. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
 func (pp *PreviewPanel) DisplayState() obj.Object {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -180,6 +199,7 @@ func (pp *PreviewPanel) DisplayState() obj.Object {
 
 // IsInFullScreenMode reports whether the property that indicates whether the panel is in full screen mode. The value is <doc://com.apple.documentation/documentation/objectivec/yes> if the panel is currently open and in full screen mode; otherwise it’s <doc://com.apple.documentation/documentation/objectivec/no>.
 func (pp *PreviewPanel) IsInFullScreenMode() bool {
+	defer runtime.KeepAlive(pp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func voiceAnalyticsAdopt(id objc.ID) *VoiceAnalytics {
 
 // Description returns the object's -description text.
 func (va *VoiceAnalytics) Description() string {
+	defer runtime.KeepAlive(va)
 	return rt.Description(objref.IDOf(va))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (va *VoiceAnalytics) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(va)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(va), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (va *VoiceAnalytics) IsKind(className string) bool {
+	defer runtime.KeepAlive(va)
 	return rt.IsKind(objref.IDOf(va), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (va *VoiceAnalytics) String() string {
+	defer runtime.KeepAlive(va)
 	return rt.Description(objref.IDOf(va))
 }
 
@@ -74,24 +81,28 @@ func NewVoiceAnalytics() *VoiceAnalytics {
 
 // Jitter returns the jitter.
 func (va *VoiceAnalytics) Jitter() *AcousticFeature {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("jitter"))
 	return AcousticFeatureFromID(_r)
 }
 
 // Shimmer returns the variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
 func (va *VoiceAnalytics) Shimmer() *AcousticFeature {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("shimmer"))
 	return AcousticFeatureFromID(_r)
 }
 
 // Pitch returns the highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
 func (va *VoiceAnalytics) Pitch() *AcousticFeature {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("pitch"))
 	return AcousticFeatureFromID(_r)
 }
 
 // Voicing returns the voicing.
 func (va *VoiceAnalytics) Voicing() *AcousticFeature {
+	defer runtime.KeepAlive(va)
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("voicing"))
 	return AcousticFeatureFromID(_r)
 }

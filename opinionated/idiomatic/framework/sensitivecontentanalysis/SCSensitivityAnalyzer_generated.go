@@ -6,6 +6,7 @@ package sensitivecontentanalysis
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func sensitivityAnalyzerAdopt(id objc.ID) *SensitivityAnalyzer {
 
 // Description returns the object's -description text.
 func (sa *SensitivityAnalyzer) Description() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sa *SensitivityAnalyzer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sa *SensitivityAnalyzer) IsKind(className string) bool {
+	defer runtime.KeepAlive(sa)
 	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sa *SensitivityAnalyzer) String() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
@@ -79,6 +85,7 @@ func NewSensitivityAnalyzer() *SensitivityAnalyzer {
 //
 // AnalyzeImageFile blocks until the operation completes or ctx is cancelled.
 func (sa *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (result *SensitivityAnalysis, err error) {
+	defer runtime.KeepAlive(sa)
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
@@ -104,6 +111,8 @@ func (sa *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL str
 //
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
 func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (result *SensitivityAnalysis, err error) {
+	defer runtime.KeepAlive(sa)
+	defer runtime.KeepAlive(image)
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
@@ -127,6 +136,7 @@ func (sa *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Obj
 
 // AnalysisPolicy returns current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
 func (sa *SensitivityAnalyzer) AnalysisPolicy() SensitivityAnalysisPolicy {
+	defer runtime.KeepAlive(sa)
 	_r := objc.Send[SensitivityAnalysisPolicy](objref.IDOf(sa), objc.RegisterName("analysisPolicy"))
 	return _r
 }

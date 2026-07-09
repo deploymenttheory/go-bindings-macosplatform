@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (dml *DOMMediaList) WithMediaText(mediaText string) *DOMMediaList {
 
 // Item wraps the corresponding Objective-C method.
 func (dml *DOMMediaList) Item(index int) string {
+	defer runtime.KeepAlive(dml)
 	_r := objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("item:"), index)
 	if _r == 0 {
 		return ""
@@ -66,16 +69,19 @@ func (dml *DOMMediaList) Item(index int) string {
 
 // DeleteMedium deletes medium.
 func (dml *DOMMediaList) DeleteMedium(oldMedium string) {
+	defer runtime.KeepAlive(dml)
 	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("deleteMedium:"), purego.NSString(oldMedium))
 }
 
 // AppendMedium appends medium.
 func (dml *DOMMediaList) AppendMedium(newMedium string) {
+	defer runtime.KeepAlive(dml)
 	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("appendMedium:"), purego.NSString(newMedium))
 }
 
 // MediaText returns the media text.
 func (dml *DOMMediaList) MediaText() string {
+	defer runtime.KeepAlive(dml)
 	_r := objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("mediaText"))
 	if _r == 0 {
 		return ""
@@ -85,6 +91,7 @@ func (dml *DOMMediaList) MediaText() string {
 
 // Length returns the length.
 func (dml *DOMMediaList) Length() int {
+	defer runtime.KeepAlive(dml)
 	_r := objc.Send[int](objref.IDOf(dml), objc.RegisterName("length"))
 	return _r
 }

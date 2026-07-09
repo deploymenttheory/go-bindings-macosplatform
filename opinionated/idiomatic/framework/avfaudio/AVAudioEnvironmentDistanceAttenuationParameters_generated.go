@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioEnvironmentDistanceAttenuationParametersAdopt(id objc.ID) *AudioEnviro
 
 // Description returns the object's -description text.
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) Description() string {
+	defer runtime.KeepAlive(aedap)
 	return rt.Description(objref.IDOf(aedap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aedap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aedap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(aedap)
 	return rt.IsKind(objref.IDOf(aedap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) String() string {
+	defer runtime.KeepAlive(aedap)
 	return rt.Description(objref.IDOf(aedap))
 }
 
@@ -98,24 +105,28 @@ func (aedap *AudioEnvironmentDistanceAttenuationParameters) WithRolloffFactor(ro
 
 // DistanceAttenuationModel returns type of distance attenuation model Default:    AVAudioEnvironmentDistanceAttenuationModelInverse
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) DistanceAttenuationModel() AudioEnvironmentDistanceAttenuationModel {
+	defer runtime.KeepAlive(aedap)
 	_r := objc.Send[AudioEnvironmentDistanceAttenuationModel](objref.IDOf(aedap), objc.RegisterName("distanceAttenuationModel"))
 	return _r
 }
 
 // ReferenceDistance returns the minimum distance at which attenuation is applied Default:    1.0 meter Models:     AVAudioEnvironmentDistanceAttenuationModelInverse, AVAudioEnvironmentDistanceAttenuationModelLinear
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) ReferenceDistance() float32 {
+	defer runtime.KeepAlive(aedap)
 	_r := objc.Send[float32](objref.IDOf(aedap), objc.RegisterName("referenceDistance"))
 	return _r
 }
 
 // MaximumDistance returns the distance beyond which no further attenuation is applied Default:    100000.0 meters Models:     AVAudioEnvironmentDistanceAttenuationModelLinear
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) MaximumDistance() float32 {
+	defer runtime.KeepAlive(aedap)
 	_r := objc.Send[float32](objref.IDOf(aedap), objc.RegisterName("maximumDistance"))
 	return _r
 }
 
 // RolloffFactor determines the attenuation curve A higher value results in a steeper attenuation curve. The rolloff factor should be a value greater than 0. Default:    1.0 Models:     AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModelLinear
 func (aedap *AudioEnvironmentDistanceAttenuationParameters) RolloffFactor() float32 {
+	defer runtime.KeepAlive(aedap)
 	_r := objc.Send[float32](objref.IDOf(aedap), objc.RegisterName("rolloffFactor"))
 	return _r
 }

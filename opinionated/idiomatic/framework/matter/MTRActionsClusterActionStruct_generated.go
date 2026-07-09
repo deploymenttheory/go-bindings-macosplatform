@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActionsClusterActionStructAdopt(id objc.ID) *MTRActionsClusterActionStru
 
 // Description returns the object's -description text.
 func (macas *MTRActionsClusterActionStruct) Description() string {
+	defer runtime.KeepAlive(macas)
 	return rt.Description(objref.IDOf(macas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macas *MTRActionsClusterActionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macas *MTRActionsClusterActionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(macas)
 	return rt.IsKind(objref.IDOf(macas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macas *MTRActionsClusterActionStruct) String() string {
+	defer runtime.KeepAlive(macas)
 	return rt.Description(objref.IDOf(macas))
 }
 
@@ -72,6 +80,7 @@ func NewMTRActionsClusterActionStruct() *MTRActionsClusterActionStruct {
 
 // WithActionID sets the action ID.
 func (macas *MTRActionsClusterActionStruct) WithActionID(actionID obj.Object) *MTRActionsClusterActionStruct {
+	defer runtime.KeepAlive(actionID)
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macas
 }
@@ -84,36 +93,42 @@ func (macas *MTRActionsClusterActionStruct) WithName(name string) *MTRActionsClu
 
 // WithType sets the type.
 func (macas *MTRActionsClusterActionStruct) WithType(type_ obj.Object) *MTRActionsClusterActionStruct {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return macas
 }
 
 // WithEndpointListID sets the endpoint list ID.
 func (macas *MTRActionsClusterActionStruct) WithEndpointListID(endpointListID obj.Object) *MTRActionsClusterActionStruct {
+	defer runtime.KeepAlive(endpointListID)
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setEndpointListID:"), objref.IDOf(endpointListID))
 	return macas
 }
 
 // WithSupportedCommands sets the supported commands.
 func (macas *MTRActionsClusterActionStruct) WithSupportedCommands(supportedCommands obj.Object) *MTRActionsClusterActionStruct {
+	defer runtime.KeepAlive(supportedCommands)
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setSupportedCommands:"), objref.IDOf(supportedCommands))
 	return macas
 }
 
 // WithState sets the state.
 func (macas *MTRActionsClusterActionStruct) WithState(state obj.Object) *MTRActionsClusterActionStruct {
+	defer runtime.KeepAlive(state)
 	objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("setState:"), objref.IDOf(state))
 	return macas
 }
 
 // ActionID returns the action ID.
-func (macas *MTRActionsClusterActionStruct) ActionID() obj.Object {
+func (macas *MTRActionsClusterActionStruct) ActionID() *foundation.Number {
+	defer runtime.KeepAlive(macas)
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("actionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (macas *MTRActionsClusterActionStruct) Name() string {
+	defer runtime.KeepAlive(macas)
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -122,25 +137,29 @@ func (macas *MTRActionsClusterActionStruct) Name() string {
 }
 
 // Type returns the type.
-func (macas *MTRActionsClusterActionStruct) Type() obj.Object {
+func (macas *MTRActionsClusterActionStruct) Type() *foundation.Number {
+	defer runtime.KeepAlive(macas)
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndpointListID returns the endpoint list ID.
-func (macas *MTRActionsClusterActionStruct) EndpointListID() obj.Object {
+func (macas *MTRActionsClusterActionStruct) EndpointListID() *foundation.Number {
+	defer runtime.KeepAlive(macas)
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("endpointListID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SupportedCommands returns the supported commands.
-func (macas *MTRActionsClusterActionStruct) SupportedCommands() obj.Object {
+func (macas *MTRActionsClusterActionStruct) SupportedCommands() *foundation.Number {
+	defer runtime.KeepAlive(macas)
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("supportedCommands"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // State returns the state.
-func (macas *MTRActionsClusterActionStruct) State() obj.Object {
+func (macas *MTRActionsClusterActionStruct) State() *foundation.Number {
+	defer runtime.KeepAlive(macas)
 	_r := objc.Send[objc.ID](objref.IDOf(macas), objc.RegisterName("state"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

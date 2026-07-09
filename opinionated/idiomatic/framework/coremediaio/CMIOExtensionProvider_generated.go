@@ -5,10 +5,12 @@
 package coremediaio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func extensionProviderAdopt(id objc.ID) *ExtensionProvider {
 
 // Description returns the object's -description text.
 func (ep *ExtensionProvider) Description() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ep *ExtensionProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ep *ExtensionProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(ep)
 	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ep *ExtensionProvider) String() string {
+	defer runtime.KeepAlive(ep)
 	return rt.Description(objref.IDOf(ep))
 }
 
@@ -77,6 +84,8 @@ func NewExtensionProvider() *ExtensionProvider {
 
 // AddDevice adds a device to a provider.
 func (ep *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(device)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("addDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,6 +96,8 @@ func (ep *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
 
 // RemoveDevice removes a device from a provider.
 func (ep *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(device)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("removeDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -97,19 +108,23 @@ func (ep *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
 
 // NotifyPropertiesChanged notifies connected clients of device property changes.
 func (ep *ExtensionProvider) NotifyPropertiesChanged(propertyStates obj.Object) {
+	defer runtime.KeepAlive(ep)
+	defer runtime.KeepAlive(propertyStates)
 	objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
 // ClientQueue returns the dispatch queue on which source methods from the provider/device/stream will be called.
-func (ep *ExtensionProvider) ClientQueue() obj.Object {
+func (ep *ExtensionProvider) ClientQueue() *foundation.Object {
+	defer runtime.KeepAlive(ep)
 	_r := objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("clientQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // ConnectedClients returns the array of connected clients. This property is key-value observable.
 //
 // ConnectedClients returns the collection as a Go slice.
 func (ep *ExtensionProvider) ConnectedClients() []*ExtensionClient {
+	defer runtime.KeepAlive(ep)
 	_arr := objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("connectedClients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }
@@ -118,6 +133,7 @@ func (ep *ExtensionProvider) ConnectedClients() []*ExtensionClient {
 //
 // Devices returns the collection as a Go slice.
 func (ep *ExtensionProvider) Devices() []*ExtensionDevice {
+	defer runtime.KeepAlive(ep)
 	_arr := objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionDevice { return ExtensionDeviceFromID(_id) })
 }

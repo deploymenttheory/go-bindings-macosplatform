@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRChannelClusterGetProgramGuideParamsAdopt(id objc.ID) *MTRChannelClusterG
 
 // Description returns the object's -description text.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) Description() string {
+	defer runtime.KeepAlive(mccgpgp)
 	return rt.Description(objref.IDOf(mccgpgp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccgpgp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccgpgp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccgpgp)
 	return rt.IsKind(objref.IDOf(mccgpgp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) String() string {
+	defer runtime.KeepAlive(mccgpgp)
 	return rt.Description(objref.IDOf(mccgpgp))
 }
 
@@ -72,95 +80,111 @@ func NewMTRChannelClusterGetProgramGuideParams() *MTRChannelClusterGetProgramGui
 
 // WithStartTime sets the start time.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mccgpgp
 }
 
 // WithEndTime sets the end time.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	defer runtime.KeepAlive(endTime)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return mccgpgp
 }
 
 // WithPageToken sets the page token.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
+	defer runtime.KeepAlive(pageToken)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
 	return mccgpgp
 }
 
 // WithRecordingFlag sets the recording flag.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	defer runtime.KeepAlive(recordingFlag)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 	return mccgpgp
 }
 
 // WithData sets the data.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams {
-	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setData:"), objref.IDOf(data))
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithData(data []byte) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return mccgpgp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mccgpgp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mccgpgp
 }
 
 // StartTime returns the start time.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) StartTime() obj.Object {
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndTime returns the end time.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) EndTime() obj.Object {
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) EndTime() *foundation.Number {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("endTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ChannelList returns the channel list.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) ChannelList() obj.Object {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("channelList"))
 	return obj.Wrap(_r)
 }
 
 // SetChannelList wraps the corresponding Objective-C method.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList obj.Object) {
+	defer runtime.KeepAlive(mccgpgp)
+	defer runtime.KeepAlive(channelList)
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setChannelList:"), objref.IDOf(channelList))
 }
 
 // PageToken returns the page token.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("pageToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
 }
 
 // RecordingFlag returns the recording flag.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) RecordingFlag() obj.Object {
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) RecordingFlag() *foundation.Number {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("recordingFlag"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Data returns the data.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) Data() obj.Object {
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) Data() []byte {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() obj.Object {
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mccgpgp *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() obj.Object {
+func (mccgpgp *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mccgpgp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

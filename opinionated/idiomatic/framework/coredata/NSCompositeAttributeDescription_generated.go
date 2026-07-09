@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -73,6 +75,7 @@ func (cad *CompositeAttributeDescription) WithAttributeValueClassName(attributeV
 
 // WithDefaultValue sets the default value of the attribute.
 func (cad *CompositeAttributeDescription) WithDefaultValue(defaultValue obj.Object) *CompositeAttributeDescription {
+	defer runtime.KeepAlive(defaultValue)
 	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
 	return cad
 }
@@ -121,6 +124,7 @@ func (cad *CompositeAttributeDescription) WithTransient(transient bool) *Composi
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (cad *CompositeAttributeDescription) WithUserInfo(userInfo obj.Object) *CompositeAttributeDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return cad
 }
@@ -159,6 +163,7 @@ func (cad *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentif
 //
 // Elements returns the collection as a Go slice.
 func (cad *CompositeAttributeDescription) Elements() []*AttributeDescription {
+	defer runtime.KeepAlive(cad)
 	_arr := objc.Send[objc.ID](objref.IDOf(cad), objc.RegisterName("elements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AttributeDescription { return AttributeDescriptionFromID(_id) })
 }

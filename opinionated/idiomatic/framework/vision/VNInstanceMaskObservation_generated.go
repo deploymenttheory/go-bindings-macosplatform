@@ -5,9 +5,11 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,9 +55,10 @@ func NewInstanceMaskObservation() *InstanceMaskObservation {
 }
 
 // AllInstances returns *The IndexSet that encompases all instances except the background
-func (imo *InstanceMaskObservation) AllInstances() obj.Object {
+func (imo *InstanceMaskObservation) AllInstances() *foundation.IndexSet {
+	defer runtime.KeepAlive(imo)
 	_r := objc.Send[objc.ID](objref.IDOf(imo), objc.RegisterName("allInstances"))
-	return obj.Wrap(_r)
+	return foundation.IndexSetFromID(_r)
 }
 
 var _ ObservationProvider = (*InstanceMaskObservation)(nil)

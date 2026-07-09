@@ -5,6 +5,8 @@
 package addressbook
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,39 +49,47 @@ func multiValueAdopt(id objc.ID) *MultiValue {
 
 // Description returns the object's -description text.
 func (mv *MultiValue) Description() string {
+	defer runtime.KeepAlive(mv)
 	return rt.Description(objref.IDOf(mv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mv *MultiValue) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mv *MultiValue) IsKind(className string) bool {
+	defer runtime.KeepAlive(mv)
 	return rt.IsKind(objref.IDOf(mv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mv *MultiValue) String() string {
+	defer runtime.KeepAlive(mv)
 	return rt.Description(objref.IDOf(mv))
 }
 
 // Count returns the count.
 func (mv *MultiValue) Count() int {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("count"))
 	return _r
 }
 
 // ValueAtIndex wraps the corresponding Objective-C method.
 func (mv *MultiValue) ValueAtIndex(index int) obj.Object {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("valueAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
 // LabelAtIndex wraps the corresponding Objective-C method.
 func (mv *MultiValue) LabelAtIndex(index int) string {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("labelAtIndex:"), index)
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (mv *MultiValue) LabelAtIndex(index int) string {
 
 // IdentifierAtIndex wraps the corresponding Objective-C method.
 func (mv *MultiValue) IdentifierAtIndex(index int) string {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("identifierAtIndex:"), index)
 	if _r == 0 {
 		return ""
@@ -98,12 +109,14 @@ func (mv *MultiValue) IdentifierAtIndex(index int) string {
 
 // IndexForIdentifier wraps the corresponding Objective-C method.
 func (mv *MultiValue) IndexForIdentifier(identifier string) int {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("indexForIdentifier:"), purego.NSString(identifier))
 	return _r
 }
 
 // PrimaryIdentifier returns the primary identifier.
 func (mv *MultiValue) PrimaryIdentifier() string {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("primaryIdentifier"))
 	if _r == 0 {
 		return ""
@@ -113,18 +126,21 @@ func (mv *MultiValue) PrimaryIdentifier() string {
 
 // PropertyType returns the property type.
 func (mv *MultiValue) PropertyType() int {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[int](objref.IDOf(mv), objc.RegisterName("propertyType"))
 	return _r
 }
 
 // ValueForIdentifier wraps the corresponding Objective-C method.
 func (mv *MultiValue) ValueForIdentifier(identifier string) obj.Object {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("valueForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
 // LabelForIdentifier wraps the corresponding Objective-C method.
 func (mv *MultiValue) LabelForIdentifier(identifier string) obj.Object {
+	defer runtime.KeepAlive(mv)
 	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("labelForIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }

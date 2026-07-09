@@ -10,18 +10,18 @@ import (
 )
 
 // Constants that indicate the axis and direction to use for a perspective projection matrix.
-type Cp_axis_direction_convention int64
+type AxisDirectionConvention int64
 
 const (
-	Cp_axis_direction_convention_right_up_back      Cp_axis_direction_convention = 0
-	Cp_axis_direction_convention_right_up_forward   Cp_axis_direction_convention = 1
-	Cp_axis_direction_convention_right_down_back    Cp_axis_direction_convention = 2
-	Cp_axis_direction_convention_right_down_forward Cp_axis_direction_convention = 3
+	Cp_axis_direction_convention_right_up_back      AxisDirectionConvention = 0
+	Cp_axis_direction_convention_right_up_forward   AxisDirectionConvention = 1
+	Cp_axis_direction_convention_right_down_back    AxisDirectionConvention = 2
+	Cp_axis_direction_convention_right_down_forward AxisDirectionConvention = 3
 )
 
-// String returns the Cp_axis_direction_convention constant's name, or its numeric form when the
+// String returns the AxisDirectionConvention constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_axis_direction_convention) String() string {
+func (e AxisDirectionConvention) String() string {
 	switch e {
 	case Cp_axis_direction_convention_right_up_back:
 		return "Cp_axis_direction_convention_right_up_back"
@@ -32,25 +32,25 @@ func (e Cp_axis_direction_convention) String() string {
 	case Cp_axis_direction_convention_right_down_forward:
 		return "Cp_axis_direction_convention_right_down_forward"
 	default:
-		return fmt.Sprintf("Cp_axis_direction_convention(%d)", int64(e))
+		return fmt.Sprintf("AxisDirectionConvention(%d)", int64(e))
 	}
 }
 
 // The state of ownership for the drawable.
-type Cp_drawable_state int64
+type DrawableState int64
 
 const (
 	// A drawable that is not in use and ready for assignment to a frame.
-	Cp_drawable_state_available Cp_drawable_state = 0
+	Cp_drawable_state_available DrawableState = 0
 	// A drawable that is assigned to a frame and ready to accept your drawing commands.
-	Cp_drawable_state_rendering Cp_drawable_state = 1
+	Cp_drawable_state_rendering DrawableState = 1
 	// A drawable that the compositor is currently displaying onscreen.
-	Cp_drawable_state_presenting Cp_drawable_state = 2
+	Cp_drawable_state_presenting DrawableState = 2
 )
 
-// String returns the Cp_drawable_state constant's name, or its numeric form when the
+// String returns the DrawableState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_drawable_state) String() string {
+func (e DrawableState) String() string {
 	switch e {
 	case Cp_drawable_state_available:
 		return "Cp_drawable_state_available"
@@ -59,47 +59,47 @@ func (e Cp_drawable_state) String() string {
 	case Cp_drawable_state_presenting:
 		return "Cp_drawable_state_presenting"
 	default:
-		return fmt.Sprintf("Cp_drawable_state(%d)", int64(e))
+		return fmt.Sprintf("DrawableState(%d)", int64(e))
 	}
 }
 
-type Cp_drawable_target int64
+type DrawableTarget int64
 
 const (
 	// A drawable that is targeting the built-in display, this is what a user will see in the device.
-	Cp_drawable_target_built_in Cp_drawable_target = 0
+	Cp_drawable_target_built_in DrawableTarget = 0
 	// A drawable that will be used for capture purposes, this could be used for video or AirPlay streaming and will be visible to users outside of the device.
-	Cp_drawable_target_capture Cp_drawable_target = 1
+	Cp_drawable_target_capture DrawableTarget = 1
 )
 
-// String returns the Cp_drawable_target constant's name, or its numeric form when the
+// String returns the DrawableTarget constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_drawable_target) String() string {
+func (e DrawableTarget) String() string {
 	switch e {
 	case Cp_drawable_target_built_in:
 		return "Cp_drawable_target_built_in"
 	case Cp_drawable_target_capture:
 		return "Cp_drawable_target_capture"
 	default:
-		return fmt.Sprintf("Cp_drawable_target(%d)", int64(e))
+		return fmt.Sprintf("DrawableTarget(%d)", int64(e))
 	}
 }
 
 // Constants that specify the organization of the textures you use for drawing.
-type Cp_layer_renderer_layout int64
+type LayerRendererLayout int64
 
 const (
 	// A layout that assigns a separate texture to each rendered view. When the layout contains multiple views, each view receives its own dedicated texture. The type of each texture is MTLTextureType2D.
-	Cp_layer_renderer_layout_dedicated Cp_layer_renderer_layout = 0
+	Cp_layer_renderer_layout_dedicated LayerRendererLayout = 0
 	// A layout that uses a single texture to store the content for all rendered views. When a layer contains multiple views, the texture stores the images for those views side-by-side. The texture map for each view contains a viewport that defines the boundaries of the view’s content. The type of each texture is MTLTextureType2D.
-	Cp_layer_renderer_layout_shared Cp_layer_renderer_layout = 1
+	Cp_layer_renderer_layout_shared LayerRendererLayout = 1
 	// A layout that specifies each view’s content as a slice of a single texture. The layout uses a single texture to store the content for all rendered views. The type of the texture is MTLTextureType2DArray. The texture map’s slice index indicates which array slot contains the view’s content.
-	Cp_layer_renderer_layout_layered Cp_layer_renderer_layout = 2
+	Cp_layer_renderer_layout_layered LayerRendererLayout = 2
 )
 
-// String returns the Cp_layer_renderer_layout constant's name, or its numeric form when the
+// String returns the LayerRendererLayout constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_layer_renderer_layout) String() string {
+func (e LayerRendererLayout) String() string {
 	switch e {
 	case Cp_layer_renderer_layout_dedicated:
 		return "Cp_layer_renderer_layout_dedicated"
@@ -108,25 +108,25 @@ func (e Cp_layer_renderer_layout) String() string {
 	case Cp_layer_renderer_layout_layered:
 		return "Cp_layer_renderer_layout_layered"
 	default:
-		return fmt.Sprintf("Cp_layer_renderer_layout(%d)", int64(e))
+		return fmt.Sprintf("LayerRendererLayout(%d)", int64(e))
 	}
 }
 
 // The states of the layer renderer, which tell you how to proceed with drawing operations.
-type Cp_layer_renderer_state int64
+type LayerRendererState int64
 
 const (
 	// A state that indicates the layer renderer isn't currently drawing. A layer renderer starts in this state and later transitions to the running or invalid states. Don't draw while in this state. Wait until the layer changes to one of the other states to take further action on the layer.
-	Cp_layer_renderer_state_paused Cp_layer_renderer_state = 1
+	Cp_layer_renderer_state_paused LayerRendererState = 1
 	// A state that indicates the layer renderer is ready for you to draw your content. When the layer enters this state, start your rendering loop and draw your content. Keep drawing frames of content until the layer transitions to another state.
-	Cp_layer_renderer_state_running Cp_layer_renderer_state = 2
+	Cp_layer_renderer_state_running LayerRendererState = 2
 	// A state that indicates the layer renderer no longer supports drawing operations. A layer enters this state shortly before the system releases its resources. When the layer enters this state, exit your rendering loop and release any drawing-related structures.
-	Cp_layer_renderer_state_invalidated Cp_layer_renderer_state = 3
+	Cp_layer_renderer_state_invalidated LayerRendererState = 3
 )
 
-// String returns the Cp_layer_renderer_state constant's name, or its numeric form when the
+// String returns the LayerRendererState constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_layer_renderer_state) String() string {
+func (e LayerRendererState) String() string {
 	switch e {
 	case Cp_layer_renderer_state_paused:
 		return "Cp_layer_renderer_state_paused"
@@ -135,22 +135,22 @@ func (e Cp_layer_renderer_state) String() string {
 	case Cp_layer_renderer_state_invalidated:
 		return "Cp_layer_renderer_state_invalidated"
 	default:
-		return fmt.Sprintf("Cp_layer_renderer_state(%d)", int64(e))
+		return fmt.Sprintf("LayerRendererState(%d)", int64(e))
 	}
 }
 
 // The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count
 // Bitmask — values may be combined with |.
-type Cp_supported_color_formats_options int64
+type SupportedColorFormatsOptions int64
 
 const (
-	Cp_supported_color_formats_options_none                          Cp_supported_color_formats_options = 0
-	Cp_supported_color_formats_options_progressive_immersion_enabled Cp_supported_color_formats_options = 1
+	Cp_supported_color_formats_options_none                          SupportedColorFormatsOptions = 0
+	Cp_supported_color_formats_options_progressive_immersion_enabled SupportedColorFormatsOptions = 1
 )
 
-// String returns the Cp_supported_color_formats_options constant's name, or its numeric form when the
+// String returns the SupportedColorFormatsOptions constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_supported_color_formats_options) String() string {
+func (e SupportedColorFormatsOptions) String() string {
 	var parts []string
 	if e&Cp_supported_color_formats_options_progressive_immersion_enabled != 0 {
 		parts = append(parts, "Cp_supported_color_formats_options_progressive_immersion_enabled")
@@ -163,17 +163,17 @@ func (e Cp_supported_color_formats_options) String() string {
 
 // The options you can pass to functions that relate to rendering capabilities and layout support.
 // Bitmask — values may be combined with |.
-type Cp_supported_layouts_options int64
+type SupportedLayoutsOptions int64
 
 const (
-	Cp_supported_layouts_options_none                          Cp_supported_layouts_options = 0
-	Cp_supported_layouts_options_foveation_enabled             Cp_supported_layouts_options = 1
-	Cp_supported_layouts_options_progressive_immersion_enabled Cp_supported_layouts_options = 2
+	Cp_supported_layouts_options_none                          SupportedLayoutsOptions = 0
+	Cp_supported_layouts_options_foveation_enabled             SupportedLayoutsOptions = 1
+	Cp_supported_layouts_options_progressive_immersion_enabled SupportedLayoutsOptions = 2
 )
 
-// String returns the Cp_supported_layouts_options constant's name, or its numeric form when the
+// String returns the SupportedLayoutsOptions constant's name, or its numeric form when the
 // value is not a known constant.
-func (e Cp_supported_layouts_options) String() string {
+func (e SupportedLayoutsOptions) String() string {
 	var parts []string
 	if e&Cp_supported_layouts_options_foveation_enabled != 0 {
 		parts = append(parts, "Cp_supported_layouts_options_foveation_enabled")

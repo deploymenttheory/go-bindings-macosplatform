@@ -6,7 +6,7 @@ package corewlan
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -14,11 +14,11 @@ import (
 var _fnCWMergeNetworks func(objc.ID) objc.ID
 
 // CWMergeNetworks calls the CoreWLAN framework function CWMergeNetworks.
-func CWMergeNetworks(networks obj.Object) obj.Object {
+func CWMergeNetworks(networks []*Network) []*Network {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCWMergeNetworks == nil {
 		ebipurego.RegisterLibFunc(&_fnCWMergeNetworks, _lib, "CWMergeNetworks")
 	}
-	_ret := _fnCWMergeNetworks(objref.IDOf(networks))
-	return obj.Wrap(_ret)
+	_ret := _fnCWMergeNetworks(rt.SliceToNSSet(networks, func(_v *Network) objc.ID { return objref.IDOf(_v) }))
+	return rt.NSSetToSlice(_ret, func(_id objc.ID) *Network { return NetworkFromID(_id) })
 }

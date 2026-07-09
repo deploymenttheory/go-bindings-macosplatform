@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func graphAdopt(id objc.ID) *Graph {
 
 // Description returns the object's -description text.
 func (g *Graph) Description() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (g *Graph) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (g *Graph) IsKind(className string) bool {
+	defer runtime.KeepAlive(g)
 	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (g *Graph) String() string {
+	defer runtime.KeepAlive(g)
 	return rt.Description(objref.IDOf(g))
 }
 
@@ -77,21 +84,28 @@ func NewGraphWithNodes(nodes []*GraphNode) *Graph {
 
 // ConnectNodeToLowestCostNodeBidirectional adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
 func (g *Graph) ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool) {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("connectNodeToLowestCostNode:bidirectional:"), objref.IDOf(node), bidirectional)
 }
 
 // RemoveNodes removes the specified nodes from the graph.
 func (g *Graph) RemoveNodes(nodes []*GraphNode) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("removeNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddNodes adds the specified nodes to the graph.
 func (g *Graph) AddNodes(nodes []*GraphNode) {
+	defer runtime.KeepAlive(g)
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("addNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FindPathFromNodeToNode computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
 func (g *Graph) FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode {
+	defer runtime.KeepAlive(g)
+	defer runtime.KeepAlive(startNode)
+	defer runtime.KeepAlive(endNode)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("findPathFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
@@ -100,6 +114,7 @@ func (g *Graph) FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode)
 //
 // Nodes returns the collection as a Go slice.
 func (g *Graph) Nodes() []*GraphNode {
+	defer runtime.KeepAlive(g)
 	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("nodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }

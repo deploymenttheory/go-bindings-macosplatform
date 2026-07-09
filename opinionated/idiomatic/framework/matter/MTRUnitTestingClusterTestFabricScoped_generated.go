@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,45 +50,54 @@ func mTRUnitTestingClusterTestFabricScopedAdopt(id objc.ID) *MTRUnitTestingClust
 
 // Description returns the object's -description text.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) Description() string {
+	defer runtime.KeepAlive(mutctfs)
 	return rt.Description(objref.IDOf(mutctfs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctfs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctfs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctfs)
 	return rt.IsKind(objref.IDOf(mutctfs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) String() string {
+	defer runtime.KeepAlive(mutctfs)
 	return rt.Description(objref.IDOf(mutctfs))
 }
 
 // WithFabricSensitiveInt8u sets the fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveInt8u(fabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
+	defer runtime.KeepAlive(fabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveInt8u:"), objref.IDOf(fabricSensitiveInt8u))
 	return mutctfs
 }
 
 // WithOptionalFabricSensitiveInt8u sets the optional fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithOptionalFabricSensitiveInt8u(optionalFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
+	defer runtime.KeepAlive(optionalFabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setOptionalFabricSensitiveInt8u:"), objref.IDOf(optionalFabricSensitiveInt8u))
 	return mutctfs
 }
 
 // WithNullableFabricSensitiveInt8u sets the nullable fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithNullableFabricSensitiveInt8u(nullableFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
+	defer runtime.KeepAlive(nullableFabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setNullableFabricSensitiveInt8u:"), objref.IDOf(nullableFabricSensitiveInt8u))
 	return mutctfs
 }
 
 // WithNullableOptionalFabricSensitiveInt8u sets the nullable optional fabric sensitive int8u.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithNullableOptionalFabricSensitiveInt8u(nullableOptionalFabricSensitiveInt8u obj.Object) *MTRUnitTestingClusterTestFabricScoped {
+	defer runtime.KeepAlive(nullableOptionalFabricSensitiveInt8u)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setNullableOptionalFabricSensitiveInt8u:"), objref.IDOf(nullableOptionalFabricSensitiveInt8u))
 	return mutctfs
 }
@@ -98,42 +110,49 @@ func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveCharStr
 
 // WithFabricSensitiveStruct sets the fabric sensitive struct.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricSensitiveStruct(fabricSensitiveStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestFabricScoped {
+	defer runtime.KeepAlive(fabricSensitiveStruct)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveStruct:"), objref.IDOf(fabricSensitiveStruct))
 	return mutctfs
 }
 
 // WithFabricIndex sets the fabric index.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScoped {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mutctfs
 }
 
 // FabricSensitiveInt8u returns the fabric sensitive int8u.
-func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8u() obj.Object {
+func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8u() *foundation.Number {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveInt8u"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionalFabricSensitiveInt8u returns the optional fabric sensitive int8u.
-func (mutctfs *MTRUnitTestingClusterTestFabricScoped) OptionalFabricSensitiveInt8u() obj.Object {
+func (mutctfs *MTRUnitTestingClusterTestFabricScoped) OptionalFabricSensitiveInt8u() *foundation.Number {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("optionalFabricSensitiveInt8u"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NullableFabricSensitiveInt8u returns the nullable fabric sensitive int8u.
-func (mutctfs *MTRUnitTestingClusterTestFabricScoped) NullableFabricSensitiveInt8u() obj.Object {
+func (mutctfs *MTRUnitTestingClusterTestFabricScoped) NullableFabricSensitiveInt8u() *foundation.Number {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("nullableFabricSensitiveInt8u"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NullableOptionalFabricSensitiveInt8u returns the nullable optional fabric sensitive int8u.
-func (mutctfs *MTRUnitTestingClusterTestFabricScoped) NullableOptionalFabricSensitiveInt8u() obj.Object {
+func (mutctfs *MTRUnitTestingClusterTestFabricScoped) NullableOptionalFabricSensitiveInt8u() *foundation.Number {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("nullableOptionalFabricSensitiveInt8u"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FabricSensitiveCharString returns the fabric sensitive char string.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString() string {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveCharString"))
 	if _r == 0 {
 		return ""
@@ -143,25 +162,30 @@ func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveCharString(
 
 // FabricSensitiveStruct returns the fabric sensitive struct.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveStruct() *MTRUnitTestingClusterSimpleStruct {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveStruct"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
 // FabricSensitiveInt8uList returns the fabric sensitive int8u list.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricSensitiveInt8uList() obj.Object {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricSensitiveInt8uList"))
 	return obj.Wrap(_r)
 }
 
 // SetFabricSensitiveInt8uList wraps the corresponding Objective-C method.
 func (mutctfs *MTRUnitTestingClusterTestFabricScoped) SetFabricSensitiveInt8uList(fabricSensitiveInt8uList obj.Object) {
+	defer runtime.KeepAlive(mutctfs)
+	defer runtime.KeepAlive(fabricSensitiveInt8uList)
 	objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("setFabricSensitiveInt8uList:"), objref.IDOf(fabricSensitiveInt8uList))
 }
 
 // FabricIndex returns the fabric index.
-func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricIndex() obj.Object {
+func (mutctfs *MTRUnitTestingClusterTestFabricScoped) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mutctfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfs), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestFabricScoped marks MTRUnitTestingClusterTestFabricScoped — and, by embedding promotion, its

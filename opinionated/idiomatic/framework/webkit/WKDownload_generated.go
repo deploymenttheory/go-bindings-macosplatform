@@ -5,7 +5,10 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func wKDownloadAdopt(id objc.ID) *WKDownload {
 
 // Description returns the object's -description text.
 func (wd *WKDownload) Description() string {
+	defer runtime.KeepAlive(wd)
 	return rt.Description(objref.IDOf(wd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wd *WKDownload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wd *WKDownload) IsKind(className string) bool {
+	defer runtime.KeepAlive(wd)
 	return rt.IsKind(objref.IDOf(wd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wd *WKDownload) String() string {
+	defer runtime.KeepAlive(wd)
 	return rt.Description(objref.IDOf(wd))
 }
 
@@ -80,6 +88,7 @@ func NewWKDownload() *WKDownload {
 
 // Cancel cancels the download, and optionally captures data so that you can resume the download later.
 func (wd *WKDownload) Cancel(completionHandler func(obj.Object) int) {
+	defer runtime.KeepAlive(wd)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("cancel:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 	})
@@ -87,12 +96,13 @@ func (wd *WKDownload) Cancel(completionHandler func(obj.Object) int) {
 }
 
 // OriginalRequest returns the original request.
-func (wd *WKDownload) OriginalRequest() obj.Object {
-	var _mainthread0 obj.Object
+func (wd *WKDownload) OriginalRequest() *foundation.URLRequest {
+	defer runtime.KeepAlive(wd)
+	var _mainthread0 *foundation.URLRequest
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.URLRequest {
 			_r := objc.Send[objc.ID](objref.IDOf(wd), objc.RegisterName("originalRequest"))
-			return obj.Wrap(_r)
+			return foundation.URLRequestFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -101,6 +111,7 @@ func (wd *WKDownload) OriginalRequest() obj.Object {
 
 // WebView returns the web view.
 func (wd *WKDownload) WebView() *WKWebView {
+	defer runtime.KeepAlive(wd)
 	var _mainthread0 *WKWebView
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebView {
@@ -114,6 +125,7 @@ func (wd *WKDownload) WebView() *WKWebView {
 
 // IsUserInitiated reports whether the object is user initiated.
 func (wd *WKDownload) IsUserInitiated() bool {
+	defer runtime.KeepAlive(wd)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -127,6 +139,7 @@ func (wd *WKDownload) IsUserInitiated() bool {
 
 // OriginatingFrame returns the originating frame.
 func (wd *WKDownload) OriginatingFrame() *WKFrameInfo {
+	defer runtime.KeepAlive(wd)
 	var _mainthread0 *WKFrameInfo
 	purego.Main(func() {
 		_mainthread0 = func() *WKFrameInfo {

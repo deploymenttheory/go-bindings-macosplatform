@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,7 @@ func NewGPUMetric() *GPUMetric {
 
 // CumulativeGPUTime returns the cumulative GPU time.
 func (gm *GPUMetric) CumulativeGPUTime() obj.Object {
+	defer runtime.KeepAlive(gm)
 	_r := objc.Send[objc.ID](objref.IDOf(gm), objc.RegisterName("cumulativeGPUTime"))
 	return obj.Wrap(_r)
 }

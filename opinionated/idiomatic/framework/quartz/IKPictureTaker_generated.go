@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKPictureTakerAdopt(id objc.ID) *IKPictureTaker {
 
 // Description returns the object's -description text.
 func (ipt *IKPictureTaker) Description() string {
+	defer runtime.KeepAlive(ipt)
 	return rt.Description(objref.IDOf(ipt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ipt *IKPictureTaker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ipt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ipt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ipt *IKPictureTaker) IsKind(className string) bool {
+	defer runtime.KeepAlive(ipt)
 	return rt.IsKind(objref.IDOf(ipt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ipt *IKPictureTaker) String() string {
+	defer runtime.KeepAlive(ipt)
 	return rt.Description(objref.IDOf(ipt))
 }
 
@@ -80,6 +87,7 @@ func NewIKPictureTaker() *IKPictureTaker {
 
 // RunModal returns opens a modal picture taker dialog.
 func (ipt *IKPictureTaker) RunModal() int {
+	defer runtime.KeepAlive(ipt)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -93,6 +101,8 @@ func (ipt *IKPictureTaker) RunModal() int {
 
 // SetInputImage set the image input for the picture taker.
 func (ipt *IKPictureTaker) SetInputImage(image obj.Object) {
+	defer runtime.KeepAlive(ipt)
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ipt), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 	})
@@ -101,6 +111,7 @@ func (ipt *IKPictureTaker) SetInputImage(image obj.Object) {
 
 // InputImage returns the input image associated with the picture taker.
 func (ipt *IKPictureTaker) InputImage() obj.Object {
+	defer runtime.KeepAlive(ipt)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -114,6 +125,7 @@ func (ipt *IKPictureTaker) InputImage() obj.Object {
 
 // OutputImage returns the edited image.
 func (ipt *IKPictureTaker) OutputImage() obj.Object {
+	defer runtime.KeepAlive(ipt)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -127,6 +139,7 @@ func (ipt *IKPictureTaker) OutputImage() obj.Object {
 
 // SetMirroring controls whether the receiver enables video mirroring during snapshots.
 func (ipt *IKPictureTaker) SetMirroring(b bool) {
+	defer runtime.KeepAlive(ipt)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ipt), objc.RegisterName("setMirroring:"), b)
 	})
@@ -135,6 +148,7 @@ func (ipt *IKPictureTaker) SetMirroring(b bool) {
 
 // Mirroring reports whether video mirroring is enabled during snapshots.
 func (ipt *IKPictureTaker) Mirroring() bool {
+	defer runtime.KeepAlive(ipt)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

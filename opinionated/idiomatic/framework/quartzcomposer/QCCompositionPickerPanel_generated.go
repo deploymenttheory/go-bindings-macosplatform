@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func compositionPickerPanelAdopt(id objc.ID) *CompositionPickerPanel {
 
 // Description returns the object's -description text.
 func (cpp *CompositionPickerPanel) Description() string {
+	defer runtime.KeepAlive(cpp)
 	return rt.Description(objref.IDOf(cpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpp *CompositionPickerPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpp *CompositionPickerPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpp)
 	return rt.IsKind(objref.IDOf(cpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpp *CompositionPickerPanel) String() string {
+	defer runtime.KeepAlive(cpp)
 	return rt.Description(objref.IDOf(cpp))
 }
 
@@ -78,6 +85,7 @@ func NewCompositionPickerPanel() *CompositionPickerPanel {
 
 // CompositionPickerView returns the composition picker view.
 func (cpp *CompositionPickerPanel) CompositionPickerView() obj.Object {
+	defer runtime.KeepAlive(cpp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

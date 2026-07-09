@@ -5,12 +5,14 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,8 +51,8 @@ func dataDetectorAdopt(id objc.ID) *DataDetector {
 	return x
 }
 
-// NewDataDetectorWithTypesError initializes and returns a data detector instance.
-func NewDataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, err error) {
+// NewDataDetectorWithTypes initializes and returns a data detector instance.
+func NewDataDetectorWithTypes(checkingTypes uint64) (result *DataDetector, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDataDetector")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTypes:error:"), checkingTypes, unsafe.Pointer(&_nsErr))
@@ -67,13 +69,14 @@ func (dd *DataDetector) WithObservationInfo(observationInfo unsafe.Pointer) *Dat
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (dd *DataDetector) WithScriptingProperties(scriptingProperties obj.Object) *DataDetector {
-	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (dd *DataDetector) WithScriptingProperties(scriptingProperties map[string]obj.Object) *DataDetector {
+	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return dd
 }
 
 // CheckingTypes returns the checking types.
 func (dd *DataDetector) CheckingTypes() uint64 {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[uint64](objref.IDOf(dd), objc.RegisterName("checkingTypes"))
 	return _r
 }

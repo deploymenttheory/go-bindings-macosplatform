@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func boundsPredictionAdopt(id objc.ID) *BoundsPrediction {
 
 // Description returns the object's -description text.
 func (bp *BoundsPrediction) Description() string {
+	defer runtime.KeepAlive(bp)
 	return rt.Description(objref.IDOf(bp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bp *BoundsPrediction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bp *BoundsPrediction) IsKind(className string) bool {
+	defer runtime.KeepAlive(bp)
 	return rt.IsKind(objref.IDOf(bp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bp *BoundsPrediction) String() string {
+	defer runtime.KeepAlive(bp)
 	return rt.Description(objref.IDOf(bp))
 }
 
@@ -87,12 +94,14 @@ func (bp *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction
 
 // NormalizedBounds returns bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
 func (bp *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(bp)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(bp), objc.RegisterName("normalizedBounds"))
 	return _r
 }
 
 // Confidence returns the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
 func (bp *BoundsPrediction) Confidence() float32 {
+	defer runtime.KeepAlive(bp)
 	_r := objc.Send[float32](objref.IDOf(bp), objc.RegisterName("confidence"))
 	return _r
 }

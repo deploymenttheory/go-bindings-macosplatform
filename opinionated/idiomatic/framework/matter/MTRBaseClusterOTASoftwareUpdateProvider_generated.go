@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterOTASoftwareUpdateProviderAdopt(id objc.ID) *MTRBaseClusterOTA
 
 // NewMTRBaseClusterOTASoftwareUpdateProviderWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterOTASoftwareUpdateProviderWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterOTASoftwareUpdateProvider {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOTASoftwareUpdateProvider")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterOTASoftwareUpdateProviderAdopt(_id)
@@ -58,6 +62,8 @@ func NewMTRBaseClusterOTASoftwareUpdateProviderWithDeviceEndpointIDQueue(device 
 //
 // QueryImageWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) QueryImageWithParamsCompletion(ctx context.Context, params *MTROTASoftwareUpdateProviderClusterQueryImageParams) (result *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROTASoftwareUpdateProviderClusterQueryImageResponseParams
 		err error
@@ -83,6 +89,8 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) QueryImageWithParamsComp
 //
 // ApplyUpdateRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithParamsCompletion(ctx context.Context, params *MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams) (result *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams
 		err error
@@ -108,6 +116,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ApplyUpdateRequestWithPa
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -133,6 +142,8 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeGeneratedCo
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -158,6 +169,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeGenera
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -183,6 +195,8 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeAcceptedCom
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -208,6 +222,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeAccept
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -233,6 +248,8 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeAttributeLi
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -258,6 +275,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeAttrib
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -283,6 +301,8 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeFeatureMapW
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -308,6 +328,7 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeFeatur
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
 	type _result struct {
 		val obj.Object
 		err error
@@ -333,6 +354,8 @@ func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) ReadAttributeClusterRevi
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcosup *MTRBaseClusterOTASoftwareUpdateProvider) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcosup)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

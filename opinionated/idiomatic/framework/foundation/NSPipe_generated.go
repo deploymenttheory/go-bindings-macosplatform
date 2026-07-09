@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func pipeAdopt(id objc.ID) *Pipe {
 
 // Description returns the object's -description text.
 func (p *Pipe) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Pipe) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Pipe) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Pipe) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -81,19 +87,21 @@ func (p *Pipe) WithObservationInfo(observationInfo unsafe.Pointer) *Pipe {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (p *Pipe) WithScriptingProperties(scriptingProperties obj.Object) *Pipe {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (p *Pipe) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Pipe {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return p
 }
 
 // FileHandleForReading returns the file handle for reading.
 func (p *Pipe) FileHandleForReading() *FileHandle {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForReading"))
 	return FileHandleFromID(_r)
 }
 
 // FileHandleForWriting returns the file handle for writing.
 func (p *Pipe) FileHandleForWriting() *FileHandle {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForWriting"))
 	return FileHandleFromID(_r)
 }

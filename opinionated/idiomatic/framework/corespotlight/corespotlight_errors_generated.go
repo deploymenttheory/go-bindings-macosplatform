@@ -8,38 +8,38 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeUnknownError matches the CoreSpotlight error CSIndexErrorCodeUnknownError.
-var ErrCodeUnknownError = errkit.New("CSIndexErrorDomain", -1)
+// ErrCodeCancelled matches the CoreSpotlight error CSSearchQueryErrorCodeCancelled.
+var ErrCodeCancelled = errkit.New("CSSearchQueryErrorDomain", -2003)
 
 // ErrCodeIndexUnavailableError matches the CoreSpotlight error CSIndexErrorCodeIndexUnavailableError.
 var ErrCodeIndexUnavailableError = errkit.New("CSIndexErrorDomain", -1000)
 
-// ErrCodeInvalidItemError matches the CoreSpotlight error CSIndexErrorCodeInvalidItemError.
-var ErrCodeInvalidItemError = errkit.New("CSIndexErrorDomain", -1001)
-
-// ErrCodeInvalidClientStateError matches the CoreSpotlight error CSIndexErrorCodeInvalidClientStateError.
-var ErrCodeInvalidClientStateError = errkit.New("CSIndexErrorDomain", -1002)
-
-// ErrCodeRemoteConnectionError matches the CoreSpotlight error CSIndexErrorCodeRemoteConnectionError.
-var ErrCodeRemoteConnectionError = errkit.New("CSIndexErrorDomain", -1003)
-
-// ErrCodeQuotaExceeded matches the CoreSpotlight error CSIndexErrorCodeQuotaExceeded.
-var ErrCodeQuotaExceeded = errkit.New("CSIndexErrorDomain", -1004)
+// ErrCodeIndexUnreachable matches the CoreSpotlight error CSSearchQueryErrorCodeIndexUnreachable.
+var ErrCodeIndexUnreachable = errkit.New("CSSearchQueryErrorDomain", -2001)
 
 // ErrCodeIndexingUnsupported matches the CoreSpotlight error CSIndexErrorCodeIndexingUnsupported.
 var ErrCodeIndexingUnsupported = errkit.New("CSIndexErrorDomain", -1005)
 
-// ErrCodeMismatchedClientState matches the CoreSpotlight error CSIndexErrorCodeMismatchedClientState.
-var ErrCodeMismatchedClientState = errkit.New("CSIndexErrorDomain", -1006)
+// ErrCodeInvalidClientStateError matches the CoreSpotlight error CSIndexErrorCodeInvalidClientStateError.
+var ErrCodeInvalidClientStateError = errkit.New("CSIndexErrorDomain", -1002)
 
-// ErrCodeUnknown matches the CoreSpotlight error CSSearchQueryErrorCodeUnknown.
-var ErrCodeUnknown = errkit.New("CSSearchQueryErrorDomain", -2000)
-
-// ErrCodeIndexUnreachable matches the CoreSpotlight error CSSearchQueryErrorCodeIndexUnreachable.
-var ErrCodeIndexUnreachable = errkit.New("CSSearchQueryErrorDomain", -2001)
+// ErrCodeInvalidItemError matches the CoreSpotlight error CSIndexErrorCodeInvalidItemError.
+var ErrCodeInvalidItemError = errkit.New("CSIndexErrorDomain", -1001)
 
 // ErrCodeInvalidQuery matches the CoreSpotlight error CSSearchQueryErrorCodeInvalidQuery.
 var ErrCodeInvalidQuery = errkit.New("CSSearchQueryErrorDomain", -2002)
 
-// ErrCodeCancelled matches the CoreSpotlight error CSSearchQueryErrorCodeCancelled.
-var ErrCodeCancelled = errkit.New("CSSearchQueryErrorDomain", -2003)
+// ErrCodeMismatchedClientState matches the CoreSpotlight error CSIndexErrorCodeMismatchedClientState.
+var ErrCodeMismatchedClientState = errkit.New("CSIndexErrorDomain", -1006)
+
+// ErrCodeQuotaExceeded matches the CoreSpotlight error CSIndexErrorCodeQuotaExceeded.
+var ErrCodeQuotaExceeded = errkit.New("CSIndexErrorDomain", -1004)
+
+// ErrCodeRemoteConnectionError matches the CoreSpotlight error CSIndexErrorCodeRemoteConnectionError.
+var ErrCodeRemoteConnectionError = errkit.New("CSIndexErrorDomain", -1003)
+
+// ErrCodeUnknown matches the CoreSpotlight error CSSearchQueryErrorCodeUnknown.
+var ErrCodeUnknown = errkit.New("CSSearchQueryErrorDomain", -2000)
+
+// ErrCodeUnknownError matches the CoreSpotlight error CSIndexErrorCodeUnknownError.
+var ErrCodeUnknownError = errkit.New("CSIndexErrorDomain", -1)

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessControlClusterFabricRestrictionReviewUpdateEventAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Description() string {
+	defer runtime.KeepAlive(maccfrrue)
 	return rt.Description(objref.IDOf(maccfrrue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccfrrue)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccfrrue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccfrrue)
 	return rt.IsKind(objref.IDOf(maccfrrue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) String() string {
+	defer runtime.KeepAlive(maccfrrue)
 	return rt.Description(objref.IDOf(maccfrrue))
 }
 
@@ -72,6 +80,7 @@ func NewMTRAccessControlClusterFabricRestrictionReviewUpdateEvent() *MTRAccessCo
 
 // WithToken sets the token.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithToken(token obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
+	defer runtime.KeepAlive(token)
 	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setToken:"), objref.IDOf(token))
 	return maccfrrue
 }
@@ -84,18 +93,21 @@ func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) With
 
 // WithFabricIndex sets the fabric index.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccfrrue
 }
 
 // Token returns the token.
-func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() obj.Object {
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() *foundation.Number {
+	defer runtime.KeepAlive(maccfrrue)
 	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("token"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Instruction returns the instruction.
 func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Instruction() string {
+	defer runtime.KeepAlive(maccfrrue)
 	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("instruction"))
 	if _r == 0 {
 		return ""
@@ -104,7 +116,8 @@ func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Inst
 }
 
 // FabricIndex returns the fabric index.
-func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() obj.Object {
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(maccfrrue)
 	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("fabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

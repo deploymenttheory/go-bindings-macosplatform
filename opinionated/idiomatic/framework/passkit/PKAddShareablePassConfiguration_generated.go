@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (aspc *AddShareablePassConfiguration) WithLocalizedDescription(localizedDes
 
 // PrimaryAction returns the primary action.
 func (aspc *AddShareablePassConfiguration) PrimaryAction() AddShareablePassConfigurationPrimaryAction {
+	defer runtime.KeepAlive(aspc)
 	_r := objc.Send[AddShareablePassConfigurationPrimaryAction](objref.IDOf(aspc), objc.RegisterName("primaryAction"))
 	return _r
 }
@@ -73,12 +76,14 @@ func (aspc *AddShareablePassConfiguration) PrimaryAction() AddShareablePassConfi
 //
 // CredentialsMetadata returns the collection as a Go slice.
 func (aspc *AddShareablePassConfiguration) CredentialsMetadata() []*ShareablePassMetadata {
+	defer runtime.KeepAlive(aspc)
 	_arr := objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("credentialsMetadata"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShareablePassMetadata { return ShareablePassMetadataFromID(_id) })
 }
 
 // ProvisioningPolicyIdentifier returns the provisioning policy identifier.
 func (aspc *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
+	defer runtime.KeepAlive(aspc)
 	_r := objc.Send[objc.ID](objref.IDOf(aspc), objc.RegisterName("provisioningPolicyIdentifier"))
 	if _r == 0 {
 		return ""

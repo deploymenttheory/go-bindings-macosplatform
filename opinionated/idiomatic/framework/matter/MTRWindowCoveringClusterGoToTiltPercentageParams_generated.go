@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWindowCoveringClusterGoToTiltPercentageParamsAdopt(id objc.ID) *MTRWindo
 
 // Description returns the object's -description text.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) Description() string {
+	defer runtime.KeepAlive(mwccgttpp)
 	return rt.Description(objref.IDOf(mwccgttpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwccgttpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwccgttpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwccgttpp)
 	return rt.IsKind(objref.IDOf(mwccgttpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) String() string {
+	defer runtime.KeepAlive(mwccgttpp)
 	return rt.Description(objref.IDOf(mwccgttpp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRWindowCoveringClusterGoToTiltPercentageParams() *MTRWindowCoveringClu
 
 // WithTiltPercent100thsValue sets the tilt percent100ths value.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTiltPercent100thsValue(tiltPercent100thsValue obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
+	defer runtime.KeepAlive(tiltPercent100thsValue)
 	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setTiltPercent100thsValue:"), objref.IDOf(tiltPercent100thsValue))
 	return mwccgttpp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mwccgttpp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWindowCoveringClusterGoToTiltPercentageParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mwccgttpp
 }
 
 // TiltPercent100thsValue returns the tilt percent100ths value.
-func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TiltPercent100thsValue() obj.Object {
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TiltPercent100thsValue() *foundation.Number {
+	defer runtime.KeepAlive(mwccgttpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("tiltPercent100thsValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TimedInvokeTimeoutMs() obj.Object {
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mwccgttpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) ServerSideProcessingTimeout() obj.Object {
+func (mwccgttpp *MTRWindowCoveringClusterGoToTiltPercentageParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mwccgttpp)
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgttpp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

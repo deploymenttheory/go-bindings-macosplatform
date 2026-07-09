@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func mTRApplicationLauncherClusterApplicationStructAdopt(id objc.ID) *MTRApplica
 
 // Description returns the object's -description text.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) Description() string {
+	defer runtime.KeepAlive(malcas)
 	return rt.Description(objref.IDOf(malcas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(malcas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(malcas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(malcas)
 	return rt.IsKind(objref.IDOf(malcas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) String() string {
+	defer runtime.KeepAlive(malcas)
 	return rt.Description(objref.IDOf(malcas))
 }
 
 // WithCatalogVendorID sets the catalog vendor ID.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplicationStruct {
+	defer runtime.KeepAlive(catalogVendorID)
 	objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return malcas
 }
@@ -79,13 +88,15 @@ func (malcas *MTRApplicationLauncherClusterApplicationStruct) WithApplicationID(
 }
 
 // CatalogVendorID returns the catalog vendor ID.
-func (malcas *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorID() obj.Object {
+func (malcas *MTRApplicationLauncherClusterApplicationStruct) CatalogVendorID() *foundation.Number {
+	defer runtime.KeepAlive(malcas)
 	_r := objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("catalogVendorID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ApplicationID returns the application ID.
 func (malcas *MTRApplicationLauncherClusterApplicationStruct) ApplicationID() string {
+	defer runtime.KeepAlive(malcas)
 	_r := objc.Send[objc.ID](objref.IDOf(malcas), objc.RegisterName("applicationID"))
 	if _r == 0 {
 		return ""

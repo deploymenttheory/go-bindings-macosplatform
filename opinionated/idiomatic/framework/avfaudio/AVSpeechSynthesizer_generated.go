@@ -5,8 +5,11 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func speechSynthesizerAdopt(id objc.ID) *SpeechSynthesizer {
 
 // Description returns the object's -description text.
 func (ss *SpeechSynthesizer) Description() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ss *SpeechSynthesizer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ss *SpeechSynthesizer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ss)
 	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ss *SpeechSynthesizer) String() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
@@ -72,37 +80,54 @@ func NewSpeechSynthesizer() *SpeechSynthesizer {
 	return speechSynthesizerAdopt(_id)
 }
 
+// WithDelegate sets the delegate object for the speech synthesizer.
+func (ss *SpeechSynthesizer) WithDelegate(delegate SpeechSynthesizerDelegate) *SpeechSynthesizer {
+	_shim := newSpeechSynthesizerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ss), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ss), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ss
+}
+
 // SpeakUtterance adds the utterance you specify to the speech synthesizer’s queue.
 func (ss *SpeechSynthesizer) SpeakUtterance(utterance *SpeechUtterance) {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(utterance)
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("speakUtterance:"), objref.IDOf(utterance))
 }
 
 // StopSpeakingAtBoundary stops speech at the boundary you specify.
 func (ss *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
 	return _r
 }
 
 // PauseSpeakingAtBoundary pauses speech at the boundary you specify.
 func (ss *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
 	return _r
 }
 
 // ContinueSpeaking reports whether resumes speech from its paused point.
 func (ss *SpeechSynthesizer) ContinueSpeaking() bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("continueSpeaking"))
 	return _r
 }
 
 // IsSpeaking reports whether the object is speaking.
 func (ss *SpeechSynthesizer) IsSpeaking() bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isSpeaking"))
 	return _r
 }
 
 // IsPaused reports whether the object is paused.
 func (ss *SpeechSynthesizer) IsPaused() bool {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[bool](objref.IDOf(ss), objc.RegisterName("isPaused"))
 	return _r
 }

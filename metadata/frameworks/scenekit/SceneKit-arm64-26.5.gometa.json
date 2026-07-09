@@ -4,7 +4,7 @@
   "arch": "arm64",
   "schema_version": 1,
   "clang_version": "Apple clang version 21.0.0 (clang-2100.1.1.101)",
-  "xcode_version": "Xcode 26.5 Build version 17F42",
+  "xcode_version": "Xcode 26.6 Build version 17F113",
   "classes": {
     "SCNAccelerationConstraint": {
       "super": "SCNConstraint",

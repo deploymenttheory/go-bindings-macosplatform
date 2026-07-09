@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAttributeValueWaiterAdopt(id objc.ID) *MTRAttributeValueWaiter {
 
 // Description returns the object's -description text.
 func (mavw *MTRAttributeValueWaiter) Description() string {
+	defer runtime.KeepAlive(mavw)
 	return rt.Description(objref.IDOf(mavw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mavw *MTRAttributeValueWaiter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mavw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mavw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mavw *MTRAttributeValueWaiter) IsKind(className string) bool {
+	defer runtime.KeepAlive(mavw)
 	return rt.IsKind(objref.IDOf(mavw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mavw *MTRAttributeValueWaiter) String() string {
+	defer runtime.KeepAlive(mavw)
 	return rt.Description(objref.IDOf(mavw))
 }
 
@@ -72,11 +80,13 @@ func NewMTRAttributeValueWaiter() *MTRAttributeValueWaiter {
 
 // Cancel cancel the wait for the set of attribute path/value pairs represented by this MTRAttributeValueWaiter. If the completion has not been called yet, it will becalled with MTRErrorCodeCancelled.
 func (mavw *MTRAttributeValueWaiter) Cancel() {
+	defer runtime.KeepAlive(mavw)
 	objc.Send[objc.ID](objref.IDOf(mavw), objc.RegisterName("cancel"))
 }
 
 // UUID returns the UUID.
-func (mavw *MTRAttributeValueWaiter) UUID() obj.Object {
+func (mavw *MTRAttributeValueWaiter) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(mavw)
 	_r := objc.Send[objc.ID](objref.IDOf(mavw), objc.RegisterName("UUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }

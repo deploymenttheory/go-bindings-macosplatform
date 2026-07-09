@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func iKImageBrowserCellAdopt(id objc.ID) *IKImageBrowserCell {
 
 // Description returns the object's -description text.
 func (iibc *IKImageBrowserCell) Description() string {
+	defer runtime.KeepAlive(iibc)
 	return rt.Description(objref.IDOf(iibc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iibc *IKImageBrowserCell) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iibc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iibc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iibc *IKImageBrowserCell) IsKind(className string) bool {
+	defer runtime.KeepAlive(iibc)
 	return rt.IsKind(objref.IDOf(iibc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iibc *IKImageBrowserCell) String() string {
+	defer runtime.KeepAlive(iibc)
 	return rt.Description(objref.IDOf(iibc))
 }
 
@@ -75,78 +82,91 @@ func NewIKImageBrowserCell() *IKImageBrowserCell {
 
 // ImageBrowserView returns the view the receiver uses to display the cell.
 func (iibc *IKImageBrowserCell) ImageBrowserView() obj.Object {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[objc.ID](objref.IDOf(iibc), objc.RegisterName("imageBrowserView"))
 	return obj.Wrap(_r)
 }
 
 // RepresentedItem returns the receiver’s represented object.
 func (iibc *IKImageBrowserCell) RepresentedItem() obj.Object {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[objc.ID](objref.IDOf(iibc), objc.RegisterName("representedItem"))
 	return obj.Wrap(_r)
 }
 
 // IndexOfRepresentedItem returns the index of the receiver’s represented object in the datasource.
 func (iibc *IKImageBrowserCell) IndexOfRepresentedItem() int {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[int](objref.IDOf(iibc), objc.RegisterName("indexOfRepresentedItem"))
 	return _r
 }
 
 // Frame returns the receiver’s frame rectangle, which defines its position in its IKImageBrowserView.
 func (iibc *IKImageBrowserCell) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iibc), objc.RegisterName("frame"))
 	return _r
 }
 
 // ImageContainerFrame returns the receiver’s image container frame rectangle, which defines the position of the container of the thumbnail.
 func (iibc *IKImageBrowserCell) ImageContainerFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iibc), objc.RegisterName("imageContainerFrame"))
 	return _r
 }
 
 // ImageFrame returns the receiver’s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView.
 func (iibc *IKImageBrowserCell) ImageFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iibc), objc.RegisterName("imageFrame"))
 	return _r
 }
 
 // SelectionFrame returns the receiver’s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView.
 func (iibc *IKImageBrowserCell) SelectionFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iibc), objc.RegisterName("selectionFrame"))
 	return _r
 }
 
 // TitleFrame returns the receiver’s title frame rectangle.
 func (iibc *IKImageBrowserCell) TitleFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iibc), objc.RegisterName("titleFrame"))
 	return _r
 }
 
 // SubtitleFrame returns the receiver’s subtitle frame rectangle.
 func (iibc *IKImageBrowserCell) SubtitleFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iibc), objc.RegisterName("subtitleFrame"))
 	return _r
 }
 
 // IsSelected reports whether the cell is selected.
 func (iibc *IKImageBrowserCell) IsSelected() bool {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[bool](objref.IDOf(iibc), objc.RegisterName("isSelected"))
 	return _r
 }
 
 // CellState returns the current cell state of the receiver.
 func (iibc *IKImageBrowserCell) CellState() IKImageBrowserCellState {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[IKImageBrowserCellState](objref.IDOf(iibc), objc.RegisterName("cellState"))
 	return _r
 }
 
 // Opacity returns the opacity of the receiver.
 func (iibc *IKImageBrowserCell) Opacity() float64 {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[float64](objref.IDOf(iibc), objc.RegisterName("opacity"))
 	return _r
 }
 
 // LayerForType returns a layer for the specified position.
 func (iibc *IKImageBrowserCell) LayerForType(type_ string) obj.Object {
+	defer runtime.KeepAlive(iibc)
 	_r := objc.Send[objc.ID](objref.IDOf(iibc), objc.RegisterName("layerForType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }

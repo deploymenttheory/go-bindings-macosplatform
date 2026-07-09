@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,29 +49,34 @@ func smartCardATRAdopt(id objc.ID) *SmartCardATR {
 
 // Description returns the object's -description text.
 func (sca *SmartCardATR) Description() string {
+	defer runtime.KeepAlive(sca)
 	return rt.Description(objref.IDOf(sca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sca *SmartCardATR) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sca *SmartCardATR) IsKind(className string) bool {
+	defer runtime.KeepAlive(sca)
 	return rt.IsKind(objref.IDOf(sca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sca *SmartCardATR) String() string {
+	defer runtime.KeepAlive(sca)
 	return rt.Description(objref.IDOf(sca))
 }
 
 // NewSmartCardATRWithBytes initializes a TKSmartCardATR object from a provided data object.
-func NewSmartCardATRWithBytes(bytes_ obj.Object) *SmartCardATR {
+func NewSmartCardATRWithBytes(data []byte) *SmartCardATR {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSmartCardATR")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:"), objref.IDOf(bytes_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:"), rt.BytesToNSData(data))
 	return smartCardATRAdopt(_id)
 }
 
@@ -82,40 +89,46 @@ func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
 
 // InterfaceGroupAtIndex returns the interface group at the specified index.
 func (sca *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup {
+	defer runtime.KeepAlive(sca)
 	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("interfaceGroupAtIndex:"), index)
 	return SmartCardATRInterfaceGroupFromID(_r)
 }
 
 // InterfaceGroupForProtocol returns the interface group with the specified protocol.
 func (sca *SmartCardATR) InterfaceGroupForProtocol(protocol SmartCardProtocol) *SmartCardATRInterfaceGroup {
+	defer runtime.KeepAlive(sca)
 	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("interfaceGroupForProtocol:"), protocol)
 	return SmartCardATRInterfaceGroupFromID(_r)
 }
 
 // Bytes returns full ATR as string of bytes
-func (sca *SmartCardATR) Bytes() obj.Object {
+func (sca *SmartCardATR) Bytes() []byte {
+	defer runtime.KeepAlive(sca)
 	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("bytes"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Protocols returns array of NSNumber of protocols indicated in ATR, in the correct order (i.e. the default protocol comes first), duplicates sorted out.
 //
 // Protocols returns the collection as a Go slice.
 func (sca *SmartCardATR) Protocols() []obj.Object {
+	defer runtime.KeepAlive(sca)
 	_arr := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("protocols"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // HistoricalBytes returns just historical bytes of ATR, without Tck and interface bytes.
-func (sca *SmartCardATR) HistoricalBytes() obj.Object {
+func (sca *SmartCardATR) HistoricalBytes() []byte {
+	defer runtime.KeepAlive(sca)
 	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("historicalBytes"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // HistoricalRecords returns an array of TKCompactTLVRecord instances with TLV records parsed from historical bytes.  If historical bytes are not structured using Compact TLV encoding, nil is returned.
 //
 // HistoricalRecords returns the collection as a Go slice.
 func (sca *SmartCardATR) HistoricalRecords() []*CompactTLVRecord {
+	defer runtime.KeepAlive(sca)
 	_arr := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("historicalRecords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CompactTLVRecord { return CompactTLVRecordFromID(_id) })
 }

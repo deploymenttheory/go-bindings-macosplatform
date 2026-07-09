@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mACAddressAdopt(id objc.ID) *MACAddress {
 
 // Description returns the object's -description text.
 func (ma *MACAddress) Description() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ma *MACAddress) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ma *MACAddress) IsKind(className string) bool {
+	defer runtime.KeepAlive(ma)
 	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ma *MACAddress) String() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
@@ -71,8 +78,8 @@ func NewMACAddress() *MACAddress {
 }
 
 // WithDataRepresentation sets an NSData object containing the bytes of the MAC address.
-func (ma *MACAddress) WithDataRepresentation(dataRepresentation obj.Object) *MACAddress {
-	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setDataRepresentation:"), objref.IDOf(dataRepresentation))
+func (ma *MACAddress) WithDataRepresentation(dataRepresentation []byte) *MACAddress {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("setDataRepresentation:"), rt.BytesToNSData(dataRepresentation))
 	return ma
 }
 
@@ -89,13 +96,15 @@ func (ma *MACAddress) WithMulticast(multicast bool) *MACAddress {
 }
 
 // DataRepresentation returns an NSData object containing the bytes of the MAC address.
-func (ma *MACAddress) DataRepresentation() obj.Object {
+func (ma *MACAddress) DataRepresentation() []byte {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // StringRepresentation returns the colon separated cannonical string representation of the MAC address e.g. 12:34:56:78:ab:cd
 func (ma *MACAddress) StringRepresentation() string {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
@@ -105,6 +114,7 @@ func (ma *MACAddress) StringRepresentation() string {
 
 // IsMulticast reports whether returns if the multicast bit is set in the MAC address.
 func (ma *MACAddress) IsMulticast() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isMulticast"))
 	return _r
 }

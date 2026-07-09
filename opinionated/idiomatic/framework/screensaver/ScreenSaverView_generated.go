@@ -5,6 +5,8 @@
 package screensaver
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func screenSaverViewAdopt(id objc.ID) *ScreenSaverView {
 
 // Description returns the object's -description text.
 func (ssv *ScreenSaverView) Description() string {
+	defer runtime.KeepAlive(ssv)
 	return rt.Description(objref.IDOf(ssv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssv *ScreenSaverView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssv *ScreenSaverView) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssv)
 	return rt.IsKind(objref.IDOf(ssv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssv *ScreenSaverView) String() string {
+	defer runtime.KeepAlive(ssv)
 	return rt.Description(objref.IDOf(ssv))
 }
 
@@ -90,6 +97,7 @@ func (ssv *ScreenSaverView) WithAnimationTimeInterval(animationTimeInterval floa
 
 // StartAnimation activates the periodic timer that animates the screen saver.
 func (ssv *ScreenSaverView) StartAnimation() {
+	defer runtime.KeepAlive(ssv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("startAnimation"))
 	})
@@ -98,6 +106,7 @@ func (ssv *ScreenSaverView) StartAnimation() {
 
 // StopAnimation deactivates the timer that advances the animation.
 func (ssv *ScreenSaverView) StopAnimation() {
+	defer runtime.KeepAlive(ssv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("stopAnimation"))
 	})
@@ -106,6 +115,7 @@ func (ssv *ScreenSaverView) StopAnimation() {
 
 // AnimateOneFrame advances the screen saver’s animation by a single frame.
 func (ssv *ScreenSaverView) AnimateOneFrame() {
+	defer runtime.KeepAlive(ssv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("animateOneFrame"))
 	})
@@ -114,6 +124,7 @@ func (ssv *ScreenSaverView) AnimateOneFrame() {
 
 // AnimationTimeInterval returns the time interval between animation frames. If your screen saver has particular requirements for time between animation frames, call this method to set the animation rate to a reasonable value.
 func (ssv *ScreenSaverView) AnimationTimeInterval() float64 {
+	defer runtime.KeepAlive(ssv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -127,6 +138,7 @@ func (ssv *ScreenSaverView) AnimationTimeInterval() float64 {
 
 // IsAnimating reports whether the screen saver is animating. ## Overview The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> when the screen saver is animating, and <doc://com.apple.documentation/documentation/objectivec/no> when it isn’t. ## See also - “ScreenSaver/ScreenSaverView/stopAnimation“ - “ScreenSaver/ScreenSaverView/startAnimation“
 func (ssv *ScreenSaverView) IsAnimating() bool {
+	defer runtime.KeepAlive(ssv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -140,6 +152,7 @@ func (ssv *ScreenSaverView) IsAnimating() bool {
 
 // HasConfigureSheet reports whether the screen saver has an associated configuration sheet. If you provide a configuration sheet in your bundle, override this method and return <doc://com.apple.documentation/documentation/objectivec/yes>. ## See also - “ScreenSaver/ScreenSaverView/configureSheet“
 func (ssv *ScreenSaverView) HasConfigureSheet() bool {
+	defer runtime.KeepAlive(ssv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -153,6 +166,7 @@ func (ssv *ScreenSaverView) HasConfigureSheet() bool {
 
 // ConfigureSheet returns the window that contains the controls to configure the screen saver. The system runs this window as a sheet, so include buttons that allow the user to end the modal session in which the sheet runs. When the user dismisses the sheet, the controller in charge of the sheet must end the document modal session by calling the <doc://com.apple.documentation/documentation/appkit/nsapplication> method <doc://com.apple.documentation/documentation/appkit/nsapplication/1428503-endsheet> with the sheet’s window as the argument. ## See also - “ScreenSaver/ScreenSaverView/hasConfigureSheet“
 func (ssv *ScreenSaverView) ConfigureSheet() obj.Object {
+	defer runtime.KeepAlive(ssv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -166,6 +180,7 @@ func (ssv *ScreenSaverView) ConfigureSheet() obj.Object {
 
 // IsPreview reports whether the screen saver view is set to a size suitable for previewing its content. ## Overview The system sets the value of this property to <doc://com.apple.documentation/documentation/objectivec/yes> when it creates a smaller preview of your screen saver. When the value is <doc://com.apple.documentation/documentation/objectivec/no>, your view matches the size of the screen. Use this property to adjust the content you present. For example, you might change the drawing parameters or data you display in your view.
 func (ssv *ScreenSaverView) IsPreview() bool {
+	defer runtime.KeepAlive(ssv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

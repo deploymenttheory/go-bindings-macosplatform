@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -219,6 +221,7 @@ func (dae *DOMHTMLAppletElement) WithTextContent(textContent string) *DOMHTMLApp
 
 // Align returns the align.
 func (dae *DOMHTMLAppletElement) Align() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -228,6 +231,7 @@ func (dae *DOMHTMLAppletElement) Align() string {
 
 // Alt returns the alt.
 func (dae *DOMHTMLAppletElement) Alt() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("alt"))
 	if _r == 0 {
 		return ""
@@ -237,6 +241,7 @@ func (dae *DOMHTMLAppletElement) Alt() string {
 
 // Archive returns the archive.
 func (dae *DOMHTMLAppletElement) Archive() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("archive"))
 	if _r == 0 {
 		return ""
@@ -246,6 +251,7 @@ func (dae *DOMHTMLAppletElement) Archive() string {
 
 // Code returns the code.
 func (dae *DOMHTMLAppletElement) Code() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("code"))
 	if _r == 0 {
 		return ""
@@ -255,6 +261,7 @@ func (dae *DOMHTMLAppletElement) Code() string {
 
 // CodeBase returns the code base.
 func (dae *DOMHTMLAppletElement) CodeBase() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("codeBase"))
 	if _r == 0 {
 		return ""
@@ -264,6 +271,7 @@ func (dae *DOMHTMLAppletElement) CodeBase() string {
 
 // Height returns the height.
 func (dae *DOMHTMLAppletElement) Height() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("height"))
 	if _r == 0 {
 		return ""
@@ -273,12 +281,14 @@ func (dae *DOMHTMLAppletElement) Height() string {
 
 // Hspace returns the hspace.
 func (dae *DOMHTMLAppletElement) Hspace() int {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[int](objref.IDOf(dae), objc.RegisterName("hspace"))
 	return _r
 }
 
 // Name returns the name.
 func (dae *DOMHTMLAppletElement) Name() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -288,6 +298,7 @@ func (dae *DOMHTMLAppletElement) Name() string {
 
 // Object returns the object.
 func (dae *DOMHTMLAppletElement) Object() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("object"))
 	if _r == 0 {
 		return ""
@@ -297,12 +308,14 @@ func (dae *DOMHTMLAppletElement) Object() string {
 
 // Vspace returns the vspace.
 func (dae *DOMHTMLAppletElement) Vspace() int {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[int](objref.IDOf(dae), objc.RegisterName("vspace"))
 	return _r
 }
 
 // Width returns the width.
 func (dae *DOMHTMLAppletElement) Width() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""

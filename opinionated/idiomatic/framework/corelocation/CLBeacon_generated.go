@@ -5,7 +5,11 @@
 package corelocation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func beaconAdopt(id objc.ID) *Beacon {
 
 // Description returns the object's -description text.
 func (b *Beacon) Description() string {
+	defer runtime.KeepAlive(b)
 	return rt.Description(objref.IDOf(b))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (b *Beacon) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(b)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(b), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (b *Beacon) IsKind(className string) bool {
+	defer runtime.KeepAlive(b)
 	return rt.IsKind(objref.IDOf(b), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (b *Beacon) String() string {
+	defer runtime.KeepAlive(b)
 	return rt.Description(objref.IDOf(b))
 }
 
@@ -73,43 +82,50 @@ func NewBeacon() *Beacon {
 }
 
 // Timestamp returns the timestamp.
-func (b *Beacon) Timestamp() obj.Object {
+func (b *Beacon) Timestamp() time.Time {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("timestamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // UUID returns the UUID.
-func (b *Beacon) UUID() obj.Object {
+func (b *Beacon) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("UUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // ProximityUUID returns the proximity UUID.
-func (b *Beacon) ProximityUUID() obj.Object {
+func (b *Beacon) ProximityUUID() *foundation.UUID {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("proximityUUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Major returns the major.
-func (b *Beacon) Major() obj.Object {
+func (b *Beacon) Major() *foundation.Number {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("major"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Minor returns the minor.
-func (b *Beacon) Minor() obj.Object {
+func (b *Beacon) Minor() *foundation.Number {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("minor"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Proximity returns the proximity.
 func (b *Beacon) Proximity() Proximity {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[Proximity](objref.IDOf(b), objc.RegisterName("proximity"))
 	return _r
 }
 
 // Rssi returns the rssi.
 func (b *Beacon) Rssi() int {
+	defer runtime.KeepAlive(b)
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("rssi"))
 	return _r
 }

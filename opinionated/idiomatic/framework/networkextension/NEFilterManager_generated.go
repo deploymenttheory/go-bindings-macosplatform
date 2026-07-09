@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func nEFilterManagerAdopt(id objc.ID) *NEFilterManager {
 
 // Description returns the object's -description text.
 func (nfm *NEFilterManager) Description() string {
+	defer runtime.KeepAlive(nfm)
 	return rt.Description(objref.IDOf(nfm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nfm *NEFilterManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nfm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nfm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nfm *NEFilterManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(nfm)
 	return rt.IsKind(objref.IDOf(nfm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nfm *NEFilterManager) String() string {
+	defer runtime.KeepAlive(nfm)
 	return rt.Description(objref.IDOf(nfm))
 }
 
@@ -83,6 +89,7 @@ func (nfm *NEFilterManager) WithLocalizedDescription(localizedDescription string
 
 // WithProviderConfiguration sets a NEFilterProviderConfiguration object containing the filter configuration settings.
 func (nfm *NEFilterManager) WithProviderConfiguration(providerConfiguration *NEFilterProviderConfiguration) *NEFilterManager {
+	defer runtime.KeepAlive(providerConfiguration)
 	objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
 	return nfm
 }
@@ -109,6 +116,7 @@ func (nfm *NEFilterManager) WithDisableEncryptedDNSSettings(disableEncryptedDNSS
 //
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nfm *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nfm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -128,6 +136,7 @@ func (nfm *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 //
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (nfm *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nfm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -147,6 +156,7 @@ func (nfm *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 //
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (nfm *NEFilterManager) SaveToPreferences(ctx context.Context) error {
+	defer runtime.KeepAlive(nfm)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -164,6 +174,7 @@ func (nfm *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 
 // LocalizedDescription returns a string containing a description of the filter.
 func (nfm *NEFilterManager) LocalizedDescription() string {
+	defer runtime.KeepAlive(nfm)
 	_r := objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -173,24 +184,28 @@ func (nfm *NEFilterManager) LocalizedDescription() string {
 
 // ProviderConfiguration returns an NEFilterProviderConfiguration object containing the provider-specific portion of the filter configuration.
 func (nfm *NEFilterManager) ProviderConfiguration() *NEFilterProviderConfiguration {
+	defer runtime.KeepAlive(nfm)
 	_r := objc.Send[objc.ID](objref.IDOf(nfm), objc.RegisterName("providerConfiguration"))
 	return NEFilterProviderConfigurationFromID(_r)
 }
 
 // IsEnabled reports whether toggles the enabled status of the filter. On iOS, setting this property will disable filter configurations of other apps, and this property will be set to false when other filter configurations are enabled. On macOS, up to 4 filter configurations of the same grade can be enabled simultaneously.
 func (nfm *NEFilterManager) IsEnabled() bool {
+	defer runtime.KeepAlive(nfm)
 	_r := objc.Send[bool](objref.IDOf(nfm), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // Grade returns the grade of the filter. The default grade is NEFilterManagerGradeFirewall.
 func (nfm *NEFilterManager) Grade() NEFilterManagerGrade {
+	defer runtime.KeepAlive(nfm)
 	_r := objc.Send[NEFilterManagerGrade](objref.IDOf(nfm), objc.RegisterName("grade"))
 	return _r
 }
 
 // DisableEncryptedDNSSettings reports whether causes the content filter to disable any other installed encrypted DNS settings, including iCloud Private Relay system-wide DNS encryption. This should only be used if the content filter expects to intercept cleartext UDP DNS packets.
 func (nfm *NEFilterManager) DisableEncryptedDNSSettings() bool {
+	defer runtime.KeepAlive(nfm)
 	_r := objc.Send[bool](objref.IDOf(nfm), objc.RegisterName("disableEncryptedDNSSettings"))
 	return _r
 }

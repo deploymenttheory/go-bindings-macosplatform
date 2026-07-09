@@ -31,6 +31,9 @@ var commonInitialisms = map[string]bool{
 	"USB": true, "EFI": true, "NVM": true, "NVME": true, "MAC": true,
 	"PCI": true, "HID": true, "OS": true, "IO": true, "GPU": true,
 	"VNC": true, "DMA": true, "BSD": true, "GCD": true, "SPICE": true,
+	// ARM virtualization terms from the Hypervisor framework's C surface.
+	"GIC": true, "IPA": true, "MSI": true, "SME": true, "SVE": true,
+	"SIMD": true, "FP": true, "EL1": true, "EL2": true,
 }
 
 // splitWords breaks a MixedCaps (or mixedCaps) identifier into its component

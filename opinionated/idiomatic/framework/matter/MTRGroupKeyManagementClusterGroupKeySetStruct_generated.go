@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGroupKeyManagementClusterGroupKeySetStructAdopt(id objc.ID) *MTRGroupKey
 
 // Description returns the object's -description text.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) Description() string {
+	defer runtime.KeepAlive(mgkmcgkss)
 	return rt.Description(objref.IDOf(mgkmcgkss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgkmcgkss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgkmcgkss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgkmcgkss)
 	return rt.IsKind(objref.IDOf(mgkmcgkss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) String() string {
+	defer runtime.KeepAlive(mgkmcgkss)
 	return rt.Description(objref.IDOf(mgkmcgkss))
 }
 
@@ -72,96 +80,109 @@ func NewMTRGroupKeyManagementClusterGroupKeySetStruct() *MTRGroupKeyManagementCl
 
 // WithGroupKeySetID sets the group key set ID.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	defer runtime.KeepAlive(groupKeySetID)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return mgkmcgkss
 }
 
 // WithGroupKeySecurityPolicy sets the group key security policy.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithGroupKeySecurityPolicy(groupKeySecurityPolicy obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	defer runtime.KeepAlive(groupKeySecurityPolicy)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setGroupKeySecurityPolicy:"), objref.IDOf(groupKeySecurityPolicy))
 	return mgkmcgkss
 }
 
 // WithEpochKey0 sets the epoch key0.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey0(epochKey0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey0:"), objref.IDOf(epochKey0))
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey0(epochKey0 []byte) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey0:"), rt.BytesToNSData(epochKey0))
 	return mgkmcgkss
 }
 
 // WithEpochStartTime0 sets the epoch start time0.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime0(epochStartTime0 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	defer runtime.KeepAlive(epochStartTime0)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochStartTime0:"), objref.IDOf(epochStartTime0))
 	return mgkmcgkss
 }
 
 // WithEpochKey1 sets the epoch key1.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey1(epochKey1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey1:"), objref.IDOf(epochKey1))
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey1(epochKey1 []byte) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey1:"), rt.BytesToNSData(epochKey1))
 	return mgkmcgkss
 }
 
 // WithEpochStartTime1 sets the epoch start time1.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime1(epochStartTime1 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	defer runtime.KeepAlive(epochStartTime1)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochStartTime1:"), objref.IDOf(epochStartTime1))
 	return mgkmcgkss
 }
 
 // WithEpochKey2 sets the epoch key2.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey2(epochKey2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
-	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey2:"), objref.IDOf(epochKey2))
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochKey2(epochKey2 []byte) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochKey2:"), rt.BytesToNSData(epochKey2))
 	return mgkmcgkss
 }
 
 // WithEpochStartTime2 sets the epoch start time2.
 func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) WithEpochStartTime2(epochStartTime2 obj.Object) *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	defer runtime.KeepAlive(epochStartTime2)
 	objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("setEpochStartTime2:"), objref.IDOf(epochStartTime2))
 	return mgkmcgkss
 }
 
 // GroupKeySetID returns the group key set ID.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySetID() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("groupKeySetID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GroupKeySecurityPolicy returns the group key security policy.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) GroupKeySecurityPolicy() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("groupKeySecurityPolicy"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EpochKey0 returns the epoch key0.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey0() []byte {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochKey0"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // EpochStartTime0 returns the epoch start time0.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime0() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochStartTime0"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EpochKey1 returns the epoch key1.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey1() []byte {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochKey1"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // EpochStartTime1 returns the epoch start time1.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime1() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochStartTime1"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EpochKey2 returns the epoch key2.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochKey2() []byte {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochKey2"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // EpochStartTime2 returns the epoch start time2.
-func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() obj.Object {
+func (mgkmcgkss *MTRGroupKeyManagementClusterGroupKeySetStruct) EpochStartTime2() *foundation.Number {
+	defer runtime.KeepAlive(mgkmcgkss)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkss), objc.RegisterName("epochStartTime2"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

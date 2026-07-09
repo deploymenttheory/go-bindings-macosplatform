@@ -5,9 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,32 +56,37 @@ func NewDiscreteQuantitySample() *DiscreteQuantitySample {
 
 // MinimumQuantity returns the minimum of the receiver's quantities
 func (dqs *DiscreteQuantitySample) MinimumQuantity() *Quantity {
+	defer runtime.KeepAlive(dqs)
 	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("minimumQuantity"))
 	return QuantityFromID(_r)
 }
 
 // AverageQuantity returns the average of the receiver's quantities
 func (dqs *DiscreteQuantitySample) AverageQuantity() *Quantity {
+	defer runtime.KeepAlive(dqs)
 	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("averageQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MaximumQuantity returns the maximum of the receiver's quantities
 func (dqs *DiscreteQuantitySample) MaximumQuantity() *Quantity {
+	defer runtime.KeepAlive(dqs)
 	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("maximumQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MostRecentQuantity returns the receiver's quantity with most recent date interval
 func (dqs *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
+	defer runtime.KeepAlive(dqs)
 	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("mostRecentQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MostRecentQuantityDateInterval returns the date interval for the receiver's most recent quantity
-func (dqs *DiscreteQuantitySample) MostRecentQuantityDateInterval() obj.Object {
+func (dqs *DiscreteQuantitySample) MostRecentQuantityDateInterval() *foundation.DateInterval {
+	defer runtime.KeepAlive(dqs)
 	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("mostRecentQuantityDateInterval"))
-	return obj.Wrap(_r)
+	return foundation.DateIntervalFromID(_r)
 }
 
 var _ QuantitySampleProvider = (*DiscreteQuantitySample)(nil)

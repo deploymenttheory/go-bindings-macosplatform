@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func distanceModelFadeOutParametersAdopt(id objc.ID) *DistanceModelFadeOutParame
 
 // Description returns the object's -description text.
 func (dmfop *DistanceModelFadeOutParameters) Description() string {
+	defer runtime.KeepAlive(dmfop)
 	return rt.Description(objref.IDOf(dmfop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dmfop *DistanceModelFadeOutParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dmfop)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dmfop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dmfop *DistanceModelFadeOutParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(dmfop)
 	return rt.IsKind(objref.IDOf(dmfop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dmfop *DistanceModelFadeOutParameters) String() string {
+	defer runtime.KeepAlive(dmfop)
 	return rt.Description(objref.IDOf(dmfop))
 }
 
@@ -75,6 +82,7 @@ func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *Di
 
 // CullDistance returns the cull distance.
 func (dmfop *DistanceModelFadeOutParameters) CullDistance() float64 {
+	defer runtime.KeepAlive(dmfop)
 	_r := objc.Send[float64](objref.IDOf(dmfop), objc.RegisterName("cullDistance"))
 	return _r
 }

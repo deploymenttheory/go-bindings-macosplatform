@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -104,41 +106,50 @@ func (cct *CNNConvolutionTranspose) WithLabel(label string) *CNNConvolutionTrans
 
 // ResultStateForSourceImageSourceStatesDestinationImage allocate a MPCNNConvolutionTransposeGradientState to hold the results from a -encodeBatchToCommandBuffer... operation
 func (cct *CNNConvolutionTranspose) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
+	defer runtime.KeepAlive(cct)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(destinationImage)
 	_r := objc.Send[objc.ID](objref.IDOf(cct), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
 	return obj.Wrap(_r)
 }
 
 // ReloadWeightsAndBiasesFromDataSource CPU side reload. Reload the updated weights and biases from data provider into internal weights and bias buffers. Weights and biases gradients needed for update are obtained from MPSCNNConvolutionTransposeGradientState object. Data provider passed in init call is used for this purpose.
 func (cct *CNNConvolutionTranspose) ReloadWeightsAndBiasesFromDataSource() {
+	defer runtime.KeepAlive(cct)
 	objc.Send[objc.ID](objref.IDOf(cct), objc.RegisterName("reloadWeightsAndBiasesFromDataSource"))
 }
 
 // InputFeatureChannels returns the number of feature channels per pixel in the input image.
 func (cct *CNNConvolutionTranspose) InputFeatureChannels() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels per pixel in the output image.
 func (cct *CNNConvolutionTranspose) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // KernelOffsetX returns offset in X from which the kernel starts sliding
 func (cct *CNNConvolutionTranspose) KernelOffsetX() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("kernelOffsetX"))
 	return _r
 }
 
 // KernelOffsetY returns offset in Y from which the kernel starts sliding
 func (cct *CNNConvolutionTranspose) KernelOffsetY() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("kernelOffsetY"))
 	return _r
 }
 
 // Groups returns number of groups input and output channels are divided into.
 func (cct *CNNConvolutionTranspose) Groups() int {
+	defer runtime.KeepAlive(cct)
 	_r := objc.Send[int](objref.IDOf(cct), objc.RegisterName("groups"))
 	return _r
 }

@@ -5,9 +5,11 @@
 package corespotlight
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,8 +31,8 @@ func Prepare() {
 }
 
 // PrepareProtectionClasses performs one-time tasks that prepare Spotlight to search for content in one or more protected search indexes.
-func PrepareProtectionClasses(protectionClasses []obj.Object) {
-	objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("prepareProtectionClasses:"), purego.SliceToNSArray(protectionClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func PrepareProtectionClasses(protectionClasses []*foundation.String) {
+	objc.Send[objc.ID](objc.ID(_class("CSUserQuery")), objc.RegisterName("prepareProtectionClasses:"), purego.SliceToNSArray(protectionClasses, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CSUserQueryContextUserQueryContext returns the current behavior configuration for the user query.
@@ -41,6 +43,7 @@ func CSUserQueryContextUserQueryContext() *UserQueryContext {
 
 // UserQueryContextWithCurrentSuggestion creates a new query context object with an optional suggested search string.
 func UserQueryContextWithCurrentSuggestion(currentSuggestion *Suggestion) *UserQueryContext {
+	defer runtime.KeepAlive(currentSuggestion)
 	_r := objc.Send[objc.ID](objc.ID(_class("CSUserQueryContext")), objc.RegisterName("userQueryContextWithCurrentSuggestion:"), objref.IDOf(currentSuggestion))
 	return UserQueryContextFromID(_r)
 }

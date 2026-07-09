@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func localIdentifierMappingAdopt(id objc.ID) *LocalIdentifierMapping {
 
 // Description returns the object's -description text.
 func (lim *LocalIdentifierMapping) Description() string {
+	defer runtime.KeepAlive(lim)
 	return rt.Description(objref.IDOf(lim))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lim *LocalIdentifierMapping) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lim)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lim), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lim *LocalIdentifierMapping) IsKind(className string) bool {
+	defer runtime.KeepAlive(lim)
 	return rt.IsKind(objref.IDOf(lim), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lim *LocalIdentifierMapping) String() string {
+	defer runtime.KeepAlive(lim)
 	return rt.Description(objref.IDOf(lim))
 }
 
@@ -74,6 +81,7 @@ func NewLocalIdentifierMapping() *LocalIdentifierMapping {
 
 // LocalIdentifier returns the \c NSString representing the local identifier of the resource found for this cloud identifier, or nil if the match was not found.
 func (lim *LocalIdentifierMapping) LocalIdentifier() string {
+	defer runtime.KeepAlive(lim)
 	_r := objc.Send[objc.ID](objref.IDOf(lim), objc.RegisterName("localIdentifier"))
 	if _r == 0 {
 		return ""

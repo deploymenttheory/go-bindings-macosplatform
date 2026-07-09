@@ -5,11 +5,13 @@
 package audiovideobridging
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -48,22 +50,27 @@ func aVB17221EntityDiscoveryAdopt(id objc.ID) *AVB17221EntityDiscovery {
 
 // Description returns the object's -description text.
 func (aed *AVB17221EntityDiscovery) Description() string {
+	defer runtime.KeepAlive(aed)
 	return rt.Description(objref.IDOf(aed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aed *AVB17221EntityDiscovery) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aed)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aed *AVB17221EntityDiscovery) IsKind(className string) bool {
+	defer runtime.KeepAlive(aed)
 	return rt.IsKind(objref.IDOf(aed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aed *AVB17221EntityDiscovery) String() string {
+	defer runtime.KeepAlive(aed)
 	return rt.Description(objref.IDOf(aed))
 }
 
@@ -80,25 +87,40 @@ func (aed *AVB17221EntityDiscovery) WithInterfaceName(interfaceName string) *AVB
 	return aed
 }
 
+// WithDiscoveryDelegate sets the delegate, implementing the AVB17221EntityDiscoveryDelegate protocol, which will handle entities arriving, departing and changing properties.
+func (aed *AVB17221EntityDiscovery) WithDiscoveryDelegate(discoveryDelegate AVB17221EntityDiscoveryDelegate) *AVB17221EntityDiscovery {
+	_shim := newAVB17221EntityDiscoveryDelegateShim(discoveryDelegate)
+	_sel := objc.RegisterName("setDiscoveryDelegate:")
+	shim.Associate(objref.IDOf(aed), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(aed), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return aed
+}
+
 // PrimeIterators prepares the IOIterators for receiving entity arrival, departure and property change notifications. This method primes the iterators by iterating over any already available entities. This may be called once, at any time after object creation, but if the discoveryDelegate property has not been set, any already discovered entity notifications will be lost.
 func (aed *AVB17221EntityDiscovery) PrimeIterators() {
+	defer runtime.KeepAlive(aed)
 	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("primeIterators"))
 }
 
 // DiscoverEntities reports whether triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
 func (aed *AVB17221EntityDiscovery) DiscoverEntities() bool {
+	defer runtime.KeepAlive(aed)
 	_r := objc.Send[bool](objref.IDOf(aed), objc.RegisterName("discoverEntities"))
 	return _r
 }
 
 // DiscoverEntity triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity.
 func (aed *AVB17221EntityDiscovery) DiscoverEntity(entityID uint64) bool {
+	defer runtime.KeepAlive(aed)
 	_r := objc.Send[bool](objref.IDOf(aed), objc.RegisterName("discoverEntity:"), entityID)
 	return _r
 }
 
 // AddLocalEntity publishes a entity as being available on the interface. The in kernel portion creates an IOAVB17221LocalEntity and maintains the ADP messaging.
 func (aed *AVB17221EntityDiscovery) AddLocalEntity(anEntity *AVB17221Entity) error {
+	defer runtime.KeepAlive(aed)
+	defer runtime.KeepAlive(anEntity)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aed), objc.RegisterName("addLocalEntity:error:"), objref.IDOf(anEntity), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -109,6 +131,7 @@ func (aed *AVB17221EntityDiscovery) AddLocalEntity(anEntity *AVB17221Entity) err
 
 // RemoveLocalEntity removes a published local entity with the given GUID.
 func (aed *AVB17221EntityDiscovery) RemoveLocalEntity(guid uint64) error {
+	defer runtime.KeepAlive(aed)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aed), objc.RegisterName("removeLocalEntity:error:"), guid, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -119,6 +142,7 @@ func (aed *AVB17221EntityDiscovery) RemoveLocalEntity(guid uint64) error {
 
 // ChangeEntityWithEntityIDToNewGPTPGrandmasterID change the gptp_grandmaster_id value of the entity when the grandmaster changes.
 func (aed *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterID(entityID uint64, gPTPGrandmasterID uint64) error {
+	defer runtime.KeepAlive(aed)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(aed), objc.RegisterName("changeEntityWithEntityID:toNewGPTPGrandmasterID:error:"), entityID, gPTPGrandmasterID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -129,6 +153,7 @@ func (aed *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmaster
 
 // InterfaceName returns the BSD interface name for the interface that discovery is being performed on.
 func (aed *AVB17221EntityDiscovery) InterfaceName() string {
+	defer runtime.KeepAlive(aed)
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("interfaceName"))
 	if _r == 0 {
 		return ""
@@ -138,6 +163,7 @@ func (aed *AVB17221EntityDiscovery) InterfaceName() string {
 
 // Interface returns the AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
 func (aed *AVB17221EntityDiscovery) Interface() *Interface {
+	defer runtime.KeepAlive(aed)
 	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
 }

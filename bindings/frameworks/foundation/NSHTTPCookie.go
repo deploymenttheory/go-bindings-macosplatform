@@ -75,8 +75,8 @@ func NSHTTPCookieRequestHeaderFieldsWithCookies(cookies *NSArray[*NSHTTPCookie])
 }
 
 // @method cookiesWithResponseHeaderFields:forURL: @abstract Return an array of cookies parsed from the specified response header fields and URL. @param headerFields The response header fields to check for cookies. @param URL The URL that the cookies came from - relevant to how the cookies are interpreted. @result An NSArray of NSHTTPCookie objects @discussion This method will ignore irrelevant header fields so you can pass a dictionary containing data other than cookie data.
-func NSHTTPCookieCookiesWithResponseHeaderFieldsForURL(headerFields *NSDictionary[*NSString, *NSString], uRL *NSURL) *NSArray[*NSHTTPCookie] {
-	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPCookie), _nSHTTPCookieSelCookiesWithResponseHeaderFieldsForURL, headerFields.Ptr(), uRL.Ptr())
+func NSHTTPCookieCookiesWithResponseHeaderFieldsForURL(headerFields *NSDictionary[*NSString, *NSString], url *NSURL) *NSArray[*NSHTTPCookie] {
+	_ret := objc.Send[objc.ID](objc.ID(_clsNSHTTPCookie), _nSHTTPCookieSelCookiesWithResponseHeaderFieldsForURL, headerFields.Ptr(), url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

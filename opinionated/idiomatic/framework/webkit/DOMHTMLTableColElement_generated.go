@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -189,6 +191,7 @@ func (dtce *DOMHTMLTableColElement) WithTextContent(textContent string) *DOMHTML
 
 // Align returns the align.
 func (dtce *DOMHTMLTableColElement) Align() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -198,6 +201,7 @@ func (dtce *DOMHTMLTableColElement) Align() string {
 
 // Ch returns the ch.
 func (dtce *DOMHTMLTableColElement) Ch() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("ch"))
 	if _r == 0 {
 		return ""
@@ -207,6 +211,7 @@ func (dtce *DOMHTMLTableColElement) Ch() string {
 
 // ChOff returns the ch off.
 func (dtce *DOMHTMLTableColElement) ChOff() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("chOff"))
 	if _r == 0 {
 		return ""
@@ -216,12 +221,14 @@ func (dtce *DOMHTMLTableColElement) ChOff() string {
 
 // Span returns the span.
 func (dtce *DOMHTMLTableColElement) Span() int {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[int](objref.IDOf(dtce), objc.RegisterName("span"))
 	return _r
 }
 
 // VAlign returns the v align.
 func (dtce *DOMHTMLTableColElement) VAlign() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("vAlign"))
 	if _r == 0 {
 		return ""
@@ -231,6 +238,7 @@ func (dtce *DOMHTMLTableColElement) VAlign() string {
 
 // Width returns the width.
 func (dtce *DOMHTMLTableColElement) Width() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""

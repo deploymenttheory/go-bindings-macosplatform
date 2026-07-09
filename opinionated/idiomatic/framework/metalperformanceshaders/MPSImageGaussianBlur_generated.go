@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -73,6 +75,7 @@ func (igb *ImageGaussianBlur) WithLabel(label string) *ImageGaussianBlur {
 
 // Sigma returns read-only sigma value with which filter was created
 func (igb *ImageGaussianBlur) Sigma() float32 {
+	defer runtime.KeepAlive(igb)
 	_r := objc.Send[float32](objref.IDOf(igb), objc.RegisterName("sigma"))
 	return _r
 }

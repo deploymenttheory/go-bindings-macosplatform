@@ -5,11 +5,12 @@
 package photos
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -56,8 +57,8 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 }
 
 // WithCreationDate sets the date and time at which the asset claims to have been originally created.
-func (acr *AssetCreationRequest) WithCreationDate(creationDate obj.Object) *AssetCreationRequest {
-	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
+func (acr *AssetCreationRequest) WithCreationDate(creationDate time.Time) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setCreationDate:"), rt.TimeToNSDate(creationDate))
 	return acr
 }
 
@@ -81,18 +82,23 @@ func (acr *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
 
 // WithContentEditingOutput sets the output of an asset content editing session.
 func (acr *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
+	defer runtime.KeepAlive(contentEditingOutput)
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
 	return acr
 }
 
-// AddResourceWithTypeFileURLOptions adds a data resource to the asset being created, using the file at the specified URL.
-func (acr *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions) {
+// AddResourceWithTypeFileURL adds a data resource to the asset being created, using the file at the specified URL.
+func (acr *AssetCreationRequest) AddResourceWithTypeFileURL(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions) {
+	defer runtime.KeepAlive(acr)
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addResourceWithType:fileURL:options:"), type_, rt.FileURL(fileURL), objref.IDOf(options))
 }
 
-// AddResourceWithTypeDataOptions adds a data resource to the asset being created, using the specified data.
-func (acr *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions) {
-	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addResourceWithType:data:options:"), type_, objref.IDOf(data), objref.IDOf(options))
+// AddResourceWithTypeData adds a data resource to the asset being created, using the specified data.
+func (acr *AssetCreationRequest) AddResourceWithTypeData(type_ AssetResourceType, data []byte, options *AssetResourceCreationOptions) {
+	defer runtime.KeepAlive(acr)
+	defer runtime.KeepAlive(options)
+	objc.Send[objc.ID](objref.IDOf(acr), objc.RegisterName("addResourceWithType:data:options:"), type_, rt.BytesToNSData(data), objref.IDOf(options))
 }
 
 var _ AssetChangeRequestProvider = (*AssetCreationRequest)(nil)

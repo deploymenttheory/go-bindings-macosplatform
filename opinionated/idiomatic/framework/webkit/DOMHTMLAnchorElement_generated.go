@@ -5,9 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -214,6 +216,7 @@ func (dae *DOMHTMLAnchorElement) WithTextContent(textContent string) *DOMHTMLAnc
 
 // Charset returns the charset.
 func (dae *DOMHTMLAnchorElement) Charset() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("charset"))
 	if _r == 0 {
 		return ""
@@ -223,6 +226,7 @@ func (dae *DOMHTMLAnchorElement) Charset() string {
 
 // Coords returns the coords.
 func (dae *DOMHTMLAnchorElement) Coords() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("coords"))
 	if _r == 0 {
 		return ""
@@ -232,6 +236,7 @@ func (dae *DOMHTMLAnchorElement) Coords() string {
 
 // Hreflang returns the hreflang.
 func (dae *DOMHTMLAnchorElement) Hreflang() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hreflang"))
 	if _r == 0 {
 		return ""
@@ -241,6 +246,7 @@ func (dae *DOMHTMLAnchorElement) Hreflang() string {
 
 // Name returns the name.
 func (dae *DOMHTMLAnchorElement) Name() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -250,6 +256,7 @@ func (dae *DOMHTMLAnchorElement) Name() string {
 
 // Rel returns the rel.
 func (dae *DOMHTMLAnchorElement) Rel() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("rel"))
 	if _r == 0 {
 		return ""
@@ -259,6 +266,7 @@ func (dae *DOMHTMLAnchorElement) Rel() string {
 
 // Rev returns the rev.
 func (dae *DOMHTMLAnchorElement) Rev() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("rev"))
 	if _r == 0 {
 		return ""
@@ -268,6 +276,7 @@ func (dae *DOMHTMLAnchorElement) Rev() string {
 
 // Shape returns the shape.
 func (dae *DOMHTMLAnchorElement) Shape() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("shape"))
 	if _r == 0 {
 		return ""
@@ -277,6 +286,7 @@ func (dae *DOMHTMLAnchorElement) Shape() string {
 
 // Target returns the target.
 func (dae *DOMHTMLAnchorElement) Target() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""
@@ -286,6 +296,7 @@ func (dae *DOMHTMLAnchorElement) Target() string {
 
 // Type returns the type.
 func (dae *DOMHTMLAnchorElement) Type() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -295,6 +306,7 @@ func (dae *DOMHTMLAnchorElement) Type() string {
 
 // Text returns the text.
 func (dae *DOMHTMLAnchorElement) Text() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -303,13 +315,15 @@ func (dae *DOMHTMLAnchorElement) Text() string {
 }
 
 // AbsoluteLinkURL returns the absolute link URL.
-func (dae *DOMHTMLAnchorElement) AbsoluteLinkURL() obj.Object {
+func (dae *DOMHTMLAnchorElement) AbsoluteLinkURL() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("absoluteLinkURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Href returns the href.
 func (dae *DOMHTMLAnchorElement) Href() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
@@ -319,6 +333,7 @@ func (dae *DOMHTMLAnchorElement) Href() string {
 
 // Protocol returns the protocol.
 func (dae *DOMHTMLAnchorElement) Protocol() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("protocol"))
 	if _r == 0 {
 		return ""
@@ -328,6 +343,7 @@ func (dae *DOMHTMLAnchorElement) Protocol() string {
 
 // Host returns the host.
 func (dae *DOMHTMLAnchorElement) Host() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
@@ -337,6 +353,7 @@ func (dae *DOMHTMLAnchorElement) Host() string {
 
 // Hostname returns the hostname.
 func (dae *DOMHTMLAnchorElement) Hostname() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hostname"))
 	if _r == 0 {
 		return ""
@@ -346,6 +363,7 @@ func (dae *DOMHTMLAnchorElement) Hostname() string {
 
 // Port returns the port.
 func (dae *DOMHTMLAnchorElement) Port() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("port"))
 	if _r == 0 {
 		return ""
@@ -355,6 +373,7 @@ func (dae *DOMHTMLAnchorElement) Port() string {
 
 // Pathname returns the pathname.
 func (dae *DOMHTMLAnchorElement) Pathname() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("pathname"))
 	if _r == 0 {
 		return ""
@@ -364,6 +383,7 @@ func (dae *DOMHTMLAnchorElement) Pathname() string {
 
 // Search returns the search.
 func (dae *DOMHTMLAnchorElement) Search() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("search"))
 	if _r == 0 {
 		return ""
@@ -373,6 +393,7 @@ func (dae *DOMHTMLAnchorElement) Search() string {
 
 // HashName returns the hash name.
 func (dae *DOMHTMLAnchorElement) HashName() string {
+	defer runtime.KeepAlive(dae)
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hashName"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialPRFRegistrationOutputAdopt(id objc.ID) *Aut
 
 // Description returns the object's -description text.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Description() string {
+	defer runtime.KeepAlive(apkcpro)
 	return rt.Description(objref.IDOf(apkcpro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkcpro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkcpro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkcpro)
 	return rt.IsKind(objref.IDOf(apkcpro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) String() string {
+	defer runtime.KeepAlive(apkcpro)
 	return rt.Description(objref.IDOf(apkcpro))
 }
 
@@ -74,18 +81,21 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationOutput() *AuthorizationPu
 
 // IsSupported reports whether the object is supported.
 func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() bool {
+	defer runtime.KeepAlive(apkcpro)
 	_r := objc.Send[bool](objref.IDOf(apkcpro), objc.RegisterName("isSupported"))
 	return _r
 }
 
 // First returns the first.
-func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() obj.Object {
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() []byte {
+	defer runtime.KeepAlive(apkcpro)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpro), objc.RegisterName("first"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Second returns the second.
-func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() obj.Object {
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() []byte {
+	defer runtime.KeepAlive(apkcpro)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpro), objc.RegisterName("second"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

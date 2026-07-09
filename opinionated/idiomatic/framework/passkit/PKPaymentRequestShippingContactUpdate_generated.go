@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -85,30 +86,35 @@ func (prscu *PaymentRequestShippingContactUpdate) WithMultiTokenContexts(items .
 
 // WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
 func (prscu *PaymentRequestShippingContactUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate {
+	defer runtime.KeepAlive(recurringPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
 	return prscu
 }
 
 // WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
 func (prscu *PaymentRequestShippingContactUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate {
+	defer runtime.KeepAlive(automaticReloadPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
 	return prscu
 }
 
 // WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
 func (prscu *PaymentRequestShippingContactUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate {
+	defer runtime.KeepAlive(deferredPaymentRequest)
 	objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
 	return prscu
 }
 
 // Errors returns the errors.
 func (prscu *PaymentRequestShippingContactUpdate) Errors() []obj.Object {
+	defer runtime.KeepAlive(prscu)
 	_r := objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
 func (prscu *PaymentRequestShippingContactUpdate) SetErrors() error {
+	defer runtime.KeepAlive(prscu)
 	var _nsErr uintptr
 	_ = objc.Send[objc.ID](objref.IDOf(prscu), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

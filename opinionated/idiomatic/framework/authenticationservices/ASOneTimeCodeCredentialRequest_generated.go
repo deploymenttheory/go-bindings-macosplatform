@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func oneTimeCodeCredentialRequestAdopt(id objc.ID) *OneTimeCodeCredentialRequest
 
 // Description returns the object's -description text.
 func (otccr *OneTimeCodeCredentialRequest) Description() string {
+	defer runtime.KeepAlive(otccr)
 	return rt.Description(objref.IDOf(otccr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (otccr *OneTimeCodeCredentialRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(otccr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(otccr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (otccr *OneTimeCodeCredentialRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(otccr)
 	return rt.IsKind(objref.IDOf(otccr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (otccr *OneTimeCodeCredentialRequest) String() string {
+	defer runtime.KeepAlive(otccr)
 	return rt.Description(objref.IDOf(otccr))
 }
 
 // NewOneTimeCodeCredentialRequestWithCredentialIdentity initializes an instance of ASOneTimeCodeCredentialRequest.
 func NewOneTimeCodeCredentialRequestWithCredentialIdentity(credentialIdentity *OneTimeCodeCredentialIdentity) *OneTimeCodeCredentialRequest {
+	defer runtime.KeepAlive(credentialIdentity)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASOneTimeCodeCredentialRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
 	return oneTimeCodeCredentialRequestAdopt(_id)

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iOCommandQueueDescriptorAdopt(id objc.ID) *IOCommandQueueDescriptor {
 
 // Description returns the object's -description text.
 func (icqd *IOCommandQueueDescriptor) Description() string {
+	defer runtime.KeepAlive(icqd)
 	return rt.Description(objref.IDOf(icqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (icqd *IOCommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(icqd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(icqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (icqd *IOCommandQueueDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(icqd)
 	return rt.IsKind(objref.IDOf(icqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (icqd *IOCommandQueueDescriptor) String() string {
+	defer runtime.KeepAlive(icqd)
 	return rt.Description(objref.IDOf(icqd))
 }
 
@@ -98,24 +105,28 @@ func (icqd *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFligh
 
 // MaxCommandBufferCount returns the maximum number of commandBuffers that can be in flight at a given time for the queue.
 func (icqd *IOCommandQueueDescriptor) MaxCommandBufferCount() int {
+	defer runtime.KeepAlive(icqd)
 	_r := objc.Send[int](objref.IDOf(icqd), objc.RegisterName("maxCommandBufferCount"))
 	return _r
 }
 
 // Priority returns the priority of the commands executed by this queue.
 func (icqd *IOCommandQueueDescriptor) Priority() IOPriority {
+	defer runtime.KeepAlive(icqd)
 	_r := objc.Send[IOPriority](objref.IDOf(icqd), objc.RegisterName("priority"))
 	return _r
 }
 
 // Type returns the type (serial or concurrent) of the queue.
 func (icqd *IOCommandQueueDescriptor) Type() IOCommandQueueType {
+	defer runtime.KeepAlive(icqd)
 	_r := objc.Send[IOCommandQueueType](objref.IDOf(icqd), objc.RegisterName("type"))
 	return _r
 }
 
 // MaxCommandsInFlight returns the maximum number of IO commands that can be in flight at a given time for the queue. A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
 func (icqd *IOCommandQueueDescriptor) MaxCommandsInFlight() int {
+	defer runtime.KeepAlive(icqd)
 	_r := objc.Send[int](objref.IDOf(icqd), objc.RegisterName("maxCommandsInFlight"))
 	return _r
 }

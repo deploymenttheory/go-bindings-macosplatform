@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func iKConstraintAdopt(id objc.ID) *IKConstraint {
 
 // NewIKConstraintWithChainRootNode initializes an inverse kinematics constraint whose chain of nodes begins with the specified node.
 func NewIKConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
+	defer runtime.KeepAlive(chainRootNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNIKConstraint")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChainRootNode:"), objref.IDOf(chainRootNode))
 	return iKConstraintAdopt(_id)
@@ -72,17 +75,22 @@ func (ic *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
 
 // SetMaxAllowedRotationAngleForJoint sets the rotation limit, in degrees, for the specified node.
 func (ic *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *Node) {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setMaxAllowedRotationAngle:forJoint:"), angle, objref.IDOf(node))
 }
 
 // MaxAllowedRotationAngleForJoint returns the rotation limit, in degrees, for the specified node.
 func (ic *IKConstraint) MaxAllowedRotationAngleForJoint(node *Node) float64 {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[float64](objref.IDOf(ic), objc.RegisterName("maxAllowedRotationAngleForJoint:"), objref.IDOf(node))
 	return _r
 }
 
 // ChainRootNode specifies the root node of the kinematic chain.
 func (ic *IKConstraint) ChainRootNode() *Node {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("chainRootNode"))
 	return NodeFromID(_r)
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -189,6 +191,7 @@ func (dbe *DOMHTMLBodyElement) WithTextContent(textContent string) *DOMHTMLBodyE
 
 // ALink returns the a link.
 func (dbe *DOMHTMLBodyElement) ALink() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("aLink"))
 	if _r == 0 {
 		return ""
@@ -198,6 +201,7 @@ func (dbe *DOMHTMLBodyElement) ALink() string {
 
 // Background returns the background.
 func (dbe *DOMHTMLBodyElement) Background() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("background"))
 	if _r == 0 {
 		return ""
@@ -207,6 +211,7 @@ func (dbe *DOMHTMLBodyElement) Background() string {
 
 // BgColor returns the bg color.
 func (dbe *DOMHTMLBodyElement) BgColor() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("bgColor"))
 	if _r == 0 {
 		return ""
@@ -216,6 +221,7 @@ func (dbe *DOMHTMLBodyElement) BgColor() string {
 
 // Link returns the link.
 func (dbe *DOMHTMLBodyElement) Link() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("link"))
 	if _r == 0 {
 		return ""
@@ -225,6 +231,7 @@ func (dbe *DOMHTMLBodyElement) Link() string {
 
 // Text returns the text.
 func (dbe *DOMHTMLBodyElement) Text() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -234,6 +241,7 @@ func (dbe *DOMHTMLBodyElement) Text() string {
 
 // VLink returns the v link.
 func (dbe *DOMHTMLBodyElement) VLink() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("vLink"))
 	if _r == 0 {
 		return ""

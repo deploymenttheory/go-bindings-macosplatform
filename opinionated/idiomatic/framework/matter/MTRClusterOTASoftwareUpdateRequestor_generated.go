@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,73 +49,99 @@ func mTRClusterOTASoftwareUpdateRequestorAdopt(id objc.ID) *MTRClusterOTASoftwar
 
 // NewMTRClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOTASoftwareUpdateRequestor {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOTASoftwareUpdateRequestor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterOTASoftwareUpdateRequestorAdopt(_id)
 }
 
 // ReadAttributeDefaultOTAProvidersWithParams reads attribute default ota providers with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvidersWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvidersWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeDefaultOTAProvidersWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval writes attribute default ota providers with value expected value interval.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams writes attribute default ota providers with value expected value interval params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) WriteAttributeDefaultOTAProvidersWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("writeAttributeDefaultOTAProvidersWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUpdatePossibleWithParams reads attribute update possible with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeUpdatePossibleWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUpdateStateWithParams reads attribute update state with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeUpdateStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUpdateStateProgressWithParams reads attribute update state progress with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgressWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgressWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeUpdateStateProgressWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcosur *MTRClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcosur)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcosur), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // isMTRClusterOTASoftwareUpdateRequestor marks MTRClusterOTASoftwareUpdateRequestor — and, by embedding promotion, its

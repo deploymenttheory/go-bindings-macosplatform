@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -93,6 +95,7 @@ func (sc *SegmentedCell) WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedC
 
 // WithControlView sets the view associated with the cell.
 func (sc *SegmentedCell) WithControlView(controlView ViewProvider) *SegmentedCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -117,6 +120,7 @@ func (sc *SegmentedCell) WithState(state int) *SegmentedCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (sc *SegmentedCell) WithTarget(target obj.Object) *SegmentedCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -221,6 +225,7 @@ func (sc *SegmentedCell) WithWraps(wraps bool) *SegmentedCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (sc *SegmentedCell) WithFont(font *Font) *SegmentedCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -229,6 +234,7 @@ func (sc *SegmentedCell) WithFont(font *Font) *SegmentedCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (sc *SegmentedCell) WithFormatter(formatter obj.Object) *SegmentedCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -237,6 +243,7 @@ func (sc *SegmentedCell) WithFormatter(formatter obj.Object) *SegmentedCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (sc *SegmentedCell) WithObjectValue(objectValue obj.Object) *SegmentedCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -285,6 +292,7 @@ func (sc *SegmentedCell) WithIntegerValue(integerValue int) *SegmentedCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (sc *SegmentedCell) WithImage(image *Image) *SegmentedCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -301,6 +309,7 @@ func (sc *SegmentedCell) WithControlSize(controlSize ControlSize) *SegmentedCell
 
 // WithRepresentedObject sets the object represented by the cell.
 func (sc *SegmentedCell) WithRepresentedObject(representedObject obj.Object) *SegmentedCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -309,6 +318,7 @@ func (sc *SegmentedCell) WithRepresentedObject(representedObject obj.Object) *Se
 
 // WithMenu sets the cell’s contextual menu.
 func (sc *SegmentedCell) WithMenu(menu *Menu) *SegmentedCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -397,6 +407,7 @@ func (sc *SegmentedCell) WithFocusRingType(focusRingType FocusRingType) *Segment
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (sc *SegmentedCell) WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -445,6 +456,7 @@ func (sc *SegmentedCell) WithControlTint(controlTint ControlTint) *SegmentedCell
 
 // SelectSegmentWithTag selects the segment with the specified tag.
 func (sc *SegmentedCell) SelectSegmentWithTag(tag int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -458,6 +470,7 @@ func (sc *SegmentedCell) SelectSegmentWithTag(tag int) bool {
 
 // MakeNextSegmentKey selects the next segment.
 func (sc *SegmentedCell) MakeNextSegmentKey() {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("makeNextSegmentKey"))
 	})
@@ -466,6 +479,7 @@ func (sc *SegmentedCell) MakeNextSegmentKey() {
 
 // MakePreviousSegmentKey selects the previous segment.
 func (sc *SegmentedCell) MakePreviousSegmentKey() {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("makePreviousSegmentKey"))
 	})
@@ -474,6 +488,7 @@ func (sc *SegmentedCell) MakePreviousSegmentKey() {
 
 // SetWidthForSegment sets the width of the specified segment.
 func (sc *SegmentedCell) SetWidthForSegment(width float64, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWidth:forSegment:"), width, segment)
 	})
@@ -482,6 +497,7 @@ func (sc *SegmentedCell) SetWidthForSegment(width float64, segment int) {
 
 // WidthForSegment returns the width of the specified segment.
 func (sc *SegmentedCell) WidthForSegment(segment int) float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -495,6 +511,8 @@ func (sc *SegmentedCell) WidthForSegment(segment int) float64 {
 
 // SetImageForSegment sets the image for the specified segment.
 func (sc *SegmentedCell) SetImageForSegment(image *Image, segment int) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
 	})
@@ -503,6 +521,7 @@ func (sc *SegmentedCell) SetImageForSegment(image *Image, segment int) {
 
 // ImageForSegment returns the image associated with the specified segment.
 func (sc *SegmentedCell) ImageForSegment(segment int) *Image {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -516,6 +535,7 @@ func (sc *SegmentedCell) ImageForSegment(segment int) *Image {
 
 // SetImageScalingForSegment sets the image scaling mode for the specified segment.
 func (sc *SegmentedCell) SetImageScalingForSegment(scaling ImageScaling, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
 	})
@@ -524,6 +544,7 @@ func (sc *SegmentedCell) SetImageScalingForSegment(scaling ImageScaling, segment
 
 // ImageScalingForSegment returns the image scaling mode associated with the specified segment.
 func (sc *SegmentedCell) ImageScalingForSegment(segment int) ImageScaling {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -537,6 +558,7 @@ func (sc *SegmentedCell) ImageScalingForSegment(segment int) ImageScaling {
 
 // SetLabelForSegment sets the label for the specified segment.
 func (sc *SegmentedCell) SetLabelForSegment(label string, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
 	})
@@ -545,6 +567,7 @@ func (sc *SegmentedCell) SetLabelForSegment(label string, segment int) {
 
 // LabelForSegment returns the label of the specified segment.
 func (sc *SegmentedCell) LabelForSegment(segment int) string {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -561,6 +584,7 @@ func (sc *SegmentedCell) LabelForSegment(segment int) string {
 
 // SetSelectedForSegment sets the selection state of the specified segment.
 func (sc *SegmentedCell) SetSelectedForSegment(selected bool, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelected:forSegment:"), selected, segment)
 	})
@@ -569,6 +593,7 @@ func (sc *SegmentedCell) SetSelectedForSegment(selected bool, segment int) {
 
 // IsSelectedForSegment returns a Boolean value indicating whether the specified segment is selected,
 func (sc *SegmentedCell) IsSelectedForSegment(segment int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -582,6 +607,7 @@ func (sc *SegmentedCell) IsSelectedForSegment(segment int) bool {
 
 // SetEnabledForSegment sets the enabled state of the specified segment
 func (sc *SegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
 	})
@@ -590,6 +616,7 @@ func (sc *SegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
 
 // IsEnabledForSegment returns a Boolean value indicating whether the specified segment is enabled.
 func (sc *SegmentedCell) IsEnabledForSegment(segment int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -603,6 +630,8 @@ func (sc *SegmentedCell) IsEnabledForSegment(segment int) bool {
 
 // SetMenuForSegment sets the menu for the specified segment.
 func (sc *SegmentedCell) SetMenuForSegment(menu *Menu, segment int) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
 	})
@@ -611,6 +640,7 @@ func (sc *SegmentedCell) SetMenuForSegment(menu *Menu, segment int) {
 
 // MenuForSegment returns the menu for the specified segment.
 func (sc *SegmentedCell) MenuForSegment(segment int) *Menu {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -624,6 +654,7 @@ func (sc *SegmentedCell) MenuForSegment(segment int) *Menu {
 
 // SetToolTipForSegment sets the tooltip for the specified segment.
 func (sc *SegmentedCell) SetToolTipForSegment(toolTip string, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
 	})
@@ -632,6 +663,7 @@ func (sc *SegmentedCell) SetToolTipForSegment(toolTip string, segment int) {
 
 // ToolTipForSegment returns the tooltip of the specified segment.
 func (sc *SegmentedCell) ToolTipForSegment(segment int) string {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -648,6 +680,7 @@ func (sc *SegmentedCell) ToolTipForSegment(segment int) string {
 
 // SetTagForSegment sets the tag for the specified segment.
 func (sc *SegmentedCell) SetTagForSegment(tag int, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:forSegment:"), tag, segment)
 	})
@@ -656,6 +689,7 @@ func (sc *SegmentedCell) SetTagForSegment(tag int, segment int) {
 
 // TagForSegment returns the tag of the specified segment.
 func (sc *SegmentedCell) TagForSegment(segment int) int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -669,6 +703,8 @@ func (sc *SegmentedCell) TagForSegment(segment int) int {
 
 // DrawSegmentInFrameWithView draws the image and label of the segment in the specified view.
 func (sc *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *View) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawSegment:inFrame:withView:"), segment, frame, objref.IDOf(controlView))
 	})
@@ -677,6 +713,7 @@ func (sc *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefound
 
 // SegmentCount returns the segment count.
 func (sc *SegmentedCell) SegmentCount() int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -690,6 +727,7 @@ func (sc *SegmentedCell) SegmentCount() int {
 
 // SelectedSegment returns the selected segment.
 func (sc *SegmentedCell) SelectedSegment() int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -703,6 +741,7 @@ func (sc *SegmentedCell) SelectedSegment() int {
 
 // TrackingMode returns the tracking mode.
 func (sc *SegmentedCell) TrackingMode() SegmentSwitchTracking {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 SegmentSwitchTracking
 	purego.Main(func() {
 		_mainthread0 = func() SegmentSwitchTracking {
@@ -716,6 +755,7 @@ func (sc *SegmentedCell) TrackingMode() SegmentSwitchTracking {
 
 // SegmentStyle returns the segment style.
 func (sc *SegmentedCell) SegmentStyle() SegmentStyle {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 SegmentStyle
 	purego.Main(func() {
 		_mainthread0 = func() SegmentStyle {
@@ -729,6 +769,7 @@ func (sc *SegmentedCell) SegmentStyle() SegmentStyle {
 
 // InteriorBackgroundStyleForSegment returns the interior background style for the specified segment.
 func (sc *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) BackgroundStyle {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 BackgroundStyle
 	purego.Main(func() {
 		_mainthread0 = func() BackgroundStyle {

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -131,12 +133,14 @@ func (nrb *NNReduceBinary) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY
 
 // PrimarySourceClipRect returns the source rectangle to use when reading data from primary source A MTLRegion that indicates which part of the primary source to read. If the clipRectPrimarySource does not lie completely within the primary source image, the intersection of the image bounds and clipRectPrimarySource will be used. The primarySourceClipRect replaces the MPSBinaryImageKernel primaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (nrb *NNReduceBinary) PrimarySourceClipRect() metal.MTLRegion {
+	defer runtime.KeepAlive(nrb)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(nrb), objc.RegisterName("primarySourceClipRect"))
 	return _r
 }
 
 // SecondarySourceClipRect returns the source rectangle to use when reading data from secondary source A MTLRegion that indicates which part of the secondary source to read. If the clipRectSecondarySource does not lie completely within the secondary source image, the intersection of the image bounds and clipRectSecondarySource will be used. The secondarySourceClipRect replaces the MPSBinaryImageKernel secondaryOffset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSBinaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
 func (nrb *NNReduceBinary) SecondarySourceClipRect() metal.MTLRegion {
+	defer runtime.KeepAlive(nrb)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(nrb), objc.RegisterName("secondarySourceClipRect"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package videotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func frameProcessorAdopt(id objc.ID) *FrameProcessor {
 
 // Description returns the object's -description text.
 func (fp *FrameProcessor) Description() string {
+	defer runtime.KeepAlive(fp)
 	return rt.Description(objref.IDOf(fp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fp *FrameProcessor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fp *FrameProcessor) IsKind(className string) bool {
+	defer runtime.KeepAlive(fp)
 	return rt.IsKind(objref.IDOf(fp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fp *FrameProcessor) String() string {
+	defer runtime.KeepAlive(fp)
 	return rt.Description(objref.IDOf(fp))
 }
 
@@ -74,5 +81,6 @@ func NewFrameProcessor() *FrameProcessor {
 
 // EndSession performs all necessary tasks to end the session.
 func (fp *FrameProcessor) EndSession() {
+	defer runtime.KeepAlive(fp)
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("endSession"))
 }

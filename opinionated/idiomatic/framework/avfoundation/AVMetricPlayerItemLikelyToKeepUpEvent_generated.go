@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,12 +50,14 @@ func metricPlayerItemLikelyToKeepUpEventAdopt(id objc.ID) *MetricPlayerItemLikel
 
 // Variant returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
 func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
+	defer runtime.KeepAlive(mpiltkue)
 	_r := objc.Send[objc.ID](objref.IDOf(mpiltkue), objc.RegisterName("variant"))
 	return AssetVariantFromID(_r)
 }
 
 // TimeTaken returns the total time taken to reach likely to keep up.
 func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
+	defer runtime.KeepAlive(mpiltkue)
 	_r := objc.Send[float64](objref.IDOf(mpiltkue), objc.RegisterName("timeTaken"))
 	return _r
 }
@@ -62,6 +66,7 @@ func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (mpiltkue *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []obj.Object {
+	defer runtime.KeepAlive(mpiltkue)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpiltkue), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

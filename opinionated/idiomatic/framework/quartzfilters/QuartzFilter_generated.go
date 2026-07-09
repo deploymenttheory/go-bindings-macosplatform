@@ -5,6 +5,8 @@
 package quartzfilters
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func quartzFilterAdopt(id objc.ID) *QuartzFilter {
 
 // Description returns the object's -description text.
 func (qf *QuartzFilter) Description() string {
+	defer runtime.KeepAlive(qf)
 	return rt.Description(objref.IDOf(qf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (qf *QuartzFilter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(qf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(qf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (qf *QuartzFilter) IsKind(className string) bool {
+	defer runtime.KeepAlive(qf)
 	return rt.IsKind(objref.IDOf(qf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (qf *QuartzFilter) String() string {
+	defer runtime.KeepAlive(qf)
 	return rt.Description(objref.IDOf(qf))
 }
 
@@ -72,18 +79,21 @@ func NewQuartzFilter() *QuartzFilter {
 
 // Properties returns the properties.
 func (qf *QuartzFilter) Properties() obj.Object {
+	defer runtime.KeepAlive(qf)
 	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
 // URL returns the URL.
-func (qf *QuartzFilter) URL() obj.Object {
+func (qf *QuartzFilter) URL() string {
+	defer runtime.KeepAlive(qf)
 	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // LocalizedName returns the localized name.
 func (qf *QuartzFilter) LocalizedName() string {
+	defer runtime.KeepAlive(qf)
 	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -93,11 +103,15 @@ func (qf *QuartzFilter) LocalizedName() string {
 
 // ApplyToContext applies to context.
 func (qf *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
+	defer runtime.KeepAlive(qf)
+	defer runtime.KeepAlive(aContext)
 	_r := objc.Send[bool](objref.IDOf(qf), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
 	return _r
 }
 
 // RemoveFromContext removes from context.
 func (qf *QuartzFilter) RemoveFromContext(aContext obj.Object) {
+	defer runtime.KeepAlive(qf)
+	defer runtime.KeepAlive(aContext)
 	objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
 }

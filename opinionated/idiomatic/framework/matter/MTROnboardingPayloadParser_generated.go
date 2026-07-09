@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTROnboardingPayloadParserAdopt(id objc.ID) *MTROnboardingPayloadParser {
 
 // Description returns the object's -description text.
 func (mopp *MTROnboardingPayloadParser) Description() string {
+	defer runtime.KeepAlive(mopp)
 	return rt.Description(objref.IDOf(mopp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mopp *MTROnboardingPayloadParser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mopp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mopp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mopp *MTROnboardingPayloadParser) IsKind(className string) bool {
+	defer runtime.KeepAlive(mopp)
 	return rt.IsKind(objref.IDOf(mopp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mopp *MTROnboardingPayloadParser) String() string {
+	defer runtime.KeepAlive(mopp)
 	return rt.Description(objref.IDOf(mopp))
 }
 

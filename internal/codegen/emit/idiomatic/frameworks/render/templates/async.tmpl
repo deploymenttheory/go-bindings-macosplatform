@@ -10,6 +10,9 @@
 {{end}}// {{.GoName}} blocks until the operation completes or ctx is cancelled.
 {{if .HasResult -}}
 func {{.Recv}}{{.GoName}}({{.ParamStr}}) (result {{.ResultGoType}}, err error) {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 type _result struct {
 val {{.ResultGoType}}
 err error
@@ -32,6 +35,9 @@ return _zero, ctx.Err()
 }
 {{else -}}
 func {{.Recv}}{{.GoName}}({{.ParamStr}}) error {
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
 _ch := make(chan error, 1)
 _block := objc.NewBlock(func(_ objc.Block{{range .ClosureParams}}, {{.}}{{end}}) {
 {{if .ErrConvExpr}}var _err error

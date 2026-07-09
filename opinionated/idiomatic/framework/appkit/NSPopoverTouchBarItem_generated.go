@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func NewPopoverTouchBarItem() *PopoverTouchBarItem {
 
 // WithPopoverTouchBar sets the bar displayed when this item is “popped.”
 func (ptbi *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
+	defer runtime.KeepAlive(popoverTouchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
 	})
@@ -76,6 +79,7 @@ func (ptbi *PopoverTouchBarItem) WithCustomizationLabel(customizationLabel strin
 
 // WithCollapsedRepresentation sets the view displayed when this item is displayed in its parent bar.
 func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem {
+	defer runtime.KeepAlive(collapsedRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
 	})
@@ -84,6 +88,7 @@ func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresenta
 
 // WithCollapsedRepresentationImage sets the image displayed by the button for the default collapsed representation.
 func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
+	defer runtime.KeepAlive(collapsedRepresentationImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
 	})
@@ -100,6 +105,7 @@ func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepre
 
 // WithPressAndHoldTouchBar sets the bar that is displayed when a user press-and-holds on the popover item.
 func (ptbi *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
+	defer runtime.KeepAlive(pressAndHoldTouchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
 	})
@@ -124,6 +130,8 @@ func (ptbi *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float
 
 // ShowPopover replaces the main bar with this item’s popover bar.
 func (ptbi *PopoverTouchBarItem) ShowPopover(sender obj.Object) {
+	defer runtime.KeepAlive(ptbi)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("showPopover:"), objref.IDOf(sender))
 	})
@@ -132,6 +140,8 @@ func (ptbi *PopoverTouchBarItem) ShowPopover(sender obj.Object) {
 
 // DismissPopover restores the previously visible main bar.
 func (ptbi *PopoverTouchBarItem) DismissPopover(sender obj.Object) {
+	defer runtime.KeepAlive(ptbi)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("dismissPopover:"), objref.IDOf(sender))
 	})
@@ -140,6 +150,7 @@ func (ptbi *PopoverTouchBarItem) DismissPopover(sender obj.Object) {
 
 // MakeStandardActivatePopoverGestureRecognizer returns a gesture recognizer, configured to invoke the showPopover: method.
 func (ptbi *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *GestureRecognizer
 	purego.Main(func() {
 		_mainthread0 = func() *GestureRecognizer {
@@ -153,6 +164,7 @@ func (ptbi *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() 
 
 // PopoverTouchBar returns the popover touch bar.
 func (ptbi *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *TouchBar
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBar {
@@ -166,6 +178,7 @@ func (ptbi *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
 
 // CollapsedRepresentation returns the collapsed representation.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentation() *View {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -179,6 +192,7 @@ func (ptbi *PopoverTouchBarItem) CollapsedRepresentation() *View {
 
 // CollapsedRepresentationImage returns the collapsed representation image.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -192,6 +206,7 @@ func (ptbi *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
 
 // CollapsedRepresentationLabel returns the collapsed representation label.
 func (ptbi *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -208,6 +223,7 @@ func (ptbi *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
 
 // PressAndHoldTouchBar returns the press and hold touch bar.
 func (ptbi *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 *TouchBar
 	purego.Main(func() {
 		_mainthread0 = func() *TouchBar {
@@ -221,6 +237,7 @@ func (ptbi *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
 
 // ShowsCloseButton wraps the corresponding Objective-C method.
 func (ptbi *PopoverTouchBarItem) ShowsCloseButton() bool {
+	defer runtime.KeepAlive(ptbi)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func skinnerAdopt(id objc.ID) *Skinner {
 
 // Description returns the object's -description text.
 func (s *Skinner) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Skinner) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Skinner) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Skinner) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -75,12 +82,14 @@ func NewSkinner() *Skinner {
 
 // WithSkeleton sets the root node of the skinner object’s animation skeleton.
 func (s *Skinner) WithSkeleton(skeleton NodeProvider) *Skinner {
+	defer runtime.KeepAlive(skeleton)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 	return s
 }
 
 // WithBaseGeometry sets the geometry whose surface the skinner’s animation skeleton deforms.
 func (s *Skinner) WithBaseGeometry(baseGeometry GeometryProvider) *Skinner {
+	defer runtime.KeepAlive(baseGeometry)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseGeometry:"), objref.IDOf(baseGeometry))
 	return s
 }
@@ -93,18 +102,21 @@ func (s *Skinner) WithBaseGeometryBindTransform(baseGeometryBindTransform quartz
 
 // Skeleton specifies the skeleton of the receiver. When setting a new skeleton, the new skeleton must have the same hierarchy of joints.
 func (s *Skinner) Skeleton() *Node {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("skeleton"))
 	return NodeFromID(_r)
 }
 
 // BaseGeometry specifies the base geometry of the receiver. Updating this will change the geometry of all the nodes sharing the skinner. Access the node's geometry if you want to update this specific skinner properties (materials for example). Access this property if you want a whole new geometry (which will necessarily be shared among the skinner instances), with different sources, for instance.
 func (s *Skinner) BaseGeometry() *Geometry {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("baseGeometry"))
 	return GeometryFromID(_r)
 }
 
 // BaseGeometryBindTransform specifies the transform of the baseGeometry at the time when the mesh was bound to a skeleton. This transforms the baseGeometry from object space to a space on which the skinning then applies.
 func (s *Skinner) BaseGeometryBindTransform() quartzcore.CATransform3D {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(s), objc.RegisterName("baseGeometryBindTransform"))
 	return _r
 }
@@ -113,6 +125,7 @@ func (s *Skinner) BaseGeometryBindTransform() quartzcore.CATransform3D {
 //
 // BoneInverseBindTransforms returns the collection as a Go slice.
 func (s *Skinner) BoneInverseBindTransforms() []obj.Object {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("boneInverseBindTransforms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -121,18 +134,21 @@ func (s *Skinner) BoneInverseBindTransforms() []obj.Object {
 //
 // Bones returns the collection as a Go slice.
 func (s *Skinner) Bones() []*Node {
+	defer runtime.KeepAlive(s)
 	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("bones"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
 // BoneWeights returns the bone weights of the receiver.
 func (s *Skinner) BoneWeights() *GeometrySource {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("boneWeights"))
 	return GeometrySourceFromID(_r)
 }
 
 // BoneIndices returns the bone indices of the receiver.
 func (s *Skinner) BoneIndices() *GeometrySource {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("boneIndices"))
 	return GeometrySourceFromID(_r)
 }

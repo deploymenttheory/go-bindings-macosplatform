@@ -5,7 +5,10 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func recordingOutputConfigurationAdopt(id objc.ID) *RecordingOutputConfiguration
 
 // Description returns the object's -description text.
 func (roc *RecordingOutputConfiguration) Description() string {
+	defer runtime.KeepAlive(roc)
 	return rt.Description(objref.IDOf(roc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (roc *RecordingOutputConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(roc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(roc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (roc *RecordingOutputConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(roc)
 	return rt.IsKind(objref.IDOf(roc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (roc *RecordingOutputConfiguration) String() string {
+	defer runtime.KeepAlive(roc)
 	return rt.Description(objref.IDOf(roc))
 }
 
@@ -78,38 +86,44 @@ func (roc *RecordingOutputConfiguration) WithOutputURL(outputURL string) *Record
 
 // WithVideoCodecType sets specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
 func (roc *RecordingOutputConfiguration) WithVideoCodecType(videoCodecType obj.Object) *RecordingOutputConfiguration {
+	defer runtime.KeepAlive(videoCodecType)
 	objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("setVideoCodecType:"), objref.IDOf(videoCodecType))
 	return roc
 }
 
 // WithOutputFileType sets specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
 func (roc *RecordingOutputConfiguration) WithOutputFileType(outputFileType obj.Object) *RecordingOutputConfiguration {
+	defer runtime.KeepAlive(outputFileType)
 	objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 	return roc
 }
 
 // OutputURL specifies output URL to save the recording.
-func (roc *RecordingOutputConfiguration) OutputURL() obj.Object {
+func (roc *RecordingOutputConfiguration) OutputURL() string {
+	defer runtime.KeepAlive(roc)
 	_r := objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("outputURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // VideoCodecType specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
-func (roc *RecordingOutputConfiguration) VideoCodecType() obj.Object {
+func (roc *RecordingOutputConfiguration) VideoCodecType() *foundation.String {
+	defer runtime.KeepAlive(roc)
 	_r := objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("videoCodecType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // OutputFileType specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
-func (roc *RecordingOutputConfiguration) OutputFileType() obj.Object {
+func (roc *RecordingOutputConfiguration) OutputFileType() *foundation.String {
+	defer runtime.KeepAlive(roc)
 	_r := objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("outputFileType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AvailableVideoCodecTypes returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
 //
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (roc *RecordingOutputConfiguration) AvailableVideoCodecTypes() []obj.Object {
+	defer runtime.KeepAlive(roc)
 	_arr := objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("availableVideoCodecTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -118,6 +132,7 @@ func (roc *RecordingOutputConfiguration) AvailableVideoCodecTypes() []obj.Object
 //
 // AvailableOutputFileTypes returns the collection as a Go slice.
 func (roc *RecordingOutputConfiguration) AvailableOutputFileTypes() []obj.Object {
+	defer runtime.KeepAlive(roc)
 	_arr := objc.Send[objc.ID](objref.IDOf(roc), objc.RegisterName("availableOutputFileTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func captureDeskViewApplicationLaunchConfigurationAdopt(id objc.ID) *CaptureDesk
 
 // Description returns the object's -description text.
 func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) Description() string {
+	defer runtime.KeepAlive(cdvalc)
 	return rt.Description(objref.IDOf(cdvalc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdvalc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdvalc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdvalc)
 	return rt.IsKind(objref.IDOf(cdvalc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) String() string {
+	defer runtime.KeepAlive(cdvalc)
 	return rt.Description(objref.IDOf(cdvalc))
 }
 
@@ -87,12 +94,14 @@ func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) WithRequiresSetUpMo
 
 // MainWindowFrame specifies the desired frame of the Desk View application's main window when launched. Default value is CGRectZero. The app will use a default value in this case (the user's previously selected position). mainWindowFrame is specified in global screen coordinates. When launching the Desk View application from a Mac Catalyst app, window origin is top left. When launched from a native macOS app, window origin is bottom left.
 func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) MainWindowFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(cdvalc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cdvalc), objc.RegisterName("mainWindowFrame"))
 	return _r
 }
 
 // RequiresSetUpModeCompletion reports whether presentWithLaunchConfiguration:completionHandler:'s completionHandler fires immediately after the application is launched, or only after the user has completed set up. The Desk View application launches in set up mode, showing the full field of view of an Ultra Wide camera with a superimposed trapezoid indicating the desk region crop that will be shown once set up is complete. By default, your presentWithLaunchConfiguration:completionHandler:'s completionHandler fires after the Desk View application is launched and visible to the user. By setting this property to true, your completionHandler only fires when the user has completed set up mode and transitioned to the cropped Desk View mode.
 func (cdvalc *CaptureDeskViewApplicationLaunchConfiguration) RequiresSetUpModeCompletion() bool {
+	defer runtime.KeepAlive(cdvalc)
 	_r := objc.Send[bool](objref.IDOf(cdvalc), objc.RegisterName("requiresSetUpModeCompletion"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,8 @@ func mathExpressionFractionAdopt(id objc.ID) *MathExpressionFraction {
 
 // NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression creates a new MathExpressionFraction.
 func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numeratorExpression *MathExpression, denimonatorExpression *MathExpression) *MathExpressionFraction {
+	defer runtime.KeepAlive(numeratorExpression)
+	defer runtime.KeepAlive(denimonatorExpression)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionFraction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNumeratorExpression:denimonatorExpression:"), objref.IDOf(numeratorExpression), objref.IDOf(denimonatorExpression))
 	return mathExpressionFractionAdopt(_id)
@@ -52,12 +56,14 @@ func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numer
 
 // NumeratorExpression returns the numerator expression.
 func (mef *MathExpressionFraction) NumeratorExpression() *MathExpression {
+	defer runtime.KeepAlive(mef)
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("numeratorExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // DenimonatorExpression returns the denimonator expression.
 func (mef *MathExpressionFraction) DenimonatorExpression() *MathExpression {
+	defer runtime.KeepAlive(mef)
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("denimonatorExpression"))
 	return MathExpressionFromID(_r)
 }

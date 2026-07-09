@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -84,6 +85,7 @@ func (dabpr *DetectAnimalBodyPoseRequest) WithRevision(revision int) *DetectAnim
 //
 // SupportedJointNames returns the collection as a Go slice.
 func (dabpr *DetectAnimalBodyPoseRequest) SupportedJointNames() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(dabpr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("supportedJointNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -96,6 +98,7 @@ func (dabpr *DetectAnimalBodyPoseRequest) SupportedJointNames() (result []obj.Ob
 //
 // SupportedJointsGroupNames returns the collection as a Go slice.
 func (dabpr *DetectAnimalBodyPoseRequest) SupportedJointsGroupNames() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(dabpr)
 	var _nsErr uintptr
 	_arr := objc.Send[objc.ID](objref.IDOf(dabpr), objc.RegisterName("supportedJointsGroupNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

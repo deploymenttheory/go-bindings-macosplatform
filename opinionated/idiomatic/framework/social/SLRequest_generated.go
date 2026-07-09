@@ -5,7 +5,10 @@
 package social
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func requestAdopt(id objc.ID) *Request {
 
 // Description returns the object's -description text.
 func (r *Request) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Request) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Request) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Request) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -74,46 +82,54 @@ func NewRequest() *Request {
 
 // WithAccount sets account information used to authenticate the request.
 func (r *Request) WithAccount(account obj.Object) *Request {
+	defer runtime.KeepAlive(account)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setAccount:"), objref.IDOf(account))
 	return r
 }
 
 // AddMultipartDataWithNameTypeFilename specifies a named multipart POST body for this request.
-func (r *Request) AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("addMultipartData:withName:type:filename:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_), purego.NSString(filename))
+func (r *Request) AddMultipartDataWithNameTypeFilename(data []byte, name string, type_ string, filename string) {
+	defer runtime.KeepAlive(r)
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("addMultipartData:withName:type:filename:"), rt.BytesToNSData(data), purego.NSString(name), purego.NSString(type_), purego.NSString(filename))
 }
 
 // AddMultipartDataWithNameType specifies a named multipart POST body for this request.
-func (r *Request) AddMultipartDataWithNameType(data obj.Object, name string, type_ string) {
-	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("addMultipartData:withName:type:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_))
+func (r *Request) AddMultipartDataWithNameType(data []byte, name string, type_ string) {
+	defer runtime.KeepAlive(r)
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("addMultipartData:withName:type:"), rt.BytesToNSData(data), purego.NSString(name), purego.NSString(type_))
 }
 
 // PreparedURLRequest returns an authorized URL request that can be sent using an NSURLConnection object.
-func (r *Request) PreparedURLRequest() obj.Object {
+func (r *Request) PreparedURLRequest() *foundation.URLRequest {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("preparedURLRequest"))
-	return obj.Wrap(_r)
+	return foundation.URLRequestFromID(_r)
 }
 
 // Account returns the account.
 func (r *Request) Account() obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("account"))
 	return obj.Wrap(_r)
 }
 
 // RequestMethod returns the request method.
 func (r *Request) RequestMethod() RequestMethod {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[RequestMethod](objref.IDOf(r), objc.RegisterName("requestMethod"))
 	return _r
 }
 
 // URL returns the URL.
-func (r *Request) URL() obj.Object {
+func (r *Request) URL() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Parameters returns the parameters.
 func (r *Request) Parameters() obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }

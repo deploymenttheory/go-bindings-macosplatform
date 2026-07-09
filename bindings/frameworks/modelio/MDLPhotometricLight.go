@@ -39,8 +39,8 @@ func MDLPhotometricLightFromID(id objc.ID) *MDLPhotometricLight {
 }
 
 // Initializes a light from photometry data in the file at the specified URL.
-func (o *MDLPhotometricLight) InitWithIESProfile(uRL *foundation.NSURL) *MDLPhotometricLight {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelInitWithIESProfile, uRL.Ptr())
+func (o *MDLPhotometricLight) InitWithIESProfile(url *foundation.NSURL) *MDLPhotometricLight {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLPhotometricLightSelInitWithIESProfile, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

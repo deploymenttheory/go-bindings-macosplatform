@@ -5,6 +5,8 @@
 package accounts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func accountAdopt(id objc.ID) *Account {
 
 // Description returns the object's -description text.
 func (a *Account) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Account) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Account) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Account) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // NewAccountWithAccountType initializes a new account of the specified type.
 func NewAccountWithAccountType(type_ *AccountType) *Account {
+	defer runtime.KeepAlive(type_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ACAccount")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAccountType:"), objref.IDOf(type_))
 	return accountAdopt(_id)
@@ -75,6 +83,7 @@ func NewAccountWithAccountType(type_ *AccountType) *Account {
 
 // WithAccountType sets the type of service account.
 func (a *Account) WithAccountType(accountType *AccountType) *Account {
+	defer runtime.KeepAlive(accountType)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setAccountType:"), objref.IDOf(accountType))
 	return a
 }
@@ -93,12 +102,14 @@ func (a *Account) WithUsername(username string) *Account {
 
 // WithCredential sets the credential used to authenticate the user of this account.
 func (a *Account) WithCredential(credential *AccountCredential) *Account {
+	defer runtime.KeepAlive(credential)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 	return a
 }
 
 // Identifier returns the identifier.
 func (a *Account) Identifier() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -108,12 +119,14 @@ func (a *Account) Identifier() string {
 
 // AccountType returns the account type.
 func (a *Account) AccountType() *AccountType {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accountType"))
 	return AccountTypeFromID(_r)
 }
 
 // AccountDescription returns the account description.
 func (a *Account) AccountDescription() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accountDescription"))
 	if _r == 0 {
 		return ""
@@ -123,6 +136,7 @@ func (a *Account) AccountDescription() string {
 
 // Username returns the username.
 func (a *Account) Username() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
@@ -132,6 +146,7 @@ func (a *Account) Username() string {
 
 // Credential returns the credential.
 func (a *Account) Credential() *AccountCredential {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("credential"))
 	return AccountCredentialFromID(_r)
 }

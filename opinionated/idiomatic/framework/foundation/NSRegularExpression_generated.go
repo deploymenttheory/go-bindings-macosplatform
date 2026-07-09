@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,27 +53,32 @@ func regularExpressionAdopt(id objc.ID) *RegularExpression {
 
 // Description returns the object's -description text.
 func (re *RegularExpression) Description() string {
+	defer runtime.KeepAlive(re)
 	return rt.Description(objref.IDOf(re))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (re *RegularExpression) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(re), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (re *RegularExpression) IsKind(className string) bool {
+	defer runtime.KeepAlive(re)
 	return rt.IsKind(objref.IDOf(re), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (re *RegularExpression) String() string {
+	defer runtime.KeepAlive(re)
 	return rt.Description(objref.IDOf(re))
 }
 
-// NewRegularExpressionWithPatternOptionsError returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
-func NewRegularExpressionWithPatternOptionsError(pattern string, options RegularExpressionOptions) (result *RegularExpression, err error) {
+// NewRegularExpressionWithPatternOptions returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
+func NewRegularExpressionWithPatternOptions(pattern string, options RegularExpressionOptions) (result *RegularExpression, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPattern:options:error:"), purego.NSString(pattern), options, unsafe.Pointer(&_nsErr))
@@ -89,13 +95,14 @@ func (re *RegularExpression) WithObservationInfo(observationInfo unsafe.Pointer)
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (re *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
-	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (re *RegularExpression) WithScriptingProperties(scriptingProperties map[string]obj.Object) *RegularExpression {
+	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return re
 }
 
 // Pattern returns the pattern.
 func (re *RegularExpression) Pattern() string {
+	defer runtime.KeepAlive(re)
 	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("pattern"))
 	if _r == 0 {
 		return ""
@@ -105,19 +112,23 @@ func (re *RegularExpression) Pattern() string {
 
 // Options returns the options.
 func (re *RegularExpression) Options() RegularExpressionOptions {
+	defer runtime.KeepAlive(re)
 	_r := objc.Send[RegularExpressionOptions](objref.IDOf(re), objc.RegisterName("options"))
 	return _r
 }
 
 // NumberOfCaptureGroups returns the number of capture groups.
 func (re *RegularExpression) NumberOfCaptureGroups() int {
+	defer runtime.KeepAlive(re)
 	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfCaptureGroups"))
 	return _r
 }
 
 // ReplacementStringForResultInStringOffsetTemplate used to perform template substitution for a single result for clients implementing their own replace functionality.
-func (re *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("replacementStringForResult:inString:offset:template:"), objref.IDOf(result), purego.NSString(string_), offset, purego.NSString(templ))
+func (re *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, str string, offset int, templ string) string {
+	defer runtime.KeepAlive(re)
+	defer runtime.KeepAlive(result)
+	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("replacementStringForResult:inString:offset:template:"), objref.IDOf(result), purego.NSString(str), offset, purego.NSString(templ))
 	if _r == 0 {
 		return ""
 	}

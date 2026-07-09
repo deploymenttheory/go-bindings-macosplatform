@@ -8,9 +8,9 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
@@ -79,9 +79,9 @@ func emitEnums(
 	var enums []view.Enum
 	needsFmt, needsStrings := false, false
 	for _, goType := range refNames {
-		// Use the de-prefixed name, matching localizeEnumType so signatures and
-		// this definition agree.
-		localName := deprefixEnumName(goType, fc.prefix)
+		// Use the shared local spelling, matching localizeEnumType so signatures
+		// and this definition agree.
+		localName := fc.localEnumTypeName(goType)
 		if emitted[localName] {
 			continue
 		}
@@ -129,6 +129,11 @@ func buildEnumView(goName string, enum meta.Enum, prefix string) view.Enum {
 	goType = rawfw.MapEnumGoType(goType)
 	goType = rawfw.UpgradeEnumTypeIfOverflow(goType, enum.Members)
 
+	// SCREAMING_SNAKE C constants get idiomatic const names prefixed with the
+	// enum's own Go type name (HV_EXIT_REASON_CANCELED → ExitReasonCanceled);
+	// ObjC-style members keep the class-prefix strip.
+	cMemberNames := cEnumMemberNames(goName, enum.Members)
+
 	type nv struct{ name, value string }
 	seen := map[nv]bool{}
 	var members []view.EnumMember
@@ -137,6 +142,9 @@ func buildEnumView(goName string, enum meta.Enum, prefix string) view.Enum {
 			continue
 		}
 		constName := deprefixEnumName(naming.GoTypeName(member.Name), prefix)
+		if cName, isC := cMemberNames[member.Name]; isC {
+			constName = cName
+		}
 		k := nv{constName, member.Value}
 		if seen[k] {
 			continue

@@ -5,6 +5,8 @@
 package cinematic
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -51,27 +53,33 @@ func assetInfoAdopt(id objc.ID) *AssetInfo {
 
 // Description returns the object's -description text.
 func (ai *AssetInfo) Description() string {
+	defer runtime.KeepAlive(ai)
 	return rt.Description(objref.IDOf(ai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ai *AssetInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ai *AssetInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(ai)
 	return rt.IsKind(objref.IDOf(ai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ai *AssetInfo) String() string {
+	defer runtime.KeepAlive(ai)
 	return rt.Description(objref.IDOf(ai))
 }
 
 // Asset returns the asset.
 func (ai *AssetInfo) Asset() obj.Object {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("asset"))
 	return obj.Wrap(_r)
 }
@@ -80,54 +88,63 @@ func (ai *AssetInfo) Asset() obj.Object {
 //
 // AllCinematicTracks returns the collection as a Go slice.
 func (ai *AssetInfo) AllCinematicTracks() []obj.Object {
+	defer runtime.KeepAlive(ai)
 	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("allCinematicTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CinematicVideoTrack returns the cinematic video track.
 func (ai *AssetInfo) CinematicVideoTrack() obj.Object {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicVideoTrack"))
 	return obj.Wrap(_r)
 }
 
 // CinematicDisparityTrack returns the cinematic disparity track.
 func (ai *AssetInfo) CinematicDisparityTrack() obj.Object {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicDisparityTrack"))
 	return obj.Wrap(_r)
 }
 
 // CinematicMetadataTrack returns the cinematic metadata track.
 func (ai *AssetInfo) CinematicMetadataTrack() obj.Object {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicMetadataTrack"))
 	return obj.Wrap(_r)
 }
 
 // TimeRange returns time range over which all cinematic tracks are valid.
 func (ai *AssetInfo) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(ai), objc.RegisterName("timeRange"))
 	return _r
 }
 
 // NaturalSize returns natural size at which cinematic video would be rendered
 func (ai *AssetInfo) NaturalSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ai), objc.RegisterName("naturalSize"))
 	return _r
 }
 
 // PreferredSize returns natural size at which cinematic video would be displayed. Same as naturalSize with preferredTransform applied.
 func (ai *AssetInfo) PreferredSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ai), objc.RegisterName("preferredSize"))
 	return _r
 }
 
 // PreferredTransform returns the preferred transform of the rendered image for display purposes. Always the identity transform or a multiple of a 90º rotation with no scaling.
 func (ai *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ai), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
 // FrameTimingTrack returns track to be used for frame timing
 func (ai *AssetInfo) FrameTimingTrack() obj.Object {
+	defer runtime.KeepAlive(ai)
 	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("frameTimingTrack"))
 	return obj.Wrap(_r)
 }
@@ -136,6 +153,7 @@ func (ai *AssetInfo) FrameTimingTrack() obj.Object {
 //
 // VideoCompositionTracks returns the collection as a Go slice.
 func (ai *AssetInfo) VideoCompositionTracks() []obj.Object {
+	defer runtime.KeepAlive(ai)
 	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("videoCompositionTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -144,6 +162,7 @@ func (ai *AssetInfo) VideoCompositionTracks() []obj.Object {
 //
 // VideoCompositionTrackIDs returns the collection as a Go slice.
 func (ai *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(ai)
 	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("videoCompositionTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -152,6 +171,7 @@ func (ai *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
 //
 // SampleDataTrackIDs returns the collection as a Go slice.
 func (ai *AssetInfo) SampleDataTrackIDs() []obj.Object {
+	defer runtime.KeepAlive(ai)
 	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("sampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

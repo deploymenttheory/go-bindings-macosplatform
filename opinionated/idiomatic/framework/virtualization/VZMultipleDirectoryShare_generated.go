@@ -5,9 +5,11 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,16 +55,17 @@ func NewMultipleDirectoryShare() *MultipleDirectoryShare {
 }
 
 // NewMultipleDirectoryShareWithDirectories creates the directory share with a set of directories on the host.
-func NewMultipleDirectoryShareWithDirectories(directories obj.Object) *MultipleDirectoryShare {
+func NewMultipleDirectoryShareWithDirectories(directories map[string]*SharedDirectory) *MultipleDirectoryShare {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMultipleDirectoryShare")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), objref.IDOf(directories))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), rt.MapToDict(directories, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *SharedDirectory) objc.ID { return objref.IDOf(_v) }))
 	return multipleDirectoryShareAdopt(_id)
 }
 
 // Directories returns the directories on the host to expose to the guest. The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised.
-func (mds *MultipleDirectoryShare) Directories() obj.Object {
+func (mds *MultipleDirectoryShare) Directories() map[string]*SharedDirectory {
+	defer runtime.KeepAlive(mds)
 	_r := objc.Send[objc.ID](objref.IDOf(mds), objc.RegisterName("directories"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *SharedDirectory { return SharedDirectoryFromID(_id) })
 }
 
 var _ DirectoryShareProvider = (*MultipleDirectoryShare)(nil)

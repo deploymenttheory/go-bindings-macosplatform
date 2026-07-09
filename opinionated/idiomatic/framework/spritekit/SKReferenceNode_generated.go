@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -76,6 +78,7 @@ func NewReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
 
 // NewReferenceNodeWithCoder a method that initializes a reference node from an archive.
 func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *ReferenceNode
 	purego.Main(func() {
 		_mainthread0 = func() *ReferenceNode {
@@ -177,6 +180,7 @@ func (rn *ReferenceNode) WithName(name string) *ReferenceNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (rn *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -185,6 +189,7 @@ func (rn *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNod
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (rn *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -193,6 +198,7 @@ func (rn *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (rn *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -209,9 +215,9 @@ func (rn *ReferenceNode) WithConstraints(items ...*Constraint) *ReferenceNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (rn *ReferenceNode) WithAttributeValues(attributeValues obj.Object) *ReferenceNode {
+func (rn *ReferenceNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *ReferenceNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return rn
 }
@@ -258,6 +264,7 @@ func (rn *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundatio
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (rn *ReferenceNode) WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -290,6 +297,8 @@ func (rn *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Re
 
 // DidLoadReferenceNode a method called by SpriteKit after the reference node’s contents are loaded.
 func (rn *ReferenceNode) DidLoadReferenceNode(node *Node) {
+	defer runtime.KeepAlive(rn)
+	defer runtime.KeepAlive(node)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
 	})
@@ -298,6 +307,7 @@ func (rn *ReferenceNode) DidLoadReferenceNode(node *Node) {
 
 // ResolveReferenceNode loads the reference node’s content and adds it as a new child node.
 func (rn *ReferenceNode) ResolveReferenceNode() {
+	defer runtime.KeepAlive(rn)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("resolveReferenceNode"))
 	})

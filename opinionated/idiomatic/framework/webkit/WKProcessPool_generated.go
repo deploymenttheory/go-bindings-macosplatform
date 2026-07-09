@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKProcessPoolAdopt(id objc.ID) *WKProcessPool {
 
 // Description returns the object's -description text.
 func (wpp *WKProcessPool) Description() string {
+	defer runtime.KeepAlive(wpp)
 	return rt.Description(objref.IDOf(wpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wpp *WKProcessPool) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wpp *WKProcessPool) IsKind(className string) bool {
+	defer runtime.KeepAlive(wpp)
 	return rt.IsKind(objref.IDOf(wpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wpp *WKProcessPool) String() string {
+	defer runtime.KeepAlive(wpp)
 	return rt.Description(objref.IDOf(wpp))
 }
 

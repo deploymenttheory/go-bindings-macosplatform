@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,35 +50,42 @@ func mTRBridgedDeviceBasicInformationClusterStartUpEventAdopt(id objc.ID) *MTRBr
 
 // Description returns the object's -description text.
 func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) Description() string {
+	defer runtime.KeepAlive(mbdbicsue)
 	return rt.Description(objref.IDOf(mbdbicsue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mbdbicsue)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mbdbicsue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mbdbicsue)
 	return rt.IsKind(objref.IDOf(mbdbicsue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) String() string {
+	defer runtime.KeepAlive(mbdbicsue)
 	return rt.Description(objref.IDOf(mbdbicsue))
 }
 
 // WithSoftwareVersion sets the software version.
 func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBridgedDeviceBasicInformationClusterStartUpEvent {
+	defer runtime.KeepAlive(softwareVersion)
 	objc.Send[objc.ID](objref.IDOf(mbdbicsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mbdbicsue
 }
 
 // SoftwareVersion returns the software version.
-func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
+func (mbdbicsue *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() *foundation.Number {
+	defer runtime.KeepAlive(mbdbicsue)
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbicsue), objc.RegisterName("softwareVersion"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRBridgedDeviceBasicInformationClusterStartUpEvent marks MTRBridgedDeviceBasicInformationClusterStartUpEvent — and, by embedding promotion, its

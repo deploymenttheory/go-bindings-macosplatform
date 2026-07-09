@@ -953,10 +953,10 @@ func Tk_NameOf3DBorder(border unsafe.Pointer) string {
 	return _fnTk_NameOf3DBorder(border)
 }
 
-var _fnTk_NameOfAnchor func(Tk_Anchor) string
+var _fnTk_NameOfAnchor func(Anchor) string
 
 // Tk_NameOfAnchor calls the Tk framework function Tk_NameOfAnchor.
-func Tk_NameOfAnchor(anchor Tk_Anchor) string {
+func Tk_NameOfAnchor(anchor Anchor) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_NameOfAnchor == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_NameOfAnchor, _lib, "Tk_NameOfAnchor")
@@ -1021,10 +1021,10 @@ func Tk_NameOfJoinStyle(join int) string {
 	return _fnTk_NameOfJoinStyle(join)
 }
 
-var _fnTk_NameOfJustify func(Tk_Justify) string
+var _fnTk_NameOfJustify func(Justify) string
 
 // Tk_NameOfJustify calls the Tk framework function Tk_NameOfJustify.
-func Tk_NameOfJustify(justify Tk_Justify) string {
+func Tk_NameOfJustify(justify Justify) string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnTk_NameOfJustify == nil {
 		ebipurego.RegisterLibFunc(&_fnTk_NameOfJustify, _lib, "Tk_NameOfJustify")

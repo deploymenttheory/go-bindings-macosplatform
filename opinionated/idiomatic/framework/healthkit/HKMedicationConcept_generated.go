@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func medicationConceptAdopt(id objc.ID) *MedicationConcept {
 
 // Description returns the object's -description text.
 func (mc *MedicationConcept) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MedicationConcept) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MedicationConcept) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MedicationConcept) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -74,12 +82,14 @@ func NewMedicationConcept() *MedicationConcept {
 
 // Identifier returns the unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
 func (mc *MedicationConcept) Identifier() *HealthConceptIdentifier {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("identifier"))
 	return HealthConceptIdentifierFromID(_r)
 }
 
 // DisplayText returns the display name for this medication. The name of the medication a person enters or selects during medication onboarding.
 func (mc *MedicationConcept) DisplayText() string {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("displayText"))
 	if _r == 0 {
 		return ""
@@ -88,13 +98,16 @@ func (mc *MedicationConcept) DisplayText() string {
 }
 
 // GeneralForm returns the general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
-func (mc *MedicationConcept) GeneralForm() obj.Object {
+func (mc *MedicationConcept) GeneralForm() *foundation.String {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("generalForm"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // RelatedCodings returns the set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
-func (mc *MedicationConcept) RelatedCodings() obj.Object {
+// The order of the returned elements is unspecified.
+func (mc *MedicationConcept) RelatedCodings() []*ClinicalCoding {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("relatedCodings"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *ClinicalCoding { return ClinicalCodingFromID(_id) })
 }

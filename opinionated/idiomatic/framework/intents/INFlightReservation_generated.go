@@ -5,9 +5,11 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,27 +50,35 @@ func flightReservationAdopt(id objc.ID) *FlightReservation {
 }
 
 // NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight creates a flight reservation with the specified contents and attributes.
-func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, flight *Flight) *FlightReservation {
+func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatFlight(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, reservedSeat *Seat, flight *Flight) *FlightReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservedSeat)
+	defer runtime.KeepAlive(flight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INFlightReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:flight:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(flight))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:flight:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(reservedSeat), objref.IDOf(flight))
 	return flightReservationAdopt(_id)
 }
 
 // NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight creates a new flight reservation with the specified contents and attributes.
-func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, flight *Flight) *FlightReservation {
+func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatFlight(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, flight *Flight) *FlightReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservedSeat)
+	defer runtime.KeepAlive(flight)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INFlightReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:flight:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(flight))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:flight:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(flight))
 	return flightReservationAdopt(_id)
 }
 
 // ReservedSeat returns the reserved seat.
 func (fr *FlightReservation) ReservedSeat() *Seat {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // Flight returns the flight.
 func (fr *FlightReservation) Flight() *Flight {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("flight"))
 	return FlightFromID(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREventRequestPathAdopt(id objc.ID) *MTREventRequestPath {
 
 // Description returns the object's -description text.
 func (merp *MTREventRequestPath) Description() string {
+	defer runtime.KeepAlive(merp)
 	return rt.Description(objref.IDOf(merp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (merp *MTREventRequestPath) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(merp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(merp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (merp *MTREventRequestPath) IsKind(className string) bool {
+	defer runtime.KeepAlive(merp)
 	return rt.IsKind(objref.IDOf(merp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (merp *MTREventRequestPath) String() string {
+	defer runtime.KeepAlive(merp)
 	return rt.Description(objref.IDOf(merp))
 }
 
@@ -71,19 +79,22 @@ func NewMTREventRequestPath() *MTREventRequestPath {
 }
 
 // Endpoint returns the endpoint.
-func (merp *MTREventRequestPath) Endpoint() obj.Object {
+func (merp *MTREventRequestPath) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(merp)
 	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Cluster returns the cluster.
-func (merp *MTREventRequestPath) Cluster() obj.Object {
+func (merp *MTREventRequestPath) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(merp)
 	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Event returns the event.
-func (merp *MTREventRequestPath) Event() obj.Object {
+func (merp *MTREventRequestPath) Event() *foundation.Number {
+	defer runtime.KeepAlive(merp)
 	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("event"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

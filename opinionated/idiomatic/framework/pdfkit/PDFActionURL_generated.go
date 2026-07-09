@@ -5,9 +5,10 @@
 package pdfkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -55,15 +56,16 @@ func NewActionURLWithURL(url string) *ActionURL {
 }
 
 // WithURL sets returns the URL associated with the URL action.
-func (au *ActionURL) WithURL(uRL string) *ActionURL {
-	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (au *ActionURL) WithURL(url string) *ActionURL {
+	objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return au
 }
 
 // URL returns the URL.
-func (au *ActionURL) URL() obj.Object {
+func (au *ActionURL) URL() string {
+	defer runtime.KeepAlive(au)
 	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ ActionProvider = (*ActionURL)(nil)

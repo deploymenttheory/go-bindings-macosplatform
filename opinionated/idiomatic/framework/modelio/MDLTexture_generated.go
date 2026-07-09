@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,29 +52,34 @@ func textureAdopt(id objc.ID) *Texture {
 
 // Description returns the object's -description text.
 func (t *Texture) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Texture) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Texture) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Texture) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube initializes a texture object with the specified image data and properties.
-func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData obj.Object, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount int, channelEncoding TextureChannelEncoding, isCube bool) *Texture {
+func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData []byte, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount int, channelEncoding TextureChannelEncoding, isCube bool) *Texture {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:"), objref.IDOf(pixelData), topLeftOrigin, purego.NSString(name), dimensions, rowStride, channelCount, channelEncoding, isCube)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:"), rt.BytesToNSData(pixelData), topLeftOrigin, purego.NSString(name), dimensions, rowStride, channelCount, channelEncoding, isCube)
 	return textureAdopt(_id)
 }
 
@@ -90,97 +96,115 @@ func (t *Texture) WithHasAlphaValues(hasAlphaValues bool) *Texture {
 }
 
 // WriteToURL exports the texture data to an image file at the specified URL.
-func (t *Texture) WriteToURL(uRL string) bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:"), rt.FileURL(uRL))
+func (t *Texture) WriteToURL(url string) bool {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:"), rt.FileURL(url))
 	return _r
 }
 
 // WriteToURLLevel write a particular level of a mipped texture to URL, deducing type from path extension
-func (t *Texture) WriteToURLLevel(uRL string, level int) bool {
-	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:level:"), rt.FileURL(uRL), level)
+func (t *Texture) WriteToURLLevel(url string, level int) bool {
+	defer runtime.KeepAlive(t)
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:level:"), rt.FileURL(url), level)
 	return _r
 }
 
 // WriteToURLType exports the texture data to an image file at the specified URL, of the specified type.
 func (t *Texture) WriteToURLType(nsurl string, type_ obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:type:"), rt.FileURL(nsurl), objref.IDOf(type_))
 	return _r
 }
 
 // WriteToURLTypeLevel write a particular level of a mipped texture to URL, using a specific UT type
 func (t *Texture) WriteToURLTypeLevel(nsurl string, type_ obj.Object, level int) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(type_)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("writeToURL:type:level:"), rt.FileURL(nsurl), objref.IDOf(type_), level)
 	return _r
 }
 
 // ImageFromTexture returns exports the texture data as a CoreGraphics image.
 func (t *Texture) ImageFromTexture() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("imageFromTexture"))
 	return obj.Wrap(_r)
 }
 
 // ImageFromTextureAtLevel wraps the corresponding Objective-C method.
 func (t *Texture) ImageFromTextureAtLevel(level int) obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("imageFromTextureAtLevel:"), level)
 	return obj.Wrap(_r)
 }
 
 // TexelDataWithTopLeftOrigin returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.
-func (t *Texture) TexelDataWithTopLeftOrigin() obj.Object {
+func (t *Texture) TexelDataWithTopLeftOrigin() []byte {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("texelDataWithTopLeftOrigin"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TexelDataWithBottomLeftOrigin returns the texture’s image data, organized such that its first pixel represents the bottom-left corner of the image.
-func (t *Texture) TexelDataWithBottomLeftOrigin() obj.Object {
+func (t *Texture) TexelDataWithBottomLeftOrigin() []byte {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("texelDataWithBottomLeftOrigin"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TexelDataWithTopLeftOriginAtMipLevelCreate returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the top-left corner of the image.
-func (t *Texture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) obj.Object {
+func (t *Texture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) []byte {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("texelDataWithTopLeftOriginAtMipLevel:create:"), level, create)
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TexelDataWithBottomLeftOriginAtMipLevelCreate returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the bottom-left corner of the image.
-func (t *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) obj.Object {
+func (t *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) []byte {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("texelDataWithBottomLeftOriginAtMipLevel:create:"), level, create)
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // RowStride returns the row stride.
 func (t *Texture) RowStride() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("rowStride"))
 	return _r
 }
 
 // ChannelCount returns the channel count.
 func (t *Texture) ChannelCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("channelCount"))
 	return _r
 }
 
 // MipLevelCount returns the mip level count.
 func (t *Texture) MipLevelCount() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("mipLevelCount"))
 	return _r
 }
 
 // ChannelEncoding returns the channel encoding.
 func (t *Texture) ChannelEncoding() TextureChannelEncoding {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TextureChannelEncoding](objref.IDOf(t), objc.RegisterName("channelEncoding"))
 	return _r
 }
 
 // IsCube reports whether the object is cube.
 func (t *Texture) IsCube() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isCube"))
 	return _r
 }
 
 // HasAlphaValues reports whether hasAlphaValues Can be overridden. If not overridden, hasAlpha will be false if the texture does not have an alpha channel. It wil be true if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (t *Texture) HasAlphaValues() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("hasAlphaValues"))
 	return _r
 }

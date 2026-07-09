@@ -15,7 +15,7 @@ type Tcl_Time struct {
 }
 
 type Tcl_Value struct {
-	Type        Tcl_ValueType
+	Type        Valuetype
 	IntValue    int
 	DoubleValue float64
 	WideValue   int

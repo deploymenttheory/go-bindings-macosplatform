@@ -5,44 +5,53 @@
 package collaboration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // GroupIdentityWithPosixGIDAuthority returns the group identity with the given POSIX GID in the specified identity authority.
 func GroupIdentityWithPosixGIDAuthority(gid int, authority *IdentityAuthority) *GroupIdentity {
+	defer runtime.KeepAlive(authority)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBGroupIdentity")), objc.RegisterName("groupIdentityWithPosixGID:authority:"), gid, objref.IDOf(authority))
 	return GroupIdentityFromID(_r)
 }
 
 // IdentityWithNameAuthority returns the identity object with the given name from the specified identity authority.
 func IdentityWithNameAuthority(name string, authority *IdentityAuthority) *Identity {
+	defer runtime.KeepAlive(authority)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithName:authority:"), purego.NSString(name), objref.IDOf(authority))
 	return IdentityFromID(_r)
 }
 
 // IdentityWithUniqueIdentifierAuthority wraps the corresponding Objective-C method.
 func IdentityWithUniqueIdentifierAuthority(uuid obj.Object, authority *IdentityAuthority) *Identity {
+	defer runtime.KeepAlive(uuid)
+	defer runtime.KeepAlive(authority)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithUniqueIdentifier:authority:"), objref.IDOf(uuid), objref.IDOf(authority))
 	return IdentityFromID(_r)
 }
 
 // IdentityWithUUIDStringAuthority returns the identity object with the given UUID from the specified identity authority.
 func IdentityWithUUIDStringAuthority(uuid string, authority *IdentityAuthority) *Identity {
+	defer runtime.KeepAlive(authority)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithUUIDString:authority:"), purego.NSString(uuid), objref.IDOf(authority))
 	return IdentityFromID(_r)
 }
 
 // IdentityWithPersistentReference returns the identity object matching the persistent reference data.
-func IdentityWithPersistentReference(data obj.Object) *Identity {
-	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithPersistentReference:"), objref.IDOf(data))
+func IdentityWithPersistentReference(data []byte) *Identity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithPersistentReference:"), rt.BytesToNSData(data))
 	return IdentityFromID(_r)
 }
 
 // IdentityWithCSIdentity returns an identity object created from the specified Core Services Identity opaque object.
 func IdentityWithCSIdentity(csIdentity obj.Object) *Identity {
+	defer runtime.KeepAlive(csIdentity)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithCSIdentity:"), objref.IDOf(csIdentity))
 	return IdentityFromID(_r)
 }
@@ -66,13 +75,15 @@ func DefaultIdentityAuthority() *IdentityAuthority {
 }
 
 // IdentityAuthorityWithCSIdentityAuthority returns an identity authority specified by a given Core Services Identity authority object.
-func IdentityAuthorityWithCSIdentityAuthority(cSIdentityAuthority obj.Object) *IdentityAuthority {
-	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("identityAuthorityWithCSIdentityAuthority:"), objref.IDOf(cSIdentityAuthority))
+func IdentityAuthorityWithCSIdentityAuthority(csIdentityAuthority obj.Object) *IdentityAuthority {
+	defer runtime.KeepAlive(csIdentityAuthority)
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("identityAuthorityWithCSIdentityAuthority:"), objref.IDOf(csIdentityAuthority))
 	return IdentityAuthorityFromID(_r)
 }
 
 // UserIdentityWithPosixUIDAuthority returns the user identity with the given POSIX UID in the specified identity authority.
 func UserIdentityWithPosixUIDAuthority(uid int, authority *IdentityAuthority) *UserIdentity {
+	defer runtime.KeepAlive(authority)
 	_r := objc.Send[objc.ID](objc.ID(_class("CBUserIdentity")), objc.RegisterName("userIdentityWithPosixUID:authority:"), uid, objref.IDOf(authority))
 	return UserIdentityFromID(_r)
 }

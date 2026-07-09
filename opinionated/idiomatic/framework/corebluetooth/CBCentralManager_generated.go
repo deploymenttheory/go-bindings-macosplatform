@@ -5,9 +5,14 @@
 package corebluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,40 +57,59 @@ func NewCentralManager() *CentralManager {
 	return centralManagerAdopt(_id)
 }
 
+// WithDelegate sets the delegate object that you want to receive central manager events.
+func (cm *CentralManager) WithDelegate(delegate CentralManagerDelegate) *CentralManager {
+	_shim := newCentralManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cm
+}
+
 // RetrievePeripheralsWithIdentifiers returns a list of known peripherals by their identifiers.
-func (cm *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral {
-	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("retrievePeripheralsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (cm *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers []*foundation.UUID) []*Peripheral {
+	defer runtime.KeepAlive(cm)
+	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("retrievePeripheralsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v *foundation.UUID) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
 // RetrieveConnectedPeripheralsWithServices returns a list of the peripherals connected to the system whose services match a given set of criteria.
 func (cm *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("retrieveConnectedPeripheralsWithServices:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
 // ScanForPeripheralsWithServicesOptions scans for peripherals that are advertising services.
-func (cm *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("scanForPeripheralsWithServices:options:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+func (cm *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options map[string]obj.Object) {
+	defer runtime.KeepAlive(cm)
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("scanForPeripheralsWithServices:options:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // StopScan asks the central manager to stop scanning for peripherals.
 func (cm *CentralManager) StopScan() {
+	defer runtime.KeepAlive(cm)
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("stopScan"))
 }
 
 // ConnectPeripheralOptions establishes a local connection to a peripheral.
-func (cm *CentralManager) ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("connectPeripheral:options:"), objref.IDOf(peripheral), objref.IDOf(options))
+func (cm *CentralManager) ConnectPeripheralOptions(peripheral *Peripheral, options map[string]obj.Object) {
+	defer runtime.KeepAlive(cm)
+	defer runtime.KeepAlive(peripheral)
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("connectPeripheral:options:"), objref.IDOf(peripheral), rt.MapToDict(options, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CancelPeripheralConnection cancels an active or pending local connection to a peripheral.
 func (cm *CentralManager) CancelPeripheralConnection(peripheral *Peripheral) {
+	defer runtime.KeepAlive(cm)
+	defer runtime.KeepAlive(peripheral)
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("cancelPeripheralConnection:"), objref.IDOf(peripheral))
 }
 
 // IsScanning reports whether the central is currently scanning.
 func (cm *CentralManager) IsScanning() bool {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("isScanning"))
 	return _r
 }

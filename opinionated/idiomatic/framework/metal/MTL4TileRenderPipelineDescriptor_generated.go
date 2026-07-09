@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMTL4TileRenderPipelineDescriptor() *MTL4TileRenderPipelineDescriptor {
 
 // WithTileFunctionDescriptor sets configures the tile function that the render pipeline executes for each tile in the tile shader stage.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) WithTileFunctionDescriptor(tileFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4TileRenderPipelineDescriptor {
+	defer runtime.KeepAlive(tileFunctionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setTileFunctionDescriptor:"), objref.IDOf(tileFunctionDescriptor))
 	return mtrpd
 }
@@ -77,6 +80,7 @@ func (mtrpd *MTL4TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup
 
 // WithStaticLinkingDescriptor sets configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
+	defer runtime.KeepAlive(staticLinkingDescriptor)
 	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
 	return mtrpd
 }
@@ -95,53 +99,62 @@ func (mtrpd *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4Tile
 
 // WithOptions sets provides compile-time options when you build the pipeline.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return mtrpd
 }
 
 // Reset resets the descriptor to the default state.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) Reset() {
+	defer runtime.KeepAlive(mtrpd)
 	objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("reset"))
 }
 
 // TileFunctionDescriptor returns configures the tile function that the render pipeline executes for each tile in the tile shader stage.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) TileFunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("tileFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
 // RasterSampleCount returns configures the number of samples per pixel used for multisampling.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) RasterSampleCount() int {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[int](objref.IDOf(mtrpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
 // ColorAttachments returns access an array of descriptors that configure the properties of each color attachment in the tile render pipeline.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("colorAttachments"))
 	return TileRenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
 // ThreadgroupSizeMatchesTileSize reports whether the size of the threadgroup matches the size of a tile in the render pipeline.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[bool](objref.IDOf(mtrpd), objc.RegisterName("threadgroupSizeMatchesTileSize"))
 	return _r
 }
 
 // MaxTotalThreadsPerThreadgroup sets the maximum number of threads that the GPU can execute simultaneously within a single threadgroup in the tile render pipeline.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[int](objref.IDOf(mtrpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
 // StaticLinkingDescriptor returns configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[objc.ID](objref.IDOf(mtrpd), objc.RegisterName("staticLinkingDescriptor"))
 	return MTL4StaticLinkingDescriptorFromID(_r)
 }
 
 // SupportBinaryLinking reports whether the pipeline supports linking binary functions.
 func (mtrpd *MTL4TileRenderPipelineDescriptor) SupportBinaryLinking() bool {
+	defer runtime.KeepAlive(mtrpd)
 	_r := objc.Send[bool](objref.IDOf(mtrpd), objc.RegisterName("supportBinaryLinking"))
 	return _r
 }

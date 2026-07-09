@@ -6,10 +6,12 @@ package usernotifications
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,22 +52,27 @@ func userNotificationCenterAdopt(id objc.ID) *UserNotificationCenter {
 
 // Description returns the object's -description text.
 func (unc *UserNotificationCenter) Description() string {
+	defer runtime.KeepAlive(unc)
 	return rt.Description(objref.IDOf(unc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (unc *UserNotificationCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(unc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (unc *UserNotificationCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(unc)
 	return rt.IsKind(objref.IDOf(unc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (unc *UserNotificationCenter) String() string {
+	defer runtime.KeepAlive(unc)
 	return rt.Description(objref.IDOf(unc))
 }
 
@@ -75,15 +82,27 @@ func NewUserNotificationCenter() *UserNotificationCenter {
 	return userNotificationCenterAdopt(_id)
 }
 
+// WithDelegate sets the notification center’s delegate.
+func (unc *UserNotificationCenter) WithDelegate(delegate UserNotificationCenterDelegate) *UserNotificationCenter {
+	_shim := newUserNotificationCenterDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(unc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(unc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return unc
+}
+
 // SetNotificationCategories registers the notification categories that your app supports.
-func (unc *UserNotificationCenter) SetNotificationCategories(categories obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setNotificationCategories:"), objref.IDOf(categories))
+func (unc *UserNotificationCenter) SetNotificationCategories(categories []*NotificationCategory) {
+	defer runtime.KeepAlive(unc)
+	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setNotificationCategories:"), rt.SliceToNSSet(categories, func(_v *NotificationCategory) objc.ID { return objref.IDOf(_v) }))
 }
 
 // GetNotificationCategories fetches your app’s registered notification categories.
 //
 // GetNotificationCategories blocks until the operation completes or ctx is cancelled.
 func (unc *UserNotificationCenter) GetNotificationCategories(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(unc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,6 +127,7 @@ func (unc *UserNotificationCenter) GetNotificationCategories(ctx context.Context
 //
 // GetNotificationSettings blocks until the operation completes or ctx is cancelled.
 func (unc *UserNotificationCenter) GetNotificationSettings(ctx context.Context) (result *NotificationSettings, err error) {
+	defer runtime.KeepAlive(unc)
 	type _result struct {
 		val *NotificationSettings
 		err error
@@ -132,6 +152,8 @@ func (unc *UserNotificationCenter) GetNotificationSettings(ctx context.Context) 
 //
 // AddNotificationRequest blocks until the operation completes or ctx is cancelled.
 func (unc *UserNotificationCenter) AddNotificationRequest(ctx context.Context, request *NotificationRequest) error {
+	defer runtime.KeepAlive(unc)
+	defer runtime.KeepAlive(request)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -151,6 +173,7 @@ func (unc *UserNotificationCenter) AddNotificationRequest(ctx context.Context, r
 //
 // GetPendingNotificationRequests blocks until the operation completes or ctx is cancelled.
 func (unc *UserNotificationCenter) GetPendingNotificationRequests(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(unc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -173,11 +196,13 @@ func (unc *UserNotificationCenter) GetPendingNotificationRequests(ctx context.Co
 
 // RemovePendingNotificationRequestsWithIdentifiers removes your app’s local notifications that are pending and match the specified identifiers.
 func (unc *UserNotificationCenter) RemovePendingNotificationRequestsWithIdentifiers(identifiers []string) {
+	defer runtime.KeepAlive(unc)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removePendingNotificationRequestsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // RemoveAllPendingNotificationRequests removes all of your app’s pending local notifications.
 func (unc *UserNotificationCenter) RemoveAllPendingNotificationRequests() {
+	defer runtime.KeepAlive(unc)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeAllPendingNotificationRequests"))
 }
 
@@ -185,6 +210,7 @@ func (unc *UserNotificationCenter) RemoveAllPendingNotificationRequests() {
 //
 // GetDeliveredNotifications blocks until the operation completes or ctx is cancelled.
 func (unc *UserNotificationCenter) GetDeliveredNotifications(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(unc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -207,11 +233,13 @@ func (unc *UserNotificationCenter) GetDeliveredNotifications(ctx context.Context
 
 // RemoveDeliveredNotificationsWithIdentifiers removes your app’s notifications from Notification Center that match the specified identifiers.
 func (unc *UserNotificationCenter) RemoveDeliveredNotificationsWithIdentifiers(identifiers []string) {
+	defer runtime.KeepAlive(unc)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeDeliveredNotificationsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // RemoveAllDeliveredNotifications removes all of your app’s delivered notifications from Notification Center.
 func (unc *UserNotificationCenter) RemoveAllDeliveredNotifications() {
+	defer runtime.KeepAlive(unc)
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeAllDeliveredNotifications"))
 }
 
@@ -219,6 +247,7 @@ func (unc *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 //
 // SetBadgeCount blocks until the operation completes or ctx is cancelled.
 func (unc *UserNotificationCenter) SetBadgeCount(ctx context.Context, newBadgeCount int) error {
+	defer runtime.KeepAlive(unc)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -236,6 +265,7 @@ func (unc *UserNotificationCenter) SetBadgeCount(ctx context.Context, newBadgeCo
 
 // SupportsContentExtensions wraps the corresponding Objective-C method.
 func (unc *UserNotificationCenter) SupportsContentExtensions() bool {
+	defer runtime.KeepAlive(unc)
 	_r := objc.Send[bool](objref.IDOf(unc), objc.RegisterName("supportsContentExtensions"))
 	return _r
 }

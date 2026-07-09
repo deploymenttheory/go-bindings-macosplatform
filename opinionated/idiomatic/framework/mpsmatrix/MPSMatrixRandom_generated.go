@@ -5,6 +5,8 @@
 package mpsmatrix
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func matrixRandomAdopt(id objc.ID) *MatrixRandom {
 
 // Description returns the object's -description text.
 func (mr *MatrixRandom) Description() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mr *MatrixRandom) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mr *MatrixRandom) IsKind(className string) bool {
+	defer runtime.KeepAlive(mr)
 	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mr *MatrixRandom) String() string {
+	defer runtime.KeepAlive(mr)
 	return rt.Description(objref.IDOf(mr))
 }
 
@@ -80,18 +87,21 @@ func (mr *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
 
 // DistributionType returns the distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
 func (mr *MatrixRandom) DistributionType() MatrixRandomDistribution {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(mr), objc.RegisterName("distributionType"))
 	return _r
 }
 
 // BatchStart returns the starting index in the destination batch.
 func (mr *MatrixRandom) BatchStart() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchStart"))
 	return _r
 }
 
 // BatchSize returns the size of the batch to process.
 func (mr *MatrixRandom) BatchSize() int {
+	defer runtime.KeepAlive(mr)
 	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchSize"))
 	return _r
 }

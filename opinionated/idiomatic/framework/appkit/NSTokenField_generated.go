@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -78,6 +81,7 @@ func (tf *TokenField) WithCompletionDelay(completionDelay float64) *TokenField {
 
 // WithTokenizingCharacterSet sets the recevier’s tokenizing character set to characterSet.
 func (tf *TokenField) WithTokenizingCharacterSet(tokenizingCharacterSet obj.Object) *TokenField {
+	defer runtime.KeepAlive(tokenizingCharacterSet)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTokenizingCharacterSet:"), objref.IDOf(tokenizingCharacterSet))
 	})
@@ -94,6 +98,7 @@ func (tf *TokenField) WithPlaceholderString(placeholderString string) *TokenFiel
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (tf *TokenField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TokenField {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -102,6 +107,7 @@ func (tf *TokenField) WithPlaceholderAttributedString(placeholderAttributedStrin
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (tf *TokenField) WithBackgroundColor(backgroundColor *Color) *TokenField {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -118,6 +124,7 @@ func (tf *TokenField) WithDrawsBackground(drawsBackground bool) *TokenField {
 
 // WithTextColor sets the color of the text field’s content.
 func (tf *TokenField) WithTextColor(textColor *Color) *TokenField {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -153,6 +160,18 @@ func (tf *TokenField) WithSelectable(selectable bool) *TokenField {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSelectable:"), selectable)
 	})
+	return tf
+}
+
+// WithDelegate sets the text field’s delegate.
+func (tf *TokenField) WithDelegate(delegate TextFieldDelegate) *TokenField {
+	_shim := newTextFieldDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(tf), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(tf), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return tf
 }
 
@@ -272,6 +291,7 @@ func (tf *TokenField) WithImportsGraphics(importsGraphics bool) *TokenField {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (tf *TokenField) WithTarget(target obj.Object) *TokenField {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -336,6 +356,7 @@ func (tf *TokenField) WithControlSize(controlSize ControlSize) *TokenField {
 
 // WithFormatter sets the receiver’s formatter.
 func (tf *TokenField) WithFormatter(formatter obj.Object) *TokenField {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -344,6 +365,7 @@ func (tf *TokenField) WithFormatter(formatter obj.Object) *TokenField {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (tf *TokenField) WithObjectValue(objectValue obj.Object) *TokenField {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -360,6 +382,7 @@ func (tf *TokenField) WithStringValue(stringValue string) *TokenField {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (tf *TokenField) WithAttributedStringValue(attributedStringValue obj.Object) *TokenField {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -400,6 +423,7 @@ func (tf *TokenField) WithDoubleValue(doubleValue float64) *TokenField {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (tf *TokenField) WithFont(font *Font) *TokenField {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -448,6 +472,7 @@ func (tf *TokenField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) 
 
 // WithCell sets the cell.
 func (tf *TokenField) WithCell(cell CellProvider) *TokenField {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -593,6 +618,7 @@ func (tf *TokenField) WithWantsLayer(wantsLayer bool) *TokenField {
 
 // WithLayer sets the layer.
 func (tf *TokenField) WithLayer(layer obj.Object) *TokenField {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -642,6 +668,7 @@ func (tf *TokenField) WithBackgroundFilters(items ...obj.Object) *TokenField {
 
 // WithCompositingFilter sets the compositing filter.
 func (tf *TokenField) WithCompositingFilter(compositingFilter obj.Object) *TokenField {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -659,6 +686,7 @@ func (tf *TokenField) WithContentFilters(items ...obj.Object) *TokenField {
 
 // WithShadow sets the shadow.
 func (tf *TokenField) WithShadow(shadow *Shadow) *TokenField {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -707,6 +735,7 @@ func (tf *TokenField) WithPreparedContentRect(preparedContentRect corefoundation
 
 // WithNextKeyView sets the next key view.
 func (tf *TokenField) WithNextKeyView(nextKeyView ViewProvider) *TokenField {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -756,6 +785,7 @@ func (tf *TokenField) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tf *TokenField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TokenField {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -812,6 +842,7 @@ func (tf *TokenField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 
 // WithPressureConfiguration sets the pressure configuration.
 func (tf *TokenField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TokenField {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -820,6 +851,7 @@ func (tf *TokenField) WithPressureConfiguration(pressureConfiguration *PressureC
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (tf *TokenField) WithNextResponder(nextResponder ResponderProvider) *TokenField {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -828,6 +860,7 @@ func (tf *TokenField) WithNextResponder(nextResponder ResponderProvider) *TokenF
 
 // WithMenu sets returns the responder’s menu.
 func (tf *TokenField) WithMenu(menu *Menu) *TokenField {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -836,6 +869,7 @@ func (tf *TokenField) WithMenu(menu *Menu) *TokenField {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (tf *TokenField) WithUserActivity(userActivity obj.Object) *TokenField {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -844,6 +878,7 @@ func (tf *TokenField) WithUserActivity(userActivity obj.Object) *TokenField {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (tf *TokenField) WithTouchBar(touchBar *TouchBar) *TokenField {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -852,6 +887,7 @@ func (tf *TokenField) WithTouchBar(touchBar *TouchBar) *TokenField {
 
 // TokenStyle returns the token style.
 func (tf *TokenField) TokenStyle() TokenStyle {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 TokenStyle
 	purego.Main(func() {
 		_mainthread0 = func() TokenStyle {
@@ -865,6 +901,7 @@ func (tf *TokenField) TokenStyle() TokenStyle {
 
 // CompletionDelay returns the completion delay.
 func (tf *TokenField) CompletionDelay() float64 {
+	defer runtime.KeepAlive(tf)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -877,12 +914,13 @@ func (tf *TokenField) CompletionDelay() float64 {
 }
 
 // TokenizingCharacterSet returns the tokenizing character set.
-func (tf *TokenField) TokenizingCharacterSet() obj.Object {
-	var _mainthread0 obj.Object
+func (tf *TokenField) TokenizingCharacterSet() *foundation.CharacterSet {
+	defer runtime.KeepAlive(tf)
+	var _mainthread0 *foundation.CharacterSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.CharacterSet {
 			_r := objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("tokenizingCharacterSet"))
-			return obj.Wrap(_r)
+			return foundation.CharacterSetFromID(_r)
 		}()
 	})
 	return _mainthread0

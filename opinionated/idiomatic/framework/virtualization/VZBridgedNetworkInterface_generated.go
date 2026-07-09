@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func bridgedNetworkInterfaceAdopt(id objc.ID) *BridgedNetworkInterface {
 
 // Description returns the object's -description text.
 func (bni *BridgedNetworkInterface) Description() string {
+	defer runtime.KeepAlive(bni)
 	return rt.Description(objref.IDOf(bni))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bni *BridgedNetworkInterface) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bni)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bni), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bni *BridgedNetworkInterface) IsKind(className string) bool {
+	defer runtime.KeepAlive(bni)
 	return rt.IsKind(objref.IDOf(bni), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bni *BridgedNetworkInterface) String() string {
+	defer runtime.KeepAlive(bni)
 	return rt.Description(objref.IDOf(bni))
 }
 
@@ -74,6 +81,7 @@ func NewBridgedNetworkInterface() *BridgedNetworkInterface {
 
 // Identifier returns the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
 func (bni *BridgedNetworkInterface) Identifier() string {
+	defer runtime.KeepAlive(bni)
 	_r := objc.Send[objc.ID](objref.IDOf(bni), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (bni *BridgedNetworkInterface) Identifier() string {
 
 // LocalizedDisplayName returns a display name if available (e.g. "Ethernet").
 func (bni *BridgedNetworkInterface) LocalizedDisplayName() string {
+	defer runtime.KeepAlive(bni)
 	_r := objc.Send[objc.ID](objref.IDOf(bni), objc.RegisterName("localizedDisplayName"))
 	if _r == 0 {
 		return ""

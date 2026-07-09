@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -71,30 +73,35 @@ func (rmil *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInference
 
 // InputFeatureChannels returns the number of feature channels input vector/matrix.
 func (rmil *RNNMatrixInferenceLayer) InputFeatureChannels() int {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("inputFeatureChannels"))
 	return _r
 }
 
 // OutputFeatureChannels returns the number of feature channels in the output vector/matrix.
 func (rmil *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("outputFeatureChannels"))
 	return _r
 }
 
 // NumberOfLayers returns number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
 func (rmil *RNNMatrixInferenceLayer) NumberOfLayers() int {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[int](objref.IDOf(rmil), objc.RegisterName("numberOfLayers"))
 	return _r
 }
 
 // RecurrentOutputIsTemporary reports whether how output states from
 func (rmil *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("recurrentOutputIsTemporary"))
 	return _r
 }
 
 // StoreAllIntermediateStates reports whether if true then calls to
 func (rmil *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
+	defer runtime.KeepAlive(rmil)
 	_r := objc.Send[bool](objref.IDOf(rmil), objc.RegisterName("storeAllIntermediateStates"))
 	return _r
 }

@@ -5,8 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func externalSyncDeviceAdopt(id objc.ID) *ExternalSyncDevice {
 
 // Description returns the object's -description text.
 func (esd *ExternalSyncDevice) Description() string {
+	defer runtime.KeepAlive(esd)
 	return rt.Description(objref.IDOf(esd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (esd *ExternalSyncDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(esd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(esd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (esd *ExternalSyncDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(esd)
 	return rt.IsKind(objref.IDOf(esd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (esd *ExternalSyncDevice) String() string {
+	defer runtime.KeepAlive(esd)
 	return rt.Description(objref.IDOf(esd))
 }
 
@@ -81,36 +89,42 @@ func (esd *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDel
 
 // Status returns the status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
 func (esd *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[ExternalSyncDeviceStatus](objref.IDOf(esd), objc.RegisterName("status"))
 	return _r
 }
 
 // Clock returns a clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
 func (esd *ExternalSyncDevice) Clock() obj.Object {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("clock"))
 	return obj.Wrap(_r)
 }
 
 // SignalCompensationDelay returns delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
 func (esd *ExternalSyncDevice) SignalCompensationDelay() coremedia.CMTime {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(esd), objc.RegisterName("signalCompensationDelay"))
 	return _r
 }
 
 // UUID returns a unique identifier for an external sync device. Use this property to select a specific external sync device.
-func (esd *ExternalSyncDevice) UUID() obj.Object {
+func (esd *ExternalSyncDevice) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("uuid"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // VendorID returns the USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
 func (esd *ExternalSyncDevice) VendorID() int {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[int](objref.IDOf(esd), objc.RegisterName("vendorID"))
 	return _r
 }
 
 // ProductID returns the USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
 func (esd *ExternalSyncDevice) ProductID() int {
+	defer runtime.KeepAlive(esd)
 	_r := objc.Send[int](objref.IDOf(esd), objc.RegisterName("productID"))
 	return _r
 }

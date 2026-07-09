@@ -5,9 +5,10 @@
 package fskit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -55,9 +56,10 @@ func NewGenericURLResourceWithURL(url string) *GenericURLResource {
 }
 
 // URL returns the URL represented by the resource.
-func (gur *GenericURLResource) URL() obj.Object {
+func (gur *GenericURLResource) URL() string {
+	defer runtime.KeepAlive(gur)
 	_r := objc.Send[objc.ID](objref.IDOf(gur), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ ResourceProvider = (*GenericURLResource)(nil)

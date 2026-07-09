@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRCertificatesAdopt(id objc.ID) *MTRCertificates {
 
 // Description returns the object's -description text.
 func (mc *MTRCertificates) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *MTRCertificates) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *MTRCertificates) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *MTRCertificates) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 

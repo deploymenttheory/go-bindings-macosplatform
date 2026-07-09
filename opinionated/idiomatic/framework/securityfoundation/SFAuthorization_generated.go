@@ -5,6 +5,8 @@
 package securityfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationAdopt(id objc.ID) *Authorization {
 
 // Description returns the object's -description text.
 func (a *Authorization) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Authorization) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Authorization) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Authorization) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -74,11 +81,13 @@ func NewAuthorization() *Authorization {
 
 // AuthorizationRef returns the authorization reference for this object.
 func (a *Authorization) AuthorizationRef() obj.Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("authorizationRef"))
 	return obj.Wrap(_r)
 }
 
 // InvalidateCredentials prevents any rights that were obtained by this object from being preserved.
 func (a *Authorization) InvalidateCredentials() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("invalidateCredentials"))
 }

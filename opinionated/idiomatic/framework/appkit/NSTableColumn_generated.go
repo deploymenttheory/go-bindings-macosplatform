@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func tableColumnAdopt(id objc.ID) *TableColumn {
 
 // Description returns the object's -description text.
 func (tc *TableColumn) Description() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tc *TableColumn) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tc *TableColumn) IsKind(className string) bool {
+	defer runtime.KeepAlive(tc)
 	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tc *TableColumn) String() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
 // NewTableColumnWithIdentifier initializes a newly created table column with a string identifier.
 func NewTableColumnWithIdentifier(identifier obj.Object) *TableColumn {
+	defer runtime.KeepAlive(identifier)
 	var _mainthread0 *TableColumn
 	purego.Main(func() {
 		_mainthread0 = func() *TableColumn {
@@ -81,6 +90,7 @@ func NewTableColumnWithIdentifier(identifier obj.Object) *TableColumn {
 
 // NewTableColumnWithCoder creates a new TableColumn.
 func NewTableColumnWithCoder(coder obj.Object) *TableColumn {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *TableColumn
 	purego.Main(func() {
 		_mainthread0 = func() *TableColumn {
@@ -94,6 +104,7 @@ func NewTableColumnWithCoder(coder obj.Object) *TableColumn {
 
 // WithIdentifier sets the identifier string for the table column.
 func (tc *TableColumn) WithIdentifier(identifier obj.Object) *TableColumn {
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	})
@@ -102,6 +113,7 @@ func (tc *TableColumn) WithIdentifier(identifier obj.Object) *TableColumn {
 
 // WithTableView sets the table view that contains the table column.
 func (tc *TableColumn) WithTableView(tableView TableViewProvider) *TableColumn {
+	defer runtime.KeepAlive(tableView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
 	})
@@ -142,6 +154,7 @@ func (tc *TableColumn) WithTitle(title string) *TableColumn {
 
 // WithHeaderCell sets the cell used to draw the table column’s header.
 func (tc *TableColumn) WithHeaderCell(headerCell *TableHeaderCell) *TableColumn {
+	defer runtime.KeepAlive(headerCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setHeaderCell:"), objref.IDOf(headerCell))
 	})
@@ -158,6 +171,7 @@ func (tc *TableColumn) WithEditable(editable bool) *TableColumn {
 
 // WithSortDescriptorPrototype sets the table column’s sort descriptor prototype.
 func (tc *TableColumn) WithSortDescriptorPrototype(sortDescriptorPrototype obj.Object) *TableColumn {
+	defer runtime.KeepAlive(sortDescriptorPrototype)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setSortDescriptorPrototype:"), objref.IDOf(sortDescriptorPrototype))
 	})
@@ -190,6 +204,7 @@ func (tc *TableColumn) WithHidden(hidden bool) *TableColumn {
 
 // WithDataCell sets the cell prototype used by the table column to draw individual cells.
 func (tc *TableColumn) WithDataCell(dataCell obj.Object) *TableColumn {
+	defer runtime.KeepAlive(dataCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setDataCell:"), objref.IDOf(dataCell))
 	})
@@ -198,6 +213,7 @@ func (tc *TableColumn) WithDataCell(dataCell obj.Object) *TableColumn {
 
 // SizeToFit resizes the table column to fit the width of its header cell.
 func (tc *TableColumn) SizeToFit() {
+	defer runtime.KeepAlive(tc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sizeToFit"))
 	})
@@ -205,12 +221,13 @@ func (tc *TableColumn) SizeToFit() {
 }
 
 // Identifier returns the identifier.
-func (tc *TableColumn) Identifier() obj.Object {
-	var _mainthread0 obj.Object
+func (tc *TableColumn) Identifier() *foundation.String {
+	defer runtime.KeepAlive(tc)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("identifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -219,6 +236,7 @@ func (tc *TableColumn) Identifier() obj.Object {
 
 // TableView returns the table view.
 func (tc *TableColumn) TableView() *TableView {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 *TableView
 	purego.Main(func() {
 		_mainthread0 = func() *TableView {
@@ -232,6 +250,7 @@ func (tc *TableColumn) TableView() *TableView {
 
 // Width returns the width.
 func (tc *TableColumn) Width() float64 {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -245,6 +264,7 @@ func (tc *TableColumn) Width() float64 {
 
 // MinWidth returns the min width.
 func (tc *TableColumn) MinWidth() float64 {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -258,6 +278,7 @@ func (tc *TableColumn) MinWidth() float64 {
 
 // MaxWidth returns the max width.
 func (tc *TableColumn) MaxWidth() float64 {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -271,6 +292,7 @@ func (tc *TableColumn) MaxWidth() float64 {
 
 // Title returns the title.
 func (tc *TableColumn) Title() string {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -287,6 +309,7 @@ func (tc *TableColumn) Title() string {
 
 // HeaderCell returns the header cell.
 func (tc *TableColumn) HeaderCell() *TableHeaderCell {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 *TableHeaderCell
 	purego.Main(func() {
 		_mainthread0 = func() *TableHeaderCell {
@@ -300,6 +323,7 @@ func (tc *TableColumn) HeaderCell() *TableHeaderCell {
 
 // IsEditable reports whether the object is editable.
 func (tc *TableColumn) IsEditable() bool {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -312,12 +336,13 @@ func (tc *TableColumn) IsEditable() bool {
 }
 
 // SortDescriptorPrototype returns the sort descriptor prototype.
-func (tc *TableColumn) SortDescriptorPrototype() obj.Object {
-	var _mainthread0 obj.Object
+func (tc *TableColumn) SortDescriptorPrototype() *foundation.SortDescriptor {
+	defer runtime.KeepAlive(tc)
+	var _mainthread0 *foundation.SortDescriptor
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.SortDescriptor {
 			_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sortDescriptorPrototype"))
-			return obj.Wrap(_r)
+			return foundation.SortDescriptorFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -326,6 +351,7 @@ func (tc *TableColumn) SortDescriptorPrototype() obj.Object {
 
 // ResizingMask returns the resizing mask.
 func (tc *TableColumn) ResizingMask() TableColumnResizingOptions {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 TableColumnResizingOptions
 	purego.Main(func() {
 		_mainthread0 = func() TableColumnResizingOptions {
@@ -339,6 +365,7 @@ func (tc *TableColumn) ResizingMask() TableColumnResizingOptions {
 
 // HeaderToolTip returns the header tool tip.
 func (tc *TableColumn) HeaderToolTip() string {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -355,6 +382,7 @@ func (tc *TableColumn) HeaderToolTip() string {
 
 // IsHidden reports whether the object is hidden.
 func (tc *TableColumn) IsHidden() bool {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -368,6 +396,7 @@ func (tc *TableColumn) IsHidden() bool {
 
 // SetResizable sets whether the user can resize the receiver in its NSTableView.
 func (tc *TableColumn) SetResizable(flag bool) {
+	defer runtime.KeepAlive(tc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("setResizable:"), flag)
 	})
@@ -376,6 +405,7 @@ func (tc *TableColumn) SetResizable(flag bool) {
 
 // IsResizable reports whether the column is resizable.
 func (tc *TableColumn) IsResizable() bool {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -389,6 +419,7 @@ func (tc *TableColumn) IsResizable() bool {
 
 // DataCellForRow returns the cell object used to display values in the specified row of the table column.
 func (tc *TableColumn) DataCellForRow(row int) obj.Object {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -402,6 +433,7 @@ func (tc *TableColumn) DataCellForRow(row int) obj.Object {
 
 // DataCell returns the data cell.
 func (tc *TableColumn) DataCell() obj.Object {
+	defer runtime.KeepAlive(tc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

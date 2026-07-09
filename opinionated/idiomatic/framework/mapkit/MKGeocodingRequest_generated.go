@@ -6,9 +6,11 @@ package mapkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func geocodingRequestAdopt(id objc.ID) *GeocodingRequest {
 
 // Description returns the object's -description text.
 func (gr *GeocodingRequest) Description() string {
+	defer runtime.KeepAlive(gr)
 	return rt.Description(objref.IDOf(gr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gr *GeocodingRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gr *GeocodingRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(gr)
 	return rt.IsKind(objref.IDOf(gr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gr *GeocodingRequest) String() string {
+	defer runtime.KeepAlive(gr)
 	return rt.Description(objref.IDOf(gr))
 }
 
@@ -78,6 +85,7 @@ func NewGeocodingRequestWithAddressString(addressString string) *GeocodingReques
 
 // WithPreferredLocale sets a value that indicates the default locale the geocoder should use when processing requests.
 func (gr *GeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *GeocodingRequest {
+	defer runtime.KeepAlive(preferredLocale)
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
 	return gr
 }
@@ -86,6 +94,7 @@ func (gr *GeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *Geo
 //
 // GetMapItems blocks until the operation completes or ctx is cancelled.
 func (gr *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(gr)
 	type _result struct {
 		val obj.Object
 		err error
@@ -109,6 +118,7 @@ func (gr *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object,
 
 // Cancel a function you call to cancel a geocoding request that’s in progress.
 func (gr *GeocodingRequest) Cancel() {
+	defer runtime.KeepAlive(gr)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("cancel"))
 	})
@@ -117,18 +127,21 @@ func (gr *GeocodingRequest) Cancel() {
 
 // IsCancelled reports whether the object is cancelled.
 func (gr *GeocodingRequest) IsCancelled() bool {
+	defer runtime.KeepAlive(gr)
 	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsLoading reports whether the object is loading.
 func (gr *GeocodingRequest) IsLoading() bool {
+	defer runtime.KeepAlive(gr)
 	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isLoading"))
 	return _r
 }
 
 // AddressString returns the address string.
 func (gr *GeocodingRequest) AddressString() string {
+	defer runtime.KeepAlive(gr)
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("addressString"))
 	if _r == 0 {
 		return ""
@@ -137,7 +150,8 @@ func (gr *GeocodingRequest) AddressString() string {
 }
 
 // PreferredLocale returns the preferred locale.
-func (gr *GeocodingRequest) PreferredLocale() obj.Object {
+func (gr *GeocodingRequest) PreferredLocale() *foundation.Locale {
+	defer runtime.KeepAlive(gr)
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("preferredLocale"))
-	return obj.Wrap(_r)
+	return foundation.LocaleFromID(_r)
 }

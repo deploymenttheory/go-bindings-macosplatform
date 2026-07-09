@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func localPointsOfInterestRequestAdopt(id objc.ID) *LocalPointsOfInterestRequest
 
 // Description returns the object's -description text.
 func (lpoir *LocalPointsOfInterestRequest) Description() string {
+	defer runtime.KeepAlive(lpoir)
 	return rt.Description(objref.IDOf(lpoir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lpoir *LocalPointsOfInterestRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lpoir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lpoir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lpoir *LocalPointsOfInterestRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(lpoir)
 	return rt.IsKind(objref.IDOf(lpoir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lpoir *LocalPointsOfInterestRequest) String() string {
+	defer runtime.KeepAlive(lpoir)
 	return rt.Description(objref.IDOf(lpoir))
 }
 
@@ -77,12 +83,14 @@ func NewLocalPointsOfInterestRequestWithCenterCoordinateRadius(coordinate unsafe
 
 // WithPointOfInterestFilter sets a filter that lists points of interest categories to include or exclude.
 func (lpoir *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalPointsOfInterestRequest {
+	defer runtime.KeepAlive(pointOfInterestFilter)
 	objc.Send[objc.ID](objref.IDOf(lpoir), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return lpoir
 }
 
 // PointOfInterestFilter returns the point of interest filter.
 func (lpoir *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
+	defer runtime.KeepAlive(lpoir)
 	_r := objc.Send[objc.ID](objref.IDOf(lpoir), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }

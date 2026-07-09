@@ -53,6 +53,11 @@ type Mapper struct {
 	// cross-framework reference targets only a struct that exists. Keyed by the
 	// struct's exported Go name (e.g. "CGRect").
 	EmittableStructs map[string]bool
+	// IdiomaticClassIndex maps an ObjC class name to the idiomatic package and
+	// wrapper type name that own it ("NSProgress" → {foundation, Progress}),
+	// computed once during idiomatic generation. It lets one idiomatic package
+	// return another's typed wrapper instead of a generic object handle.
+	IdiomaticClassIndex map[string]IdiomaticClassRef
 	// ProtocolIndex maps protocol name → owning framework.
 	ProtocolIndex map[string]string
 	// CFTypeIndex maps framework-specific CF opaque typedef names → owning framework.
@@ -82,6 +87,16 @@ type Mapper struct {
 	// recorded. The generator collects these per framework so the CLI can
 	// enforce a committed baseline (new entries fail CI).
 	Diagnostics []string
+}
+
+// IdiomaticClassRef names the idiomatic package and wrapper type that own one
+// ObjC class (see Mapper.IdiomaticClassIndex).
+type IdiomaticClassRef struct {
+	// Package is the idiomatic Go package name (e.g. "foundation").
+	Package string
+	// TypeName is the wrapper type the package emits (e.g. "Progress"); its
+	// exported <TypeName>FromID constructor adopts an existing object.
+	TypeName string
 }
 
 // appendDiag records a degradation diagnostic.

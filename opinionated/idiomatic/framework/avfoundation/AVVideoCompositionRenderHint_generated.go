@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func videoCompositionRenderHintAdopt(id objc.ID) *VideoCompositionRenderHint {
 
 // Description returns the object's -description text.
 func (vcrh *VideoCompositionRenderHint) Description() string {
+	defer runtime.KeepAlive(vcrh)
 	return rt.Description(objref.IDOf(vcrh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcrh *VideoCompositionRenderHint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcrh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcrh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcrh *VideoCompositionRenderHint) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcrh)
 	return rt.IsKind(objref.IDOf(vcrh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcrh *VideoCompositionRenderHint) String() string {
+	defer runtime.KeepAlive(vcrh)
 	return rt.Description(objref.IDOf(vcrh))
 }
 
@@ -75,12 +82,14 @@ func NewVideoCompositionRenderHint() *VideoCompositionRenderHint {
 
 // StartCompositionTime returns the start time of the upcoming composition requests.
 func (vcrh *VideoCompositionRenderHint) StartCompositionTime() coremedia.CMTime {
+	defer runtime.KeepAlive(vcrh)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(vcrh), objc.RegisterName("startCompositionTime"))
 	return _r
 }
 
 // EndCompositionTime returns the end time of the upcoming composition requests.
 func (vcrh *VideoCompositionRenderHint) EndCompositionTime() coremedia.CMTime {
+	defer runtime.KeepAlive(vcrh)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(vcrh), objc.RegisterName("endCompositionTime"))
 	return _r
 }

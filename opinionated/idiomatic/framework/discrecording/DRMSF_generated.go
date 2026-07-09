@@ -5,6 +5,8 @@
 package discrecording
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mSFAdopt(id objc.ID) *MSF {
 
 // Description returns the object's -description text.
 func (m *MSF) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *MSF) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *MSF) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *MSF) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -72,50 +79,59 @@ func NewMSFWithFrames(frames int) *MSF {
 }
 
 // NewMSFWithString initializes an msf object initialized to the value represented by string
-func NewMSFWithString(string_ string) *MSF {
+func NewMSFWithString(str string) *MSF {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return mSFAdopt(_id)
 }
 
 // Minutes returns the number of minutes represented by the receiver. If the receiver represents a non integral number of minutes, only the whole minute value is returned. For example an DRMSF value of 5:30:72 will return 5 from a message to
 func (m *MSF) Minutes() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("minutes"))
 	return _r
 }
 
 // Seconds returns the number of seconds represented by the receiver. If the receiver represents a non integral number of seconds, only the whole second value is returned. For example an DRMSF value of 5:30:72 will return 30 from a message to
 func (m *MSF) Seconds() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("seconds"))
 	return _r
 }
 
 // Frames returns the number of frames represented by the receiver. This method differs from
 func (m *MSF) Frames() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("frames"))
 	return _r
 }
 
 // Sectors returns the total number of frames/sectors represented by the receiver. This method differs from
 func (m *MSF) Sectors() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("sectors"))
 	return _r
 }
 
 // MsfByAdding adds an msf to the receiver.
 func (m *MSF) MsfByAdding(msf *MSF) *MSF {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(msf)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("msfByAdding:"), objref.IDOf(msf))
 	return MSFFromID(_r)
 }
 
 // MsfBySubtracting subtracts an msf to the receiver.
 func (m *MSF) MsfBySubtracting(msf *MSF) *MSF {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(msf)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("msfBySubtracting:"), objref.IDOf(msf))
 	return MSFFromID(_r)
 }
 
 // DescriptionWithFormat returns a textual representation of the receiver. The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value
 func (m *MSF) DescriptionWithFormat(format string) string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("descriptionWithFormat:"), purego.NSString(format))
 	if _r == 0 {
 		return ""
@@ -125,6 +141,8 @@ func (m *MSF) DescriptionWithFormat(format string) string {
 
 // IsEqualToMSF compares on emsf to another.
 func (m *MSF) IsEqualToMSF(otherDRMSF *MSF) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(otherDRMSF)
 	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isEqualToMSF:"), objref.IDOf(otherDRMSF))
 	return _r
 }

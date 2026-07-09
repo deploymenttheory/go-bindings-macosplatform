@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (npn *NNPadNode) WithLabel(label string) *NNPadNode {
 
 // FillValue determines the constant value to apply when using
 func (npn *NNPadNode) FillValue() float32 {
+	defer runtime.KeepAlive(npn)
 	_r := objc.Send[float32](objref.IDOf(npn), objc.RegisterName("fillValue"))
 	return _r
 }

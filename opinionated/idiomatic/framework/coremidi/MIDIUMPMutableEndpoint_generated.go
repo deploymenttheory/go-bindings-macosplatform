@@ -5,6 +5,7 @@
 package coremidi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -68,6 +69,7 @@ func (ume *UMPMutableEndpoint) WithFunctionBlocks(items ...UMPFunctionBlockProvi
 
 // SetName set the endpoints name. This operation will fail if the name could not be set.
 func (ume *UMPMutableEndpoint) SetName(name string) error {
+	defer runtime.KeepAlive(ume)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ume), objc.RegisterName("setName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -78,6 +80,7 @@ func (ume *UMPMutableEndpoint) SetName(name string) error {
 
 // RegisterFunctionBlocksMarkAsStatic register or replace Function Blocks for a disabled client-created MIDIUMPEndpoint. This operation will fail if the array contains any disabled Function Blocks but the MIDIUMPEndpoint Function Block configuration is static. Returns YES if the Function Block configuration was set successfully.
 func (ume *UMPMutableEndpoint) RegisterFunctionBlocksMarkAsStatic(functionBlocks []*UMPMutableFunctionBlock, markAsStatic bool) error {
+	defer runtime.KeepAlive(ume)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ume), objc.RegisterName("registerFunctionBlocks:markAsStatic:error:"), purego.SliceToNSArray(functionBlocks, func(_v *UMPMutableFunctionBlock) objc.ID { return objref.IDOf(_v) }), markAsStatic, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -88,6 +91,7 @@ func (ume *UMPMutableEndpoint) RegisterFunctionBlocksMarkAsStatic(functionBlocks
 
 // SetEnabled enable a mutable UMP endpoint in the system-wide UMP endpoint cache. A MIDIUMPMutableEndpoint must be cache enabled before it is visible via API. Note that Function Blocks may only be registered to uncached MIDIUMPMutableEndpoint objects.
 func (ume *UMPMutableEndpoint) SetEnabled(isEnabled bool) error {
+	defer runtime.KeepAlive(ume)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ume), objc.RegisterName("setEnabled:error:"), isEnabled, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -100,12 +104,14 @@ func (ume *UMPMutableEndpoint) SetEnabled(isEnabled bool) error {
 //
 // MutableFunctionBlocks returns the collection as a Go slice.
 func (ume *UMPMutableEndpoint) MutableFunctionBlocks() []*UMPMutableFunctionBlock {
+	defer runtime.KeepAlive(ume)
 	_arr := objc.Send[objc.ID](objref.IDOf(ume), objc.RegisterName("mutableFunctionBlocks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPMutableFunctionBlock { return UMPMutableFunctionBlockFromID(_id) })
 }
 
 // IsEnabled reports whether the enable state of the endpoint.
 func (ume *UMPMutableEndpoint) IsEnabled() bool {
+	defer runtime.KeepAlive(ume)
 	_r := objc.Send[bool](objref.IDOf(ume), objc.RegisterName("isEnabled"))
 	return _r
 }

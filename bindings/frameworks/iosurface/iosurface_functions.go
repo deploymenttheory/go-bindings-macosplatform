@@ -249,8 +249,8 @@ func IOSurfaceRemoveValue(buffer unsafe.Pointer, key unsafe.Pointer) {
 	_fnIOSurfaceRemoveValue(buffer, key)
 }
 
-func IOSurfaceSetOwnershipIdentity(buffer unsafe.Pointer, task_id_token uint, newLedgerTag int, newLedgerOptions uint32) int {
-	return _fnIOSurfaceSetOwnershipIdentity(buffer, task_id_token, newLedgerTag, newLedgerOptions)
+func IOSurfaceSetOwnershipIdentity(buffer unsafe.Pointer, taskIdToken uint, newLedgerTag int, newLedgerOptions uint32) int {
+	return _fnIOSurfaceSetOwnershipIdentity(buffer, taskIdToken, newLedgerTag, newLedgerOptions)
 }
 
 func IOSurfaceSetPurgeable(buffer unsafe.Pointer, newState uint32, oldState *uint32) int {

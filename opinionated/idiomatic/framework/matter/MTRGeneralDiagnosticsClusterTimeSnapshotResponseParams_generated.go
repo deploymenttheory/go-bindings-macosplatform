@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsAdopt(id objc.ID) *MT
 
 // Description returns the object's -description text.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) Description() string {
+	defer runtime.KeepAlive(mgdctsrp)
 	return rt.Description(objref.IDOf(mgdctsrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgdctsrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgdctsrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgdctsrp)
 	return rt.IsKind(objref.IDOf(mgdctsrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) String() string {
+	defer runtime.KeepAlive(mgdctsrp)
 	return rt.Description(objref.IDOf(mgdctsrp))
 }
 
-// NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, err error) {
+// NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValue initialize an MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,24 +87,28 @@ func NewMTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsWithResponseValueE
 
 // WithSystemTimeMs sets the system time ms.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithSystemTimeMs(systemTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
+	defer runtime.KeepAlive(systemTimeMs)
 	objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("setSystemTimeMs:"), objref.IDOf(systemTimeMs))
 	return mgdctsrp
 }
 
 // WithPosixTimeMs sets the posix time ms.
 func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithPosixTimeMs(posixTimeMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams {
+	defer runtime.KeepAlive(posixTimeMs)
 	objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("setPosixTimeMs:"), objref.IDOf(posixTimeMs))
 	return mgdctsrp
 }
 
 // SystemTimeMs returns the system time ms.
-func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() obj.Object {
+func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() *foundation.Number {
+	defer runtime.KeepAlive(mgdctsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("systemTimeMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PosixTimeMs returns the posix time ms.
-func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() obj.Object {
+func (mgdctsrp *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() *foundation.Number {
+	defer runtime.KeepAlive(mgdctsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdctsrp), objc.RegisterName("posixTimeMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

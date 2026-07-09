@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -133,6 +135,7 @@ func (sc *SliderCell) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool
 
 // WithControlView sets the view associated with the cell.
 func (sc *SliderCell) WithControlView(controlView ViewProvider) *SliderCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -157,6 +160,7 @@ func (sc *SliderCell) WithState(state int) *SliderCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (sc *SliderCell) WithTarget(target obj.Object) *SliderCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -261,6 +265,7 @@ func (sc *SliderCell) WithWraps(wraps bool) *SliderCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (sc *SliderCell) WithFont(font *Font) *SliderCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -269,6 +274,7 @@ func (sc *SliderCell) WithFont(font *Font) *SliderCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (sc *SliderCell) WithFormatter(formatter obj.Object) *SliderCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -277,6 +283,7 @@ func (sc *SliderCell) WithFormatter(formatter obj.Object) *SliderCell {
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (sc *SliderCell) WithObjectValue(objectValue obj.Object) *SliderCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -325,6 +332,7 @@ func (sc *SliderCell) WithIntegerValue(integerValue int) *SliderCell {
 
 // WithImage sets the image displayed by the cell, if any.
 func (sc *SliderCell) WithImage(image *Image) *SliderCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -341,6 +349,7 @@ func (sc *SliderCell) WithControlSize(controlSize ControlSize) *SliderCell {
 
 // WithRepresentedObject sets the object represented by the cell.
 func (sc *SliderCell) WithRepresentedObject(representedObject obj.Object) *SliderCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -349,6 +358,7 @@ func (sc *SliderCell) WithRepresentedObject(representedObject obj.Object) *Slide
 
 // WithMenu sets the cell’s contextual menu.
 func (sc *SliderCell) WithMenu(menu *Menu) *SliderCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -437,6 +447,7 @@ func (sc *SliderCell) WithFocusRingType(focusRingType FocusRingType) *SliderCell
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (sc *SliderCell) WithAttributedStringValue(attributedStringValue obj.Object) *SliderCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -485,6 +496,7 @@ func (sc *SliderCell) WithControlTint(controlTint ControlTint) *SliderCell {
 
 // KnobRectFlipped returns the rectangle in which the slider knob is drawn.
 func (sc *SliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -498,6 +510,7 @@ func (sc *SliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
 
 // BarRectFlipped returns the rectangle in which the bar is drawn.
 func (sc *SliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -511,6 +524,7 @@ func (sc *SliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
 
 // DrawKnob draws the slider knob in the given rectangle.
 func (sc *SliderCell) DrawKnob(knobRect corefoundation.CGRect) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawKnob:"), knobRect)
 	})
@@ -519,6 +533,7 @@ func (sc *SliderCell) DrawKnob(knobRect corefoundation.CGRect) {
 
 // DrawKnob2 calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
 func (sc *SliderCell) DrawKnob2() {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawKnob"))
 	})
@@ -527,6 +542,7 @@ func (sc *SliderCell) DrawKnob2() {
 
 // DrawBarInsideFlipped draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
 func (sc *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawBarInside:flipped:"), rect, flipped)
 	})
@@ -535,6 +551,7 @@ func (sc *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped b
 
 // MinValue returns the min value.
 func (sc *SliderCell) MinValue() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -548,6 +565,7 @@ func (sc *SliderCell) MinValue() float64 {
 
 // MaxValue returns the max value.
 func (sc *SliderCell) MaxValue() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -561,6 +579,7 @@ func (sc *SliderCell) MaxValue() float64 {
 
 // AltIncrementValue returns the alt increment value.
 func (sc *SliderCell) AltIncrementValue() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -574,6 +593,7 @@ func (sc *SliderCell) AltIncrementValue() float64 {
 
 // SliderType returns the slider type.
 func (sc *SliderCell) SliderType() SliderType {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 SliderType
 	purego.Main(func() {
 		_mainthread0 = func() SliderType {
@@ -587,6 +607,7 @@ func (sc *SliderCell) SliderType() SliderType {
 
 // IsVertical reports whether the object is vertical.
 func (sc *SliderCell) IsVertical() bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -600,6 +621,7 @@ func (sc *SliderCell) IsVertical() bool {
 
 // TrackRect returns the track rect.
 func (sc *SliderCell) TrackRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -613,6 +635,7 @@ func (sc *SliderCell) TrackRect() corefoundation.CGRect {
 
 // KnobThickness returns the knob thickness.
 func (sc *SliderCell) KnobThickness() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -626,6 +649,7 @@ func (sc *SliderCell) KnobThickness() float64 {
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at the specified index.
 func (sc *SliderCell) TickMarkValueAtIndex(index int) float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -639,6 +663,7 @@ func (sc *SliderCell) TickMarkValueAtIndex(index int) float64 {
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark at the specified index.
 func (sc *SliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -652,6 +677,7 @@ func (sc *SliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 
 // IndexOfTickMarkAtPoint returns the index of the tick mark closest to the location of the slider represented by the specified point.
 func (sc *SliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -665,6 +691,7 @@ func (sc *SliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
 
 // ClosestTickMarkValueToValue returns the value of the tick mark closest to the specified value.
 func (sc *SliderCell) ClosestTickMarkValueToValue(value float64) float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -678,6 +705,7 @@ func (sc *SliderCell) ClosestTickMarkValueToValue(value float64) float64 {
 
 // DrawTickMarks draws the slider’s tick marks.
 func (sc *SliderCell) DrawTickMarks() {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawTickMarks"))
 	})
@@ -686,6 +714,7 @@ func (sc *SliderCell) DrawTickMarks() {
 
 // NumberOfTickMarks returns the number of tick marks.
 func (sc *SliderCell) NumberOfTickMarks() int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -699,6 +728,7 @@ func (sc *SliderCell) NumberOfTickMarks() int {
 
 // TickMarkPosition returns the tick mark position.
 func (sc *SliderCell) TickMarkPosition() TickMarkPosition {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 TickMarkPosition
 	purego.Main(func() {
 		_mainthread0 = func() TickMarkPosition {
@@ -712,6 +742,7 @@ func (sc *SliderCell) TickMarkPosition() TickMarkPosition {
 
 // AllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
 func (sc *SliderCell) AllowsTickMarkValuesOnly() bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -725,6 +756,8 @@ func (sc *SliderCell) AllowsTickMarkValuesOnly() bool {
 
 // SetTitleCell sets the cell used to draw the slider’s title.
 func (sc *SliderCell) SetTitleCell(cell *Cell) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
 	})
@@ -733,6 +766,7 @@ func (sc *SliderCell) SetTitleCell(cell *Cell) {
 
 // TitleCell returns nil.
 func (sc *SliderCell) TitleCell() obj.Object {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -746,6 +780,8 @@ func (sc *SliderCell) TitleCell() obj.Object {
 
 // SetTitleColor sets the color used to draw the slider’s title.
 func (sc *SliderCell) SetTitleColor(newColor *Color) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(newColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
 	})
@@ -754,6 +790,7 @@ func (sc *SliderCell) SetTitleColor(newColor *Color) {
 
 // TitleColor returns nil.
 func (sc *SliderCell) TitleColor() *Color {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -767,6 +804,8 @@ func (sc *SliderCell) TitleColor() *Color {
 
 // SetTitleFont sets the font used to draw the slider’s title.
 func (sc *SliderCell) SetTitleFont(fontObj *Font) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(fontObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
 	})
@@ -775,6 +814,7 @@ func (sc *SliderCell) SetTitleFont(fontObj *Font) {
 
 // TitleFont returns nil.
 func (sc *SliderCell) TitleFont() *Font {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {

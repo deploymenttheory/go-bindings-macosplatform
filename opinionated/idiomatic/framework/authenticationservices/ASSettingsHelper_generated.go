@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func settingsHelperAdopt(id objc.ID) *SettingsHelper {
 
 // Description returns the object's -description text.
 func (sh *SettingsHelper) Description() string {
+	defer runtime.KeepAlive(sh)
 	return rt.Description(objref.IDOf(sh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sh *SettingsHelper) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sh)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sh *SettingsHelper) IsKind(className string) bool {
+	defer runtime.KeepAlive(sh)
 	return rt.IsKind(objref.IDOf(sh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sh *SettingsHelper) String() string {
+	defer runtime.KeepAlive(sh)
 	return rt.Description(objref.IDOf(sh))
 }
 

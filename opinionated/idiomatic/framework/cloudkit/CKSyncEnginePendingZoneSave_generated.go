@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func syncEnginePendingZoneSaveAdopt(id objc.ID) *SyncEnginePendingZoneSave {
 
 // NewSyncEnginePendingZoneSaveWithZone creates a pending zone save for the specified record zone.
 func NewSyncEnginePendingZoneSaveWithZone(zone *RecordZone) *SyncEnginePendingZoneSave {
+	defer runtime.KeepAlive(zone)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingZoneSave")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZone:"), objref.IDOf(zone))
 	return syncEnginePendingZoneSaveAdopt(_id)
@@ -54,6 +57,7 @@ func NewSyncEnginePendingZoneSaveWithZone(zone *RecordZone) *SyncEnginePendingZo
 
 // Zone returns the zone.
 func (sepzs *SyncEnginePendingZoneSave) Zone() *RecordZone {
+	defer runtime.KeepAlive(sepzs)
 	_r := objc.Send[objc.ID](objref.IDOf(sepzs), objc.RegisterName("zone"))
 	return RecordZoneFromID(_r)
 }

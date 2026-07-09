@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4MachineLearningPipelineReflectionAdopt(id objc.ID) *MTL4MachineLearning
 
 // Description returns the object's -description text.
 func (mmlpr *MTL4MachineLearningPipelineReflection) Description() string {
+	defer runtime.KeepAlive(mmlpr)
 	return rt.Description(objref.IDOf(mmlpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mmlpr *MTL4MachineLearningPipelineReflection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mmlpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mmlpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mmlpr *MTL4MachineLearningPipelineReflection) IsKind(className string) bool {
+	defer runtime.KeepAlive(mmlpr)
 	return rt.IsKind(objref.IDOf(mmlpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mmlpr *MTL4MachineLearningPipelineReflection) String() string {
+	defer runtime.KeepAlive(mmlpr)
 	return rt.Description(objref.IDOf(mmlpr))
 }
 
@@ -74,6 +81,7 @@ func NewMTL4MachineLearningPipelineReflection() *MTL4MachineLearningPipelineRefl
 
 // Bindings returns the bindings.
 func (mmlpr *MTL4MachineLearningPipelineReflection) Bindings() []obj.Object {
+	defer runtime.KeepAlive(mmlpr)
 	_r := objc.Send[objc.ID](objref.IDOf(mmlpr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

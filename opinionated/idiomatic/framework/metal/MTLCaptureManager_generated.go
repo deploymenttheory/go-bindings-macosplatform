@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func captureManagerAdopt(id objc.ID) *CaptureManager {
 
 // Description returns the object's -description text.
 func (cm *CaptureManager) Description() string {
+	defer runtime.KeepAlive(cm)
 	return rt.Description(objref.IDOf(cm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cm *CaptureManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cm *CaptureManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(cm)
 	return rt.IsKind(objref.IDOf(cm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cm *CaptureManager) String() string {
+	defer runtime.KeepAlive(cm)
 	return rt.Description(objref.IDOf(cm))
 }
 
@@ -77,12 +83,15 @@ func NewCaptureManager() *CaptureManager {
 
 // SupportsDestination checks to see whether a particular capture destination is supported.
 func (cm *CaptureManager) SupportsDestination(destination CaptureDestination) bool {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("supportsDestination:"), destination)
 	return _r
 }
 
 // StartCaptureWithDescriptor starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
 func (cm *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error {
+	defer runtime.KeepAlive(cm)
+	defer runtime.KeepAlive(descriptor)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(cm), objc.RegisterName("startCaptureWithDescriptor:error:"), objref.IDOf(descriptor), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -93,11 +102,13 @@ func (cm *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescript
 
 // StopCapture stops capturing Metal commands.
 func (cm *CaptureManager) StopCapture() {
+	defer runtime.KeepAlive(cm)
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("stopCapture"))
 }
 
 // IsCapturing reports whether the object is capturing.
 func (cm *CaptureManager) IsCapturing() bool {
+	defer runtime.KeepAlive(cm)
 	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("isCapturing"))
 	return _r
 }

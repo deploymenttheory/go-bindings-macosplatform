@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func pointingDeviceConfigurationAdopt(id objc.ID) *PointingDeviceConfiguration {
 
 // Description returns the object's -description text.
 func (pdc *PointingDeviceConfiguration) Description() string {
+	defer runtime.KeepAlive(pdc)
 	return rt.Description(objref.IDOf(pdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pdc *PointingDeviceConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pdc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pdc *PointingDeviceConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(pdc)
 	return rt.IsKind(objref.IDOf(pdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pdc *PointingDeviceConfiguration) String() string {
+	defer runtime.KeepAlive(pdc)
 	return rt.Description(objref.IDOf(pdc))
 }
 

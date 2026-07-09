@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,24 +56,28 @@ func NewAppLaunchMetric() *AppLaunchMetric {
 
 // HistogrammedTimeToFirstDraw returns histogrammed application time-to-first-draw data. Dimensioned as NSUnitDuration. This represents the time when the first CA commit is finished.
 func (alm *AppLaunchMetric) HistogrammedTimeToFirstDraw() obj.Object {
+	defer runtime.KeepAlive(alm)
 	_r := objc.Send[objc.ID](objref.IDOf(alm), objc.RegisterName("histogrammedTimeToFirstDraw"))
 	return obj.Wrap(_r)
 }
 
 // HistogrammedApplicationResumeTime returns histogrammed application resume time data. Dimensioned as NSUnitDuration.
 func (alm *AppLaunchMetric) HistogrammedApplicationResumeTime() obj.Object {
+	defer runtime.KeepAlive(alm)
 	_r := objc.Send[objc.ID](objref.IDOf(alm), objc.RegisterName("histogrammedApplicationResumeTime"))
 	return obj.Wrap(_r)
 }
 
 // HistogrammedOptimizedTimeToFirstDraw returns histogrammed optimized application time-to-first-draw data. Dimensioned as NSUnitDuration. This represents the time when the first CA commit is finished where the application launch has been optimized by the system. In iOS 15, the system will opportunistically start applications that are not running in the background to reduce the amount of time a user may have to wait before an application is usable. These launches can occur after a system reboot and periodically as system conditions allow.
 func (alm *AppLaunchMetric) HistogrammedOptimizedTimeToFirstDraw() obj.Object {
+	defer runtime.KeepAlive(alm)
 	_r := objc.Send[objc.ID](objref.IDOf(alm), objc.RegisterName("histogrammedOptimizedTimeToFirstDraw"))
 	return obj.Wrap(_r)
 }
 
 // HistogrammedExtendedLaunch returns histogrammed extended launch data. Dimensioned as NSUnitDuration. This represents the time when the app has drawn the first frame and finishes all extended launch tasks that assigned by the developer.
 func (alm *AppLaunchMetric) HistogrammedExtendedLaunch() obj.Object {
+	defer runtime.KeepAlive(alm)
 	_r := objc.Send[objc.ID](objref.IDOf(alm), objc.RegisterName("histogrammedExtendedLaunch"))
 	return obj.Wrap(_r)
 }

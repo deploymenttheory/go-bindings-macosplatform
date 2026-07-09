@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRMediaInputClusterInputInfo() *MTRMediaInputClusterInputInfo {
 
 // WithIndex sets the index.
 func (mmicii *MTRMediaInputClusterInputInfo) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfo {
+	defer runtime.KeepAlive(index)
 	objc.Send[objc.ID](objref.IDOf(mmicii), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return mmicii
 }
 
 // WithInputType sets the input type.
 func (mmicii *MTRMediaInputClusterInputInfo) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfo {
+	defer runtime.KeepAlive(inputType)
 	objc.Send[objc.ID](objref.IDOf(mmicii), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 	return mmicii
 }

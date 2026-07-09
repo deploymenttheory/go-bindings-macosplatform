@@ -5,8 +5,11 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,22 +51,27 @@ func projectRegionOfInterestAdopt(id objc.ID) *ProjectRegionOfInterest {
 
 // Description returns the object's -description text.
 func (proi *ProjectRegionOfInterest) Description() string {
+	defer runtime.KeepAlive(proi)
 	return rt.Description(objref.IDOf(proi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (proi *ProjectRegionOfInterest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(proi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(proi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (proi *ProjectRegionOfInterest) IsKind(className string) bool {
+	defer runtime.KeepAlive(proi)
 	return rt.IsKind(objref.IDOf(proi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (proi *ProjectRegionOfInterest) String() string {
+	defer runtime.KeepAlive(proi)
 	return rt.Description(objref.IDOf(proi))
 }
 
@@ -75,24 +83,28 @@ func NewProjectRegionOfInterest() *ProjectRegionOfInterest {
 
 // Rect returns the rect.
 func (proi *ProjectRegionOfInterest) Rect() corefoundation.CGRect {
+	defer runtime.KeepAlive(proi)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(proi), objc.RegisterName("rect"))
 	return _r
 }
 
 // Weight returns significance of the regionOfInterest in the overall project context is provided as a weight score. All regions of interest with the same identifier in the project have the same weight. For projects doing things like animation or transition between assets, focusing on the highest weighted regions of interest will ensure that the presentation represents something that is most meaningful to the user. Value range is a double between 0.0 and 1.0. Default is 0.5.
 func (proi *ProjectRegionOfInterest) Weight() float64 {
+	defer runtime.KeepAlive(proi)
 	_r := objc.Send[float64](objref.IDOf(proi), objc.RegisterName("weight"))
 	return _r
 }
 
 // Quality returns quality of the represented region of interest in the asset. Different regions of interest with the same identifier may have different quality values. If the project wants to decide between multiple assets containing the same region of interest, the quality score can be used to pick the best representation of the region of interest. Value range is a double between 0.0 and 1.0.
 func (proi *ProjectRegionOfInterest) Quality() float64 {
+	defer runtime.KeepAlive(proi)
 	_r := objc.Send[float64](objref.IDOf(proi), objc.RegisterName("quality"))
 	return _r
 }
 
 // Identifier returns identifier of the region of interest. Regions representing the same person or object will have the same identifier across multiple assets.
-func (proi *ProjectRegionOfInterest) Identifier() obj.Object {
+func (proi *ProjectRegionOfInterest) Identifier() *foundation.String {
+	defer runtime.KeepAlive(proi)
 	_r := objc.Send[objc.ID](objref.IDOf(proi), objc.RegisterName("identifier"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }

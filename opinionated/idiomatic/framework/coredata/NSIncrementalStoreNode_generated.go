@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,45 +49,55 @@ func incrementalStoreNodeAdopt(id objc.ID) *IncrementalStoreNode {
 
 // Description returns the object's -description text.
 func (isn *IncrementalStoreNode) Description() string {
+	defer runtime.KeepAlive(isn)
 	return rt.Description(objref.IDOf(isn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isn *IncrementalStoreNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isn *IncrementalStoreNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(isn)
 	return rt.IsKind(objref.IDOf(isn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isn *IncrementalStoreNode) String() string {
+	defer runtime.KeepAlive(isn)
 	return rt.Description(objref.IDOf(isn))
 }
 
 // NewIncrementalStoreNodeWithObjectIDWithValuesVersion returns an object initialized with the given values.
-func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *ManagedObjectID, values obj.Object, version uint64) *IncrementalStoreNode {
+func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *ManagedObjectID, values map[string]obj.Object, version uint64) *IncrementalStoreNode {
+	defer runtime.KeepAlive(objectID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSIncrementalStoreNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objref.IDOf(objectID), objref.IDOf(values), version)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objref.IDOf(objectID), rt.MapToDict(values, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), version)
 	return incrementalStoreNodeAdopt(_id)
 }
 
 // UpdateWithValuesVersion update the values and version to reflect new data being saved to or loaded from the external store.
-func (isn *IncrementalStoreNode) UpdateWithValuesVersion(values obj.Object, version uint64) {
-	objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("updateWithValues:version:"), objref.IDOf(values), version)
+func (isn *IncrementalStoreNode) UpdateWithValuesVersion(values map[string]obj.Object, version uint64) {
+	defer runtime.KeepAlive(isn)
+	objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("updateWithValues:version:"), rt.MapToDict(values, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), version)
 }
 
 // ValueForPropertyDescription returns the value for the given property.
 func (isn *IncrementalStoreNode) ValueForPropertyDescription(prop *PropertyDescription) obj.Object {
+	defer runtime.KeepAlive(isn)
+	defer runtime.KeepAlive(prop)
 	_r := objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("valueForPropertyDescription:"), objref.IDOf(prop))
 	return obj.Wrap(_r)
 }
 
 // ObjectID returns the object ID.
 func (isn *IncrementalStoreNode) ObjectID() *ManagedObjectID {
+	defer runtime.KeepAlive(isn)
 	_r := objc.Send[objc.ID](objref.IDOf(isn), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }

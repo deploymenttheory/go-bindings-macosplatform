@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -171,12 +173,14 @@ func (dse *DOMHTMLStyleElement) WithTextContent(textContent string) *DOMHTMLStyl
 
 // Disabled wraps the corresponding Objective-C method.
 func (dse *DOMHTMLStyleElement) Disabled() bool {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[bool](objref.IDOf(dse), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Media returns the media.
 func (dse *DOMHTMLStyleElement) Media() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("media"))
 	if _r == 0 {
 		return ""
@@ -186,6 +190,7 @@ func (dse *DOMHTMLStyleElement) Media() string {
 
 // Type returns the type.
 func (dse *DOMHTMLStyleElement) Type() string {
+	defer runtime.KeepAlive(dse)
 	_r := objc.Send[objc.ID](objref.IDOf(dse), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""

@@ -5,7 +5,10 @@
 package osakit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,27 +48,33 @@ func languageInstanceAdopt(id objc.ID) *LanguageInstance {
 
 // Description returns the object's -description text.
 func (li *LanguageInstance) Description() string {
+	defer runtime.KeepAlive(li)
 	return rt.Description(objref.IDOf(li))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (li *LanguageInstance) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(li)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(li), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (li *LanguageInstance) IsKind(className string) bool {
+	defer runtime.KeepAlive(li)
 	return rt.IsKind(objref.IDOf(li), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (li *LanguageInstance) String() string {
+	defer runtime.KeepAlive(li)
 	return rt.Description(objref.IDOf(li))
 }
 
 // NewLanguageInstanceWithLanguage creates a new LanguageInstance.
 func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
+	defer runtime.KeepAlive(language)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("OSALanguageInstance")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLanguage:"), objref.IDOf(language))
 	return languageInstanceAdopt(_id)
@@ -73,24 +82,29 @@ func NewLanguageInstanceWithLanguage(language *Language) *LanguageInstance {
 
 // WithDefaultTarget sets the default target.
 func (li *LanguageInstance) WithDefaultTarget(defaultTarget obj.Object) *LanguageInstance {
+	defer runtime.KeepAlive(defaultTarget)
 	objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("setDefaultTarget:"), objref.IDOf(defaultTarget))
 	return li
 }
 
 // RichTextFromDescriptor wraps the corresponding Objective-C method.
-func (li *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) obj.Object {
+func (li *LanguageInstance) RichTextFromDescriptor(descriptor obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(li)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("richTextFromDescriptor:"), objref.IDOf(descriptor))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Language returns the language.
 func (li *LanguageInstance) Language() *Language {
+	defer runtime.KeepAlive(li)
 	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("language"))
 	return LanguageFromID(_r)
 }
 
 // DefaultTarget returns the default target.
-func (li *LanguageInstance) DefaultTarget() obj.Object {
+func (li *LanguageInstance) DefaultTarget() *foundation.AppleEventDescriptor {
+	defer runtime.KeepAlive(li)
 	_r := objc.Send[objc.ID](objref.IDOf(li), objc.RegisterName("defaultTarget"))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }

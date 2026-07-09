@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -64,6 +66,7 @@ func NewLogicalTestOrTestWithTests(subTests []*SpecifierTest) *LogicalTest {
 
 // NewLogicalTestNotTestWithTest returns an NSLogicalTest object initialized to perform a NOT operation on the given NSScriptWhoseTest object.
 func NewLogicalTestNotTestWithTest(subTest *ScriptWhoseTest) *LogicalTest {
+	defer runtime.KeepAlive(subTest)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initNotTestWithTest:"), objref.IDOf(subTest))
 	return logicalTestAdopt(_id)
@@ -76,8 +79,8 @@ func (lt *LogicalTest) WithObservationInfo(observationInfo unsafe.Pointer) *Logi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (lt *LogicalTest) WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest {
-	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (lt *LogicalTest) WithScriptingProperties(scriptingProperties map[string]obj.Object) *LogicalTest {
+	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return lt
 }
 

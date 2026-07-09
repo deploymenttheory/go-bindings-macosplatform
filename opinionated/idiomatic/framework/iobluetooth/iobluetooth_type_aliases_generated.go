@@ -259,9 +259,9 @@ type BluetoothHCIRSSIInfo struct {
 }
 
 type BluetoothHCIReadLMPHandleResults struct {
-	Handle     uint16
-	Lmp_handle uint8
-	Reserved   uint32
+	Handle    uint16
+	LmpHandle uint8
+	Reserved  uint32
 }
 
 type BluetoothHCIRequestCallbackInfo struct {

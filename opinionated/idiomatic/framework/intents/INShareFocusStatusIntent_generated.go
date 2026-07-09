@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func shareFocusStatusIntentAdopt(id objc.ID) *ShareFocusStatusIntent {
 
 // NewShareFocusStatusIntentWithFocusStatus creates an intent with the specified focus status.
 func NewShareFocusStatusIntentWithFocusStatus(focusStatus *FocusStatus) *ShareFocusStatusIntent {
+	defer runtime.KeepAlive(focusStatus)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INShareFocusStatusIntent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFocusStatus:"), objref.IDOf(focusStatus))
 	return shareFocusStatusIntentAdopt(_id)
@@ -60,12 +63,14 @@ func (sfsi *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvoc
 
 // WithDonationMetadata sets the donation metadata.
 func (sfsi *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
+	defer runtime.KeepAlive(donationMetadata)
 	objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return sfsi
 }
 
 // FocusStatus returns the focus status.
 func (sfsi *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
+	defer runtime.KeepAlive(sfsi)
 	_r := objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("focusStatus"))
 	return FocusStatusFromID(_r)
 }

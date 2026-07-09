@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func selectionAccessoryAdopt(id objc.ID) *SelectionAccessory {
 
 // Description returns the object's -description text.
 func (sa *SelectionAccessory) Description() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sa *SelectionAccessory) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sa *SelectionAccessory) IsKind(className string) bool {
+	defer runtime.KeepAlive(sa)
 	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sa *SelectionAccessory) String() string {
+	defer runtime.KeepAlive(sa)
 	return rt.Description(objref.IDOf(sa))
 }
 

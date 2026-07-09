@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,37 +51,45 @@ func taskAdopt(id objc.ID) *Task {
 
 // Description returns the object's -description text.
 func (t *Task) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Task) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Task) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Task) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // Resume begins or resumes a machine learning task.
 func (t *Task) Resume() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("resume"))
 }
 
 // Cancel cancels a machine learning task before it completes.
 func (t *Task) Cancel() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cancel"))
 }
 
 // TaskIdentifier returns the task identifier.
 func (t *Task) TaskIdentifier() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("taskIdentifier"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (t *Task) TaskIdentifier() string {
 
 // State returns the state.
 func (t *Task) State() TaskState {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TaskState](objref.IDOf(t), objc.RegisterName("state"))
 	return _r
 }

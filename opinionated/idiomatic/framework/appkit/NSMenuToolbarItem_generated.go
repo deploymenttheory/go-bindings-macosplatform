@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,6 +64,7 @@ func NewMenuToolbarItem() *MenuToolbarItem {
 
 // WithMenu sets the menu presented from the toolbar item.
 func (mti *MenuToolbarItem) WithMenu(menu *Menu) *MenuToolbarItem {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -92,9 +96,9 @@ func (mti *MenuToolbarItem) WithPaletteLabel(paletteLabel string) *MenuToolbarIt
 }
 
 // WithPossibleLabels sets the set of labels that the item might display.
-func (mti *MenuToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *MenuToolbarItem {
+func (mti *MenuToolbarItem) WithPossibleLabels(possibleLabels []string) *MenuToolbarItem {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setPossibleLabels:"), rt.SliceToNSSet(possibleLabels, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
 	return mti
 }
@@ -109,6 +113,7 @@ func (mti *MenuToolbarItem) WithToolTip(toolTip string) *MenuToolbarItem {
 
 // WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
 func (mti *MenuToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *MenuToolbarItem {
+	defer runtime.KeepAlive(menuFormRepresentation)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
 	})
@@ -125,6 +130,7 @@ func (mti *MenuToolbarItem) WithTag(tag int) *MenuToolbarItem {
 
 // WithTarget sets the object that defines the action method the toolbar item calls when clicked.
 func (mti *MenuToolbarItem) WithTarget(target obj.Object) *MenuToolbarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -141,6 +147,7 @@ func (mti *MenuToolbarItem) WithEnabled(enabled bool) *MenuToolbarItem {
 
 // WithImage sets the image to display for the toolbar item.
 func (mti *MenuToolbarItem) WithImage(image *Image) *MenuToolbarItem {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -165,6 +172,7 @@ func (mti *MenuToolbarItem) WithBordered(bordered bool) *MenuToolbarItem {
 
 // WithBackgroundTintColor sets the background tint color.
 func (mti *MenuToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *MenuToolbarItem {
+	defer runtime.KeepAlive(backgroundTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	})
@@ -189,6 +197,7 @@ func (mti *MenuToolbarItem) WithNavigational(navigational bool) *MenuToolbarItem
 
 // WithView sets the custom view you use to draw the toolbar item.
 func (mti *MenuToolbarItem) WithView(view ViewProvider) *MenuToolbarItem {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -229,6 +238,7 @@ func (mti *MenuToolbarItem) WithVisibilityPriority(visibilityPriority int) *Menu
 
 // WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
 func (mti *MenuToolbarItem) WithBadge(badge *ItemBadge) *MenuToolbarItem {
+	defer runtime.KeepAlive(badge)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(mti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	})
@@ -245,6 +255,7 @@ func (mti *MenuToolbarItem) WithAutovalidates(autovalidates bool) *MenuToolbarIt
 
 // Menu returns the menu.
 func (mti *MenuToolbarItem) Menu() *Menu {
+	defer runtime.KeepAlive(mti)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -258,6 +269,7 @@ func (mti *MenuToolbarItem) Menu() *Menu {
 
 // ShowsIndicator wraps the corresponding Objective-C method.
 func (mti *MenuToolbarItem) ShowsIndicator() bool {
+	defer runtime.KeepAlive(mti)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

@@ -5,6 +5,7 @@
 package fskit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -167,12 +168,14 @@ func (isar *ItemSetAttributesRequest) WithBackupTime(backupTime unsafe.Pointer) 
 
 // WasAttributeConsumed a method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
 func (isar *ItemSetAttributesRequest) WasAttributeConsumed(attribute ItemAttribute) bool {
+	defer runtime.KeepAlive(isar)
 	_r := objc.Send[bool](objref.IDOf(isar), objc.RegisterName("wasAttributeConsumed:"), attribute)
 	return _r
 }
 
 // ConsumedAttributes returns the attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 func (isar *ItemSetAttributesRequest) ConsumedAttributes() ItemAttribute {
+	defer runtime.KeepAlive(isar)
 	_r := objc.Send[ItemAttribute](objref.IDOf(isar), objc.RegisterName("consumedAttributes"))
 	return _r
 }

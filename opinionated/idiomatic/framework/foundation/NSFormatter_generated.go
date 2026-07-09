@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func formatterAdopt(id objc.ID) *Formatter {
 
 // Description returns the object's -description text.
 func (f *Formatter) Description() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (f *Formatter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (f *Formatter) IsKind(className string) bool {
+	defer runtime.KeepAlive(f)
 	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (f *Formatter) String() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
@@ -77,14 +83,16 @@ func (f *Formatter) WithObservationInfo(observationInfo unsafe.Pointer) *Formatt
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (f *Formatter) WithScriptingProperties(scriptingProperties obj.Object) *Formatter {
-	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (f *Formatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Formatter {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return f
 }
 
 // StringForObjectValue wraps the corresponding Objective-C method.
-func (f *Formatter) StringForObjectValue(obj_ obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("stringForObjectValue:"), objref.IDOf(obj_))
+func (f *Formatter) StringForObjectValue(object obj.Object) string {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("stringForObjectValue:"), objref.IDOf(object))
 	if _r == 0 {
 		return ""
 	}
@@ -92,14 +100,19 @@ func (f *Formatter) StringForObjectValue(obj_ obj.Object) string {
 }
 
 // AttributedStringForObjectValueWithDefaultAttributes wraps the corresponding Objective-C method.
-func (f *Formatter) AttributedStringForObjectValueWithDefaultAttributes(obj_ obj.Object, attrs obj.Object) *AttributedString {
-	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:"), objref.IDOf(obj_), objref.IDOf(attrs))
+func (f *Formatter) AttributedStringForObjectValueWithDefaultAttributes(object obj.Object, attrs obj.Object) *AttributedString {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(object)
+	defer runtime.KeepAlive(attrs)
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("attributedStringForObjectValue:withDefaultAttributes:"), objref.IDOf(object), objref.IDOf(attrs))
 	return AttributedStringFromID(_r)
 }
 
 // EditingStringForObjectValue wraps the corresponding Objective-C method.
-func (f *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("editingStringForObjectValue:"), objref.IDOf(obj_))
+func (f *Formatter) EditingStringForObjectValue(object obj.Object) string {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(object)
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("editingStringForObjectValue:"), objref.IDOf(object))
 	if _r == 0 {
 		return ""
 	}
@@ -107,8 +120,9 @@ func (f *Formatter) EditingStringForObjectValue(obj_ obj.Object) string {
 }
 
 // IsPartialStringValidNewEditingStringErrorDescription wraps the corresponding Objective-C method.
-func (f *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, error_ string) bool {
-	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:"), purego.NSString(partialString), purego.NSString(newString), purego.NSString(error_))
+func (f *Formatter) IsPartialStringValidNewEditingStringErrorDescription(partialString string, newString string, err string) bool {
+	defer runtime.KeepAlive(f)
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isPartialStringValid:newEditingString:errorDescription:"), purego.NSString(partialString), purego.NSString(newString), purego.NSString(err))
 	return _r
 }
 

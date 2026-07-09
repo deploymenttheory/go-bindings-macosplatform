@@ -5,10 +5,14 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,6 +59,7 @@ func NewMutableMetadataItem() *MutableMetadataItem {
 
 // WithIdentifier sets indicates the identifier of the metadata item.
 func (mmi *MutableMetadataItem) WithIdentifier(identifier obj.Object) *MutableMetadataItem {
+	defer runtime.KeepAlive(identifier)
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return mmi
 }
@@ -67,6 +72,7 @@ func (mmi *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag stri
 
 // WithLocale sets the locale for a mutable metadata item.
 func (mmi *MutableMetadataItem) WithLocale(locale obj.Object) *MutableMetadataItem {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return mmi
 }
@@ -91,30 +97,34 @@ func (mmi *MutableMetadataItem) WithDataType(dataType string) *MutableMetadataIt
 
 // WithValue sets the value for the mutable metadata item.
 func (mmi *MutableMetadataItem) WithValue(value obj.Object) *MutableMetadataItem {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mmi
 }
 
 // WithExtraAttributes sets a dictionary of additional attributes for a metadata item.
 func (mmi *MutableMetadataItem) WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem {
+	defer runtime.KeepAlive(extraAttributes)
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
 	return mmi
 }
 
 // WithStartDate sets the start date of the timed metadata.
-func (mmi *MutableMetadataItem) WithStartDate(startDate obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+func (mmi *MutableMetadataItem) WithStartDate(startDate time.Time) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setStartDate:"), rt.TimeToNSDate(startDate))
 	return mmi
 }
 
 // WithKeySpace sets the key space of the metadata item’s key.
 func (mmi *MutableMetadataItem) WithKeySpace(keySpace obj.Object) *MutableMetadataItem {
+	defer runtime.KeepAlive(keySpace)
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
 	return mmi
 }
 
 // WithKey sets the key for a mutable metadata item.
 func (mmi *MutableMetadataItem) WithKey(key obj.Object) *MutableMetadataItem {
+	defer runtime.KeepAlive(key)
 	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return mmi
 }

@@ -5,9 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -88,6 +90,7 @@ func (die *DOMHTMLInputElement) WithDisabled(disabled bool) *DOMHTMLInputElement
 
 // WithFiles sets the files.
 func (die *DOMHTMLInputElement) WithFiles(files *DOMFileList) *DOMHTMLInputElement {
+	defer runtime.KeepAlive(files)
 	objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("setFiles:"), objref.IDOf(files))
 	return die
 }
@@ -280,16 +283,19 @@ func (die *DOMHTMLInputElement) WithTextContent(textContent string) *DOMHTMLInpu
 
 // Select wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) Select() {
+	defer runtime.KeepAlive(die)
 	objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("select"))
 }
 
 // SetSelectionRangeEnd wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) SetSelectionRangeEnd(start int, end int) {
+	defer runtime.KeepAlive(die)
 	objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("setSelectionRange:end:"), start, end)
 }
 
 // Accept returns the accept.
 func (die *DOMHTMLInputElement) Accept() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("accept"))
 	if _r == 0 {
 		return ""
@@ -299,6 +305,7 @@ func (die *DOMHTMLInputElement) Accept() string {
 
 // Alt returns the alt.
 func (die *DOMHTMLInputElement) Alt() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("alt"))
 	if _r == 0 {
 		return ""
@@ -308,60 +315,70 @@ func (die *DOMHTMLInputElement) Alt() string {
 
 // Autofocus wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) Autofocus() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("autofocus"))
 	return _r
 }
 
 // DefaultChecked wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) DefaultChecked() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("defaultChecked"))
 	return _r
 }
 
 // Checked wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) Checked() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("checked"))
 	return _r
 }
 
 // Disabled wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) Disabled() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Form returns the form.
 func (die *DOMHTMLInputElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Files returns the files.
 func (die *DOMHTMLInputElement) Files() *DOMFileList {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("files"))
 	return DOMFileListFromID(_r)
 }
 
 // Indeterminate wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) Indeterminate() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("indeterminate"))
 	return _r
 }
 
 // MaxLength returns the max length.
 func (die *DOMHTMLInputElement) MaxLength() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("maxLength"))
 	return _r
 }
 
 // Multiple wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) Multiple() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("multiple"))
 	return _r
 }
 
 // Name returns the name.
 func (die *DOMHTMLInputElement) Name() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -371,12 +388,14 @@ func (die *DOMHTMLInputElement) Name() string {
 
 // ReadOnly wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) ReadOnly() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("readOnly"))
 	return _r
 }
 
 // Size returns the size.
 func (die *DOMHTMLInputElement) Size() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("size"))
 	if _r == 0 {
 		return ""
@@ -386,6 +405,7 @@ func (die *DOMHTMLInputElement) Size() string {
 
 // Src returns the src.
 func (die *DOMHTMLInputElement) Src() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("src"))
 	if _r == 0 {
 		return ""
@@ -395,6 +415,7 @@ func (die *DOMHTMLInputElement) Src() string {
 
 // Type returns the type.
 func (die *DOMHTMLInputElement) Type() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -404,6 +425,7 @@ func (die *DOMHTMLInputElement) Type() string {
 
 // DefaultValue returns the default value.
 func (die *DOMHTMLInputElement) DefaultValue() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("defaultValue"))
 	if _r == 0 {
 		return ""
@@ -413,6 +435,7 @@ func (die *DOMHTMLInputElement) DefaultValue() string {
 
 // Value returns the value.
 func (die *DOMHTMLInputElement) Value() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -422,24 +445,28 @@ func (die *DOMHTMLInputElement) Value() string {
 
 // WillValidate wraps the corresponding Objective-C method.
 func (die *DOMHTMLInputElement) WillValidate() bool {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[bool](objref.IDOf(die), objc.RegisterName("willValidate"))
 	return _r
 }
 
 // SelectionStart returns the selection start.
 func (die *DOMHTMLInputElement) SelectionStart() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("selectionStart"))
 	return _r
 }
 
 // SelectionEnd returns the selection end.
 func (die *DOMHTMLInputElement) SelectionEnd() int {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[int](objref.IDOf(die), objc.RegisterName("selectionEnd"))
 	return _r
 }
 
 // Align returns the align.
 func (die *DOMHTMLInputElement) Align() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -449,6 +476,7 @@ func (die *DOMHTMLInputElement) Align() string {
 
 // UseMap returns the use map.
 func (die *DOMHTMLInputElement) UseMap() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("useMap"))
 	if _r == 0 {
 		return ""
@@ -458,6 +486,7 @@ func (die *DOMHTMLInputElement) UseMap() string {
 
 // AltDisplayString returns the alt display string.
 func (die *DOMHTMLInputElement) AltDisplayString() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("altDisplayString"))
 	if _r == 0 {
 		return ""
@@ -466,9 +495,10 @@ func (die *DOMHTMLInputElement) AltDisplayString() string {
 }
 
 // AbsoluteImageURL returns the absolute image URL.
-func (die *DOMHTMLInputElement) AbsoluteImageURL() obj.Object {
+func (die *DOMHTMLInputElement) AbsoluteImageURL() string {
+	defer runtime.KeepAlive(die)
 	_r := objc.Send[objc.ID](objref.IDOf(die), objc.RegisterName("absoluteImageURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 var _ DOMHTMLElementProvider = (*DOMHTMLInputElement)(nil)

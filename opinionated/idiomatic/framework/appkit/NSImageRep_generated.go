@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,27 +53,33 @@ func imageRepAdopt(id objc.ID) *ImageRep {
 
 // Description returns the object's -description text.
 func (ir *ImageRep) Description() string {
+	defer runtime.KeepAlive(ir)
 	return rt.Description(objref.IDOf(ir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ir *ImageRep) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ir)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ir *ImageRep) IsKind(className string) bool {
+	defer runtime.KeepAlive(ir)
 	return rt.IsKind(objref.IDOf(ir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ir *ImageRep) String() string {
+	defer runtime.KeepAlive(ir)
 	return rt.Description(objref.IDOf(ir))
 }
 
 // NewImageRepWithCoder creates and returns an image representation object from data in an unarchiver.
 func NewImageRepWithCoder(coder obj.Object) *ImageRep {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSImageRep")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return imageRepAdopt(_id)
@@ -96,6 +105,7 @@ func (ir *ImageRep) WithOpaque(opaque bool) *ImageRep {
 
 // WithColorSpaceName sets the name of the color space used by the image data.
 func (ir *ImageRep) WithColorSpaceName(colorSpaceName obj.Object) *ImageRep {
+	defer runtime.KeepAlive(colorSpaceName)
 	objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return ir
 }
@@ -126,72 +136,85 @@ func (ir *ImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *I
 
 // Draw reports whether implemented by subclasses to draw the image in the current coordinate system.
 func (ir *ImageRep) Draw() bool {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("draw"))
 	return _r
 }
 
 // DrawAtPoint draws the image representation’s image data at the specified point in the current coordinate system.
 func (ir *ImageRep) DrawAtPoint(point corefoundation.CGPoint) bool {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawAtPoint:"), point)
 	return _r
 }
 
 // DrawInRect draws the image, scaling it (as needed) to fit the specified rectangle.
 func (ir *ImageRep) DrawInRect(rect corefoundation.CGRect) bool {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawInRect:"), rect)
 	return _r
 }
 
 // DrawInRectFromRectOperationFractionRespectFlippedHints draws all or part of the image in the specified rectangle in the current coordinate system.
 func (ir *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSpacePortionRect corefoundation.CGRect, srcSpacePortionRect corefoundation.CGRect, op CompositingOperation, requestedAlpha float64, respectContextIsFlipped bool, hints obj.Object) bool {
+	defer runtime.KeepAlive(ir)
+	defer runtime.KeepAlive(hints)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("drawInRect:fromRect:operation:fraction:respectFlipped:hints:"), dstSpacePortionRect, srcSpacePortionRect, op, requestedAlpha, respectContextIsFlipped, objref.IDOf(hints))
 	return _r
 }
 
 // Size returns the size.
 func (ir *ImageRep) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ir), objc.RegisterName("size"))
 	return _r
 }
 
 // HasAlpha reports whether the object has alpha.
 func (ir *ImageRep) HasAlpha() bool {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("hasAlpha"))
 	return _r
 }
 
 // IsOpaque reports whether the object is opaque.
 func (ir *ImageRep) IsOpaque() bool {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("isOpaque"))
 	return _r
 }
 
 // ColorSpaceName returns the color space name.
-func (ir *ImageRep) ColorSpaceName() obj.Object {
+func (ir *ImageRep) ColorSpaceName() *foundation.String {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("colorSpaceName"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // BitsPerSample returns the bits per sample.
 func (ir *ImageRep) BitsPerSample() int {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("bitsPerSample"))
 	return _r
 }
 
 // PixelsWide returns the pixels wide.
 func (ir *ImageRep) PixelsWide() int {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
 // PixelsHigh returns the pixels high.
 func (ir *ImageRep) PixelsHigh() int {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
 // LayoutDirection returns the layout direction.
 func (ir *ImageRep) LayoutDirection() ImageLayoutDirection {
+	defer runtime.KeepAlive(ir)
 	_r := objc.Send[ImageLayoutDirection](objref.IDOf(ir), objc.RegisterName("layoutDirection"))
 	return _r
 }

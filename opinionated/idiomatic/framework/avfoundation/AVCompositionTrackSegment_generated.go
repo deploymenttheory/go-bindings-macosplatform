@@ -5,10 +5,11 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,9 +50,9 @@ func compositionTrackSegmentAdopt(id objc.ID) *CompositionTrackSegment {
 }
 
 // NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange creates an object that presents a segment of a media file that the specified URL references.
-func NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL string, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *CompositionTrackSegment {
+func NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(url string, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *CompositionTrackSegment {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:trackID:sourceTimeRange:targetTimeRange:"), rt.FileURL(uRL), trackID, sourceTimeRange, targetTimeRange)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:trackID:sourceTimeRange:targetTimeRange:"), rt.FileURL(url), trackID, sourceTimeRange, targetTimeRange)
 	return compositionTrackSegmentAdopt(_id)
 }
 
@@ -63,13 +64,15 @@ func NewCompositionTrackSegmentWithTimeRange(timeRange coremedia.CMTimeRange) *C
 }
 
 // SourceURL returns the source URL.
-func (cts *CompositionTrackSegment) SourceURL() obj.Object {
+func (cts *CompositionTrackSegment) SourceURL() string {
+	defer runtime.KeepAlive(cts)
 	_r := objc.Send[objc.ID](objref.IDOf(cts), objc.RegisterName("sourceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // SourceTrackID returns the source track ID.
 func (cts *CompositionTrackSegment) SourceTrackID() int32 {
+	defer runtime.KeepAlive(cts)
 	_r := objc.Send[int32](objref.IDOf(cts), objc.RegisterName("sourceTrackID"))
 	return _r
 }

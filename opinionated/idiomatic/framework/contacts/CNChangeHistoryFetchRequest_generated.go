@@ -5,9 +5,12 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +56,8 @@ func NewChangeHistoryFetchRequest() *ChangeHistoryFetchRequest {
 }
 
 // WithStartingToken sets an opaque token that indicates a point in history in the user’s Contacts database.
-func (chfr *ChangeHistoryFetchRequest) WithStartingToken(startingToken obj.Object) *ChangeHistoryFetchRequest {
-	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setStartingToken:"), objref.IDOf(startingToken))
+func (chfr *ChangeHistoryFetchRequest) WithStartingToken(startingToken []byte) *ChangeHistoryFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setStartingToken:"), rt.BytesToNSData(startingToken))
 	return chfr
 }
 
@@ -84,36 +87,42 @@ func (chfr *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...o
 }
 
 // StartingToken returns request changes made after a certain point. If non-nil, only changes made after this point in history will be returned. If nil, a
-func (chfr *ChangeHistoryFetchRequest) StartingToken() obj.Object {
+func (chfr *ChangeHistoryFetchRequest) StartingToken() []byte {
+	defer runtime.KeepAlive(chfr)
 	_r := objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("startingToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AdditionalContactKeyDescriptors returns additional keys to include in the fetched contacts. By default, only
 func (chfr *ChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() []obj.Object {
+	defer runtime.KeepAlive(chfr)
 	_r := objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("additionalContactKeyDescriptors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetAdditionalContactKeyDescriptors wraps the corresponding Objective-C method.
 func (chfr *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors []obj.Object) {
+	defer runtime.KeepAlive(chfr)
 	objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("setAdditionalContactKeyDescriptors:"), purego.SliceToNSArray(additionalContactKeyDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ShouldUnifyResults reports whether returns contact changes as unified contacts. If
 func (chfr *ChangeHistoryFetchRequest) ShouldUnifyResults() bool {
+	defer runtime.KeepAlive(chfr)
 	_r := objc.Send[bool](objref.IDOf(chfr), objc.RegisterName("shouldUnifyResults"))
 	return _r
 }
 
 // MutableObjects reports whether to return mutable contacts and groups. If
 func (chfr *ChangeHistoryFetchRequest) MutableObjects() bool {
+	defer runtime.KeepAlive(chfr)
 	_r := objc.Send[bool](objref.IDOf(chfr), objc.RegisterName("mutableObjects"))
 	return _r
 }
 
 // IncludeGroupChanges reports whether set to
 func (chfr *ChangeHistoryFetchRequest) IncludeGroupChanges() bool {
+	defer runtime.KeepAlive(chfr)
 	_r := objc.Send[bool](objref.IDOf(chfr), objc.RegisterName("includeGroupChanges"))
 	return _r
 }
@@ -122,6 +131,7 @@ func (chfr *ChangeHistoryFetchRequest) IncludeGroupChanges() bool {
 //
 // ExcludedTransactionAuthors returns the collection as a Go slice.
 func (chfr *ChangeHistoryFetchRequest) ExcludedTransactionAuthors() []string {
+	defer runtime.KeepAlive(chfr)
 	_arr := objc.Send[objc.ID](objref.IDOf(chfr), objc.RegisterName("excludedTransactionAuthors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

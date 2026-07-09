@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,29 +51,34 @@ func assetAdopt(id objc.ID) *Asset {
 
 // Description returns the object's -description text.
 func (a *Asset) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Asset) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Asset) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Asset) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // NewAssetWithURL initializes an asset from the file at the specified URL.
-func NewAssetWithURL(uRL string) *Asset {
+func NewAssetWithURL(url string) *Asset {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLAsset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 	return assetAdopt(_id)
 }
 
@@ -101,34 +107,42 @@ func (a *Asset) WithUpAxis(upAxis unsafe.Pointer) *Asset {
 }
 
 // ExportAssetToURL writes asset data to a file at the specified URL.
-func (a *Asset) ExportAssetToURL(uRL string) bool {
-	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("exportAssetToURL:"), rt.FileURL(uRL))
+func (a *Asset) ExportAssetToURL(url string) bool {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("exportAssetToURL:"), rt.FileURL(url))
 	return _r
 }
 
 // ObjectAtPath return the object at the specified path, or nil if none exists there
 func (a *Asset) ObjectAtPath(path string) *Object {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtPath:"), purego.NSString(path))
 	return ObjectFromID(_r)
 }
 
 // LoadTextures iterates over all material properties on all materials. If they are string values or NSURL values, and can be resolved as textures, then the string and NSURL values will be replaced by MDLTextureSampler values.
 func (a *Asset) LoadTextures() {
+	defer runtime.KeepAlive(a)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("loadTextures"))
 }
 
 // AddObject adds the specified object to the asset’s list of top-level objects.
 func (a *Asset) AddObject(object *Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes the specified object from the asset’s list of top-level objects.
 func (a *Asset) RemoveObject(object *Object) {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(object)
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // ObjectAtIndexedSubscript returns the top-level object at the specified index in the asset, using subscript syntax.
 func (a *Asset) ObjectAtIndexedSubscript(index int) *Object {
+	defer runtime.KeepAlive(a)
 	errkit.CheckIndex(index, a.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return ObjectFromID(_r)
@@ -136,6 +150,7 @@ func (a *Asset) ObjectAtIndexedSubscript(index int) *Object {
 
 // ObjectAtIndex returns the top-level object at the specified index in the asset.
 func (a *Asset) ObjectAtIndex(index int) *Object {
+	defer runtime.KeepAlive(a)
 	errkit.CheckIndex(index, a.Count())
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtIndex:"), index)
 	return ObjectFromID(_r)
@@ -143,36 +158,42 @@ func (a *Asset) ObjectAtIndex(index int) *Object {
 
 // FrameInterval returns inherent frame rate of an asset If no framerate was specified by resource or resource uncapable of specifying framerate, this value defaults to 0
 func (a *Asset) FrameInterval() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("frameInterval"))
 	return _r
 }
 
 // StartTime returns start time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If startTime was set explicitly, then the value of startTime will be the lesser of the set value and the animated values.
 func (a *Asset) StartTime() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("startTime"))
 	return _r
 }
 
 // EndTime returns end time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If the endTime was set explicitly, then the value of endTime will be the greater of the set value and the animated values.
 func (a *Asset) EndTime() float64 {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("endTime"))
 	return _r
 }
 
 // URL returns URL used to create the asset If the asset was not created with a URL, nil will be returned.
-func (a *Asset) URL() obj.Object {
+func (a *Asset) URL() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // VertexDescriptor returns vertex descriptor set upon asset initialization Will be nil if there was no descriptor set
 func (a *Asset) VertexDescriptor() *VertexDescriptor {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
 // Count returns the number of top level objects
 func (a *Asset) Count() int {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("count"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collectionViewCompositionalLayoutConfigurationAdopt(id objc.ID) *Collection
 
 // Description returns the object's -description text.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) Description() string {
+	defer runtime.KeepAlive(cvclc)
 	return rt.Description(objref.IDOf(cvclc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cvclc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cvclc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(cvclc)
 	return rt.IsKind(objref.IDOf(cvclc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) String() string {
+	defer runtime.KeepAlive(cvclc)
 	return rt.Description(objref.IDOf(cvclc))
 }
 
@@ -105,6 +112,7 @@ func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplem
 
 // ScrollDirection returns the scroll direction.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
+	defer runtime.KeepAlive(cvclc)
 	var _mainthread0 CollectionViewScrollDirection
 	purego.Main(func() {
 		_mainthread0 = func() CollectionViewScrollDirection {
@@ -118,6 +126,7 @@ func (cvclc *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() C
 
 // InterSectionSpacing returns the inter section spacing.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
+	defer runtime.KeepAlive(cvclc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -133,6 +142,7 @@ func (cvclc *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
+	defer runtime.KeepAlive(cvclc)
 	var _mainthread0 []*CollectionLayoutBoundarySupplementaryItem
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionLayoutBoundarySupplementaryItem {

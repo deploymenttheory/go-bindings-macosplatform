@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func poolingDescriptorAdopt(id objc.ID) *PoolingDescriptor {
 
 // Description returns the object's -description text.
 func (pd *PoolingDescriptor) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *PoolingDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *PoolingDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *PoolingDescriptor) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
@@ -74,66 +81,77 @@ func NewPoolingDescriptor() *PoolingDescriptor {
 
 // PoolingType returns the pooling operation
 func (pd *PoolingDescriptor) PoolingType() PoolingType {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[PoolingType](objref.IDOf(pd), objc.RegisterName("poolingType"))
 	return _r
 }
 
 // KernelWidth returns the pooling kernel size in x.
 func (pd *PoolingDescriptor) KernelWidth() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
 // KernelHeight returns the pooling kernel size in y.
 func (pd *PoolingDescriptor) KernelHeight() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // StrideInX returns the stride of the kernel in x.
 func (pd *PoolingDescriptor) StrideInX() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("strideInX"))
 	return _r
 }
 
 // StrideInY returns the stride of the kernel in y.
 func (pd *PoolingDescriptor) StrideInY() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("strideInY"))
 	return _r
 }
 
 // DilationRateInX returns the dilation rate i.e. stride of elements in the kernel in x.
 func (pd *PoolingDescriptor) DilationRateInX() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("dilationRateInX"))
 	return _r
 }
 
 // DilationRateInY returns the dilation rate i.e. stride of elements in the kernel in y.
 func (pd *PoolingDescriptor) DilationRateInY() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("dilationRateInY"))
 	return _r
 }
 
 // PaddingPolicy returns the padding policy to use.
 func (pd *PoolingDescriptor) PaddingPolicy() PaddingPolicy {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[PaddingPolicy](objref.IDOf(pd), objc.RegisterName("paddingPolicy"))
 	return _r
 }
 
 // PaddingSizeInX returns the padding size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
 func (pd *PoolingDescriptor) PaddingSizeInX() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("paddingSizeInX"))
 	return _r
 }
 
 // PaddingSizeInY returns the padding size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
 func (pd *PoolingDescriptor) PaddingSizeInY() int {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("paddingSizeInY"))
 	return _r
 }
 
 // CountIncludesPadding reports whether include the zero-padding in the averaging calculation if true. Used only with average pooling.
 func (pd *PoolingDescriptor) CountIncludesPadding() bool {
+	defer runtime.KeepAlive(pd)
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("countIncludesPadding"))
 	return _r
 }

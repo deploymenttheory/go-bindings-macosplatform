@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -69,18 +71,21 @@ func (dt *DOMText) WithTextContent(textContent string) *DOMText {
 
 // SplitText wraps the corresponding Objective-C method.
 func (dt *DOMText) SplitText(offset int) *DOMText {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("splitText:"), offset)
 	return DOMTextFromID(_r)
 }
 
 // ReplaceWholeText replaces whole text.
 func (dt *DOMText) ReplaceWholeText(content string) *DOMText {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("replaceWholeText:"), purego.NSString(content))
 	return DOMTextFromID(_r)
 }
 
 // WholeText returns the whole text.
 func (dt *DOMText) WholeText() string {
+	defer runtime.KeepAlive(dt)
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("wholeText"))
 	if _r == 0 {
 		return ""

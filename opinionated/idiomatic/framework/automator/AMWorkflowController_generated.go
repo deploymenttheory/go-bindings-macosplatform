@@ -5,8 +5,11 @@
 package automator
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func workflowControllerAdopt(id objc.ID) *WorkflowController {
 
 // Description returns the object's -description text.
 func (wc *WorkflowController) Description() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wc *WorkflowController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wc *WorkflowController) IsKind(className string) bool {
+	defer runtime.KeepAlive(wc)
 	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wc *WorkflowController) String() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
@@ -74,67 +82,94 @@ func NewWorkflowController() *WorkflowController {
 
 // WithWorkflow sets the controller’s workflow.
 func (wc *WorkflowController) WithWorkflow(workflow *Workflow) *WorkflowController {
+	defer runtime.KeepAlive(workflow)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setWorkflow:"), objref.IDOf(workflow))
 	return wc
 }
 
 // WithWorkflowView sets the controller’s workflow view.
 func (wc *WorkflowController) WithWorkflowView(workflowView *WorkflowView) *WorkflowController {
+	defer runtime.KeepAlive(workflowView)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setWorkflowView:"), objref.IDOf(workflowView))
+	return wc
+}
+
+// WithDelegate sets the controller’s delegate.
+func (wc *WorkflowController) WithDelegate(delegate WorkflowControllerDelegate) *WorkflowController {
+	_shim := newWorkflowControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(wc), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(wc), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
 	return wc
 }
 
 // Run runs the associated workflow, after first clearing any results stored by its actions during any previous run.
 func (wc *WorkflowController) Run(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("run:"), objref.IDOf(sender))
 }
 
 // Stop stops the associated workflow.
 func (wc *WorkflowController) Stop(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
 // Pause pauses a workflow that’s running.
 func (wc *WorkflowController) Pause(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("pause:"), objref.IDOf(sender))
 }
 
 // Step in a paused workflow, runs the next action in the workflow and then pauses again.
 func (wc *WorkflowController) Step(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("step:"), objref.IDOf(sender))
 }
 
 // Reset stops a workflow, clears any action results, and resets the workflow back to an un-run state.
 func (wc *WorkflowController) Reset(sender obj.Object) {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("reset:"), objref.IDOf(sender))
 }
 
 // Workflow returns the workflow.
 func (wc *WorkflowController) Workflow() *Workflow {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("workflow"))
 	return WorkflowFromID(_r)
 }
 
 // WorkflowView returns the workflow view.
 func (wc *WorkflowController) WorkflowView() *WorkflowView {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("workflowView"))
 	return WorkflowViewFromID(_r)
 }
 
 // CanRun wraps the corresponding Objective-C method.
 func (wc *WorkflowController) CanRun() bool {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("canRun"))
 	return _r
 }
 
 // IsRunning reports whether the object is running.
 func (wc *WorkflowController) IsRunning() bool {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("isRunning"))
 	return _r
 }
 
 // IsPaused reports whether the object is paused.
 func (wc *WorkflowController) IsPaused() bool {
+	defer runtime.KeepAlive(wc)
 	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("isPaused"))
 	return _r
 }

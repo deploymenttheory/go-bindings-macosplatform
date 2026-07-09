@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRUnitTestingClusterTestNestedStructListArgumentRequestParamsAdopt(id objc
 
 // Description returns the object's -description text.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) Description() string {
+	defer runtime.KeepAlive(mutctnslarp)
 	return rt.Description(objref.IDOf(mutctnslarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mutctnslarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mutctnslarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mutctnslarp)
 	return rt.IsKind(objref.IDOf(mutctnslarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) String() string {
+	defer runtime.KeepAlive(mutctnslarp)
 	return rt.Description(objref.IDOf(mutctnslarp))
 }
 
 // WithArg1 sets the arg1.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) WithArg1(arg1 MTRUnitTestingClusterNestedStructListProvider) *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams {
+	defer runtime.KeepAlive(arg1)
 	objc.Send[objc.ID](objref.IDOf(mutctnslarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctnslarp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mutctnslarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mutctnslarp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mutctnslarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mutctnslarp
 }
 
 // Arg1 returns the arg1.
 func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) Arg1() *MTRUnitTestingClusterNestedStructList {
+	defer runtime.KeepAlive(mutctnslarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnslarp), objc.RegisterName("arg1"))
 	return MTRUnitTestingClusterNestedStructListFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mutctnslarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnslarp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mutctnslarp *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mutctnslarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnslarp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRUnitTestingClusterTestNestedStructListArgumentRequestParams marks MTRUnitTestingClusterTestNestedStructListArgumentRequestParams — and, by embedding promotion, its

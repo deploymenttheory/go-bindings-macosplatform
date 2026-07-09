@@ -5,6 +5,8 @@
 package usernotifications
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func notificationAttachmentAdopt(id objc.ID) *NotificationAttachment {
 
 // Description returns the object's -description text.
 func (na *NotificationAttachment) Description() string {
+	defer runtime.KeepAlive(na)
 	return rt.Description(objref.IDOf(na))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (na *NotificationAttachment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(na)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(na), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (na *NotificationAttachment) IsKind(className string) bool {
+	defer runtime.KeepAlive(na)
 	return rt.IsKind(objref.IDOf(na), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (na *NotificationAttachment) String() string {
+	defer runtime.KeepAlive(na)
 	return rt.Description(objref.IDOf(na))
 }
 
@@ -74,6 +81,7 @@ func NewNotificationAttachment() *NotificationAttachment {
 
 // Identifier returns the identifier.
 func (na *NotificationAttachment) Identifier() string {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -82,13 +90,15 @@ func (na *NotificationAttachment) Identifier() string {
 }
 
 // URL returns the URL.
-func (na *NotificationAttachment) URL() obj.Object {
+func (na *NotificationAttachment) URL() string {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Type returns the type.
 func (na *NotificationAttachment) Type() string {
+	defer runtime.KeepAlive(na)
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""

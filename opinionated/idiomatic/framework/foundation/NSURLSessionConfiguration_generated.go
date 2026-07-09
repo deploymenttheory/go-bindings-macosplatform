@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func uRLSessionConfigurationAdopt(id objc.ID) *URLSessionConfiguration {
 
 // Description returns the object's -description text.
 func (usc *URLSessionConfiguration) Description() string {
+	defer runtime.KeepAlive(usc)
 	return rt.Description(objref.IDOf(usc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (usc *URLSessionConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(usc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(usc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (usc *URLSessionConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(usc)
 	return rt.IsKind(objref.IDOf(usc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (usc *URLSessionConfiguration) String() string {
+	defer runtime.KeepAlive(usc)
 	return rt.Description(objref.IDOf(usc))
 }
 
@@ -142,6 +148,7 @@ func (usc *URLSessionConfiguration) WithDiscretionary(discretionary bool) *URLSe
 
 // WithSharedContainerIdentifier sets the shared container identifier.
 func (usc *URLSessionConfiguration) WithSharedContainerIdentifier(sharedContainerIdentifier StringProvider) *URLSessionConfiguration {
+	defer runtime.KeepAlive(sharedContainerIdentifier)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setSharedContainerIdentifier:"), objref.IDOf(sharedContainerIdentifier))
 	return usc
 }
@@ -154,55 +161,60 @@ func (usc *URLSessionConfiguration) WithSessionSendsLaunchEvents(sessionSendsLau
 
 // WithConnectionProxyDictionary sets the connection proxy dictionary.
 func (usc *URLSessionConfiguration) WithConnectionProxyDictionary(connectionProxyDictionary obj.Object) *URLSessionConfiguration {
+	defer runtime.KeepAlive(connectionProxyDictionary)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setConnectionProxyDictionary:"), objref.IDOf(connectionProxyDictionary))
 	return usc
 }
 
 // WithHTTPShouldUsePipelining sets the HTTP should use pipelining.
-func (usc *URLSessionConfiguration) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
+func (usc *URLSessionConfiguration) WithHTTPShouldUsePipelining(httpShouldUsePipelining bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldUsePipelining:"), httpShouldUsePipelining)
 	return usc
 }
 
 // WithHTTPShouldSetCookies sets the HTTP should set cookies.
-func (usc *URLSessionConfiguration) WithHTTPShouldSetCookies(hTTPShouldSetCookies bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldSetCookies:"), hTTPShouldSetCookies)
+func (usc *URLSessionConfiguration) WithHTTPShouldSetCookies(httpShouldSetCookies bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldSetCookies:"), httpShouldSetCookies)
 	return usc
 }
 
 // WithHTTPCookieAcceptPolicy sets the HTTP cookie accept policy.
-func (usc *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy HTTPCookieAcceptPolicy) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieAcceptPolicy:"), hTTPCookieAcceptPolicy)
+func (usc *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(httpCookieAcceptPolicy HTTPCookieAcceptPolicy) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieAcceptPolicy:"), httpCookieAcceptPolicy)
 	return usc
 }
 
 // WithHTTPAdditionalHeaders sets the HTTP additional headers.
-func (usc *URLSessionConfiguration) WithHTTPAdditionalHeaders(hTTPAdditionalHeaders obj.Object) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPAdditionalHeaders:"), objref.IDOf(hTTPAdditionalHeaders))
+func (usc *URLSessionConfiguration) WithHTTPAdditionalHeaders(httpAdditionalHeaders obj.Object) *URLSessionConfiguration {
+	defer runtime.KeepAlive(httpAdditionalHeaders)
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPAdditionalHeaders:"), objref.IDOf(httpAdditionalHeaders))
 	return usc
 }
 
 // WithHTTPMaximumConnectionsPerHost sets the HTTP maximum connections per host.
-func (usc *URLSessionConfiguration) WithHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPMaximumConnectionsPerHost:"), hTTPMaximumConnectionsPerHost)
+func (usc *URLSessionConfiguration) WithHTTPMaximumConnectionsPerHost(httpMaximumConnectionsPerHost int) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPMaximumConnectionsPerHost:"), httpMaximumConnectionsPerHost)
 	return usc
 }
 
 // WithHTTPCookieStorage sets the HTTP cookie storage.
-func (usc *URLSessionConfiguration) WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieStorage:"), objref.IDOf(hTTPCookieStorage))
+func (usc *URLSessionConfiguration) WithHTTPCookieStorage(httpCookieStorage *HTTPCookieStorage) *URLSessionConfiguration {
+	defer runtime.KeepAlive(httpCookieStorage)
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieStorage:"), objref.IDOf(httpCookieStorage))
 	return usc
 }
 
 // WithURLCredentialStorage sets the URL credential storage.
-func (usc *URLSessionConfiguration) WithURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCredentialStorage:"), objref.IDOf(uRLCredentialStorage))
+func (usc *URLSessionConfiguration) WithURLCredentialStorage(urlCredentialStorage *URLCredentialStorage) *URLSessionConfiguration {
+	defer runtime.KeepAlive(urlCredentialStorage)
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCredentialStorage:"), objref.IDOf(urlCredentialStorage))
 	return usc
 }
 
 // WithURLCache sets the URL cache.
-func (usc *URLSessionConfiguration) WithURLCache(uRLCache *URLCache) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCache:"), objref.IDOf(uRLCache))
+func (usc *URLSessionConfiguration) WithURLCache(urlCache *URLCache) *URLSessionConfiguration {
+	defer runtime.KeepAlive(urlCache)
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCache:"), objref.IDOf(urlCache))
 	return usc
 }
 
@@ -231,13 +243,14 @@ func (usc *URLSessionConfiguration) WithObservationInfo(observationInfo unsafe.P
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (usc *URLSessionConfiguration) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (usc *URLSessionConfiguration) WithScriptingProperties(scriptingProperties map[string]obj.Object) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return usc
 }
 
 // Identifier returns the identifier.
 func (usc *URLSessionConfiguration) Identifier() string {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -247,72 +260,84 @@ func (usc *URLSessionConfiguration) Identifier() string {
 
 // RequestCachePolicy returns the request cache policy.
 func (usc *URLSessionConfiguration) RequestCachePolicy() URLRequestCachePolicy {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[URLRequestCachePolicy](objref.IDOf(usc), objc.RegisterName("requestCachePolicy"))
 	return _r
 }
 
 // TimeoutIntervalForRequest returns the timeout interval for request.
 func (usc *URLSessionConfiguration) TimeoutIntervalForRequest() float64 {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[float64](objref.IDOf(usc), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
 }
 
 // TimeoutIntervalForResource returns the timeout interval for resource.
 func (usc *URLSessionConfiguration) TimeoutIntervalForResource() float64 {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[float64](objref.IDOf(usc), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
 }
 
 // NetworkServiceType returns the network service type.
 func (usc *URLSessionConfiguration) NetworkServiceType() URLRequestNetworkServiceType {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(usc), objc.RegisterName("networkServiceType"))
 	return _r
 }
 
 // AllowsCellularAccess wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) AllowsCellularAccess() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsCellularAccess"))
 	return _r
 }
 
 // AllowsExpensiveNetworkAccess wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) AllowsExpensiveNetworkAccess() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsExpensiveNetworkAccess"))
 	return _r
 }
 
 // AllowsConstrainedNetworkAccess wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) AllowsConstrainedNetworkAccess() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsConstrainedNetworkAccess"))
 	return _r
 }
 
 // AllowsUltraConstrainedNetworkAccess wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) AllowsUltraConstrainedNetworkAccess() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsUltraConstrainedNetworkAccess"))
 	return _r
 }
 
 // RequiresDNSSECValidation wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) RequiresDNSSECValidation() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("requiresDNSSECValidation"))
 	return _r
 }
 
 // WaitsForConnectivity wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) WaitsForConnectivity() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("waitsForConnectivity"))
 	return _r
 }
 
 // IsDiscretionary reports whether the object is discretionary.
 func (usc *URLSessionConfiguration) IsDiscretionary() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("isDiscretionary"))
 	return _r
 }
 
 // SharedContainerIdentifier returns the shared container identifier.
 func (usc *URLSessionConfiguration) SharedContainerIdentifier() string {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("sharedContainerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -322,89 +347,104 @@ func (usc *URLSessionConfiguration) SharedContainerIdentifier() string {
 
 // SessionSendsLaunchEvents wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) SessionSendsLaunchEvents() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("sessionSendsLaunchEvents"))
 	return _r
 }
 
 // ConnectionProxyDictionary returns the connection proxy dictionary.
 func (usc *URLSessionConfiguration) ConnectionProxyDictionary() obj.Object {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("connectionProxyDictionary"))
 	return obj.Wrap(_r)
 }
 
 // HTTPShouldUsePipelining wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) HTTPShouldUsePipelining() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("HTTPShouldUsePipelining"))
 	return _r
 }
 
 // HTTPShouldSetCookies wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) HTTPShouldSetCookies() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("HTTPShouldSetCookies"))
 	return _r
 }
 
 // HTTPCookieAcceptPolicy returns the HTTP cookie accept policy.
 func (usc *URLSessionConfiguration) HTTPCookieAcceptPolicy() HTTPCookieAcceptPolicy {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[HTTPCookieAcceptPolicy](objref.IDOf(usc), objc.RegisterName("HTTPCookieAcceptPolicy"))
 	return _r
 }
 
 // HTTPAdditionalHeaders returns the HTTP additional headers.
 func (usc *URLSessionConfiguration) HTTPAdditionalHeaders() obj.Object {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("HTTPAdditionalHeaders"))
 	return obj.Wrap(_r)
 }
 
 // HTTPMaximumConnectionsPerHost returns the HTTP maximum connections per host.
 func (usc *URLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[int](objref.IDOf(usc), objc.RegisterName("HTTPMaximumConnectionsPerHost"))
 	return _r
 }
 
 // HTTPCookieStorage returns the HTTP cookie storage.
 func (usc *URLSessionConfiguration) HTTPCookieStorage() *HTTPCookieStorage {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("HTTPCookieStorage"))
 	return HTTPCookieStorageFromID(_r)
 }
 
 // URLCredentialStorage returns the URL credential storage.
 func (usc *URLSessionConfiguration) URLCredentialStorage() *URLCredentialStorage {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("URLCredentialStorage"))
 	return URLCredentialStorageFromID(_r)
 }
 
 // URLCache returns the URL cache.
 func (usc *URLSessionConfiguration) URLCache() *URLCache {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("URLCache"))
 	return URLCacheFromID(_r)
 }
 
 // ShouldUseExtendedBackgroundIdleMode wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) ShouldUseExtendedBackgroundIdleMode() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("shouldUseExtendedBackgroundIdleMode"))
 	return _r
 }
 
 // ProtocolClasses returns the protocol classes.
 func (usc *URLSessionConfiguration) ProtocolClasses() []obj.Object {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("protocolClasses"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetProtocolClasses wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) SetProtocolClasses(protocolClasses []obj.Object) {
+	defer runtime.KeepAlive(usc)
 	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setProtocolClasses:"), purego.SliceToNSArray(protocolClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // UsesClassicLoadingMode wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) UsesClassicLoadingMode() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("usesClassicLoadingMode"))
 	return _r
 }
 
 // EnablesEarlyData wraps the corresponding Objective-C method.
 func (usc *URLSessionConfiguration) EnablesEarlyData() bool {
+	defer runtime.KeepAlive(usc)
 	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("enablesEarlyData"))
 	return _r
 }

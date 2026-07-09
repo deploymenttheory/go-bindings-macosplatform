@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (cl *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Comp
 
 // Operation returns the operation.
 func (cl *ComparisonLayer) Operation() ComparisonOperation {
+	defer runtime.KeepAlive(cl)
 	_r := objc.Send[ComparisonOperation](objref.IDOf(cl), objc.RegisterName("operation"))
 	return _r
 }

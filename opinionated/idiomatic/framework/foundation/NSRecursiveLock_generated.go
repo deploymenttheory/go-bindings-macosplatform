@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func recursiveLockAdopt(id objc.ID) *RecursiveLock {
 
 // Description returns the object's -description text.
 func (rl *RecursiveLock) Description() string {
+	defer runtime.KeepAlive(rl)
 	return rt.Description(objref.IDOf(rl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rl *RecursiveLock) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rl *RecursiveLock) IsKind(className string) bool {
+	defer runtime.KeepAlive(rl)
 	return rt.IsKind(objref.IDOf(rl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rl *RecursiveLock) String() string {
+	defer runtime.KeepAlive(rl)
 	return rt.Description(objref.IDOf(rl))
 }
 
@@ -76,6 +83,7 @@ func NewRecursiveLock() *RecursiveLock {
 
 // WithName sets the name associated with the receiver.
 func (rl *RecursiveLock) WithName(name StringProvider) *RecursiveLock {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setName:"), objref.IDOf(name))
 	return rl
 }
@@ -87,25 +95,28 @@ func (rl *RecursiveLock) WithObservationInfo(observationInfo unsafe.Pointer) *Re
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (rl *RecursiveLock) WithScriptingProperties(scriptingProperties obj.Object) *RecursiveLock {
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (rl *RecursiveLock) WithScriptingProperties(scriptingProperties map[string]obj.Object) *RecursiveLock {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rl
 }
 
 // TryLock reports whether attempts to acquire a lock, and immediately returns a Boolean value that indicates whether the attempt was successful.
 func (rl *RecursiveLock) TryLock() bool {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("tryLock"))
 	return _r
 }
 
 // LockBeforeDate attempts to acquire a lock before a given date.
-func (rl *RecursiveLock) LockBeforeDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
+func (rl *RecursiveLock) LockBeforeDate(limit time.Time) bool {
+	defer runtime.KeepAlive(rl)
+	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("lockBeforeDate:"), rt.TimeToNSDate(limit))
 	return _r
 }
 
 // Name returns the name.
 func (rl *RecursiveLock) Name() string {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

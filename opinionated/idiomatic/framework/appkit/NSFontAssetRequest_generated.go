@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func fontAssetRequestAdopt(id objc.ID) *FontAssetRequest {
 
 // Description returns the object's -description text.
 func (far *FontAssetRequest) Description() string {
+	defer runtime.KeepAlive(far)
 	return rt.Description(objref.IDOf(far))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (far *FontAssetRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(far)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(far), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (far *FontAssetRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(far)
 	return rt.IsKind(objref.IDOf(far), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (far *FontAssetRequest) String() string {
+	defer runtime.KeepAlive(far)
 	return rt.Description(objref.IDOf(far))
 }
 
@@ -75,12 +83,14 @@ func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescri
 //
 // DownloadedFontDescriptors returns the collection as a Go slice.
 func (far *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
+	defer runtime.KeepAlive(far)
 	_arr := objc.Send[objc.ID](objref.IDOf(far), objc.RegisterName("downloadedFontDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
 // Progress returns the progress.
-func (far *FontAssetRequest) Progress() obj.Object {
+func (far *FontAssetRequest) Progress() *foundation.Progress {
+	defer runtime.KeepAlive(far)
 	_r := objc.Send[objc.ID](objref.IDOf(far), objc.RegisterName("progress"))
-	return obj.Wrap(_r)
+	return foundation.ProgressFromID(_r)
 }

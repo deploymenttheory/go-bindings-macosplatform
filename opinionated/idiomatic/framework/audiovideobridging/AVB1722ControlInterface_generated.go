@@ -5,6 +5,8 @@
 package audiovideobridging
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func aVB1722ControlInterfaceAdopt(id objc.ID) *AVB1722ControlInterface {
 
 // Description returns the object's -description text.
 func (aci *AVB1722ControlInterface) Description() string {
+	defer runtime.KeepAlive(aci)
 	return rt.Description(objref.IDOf(aci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aci *AVB1722ControlInterface) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aci *AVB1722ControlInterface) IsKind(className string) bool {
+	defer runtime.KeepAlive(aci)
 	return rt.IsKind(objref.IDOf(aci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aci *AVB1722ControlInterface) String() string {
+	defer runtime.KeepAlive(aci)
 	return rt.Description(objref.IDOf(aci))
 }
 
@@ -75,6 +82,7 @@ func NewAVB1722ControlInterfaceWithInterfaceName(anInterfaceName string) *AVB172
 
 // NewAVB1722ControlInterfaceWithInterface initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
 func NewAVB1722ControlInterfaceWithInterface(anInterface *Interface) *AVB1722ControlInterface {
+	defer runtime.KeepAlive(anInterface)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB1722ControlInterface")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), objref.IDOf(anInterface))
 	return aVB1722ControlInterfaceAdopt(_id)
@@ -82,6 +90,7 @@ func NewAVB1722ControlInterfaceWithInterface(anInterface *Interface) *AVB1722Con
 
 // InterfaceName returns the interface name.
 func (aci *AVB1722ControlInterface) InterfaceName() string {
+	defer runtime.KeepAlive(aci)
 	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("interfaceName"))
 	if _r == 0 {
 		return ""
@@ -91,6 +100,7 @@ func (aci *AVB1722ControlInterface) InterfaceName() string {
 
 // Interface returns the AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
 func (aci *AVB1722ControlInterface) Interface() *Interface {
+	defer runtime.KeepAlive(aci)
 	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
 }

@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,6 +58,7 @@ func NewTimedMetadataGroupWithItemsTimeRange(items []*MetadataItem, timeRange co
 
 // NewTimedMetadataGroupWithSampleBuffer initializes an instance of AVTimedMetadataGroup with a sample buffer.
 func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer obj.Object) *TimedMetadataGroup {
+	defer runtime.KeepAlive(sampleBuffer)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTimedMetadataGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:"), objref.IDOf(sampleBuffer))
 	return timedMetadataGroupAdopt(_id)
@@ -63,6 +66,7 @@ func NewTimedMetadataGroupWithSampleBuffer(sampleBuffer obj.Object) *TimedMetada
 
 // TimeRange returns the time range.
 func (tmg *TimedMetadataGroup) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(tmg)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(tmg), objc.RegisterName("timeRange"))
 	return _r
 }

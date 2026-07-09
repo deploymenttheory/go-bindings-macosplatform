@@ -5,6 +5,8 @@
 package linkpresentation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,32 +49,37 @@ func linkViewAdopt(id objc.ID) *LinkView {
 
 // Description returns the object's -description text.
 func (lv *LinkView) Description() string {
+	defer runtime.KeepAlive(lv)
 	return rt.Description(objref.IDOf(lv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (lv *LinkView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(lv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(lv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (lv *LinkView) IsKind(className string) bool {
+	defer runtime.KeepAlive(lv)
 	return rt.IsKind(objref.IDOf(lv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (lv *LinkView) String() string {
+	defer runtime.KeepAlive(lv)
 	return rt.Description(objref.IDOf(lv))
 }
 
 // NewLinkViewWithURL initializes a placeholder link view without metadata for a given URL.
-func NewLinkViewWithURL(uRL string) *LinkView {
+func NewLinkViewWithURL(url string) *LinkView {
 	var _mainthread0 *LinkView
 	purego.Main(func() {
 		_mainthread0 = func() *LinkView {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("LPLinkView")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
 			return linkViewAdopt(_id)
 		}()
 	})
@@ -81,6 +88,7 @@ func NewLinkViewWithURL(uRL string) *LinkView {
 
 // NewLinkViewWithMetadata initializes a link view with specified metadata.
 func NewLinkViewWithMetadata(metadata *LinkMetadata) *LinkView {
+	defer runtime.KeepAlive(metadata)
 	var _mainthread0 *LinkView
 	purego.Main(func() {
 		_mainthread0 = func() *LinkView {
@@ -94,6 +102,7 @@ func NewLinkViewWithMetadata(metadata *LinkMetadata) *LinkView {
 
 // WithMetadata sets the metadata from which to generate a rich presentation.
 func (lv *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
+	defer runtime.KeepAlive(metadata)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
 	})
@@ -102,6 +111,7 @@ func (lv *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
 
 // Metadata returns the metadata.
 func (lv *LinkView) Metadata() *LinkMetadata {
+	defer runtime.KeepAlive(lv)
 	var _mainthread0 *LinkMetadata
 	purego.Main(func() {
 		_mainthread0 = func() *LinkMetadata {

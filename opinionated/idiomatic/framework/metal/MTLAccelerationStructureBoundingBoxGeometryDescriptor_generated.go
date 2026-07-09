@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -113,18 +115,21 @@ func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveD
 
 // BoundingBoxBufferOffset returns bounding box buffer offset. Must be a multiple of the bounding box stride and must be aligned to the platform's buffer offset alignment.
 func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBufferOffset() int {
+	defer runtime.KeepAlive(asbbgd)
 	_r := objc.Send[int](objref.IDOf(asbbgd), objc.RegisterName("boundingBoxBufferOffset"))
 	return _r
 }
 
 // BoundingBoxStride returns stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
 func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
+	defer runtime.KeepAlive(asbbgd)
 	_r := objc.Send[int](objref.IDOf(asbbgd), objc.RegisterName("boundingBoxStride"))
 	return _r
 }
 
 // BoundingBoxCount returns number of bounding boxes
 func (asbbgd *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
+	defer runtime.KeepAlive(asbbgd)
 	_r := objc.Send[int](objref.IDOf(asbbgd), objc.RegisterName("boundingBoxCount"))
 	return _r
 }

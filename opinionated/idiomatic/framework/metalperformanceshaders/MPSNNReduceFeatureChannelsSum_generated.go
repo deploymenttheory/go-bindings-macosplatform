@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -103,6 +105,7 @@ func (nrfcs *NNReduceFeatureChannelsSum) WithLabel(label string) *NNReduceFeatur
 
 // Weight returns the scale factor to apply to each feature channel value Each feature channel is multiplied by the weight value to compute a weighted sum or mean across feature channels The default value is 1.0.
 func (nrfcs *NNReduceFeatureChannelsSum) Weight() float32 {
+	defer runtime.KeepAlive(nrfcs)
 	_r := objc.Send[float32](objref.IDOf(nrfcs), objc.RegisterName("weight"))
 	return _r
 }

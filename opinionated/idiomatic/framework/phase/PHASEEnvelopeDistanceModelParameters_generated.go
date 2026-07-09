@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func envelopeDistanceModelParametersAdopt(id objc.ID) *EnvelopeDistanceModelPara
 
 // NewEnvelopeDistanceModelParametersWithEnvelope creates the distance model parameters with an envelope.
 func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *Envelope) *EnvelopeDistanceModelParameters {
+	defer runtime.KeepAlive(envelope)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelopeDistanceModelParameters")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnvelope:"), objref.IDOf(envelope))
 	return envelopeDistanceModelParametersAdopt(_id)
@@ -54,12 +57,14 @@ func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *Envelope) *Envelop
 
 // WithFadeOutParameters sets a distance over which the framework fades out the mixer’s sound.
 func (edmp *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
+	defer runtime.KeepAlive(fadeOutParameters)
 	objc.Send[objc.ID](objref.IDOf(edmp), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 	return edmp
 }
 
 // Envelope returns the envelope.
 func (edmp *EnvelopeDistanceModelParameters) Envelope() *Envelope {
+	defer runtime.KeepAlive(edmp)
 	_r := objc.Send[objc.ID](objref.IDOf(edmp), objc.RegisterName("envelope"))
 	return EnvelopeFromID(_r)
 }

@@ -397,6 +397,57 @@ func (e ApplicationPresentationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate the outcome of a print request.
+type ApplicationPrintReply uint64
+
+const (
+	PrintingCancelled  ApplicationPrintReply = 0
+	PrintingSuccess    ApplicationPrintReply = 1
+	PrintingReplyLater ApplicationPrintReply = 2
+	PrintingFailure    ApplicationPrintReply = 3
+)
+
+// String returns the ApplicationPrintReply constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationPrintReply) String() string {
+	switch e {
+	case PrintingCancelled:
+		return "PrintingCancelled"
+	case PrintingSuccess:
+		return "PrintingSuccess"
+	case PrintingReplyLater:
+		return "PrintingReplyLater"
+	case PrintingFailure:
+		return "PrintingFailure"
+	default:
+		return fmt.Sprintf("ApplicationPrintReply(%d)", int64(e))
+	}
+}
+
+// Constants that determine whether an app should terminate.
+type ApplicationTerminateReply uint64
+
+const (
+	TerminateCancel ApplicationTerminateReply = 0
+	TerminateNow    ApplicationTerminateReply = 1
+	TerminateLater  ApplicationTerminateReply = 2
+)
+
+// String returns the ApplicationTerminateReply constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ApplicationTerminateReply) String() string {
+	switch e {
+	case TerminateCancel:
+		return "TerminateCancel"
+	case TerminateNow:
+		return "TerminateNow"
+	case TerminateLater:
+		return "TerminateLater"
+	default:
+		return fmt.Sprintf("ApplicationTerminateReply(%d)", int64(e))
+	}
+}
+
 // Constants that specify the autoresizing behaviors for views.
 // Bitmask — values may be combined with |.
 type AutoresizingMaskOptions uint64
@@ -1046,6 +1097,45 @@ func (e CharacterCollection) String() string {
 	}
 }
 
+// Constants that describe how a participant can configure a CloudKit share.
+// Bitmask — values may be combined with |.
+type CloudKitSharingServiceOptions uint64
+
+const (
+	// Allow the user to configure the share with the standard set of options.
+	CloudKitSharingServiceStandard CloudKitSharingServiceOptions = 0
+	// The user is allowed to share publicly.
+	CloudKitSharingServiceAllowPublic CloudKitSharingServiceOptions = 1
+	// The user is allowed to share privately.
+	CloudKitSharingServiceAllowPrivate CloudKitSharingServiceOptions = 2
+	// The user is allowed to grant participants read-only permissions.
+	CloudKitSharingServiceAllowReadOnly CloudKitSharingServiceOptions = 16
+	// The user is allowed to grant participants read/write permissions.
+	CloudKitSharingServiceAllowReadWrite CloudKitSharingServiceOptions = 32
+)
+
+// String returns the CloudKitSharingServiceOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e CloudKitSharingServiceOptions) String() string {
+	var parts []string
+	if e&CloudKitSharingServiceAllowPublic != 0 {
+		parts = append(parts, "CloudKitSharingServiceAllowPublic")
+	}
+	if e&CloudKitSharingServiceAllowPrivate != 0 {
+		parts = append(parts, "CloudKitSharingServiceAllowPrivate")
+	}
+	if e&CloudKitSharingServiceAllowReadOnly != 0 {
+		parts = append(parts, "CloudKitSharingServiceAllowReadOnly")
+	}
+	if e&CloudKitSharingServiceAllowReadWrite != 0 {
+		parts = append(parts, "CloudKitSharingServiceAllowReadWrite")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // Constants specifying the type of element in the collection view.
 type CollectionElementCategory int64
 
@@ -1683,6 +1773,47 @@ func (e ControlBorderShape) String() string {
 	default:
 		return fmt.Sprintf("ControlBorderShape(%d)", int64(e))
 	}
+}
+
+// Constants that describe actions for control characters.
+// Bitmask — values may be combined with |.
+type ControlCharacterAction int64
+
+const (
+	ControlCharacterActionZeroAdvancement ControlCharacterAction = 1
+	ControlCharacterActionWhitespace      ControlCharacterAction = 2
+	ControlCharacterActionHorizontalTab   ControlCharacterAction = 4
+	ControlCharacterActionLineBreak       ControlCharacterAction = 8
+	ControlCharacterActionParagraphBreak  ControlCharacterAction = 16
+	ControlCharacterActionContainerBreak  ControlCharacterAction = 32
+)
+
+// String returns the ControlCharacterAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ControlCharacterAction) String() string {
+	var parts []string
+	if e&ControlCharacterActionZeroAdvancement != 0 {
+		parts = append(parts, "ControlCharacterActionZeroAdvancement")
+	}
+	if e&ControlCharacterActionWhitespace != 0 {
+		parts = append(parts, "ControlCharacterActionWhitespace")
+	}
+	if e&ControlCharacterActionHorizontalTab != 0 {
+		parts = append(parts, "ControlCharacterActionHorizontalTab")
+	}
+	if e&ControlCharacterActionLineBreak != 0 {
+		parts = append(parts, "ControlCharacterActionLineBreak")
+	}
+	if e&ControlCharacterActionParagraphBreak != 0 {
+		parts = append(parts, "ControlCharacterActionParagraphBreak")
+	}
+	if e&ControlCharacterActionContainerBreak != 0 {
+		parts = append(parts, "ControlCharacterActionContainerBreak")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // A constant for specifying a cell’s size.
@@ -3553,6 +3684,36 @@ func (e ImageLayoutDirection) String() string {
 		return "ImageLayoutDirectionRightToLeft"
 	default:
 		return fmt.Sprintf("ImageLayoutDirection(%d)", int64(e))
+	}
+}
+
+// Status values for incremental image loading.
+type ImageLoadStatus uint64
+
+const (
+	ImageLoadStatusCompleted     ImageLoadStatus = 0
+	ImageLoadStatusCancelled     ImageLoadStatus = 1
+	ImageLoadStatusInvalidData   ImageLoadStatus = 2
+	ImageLoadStatusUnexpectedEOF ImageLoadStatus = 3
+	ImageLoadStatusReadError     ImageLoadStatus = 4
+)
+
+// String returns the ImageLoadStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e ImageLoadStatus) String() string {
+	switch e {
+	case ImageLoadStatusCompleted:
+		return "ImageLoadStatusCompleted"
+	case ImageLoadStatusCancelled:
+		return "ImageLoadStatusCancelled"
+	case ImageLoadStatusInvalidData:
+		return "ImageLoadStatusInvalidData"
+	case ImageLoadStatusUnexpectedEOF:
+		return "ImageLoadStatusUnexpectedEOF"
+	case ImageLoadStatusReadError:
+		return "ImageLoadStatusReadError"
+	default:
+		return fmt.Sprintf("ImageLoadStatus(%d)", int64(e))
 	}
 }
 
@@ -5939,6 +6100,27 @@ func (e TableColumnResizingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// These constants define table row edges on which row actions are attached. They are used by the tableView:rowActionsForRow:edge: delegate method.
+type TableRowActionEdge int64
+
+const (
+	TableRowActionEdgeLeading  TableRowActionEdge = 0
+	TableRowActionEdgeTrailing TableRowActionEdge = 1
+)
+
+// String returns the TableRowActionEdge constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TableRowActionEdge) String() string {
+	switch e {
+	case TableRowActionEdgeLeading:
+		return "TableRowActionEdgeLeading"
+	case TableRowActionEdgeTrailing:
+		return "TableRowActionEdgeTrailing"
+	default:
+		return fmt.Sprintf("TableRowActionEdge(%d)", int64(e))
+	}
+}
+
 // Specifies the animation effects to apply when inserting or removing rows.
 // Bitmask — values may be combined with |.
 type TableViewAnimationOptions uint64
@@ -6328,6 +6510,29 @@ func (e TextBlockVerticalAlignment) String() string {
 	default:
 		return fmt.Sprintf("TextBlockVerticalAlignment(%d)", int64(e))
 	}
+}
+
+// Values that control the order in which the framework enumerates text elements.
+// Bitmask — values may be combined with |.
+type TextContentManagerEnumerationOptions uint64
+
+const (
+	// The value that represents no custom enumeration handling.
+	TextContentManagerEnumerationOptionsNone    TextContentManagerEnumerationOptions = 0
+	TextContentManagerEnumerationOptionsReverse TextContentManagerEnumerationOptions = 1
+)
+
+// String returns the TextContentManagerEnumerationOptions constant's name, or its numeric form when the
+// value is not a known constant.
+func (e TextContentManagerEnumerationOptions) String() string {
+	var parts []string
+	if e&TextContentManagerEnumerationOptionsReverse != 0 {
+		parts = append(parts, "TextContentManagerEnumerationOptionsReverse")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
 }
 
 // The style of bezel the text field displays.
@@ -8458,6 +8663,33 @@ func (e WritingToolsBehavior) String() string {
 		return "WritingToolsBehaviorLimited"
 	default:
 		return fmt.Sprintf("WritingToolsBehavior(%d)", int64(e))
+	}
+}
+
+// Options that indicate how much of your content Writing Tools requested. At the start of any Writing Tools interaction, you provide the text for the system to evaluate from your “NSWritingToolsCoordinator/Delegate“ object. The request for your content comes with a scope constant that indicates how much of your view’s text to provide.
+type WritingToolsCoordinatorContextScope int64
+
+const (
+	// An option to provide only the view’s currently selected text. With this option, include the selected text in your context object, along with some additional text before and after the selection. When performing changes inline with your view’s content, Writing Tools applies animations only to the selected text.
+	WritingToolsCoordinatorContextScopeUserSelection WritingToolsCoordinatorContextScope = 0
+	// An option to provide all of your view’s text. With this option, include all of the text your view manages. If your view has multiple text storage objects, create a separate context object for each one.
+	WritingToolsCoordinatorContextScopeFullDocument WritingToolsCoordinatorContextScope = 1
+	// An option to provide only the text in the currently visible portion of your view. With this option, include only the currently visible text, along with some additional text before and after the visible text.
+	WritingToolsCoordinatorContextScopeVisibleArea WritingToolsCoordinatorContextScope = 2
+)
+
+// String returns the WritingToolsCoordinatorContextScope constant's name, or its numeric form when the
+// value is not a known constant.
+func (e WritingToolsCoordinatorContextScope) String() string {
+	switch e {
+	case WritingToolsCoordinatorContextScopeUserSelection:
+		return "WritingToolsCoordinatorContextScopeUserSelection"
+	case WritingToolsCoordinatorContextScopeFullDocument:
+		return "WritingToolsCoordinatorContextScopeFullDocument"
+	case WritingToolsCoordinatorContextScopeVisibleArea:
+		return "WritingToolsCoordinatorContextScopeVisibleArea"
+	default:
+		return fmt.Sprintf("WritingToolsCoordinatorContextScope(%d)", int64(e))
 	}
 }
 

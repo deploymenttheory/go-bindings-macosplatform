@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,76 +47,85 @@ func cSRInfoAdopt(id objc.ID) *CSRInfo {
 
 // Description returns the object's -description text.
 func (ci *CSRInfo) Description() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ci *CSRInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ci *CSRInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(ci)
 	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ci *CSRInfo) String() string {
+	defer runtime.KeepAlive(ci)
 	return rt.Description(objref.IDOf(ci))
 }
 
 // NewCSRInfoWithNonceElementsElementsSignatureCsr creates a new CSRInfo.
-func NewCSRInfoWithNonceElementsElementsSignatureCsr(nonce obj.Object, elements obj.Object, elementsSignature obj.Object, csr obj.Object) *CSRInfo {
+func NewCSRInfoWithNonceElementsElementsSignatureCsr(nonce []byte, elements []byte, elementsSignature []byte, csr []byte) *CSRInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSRInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNonce:elements:elementsSignature:csr:"), objref.IDOf(nonce), objref.IDOf(elements), objref.IDOf(elementsSignature), objref.IDOf(csr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNonce:elements:elementsSignature:csr:"), rt.BytesToNSData(nonce), rt.BytesToNSData(elements), rt.BytesToNSData(elementsSignature), rt.BytesToNSData(csr))
 	return cSRInfoAdopt(_id)
 }
 
 // WithNonce sets the nonce.
-func (ci *CSRInfo) WithNonce(nonce obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
+func (ci *CSRInfo) WithNonce(nonce []byte) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setNonce:"), rt.BytesToNSData(nonce))
 	return ci
 }
 
 // WithElements sets the elements.
-func (ci *CSRInfo) WithElements(elements obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElements:"), objref.IDOf(elements))
+func (ci *CSRInfo) WithElements(elements []byte) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElements:"), rt.BytesToNSData(elements))
 	return ci
 }
 
 // WithElementsSignature sets the elements signature.
-func (ci *CSRInfo) WithElementsSignature(elementsSignature obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
+func (ci *CSRInfo) WithElementsSignature(elementsSignature []byte) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElementsSignature:"), rt.BytesToNSData(elementsSignature))
 	return ci
 }
 
 // WithCsr sets the csr.
-func (ci *CSRInfo) WithCsr(csr obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setCsr:"), objref.IDOf(csr))
+func (ci *CSRInfo) WithCsr(csr []byte) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setCsr:"), rt.BytesToNSData(csr))
 	return ci
 }
 
 // Nonce returns the nonce.
-func (ci *CSRInfo) Nonce() obj.Object {
+func (ci *CSRInfo) Nonce() []byte {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("nonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Elements returns the elements.
-func (ci *CSRInfo) Elements() obj.Object {
+func (ci *CSRInfo) Elements() []byte {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("elements"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ElementsSignature returns the elements signature.
-func (ci *CSRInfo) ElementsSignature() obj.Object {
+func (ci *CSRInfo) ElementsSignature() []byte {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("elementsSignature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Csr returns the csr.
-func (ci *CSRInfo) Csr() obj.Object {
+func (ci *CSRInfo) Csr() []byte {
+	defer runtime.KeepAlive(ci)
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("csr"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

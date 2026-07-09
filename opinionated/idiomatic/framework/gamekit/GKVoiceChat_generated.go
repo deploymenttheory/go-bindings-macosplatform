@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func voiceChatAdopt(id objc.ID) *VoiceChat {
 
 // Description returns the object's -description text.
 func (vc *VoiceChat) Description() string {
+	defer runtime.KeepAlive(vc)
 	return rt.Description(objref.IDOf(vc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vc *VoiceChat) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vc *VoiceChat) IsKind(className string) bool {
+	defer runtime.KeepAlive(vc)
 	return rt.IsKind(objref.IDOf(vc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vc *VoiceChat) String() string {
+	defer runtime.KeepAlive(vc)
 	return rt.Description(objref.IDOf(vc))
 }
 
@@ -86,21 +93,26 @@ func (vc *VoiceChat) WithVolume(volume float32) *VoiceChat {
 
 // Start starts communication with other players in a channel.
 func (vc *VoiceChat) Start() {
+	defer runtime.KeepAlive(vc)
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("start"))
 }
 
 // Stop ends communication with other players in a channel.
 func (vc *VoiceChat) Stop() {
+	defer runtime.KeepAlive(vc)
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("stop"))
 }
 
 // SetPlayerMuted mutes a player in the chat, including the local player.
 func (vc *VoiceChat) SetPlayerMuted(player *Player, isMuted bool) {
+	defer runtime.KeepAlive(vc)
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPlayer:muted:"), objref.IDOf(player), isMuted)
 }
 
 // Name returns the name.
 func (vc *VoiceChat) Name() string {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -110,12 +122,14 @@ func (vc *VoiceChat) Name() string {
 
 // IsActive reports whether the object is active.
 func (vc *VoiceChat) IsActive() bool {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("isActive"))
 	return _r
 }
 
 // Volume returns the volume.
 func (vc *VoiceChat) Volume() float32 {
+	defer runtime.KeepAlive(vc)
 	_r := objc.Send[float32](objref.IDOf(vc), objc.RegisterName("volume"))
 	return _r
 }
@@ -124,12 +138,14 @@ func (vc *VoiceChat) Volume() float32 {
 //
 // Players returns the collection as a Go slice.
 func (vc *VoiceChat) Players() []*Player {
+	defer runtime.KeepAlive(vc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // SetMuteForPlayer mutes a player in a voice chat.
 func (vc *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
+	defer runtime.KeepAlive(vc)
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setMute:forPlayer:"), isMuted, purego.NSString(playerID))
 }
 
@@ -137,6 +153,7 @@ func (vc *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
 //
 // PlayerIDs returns the collection as a Go slice.
 func (vc *VoiceChat) PlayerIDs() []string {
+	defer runtime.KeepAlive(vc)
 	_arr := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("playerIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

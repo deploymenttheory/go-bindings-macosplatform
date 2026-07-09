@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func sliderAccessoryBehaviorAdopt(id objc.ID) *SliderAccessoryBehavior {
 
 // Description returns the object's -description text.
 func (sab *SliderAccessoryBehavior) Description() string {
+	defer runtime.KeepAlive(sab)
 	return rt.Description(objref.IDOf(sab))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sab *SliderAccessoryBehavior) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sab)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sab), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sab *SliderAccessoryBehavior) IsKind(className string) bool {
+	defer runtime.KeepAlive(sab)
 	return rt.IsKind(objref.IDOf(sab), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sab *SliderAccessoryBehavior) String() string {
+	defer runtime.KeepAlive(sab)
 	return rt.Description(objref.IDOf(sab))
 }
 
@@ -78,6 +85,8 @@ func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
 
 // HandleAction override point for custom subclasses to handle interaction.
 func (sab *SliderAccessoryBehavior) HandleAction(sender *SliderAccessory) {
+	defer runtime.KeepAlive(sab)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sab), objc.RegisterName("handleAction:"), objref.IDOf(sender))
 	})

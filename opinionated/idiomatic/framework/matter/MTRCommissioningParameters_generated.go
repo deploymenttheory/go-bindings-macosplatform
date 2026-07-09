@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRCommissioningParametersAdopt(id objc.ID) *MTRCommissioningParameters {
 
 // Description returns the object's -description text.
 func (mcp *MTRCommissioningParameters) Description() string {
+	defer runtime.KeepAlive(mcp)
 	return rt.Description(objref.IDOf(mcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcp *MTRCommissioningParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcp *MTRCommissioningParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcp)
 	return rt.IsKind(objref.IDOf(mcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcp *MTRCommissioningParameters) String() string {
+	defer runtime.KeepAlive(mcp)
 	return rt.Description(objref.IDOf(mcp))
 }
 
@@ -71,37 +79,38 @@ func NewMTRCommissioningParameters() *MTRCommissioningParameters {
 }
 
 // WithCsrNonce sets the nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
-func (mcp *MTRCommissioningParameters) WithCsrNonce(csrNonce obj.Object) *MTRCommissioningParameters {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setCsrNonce:"), objref.IDOf(csrNonce))
+func (mcp *MTRCommissioningParameters) WithCsrNonce(csrNonce []byte) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setCsrNonce:"), rt.BytesToNSData(csrNonce))
 	return mcp
 }
 
 // WithAttestationNonce sets the nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
-func (mcp *MTRCommissioningParameters) WithAttestationNonce(attestationNonce obj.Object) *MTRCommissioningParameters {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
+func (mcp *MTRCommissioningParameters) WithAttestationNonce(attestationNonce []byte) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setAttestationNonce:"), rt.BytesToNSData(attestationNonce))
 	return mcp
 }
 
 // WithWifiSSID sets the Wi-Fi SSID, if available.
-func (mcp *MTRCommissioningParameters) WithWifiSSID(wifiSSID obj.Object) *MTRCommissioningParameters {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setWifiSSID:"), objref.IDOf(wifiSSID))
+func (mcp *MTRCommissioningParameters) WithWifiSSID(wifiSSID []byte) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setWifiSSID:"), rt.BytesToNSData(wifiSSID))
 	return mcp
 }
 
 // WithWifiCredentials sets the Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
-func (mcp *MTRCommissioningParameters) WithWifiCredentials(wifiCredentials obj.Object) *MTRCommissioningParameters {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setWifiCredentials:"), objref.IDOf(wifiCredentials))
+func (mcp *MTRCommissioningParameters) WithWifiCredentials(wifiCredentials []byte) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setWifiCredentials:"), rt.BytesToNSData(wifiCredentials))
 	return mcp
 }
 
 // WithThreadOperationalDataset sets the Thread operational dataset, if available.
-func (mcp *MTRCommissioningParameters) WithThreadOperationalDataset(threadOperationalDataset obj.Object) *MTRCommissioningParameters {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setThreadOperationalDataset:"), objref.IDOf(threadOperationalDataset))
+func (mcp *MTRCommissioningParameters) WithThreadOperationalDataset(threadOperationalDataset []byte) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setThreadOperationalDataset:"), rt.BytesToNSData(threadOperationalDataset))
 	return mcp
 }
 
 // WithFailSafeTimeout sets the timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
 func (mcp *MTRCommissioningParameters) WithFailSafeTimeout(failSafeTimeout obj.Object) *MTRCommissioningParameters {
+	defer runtime.KeepAlive(failSafeTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setFailSafeTimeout:"), objref.IDOf(failSafeTimeout))
 	return mcp
 }
@@ -144,61 +153,70 @@ func (mcp *MTRCommissioningParameters) WithForceThreadScan(forceThreadScan bool)
 }
 
 // WithCSRNonce sets the csr nonce.
-func (mcp *MTRCommissioningParameters) WithCSRNonce(cSRNonce obj.Object) *MTRCommissioningParameters {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setCSRNonce:"), objref.IDOf(cSRNonce))
+func (mcp *MTRCommissioningParameters) WithCSRNonce(csrNonce []byte) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setCSRNonce:"), rt.BytesToNSData(csrNonce))
 	return mcp
 }
 
 // WithFailSafeExpiryTimeoutSecs sets the fail safe expiry timeout secs.
 func (mcp *MTRCommissioningParameters) WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs obj.Object) *MTRCommissioningParameters {
+	defer runtime.KeepAlive(failSafeExpiryTimeoutSecs)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setFailSafeExpiryTimeoutSecs:"), objref.IDOf(failSafeExpiryTimeoutSecs))
 	return mcp
 }
 
 // CsrNonce returns the nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
-func (mcp *MTRCommissioningParameters) CsrNonce() obj.Object {
+func (mcp *MTRCommissioningParameters) CsrNonce() []byte {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("csrNonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // AttestationNonce returns the nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
-func (mcp *MTRCommissioningParameters) AttestationNonce() obj.Object {
+func (mcp *MTRCommissioningParameters) AttestationNonce() []byte {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("attestationNonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // WifiSSID returns the Wi-Fi SSID, if available.
-func (mcp *MTRCommissioningParameters) WifiSSID() obj.Object {
+func (mcp *MTRCommissioningParameters) WifiSSID() []byte {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("wifiSSID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // WifiCredentials returns the Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
-func (mcp *MTRCommissioningParameters) WifiCredentials() obj.Object {
+func (mcp *MTRCommissioningParameters) WifiCredentials() []byte {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("wifiCredentials"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ThreadOperationalDataset returns the Thread operational dataset, if available.
-func (mcp *MTRCommissioningParameters) ThreadOperationalDataset() obj.Object {
+func (mcp *MTRCommissioningParameters) ThreadOperationalDataset() []byte {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("threadOperationalDataset"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FailSafeTimeout returns the timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
-func (mcp *MTRCommissioningParameters) FailSafeTimeout() obj.Object {
+func (mcp *MTRCommissioningParameters) FailSafeTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("failSafeTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SkipCommissioningComplete reports whether only perform the PASE steps of commissioning. If set to true, commissioning will be completed by another admin on the network. Defaults to false.
 func (mcp *MTRCommissioningParameters) SkipCommissioningComplete() bool {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[bool](objref.IDOf(mcp), objc.RegisterName("skipCommissioningComplete"))
 	return _r
 }
 
 // CountryCode returns the country code to provide to the device during commissioning. If not nil, this must be a 2-character ISO 3166-1 country code, which the device can use to decide on things like radio communications bands.
 func (mcp *MTRCommissioningParameters) CountryCode() string {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
@@ -208,6 +226,7 @@ func (mcp *MTRCommissioningParameters) CountryCode() string {
 
 // ReadEndpointInformation reports whether read device type information from all endpoints during commissioning. Defaults to false.
 func (mcp *MTRCommissioningParameters) ReadEndpointInformation() bool {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[bool](objref.IDOf(mcp), objc.RegisterName("readEndpointInformation"))
 	return _r
 }
@@ -216,30 +235,35 @@ func (mcp *MTRCommissioningParameters) ReadEndpointInformation() bool {
 //
 // ExtraAttributesToRead returns the collection as a Go slice.
 func (mcp *MTRCommissioningParameters) ExtraAttributesToRead() []*MTRAttributeRequestPath {
+	defer runtime.KeepAlive(mcp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("extraAttributesToRead"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRAttributeRequestPath { return MTRAttributeRequestPathFromID(_id) })
 }
 
 // ForceWiFiScan reports whether to force a network scan before requesting Wi-Fi credentials. The default is false. Even if this value is false a scan may still be performed. This value will be ignored if Wi-Fi credentials are provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
 func (mcp *MTRCommissioningParameters) ForceWiFiScan() bool {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[bool](objref.IDOf(mcp), objc.RegisterName("forceWiFiScan"))
 	return _r
 }
 
 // ForceThreadScan reports whether to force a network scan before requesting Thread credentials. The default is false. Even if this value is false a scan may still be performed. This value will be ignored if a Thread operational dataset is provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
 func (mcp *MTRCommissioningParameters) ForceThreadScan() bool {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[bool](objref.IDOf(mcp), objc.RegisterName("forceThreadScan"))
 	return _r
 }
 
 // CSRNonce returns the csr nonce.
-func (mcp *MTRCommissioningParameters) CSRNonce() obj.Object {
+func (mcp *MTRCommissioningParameters) CSRNonce() []byte {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("CSRNonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // FailSafeExpiryTimeoutSecs returns the fail safe expiry timeout secs.
-func (mcp *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() obj.Object {
+func (mcp *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() *foundation.Number {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("failSafeExpiryTimeoutSecs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

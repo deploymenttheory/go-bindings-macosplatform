@@ -152,7 +152,7 @@
     "PKToolPickerEraserItem": {
       "eraserTool": {
         "doc": "An eraser tool for erasing parts of a drawing.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickereraseritem/erasertool-4q3hp"
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickereraseritem/erasertool-92wqj"
       },
       "init(type:)": {
         "doc": "Creates a new eraser item.",
@@ -187,8 +187,8 @@
         "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickeritem/identifier"
       },
       "tool": {
-        "doc": "The PKTool this tool picker item represents.",
-        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickeritem/tool-918ln"
+        "doc": "A tool for drawing on a PKCanvasView.",
+        "url": "https://developer.apple.com/documentation/pencilkit/pktoolpickeritem/tool-2ji9h"
       }
     }
   }

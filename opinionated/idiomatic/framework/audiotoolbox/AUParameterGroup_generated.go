@@ -5,6 +5,8 @@
 package audiotoolbox
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +51,7 @@ func parameterGroupAdopt(id objc.ID) *ParameterGroup {
 //
 // Children returns the collection as a Go slice.
 func (pg *ParameterGroup) Children() []*ParameterNode {
+	defer runtime.KeepAlive(pg)
 	_arr := objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("children"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParameterNode { return ParameterNodeFromID(_id) })
 }
@@ -57,6 +60,7 @@ func (pg *ParameterGroup) Children() []*ParameterNode {
 //
 // AllParameters returns the collection as a Go slice.
 func (pg *ParameterGroup) AllParameters() []*Parameter {
+	defer runtime.KeepAlive(pg)
 	_arr := objc.Send[objc.ID](objref.IDOf(pg), objc.RegisterName("allParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Parameter { return ParameterFromID(_id) })
 }

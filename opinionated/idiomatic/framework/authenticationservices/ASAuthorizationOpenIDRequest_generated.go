@@ -5,7 +5,10 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -67,6 +70,7 @@ func (aoir *AuthorizationOpenIDRequest) WithNonce(nonce string) *AuthorizationOp
 
 // WithRequestedOperation sets the OpenID authentication operation you want this request to perform.
 func (aoir *AuthorizationOpenIDRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationOpenIDRequest {
+	defer runtime.KeepAlive(requestedOperation)
 	objc.Send[objc.ID](objref.IDOf(aoir), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
 	return aoir
 }
@@ -75,12 +79,14 @@ func (aoir *AuthorizationOpenIDRequest) WithRequestedOperation(requestedOperatio
 //
 // RequestedScopes returns the collection as a Go slice.
 func (aoir *AuthorizationOpenIDRequest) RequestedScopes() []obj.Object {
+	defer runtime.KeepAlive(aoir)
 	_arr := objc.Send[objc.ID](objref.IDOf(aoir), objc.RegisterName("requestedScopes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // State returns state to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response.
 func (aoir *AuthorizationOpenIDRequest) State() string {
+	defer runtime.KeepAlive(aoir)
 	_r := objc.Send[objc.ID](objref.IDOf(aoir), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
@@ -90,6 +96,7 @@ func (aoir *AuthorizationOpenIDRequest) State() string {
 
 // Nonce returns nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response.
 func (aoir *AuthorizationOpenIDRequest) Nonce() string {
+	defer runtime.KeepAlive(aoir)
 	_r := objc.Send[objc.ID](objref.IDOf(aoir), objc.RegisterName("nonce"))
 	if _r == 0 {
 		return ""
@@ -98,9 +105,10 @@ func (aoir *AuthorizationOpenIDRequest) Nonce() string {
 }
 
 // RequestedOperation returns operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
-func (aoir *AuthorizationOpenIDRequest) RequestedOperation() obj.Object {
+func (aoir *AuthorizationOpenIDRequest) RequestedOperation() *foundation.String {
+	defer runtime.KeepAlive(aoir)
 	_r := objc.Send[objc.ID](objref.IDOf(aoir), objc.RegisterName("requestedOperation"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // isAuthorizationOpenIDRequest marks AuthorizationOpenIDRequest — and, by embedding promotion, its

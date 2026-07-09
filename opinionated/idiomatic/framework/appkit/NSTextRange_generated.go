@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textRangeAdopt(id objc.ID) *TextRange {
 
 // Description returns the object's -description text.
 func (tr *TextRange) Description() string {
+	defer runtime.KeepAlive(tr)
 	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tr *TextRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tr *TextRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(tr)
 	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tr *TextRange) String() string {
+	defer runtime.KeepAlive(tr)
 	return rt.Description(objref.IDOf(tr))
 }
 
@@ -74,36 +81,47 @@ func NewTextRange() *TextRange {
 
 // IsEqualToTextRange compares two text ranges.
 func (tr *TextRange) IsEqualToTextRange(textRange *TextRange) bool {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(textRange)
 	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("isEqualToTextRange:"), objref.IDOf(textRange))
 	return _r
 }
 
 // ContainsRange determines if the text range you specify is in the current text range.
 func (tr *TextRange) ContainsRange(textRange *TextRange) bool {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(textRange)
 	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("containsRange:"), objref.IDOf(textRange))
 	return _r
 }
 
-// IntersectsWithTextRange determines if two ranges intersect.
-func (tr *TextRange) IntersectsWithTextRange(textRange *TextRange) bool {
+// Intersects determines if two ranges intersect.
+func (tr *TextRange) Intersects(textRange *TextRange) bool {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(textRange)
 	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("intersectsWithTextRange:"), objref.IDOf(textRange))
 	return _r
 }
 
-// TextRangeByIntersectingWithTextRange returns the range, if any, where two text ranges intersect.
-func (tr *TextRange) TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange {
+// TextRangeByIntersecting returns the range, if any, where two text ranges intersect.
+func (tr *TextRange) TextRangeByIntersecting(textRange *TextRange) *TextRange {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(textRange)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("textRangeByIntersectingWithTextRange:"), objref.IDOf(textRange))
 	return TextRangeFromID(_r)
 }
 
-// TextRangeByFormingUnionWithTextRange returns a new text range by forming the union with the text range you provide.
-func (tr *TextRange) TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange {
+// TextRangeByFormingUnion returns a new text range by forming the union with the text range you provide.
+func (tr *TextRange) TextRangeByFormingUnion(textRange *TextRange) *TextRange {
+	defer runtime.KeepAlive(tr)
+	defer runtime.KeepAlive(textRange)
 	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("textRangeByFormingUnionWithTextRange:"), objref.IDOf(textRange))
 	return TextRangeFromID(_r)
 }
 
 // IsEmpty reports whether the text range is empty.
 func (tr *TextRange) IsEmpty() bool {
+	defer runtime.KeepAlive(tr)
 	_r := objc.Send[bool](objref.IDOf(tr), objc.RegisterName("isEmpty"))
 	return _r
 }

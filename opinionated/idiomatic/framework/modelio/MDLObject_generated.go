@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func objectAdopt(id objc.ID) *Object {
 
 // Description returns the object's -description text.
 func (o *Object) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Object) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Object) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Object) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // WithParent sets the parent object that contains this object.
 func (o *Object) WithParent(parent ObjectProvider) *Object {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return o
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (o *Object) WithInstance(instance ObjectProvider) *Object {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return o
 }
@@ -88,35 +97,42 @@ func (o *Object) WithHidden(hidden bool) *Object {
 
 // ObjectAtPath returns the child object at the specified path.
 func (o *Object) ObjectAtPath(path string) *Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("objectAtPath:"), purego.NSString(path))
 	return ObjectFromID(_r)
 }
 
 // AddChild adds a child object to this object, creating a container for the object’s children if necessary.
 func (o *Object) AddChild(child *Object) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
 // Components returns allows applications to introspect the components on the objects.
 func (o *Object) Components() []obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Parent returns parent object. Nil if no parent. Set to nil when you remove this from an object container inside the parent object.
 func (o *Object) Parent() *Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("parent"))
 	return ObjectFromID(_r)
 }
 
 // Instance returns instance object nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
 func (o *Object) Instance() *Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("instance"))
 	return ObjectFromID(_r)
 }
 
 // Path returns a string representing a path to the object a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
 func (o *Object) Path() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
@@ -126,6 +142,7 @@ func (o *Object) Path() string {
 
 // Hidden wraps the corresponding Objective-C method.
 func (o *Object) Hidden() bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("hidden"))
 	return _r
 }

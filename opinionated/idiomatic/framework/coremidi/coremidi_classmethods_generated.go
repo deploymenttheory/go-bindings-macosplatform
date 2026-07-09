@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -25,6 +27,7 @@ func MIDICIDiscoveryManagerSharedInstance() *CIDiscoveryManager {
 
 // ConnectionWithHost creates a connection to the specified host.
 func ConnectionWithHost(host *NetworkHost) *NetworkConnection {
+	defer runtime.KeepAlive(host)
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkConnection")), objc.RegisterName("connectionWithHost:"), objref.IDOf(host))
 	return NetworkConnectionFromID(_r)
 }
@@ -37,6 +40,7 @@ func HostWithNameAddressPort(name string, address string, port int) *NetworkHost
 
 // HostWithNameNetService creates a host with the specified name and net service.
 func HostWithNameNetService(name string, netService obj.Object) *NetworkHost {
+	defer runtime.KeepAlive(netService)
 	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:netService:"), purego.NSString(name), objref.IDOf(netService))
 	return NetworkHostFromID(_r)
 }

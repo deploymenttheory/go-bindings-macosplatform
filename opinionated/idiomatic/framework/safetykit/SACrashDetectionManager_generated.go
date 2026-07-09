@@ -5,8 +5,11 @@
 package safetykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func crashDetectionManagerAdopt(id objc.ID) *CrashDetectionManager {
 
 // Description returns the object's -description text.
 func (cdm *CrashDetectionManager) Description() string {
+	defer runtime.KeepAlive(cdm)
 	return rt.Description(objref.IDOf(cdm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdm *CrashDetectionManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdm *CrashDetectionManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdm)
 	return rt.IsKind(objref.IDOf(cdm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdm *CrashDetectionManager) String() string {
+	defer runtime.KeepAlive(cdm)
 	return rt.Description(objref.IDOf(cdm))
 }
 
@@ -72,8 +80,19 @@ func NewCrashDetectionManager() *CrashDetectionManager {
 	return crashDetectionManagerAdopt(_id)
 }
 
+// WithDelegate sets the object that receives Crash Detection events.
+func (cdm *CrashDetectionManager) WithDelegate(delegate CrashDetectionDelegate) *CrashDetectionManager {
+	_shim := newCrashDetectionDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cdm), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(cdm), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return cdm
+}
+
 // AuthorizationStatus returns authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
 func (cdm *CrashDetectionManager) AuthorizationStatus() AuthorizationStatus {
+	defer runtime.KeepAlive(cdm)
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(cdm), objc.RegisterName("authorizationStatus"))
 	return _r
 }

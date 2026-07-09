@@ -61,3 +61,49 @@ func (e SystemExtensionErrorCode) String() string {
 		return fmt.Sprintf("SystemExtensionErrorCode(%d)", int64(e))
 	}
 }
+
+// Actions for describing how the extension manager should resolve a version conflict.
+type SystemExtensionReplacementAction int64
+
+const (
+	// Returned by the delegate when it determines that replacing an existing System Extension should not proceed.
+	SystemExtensionReplacementActionCancel SystemExtensionReplacementAction = 0
+	// Returned by the delegate when it determines that replacing an existing System Extension is desired.
+	SystemExtensionReplacementActionReplace SystemExtensionReplacementAction = 1
+)
+
+// String returns the SystemExtensionReplacementAction constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SystemExtensionReplacementAction) String() string {
+	switch e {
+	case SystemExtensionReplacementActionCancel:
+		return "SystemExtensionReplacementActionCancel"
+	case SystemExtensionReplacementActionReplace:
+		return "SystemExtensionReplacementActionReplace"
+	default:
+		return fmt.Sprintf("SystemExtensionReplacementAction(%d)", int64(e))
+	}
+}
+
+// The result of a completed request, possibly including additional information about the extension’s state.
+type SystemExtensionRequestResult int64
+
+const (
+	// The request was successfully completed.
+	SystemExtensionRequestCompleted SystemExtensionRequestResult = 0
+	// The request will be successfully completed after a reboot.
+	SystemExtensionRequestWillCompleteAfterReboot SystemExtensionRequestResult = 1
+)
+
+// String returns the SystemExtensionRequestResult constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SystemExtensionRequestResult) String() string {
+	switch e {
+	case SystemExtensionRequestCompleted:
+		return "SystemExtensionRequestCompleted"
+	case SystemExtensionRequestWillCompleteAfterReboot:
+		return "SystemExtensionRequestWillCompleteAfterReboot"
+	default:
+		return fmt.Sprintf("SystemExtensionRequestResult(%d)", int64(e))
+	}
+}

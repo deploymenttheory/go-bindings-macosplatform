@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (mpbe *MIDIPitchBendEvent) WithChannel(channel int) *MIDIPitchBendEvent {
 
 // Value returns the value.
 func (mpbe *MIDIPitchBendEvent) Value() int {
+	defer runtime.KeepAlive(mpbe)
 	_r := objc.Send[int](objref.IDOf(mpbe), objc.RegisterName("value"))
 	return _r
 }

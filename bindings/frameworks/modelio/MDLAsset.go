@@ -72,8 +72,8 @@ func MDLAssetFromID(id objc.ID) *MDLAsset {
 }
 
 // Initializes an asset from the file at the specified URL.
-func (o *MDLAsset) InitWithURL(uRL *foundation.NSURL) *MDLAsset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURL, uRL.Ptr())
+func (o *MDLAsset) InitWithURL(url *foundation.NSURL) *MDLAsset {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -81,8 +81,8 @@ func (o *MDLAsset) InitWithURL(uRL *foundation.NSURL) *MDLAsset {
 }
 
 // Initializes an asset from the file at the specified URL, using the specified vertex descriptor and buffer allocator.
-func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocator(uRL *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator) *MDLAsset {
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocator, uRL.Ptr(), vertexDescriptor.Ptr(), bufferAllocator)
+func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocator(url *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator) *MDLAsset {
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocator, url.Ptr(), vertexDescriptor.Ptr(), bufferAllocator)
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -99,9 +99,9 @@ func (o *MDLAsset) InitWithBufferAllocator(bufferAllocator MDLMeshBufferAllocato
 }
 
 // Initializes an asset from the file at the specified URL, using the specified options for allocating and transforming data during import.
-func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError(uRL *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator, preserveTopology bool) (*MDLAsset, error) {
+func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError(url *foundation.NSURL, vertexDescriptor *MDLVertexDescriptor, bufferAllocator MDLMeshBufferAllocator, preserveTopology bool) (*MDLAsset, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError, uRL.Ptr(), vertexDescriptor.Ptr(), bufferAllocator, preserveTopology, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _mDLAssetSelInitWithURLVertexDescriptorBufferAllocatorPreserveTopologyError, url.Ptr(), vertexDescriptor.Ptr(), bufferAllocator, preserveTopology, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -112,15 +112,15 @@ func (o *MDLAsset) InitWithURLVertexDescriptorBufferAllocatorPreserveTopologyErr
 }
 
 // Writes asset data to a file at the specified URL.
-func (o *MDLAsset) ExportAssetToURL(uRL *foundation.NSURL) bool {
-	_ret := objc.Send[bool](o.Ptr(), _mDLAssetSelExportAssetToURL, uRL.Ptr())
+func (o *MDLAsset) ExportAssetToURL(url *foundation.NSURL) bool {
+	_ret := objc.Send[bool](o.Ptr(), _mDLAssetSelExportAssetToURL, url.Ptr())
 	return _ret
 }
 
 // Writes asset data to a file at the specified URL and reports errors that occur during export.
-func (o *MDLAsset) ExportAssetToURLError(uRL *foundation.NSURL) (bool, error) {
+func (o *MDLAsset) ExportAssetToURLError(url *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[bool](o.Ptr(), _mDLAssetSelExportAssetToURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[bool](o.Ptr(), _mDLAssetSelExportAssetToURLError, url.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return false, purego.NSErrorToError(objc.ID(_nsErr))
 	}

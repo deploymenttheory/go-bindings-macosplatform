@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewMetricPlayerItemVariantSwitchStartEvent() *MetricPlayerItemVariantSwitch
 
 // FromVariant returns the variant from which the switch is attempted. If no value is available, returns nil
 func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) FromVariant() *AssetVariant {
+	defer runtime.KeepAlive(mpivsse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("fromVariant"))
 	return AssetVariantFromID(_r)
 }
 
 // ToVariant returns the variant to which the switch is attempted.
 func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVariant {
+	defer runtime.KeepAlive(mpivsse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("toVariant"))
 	return AssetVariantFromID(_r)
 }
@@ -68,24 +72,28 @@ func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVarian
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []obj.Object {
+	defer runtime.KeepAlive(mpivsse)
 	_arr := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // VideoRendition contains information corresponding to the currently selected video rendition.
 func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) VideoRendition() *MetricMediaRendition {
+	defer runtime.KeepAlive(mpivsse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("videoRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // AudioRendition contains information corresponding to the currently selected audio rendition.
 func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) AudioRendition() *MetricMediaRendition {
+	defer runtime.KeepAlive(mpivsse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("audioRendition"))
 	return MetricMediaRenditionFromID(_r)
 }
 
 // SubtitleRendition contains information corresponding to the currently selected subtitle rendition.
 func (mpivsse *MetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *MetricMediaRendition {
+	defer runtime.KeepAlive(mpivsse)
 	_r := objc.Send[objc.ID](objref.IDOf(mpivsse), objc.RegisterName("subtitleRendition"))
 	return MetricMediaRenditionFromID(_r)
 }

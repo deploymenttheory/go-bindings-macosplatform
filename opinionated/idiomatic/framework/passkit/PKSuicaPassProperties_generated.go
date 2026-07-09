@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,24 +55,28 @@ func NewSuicaPassProperties() *SuicaPassProperties {
 
 // IsInShinkansenStation reports whether note: isInShinkansenStation is not a subset of isInStation.
 func (spp *SuicaPassProperties) IsInShinkansenStation() bool {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isInShinkansenStation"))
 	return _r
 }
 
 // IsBalanceAllowedForCommute reports whether the object is balance allowed for commute.
 func (spp *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isBalanceAllowedForCommute"))
 	return _r
 }
 
 // IsLowBalanceGateNotificationEnabled reports whether the object is low balance gate notification enabled.
 func (spp *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isLowBalanceGateNotificationEnabled"))
 	return _r
 }
 
 // IsGreenCarTicketUsed reports whether the object is green car ticket used.
 func (spp *SuicaPassProperties) IsGreenCarTicketUsed() bool {
+	defer runtime.KeepAlive(spp)
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isGreenCarTicketUsed"))
 	return _r
 }

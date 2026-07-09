@@ -5,10 +5,13 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -116,6 +119,18 @@ func (cb *ComboBox) WithCompletes(completes bool) *ComboBox {
 	return cb
 }
 
+// WithDataSource sets the object that provides the item data for the combo box.
+func (cb *ComboBox) WithDataSource(dataSource ComboBoxDataSource) *ComboBox {
+	_shim := newComboBoxDataSourceShim(dataSource)
+	_sel := objc.RegisterName("setDataSource:")
+	shim.Associate(objref.IDOf(cb), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return cb
+}
+
 // WithPlaceholderString sets the string the text field displays when empty to help the user understand the text field’s purpose.
 func (cb *ComboBox) WithPlaceholderString(placeholderString string) *ComboBox {
 	purego.Main(func() {
@@ -126,6 +141,7 @@ func (cb *ComboBox) WithPlaceholderString(placeholderString string) *ComboBox {
 
 // WithPlaceholderAttributedString sets the attributed string the text field displays when empty to help the user understand the text field’s purpose.
 func (cb *ComboBox) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *ComboBox {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -134,6 +150,7 @@ func (cb *ComboBox) WithPlaceholderAttributedString(placeholderAttributedString 
 
 // WithBackgroundColor sets the color of the background the text field’s cell draws behind the text.
 func (cb *ComboBox) WithBackgroundColor(backgroundColor *Color) *ComboBox {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -150,6 +167,7 @@ func (cb *ComboBox) WithDrawsBackground(drawsBackground bool) *ComboBox {
 
 // WithTextColor sets the color of the text field’s content.
 func (cb *ComboBox) WithTextColor(textColor *Color) *ComboBox {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -185,6 +203,18 @@ func (cb *ComboBox) WithSelectable(selectable bool) *ComboBox {
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSelectable:"), selectable)
 	})
+	return cb
+}
+
+// WithDelegate sets the text field’s delegate.
+func (cb *ComboBox) WithDelegate(delegate TextFieldDelegate) *ComboBox {
+	_shim := newTextFieldDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cb), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cb), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return cb
 }
 
@@ -304,6 +334,7 @@ func (cb *ComboBox) WithImportsGraphics(importsGraphics bool) *ComboBox {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (cb *ComboBox) WithTarget(target obj.Object) *ComboBox {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -368,6 +399,7 @@ func (cb *ComboBox) WithControlSize(controlSize ControlSize) *ComboBox {
 
 // WithFormatter sets the receiver’s formatter.
 func (cb *ComboBox) WithFormatter(formatter obj.Object) *ComboBox {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -376,6 +408,7 @@ func (cb *ComboBox) WithFormatter(formatter obj.Object) *ComboBox {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (cb *ComboBox) WithObjectValue(objectValue obj.Object) *ComboBox {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -392,6 +425,7 @@ func (cb *ComboBox) WithStringValue(stringValue string) *ComboBox {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (cb *ComboBox) WithAttributedStringValue(attributedStringValue obj.Object) *ComboBox {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -432,6 +466,7 @@ func (cb *ComboBox) WithDoubleValue(doubleValue float64) *ComboBox {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (cb *ComboBox) WithFont(font *Font) *ComboBox {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -480,6 +515,7 @@ func (cb *ComboBox) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *C
 
 // WithCell sets the cell.
 func (cb *ComboBox) WithCell(cell CellProvider) *ComboBox {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -625,6 +661,7 @@ func (cb *ComboBox) WithWantsLayer(wantsLayer bool) *ComboBox {
 
 // WithLayer sets the layer.
 func (cb *ComboBox) WithLayer(layer obj.Object) *ComboBox {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -674,6 +711,7 @@ func (cb *ComboBox) WithBackgroundFilters(items ...obj.Object) *ComboBox {
 
 // WithCompositingFilter sets the compositing filter.
 func (cb *ComboBox) WithCompositingFilter(compositingFilter obj.Object) *ComboBox {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -691,6 +729,7 @@ func (cb *ComboBox) WithContentFilters(items ...obj.Object) *ComboBox {
 
 // WithShadow sets the shadow.
 func (cb *ComboBox) WithShadow(shadow *Shadow) *ComboBox {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -739,6 +778,7 @@ func (cb *ComboBox) WithPreparedContentRect(preparedContentRect corefoundation.C
 
 // WithNextKeyView sets the next key view.
 func (cb *ComboBox) WithNextKeyView(nextKeyView ViewProvider) *ComboBox {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -788,6 +828,7 @@ func (cb *ComboBox) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cb *ComboBox) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboBox {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -844,6 +885,7 @@ func (cb *ComboBox) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cb *ComboBox) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboBox {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -852,6 +894,7 @@ func (cb *ComboBox) WithPressureConfiguration(pressureConfiguration *PressureCon
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cb *ComboBox) WithNextResponder(nextResponder ResponderProvider) *ComboBox {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -860,6 +903,7 @@ func (cb *ComboBox) WithNextResponder(nextResponder ResponderProvider) *ComboBox
 
 // WithMenu sets returns the responder’s menu.
 func (cb *ComboBox) WithMenu(menu *Menu) *ComboBox {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -868,6 +912,7 @@ func (cb *ComboBox) WithMenu(menu *Menu) *ComboBox {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cb *ComboBox) WithUserActivity(userActivity obj.Object) *ComboBox {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -876,6 +921,7 @@ func (cb *ComboBox) WithUserActivity(userActivity obj.Object) *ComboBox {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cb *ComboBox) WithTouchBar(touchBar *TouchBar) *ComboBox {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -884,6 +930,7 @@ func (cb *ComboBox) WithTouchBar(touchBar *TouchBar) *ComboBox {
 
 // ReloadData marks the receiver as needing redisplay, so that it will reload the data for visible pop-up items and draw the new values.
 func (cb *ComboBox) ReloadData() {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("reloadData"))
 	})
@@ -892,6 +939,7 @@ func (cb *ComboBox) ReloadData() {
 
 // NoteNumberOfItemsChanged informs the receiver that the number of items in its data source has changed.
 func (cb *ComboBox) NoteNumberOfItemsChanged() {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("noteNumberOfItemsChanged"))
 	})
@@ -900,6 +948,7 @@ func (cb *ComboBox) NoteNumberOfItemsChanged() {
 
 // ScrollItemAtIndexToTop scrolls the receiver’s pop-up list vertically so that the item at the specified index is as close to the top as possible.
 func (cb *ComboBox) ScrollItemAtIndexToTop(index int) {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("scrollItemAtIndexToTop:"), index)
 	})
@@ -908,6 +957,7 @@ func (cb *ComboBox) ScrollItemAtIndexToTop(index int) {
 
 // ScrollItemAtIndexToVisible scrolls the receiver’s pop-up list vertically so that the item at the specified index is visible.
 func (cb *ComboBox) ScrollItemAtIndexToVisible(index int) {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("scrollItemAtIndexToVisible:"), index)
 	})
@@ -916,6 +966,7 @@ func (cb *ComboBox) ScrollItemAtIndexToVisible(index int) {
 
 // SelectItemAtIndex selects the pop-up list row at the given index.
 func (cb *ComboBox) SelectItemAtIndex(index int) {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("selectItemAtIndex:"), index)
 	})
@@ -924,6 +975,7 @@ func (cb *ComboBox) SelectItemAtIndex(index int) {
 
 // DeselectItemAtIndex deselects the pop-up list item at the specified index if it’s selected.
 func (cb *ComboBox) DeselectItemAtIndex(index int) {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("deselectItemAtIndex:"), index)
 	})
@@ -932,6 +984,8 @@ func (cb *ComboBox) DeselectItemAtIndex(index int) {
 
 // AddItemWithObjectValue adds an object to the end of the receiver’s internal item list.
 func (cb *ComboBox) AddItemWithObjectValue(object obj.Object) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("addItemWithObjectValue:"), objref.IDOf(object))
 	})
@@ -940,6 +994,8 @@ func (cb *ComboBox) AddItemWithObjectValue(object obj.Object) {
 
 // AddItemsWithObjectValues adds multiple objects to the end of the receiver’s internal item list.
 func (cb *ComboBox) AddItemsWithObjectValues(objects obj.Object) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(objects)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("addItemsWithObjectValues:"), objref.IDOf(objects))
 	})
@@ -948,6 +1004,8 @@ func (cb *ComboBox) AddItemsWithObjectValues(objects obj.Object) {
 
 // InsertItemWithObjectValueAtIndex inserts an object at the specified location in the receiver’s internal item list.
 func (cb *ComboBox) InsertItemWithObjectValueAtIndex(object obj.Object, index int) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("insertItemWithObjectValue:atIndex:"), objref.IDOf(object), index)
 	})
@@ -956,6 +1014,8 @@ func (cb *ComboBox) InsertItemWithObjectValueAtIndex(object obj.Object, index in
 
 // RemoveItemWithObjectValue removes all occurrences of the given object from the receiver’s internal item list.
 func (cb *ComboBox) RemoveItemWithObjectValue(object obj.Object) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeItemWithObjectValue:"), objref.IDOf(object))
 	})
@@ -964,6 +1024,7 @@ func (cb *ComboBox) RemoveItemWithObjectValue(object obj.Object) {
 
 // RemoveItemAtIndex removes the object at the specified location from the receiver’s internal item list.
 func (cb *ComboBox) RemoveItemAtIndex(index int) {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeItemAtIndex:"), index)
 	})
@@ -972,6 +1033,7 @@ func (cb *ComboBox) RemoveItemAtIndex(index int) {
 
 // RemoveAllItems removes all items from the receiver’s internal item list.
 func (cb *ComboBox) RemoveAllItems() {
+	defer runtime.KeepAlive(cb)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("removeAllItems"))
 	})
@@ -980,6 +1042,8 @@ func (cb *ComboBox) RemoveAllItems() {
 
 // SelectItemWithObjectValue selects the first pop-up list item that corresponds to the given object.
 func (cb *ComboBox) SelectItemWithObjectValue(object obj.Object) {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("selectItemWithObjectValue:"), objref.IDOf(object))
 	})
@@ -988,6 +1052,7 @@ func (cb *ComboBox) SelectItemWithObjectValue(object obj.Object) {
 
 // ItemObjectValueAtIndex returns the object located at the given index within the receiver’s internal item list.
 func (cb *ComboBox) ItemObjectValueAtIndex(index int) obj.Object {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1001,6 +1066,8 @@ func (cb *ComboBox) ItemObjectValueAtIndex(index int) obj.Object {
 
 // IndexOfItemWithObjectValue searches the receiver’s internal item list for the specified object and returns the lowest matching index.
 func (cb *ComboBox) IndexOfItemWithObjectValue(object obj.Object) int {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(object)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1014,6 +1081,7 @@ func (cb *ComboBox) IndexOfItemWithObjectValue(object obj.Object) int {
 
 // HasVerticalScroller reports whether the object has vertical scroller.
 func (cb *ComboBox) HasVerticalScroller() bool {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1027,6 +1095,7 @@ func (cb *ComboBox) HasVerticalScroller() bool {
 
 // IntercellSpacing returns the intercell spacing.
 func (cb *ComboBox) IntercellSpacing() corefoundation.CGSize {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1040,6 +1109,7 @@ func (cb *ComboBox) IntercellSpacing() corefoundation.CGSize {
 
 // ItemHeight returns the item height.
 func (cb *ComboBox) ItemHeight() float64 {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1053,6 +1123,7 @@ func (cb *ComboBox) ItemHeight() float64 {
 
 // NumberOfVisibleItems returns the number of visible items.
 func (cb *ComboBox) NumberOfVisibleItems() int {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1066,6 +1137,7 @@ func (cb *ComboBox) NumberOfVisibleItems() int {
 
 // IsButtonBordered reports whether the object is button bordered.
 func (cb *ComboBox) IsButtonBordered() bool {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1079,6 +1151,7 @@ func (cb *ComboBox) IsButtonBordered() bool {
 
 // UsesDataSource wraps the corresponding Objective-C method.
 func (cb *ComboBox) UsesDataSource() bool {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1092,6 +1165,7 @@ func (cb *ComboBox) UsesDataSource() bool {
 
 // IndexOfSelectedItem returns the index of selected item.
 func (cb *ComboBox) IndexOfSelectedItem() int {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1105,6 +1179,7 @@ func (cb *ComboBox) IndexOfSelectedItem() int {
 
 // NumberOfItems returns the number of items.
 func (cb *ComboBox) NumberOfItems() int {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1118,6 +1193,7 @@ func (cb *ComboBox) NumberOfItems() int {
 
 // Completes wraps the corresponding Objective-C method.
 func (cb *ComboBox) Completes() bool {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1131,6 +1207,7 @@ func (cb *ComboBox) Completes() bool {
 
 // ObjectValueOfSelectedItem returns the object value of selected item.
 func (cb *ComboBox) ObjectValueOfSelectedItem() obj.Object {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1144,6 +1221,7 @@ func (cb *ComboBox) ObjectValueOfSelectedItem() obj.Object {
 
 // ObjectValues returns the object values.
 func (cb *ComboBox) ObjectValues() obj.Object {
+	defer runtime.KeepAlive(cb)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

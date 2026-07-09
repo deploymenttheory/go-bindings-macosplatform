@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func motionKeyframeDataAdopt(id objc.ID) *MotionKeyframeData {
 
 // Description returns the object's -description text.
 func (mkd *MotionKeyframeData) Description() string {
+	defer runtime.KeepAlive(mkd)
 	return rt.Description(objref.IDOf(mkd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mkd *MotionKeyframeData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mkd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mkd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mkd *MotionKeyframeData) IsKind(className string) bool {
+	defer runtime.KeepAlive(mkd)
 	return rt.IsKind(objref.IDOf(mkd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mkd *MotionKeyframeData) String() string {
+	defer runtime.KeepAlive(mkd)
 	return rt.Description(objref.IDOf(mkd))
 }
 
@@ -80,6 +87,7 @@ func (mkd *MotionKeyframeData) WithOffset(offset int) *MotionKeyframeData {
 
 // Offset returns buffer offset. Must be a multiple of 4 bytes.
 func (mkd *MotionKeyframeData) Offset() int {
+	defer runtime.KeepAlive(mkd)
 	_r := objc.Send[int](objref.IDOf(mkd), objc.RegisterName("offset"))
 	return _r
 }

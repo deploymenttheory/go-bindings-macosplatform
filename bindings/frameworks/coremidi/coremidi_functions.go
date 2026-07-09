@@ -281,8 +281,8 @@ func MIDI2FunctionBlockDiscoveryMessage(functionBlockNumber uint8, infoRequest b
 	return _fnMIDI2FunctionBlockDiscoveryMessage(functionBlockNumber, infoRequest, nameRequest)
 }
 
-func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uIHint MIDIUMPFunctionBlockUIHint, mIDI1 MIDIUMPFunctionBlockMIDI1Info, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, cIVersion uint8, maxSysex8Streams uint8) MIDIMessage_128 {
-	return _fnMIDI2FunctionBlockInfoNotificationMessage(active, blockNumber, uIHint, mIDI1, direction, firstGroup, numberOfGroupsSpanned, cIVersion, maxSysex8Streams)
+func MIDI2FunctionBlockInfoNotificationMessage(active bool, blockNumber uint8, uiHint MIDIUMPFunctionBlockUIHint, midi1 MIDIUMPFunctionBlockMIDI1Info, direction MIDIUMPFunctionBlockDirection, firstGroup uint8, numberOfGroupsSpanned uint8, ciVersion uint8, maxSysex8Streams uint8) MIDIMessage_128 {
+	return _fnMIDI2FunctionBlockInfoNotificationMessage(active, blockNumber, uiHint, midi1, direction, firstGroup, numberOfGroupsSpanned, ciVersion, maxSysex8Streams)
 }
 
 func MIDI2FunctionBlockNameNotificationMessage(format UMPStreamMessageFormat, blockNumber uint8, data string, length uint) MIDIMessage_128 {
@@ -313,8 +313,8 @@ func MIDI2PolyPressure(group uint8, channel uint8, noteNumber uint8, value uint)
 	return _fnMIDI2PolyPressure(group, channel, noteNumber, value)
 }
 
-func MIDI2ProgramChange(group uint8, channel uint8, bankIsValid bool, program uint8, bank_msb uint8, bank_lsb uint8) MIDIMessage_64 {
-	return _fnMIDI2ProgramChange(group, channel, bankIsValid, program, bank_msb, bank_lsb)
+func MIDI2ProgramChange(group uint8, channel uint8, bankIsValid bool, program uint8, bankMsb uint8, bankLsb uint8) MIDIMessage_64 {
+	return _fnMIDI2ProgramChange(group, channel, bankIsValid, program, bankMsb, bankLsb)
 }
 
 func MIDI2RegisteredControl(group uint8, channel uint8, bank uint8, index uint8, value uint) MIDIMessage_64 {

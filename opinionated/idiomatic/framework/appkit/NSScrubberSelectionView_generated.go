@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -215,6 +217,7 @@ func (ssv *ScrubberSelectionView) WithWantsLayer(wantsLayer bool) *ScrubberSelec
 
 // WithLayer sets the layer.
 func (ssv *ScrubberSelectionView) WithLayer(layer obj.Object) *ScrubberSelectionView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -264,6 +267,7 @@ func (ssv *ScrubberSelectionView) WithBackgroundFilters(items ...obj.Object) *Sc
 
 // WithCompositingFilter sets the compositing filter.
 func (ssv *ScrubberSelectionView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberSelectionView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -281,6 +285,7 @@ func (ssv *ScrubberSelectionView) WithContentFilters(items ...obj.Object) *Scrub
 
 // WithShadow sets the shadow.
 func (ssv *ScrubberSelectionView) WithShadow(shadow *Shadow) *ScrubberSelectionView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -329,6 +334,7 @@ func (ssv *ScrubberSelectionView) WithPreparedContentRect(preparedContentRect co
 
 // WithNextKeyView sets the next key view.
 func (ssv *ScrubberSelectionView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberSelectionView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -378,6 +384,7 @@ func (ssv *ScrubberSelectionView) WithPrefersCompactControlSizeMetrics(prefersCo
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (ssv *ScrubberSelectionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberSelectionView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -434,6 +441,7 @@ func (ssv *ScrubberSelectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wan
 
 // WithPressureConfiguration sets the pressure configuration.
 func (ssv *ScrubberSelectionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberSelectionView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -442,6 +450,7 @@ func (ssv *ScrubberSelectionView) WithPressureConfiguration(pressureConfiguratio
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (ssv *ScrubberSelectionView) WithNextResponder(nextResponder ResponderProvider) *ScrubberSelectionView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -450,6 +459,7 @@ func (ssv *ScrubberSelectionView) WithNextResponder(nextResponder ResponderProvi
 
 // WithMenu sets returns the responder’s menu.
 func (ssv *ScrubberSelectionView) WithMenu(menu *Menu) *ScrubberSelectionView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -458,6 +468,7 @@ func (ssv *ScrubberSelectionView) WithMenu(menu *Menu) *ScrubberSelectionView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (ssv *ScrubberSelectionView) WithUserActivity(userActivity obj.Object) *ScrubberSelectionView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -466,6 +477,7 @@ func (ssv *ScrubberSelectionView) WithUserActivity(userActivity obj.Object) *Scr
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (ssv *ScrubberSelectionView) WithTouchBar(touchBar *TouchBar) *ScrubberSelectionView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ssv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})

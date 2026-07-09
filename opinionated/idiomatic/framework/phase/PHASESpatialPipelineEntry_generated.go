@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func spatialPipelineEntryAdopt(id objc.ID) *SpatialPipelineEntry {
 
 // Description returns the object's -description text.
 func (spe *SpatialPipelineEntry) Description() string {
+	defer runtime.KeepAlive(spe)
 	return rt.Description(objref.IDOf(spe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (spe *SpatialPipelineEntry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(spe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(spe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (spe *SpatialPipelineEntry) IsKind(className string) bool {
+	defer runtime.KeepAlive(spe)
 	return rt.IsKind(objref.IDOf(spe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (spe *SpatialPipelineEntry) String() string {
+	defer runtime.KeepAlive(spe)
 	return rt.Description(objref.IDOf(spe))
 }
 
@@ -80,18 +87,21 @@ func (spe *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipeli
 
 // WithSendLevelMetaParameterDefinition sets a parameter that gradually updates the amount of audio signal that passes through to the output.
 func (spe *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry {
+	defer runtime.KeepAlive(sendLevelMetaParameterDefinition)
 	objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("setSendLevelMetaParameterDefinition:"), objref.IDOf(sendLevelMetaParameterDefinition))
 	return spe
 }
 
 // SendLevel returns send level.
 func (spe *SpatialPipelineEntry) SendLevel() float64 {
+	defer runtime.KeepAlive(spe)
 	_r := objc.Send[float64](objref.IDOf(spe), objc.RegisterName("sendLevel"))
 	return _r
 }
 
 // SendLevelMetaParameterDefinition returns an optional metaparameter used to drive the send level during playback.
 func (spe *SpatialPipelineEntry) SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition {
+	defer runtime.KeepAlive(spe)
 	_r := objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("sendLevelMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }

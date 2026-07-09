@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGroupKeyManagementClusterKeySetWriteParamsAdopt(id objc.ID) *MTRGroupKey
 
 // Description returns the object's -description text.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) Description() string {
+	defer runtime.KeepAlive(mgkmckswp)
 	return rt.Description(objref.IDOf(mgkmckswp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgkmckswp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgkmckswp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgkmckswp)
 	return rt.IsKind(objref.IDOf(mgkmckswp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) String() string {
+	defer runtime.KeepAlive(mgkmckswp)
 	return rt.Description(objref.IDOf(mgkmckswp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRGroupKeyManagementClusterKeySetWriteParams() *MTRGroupKeyManagementCl
 
 // WithGroupKeySet sets the group key set.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) WithGroupKeySet(groupKeySet *MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams {
+	defer runtime.KeepAlive(groupKeySet)
 	objc.Send[objc.ID](objref.IDOf(mgkmckswp), objc.RegisterName("setGroupKeySet:"), objref.IDOf(groupKeySet))
 	return mgkmckswp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupKeyManagementClusterKeySetWriteParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mgkmckswp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mgkmckswp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupKeyManagementClusterKeySetWriteParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mgkmckswp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mgkmckswp
 }
 
 // GroupKeySet returns the group key set.
 func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	defer runtime.KeepAlive(mgkmckswp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmckswp), objc.RegisterName("groupKeySet"))
 	return MTRGroupKeyManagementClusterGroupKeySetStructFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) TimedInvokeTimeoutMs() obj.Object {
+func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mgkmckswp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmckswp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) ServerSideProcessingTimeout() obj.Object {
+func (mgkmckswp *MTRGroupKeyManagementClusterKeySetWriteParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mgkmckswp)
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmckswp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

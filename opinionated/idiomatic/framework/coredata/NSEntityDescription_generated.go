@@ -5,7 +5,10 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func entityDescriptionAdopt(id objc.ID) *EntityDescription {
 
 // Description returns the object's -description text.
 func (ed *EntityDescription) Description() string {
+	defer runtime.KeepAlive(ed)
 	return rt.Description(objref.IDOf(ed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ed *EntityDescription) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ed *EntityDescription) IsKind(className string) bool {
+	defer runtime.KeepAlive(ed)
 	return rt.IsKind(objref.IDOf(ed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ed *EntityDescription) String() string {
+	defer runtime.KeepAlive(ed)
 	return rt.Description(objref.IDOf(ed))
 }
 
@@ -106,6 +114,7 @@ func (ed *EntityDescription) WithProperties(items ...PropertyDescriptionProvider
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (ed *EntityDescription) WithUserInfo(userInfo obj.Object) *EntityDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return ed
 }
@@ -145,30 +154,37 @@ func (ed *EntityDescription) WithCompoundIndexes(items ...obj.Object) *EntityDes
 
 // WithCoreSpotlightDisplayNameExpression sets the expression that computes the CoreSpotlight display name for instances of the entity.
 func (ed *EntityDescription) WithCoreSpotlightDisplayNameExpression(coreSpotlightDisplayNameExpression obj.Object) *EntityDescription {
+	defer runtime.KeepAlive(coreSpotlightDisplayNameExpression)
 	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setCoreSpotlightDisplayNameExpression:"), objref.IDOf(coreSpotlightDisplayNameExpression))
 	return ed
 }
 
 // RelationshipsWithDestinationEntity returns an array containing the relationships of the receiver where the entity description of the relationship is a given entity.
 func (ed *EntityDescription) RelationshipsWithDestinationEntity(entity *EntityDescription) []*RelationshipDescription {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(entity)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("relationshipsWithDestinationEntity:"), objref.IDOf(entity))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *RelationshipDescription { return RelationshipDescriptionFromID(_id) })
 }
 
 // IsKindOfEntity returns a Boolean value that indicates whether the receiver is a sub-entity of another given entity.
 func (ed *EntityDescription) IsKindOfEntity(entity *EntityDescription) bool {
+	defer runtime.KeepAlive(ed)
+	defer runtime.KeepAlive(entity)
 	_r := objc.Send[bool](objref.IDOf(ed), objc.RegisterName("isKindOfEntity:"), objref.IDOf(entity))
 	return _r
 }
 
 // ManagedObjectModel returns the managed object model.
 func (ed *EntityDescription) ManagedObjectModel() *ManagedObjectModel {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
 // ManagedObjectClassName returns the managed object class name.
 func (ed *EntityDescription) ManagedObjectClassName() string {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("managedObjectClassName"))
 	if _r == 0 {
 		return ""
@@ -178,6 +194,7 @@ func (ed *EntityDescription) ManagedObjectClassName() string {
 
 // Name returns the name.
 func (ed *EntityDescription) Name() string {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -187,70 +204,81 @@ func (ed *EntityDescription) Name() string {
 
 // IsAbstract reports whether the object is abstract.
 func (ed *EntityDescription) IsAbstract() bool {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[bool](objref.IDOf(ed), objc.RegisterName("isAbstract"))
 	return _r
 }
 
 // SubentitiesByName returns the subentities by name.
-func (ed *EntityDescription) SubentitiesByName() obj.Object {
+func (ed *EntityDescription) SubentitiesByName() map[string]*EntityDescription {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("subentitiesByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
 // Subentities returns the subentities.
 //
 // Subentities returns the collection as a Go slice.
 func (ed *EntityDescription) Subentities() []*EntityDescription {
+	defer runtime.KeepAlive(ed)
 	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("subentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
 // Superentity returns the superentity.
 func (ed *EntityDescription) Superentity() *EntityDescription {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("superentity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // PropertiesByName returns the properties by name.
-func (ed *EntityDescription) PropertiesByName() obj.Object {
+func (ed *EntityDescription) PropertiesByName() map[string]*PropertyDescription {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("propertiesByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *PropertyDescription { return PropertyDescriptionFromID(_id) })
 }
 
 // Properties returns the properties.
 //
 // Properties returns the collection as a Go slice.
 func (ed *EntityDescription) Properties() []*PropertyDescription {
+	defer runtime.KeepAlive(ed)
 	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("properties"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PropertyDescription { return PropertyDescriptionFromID(_id) })
 }
 
 // UserInfo returns the user info.
 func (ed *EntityDescription) UserInfo() obj.Object {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // AttributesByName returns the attributes by name.
-func (ed *EntityDescription) AttributesByName() obj.Object {
+func (ed *EntityDescription) AttributesByName() map[string]*AttributeDescription {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("attributesByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *AttributeDescription { return AttributeDescriptionFromID(_id) })
 }
 
 // RelationshipsByName returns the relationships by name.
-func (ed *EntityDescription) RelationshipsByName() obj.Object {
+func (ed *EntityDescription) RelationshipsByName() map[string]*RelationshipDescription {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("relationshipsByName"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *RelationshipDescription { return RelationshipDescriptionFromID(_id) })
 }
 
 // VersionHash returns the version hash.
-func (ed *EntityDescription) VersionHash() obj.Object {
+func (ed *EntityDescription) VersionHash() []byte {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("versionHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // VersionHashModifier returns the version hash modifier.
 func (ed *EntityDescription) VersionHashModifier() string {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("versionHashModifier"))
 	if _r == 0 {
 		return ""
@@ -260,6 +288,7 @@ func (ed *EntityDescription) VersionHashModifier() string {
 
 // RenamingIdentifier returns the renaming identifier.
 func (ed *EntityDescription) RenamingIdentifier() string {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("renamingIdentifier"))
 	if _r == 0 {
 		return ""
@@ -271,6 +300,7 @@ func (ed *EntityDescription) RenamingIdentifier() string {
 //
 // Indexes returns the collection as a Go slice.
 func (ed *EntityDescription) Indexes() []*FetchIndexDescription {
+	defer runtime.KeepAlive(ed)
 	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("indexes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FetchIndexDescription { return FetchIndexDescriptionFromID(_id) })
 }
@@ -279,6 +309,7 @@ func (ed *EntityDescription) Indexes() []*FetchIndexDescription {
 //
 // UniquenessConstraints returns the collection as a Go slice.
 func (ed *EntityDescription) UniquenessConstraints() []obj.Object {
+	defer runtime.KeepAlive(ed)
 	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("uniquenessConstraints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -287,12 +318,14 @@ func (ed *EntityDescription) UniquenessConstraints() []obj.Object {
 //
 // CompoundIndexes returns the collection as a Go slice.
 func (ed *EntityDescription) CompoundIndexes() []obj.Object {
+	defer runtime.KeepAlive(ed)
 	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("compoundIndexes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CoreSpotlightDisplayNameExpression returns the core spotlight display name expression.
-func (ed *EntityDescription) CoreSpotlightDisplayNameExpression() obj.Object {
+func (ed *EntityDescription) CoreSpotlightDisplayNameExpression() *foundation.Expression {
+	defer runtime.KeepAlive(ed)
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("coreSpotlightDisplayNameExpression"))
-	return obj.Wrap(_r)
+	return foundation.ExpressionFromID(_r)
 }

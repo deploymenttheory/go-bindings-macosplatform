@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewStructType() *StructType {
 
 // MemberByName provides a representation of a struct member.
 func (st *StructType) MemberByName(name string) *StructMember {
+	defer runtime.KeepAlive(st)
 	_r := objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("memberByName:"), purego.NSString(name))
 	return StructMemberFromID(_r)
 }
@@ -61,6 +64,7 @@ func (st *StructType) MemberByName(name string) *StructMember {
 //
 // Members returns the collection as a Go slice.
 func (st *StructType) Members() []*StructMember {
+	defer runtime.KeepAlive(st)
 	_arr := objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("members"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StructMember { return StructMemberFromID(_id) })
 }

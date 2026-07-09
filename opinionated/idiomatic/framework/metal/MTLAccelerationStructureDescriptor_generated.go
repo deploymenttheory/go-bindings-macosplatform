@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func accelerationStructureDescriptorAdopt(id objc.ID) *AccelerationStructureDesc
 
 // Description returns the object's -description text.
 func (asd *AccelerationStructureDescriptor) Description() string {
+	defer runtime.KeepAlive(asd)
 	return rt.Description(objref.IDOf(asd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asd *AccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asd *AccelerationStructureDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(asd)
 	return rt.IsKind(objref.IDOf(asd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asd *AccelerationStructureDescriptor) String() string {
+	defer runtime.KeepAlive(asd)
 	return rt.Description(objref.IDOf(asd))
 }
 
@@ -76,6 +83,7 @@ func (asd *AccelerationStructureDescriptor) WithUsage(usage AccelerationStructur
 
 // Usage returns the usage.
 func (asd *AccelerationStructureDescriptor) Usage() AccelerationStructureUsage {
+	defer runtime.KeepAlive(asd)
 	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(asd), objc.RegisterName("usage"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,7 @@ func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
 
 // WithFabricIndex sets the fabric index.
 func (mbcle *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent {
+	defer runtime.KeepAlive(fabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mbcle), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mbcle
 }

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,6 +67,7 @@ func (nfdv *NEFilterDataVerdict) WithShouldReport(shouldReport bool) *NEFilterDa
 
 // StatisticsReportFrequency returns the frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics. The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
 func (nfdv *NEFilterDataVerdict) StatisticsReportFrequency() NEFilterReportFrequency {
+	defer runtime.KeepAlive(nfdv)
 	_r := objc.Send[NEFilterReportFrequency](objref.IDOf(nfdv), objc.RegisterName("statisticsReportFrequency"))
 	return _r
 }

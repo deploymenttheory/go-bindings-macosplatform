@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewRecognizedObjectObservation() *RecognizedObjectObservation {
 //
 // Labels returns the collection as a Go slice.
 func (roo *RecognizedObjectObservation) Labels() []*ClassificationObservation {
+	defer runtime.KeepAlive(roo)
 	_arr := objc.Send[objc.ID](objref.IDOf(roo), objc.RegisterName("labels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ClassificationObservation { return ClassificationObservationFromID(_id) })
 }

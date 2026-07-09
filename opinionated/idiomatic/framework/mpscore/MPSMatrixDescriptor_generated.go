@@ -5,6 +5,8 @@
 package mpscore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func matrixDescriptorAdopt(id objc.ID) *MatrixDescriptor {
 
 // Description returns the object's -description text.
 func (md *MatrixDescriptor) Description() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (md *MatrixDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (md *MatrixDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(md)
 	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (md *MatrixDescriptor) String() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
@@ -96,36 +103,42 @@ func (md *MatrixDescriptor) WithRowBytes(rowBytes int) *MatrixDescriptor {
 
 // Rows returns the number of rows in a matrix.
 func (md *MatrixDescriptor) Rows() int {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("rows"))
 	return _r
 }
 
 // Columns returns the number of columns in a matrix.
 func (md *MatrixDescriptor) Columns() int {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("columns"))
 	return _r
 }
 
 // Matrices returns the number of matrices.
 func (md *MatrixDescriptor) Matrices() int {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("matrices"))
 	return _r
 }
 
 // DataType returns the type of the data which makes up the values of the matrix.
 func (md *MatrixDescriptor) DataType() DataType {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[DataType](objref.IDOf(md), objc.RegisterName("dataType"))
 	return _r
 }
 
 // RowBytes returns the stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
 func (md *MatrixDescriptor) RowBytes() int {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("rowBytes"))
 	return _r
 }
 
 // MatrixBytes returns the stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
 func (md *MatrixDescriptor) MatrixBytes() int {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("matrixBytes"))
 	return _r
 }

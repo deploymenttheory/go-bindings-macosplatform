@@ -5,10 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,6 +52,7 @@ func effectNodeAdopt(id objc.ID) *EffectNode {
 
 // WithFilter sets the Core Image filter to apply.
 func (en *EffectNode) WithFilter(filter obj.Object) *EffectNode {
+	defer runtime.KeepAlive(filter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	})
@@ -89,6 +93,7 @@ func (en *EffectNode) WithBlendMode(blendMode BlendMode) *EffectNode {
 
 // WithShader sets a custom shader that is called when the effect node is blended into the parent’s framebuffer.
 func (en *EffectNode) WithShader(shader *Shader) *EffectNode {
+	defer runtime.KeepAlive(shader)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	})
@@ -185,6 +190,7 @@ func (en *EffectNode) WithName(name string) *EffectNode {
 
 // WithPhysicsBody sets the physics body associated with the node.
 func (en *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
+	defer runtime.KeepAlive(physicsBody)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	})
@@ -193,6 +199,7 @@ func (en *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
 
 // WithUserData sets a dictionary containing arbitrary data.
 func (en *EffectNode) WithUserData(userData obj.Object) *EffectNode {
+	defer runtime.KeepAlive(userData)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	})
@@ -201,6 +208,7 @@ func (en *EffectNode) WithUserData(userData obj.Object) *EffectNode {
 
 // WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
 func (en *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode {
+	defer runtime.KeepAlive(reachConstraints)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	})
@@ -217,9 +225,9 @@ func (en *EffectNode) WithConstraints(items ...*Constraint) *EffectNode {
 }
 
 // WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
-func (en *EffectNode) WithAttributeValues(attributeValues obj.Object) *EffectNode {
+func (en *EffectNode) WithAttributeValues(attributeValues map[string]*AttributeValue) *EffectNode {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAttributeValues:"), rt.MapToDict(attributeValues, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v *AttributeValue) objc.ID { return objref.IDOf(_v) }))
 	})
 	return en
 }
@@ -266,6 +274,7 @@ func (en *EffectNode) WithAccessibilityFrame(accessibilityFrame corefoundation.C
 
 // WithAccessibilityParent sets the user interface element that contains this element.
 func (en *EffectNode) WithAccessibilityParent(accessibilityParent obj.Object) *EffectNode {
+	defer runtime.KeepAlive(accessibilityParent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(en), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	})
@@ -298,6 +307,7 @@ func (en *EffectNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Effec
 
 // Filter returns a CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
 func (en *EffectNode) Filter() obj.Object {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -311,6 +321,7 @@ func (en *EffectNode) Filter() obj.Object {
 
 // ShouldCenterFilter wraps the corresponding Objective-C method.
 func (en *EffectNode) ShouldCenterFilter() bool {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -324,6 +335,7 @@ func (en *EffectNode) ShouldCenterFilter() bool {
 
 // ShouldEnableEffects reports whether enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to true.
 func (en *EffectNode) ShouldEnableEffects() bool {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -337,6 +349,7 @@ func (en *EffectNode) ShouldEnableEffects() bool {
 
 // ShouldRasterize reports whether enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
 func (en *EffectNode) ShouldRasterize() bool {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -350,6 +363,7 @@ func (en *EffectNode) ShouldRasterize() bool {
 
 // BlendMode sets the blend mode to use when composing the effect with the final framebuffer.
 func (en *EffectNode) BlendMode() BlendMode {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 BlendMode
 	purego.Main(func() {
 		_mainthread0 = func() BlendMode {
@@ -363,6 +377,7 @@ func (en *EffectNode) BlendMode() BlendMode {
 
 // Shader returns the shader.
 func (en *EffectNode) Shader() *Shader {
+	defer runtime.KeepAlive(en)
 	var _mainthread0 *Shader
 	purego.Main(func() {
 		_mainthread0 = func() *Shader {

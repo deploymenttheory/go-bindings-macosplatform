@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func changeRequestAdopt(id objc.ID) *ChangeRequest {
 
 // Description returns the object's -description text.
 func (cr *ChangeRequest) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *ChangeRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *ChangeRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *ChangeRequest) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 

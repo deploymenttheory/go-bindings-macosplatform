@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +50,28 @@ func movieTrackAdopt(id objc.ID) *MovieTrack {
 
 // MediaPresentationTimeRange returns a CMTimeRange indicating the range of presentation times for the track's media.
 func (mt *MovieTrack) MediaPresentationTimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(mt), objc.RegisterName("mediaPresentationTimeRange"))
 	return _r
 }
 
 // MediaDecodeTimeRange returns a CMTimeRange indicating the range of decode times for the track's media.
 func (mt *MovieTrack) MediaDecodeTimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(mt), objc.RegisterName("mediaDecodeTimeRange"))
 	return _r
 }
 
 // AlternateGroupID returns the alternate group ID.
 func (mt *MovieTrack) AlternateGroupID() int {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[int](objref.IDOf(mt), objc.RegisterName("alternateGroupID"))
 	return _r
 }
 
 // MediaDataStorage returns the media data storage.
 func (mt *MovieTrack) MediaDataStorage() *MediaDataStorage {
+	defer runtime.KeepAlive(mt)
 	_r := objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("mediaDataStorage"))
 	return MediaDataStorageFromID(_r)
 }

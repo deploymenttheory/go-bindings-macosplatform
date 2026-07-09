@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetResourceAdopt(id objc.ID) *AssetResource {
 
 // Description returns the object's -description text.
 func (ar *AssetResource) Description() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ar *AssetResource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ar *AssetResource) IsKind(className string) bool {
+	defer runtime.KeepAlive(ar)
 	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ar *AssetResource) String() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
@@ -74,12 +81,14 @@ func NewAssetResource() *AssetResource {
 
 // Type returns the type.
 func (ar *AssetResource) Type() AssetResourceType {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[AssetResourceType](objref.IDOf(ar), objc.RegisterName("type"))
 	return _r
 }
 
 // AssetLocalIdentifier returns the asset local identifier.
 func (ar *AssetResource) AssetLocalIdentifier() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("assetLocalIdentifier"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (ar *AssetResource) AssetLocalIdentifier() string {
 
 // OriginalFilename returns the original filename.
 func (ar *AssetResource) OriginalFilename() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("originalFilename"))
 	if _r == 0 {
 		return ""
@@ -98,12 +108,14 @@ func (ar *AssetResource) OriginalFilename() string {
 
 // ContentType returns the type of data associated with this asset resource (the data can be retrieved via PHAssetResourceManager)
 func (ar *AssetResource) ContentType() obj.Object {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // UniformTypeIdentifier returns the uniform type identifier.
 func (ar *AssetResource) UniformTypeIdentifier() string {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -113,12 +125,14 @@ func (ar *AssetResource) UniformTypeIdentifier() string {
 
 // PixelWidth returns the pixel width.
 func (ar *AssetResource) PixelWidth() int {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[int](objref.IDOf(ar), objc.RegisterName("pixelWidth"))
 	return _r
 }
 
 // PixelHeight returns the pixel height.
 func (ar *AssetResource) PixelHeight() int {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[int](objref.IDOf(ar), objc.RegisterName("pixelHeight"))
 	return _r
 }

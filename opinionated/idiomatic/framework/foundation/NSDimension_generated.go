@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func dimensionAdopt(id objc.ID) *Dimension {
 
 // NewDimensionWithSymbolConverter creates a new Dimension.
 func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *Dimension {
+	defer runtime.KeepAlive(converter)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSymbol:converter:"), purego.NSString(symbol), objref.IDOf(converter))
 	return dimensionAdopt(_id)
@@ -62,13 +65,14 @@ func (d *Dimension) WithObservationInfo(observationInfo unsafe.Pointer) *Dimensi
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (d *Dimension) WithScriptingProperties(scriptingProperties obj.Object) *Dimension {
-	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (d *Dimension) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Dimension {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return d
 }
 
 // Converter returns the converter.
 func (d *Dimension) Converter() *UnitConverter {
+	defer runtime.KeepAlive(d)
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("converter"))
 	return UnitConverterFromID(_r)
 }

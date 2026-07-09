@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMTL4SpecializedFunctionDescriptor() *MTL4SpecializedFunctionDescriptor {
 
 // WithFunctionDescriptor sets provides a descriptor that corresponds to a base function that the specialization applies to.
 func (msfd *MTL4SpecializedFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor {
+	defer runtime.KeepAlive(functionDescriptor)
 	objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
 	return msfd
 }
@@ -65,18 +68,21 @@ func (msfd *MTL4SpecializedFunctionDescriptor) WithSpecializedName(specializedNa
 
 // WithConstantValues sets configures optional function constant values to associate with the function.
 func (msfd *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor {
+	defer runtime.KeepAlive(constantValues)
 	objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 	return msfd
 }
 
 // FunctionDescriptor provides a descriptor that corresponds to a base function that the specialization applies to.
 func (msfd *MTL4SpecializedFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
+	defer runtime.KeepAlive(msfd)
 	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("functionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
 // SpecializedName returns assigns an optional name to the specialized function.
 func (msfd *MTL4SpecializedFunctionDescriptor) SpecializedName() string {
+	defer runtime.KeepAlive(msfd)
 	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("specializedName"))
 	if _r == 0 {
 		return ""
@@ -86,6 +92,7 @@ func (msfd *MTL4SpecializedFunctionDescriptor) SpecializedName() string {
 
 // ConstantValues returns configures optional function constant values to associate with the function.
 func (msfd *MTL4SpecializedFunctionDescriptor) ConstantValues() *FunctionConstantValues {
+	defer runtime.KeepAlive(msfd)
 	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("constantValues"))
 	return FunctionConstantValuesFromID(_r)
 }

@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func passkeyRegistrationCredentialExtensionInputAdopt(id objc.ID) *PasskeyRegist
 
 // Description returns the object's -description text.
 func (prcei *PasskeyRegistrationCredentialExtensionInput) Description() string {
+	defer runtime.KeepAlive(prcei)
 	return rt.Description(objref.IDOf(prcei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (prcei *PasskeyRegistrationCredentialExtensionInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(prcei)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(prcei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (prcei *PasskeyRegistrationCredentialExtensionInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(prcei)
 	return rt.IsKind(objref.IDOf(prcei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (prcei *PasskeyRegistrationCredentialExtensionInput) String() string {
+	defer runtime.KeepAlive(prcei)
 	return rt.Description(objref.IDOf(prcei))
 }
 
@@ -74,6 +81,7 @@ func NewPasskeyRegistrationCredentialExtensionInput() *PasskeyRegistrationCreden
 
 // LargeBlob returns the large blob.
 func (prcei *PasskeyRegistrationCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	defer runtime.KeepAlive(prcei)
 	_r := objc.Send[objc.ID](objref.IDOf(prcei), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_r)
 }

@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,42 +57,49 @@ func NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu
 
 // WithIPv4Settings sets the tunnel IP version 4 settings.
 func (netns *NEEthernetTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *NEIPv4Settings) *NEEthernetTunnelNetworkSettings {
+	defer runtime.KeepAlive(iPv4Settings)
 	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setIPv4Settings:"), objref.IDOf(iPv4Settings))
 	return netns
 }
 
 // WithIPv6Settings sets the tunnel IP version 6 settings.
 func (netns *NEEthernetTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *NEIPv6Settings) *NEEthernetTunnelNetworkSettings {
+	defer runtime.KeepAlive(iPv6Settings)
 	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setIPv6Settings:"), objref.IDOf(iPv6Settings))
 	return netns
 }
 
 // WithTunnelOverheadBytes sets the number of bytes added to each tunneled packet for storing tunneling protocol headers.
 func (netns *NEEthernetTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes obj.Object) *NEEthernetTunnelNetworkSettings {
+	defer runtime.KeepAlive(tunnelOverheadBytes)
 	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setTunnelOverheadBytes:"), objref.IDOf(tunnelOverheadBytes))
 	return netns
 }
 
 // WithMTU sets the size of the maximum trasnmission unit, in bytes.
-func (netns *NEEthernetTunnelNetworkSettings) WithMTU(mTU obj.Object) *NEEthernetTunnelNetworkSettings {
-	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setMTU:"), objref.IDOf(mTU))
+func (netns *NEEthernetTunnelNetworkSettings) WithMTU(mtu obj.Object) *NEEthernetTunnelNetworkSettings {
+	defer runtime.KeepAlive(mtu)
+	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setMTU:"), objref.IDOf(mtu))
 	return netns
 }
 
 // WithDNSSettings sets the tunnel DNS settings.
-func (netns *NEEthernetTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEEthernetTunnelNetworkSettings {
-	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
+func (netns *NEEthernetTunnelNetworkSettings) WithDNSSettings(dnsSettings NEDNSSettingsProvider) *NEEthernetTunnelNetworkSettings {
+	defer runtime.KeepAlive(dnsSettings)
+	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dnsSettings))
 	return netns
 }
 
 // WithProxySettings sets the tunnel HTTP proxy settings.
 func (netns *NEEthernetTunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NEEthernetTunnelNetworkSettings {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return netns
 }
 
 // EthernetAddress returns the ethernet address.
 func (netns *NEEthernetTunnelNetworkSettings) EthernetAddress() string {
+	defer runtime.KeepAlive(netns)
 	_r := objc.Send[objc.ID](objref.IDOf(netns), objc.RegisterName("ethernetAddress"))
 	if _r == 0 {
 		return ""

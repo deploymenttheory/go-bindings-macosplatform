@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,53 +68,63 @@ func (mg *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj
 
 // SaveSnapshot returns saves a snapshot of all of the profile’s elements.
 func (mg *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("saveSnapshot"))
 	return MicroGamepadSnapshotFromID(_r)
 }
 
 // SetStateFromMicroGamepad copies the input values from a specified micro gamepad to a snapshot of a micro gamepad.
 func (mg *MicroGamepad) SetStateFromMicroGamepad(microGamepad *MicroGamepad) {
+	defer runtime.KeepAlive(mg)
+	defer runtime.KeepAlive(microGamepad)
 	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("setStateFromMicroGamepad:"), objref.IDOf(microGamepad))
 }
 
 // Controller returns a profile keeps a reference to the controller that this profile is mapping input from.
 func (mg *MicroGamepad) Controller() *Controller {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
 // Dpad returns optionally analog in the Micro profile. All the elements of this directional input are either analog or digital.
 func (mg *MicroGamepad) Dpad() *ControllerDirectionPad {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("dpad"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // ButtonA returns the Micro profile has two buttons that are optionally analog in the Micro profile. Button A is the primary action button, it indicates affirmative action and should be used to advance in menus or perform the primary action in gameplay.
 func (mg *MicroGamepad) ButtonA() *ControllerButtonInput {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("buttonA"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonX returns button X is the secondary action button, it indicates an alternate affirmative action and should be used to perform a secondary action. If there is no secondary action it should be used as equivalent to buttonA. Unlike on other profiles there is no negative button on this profile. Instead the menu button should be used to present menu content or to retreat in a menu flow.
 func (mg *MicroGamepad) ButtonX() *ControllerButtonInput {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonMenu returns button menu is the primary menu button, and should be used to enter the main menu and pause the game.
 func (mg *MicroGamepad) ButtonMenu() *ControllerButtonInput {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("buttonMenu"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ReportsAbsoluteDpadValues reports whether the Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If false; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If true; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is false, meaning a sliding window is used for the dpad.
 func (mg *MicroGamepad) ReportsAbsoluteDpadValues() bool {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[bool](objref.IDOf(mg), objc.RegisterName("reportsAbsoluteDpadValues"))
 	return _r
 }
 
 // AllowsRotation reports whether allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is false.
 func (mg *MicroGamepad) AllowsRotation() bool {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[bool](objref.IDOf(mg), objc.RegisterName("allowsRotation"))
 	return _r
 }

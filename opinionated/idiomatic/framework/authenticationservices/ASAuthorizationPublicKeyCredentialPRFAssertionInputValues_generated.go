@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,40 +49,47 @@ func authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(id objc.ID) *A
 
 // Description returns the object's -description text.
 func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) Description() string {
+	defer runtime.KeepAlive(apkcpaiv)
 	return rt.Description(objref.IDOf(apkcpaiv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkcpaiv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkcpaiv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkcpaiv)
 	return rt.IsKind(objref.IDOf(apkcpaiv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) String() string {
+	defer runtime.KeepAlive(apkcpaiv)
 	return rt.Description(objref.IDOf(apkcpaiv))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2 initializes an input values object with the given salts.
-func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2(saltInput1 obj.Object, saltInput2 obj.Object) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1SaltInput2(saltInput1 []byte, saltInput2 []byte) *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionInputValues")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSaltInput1:saltInput2:"), objref.IDOf(saltInput1), objref.IDOf(saltInput2))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSaltInput1:saltInput2:"), rt.BytesToNSData(saltInput1), rt.BytesToNSData(saltInput2))
 	return authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(_id)
 }
 
 // SaltInput1 returns the salt input1.
-func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() obj.Object {
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() []byte {
+	defer runtime.KeepAlive(apkcpaiv)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpaiv), objc.RegisterName("saltInput1"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SaltInput2 returns the salt input2.
-func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() obj.Object {
+func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() []byte {
+	defer runtime.KeepAlive(apkcpaiv)
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpaiv), objc.RegisterName("saltInput2"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func layerAdopt(id objc.ID) *Layer {
 
 // Description returns the object's -description text.
 func (l *Layer) Description() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (l *Layer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (l *Layer) IsKind(className string) bool {
+	defer runtime.KeepAlive(l)
 	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (l *Layer) String() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
@@ -74,12 +81,14 @@ func NewLayer() *Layer {
 
 // WithScene sets the scene to be displayed in the layer.
 func (l *Layer) WithScene(scene *Scene) *Layer {
+	defer runtime.KeepAlive(scene)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return l
 }
 
 // Scene returns the scene.
 func (l *Layer) Scene() *Scene {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }

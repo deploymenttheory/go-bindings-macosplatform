@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -51,23 +53,38 @@ func streamAdopt(id objc.ID) *Stream {
 
 // Description returns the object's -description text.
 func (s *Stream) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Stream) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Stream) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Stream) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
+}
+
+// WithDelegate sets the delegate.
+func (s *Stream) WithDelegate(delegate StreamDelegate) *Stream {
+	_shim := newStreamDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(s), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(s), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return s
 }
 
 // WithObservationInfo sets the observation info.
@@ -77,45 +94,59 @@ func (s *Stream) WithObservationInfo(observationInfo unsafe.Pointer) *Stream {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (s *Stream) WithScriptingProperties(scriptingProperties obj.Object) *Stream {
-	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (s *Stream) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Stream {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return s
 }
 
 // Open wraps the corresponding Objective-C method.
 func (s *Stream) Open() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("open"))
 }
 
 // Close wraps the corresponding Objective-C method.
 func (s *Stream) Close() {
+	defer runtime.KeepAlive(s)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("close"))
 }
 
 // PropertyForKey wraps the corresponding Objective-C method.
 func (s *Stream) PropertyForKey(key *String) obj.Object {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("propertyForKey:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // SetPropertyForKey wraps the corresponding Objective-C method.
 func (s *Stream) SetPropertyForKey(property obj.Object, key *String) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(property)
+	defer runtime.KeepAlive(key)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("setProperty:forKey:"), objref.IDOf(property), objref.IDOf(key))
 	return _r
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (s *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(aRunLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes from run loop for mode.
 func (s *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(aRunLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // StreamStatus returns the stream status.
 func (s *Stream) StreamStatus() StreamStatus {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[StreamStatus](objref.IDOf(s), objc.RegisterName("streamStatus"))
 	return _r
 }

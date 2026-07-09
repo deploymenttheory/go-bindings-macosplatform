@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func imageSizeConstraintAdopt(id objc.ID) *ImageSizeConstraint {
 
 // Description returns the object's -description text.
 func (isc *ImageSizeConstraint) Description() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (isc *ImageSizeConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(isc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (isc *ImageSizeConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(isc)
 	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (isc *ImageSizeConstraint) String() string {
+	defer runtime.KeepAlive(isc)
 	return rt.Description(objref.IDOf(isc))
 }
 
@@ -75,18 +82,21 @@ func NewImageSizeConstraint() *ImageSizeConstraint {
 
 // Type returns the type.
 func (isc *ImageSizeConstraint) Type() ImageSizeConstraintType {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[ImageSizeConstraintType](objref.IDOf(isc), objc.RegisterName("type"))
 	return _r
 }
 
 // PixelsWideRange returns the pixels wide range.
 func (isc *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(isc), objc.RegisterName("pixelsWideRange"))
 	return _r
 }
 
 // PixelsHighRange returns the pixels high range.
 func (isc *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
+	defer runtime.KeepAlive(isc)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(isc), objc.RegisterName("pixelsHighRange"))
 	return _r
 }
@@ -95,6 +105,7 @@ func (isc *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
 //
 // EnumeratedImageSizes returns the collection as a Go slice.
 func (isc *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
+	defer runtime.KeepAlive(isc)
 	_arr := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("enumeratedImageSizes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ImageSize { return ImageSizeFromID(_id) })
 }

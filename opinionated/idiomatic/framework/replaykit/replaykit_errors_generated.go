@@ -8,20 +8,92 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrUnknown matches the ReplayKit error RPRecordingErrorUnknown.
-var ErrUnknown = errkit.New("RPRecordingErrorDomain", -5800)
+// ErrActivePhoneCall matches the ReplayKit error RPRecordingErrorActivePhoneCall.
+var ErrActivePhoneCall = errkit.New("RPRecordingErrorDomain", -5811)
 
-// ErrUserDeclined matches the ReplayKit error RPRecordingErrorUserDeclined.
-var ErrUserDeclined = errkit.New("RPRecordingErrorDomain", -5801)
+// ErrAttemptToStartInRecordingState matches the ReplayKit error RPRecordingErrorAttemptToStartInRecordingState.
+var ErrAttemptToStartInRecordingState = errkit.New("RPRecordingErrorDomain", -5830)
+
+// ErrAttemptToStopNonRecording matches the ReplayKit error RPRecordingErrorAttemptToStopNonRecording.
+var ErrAttemptToStopNonRecording = errkit.New("RPRecordingErrorDomain", -5829)
+
+// ErrBroadcastInvalidSession matches the ReplayKit error RPRecordingErrorBroadcastInvalidSession.
+var ErrBroadcastInvalidSession = errkit.New("RPRecordingErrorDomain", -5808)
+
+// ErrBroadcastSetupFailed matches the ReplayKit error RPRecordingErrorBroadcastSetupFailed.
+var ErrBroadcastSetupFailed = errkit.New("RPRecordingErrorDomain", -5819)
+
+// ErrCarPlay matches the ReplayKit error RPRecordingErrorCarPlay.
+var ErrCarPlay = errkit.New("RPRecordingErrorDomain", -5813)
+
+// ErrCodeSuccessful matches the ReplayKit error RPRecordingErrorCodeSuccessful.
+var ErrCodeSuccessful = errkit.New("RPRecordingErrorDomain", 0)
+
+// ErrContentResize matches the ReplayKit error RPRecordingErrorContentResize.
+var ErrContentResize = errkit.New("RPRecordingErrorDomain", -5807)
 
 // ErrDisabled matches the ReplayKit error RPRecordingErrorDisabled.
 var ErrDisabled = errkit.New("RPRecordingErrorDomain", -5802)
 
-// ErrFailedToStart matches the ReplayKit error RPRecordingErrorFailedToStart.
-var ErrFailedToStart = errkit.New("RPRecordingErrorDomain", -5803)
+// ErrEntitlements matches the ReplayKit error RPRecordingErrorEntitlements.
+var ErrEntitlements = errkit.New("RPRecordingErrorDomain", -5810)
+
+// ErrExportClipToURLInProgress matches the ReplayKit error RPRecordingErrorExportClipToURLInProgress.
+var ErrExportClipToURLInProgress = errkit.New("RPRecordingErrorDomain", -5836)
 
 // ErrFailed matches the ReplayKit error RPRecordingErrorFailed.
 var ErrFailed = errkit.New("RPRecordingErrorDomain", -5804)
+
+// ErrFailedApplicationConnectionInterrupted matches the ReplayKit error RPRecordingErrorFailedApplicationConnectionInterrupted.
+var ErrFailedApplicationConnectionInterrupted = errkit.New("RPRecordingErrorDomain", -5815)
+
+// ErrFailedApplicationConnectionInvalid matches the ReplayKit error RPRecordingErrorFailedApplicationConnectionInvalid.
+var ErrFailedApplicationConnectionInvalid = errkit.New("RPRecordingErrorDomain", -5814)
+
+// ErrFailedAssetWriterExportCanceled matches the ReplayKit error RPRecordingErrorFailedAssetWriterExportCanceled.
+var ErrFailedAssetWriterExportCanceled = errkit.New("RPRecordingErrorDomain", -5828)
+
+// ErrFailedAssetWriterExportFailed matches the ReplayKit error RPRecordingErrorFailedAssetWriterExportFailed.
+var ErrFailedAssetWriterExportFailed = errkit.New("RPRecordingErrorDomain", -5826)
+
+// ErrFailedAssetWriterFailedToSave matches the ReplayKit error RPRecordingErrorFailedAssetWriterFailedToSave.
+var ErrFailedAssetWriterFailedToSave = errkit.New("RPRecordingErrorDomain", -5823)
+
+// ErrFailedAssetWriterInWrongState matches the ReplayKit error RPRecordingErrorFailedAssetWriterInWrongState.
+var ErrFailedAssetWriterInWrongState = errkit.New("RPRecordingErrorDomain", -5825)
+
+// ErrFailedIncorrectTimeStamps matches the ReplayKit error RPRecordingErrorFailedIncorrectTimeStamps.
+var ErrFailedIncorrectTimeStamps = errkit.New("RPRecordingErrorDomain", -5821)
+
+// ErrFailedMediaServicesFailure matches the ReplayKit error RPRecordingErrorFailedMediaServicesFailure.
+var ErrFailedMediaServicesFailure = errkit.New("RPRecordingErrorDomain", -5817)
+
+// ErrFailedNoAssetWriter matches the ReplayKit error RPRecordingErrorFailedNoAssetWriter.
+var ErrFailedNoAssetWriter = errkit.New("RPRecordingErrorDomain", -5824)
+
+// ErrFailedNoMatchingApplicationContext matches the ReplayKit error RPRecordingErrorFailedNoMatchingApplicationContext.
+var ErrFailedNoMatchingApplicationContext = errkit.New("RPRecordingErrorDomain", -5816)
+
+// ErrFailedToObtainURL matches the ReplayKit error RPRecordingErrorFailedToObtainURL.
+var ErrFailedToObtainURL = errkit.New("RPRecordingErrorDomain", -5820)
+
+// ErrFailedToProcessFirstSample matches the ReplayKit error RPRecordingErrorFailedToProcessFirstSample.
+var ErrFailedToProcessFirstSample = errkit.New("RPRecordingErrorDomain", -5822)
+
+// ErrFailedToRemoveFile matches the ReplayKit error RPRecordingErrorFailedToRemoveFile.
+var ErrFailedToRemoveFile = errkit.New("RPRecordingErrorDomain", -5827)
+
+// ErrFailedToSave matches the ReplayKit error RPRecordingErrorFailedToSave.
+var ErrFailedToSave = errkit.New("RPRecordingErrorDomain", -5812)
+
+// ErrFailedToStart matches the ReplayKit error RPRecordingErrorFailedToStart.
+var ErrFailedToStart = errkit.New("RPRecordingErrorDomain", -5803)
+
+// ErrFailedToStartCaptureStack matches the ReplayKit error RPRecordingErrorFailedToStartCaptureStack.
+var ErrFailedToStartCaptureStack = errkit.New("RPRecordingErrorDomain", -5833)
+
+// ErrFilePermissions matches the ReplayKit error RPRecordingErrorFilePermissions.
+var ErrFilePermissions = errkit.New("RPRecordingErrorDomain", -5835)
 
 // ErrInsufficientStorage matches the ReplayKit error RPRecordingErrorInsufficientStorage.
 var ErrInsufficientStorage = errkit.New("RPRecordingErrorDomain", -5805)
@@ -29,77 +101,8 @@ var ErrInsufficientStorage = errkit.New("RPRecordingErrorDomain", -5805)
 // ErrInterrupted matches the ReplayKit error RPRecordingErrorInterrupted.
 var ErrInterrupted = errkit.New("RPRecordingErrorDomain", -5806)
 
-// ErrContentResize matches the ReplayKit error RPRecordingErrorContentResize.
-var ErrContentResize = errkit.New("RPRecordingErrorDomain", -5807)
-
-// ErrBroadcastInvalidSession matches the ReplayKit error RPRecordingErrorBroadcastInvalidSession.
-var ErrBroadcastInvalidSession = errkit.New("RPRecordingErrorDomain", -5808)
-
-// ErrSystemDormancy matches the ReplayKit error RPRecordingErrorSystemDormancy.
-var ErrSystemDormancy = errkit.New("RPRecordingErrorDomain", -5809)
-
-// ErrEntitlements matches the ReplayKit error RPRecordingErrorEntitlements.
-var ErrEntitlements = errkit.New("RPRecordingErrorDomain", -5810)
-
-// ErrActivePhoneCall matches the ReplayKit error RPRecordingErrorActivePhoneCall.
-var ErrActivePhoneCall = errkit.New("RPRecordingErrorDomain", -5811)
-
-// ErrFailedToSave matches the ReplayKit error RPRecordingErrorFailedToSave.
-var ErrFailedToSave = errkit.New("RPRecordingErrorDomain", -5812)
-
-// ErrCarPlay matches the ReplayKit error RPRecordingErrorCarPlay.
-var ErrCarPlay = errkit.New("RPRecordingErrorDomain", -5813)
-
-// ErrFailedApplicationConnectionInvalid matches the ReplayKit error RPRecordingErrorFailedApplicationConnectionInvalid.
-var ErrFailedApplicationConnectionInvalid = errkit.New("RPRecordingErrorDomain", -5814)
-
-// ErrFailedApplicationConnectionInterrupted matches the ReplayKit error RPRecordingErrorFailedApplicationConnectionInterrupted.
-var ErrFailedApplicationConnectionInterrupted = errkit.New("RPRecordingErrorDomain", -5815)
-
-// ErrFailedNoMatchingApplicationContext matches the ReplayKit error RPRecordingErrorFailedNoMatchingApplicationContext.
-var ErrFailedNoMatchingApplicationContext = errkit.New("RPRecordingErrorDomain", -5816)
-
-// ErrFailedMediaServicesFailure matches the ReplayKit error RPRecordingErrorFailedMediaServicesFailure.
-var ErrFailedMediaServicesFailure = errkit.New("RPRecordingErrorDomain", -5817)
-
-// ErrVideoMixingFailure matches the ReplayKit error RPRecordingErrorVideoMixingFailure.
-var ErrVideoMixingFailure = errkit.New("RPRecordingErrorDomain", -5818)
-
-// ErrBroadcastSetupFailed matches the ReplayKit error RPRecordingErrorBroadcastSetupFailed.
-var ErrBroadcastSetupFailed = errkit.New("RPRecordingErrorDomain", -5819)
-
-// ErrFailedToObtainURL matches the ReplayKit error RPRecordingErrorFailedToObtainURL.
-var ErrFailedToObtainURL = errkit.New("RPRecordingErrorDomain", -5820)
-
-// ErrFailedIncorrectTimeStamps matches the ReplayKit error RPRecordingErrorFailedIncorrectTimeStamps.
-var ErrFailedIncorrectTimeStamps = errkit.New("RPRecordingErrorDomain", -5821)
-
-// ErrFailedToProcessFirstSample matches the ReplayKit error RPRecordingErrorFailedToProcessFirstSample.
-var ErrFailedToProcessFirstSample = errkit.New("RPRecordingErrorDomain", -5822)
-
-// ErrFailedAssetWriterFailedToSave matches the ReplayKit error RPRecordingErrorFailedAssetWriterFailedToSave.
-var ErrFailedAssetWriterFailedToSave = errkit.New("RPRecordingErrorDomain", -5823)
-
-// ErrFailedNoAssetWriter matches the ReplayKit error RPRecordingErrorFailedNoAssetWriter.
-var ErrFailedNoAssetWriter = errkit.New("RPRecordingErrorDomain", -5824)
-
-// ErrFailedAssetWriterInWrongState matches the ReplayKit error RPRecordingErrorFailedAssetWriterInWrongState.
-var ErrFailedAssetWriterInWrongState = errkit.New("RPRecordingErrorDomain", -5825)
-
-// ErrFailedAssetWriterExportFailed matches the ReplayKit error RPRecordingErrorFailedAssetWriterExportFailed.
-var ErrFailedAssetWriterExportFailed = errkit.New("RPRecordingErrorDomain", -5826)
-
-// ErrFailedToRemoveFile matches the ReplayKit error RPRecordingErrorFailedToRemoveFile.
-var ErrFailedToRemoveFile = errkit.New("RPRecordingErrorDomain", -5827)
-
-// ErrFailedAssetWriterExportCanceled matches the ReplayKit error RPRecordingErrorFailedAssetWriterExportCanceled.
-var ErrFailedAssetWriterExportCanceled = errkit.New("RPRecordingErrorDomain", -5828)
-
-// ErrAttemptToStopNonRecording matches the ReplayKit error RPRecordingErrorAttemptToStopNonRecording.
-var ErrAttemptToStopNonRecording = errkit.New("RPRecordingErrorDomain", -5829)
-
-// ErrAttemptToStartInRecordingState matches the ReplayKit error RPRecordingErrorAttemptToStartInRecordingState.
-var ErrAttemptToStartInRecordingState = errkit.New("RPRecordingErrorDomain", -5830)
+// ErrInvalidParameter matches the ReplayKit error RPRecordingErrorInvalidParameter.
+var ErrInvalidParameter = errkit.New("RPRecordingErrorDomain", -5834)
 
 // ErrPhotoFailure matches the ReplayKit error RPRecordingErrorPhotoFailure.
 var ErrPhotoFailure = errkit.New("RPRecordingErrorDomain", -5831)
@@ -107,17 +110,14 @@ var ErrPhotoFailure = errkit.New("RPRecordingErrorDomain", -5831)
 // ErrRecordingInvalidSession matches the ReplayKit error RPRecordingErrorRecordingInvalidSession.
 var ErrRecordingInvalidSession = errkit.New("RPRecordingErrorDomain", -5832)
 
-// ErrFailedToStartCaptureStack matches the ReplayKit error RPRecordingErrorFailedToStartCaptureStack.
-var ErrFailedToStartCaptureStack = errkit.New("RPRecordingErrorDomain", -5833)
+// ErrSystemDormancy matches the ReplayKit error RPRecordingErrorSystemDormancy.
+var ErrSystemDormancy = errkit.New("RPRecordingErrorDomain", -5809)
 
-// ErrInvalidParameter matches the ReplayKit error RPRecordingErrorInvalidParameter.
-var ErrInvalidParameter = errkit.New("RPRecordingErrorDomain", -5834)
+// ErrUnknown matches the ReplayKit error RPRecordingErrorUnknown.
+var ErrUnknown = errkit.New("RPRecordingErrorDomain", -5800)
 
-// ErrFilePermissions matches the ReplayKit error RPRecordingErrorFilePermissions.
-var ErrFilePermissions = errkit.New("RPRecordingErrorDomain", -5835)
+// ErrUserDeclined matches the ReplayKit error RPRecordingErrorUserDeclined.
+var ErrUserDeclined = errkit.New("RPRecordingErrorDomain", -5801)
 
-// ErrExportClipToURLInProgress matches the ReplayKit error RPRecordingErrorExportClipToURLInProgress.
-var ErrExportClipToURLInProgress = errkit.New("RPRecordingErrorDomain", -5836)
-
-// ErrCodeSuccessful matches the ReplayKit error RPRecordingErrorCodeSuccessful.
-var ErrCodeSuccessful = errkit.New("RPRecordingErrorDomain", 0)
+// ErrVideoMixingFailure matches the ReplayKit error RPRecordingErrorVideoMixingFailure.
+var ErrVideoMixingFailure = errkit.New("RPRecordingErrorDomain", -5818)

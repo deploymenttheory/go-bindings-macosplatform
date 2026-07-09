@@ -5,6 +5,7 @@
 package coremidi
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,22 +49,27 @@ func uMPCIProfileAdopt(id objc.ID) *UMPCIProfile {
 
 // Description returns the object's -description text.
 func (up *UMPCIProfile) Description() string {
+	defer runtime.KeepAlive(up)
 	return rt.Description(objref.IDOf(up))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (up *UMPCIProfile) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(up)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(up), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (up *UMPCIProfile) IsKind(className string) bool {
+	defer runtime.KeepAlive(up)
 	return rt.IsKind(objref.IDOf(up), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (up *UMPCIProfile) String() string {
+	defer runtime.KeepAlive(up)
 	return rt.Description(objref.IDOf(up))
 }
 
@@ -75,6 +81,7 @@ func NewUMPCIProfile() *UMPCIProfile {
 
 // SetProfileStateEnabledChannelCount issue a Set Profile On or Set Profile Off request on this profile using the MIDI server's MUID. The result of this operation, if any, is received via the profile notification posted by the MIDICIDeviceManager. Returns YES if the request is valid and the request was dispatched.
 func (up *UMPCIProfile) SetProfileStateEnabledChannelCount(isEnabled bool, enabledChannelCount uint16) error {
+	defer runtime.KeepAlive(up)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(up), objc.RegisterName("setProfileState:enabledChannelCount:error:"), isEnabled, enabledChannelCount, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -85,6 +92,7 @@ func (up *UMPCIProfile) SetProfileStateEnabledChannelCount(isEnabled bool, enabl
 
 // Name returns the name of the MIDI-CI proifle.
 func (up *UMPCIProfile) Name() string {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -94,36 +102,42 @@ func (up *UMPCIProfile) Name() string {
 
 // ProfileType returns the type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
 func (up *UMPCIProfile) ProfileType() CIProfileType {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[CIProfileType](objref.IDOf(up), objc.RegisterName("profileType"))
 	return _r
 }
 
 // GroupOffset returns for Group profiles defined on Function Blocks, the value to be added to the lowest Function Block UMP Group for messaging (e.g., a Group Profile defined on the second Group of a Function Block has a groupOffset of 1).
 func (up *UMPCIProfile) GroupOffset() uint8 {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[uint8](objref.IDOf(up), objc.RegisterName("groupOffset"))
 	return _r
 }
 
 // FirstChannel returns the first channel number supported on the Profile.
 func (up *UMPCIProfile) FirstChannel() uint8 {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[uint8](objref.IDOf(up), objc.RegisterName("firstChannel"))
 	return _r
 }
 
 // EnabledChannelCount returns the number of channels currently enabled on the Profile. When the profile is disabled, this value is set to 0.
 func (up *UMPCIProfile) EnabledChannelCount() uint16 {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[uint16](objref.IDOf(up), objc.RegisterName("enabledChannelCount"))
 	return _r
 }
 
 // TotalChannelCount returns the total number of channels supported by the Profile.
 func (up *UMPCIProfile) TotalChannelCount() uint16 {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[uint16](objref.IDOf(up), objc.RegisterName("totalChannelCount"))
 	return _r
 }
 
 // IsEnabled reports whether the enable state of the Profile.
 func (up *UMPCIProfile) IsEnabled() bool {
+	defer runtime.KeepAlive(up)
 	_r := objc.Send[bool](objref.IDOf(up), objc.RegisterName("isEnabled"))
 	return _r
 }

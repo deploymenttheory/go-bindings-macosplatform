@@ -5,7 +5,10 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,48 +50,55 @@ func speechUtteranceAdopt(id objc.ID) *SpeechUtterance {
 
 // Description returns the object's -description text.
 func (su *SpeechUtterance) Description() string {
+	defer runtime.KeepAlive(su)
 	return rt.Description(objref.IDOf(su))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (su *SpeechUtterance) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(su)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(su), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (su *SpeechUtterance) IsKind(className string) bool {
+	defer runtime.KeepAlive(su)
 	return rt.IsKind(objref.IDOf(su), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (su *SpeechUtterance) String() string {
+	defer runtime.KeepAlive(su)
 	return rt.Description(objref.IDOf(su))
 }
 
 // NewSpeechUtteranceWithString creates an utterance with the text string that you specify for the speech synthesizer to speak.
-func NewSpeechUtteranceWithString(string_ string) *SpeechUtterance {
+func NewSpeechUtteranceWithString(str string) *SpeechUtterance {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return speechUtteranceAdopt(_id)
 }
 
 // NewSpeechUtteranceWithAttributedString creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
-func NewSpeechUtteranceWithAttributedString(string_ obj.Object) *SpeechUtterance {
+func NewSpeechUtteranceWithAttributedString(str obj.Object) *SpeechUtterance {
+	defer runtime.KeepAlive(str)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), objref.IDOf(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), objref.IDOf(str))
 	return speechUtteranceAdopt(_id)
 }
 
 // NewSpeechUtteranceWithSSMLRepresentation creates a speech utterance with an Speech Synthesis Markup Language (SSML) string.
-func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
+func NewSpeechUtteranceWithSSMLRepresentation(str string) *SpeechUtterance {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:"), purego.NSString(str))
 	return speechUtteranceAdopt(_id)
 }
 
 // WithVoice sets the voice the speech synthesizer uses when speaking the utterance.
 func (su *SpeechUtterance) WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance {
+	defer runtime.KeepAlive(voice)
 	objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("setVoice:"), objref.IDOf(voice))
 	return su
 }
@@ -131,12 +141,14 @@ func (su *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *S
 
 // Voice returns the voice.
 func (su *SpeechUtterance) Voice() *SpeechSynthesisVoice {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("voice"))
 	return SpeechSynthesisVoiceFromID(_r)
 }
 
 // SpeechString returns the speech string.
 func (su *SpeechUtterance) SpeechString() string {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("speechString"))
 	if _r == 0 {
 		return ""
@@ -145,43 +157,50 @@ func (su *SpeechUtterance) SpeechString() string {
 }
 
 // AttributedSpeechString returns the attributed speech string.
-func (su *SpeechUtterance) AttributedSpeechString() obj.Object {
+func (su *SpeechUtterance) AttributedSpeechString() *foundation.AttributedString {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("attributedSpeechString"))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Rate returns the rate.
 func (su *SpeechUtterance) Rate() float32 {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("rate"))
 	return _r
 }
 
 // PitchMultiplier returns the pitch multiplier.
 func (su *SpeechUtterance) PitchMultiplier() float32 {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("pitchMultiplier"))
 	return _r
 }
 
 // Volume returns the volume.
 func (su *SpeechUtterance) Volume() float32 {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("volume"))
 	return _r
 }
 
 // PrefersAssistiveTechnologySettings wraps the corresponding Objective-C method.
 func (su *SpeechUtterance) PrefersAssistiveTechnologySettings() bool {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[bool](objref.IDOf(su), objc.RegisterName("prefersAssistiveTechnologySettings"))
 	return _r
 }
 
 // PreUtteranceDelay returns the pre utterance delay.
 func (su *SpeechUtterance) PreUtteranceDelay() float64 {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[float64](objref.IDOf(su), objc.RegisterName("preUtteranceDelay"))
 	return _r
 }
 
 // PostUtteranceDelay returns the post utterance delay.
 func (su *SpeechUtterance) PostUtteranceDelay() float64 {
+	defer runtime.KeepAlive(su)
 	_r := objc.Send[float64](objref.IDOf(su), objc.RegisterName("postUtteranceDelay"))
 	return _r
 }

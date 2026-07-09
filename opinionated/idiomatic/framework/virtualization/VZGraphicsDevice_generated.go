@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func graphicsDeviceAdopt(id objc.ID) *GraphicsDevice {
 
 // Description returns the object's -description text.
 func (gd *GraphicsDevice) Description() string {
+	defer runtime.KeepAlive(gd)
 	return rt.Description(objref.IDOf(gd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gd *GraphicsDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gd *GraphicsDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(gd)
 	return rt.IsKind(objref.IDOf(gd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gd *GraphicsDevice) String() string {
+	defer runtime.KeepAlive(gd)
 	return rt.Description(objref.IDOf(gd))
 }
 
@@ -72,6 +79,7 @@ func (gd *GraphicsDevice) String() string {
 //
 // Displays returns the collection as a Go slice.
 func (gd *GraphicsDevice) Displays() []*GraphicsDisplay {
+	defer runtime.KeepAlive(gd)
 	_arr := objc.Send[objc.ID](objref.IDOf(gd), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphicsDisplay { return GraphicsDisplayFromID(_id) })
 }

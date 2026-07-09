@@ -5,7 +5,11 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +49,27 @@ func passRelevantDateAdopt(id objc.ID) *PassRelevantDate {
 
 // Description returns the object's -description text.
 func (prd *PassRelevantDate) Description() string {
+	defer runtime.KeepAlive(prd)
 	return rt.Description(objref.IDOf(prd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (prd *PassRelevantDate) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(prd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(prd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (prd *PassRelevantDate) IsKind(className string) bool {
+	defer runtime.KeepAlive(prd)
 	return rt.IsKind(objref.IDOf(prd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (prd *PassRelevantDate) String() string {
+	defer runtime.KeepAlive(prd)
 	return rt.Description(objref.IDOf(prd))
 }
 
@@ -71,13 +80,15 @@ func NewPassRelevantDate() *PassRelevantDate {
 }
 
 // Interval returns the interval.
-func (prd *PassRelevantDate) Interval() obj.Object {
+func (prd *PassRelevantDate) Interval() *foundation.DateInterval {
+	defer runtime.KeepAlive(prd)
 	_r := objc.Send[objc.ID](objref.IDOf(prd), objc.RegisterName("interval"))
-	return obj.Wrap(_r)
+	return foundation.DateIntervalFromID(_r)
 }
 
 // Date returns the date.
-func (prd *PassRelevantDate) Date() obj.Object {
+func (prd *PassRelevantDate) Date() time.Time {
+	defer runtime.KeepAlive(prd)
 	_r := objc.Send[objc.ID](objref.IDOf(prd), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

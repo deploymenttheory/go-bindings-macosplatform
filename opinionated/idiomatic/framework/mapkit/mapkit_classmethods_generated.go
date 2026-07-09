@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -35,6 +36,7 @@ func CircleWithCenterCoordinateRadius(coord unsafe.Pointer, radius unsafe.Pointe
 
 // CompassButtonWithMapView creates a compass button and associates it with the specified map view.
 func CompassButtonWithMapView(mapView *MapView) *CompassButton {
+	defer runtime.KeepAlive(mapView)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("compassButtonWithMapView:"), objref.IDOf(mapView))
 	return CompassButtonFromID(_r)
 }
@@ -71,6 +73,7 @@ func CameraLookingAtCenterCoordinateFromDistancePitchHeading(centerCoordinate un
 
 // CameraLookingAtMapItemForViewSizeAllowPitch returns a new camera object using the specified map item, view size, and pitch.
 func CameraLookingAtMapItemForViewSizeAllowPitch(mapItem *MapItem, viewSize corefoundation.CGSize, allowPitch bool) *MapCamera {
+	defer runtime.KeepAlive(mapItem)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapCamera")), objc.RegisterName("cameraLookingAtMapItem:forViewSize:allowPitch:"), objref.IDOf(mapItem), viewSize, allowPitch)
 	return MapCameraFromID(_r)
 }
@@ -82,18 +85,19 @@ func MapItemForCurrentLocation() *MapItem {
 }
 
 // OpenMapsWithItemsLaunchOptions opens the Maps app and displays the specified map items.
-func OpenMapsWithItemsLaunchOptions(mapItems []*MapItem, launchOptions obj.Object) bool {
-	_r := objc.Send[bool](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(launchOptions))
+func OpenMapsWithItemsLaunchOptions(mapItems []*MapItem, launchOptions map[string]obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(launchOptions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return _r
 }
 
 // OpenMapsWithItemsLaunchOptionsCompletionHandler opens the Maps app using the specified map items and options.
-func OpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems []*MapItem, launchOptions obj.Object, completion func(bool)) {
-	objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:completionHandler:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+func OpenMapsWithItemsLaunchOptionsCompletionHandler(mapItems []*MapItem, launchOptions map[string]obj.Object, completion func(bool)) {
+	objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("openMapsWithItems:launchOptions:completionHandler:"), purego.SliceToNSArray(mapItems, func(_v *MapItem) objc.ID { return objref.IDOf(_v) }), rt.MapToDict(launchOptions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // AutomaticWithPresentationViewController an appropriate presentation style will be chosen automatically.
 func AutomaticWithPresentationViewController(presentationViewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
+	defer runtime.KeepAlive(presentationViewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("automaticWithPresentationViewController:"), objref.IDOf(presentationViewController))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
@@ -106,6 +110,7 @@ func CalloutWithCalloutStyle(style MapItemDetailSelectionAccessoryCalloutStyle) 
 
 // SheetPresentedFromViewController wraps the corresponding Objective-C method.
 func SheetPresentedFromViewController(viewController obj.Object) *MapItemDetailSelectionAccessoryPresentationStyle {
+	defer runtime.KeepAlive(viewController)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("sheetPresentedFromViewController:"), objref.IDOf(viewController))
 	return MapItemDetailSelectionAccessoryPresentationStyleFromID(_r)
 }
@@ -142,6 +147,7 @@ func PurplePinColor() obj.Object {
 
 // PitchControlWithMapView creates a pitch control and associates it with the specified map view.
 func PitchControlWithMapView(mapView *MapView) *PitchControl {
+	defer runtime.KeepAlive(mapView)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("pitchControlWithMapView:"), objref.IDOf(mapView))
 	return PitchControlFromID(_r)
 }
@@ -178,12 +184,14 @@ func MKPolylinePolylineWithCoordinatesCount(coords unsafe.Pointer, count int) *P
 
 // MapItemDetailWithPresentationStyle detailed information about a place
 func MapItemDetailWithPresentationStyle(presentationStyle *MapItemDetailSelectionAccessoryPresentationStyle) *SelectionAccessory {
+	defer runtime.KeepAlive(presentationStyle)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKSelectionAccessory")), objc.RegisterName("mapItemDetailWithPresentationStyle:"), objref.IDOf(presentationStyle))
 	return SelectionAccessoryFromID(_r)
 }
 
 // ZoomControlWithMapView creates a zoom control and associates it with the specified map view.
 func ZoomControlWithMapView(mapView *MapView) *ZoomControl {
+	defer runtime.KeepAlive(mapView)
 	_r := objc.Send[objc.ID](objc.ID(_class("MKZoomControl")), objc.RegisterName("zoomControlWithMapView:"), objref.IDOf(mapView))
 	return ZoomControlFromID(_r)
 }

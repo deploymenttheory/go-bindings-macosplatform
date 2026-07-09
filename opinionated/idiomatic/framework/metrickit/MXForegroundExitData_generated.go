@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func foregroundExitDataAdopt(id objc.ID) *ForegroundExitData {
 
 // Description returns the object's -description text.
 func (fed *ForegroundExitData) Description() string {
+	defer runtime.KeepAlive(fed)
 	return rt.Description(objref.IDOf(fed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fed *ForegroundExitData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fed)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fed *ForegroundExitData) IsKind(className string) bool {
+	defer runtime.KeepAlive(fed)
 	return rt.IsKind(objref.IDOf(fed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fed *ForegroundExitData) String() string {
+	defer runtime.KeepAlive(fed)
 	return rt.Description(objref.IDOf(fed))
 }
 
@@ -74,36 +81,42 @@ func NewForegroundExitData() *ForegroundExitData {
 
 // CumulativeNormalAppExitCount returns cumulative number of times the application exited normally, or was gracefully terminated by the system.
 func (fed *ForegroundExitData) CumulativeNormalAppExitCount() int {
+	defer runtime.KeepAlive(fed)
 	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeNormalAppExitCount"))
 	return _r
 }
 
 // CumulativeMemoryResourceLimitExitCount returns cumulative number of times the application was terminated for exceeding a memory consumption limit.
 func (fed *ForegroundExitData) CumulativeMemoryResourceLimitExitCount() int {
+	defer runtime.KeepAlive(fed)
 	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeMemoryResourceLimitExitCount"))
 	return _r
 }
 
 // CumulativeBadAccessExitCount returns cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
 func (fed *ForegroundExitData) CumulativeBadAccessExitCount() int {
+	defer runtime.KeepAlive(fed)
 	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeBadAccessExitCount"))
 	return _r
 }
 
 // CumulativeAbnormalExitCount returns cumulative number of times the application exited abnormally. The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
 func (fed *ForegroundExitData) CumulativeAbnormalExitCount() int {
+	defer runtime.KeepAlive(fed)
 	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeAbnormalExitCount"))
 	return _r
 }
 
 // CumulativeIllegalInstructionExitCount returns cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. The process may have attempted to jump to an invalid address via a misconfigured function pointer.
 func (fed *ForegroundExitData) CumulativeIllegalInstructionExitCount() int {
+	defer runtime.KeepAlive(fed)
 	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeIllegalInstructionExitCount"))
 	return _r
 }
 
 // CumulativeAppWatchdogExitCount returns cumulative number of times the application was terminated because a watchdog timeout occured. These can occur when the application took too long to launch, terminate, or respond to system events.
 func (fed *ForegroundExitData) CumulativeAppWatchdogExitCount() int {
+	defer runtime.KeepAlive(fed)
 	_r := objc.Send[int](objref.IDOf(fed), objc.RegisterName("cumulativeAppWatchdogExitCount"))
 	return _r
 }

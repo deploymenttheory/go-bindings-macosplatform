@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func heapDescriptorAdopt(id objc.ID) *HeapDescriptor {
 
 // Description returns the object's -description text.
 func (hd *HeapDescriptor) Description() string {
+	defer runtime.KeepAlive(hd)
 	return rt.Description(objref.IDOf(hd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (hd *HeapDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(hd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(hd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (hd *HeapDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(hd)
 	return rt.IsKind(objref.IDOf(hd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (hd *HeapDescriptor) String() string {
+	defer runtime.KeepAlive(hd)
 	return rt.Description(objref.IDOf(hd))
 }
 
@@ -122,48 +129,56 @@ func (hd *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatible
 
 // Size returns requested size of the heap's backing memory. The size may be rounded up to GPU page granularity.
 func (hd *HeapDescriptor) Size() int {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[int](objref.IDOf(hd), objc.RegisterName("size"))
 	return _r
 }
 
 // StorageMode returns storage mode for the heap. Default is MTLStorageModePrivate. All resources created from this heap share the same storage mode. MTLStorageModeManaged and MTLStorageModeMemoryless are disallowed.
 func (hd *HeapDescriptor) StorageMode() StorageMode {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[StorageMode](objref.IDOf(hd), objc.RegisterName("storageMode"))
 	return _r
 }
 
 // CPUCacheMode returns CPU cache mode for the heap. Default is MTLCPUCacheModeDefaultCache. All resources created from this heap share the same cache mode. CPU cache mode is ignored for MTLStorageModePrivate.
 func (hd *HeapDescriptor) CPUCacheMode() CPUCacheMode {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[CPUCacheMode](objref.IDOf(hd), objc.RegisterName("cpuCacheMode"))
 	return _r
 }
 
 // SparsePageSize returns the sparse page size to use for resources created from the heap.
 func (hd *HeapDescriptor) SparsePageSize() SparsePageSize {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[SparsePageSize](objref.IDOf(hd), objc.RegisterName("sparsePageSize"))
 	return _r
 }
 
 // HazardTrackingMode set hazard tracking mode for the heap. The default value is MTLHazardTrackingModeDefault. For heaps, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeUntracked. Setting hazardTrackingMode to MTLHazardTrackingModeTracked causes hazard tracking to be enabled heap. When a resource on a hazard tracked heap is modified, reads and writes from all resources suballocated on that heap will be delayed until the modification is complete. Similarly, modifying heap resources will be delayed until all in-flight reads and writes from all resources suballocated on that heap have completed. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead. All resources created from this heap shared the same hazard tracking mode.
 func (hd *HeapDescriptor) HazardTrackingMode() HazardTrackingMode {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[HazardTrackingMode](objref.IDOf(hd), objc.RegisterName("hazardTrackingMode"))
 	return _r
 }
 
 // ResourceOptions returns a packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties. Modifications to this property are reflected in the other properties and vice versa.
 func (hd *HeapDescriptor) ResourceOptions() ResourceOptions {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[ResourceOptions](objref.IDOf(hd), objc.RegisterName("resourceOptions"))
 	return _r
 }
 
 // Type returns the type of the heap. The default value is MTLHeapTypeAutomatic. This constrains the resource creation functions that are available.
 func (hd *HeapDescriptor) Type() HeapType {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[HeapType](objref.IDOf(hd), objc.RegisterName("type"))
 	return _r
 }
 
 // MaxCompatiblePlacementSparsePageSize specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
 func (hd *HeapDescriptor) MaxCompatiblePlacementSparsePageSize() SparsePageSize {
+	defer runtime.KeepAlive(hd)
 	_r := objc.Send[SparsePageSize](objref.IDOf(hd), objc.RegisterName("maxCompatiblePlacementSparsePageSize"))
 	return _r
 }

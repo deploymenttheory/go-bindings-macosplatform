@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func mTL4AccelerationStructureGeometryDescriptorAdopt(id objc.ID) *MTL4Accelerat
 
 // Description returns the object's -description text.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) Description() string {
+	defer runtime.KeepAlive(masgd)
 	return rt.Description(objref.IDOf(masgd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(masgd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(masgd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(masgd)
 	return rt.IsKind(objref.IDOf(masgd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) String() string {
+	defer runtime.KeepAlive(masgd)
 	return rt.Description(objref.IDOf(masgd))
 }
 
@@ -106,24 +113,28 @@ func (masgd *MTL4AccelerationStructureGeometryDescriptor) WithPrimitiveDataEleme
 
 // IntersectionFunctionTableOffset sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() int {
+	defer runtime.KeepAlive(masgd)
 	_r := objc.Send[int](objref.IDOf(masgd), objc.RegisterName("intersectionFunctionTableOffset"))
 	return _r
 }
 
 // Opaque reports whether provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) Opaque() bool {
+	defer runtime.KeepAlive(masgd)
 	_r := objc.Send[bool](objref.IDOf(masgd), objc.RegisterName("opaque"))
 	return _r
 }
 
 // AllowDuplicateIntersectionFunctionInvocation reports whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) AllowDuplicateIntersectionFunctionInvocation() bool {
+	defer runtime.KeepAlive(masgd)
 	_r := objc.Send[bool](objref.IDOf(masgd), objc.RegisterName("allowDuplicateIntersectionFunctionInvocation"))
 	return _r
 }
 
 // Label returns assigns an optional label you can assign to this geometry for debugging purposes.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) Label() string {
+	defer runtime.KeepAlive(masgd)
 	_r := objc.Send[objc.ID](objref.IDOf(masgd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -133,12 +144,14 @@ func (masgd *MTL4AccelerationStructureGeometryDescriptor) Label() string {
 
 // PrimitiveDataStride defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataStride() int {
+	defer runtime.KeepAlive(masgd)
 	_r := objc.Send[int](objref.IDOf(masgd), objc.RegisterName("primitiveDataStride"))
 	return _r
 }
 
 // PrimitiveDataElementSize sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
 func (masgd *MTL4AccelerationStructureGeometryDescriptor) PrimitiveDataElementSize() int {
+	defer runtime.KeepAlive(masgd)
 	_r := objc.Send[int](objref.IDOf(masgd), objc.RegisterName("primitiveDataElementSize"))
 	return _r
 }

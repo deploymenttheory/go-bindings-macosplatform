@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -64,18 +66,21 @@ func (doe *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEve
 
 // Orient returns the orient.
 func (doe *DOMOverflowEvent) Orient() uint16 {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[uint16](objref.IDOf(doe), objc.RegisterName("orient"))
 	return _r
 }
 
 // HorizontalOverflow wraps the corresponding Objective-C method.
 func (doe *DOMOverflowEvent) HorizontalOverflow() bool {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("horizontalOverflow"))
 	return _r
 }
 
 // VerticalOverflow wraps the corresponding Objective-C method.
 func (doe *DOMOverflowEvent) VerticalOverflow() bool {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("verticalOverflow"))
 	return _r
 }

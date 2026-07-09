@@ -5,10 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func semanticSegmentationMatteAdopt(id objc.ID) *SemanticSegmentationMatte {
 
 // Description returns the object's -description text.
 func (ssm *SemanticSegmentationMatte) Description() string {
+	defer runtime.KeepAlive(ssm)
 	return rt.Description(objref.IDOf(ssm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssm *SemanticSegmentationMatte) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssm *SemanticSegmentationMatte) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssm)
 	return rt.IsKind(objref.IDOf(ssm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssm *SemanticSegmentationMatte) String() string {
+	defer runtime.KeepAlive(ssm)
 	return rt.Description(objref.IDOf(ssm))
 }
 
@@ -75,8 +82,9 @@ func NewSemanticSegmentationMatte() *SemanticSegmentationMatte {
 	return semanticSegmentationMatteAdopt(_id)
 }
 
-// SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError returns a semantic segmentation matte instance that wraps the replacement pixel buffer.
-func (ssm *SemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (result *SemanticSegmentationMatte, err error) {
+// SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer returns a semantic segmentation matte instance that wraps the replacement pixel buffer.
+func (ssm *SemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer(pixelBuffer unsafe.Pointer) (result *SemanticSegmentationMatte, err error) {
+	defer runtime.KeepAlive(ssm)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("semanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer:error:"), pixelBuffer, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -87,18 +95,21 @@ func (ssm *SemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemant
 
 // DictionaryRepresentationForAuxiliaryDataType returns a dictionary of primitive map information to use when writing an image file with a semantic segmentation matte.
 func (ssm *SemanticSegmentationMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
 // MatteType specifies the receiver's semantic segmentation matting image type. An AVSemanticSegmentationMatte's matteType is immutable for the life of the object.
-func (ssm *SemanticSegmentationMatte) MatteType() obj.Object {
+func (ssm *SemanticSegmentationMatte) MatteType() *foundation.String {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("matteType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
 func (ssm *SemanticSegmentationMatte) PixelFormatType() int {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[int](objref.IDOf(ssm), objc.RegisterName("pixelFormatType"))
 	return _r
 }

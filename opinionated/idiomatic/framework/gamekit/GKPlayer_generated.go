@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -51,12 +52,14 @@ func playerAdopt(id objc.ID) *Player {
 
 // ScopedIDsArePersistent reports whether returns a Boolean value depending on whether the player identifiers are persistent across game instances or unique to the game instance.
 func (p *Player) ScopedIDsArePersistent() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("scopedIDsArePersistent"))
 	return _r
 }
 
 // GamePlayerID returns this is the player's unique and persistent ID that is scoped to this application.
 func (p *Player) GamePlayerID() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("gamePlayerID"))
 	if _r == 0 {
 		return ""
@@ -66,6 +69,7 @@ func (p *Player) GamePlayerID() string {
 
 // TeamPlayerID returns this is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
 func (p *Player) TeamPlayerID() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("teamPlayerID"))
 	if _r == 0 {
 		return ""
@@ -75,6 +79,7 @@ func (p *Player) TeamPlayerID() string {
 
 // Alias returns the alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
 func (p *Player) Alias() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("alias"))
 	if _r == 0 {
 		return ""
@@ -84,6 +89,7 @@ func (p *Player) Alias() string {
 
 // GuestIdentifier returns the guest identifier.
 func (p *Player) GuestIdentifier() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("guestIdentifier"))
 	if _r == 0 {
 		return ""
@@ -93,6 +99,7 @@ func (p *Player) GuestIdentifier() string {
 
 // IsInvitable reports whether the object is invitable.
 func (p *Player) IsInvitable() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isInvitable"))
 	return _r
 }
@@ -101,6 +108,7 @@ func (p *Player) IsInvitable() bool {
 //
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
 func (p *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result obj.Object, err error) {
+	defer runtime.KeepAlive(p)
 	type _result struct {
 		val obj.Object
 		err error
@@ -124,6 +132,7 @@ func (p *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result o
 
 // IsFriend reports whether the object is friend.
 func (p *Player) IsFriend() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFriend"))
 	return _r
 }

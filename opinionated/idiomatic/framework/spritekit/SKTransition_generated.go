@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func transitionAdopt(id objc.ID) *Transition {
 
 // Description returns the object's -description text.
 func (t *Transition) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Transition) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Transition) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Transition) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -86,12 +93,14 @@ func (t *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transiti
 
 // PausesIncomingScene reports whether pause the incoming Scene during the transition, defaults to true.
 func (t *Transition) PausesIncomingScene() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("pausesIncomingScene"))
 	return _r
 }
 
 // PausesOutgoingScene reports whether pause the outgoing Scene during the transition, defaults to true.
 func (t *Transition) PausesOutgoingScene() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("pausesOutgoingScene"))
 	return _r
 }

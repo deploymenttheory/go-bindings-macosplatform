@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func coneDirectivityModelSubbandParametersAdopt(id objc.ID) *ConeDirectivityMode
 
 // Description returns the object's -description text.
 func (cdmsp *ConeDirectivityModelSubbandParameters) Description() string {
+	defer runtime.KeepAlive(cdmsp)
 	return rt.Description(objref.IDOf(cdmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdmsp *ConeDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdmsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdmsp *ConeDirectivityModelSubbandParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdmsp)
 	return rt.IsKind(objref.IDOf(cdmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdmsp *ConeDirectivityModelSubbandParameters) String() string {
+	defer runtime.KeepAlive(cdmsp)
 	return rt.Description(objref.IDOf(cdmsp))
 }
 
@@ -86,29 +93,34 @@ func (cdmsp *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain floa
 
 // SetInnerAngleOuterAngle configures a focus area for cone-based sound directivity.
 func (cdmsp *ConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {
+	defer runtime.KeepAlive(cdmsp)
 	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setInnerAngle:outerAngle:"), innerAngle, outerAngle)
 }
 
 // Frequency returns the frequency of the subband, in hertz.
 func (cdmsp *ConeDirectivityModelSubbandParameters) Frequency() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("frequency"))
 	return _r
 }
 
 // InnerAngle returns the inner angle, in degrees.
 func (cdmsp *ConeDirectivityModelSubbandParameters) InnerAngle() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("innerAngle"))
 	return _r
 }
 
 // OuterAngle returns the outer angle, in degrees.
 func (cdmsp *ConeDirectivityModelSubbandParameters) OuterAngle() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("outerAngle"))
 	return _r
 }
 
 // OuterGain returns the outer gain.
 func (cdmsp *ConeDirectivityModelSubbandParameters) OuterGain() float64 {
+	defer runtime.KeepAlive(cdmsp)
 	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("outerGain"))
 	return _r
 }

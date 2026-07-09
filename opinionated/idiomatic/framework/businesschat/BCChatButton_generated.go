@@ -5,6 +5,8 @@
 package businesschat
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func chatButtonAdopt(id objc.ID) *ChatButton {
 
 // Description returns the object's -description text.
 func (cb *ChatButton) Description() string {
+	defer runtime.KeepAlive(cb)
 	return rt.Description(objref.IDOf(cb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cb *ChatButton) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cb *ChatButton) IsKind(className string) bool {
+	defer runtime.KeepAlive(cb)
 	return rt.IsKind(objref.IDOf(cb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cb *ChatButton) String() string {
+	defer runtime.KeepAlive(cb)
 	return rt.Description(objref.IDOf(cb))
 }
 
@@ -79,6 +86,7 @@ func NewChatButtonWithStyle(style ChatButtonStyle) *ChatButton {
 
 // NewChatButtonWithCoder creates a new ChatButton.
 func NewChatButtonWithCoder(coder obj.Object) *ChatButton {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *ChatButton
 	purego.Main(func() {
 		_mainthread0 = func() *ChatButton {

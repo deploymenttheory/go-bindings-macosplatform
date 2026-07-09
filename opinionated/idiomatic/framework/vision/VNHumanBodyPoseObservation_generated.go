@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -55,8 +56,10 @@ func NewHumanBodyPoseObservation() *HumanBodyPoseObservation {
 	return humanBodyPoseObservationAdopt(_id)
 }
 
-// RecognizedPointForJointNameError retrieves the recognized point for a joint name.
-func (hbpo *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+// RecognizedPointForJointName retrieves the recognized point for a joint name.
+func (hbpo *HumanBodyPoseObservation) RecognizedPointForJointName(jointName obj.Object) (result *RecognizedPoint, err error) {
+	defer runtime.KeepAlive(hbpo)
+	defer runtime.KeepAlive(jointName)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -65,8 +68,10 @@ func (hbpo *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName
 	return RecognizedPointFromID(_r), nil
 }
 
-// RecognizedPointsForJointsGroupNameError retrieves the recognized points associated with the joint group name.
-func (hbpo *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+// RecognizedPointsForJointsGroupName retrieves the recognized points associated with the joint group name.
+func (hbpo *HumanBodyPoseObservation) RecognizedPointsForJointsGroupName(jointsGroupName obj.Object) (result obj.Object, err error) {
+	defer runtime.KeepAlive(hbpo)
+	defer runtime.KeepAlive(jointsGroupName)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -79,6 +84,7 @@ func (hbpo *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jo
 //
 // AvailableJointNames returns the collection as a Go slice.
 func (hbpo *HumanBodyPoseObservation) AvailableJointNames() []obj.Object {
+	defer runtime.KeepAlive(hbpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("availableJointNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -87,6 +93,7 @@ func (hbpo *HumanBodyPoseObservation) AvailableJointNames() []obj.Object {
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
 func (hbpo *HumanBodyPoseObservation) AvailableJointsGroupNames() []obj.Object {
+	defer runtime.KeepAlive(hbpo)
 	_arr := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("availableJointsGroupNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

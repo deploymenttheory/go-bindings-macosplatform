@@ -5,6 +5,8 @@
 package accessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func mathExpressionRootAdopt(id objc.ID) *MathExpressionRoot {
 
 // NewMathExpressionRootWithRadicandExpressionsRootIndexExpression creates a new MathExpressionRoot.
 func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExpressions []*MathExpression, rootIndexExpression *MathExpression) *MathExpressionRoot {
+	defer runtime.KeepAlive(rootIndexExpression)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionRoot")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadicandExpressions:rootIndexExpression:"), purego.SliceToNSArray(radicandExpressions, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }), objref.IDOf(rootIndexExpression))
 	return mathExpressionRootAdopt(_id)
@@ -54,12 +57,14 @@ func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExp
 //
 // RadicandExpressions returns the collection as a Go slice.
 func (mer *MathExpressionRoot) RadicandExpressions() []*MathExpression {
+	defer runtime.KeepAlive(mer)
 	_arr := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("radicandExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // RootIndexExpression returns the root index expression.
 func (mer *MathExpressionRoot) RootIndexExpression() *MathExpression {
+	defer runtime.KeepAlive(mer)
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("rootIndexExpression"))
 	return MathExpressionFromID(_r)
 }

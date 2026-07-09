@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,30 +55,35 @@ func NewSymbolDrawOffEffect() *SymbolDrawOffEffect {
 
 // EffectWithByLayer returns a copy of the effect requesting an animation that applies separately to each motion group.
 func (sdoe *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithByLayer"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
 func (sdoe *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithIndividually returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
 func (sdoe *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithIndividually"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithReversed returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
 func (sdoe *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithReversed"))
 	return SymbolDrawOffEffectFromID(_r)
 }
 
 // EffectWithNonReversed returns a copy of the effect that only animates forwards. This cancels the reversed variant.
 func (sdoe *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
+	defer runtime.KeepAlive(sdoe)
 	_r := objc.Send[objc.ID](objref.IDOf(sdoe), objc.RegisterName("effectWithNonReversed"))
 	return SymbolDrawOffEffectFromID(_r)
 }

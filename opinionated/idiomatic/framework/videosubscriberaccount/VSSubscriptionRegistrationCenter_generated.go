@@ -5,6 +5,8 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func vSSubscriptionRegistrationCenterAdopt(id objc.ID) *VSSubscriptionRegistrati
 
 // Description returns the object's -description text.
 func (vsrc *VSSubscriptionRegistrationCenter) Description() string {
+	defer runtime.KeepAlive(vsrc)
 	return rt.Description(objref.IDOf(vsrc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vsrc *VSSubscriptionRegistrationCenter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vsrc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vsrc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vsrc *VSSubscriptionRegistrationCenter) IsKind(className string) bool {
+	defer runtime.KeepAlive(vsrc)
 	return rt.IsKind(objref.IDOf(vsrc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vsrc *VSSubscriptionRegistrationCenter) String() string {
+	defer runtime.KeepAlive(vsrc)
 	return rt.Description(objref.IDOf(vsrc))
 }
 
@@ -74,5 +81,7 @@ func NewVSSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 
 // SetCurrentSubscription sets the subscription information for the current user.
 func (vsrc *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
+	defer runtime.KeepAlive(vsrc)
+	defer runtime.KeepAlive(currentSubscription)
 	objc.Send[objc.ID](objref.IDOf(vsrc), objc.RegisterName("setCurrentSubscription:"), objref.IDOf(currentSubscription))
 }

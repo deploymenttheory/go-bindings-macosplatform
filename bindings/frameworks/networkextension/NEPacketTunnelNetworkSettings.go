@@ -87,6 +87,6 @@ func (o *NEPacketTunnelNetworkSettings) MTU() *foundation.NSNumber {
 	return foundation.NSNumberFromID(_ret)
 }
 
-func (o *NEPacketTunnelNetworkSettings) SetMTU(mTU *foundation.NSNumber) {
-	o.Ptr().Send(_nEPacketTunnelNetworkSettingsSelSetMTU, mTU.Ptr())
+func (o *NEPacketTunnelNetworkSettings) SetMTU(mtu *foundation.NSNumber) {
+	o.Ptr().Send(_nEPacketTunnelNetworkSettingsSelSetMTU, mtu.Ptr())
 }

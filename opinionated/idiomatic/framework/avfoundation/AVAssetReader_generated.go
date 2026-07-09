@@ -5,6 +5,7 @@
 package avfoundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,27 +52,33 @@ func assetReaderAdopt(id objc.ID) *AssetReader {
 
 // Description returns the object's -description text.
 func (ar *AssetReader) Description() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ar *AssetReader) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ar *AssetReader) IsKind(className string) bool {
+	defer runtime.KeepAlive(ar)
 	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ar *AssetReader) String() string {
+	defer runtime.KeepAlive(ar)
 	return rt.Description(objref.IDOf(ar))
 }
 
-// NewAssetReaderWithAssetError creates an object to read media data from an asset.
-func NewAssetReaderWithAssetError(asset *Asset) (result *AssetReader, err error) {
+// NewAssetReaderWithAsset creates an object to read media data from an asset.
+func NewAssetReaderWithAsset(asset *Asset) (result *AssetReader, err error) {
+	defer runtime.KeepAlive(asset)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReader")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:error:"), objref.IDOf(asset), unsafe.Pointer(&_nsErr))
@@ -89,40 +96,49 @@ func (ar *AssetReader) WithTimeRange(timeRange coremedia.CMTimeRange) *AssetRead
 
 // CanAddOutput determines whether you can add the output to the asset reader.
 func (ar *AssetReader) CanAddOutput(output *AssetReaderOutput) bool {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(output)
 	_r := objc.Send[bool](objref.IDOf(ar), objc.RegisterName("canAddOutput:"), objref.IDOf(output))
 	return _r
 }
 
 // AddOutput adds an output to the reader.
 func (ar *AssetReader) AddOutput(output *AssetReaderOutput) {
+	defer runtime.KeepAlive(ar)
+	defer runtime.KeepAlive(output)
 	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("addOutput:"), objref.IDOf(output))
 }
 
 // StartReading reports whether prepares the asset reader to start reading sample buffers from the asset.
 func (ar *AssetReader) StartReading() bool {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[bool](objref.IDOf(ar), objc.RegisterName("startReading"))
 	return _r
 }
 
 // CancelReading cancels any background work and stops the reader’s outputs from reading more samples.
 func (ar *AssetReader) CancelReading() {
+	defer runtime.KeepAlive(ar)
 	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("cancelReading"))
 }
 
 // Asset returns the asset from which the receiver's outputs read sample buffers. The value of this property is an AVAsset. Concrete instances of AVAssetReader that are created with specific AVAssetTrack instances must obtain those tracks from the asset returned by this property.
 func (ar *AssetReader) Asset() *Asset {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
 // Status returns the status of reading sample buffers from the receiver's asset. The value of this property is an AVAssetReaderStatus that indicates whether reading is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetReaderOutput objects should check the value of this property after -[AVAssetReaderOutput copyNextSampleBuffer] returns NULL to determine why no more samples could be read. This property is thread safe.
 func (ar *AssetReader) Status() AssetReaderStatus {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[AssetReaderStatus](objref.IDOf(ar), objc.RegisterName("status"))
 	return _r
 }
 
 // TimeRange specifies a range of time that may limit the temporal portion of the receiver's asset from which media data will be read. The intersection of the value of timeRange and CMTimeRangeMake(kCMTimeZero, asset.duration) will determine the time range of the asset from which media data will be read. The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity). This property throws an exception if a value is set after reading has started.
 func (ar *AssetReader) TimeRange() coremedia.CMTimeRange {
+	defer runtime.KeepAlive(ar)
 	_r := objc.Send[coremedia.CMTimeRange](objref.IDOf(ar), objc.RegisterName("timeRange"))
 	return _r
 }
@@ -131,6 +147,7 @@ func (ar *AssetReader) TimeRange() coremedia.CMTimeRange {
 //
 // Outputs returns the collection as a Go slice.
 func (ar *AssetReader) Outputs() []*AssetReaderOutput {
+	defer runtime.KeepAlive(ar)
 	_arr := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("outputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetReaderOutput { return AssetReaderOutputFromID(_id) })
 }

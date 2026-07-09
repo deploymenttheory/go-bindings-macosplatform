@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,22 +52,27 @@ func playbackCoordinatorAdopt(id objc.ID) *PlaybackCoordinator {
 
 // Description returns the object's -description text.
 func (pc *PlaybackCoordinator) Description() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pc *PlaybackCoordinator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pc *PlaybackCoordinator) IsKind(className string) bool {
+	defer runtime.KeepAlive(pc)
 	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pc *PlaybackCoordinator) String() string {
+	defer runtime.KeepAlive(pc)
 	return rt.Description(objref.IDOf(pc))
 }
 
@@ -84,12 +91,15 @@ func (pc *PlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsT
 
 // BeginSuspensionForReason tells the coordinator to stop sending playback commands temporarily when the playback object disconnects from the group activity.
 func (pc *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason obj.Object) *CoordinatedPlaybackSuspension {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(suspensionReason)
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("beginSuspensionForReason:"), objref.IDOf(suspensionReason))
 	return CoordinatedPlaybackSuspensionFromID(_r)
 }
 
 // ExpectedItemTimeAtHostTime returns a time in the current item’s timeline that the coordinator expects to play at the specified host time.
 func (pc *PlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedia.CMTime) coremedia.CMTime {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(pc), objc.RegisterName("expectedItemTimeAtHostTime:"), hostClockTime)
 	return _r
 }
@@ -98,6 +108,7 @@ func (pc *PlaybackCoordinator) ExpectedItemTimeAtHostTime(hostClockTime coremedi
 //
 // OtherParticipants returns the collection as a Go slice.
 func (pc *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackParticipant {
+	defer runtime.KeepAlive(pc)
 	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("otherParticipants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CoordinatedPlaybackParticipant { return CoordinatedPlaybackParticipantFromID(_id) })
 }
@@ -106,17 +117,22 @@ func (pc *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackPartici
 //
 // SuspensionReasons returns the collection as a Go slice.
 func (pc *PlaybackCoordinator) SuspensionReasons() []obj.Object {
+	defer runtime.KeepAlive(pc)
 	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("suspensionReasons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetParticipantLimitForWaitingOutSuspensionsWithReason sets a limit on the number of partipants that a group may contain before the coordinator stops waiting on suspensions that occur for a particular reason.
 func (pc *PlaybackCoordinator) SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason obj.Object) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(reason)
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setParticipantLimit:forWaitingOutSuspensionsWithReason:"), participantLimit, objref.IDOf(reason))
 }
 
 // ParticipantLimitForWaitingOutSuspensionsWithReason returns the limit on the number of partipants that a group may contain before the coordinator stops waiting on suspensions that occur for a particular reason.
 func (pc *PlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReason(reason obj.Object) int {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(reason)
 	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("participantLimitForWaitingOutSuspensionsWithReason:"), objref.IDOf(reason))
 	return _r
 }
@@ -125,12 +141,14 @@ func (pc *PlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReaso
 //
 // SuspensionReasonsThatTriggerWaiting returns the collection as a Go slice.
 func (pc *PlaybackCoordinator) SuspensionReasonsThatTriggerWaiting() []obj.Object {
+	defer runtime.KeepAlive(pc)
 	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("suspensionReasonsThatTriggerWaiting"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PauseSnapsToMediaTimeOfOriginator reports whether determines if participants should mirror the originator's stop time when pausing. If true, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If false, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.
 func (pc *PlaybackCoordinator) PauseSnapsToMediaTimeOfOriginator() bool {
+	defer runtime.KeepAlive(pc)
 	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("pauseSnapsToMediaTimeOfOriginator"))
 	return _r
 }

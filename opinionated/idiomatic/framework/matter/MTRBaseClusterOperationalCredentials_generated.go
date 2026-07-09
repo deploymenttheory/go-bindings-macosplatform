@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterOperationalCredentialsAdopt(id objc.ID) *MTRBaseClusterOperat
 
 // NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterOperationalCredentials {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOperationalCredentials")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterOperationalCredentialsAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *MT
 
 // NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointQueue creates a new MTRBaseClusterOperationalCredentials.
 func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterOperationalCredentials {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOperationalCredentials")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterOperationalCredentialsAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRB
 //
 // AttestationRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -90,6 +98,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsC
 //
 // CertificateChainRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -115,6 +125,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithPa
 //
 // CSRRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -140,6 +152,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletio
 //
 // AddNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -165,6 +179,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ct
 //
 // UpdateNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -190,6 +206,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion
 //
 // UpdateFabricLabelWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -215,6 +233,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCo
 //
 // RemoveFabricWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -240,6 +260,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsComplet
 //
 // ReadAttributeNOCsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +287,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCo
 //
 // SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +314,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithPar
 //
 // ReadAttributeFabricsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +341,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParam
 //
 // SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +368,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWith
 //
 // ReadAttributeSupportedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +394,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics
 //
 // SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +421,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFa
 //
 // ReadAttributeCommissionedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +447,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabr
 //
 // SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +474,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissione
 //
 // ReadAttributeTrustedRootCertificatesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +500,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCerti
 //
 // SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +527,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRoot
 //
 // ReadAttributeCurrentFabricIndexWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +553,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricInd
 //
 // SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +580,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabr
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +606,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommand
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +633,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCo
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +659,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandL
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +686,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCom
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +712,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWit
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +739,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeLi
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +765,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCo
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +792,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapW
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +818,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionW
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +845,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevi
 //
 // AttestationRequestWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -815,6 +872,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(
 //
 // CertificateChainRequestWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -840,6 +899,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithPa
 //
 // CSRRequestWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -865,6 +926,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx cont
 //
 // AddNOCWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -890,6 +953,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.
 //
 // UpdateNOCWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -915,6 +980,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx conte
 //
 // UpdateFabricLabelWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -940,6 +1007,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(c
 //
 // RemoveFabricWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -965,6 +1034,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx co
 //
 // ReadAttributeNOCsWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1061,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(c
 //
 // SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1090,8 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMin
 //
 // ReadAttributeFabricsWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1117,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParam
 //
 // SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1146,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWith
 //
 // ReadAttributeSupportedFabrics blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1172,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics
 //
 // SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1201,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFa
 //
 // ReadAttributeCommissionedFabrics blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1227,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabr
 //
 // SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1256,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissione
 //
 // ReadAttributeTrustedRootCertificates blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificates(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1282,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCerti
 //
 // SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1311,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRoot
 //
 // ReadAttributeCurrentFabricIndex blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1337,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricInd
 //
 // SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1366,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabr
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1392,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommand
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1421,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCo
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1447,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandL
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1476,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCom
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1502,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ct
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1531,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeLi
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1557,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx c
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1586,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapW
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1612,10 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcoc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

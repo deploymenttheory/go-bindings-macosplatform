@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mTL4LibraryDescriptorAdopt(id objc.ID) *MTL4LibraryDescriptor {
 
 // Description returns the object's -description text.
 func (mld *MTL4LibraryDescriptor) Description() string {
+	defer runtime.KeepAlive(mld)
 	return rt.Description(objref.IDOf(mld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mld *MTL4LibraryDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mld)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mld *MTL4LibraryDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mld)
 	return rt.IsKind(objref.IDOf(mld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mld *MTL4LibraryDescriptor) String() string {
+	defer runtime.KeepAlive(mld)
 	return rt.Description(objref.IDOf(mld))
 }
 
@@ -80,6 +87,7 @@ func (mld *MTL4LibraryDescriptor) WithSource(source string) *MTL4LibraryDescript
 
 // WithOptions sets provides compile-time options for the Metal library.
 func (mld *MTL4LibraryDescriptor) WithOptions(options *CompileOptions) *MTL4LibraryDescriptor {
+	defer runtime.KeepAlive(options)
 	objc.Send[objc.ID](objref.IDOf(mld), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return mld
 }
@@ -92,6 +100,7 @@ func (mld *MTL4LibraryDescriptor) WithName(name string) *MTL4LibraryDescriptor {
 
 // Source returns assigns an optional string containing the source code of the shader language program to compile into a Metal library.
 func (mld *MTL4LibraryDescriptor) Source() string {
+	defer runtime.KeepAlive(mld)
 	_r := objc.Send[objc.ID](objref.IDOf(mld), objc.RegisterName("source"))
 	if _r == 0 {
 		return ""
@@ -101,12 +110,14 @@ func (mld *MTL4LibraryDescriptor) Source() string {
 
 // Options provides compile-time options for the Metal library.
 func (mld *MTL4LibraryDescriptor) Options() *CompileOptions {
+	defer runtime.KeepAlive(mld)
 	_r := objc.Send[objc.ID](objref.IDOf(mld), objc.RegisterName("options"))
 	return CompileOptionsFromID(_r)
 }
 
 // Name returns assigns an optional name to the Metal library.
 func (mld *MTL4LibraryDescriptor) Name() string {
+	defer runtime.KeepAlive(mld)
 	_r := objc.Send[objc.ID](objref.IDOf(mld), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

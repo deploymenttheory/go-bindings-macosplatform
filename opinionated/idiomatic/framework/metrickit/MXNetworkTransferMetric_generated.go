@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,24 +56,28 @@ func NewNetworkTransferMetric() *NetworkTransferMetric {
 
 // CumulativeWifiUpload returns cumulative amount of data uploaded over WiFi. Dimensioned as NSUnitInformationStorage.
 func (ntm *NetworkTransferMetric) CumulativeWifiUpload() obj.Object {
+	defer runtime.KeepAlive(ntm)
 	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeWifiUpload"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeWifiDownload returns cumulative amount of data downloaded over WiFi. Dimensioned as NSUnitInformationStorage.
 func (ntm *NetworkTransferMetric) CumulativeWifiDownload() obj.Object {
+	defer runtime.KeepAlive(ntm)
 	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeWifiDownload"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeCellularUpload returns cumulative amount of data uploaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
 func (ntm *NetworkTransferMetric) CumulativeCellularUpload() obj.Object {
+	defer runtime.KeepAlive(ntm)
 	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeCellularUpload"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeCellularDownload returns cumulative amount of data downloaded over cellular networks. This data is radio access technology agnostic. Dimensioned as NSUnitInformationStorage.
 func (ntm *NetworkTransferMetric) CumulativeCellularDownload() obj.Object {
+	defer runtime.KeepAlive(ntm)
 	_r := objc.Send[objc.ID](objref.IDOf(ntm), objc.RegisterName("cumulativeCellularDownload"))
 	return obj.Wrap(_r)
 }

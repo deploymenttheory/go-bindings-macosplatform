@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func mediaLibraryBrowserControllerAdopt(id objc.ID) *MediaLibraryBrowserControll
 
 // Description returns the object's -description text.
 func (mlbc *MediaLibraryBrowserController) Description() string {
+	defer runtime.KeepAlive(mlbc)
 	return rt.Description(objref.IDOf(mlbc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mlbc *MediaLibraryBrowserController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mlbc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mlbc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mlbc *MediaLibraryBrowserController) IsKind(className string) bool {
+	defer runtime.KeepAlive(mlbc)
 	return rt.IsKind(objref.IDOf(mlbc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mlbc *MediaLibraryBrowserController) String() string {
+	defer runtime.KeepAlive(mlbc)
 	return rt.Description(objref.IDOf(mlbc))
 }
 
@@ -93,23 +100,28 @@ func (mlbc *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries Med
 
 // TogglePanel toggles the visibility of the Media Library Browser.
 func (mlbc *MediaLibraryBrowserController) TogglePanel(sender obj.Object) {
+	defer runtime.KeepAlive(mlbc)
+	defer runtime.KeepAlive(sender)
 	objc.Send[objc.ID](objref.IDOf(mlbc), objc.RegisterName("togglePanel:"), objref.IDOf(sender))
 }
 
 // IsVisible reports whether the object is visible.
 func (mlbc *MediaLibraryBrowserController) IsVisible() bool {
+	defer runtime.KeepAlive(mlbc)
 	_r := objc.Send[bool](objref.IDOf(mlbc), objc.RegisterName("isVisible"))
 	return _r
 }
 
 // Frame returns the frame.
 func (mlbc *MediaLibraryBrowserController) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(mlbc)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mlbc), objc.RegisterName("frame"))
 	return _r
 }
 
 // MediaLibraries returns the media libraries.
 func (mlbc *MediaLibraryBrowserController) MediaLibraries() MediaLibrary {
+	defer runtime.KeepAlive(mlbc)
 	_r := objc.Send[MediaLibrary](objref.IDOf(mlbc), objc.RegisterName("mediaLibraries"))
 	return _r
 }

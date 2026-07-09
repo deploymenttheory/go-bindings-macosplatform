@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func playerItemErrorLogEventAdopt(id objc.ID) *PlayerItemErrorLogEvent {
 
 // Description returns the object's -description text.
 func (piele *PlayerItemErrorLogEvent) Description() string {
+	defer runtime.KeepAlive(piele)
 	return rt.Description(objref.IDOf(piele))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (piele *PlayerItemErrorLogEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(piele)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(piele), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (piele *PlayerItemErrorLogEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(piele)
 	return rt.IsKind(objref.IDOf(piele), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (piele *PlayerItemErrorLogEvent) String() string {
+	defer runtime.KeepAlive(piele)
 	return rt.Description(objref.IDOf(piele))
 }
 
@@ -73,13 +81,15 @@ func NewPlayerItemErrorLogEvent() *PlayerItemErrorLogEvent {
 }
 
 // Date returns the date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
-func (piele *PlayerItemErrorLogEvent) Date() obj.Object {
+func (piele *PlayerItemErrorLogEvent) Date() time.Time {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // URI returns the URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
 func (piele *PlayerItemErrorLogEvent) URI() string {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("URI"))
 	if _r == 0 {
 		return ""
@@ -89,6 +99,7 @@ func (piele *PlayerItemErrorLogEvent) URI() string {
 
 // ServerAddress returns the IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
 func (piele *PlayerItemErrorLogEvent) ServerAddress() string {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("serverAddress"))
 	if _r == 0 {
 		return ""
@@ -98,6 +109,7 @@ func (piele *PlayerItemErrorLogEvent) ServerAddress() string {
 
 // PlaybackSessionID returns a GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
 func (piele *PlayerItemErrorLogEvent) PlaybackSessionID() string {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("playbackSessionID"))
 	if _r == 0 {
 		return ""
@@ -107,12 +119,14 @@ func (piele *PlayerItemErrorLogEvent) PlaybackSessionID() string {
 
 // ErrorStatusCode returns a unique error code identifier. Corresponds to "status". This property is not observable.
 func (piele *PlayerItemErrorLogEvent) ErrorStatusCode() int {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[int](objref.IDOf(piele), objc.RegisterName("errorStatusCode"))
 	return _r
 }
 
 // ErrorDomain returns the domain of the error. Corresponds to "domain". This property is not observable.
 func (piele *PlayerItemErrorLogEvent) ErrorDomain() string {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("errorDomain"))
 	if _r == 0 {
 		return ""
@@ -122,6 +136,7 @@ func (piele *PlayerItemErrorLogEvent) ErrorDomain() string {
 
 // ErrorComment returns a description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
 func (piele *PlayerItemErrorLogEvent) ErrorComment() string {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("errorComment"))
 	if _r == 0 {
 		return ""
@@ -130,7 +145,8 @@ func (piele *PlayerItemErrorLogEvent) ErrorComment() string {
 }
 
 // AllHTTPResponseHeaderFields returns the HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
-func (piele *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() obj.Object {
+func (piele *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() map[string]string {
+	defer runtime.KeepAlive(piele)
 	_r := objc.Send[objc.ID](objref.IDOf(piele), objc.RegisterName("allHTTPResponseHeaderFields"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }

@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRDoorLockClusterGetUserResponseParamsAdopt(id objc.ID) *MTRDoorLockCluste
 
 // Description returns the object's -description text.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) Description() string {
+	defer runtime.KeepAlive(mdlcgurp)
 	return rt.Description(objref.IDOf(mdlcgurp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcgurp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcgurp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcgurp)
 	return rt.IsKind(objref.IDOf(mdlcgurp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) String() string {
+	defer runtime.KeepAlive(mdlcgurp)
 	return rt.Description(objref.IDOf(mdlcgurp))
 }
 
-// NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError initialize an MTRDoorLockClusterGetUserResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
+// NewMTRDoorLockClusterGetUserResponseParamsWithResponseValue initialize an MTRDoorLockClusterGetUserResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDoorLockClusterGetUserResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRDoorLockClusterGetUserResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetUserResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError(responseVa
 
 // WithUserIndex sets the user index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgurp
 }
@@ -92,60 +100,70 @@ func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserName(userName s
 
 // WithUserUniqueID sets the user unique ID.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueID(userUniqueID obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(userUniqueID)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserUniqueID:"), objref.IDOf(userUniqueID))
 	return mdlcgurp
 }
 
 // WithUserStatus sets the user status.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(userStatus)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return mdlcgurp
 }
 
 // WithUserType sets the user type.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithUserType(userType obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(userType)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return mdlcgurp
 }
 
 // WithCredentialRule sets the credential rule.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithCredentialRule(credentialRule obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(credentialRule)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setCredentialRule:"), objref.IDOf(credentialRule))
 	return mdlcgurp
 }
 
 // WithCreatorFabricIndex sets the creator fabric index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithCreatorFabricIndex(creatorFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(creatorFabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setCreatorFabricIndex:"), objref.IDOf(creatorFabricIndex))
 	return mdlcgurp
 }
 
 // WithLastModifiedFabricIndex sets the last modified fabric index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(lastModifiedFabricIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setLastModifiedFabricIndex:"), objref.IDOf(lastModifiedFabricIndex))
 	return mdlcgurp
 }
 
 // WithNextUserIndex sets the next user index.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithNextUserIndex(nextUserIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(nextUserIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setNextUserIndex:"), objref.IDOf(nextUserIndex))
 	return mdlcgurp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcgurp
 }
 
 // UserIndex returns the user index.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserIndex() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserName returns the user name.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserName() string {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userName"))
 	if _r == 0 {
 		return ""
@@ -154,60 +172,71 @@ func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserName() string {
 }
 
 // UserUniqueID returns the user unique ID.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userUniqueID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserStatus returns the user status.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserStatus() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserStatus() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userStatus"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserType returns the user type.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserType() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) UserType() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("userType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CredentialRule returns the credential rule.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) CredentialRule() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) CredentialRule() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("credentialRule"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Credentials returns the credentials.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) Credentials() obj.Object {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("credentials"))
 	return obj.Wrap(_r)
 }
 
 // SetCredentials wraps the corresponding Objective-C method.
 func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) SetCredentials(credentials obj.Object) {
+	defer runtime.KeepAlive(mdlcgurp)
+	defer runtime.KeepAlive(credentials)
 	objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }
 
 // CreatorFabricIndex returns the creator fabric index.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("creatorFabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LastModifiedFabricIndex returns the last modified fabric index.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("lastModifiedFabricIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NextUserIndex returns the next user index.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("nextUserIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcgurp *MTRDoorLockClusterGetUserResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgurp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgurp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

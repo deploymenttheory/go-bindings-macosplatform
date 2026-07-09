@@ -5,6 +5,8 @@
 package browserenginekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func accessibilityTextMarkerRangeAdopt(id objc.ID) *AccessibilityTextMarkerRange
 
 // Description returns the object's -description text.
 func (atmr *AccessibilityTextMarkerRange) Description() string {
+	defer runtime.KeepAlive(atmr)
 	return rt.Description(objref.IDOf(atmr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (atmr *AccessibilityTextMarkerRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(atmr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(atmr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (atmr *AccessibilityTextMarkerRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(atmr)
 	return rt.IsKind(objref.IDOf(atmr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (atmr *AccessibilityTextMarkerRange) String() string {
+	defer runtime.KeepAlive(atmr)
 	return rt.Description(objref.IDOf(atmr))
 }
 
@@ -72,24 +79,28 @@ func NewAccessibilityTextMarkerRange() *AccessibilityTextMarkerRange {
 
 // WithStartMarker sets the start marker.
 func (atmr *AccessibilityTextMarkerRange) WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
+	defer runtime.KeepAlive(startMarker)
 	objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
 	return atmr
 }
 
 // WithEndMarker sets the end marker.
 func (atmr *AccessibilityTextMarkerRange) WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
+	defer runtime.KeepAlive(endMarker)
 	objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
 	return atmr
 }
 
 // StartMarker returns the start marker.
 func (atmr *AccessibilityTextMarkerRange) StartMarker() *AccessibilityTextMarker {
+	defer runtime.KeepAlive(atmr)
 	_r := objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("startMarker"))
 	return AccessibilityTextMarkerFromID(_r)
 }
 
 // EndMarker returns the end marker.
 func (atmr *AccessibilityTextMarkerRange) EndMarker() *AccessibilityTextMarker {
+	defer runtime.KeepAlive(atmr)
 	_r := objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("endMarker"))
 	return AccessibilityTextMarkerFromID(_r)
 }

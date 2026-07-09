@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewCameraFolder() *CameraFolder {
 //
 // Contents returns the collection as a Go slice.
 func (cf *CameraFolder) Contents() []*CameraItem {
+	defer runtime.KeepAlive(cf)
 	_arr := objc.Send[objc.ID](objref.IDOf(cf), objc.RegisterName("contents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }

@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,63 +51,84 @@ func mTRClusterDishwasherAlarmAdopt(id objc.ID) *MTRClusterDishwasherAlarm {
 
 // NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDishwasherAlarm {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDishwasherAlarm")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterDishwasherAlarmAdopt(_id)
 }
 
 // ReadAttributeMaskWithParams reads attribute mask with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeMaskWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeMaskWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLatchWithParams reads attribute latch with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeLatchWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeLatchWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeLatchWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeStateWithParams reads attribute state with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupportedWithParams reads attribute supported with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeSupportedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeSupportedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcda *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcda *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcda)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcda), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterDishwasherAlarm)(nil)

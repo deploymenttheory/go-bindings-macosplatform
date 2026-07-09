@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func assetWriterInputCaptionAdaptorAdopt(id objc.ID) *AssetWriterInputCaptionAda
 
 // Description returns the object's -description text.
 func (awica *AssetWriterInputCaptionAdaptor) Description() string {
+	defer runtime.KeepAlive(awica)
 	return rt.Description(objref.IDOf(awica))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (awica *AssetWriterInputCaptionAdaptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(awica)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(awica), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (awica *AssetWriterInputCaptionAdaptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(awica)
 	return rt.IsKind(objref.IDOf(awica), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (awica *AssetWriterInputCaptionAdaptor) String() string {
+	defer runtime.KeepAlive(awica)
 	return rt.Description(objref.IDOf(awica))
 }
 
 // NewAssetWriterInputCaptionAdaptorWithAssetWriterInput creates a new caption adaptor that writes to the specified asset writer input.
 func NewAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputCaptionAdaptor {
+	defer runtime.KeepAlive(input)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputCaptionAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), objref.IDOf(input))
 	return assetWriterInputCaptionAdaptorAdopt(_id)
@@ -75,18 +83,23 @@ func NewAssetWriterInputCaptionAdaptorWithAssetWriterInput(input *AssetWriterInp
 
 // AppendCaption appends a caption to the writer input.
 func (awica *AssetWriterInputCaptionAdaptor) AppendCaption(caption *Caption) bool {
+	defer runtime.KeepAlive(awica)
+	defer runtime.KeepAlive(caption)
 	_r := objc.Send[bool](objref.IDOf(awica), objc.RegisterName("appendCaption:"), objref.IDOf(caption))
 	return _r
 }
 
 // AppendCaptionGroup appends a caption group that the system writes to the output.
 func (awica *AssetWriterInputCaptionAdaptor) AppendCaptionGroup(captionGroup *CaptionGroup) bool {
+	defer runtime.KeepAlive(awica)
+	defer runtime.KeepAlive(captionGroup)
 	_r := objc.Send[bool](objref.IDOf(awica), objc.RegisterName("appendCaptionGroup:"), objref.IDOf(captionGroup))
 	return _r
 }
 
 // AssetWriterInput returns the asset writer input that was used to initialize the receiver.
 func (awica *AssetWriterInputCaptionAdaptor) AssetWriterInput() *AssetWriterInput {
+	defer runtime.KeepAlive(awica)
 	_r := objc.Send[objc.ID](objref.IDOf(awica), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)
 }

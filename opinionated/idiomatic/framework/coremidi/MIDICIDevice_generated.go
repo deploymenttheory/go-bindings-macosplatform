@@ -5,6 +5,8 @@
 package coremidi
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func cIDeviceAdopt(id objc.ID) *CIDevice {
 
 // Description returns the object's -description text.
 func (cd *CIDevice) Description() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cd *CIDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cd *CIDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(cd)
 	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cd *CIDevice) String() string {
+	defer runtime.KeepAlive(cd)
 	return rt.Description(objref.IDOf(cd))
 }
 
@@ -72,54 +79,63 @@ func NewCIDevice() *CIDevice {
 
 // DeviceInfo returns the basic information describing the CI device.
 func (cd *CIDevice) DeviceInfo() *MIDI2DeviceInfo {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("deviceInfo"))
 	return MIDI2DeviceInfoFromID(_r)
 }
 
 // MUID returns the MIDI unique identifier (MUID) assigned to the CI device.
 func (cd *CIDevice) MUID() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("MUID"))
 	return _r
 }
 
 // SupportsProtocolNegotiation reports whether MIDI-CI Protocol Negotiation capability.
 func (cd *CIDevice) SupportsProtocolNegotiation() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("supportsProtocolNegotiation"))
 	return _r
 }
 
 // SupportsProfileConfiguration reports whether MIDI-CI Profile Configuration capability.
 func (cd *CIDevice) SupportsProfileConfiguration() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("supportsProfileConfiguration"))
 	return _r
 }
 
 // SupportsPropertyExchange reports whether MIDI-CI Property Exchange capability.
 func (cd *CIDevice) SupportsPropertyExchange() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("supportsPropertyExchange"))
 	return _r
 }
 
 // SupportsProcessInquiry reports whether MIDI-CI Process Inquiry capability.
 func (cd *CIDevice) SupportsProcessInquiry() bool {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[bool](objref.IDOf(cd), objc.RegisterName("supportsProcessInquiry"))
 	return _r
 }
 
 // MaxSysExSize returns the maximum receivable MIDI System Exclusive size for this CI device.
 func (cd *CIDevice) MaxSysExSize() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("maxSysExSize"))
 	return _r
 }
 
 // MaxPropertyExchangeRequests returns the maximum number of simultaneous Property Exchange requests, if supported.
 func (cd *CIDevice) MaxPropertyExchangeRequests() int {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[int](objref.IDOf(cd), objc.RegisterName("maxPropertyExchangeRequests"))
 	return _r
 }
 
 // DeviceType returns the type of MIDI-CI device.
 func (cd *CIDevice) DeviceType() CIDeviceType {
+	defer runtime.KeepAlive(cd)
 	_r := objc.Send[CIDeviceType](objref.IDOf(cd), objc.RegisterName("deviceType"))
 	return _r
 }
@@ -128,6 +144,7 @@ func (cd *CIDevice) DeviceType() CIDeviceType {
 //
 // Profiles returns the collection as a Go slice.
 func (cd *CIDevice) Profiles() []*UMPCIProfile {
+	defer runtime.KeepAlive(cd)
 	_arr := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("profiles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPCIProfile { return UMPCIProfileFromID(_id) })
 }

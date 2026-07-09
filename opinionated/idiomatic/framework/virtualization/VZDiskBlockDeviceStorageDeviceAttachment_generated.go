@@ -5,10 +5,12 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -49,8 +51,9 @@ func diskBlockDeviceStorageDeviceAttachmentAdopt(id objc.ID) *DiskBlockDeviceSto
 	return x
 }
 
-// NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
-func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationModeError(fileHandle obj.Object, readOnly bool, synchronizationMode DiskSynchronizationMode) (result *DiskBlockDeviceStorageDeviceAttachment, err error) {
+// NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationMode creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
+func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizationMode(fileHandle obj.Object, readOnly bool, synchronizationMode DiskSynchronizationMode) (result *DiskBlockDeviceStorageDeviceAttachment, err error) {
+	defer runtime.KeepAlive(fileHandle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZDiskBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileHandle:readOnly:synchronizationMode:error:"), objref.IDOf(fileHandle), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
@@ -61,19 +64,22 @@ func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizat
 }
 
 // FileHandle returns file handle to the underlying disk used for storage by the attachment.
-func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) FileHandle() obj.Object {
+func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) FileHandle() *foundation.FileHandle {
+	defer runtime.KeepAlive(dbdsda)
 	_r := objc.Send[objc.ID](objref.IDOf(dbdsda), objc.RegisterName("fileHandle"))
-	return obj.Wrap(_r)
+	return foundation.FileHandleFromID(_r)
 }
 
 // IsReadOnly reports whether the underlying disk attachment is read-only.
 func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
+	defer runtime.KeepAlive(dbdsda)
 	_r := objc.Send[bool](objref.IDOf(dbdsda), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
 // SynchronizationMode returns the mode in which the disk image synchronizes data with the underlying storage device.
 func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
+	defer runtime.KeepAlive(dbdsda)
 	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(dbdsda), objc.RegisterName("synchronizationMode"))
 	return _r
 }

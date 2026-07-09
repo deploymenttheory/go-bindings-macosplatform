@@ -5,7 +5,10 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func textListAdopt(id objc.ID) *TextList {
 
 // Description returns the object's -description text.
 func (tl *TextList) Description() string {
+	defer runtime.KeepAlive(tl)
 	return rt.Description(objref.IDOf(tl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tl *TextList) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tl *TextList) IsKind(className string) bool {
+	defer runtime.KeepAlive(tl)
 	return rt.IsKind(objref.IDOf(tl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tl *TextList) String() string {
+	defer runtime.KeepAlive(tl)
 	return rt.Description(objref.IDOf(tl))
 }
 
 // NewTextListWithMarkerFormatOptionsStartingItemNumber returns a new text list with the format, options, and starting item number you provide.
 func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat obj.Object, options TextListOptions, startingItemNumber int) *TextList {
+	defer runtime.KeepAlive(markerFormat)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerFormat:options:startingItemNumber:"), objref.IDOf(markerFormat), options, startingItemNumber)
 	return textListAdopt(_id)
@@ -75,6 +84,7 @@ func NewTextListWithMarkerFormatOptionsStartingItemNumber(markerFormat obj.Objec
 
 // NewTextListWithMarkerFormatOptions returns an initialized text list.
 func NewTextListWithMarkerFormatOptions(markerFormat obj.Object, options int) *TextList {
+	defer runtime.KeepAlive(markerFormat)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkerFormat:options:"), objref.IDOf(markerFormat), options)
 	return textListAdopt(_id)
@@ -82,6 +92,7 @@ func NewTextListWithMarkerFormatOptions(markerFormat obj.Object, options int) *T
 
 // NewTextListWithCoder initializes and returns a newly allocated text list item.
 func NewTextListWithCoder(coder obj.Object) *TextList {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextList")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textListAdopt(_id)
@@ -95,6 +106,7 @@ func (tl *TextList) WithStartingItemNumber(startingItemNumber int) *TextList {
 
 // MarkerForItemNumber returns the computed value for a specific ordinal position in the list.
 func (tl *TextList) MarkerForItemNumber(itemNumber int) string {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("markerForItemNumber:"), itemNumber)
 	if _r == 0 {
 		return ""
@@ -103,25 +115,29 @@ func (tl *TextList) MarkerForItemNumber(itemNumber int) string {
 }
 
 // MarkerFormat returns the marker format.
-func (tl *TextList) MarkerFormat() obj.Object {
+func (tl *TextList) MarkerFormat() *foundation.String {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("markerFormat"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ListOptions returns the list options.
 func (tl *TextList) ListOptions() TextListOptions {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[TextListOptions](objref.IDOf(tl), objc.RegisterName("listOptions"))
 	return _r
 }
 
 // StartingItemNumber returns the starting item number.
 func (tl *TextList) StartingItemNumber() int {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("startingItemNumber"))
 	return _r
 }
 
 // IsOrdered reports whether the object is ordered.
 func (tl *TextList) IsOrdered() bool {
+	defer runtime.KeepAlive(tl)
 	_r := objc.Send[bool](objref.IDOf(tl), objc.RegisterName("isOrdered"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func NewTextAttachmentCell() *TextAttachmentCell {
 
 // WithControlView sets the view associated with the cell.
 func (tac *TextAttachmentCell) WithControlView(controlView ViewProvider) *TextAttachmentCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -84,6 +87,7 @@ func (tac *TextAttachmentCell) WithState(state int) *TextAttachmentCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (tac *TextAttachmentCell) WithTarget(target obj.Object) *TextAttachmentCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -188,6 +192,7 @@ func (tac *TextAttachmentCell) WithWraps(wraps bool) *TextAttachmentCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (tac *TextAttachmentCell) WithFont(font *Font) *TextAttachmentCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -196,6 +201,7 @@ func (tac *TextAttachmentCell) WithFont(font *Font) *TextAttachmentCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (tac *TextAttachmentCell) WithFormatter(formatter obj.Object) *TextAttachmentCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -204,6 +210,7 @@ func (tac *TextAttachmentCell) WithFormatter(formatter obj.Object) *TextAttachme
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (tac *TextAttachmentCell) WithObjectValue(objectValue obj.Object) *TextAttachmentCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -252,6 +259,7 @@ func (tac *TextAttachmentCell) WithIntegerValue(integerValue int) *TextAttachmen
 
 // WithImage sets the image displayed by the cell, if any.
 func (tac *TextAttachmentCell) WithImage(image *Image) *TextAttachmentCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -268,6 +276,7 @@ func (tac *TextAttachmentCell) WithControlSize(controlSize ControlSize) *TextAtt
 
 // WithRepresentedObject sets the object represented by the cell.
 func (tac *TextAttachmentCell) WithRepresentedObject(representedObject obj.Object) *TextAttachmentCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -276,6 +285,7 @@ func (tac *TextAttachmentCell) WithRepresentedObject(representedObject obj.Objec
 
 // WithMenu sets the cell’s contextual menu.
 func (tac *TextAttachmentCell) WithMenu(menu *Menu) *TextAttachmentCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -364,6 +374,7 @@ func (tac *TextAttachmentCell) WithFocusRingType(focusRingType FocusRingType) *T
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (tac *TextAttachmentCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextAttachmentCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(tac), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})

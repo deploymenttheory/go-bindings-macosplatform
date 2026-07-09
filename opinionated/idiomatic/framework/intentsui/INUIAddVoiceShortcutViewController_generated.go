@@ -5,8 +5,11 @@
 package intentsui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func addVoiceShortcutViewControllerAdopt(id objc.ID) *AddVoiceShortcutViewContro
 
 // Description returns the object's -description text.
 func (avsvc *AddVoiceShortcutViewController) Description() string {
+	defer runtime.KeepAlive(avsvc)
 	return rt.Description(objref.IDOf(avsvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (avsvc *AddVoiceShortcutViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(avsvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(avsvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (avsvc *AddVoiceShortcutViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(avsvc)
 	return rt.IsKind(objref.IDOf(avsvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (avsvc *AddVoiceShortcutViewController) String() string {
+	defer runtime.KeepAlive(avsvc)
 	return rt.Description(objref.IDOf(avsvc))
 }
 
 // NewAddVoiceShortcutViewControllerWithShortcut creates a view controller with a shortcut the user can add to Siri.
 func NewAddVoiceShortcutViewControllerWithShortcut(shortcut obj.Object) *AddVoiceShortcutViewController {
+	defer runtime.KeepAlive(shortcut)
 	var _mainthread0 *AddVoiceShortcutViewController
 	purego.Main(func() {
 		_mainthread0 = func() *AddVoiceShortcutViewController {
@@ -77,4 +86,16 @@ func NewAddVoiceShortcutViewControllerWithShortcut(shortcut obj.Object) *AddVoic
 		}()
 	})
 	return _mainthread0
+}
+
+// WithDelegate sets the object that retrieves notifications from the view controller.
+func (avsvc *AddVoiceShortcutViewController) WithDelegate(delegate AddVoiceShortcutViewControllerDelegate) *AddVoiceShortcutViewController {
+	_shim := newAddVoiceShortcutViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(avsvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(avsvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return avsvc
 }

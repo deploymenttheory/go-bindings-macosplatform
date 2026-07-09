@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func collaborationOptionAdopt(id objc.ID) *CollaborationOption {
 
 // Description returns the object's -description text.
 func (co *CollaborationOption) Description() string {
+	defer runtime.KeepAlive(co)
 	return rt.Description(objref.IDOf(co))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (co *CollaborationOption) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(co)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(co), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (co *CollaborationOption) IsKind(className string) bool {
+	defer runtime.KeepAlive(co)
 	return rt.IsKind(objref.IDOf(co), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (co *CollaborationOption) String() string {
+	defer runtime.KeepAlive(co)
 	return rt.Description(objref.IDOf(co))
 }
 
@@ -100,6 +107,7 @@ func (co *CollaborationOption) WithRequiredOptionsIdentifiers(items ...obj.Objec
 
 // Title returns a localized title string to be used when displaying the option
 func (co *CollaborationOption) Title() string {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -109,6 +117,7 @@ func (co *CollaborationOption) Title() string {
 
 // Identifier returns unique identifier
 func (co *CollaborationOption) Identifier() string {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -118,6 +127,7 @@ func (co *CollaborationOption) Identifier() string {
 
 // Subtitle returns a localized subtitle string to be used when displaying the option
 func (co *CollaborationOption) Subtitle() string {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
@@ -127,6 +137,7 @@ func (co *CollaborationOption) Subtitle() string {
 
 // IsSelected reports whether a flag that indicates whether the option is selected. This property should only be set directly when the option represents an individual switch. Defaults to false
 func (co *CollaborationOption) IsSelected() bool {
+	defer runtime.KeepAlive(co)
 	_r := objc.Send[bool](objref.IDOf(co), objc.RegisterName("isSelected"))
 	return _r
 }
@@ -135,6 +146,7 @@ func (co *CollaborationOption) IsSelected() bool {
 //
 // RequiredOptionsIdentifiers returns the collection as a Go slice.
 func (co *CollaborationOption) RequiredOptionsIdentifiers() []string {
+	defer runtime.KeepAlive(co)
 	_arr := objc.Send[objc.ID](objref.IDOf(co), objc.RegisterName("requiredOptionsIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

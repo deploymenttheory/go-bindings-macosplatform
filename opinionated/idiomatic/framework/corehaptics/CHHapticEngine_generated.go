@@ -5,6 +5,7 @@
 package corehaptics
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,22 +51,27 @@ func hapticEngineAdopt(id objc.ID) *HapticEngine {
 
 // Description returns the object's -description text.
 func (he *HapticEngine) Description() string {
+	defer runtime.KeepAlive(he)
 	return rt.Description(objref.IDOf(he))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (he *HapticEngine) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(he)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(he), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (he *HapticEngine) IsKind(className string) bool {
+	defer runtime.KeepAlive(he)
 	return rt.IsKind(objref.IDOf(he), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (he *HapticEngine) String() string {
+	defer runtime.KeepAlive(he)
 	return rt.Description(objref.IDOf(he))
 }
 
@@ -75,8 +81,9 @@ func NewHapticEngine() *HapticEngine {
 	return hapticEngineAdopt(_id)
 }
 
-// NewHapticEngineWithAudioSessionError creates a haptic engine from an audio session.
-func NewHapticEngineWithAudioSessionError(audioSession obj.Object) (result *HapticEngine, err error) {
+// NewHapticEngineWithAudioSession creates a haptic engine from an audio session.
+func NewHapticEngineWithAudioSession(audioSession obj.Object) (result *HapticEngine, err error) {
+	defer runtime.KeepAlive(audioSession)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEngine")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioSession:error:"), objref.IDOf(audioSession), unsafe.Pointer(&_nsErr))
@@ -126,6 +133,7 @@ func (he *HapticEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *Hapti
 //
 // StartAndReturnError returns an error if the operation did not succeed.
 func (he *HapticEngine) StartAndReturnError() error {
+	defer runtime.KeepAlive(he)
 	var _nsErr uintptr
 	objc.Send[bool](objref.IDOf(he), objc.RegisterName("startAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -134,8 +142,10 @@ func (he *HapticEngine) StartAndReturnError() error {
 	return nil
 }
 
-// RegisterAudioResourceOptionsError registers an external audio to use as a custom waveform.
-func (he *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, options obj.Object) (result int, err error) {
+// RegisterAudioResourceOptions registers an external audio to use as a custom waveform.
+func (he *HapticEngine) RegisterAudioResourceOptions(resourceURL string, options obj.Object) (result int, err error) {
+	defer runtime.KeepAlive(he)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_r := objc.Send[int](objref.IDOf(he), objc.RegisterName("registerAudioResource:options:error:"), rt.FileURL(resourceURL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -146,6 +156,7 @@ func (he *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, op
 
 // UnregisterAudioResource unregisters an external audio file that you previously registered with the engine.
 func (he *HapticEngine) UnregisterAudioResource(resourceID int) error {
+	defer runtime.KeepAlive(he)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(he), objc.RegisterName("unregisterAudioResource:error:"), resourceID, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -156,6 +167,7 @@ func (he *HapticEngine) UnregisterAudioResource(resourceID int) error {
 
 // PlayPatternFromURL plays a pattern that’s defined in a file at the specified URL.
 func (he *HapticEngine) PlayPatternFromURL(fileURL string) error {
+	defer runtime.KeepAlive(he)
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(he), objc.RegisterName("playPatternFromURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -165,9 +177,10 @@ func (he *HapticEngine) PlayPatternFromURL(fileURL string) error {
 }
 
 // PlayPatternFromData plays a pattern from the specified data.
-func (he *HapticEngine) PlayPatternFromData(data obj.Object) error {
+func (he *HapticEngine) PlayPatternFromData(data []byte) error {
+	defer runtime.KeepAlive(he)
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(he), objc.RegisterName("playPatternFromData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(he), objc.RegisterName("playPatternFromData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -176,36 +189,42 @@ func (he *HapticEngine) PlayPatternFromData(data obj.Object) error {
 
 // CurrentTime returns the current time.
 func (he *HapticEngine) CurrentTime() float64 {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[float64](objref.IDOf(he), objc.RegisterName("currentTime"))
 	return _r
 }
 
 // PlaysHapticsOnly reports whether this behavior change will only take effect after the engine is stopped and restarted. The default is false.
 func (he *HapticEngine) PlaysHapticsOnly() bool {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[bool](objref.IDOf(he), objc.RegisterName("playsHapticsOnly"))
 	return _r
 }
 
 // PlaysAudioOnly reports whether this behavior change will only take effect after the engine is stopped and restarted. The default is false.
 func (he *HapticEngine) PlaysAudioOnly() bool {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[bool](objref.IDOf(he), objc.RegisterName("playsAudioOnly"))
 	return _r
 }
 
 // IsMutedForAudio reports whether default is false.
 func (he *HapticEngine) IsMutedForAudio() bool {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[bool](objref.IDOf(he), objc.RegisterName("isMutedForAudio"))
 	return _r
 }
 
 // IsMutedForHaptics reports whether default is false.
 func (he *HapticEngine) IsMutedForHaptics() bool {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[bool](objref.IDOf(he), objc.RegisterName("isMutedForHaptics"))
 	return _r
 }
 
 // IsAutoShutdownEnabled reports whether when auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed.
 func (he *HapticEngine) IsAutoShutdownEnabled() bool {
+	defer runtime.KeepAlive(he)
 	_r := objc.Send[bool](objref.IDOf(he), objc.RegisterName("isAutoShutdownEnabled"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -143,6 +145,7 @@ func (ngmcg *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsY(secon
 
 // Alpha returns scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
 func (ngmcg *NNGramMatrixCalculationGradient) Alpha() float32 {
+	defer runtime.KeepAlive(ngmcg)
 	_r := objc.Send[float32](objref.IDOf(ngmcg), objc.RegisterName("alpha"))
 	return _r
 }

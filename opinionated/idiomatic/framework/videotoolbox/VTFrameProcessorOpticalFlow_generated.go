@@ -5,6 +5,7 @@
 package videotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func frameProcessorOpticalFlowAdopt(id objc.ID) *FrameProcessorOpticalFlow {
 
 // Description returns the object's -description text.
 func (fpof *FrameProcessorOpticalFlow) Description() string {
+	defer runtime.KeepAlive(fpof)
 	return rt.Description(objref.IDOf(fpof))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpof *FrameProcessorOpticalFlow) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpof)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpof), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpof *FrameProcessorOpticalFlow) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpof)
 	return rt.IsKind(objref.IDOf(fpof), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpof *FrameProcessorOpticalFlow) String() string {
+	defer runtime.KeepAlive(fpof)
 	return rt.Description(objref.IDOf(fpof))
 }
 

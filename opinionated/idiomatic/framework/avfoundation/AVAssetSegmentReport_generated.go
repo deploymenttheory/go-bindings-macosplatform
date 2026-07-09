@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetSegmentReportAdopt(id objc.ID) *AssetSegmentReport {
 
 // Description returns the object's -description text.
 func (asr *AssetSegmentReport) Description() string {
+	defer runtime.KeepAlive(asr)
 	return rt.Description(objref.IDOf(asr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asr *AssetSegmentReport) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asr *AssetSegmentReport) IsKind(className string) bool {
+	defer runtime.KeepAlive(asr)
 	return rt.IsKind(objref.IDOf(asr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asr *AssetSegmentReport) String() string {
+	defer runtime.KeepAlive(asr)
 	return rt.Description(objref.IDOf(asr))
 }
 
@@ -74,6 +81,7 @@ func NewAssetSegmentReport() *AssetSegmentReport {
 
 // SegmentType returns a segment type of the segment data.
 func (asr *AssetSegmentReport) SegmentType() AssetSegmentType {
+	defer runtime.KeepAlive(asr)
 	_r := objc.Send[AssetSegmentType](objref.IDOf(asr), objc.RegisterName("segmentType"))
 	return _r
 }
@@ -82,6 +90,7 @@ func (asr *AssetSegmentReport) SegmentType() AssetSegmentType {
 //
 // TrackReports returns the collection as a Go slice.
 func (asr *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
+	defer runtime.KeepAlive(asr)
 	_arr := objc.Send[objc.ID](objref.IDOf(asr), objc.RegisterName("trackReports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetSegmentTrackReport { return AssetSegmentTrackReportFromID(_id) })
 }

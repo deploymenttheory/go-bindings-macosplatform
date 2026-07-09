@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fetchResultAdopt(id objc.ID) *FetchResult {
 
 // Description returns the object's -description text.
 func (fr *FetchResult) Description() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fr *FetchResult) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fr *FetchResult) IsKind(className string) bool {
+	defer runtime.KeepAlive(fr)
 	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fr *FetchResult) String() string {
+	defer runtime.KeepAlive(fr)
 	return rt.Description(objref.IDOf(fr))
 }
 
@@ -74,12 +81,14 @@ func NewFetchResult() *FetchResult {
 
 // Value returns the value.
 func (fr *FetchResult) Value() obj.Object {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // CurrentHistoryToken returns the current history token.
-func (fr *FetchResult) CurrentHistoryToken() obj.Object {
+func (fr *FetchResult) CurrentHistoryToken() []byte {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("currentHistoryToken"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

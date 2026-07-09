@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTL4RenderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *MTL4RenderPip
 
 // Description returns the object's -description text.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) Description() string {
+	defer runtime.KeepAlive(mrpcad)
 	return rt.Description(objref.IDOf(mrpcad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrpcad)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrpcad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrpcad)
 	return rt.IsKind(objref.IDOf(mrpcad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) String() string {
+	defer runtime.KeepAlive(mrpcad)
 	return rt.Description(objref.IDOf(mrpcad))
 }
 
@@ -126,59 +133,69 @@ func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) WithWriteMask(writeMa
 
 // Reset resets this descriptor to its default state.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) Reset() {
+	defer runtime.KeepAlive(mrpcad)
 	objc.Send[objc.ID](objref.IDOf(mrpcad), objc.RegisterName("reset"))
 }
 
 // PixelFormat returns configures the pixel format. This property defaults to “MTLPixelFormatInvalid“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[PixelFormat](objref.IDOf(mrpcad), objc.RegisterName("pixelFormat"))
 	return _r
 }
 
 // BlendingState returns configure the blend state for color attachments the pipeline state uses. This property's default value is “MTL4BlendStateDisabled“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) BlendingState() MTL4BlendState {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[MTL4BlendState](objref.IDOf(mrpcad), objc.RegisterName("blendingState"))
 	return _r
 }
 
 // SourceRGBBlendFactor returns configures the source RGB blend factor. This property defaults to “MTLBlendFactorOne“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) SourceRGBBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(mrpcad), objc.RegisterName("sourceRGBBlendFactor"))
 	return _r
 }
 
 // DestinationRGBBlendFactor returns configures the destination RGB blend factor. This property defaults to “MTLBlendFactorZero“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) DestinationRGBBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(mrpcad), objc.RegisterName("destinationRGBBlendFactor"))
 	return _r
 }
 
 // RgbBlendOperation returns configures the RGB blend operation. This property defaults to “MTLBlendOperationAdd“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) RgbBlendOperation() BlendOperation {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[BlendOperation](objref.IDOf(mrpcad), objc.RegisterName("rgbBlendOperation"))
 	return _r
 }
 
 // SourceAlphaBlendFactor returns configures the source-alpha blend factor. This property defaults to “MTLBlendFactorOne“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) SourceAlphaBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(mrpcad), objc.RegisterName("sourceAlphaBlendFactor"))
 	return _r
 }
 
 // DestinationAlphaBlendFactor returns configures the destination-alpha blend factor. This property defaults to “MTLBlendFactorZero“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) DestinationAlphaBlendFactor() BlendFactor {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[BlendFactor](objref.IDOf(mrpcad), objc.RegisterName("destinationAlphaBlendFactor"))
 	return _r
 }
 
 // AlphaBlendOperation returns configures the alpha blending operation. This property defaults to “MTLBlendOperationAdd“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) AlphaBlendOperation() BlendOperation {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[BlendOperation](objref.IDOf(mrpcad), objc.RegisterName("alphaBlendOperation"))
 	return _r
 }
 
 // WriteMask returns configures the color write mask. This property defaults to “MTLColorWriteMaskAll“.
 func (mrpcad *MTL4RenderPipelineColorAttachmentDescriptor) WriteMask() ColorWriteMask {
+	defer runtime.KeepAlive(mrpcad)
 	_r := objc.Send[ColorWriteMask](objref.IDOf(mrpcad), objc.RegisterName("writeMask"))
 	return _r
 }

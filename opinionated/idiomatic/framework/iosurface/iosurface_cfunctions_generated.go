@@ -497,12 +497,12 @@ func IOSurfaceRemoveValue(buffer obj.Object, key obj.Object) {
 var _fnIOSurfaceSetOwnershipIdentity func(objc.ID, int, int, uint32) int32
 
 // IOSurfaceSetOwnershipIdentity calls the IOSurface framework function IOSurfaceSetOwnershipIdentity.
-func IOSurfaceSetOwnershipIdentity(buffer obj.Object, task_id_token int, newLedgerTag int, newLedgerOptions uint32) int {
+func IOSurfaceSetOwnershipIdentity(buffer obj.Object, taskIdToken int, newLedgerTag int, newLedgerOptions uint32) int {
 	_loadOnce.Do(_loadLibrary)
 	if _fnIOSurfaceSetOwnershipIdentity == nil {
 		ebipurego.RegisterLibFunc(&_fnIOSurfaceSetOwnershipIdentity, _lib, "IOSurfaceSetOwnershipIdentity")
 	}
-	return int(_fnIOSurfaceSetOwnershipIdentity(objref.IDOf(buffer), task_id_token, newLedgerTag, newLedgerOptions))
+	return int(_fnIOSurfaceSetOwnershipIdentity(objref.IDOf(buffer), taskIdToken, newLedgerTag, newLedgerOptions))
 }
 
 var _fnIOSurfaceSetPurgeable func(objc.ID, uint32, unsafe.Pointer) int32

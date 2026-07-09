@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRVCRunModeClusterChangeToModeParamsAdopt(id objc.ID) *MTRRVCRunModeClust
 
 // Description returns the object's -description text.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) Description() string {
+	defer runtime.KeepAlive(mrmcctmp)
 	return rt.Description(objref.IDOf(mrmcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mrmcctmp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mrmcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mrmcctmp)
 	return rt.IsKind(objref.IDOf(mrmcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) String() string {
+	defer runtime.KeepAlive(mrmcctmp)
 	return rt.Description(objref.IDOf(mrmcctmp))
 }
 
@@ -72,36 +80,42 @@ func NewMTRRVCRunModeClusterChangeToModeParams() *MTRRVCRunModeClusterChangeToMo
 
 // WithNewMode sets the new mode.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(newMode)
 	objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mrmcctmp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mrmcctmp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mrmcctmp
 }
 
 // NewMode returns the new mode.
-func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) NewMode() obj.Object {
+func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) NewMode() *foundation.Number {
+	defer runtime.KeepAlive(mrmcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("getNewMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mrmcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mrmcctmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

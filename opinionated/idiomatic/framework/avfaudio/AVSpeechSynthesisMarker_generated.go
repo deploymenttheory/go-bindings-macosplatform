@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func speechSynthesisMarkerAdopt(id objc.ID) *SpeechSynthesisMarker {
 
 // Description returns the object's -description text.
 func (ssm *SpeechSynthesisMarker) Description() string {
+	defer runtime.KeepAlive(ssm)
 	return rt.Description(objref.IDOf(ssm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ssm *SpeechSynthesisMarker) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ssm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ssm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ssm *SpeechSynthesisMarker) IsKind(className string) bool {
+	defer runtime.KeepAlive(ssm)
 	return rt.IsKind(objref.IDOf(ssm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ssm *SpeechSynthesisMarker) String() string {
+	defer runtime.KeepAlive(ssm)
 	return rt.Description(objref.IDOf(ssm))
 }
 
@@ -141,24 +148,28 @@ func (ssm *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMa
 
 // Mark returns the mark.
 func (ssm *SpeechSynthesisMarker) Mark() SpeechSynthesisMarkerMark {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[SpeechSynthesisMarkerMark](objref.IDOf(ssm), objc.RegisterName("mark"))
 	return _r
 }
 
 // ByteSampleOffset returns byte offset into the associated audio buffer
 func (ssm *SpeechSynthesisMarker) ByteSampleOffset() int {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[int](objref.IDOf(ssm), objc.RegisterName("byteSampleOffset"))
 	return _r
 }
 
 // TextRange returns the location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
 func (ssm *SpeechSynthesisMarker) TextRange() foundation.NSRange {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(ssm), objc.RegisterName("textRange"))
 	return _r
 }
 
 // BookmarkName returns the bookmark name.
 func (ssm *SpeechSynthesisMarker) BookmarkName() string {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("bookmarkName"))
 	if _r == 0 {
 		return ""
@@ -168,6 +179,7 @@ func (ssm *SpeechSynthesisMarker) BookmarkName() string {
 
 // Phoneme returns the phoneme.
 func (ssm *SpeechSynthesisMarker) Phoneme() string {
+	defer runtime.KeepAlive(ssm)
 	_r := objc.Send[objc.ID](objref.IDOf(ssm), objc.RegisterName("phoneme"))
 	if _r == 0 {
 		return ""

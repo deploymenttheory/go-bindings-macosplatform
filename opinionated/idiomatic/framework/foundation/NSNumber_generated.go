@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,6 +52,7 @@ func numberAdopt(id objc.ID) *Number {
 
 // NewNumberWithCoder creates a new Number.
 func NewNumberWithCoder(coder *Coder) *Number {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSNumber")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return numberAdopt(_id)
@@ -167,25 +170,31 @@ func (n *Number) WithObservationInfo(observationInfo unsafe.Pointer) *Number {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (n *Number) WithScriptingProperties(scriptingProperties obj.Object) *Number {
-	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (n *Number) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Number {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return n
 }
 
 // Compare returns an NSComparisonResult value that indicates whether the number object’s value is greater than, equal to, or less than a given number.
 func (n *Number) Compare(otherNumber *Number) ComparisonResult {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(otherNumber)
 	_r := objc.Send[ComparisonResult](objref.IDOf(n), objc.RegisterName("compare:"), objref.IDOf(otherNumber))
 	return _r
 }
 
 // IsEqualToNumber returns a Boolean value that indicates whether the number object’s value and a given number are equal.
 func (n *Number) IsEqualToNumber(number *Number) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(number)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("isEqualToNumber:"), objref.IDOf(number))
 	return _r
 }
 
 // DescriptionWithLocale returns a string that represents the contents of the number object for a given locale.
 func (n *Number) DescriptionWithLocale(locale obj.Object) string {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -195,96 +204,112 @@ func (n *Number) DescriptionWithLocale(locale obj.Object) string {
 
 // CharValue returns the char value.
 func (n *Number) CharValue() int8 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int8](objref.IDOf(n), objc.RegisterName("charValue"))
 	return _r
 }
 
 // UnsignedCharValue returns the unsigned char value.
 func (n *Number) UnsignedCharValue() uint8 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[uint8](objref.IDOf(n), objc.RegisterName("unsignedCharValue"))
 	return _r
 }
 
 // ShortValue returns the short value.
 func (n *Number) ShortValue() int16 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int16](objref.IDOf(n), objc.RegisterName("shortValue"))
 	return _r
 }
 
 // UnsignedShortValue returns the unsigned short value.
 func (n *Number) UnsignedShortValue() uint16 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[uint16](objref.IDOf(n), objc.RegisterName("unsignedShortValue"))
 	return _r
 }
 
 // IntValue returns the int value.
 func (n *Number) IntValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("intValue"))
 	return _r
 }
 
 // UnsignedIntValue returns the unsigned int value.
 func (n *Number) UnsignedIntValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntValue"))
 	return _r
 }
 
 // LongValue returns the long value.
 func (n *Number) LongValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("longValue"))
 	return _r
 }
 
 // UnsignedLongValue returns the unsigned long value.
 func (n *Number) UnsignedLongValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedLongValue"))
 	return _r
 }
 
 // LongLongValue returns the long long value.
 func (n *Number) LongLongValue() int64 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int64](objref.IDOf(n), objc.RegisterName("longLongValue"))
 	return _r
 }
 
 // UnsignedLongLongValue returns the unsigned long long value.
 func (n *Number) UnsignedLongLongValue() uint64 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[uint64](objref.IDOf(n), objc.RegisterName("unsignedLongLongValue"))
 	return _r
 }
 
 // FloatValue returns the float value.
 func (n *Number) FloatValue() float32 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[float32](objref.IDOf(n), objc.RegisterName("floatValue"))
 	return _r
 }
 
 // DoubleValue returns the double value.
 func (n *Number) DoubleValue() float64 {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[float64](objref.IDOf(n), objc.RegisterName("doubleValue"))
 	return _r
 }
 
 // BoolValue wraps the corresponding Objective-C method.
 func (n *Number) BoolValue() bool {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[bool](objref.IDOf(n), objc.RegisterName("boolValue"))
 	return _r
 }
 
 // IntegerValue returns the integer value.
 func (n *Number) IntegerValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("integerValue"))
 	return _r
 }
 
 // UnsignedIntegerValue returns the unsigned integer value.
 func (n *Number) UnsignedIntegerValue() int {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntegerValue"))
 	return _r
 }
 
 // StringValue returns the string value.
 func (n *Number) StringValue() string {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""

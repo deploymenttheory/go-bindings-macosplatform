@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKFilterBrowserPanelAdopt(id objc.ID) *IKFilterBrowserPanel {
 
 // Description returns the object's -description text.
 func (ifbp *IKFilterBrowserPanel) Description() string {
+	defer runtime.KeepAlive(ifbp)
 	return rt.Description(objref.IDOf(ifbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ifbp *IKFilterBrowserPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ifbp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ifbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ifbp *IKFilterBrowserPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(ifbp)
 	return rt.IsKind(objref.IDOf(ifbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ifbp *IKFilterBrowserPanel) String() string {
+	defer runtime.KeepAlive(ifbp)
 	return rt.Description(objref.IDOf(ifbp))
 }
 
@@ -80,6 +87,7 @@ func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
 
 // FilterName returns the name of the filter that is currently selected in the filter browser.
 func (ifbp *IKFilterBrowserPanel) FilterName() string {
+	defer runtime.KeepAlive(ifbp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

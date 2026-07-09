@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func pickerUpdateConfigurationAdopt(id objc.ID) *PickerUpdateConfiguration {
 
 // Description returns the object's -description text.
 func (puc *PickerUpdateConfiguration) Description() string {
+	defer runtime.KeepAlive(puc)
 	return rt.Description(objref.IDOf(puc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (puc *PickerUpdateConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(puc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(puc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (puc *PickerUpdateConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(puc)
 	return rt.IsKind(objref.IDOf(puc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (puc *PickerUpdateConfiguration) String() string {
+	defer runtime.KeepAlive(puc)
 	return rt.Description(objref.IDOf(puc))
 }
 
@@ -80,6 +87,7 @@ func (puc *PickerUpdateConfiguration) WithSelectionLimit(selectionLimit int) *Pi
 
 // SelectionLimit returns the maximum number of assets that can be selected.
 func (puc *PickerUpdateConfiguration) SelectionLimit() int {
+	defer runtime.KeepAlive(puc)
 	_r := objc.Send[int](objref.IDOf(puc), objc.RegisterName("selectionLimit"))
 	return _r
 }

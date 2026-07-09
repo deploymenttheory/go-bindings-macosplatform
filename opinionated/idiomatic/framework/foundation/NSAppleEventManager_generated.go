@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func appleEventManagerAdopt(id objc.ID) *AppleEventManager {
 
 // Description returns the object's -description text.
 func (aem *AppleEventManager) Description() string {
+	defer runtime.KeepAlive(aem)
 	return rt.Description(objref.IDOf(aem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aem *AppleEventManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aem)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aem *AppleEventManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(aem)
 	return rt.IsKind(objref.IDOf(aem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aem *AppleEventManager) String() string {
+	defer runtime.KeepAlive(aem)
 	return rt.Description(objref.IDOf(aem))
 }
 
@@ -81,52 +87,64 @@ func (aem *AppleEventManager) WithObservationInfo(observationInfo unsafe.Pointer
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (aem *AppleEventManager) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventManager {
-	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (aem *AppleEventManager) WithScriptingProperties(scriptingProperties map[string]obj.Object) *AppleEventManager {
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return aem
 }
 
 // RemoveEventHandlerForEventClassAndEventID if an Apple event handler has been registered for the event specified by eventClass and eventID, removes it.
 func (aem *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventClass int, eventID int) {
+	defer runtime.KeepAlive(aem)
 	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("removeEventHandlerForEventClass:andEventID:"), eventClass, eventID)
 }
 
 // SuspendCurrentAppleEvent returns suspends the handling of the current event and returns an ID that must be used to resume the handling of the event if an Apple event is being handled on the current thread.
 func (aem *AppleEventManager) SuspendCurrentAppleEvent() obj.Object {
+	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("suspendCurrentAppleEvent"))
 	return obj.Wrap(_r)
 }
 
 // AppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the descriptor for the event whose handling was suspended.
 func (aem *AppleEventManager) AppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
+	defer runtime.KeepAlive(aem)
+	defer runtime.KeepAlive(suspensionID)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("appleEventForSuspensionID:"), objref.IDOf(suspensionID))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ReplyAppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the corresponding reply event descriptor.
 func (aem *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
+	defer runtime.KeepAlive(aem)
+	defer runtime.KeepAlive(suspensionID)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("replyAppleEventForSuspensionID:"), objref.IDOf(suspensionID))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // SetCurrentAppleEventAndReplyEventWithSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, sets the values that will be returned by subsequent invocations of currentAppleEvent and currentReplyAppleEvent to be the event whose handling was suspended and its corresponding reply event, respectively.
 func (aem *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID obj.Object) {
+	defer runtime.KeepAlive(aem)
+	defer runtime.KeepAlive(suspensionID)
 	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setCurrentAppleEventAndReplyEventWithSuspensionID:"), objref.IDOf(suspensionID))
 }
 
 // ResumeWithSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.
 func (aem *AppleEventManager) ResumeWithSuspensionID(suspensionID obj.Object) {
+	defer runtime.KeepAlive(aem)
+	defer runtime.KeepAlive(suspensionID)
 	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("resumeWithSuspensionID:"), objref.IDOf(suspensionID))
 }
 
 // CurrentAppleEvent returns the current apple event.
 func (aem *AppleEventManager) CurrentAppleEvent() *AppleEventDescriptor {
+	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("currentAppleEvent"))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // CurrentReplyAppleEvent returns the current reply apple event.
 func (aem *AppleEventManager) CurrentReplyAppleEvent() *AppleEventDescriptor {
+	defer runtime.KeepAlive(aem)
 	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("currentReplyAppleEvent"))
 	return AppleEventDescriptorFromID(_r)
 }

@@ -358,8 +358,8 @@ func (o *NSDateFormatter) AMSymbol() *NSString {
 	return NSStringFromID(_ret)
 }
 
-func (o *NSDateFormatter) SetAMSymbol(aMSymbol *NSString) {
-	o.Ptr().Send(_nSDateFormatterSelSetAMSymbol, aMSymbol.Ptr())
+func (o *NSDateFormatter) SetAMSymbol(amSymbol *NSString) {
+	o.Ptr().Send(_nSDateFormatterSelSetAMSymbol, amSymbol.Ptr())
 }
 
 func (o *NSDateFormatter) PMSymbol() *NSString {
@@ -370,8 +370,8 @@ func (o *NSDateFormatter) PMSymbol() *NSString {
 	return NSStringFromID(_ret)
 }
 
-func (o *NSDateFormatter) SetPMSymbol(pMSymbol *NSString) {
-	o.Ptr().Send(_nSDateFormatterSelSetPMSymbol, pMSymbol.Ptr())
+func (o *NSDateFormatter) SetPMSymbol(pmSymbol *NSString) {
+	o.Ptr().Send(_nSDateFormatterSelSetPMSymbol, pmSymbol.Ptr())
 }
 
 func (o *NSDateFormatter) LongEraSymbols() *NSArray[*NSString] {

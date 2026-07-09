@@ -85,7 +85,8 @@ func TestMethodGolden(t *testing.T) {
 	}{
 		{"method_scalar", view.Method{
 			Recv: "(x *Array) ", GoName: "Count", RetSig: " int",
-			Dispatch: view.Dispatch{Call: `objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))`, RetKind: view.RetScalar},
+			Dispatch:  view.Dispatch{Call: `objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))`, RetKind: view.RetScalar},
+			KeepAlive: []string{"x"},
 		}},
 		{"method_object_guard", view.Method{
 			Recv: "(x *Array) ", GoName: "ObjectAtIndex", ParamStr: "index int", RetSig: " obj.Object",
@@ -106,10 +107,11 @@ func TestMethodGolden(t *testing.T) {
 		{"method_outparam", view.Method{
 			Recv: "(x *Serializer) ", GoName: "PropertyList", ParamStr: "data obj.Object", RetSig: " (obj.Object, PropertyListFormat, error)",
 			Dispatch: view.Dispatch{
-				Call:    `objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListWithData:format:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))`,
-				Error:   true, RetKind: view.RetObject, RetWrap: "obj.Wrap(%s)", RetZero: "nil",
+				Call:  `objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListWithData:format:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))`,
+				Error: true, RetKind: view.RetObject, RetWrap: "obj.Wrap(%s)", RetZero: "nil",
 				Outs: []view.DispatchOut{{GoName: "_out0", GoType: "PropertyListFormat", Zero: "0"}},
 			},
+			KeepAlive: []string{"x", "data"},
 		}},
 	}
 	for _, c := range cases {
@@ -136,6 +138,7 @@ func TestMainThreadGolden(t *testing.T) {
 				RetKind: view.RetObject, RetWrap: "obj.Wrap(%s)", RetZero: "nil",
 			},
 			MainThread: true, RetVars: []string{"_mainthread0"}, RetTypes: []string{"obj.Object"},
+			KeepAlive: []string{"x"},
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -184,6 +187,7 @@ func TestMainThreadGolden(t *testing.T) {
 func TestAsyncMethodGolden(t *testing.T) {
 	got, err := AsyncMethod(view.AsyncMethod{
 		Recv: "(x *Machine) ", GoName: "Start", ParamStr: "ctx context.Context",
+		KeepAlive:     []string{"x"},
 		ClosureParams: []string{"_p0 objc.ID"},
 		SendCall:      `objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithCompletionHandler:"), _block)`,
 		ErrConvExpr:   "errkit.FromObjC(purego.NSErrorToError(_p0))",
@@ -213,6 +217,7 @@ func TestSliceMethodGolden(t *testing.T) {
 		Recv: "(x *Array) ", GoName: "ComponentsSeparatedByString", RecvExpr: "objref.IDOf(x)",
 		Selector: "componentsSeparatedByString:", ElemGoType: "string",
 		ConvClosure: "func(_id objc.ID) string { return purego.GoString(_id) }",
+		KeepAlive:   []string{"x"},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -234,7 +239,8 @@ func TestSliceMethodGolden(t *testing.T) {
 func TestBoolNSErrorMethodGolden(t *testing.T) {
 	got, err := BoolNSErrorMethod(view.BoolNSErrorMethod{
 		Recv: "(x *Machine) ", GoName: "Validate", RecvExpr: "objref.IDOf(x)",
-		Selector: "validateWithError:",
+		Selector:  "validateWithError:",
+		KeepAlive: []string{"x"},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -287,8 +293,8 @@ func TestFuncsGolden(t *testing.T) {
 			CommentLine: "// SecItemDelete reports an error if the Security framework function SecItemDelete fails.\n",
 			ABIParams:   []string{"objc.ID"}, ABIRet: "int32",
 			SigParams: []string{"query obj.Object"}, RetSig: " error",
-			Kind: view.FuncOSStatus,
-			Call: "_fnSecItemDelete(objref.IDOf(query))",
+			Kind:    view.FuncOSStatus,
+			Call:    "_fnSecItemDelete(objref.IDOf(query))",
 			FailRet: "_err", OkRet: "nil",
 		},
 		{
@@ -301,6 +307,18 @@ func TestFuncsGolden(t *testing.T) {
 			PreLines: []string{"var _cfErr unsafe.Pointer"},
 			Call:     "_fnCFBundlePreflightExecutable(objref.IDOf(bundle), unsafe.Pointer(&_cfErr))",
 			Fail:     "!_ok",
+		},
+		{
+			GoName: "VcpuCreate", CName: "hv_vcpu_create", VarName: "_fnVcpuCreate",
+			CommentLine: "// VcpuCreate reports an error if the Hypervisor framework function hv_vcpu_create fails.\n",
+			ABIParams:   []string{"unsafe.Pointer", "unsafe.Pointer", "unsafe.Pointer"}, ABIRet: "int32",
+			RetSig:   " (vcpu uint64, exit *HvVcpuExitT, err error)",
+			Kind:     view.FuncStatusCode,
+			PreLines: []string{"var _out0 uint64", "var _out1 *HvVcpuExitT"},
+			Call:     "_fnVcpuCreate(unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), nil)",
+			ErrExpr:  `errkit.FromCode("HypervisorReturnDomain", int64(_rc), 0)`,
+			FailRet:  "0, nil, _err",
+			OkRet:    "_out0, _out1, nil",
 		},
 	}
 	got, err := Funcs(funcs)

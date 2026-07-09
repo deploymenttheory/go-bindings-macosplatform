@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDeviceEnergyManagementClusterForecastStructAdopt(id objc.ID) *MTRDeviceE
 
 // Description returns the object's -description text.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) Description() string {
+	defer runtime.KeepAlive(mdemcfs)
 	return rt.Description(objref.IDOf(mdemcfs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemcfs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemcfs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemcfs)
 	return rt.IsKind(objref.IDOf(mdemcfs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) String() string {
+	defer runtime.KeepAlive(mdemcfs)
 	return rt.Description(objref.IDOf(mdemcfs))
 }
 
@@ -72,107 +80,126 @@ func NewMTRDeviceEnergyManagementClusterForecastStruct() *MTRDeviceEnergyManagem
 
 // WithForecastID sets the forecast ID.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(forecastID)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 	return mdemcfs
 }
 
 // WithActiveSlotNumber sets the active slot number.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithActiveSlotNumber(activeSlotNumber obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(activeSlotNumber)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setActiveSlotNumber:"), objref.IDOf(activeSlotNumber))
 	return mdemcfs
 }
 
 // WithStartTime sets the start time.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithStartTime(startTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(startTime)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mdemcfs
 }
 
 // WithEndTime sets the end time.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithEndTime(endTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(endTime)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return mdemcfs
 }
 
 // WithEarliestStartTime sets the earliest start time.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithEarliestStartTime(earliestStartTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(earliestStartTime)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setEarliestStartTime:"), objref.IDOf(earliestStartTime))
 	return mdemcfs
 }
 
 // WithLatestEndTime sets the latest end time.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithLatestEndTime(latestEndTime obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(latestEndTime)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setLatestEndTime:"), objref.IDOf(latestEndTime))
 	return mdemcfs
 }
 
 // WithIsPausable sets the is pausable.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithIsPausable(isPausable obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(isPausable)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setIsPausable:"), objref.IDOf(isPausable))
 	return mdemcfs
 }
 
 // WithForecastUpdateReason sets the forecast update reason.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastUpdateReason(forecastUpdateReason obj.Object) *MTRDeviceEnergyManagementClusterForecastStruct {
+	defer runtime.KeepAlive(forecastUpdateReason)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setForecastUpdateReason:"), objref.IDOf(forecastUpdateReason))
 	return mdemcfs
 }
 
 // ForecastID returns the forecast ID.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) ForecastID() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) ForecastID() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("forecastID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ActiveSlotNumber returns the active slot number.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) ActiveSlotNumber() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) ActiveSlotNumber() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("activeSlotNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartTime returns the start time.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) StartTime() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) StartTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("startTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndTime returns the end time.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) EndTime() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) EndTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("endTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EarliestStartTime returns the earliest start time.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) EarliestStartTime() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) EarliestStartTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("earliestStartTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LatestEndTime returns the latest end time.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) LatestEndTime() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) LatestEndTime() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("latestEndTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsPausable returns the is pausable.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) IsPausable() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) IsPausable() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("isPausable"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Slots returns the slots.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) Slots() obj.Object {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("slots"))
 	return obj.Wrap(_r)
 }
 
 // SetSlots wraps the corresponding Objective-C method.
 func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) SetSlots(slots obj.Object) {
+	defer runtime.KeepAlive(mdemcfs)
+	defer runtime.KeepAlive(slots)
 	objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("setSlots:"), objref.IDOf(slots))
 }
 
 // ForecastUpdateReason returns the forecast update reason.
-func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() obj.Object {
+func (mdemcfs *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() *foundation.Number {
+	defer runtime.KeepAlive(mdemcfs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcfs), objc.RegisterName("forecastUpdateReason"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

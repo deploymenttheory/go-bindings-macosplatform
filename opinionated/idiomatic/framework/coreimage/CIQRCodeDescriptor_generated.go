@@ -5,9 +5,11 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,32 +49,36 @@ func qRCodeDescriptorAdopt(id objc.ID) *QRCodeDescriptor {
 }
 
 // NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel initializes a QR code descriptor for the given payload and parameters.
-func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload obj.Object, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
+func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload []byte, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), objref.IDOf(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), rt.BytesToNSData(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
 	return qRCodeDescriptorAdopt(_id)
 }
 
 // ErrorCorrectedPayload returns the error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
-func (qcd *QRCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+func (qcd *QRCodeDescriptor) ErrorCorrectedPayload() []byte {
+	defer runtime.KeepAlive(qcd)
 	_r := objc.Send[objc.ID](objref.IDOf(qcd), objc.RegisterName("errorCorrectedPayload"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // SymbolVersion returns the version of the QR code which corresponds to the size of the QR code symbol. ISO/IEC 18004 defines versions from 1 to 40, where a higher symbol version indicates a larger data-carrying capacity. This field is required in order to properly interpret the error corrected payload.
 func (qcd *QRCodeDescriptor) SymbolVersion() int {
+	defer runtime.KeepAlive(qcd)
 	_r := objc.Send[int](objref.IDOf(qcd), objc.RegisterName("symbolVersion"))
 	return _r
 }
 
 // MaskPattern returns the data mask pattern for the QR code symbol. QR Codes support eight data mask patterns, which are used to avoid large black or large white areas inside the symbol body. Valid values range from 0 to 7.
 func (qcd *QRCodeDescriptor) MaskPattern() uint8 {
+	defer runtime.KeepAlive(qcd)
 	_r := objc.Send[uint8](objref.IDOf(qcd), objc.RegisterName("maskPattern"))
 	return _r
 }
 
 // ErrorCorrectionLevel returns the error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
 func (qcd *QRCodeDescriptor) ErrorCorrectionLevel() QRCodeErrorCorrectionLevel {
+	defer runtime.KeepAlive(qcd)
 	_r := objc.Send[QRCodeErrorCorrectionLevel](objref.IDOf(qcd), objc.RegisterName("errorCorrectionLevel"))
 	return _r
 }

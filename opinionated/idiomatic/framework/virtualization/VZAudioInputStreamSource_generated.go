@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func audioInputStreamSourceAdopt(id objc.ID) *AudioInputStreamSource {
 
 // Description returns the object's -description text.
 func (aiss *AudioInputStreamSource) Description() string {
+	defer runtime.KeepAlive(aiss)
 	return rt.Description(objref.IDOf(aiss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aiss *AudioInputStreamSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aiss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aiss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aiss *AudioInputStreamSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(aiss)
 	return rt.IsKind(objref.IDOf(aiss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aiss *AudioInputStreamSource) String() string {
+	defer runtime.KeepAlive(aiss)
 	return rt.Description(objref.IDOf(aiss))
 }
 

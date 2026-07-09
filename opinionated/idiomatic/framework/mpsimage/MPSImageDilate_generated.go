@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -59,12 +61,14 @@ func (id_ *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
 
 // KernelHeight returns the height of the filter window. Must be an odd number.
 func (id_ *ImageDilate) KernelHeight() int {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
 // KernelWidth returns the width of the filter window. Must be an odd number.
 func (id_ *ImageDilate) KernelWidth() int {
+	defer runtime.KeepAlive(id_)
 	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("kernelWidth"))
 	return _r
 }

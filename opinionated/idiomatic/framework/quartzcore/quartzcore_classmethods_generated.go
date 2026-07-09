@@ -6,11 +6,13 @@ package quartzcore
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,8 +53,8 @@ func LayoutManager() *ConstraintLayoutManager {
 }
 
 // HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale creates EDR metadata for HDR10 content based on mastering display color information and content light levels.
-func HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData obj.Object, contentData obj.Object, scale float32) *EDRMetadata {
-	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HDR10MetadataWithDisplayInfo:contentInfo:opticalOutputScale:"), objref.IDOf(displayData), objref.IDOf(contentData), scale)
+func HDR10MetadataWithDisplayInfoContentInfoOpticalOutputScale(displayData []byte, contentData []byte, scale float32) *EDRMetadata {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HDR10MetadataWithDisplayInfo:contentInfo:opticalOutputScale:"), rt.BytesToNSData(displayData), rt.BytesToNSData(contentData), scale)
 	return EDRMetadataFromID(_r)
 }
 
@@ -63,8 +65,8 @@ func HDR10MetadataWithMinLuminanceMaxLuminanceOpticalOutputScale(minNits float32
 }
 
 // HLGMetadataWithAmbientViewingEnvironment wraps the corresponding Objective-C method.
-func HLGMetadataWithAmbientViewingEnvironment(data obj.Object) *EDRMetadata {
-	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HLGMetadataWithAmbientViewingEnvironment:"), objref.IDOf(data))
+func HLGMetadataWithAmbientViewingEnvironment(data []byte) *EDRMetadata {
+	_r := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("HLGMetadataWithAmbientViewingEnvironment:"), rt.BytesToNSData(data))
 	return EDRMetadataFromID(_r)
 }
 
@@ -112,18 +114,20 @@ func NeedsDisplayForKey(key string) bool {
 
 // CornerCurveExpansionFactor wraps the corresponding Objective-C method.
 func CornerCurveExpansionFactor(curve obj.Object) float64 {
+	defer runtime.KeepAlive(curve)
 	_r := objc.Send[float64](objc.ID(_class("CALayer")), objc.RegisterName("cornerCurveExpansionFactor:"), objref.IDOf(curve))
 	return _r
 }
 
 // LayerWithRemoteClientId initializes a layer with a remote client ID.
-func LayerWithRemoteClientId(client_id uint32) *Layer {
-	_r := objc.Send[objc.ID](objc.ID(_class("CALayer")), objc.RegisterName("layerWithRemoteClientId:"), client_id)
+func LayerWithRemoteClientId(clientId uint32) *Layer {
+	_r := objc.Send[objc.ID](objc.ID(_class("CALayer")), objc.RegisterName("layerWithRemoteClientId:"), clientId)
 	return LayerFromID(_r)
 }
 
 // FunctionWithName creates and returns a new instance of CAMediaTimingFunction configured with the predefined timing function specified by name.
 func FunctionWithName(name obj.Object) *MediaTimingFunction {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("CAMediaTimingFunction")), objc.RegisterName("functionWithName:"), objref.IDOf(name))
 	return MediaTimingFunctionFromID(_r)
 }
@@ -148,6 +152,7 @@ func SharedServer() *RemoteLayerServer {
 
 // RendererWithCGLContextOptions creates and returns a CARenderer instance with the render target specified by the Core OpenGL context.
 func RendererWithCGLContextOptions(ctx unsafe.Pointer, dict obj.Object) *Renderer {
+	defer runtime.KeepAlive(dict)
 	_r := objc.Send[objc.ID](objc.ID(_class("CARenderer")), objc.RegisterName("rendererWithCGLContext:options:"), ctx, objref.IDOf(dict))
 	return RendererFromID(_r)
 }
@@ -202,6 +207,7 @@ func AnimationTimingFunction() *MediaTimingFunction {
 
 // SetAnimationTimingFunction sets the timing function used for all animations within this transaction group.
 func SetAnimationTimingFunction(function *MediaTimingFunction) {
+	defer runtime.KeepAlive(function)
 	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setAnimationTimingFunction:"), objref.IDOf(function))
 }
 
@@ -241,11 +247,13 @@ func ValueForKey(key string) obj.Object {
 
 // SetValueForKey sets the arbitrary keyed-data for the specified key.
 func SetValueForKey(anObject obj.Object, key string) {
+	defer runtime.KeepAlive(anObject)
 	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setValue:forKey:"), objref.IDOf(anObject), purego.NSString(key))
 }
 
 // CAValueFunctionFunctionWithName returns the value function object identified by the name.
 func CAValueFunctionFunctionWithName(name obj.Object) *ValueFunction {
+	defer runtime.KeepAlive(name)
 	_r := objc.Send[objc.ID](objc.ID(_class("CAValueFunction")), objc.RegisterName("functionWithName:"), objref.IDOf(name))
 	return ValueFunctionFromID(_r)
 }

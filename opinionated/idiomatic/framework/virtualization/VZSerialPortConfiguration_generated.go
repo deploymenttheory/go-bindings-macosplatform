@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func serialPortConfigurationAdopt(id objc.ID) *SerialPortConfiguration {
 
 // Description returns the object's -description text.
 func (spc *SerialPortConfiguration) Description() string {
+	defer runtime.KeepAlive(spc)
 	return rt.Description(objref.IDOf(spc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (spc *SerialPortConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(spc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(spc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (spc *SerialPortConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(spc)
 	return rt.IsKind(objref.IDOf(spc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (spc *SerialPortConfiguration) String() string {
+	defer runtime.KeepAlive(spc)
 	return rt.Description(objref.IDOf(spc))
 }
 
 // WithAttachment sets the object that defines how the configuration of the virtual machine’s serial port interfaces.
 func (spc *SerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *SerialPortConfiguration {
+	defer runtime.KeepAlive(attachment)
 	objc.Send[objc.ID](objref.IDOf(spc), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return spc
 }
 
 // Attachment returns the attachment.
 func (spc *SerialPortConfiguration) Attachment() *SerialPortAttachment {
+	defer runtime.KeepAlive(spc)
 	_r := objc.Send[objc.ID](objref.IDOf(spc), objc.RegisterName("attachment"))
 	return SerialPortAttachmentFromID(_r)
 }

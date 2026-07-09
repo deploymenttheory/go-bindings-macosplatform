@@ -5,10 +5,12 @@
 package scenekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -50,22 +52,27 @@ func lightAdopt(id objc.ID) *Light {
 
 // Description returns the object's -description text.
 func (l *Light) Description() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (l *Light) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (l *Light) IsKind(className string) bool {
+	defer runtime.KeepAlive(l)
 	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (l *Light) String() string {
+	defer runtime.KeepAlive(l)
 	return rt.Description(objref.IDOf(l))
 }
 
@@ -77,12 +84,14 @@ func NewLight() *Light {
 
 // WithType sets a constant identifying the general behavior of the light.
 func (l *Light) WithType(type_ obj.Object) *Light {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return l
 }
 
 // WithColor sets the color of the light. Animatable.
 func (l *Light) WithColor(color obj.Object) *Light {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return l
 }
@@ -113,6 +122,7 @@ func (l *Light) WithCastsShadow(castsShadow bool) *Light {
 
 // WithShadowColor sets the color of shadows cast by the light. Animatable.
 func (l *Light) WithShadowColor(shadowColor obj.Object) *Light {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return l
 }
@@ -232,8 +242,8 @@ func (l *Light) WithSpotOuterAngle(spotOuterAngle float64) *Light {
 }
 
 // WithIESProfileURL sets the URL for a file that contains photometry data describing the intended appearance of the light.
-func (l *Light) WithIESProfileURL(iESProfileURL string) *Light {
-	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setIESProfileURL:"), rt.FileURL(iESProfileURL))
+func (l *Light) WithIESProfileURL(iesProfileURL string) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setIESProfileURL:"), rt.FileURL(iesProfileURL))
 	return l
 }
 
@@ -317,31 +327,36 @@ func (l *Light) WithCategoryBitMask(categoryBitMask int) *Light {
 }
 
 // Type specifies the receiver's type. Defaults to SCNLightTypeOmni on iOS 8 and later, and on macOS 10.10 and later (otherwise defaults to SCNLightTypeAmbient).
-func (l *Light) Type() obj.Object {
+func (l *Light) Type() *foundation.String {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("type"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Color specifies the receiver's color (NSColor or CGColorRef). Animatable. Defaults to white. The initial value is a NSColor. The renderer multiplies the light's color is by the color derived from the light's temperature.
 func (l *Light) Color() obj.Object {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // Temperature specifies the receiver's temperature. This specifies the temperature of the light in Kelvin. The renderer multiplies the light's color by the color derived from the light's temperature. Defaults to 6500 (pure white). Animatable.
 func (l *Light) Temperature() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("temperature"))
 	return _r
 }
 
 // Intensity specifies the receiver's intensity. This intensity is used to modulate the light color. When used with a physically-based material, this corresponds to the luminous flux of the light, expressed in lumens (lm). Defaults to 1000. Animatable.
 func (l *Light) Intensity() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("intensity"))
 	return _r
 }
 
 // Name determines the name of the receiver.
 func (l *Light) Name() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -351,168 +366,196 @@ func (l *Light) Name() string {
 
 // CastsShadow reports whether the receiver casts a shadow. Defaults to false. Shadows are only supported by spot and directional lights.
 func (l *Light) CastsShadow() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("castsShadow"))
 	return _r
 }
 
 // ShadowColor specifies the color (CGColorRef or NSColor) of the shadow casted by the receiver. Defaults to black. Animatable. On iOS 9 or earlier and macOS 10.11 or earlier, this defaults to black 50% transparent.
 func (l *Light) ShadowColor() obj.Object {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("shadowColor"))
 	return obj.Wrap(_r)
 }
 
 // ShadowRadius specifies the sample radius used to render the receiver’s shadow. Default value is 3.0. Animatable.
 func (l *Light) ShadowRadius() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("shadowRadius"))
 	return _r
 }
 
 // ShadowMapSize specifies the size of the shadow map. The larger the shadow map is the more precise the shadows are but the slower the computation is. If set to {0,0} the size of the shadow map is automatically chosen. Defaults to {0,0}.
 func (l *Light) ShadowMapSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(l), objc.RegisterName("shadowMapSize"))
 	return _r
 }
 
 // ShadowSampleCount specifies the number of sample per fragment to compute the shadow map. Defaults to 0. On macOS 10.11 or earlier, the shadowSampleCount defaults to 16. On iOS 9 or earlier it defaults to 1.0. On macOS 10.12, iOS 10 and greater, when the shadowSampleCount is set to 0, a default sample count is chosen depending on the platform.
 func (l *Light) ShadowSampleCount() int {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("shadowSampleCount"))
 	return _r
 }
 
 // ShadowMode returns specified the mode to use to cast shadows. See above for the available modes and their description. Defaults to SCNShadowModeDefered on 10.9 and before, defaults to SCNShadowModeForward otherwise.
 func (l *Light) ShadowMode() ShadowMode {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[ShadowMode](objref.IDOf(l), objc.RegisterName("shadowMode"))
 	return _r
 }
 
 // ShadowBias specifies the correction to apply to the shadow map to correct acne artefacts. It is multiplied by an implementation-specific value to create a constant depth offset. Defaults to 1.0
 func (l *Light) ShadowBias() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("shadowBias"))
 	return _r
 }
 
 // AutomaticallyAdjustsShadowProjection reports whether specifies if the shadow map projection should be done automatically or manually by the user. Defaults to true.
 func (l *Light) AutomaticallyAdjustsShadowProjection() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("automaticallyAdjustsShadowProjection"))
 	return _r
 }
 
 // MaximumShadowDistance specifies the maximum distance from the viewpoint from which the shadows for the receiver light won't be computed. Defaults to 100.0.
 func (l *Light) MaximumShadowDistance() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("maximumShadowDistance"))
 	return _r
 }
 
 // ForcesBackFaceCasters reports whether render only back faces of the shadow caster when enabled. Defaults to false. This is a behavior change from previous releases.
 func (l *Light) ForcesBackFaceCasters() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("forcesBackFaceCasters"))
 	return _r
 }
 
 // SampleDistributedShadowMaps reports whether use the sample distribution of the main rendering to better fit the shadow frusta. Defaults to false.
 func (l *Light) SampleDistributedShadowMaps() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("sampleDistributedShadowMaps"))
 	return _r
 }
 
 // ShadowCascadeCount specifies the number of distinct shadow maps that will be computed for the receiver light. Defaults to 1. Maximum is 4.
 func (l *Light) ShadowCascadeCount() int {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("shadowCascadeCount"))
 	return _r
 }
 
 // ShadowCascadeSplittingFactor specifies a factor to interpolate between linear splitting (0) and logarithmic splitting (1). Defaults to 0.15.
 func (l *Light) ShadowCascadeSplittingFactor() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("shadowCascadeSplittingFactor"))
 	return _r
 }
 
 // OrthographicScale specifies the orthographic scale used to render from the directional light into the shadow map. Defaults to 1. This is only applicable for directional lights.
 func (l *Light) OrthographicScale() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("orthographicScale"))
 	return _r
 }
 
 // ZNear specifies the minimal distance between the light and the surface to cast shadow on. If a surface is closer to the light than this minimal distance, then the surface won't be shadowed. The near value must be different than zero. Animatable. Defaults to 1.
 func (l *Light) ZNear() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("zNear"))
 	return _r
 }
 
 // ZFar specifies the maximal distance between the light and a visible surface to cast shadow on. If a surface is further from the light than this maximal distance, then the surface won't be shadowed. Animatable. Defaults to 100.
 func (l *Light) ZFar() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("zFar"))
 	return _r
 }
 
 // AttenuationStartDistance returns the distance at which the attenuation starts (Omni or Spot light types only). Animatable. Defaults to 0.
 func (l *Light) AttenuationStartDistance() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("attenuationStartDistance"))
 	return _r
 }
 
 // AttenuationEndDistance returns the distance at which the attenuation ends (Omni or Spot light types only). Animatable. Defaults to 0.
 func (l *Light) AttenuationEndDistance() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("attenuationEndDistance"))
 	return _r
 }
 
 // AttenuationFalloffExponent specifies the attenuation between the start and end attenuation distances. 0 means a constant attenuation, 1 a linear attenuation and 2 a quadratic attenuation, but any positive value will work (Omni or Spot light types only). Animatable. Defaults to 2.
 func (l *Light) AttenuationFalloffExponent() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("attenuationFalloffExponent"))
 	return _r
 }
 
 // SpotInnerAngle returns the angle in degrees between the spot direction and the lit element below which the lighting is at full strength. Animatable. Defaults to 0.
 func (l *Light) SpotInnerAngle() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("spotInnerAngle"))
 	return _r
 }
 
 // SpotOuterAngle returns the angle in degrees between the spot direction and the lit element after which the lighting is at zero strength. Animatable. Defaults to 45 degrees.
 func (l *Light) SpotOuterAngle() float64 {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("spotOuterAngle"))
 	return _r
 }
 
 // IESProfileURL specifies the IES file from which the shape, direction, and intensity of illumination is determined. Defaults to nil.
-func (l *Light) IESProfileURL() obj.Object {
+func (l *Light) IESProfileURL() string {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("IESProfileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // SphericalHarmonicsCoefficients returns the receiver's spherical harmonics coefficients. Currently spherical harmonics are only supported by light probes (SCNLightTypeProbe). The data is an array of 27 32-bit floating-point values, containing three non-interleaved data sets corresponding to the red, green, and blue sets of coefficients.
-func (l *Light) SphericalHarmonicsCoefficients() obj.Object {
+func (l *Light) SphericalHarmonicsCoefficients() []byte {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("sphericalHarmonicsCoefficients"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ProbeType returns the probe type.
 func (l *Light) ProbeType() LightProbeType {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LightProbeType](objref.IDOf(l), objc.RegisterName("probeType"))
 	return _r
 }
 
 // ProbeUpdateType returns the probe update type.
 func (l *Light) ProbeUpdateType() LightProbeUpdateType {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LightProbeUpdateType](objref.IDOf(l), objc.RegisterName("probeUpdateType"))
 	return _r
 }
 
 // ParallaxCorrectionEnabled wraps the corresponding Objective-C method.
 func (l *Light) ParallaxCorrectionEnabled() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("parallaxCorrectionEnabled"))
 	return _r
 }
 
 // ProbeEnvironment returns the probe environment.
 func (l *Light) ProbeEnvironment() *MaterialProperty {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("probeEnvironment"))
 	return MaterialPropertyFromID(_r)
 }
 
 // AreaType determines the shape of a light of type SCNLightTypeArea. Defaults to SCNLightAreaTypeRectangle.
 func (l *Light) AreaType() LightAreaType {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[LightAreaType](objref.IDOf(l), objc.RegisterName("areaType"))
 	return _r
 }
@@ -521,41 +564,49 @@ func (l *Light) AreaType() LightAreaType {
 //
 // AreaPolygonVertices returns the collection as a Go slice.
 func (l *Light) AreaPolygonVertices() []obj.Object {
+	defer runtime.KeepAlive(l)
 	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("areaPolygonVertices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DrawsArea reports whether the shape of a light of type SCNLightTypeArea is drawn in the scene. Defaults to true.
 func (l *Light) DrawsArea() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("drawsArea"))
 	return _r
 }
 
 // DoubleSided reports whether a light of type SCNLightTypeArea is double-sided. Defaults false. Area lights of type SCNLightAreaTypeRectangle or SCNLightAreaTypePolygon emit light along the -Z axis. When set to true, they also emit light along the +Z axis.
 func (l *Light) DoubleSided() bool {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("doubleSided"))
 	return _r
 }
 
 // Gobo specifies the gobo (or "cookie") of the light, used to control the shape of emitted light. Gobos are only supported by spot lights.
 func (l *Light) Gobo() *MaterialProperty {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("gobo"))
 	return MaterialPropertyFromID(_r)
 }
 
 // CategoryBitMask determines the node categories that will be lit by the receiver. Defaults to all bit set.
 func (l *Light) CategoryBitMask() int {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
 // AttributeForKey returns the value of a lighting attribute.
 func (l *Light) AttributeForKey(key string) obj.Object {
+	defer runtime.KeepAlive(l)
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("attributeForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetAttributeForKey sets the value for a lighting attribute.
 func (l *Light) SetAttributeForKey(attribute obj.Object, key string) {
+	defer runtime.KeepAlive(l)
+	defer runtime.KeepAlive(attribute)
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setAttribute:forKey:"), objref.IDOf(attribute), purego.NSString(key))
 }

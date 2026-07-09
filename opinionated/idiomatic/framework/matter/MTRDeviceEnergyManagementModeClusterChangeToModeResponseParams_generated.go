@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsAdopt(id objc
 
 // Description returns the object's -description text.
 func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Description() string {
+	defer runtime.KeepAlive(mdemmcctmrp)
 	return rt.Description(objref.IDOf(mdemmcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdemmcctmrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdemmcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdemmcctmrp)
 	return rt.IsKind(objref.IDOf(mdemmcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) String() string {
+	defer runtime.KeepAlive(mdemmcctmrp)
 	return rt.Description(objref.IDOf(mdemmcctmrp))
 }
 
-// NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams, err error) {
+// NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithResponseValue initialize an MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,6 +87,7 @@ func NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithRespon
 
 // WithStatus sets the status.
 func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdemmcctmrp
 }
@@ -91,13 +99,15 @@ func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParam
 }
 
 // Status returns the status.
-func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Status() obj.Object {
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mdemmcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StatusText returns the status text.
 func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) StatusText() string {
+	defer runtime.KeepAlive(mdemmcctmrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""

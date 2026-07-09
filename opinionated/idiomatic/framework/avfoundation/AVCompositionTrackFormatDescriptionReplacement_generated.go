@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func compositionTrackFormatDescriptionReplacementAdopt(id objc.ID) *CompositionT
 
 // Description returns the object's -description text.
 func (ctfdr *CompositionTrackFormatDescriptionReplacement) Description() string {
+	defer runtime.KeepAlive(ctfdr)
 	return rt.Description(objref.IDOf(ctfdr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ctfdr *CompositionTrackFormatDescriptionReplacement) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ctfdr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ctfdr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ctfdr *CompositionTrackFormatDescriptionReplacement) IsKind(className string) bool {
+	defer runtime.KeepAlive(ctfdr)
 	return rt.IsKind(objref.IDOf(ctfdr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ctfdr *CompositionTrackFormatDescriptionReplacement) String() string {
+	defer runtime.KeepAlive(ctfdr)
 	return rt.Description(objref.IDOf(ctfdr))
 }
 
@@ -74,12 +81,14 @@ func NewCompositionTrackFormatDescriptionReplacement() *CompositionTrackFormatDe
 
 // OriginalFormatDescription returns the original format description.
 func (ctfdr *CompositionTrackFormatDescriptionReplacement) OriginalFormatDescription() obj.Object {
+	defer runtime.KeepAlive(ctfdr)
 	_r := objc.Send[objc.ID](objref.IDOf(ctfdr), objc.RegisterName("originalFormatDescription"))
 	return obj.Wrap(_r)
 }
 
 // ReplacementFormatDescription returns the replacement format description.
 func (ctfdr *CompositionTrackFormatDescriptionReplacement) ReplacementFormatDescription() obj.Object {
+	defer runtime.KeepAlive(ctfdr)
 	_r := objc.Send[objc.ID](objref.IDOf(ctfdr), objc.RegisterName("replacementFormatDescription"))
 	return obj.Wrap(_r)
 }

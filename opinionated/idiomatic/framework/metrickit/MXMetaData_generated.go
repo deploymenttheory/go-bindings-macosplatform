@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func metaDataAdopt(id objc.ID) *MetaData {
 
 // Description returns the object's -description text.
 func (md *MetaData) Description() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (md *MetaData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(md)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (md *MetaData) IsKind(className string) bool {
+	defer runtime.KeepAlive(md)
 	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (md *MetaData) String() string {
+	defer runtime.KeepAlive(md)
 	return rt.Description(objref.IDOf(md))
 }
 
@@ -73,19 +80,22 @@ func NewMetaData() *MetaData {
 }
 
 // JSONRepresentation returns the contents of the metadata in JSON format.
-func (md *MetaData) JSONRepresentation() obj.Object {
+func (md *MetaData) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DictionaryRepresentation returns the contents of the metadata as a dictionary.
 func (md *MetaData) DictionaryRepresentation() obj.Object {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // RegionFormat returns an NSString designating the region format associated with the application.
 func (md *MetaData) RegionFormat() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("regionFormat"))
 	if _r == 0 {
 		return ""
@@ -95,6 +105,7 @@ func (md *MetaData) RegionFormat() string {
 
 // OSVersion returns an NSString designating the OS version associated with the device.
 func (md *MetaData) OSVersion() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("osVersion"))
 	if _r == 0 {
 		return ""
@@ -104,6 +115,7 @@ func (md *MetaData) OSVersion() string {
 
 // DeviceType returns an NSString designating the device type associated with this device.
 func (md *MetaData) DeviceType() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("deviceType"))
 	if _r == 0 {
 		return ""
@@ -113,6 +125,7 @@ func (md *MetaData) DeviceType() string {
 
 // ApplicationBuildVersion returns an NSString designating the app build version.
 func (md *MetaData) ApplicationBuildVersion() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("applicationBuildVersion"))
 	if _r == 0 {
 		return ""
@@ -122,6 +135,7 @@ func (md *MetaData) ApplicationBuildVersion() string {
 
 // PlatformArchitecture returns an NSString designating the current architecture.
 func (md *MetaData) PlatformArchitecture() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("platformArchitecture"))
 	if _r == 0 {
 		return ""
@@ -131,24 +145,28 @@ func (md *MetaData) PlatformArchitecture() string {
 
 // LowPowerModeEnabled wraps the corresponding Objective-C method.
 func (md *MetaData) LowPowerModeEnabled() bool {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("lowPowerModeEnabled"))
 	return _r
 }
 
 // IsTestFlightApp reports whether the object is test flight app.
 func (md *MetaData) IsTestFlightApp() bool {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("isTestFlightApp"))
 	return _r
 }
 
 // Pid returns the pid.
 func (md *MetaData) Pid() int {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("pid"))
 	return _r
 }
 
 // BundleIdentifier returns the bundle identifier.
 func (md *MetaData) BundleIdentifier() string {
+	defer runtime.KeepAlive(md)
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""

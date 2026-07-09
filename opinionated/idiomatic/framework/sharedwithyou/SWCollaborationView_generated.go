@@ -6,9 +6,11 @@ package sharedwithyou
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,27 +51,33 @@ func collaborationViewAdopt(id objc.ID) *CollaborationView {
 
 // Description returns the object's -description text.
 func (cv *CollaborationView) Description() string {
+	defer runtime.KeepAlive(cv)
 	return rt.Description(objref.IDOf(cv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cv *CollaborationView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cv *CollaborationView) IsKind(className string) bool {
+	defer runtime.KeepAlive(cv)
 	return rt.IsKind(objref.IDOf(cv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cv *CollaborationView) String() string {
+	defer runtime.KeepAlive(cv)
 	return rt.Description(objref.IDOf(cv))
 }
 
 // NewCollaborationViewWithItemProvider creates and initializes a collaboration view.
 func NewCollaborationViewWithItemProvider(itemProvider obj.Object) *CollaborationView {
+	defer runtime.KeepAlive(itemProvider)
 	var _mainthread0 *CollaborationView
 	purego.Main(func() {
 		_mainthread0 = func() *CollaborationView {
@@ -86,6 +94,18 @@ func (cv *CollaborationView) WithActiveParticipantCount(activeParticipantCount i
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setActiveParticipantCount:"), activeParticipantCount)
 	})
+	return cv
+}
+
+// WithDelegate sets the delegate object for the collaboration view.
+func (cv *CollaborationView) WithDelegate(delegate CollaborationViewDelegate) *CollaborationView {
+	_shim := newCollaborationViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return cv
 }
 
@@ -107,6 +127,7 @@ func (cv *CollaborationView) WithHeaderSubtitle(headerSubtitle string) *Collabor
 
 // WithHeaderImage sets the image that the system displays in the header.
 func (cv *CollaborationView) WithHeaderImage(headerImage obj.Object) *CollaborationView {
+	defer runtime.KeepAlive(headerImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHeaderImage:"), objref.IDOf(headerImage))
 	})
@@ -123,6 +144,8 @@ func (cv *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *Co
 
 // SetContentView sets the content view.
 func (cv *CollaborationView) SetContentView(detailViewListContentView obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(detailViewListContentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentView:"), objref.IDOf(detailViewListContentView))
 	})
@@ -133,6 +156,7 @@ func (cv *CollaborationView) SetContentView(detailViewListContentView obj.Object
 //
 // DismissPopover blocks until the operation completes or ctx is cancelled.
 func (cv *CollaborationView) DismissPopover(ctx context.Context) error {
+	defer runtime.KeepAlive(cv)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -148,6 +172,7 @@ func (cv *CollaborationView) DismissPopover(ctx context.Context) error {
 
 // SetShowManageButton a Boolean value the system uses to show or hide the default manage-participants button in the collaboration popover.
 func (cv *CollaborationView) SetShowManageButton(showManageButton bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShowManageButton:"), showManageButton)
 	})
@@ -156,6 +181,7 @@ func (cv *CollaborationView) SetShowManageButton(showManageButton bool) {
 
 // ActiveParticipantCount returns the active participant count.
 func (cv *CollaborationView) ActiveParticipantCount() int {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -169,6 +195,7 @@ func (cv *CollaborationView) ActiveParticipantCount() int {
 
 // HeaderTitle returns the header title.
 func (cv *CollaborationView) HeaderTitle() string {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -185,6 +212,7 @@ func (cv *CollaborationView) HeaderTitle() string {
 
 // HeaderSubtitle returns the header subtitle.
 func (cv *CollaborationView) HeaderSubtitle() string {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -201,6 +229,7 @@ func (cv *CollaborationView) HeaderSubtitle() string {
 
 // HeaderImage returns the header image.
 func (cv *CollaborationView) HeaderImage() obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -214,6 +243,7 @@ func (cv *CollaborationView) HeaderImage() obj.Object {
 
 // MenuFormRepresentation returns the menu form representation.
 func (cv *CollaborationView) MenuFormRepresentation() obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -227,6 +257,7 @@ func (cv *CollaborationView) MenuFormRepresentation() obj.Object {
 
 // ManageButtonTitle sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
 func (cv *CollaborationView) ManageButtonTitle() string {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {

@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rAWProcessorPixelBufferManagerAdopt(id objc.ID) *RAWProcessorPixelBufferMan
 
 // Description returns the object's -description text.
 func (rppbm *RAWProcessorPixelBufferManager) Description() string {
+	defer runtime.KeepAlive(rppbm)
 	return rt.Description(objref.IDOf(rppbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rppbm *RAWProcessorPixelBufferManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rppbm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rppbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rppbm *RAWProcessorPixelBufferManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(rppbm)
 	return rt.IsKind(objref.IDOf(rppbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rppbm *RAWProcessorPixelBufferManager) String() string {
+	defer runtime.KeepAlive(rppbm)
 	return rt.Description(objref.IDOf(rppbm))
 }
 
@@ -73,13 +80,14 @@ func NewRAWProcessorPixelBufferManager() *RAWProcessorPixelBufferManager {
 }
 
 // WithPixelBufferAttributes sets a dictionary that contains the attributes Video Toolbox uses to create a pixel buffer for the video RAW processor.
-func (rppbm *RAWProcessorPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes obj.Object) *RAWProcessorPixelBufferManager {
-	objc.Send[objc.ID](objref.IDOf(rppbm), objc.RegisterName("setPixelBufferAttributes:"), objref.IDOf(pixelBufferAttributes))
+func (rppbm *RAWProcessorPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes map[string]obj.Object) *RAWProcessorPixelBufferManager {
+	objc.Send[objc.ID](objref.IDOf(rppbm), objc.RegisterName("setPixelBufferAttributes:"), rt.MapToDict(pixelBufferAttributes, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rppbm
 }
 
 // PixelBufferAttributes returns videoToolbox will use these attributes when creating a pixelBuffer for the RAW Processor. This can be updated by the processor before requesting a new pixelBuffer.
-func (rppbm *RAWProcessorPixelBufferManager) PixelBufferAttributes() obj.Object {
+func (rppbm *RAWProcessorPixelBufferManager) PixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(rppbm)
 	_r := objc.Send[objc.ID](objref.IDOf(rppbm), objc.RegisterName("pixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

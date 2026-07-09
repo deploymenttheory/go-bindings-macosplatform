@@ -6,6 +6,7 @@ package videotoolbox
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func superResolutionScalerConfigurationAdopt(id objc.ID) *SuperResolutionScalerC
 
 // Description returns the object's -description text.
 func (srsc *SuperResolutionScalerConfiguration) Description() string {
+	defer runtime.KeepAlive(srsc)
 	return rt.Description(objref.IDOf(srsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (srsc *SuperResolutionScalerConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(srsc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(srsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (srsc *SuperResolutionScalerConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(srsc)
 	return rt.IsKind(objref.IDOf(srsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (srsc *SuperResolutionScalerConfiguration) String() string {
+	defer runtime.KeepAlive(srsc)
 	return rt.Description(objref.IDOf(srsc))
 }
 
@@ -80,6 +86,7 @@ func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorIn
 //
 // DownloadConfigurationModel blocks until the operation completes or ctx is cancelled.
 func (srsc *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx context.Context) error {
+	defer runtime.KeepAlive(srsc)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -97,42 +104,49 @@ func (srsc *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx c
 
 // FrameWidth returns width of source frame in pixels.
 func (srsc *SuperResolutionScalerConfiguration) FrameWidth() int {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[int](objref.IDOf(srsc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
 // FrameHeight returns height of source frame in pixels.
 func (srsc *SuperResolutionScalerConfiguration) FrameHeight() int {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[int](objref.IDOf(srsc), objc.RegisterName("frameHeight"))
 	return _r
 }
 
 // InputType indicates the type of input.
 func (srsc *SuperResolutionScalerConfiguration) InputType() SuperResolutionScalerConfigurationInputType {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[SuperResolutionScalerConfigurationInputType](objref.IDOf(srsc), objc.RegisterName("inputType"))
 	return _r
 }
 
 // UsesPrecomputedFlow reports whether indicates that you provide optical flow.
 func (srsc *SuperResolutionScalerConfiguration) UsesPrecomputedFlow() bool {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[bool](objref.IDOf(srsc), objc.RegisterName("usesPrecomputedFlow"))
 	return _r
 }
 
 // ScaleFactor indicates the scale factor between input and output.
 func (srsc *SuperResolutionScalerConfiguration) ScaleFactor() int {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[int](objref.IDOf(srsc), objc.RegisterName("scaleFactor"))
 	return _r
 }
 
 // QualityPrioritization returns a parameter to control quality and performance levels. For more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“.
 func (srsc *SuperResolutionScalerConfiguration) QualityPrioritization() SuperResolutionScalerConfigurationQualityPrioritization {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[SuperResolutionScalerConfigurationQualityPrioritization](objref.IDOf(srsc), objc.RegisterName("qualityPrioritization"))
 	return _r
 }
 
 // Revision returns the specific algorithm or configuration revision you use to perform the request.
 func (srsc *SuperResolutionScalerConfiguration) Revision() SuperResolutionScalerConfigurationRevision {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[SuperResolutionScalerConfigurationRevision](objref.IDOf(srsc), objc.RegisterName("revision"))
 	return _r
 }
@@ -141,30 +155,35 @@ func (srsc *SuperResolutionScalerConfiguration) Revision() SuperResolutionScaler
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (srsc *SuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	defer runtime.KeepAlive(srsc)
 	_arr := objc.Send[objc.ID](objref.IDOf(srsc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (srsc *SuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
+func (srsc *SuperResolutionScalerConfiguration) SourcePixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[objc.ID](objref.IDOf(srsc), objc.RegisterName("sourcePixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (srsc *SuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
+func (srsc *SuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() map[string]obj.Object {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[objc.ID](objref.IDOf(srsc), objc.RegisterName("destinationPixelBufferAttributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ConfigurationModelStatus returns reports the download status of models that the system needs for the current configuration.
 func (srsc *SuperResolutionScalerConfiguration) ConfigurationModelStatus() SuperResolutionScalerConfigurationModelStatus {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[SuperResolutionScalerConfigurationModelStatus](objref.IDOf(srsc), objc.RegisterName("configurationModelStatus"))
 	return _r
 }
 
 // ConfigurationModelPercentageAvailable returns a floating point value between 0.0 and 1.0 indicating the percentage of required model assets that have been downloaded.
 func (srsc *SuperResolutionScalerConfiguration) ConfigurationModelPercentageAvailable() float32 {
+	defer runtime.KeepAlive(srsc)
 	_r := objc.Send[float32](objref.IDOf(srsc), objc.RegisterName("configurationModelPercentageAvailable"))
 	return _r
 }

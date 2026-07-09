@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,6 +59,7 @@ func (dffr *DOMCSSFontFaceRule) WithCSSText(cssText string) *DOMCSSFontFaceRule 
 
 // Style returns the style.
 func (dffr *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
+	defer runtime.KeepAlive(dffr)
 	_r := objc.Send[objc.ID](objref.IDOf(dffr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }

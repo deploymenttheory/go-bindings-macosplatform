@@ -5,6 +5,8 @@
 package findersync
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func finderSyncAdopt(id objc.ID) *FinderSync {
 
 // Description returns the object's -description text.
 func (fs *FinderSync) Description() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fs *FinderSync) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fs *FinderSync) IsKind(className string) bool {
+	defer runtime.KeepAlive(fs)
 	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fs *FinderSync) String() string {
+	defer runtime.KeepAlive(fs)
 	return rt.Description(objref.IDOf(fs))
 }
 

@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func symbolEffectOptionsAdopt(id objc.ID) *SymbolEffectOptions {
 
 // Description returns the object's -description text.
 func (seo *SymbolEffectOptions) Description() string {
+	defer runtime.KeepAlive(seo)
 	return rt.Description(objref.IDOf(seo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (seo *SymbolEffectOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(seo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(seo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (seo *SymbolEffectOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(seo)
 	return rt.IsKind(objref.IDOf(seo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (seo *SymbolEffectOptions) String() string {
+	defer runtime.KeepAlive(seo)
 	return rt.Description(objref.IDOf(seo))
 }
 
@@ -74,30 +81,36 @@ func NewSymbolEffectOptions() *SymbolEffectOptions {
 
 // OptionsWithRepeating returns a set of effect options that prefers to repeat indefinitely.
 func (seo *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
+	defer runtime.KeepAlive(seo)
 	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithNonRepeating returns a set of effect options that prefers to not repeat.
 func (seo *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
+	defer runtime.KeepAlive(seo)
 	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithNonRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithRepeatCount creates a set of effect options with a preferred repeat count.
 func (seo *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
+	defer runtime.KeepAlive(seo)
 	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithRepeatCount:"), count)
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithSpeed creates a set of effect options with a preferred speed multiplier.
 func (seo *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
+	defer runtime.KeepAlive(seo)
 	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithSpeed:"), speed)
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithRepeatBehavior return a copy of the options setting a preferred repeat behavior.
 func (seo *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
+	defer runtime.KeepAlive(seo)
+	defer runtime.KeepAlive(behavior)
 	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
 	return SymbolEffectOptionsFromID(_r)
 }

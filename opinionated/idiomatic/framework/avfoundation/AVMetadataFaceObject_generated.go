@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,30 +55,35 @@ func NewMetadataFaceObject() *MetadataFaceObject {
 
 // FaceID returns a unique number associated with the receiver. The value of this property is an NSInteger indicating the unique identifier of this face in the picture. When a new face enters the picture, it is assigned a new unique identifier. faceIDs are not re-used as faces leave the picture and new ones enter. Faces that leave the picture then re-enter are assigned a new faceID.
 func (mfo *MetadataFaceObject) FaceID() int {
+	defer runtime.KeepAlive(mfo)
 	_r := objc.Send[int](objref.IDOf(mfo), objc.RegisterName("faceID"))
 	return _r
 }
 
 // HasRollAngle reports whether a BOOL indicating whether the rollAngle property is valid for this receiver.
 func (mfo *MetadataFaceObject) HasRollAngle() bool {
+	defer runtime.KeepAlive(mfo)
 	_r := objc.Send[bool](objref.IDOf(mfo), objc.RegisterName("hasRollAngle"))
 	return _r
 }
 
 // RollAngle returns the roll angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of roll (or tilt) in degrees. A value of 0.0 indicates that the face is level in the picture. If -hasRollAngle returns NO, then reading this property throws an NSGenericException.
 func (mfo *MetadataFaceObject) RollAngle() float64 {
+	defer runtime.KeepAlive(mfo)
 	_r := objc.Send[float64](objref.IDOf(mfo), objc.RegisterName("rollAngle"))
 	return _r
 }
 
 // HasYawAngle reports whether a BOOL indicating whether the yawAngle property is valid for this receiver.
 func (mfo *MetadataFaceObject) HasYawAngle() bool {
+	defer runtime.KeepAlive(mfo)
 	_r := objc.Send[bool](objref.IDOf(mfo), objc.RegisterName("hasYawAngle"))
 	return _r
 }
 
 // YawAngle returns the yaw angle of the face in degrees. The value of this property is a CGFloat indicating the face's angle of yaw (or turn) in degrees. A value of 0.0 indicates that the face is straight on in the picture. If -hasYawAngle returns NO, then reading this property throws an NSGenericException.
 func (mfo *MetadataFaceObject) YawAngle() float64 {
+	defer runtime.KeepAlive(mfo)
 	_r := objc.Send[float64](objref.IDOf(mfo), objc.RegisterName("yawAngle"))
 	return _r
 }

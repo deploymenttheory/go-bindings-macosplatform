@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contentBlockerManagerAdopt(id objc.ID) *ContentBlockerManager {
 
 // Description returns the object's -description text.
 func (cbm *ContentBlockerManager) Description() string {
+	defer runtime.KeepAlive(cbm)
 	return rt.Description(objref.IDOf(cbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cbm *ContentBlockerManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cbm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cbm *ContentBlockerManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(cbm)
 	return rt.IsKind(objref.IDOf(cbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cbm *ContentBlockerManager) String() string {
+	defer runtime.KeepAlive(cbm)
 	return rt.Description(objref.IDOf(cbm))
 }
 

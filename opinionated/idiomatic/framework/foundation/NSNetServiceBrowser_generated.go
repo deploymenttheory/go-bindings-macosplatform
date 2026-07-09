@@ -5,10 +5,12 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +51,27 @@ func netServiceBrowserAdopt(id objc.ID) *NetServiceBrowser {
 
 // Description returns the object's -description text.
 func (nsb *NetServiceBrowser) Description() string {
+	defer runtime.KeepAlive(nsb)
 	return rt.Description(objref.IDOf(nsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nsb *NetServiceBrowser) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nsb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nsb *NetServiceBrowser) IsKind(className string) bool {
+	defer runtime.KeepAlive(nsb)
 	return rt.IsKind(objref.IDOf(nsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nsb *NetServiceBrowser) String() string {
+	defer runtime.KeepAlive(nsb)
 	return rt.Description(objref.IDOf(nsb))
 }
 
@@ -72,6 +79,16 @@ func (nsb *NetServiceBrowser) String() string {
 func NewNetServiceBrowser() *NetServiceBrowser {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSNetServiceBrowser")), objc.RegisterName("new"))
 	return netServiceBrowserAdopt(_id)
+}
+
+// WithDelegate sets the delegate.
+func (nsb *NetServiceBrowser) WithDelegate(delegate NetServiceBrowserDelegate) *NetServiceBrowser {
+	_shim := newNetServiceBrowserDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(nsb), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(nsb), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return nsb
 }
 
 // WithIncludesPeerToPeer sets the includes peer to peer.
@@ -87,43 +104,54 @@ func (nsb *NetServiceBrowser) WithObservationInfo(observationInfo unsafe.Pointer
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (nsb *NetServiceBrowser) WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser {
-	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (nsb *NetServiceBrowser) WithScriptingProperties(scriptingProperties map[string]obj.Object) *NetServiceBrowser {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nsb
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (nsb *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(nsb)
+	defer runtime.KeepAlive(aRunLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes from run loop for mode.
 func (nsb *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(nsb)
+	defer runtime.KeepAlive(aRunLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // SearchForBrowsableDomains wraps the corresponding Objective-C method.
 func (nsb *NetServiceBrowser) SearchForBrowsableDomains() {
+	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForBrowsableDomains"))
 }
 
 // SearchForRegistrationDomains wraps the corresponding Objective-C method.
 func (nsb *NetServiceBrowser) SearchForRegistrationDomains() {
+	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForRegistrationDomains"))
 }
 
 // SearchForServicesOfTypeInDomain wraps the corresponding Objective-C method.
 func (nsb *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
+	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForServicesOfType:inDomain:"), purego.NSString(type_), purego.NSString(domainString))
 }
 
 // Stop wraps the corresponding Objective-C method.
 func (nsb *NetServiceBrowser) Stop() {
+	defer runtime.KeepAlive(nsb)
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("stop"))
 }
 
 // IncludesPeerToPeer wraps the corresponding Objective-C method.
 func (nsb *NetServiceBrowser) IncludesPeerToPeer() bool {
+	defer runtime.KeepAlive(nsb)
 	_r := objc.Send[bool](objref.IDOf(nsb), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }

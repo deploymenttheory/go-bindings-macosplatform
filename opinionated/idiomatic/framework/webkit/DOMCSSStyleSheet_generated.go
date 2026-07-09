@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -57,46 +59,54 @@ func (dss *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
 
 // InsertRuleIndex inserts rule index.
 func (dss *DOMCSSStyleSheet) InsertRuleIndex(rule string, index int) int {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
 // DeleteRule deletes rule.
 func (dss *DOMCSSStyleSheet) DeleteRule(index int) {
+	defer runtime.KeepAlive(dss)
 	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("deleteRule:"), index)
 }
 
 // AddRuleStyleIndex adds rule style index.
 func (dss *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index int) int {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("addRule:style:index:"), purego.NSString(selector), purego.NSString(style), index)
 	return _r
 }
 
 // RemoveRule removes rule.
 func (dss *DOMCSSStyleSheet) RemoveRule(index int) {
+	defer runtime.KeepAlive(dss)
 	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("removeRule:"), index)
 }
 
 // OwnerRule returns the owner rule.
 func (dss *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("ownerRule"))
 	return DOMCSSRuleFromID(_r)
 }
 
 // CSSRules returns the CSS rules.
 func (dss *DOMCSSStyleSheet) CSSRules() *DOMCSSRuleList {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
 // Rules returns the rules.
 func (dss *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("rules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
 // InsertRule inserts rule.
 func (dss *DOMCSSStyleSheet) InsertRule(rule string, index int) int {
+	defer runtime.KeepAlive(dss)
 	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r
 }

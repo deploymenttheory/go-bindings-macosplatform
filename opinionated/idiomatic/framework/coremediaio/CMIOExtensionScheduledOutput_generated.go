@@ -5,6 +5,8 @@
 package coremediaio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func extensionScheduledOutputAdopt(id objc.ID) *ExtensionScheduledOutput {
 
 // Description returns the object's -description text.
 func (eso *ExtensionScheduledOutput) Description() string {
+	defer runtime.KeepAlive(eso)
 	return rt.Description(objref.IDOf(eso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (eso *ExtensionScheduledOutput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(eso)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(eso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (eso *ExtensionScheduledOutput) IsKind(className string) bool {
+	defer runtime.KeepAlive(eso)
 	return rt.IsKind(objref.IDOf(eso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (eso *ExtensionScheduledOutput) String() string {
+	defer runtime.KeepAlive(eso)
 	return rt.Description(objref.IDOf(eso))
 }
 
@@ -75,12 +82,14 @@ func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequence
 
 // SequenceNumber returns the buffer sequence number that was output.
 func (eso *ExtensionScheduledOutput) SequenceNumber() uint64 {
+	defer runtime.KeepAlive(eso)
 	_r := objc.Send[uint64](objref.IDOf(eso), objc.RegisterName("sequenceNumber"))
 	return _r
 }
 
 // HostTimeInNanoseconds returns the host time in nanoseconds when the buffer was output.
 func (eso *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
+	defer runtime.KeepAlive(eso)
 	_r := objc.Send[uint64](objref.IDOf(eso), objc.RegisterName("hostTimeInNanoseconds"))
 	return _r
 }

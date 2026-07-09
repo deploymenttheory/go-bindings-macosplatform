@@ -5,6 +5,8 @@
 package screencapturekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func shareableContentAdopt(id objc.ID) *ShareableContent {
 
 // Description returns the object's -description text.
 func (sc *ShareableContent) Description() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sc *ShareableContent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sc *ShareableContent) IsKind(className string) bool {
+	defer runtime.KeepAlive(sc)
 	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sc *ShareableContent) String() string {
+	defer runtime.KeepAlive(sc)
 	return rt.Description(objref.IDOf(sc))
 }
 
@@ -76,6 +83,7 @@ func NewShareableContent() *ShareableContent {
 //
 // Windows returns the collection as a Go slice.
 func (sc *ShareableContent) Windows() []*Window {
+	defer runtime.KeepAlive(sc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("windows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
@@ -84,6 +92,7 @@ func (sc *ShareableContent) Windows() []*Window {
 //
 // Displays returns the collection as a Go slice.
 func (sc *ShareableContent) Displays() []*Display {
+	defer runtime.KeepAlive(sc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Display { return DisplayFromID(_id) })
 }
@@ -92,6 +101,7 @@ func (sc *ShareableContent) Displays() []*Display {
 //
 // Applications returns the collection as a Go slice.
 func (sc *ShareableContent) Applications() []*RunningApplication {
+	defer runtime.KeepAlive(sc)
 	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("applications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }

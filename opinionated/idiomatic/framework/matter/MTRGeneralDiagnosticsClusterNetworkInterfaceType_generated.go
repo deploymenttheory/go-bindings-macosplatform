@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,30 +61,34 @@ func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithName(name s
 
 // WithIsOperational sets the is operational.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithIsOperational(isOperational obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	defer runtime.KeepAlive(isOperational)
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setIsOperational:"), objref.IDOf(isOperational))
 	return mgdcnit
 }
 
 // WithOffPremiseServicesReachableIPv4 sets the off premise services reachable i pv4.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	defer runtime.KeepAlive(offPremiseServicesReachableIPv4)
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setOffPremiseServicesReachableIPv4:"), objref.IDOf(offPremiseServicesReachableIPv4))
 	return mgdcnit
 }
 
 // WithOffPremiseServicesReachableIPv6 sets the off premise services reachable i pv6.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	defer runtime.KeepAlive(offPremiseServicesReachableIPv6)
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setOffPremiseServicesReachableIPv6:"), objref.IDOf(offPremiseServicesReachableIPv6))
 	return mgdcnit
 }
 
 // WithHardwareAddress sets the hardware address.
-func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithHardwareAddress(hardwareAddress obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
-	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setHardwareAddress:"), objref.IDOf(hardwareAddress))
+func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithHardwareAddress(hardwareAddress []byte) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setHardwareAddress:"), rt.BytesToNSData(hardwareAddress))
 	return mgdcnit
 }
 
 // WithType sets the type.
 func (mgdcnit *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithType(type_ obj.Object) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	defer runtime.KeepAlive(type_)
 	objc.Send[objc.ID](objref.IDOf(mgdcnit), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mgdcnit
 }

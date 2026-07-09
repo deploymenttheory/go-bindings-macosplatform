@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,9 @@ func mTRClusterThreadNetworkDirectoryAdopt(id objc.ID) *MTRClusterThreadNetworkD
 
 // NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThreadNetworkDirectory {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterThreadNetworkDirectoryAdopt(_id)
@@ -60,6 +65,9 @@ func NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *MTRDev
 //
 // GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mctnd *MTRClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, err error) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
 		err error
@@ -82,61 +90,82 @@ func (mctnd *MTRClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsEx
 }
 
 // ReadAttributePreferredExtendedPanIDWithParams reads attribute preferred extended pan ID with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributePreferredExtendedPanIDWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval writes attribute preferred extended pan ID with value expected value interval.
-func (mctnd *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mctnd *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams writes attribute preferred extended pan ID with value expected value interval params.
-func (mctnd *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mctnd *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThreadNetworksWithParams reads attribute thread networks with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeThreadNetworksWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeThreadNetworkTableSizeWithParams reads attribute thread network table size with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeThreadNetworkTableSizeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mctnd *MTRClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mctnd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mctnd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterThreadNetworkDirectory)(nil)

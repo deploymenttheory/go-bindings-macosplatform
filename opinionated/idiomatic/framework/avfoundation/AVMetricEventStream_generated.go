@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func metricEventStreamAdopt(id objc.ID) *MetricEventStream {
 
 // Description returns the object's -description text.
 func (mes *MetricEventStream) Description() string {
+	defer runtime.KeepAlive(mes)
 	return rt.Description(objref.IDOf(mes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mes *MetricEventStream) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mes)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mes *MetricEventStream) IsKind(className string) bool {
+	defer runtime.KeepAlive(mes)
 	return rt.IsKind(objref.IDOf(mes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mes *MetricEventStream) String() string {
+	defer runtime.KeepAlive(mes)
 	return rt.Description(objref.IDOf(mes))
 }
 
@@ -74,10 +81,12 @@ func NewMetricEventStream() *MetricEventStream {
 
 // SubscribeToMetricEvents subscribe to set of metric event classes. - Parameter metricEventClasses: Set of metric event classes to subscribe to.
 func (mes *MetricEventStream) SubscribeToMetricEvents(metricEventClasses []obj.Object) {
+	defer runtime.KeepAlive(mes)
 	objc.Send[objc.ID](objref.IDOf(mes), objc.RegisterName("subscribeToMetricEvents:"), purego.SliceToNSArray(metricEventClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SubscribeToAllMetricEvents subscribe to all metric event classes.
 func (mes *MetricEventStream) SubscribeToAllMetricEvents() {
+	defer runtime.KeepAlive(mes)
 	objc.Send[objc.ID](objref.IDOf(mes), objc.RegisterName("subscribeToAllMetricEvents"))
 }

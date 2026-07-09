@@ -5,6 +5,8 @@
 package mpscore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,69 +49,82 @@ func matrixAdopt(id objc.ID) *Matrix {
 
 // Description returns the object's -description text.
 func (m *Matrix) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Matrix) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Matrix) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Matrix) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSMatrix instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the matrix data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSMatrixes are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:. In such cases, 0 will be returned.
 func (m *Matrix) ResourceSize() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("resourceSize"))
 	return _r
 }
 
 // Rows returns the number of rows in a matrix in the MPSMatrix.
 func (m *Matrix) Rows() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("rows"))
 	return _r
 }
 
 // Columns returns the number of columns in a matrix in the MPSMatrix.
 func (m *Matrix) Columns() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("columns"))
 	return _r
 }
 
 // Matrices returns the number of matrices in the MPSMatrix.
 func (m *Matrix) Matrices() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("matrices"))
 	return _r
 }
 
 // DataType returns the type of the MPSMatrix data.
 func (m *Matrix) DataType() DataType {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[DataType](objref.IDOf(m), objc.RegisterName("dataType"))
 	return _r
 }
 
 // RowBytes returns the stride, in bytes, between corresponding elements of consecutive rows.
 func (m *Matrix) RowBytes() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("rowBytes"))
 	return _r
 }
 
 // MatrixBytes returns the stride, in bytes, between corresponding elements of consecutive matrices.
 func (m *Matrix) MatrixBytes() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("matrixBytes"))
 	return _r
 }
 
 // Offset returns byte-offset to the buffer where the matrix data begins - see
 func (m *Matrix) Offset() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("offset"))
 	return _r
 }

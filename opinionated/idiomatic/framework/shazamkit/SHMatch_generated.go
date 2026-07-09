@@ -5,6 +5,8 @@
 package shazamkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func matchAdopt(id objc.ID) *Match {
 
 // Description returns the object's -description text.
 func (m *Match) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Match) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Match) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Match) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
@@ -76,12 +83,14 @@ func NewMatch() *Match {
 //
 // MediaItems returns the collection as a Go slice.
 func (m *Match) MediaItems() []*MatchedMediaItem {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("mediaItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MatchedMediaItem { return MatchedMediaItemFromID(_id) })
 }
 
 // QuerySignature returns the query signature for the match.
 func (m *Match) QuerySignature() *Signature {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("querySignature"))
 	return SignatureFromID(_r)
 }

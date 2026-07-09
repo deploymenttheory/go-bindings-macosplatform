@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func lookAroundSnapshotAdopt(id objc.ID) *LookAroundSnapshot {
 
 // Description returns the object's -description text.
 func (las *LookAroundSnapshot) Description() string {
+	defer runtime.KeepAlive(las)
 	return rt.Description(objref.IDOf(las))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (las *LookAroundSnapshot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(las)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(las), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (las *LookAroundSnapshot) IsKind(className string) bool {
+	defer runtime.KeepAlive(las)
 	return rt.IsKind(objref.IDOf(las), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (las *LookAroundSnapshot) String() string {
+	defer runtime.KeepAlive(las)
 	return rt.Description(objref.IDOf(las))
 }
 
@@ -74,6 +81,7 @@ func NewLookAroundSnapshot() *LookAroundSnapshot {
 
 // Image returns the image.
 func (las *LookAroundSnapshot) Image() obj.Object {
+	defer runtime.KeepAlive(las)
 	_r := objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }

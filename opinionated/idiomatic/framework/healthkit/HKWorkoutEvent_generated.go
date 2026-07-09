@@ -5,7 +5,11 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +51,27 @@ func workoutEventAdopt(id objc.ID) *WorkoutEvent {
 
 // Description returns the object's -description text.
 func (we *WorkoutEvent) Description() string {
+	defer runtime.KeepAlive(we)
 	return rt.Description(objref.IDOf(we))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (we *WorkoutEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(we)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(we), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (we *WorkoutEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(we)
 	return rt.IsKind(objref.IDOf(we), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (we *WorkoutEvent) String() string {
+	defer runtime.KeepAlive(we)
 	return rt.Description(objref.IDOf(we))
 }
 
@@ -74,24 +83,28 @@ func NewWorkoutEvent() *WorkoutEvent {
 
 // Type represents the type of event that occurred during a workout.
 func (we *WorkoutEvent) Type() WorkoutEventType {
+	defer runtime.KeepAlive(we)
 	_r := objc.Send[WorkoutEventType](objref.IDOf(we), objc.RegisterName("type"))
 	return _r
 }
 
 // Date returns the date.
-func (we *WorkoutEvent) Date() obj.Object {
+func (we *WorkoutEvent) Date() time.Time {
+	defer runtime.KeepAlive(we)
 	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DateInterval returns date interval representing the time period for which the event is valid. Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
-func (we *WorkoutEvent) DateInterval() obj.Object {
+func (we *WorkoutEvent) DateInterval() *foundation.DateInterval {
+	defer runtime.KeepAlive(we)
 	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("dateInterval"))
-	return obj.Wrap(_r)
+	return foundation.DateIntervalFromID(_r)
 }
 
 // Metadata returns extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-func (we *WorkoutEvent) Metadata() obj.Object {
+func (we *WorkoutEvent) Metadata() map[string]obj.Object {
+	defer runtime.KeepAlive(we)
 	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("metadata"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

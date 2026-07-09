@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewTextObservation() *TextObservation {
 //
 // CharacterBoxes returns the collection as a Go slice.
 func (to *TextObservation) CharacterBoxes() []*RectangleObservation {
+	defer runtime.KeepAlive(to)
 	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("characterBoxes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RectangleObservation { return RectangleObservationFromID(_id) })
 }

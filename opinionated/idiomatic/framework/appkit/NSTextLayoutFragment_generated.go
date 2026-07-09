@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,27 +51,34 @@ func textLayoutFragmentAdopt(id objc.ID) *TextLayoutFragment {
 
 // Description returns the object's -description text.
 func (tlf *TextLayoutFragment) Description() string {
+	defer runtime.KeepAlive(tlf)
 	return rt.Description(objref.IDOf(tlf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tlf *TextLayoutFragment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tlf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tlf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tlf *TextLayoutFragment) IsKind(className string) bool {
+	defer runtime.KeepAlive(tlf)
 	return rt.IsKind(objref.IDOf(tlf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tlf *TextLayoutFragment) String() string {
+	defer runtime.KeepAlive(tlf)
 	return rt.Description(objref.IDOf(tlf))
 }
 
 // NewTextLayoutFragmentWithTextElementRange create a new layout fragment using the provided text element and range.
 func NewTextLayoutFragmentWithTextElementRange(textElement *TextElement, rangeInElement *TextRange) *TextLayoutFragment {
+	defer runtime.KeepAlive(textElement)
+	defer runtime.KeepAlive(rangeInElement)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutFragment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextElement:range:"), objref.IDOf(textElement), objref.IDOf(rangeInElement))
 	return textLayoutFragmentAdopt(_id)
@@ -76,6 +86,7 @@ func NewTextLayoutFragmentWithTextElementRange(textElement *TextElement, rangeIn
 
 // NewTextLayoutFragmentWithCoder creates a new layout fragment with the coder you provide.
 func NewTextLayoutFragmentWithCoder(coder obj.Object) *TextLayoutFragment {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextLayoutFragment")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return textLayoutFragmentAdopt(_id)
@@ -83,40 +94,48 @@ func NewTextLayoutFragmentWithCoder(coder obj.Object) *TextLayoutFragment {
 
 // WithLayoutQueue sets the queue on which the framework dispatches layout operations.
 func (tlf *TextLayoutFragment) WithLayoutQueue(layoutQueue obj.Object) *TextLayoutFragment {
+	defer runtime.KeepAlive(layoutQueue)
 	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("setLayoutQueue:"), objref.IDOf(layoutQueue))
 	return tlf
 }
 
 // TextLineFragmentForVerticalOffsetRequiresExactMatch returns the text line fragment for the vertical offset you provide, or the closest text line fragment beyond the vertical offset.
 func (tlf *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLineFragmentForVerticalOffset:requiresExactMatch:"), verticalOffset, requiresExactMatch)
 	return TextLineFragmentFromID(_r)
 }
 
 // InvalidateLayout invalidates any layout information associated with the text layout fragment.
 func (tlf *TextLayoutFragment) InvalidateLayout() {
+	defer runtime.KeepAlive(tlf)
 	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("invalidateLayout"))
 }
 
 // DrawAtPointInContext renders the visual representation of this element in the specified graphics context.
 func (tlf *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+	defer runtime.KeepAlive(tlf)
+	defer runtime.KeepAlive(context_)
 	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
 }
 
 // TextLayoutManager returns the text layout manager.
 func (tlf *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
 // TextElement returns the text element.
 func (tlf *TextLayoutFragment) TextElement() *TextElement {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textElement"))
 	return TextElementFromID(_r)
 }
 
 // RangeInElement returns the range in element.
 func (tlf *TextLayoutFragment) RangeInElement() *TextRange {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("rangeInElement"))
 	return TextRangeFromID(_r)
 }
@@ -125,54 +144,63 @@ func (tlf *TextLayoutFragment) RangeInElement() *TextRange {
 //
 // TextLineFragments returns the collection as a Go slice.
 func (tlf *TextLayoutFragment) TextLineFragments() []*TextLineFragment {
+	defer runtime.KeepAlive(tlf)
 	_arr := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textLineFragments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLineFragment { return TextLineFragmentFromID(_id) })
 }
 
 // LayoutQueue returns the layout queue.
-func (tlf *TextLayoutFragment) LayoutQueue() obj.Object {
+func (tlf *TextLayoutFragment) LayoutQueue() *foundation.OperationQueue {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("layoutQueue"))
-	return obj.Wrap(_r)
+	return foundation.OperationQueueFromID(_r)
 }
 
 // State returns the state.
 func (tlf *TextLayoutFragment) State() TextLayoutFragmentState {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[TextLayoutFragmentState](objref.IDOf(tlf), objc.RegisterName("state"))
 	return _r
 }
 
 // LayoutFragmentFrame returns the layout fragment frame.
 func (tlf *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("layoutFragmentFrame"))
 	return _r
 }
 
 // RenderingSurfaceBounds returns the rendering surface bounds.
 func (tlf *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("renderingSurfaceBounds"))
 	return _r
 }
 
 // LeadingPadding returns the leading padding.
 func (tlf *TextLayoutFragment) LeadingPadding() float64 {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("leadingPadding"))
 	return _r
 }
 
 // TrailingPadding returns the trailing padding.
 func (tlf *TextLayoutFragment) TrailingPadding() float64 {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("trailingPadding"))
 	return _r
 }
 
 // TopMargin returns the top margin.
 func (tlf *TextLayoutFragment) TopMargin() float64 {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("topMargin"))
 	return _r
 }
 
 // BottomMargin returns the bottom margin.
 func (tlf *TextLayoutFragment) BottomMargin() float64 {
+	defer runtime.KeepAlive(tlf)
 	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("bottomMargin"))
 	return _r
 }
@@ -181,6 +209,7 @@ func (tlf *TextLayoutFragment) BottomMargin() float64 {
 //
 // TextAttachmentViewProviders returns the collection as a Go slice.
 func (tlf *TextLayoutFragment) TextAttachmentViewProviders() []*TextAttachmentViewProvider {
+	defer runtime.KeepAlive(tlf)
 	_arr := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("textAttachmentViewProviders"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextAttachmentViewProvider { return TextAttachmentViewProviderFromID(_id) })
 }

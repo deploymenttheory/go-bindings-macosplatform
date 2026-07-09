@@ -5,10 +5,12 @@
 package coredata
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -64,12 +66,14 @@ func NewFetchRequestWithEntityName(entityName string) *FetchRequest {
 
 // WithEntity sets the entity specified for the fetch request.
 func (fr *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
+	defer runtime.KeepAlive(entity)
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setEntity:"), objref.IDOf(entity))
 	return fr
 }
 
 // WithPredicate sets the predicate of the fetch request.
 func (fr *FetchRequest) WithPredicate(predicate obj.Object) *FetchRequest {
+	defer runtime.KeepAlive(predicate)
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return fr
 }
@@ -150,6 +154,7 @@ func (fr *FetchRequest) WithShouldRefreshRefetchedObjects(shouldRefreshRefetched
 
 // WithHavingPredicate sets the predicate used to filter rows being returned by a query containing a GROUP BY directive.
 func (fr *FetchRequest) WithHavingPredicate(havingPredicate obj.Object) *FetchRequest {
+	defer runtime.KeepAlive(havingPredicate)
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setHavingPredicate:"), objref.IDOf(havingPredicate))
 	return fr
 }
@@ -163,6 +168,7 @@ func (fr *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *Fe
 
 // Execute executes the fetch request against the managed object context that is associated with the current queue.
 func (fr *FetchRequest) Execute() (result []obj.Object, err error) {
+	defer runtime.KeepAlive(fr)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("execute:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -173,12 +179,14 @@ func (fr *FetchRequest) Execute() (result []obj.Object, err error) {
 
 // Entity returns the entity.
 func (fr *FetchRequest) Entity() *EntityDescription {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // EntityName returns the entity name.
 func (fr *FetchRequest) EntityName() string {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("entityName"))
 	if _r == 0 {
 		return ""
@@ -187,45 +195,52 @@ func (fr *FetchRequest) EntityName() string {
 }
 
 // Predicate returns the predicate.
-func (fr *FetchRequest) Predicate() obj.Object {
+func (fr *FetchRequest) Predicate() *foundation.Predicate {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("predicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 // SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (fr *FetchRequest) SortDescriptors() []obj.Object {
+	defer runtime.KeepAlive(fr)
 	_arr := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FetchLimit returns the fetch limit.
 func (fr *FetchRequest) FetchLimit() int {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchLimit"))
 	return _r
 }
 
 // ResultType returns the result type.
 func (fr *FetchRequest) ResultType() FetchRequestResultType {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[FetchRequestResultType](objref.IDOf(fr), objc.RegisterName("resultType"))
 	return _r
 }
 
 // IncludesSubentities wraps the corresponding Objective-C method.
 func (fr *FetchRequest) IncludesSubentities() bool {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("includesSubentities"))
 	return _r
 }
 
 // IncludesPropertyValues wraps the corresponding Objective-C method.
 func (fr *FetchRequest) IncludesPropertyValues() bool {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("includesPropertyValues"))
 	return _r
 }
 
 // ReturnsObjectsAsFaults wraps the corresponding Objective-C method.
 func (fr *FetchRequest) ReturnsObjectsAsFaults() bool {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("returnsObjectsAsFaults"))
 	return _r
 }
@@ -234,66 +249,79 @@ func (fr *FetchRequest) ReturnsObjectsAsFaults() bool {
 //
 // RelationshipKeyPathsForPrefetching returns the collection as a Go slice.
 func (fr *FetchRequest) RelationshipKeyPathsForPrefetching() []string {
+	defer runtime.KeepAlive(fr)
 	_arr := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("relationshipKeyPathsForPrefetching"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // IncludesPendingChanges wraps the corresponding Objective-C method.
 func (fr *FetchRequest) IncludesPendingChanges() bool {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("includesPendingChanges"))
 	return _r
 }
 
 // ReturnsDistinctResults wraps the corresponding Objective-C method.
 func (fr *FetchRequest) ReturnsDistinctResults() bool {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("returnsDistinctResults"))
 	return _r
 }
 
 // PropertiesToFetch returns the properties to fetch.
 func (fr *FetchRequest) PropertiesToFetch() obj.Object {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("propertiesToFetch"))
 	return obj.Wrap(_r)
 }
 
 // SetPropertiesToFetch wraps the corresponding Objective-C method.
 func (fr *FetchRequest) SetPropertiesToFetch(propertiesToFetch obj.Object) {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(propertiesToFetch)
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPropertiesToFetch:"), objref.IDOf(propertiesToFetch))
 }
 
 // FetchOffset returns the fetch offset.
 func (fr *FetchRequest) FetchOffset() int {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchOffset"))
 	return _r
 }
 
 // FetchBatchSize returns the fetch batch size.
 func (fr *FetchRequest) FetchBatchSize() int {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchBatchSize"))
 	return _r
 }
 
 // ShouldRefreshRefetchedObjects wraps the corresponding Objective-C method.
 func (fr *FetchRequest) ShouldRefreshRefetchedObjects() bool {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("shouldRefreshRefetchedObjects"))
 	return _r
 }
 
 // PropertiesToGroupBy returns the properties to group by.
 func (fr *FetchRequest) PropertiesToGroupBy() obj.Object {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("propertiesToGroupBy"))
 	return obj.Wrap(_r)
 }
 
 // SetPropertiesToGroupBy wraps the corresponding Objective-C method.
 func (fr *FetchRequest) SetPropertiesToGroupBy(propertiesToGroupBy obj.Object) {
+	defer runtime.KeepAlive(fr)
+	defer runtime.KeepAlive(propertiesToGroupBy)
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPropertiesToGroupBy:"), objref.IDOf(propertiesToGroupBy))
 }
 
 // HavingPredicate returns the having predicate.
-func (fr *FetchRequest) HavingPredicate() obj.Object {
+func (fr *FetchRequest) HavingPredicate() *foundation.Predicate {
+	defer runtime.KeepAlive(fr)
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("havingPredicate"))
-	return obj.Wrap(_r)
+	return foundation.PredicateFromID(_r)
 }
 
 var _ PersistentStoreRequestProvider = (*FetchRequest)(nil)

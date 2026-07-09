@@ -6,6 +6,7 @@ package linkpresentation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func metadataProviderAdopt(id objc.ID) *MetadataProvider {
 
 // Description returns the object's -description text.
 func (mp *MetadataProvider) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MetadataProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MetadataProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MetadataProvider) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
@@ -90,7 +96,8 @@ func (mp *MetadataProvider) WithTimeout(timeout float64) *MetadataProvider {
 // StartFetchingMetadataForURL fetches metadata for the given URL.
 //
 // StartFetchingMetadataForURL blocks until the operation completes or ctx is cancelled.
-func (mp *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (result *LinkMetadata, err error) {
+func (mp *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, url string) (result *LinkMetadata, err error) {
+	defer runtime.KeepAlive(mp)
 	type _result struct {
 		val *LinkMetadata
 		err error
@@ -102,7 +109,7 @@ func (mp *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL
 		_o.val = LinkMetadataFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("startFetchingMetadataForURL:completionHandler:"), rt.FileURL(uRL), _block)
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("startFetchingMetadataForURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -116,6 +123,8 @@ func (mp *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL
 //
 // StartFetchingMetadataForRequest blocks until the operation completes or ctx is cancelled.
 func (mp *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request obj.Object) (result *LinkMetadata, err error) {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(request)
 	type _result struct {
 		val *LinkMetadata
 		err error
@@ -139,17 +148,20 @@ func (mp *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context,
 
 // Cancel cancels a metadata request.
 func (mp *MetadataProvider) Cancel() {
+	defer runtime.KeepAlive(mp)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("cancel"))
 }
 
 // ShouldFetchSubresources reports whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
 func (mp *MetadataProvider) ShouldFetchSubresources() bool {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[bool](objref.IDOf(mp), objc.RegisterName("shouldFetchSubresources"))
 	return _r
 }
 
 // Timeout returns the time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
 func (mp *MetadataProvider) Timeout() float64 {
+	defer runtime.KeepAlive(mp)
 	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("timeout"))
 	return _r
 }

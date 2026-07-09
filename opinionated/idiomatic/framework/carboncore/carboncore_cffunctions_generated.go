@@ -32,12 +32,12 @@ func CSBackupSetItemExcluded(item obj.Object, exclude uint8, excludeByPath uint8
 var _fnCoreEndianFlipData func(int, int, int16, unsafe.Pointer, int, uint8) int32
 
 // CoreEndianFlipData reports an error if the CarbonCore framework function CoreEndianFlipData fails.
-func CoreEndianFlipData(dataDomain int, dataType int, id_ int16, data unsafe.Pointer, dataLen int, currentlyNative uint8) error {
+func CoreEndianFlipData(dataDomain int, dataType int, identifier int16, data unsafe.Pointer, dataLen int, currentlyNative uint8) error {
 	_loadOnce.Do(_loadLibrary)
 	if _fnCoreEndianFlipData == nil {
 		ebipurego.RegisterLibFunc(&_fnCoreEndianFlipData, _lib, "CoreEndianFlipData")
 	}
-	_rc := _fnCoreEndianFlipData(dataDomain, dataType, id_, data, dataLen, currentlyNative)
+	_rc := _fnCoreEndianFlipData(dataDomain, dataType, identifier, data, dataLen, currentlyNative)
 	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}

@@ -5,6 +5,9 @@
 package gamekit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func leaderboardEntryAdopt(id objc.ID) *LeaderboardEntry {
 
 // Description returns the object's -description text.
 func (le *LeaderboardEntry) Description() string {
+	defer runtime.KeepAlive(le)
 	return rt.Description(objref.IDOf(le))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (le *LeaderboardEntry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(le)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(le), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (le *LeaderboardEntry) IsKind(className string) bool {
+	defer runtime.KeepAlive(le)
 	return rt.IsKind(objref.IDOf(le), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (le *LeaderboardEntry) String() string {
+	defer runtime.KeepAlive(le)
 	return rt.Description(objref.IDOf(le))
 }
 
@@ -74,24 +82,28 @@ func NewLeaderboardEntry() *LeaderboardEntry {
 
 // Player returns the player.
 func (le *LeaderboardEntry) Player() *Player {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // Rank returns the rank.
 func (le *LeaderboardEntry) Rank() int {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("rank"))
 	return _r
 }
 
 // Score returns the score.
 func (le *LeaderboardEntry) Score() int {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("score"))
 	return _r
 }
 
 // FormattedScore returns the formatted score.
 func (le *LeaderboardEntry) FormattedScore() string {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("formattedScore"))
 	if _r == 0 {
 		return ""
@@ -101,12 +113,14 @@ func (le *LeaderboardEntry) FormattedScore() string {
 
 // Context returns the context.
 func (le *LeaderboardEntry) Context() int {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("context"))
 	return _r
 }
 
 // Date returns the date.
-func (le *LeaderboardEntry) Date() obj.Object {
+func (le *LeaderboardEntry) Date() time.Time {
+	defer runtime.KeepAlive(le)
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

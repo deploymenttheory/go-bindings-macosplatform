@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func filterAdopt(id objc.ID) *Filter {
 
 // Description returns the object's -description text.
 func (f *Filter) Description() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (f *Filter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (f *Filter) IsKind(className string) bool {
+	defer runtime.KeepAlive(f)
 	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (f *Filter) String() string {
+	defer runtime.KeepAlive(f)
 	return rt.Description(objref.IDOf(f))
 }
 
@@ -82,6 +89,7 @@ func (f *Filter) WithEnabled(enabled bool) *Filter {
 
 // Name returns the name.
 func (f *Filter) Name() string {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -91,23 +99,29 @@ func (f *Filter) Name() string {
 
 // SetDefaults sets all inputs to their default values (where default values are defined, other inputs are left as-is).
 func (f *Filter) SetDefaults() {
+	defer runtime.KeepAlive(f)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setDefaults"))
 }
 
 // ApplyArgumentsOptions used by CIFilter subclasses to apply the array of argument values 'args' to the kernel function 'k'. The supplied arguments must be type-compatible with the function signature of the kernel. The key-value pairs defined by 'dict' (if non-nil) are used to control exactly how the kernel is evaluated. Valid keys include: kCIApplyOptionExtent: the size of the produced image. Value is a four element NSArray [X Y WIDTH HEIGHT]. kCIApplyOptionDefinition: the Domain of Definition of the produced image. Value is either a CIFilterShape object, or a four element NSArray defining a rectangle.
-func (f *Filter) ApplyArgumentsOptions(k *Kernel, args obj.Object, dict obj.Object) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("apply:arguments:options:"), objref.IDOf(k), objref.IDOf(args), objref.IDOf(dict))
+func (f *Filter) ApplyArgumentsOptions(k *Kernel, args obj.Object, dict map[string]obj.Object) *Image {
+	defer runtime.KeepAlive(f)
+	defer runtime.KeepAlive(k)
+	defer runtime.KeepAlive(args)
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("apply:arguments:options:"), objref.IDOf(k), objref.IDOf(args), rt.MapToDict(dict, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ImageFromID(_r)
 }
 
 // OutputImage returns the output image.
 func (f *Filter) OutputImage() *Image {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("outputImage"))
 	return ImageFromID(_r)
 }
 
 // IsEnabled reports whether the object is enabled.
 func (f *Filter) IsEnabled() bool {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isEnabled"))
 	return _r
 }
@@ -116,6 +130,7 @@ func (f *Filter) IsEnabled() bool {
 //
 // InputKeys returns the collection as a Go slice.
 func (f *Filter) InputKeys() []string {
+	defer runtime.KeepAlive(f)
 	_arr := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("inputKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -124,14 +139,16 @@ func (f *Filter) InputKeys() []string {
 //
 // OutputKeys returns the collection as a Go slice.
 func (f *Filter) OutputKeys() []string {
+	defer runtime.KeepAlive(f)
 	_arr := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("outputKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Attributes returns a dictionary containing key/value pairs describing the filter. (see description of keys below)
-func (f *Filter) Attributes() obj.Object {
+func (f *Filter) Attributes() map[string]obj.Object {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("attributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // isFilter marks Filter — and, by embedding promotion, its

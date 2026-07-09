@@ -5,6 +5,8 @@
 package quartzfilters
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -19,12 +21,14 @@ func QuartzFilterWithURL(aURL string) obj.Object {
 
 // QuartzFilterWithProperties wraps the corresponding Objective-C method.
 func QuartzFilterWithProperties(properties obj.Object) obj.Object {
+	defer runtime.KeepAlive(properties)
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithProperties:"), objref.IDOf(properties))
 	return obj.Wrap(_r)
 }
 
 // QuartzFilterWithOutputIntents wraps the corresponding Objective-C method.
 func QuartzFilterWithOutputIntents(outputIntents obj.Object) obj.Object {
+	defer runtime.KeepAlive(outputIntents)
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithOutputIntents:"), objref.IDOf(outputIntents))
 	return obj.Wrap(_r)
 }
@@ -37,6 +41,7 @@ func FilterManager() obj.Object {
 
 // FiltersInDomains wraps the corresponding Objective-C method.
 func FiltersInDomains(domains obj.Object) obj.Object {
+	defer runtime.KeepAlive(domains)
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filtersInDomains:"), objref.IDOf(domains))
 	return obj.Wrap(_r)
 }

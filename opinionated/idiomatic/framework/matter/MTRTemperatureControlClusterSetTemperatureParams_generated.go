@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTemperatureControlClusterSetTemperatureParamsAdopt(id objc.ID) *MTRTempe
 
 // Description returns the object's -description text.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) Description() string {
+	defer runtime.KeepAlive(mtccstp)
 	return rt.Description(objref.IDOf(mtccstp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtccstp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtccstp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtccstp)
 	return rt.IsKind(objref.IDOf(mtccstp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) String() string {
+	defer runtime.KeepAlive(mtccstp)
 	return rt.Description(objref.IDOf(mtccstp))
 }
 
@@ -72,48 +80,56 @@ func NewMTRTemperatureControlClusterSetTemperatureParams() *MTRTemperatureContro
 
 // WithTargetTemperature sets the target temperature.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperature(targetTemperature obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	defer runtime.KeepAlive(targetTemperature)
 	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTargetTemperature:"), objref.IDOf(targetTemperature))
 	return mtccstp
 }
 
 // WithTargetTemperatureLevel sets the target temperature level.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTargetTemperatureLevel(targetTemperatureLevel obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	defer runtime.KeepAlive(targetTemperatureLevel)
 	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTargetTemperatureLevel:"), objref.IDOf(targetTemperatureLevel))
 	return mtccstp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mtccstp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTemperatureControlClusterSetTemperatureParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mtccstp
 }
 
 // TargetTemperature returns the target temperature.
-func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() obj.Object {
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperature() *foundation.Number {
+	defer runtime.KeepAlive(mtccstp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("targetTemperature"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TargetTemperatureLevel returns the target temperature level.
-func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() obj.Object {
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TargetTemperatureLevel() *foundation.Number {
+	defer runtime.KeepAlive(mtccstp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("targetTemperatureLevel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mtccstp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) ServerSideProcessingTimeout() obj.Object {
+func (mtccstp *MTRTemperatureControlClusterSetTemperatureParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mtccstp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtccstp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

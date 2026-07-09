@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRContentLauncherClusterDimensionStructAdopt(id objc.ID) *MTRContentLaunch
 
 // Description returns the object's -description text.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) Description() string {
+	defer runtime.KeepAlive(mclcds)
 	return rt.Description(objref.IDOf(mclcds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mclcds)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mclcds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mclcds)
 	return rt.IsKind(objref.IDOf(mclcds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) String() string {
+	defer runtime.KeepAlive(mclcds)
 	return rt.Description(objref.IDOf(mclcds))
 }
 
 // WithWidth sets the width.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	defer runtime.KeepAlive(width)
 	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return mclcds
 }
 
 // WithHeight sets the height.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	defer runtime.KeepAlive(height)
 	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return mclcds
 }
 
 // WithMetric sets the metric.
 func (mclcds *MTRContentLauncherClusterDimensionStruct) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	defer runtime.KeepAlive(metric)
 	objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return mclcds
 }
 
 // Width returns the width.
-func (mclcds *MTRContentLauncherClusterDimensionStruct) Width() obj.Object {
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Width() *foundation.Number {
+	defer runtime.KeepAlive(mclcds)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("width"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Height returns the height.
-func (mclcds *MTRContentLauncherClusterDimensionStruct) Height() obj.Object {
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Height() *foundation.Number {
+	defer runtime.KeepAlive(mclcds)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("height"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Metric returns the metric.
-func (mclcds *MTRContentLauncherClusterDimensionStruct) Metric() obj.Object {
+func (mclcds *MTRContentLauncherClusterDimensionStruct) Metric() *foundation.Number {
+	defer runtime.KeepAlive(mclcds)
 	_r := objc.Send[objc.ID](objref.IDOf(mclcds), objc.RegisterName("metric"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRContentLauncherClusterDimensionStruct marks MTRContentLauncherClusterDimensionStruct — and, by embedding promotion, its

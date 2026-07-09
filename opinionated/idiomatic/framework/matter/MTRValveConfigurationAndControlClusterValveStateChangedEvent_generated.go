@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRValveConfigurationAndControlClusterValveStateChangedEventAdopt(id objc.I
 
 // Description returns the object's -description text.
 func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) Description() string {
+	defer runtime.KeepAlive(mvcaccvsce)
 	return rt.Description(objref.IDOf(mvcaccvsce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mvcaccvsce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mvcaccvsce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mvcaccvsce)
 	return rt.IsKind(objref.IDOf(mvcaccvsce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) String() string {
+	defer runtime.KeepAlive(mvcaccvsce)
 	return rt.Description(objref.IDOf(mvcaccvsce))
 }
 
@@ -72,24 +80,28 @@ func NewMTRValveConfigurationAndControlClusterValveStateChangedEvent() *MTRValve
 
 // WithValveState sets the valve state.
 func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) WithValveState(valveState obj.Object) *MTRValveConfigurationAndControlClusterValveStateChangedEvent {
+	defer runtime.KeepAlive(valveState)
 	objc.Send[objc.ID](objref.IDOf(mvcaccvsce), objc.RegisterName("setValveState:"), objref.IDOf(valveState))
 	return mvcaccvsce
 }
 
 // WithValveLevel sets the valve level.
 func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) WithValveLevel(valveLevel obj.Object) *MTRValveConfigurationAndControlClusterValveStateChangedEvent {
+	defer runtime.KeepAlive(valveLevel)
 	objc.Send[objc.ID](objref.IDOf(mvcaccvsce), objc.RegisterName("setValveLevel:"), objref.IDOf(valveLevel))
 	return mvcaccvsce
 }
 
 // ValveState returns the valve state.
-func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveState() obj.Object {
+func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveState() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccvsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccvsce), objc.RegisterName("valveState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ValveLevel returns the valve level.
-func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveLevel() obj.Object {
+func (mvcaccvsce *MTRValveConfigurationAndControlClusterValveStateChangedEvent) ValveLevel() *foundation.Number {
+	defer runtime.KeepAlive(mvcaccvsce)
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccvsce), objc.RegisterName("valveLevel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

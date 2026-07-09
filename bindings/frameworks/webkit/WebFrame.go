@@ -71,13 +71,13 @@ func (o *WebFrame) LoadRequest(request *foundation.NSURLRequest) {
 }
 
 // Sets the main page contents, MIME type, content encoding, and base URL.
-func (o *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data *foundation.NSData, mIMEType *foundation.NSString, encodingName *foundation.NSString, uRL *foundation.NSURL) {
-	o.Ptr().Send(_webFrameSelLoadDataMIMETypeTextEncodingNameBaseURL, data.Ptr(), mIMEType.Ptr(), encodingName.Ptr(), uRL.Ptr())
+func (o *WebFrame) LoadDataMIMETypeTextEncodingNameBaseURL(data *foundation.NSData, mimeType *foundation.NSString, encodingName *foundation.NSString, url *foundation.NSURL) {
+	o.Ptr().Send(_webFrameSelLoadDataMIMETypeTextEncodingNameBaseURL, data.Ptr(), mimeType.Ptr(), encodingName.Ptr(), url.Ptr())
 }
 
 // Sets the main page contents and base URL.
-func (o *WebFrame) LoadHTMLStringBaseURL(string_ *foundation.NSString, uRL *foundation.NSURL) {
-	o.Ptr().Send(_webFrameSelLoadHTMLStringBaseURL, string_.Ptr(), uRL.Ptr())
+func (o *WebFrame) LoadHTMLStringBaseURL(string_ *foundation.NSString, url *foundation.NSURL) {
+	o.Ptr().Send(_webFrameSelLoadHTMLStringBaseURL, string_.Ptr(), url.Ptr())
 }
 
 // Loads alternate content for a frame whose URL is unreachable.

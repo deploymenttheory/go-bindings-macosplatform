@@ -5,6 +5,8 @@
 package securityinterface
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,34 @@ func certificatePanelAdopt(id objc.ID) *CertificatePanel {
 
 // Description returns the object's -description text.
 func (cp *CertificatePanel) Description() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cp *CertificatePanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cp *CertificatePanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(cp)
 	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cp *CertificatePanel) String() string {
+	defer runtime.KeepAlive(cp)
 	return rt.Description(objref.IDOf(cp))
 }
 
 // RunModalForTrustShowGroup displays a certificate chain in a modal panel.
 func (cp *CertificatePanel) RunModalForTrustShowGroup(trust obj.Object, showGroup bool) int {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(trust)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -83,6 +92,8 @@ func (cp *CertificatePanel) RunModalForTrustShowGroup(trust obj.Object, showGrou
 
 // RunModalForCertificatesShowGroup displays one or more specified certificates in a modal panel.
 func (cp *CertificatePanel) RunModalForCertificatesShowGroup(certificates obj.Object, showGroup bool) int {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(certificates)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -96,6 +107,8 @@ func (cp *CertificatePanel) RunModalForCertificatesShowGroup(certificates obj.Ob
 
 // SetPolicies specifies one or more policies that apply to the displayed certificates.
 func (cp *CertificatePanel) SetPolicies(policies obj.Object) {
+	defer runtime.KeepAlive(cp)
+	defer runtime.KeepAlive(policies)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 	})
@@ -104,6 +117,7 @@ func (cp *CertificatePanel) SetPolicies(policies obj.Object) {
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificates.
 func (cp *CertificatePanel) Policies() obj.Object {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -117,6 +131,7 @@ func (cp *CertificatePanel) Policies() obj.Object {
 
 // SetDefaultButtonTitle customizes the title of the default button.
 func (cp *CertificatePanel) SetDefaultButtonTitle(title string) {
+	defer runtime.KeepAlive(cp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 	})
@@ -125,6 +140,7 @@ func (cp *CertificatePanel) SetDefaultButtonTitle(title string) {
 
 // SetAlternateButtonTitle customizes the title of the alternate button.
 func (cp *CertificatePanel) SetAlternateButtonTitle(title string) {
+	defer runtime.KeepAlive(cp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
 	})
@@ -133,6 +149,7 @@ func (cp *CertificatePanel) SetAlternateButtonTitle(title string) {
 
 // SetShowsHelp displays a Help button in the sheet or panel.
 func (cp *CertificatePanel) SetShowsHelp(showsHelp bool) {
+	defer runtime.KeepAlive(cp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setShowsHelp:"), showsHelp)
 	})
@@ -141,6 +158,7 @@ func (cp *CertificatePanel) SetShowsHelp(showsHelp bool) {
 
 // ShowsHelp reports whether the help button is currently set to be displayed.
 func (cp *CertificatePanel) ShowsHelp() bool {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -154,6 +172,7 @@ func (cp *CertificatePanel) ShowsHelp() bool {
 
 // SetHelpAnchor sets the help anchor string for the sheet or modal panel.
 func (cp *CertificatePanel) SetHelpAnchor(anchor string) {
+	defer runtime.KeepAlive(cp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
 	})
@@ -162,6 +181,7 @@ func (cp *CertificatePanel) SetHelpAnchor(anchor string) {
 
 // HelpAnchor returns the current help anchor string for the sheet or panel.
 func (cp *CertificatePanel) HelpAnchor() string {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -178,6 +198,7 @@ func (cp *CertificatePanel) HelpAnchor() string {
 
 // CertificateView returns the certificate view for the modal panel.
 func (cp *CertificatePanel) CertificateView() *CertificateView {
+	defer runtime.KeepAlive(cp)
 	var _mainthread0 *CertificateView
 	purego.Main(func() {
 		_mainthread0 = func() *CertificateView {

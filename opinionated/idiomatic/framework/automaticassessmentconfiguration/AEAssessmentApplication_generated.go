@@ -5,6 +5,8 @@
 package automaticassessmentconfiguration
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assessmentApplicationAdopt(id objc.ID) *AssessmentApplication {
 
 // Description returns the object's -description text.
 func (aa *AssessmentApplication) Description() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aa *AssessmentApplication) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aa)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aa *AssessmentApplication) IsKind(className string) bool {
+	defer runtime.KeepAlive(aa)
 	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aa *AssessmentApplication) String() string {
+	defer runtime.KeepAlive(aa)
 	return rt.Description(objref.IDOf(aa))
 }
 
@@ -88,6 +95,7 @@ func (aa *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatu
 
 // BundleIdentifier returns the bundle identifier.
 func (aa *AssessmentApplication) BundleIdentifier() string {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
@@ -97,6 +105,7 @@ func (aa *AssessmentApplication) BundleIdentifier() string {
 
 // TeamIdentifier returns the team identifier.
 func (aa *AssessmentApplication) TeamIdentifier() string {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("teamIdentifier"))
 	if _r == 0 {
 		return ""
@@ -106,6 +115,7 @@ func (aa *AssessmentApplication) TeamIdentifier() string {
 
 // RequiresSignatureValidation wraps the corresponding Objective-C method.
 func (aa *AssessmentApplication) RequiresSignatureValidation() bool {
+	defer runtime.KeepAlive(aa)
 	_r := objc.Send[bool](objref.IDOf(aa), objc.RegisterName("requiresSignatureValidation"))
 	return _r
 }

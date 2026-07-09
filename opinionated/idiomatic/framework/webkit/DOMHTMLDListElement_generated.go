@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (dle *DOMHTMLDListElement) WithTextContent(textContent string) *DOMHTMLDLis
 
 // Compact wraps the corresponding Objective-C method.
 func (dle *DOMHTMLDListElement) Compact() bool {
+	defer runtime.KeepAlive(dle)
 	_r := objc.Send[bool](objref.IDOf(dle), objc.RegisterName("compact"))
 	return _r
 }

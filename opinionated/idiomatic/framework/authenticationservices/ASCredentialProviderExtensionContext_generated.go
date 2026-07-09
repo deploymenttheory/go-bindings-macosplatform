@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func credentialProviderExtensionContextAdopt(id objc.ID) *CredentialProviderExte
 
 // Description returns the object's -description text.
 func (cpec *CredentialProviderExtensionContext) Description() string {
+	defer runtime.KeepAlive(cpec)
 	return rt.Description(objref.IDOf(cpec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cpec *CredentialProviderExtensionContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cpec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cpec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cpec *CredentialProviderExtensionContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(cpec)
 	return rt.IsKind(objref.IDOf(cpec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cpec *CredentialProviderExtensionContext) String() string {
+	defer runtime.KeepAlive(cpec)
 	return rt.Description(objref.IDOf(cpec))
 }
 
@@ -74,25 +81,34 @@ func NewCredentialProviderExtensionContext() *CredentialProviderExtensionContext
 
 // CompleteRequestWithSelectedCredentialCompletionHandler provides the user-selected credential.
 func (cpec *CredentialProviderExtensionContext) CompleteRequestWithSelectedCredentialCompletionHandler(credential *PasswordCredential, completionHandler func(bool)) {
+	defer runtime.KeepAlive(cpec)
+	defer runtime.KeepAlive(credential)
 	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeRequestWithSelectedCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler complete the passkey assertion request by providing the user-selected passkey credential.
 func (cpec *CredentialProviderExtensionContext) CompleteAssertionRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyAssertionCredential, completionHandler func(bool)) {
+	defer runtime.KeepAlive(cpec)
+	defer runtime.KeepAlive(credential)
 	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler complete the registration request by providing the newly-created passkey credential.
 func (cpec *CredentialProviderExtensionContext) CompleteRegistrationRequestWithSelectedPasskeyCredentialCompletionHandler(credential *PasskeyRegistrationCredential, completionHandler func(bool)) {
+	defer runtime.KeepAlive(cpec)
+	defer runtime.KeepAlive(credential)
 	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler provides the user-selected one-time passcode (OTP).
 func (cpec *CredentialProviderExtensionContext) CompleteOneTimeCodeRequestWithSelectedCredentialCompletionHandler(credential *OneTimeCodeCredential, completionHandler func(bool)) {
+	defer runtime.KeepAlive(cpec)
+	defer runtime.KeepAlive(credential)
 	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeOneTimeCodeRequestWithSelectedCredential:completionHandler:"), objref.IDOf(credential), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CompleteExtensionConfigurationRequest completes the request to configure the extension.
 func (cpec *CredentialProviderExtensionContext) CompleteExtensionConfigurationRequest() {
+	defer runtime.KeepAlive(cpec)
 	objc.Send[objc.ID](objref.IDOf(cpec), objc.RegisterName("completeExtensionConfigurationRequest"))
 }

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func dOMMutationEventAdopt(id objc.ID) *DOMMutationEvent {
 
 // NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange creates a new DOMMutationEvent.
 func NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewValueAttrNameAttrChange(type_ string, canBubble bool, cancelable bool, relatedNode *DOMNode, prevValue string, newValue string, attrName string, attrChange uint16) *DOMMutationEvent {
+	defer runtime.KeepAlive(relatedNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMMutationEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMutationEvent:canBubble:cancelable:relatedNode:prevValue:newValue:attrName:attrChange:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(relatedNode), purego.NSString(prevValue), purego.NSString(newValue), purego.NSString(attrName), attrChange)
 	return dOMMutationEventAdopt(_id)
@@ -52,6 +55,7 @@ func NewDOMMutationEventMutationEventCanBubbleCancelableRelatedNodePrevValueNewV
 
 // NewDOMMutationEventMutationEvent creates a new DOMMutationEvent.
 func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable bool, relatedNode *DOMNode, prevValue string, newValue string, attrName string, attrChange uint16) *DOMMutationEvent {
+	defer runtime.KeepAlive(relatedNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMMutationEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initMutationEvent::::::::"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(relatedNode), purego.NSString(prevValue), purego.NSString(newValue), purego.NSString(attrName), attrChange)
 	return dOMMutationEventAdopt(_id)
@@ -71,6 +75,7 @@ func (dme *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEve
 
 // NewValue returns the new value.
 func (dme *DOMMutationEvent) NewValue() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("newValue"))
 	if _r == 0 {
 		return ""
@@ -80,12 +85,14 @@ func (dme *DOMMutationEvent) NewValue() string {
 
 // RelatedNode returns the related node.
 func (dme *DOMMutationEvent) RelatedNode() *DOMNode {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("relatedNode"))
 	return DOMNodeFromID(_r)
 }
 
 // PrevValue returns the prev value.
 func (dme *DOMMutationEvent) PrevValue() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("prevValue"))
 	if _r == 0 {
 		return ""
@@ -95,6 +102,7 @@ func (dme *DOMMutationEvent) PrevValue() string {
 
 // AttrName returns the attr name.
 func (dme *DOMMutationEvent) AttrName() string {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("attrName"))
 	if _r == 0 {
 		return ""
@@ -104,6 +112,7 @@ func (dme *DOMMutationEvent) AttrName() string {
 
 // AttrChange returns the attr change.
 func (dme *DOMMutationEvent) AttrChange() uint16 {
+	defer runtime.KeepAlive(dme)
 	_r := objc.Send[uint16](objref.IDOf(dme), objc.RegisterName("attrChange"))
 	return _r
 }

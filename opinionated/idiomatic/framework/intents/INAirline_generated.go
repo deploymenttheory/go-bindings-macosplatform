@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func airlineAdopt(id objc.ID) *Airline {
 
 // Description returns the object's -description text.
 func (a *Airline) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Airline) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Airline) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Airline) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
@@ -75,6 +82,7 @@ func NewAirlineWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode s
 
 // Name returns the name.
 func (a *Airline) Name() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -84,6 +92,7 @@ func (a *Airline) Name() string {
 
 // IataCode returns the iata code.
 func (a *Airline) IataCode() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("iataCode"))
 	if _r == 0 {
 		return ""
@@ -93,6 +102,7 @@ func (a *Airline) IataCode() string {
 
 // IcaoCode returns the icao code.
 func (a *Airline) IcaoCode() string {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("icaoCode"))
 	if _r == 0 {
 		return ""

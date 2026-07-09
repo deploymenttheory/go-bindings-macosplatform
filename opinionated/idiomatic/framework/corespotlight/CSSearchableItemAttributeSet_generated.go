@@ -5,9 +5,12 @@
 package corespotlight
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,22 +52,27 @@ func searchableItemAttributeSetAdopt(id objc.ID) *SearchableItemAttributeSet {
 
 // Description returns the object's -description text.
 func (sias *SearchableItemAttributeSet) Description() string {
+	defer runtime.KeepAlive(sias)
 	return rt.Description(objref.IDOf(sias))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sias *SearchableItemAttributeSet) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sias)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sias), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sias *SearchableItemAttributeSet) IsKind(className string) bool {
+	defer runtime.KeepAlive(sias)
 	return rt.IsKind(objref.IDOf(sias), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sias *SearchableItemAttributeSet) String() string {
+	defer runtime.KeepAlive(sias)
 	return rt.Description(objref.IDOf(sias))
 }
 
@@ -77,6 +85,7 @@ func NewSearchableItemAttributeSetWithItemContentType(itemContentType string) *S
 
 // NewSearchableItemAttributeSetWithContentType creates an attribute set for the specified content type.
 func NewSearchableItemAttributeSetWithContentType(contentType obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(contentType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CSSearchableItemAttributeSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentType:"), objref.IDOf(contentType))
 	return searchableItemAttributeSetAdopt(_id)
@@ -114,8 +123,8 @@ func (sias *SearchableItemAttributeSet) WithThumbnailURL(thumbnailURL string) *S
 }
 
 // WithThumbnailData sets image data that represents the thumbnail of the item.
-func (sias *SearchableItemAttributeSet) WithThumbnailData(thumbnailData obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setThumbnailData:"), objref.IDOf(thumbnailData))
+func (sias *SearchableItemAttributeSet) WithThumbnailData(thumbnailData []byte) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setThumbnailData:"), rt.BytesToNSData(thumbnailData))
 	return sias
 }
 
@@ -138,8 +147,8 @@ func (sias *SearchableItemAttributeSet) WithWeakRelatedUniqueIdentifier(weakRela
 }
 
 // WithMetadataModificationDate sets the date on which the last metadata attribute was changed.
-func (sias *SearchableItemAttributeSet) WithMetadataModificationDate(metadataModificationDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setMetadataModificationDate:"), objref.IDOf(metadataModificationDate))
+func (sias *SearchableItemAttributeSet) WithMetadataModificationDate(metadataModificationDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setMetadataModificationDate:"), rt.TimeToNSDate(metadataModificationDate))
 	return sias
 }
 
@@ -207,12 +216,14 @@ func (sias *SearchableItemAttributeSet) WithTranscribedTextContent(transcribedTe
 
 // WithSupportsPhoneCall sets a value that indicates whether the item contains information sufficient to allow a phone call to a number associated with the item.
 func (sias *SearchableItemAttributeSet) WithSupportsPhoneCall(supportsPhoneCall obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(supportsPhoneCall)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setSupportsPhoneCall:"), objref.IDOf(supportsPhoneCall))
 	return sias
 }
 
 // WithSupportsNavigation sets a value that indicates whether the item contains information sufficient to provide navigation to the location it represents.
 func (sias *SearchableItemAttributeSet) WithSupportsNavigation(supportsNavigation obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(supportsNavigation)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setSupportsNavigation:"), objref.IDOf(supportsNavigation))
 	return sias
 }
@@ -237,6 +248,7 @@ func (sias *SearchableItemAttributeSet) WithContainerIdentifier(containerIdentif
 
 // WithContainerOrder sets the order of the item within the container.
 func (sias *SearchableItemAttributeSet) WithContainerOrder(containerOrder obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(containerOrder)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContainerOrder:"), objref.IDOf(containerOrder))
 	return sias
 }
@@ -292,24 +304,28 @@ func (sias *SearchableItemAttributeSet) WithAudiences(items ...obj.Object) *Sear
 
 // WithFileSize sets the size of the document file.
 func (sias *SearchableItemAttributeSet) WithFileSize(fileSize obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(fileSize)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setFileSize:"), objref.IDOf(fileSize))
 	return sias
 }
 
 // WithPageCount sets the number of pages in the document.
 func (sias *SearchableItemAttributeSet) WithPageCount(pageCount obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(pageCount)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPageCount:"), objref.IDOf(pageCount))
 	return sias
 }
 
 // WithPageWidth sets the width of the document page, in points (72 points per inch).
 func (sias *SearchableItemAttributeSet) WithPageWidth(pageWidth obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(pageWidth)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPageWidth:"), objref.IDOf(pageWidth))
 	return sias
 }
 
 // WithPageHeight sets the height of the document page, in points (72 points per inch).
 func (sias *SearchableItemAttributeSet) WithPageHeight(pageHeight obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(pageHeight)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPageHeight:"), objref.IDOf(pageHeight))
 	return sias
 }
@@ -347,26 +363,26 @@ func (sias *SearchableItemAttributeSet) WithFontNames(items ...obj.Object) *Sear
 }
 
 // WithDueDate sets the date on which the item is due.
-func (sias *SearchableItemAttributeSet) WithDueDate(dueDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
+func (sias *SearchableItemAttributeSet) WithDueDate(dueDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDueDate:"), rt.TimeToNSDate(dueDate))
 	return sias
 }
 
 // WithCompletionDate sets the date on which the item was completed.
-func (sias *SearchableItemAttributeSet) WithCompletionDate(completionDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setCompletionDate:"), objref.IDOf(completionDate))
+func (sias *SearchableItemAttributeSet) WithCompletionDate(completionDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setCompletionDate:"), rt.TimeToNSDate(completionDate))
 	return sias
 }
 
 // WithStartDate sets the start date for the item.
-func (sias *SearchableItemAttributeSet) WithStartDate(startDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+func (sias *SearchableItemAttributeSet) WithStartDate(startDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setStartDate:"), rt.TimeToNSDate(startDate))
 	return sias
 }
 
 // WithEndDate sets the end date for the item.
-func (sias *SearchableItemAttributeSet) WithEndDate(endDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+func (sias *SearchableItemAttributeSet) WithEndDate(endDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEndDate:"), rt.TimeToNSDate(endDate))
 	return sias
 }
 
@@ -379,6 +395,7 @@ func (sias *SearchableItemAttributeSet) WithImportantDates(items ...obj.Object) 
 
 // WithAllDay sets a value that indicates if the event covers an entire day.
 func (sias *SearchableItemAttributeSet) WithAllDay(allDay obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(allDay)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAllDay:"), objref.IDOf(allDay))
 	return sias
 }
@@ -397,8 +414,8 @@ func (sias *SearchableItemAttributeSet) WithAccountHandles(items ...obj.Object) 
 }
 
 // WithHTMLContentData sets the HTML content of the document encoded as an NSData object representing a UTF-8 encoded string.
-func (sias *SearchableItemAttributeSet) WithHTMLContentData(hTMLContentData obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setHTMLContentData:"), objref.IDOf(hTMLContentData))
+func (sias *SearchableItemAttributeSet) WithHTMLContentData(htmlContentData []byte) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setHTMLContentData:"), rt.BytesToNSData(htmlContentData))
 	return sias
 }
 
@@ -437,8 +454,8 @@ func (sias *SearchableItemAttributeSet) WithHiddenAdditionalRecipients(items ...
 }
 
 // WithEmailHeaders sets a dictionary that contains all the headers of the message.
-func (sias *SearchableItemAttributeSet) WithEmailHeaders(emailHeaders obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEmailHeaders:"), objref.IDOf(emailHeaders))
+func (sias *SearchableItemAttributeSet) WithEmailHeaders(emailHeaders map[string]obj.Object) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEmailHeaders:"), rt.MapToDict(emailHeaders, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sias
 }
 
@@ -514,6 +531,7 @@ func (sias *SearchableItemAttributeSet) WithInstantMessageAddresses(items ...obj
 
 // WithLikelyJunk sets a value that indicates if the message is likely to be considered junk.
 func (sias *SearchableItemAttributeSet) WithLikelyJunk(likelyJunk obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(likelyJunk)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setLikelyJunk:"), objref.IDOf(likelyJunk))
 	return sias
 }
@@ -559,37 +577,38 @@ func (sias *SearchableItemAttributeSet) WithCopyright(copyright string) *Searcha
 }
 
 // WithLastUsedDate sets the date on which the file was last used.
-func (sias *SearchableItemAttributeSet) WithLastUsedDate(lastUsedDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setLastUsedDate:"), objref.IDOf(lastUsedDate))
+func (sias *SearchableItemAttributeSet) WithLastUsedDate(lastUsedDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setLastUsedDate:"), rt.TimeToNSDate(lastUsedDate))
 	return sias
 }
 
 // WithContentCreationDate sets the creation date of an edited or optimized version of the song or composition.
-func (sias *SearchableItemAttributeSet) WithContentCreationDate(contentCreationDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContentCreationDate:"), objref.IDOf(contentCreationDate))
+func (sias *SearchableItemAttributeSet) WithContentCreationDate(contentCreationDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContentCreationDate:"), rt.TimeToNSDate(contentCreationDate))
 	return sias
 }
 
 // WithContentModificationDate sets the date on which the contents of the file was last modified.
-func (sias *SearchableItemAttributeSet) WithContentModificationDate(contentModificationDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContentModificationDate:"), objref.IDOf(contentModificationDate))
+func (sias *SearchableItemAttributeSet) WithContentModificationDate(contentModificationDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContentModificationDate:"), rt.TimeToNSDate(contentModificationDate))
 	return sias
 }
 
 // WithAddedDate sets the date on which the item was moved into its current location.
-func (sias *SearchableItemAttributeSet) WithAddedDate(addedDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAddedDate:"), objref.IDOf(addedDate))
+func (sias *SearchableItemAttributeSet) WithAddedDate(addedDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAddedDate:"), rt.TimeToNSDate(addedDate))
 	return sias
 }
 
 // WithDownloadedDate sets the most recent date on which the file was downloaded or received.
-func (sias *SearchableItemAttributeSet) WithDownloadedDate(downloadedDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDownloadedDate:"), objref.IDOf(downloadedDate))
+func (sias *SearchableItemAttributeSet) WithDownloadedDate(downloadedDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDownloadedDate:"), rt.TimeToNSDate(downloadedDate))
 	return sias
 }
 
 // WithDuration sets the duration (if appropriate) of the content of the file, in seconds.
 func (sias *SearchableItemAttributeSet) WithDuration(duration obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(duration)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return sias
 }
@@ -617,30 +636,35 @@ func (sias *SearchableItemAttributeSet) WithMediaTypes(items ...obj.Object) *Sea
 
 // WithStreamable sets a value that indicates if the content is prepared for streaming.
 func (sias *SearchableItemAttributeSet) WithStreamable(streamable obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(streamable)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setStreamable:"), objref.IDOf(streamable))
 	return sias
 }
 
 // WithTotalBitRate sets the total bit rate of the media, combining audio and video.
 func (sias *SearchableItemAttributeSet) WithTotalBitRate(totalBitRate obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(totalBitRate)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setTotalBitRate:"), objref.IDOf(totalBitRate))
 	return sias
 }
 
 // WithVideoBitRate sets the video bit rate of the media.
 func (sias *SearchableItemAttributeSet) WithVideoBitRate(videoBitRate obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(videoBitRate)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setVideoBitRate:"), objref.IDOf(videoBitRate))
 	return sias
 }
 
 // WithAudioBitRate sets the audio bit rate of the media.
 func (sias *SearchableItemAttributeSet) WithAudioBitRate(audioBitRate obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(audioBitRate)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAudioBitRate:"), objref.IDOf(audioBitRate))
 	return sias
 }
 
 // WithDeliveryType sets the delivery type of the file.
 func (sias *SearchableItemAttributeSet) WithDeliveryType(deliveryType obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(deliveryType)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setDeliveryType:"), objref.IDOf(deliveryType))
 	return sias
 }
@@ -694,6 +718,7 @@ func (sias *SearchableItemAttributeSet) WithCoverage(items ...obj.Object) *Searc
 
 // WithRating sets the user-supplied rating of the media.
 func (sias *SearchableItemAttributeSet) WithRating(rating obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(rating)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRating:"), objref.IDOf(rating))
 	return sias
 }
@@ -706,6 +731,7 @@ func (sias *SearchableItemAttributeSet) WithRatingDescription(ratingDescription 
 
 // WithPlayCount sets a user-supplied play count for the media.
 func (sias *SearchableItemAttributeSet) WithPlayCount(playCount obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(playCount)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPlayCount:"), objref.IDOf(playCount))
 	return sias
 }
@@ -755,36 +781,41 @@ func (sias *SearchableItemAttributeSet) WithOriginalSource(originalSource string
 
 // WithLocal sets a value that indicates if the media is local.
 func (sias *SearchableItemAttributeSet) WithLocal(local obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(local)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setLocal:"), objref.IDOf(local))
 	return sias
 }
 
 // WithContentRating sets a value that indicates if the media contains explicit content.
 func (sias *SearchableItemAttributeSet) WithContentRating(contentRating obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(contentRating)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setContentRating:"), objref.IDOf(contentRating))
 	return sias
 }
 
 // WithURL sets the URL associated with the media.
-func (sias *SearchableItemAttributeSet) WithURL(uRL string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+func (sias *SearchableItemAttributeSet) WithURL(url string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setURL:"), rt.FileURL(url))
 	return sias
 }
 
 // WithAudioSampleRate sets the sample rate of the audio data the file contains, as a float value representing Hz (audio frames per second), such as 44100.0 or 22254.54.
 func (sias *SearchableItemAttributeSet) WithAudioSampleRate(audioSampleRate obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(audioSampleRate)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAudioSampleRate:"), objref.IDOf(audioSampleRate))
 	return sias
 }
 
 // WithAudioChannelCount sets the number of channels in the audio data that the file contains.
 func (sias *SearchableItemAttributeSet) WithAudioChannelCount(audioChannelCount obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(audioChannelCount)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAudioChannelCount:"), objref.IDOf(audioChannelCount))
 	return sias
 }
 
 // WithTempo sets the tempo of the music that the audio file contains, in beats per minute.
 func (sias *SearchableItemAttributeSet) WithTempo(tempo obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(tempo)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setTempo:"), objref.IDOf(tempo))
 	return sias
 }
@@ -833,13 +864,14 @@ func (sias *SearchableItemAttributeSet) WithArtist(artist string) *SearchableIte
 
 // WithAudioTrackNumber sets the track number of a song or audio composition when part of an album.
 func (sias *SearchableItemAttributeSet) WithAudioTrackNumber(audioTrackNumber obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(audioTrackNumber)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAudioTrackNumber:"), objref.IDOf(audioTrackNumber))
 	return sias
 }
 
 // WithRecordingDate sets the recording date of the song or composition.
-func (sias *SearchableItemAttributeSet) WithRecordingDate(recordingDate obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRecordingDate:"), objref.IDOf(recordingDate))
+func (sias *SearchableItemAttributeSet) WithRecordingDate(recordingDate time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRecordingDate:"), rt.TimeToNSDate(recordingDate))
 	return sias
 }
 
@@ -851,6 +883,7 @@ func (sias *SearchableItemAttributeSet) WithMusicalGenre(musicalGenre string) *S
 
 // WithGeneralMIDISequence sets a value that indicates whether the MIDI sequence the file contains is set up for use with a general MIDI device.
 func (sias *SearchableItemAttributeSet) WithGeneralMIDISequence(generalMIDISequence obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(generalMIDISequence)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGeneralMIDISequence:"), objref.IDOf(generalMIDISequence))
 	return sias
 }
@@ -869,18 +902,21 @@ func (sias *SearchableItemAttributeSet) WithMusicalInstrumentName(musicalInstrum
 
 // WithPixelHeight sets the height of the item, such as image or video frame height, in pixels.
 func (sias *SearchableItemAttributeSet) WithPixelHeight(pixelHeight obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(pixelHeight)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPixelHeight:"), objref.IDOf(pixelHeight))
 	return sias
 }
 
 // WithPixelWidth sets the width of the item, such as image or video frame width, in pixels.
 func (sias *SearchableItemAttributeSet) WithPixelWidth(pixelWidth obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(pixelWidth)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPixelWidth:"), objref.IDOf(pixelWidth))
 	return sias
 }
 
 // WithPixelCount sets the total number of pixels in the image.
 func (sias *SearchableItemAttributeSet) WithPixelCount(pixelCount obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(pixelCount)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setPixelCount:"), objref.IDOf(pixelCount))
 	return sias
 }
@@ -893,24 +929,28 @@ func (sias *SearchableItemAttributeSet) WithColorSpace(colorSpace string) *Searc
 
 // WithBitsPerSample sets the number of bits per sample.
 func (sias *SearchableItemAttributeSet) WithBitsPerSample(bitsPerSample obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(bitsPerSample)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setBitsPerSample:"), objref.IDOf(bitsPerSample))
 	return sias
 }
 
 // WithFlashOn sets a value that indicates if the camera used a flash to capture the image.
 func (sias *SearchableItemAttributeSet) WithFlashOn(flashOn obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(flashOn)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setFlashOn:"), objref.IDOf(flashOn))
 	return sias
 }
 
 // WithFocalLength sets the actual focal length of the lens, in millimeters.
 func (sias *SearchableItemAttributeSet) WithFocalLength(focalLength obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(focalLength)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setFocalLength:"), objref.IDOf(focalLength))
 	return sias
 }
 
 // WithFocalLength35mm sets a value that indicates if the focal length is 35mm.
 func (sias *SearchableItemAttributeSet) WithFocalLength35mm(focalLength35mm obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(focalLength35mm)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setFocalLength35mm:"), objref.IDOf(focalLength35mm))
 	return sias
 }
@@ -940,13 +980,15 @@ func (sias *SearchableItemAttributeSet) WithLensModel(lensModel string) *Searcha
 }
 
 // WithISOSpeed sets the ISO speed setting at the time the camera captured the image.
-func (sias *SearchableItemAttributeSet) WithISOSpeed(iSOSpeed obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setISOSpeed:"), objref.IDOf(iSOSpeed))
+func (sias *SearchableItemAttributeSet) WithISOSpeed(isoSpeed obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(isoSpeed)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setISOSpeed:"), objref.IDOf(isoSpeed))
 	return sias
 }
 
 // WithOrientation sets the orientation of the data.
 func (sias *SearchableItemAttributeSet) WithOrientation(orientation obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(orientation)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setOrientation:"), objref.IDOf(orientation))
 	return sias
 }
@@ -960,12 +1002,14 @@ func (sias *SearchableItemAttributeSet) WithLayerNames(items ...obj.Object) *Sea
 
 // WithWhiteBalance sets the white balance setting when the camera captured the image.
 func (sias *SearchableItemAttributeSet) WithWhiteBalance(whiteBalance obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(whiteBalance)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setWhiteBalance:"), objref.IDOf(whiteBalance))
 	return sias
 }
 
 // WithAperture sets the size of the lens aperture at the time the camera captured the image, as a log-scale APEX value.
 func (sias *SearchableItemAttributeSet) WithAperture(aperture obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(aperture)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAperture:"), objref.IDOf(aperture))
 	return sias
 }
@@ -978,48 +1022,54 @@ func (sias *SearchableItemAttributeSet) WithProfileName(profileName string) *Sea
 
 // WithResolutionWidthDPI sets the resolution width of the image, in DPI.
 func (sias *SearchableItemAttributeSet) WithResolutionWidthDPI(resolutionWidthDPI obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(resolutionWidthDPI)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setResolutionWidthDPI:"), objref.IDOf(resolutionWidthDPI))
 	return sias
 }
 
 // WithResolutionHeightDPI sets the resolution height of the image, in DPI.
 func (sias *SearchableItemAttributeSet) WithResolutionHeightDPI(resolutionHeightDPI obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(resolutionHeightDPI)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setResolutionHeightDPI:"), objref.IDOf(resolutionHeightDPI))
 	return sias
 }
 
 // WithExposureMode sets the mode the camera used for the exposure of the image.
 func (sias *SearchableItemAttributeSet) WithExposureMode(exposureMode obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(exposureMode)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setExposureMode:"), objref.IDOf(exposureMode))
 	return sias
 }
 
 // WithExposureTime sets the time that the lens was open during exposure, in seconds.
 func (sias *SearchableItemAttributeSet) WithExposureTime(exposureTime obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(exposureTime)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setExposureTime:"), objref.IDOf(exposureTime))
 	return sias
 }
 
 // WithEXIFVersion sets the version of the EXIF header that was used to generate the metadata for the image.
-func (sias *SearchableItemAttributeSet) WithEXIFVersion(eXIFVersion string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEXIFVersion:"), purego.NSString(eXIFVersion))
+func (sias *SearchableItemAttributeSet) WithEXIFVersion(exifVersion string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEXIFVersion:"), purego.NSString(exifVersion))
 	return sias
 }
 
 // WithEXIFGPSVersion sets the version of GPS Info IFD header that was used to generate the metadata for the image.
-func (sias *SearchableItemAttributeSet) WithEXIFGPSVersion(eXIFGPSVersion string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEXIFGPSVersion:"), purego.NSString(eXIFGPSVersion))
+func (sias *SearchableItemAttributeSet) WithEXIFGPSVersion(exifgpsVersion string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setEXIFGPSVersion:"), purego.NSString(exifgpsVersion))
 	return sias
 }
 
 // WithHasAlphaChannel sets indicates if the image file has an alpha channel.
 func (sias *SearchableItemAttributeSet) WithHasAlphaChannel(hasAlphaChannel obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(hasAlphaChannel)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setHasAlphaChannel:"), objref.IDOf(hasAlphaChannel))
 	return sias
 }
 
 // WithRedEyeOn sets a value that indicates if the camera used red-eye reduction when capturing the image.
 func (sias *SearchableItemAttributeSet) WithRedEyeOn(redEyeOn obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(redEyeOn)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setRedEyeOn:"), objref.IDOf(redEyeOn))
 	return sias
 }
@@ -1032,12 +1082,14 @@ func (sias *SearchableItemAttributeSet) WithMeteringMode(meteringMode string) *S
 
 // WithMaxAperture sets the smallest F number of the lens.
 func (sias *SearchableItemAttributeSet) WithMaxAperture(maxAperture obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(maxAperture)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setMaxAperture:"), objref.IDOf(maxAperture))
 	return sias
 }
 
 // WithFNumber sets the focal length of the lens, divided by the diameter of the aperture when the camera captured the image.
 func (sias *SearchableItemAttributeSet) WithFNumber(fNumber obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(fNumber)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setFNumber:"), objref.IDOf(fNumber))
 	return sias
 }
@@ -1110,36 +1162,41 @@ func (sias *SearchableItemAttributeSet) WithFullyFormattedAddress(fullyFormatted
 
 // WithAltitude sets the altitude of the item in meters above sea level, expressed using the WGS84 datum.
 func (sias *SearchableItemAttributeSet) WithAltitude(altitude obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(altitude)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setAltitude:"), objref.IDOf(altitude))
 	return sias
 }
 
 // WithLatitude sets the latitude of the item, in degrees north of the equator, expressed using the WGS84 datum.
 func (sias *SearchableItemAttributeSet) WithLatitude(latitude obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(latitude)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setLatitude:"), objref.IDOf(latitude))
 	return sias
 }
 
 // WithLongitude sets the longitude of the item, in degrees east of the prime meridian, expressed using the WGS84 datum.
 func (sias *SearchableItemAttributeSet) WithLongitude(longitude obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(longitude)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setLongitude:"), objref.IDOf(longitude))
 	return sias
 }
 
 // WithSpeed sets the speed of the item, in kilometers per hour.
 func (sias *SearchableItemAttributeSet) WithSpeed(speed obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(speed)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setSpeed:"), objref.IDOf(speed))
 	return sias
 }
 
 // WithTimestamp sets the timestamp on the item.
-func (sias *SearchableItemAttributeSet) WithTimestamp(timestamp obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setTimestamp:"), objref.IDOf(timestamp))
+func (sias *SearchableItemAttributeSet) WithTimestamp(timestamp time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setTimestamp:"), rt.TimeToNSDate(timestamp))
 	return sias
 }
 
 // WithImageDirection sets the direction of the item’s image in degrees from true north.
 func (sias *SearchableItemAttributeSet) WithImageDirection(imageDirection obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(imageDirection)
 	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setImageDirection:"), objref.IDOf(imageDirection))
 	return sias
 }
@@ -1151,85 +1208,93 @@ func (sias *SearchableItemAttributeSet) WithNamedLocation(namedLocation string) 
 }
 
 // WithGPSTrack sets the direction of travel of the item in degrees from true north.
-func (sias *SearchableItemAttributeSet) WithGPSTrack(gPSTrack obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSTrack:"), objref.IDOf(gPSTrack))
+func (sias *SearchableItemAttributeSet) WithGPSTrack(gpsTrack obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsTrack)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSTrack:"), objref.IDOf(gpsTrack))
 	return sias
 }
 
 // WithGPSStatus sets the status of the GPS receiver.
-func (sias *SearchableItemAttributeSet) WithGPSStatus(gPSStatus string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSStatus:"), purego.NSString(gPSStatus))
+func (sias *SearchableItemAttributeSet) WithGPSStatus(gpsStatus string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSStatus:"), purego.NSString(gpsStatus))
 	return sias
 }
 
 // WithGPSMeasureMode sets the measurement precision mode in use by the GPS receiver.
-func (sias *SearchableItemAttributeSet) WithGPSMeasureMode(gPSMeasureMode string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSMeasureMode:"), purego.NSString(gPSMeasureMode))
+func (sias *SearchableItemAttributeSet) WithGPSMeasureMode(gpsMeasureMode string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSMeasureMode:"), purego.NSString(gpsMeasureMode))
 	return sias
 }
 
 // WithGPSDOP sets the GPS dilution of precision value.
-func (sias *SearchableItemAttributeSet) WithGPSDOP(gPSDOP obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDOP:"), objref.IDOf(gPSDOP))
+func (sias *SearchableItemAttributeSet) WithGPSDOP(gpsdop obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsdop)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDOP:"), objref.IDOf(gpsdop))
 	return sias
 }
 
 // WithGPSMapDatum sets the geodetic data that the GPS receiver uses.
-func (sias *SearchableItemAttributeSet) WithGPSMapDatum(gPSMapDatum string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSMapDatum:"), purego.NSString(gPSMapDatum))
+func (sias *SearchableItemAttributeSet) WithGPSMapDatum(gpsMapDatum string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSMapDatum:"), purego.NSString(gpsMapDatum))
 	return sias
 }
 
 // WithGPSDestLatitude sets the latitude of the destination point.
-func (sias *SearchableItemAttributeSet) WithGPSDestLatitude(gPSDestLatitude obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestLatitude:"), objref.IDOf(gPSDestLatitude))
+func (sias *SearchableItemAttributeSet) WithGPSDestLatitude(gpsDestLatitude obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsDestLatitude)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestLatitude:"), objref.IDOf(gpsDestLatitude))
 	return sias
 }
 
 // WithGPSDestLongitude sets the longitude of the destination point.
-func (sias *SearchableItemAttributeSet) WithGPSDestLongitude(gPSDestLongitude obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestLongitude:"), objref.IDOf(gPSDestLongitude))
+func (sias *SearchableItemAttributeSet) WithGPSDestLongitude(gpsDestLongitude obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsDestLongitude)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestLongitude:"), objref.IDOf(gpsDestLongitude))
 	return sias
 }
 
 // WithGPSDestBearing sets the bearing to the destination point.
-func (sias *SearchableItemAttributeSet) WithGPSDestBearing(gPSDestBearing obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestBearing:"), objref.IDOf(gPSDestBearing))
+func (sias *SearchableItemAttributeSet) WithGPSDestBearing(gpsDestBearing obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsDestBearing)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestBearing:"), objref.IDOf(gpsDestBearing))
 	return sias
 }
 
 // WithGPSDestDistance sets the distance to the destination point.
-func (sias *SearchableItemAttributeSet) WithGPSDestDistance(gPSDestDistance obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestDistance:"), objref.IDOf(gPSDestDistance))
+func (sias *SearchableItemAttributeSet) WithGPSDestDistance(gpsDestDistance obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsDestDistance)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDestDistance:"), objref.IDOf(gpsDestDistance))
 	return sias
 }
 
 // WithGPSProcessingMethod sets the location finding method that the GPS receiver uses.
-func (sias *SearchableItemAttributeSet) WithGPSProcessingMethod(gPSProcessingMethod string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSProcessingMethod:"), purego.NSString(gPSProcessingMethod))
+func (sias *SearchableItemAttributeSet) WithGPSProcessingMethod(gpsProcessingMethod string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSProcessingMethod:"), purego.NSString(gpsProcessingMethod))
 	return sias
 }
 
 // WithGPSAreaInformation sets information about the GPS area.
-func (sias *SearchableItemAttributeSet) WithGPSAreaInformation(gPSAreaInformation string) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSAreaInformation:"), purego.NSString(gPSAreaInformation))
+func (sias *SearchableItemAttributeSet) WithGPSAreaInformation(gpsAreaInformation string) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSAreaInformation:"), purego.NSString(gpsAreaInformation))
 	return sias
 }
 
 // WithGPSDateStamp sets the date and time related to the GPS value.
-func (sias *SearchableItemAttributeSet) WithGPSDateStamp(gPSDateStamp obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDateStamp:"), objref.IDOf(gPSDateStamp))
+func (sias *SearchableItemAttributeSet) WithGPSDateStamp(gpsDateStamp time.Time) *SearchableItemAttributeSet {
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDateStamp:"), rt.TimeToNSDate(gpsDateStamp))
 	return sias
 }
 
 // WithGPSDifferental sets the differential correction applied to the GPS receiver.
-func (sias *SearchableItemAttributeSet) WithGPSDifferental(gPSDifferental obj.Object) *SearchableItemAttributeSet {
-	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDifferental:"), objref.IDOf(gPSDifferental))
+func (sias *SearchableItemAttributeSet) WithGPSDifferental(gpsDifferental obj.Object) *SearchableItemAttributeSet {
+	defer runtime.KeepAlive(gpsDifferental)
+	objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("setGPSDifferental:"), objref.IDOf(gpsDifferental))
 	return sias
 }
 
 // DisplayName returns the display name.
 func (sias *SearchableItemAttributeSet) DisplayName() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -1241,12 +1306,14 @@ func (sias *SearchableItemAttributeSet) DisplayName() string {
 //
 // AlternateNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AlternateNames() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("alternateNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Path returns the path.
 func (sias *SearchableItemAttributeSet) Path() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
@@ -1255,31 +1322,36 @@ func (sias *SearchableItemAttributeSet) Path() string {
 }
 
 // ContentURL returns the content URL.
-func (sias *SearchableItemAttributeSet) ContentURL() obj.Object {
+func (sias *SearchableItemAttributeSet) ContentURL() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ThumbnailURL returns the thumbnail URL.
-func (sias *SearchableItemAttributeSet) ThumbnailURL() obj.Object {
+func (sias *SearchableItemAttributeSet) ThumbnailURL() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("thumbnailURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ThumbnailData returns the thumbnail data.
-func (sias *SearchableItemAttributeSet) ThumbnailData() obj.Object {
+func (sias *SearchableItemAttributeSet) ThumbnailData() []byte {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("thumbnailData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DarkThumbnailURL returns the dark thumbnail URL.
-func (sias *SearchableItemAttributeSet) DarkThumbnailURL() obj.Object {
+func (sias *SearchableItemAttributeSet) DarkThumbnailURL() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("darkThumbnailURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // RelatedUniqueIdentifier returns the related unique identifier.
 func (sias *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("relatedUniqueIdentifier"))
 	if _r == 0 {
 		return ""
@@ -1288,13 +1360,15 @@ func (sias *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 }
 
 // MetadataModificationDate returns the metadata modification date.
-func (sias *SearchableItemAttributeSet) MetadataModificationDate() obj.Object {
+func (sias *SearchableItemAttributeSet) MetadataModificationDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("metadataModificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ContentType returns the content type.
 func (sias *SearchableItemAttributeSet) ContentType() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentType"))
 	if _r == 0 {
 		return ""
@@ -1306,6 +1380,7 @@ func (sias *SearchableItemAttributeSet) ContentType() string {
 //
 // ContentTypeTree returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ContentTypeTree() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentTypeTree"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1314,12 +1389,14 @@ func (sias *SearchableItemAttributeSet) ContentTypeTree() []string {
 //
 // Keywords returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Keywords() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("keywords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Title returns the title.
 func (sias *SearchableItemAttributeSet) Title() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -1329,6 +1406,7 @@ func (sias *SearchableItemAttributeSet) Title() string {
 
 // TextContentSummary returns the text content summary.
 func (sias *SearchableItemAttributeSet) TextContentSummary() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("textContentSummary"))
 	if _r == 0 {
 		return ""
@@ -1338,6 +1416,7 @@ func (sias *SearchableItemAttributeSet) TextContentSummary() string {
 
 // TranscribedTextContent returns the transcribed text content.
 func (sias *SearchableItemAttributeSet) TranscribedTextContent() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("transcribedTextContent"))
 	if _r == 0 {
 		return ""
@@ -1346,19 +1425,22 @@ func (sias *SearchableItemAttributeSet) TranscribedTextContent() string {
 }
 
 // SupportsPhoneCall returns the supports phone call.
-func (sias *SearchableItemAttributeSet) SupportsPhoneCall() obj.Object {
+func (sias *SearchableItemAttributeSet) SupportsPhoneCall() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("supportsPhoneCall"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SupportsNavigation returns the supports navigation.
-func (sias *SearchableItemAttributeSet) SupportsNavigation() obj.Object {
+func (sias *SearchableItemAttributeSet) SupportsNavigation() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("supportsNavigation"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ContainerTitle returns the container title.
 func (sias *SearchableItemAttributeSet) ContainerTitle() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerTitle"))
 	if _r == 0 {
 		return ""
@@ -1368,6 +1450,7 @@ func (sias *SearchableItemAttributeSet) ContainerTitle() string {
 
 // ContainerDisplayName returns the container display name.
 func (sias *SearchableItemAttributeSet) ContainerDisplayName() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerDisplayName"))
 	if _r == 0 {
 		return ""
@@ -1377,6 +1460,7 @@ func (sias *SearchableItemAttributeSet) ContainerDisplayName() string {
 
 // ContainerIdentifier returns the container identifier.
 func (sias *SearchableItemAttributeSet) ContainerIdentifier() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -1385,13 +1469,15 @@ func (sias *SearchableItemAttributeSet) ContainerIdentifier() string {
 }
 
 // ContainerOrder returns the container order.
-func (sias *SearchableItemAttributeSet) ContainerOrder() obj.Object {
+func (sias *SearchableItemAttributeSet) ContainerOrder() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerOrder"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Subject returns subject of the this item.
 func (sias *SearchableItemAttributeSet) Subject() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("subject"))
 	if _r == 0 {
 		return ""
@@ -1401,6 +1487,7 @@ func (sias *SearchableItemAttributeSet) Subject() string {
 
 // Theme returns the theme.
 func (sias *SearchableItemAttributeSet) Theme() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("theme"))
 	if _r == 0 {
 		return ""
@@ -1410,6 +1497,7 @@ func (sias *SearchableItemAttributeSet) Theme() string {
 
 // ContentDescription returns the content description.
 func (sias *SearchableItemAttributeSet) ContentDescription() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentDescription"))
 	if _r == 0 {
 		return ""
@@ -1419,6 +1507,7 @@ func (sias *SearchableItemAttributeSet) ContentDescription() string {
 
 // Identifier returns the identifier.
 func (sias *SearchableItemAttributeSet) Identifier() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -1430,36 +1519,42 @@ func (sias *SearchableItemAttributeSet) Identifier() string {
 //
 // Audiences returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Audiences() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audiences"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // FileSize returns the file size.
-func (sias *SearchableItemAttributeSet) FileSize() obj.Object {
+func (sias *SearchableItemAttributeSet) FileSize() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fileSize"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PageCount returns the page count.
-func (sias *SearchableItemAttributeSet) PageCount() obj.Object {
+func (sias *SearchableItemAttributeSet) PageCount() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pageCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PageWidth returns the page width.
-func (sias *SearchableItemAttributeSet) PageWidth() obj.Object {
+func (sias *SearchableItemAttributeSet) PageWidth() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pageWidth"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PageHeight returns the page height.
-func (sias *SearchableItemAttributeSet) PageHeight() obj.Object {
+func (sias *SearchableItemAttributeSet) PageHeight() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pageHeight"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // SecurityMethod returns the security method.
 func (sias *SearchableItemAttributeSet) SecurityMethod() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("securityMethod"))
 	if _r == 0 {
 		return ""
@@ -1469,6 +1564,7 @@ func (sias *SearchableItemAttributeSet) SecurityMethod() string {
 
 // Creator returns the creator.
 func (sias *SearchableItemAttributeSet) Creator() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("creator"))
 	if _r == 0 {
 		return ""
@@ -1480,12 +1576,14 @@ func (sias *SearchableItemAttributeSet) Creator() string {
 //
 // EncodingApplications returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) EncodingApplications() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("encodingApplications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Kind returns the kind.
 func (sias *SearchableItemAttributeSet) Kind() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("kind"))
 	if _r == 0 {
 		return ""
@@ -1497,50 +1595,58 @@ func (sias *SearchableItemAttributeSet) Kind() string {
 //
 // FontNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) FontNames() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fontNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // DueDate returns the due date.
-func (sias *SearchableItemAttributeSet) DueDate() obj.Object {
+func (sias *SearchableItemAttributeSet) DueDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("dueDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // CompletionDate returns the completion date.
-func (sias *SearchableItemAttributeSet) CompletionDate() obj.Object {
+func (sias *SearchableItemAttributeSet) CompletionDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("completionDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StartDate returns the start date.
-func (sias *SearchableItemAttributeSet) StartDate() obj.Object {
+func (sias *SearchableItemAttributeSet) StartDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the end date.
-func (sias *SearchableItemAttributeSet) EndDate() obj.Object {
+func (sias *SearchableItemAttributeSet) EndDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ImportantDates returns the important dates.
 //
 // ImportantDates returns the collection as a Go slice.
-func (sias *SearchableItemAttributeSet) ImportantDates() []obj.Object {
+func (sias *SearchableItemAttributeSet) ImportantDates() []time.Time {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("importantDates"))
-	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) time.Time { return rt.NSDateToTime(_id) })
 }
 
 // AllDay returns the all day.
-func (sias *SearchableItemAttributeSet) AllDay() obj.Object {
+func (sias *SearchableItemAttributeSet) AllDay() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("allDay"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AccountIdentifier returns the account identifier.
 func (sias *SearchableItemAttributeSet) AccountIdentifier() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("accountIdentifier"))
 	if _r == 0 {
 		return ""
@@ -1552,18 +1658,21 @@ func (sias *SearchableItemAttributeSet) AccountIdentifier() string {
 //
 // AccountHandles returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AccountHandles() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("accountHandles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // HTMLContentData returns the HTML content data.
-func (sias *SearchableItemAttributeSet) HTMLContentData() obj.Object {
+func (sias *SearchableItemAttributeSet) HTMLContentData() []byte {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("HTMLContentData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TextContent returns the text content.
 func (sias *SearchableItemAttributeSet) TextContent() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("textContent"))
 	if _r == 0 {
 		return ""
@@ -1575,6 +1684,7 @@ func (sias *SearchableItemAttributeSet) TextContent() string {
 //
 // Authors returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Authors() []*Person {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("authors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
@@ -1583,6 +1693,7 @@ func (sias *SearchableItemAttributeSet) Authors() []*Person {
 //
 // PrimaryRecipients returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) PrimaryRecipients() []*Person {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("primaryRecipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
@@ -1591,6 +1702,7 @@ func (sias *SearchableItemAttributeSet) PrimaryRecipients() []*Person {
 //
 // AdditionalRecipients returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AdditionalRecipients() []*Person {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("additionalRecipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
@@ -1599,20 +1711,23 @@ func (sias *SearchableItemAttributeSet) AdditionalRecipients() []*Person {
 //
 // HiddenAdditionalRecipients returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) HiddenAdditionalRecipients() []*Person {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("hiddenAdditionalRecipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // EmailHeaders returns the email headers.
-func (sias *SearchableItemAttributeSet) EmailHeaders() obj.Object {
+func (sias *SearchableItemAttributeSet) EmailHeaders() map[string]obj.Object {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("emailHeaders"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MailboxIdentifiers returns the mailbox identifiers.
 //
 // MailboxIdentifiers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) MailboxIdentifiers() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("mailboxIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1621,6 +1736,7 @@ func (sias *SearchableItemAttributeSet) MailboxIdentifiers() []string {
 //
 // AuthorNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AuthorNames() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("authorNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1629,6 +1745,7 @@ func (sias *SearchableItemAttributeSet) AuthorNames() []string {
 //
 // RecipientNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) RecipientNames() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("recipientNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1637,6 +1754,7 @@ func (sias *SearchableItemAttributeSet) RecipientNames() []string {
 //
 // AuthorEmailAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AuthorEmailAddresses() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("authorEmailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1645,6 +1763,7 @@ func (sias *SearchableItemAttributeSet) AuthorEmailAddresses() []string {
 //
 // RecipientEmailAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) RecipientEmailAddresses() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("recipientEmailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1653,6 +1772,7 @@ func (sias *SearchableItemAttributeSet) RecipientEmailAddresses() []string {
 //
 // AuthorAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AuthorAddresses() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("authorAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1661,6 +1781,7 @@ func (sias *SearchableItemAttributeSet) AuthorAddresses() []string {
 //
 // RecipientAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) RecipientAddresses() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("recipientAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1669,6 +1790,7 @@ func (sias *SearchableItemAttributeSet) RecipientAddresses() []string {
 //
 // PhoneNumbers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) PhoneNumbers() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("phoneNumbers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1677,6 +1799,7 @@ func (sias *SearchableItemAttributeSet) PhoneNumbers() []string {
 //
 // EmailAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) EmailAddresses() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("emailAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1685,26 +1808,30 @@ func (sias *SearchableItemAttributeSet) EmailAddresses() []string {
 //
 // InstantMessageAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) InstantMessageAddresses() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("instantMessageAddresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // IsLikelyJunk returns the is likely junk.
-func (sias *SearchableItemAttributeSet) IsLikelyJunk() obj.Object {
+func (sias *SearchableItemAttributeSet) IsLikelyJunk() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isLikelyJunk"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsPriority returns the is priority.
-func (sias *SearchableItemAttributeSet) IsPriority() obj.Object {
+func (sias *SearchableItemAttributeSet) IsPriority() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isPriority"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Editors returns the editors.
 //
 // Editors returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Editors() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("editors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1713,6 +1840,7 @@ func (sias *SearchableItemAttributeSet) Editors() []string {
 //
 // Participants returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Participants() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("participants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1721,6 +1849,7 @@ func (sias *SearchableItemAttributeSet) Participants() []string {
 //
 // Projects returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Projects() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("projects"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1729,12 +1858,14 @@ func (sias *SearchableItemAttributeSet) Projects() []string {
 //
 // ContentSources returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ContentSources() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentSources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Comment returns the comment.
 func (sias *SearchableItemAttributeSet) Comment() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("comment"))
 	if _r == 0 {
 		return ""
@@ -1744,6 +1875,7 @@ func (sias *SearchableItemAttributeSet) Comment() string {
 
 // Copyright returns the copyright.
 func (sias *SearchableItemAttributeSet) Copyright() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("copyright"))
 	if _r == 0 {
 		return ""
@@ -1752,45 +1884,52 @@ func (sias *SearchableItemAttributeSet) Copyright() string {
 }
 
 // LastUsedDate returns the last used date.
-func (sias *SearchableItemAttributeSet) LastUsedDate() obj.Object {
+func (sias *SearchableItemAttributeSet) LastUsedDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("lastUsedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ContentCreationDate returns the content creation date.
-func (sias *SearchableItemAttributeSet) ContentCreationDate() obj.Object {
+func (sias *SearchableItemAttributeSet) ContentCreationDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentCreationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ContentModificationDate returns the content modification date.
-func (sias *SearchableItemAttributeSet) ContentModificationDate() obj.Object {
+func (sias *SearchableItemAttributeSet) ContentModificationDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentModificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // AddedDate returns the added date.
-func (sias *SearchableItemAttributeSet) AddedDate() obj.Object {
+func (sias *SearchableItemAttributeSet) AddedDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("addedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // DownloadedDate returns the downloaded date.
-func (sias *SearchableItemAttributeSet) DownloadedDate() obj.Object {
+func (sias *SearchableItemAttributeSet) DownloadedDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("downloadedDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Duration returns the duration.
-func (sias *SearchableItemAttributeSet) Duration() obj.Object {
+func (sias *SearchableItemAttributeSet) Duration() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("duration"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ContactKeywords returns the contact keywords.
 //
 // ContactKeywords returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ContactKeywords() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contactKeywords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1799,6 +1938,7 @@ func (sias *SearchableItemAttributeSet) ContactKeywords() []string {
 //
 // Codecs returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Codecs() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("codecs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1807,50 +1947,58 @@ func (sias *SearchableItemAttributeSet) Codecs() []string {
 //
 // MediaTypes returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) MediaTypes() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("mediaTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // IsStreamable returns the is streamable.
-func (sias *SearchableItemAttributeSet) IsStreamable() obj.Object {
+func (sias *SearchableItemAttributeSet) IsStreamable() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isStreamable"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TotalBitRate returns the total bit rate.
-func (sias *SearchableItemAttributeSet) TotalBitRate() obj.Object {
+func (sias *SearchableItemAttributeSet) TotalBitRate() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("totalBitRate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // VideoBitRate returns the video bit rate.
-func (sias *SearchableItemAttributeSet) VideoBitRate() obj.Object {
+func (sias *SearchableItemAttributeSet) VideoBitRate() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("videoBitRate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AudioBitRate returns the audio bit rate.
-func (sias *SearchableItemAttributeSet) AudioBitRate() obj.Object {
+func (sias *SearchableItemAttributeSet) AudioBitRate() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioBitRate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DeliveryType returns the delivery type.
-func (sias *SearchableItemAttributeSet) DeliveryType() obj.Object {
+func (sias *SearchableItemAttributeSet) DeliveryType() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("deliveryType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Organizations returns the organizations.
 //
 // Organizations returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Organizations() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("organizations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Role returns the role.
 func (sias *SearchableItemAttributeSet) Role() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("role"))
 	if _r == 0 {
 		return ""
@@ -1862,12 +2010,14 @@ func (sias *SearchableItemAttributeSet) Role() string {
 //
 // Languages returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Languages() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("languages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Rights returns the rights.
 func (sias *SearchableItemAttributeSet) Rights() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("rights"))
 	if _r == 0 {
 		return ""
@@ -1879,6 +2029,7 @@ func (sias *SearchableItemAttributeSet) Rights() string {
 //
 // Publishers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Publishers() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("publishers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1887,6 +2038,7 @@ func (sias *SearchableItemAttributeSet) Publishers() []string {
 //
 // Contributors returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Contributors() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contributors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -1895,18 +2047,21 @@ func (sias *SearchableItemAttributeSet) Contributors() []string {
 //
 // Coverage returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Coverage() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("coverage"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Rating returns the rating.
-func (sias *SearchableItemAttributeSet) Rating() obj.Object {
+func (sias *SearchableItemAttributeSet) Rating() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("rating"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RatingDescription returns the rating description.
 func (sias *SearchableItemAttributeSet) RatingDescription() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("ratingDescription"))
 	if _r == 0 {
 		return ""
@@ -1915,13 +2070,15 @@ func (sias *SearchableItemAttributeSet) RatingDescription() string {
 }
 
 // PlayCount returns the play count.
-func (sias *SearchableItemAttributeSet) PlayCount() obj.Object {
+func (sias *SearchableItemAttributeSet) PlayCount() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("playCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Information returns the information.
 func (sias *SearchableItemAttributeSet) Information() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("information"))
 	if _r == 0 {
 		return ""
@@ -1931,6 +2088,7 @@ func (sias *SearchableItemAttributeSet) Information() string {
 
 // Director returns the director.
 func (sias *SearchableItemAttributeSet) Director() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("director"))
 	if _r == 0 {
 		return ""
@@ -1940,6 +2098,7 @@ func (sias *SearchableItemAttributeSet) Director() string {
 
 // Producer returns the producer.
 func (sias *SearchableItemAttributeSet) Producer() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("producer"))
 	if _r == 0 {
 		return ""
@@ -1949,6 +2108,7 @@ func (sias *SearchableItemAttributeSet) Producer() string {
 
 // Genre returns the genre.
 func (sias *SearchableItemAttributeSet) Genre() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("genre"))
 	if _r == 0 {
 		return ""
@@ -1960,12 +2120,14 @@ func (sias *SearchableItemAttributeSet) Genre() string {
 //
 // Performers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Performers() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("performers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // OriginalFormat returns the original format.
 func (sias *SearchableItemAttributeSet) OriginalFormat() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("originalFormat"))
 	if _r == 0 {
 		return ""
@@ -1975,6 +2137,7 @@ func (sias *SearchableItemAttributeSet) OriginalFormat() string {
 
 // OriginalSource returns the original source.
 func (sias *SearchableItemAttributeSet) OriginalSource() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("originalSource"))
 	if _r == 0 {
 		return ""
@@ -1983,43 +2146,50 @@ func (sias *SearchableItemAttributeSet) OriginalSource() string {
 }
 
 // IsLocal returns the is local.
-func (sias *SearchableItemAttributeSet) IsLocal() obj.Object {
+func (sias *SearchableItemAttributeSet) IsLocal() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isLocal"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ContentRating returns the content rating.
-func (sias *SearchableItemAttributeSet) ContentRating() obj.Object {
+func (sias *SearchableItemAttributeSet) ContentRating() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentRating"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // URL returns the URL.
-func (sias *SearchableItemAttributeSet) URL() obj.Object {
+func (sias *SearchableItemAttributeSet) URL() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // AudioSampleRate returns the audio sample rate.
-func (sias *SearchableItemAttributeSet) AudioSampleRate() obj.Object {
+func (sias *SearchableItemAttributeSet) AudioSampleRate() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioSampleRate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AudioChannelCount returns the audio channel count.
-func (sias *SearchableItemAttributeSet) AudioChannelCount() obj.Object {
+func (sias *SearchableItemAttributeSet) AudioChannelCount() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioChannelCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Tempo returns the tempo.
-func (sias *SearchableItemAttributeSet) Tempo() obj.Object {
+func (sias *SearchableItemAttributeSet) Tempo() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("tempo"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // KeySignature returns the key signature.
 func (sias *SearchableItemAttributeSet) KeySignature() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("keySignature"))
 	if _r == 0 {
 		return ""
@@ -2029,6 +2199,7 @@ func (sias *SearchableItemAttributeSet) KeySignature() string {
 
 // TimeSignature returns the time signature.
 func (sias *SearchableItemAttributeSet) TimeSignature() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("timeSignature"))
 	if _r == 0 {
 		return ""
@@ -2038,6 +2209,7 @@ func (sias *SearchableItemAttributeSet) TimeSignature() string {
 
 // AudioEncodingApplication returns the audio encoding application.
 func (sias *SearchableItemAttributeSet) AudioEncodingApplication() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioEncodingApplication"))
 	if _r == 0 {
 		return ""
@@ -2047,6 +2219,7 @@ func (sias *SearchableItemAttributeSet) AudioEncodingApplication() string {
 
 // Composer returns the composer.
 func (sias *SearchableItemAttributeSet) Composer() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("composer"))
 	if _r == 0 {
 		return ""
@@ -2056,6 +2229,7 @@ func (sias *SearchableItemAttributeSet) Composer() string {
 
 // Lyricist returns the lyricist.
 func (sias *SearchableItemAttributeSet) Lyricist() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("lyricist"))
 	if _r == 0 {
 		return ""
@@ -2065,6 +2239,7 @@ func (sias *SearchableItemAttributeSet) Lyricist() string {
 
 // Album returns the album.
 func (sias *SearchableItemAttributeSet) Album() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("album"))
 	if _r == 0 {
 		return ""
@@ -2074,6 +2249,7 @@ func (sias *SearchableItemAttributeSet) Album() string {
 
 // Artist returns the artist.
 func (sias *SearchableItemAttributeSet) Artist() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("artist"))
 	if _r == 0 {
 		return ""
@@ -2082,19 +2258,22 @@ func (sias *SearchableItemAttributeSet) Artist() string {
 }
 
 // AudioTrackNumber returns the audio track number.
-func (sias *SearchableItemAttributeSet) AudioTrackNumber() obj.Object {
+func (sias *SearchableItemAttributeSet) AudioTrackNumber() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioTrackNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RecordingDate returns the recording date.
-func (sias *SearchableItemAttributeSet) RecordingDate() obj.Object {
+func (sias *SearchableItemAttributeSet) RecordingDate() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("recordingDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // MusicalGenre returns the musical genre.
 func (sias *SearchableItemAttributeSet) MusicalGenre() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("musicalGenre"))
 	if _r == 0 {
 		return ""
@@ -2103,13 +2282,15 @@ func (sias *SearchableItemAttributeSet) MusicalGenre() string {
 }
 
 // IsGeneralMIDISequence returns the is general midi sequence.
-func (sias *SearchableItemAttributeSet) IsGeneralMIDISequence() obj.Object {
+func (sias *SearchableItemAttributeSet) IsGeneralMIDISequence() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isGeneralMIDISequence"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MusicalInstrumentCategory returns the musical instrument category.
 func (sias *SearchableItemAttributeSet) MusicalInstrumentCategory() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("musicalInstrumentCategory"))
 	if _r == 0 {
 		return ""
@@ -2119,6 +2300,7 @@ func (sias *SearchableItemAttributeSet) MusicalInstrumentCategory() string {
 
 // MusicalInstrumentName returns the musical instrument name.
 func (sias *SearchableItemAttributeSet) MusicalInstrumentName() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("musicalInstrumentName"))
 	if _r == 0 {
 		return ""
@@ -2127,25 +2309,29 @@ func (sias *SearchableItemAttributeSet) MusicalInstrumentName() string {
 }
 
 // PixelHeight returns the pixel height.
-func (sias *SearchableItemAttributeSet) PixelHeight() obj.Object {
+func (sias *SearchableItemAttributeSet) PixelHeight() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pixelHeight"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PixelWidth returns the pixel width.
-func (sias *SearchableItemAttributeSet) PixelWidth() obj.Object {
+func (sias *SearchableItemAttributeSet) PixelWidth() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pixelWidth"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PixelCount returns the pixel count.
-func (sias *SearchableItemAttributeSet) PixelCount() obj.Object {
+func (sias *SearchableItemAttributeSet) PixelCount() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pixelCount"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ColorSpace returns the color space.
 func (sias *SearchableItemAttributeSet) ColorSpace() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("colorSpace"))
 	if _r == 0 {
 		return ""
@@ -2154,31 +2340,36 @@ func (sias *SearchableItemAttributeSet) ColorSpace() string {
 }
 
 // BitsPerSample returns the bits per sample.
-func (sias *SearchableItemAttributeSet) BitsPerSample() obj.Object {
+func (sias *SearchableItemAttributeSet) BitsPerSample() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("bitsPerSample"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsFlashOn returns the is flash on.
-func (sias *SearchableItemAttributeSet) IsFlashOn() obj.Object {
+func (sias *SearchableItemAttributeSet) IsFlashOn() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isFlashOn"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FocalLength returns the focal length.
-func (sias *SearchableItemAttributeSet) FocalLength() obj.Object {
+func (sias *SearchableItemAttributeSet) FocalLength() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("focalLength"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsFocalLength35mm returns the is focal length35mm.
-func (sias *SearchableItemAttributeSet) IsFocalLength35mm() obj.Object {
+func (sias *SearchableItemAttributeSet) IsFocalLength35mm() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isFocalLength35mm"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AcquisitionMake returns the acquisition make.
 func (sias *SearchableItemAttributeSet) AcquisitionMake() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("acquisitionMake"))
 	if _r == 0 {
 		return ""
@@ -2188,6 +2379,7 @@ func (sias *SearchableItemAttributeSet) AcquisitionMake() string {
 
 // AcquisitionModel returns the acquisition model.
 func (sias *SearchableItemAttributeSet) AcquisitionModel() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("acquisitionModel"))
 	if _r == 0 {
 		return ""
@@ -2197,6 +2389,7 @@ func (sias *SearchableItemAttributeSet) AcquisitionModel() string {
 
 // CameraOwner returns the camera owner.
 func (sias *SearchableItemAttributeSet) CameraOwner() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("cameraOwner"))
 	if _r == 0 {
 		return ""
@@ -2206,6 +2399,7 @@ func (sias *SearchableItemAttributeSet) CameraOwner() string {
 
 // LensModel returns the lens model.
 func (sias *SearchableItemAttributeSet) LensModel() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("lensModel"))
 	if _r == 0 {
 		return ""
@@ -2214,39 +2408,45 @@ func (sias *SearchableItemAttributeSet) LensModel() string {
 }
 
 // ISOSpeed returns the iso speed.
-func (sias *SearchableItemAttributeSet) ISOSpeed() obj.Object {
+func (sias *SearchableItemAttributeSet) ISOSpeed() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("ISOSpeed"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Orientation returns the orientation.
-func (sias *SearchableItemAttributeSet) Orientation() obj.Object {
+func (sias *SearchableItemAttributeSet) Orientation() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("orientation"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LayerNames returns the layer names.
 //
 // LayerNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) LayerNames() []string {
+	defer runtime.KeepAlive(sias)
 	_arr := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("layerNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // WhiteBalance returns the white balance.
-func (sias *SearchableItemAttributeSet) WhiteBalance() obj.Object {
+func (sias *SearchableItemAttributeSet) WhiteBalance() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("whiteBalance"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Aperture returns the aperture.
-func (sias *SearchableItemAttributeSet) Aperture() obj.Object {
+func (sias *SearchableItemAttributeSet) Aperture() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("aperture"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ProfileName returns the profile name.
 func (sias *SearchableItemAttributeSet) ProfileName() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("profileName"))
 	if _r == 0 {
 		return ""
@@ -2255,31 +2455,36 @@ func (sias *SearchableItemAttributeSet) ProfileName() string {
 }
 
 // ResolutionWidthDPI returns the resolution width dpi.
-func (sias *SearchableItemAttributeSet) ResolutionWidthDPI() obj.Object {
+func (sias *SearchableItemAttributeSet) ResolutionWidthDPI() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("resolutionWidthDPI"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ResolutionHeightDPI returns the resolution height dpi.
-func (sias *SearchableItemAttributeSet) ResolutionHeightDPI() obj.Object {
+func (sias *SearchableItemAttributeSet) ResolutionHeightDPI() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("resolutionHeightDPI"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExposureMode returns the exposure mode.
-func (sias *SearchableItemAttributeSet) ExposureMode() obj.Object {
+func (sias *SearchableItemAttributeSet) ExposureMode() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExposureTime returns the exposure time.
-func (sias *SearchableItemAttributeSet) ExposureTime() obj.Object {
+func (sias *SearchableItemAttributeSet) ExposureTime() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EXIFVersion returns the exif version.
 func (sias *SearchableItemAttributeSet) EXIFVersion() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("EXIFVersion"))
 	if _r == 0 {
 		return ""
@@ -2289,6 +2494,7 @@ func (sias *SearchableItemAttributeSet) EXIFVersion() string {
 
 // EXIFGPSVersion returns the exifgps version.
 func (sias *SearchableItemAttributeSet) EXIFGPSVersion() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("EXIFGPSVersion"))
 	if _r == 0 {
 		return ""
@@ -2297,19 +2503,22 @@ func (sias *SearchableItemAttributeSet) EXIFGPSVersion() string {
 }
 
 // HasAlphaChannel returns the has alpha channel.
-func (sias *SearchableItemAttributeSet) HasAlphaChannel() obj.Object {
+func (sias *SearchableItemAttributeSet) HasAlphaChannel() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("hasAlphaChannel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // IsRedEyeOn returns the is red eye on.
-func (sias *SearchableItemAttributeSet) IsRedEyeOn() obj.Object {
+func (sias *SearchableItemAttributeSet) IsRedEyeOn() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isRedEyeOn"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MeteringMode returns the metering mode.
 func (sias *SearchableItemAttributeSet) MeteringMode() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("meteringMode"))
 	if _r == 0 {
 		return ""
@@ -2318,19 +2527,22 @@ func (sias *SearchableItemAttributeSet) MeteringMode() string {
 }
 
 // MaxAperture returns the max aperture.
-func (sias *SearchableItemAttributeSet) MaxAperture() obj.Object {
+func (sias *SearchableItemAttributeSet) MaxAperture() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("maxAperture"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // FNumber returns the f number.
-func (sias *SearchableItemAttributeSet) FNumber() obj.Object {
+func (sias *SearchableItemAttributeSet) FNumber() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fNumber"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ExposureProgram returns the exposure program.
 func (sias *SearchableItemAttributeSet) ExposureProgram() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureProgram"))
 	if _r == 0 {
 		return ""
@@ -2340,6 +2552,7 @@ func (sias *SearchableItemAttributeSet) ExposureProgram() string {
 
 // ExposureTimeString returns the exposure time string.
 func (sias *SearchableItemAttributeSet) ExposureTimeString() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureTimeString"))
 	if _r == 0 {
 		return ""
@@ -2349,6 +2562,7 @@ func (sias *SearchableItemAttributeSet) ExposureTimeString() string {
 
 // Headline returns the headline.
 func (sias *SearchableItemAttributeSet) Headline() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("headline"))
 	if _r == 0 {
 		return ""
@@ -2358,6 +2572,7 @@ func (sias *SearchableItemAttributeSet) Headline() string {
 
 // Instructions returns the instructions.
 func (sias *SearchableItemAttributeSet) Instructions() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("instructions"))
 	if _r == 0 {
 		return ""
@@ -2367,6 +2582,7 @@ func (sias *SearchableItemAttributeSet) Instructions() string {
 
 // Thoroughfare returns the thoroughfare.
 func (sias *SearchableItemAttributeSet) Thoroughfare() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("thoroughfare"))
 	if _r == 0 {
 		return ""
@@ -2376,6 +2592,7 @@ func (sias *SearchableItemAttributeSet) Thoroughfare() string {
 
 // SubThoroughfare returns the sub thoroughfare.
 func (sias *SearchableItemAttributeSet) SubThoroughfare() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("subThoroughfare"))
 	if _r == 0 {
 		return ""
@@ -2385,6 +2602,7 @@ func (sias *SearchableItemAttributeSet) SubThoroughfare() string {
 
 // PostalCode returns the postal code.
 func (sias *SearchableItemAttributeSet) PostalCode() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
@@ -2394,6 +2612,7 @@ func (sias *SearchableItemAttributeSet) PostalCode() string {
 
 // City returns the city.
 func (sias *SearchableItemAttributeSet) City() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("city"))
 	if _r == 0 {
 		return ""
@@ -2403,6 +2622,7 @@ func (sias *SearchableItemAttributeSet) City() string {
 
 // StateOrProvince returns the state or province.
 func (sias *SearchableItemAttributeSet) StateOrProvince() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("stateOrProvince"))
 	if _r == 0 {
 		return ""
@@ -2412,6 +2632,7 @@ func (sias *SearchableItemAttributeSet) StateOrProvince() string {
 
 // Country returns the country.
 func (sias *SearchableItemAttributeSet) Country() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""
@@ -2421,6 +2642,7 @@ func (sias *SearchableItemAttributeSet) Country() string {
 
 // FullyFormattedAddress returns the fully formatted address.
 func (sias *SearchableItemAttributeSet) FullyFormattedAddress() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fullyFormattedAddress"))
 	if _r == 0 {
 		return ""
@@ -2429,43 +2651,50 @@ func (sias *SearchableItemAttributeSet) FullyFormattedAddress() string {
 }
 
 // Altitude returns the altitude.
-func (sias *SearchableItemAttributeSet) Altitude() obj.Object {
+func (sias *SearchableItemAttributeSet) Altitude() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("altitude"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Latitude returns the latitude.
-func (sias *SearchableItemAttributeSet) Latitude() obj.Object {
+func (sias *SearchableItemAttributeSet) Latitude() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("latitude"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Longitude returns the longitude.
-func (sias *SearchableItemAttributeSet) Longitude() obj.Object {
+func (sias *SearchableItemAttributeSet) Longitude() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("longitude"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Speed returns the speed.
-func (sias *SearchableItemAttributeSet) Speed() obj.Object {
+func (sias *SearchableItemAttributeSet) Speed() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("speed"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Timestamp returns the timestamp.
-func (sias *SearchableItemAttributeSet) Timestamp() obj.Object {
+func (sias *SearchableItemAttributeSet) Timestamp() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("timestamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ImageDirection returns the image direction.
-func (sias *SearchableItemAttributeSet) ImageDirection() obj.Object {
+func (sias *SearchableItemAttributeSet) ImageDirection() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("imageDirection"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NamedLocation returns the named location.
 func (sias *SearchableItemAttributeSet) NamedLocation() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("namedLocation"))
 	if _r == 0 {
 		return ""
@@ -2474,13 +2703,15 @@ func (sias *SearchableItemAttributeSet) NamedLocation() string {
 }
 
 // GPSTrack returns the gps track.
-func (sias *SearchableItemAttributeSet) GPSTrack() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSTrack() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSTrack"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GPSStatus returns the gps status.
 func (sias *SearchableItemAttributeSet) GPSStatus() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSStatus"))
 	if _r == 0 {
 		return ""
@@ -2490,6 +2721,7 @@ func (sias *SearchableItemAttributeSet) GPSStatus() string {
 
 // GPSMeasureMode returns the gps measure mode.
 func (sias *SearchableItemAttributeSet) GPSMeasureMode() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSMeasureMode"))
 	if _r == 0 {
 		return ""
@@ -2498,13 +2730,15 @@ func (sias *SearchableItemAttributeSet) GPSMeasureMode() string {
 }
 
 // GPSDOP returns the gpsdop.
-func (sias *SearchableItemAttributeSet) GPSDOP() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDOP() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDOP"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GPSMapDatum returns the gps map datum.
 func (sias *SearchableItemAttributeSet) GPSMapDatum() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSMapDatum"))
 	if _r == 0 {
 		return ""
@@ -2513,31 +2747,36 @@ func (sias *SearchableItemAttributeSet) GPSMapDatum() string {
 }
 
 // GPSDestLatitude returns the gps dest latitude.
-func (sias *SearchableItemAttributeSet) GPSDestLatitude() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDestLatitude() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestLatitude"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GPSDestLongitude returns the gps dest longitude.
-func (sias *SearchableItemAttributeSet) GPSDestLongitude() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDestLongitude() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestLongitude"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GPSDestBearing returns the gps dest bearing.
-func (sias *SearchableItemAttributeSet) GPSDestBearing() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDestBearing() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestBearing"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GPSDestDistance returns the gps dest distance.
-func (sias *SearchableItemAttributeSet) GPSDestDistance() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDestDistance() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestDistance"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // GPSProcessingMethod returns the gps processing method.
 func (sias *SearchableItemAttributeSet) GPSProcessingMethod() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSProcessingMethod"))
 	if _r == 0 {
 		return ""
@@ -2547,6 +2786,7 @@ func (sias *SearchableItemAttributeSet) GPSProcessingMethod() string {
 
 // GPSAreaInformation returns the gps area information.
 func (sias *SearchableItemAttributeSet) GPSAreaInformation() string {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSAreaInformation"))
 	if _r == 0 {
 		return ""
@@ -2555,13 +2795,15 @@ func (sias *SearchableItemAttributeSet) GPSAreaInformation() string {
 }
 
 // GPSDateStamp returns the gps date stamp.
-func (sias *SearchableItemAttributeSet) GPSDateStamp() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDateStamp() time.Time {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDateStamp"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // GPSDifferental returns the gps differental.
-func (sias *SearchableItemAttributeSet) GPSDifferental() obj.Object {
+func (sias *SearchableItemAttributeSet) GPSDifferental() *foundation.Number {
+	defer runtime.KeepAlive(sias)
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDifferental"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

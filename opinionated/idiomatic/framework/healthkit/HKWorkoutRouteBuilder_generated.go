@@ -6,11 +6,13 @@ package healthkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,8 @@ func workoutRouteBuilderAdopt(id objc.ID) *WorkoutRouteBuilder {
 
 // NewWorkoutRouteBuilderWithHealthStoreDevice creates and returns a new workout route builder.
 func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *HealthStore, device *Device) *WorkoutRouteBuilder {
+	defer runtime.KeepAlive(healthStore)
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteBuilder")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:"), objref.IDOf(healthStore), objref.IDOf(device))
 	return workoutRouteBuilderAdopt(_id)
@@ -59,7 +63,9 @@ func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *HealthStore, devic
 // FinishRouteWithWorkoutMetadataCompletion creates, saves, and associates the route with the provided workout.
 //
 // FinishRouteWithWorkoutMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (wrb *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata obj.Object) (result *WorkoutRoute, err error) {
+func (wrb *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata map[string]obj.Object) (result *WorkoutRoute, err error) {
+	defer runtime.KeepAlive(wrb)
+	defer runtime.KeepAlive(workout)
 	type _result struct {
 		val *WorkoutRoute
 		err error
@@ -71,7 +77,7 @@ func (wrb *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx con
 		_o.val = WorkoutRouteFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(wrb), objc.RegisterName("finishRouteWithWorkout:metadata:completion:"), objref.IDOf(workout), objref.IDOf(metadata), _block)
+	objc.Send[objc.ID](objref.IDOf(wrb), objc.RegisterName("finishRouteWithWorkout:metadata:completion:"), objref.IDOf(workout), rt.MapToDict(metadata, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

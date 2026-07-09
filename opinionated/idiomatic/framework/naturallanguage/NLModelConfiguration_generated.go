@@ -5,7 +5,10 @@
 package naturallanguage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
 
 // Description returns the object's -description text.
 func (mc *ModelConfiguration) Description() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mc *ModelConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mc *ModelConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(mc)
 	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mc *ModelConfiguration) String() string {
+	defer runtime.KeepAlive(mc)
 	return rt.Description(objref.IDOf(mc))
 }
 
@@ -74,18 +82,21 @@ func NewModelConfiguration() *ModelConfiguration {
 
 // Type returns the type.
 func (mc *ModelConfiguration) Type() ModelType {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[ModelType](objref.IDOf(mc), objc.RegisterName("type"))
 	return _r
 }
 
 // Language returns the language.
-func (mc *ModelConfiguration) Language() obj.Object {
+func (mc *ModelConfiguration) Language() *foundation.String {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("language"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Revision returns the revision.
 func (mc *ModelConfiguration) Revision() int {
+	defer runtime.KeepAlive(mc)
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("revision"))
 	return _r
 }

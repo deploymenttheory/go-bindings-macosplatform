@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,27 +52,33 @@ func annotationViewAdopt(id objc.ID) *AnnotationView {
 
 // Description returns the object's -description text.
 func (av *AnnotationView) Description() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (av *AnnotationView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(av)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (av *AnnotationView) IsKind(className string) bool {
+	defer runtime.KeepAlive(av)
 	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (av *AnnotationView) String() string {
+	defer runtime.KeepAlive(av)
 	return rt.Description(objref.IDOf(av))
 }
 
 // NewAnnotationViewWithCoder creates an annotation view using data from the specified unarchiver.
 func NewAnnotationViewWithCoder(aDecoder obj.Object) *AnnotationView {
+	defer runtime.KeepAlive(aDecoder)
 	var _mainthread0 *AnnotationView
 	purego.Main(func() {
 		_mainthread0 = func() *AnnotationView {
@@ -84,6 +92,7 @@ func NewAnnotationViewWithCoder(aDecoder obj.Object) *AnnotationView {
 
 // WithImage sets the image the annotation view displays.
 func (av *AnnotationView) WithImage(image obj.Object) *AnnotationView {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -164,6 +173,7 @@ func (av *AnnotationView) WithCanShowCallout(canShowCallout bool) *AnnotationVie
 
 // WithLeftCalloutAccessoryView sets the view to display on the left side of the standard callout.
 func (av *AnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView obj.Object) *AnnotationView {
+	defer runtime.KeepAlive(leftCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setLeftCalloutAccessoryView:"), objref.IDOf(leftCalloutAccessoryView))
 	})
@@ -172,6 +182,7 @@ func (av *AnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView 
 
 // WithRightCalloutAccessoryView sets the view to display on the right side of the standard callout.
 func (av *AnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView obj.Object) *AnnotationView {
+	defer runtime.KeepAlive(rightCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setRightCalloutAccessoryView:"), objref.IDOf(rightCalloutAccessoryView))
 	})
@@ -180,6 +191,7 @@ func (av *AnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryVie
 
 // WithDetailCalloutAccessoryView sets the detail accessory view to use in the standard callout.
 func (av *AnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView obj.Object) *AnnotationView {
+	defer runtime.KeepAlive(detailCalloutAccessoryView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDetailCalloutAccessoryView:"), objref.IDOf(detailCalloutAccessoryView))
 	})
@@ -244,6 +256,7 @@ func (av *AnnotationView) WithCollisionMode(collisionMode AnnotationViewCollisio
 
 // PrepareForDisplay notifies the annotation view that the map view is about to display it.
 func (av *AnnotationView) PrepareForDisplay() {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("prepareForDisplay"))
 	})
@@ -252,6 +265,7 @@ func (av *AnnotationView) PrepareForDisplay() {
 
 // SetSelectedAnimated sets the selection state of the annotation view.
 func (av *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setSelected:animated:"), selected, animated)
 	})
@@ -260,6 +274,7 @@ func (av *AnnotationView) SetSelectedAnimated(selected bool, animated bool) {
 
 // SetDragStateAnimated sets the drag state for the annotation view.
 func (av *AnnotationView) SetDragStateAnimated(newDragState AnnotationViewDragState, animated bool) {
+	defer runtime.KeepAlive(av)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setDragState:animated:"), newDragState, animated)
 	})
@@ -268,6 +283,7 @@ func (av *AnnotationView) SetDragStateAnimated(newDragState AnnotationViewDragSt
 
 // ReuseIdentifier returns the reuse identifier.
 func (av *AnnotationView) ReuseIdentifier() string {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -284,6 +300,7 @@ func (av *AnnotationView) ReuseIdentifier() string {
 
 // Image returns the image.
 func (av *AnnotationView) Image() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -297,6 +314,7 @@ func (av *AnnotationView) Image() obj.Object {
 
 // CenterOffset returns the center offset.
 func (av *AnnotationView) CenterOffset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -310,6 +328,7 @@ func (av *AnnotationView) CenterOffset() corefoundation.CGPoint {
 
 // AccessoryOffset returns the accessory offset.
 func (av *AnnotationView) AccessoryOffset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -323,6 +342,7 @@ func (av *AnnotationView) AccessoryOffset() corefoundation.CGPoint {
 
 // CalloutOffset returns the callout offset.
 func (av *AnnotationView) CalloutOffset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -336,6 +356,7 @@ func (av *AnnotationView) CalloutOffset() corefoundation.CGPoint {
 
 // LeftCalloutOffset returns the left callout offset.
 func (av *AnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -349,6 +370,7 @@ func (av *AnnotationView) LeftCalloutOffset() corefoundation.CGPoint {
 
 // RightCalloutOffset returns the right callout offset.
 func (av *AnnotationView) RightCalloutOffset() corefoundation.CGPoint {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -362,6 +384,7 @@ func (av *AnnotationView) RightCalloutOffset() corefoundation.CGPoint {
 
 // IsEnabled reports whether the object is enabled.
 func (av *AnnotationView) IsEnabled() bool {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -375,6 +398,7 @@ func (av *AnnotationView) IsEnabled() bool {
 
 // IsHighlighted reports whether the object is highlighted.
 func (av *AnnotationView) IsHighlighted() bool {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -388,6 +412,7 @@ func (av *AnnotationView) IsHighlighted() bool {
 
 // IsSelected reports whether the object is selected.
 func (av *AnnotationView) IsSelected() bool {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -401,6 +426,7 @@ func (av *AnnotationView) IsSelected() bool {
 
 // CanShowCallout wraps the corresponding Objective-C method.
 func (av *AnnotationView) CanShowCallout() bool {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -414,6 +440,7 @@ func (av *AnnotationView) CanShowCallout() bool {
 
 // LeftCalloutAccessoryView returns the left callout accessory view.
 func (av *AnnotationView) LeftCalloutAccessoryView() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -427,6 +454,7 @@ func (av *AnnotationView) LeftCalloutAccessoryView() obj.Object {
 
 // RightCalloutAccessoryView returns the right callout accessory view.
 func (av *AnnotationView) RightCalloutAccessoryView() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -440,6 +468,7 @@ func (av *AnnotationView) RightCalloutAccessoryView() obj.Object {
 
 // DetailCalloutAccessoryView returns the detail callout accessory view.
 func (av *AnnotationView) DetailCalloutAccessoryView() obj.Object {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -453,6 +482,7 @@ func (av *AnnotationView) DetailCalloutAccessoryView() obj.Object {
 
 // IsDraggable reports whether the object is draggable.
 func (av *AnnotationView) IsDraggable() bool {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -466,6 +496,7 @@ func (av *AnnotationView) IsDraggable() bool {
 
 // DragState returns the drag state.
 func (av *AnnotationView) DragState() AnnotationViewDragState {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 AnnotationViewDragState
 	purego.Main(func() {
 		_mainthread0 = func() AnnotationViewDragState {
@@ -479,6 +510,7 @@ func (av *AnnotationView) DragState() AnnotationViewDragState {
 
 // ClusteringIdentifier returns the clustering identifier.
 func (av *AnnotationView) ClusteringIdentifier() string {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -495,6 +527,7 @@ func (av *AnnotationView) ClusteringIdentifier() string {
 
 // ClusterAnnotationView returns the cluster annotation view.
 func (av *AnnotationView) ClusterAnnotationView() *AnnotationView {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 *AnnotationView
 	purego.Main(func() {
 		_mainthread0 = func() *AnnotationView {
@@ -508,6 +541,7 @@ func (av *AnnotationView) ClusterAnnotationView() *AnnotationView {
 
 // DisplayPriority returns the display priority.
 func (av *AnnotationView) DisplayPriority() float32 {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -521,6 +555,7 @@ func (av *AnnotationView) DisplayPriority() float32 {
 
 // ZPriority returns the z priority.
 func (av *AnnotationView) ZPriority() float32 {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -534,6 +569,7 @@ func (av *AnnotationView) ZPriority() float32 {
 
 // SelectedZPriority returns the selected z priority.
 func (av *AnnotationView) SelectedZPriority() float32 {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -547,6 +583,7 @@ func (av *AnnotationView) SelectedZPriority() float32 {
 
 // CollisionMode returns the collision mode.
 func (av *AnnotationView) CollisionMode() AnnotationViewCollisionMode {
+	defer runtime.KeepAlive(av)
 	var _mainthread0 AnnotationViewCollisionMode
 	purego.Main(func() {
 		_mainthread0 = func() AnnotationViewCollisionMode {

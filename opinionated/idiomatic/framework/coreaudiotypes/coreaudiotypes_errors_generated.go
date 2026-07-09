@@ -8,26 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
-// ErrCodeNone matches the CoreAudioTypes error AVAudioSessionErrorCodeNone.
-var ErrCodeNone = errkit.New("AVAudioSessionErrorDomain", 0)
-
-// ErrCodeMediaServicesFailed matches the CoreAudioTypes error AVAudioSessionErrorCodeMediaServicesFailed.
-var ErrCodeMediaServicesFailed = errkit.New("AVAudioSessionErrorDomain", 1836282486)
-
-// ErrCodeIsBusy matches the CoreAudioTypes error AVAudioSessionErrorCodeIsBusy.
-var ErrCodeIsBusy = errkit.New("AVAudioSessionErrorDomain", 560030580)
-
-// ErrCodeIncompatibleCategory matches the CoreAudioTypes error AVAudioSessionErrorCodeIncompatibleCategory.
-var ErrCodeIncompatibleCategory = errkit.New("AVAudioSessionErrorDomain", 560161140)
+// ErrCodeBadParam matches the CoreAudioTypes error AVAudioSessionErrorCodeBadParam.
+var ErrCodeBadParam = errkit.New("AVAudioSessionErrorDomain", -50)
 
 // ErrCodeCannotInterruptOthers matches the CoreAudioTypes error AVAudioSessionErrorCodeCannotInterruptOthers.
 var ErrCodeCannotInterruptOthers = errkit.New("AVAudioSessionErrorDomain", 560557684)
-
-// ErrCodeMissingEntitlement matches the CoreAudioTypes error AVAudioSessionErrorCodeMissingEntitlement.
-var ErrCodeMissingEntitlement = errkit.New("AVAudioSessionErrorDomain", 1701737535)
-
-// ErrCodeSiriIsRecording matches the CoreAudioTypes error AVAudioSessionErrorCodeSiriIsRecording.
-var ErrCodeSiriIsRecording = errkit.New("AVAudioSessionErrorDomain", 1936290409)
 
 // ErrCodeCannotStartPlaying matches the CoreAudioTypes error AVAudioSessionErrorCodeCannotStartPlaying.
 var ErrCodeCannotStartPlaying = errkit.New("AVAudioSessionErrorDomain", 561015905)
@@ -35,20 +20,35 @@ var ErrCodeCannotStartPlaying = errkit.New("AVAudioSessionErrorDomain", 56101590
 // ErrCodeCannotStartRecording matches the CoreAudioTypes error AVAudioSessionErrorCodeCannotStartRecording.
 var ErrCodeCannotStartRecording = errkit.New("AVAudioSessionErrorDomain", 561145187)
 
-// ErrCodeBadParam matches the CoreAudioTypes error AVAudioSessionErrorCodeBadParam.
-var ErrCodeBadParam = errkit.New("AVAudioSessionErrorDomain", -50)
+// ErrCodeExpiredSession matches the CoreAudioTypes error AVAudioSessionErrorCodeExpiredSession.
+var ErrCodeExpiredSession = errkit.New("AVAudioSessionErrorDomain", 561210739)
+
+// ErrCodeIncompatibleCategory matches the CoreAudioTypes error AVAudioSessionErrorCodeIncompatibleCategory.
+var ErrCodeIncompatibleCategory = errkit.New("AVAudioSessionErrorDomain", 560161140)
 
 // ErrCodeInsufficientPriority matches the CoreAudioTypes error AVAudioSessionErrorCodeInsufficientPriority.
 var ErrCodeInsufficientPriority = errkit.New("AVAudioSessionErrorDomain", 561017449)
 
+// ErrCodeIsBusy matches the CoreAudioTypes error AVAudioSessionErrorCodeIsBusy.
+var ErrCodeIsBusy = errkit.New("AVAudioSessionErrorDomain", 560030580)
+
+// ErrCodeMediaServicesFailed matches the CoreAudioTypes error AVAudioSessionErrorCodeMediaServicesFailed.
+var ErrCodeMediaServicesFailed = errkit.New("AVAudioSessionErrorDomain", 1836282486)
+
+// ErrCodeMissingEntitlement matches the CoreAudioTypes error AVAudioSessionErrorCodeMissingEntitlement.
+var ErrCodeMissingEntitlement = errkit.New("AVAudioSessionErrorDomain", 1701737535)
+
+// ErrCodeNone matches the CoreAudioTypes error AVAudioSessionErrorCodeNone.
+var ErrCodeNone = errkit.New("AVAudioSessionErrorDomain", 0)
+
 // ErrCodeResourceNotAvailable matches the CoreAudioTypes error AVAudioSessionErrorCodeResourceNotAvailable.
 var ErrCodeResourceNotAvailable = errkit.New("AVAudioSessionErrorDomain", 561145203)
 
-// ErrCodeUnspecified matches the CoreAudioTypes error AVAudioSessionErrorCodeUnspecified.
-var ErrCodeUnspecified = errkit.New("AVAudioSessionErrorDomain", 2003329396)
-
-// ErrCodeExpiredSession matches the CoreAudioTypes error AVAudioSessionErrorCodeExpiredSession.
-var ErrCodeExpiredSession = errkit.New("AVAudioSessionErrorDomain", 561210739)
-
 // ErrCodeSessionNotActive matches the CoreAudioTypes error AVAudioSessionErrorCodeSessionNotActive.
 var ErrCodeSessionNotActive = errkit.New("AVAudioSessionErrorDomain", 1768841571)
+
+// ErrCodeSiriIsRecording matches the CoreAudioTypes error AVAudioSessionErrorCodeSiriIsRecording.
+var ErrCodeSiriIsRecording = errkit.New("AVAudioSessionErrorDomain", 1936290409)
+
+// ErrCodeUnspecified matches the CoreAudioTypes error AVAudioSessionErrorCodeUnspecified.
+var ErrCodeUnspecified = errkit.New("AVAudioSessionErrorDomain", 2003329396)

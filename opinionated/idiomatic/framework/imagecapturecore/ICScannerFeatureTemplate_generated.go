@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -56,6 +58,7 @@ func NewScannerFeatureTemplate() *ScannerFeatureTemplate {
 //
 // Targets returns the collection as a Go slice.
 func (sft *ScannerFeatureTemplate) Targets() []obj.Object {
+	defer runtime.KeepAlive(sft)
 	_arr := objc.Send[objc.ID](objref.IDOf(sft), objc.RegisterName("targets"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

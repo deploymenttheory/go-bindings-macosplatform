@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func sKNodeComponentAdopt(id objc.ID) *SKNodeComponent {
 
 // NewSKNodeComponentWithNode initializes a component to manage the specified SpriteKit node.
 func NewSKNodeComponentWithNode(node obj.Object) *SKNodeComponent {
+	defer runtime.KeepAlive(node)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSKNodeComponent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), objref.IDOf(node))
 	return sKNodeComponentAdopt(_id)
@@ -55,12 +58,14 @@ func NewSKNodeComponentWithNode(node obj.Object) *SKNodeComponent {
 
 // WithNode sets the SpriteKit node managed by the component.
 func (snc *SKNodeComponent) WithNode(node obj.Object) *SKNodeComponent {
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return snc
 }
 
 // Node returns the node.
 func (snc *SKNodeComponent) Node() obj.Object {
+	defer runtime.KeepAlive(snc)
 	_r := objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("node"))
 	return obj.Wrap(_r)
 }

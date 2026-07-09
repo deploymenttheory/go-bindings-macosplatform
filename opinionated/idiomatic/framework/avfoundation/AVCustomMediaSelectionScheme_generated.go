@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func customMediaSelectionSchemeAdopt(id objc.ID) *CustomMediaSelectionScheme {
 
 // Description returns the object's -description text.
 func (cmss *CustomMediaSelectionScheme) Description() string {
+	defer runtime.KeepAlive(cmss)
 	return rt.Description(objref.IDOf(cmss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cmss *CustomMediaSelectionScheme) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cmss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cmss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cmss *CustomMediaSelectionScheme) IsKind(className string) bool {
+	defer runtime.KeepAlive(cmss)
 	return rt.IsKind(objref.IDOf(cmss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cmss *CustomMediaSelectionScheme) String() string {
+	defer runtime.KeepAlive(cmss)
 	return rt.Description(objref.IDOf(cmss))
 }
 
@@ -74,12 +81,15 @@ func NewCustomMediaSelectionScheme() *CustomMediaSelectionScheme {
 
 // MediaPresentationSettingsForSelectorComplementaryToLanguageSettings provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver.
 func (cmss *CustomMediaSelectionScheme) MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *MediaPresentationSelector, language string, settings []*MediaPresentationSetting) []*MediaPresentationSetting {
+	defer runtime.KeepAlive(cmss)
+	defer runtime.KeepAlive(selector)
 	_r := objc.Send[objc.ID](objref.IDOf(cmss), objc.RegisterName("mediaPresentationSettingsForSelector:complementaryToLanguage:settings:"), objref.IDOf(selector), purego.NSString(language), purego.SliceToNSArray(settings, func(_v *MediaPresentationSetting) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaPresentationSetting { return MediaPresentationSettingFromID(_id) })
 }
 
 // ShouldOfferLanguageSelection reports whether an alternative selection interface should provide a menu of language choices.
 func (cmss *CustomMediaSelectionScheme) ShouldOfferLanguageSelection() bool {
+	defer runtime.KeepAlive(cmss)
 	_r := objc.Send[bool](objref.IDOf(cmss), objc.RegisterName("shouldOfferLanguageSelection"))
 	return _r
 }
@@ -88,6 +98,7 @@ func (cmss *CustomMediaSelectionScheme) ShouldOfferLanguageSelection() bool {
 //
 // AvailableLanguages returns the collection as a Go slice.
 func (cmss *CustomMediaSelectionScheme) AvailableLanguages() []string {
+	defer runtime.KeepAlive(cmss)
 	_arr := objc.Send[objc.ID](objref.IDOf(cmss), objc.RegisterName("availableLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -96,6 +107,7 @@ func (cmss *CustomMediaSelectionScheme) AvailableLanguages() []string {
 //
 // Selectors returns the collection as a Go slice.
 func (cmss *CustomMediaSelectionScheme) Selectors() []*MediaPresentationSelector {
+	defer runtime.KeepAlive(cmss)
 	_arr := objc.Send[objc.ID](objref.IDOf(cmss), objc.RegisterName("selectors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaPresentationSelector { return MediaPresentationSelectorFromID(_id) })
 }

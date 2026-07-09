@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func playerItemTrackAdopt(id objc.ID) *PlayerItemTrack {
 
 // Description returns the object's -description text.
 func (pit *PlayerItemTrack) Description() string {
+	defer runtime.KeepAlive(pit)
 	return rt.Description(objref.IDOf(pit))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pit *PlayerItemTrack) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pit)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pit), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pit *PlayerItemTrack) IsKind(className string) bool {
+	defer runtime.KeepAlive(pit)
 	return rt.IsKind(objref.IDOf(pit), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pit *PlayerItemTrack) String() string {
+	defer runtime.KeepAlive(pit)
 	return rt.Description(objref.IDOf(pit))
 }
 
@@ -96,6 +103,7 @@ func (pit *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerIte
 
 // AssetTrack indicates the AVAssetTrack for which the AVPlayerItemTrack represents presentation state. This property is not observable. Clients must serialize their access to the resulting AVAssetTrack and related objects on the associated AVPlayer's notification queue.  By default, this queue is the main queue.
 func (pit *PlayerItemTrack) AssetTrack() *AssetTrack {
+	defer runtime.KeepAlive(pit)
 	var _mainthread0 *AssetTrack
 	purego.Main(func() {
 		_mainthread0 = func() *AssetTrack {
@@ -109,6 +117,7 @@ func (pit *PlayerItemTrack) AssetTrack() *AssetTrack {
 
 // IsEnabled reports whether the track is enabled for presentation during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (pit *PlayerItemTrack) IsEnabled() bool {
+	defer runtime.KeepAlive(pit)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -122,12 +131,14 @@ func (pit *PlayerItemTrack) IsEnabled() bool {
 
 // CurrentVideoFrameRate returns if the media type of the assetTrack is AVMediaTypeVideo, indicates the current frame rate of the track as it plays, in units of frames per second. If the item is not playing, or if the media type of the track is not video, the value of this property is 0. This property is not observable. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (pit *PlayerItemTrack) CurrentVideoFrameRate() float32 {
+	defer runtime.KeepAlive(pit)
 	_r := objc.Send[float32](objref.IDOf(pit), objc.RegisterName("currentVideoFrameRate"))
 	return _r
 }
 
 // VideoFieldMode returns if the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
 func (pit *PlayerItemTrack) VideoFieldMode() string {
+	defer runtime.KeepAlive(pit)
 	_r := objc.Send[objc.ID](objref.IDOf(pit), objc.RegisterName("videoFieldMode"))
 	if _r == 0 {
 		return ""

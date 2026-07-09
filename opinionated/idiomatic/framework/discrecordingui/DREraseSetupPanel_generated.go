@@ -5,6 +5,8 @@
 package discrecordingui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,6 +62,7 @@ func NewEraseSetupPanel() *EraseSetupPanel {
 
 // EraseObject creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
 func (esp *EraseSetupPanel) EraseObject() obj.Object {
+	defer runtime.KeepAlive(esp)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -73,6 +76,8 @@ func (esp *EraseSetupPanel) EraseObject() obj.Object {
 
 // EraseType invoked when the user clicks one of the panel's erase type radio buttons.
 func (esp *EraseSetupPanel) EraseType(sender obj.Object) {
+	defer runtime.KeepAlive(esp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("eraseType:"), objref.IDOf(sender))
 	})

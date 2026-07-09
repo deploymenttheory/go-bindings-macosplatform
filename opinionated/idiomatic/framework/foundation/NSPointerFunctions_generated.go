@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func pointerFunctionsAdopt(id objc.ID) *PointerFunctions {
 
 // Description returns the object's -description text.
 func (pf *PointerFunctions) Description() string {
+	defer runtime.KeepAlive(pf)
 	return rt.Description(objref.IDOf(pf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pf *PointerFunctions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pf *PointerFunctions) IsKind(className string) bool {
+	defer runtime.KeepAlive(pf)
 	return rt.IsKind(objref.IDOf(pf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pf *PointerFunctions) String() string {
+	defer runtime.KeepAlive(pf)
 	return rt.Description(objref.IDOf(pf))
 }
 
@@ -130,19 +136,21 @@ func (pf *PointerFunctions) WithObservationInfo(observationInfo unsafe.Pointer) 
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pf *PointerFunctions) WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions {
-	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pf *PointerFunctions) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pf
 }
 
 // UsesStrongWriteBarrier wraps the corresponding Objective-C method.
 func (pf *PointerFunctions) UsesStrongWriteBarrier() bool {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesStrongWriteBarrier"))
 	return _r
 }
 
 // UsesWeakReadAndWriteBarriers wraps the corresponding Objective-C method.
 func (pf *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
+	defer runtime.KeepAlive(pf)
 	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesWeakReadAndWriteBarriers"))
 	return _r
 }

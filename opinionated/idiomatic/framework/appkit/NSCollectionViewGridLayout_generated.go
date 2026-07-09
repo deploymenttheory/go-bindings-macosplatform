@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -126,6 +128,7 @@ func (cvgl *CollectionViewGridLayout) WithBackgroundColors(items ...*Color) *Col
 
 // Margins returns the margins.
 func (cvgl *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -139,6 +142,7 @@ func (cvgl *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
 
 // MinimumInteritemSpacing returns the minimum interitem spacing.
 func (cvgl *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -152,6 +156,7 @@ func (cvgl *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
 
 // MinimumLineSpacing returns the minimum line spacing.
 func (cvgl *CollectionViewGridLayout) MinimumLineSpacing() float64 {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -165,6 +170,7 @@ func (cvgl *CollectionViewGridLayout) MinimumLineSpacing() float64 {
 
 // MaximumNumberOfRows returns the maximum number of rows.
 func (cvgl *CollectionViewGridLayout) MaximumNumberOfRows() int {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -178,6 +184,7 @@ func (cvgl *CollectionViewGridLayout) MaximumNumberOfRows() int {
 
 // MaximumNumberOfColumns returns the maximum number of columns.
 func (cvgl *CollectionViewGridLayout) MaximumNumberOfColumns() int {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -191,6 +198,7 @@ func (cvgl *CollectionViewGridLayout) MaximumNumberOfColumns() int {
 
 // MinimumItemSize returns the minimum item size.
 func (cvgl *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -204,6 +212,7 @@ func (cvgl *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
 
 // MaximumItemSize returns the maximum item size.
 func (cvgl *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -219,6 +228,7 @@ func (cvgl *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
 //
 // BackgroundColors returns the collection as a Go slice.
 func (cvgl *CollectionViewGridLayout) BackgroundColors() []*Color {
+	defer runtime.KeepAlive(cvgl)
 	var _mainthread0 []*Color
 	purego.Main(func() {
 		_mainthread0 = func() []*Color {

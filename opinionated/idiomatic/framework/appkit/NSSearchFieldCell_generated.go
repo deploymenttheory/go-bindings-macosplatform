@@ -5,8 +5,11 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,12 +51,12 @@ func searchFieldCellAdopt(id objc.ID) *SearchFieldCell {
 }
 
 // NewSearchFieldCellTextCell creates a new SearchFieldCell.
-func NewSearchFieldCellTextCell(string_ string) *SearchFieldCell {
+func NewSearchFieldCellTextCell(str string) *SearchFieldCell {
 	var _mainthread0 *SearchFieldCell
 	purego.Main(func() {
 		_mainthread0 = func() *SearchFieldCell {
 			_alloc := objc.Send[objc.ID](objc.ID(_class("NSSearchFieldCell")), objc.RegisterName("alloc"))
-			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+			_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(str))
 			return searchFieldCellAdopt(_id)
 		}()
 	})
@@ -62,6 +65,7 @@ func NewSearchFieldCellTextCell(string_ string) *SearchFieldCell {
 
 // NewSearchFieldCellWithCoder creates a new SearchFieldCell.
 func NewSearchFieldCellWithCoder(coder obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *SearchFieldCell
 	purego.Main(func() {
 		_mainthread0 = func() *SearchFieldCell {
@@ -75,6 +79,7 @@ func NewSearchFieldCellWithCoder(coder obj.Object) *SearchFieldCell {
 
 // WithSearchButtonCell sets the button cell used to display the search-button image.
 func (sfc *SearchFieldCell) WithSearchButtonCell(searchButtonCell ButtonCellProvider) *SearchFieldCell {
+	defer runtime.KeepAlive(searchButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setSearchButtonCell:"), objref.IDOf(searchButtonCell))
 	})
@@ -83,6 +88,7 @@ func (sfc *SearchFieldCell) WithSearchButtonCell(searchButtonCell ButtonCellProv
 
 // WithCancelButtonCell sets the button cell used to display the cancel-button image.
 func (sfc *SearchFieldCell) WithCancelButtonCell(cancelButtonCell ButtonCellProvider) *SearchFieldCell {
+	defer runtime.KeepAlive(cancelButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setCancelButtonCell:"), objref.IDOf(cancelButtonCell))
 	})
@@ -91,6 +97,7 @@ func (sfc *SearchFieldCell) WithCancelButtonCell(cancelButtonCell ButtonCellProv
 
 // WithSearchMenuTemplate sets the menu object used to dynamically construct the search field’s pop-up icon menu.
 func (sfc *SearchFieldCell) WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchFieldCell {
+	defer runtime.KeepAlive(searchMenuTemplate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
 	})
@@ -124,6 +131,7 @@ func (sfc *SearchFieldCell) WithRecentSearches(items ...obj.Object) *SearchField
 
 // WithRecentsAutosaveName sets the autosave name under which the search field automatically saves the list of recent search strings.
 func (sfc *SearchFieldCell) WithRecentsAutosaveName(recentsAutosaveName obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(recentsAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
 	})
@@ -140,6 +148,7 @@ func (sfc *SearchFieldCell) WithSendsSearchStringImmediately(sendsSearchStringIm
 
 // WithBackgroundColor sets the color of the cell’s background.
 func (sfc *SearchFieldCell) WithBackgroundColor(backgroundColor *Color) *SearchFieldCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -156,6 +165,7 @@ func (sfc *SearchFieldCell) WithDrawsBackground(drawsBackground bool) *SearchFie
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (sfc *SearchFieldCell) WithTextColor(textColor *Color) *SearchFieldCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -180,6 +190,7 @@ func (sfc *SearchFieldCell) WithPlaceholderString(placeholderString string) *Sea
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (sfc *SearchFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -197,6 +208,7 @@ func (sfc *SearchFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *
 
 // WithControlView sets the view associated with the cell.
 func (sfc *SearchFieldCell) WithControlView(controlView ViewProvider) *SearchFieldCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -221,6 +233,7 @@ func (sfc *SearchFieldCell) WithState(state int) *SearchFieldCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (sfc *SearchFieldCell) WithTarget(target obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -325,6 +338,7 @@ func (sfc *SearchFieldCell) WithWraps(wraps bool) *SearchFieldCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (sfc *SearchFieldCell) WithFont(font *Font) *SearchFieldCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -333,6 +347,7 @@ func (sfc *SearchFieldCell) WithFont(font *Font) *SearchFieldCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (sfc *SearchFieldCell) WithFormatter(formatter obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -341,6 +356,7 @@ func (sfc *SearchFieldCell) WithFormatter(formatter obj.Object) *SearchFieldCell
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (sfc *SearchFieldCell) WithObjectValue(objectValue obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -389,6 +405,7 @@ func (sfc *SearchFieldCell) WithIntegerValue(integerValue int) *SearchFieldCell 
 
 // WithImage sets the image displayed by the cell, if any.
 func (sfc *SearchFieldCell) WithImage(image *Image) *SearchFieldCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -405,6 +422,7 @@ func (sfc *SearchFieldCell) WithControlSize(controlSize ControlSize) *SearchFiel
 
 // WithRepresentedObject sets the object represented by the cell.
 func (sfc *SearchFieldCell) WithRepresentedObject(representedObject obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -413,6 +431,7 @@ func (sfc *SearchFieldCell) WithRepresentedObject(representedObject obj.Object) 
 
 // WithMenu sets the cell’s contextual menu.
 func (sfc *SearchFieldCell) WithMenu(menu *Menu) *SearchFieldCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -501,6 +520,7 @@ func (sfc *SearchFieldCell) WithFocusRingType(focusRingType FocusRingType) *Sear
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (sfc *SearchFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *SearchFieldCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -549,6 +569,7 @@ func (sfc *SearchFieldCell) WithControlTint(controlTint ControlTint) *SearchFiel
 
 // ResetSearchButtonCell resets the search button cell to its default attributes.
 func (sfc *SearchFieldCell) ResetSearchButtonCell() {
+	defer runtime.KeepAlive(sfc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("resetSearchButtonCell"))
 	})
@@ -557,6 +578,7 @@ func (sfc *SearchFieldCell) ResetSearchButtonCell() {
 
 // ResetCancelButtonCell resets the cancel button cell to its default attributes.
 func (sfc *SearchFieldCell) ResetCancelButtonCell() {
+	defer runtime.KeepAlive(sfc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("resetCancelButtonCell"))
 	})
@@ -565,6 +587,7 @@ func (sfc *SearchFieldCell) ResetCancelButtonCell() {
 
 // SearchTextRectForBounds modifies the bounding rectangle for the search-text field cell.
 func (sfc *SearchFieldCell) SearchTextRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -578,6 +601,7 @@ func (sfc *SearchFieldCell) SearchTextRectForBounds(rect corefoundation.CGRect) 
 
 // SearchButtonRectForBounds modifies the bounding rectangle for the search button cell.
 func (sfc *SearchFieldCell) SearchButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -591,6 +615,7 @@ func (sfc *SearchFieldCell) SearchButtonRectForBounds(rect corefoundation.CGRect
 
 // CancelButtonRectForBounds modifies the bounding rectangle for the cancel button cell.
 func (sfc *SearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -604,6 +629,7 @@ func (sfc *SearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect
 
 // SearchButtonCell returns the search button cell.
 func (sfc *SearchFieldCell) SearchButtonCell() *ButtonCell {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 *ButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *ButtonCell {
@@ -617,6 +643,7 @@ func (sfc *SearchFieldCell) SearchButtonCell() *ButtonCell {
 
 // CancelButtonCell returns the cancel button cell.
 func (sfc *SearchFieldCell) CancelButtonCell() *ButtonCell {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 *ButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *ButtonCell {
@@ -630,6 +657,7 @@ func (sfc *SearchFieldCell) CancelButtonCell() *ButtonCell {
 
 // SearchMenuTemplate returns the search menu template.
 func (sfc *SearchFieldCell) SearchMenuTemplate() *Menu {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -643,6 +671,7 @@ func (sfc *SearchFieldCell) SearchMenuTemplate() *Menu {
 
 // SendsWholeSearchString wraps the corresponding Objective-C method.
 func (sfc *SearchFieldCell) SendsWholeSearchString() bool {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -656,6 +685,7 @@ func (sfc *SearchFieldCell) SendsWholeSearchString() bool {
 
 // MaximumRecents returns the maximum recents.
 func (sfc *SearchFieldCell) MaximumRecents() int {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -671,6 +701,7 @@ func (sfc *SearchFieldCell) MaximumRecents() int {
 //
 // RecentSearches returns the collection as a Go slice.
 func (sfc *SearchFieldCell) RecentSearches() []string {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 []string
 	purego.Main(func() {
 		_mainthread0 = func() []string {
@@ -682,12 +713,13 @@ func (sfc *SearchFieldCell) RecentSearches() []string {
 }
 
 // RecentsAutosaveName returns the recents autosave name.
-func (sfc *SearchFieldCell) RecentsAutosaveName() obj.Object {
-	var _mainthread0 obj.Object
+func (sfc *SearchFieldCell) RecentsAutosaveName() *foundation.String {
+	defer runtime.KeepAlive(sfc)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("recentsAutosaveName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -696,6 +728,7 @@ func (sfc *SearchFieldCell) RecentsAutosaveName() obj.Object {
 
 // SendsSearchStringImmediately wraps the corresponding Objective-C method.
 func (sfc *SearchFieldCell) SendsSearchStringImmediately() bool {
+	defer runtime.KeepAlive(sfc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

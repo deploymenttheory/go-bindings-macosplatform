@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func assetWriterInputMetadataAdaptorAdopt(id objc.ID) *AssetWriterInputMetadataA
 
 // Description returns the object's -description text.
 func (awima *AssetWriterInputMetadataAdaptor) Description() string {
+	defer runtime.KeepAlive(awima)
 	return rt.Description(objref.IDOf(awima))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (awima *AssetWriterInputMetadataAdaptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(awima)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(awima), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (awima *AssetWriterInputMetadataAdaptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(awima)
 	return rt.IsKind(objref.IDOf(awima), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (awima *AssetWriterInputMetadataAdaptor) String() string {
+	defer runtime.KeepAlive(awima)
 	return rt.Description(objref.IDOf(awima))
 }
 
 // NewAssetWriterInputMetadataAdaptorWithAssetWriterInput creates a metadata group adaptor to append timed metadata groups to write to an output file.
 func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *AssetWriterInput) *AssetWriterInputMetadataAdaptor {
+	defer runtime.KeepAlive(input)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputMetadataAdaptor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:"), objref.IDOf(input))
 	return assetWriterInputMetadataAdaptorAdopt(_id)
@@ -75,12 +83,15 @@ func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *AssetWriterIn
 
 // AppendTimedMetadataGroup appends a timed metadata group to the adaptor.
 func (awima *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *TimedMetadataGroup) bool {
+	defer runtime.KeepAlive(awima)
+	defer runtime.KeepAlive(timedMetadataGroup)
 	_r := objc.Send[bool](objref.IDOf(awima), objc.RegisterName("appendTimedMetadataGroup:"), objref.IDOf(timedMetadataGroup))
 	return _r
 }
 
 // AssetWriterInput returns the asset writer input to which the receiver should append timed metadata groups.
 func (awima *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
+	defer runtime.KeepAlive(awima)
 	_r := objc.Send[objc.ID](objref.IDOf(awima), objc.RegisterName("assetWriterInput"))
 	return AssetWriterInputFromID(_r)
 }

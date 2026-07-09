@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRMediaPlaybackClusterPlaybackPosition() *MTRMediaPlaybackClusterPlayba
 
 // WithUpdatedAt sets the updated at.
 func (mmpcpp *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
+	defer runtime.KeepAlive(updatedAt)
 	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 	return mmpcpp
 }
 
 // WithPosition sets the position.
 func (mmpcpp *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
+	defer runtime.KeepAlive(position)
 	objc.Send[objc.ID](objref.IDOf(mmpcpp), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return mmpcpp
 }

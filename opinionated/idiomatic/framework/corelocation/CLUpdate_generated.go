@@ -5,6 +5,8 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func updateAdopt(id objc.ID) *Update {
 
 // Description returns the object's -description text.
 func (u *Update) Description() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (u *Update) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(u)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (u *Update) IsKind(className string) bool {
+	defer runtime.KeepAlive(u)
 	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (u *Update) String() string {
+	defer runtime.KeepAlive(u)
 	return rt.Description(objref.IDOf(u))
 }
 
@@ -74,60 +81,70 @@ func NewUpdate() *Update {
 
 // AuthorizationDenied wraps the corresponding Objective-C method.
 func (u *Update) AuthorizationDenied() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationDenied"))
 	return _r
 }
 
 // AuthorizationDeniedGlobally wraps the corresponding Objective-C method.
 func (u *Update) AuthorizationDeniedGlobally() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationDeniedGlobally"))
 	return _r
 }
 
 // AuthorizationRestricted wraps the corresponding Objective-C method.
 func (u *Update) AuthorizationRestricted() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationRestricted"))
 	return _r
 }
 
 // IsStationary reports whether the object is stationary.
 func (u *Update) IsStationary() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isStationary"))
 	return _r
 }
 
 // Stationary wraps the corresponding Objective-C method.
 func (u *Update) Stationary() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("stationary"))
 	return _r
 }
 
 // InsufficientlyInUse wraps the corresponding Objective-C method.
 func (u *Update) InsufficientlyInUse() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("insufficientlyInUse"))
 	return _r
 }
 
 // LocationUnavailable wraps the corresponding Objective-C method.
 func (u *Update) LocationUnavailable() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("locationUnavailable"))
 	return _r
 }
 
 // AccuracyLimited wraps the corresponding Objective-C method.
 func (u *Update) AccuracyLimited() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("accuracyLimited"))
 	return _r
 }
 
 // ServiceSessionRequired wraps the corresponding Objective-C method.
 func (u *Update) ServiceSessionRequired() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("serviceSessionRequired"))
 	return _r
 }
 
 // AuthorizationRequestInProgress wraps the corresponding Objective-C method.
 func (u *Update) AuthorizationRequestInProgress() bool {
+	defer runtime.KeepAlive(u)
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("authorizationRequestInProgress"))
 	return _r
 }

@@ -6,11 +6,13 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,6 +53,9 @@ func mTRClusterEnergyEVSEAdopt(id objc.ID) *MTRClusterEnergyEVSE {
 
 // NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterEnergyEVSE {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEnergyEVSE")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterEnergyEVSEAdopt(_id)
@@ -60,6 +65,9 @@ func NewMTRClusterEnergyEVSEWithDeviceEndpointIDQueue(device *MTRDevice, endpoin
 //
 // GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcee *MTRClusterEnergyEVSE) GetTargetsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTREnergyEVSEClusterGetTargetsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTREnergyEVSEClusterGetTargetsResponseParams
 		err error
@@ -85,6 +93,8 @@ func (mcee *MTRClusterEnergyEVSE) GetTargetsWithParamsExpectedValuesExpectedValu
 //
 // GetTargetsWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcee *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTREnergyEVSEClusterGetTargetsResponseParams, err error) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
 	type _result struct {
 		val *MTREnergyEVSEClusterGetTargetsResponseParams
 		err error
@@ -107,165 +117,224 @@ func (mcee *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueInter
 }
 
 // ReadAttributeStateWithParams reads attribute state with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSupplyStateWithParams reads attribute supply state with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeSupplyStateWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeSupplyStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSupplyStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFaultStateWithParams reads attribute fault state with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeFaultStateWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeFaultStateWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeFaultStateWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeChargingEnabledUntilWithParams reads attribute charging enabled until with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeChargingEnabledUntilWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCircuitCapacityWithParams reads attribute circuit capacity with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeCircuitCapacityWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeCircuitCapacityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeCircuitCapacityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMinimumChargeCurrentWithParams reads attribute minimum charge current with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeMinimumChargeCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMaximumChargeCurrentWithParams reads attribute maximum charge current with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeMaximumChargeCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeUserMaximumChargeCurrentWithParams reads attribute user maximum charge current with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeUserMaximumChargeCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval writes attribute user maximum charge current with value expected value interval.
-func (mcee *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcee *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams writes attribute user maximum charge current with value expected value interval params.
-func (mcee *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcee *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRandomizationDelayWindowWithParams reads attribute randomization delay window with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeRandomizationDelayWindowWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval writes attribute randomization delay window with value expected value interval.
-func (mcee *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcee *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams writes attribute randomization delay window with value expected value interval params.
-func (mcee *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcee *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNextChargeStartTimeWithParams reads attribute next charge start time with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeStartTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNextChargeTargetTimeWithParams reads attribute next charge target time with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeTargetTimeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNextChargeRequiredEnergyWithParams reads attribute next charge required energy with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeRequiredEnergyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNextChargeTargetSoCWithParams reads attribute next charge target so c with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeTargetSoCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeApproximateEVEfficiencyWithParams reads attribute approximate ev efficiency with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeApproximateEVEfficiencyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval writes attribute approximate ev efficiency with value expected value interval.
-func (mcee *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcee *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams writes attribute approximate ev efficiency with value expected value interval params.
-func (mcee *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcee *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSessionIDWithParams reads attribute session ID with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionIDWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionIDWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSessionIDWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSessionDurationWithParams reads attribute session duration with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionDurationWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionDurationWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSessionDurationWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeSessionEnergyChargedWithParams reads attribute session energy charged with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSessionEnergyChargedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcee *MTRClusterEnergyEVSE) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcee *MTRClusterEnergyEVSE) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcee)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterEnergyEVSE)(nil)

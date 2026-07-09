@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,35 @@ func previewRepresentingActivityItemAdopt(id objc.ID) *PreviewRepresentingActivi
 
 // Description returns the object's -description text.
 func (prai *PreviewRepresentingActivityItem) Description() string {
+	defer runtime.KeepAlive(prai)
 	return rt.Description(objref.IDOf(prai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (prai *PreviewRepresentingActivityItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(prai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(prai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (prai *PreviewRepresentingActivityItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(prai)
 	return rt.IsKind(objref.IDOf(prai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (prai *PreviewRepresentingActivityItem) String() string {
+	defer runtime.KeepAlive(prai)
 	return rt.Description(objref.IDOf(prai))
 }
 
 // NewPreviewRepresentingActivityItemWithItemTitleImageIcon creates a metadata object with the title, image, and icon for a shareable item.
 func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item obj.Object, title string, image *Image, icon *Image) *PreviewRepresentingActivityItem {
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(icon)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:image:icon:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(image), objref.IDOf(icon))
 	return previewRepresentingActivityItemAdopt(_id)
@@ -75,6 +85,9 @@ func NewPreviewRepresentingActivityItemWithItemTitleImageIcon(item obj.Object, t
 
 // NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider creates a metadata object that provides a title and images for a shareable item.
 func NewPreviewRepresentingActivityItemWithItemTitleImageProviderIconProvider(item obj.Object, title string, imageProvider obj.Object, iconProvider obj.Object) *PreviewRepresentingActivityItem {
+	defer runtime.KeepAlive(item)
+	defer runtime.KeepAlive(imageProvider)
+	defer runtime.KeepAlive(iconProvider)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPreviewRepresentingActivityItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItem:title:imageProvider:iconProvider:"), objref.IDOf(item), purego.NSString(title), objref.IDOf(imageProvider), objref.IDOf(iconProvider))
 	return previewRepresentingActivityItemAdopt(_id)

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -85,18 +87,21 @@ func (cu *CNNUpsampling) WithLabel(label string) *CNNUpsampling {
 
 // ScaleFactorX returns the upsampling scale factor for the x dimension. The default value is 1.
 func (cu *CNNUpsampling) ScaleFactorX() float64 {
+	defer runtime.KeepAlive(cu)
 	_r := objc.Send[float64](objref.IDOf(cu), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY returns the upsampling scale factor for the y dimension. The default value is 1.
 func (cu *CNNUpsampling) ScaleFactorY() float64 {
+	defer runtime.KeepAlive(cu)
 	_r := objc.Send[float64](objref.IDOf(cu), objc.RegisterName("scaleFactorY"))
 	return _r
 }
 
 // AlignCorners reports whether if true, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is false.
 func (cu *CNNUpsampling) AlignCorners() bool {
+	defer runtime.KeepAlive(cu)
 	_r := objc.Send[bool](objref.IDOf(cu), objc.RegisterName("alignCorners"))
 	return _r
 }

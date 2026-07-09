@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -52,6 +53,7 @@ func nEFilterProviderAdopt(id objc.ID) *NEFilterProvider {
 //
 // StartFilter blocks until the operation completes or ctx is cancelled.
 func (nfp *NEFilterProvider) StartFilter(ctx context.Context) error {
+	defer runtime.KeepAlive(nfp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -71,6 +73,7 @@ func (nfp *NEFilterProvider) StartFilter(ctx context.Context) error {
 //
 // StopFilterWithReason blocks until the operation completes or ctx is cancelled.
 func (nfp *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
+	defer runtime.KeepAlive(nfp)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -86,11 +89,14 @@ func (nfp *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NE
 
 // HandleReport receives a report from the framework.
 func (nfp *NEFilterProvider) HandleReport(report *NEFilterReport) {
+	defer runtime.KeepAlive(nfp)
+	defer runtime.KeepAlive(report)
 	objc.Send[objc.ID](objref.IDOf(nfp), objc.RegisterName("handleReport:"), objref.IDOf(report))
 }
 
 // FilterConfiguration returns an NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
 func (nfp *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
+	defer runtime.KeepAlive(nfp)
 	_r := objc.Send[objc.ID](objref.IDOf(nfp), objc.RegisterName("filterConfiguration"))
 	return NEFilterProviderConfigurationFromID(_r)
 }

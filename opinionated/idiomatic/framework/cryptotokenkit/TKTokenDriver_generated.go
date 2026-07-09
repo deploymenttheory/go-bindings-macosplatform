@@ -5,8 +5,11 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,23 +52,38 @@ func tokenDriverAdopt(id objc.ID) *TokenDriver {
 
 // Description returns the object's -description text.
 func (td *TokenDriver) Description() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (td *TokenDriver) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(td)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(td), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (td *TokenDriver) IsKind(className string) bool {
+	defer runtime.KeepAlive(td)
 	return rt.IsKind(objref.IDOf(td), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (td *TokenDriver) String() string {
+	defer runtime.KeepAlive(td)
 	return rt.Description(objref.IDOf(td))
+}
+
+// WithDelegate sets the token driver delegate.
+func (td *TokenDriver) WithDelegate(delegate TokenDriverDelegate) *TokenDriver {
+	_shim := newTokenDriverDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(td), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(td), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return td
 }
 
 // isTokenDriver marks TokenDriver — and, by embedding promotion, its

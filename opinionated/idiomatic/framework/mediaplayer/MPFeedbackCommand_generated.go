@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,12 +79,14 @@ func (fc *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {
 
 // IsActive reports whether the feedback command is in an "active" state. An example of when a feedback command would be active is if the user already "liked" a particular content item.
 func (fc *FeedbackCommand) IsActive() bool {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[bool](objref.IDOf(fc), objc.RegisterName("isActive"))
 	return _r
 }
 
 // LocalizedTitle returns a localized string briefly describing the context of the command.
 func (fc *FeedbackCommand) LocalizedTitle() string {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("localizedTitle"))
 	if _r == 0 {
 		return ""
@@ -92,6 +96,7 @@ func (fc *FeedbackCommand) LocalizedTitle() string {
 
 // LocalizedShortTitle returns an optional shorter version of the localized title for this feedback command. MediaPlayer uses this property to display this command's title on remote control interfaces with little screen space.
 func (fc *FeedbackCommand) LocalizedShortTitle() string {
+	defer runtime.KeepAlive(fc)
 	_r := objc.Send[objc.ID](objref.IDOf(fc), objc.RegisterName("localizedShortTitle"))
 	if _r == 0 {
 		return ""

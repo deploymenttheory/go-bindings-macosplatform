@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func octreeAdopt(id objc.ID) *Octree {
 
 // Description returns the object's -description text.
 func (o *Octree) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Octree) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Octree) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Octree) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
@@ -76,24 +82,32 @@ func NewOctree() *Octree {
 
 // AddElementWithPoint adds an object to the tree corresponding to the specified point in 3D space.
 func (o *Octree) AddElementWithPoint(element obj.Object, point unsafe.Pointer) *OctreeNode {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(element)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addElement:withPoint:"), objref.IDOf(element), point)
 	return OctreeNodeFromID(_r)
 }
 
 // ElementsAtPoint returns all objects whose corresponding locations overlap the specified point.
 func (o *Octree) ElementsAtPoint(point unsafe.Pointer) []obj.Object {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("elementsAtPoint:"), point)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RemoveElement searches for the specified object and removes it from the tree.
 func (o *Octree) RemoveElement(element obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(element)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("removeElement:"), objref.IDOf(element))
 	return _r
 }
 
 // RemoveElementWithNode removes the specified object from the tree, using a reference to its containing node.
 func (o *Octree) RemoveElementWithNode(element obj.Object, node *OctreeNode) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(element)
+	defer runtime.KeepAlive(node)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("removeElement:withNode:"), objref.IDOf(element), objref.IDOf(node))
 	return _r
 }

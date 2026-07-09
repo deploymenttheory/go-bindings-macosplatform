@@ -5,10 +5,13 @@
 package authenticationservices
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -49,22 +52,27 @@ func webAuthenticationSessionRequestAdopt(id objc.ID) *WebAuthenticationSessionR
 
 // Description returns the object's -description text.
 func (wasr *WebAuthenticationSessionRequest) Description() string {
+	defer runtime.KeepAlive(wasr)
 	return rt.Description(objref.IDOf(wasr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wasr *WebAuthenticationSessionRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wasr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wasr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wasr *WebAuthenticationSessionRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(wasr)
 	return rt.IsKind(objref.IDOf(wasr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wasr *WebAuthenticationSessionRequest) String() string {
+	defer runtime.KeepAlive(wasr)
 	return rt.Description(objref.IDOf(wasr))
 }
 
@@ -74,30 +82,45 @@ func NewWebAuthenticationSessionRequest() *WebAuthenticationSessionRequest {
 	return webAuthenticationSessionRequestAdopt(_id)
 }
 
+// WithDelegate sets a delegate that the session request instance informs about authentication completion.
+func (wasr *WebAuthenticationSessionRequest) WithDelegate(delegate WebAuthenticationSessionRequestDelegate) *WebAuthenticationSessionRequest {
+	_shim := newWebAuthenticationSessionRequestDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(wasr), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(wasr), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return wasr
+}
+
 // CancelWithError indicates that the browser canceled the authentication attempt.
-func (wasr *WebAuthenticationSessionRequest) CancelWithError(error_ unsafe.Pointer) {
-	objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("cancelWithError:"), error_)
+func (wasr *WebAuthenticationSessionRequest) CancelWithError(err unsafe.Pointer) {
+	defer runtime.KeepAlive(wasr)
+	objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("cancelWithError:"), err)
 }
 
 // CompleteWithCallbackURL indicates that the browser successfully completed the authentication attempt.
 func (wasr *WebAuthenticationSessionRequest) CompleteWithCallbackURL(url string) {
+	defer runtime.KeepAlive(wasr)
 	objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("completeWithCallbackURL:"), rt.FileURL(url))
 }
 
 // UUID returns the UUID.
-func (wasr *WebAuthenticationSessionRequest) UUID() obj.Object {
+func (wasr *WebAuthenticationSessionRequest) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(wasr)
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("UUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // URL returns the URL.
-func (wasr *WebAuthenticationSessionRequest) URL() obj.Object {
+func (wasr *WebAuthenticationSessionRequest) URL() string {
+	defer runtime.KeepAlive(wasr)
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CallbackURLScheme returns the callback URL scheme.
 func (wasr *WebAuthenticationSessionRequest) CallbackURLScheme() string {
+	defer runtime.KeepAlive(wasr)
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("callbackURLScheme"))
 	if _r == 0 {
 		return ""
@@ -107,18 +130,21 @@ func (wasr *WebAuthenticationSessionRequest) CallbackURLScheme() string {
 
 // ShouldUseEphemeralSession wraps the corresponding Objective-C method.
 func (wasr *WebAuthenticationSessionRequest) ShouldUseEphemeralSession() bool {
+	defer runtime.KeepAlive(wasr)
 	_r := objc.Send[bool](objref.IDOf(wasr), objc.RegisterName("shouldUseEphemeralSession"))
 	return _r
 }
 
 // AdditionalHeaderFields returns additional headers to be sent when loading the initial URL. These should _only_ apply to the initial page, and should not overwrite any headers normally sent by the browser. Add `AdditionalHeaderFieldsAreSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
-func (wasr *WebAuthenticationSessionRequest) AdditionalHeaderFields() obj.Object {
+func (wasr *WebAuthenticationSessionRequest) AdditionalHeaderFields() map[string]string {
+	defer runtime.KeepAlive(wasr)
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("additionalHeaderFields"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Callback returns the callback to listen for to complete this request. Check all main-frame navigations loaded during the request with this callback. It is used to handle all callback types, including custom schemes and HTTPS navigations. When a match is found, invoke `-completeWithCallbackURL:` with that URL. Add `CallbackURLMatchingIsSupported: true` to `ASWebAuthenticationSessionWebBrowserSupportCapabilities` in your browser's Info.plist file to indicate support for this.
 func (wasr *WebAuthenticationSessionRequest) Callback() *WebAuthenticationSessionCallback {
+	defer runtime.KeepAlive(wasr)
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("callback"))
 	return WebAuthenticationSessionCallbackFromID(_r)
 }

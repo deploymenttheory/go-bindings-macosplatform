@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func plugInAdopt(id objc.ID) *PlugIn {
 
 // Description returns the object's -description text.
 func (pi *PlugIn) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *PlugIn) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *PlugIn) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *PlugIn) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
@@ -72,55 +79,69 @@ func NewPlugIn() *PlugIn {
 
 // SerializedValueForKey wraps the corresponding Objective-C method.
 func (pi *PlugIn) SerializedValueForKey(key string) obj.Object {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetSerializedValueForKey wraps the corresponding Objective-C method.
 func (pi *PlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(serializedValue)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
 }
 
 // DidValueForInputKeyChange wraps the corresponding Objective-C method.
 func (pi *PlugIn) DidValueForInputKeyChange(key string) bool {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("didValueForInputKeyChange:"), purego.NSString(key))
 	return _r
 }
 
 // ValueForInputKey wraps the corresponding Objective-C method.
 func (pi *PlugIn) ValueForInputKey(key string) obj.Object {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("valueForInputKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetValueForOutputKey wraps the corresponding Objective-C method.
 func (pi *PlugIn) SetValueForOutputKey(value obj.Object, key string) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setValue:forOutputKey:"), objref.IDOf(value), purego.NSString(key))
 	return _r
 }
 
 // AddInputPortWithTypeForKeyWithAttributes adds input port with type for key with attributes.
 func (pi *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(attributes)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("addInputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
 // RemoveInputPortForKey removes input port for key.
 func (pi *PlugIn) RemoveInputPortForKey(key string) {
+	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeInputPortForKey:"), purego.NSString(key))
 }
 
 // AddOutputPortWithTypeForKeyWithAttributes adds output port with type for key with attributes.
 func (pi *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(attributes)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("addOutputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
 // RemoveOutputPortForKey removes output port for key.
 func (pi *PlugIn) RemoveOutputPortForKey(key string) {
+	defer runtime.KeepAlive(pi)
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeOutputPortForKey:"), purego.NSString(key))
 }
 
 // CreateViewController returns the create view controller.
 func (pi *PlugIn) CreateViewController() obj.Object {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("createViewController"))
 	return obj.Wrap(_r)
 }

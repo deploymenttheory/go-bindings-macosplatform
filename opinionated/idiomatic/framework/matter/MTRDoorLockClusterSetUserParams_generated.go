@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterSetUserParamsAdopt(id objc.ID) *MTRDoorLockClusterSetUser
 
 // Description returns the object's -description text.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) Description() string {
+	defer runtime.KeepAlive(mdlcsup)
 	return rt.Description(objref.IDOf(mdlcsup))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcsup)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcsup), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcsup)
 	return rt.IsKind(objref.IDOf(mdlcsup), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) String() string {
+	defer runtime.KeepAlive(mdlcsup)
 	return rt.Description(objref.IDOf(mdlcsup))
 }
 
@@ -72,12 +80,14 @@ func NewMTRDoorLockClusterSetUserParams() *MTRDoorLockClusterSetUserParams {
 
 // WithOperationType sets the operation type.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithOperationType(operationType obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(operationType)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setOperationType:"), objref.IDOf(operationType))
 	return mdlcsup
 }
 
 // WithUserIndex sets the user index.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcsup
 }
@@ -90,54 +100,63 @@ func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserName(userName string) *M
 
 // WithUserUniqueID sets the user unique ID.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserUniqueID(userUniqueID obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(userUniqueID)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserUniqueID:"), objref.IDOf(userUniqueID))
 	return mdlcsup
 }
 
 // WithUserStatus sets the user status.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(userStatus)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return mdlcsup
 }
 
 // WithUserType sets the user type.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserType(userType obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(userType)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return mdlcsup
 }
 
 // WithCredentialRule sets the credential rule.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithCredentialRule(credentialRule obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(credentialRule)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setCredentialRule:"), objref.IDOf(credentialRule))
 	return mdlcsup
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcsup
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetUserParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlcsup
 }
 
 // OperationType returns the operation type.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) OperationType() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) OperationType() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("operationType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) UserIndex() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserName returns the user name.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) UserName() string {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userName"))
 	if _r == 0 {
 		return ""
@@ -146,37 +165,43 @@ func (mdlcsup *MTRDoorLockClusterSetUserParams) UserName() string {
 }
 
 // UserUniqueID returns the user unique ID.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) UserUniqueID() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) UserUniqueID() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userUniqueID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserStatus returns the user status.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) UserStatus() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) UserStatus() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userStatus"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserType returns the user type.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) UserType() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) UserType() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CredentialRule returns the credential rule.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) CredentialRule() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) CredentialRule() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("credentialRule"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlcsup *MTRDoorLockClusterSetUserParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlcsup *MTRDoorLockClusterSetUserParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlcsup)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

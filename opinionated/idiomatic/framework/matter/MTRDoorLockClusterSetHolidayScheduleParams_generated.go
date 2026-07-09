@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterSetHolidayScheduleParamsAdopt(id objc.ID) *MTRDoorLockClu
 
 // Description returns the object's -description text.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) Description() string {
+	defer runtime.KeepAlive(mdlcshsp)
 	return rt.Description(objref.IDOf(mdlcshsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcshsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcshsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcshsp)
 	return rt.IsKind(objref.IDOf(mdlcshsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) String() string {
+	defer runtime.KeepAlive(mdlcshsp)
 	return rt.Description(objref.IDOf(mdlcshsp))
 }
 
@@ -72,72 +80,84 @@ func NewMTRDoorLockClusterSetHolidayScheduleParams() *MTRDoorLockClusterSetHolid
 
 // WithHolidayIndex sets the holiday index.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) WithHolidayIndex(holidayIndex obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
+	defer runtime.KeepAlive(holidayIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 	return mdlcshsp
 }
 
 // WithLocalStartTime sets the local start time.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) WithLocalStartTime(localStartTime obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
+	defer runtime.KeepAlive(localStartTime)
 	objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 	return mdlcshsp
 }
 
 // WithLocalEndTime sets the local end time.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) WithLocalEndTime(localEndTime obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
+	defer runtime.KeepAlive(localEndTime)
 	objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 	return mdlcshsp
 }
 
 // WithOperatingMode sets the operating mode.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) WithOperatingMode(operatingMode obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
+	defer runtime.KeepAlive(operatingMode)
 	objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("setOperatingMode:"), objref.IDOf(operatingMode))
 	return mdlcshsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcshsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetHolidayScheduleParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlcshsp
 }
 
 // HolidayIndex returns the holiday index.
-func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) HolidayIndex() obj.Object {
+func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) HolidayIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcshsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("holidayIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LocalStartTime returns the local start time.
-func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) LocalStartTime() obj.Object {
+func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) LocalStartTime() *foundation.Number {
+	defer runtime.KeepAlive(mdlcshsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("localStartTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LocalEndTime returns the local end time.
-func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) LocalEndTime() obj.Object {
+func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) LocalEndTime() *foundation.Number {
+	defer runtime.KeepAlive(mdlcshsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("localEndTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OperatingMode returns the operating mode.
-func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) OperatingMode() obj.Object {
+func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) OperatingMode() *foundation.Number {
+	defer runtime.KeepAlive(mdlcshsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("operatingMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcshsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlcshsp *MTRDoorLockClusterSetHolidayScheduleParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlcshsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcshsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

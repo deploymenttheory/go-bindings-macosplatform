@@ -5,8 +5,11 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func friendRequestComposeViewControllerAdopt(id objc.ID) *FriendRequestComposeVi
 
 // Description returns the object's -description text.
 func (frcvc *FriendRequestComposeViewController) Description() string {
+	defer runtime.KeepAlive(frcvc)
 	return rt.Description(objref.IDOf(frcvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (frcvc *FriendRequestComposeViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(frcvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(frcvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (frcvc *FriendRequestComposeViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(frcvc)
 	return rt.IsKind(objref.IDOf(frcvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (frcvc *FriendRequestComposeViewController) String() string {
+	defer runtime.KeepAlive(frcvc)
 	return rt.Description(objref.IDOf(frcvc))
 }
 
@@ -78,8 +86,21 @@ func NewFriendRequestComposeViewController() *FriendRequestComposeViewController
 	return _mainthread0
 }
 
+// WithComposeViewDelegate sets the view controller’s delegate
+func (frcvc *FriendRequestComposeViewController) WithComposeViewDelegate(composeViewDelegate FriendRequestComposeViewControllerDelegate) *FriendRequestComposeViewController {
+	_shim := newFriendRequestComposeViewControllerDelegateShim(composeViewDelegate)
+	_sel := objc.RegisterName("setComposeViewDelegate:")
+	shim.Associate(objref.IDOf(frcvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(frcvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return frcvc
+}
+
 // SetMessage sets the text message included in the friend invitation.
 func (frcvc *FriendRequestComposeViewController) SetMessage(message string) {
+	defer runtime.KeepAlive(frcvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("setMessage:"), purego.NSString(message))
 	})
@@ -88,6 +109,7 @@ func (frcvc *FriendRequestComposeViewController) SetMessage(message string) {
 
 // AddRecipientPlayers adds recipients based on their Game Center player identifiers.
 func (frcvc *FriendRequestComposeViewController) AddRecipientPlayers(players []*Player) {
+	defer runtime.KeepAlive(frcvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -96,6 +118,7 @@ func (frcvc *FriendRequestComposeViewController) AddRecipientPlayers(players []*
 
 // AddRecipientsWithPlayerIDs adds recipients based on their Game Center player identifiers.
 func (frcvc *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs []string) {
+	defer runtime.KeepAlive(frcvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
@@ -104,6 +127,7 @@ func (frcvc *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(play
 
 // AddRecipientsWithEmailAddresses adds recipients based on their email addresses.
 func (frcvc *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses []string) {
+	defer runtime.KeepAlive(frcvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})

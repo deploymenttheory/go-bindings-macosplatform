@@ -5,9 +5,11 @@
 package eventkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,13 +55,16 @@ func NewSource() *Source {
 }
 
 // CalendarsForEntityType returns the calendars that belong to this source object that support a particular entity type.
-func (s *Source) CalendarsForEntityType(entityType EntityType) obj.Object {
+// The order of the returned elements is unspecified.
+func (s *Source) CalendarsForEntityType(entityType EntityType) []*Calendar {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("calendarsForEntityType:"), entityType)
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Calendar { return CalendarFromID(_id) })
 }
 
 // SourceIdentifier returns the source identifier.
 func (s *Source) SourceIdentifier() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sourceIdentifier"))
 	if _r == 0 {
 		return ""
@@ -69,12 +74,14 @@ func (s *Source) SourceIdentifier() string {
 
 // SourceType returns the source type.
 func (s *Source) SourceType() SourceType {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[SourceType](objref.IDOf(s), objc.RegisterName("sourceType"))
 	return _r
 }
 
 // Title returns the title.
 func (s *Source) Title() string {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
@@ -84,6 +91,7 @@ func (s *Source) Title() string {
 
 // IsDelegate reports whether this EKSource represents an account delegated by another user.
 func (s *Source) IsDelegate() bool {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isDelegate"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(id objc.ID) 
 
 // Description returns the object's -description text.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Description() string {
+	defer runtime.KeepAlive(mtndcnfce)
 	return rt.Description(objref.IDOf(mtndcnfce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtndcnfce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtndcnfce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtndcnfce)
 	return rt.IsKind(objref.IDOf(mtndcnfce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) String() string {
+	defer runtime.KeepAlive(mtndcnfce)
 	return rt.Description(objref.IDOf(mtndcnfce))
 }
 
@@ -72,22 +79,28 @@ func NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent() *MTRThreadNe
 
 // Current returns the current.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
+	defer runtime.KeepAlive(mtndcnfce)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
+	defer runtime.KeepAlive(mtndcnfce)
+	defer runtime.KeepAlive(current)
 	objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous returns the previous.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
+	defer runtime.KeepAlive(mtndcnfce)
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
 func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
+	defer runtime.KeepAlive(mtndcnfce)
+	defer runtime.KeepAlive(previous)
 	objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }

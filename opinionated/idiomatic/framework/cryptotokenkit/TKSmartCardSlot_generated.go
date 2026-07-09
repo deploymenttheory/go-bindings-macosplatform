@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func smartCardSlotAdopt(id objc.ID) *SmartCardSlot {
 
 // Description returns the object's -description text.
 func (scs *SmartCardSlot) Description() string {
+	defer runtime.KeepAlive(scs)
 	return rt.Description(objref.IDOf(scs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (scs *SmartCardSlot) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(scs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(scs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (scs *SmartCardSlot) IsKind(className string) bool {
+	defer runtime.KeepAlive(scs)
 	return rt.IsKind(objref.IDOf(scs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (scs *SmartCardSlot) String() string {
+	defer runtime.KeepAlive(scs)
 	return rt.Description(objref.IDOf(scs))
 }
 
@@ -74,24 +81,28 @@ func NewSmartCardSlot() *SmartCardSlot {
 
 // MakeSmartCard creates a new TKSmartCard object representing the currently inserted Smart Card.
 func (scs *SmartCardSlot) MakeSmartCard() *SmartCard {
+	defer runtime.KeepAlive(scs)
 	_r := objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("makeSmartCard"))
 	return SmartCardFromID(_r)
 }
 
 // State returns current state of the slot.  Use KVO to be notified about state changes.
 func (scs *SmartCardSlot) State() SmartCardSlotState {
+	defer runtime.KeepAlive(scs)
 	_r := objc.Send[SmartCardSlotState](objref.IDOf(scs), objc.RegisterName("state"))
 	return _r
 }
 
 // ATR returns ATR of the inserted SmartCard, or nil if no or mute SmartCard is inserted.
 func (scs *SmartCardSlot) ATR() *SmartCardATR {
+	defer runtime.KeepAlive(scs)
 	_r := objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("ATR"))
 	return SmartCardATRFromID(_r)
 }
 
 // Name returns name of the SmartCard reader slot.
 func (scs *SmartCardSlot) Name() string {
+	defer runtime.KeepAlive(scs)
 	_r := objc.Send[objc.ID](objref.IDOf(scs), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -101,12 +112,14 @@ func (scs *SmartCardSlot) Name() string {
 
 // MaxInputLength returns maximal length of input APDU that the slot is able to transfer to the card.
 func (scs *SmartCardSlot) MaxInputLength() int {
+	defer runtime.KeepAlive(scs)
 	_r := objc.Send[int](objref.IDOf(scs), objc.RegisterName("maxInputLength"))
 	return _r
 }
 
 // MaxOutputLength returns maximal length of output APDU that the slot is able to transfer from the card.
 func (scs *SmartCardSlot) MaxOutputLength() int {
+	defer runtime.KeepAlive(scs)
 	_r := objc.Send[int](objref.IDOf(scs), objc.RegisterName("maxOutputLength"))
 	return _r
 }

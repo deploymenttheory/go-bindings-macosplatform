@@ -5,6 +5,9 @@
 package usernotifications
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func notificationAdopt(id objc.ID) *Notification {
 
 // Description returns the object's -description text.
 func (n *Notification) Description() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (n *Notification) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(n)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (n *Notification) IsKind(className string) bool {
+	defer runtime.KeepAlive(n)
 	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (n *Notification) String() string {
+	defer runtime.KeepAlive(n)
 	return rt.Description(objref.IDOf(n))
 }
 
@@ -73,13 +81,15 @@ func NewNotification() *Notification {
 }
 
 // Date returns the date.
-func (n *Notification) Date() obj.Object {
+func (n *Notification) Date() time.Time {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("date"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Request returns the request.
 func (n *Notification) Request() *NotificationRequest {
+	defer runtime.KeepAlive(n)
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("request"))
 	return NotificationRequestFromID(_r)
 }

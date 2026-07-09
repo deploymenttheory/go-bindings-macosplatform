@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,34 +49,40 @@ func mapItemIdentifierAdopt(id objc.ID) *MapItemIdentifier {
 
 // Description returns the object's -description text.
 func (mii *MapItemIdentifier) Description() string {
+	defer runtime.KeepAlive(mii)
 	return rt.Description(objref.IDOf(mii))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mii *MapItemIdentifier) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mii)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mii), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mii *MapItemIdentifier) IsKind(className string) bool {
+	defer runtime.KeepAlive(mii)
 	return rt.IsKind(objref.IDOf(mii), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mii *MapItemIdentifier) String() string {
+	defer runtime.KeepAlive(mii)
 	return rt.Description(objref.IDOf(mii))
 }
 
 // NewMapItemIdentifierWithIdentifierString creates a new MapItemIdentifier.
-func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier {
+func NewMapItemIdentifierWithIdentifierString(str string) *MapItemIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifierString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifierString:"), purego.NSString(str))
 	return mapItemIdentifierAdopt(_id)
 }
 
 // IdentifierString returns the identifier string.
 func (mii *MapItemIdentifier) IdentifierString() string {
+	defer runtime.KeepAlive(mii)
 	_r := objc.Send[objc.ID](objref.IDOf(mii), objc.RegisterName("identifierString"))
 	if _r == 0 {
 		return ""

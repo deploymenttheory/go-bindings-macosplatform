@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -63,6 +65,7 @@ func NewScrollViewWithFrame(frameRect corefoundation.CGRect) *ScrollView {
 
 // NewScrollViewWithCoder creates a new ScrollView.
 func NewScrollViewWithCoder(coder obj.Object) *ScrollView {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *ScrollView
 	purego.Main(func() {
 		_mainthread0 = func() *ScrollView {
@@ -76,6 +79,7 @@ func NewScrollViewWithCoder(coder obj.Object) *ScrollView {
 
 // WithDocumentView sets the view the scroll view scrolls within its content view.
 func (sv *ScrollView) WithDocumentView(documentView ViewProvider) *ScrollView {
+	defer runtime.KeepAlive(documentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
 	})
@@ -84,6 +88,7 @@ func (sv *ScrollView) WithDocumentView(documentView ViewProvider) *ScrollView {
 
 // WithContentView sets the scroll view’s content view, the view that clips the document view.
 func (sv *ScrollView) WithContentView(contentView *ClipView) *ScrollView {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
@@ -92,6 +97,7 @@ func (sv *ScrollView) WithContentView(contentView *ClipView) *ScrollView {
 
 // WithDocumentCursor sets the content view’s document cursor.
 func (sv *ScrollView) WithDocumentCursor(documentCursor *Cursor) *ScrollView {
+	defer runtime.KeepAlive(documentCursor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
 	})
@@ -108,6 +114,7 @@ func (sv *ScrollView) WithBorderType(borderType BorderType) *ScrollView {
 
 // WithBackgroundColor sets the color of the content view’s background.
 func (sv *ScrollView) WithBackgroundColor(backgroundColor *Color) *ScrollView {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -140,6 +147,7 @@ func (sv *ScrollView) WithHasHorizontalScroller(hasHorizontalScroller bool) *Scr
 
 // WithVerticalScroller sets the scroll view’s vertical scroller.
 func (sv *ScrollView) WithVerticalScroller(verticalScroller *Scroller) *ScrollView {
+	defer runtime.KeepAlive(verticalScroller)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalScroller:"), objref.IDOf(verticalScroller))
 	})
@@ -148,6 +156,7 @@ func (sv *ScrollView) WithVerticalScroller(verticalScroller *Scroller) *ScrollVi
 
 // WithHorizontalScroller sets the scroll view’s horizontal scroller.
 func (sv *ScrollView) WithHorizontalScroller(horizontalScroller *Scroller) *ScrollView {
+	defer runtime.KeepAlive(horizontalScroller)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalScroller:"), objref.IDOf(horizontalScroller))
 	})
@@ -340,6 +349,7 @@ func (sv *ScrollView) WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView {
 
 // WithHorizontalRulerView sets the scroll view’s horizontal ruler view.
 func (sv *ScrollView) WithHorizontalRulerView(horizontalRulerView *RulerView) *ScrollView {
+	defer runtime.KeepAlive(horizontalRulerView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalRulerView:"), objref.IDOf(horizontalRulerView))
 	})
@@ -348,6 +358,7 @@ func (sv *ScrollView) WithHorizontalRulerView(horizontalRulerView *RulerView) *S
 
 // WithVerticalRulerView sets the scroll view’s vertical ruler view.
 func (sv *ScrollView) WithVerticalRulerView(verticalRulerView *RulerView) *ScrollView {
+	defer runtime.KeepAlive(verticalRulerView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalRulerView:"), objref.IDOf(verticalRulerView))
 	})
@@ -501,6 +512,7 @@ func (sv *ScrollView) WithWantsLayer(wantsLayer bool) *ScrollView {
 
 // WithLayer sets the layer.
 func (sv *ScrollView) WithLayer(layer obj.Object) *ScrollView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -550,6 +562,7 @@ func (sv *ScrollView) WithBackgroundFilters(items ...obj.Object) *ScrollView {
 
 // WithCompositingFilter sets the compositing filter.
 func (sv *ScrollView) WithCompositingFilter(compositingFilter obj.Object) *ScrollView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -567,6 +580,7 @@ func (sv *ScrollView) WithContentFilters(items ...obj.Object) *ScrollView {
 
 // WithShadow sets the shadow.
 func (sv *ScrollView) WithShadow(shadow *Shadow) *ScrollView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -615,6 +629,7 @@ func (sv *ScrollView) WithPreparedContentRect(preparedContentRect corefoundation
 
 // WithNextKeyView sets the next key view.
 func (sv *ScrollView) WithNextKeyView(nextKeyView ViewProvider) *ScrollView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -664,6 +679,7 @@ func (sv *ScrollView) WithPrefersCompactControlSizeMetrics(prefersCompactControl
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *ScrollView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrollView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -720,6 +736,7 @@ func (sv *ScrollView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDy
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sv *ScrollView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrollView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -728,6 +745,7 @@ func (sv *ScrollView) WithPressureConfiguration(pressureConfiguration *PressureC
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sv *ScrollView) WithNextResponder(nextResponder ResponderProvider) *ScrollView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -736,6 +754,7 @@ func (sv *ScrollView) WithNextResponder(nextResponder ResponderProvider) *Scroll
 
 // WithMenu sets returns the responder’s menu.
 func (sv *ScrollView) WithMenu(menu *Menu) *ScrollView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -744,6 +763,7 @@ func (sv *ScrollView) WithMenu(menu *Menu) *ScrollView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sv *ScrollView) WithUserActivity(userActivity obj.Object) *ScrollView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -752,6 +772,7 @@ func (sv *ScrollView) WithUserActivity(userActivity obj.Object) *ScrollView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sv *ScrollView) WithTouchBar(touchBar *TouchBar) *ScrollView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -760,6 +781,7 @@ func (sv *ScrollView) WithTouchBar(touchBar *TouchBar) *ScrollView {
 
 // Tile lays out the components of the receiver: the content view, the scrollers, and the ruler views.
 func (sv *ScrollView) Tile() {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("tile"))
 	})
@@ -768,6 +790,7 @@ func (sv *ScrollView) Tile() {
 
 // FlashScrollers flash the overlay scroll bars.
 func (sv *ScrollView) FlashScrollers() {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("flashScrollers"))
 	})
@@ -776,6 +799,7 @@ func (sv *ScrollView) FlashScrollers() {
 
 // MagnifyToFitRect magnifies the content view proportionally such that the given rectangle fits centered in the scroll view.
 func (sv *ScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("magnifyToFitRect:"), rect)
 	})
@@ -784,6 +808,7 @@ func (sv *ScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
 
 // SetMagnificationCenteredAtPoint magnify the content by the given amount and center the result on the given point.
 func (sv *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(sv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setMagnification:centeredAtPoint:"), magnification, point)
 	})
@@ -792,6 +817,8 @@ func (sv *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, poi
 
 // AddFloatingSubviewForAxis adds a floating subview to the document view.
 func (sv *ScrollView) AddFloatingSubviewForAxis(view *View, axis EventGestureAxis) {
+	defer runtime.KeepAlive(sv)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("addFloatingSubview:forAxis:"), objref.IDOf(view), axis)
 	})
@@ -800,6 +827,7 @@ func (sv *ScrollView) AddFloatingSubviewForAxis(view *View, axis EventGestureAxi
 
 // DocumentVisibleRect returns the document visible rect.
 func (sv *ScrollView) DocumentVisibleRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -813,6 +841,7 @@ func (sv *ScrollView) DocumentVisibleRect() corefoundation.CGRect {
 
 // ContentSize returns the content size.
 func (sv *ScrollView) ContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -826,6 +855,7 @@ func (sv *ScrollView) ContentSize() corefoundation.CGSize {
 
 // DocumentView returns the document view.
 func (sv *ScrollView) DocumentView() *View {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -839,6 +869,7 @@ func (sv *ScrollView) DocumentView() *View {
 
 // ContentView returns the content view.
 func (sv *ScrollView) ContentView() *ClipView {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *ClipView
 	purego.Main(func() {
 		_mainthread0 = func() *ClipView {
@@ -852,6 +883,7 @@ func (sv *ScrollView) ContentView() *ClipView {
 
 // DocumentCursor returns the document cursor.
 func (sv *ScrollView) DocumentCursor() *Cursor {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *Cursor
 	purego.Main(func() {
 		_mainthread0 = func() *Cursor {
@@ -865,6 +897,7 @@ func (sv *ScrollView) DocumentCursor() *Cursor {
 
 // BorderType returns the border type.
 func (sv *ScrollView) BorderType() BorderType {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 BorderType
 	purego.Main(func() {
 		_mainthread0 = func() BorderType {
@@ -878,6 +911,7 @@ func (sv *ScrollView) BorderType() BorderType {
 
 // BackgroundColor returns the background color.
 func (sv *ScrollView) BackgroundColor() *Color {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -891,6 +925,7 @@ func (sv *ScrollView) BackgroundColor() *Color {
 
 // DrawsBackground wraps the corresponding Objective-C method.
 func (sv *ScrollView) DrawsBackground() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -904,6 +939,7 @@ func (sv *ScrollView) DrawsBackground() bool {
 
 // HasVerticalScroller reports whether the object has vertical scroller.
 func (sv *ScrollView) HasVerticalScroller() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -917,6 +953,7 @@ func (sv *ScrollView) HasVerticalScroller() bool {
 
 // HasHorizontalScroller reports whether the object has horizontal scroller.
 func (sv *ScrollView) HasHorizontalScroller() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -930,6 +967,7 @@ func (sv *ScrollView) HasHorizontalScroller() bool {
 
 // VerticalScroller returns the vertical scroller.
 func (sv *ScrollView) VerticalScroller() *Scroller {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *Scroller
 	purego.Main(func() {
 		_mainthread0 = func() *Scroller {
@@ -943,6 +981,7 @@ func (sv *ScrollView) VerticalScroller() *Scroller {
 
 // HorizontalScroller returns the horizontal scroller.
 func (sv *ScrollView) HorizontalScroller() *Scroller {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *Scroller
 	purego.Main(func() {
 		_mainthread0 = func() *Scroller {
@@ -956,6 +995,7 @@ func (sv *ScrollView) HorizontalScroller() *Scroller {
 
 // AutohidesScrollers wraps the corresponding Objective-C method.
 func (sv *ScrollView) AutohidesScrollers() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -969,6 +1009,7 @@ func (sv *ScrollView) AutohidesScrollers() bool {
 
 // HorizontalLineScroll returns the horizontal line scroll.
 func (sv *ScrollView) HorizontalLineScroll() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -982,6 +1023,7 @@ func (sv *ScrollView) HorizontalLineScroll() float64 {
 
 // VerticalLineScroll returns the vertical line scroll.
 func (sv *ScrollView) VerticalLineScroll() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -995,6 +1037,7 @@ func (sv *ScrollView) VerticalLineScroll() float64 {
 
 // LineScroll returns the line scroll.
 func (sv *ScrollView) LineScroll() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1008,6 +1051,7 @@ func (sv *ScrollView) LineScroll() float64 {
 
 // HorizontalPageScroll returns the horizontal page scroll.
 func (sv *ScrollView) HorizontalPageScroll() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1021,6 +1065,7 @@ func (sv *ScrollView) HorizontalPageScroll() float64 {
 
 // VerticalPageScroll returns the vertical page scroll.
 func (sv *ScrollView) VerticalPageScroll() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1034,6 +1079,7 @@ func (sv *ScrollView) VerticalPageScroll() float64 {
 
 // PageScroll returns the page scroll.
 func (sv *ScrollView) PageScroll() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1047,6 +1093,7 @@ func (sv *ScrollView) PageScroll() float64 {
 
 // ScrollsDynamically wraps the corresponding Objective-C method.
 func (sv *ScrollView) ScrollsDynamically() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1060,6 +1107,7 @@ func (sv *ScrollView) ScrollsDynamically() bool {
 
 // ScrollerStyle returns the scroller style.
 func (sv *ScrollView) ScrollerStyle() ScrollerStyle {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 ScrollerStyle
 	purego.Main(func() {
 		_mainthread0 = func() ScrollerStyle {
@@ -1073,6 +1121,7 @@ func (sv *ScrollView) ScrollerStyle() ScrollerStyle {
 
 // ScrollerKnobStyle returns the scroller knob style.
 func (sv *ScrollView) ScrollerKnobStyle() ScrollerKnobStyle {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 ScrollerKnobStyle
 	purego.Main(func() {
 		_mainthread0 = func() ScrollerKnobStyle {
@@ -1086,6 +1135,7 @@ func (sv *ScrollView) ScrollerKnobStyle() ScrollerKnobStyle {
 
 // HorizontalScrollElasticity returns the horizontal scroll elasticity.
 func (sv *ScrollView) HorizontalScrollElasticity() ScrollElasticity {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 ScrollElasticity
 	purego.Main(func() {
 		_mainthread0 = func() ScrollElasticity {
@@ -1099,6 +1149,7 @@ func (sv *ScrollView) HorizontalScrollElasticity() ScrollElasticity {
 
 // VerticalScrollElasticity returns the vertical scroll elasticity.
 func (sv *ScrollView) VerticalScrollElasticity() ScrollElasticity {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 ScrollElasticity
 	purego.Main(func() {
 		_mainthread0 = func() ScrollElasticity {
@@ -1112,6 +1163,7 @@ func (sv *ScrollView) VerticalScrollElasticity() ScrollElasticity {
 
 // UsesPredominantAxisScrolling wraps the corresponding Objective-C method.
 func (sv *ScrollView) UsesPredominantAxisScrolling() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1125,6 +1177,7 @@ func (sv *ScrollView) UsesPredominantAxisScrolling() bool {
 
 // AllowsMagnification wraps the corresponding Objective-C method.
 func (sv *ScrollView) AllowsMagnification() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1138,6 +1191,7 @@ func (sv *ScrollView) AllowsMagnification() bool {
 
 // Magnification returns the magnification.
 func (sv *ScrollView) Magnification() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1151,6 +1205,7 @@ func (sv *ScrollView) Magnification() float64 {
 
 // MaxMagnification returns the max magnification.
 func (sv *ScrollView) MaxMagnification() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1164,6 +1219,7 @@ func (sv *ScrollView) MaxMagnification() float64 {
 
 // MinMagnification returns the min magnification.
 func (sv *ScrollView) MinMagnification() float64 {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1177,6 +1233,7 @@ func (sv *ScrollView) MinMagnification() float64 {
 
 // AutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
 func (sv *ScrollView) AutomaticallyAdjustsContentInsets() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1190,6 +1247,7 @@ func (sv *ScrollView) AutomaticallyAdjustsContentInsets() bool {
 
 // ContentInsets returns the content insets.
 func (sv *ScrollView) ContentInsets() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -1203,6 +1261,7 @@ func (sv *ScrollView) ContentInsets() foundation.NSEdgeInsets {
 
 // ScrollerInsets returns the scroller insets.
 func (sv *ScrollView) ScrollerInsets() foundation.NSEdgeInsets {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 foundation.NSEdgeInsets
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSEdgeInsets {
@@ -1216,6 +1275,7 @@ func (sv *ScrollView) ScrollerInsets() foundation.NSEdgeInsets {
 
 // RulersVisible wraps the corresponding Objective-C method.
 func (sv *ScrollView) RulersVisible() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1229,6 +1289,7 @@ func (sv *ScrollView) RulersVisible() bool {
 
 // HasHorizontalRuler reports whether the object has horizontal ruler.
 func (sv *ScrollView) HasHorizontalRuler() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1242,6 +1303,7 @@ func (sv *ScrollView) HasHorizontalRuler() bool {
 
 // HasVerticalRuler reports whether the object has vertical ruler.
 func (sv *ScrollView) HasVerticalRuler() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1255,6 +1317,7 @@ func (sv *ScrollView) HasVerticalRuler() bool {
 
 // HorizontalRulerView returns the horizontal ruler view.
 func (sv *ScrollView) HorizontalRulerView() *RulerView {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *RulerView
 	purego.Main(func() {
 		_mainthread0 = func() *RulerView {
@@ -1268,6 +1331,7 @@ func (sv *ScrollView) HorizontalRulerView() *RulerView {
 
 // VerticalRulerView returns the vertical ruler view.
 func (sv *ScrollView) VerticalRulerView() *RulerView {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 *RulerView
 	purego.Main(func() {
 		_mainthread0 = func() *RulerView {
@@ -1281,6 +1345,7 @@ func (sv *ScrollView) VerticalRulerView() *RulerView {
 
 // FindBarPosition returns the find bar position.
 func (sv *ScrollView) FindBarPosition() ScrollViewFindBarPosition {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 ScrollViewFindBarPosition
 	purego.Main(func() {
 		_mainthread0 = func() ScrollViewFindBarPosition {

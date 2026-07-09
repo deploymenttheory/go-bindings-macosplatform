@@ -5,6 +5,8 @@
 package glkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func textureLoaderAdopt(id objc.ID) *TextureLoader {
 
 // Description returns the object's -description text.
 func (tl *TextureLoader) Description() string {
+	defer runtime.KeepAlive(tl)
 	return rt.Description(objref.IDOf(tl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tl *TextureLoader) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tl)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tl *TextureLoader) IsKind(className string) bool {
+	defer runtime.KeepAlive(tl)
 	return rt.IsKind(objref.IDOf(tl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tl *TextureLoader) String() string {
+	defer runtime.KeepAlive(tl)
 	return rt.Description(objref.IDOf(tl))
 }
 
 // NewTextureLoaderWithShareContext initializes a new texture loader object.
 func NewTextureLoaderWithShareContext(context_ obj.Object) *TextureLoader {
+	defer runtime.KeepAlive(context_)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GLKTextureLoader")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareContext:"), objref.IDOf(context_))
 	return textureLoaderAdopt(_id)

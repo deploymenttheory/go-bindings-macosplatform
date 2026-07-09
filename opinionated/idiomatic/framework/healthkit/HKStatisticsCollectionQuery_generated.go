@@ -5,9 +5,14 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,28 +58,34 @@ func NewStatisticsCollectionQuery() *StatisticsCollectionQuery {
 }
 
 // NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents initializes a statistics collection query to perform the specified calculations over a set of time intervals.
-func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *QuantityType, quantitySamplePredicate obj.Object, options StatisticsOptions, anchorDate obj.Object, intervalComponents obj.Object) *StatisticsCollectionQuery {
+func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsAnchorDateIntervalComponents(quantityType *QuantityType, quantitySamplePredicate obj.Object, options StatisticsOptions, anchorDate time.Time, intervalComponents obj.Object) *StatisticsCollectionQuery {
+	defer runtime.KeepAlive(quantityType)
+	defer runtime.KeepAlive(quantitySamplePredicate)
+	defer runtime.KeepAlive(intervalComponents)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKStatisticsCollectionQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), objref.IDOf(quantityType), objref.IDOf(quantitySamplePredicate), options, objref.IDOf(anchorDate), objref.IDOf(intervalComponents))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:anchorDate:intervalComponents:"), objref.IDOf(quantityType), objref.IDOf(quantitySamplePredicate), options, rt.TimeToNSDate(anchorDate), objref.IDOf(intervalComponents))
 	return statisticsCollectionQueryAdopt(_id)
 }
 
 // AnchorDate returns the anchor date.
-func (scq *StatisticsCollectionQuery) AnchorDate() obj.Object {
+func (scq *StatisticsCollectionQuery) AnchorDate() time.Time {
+	defer runtime.KeepAlive(scq)
 	_r := objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("anchorDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Options returns the options.
 func (scq *StatisticsCollectionQuery) Options() StatisticsOptions {
+	defer runtime.KeepAlive(scq)
 	_r := objc.Send[StatisticsOptions](objref.IDOf(scq), objc.RegisterName("options"))
 	return _r
 }
 
 // IntervalComponents returns the interval components.
-func (scq *StatisticsCollectionQuery) IntervalComponents() obj.Object {
+func (scq *StatisticsCollectionQuery) IntervalComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(scq)
 	_r := objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("intervalComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }
 
 var _ QueryProvider = (*StatisticsCollectionQuery)(nil)

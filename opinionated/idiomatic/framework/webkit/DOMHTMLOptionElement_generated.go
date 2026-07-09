@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -183,18 +185,21 @@ func (doe *DOMHTMLOptionElement) WithTextContent(textContent string) *DOMHTMLOpt
 
 // Disabled wraps the corresponding Objective-C method.
 func (doe *DOMHTMLOptionElement) Disabled() bool {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("disabled"))
 	return _r
 }
 
 // Form returns the form.
 func (doe *DOMHTMLOptionElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Label returns the label.
 func (doe *DOMHTMLOptionElement) Label() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -204,18 +209,21 @@ func (doe *DOMHTMLOptionElement) Label() string {
 
 // DefaultSelected wraps the corresponding Objective-C method.
 func (doe *DOMHTMLOptionElement) DefaultSelected() bool {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("defaultSelected"))
 	return _r
 }
 
 // Selected wraps the corresponding Objective-C method.
 func (doe *DOMHTMLOptionElement) Selected() bool {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("selected"))
 	return _r
 }
 
 // Value returns the value.
 func (doe *DOMHTMLOptionElement) Value() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
@@ -225,6 +233,7 @@ func (doe *DOMHTMLOptionElement) Value() string {
 
 // Text returns the text.
 func (doe *DOMHTMLOptionElement) Text() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
@@ -234,6 +243,7 @@ func (doe *DOMHTMLOptionElement) Text() string {
 
 // Index returns the index.
 func (doe *DOMHTMLOptionElement) Index() int {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[int](objref.IDOf(doe), objc.RegisterName("index"))
 	return _r
 }

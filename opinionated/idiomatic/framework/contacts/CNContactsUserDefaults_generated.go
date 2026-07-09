@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func contactsUserDefaultsAdopt(id objc.ID) *ContactsUserDefaults {
 
 // Description returns the object's -description text.
 func (cud *ContactsUserDefaults) Description() string {
+	defer runtime.KeepAlive(cud)
 	return rt.Description(objref.IDOf(cud))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cud *ContactsUserDefaults) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cud)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cud), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cud *ContactsUserDefaults) IsKind(className string) bool {
+	defer runtime.KeepAlive(cud)
 	return rt.IsKind(objref.IDOf(cud), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cud *ContactsUserDefaults) String() string {
+	defer runtime.KeepAlive(cud)
 	return rt.Description(objref.IDOf(cud))
 }
 
@@ -74,12 +81,14 @@ func NewContactsUserDefaults() *ContactsUserDefaults {
 
 // SortOrder returns the sort order.
 func (cud *ContactsUserDefaults) SortOrder() ContactSortOrder {
+	defer runtime.KeepAlive(cud)
 	_r := objc.Send[ContactSortOrder](objref.IDOf(cud), objc.RegisterName("sortOrder"))
 	return _r
 }
 
 // CountryCode returns the country code.
 func (cud *ContactsUserDefaults) CountryCode() string {
+	defer runtime.KeepAlive(cud)
 	_r := objc.Send[objc.ID](objref.IDOf(cud), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""

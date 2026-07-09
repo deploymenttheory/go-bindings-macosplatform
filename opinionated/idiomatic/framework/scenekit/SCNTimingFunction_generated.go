@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func timingFunctionAdopt(id objc.ID) *TimingFunction {
 
 // Description returns the object's -description text.
 func (tf *TimingFunction) Description() string {
+	defer runtime.KeepAlive(tf)
 	return rt.Description(objref.IDOf(tf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tf *TimingFunction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tf *TimingFunction) IsKind(className string) bool {
+	defer runtime.KeepAlive(tf)
 	return rt.IsKind(objref.IDOf(tf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tf *TimingFunction) String() string {
+	defer runtime.KeepAlive(tf)
 	return rt.Description(objref.IDOf(tf))
 }
 

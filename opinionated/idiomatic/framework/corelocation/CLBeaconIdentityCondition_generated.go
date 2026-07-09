@@ -5,7 +5,10 @@
 package corelocation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -48,6 +51,7 @@ func beaconIdentityConditionAdopt(id objc.ID) *BeaconIdentityCondition {
 
 // NewBeaconIdentityConditionWithUUID creates a new beacon identity condition with the identifier you specify.
 func NewBeaconIdentityConditionWithUUID(uuid obj.Object) *BeaconIdentityCondition {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), objref.IDOf(uuid))
 	return beaconIdentityConditionAdopt(_id)
@@ -55,6 +59,7 @@ func NewBeaconIdentityConditionWithUUID(uuid obj.Object) *BeaconIdentityConditio
 
 // NewBeaconIdentityConditionWithUUIDMajor creates a new beacon identity condition with the identifier and major value you specify.
 func NewBeaconIdentityConditionWithUUIDMajor(uuid obj.Object, major uint16) *BeaconIdentityCondition {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:"), objref.IDOf(uuid), major)
 	return beaconIdentityConditionAdopt(_id)
@@ -62,27 +67,31 @@ func NewBeaconIdentityConditionWithUUIDMajor(uuid obj.Object, major uint16) *Bea
 
 // NewBeaconIdentityConditionWithUUIDMajorMinor creates a new beacon identity condition with the identifier, and major and minor values you specify.
 func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid obj.Object, major uint16, minor uint16) *BeaconIdentityCondition {
+	defer runtime.KeepAlive(uuid)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:minor:"), objref.IDOf(uuid), major, minor)
 	return beaconIdentityConditionAdopt(_id)
 }
 
 // UUID returns the UUID.
-func (bic *BeaconIdentityCondition) UUID() obj.Object {
+func (bic *BeaconIdentityCondition) UUID() *foundation.UUID {
+	defer runtime.KeepAlive(bic)
 	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("UUID"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Major returns the major.
-func (bic *BeaconIdentityCondition) Major() obj.Object {
+func (bic *BeaconIdentityCondition) Major() *foundation.Number {
+	defer runtime.KeepAlive(bic)
 	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("major"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Minor returns the minor.
-func (bic *BeaconIdentityCondition) Minor() obj.Object {
+func (bic *BeaconIdentityCondition) Minor() *foundation.Number {
+	defer runtime.KeepAlive(bic)
 	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("minor"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isBeaconIdentityCondition marks BeaconIdentityCondition — and, by embedding promotion, its

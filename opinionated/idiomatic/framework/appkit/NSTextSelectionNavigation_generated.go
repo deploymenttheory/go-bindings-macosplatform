@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func textSelectionNavigationAdopt(id objc.ID) *TextSelectionNavigation {
 
 // Description returns the object's -description text.
 func (tsn *TextSelectionNavigation) Description() string {
+	defer runtime.KeepAlive(tsn)
 	return rt.Description(objref.IDOf(tsn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tsn *TextSelectionNavigation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tsn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tsn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tsn *TextSelectionNavigation) IsKind(className string) bool {
+	defer runtime.KeepAlive(tsn)
 	return rt.IsKind(objref.IDOf(tsn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tsn *TextSelectionNavigation) String() string {
+	defer runtime.KeepAlive(tsn)
 	return rt.Description(objref.IDOf(tsn))
 }
 
@@ -86,35 +93,44 @@ func (tsn *TextSelectionNavigation) WithRotatesCoordinateSystemForLayoutOrientat
 
 // FlushLayoutCache flushes cached layout information.
 func (tsn *TextSelectionNavigation) FlushLayoutCache() {
+	defer runtime.KeepAlive(tsn)
 	objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("flushLayoutCache"))
 }
 
 // DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined returns a new selection that results from applying the navigation operations you specify to the text selection you provide.
 func (tsn *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
+	defer runtime.KeepAlive(tsn)
+	defer runtime.KeepAlive(textSelection)
 	_r := objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("destinationSelectionForTextSelection:direction:destination:extending:confined:"), objref.IDOf(textSelection), direction, destination, extending, confined)
 	return TextSelectionFromID(_r)
 }
 
 // TextSelectionForSelectionGranularityEnclosingTextSelection returns a text selection expanded to the nearest boundaries for the selection granularity and enclosing text selection text ranges you specify.
 func (tsn *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity TextSelectionGranularity, textSelection *TextSelection) *TextSelection {
+	defer runtime.KeepAlive(tsn)
+	defer runtime.KeepAlive(textSelection)
 	_r := objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("textSelectionForSelectionGranularity:enclosingTextSelection:"), selectionGranularity, objref.IDOf(textSelection))
 	return TextSelectionFromID(_r)
 }
 
 // DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition returns the ranges for deleting the text based on the current selection and movement arguments.
 func (tsn *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, allowsDecomposition bool) []*TextRange {
+	defer runtime.KeepAlive(tsn)
+	defer runtime.KeepAlive(textSelection)
 	_r := objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("deletionRangesForTextSelection:direction:destination:allowsDecomposition:"), objref.IDOf(textSelection), direction, destination, allowsDecomposition)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
 // AllowsNonContiguousRanges wraps the corresponding Objective-C method.
 func (tsn *TextSelectionNavigation) AllowsNonContiguousRanges() bool {
+	defer runtime.KeepAlive(tsn)
 	_r := objc.Send[bool](objref.IDOf(tsn), objc.RegisterName("allowsNonContiguousRanges"))
 	return _r
 }
 
 // RotatesCoordinateSystemForLayoutOrientation wraps the corresponding Objective-C method.
 func (tsn *TextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
+	defer runtime.KeepAlive(tsn)
 	_r := objc.Send[bool](objref.IDOf(tsn), objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation"))
 	return _r
 }

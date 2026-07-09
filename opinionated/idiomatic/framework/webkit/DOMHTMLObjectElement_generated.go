@@ -5,9 +5,11 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -250,12 +252,14 @@ func (doe *DOMHTMLObjectElement) WithTextContent(textContent string) *DOMHTMLObj
 
 // Form returns the form.
 func (doe *DOMHTMLObjectElement) Form() *DOMHTMLFormElement {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
 // Code returns the code.
 func (doe *DOMHTMLObjectElement) Code() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("code"))
 	if _r == 0 {
 		return ""
@@ -265,6 +269,7 @@ func (doe *DOMHTMLObjectElement) Code() string {
 
 // Align returns the align.
 func (doe *DOMHTMLObjectElement) Align() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -274,6 +279,7 @@ func (doe *DOMHTMLObjectElement) Align() string {
 
 // Archive returns the archive.
 func (doe *DOMHTMLObjectElement) Archive() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("archive"))
 	if _r == 0 {
 		return ""
@@ -283,6 +289,7 @@ func (doe *DOMHTMLObjectElement) Archive() string {
 
 // Border returns the border.
 func (doe *DOMHTMLObjectElement) Border() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("border"))
 	if _r == 0 {
 		return ""
@@ -292,6 +299,7 @@ func (doe *DOMHTMLObjectElement) Border() string {
 
 // CodeBase returns the code base.
 func (doe *DOMHTMLObjectElement) CodeBase() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("codeBase"))
 	if _r == 0 {
 		return ""
@@ -301,6 +309,7 @@ func (doe *DOMHTMLObjectElement) CodeBase() string {
 
 // CodeType returns the code type.
 func (doe *DOMHTMLObjectElement) CodeType() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("codeType"))
 	if _r == 0 {
 		return ""
@@ -310,6 +319,7 @@ func (doe *DOMHTMLObjectElement) CodeType() string {
 
 // Data returns the data.
 func (doe *DOMHTMLObjectElement) Data() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
@@ -319,12 +329,14 @@ func (doe *DOMHTMLObjectElement) Data() string {
 
 // Declare wraps the corresponding Objective-C method.
 func (doe *DOMHTMLObjectElement) Declare() bool {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[bool](objref.IDOf(doe), objc.RegisterName("declare"))
 	return _r
 }
 
 // Height returns the height.
 func (doe *DOMHTMLObjectElement) Height() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("height"))
 	if _r == 0 {
 		return ""
@@ -334,12 +346,14 @@ func (doe *DOMHTMLObjectElement) Height() string {
 
 // Hspace returns the hspace.
 func (doe *DOMHTMLObjectElement) Hspace() int {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[int](objref.IDOf(doe), objc.RegisterName("hspace"))
 	return _r
 }
 
 // Name returns the name.
 func (doe *DOMHTMLObjectElement) Name() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -349,6 +363,7 @@ func (doe *DOMHTMLObjectElement) Name() string {
 
 // Standby returns the standby.
 func (doe *DOMHTMLObjectElement) Standby() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("standby"))
 	if _r == 0 {
 		return ""
@@ -358,6 +373,7 @@ func (doe *DOMHTMLObjectElement) Standby() string {
 
 // Type returns the type.
 func (doe *DOMHTMLObjectElement) Type() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -367,6 +383,7 @@ func (doe *DOMHTMLObjectElement) Type() string {
 
 // UseMap returns the use map.
 func (doe *DOMHTMLObjectElement) UseMap() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("useMap"))
 	if _r == 0 {
 		return ""
@@ -376,12 +393,14 @@ func (doe *DOMHTMLObjectElement) UseMap() string {
 
 // Vspace returns the vspace.
 func (doe *DOMHTMLObjectElement) Vspace() int {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[int](objref.IDOf(doe), objc.RegisterName("vspace"))
 	return _r
 }
 
 // Width returns the width.
 func (doe *DOMHTMLObjectElement) Width() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""
@@ -391,18 +410,21 @@ func (doe *DOMHTMLObjectElement) Width() string {
 
 // ContentDocument returns the content document.
 func (doe *DOMHTMLObjectElement) ContentDocument() *DOMDocument {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("contentDocument"))
 	return DOMDocumentFromID(_r)
 }
 
 // AbsoluteImageURL returns the absolute image URL.
-func (doe *DOMHTMLObjectElement) AbsoluteImageURL() obj.Object {
+func (doe *DOMHTMLObjectElement) AbsoluteImageURL() string {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("absoluteImageURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ContentFrame returns the content frame.
 func (doe *DOMHTMLObjectElement) ContentFrame() *WebFrame {
+	defer runtime.KeepAlive(doe)
 	_r := objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("contentFrame"))
 	return WebFrameFromID(_r)
 }

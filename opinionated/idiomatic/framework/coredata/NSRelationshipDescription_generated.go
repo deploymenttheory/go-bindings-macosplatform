@@ -5,6 +5,8 @@
 package coredata
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,12 +56,14 @@ func NewRelationshipDescription() *RelationshipDescription {
 
 // WithDestinationEntity sets the type of object the relationship contains.
 func (rd *RelationshipDescription) WithDestinationEntity(destinationEntity *EntityDescription) *RelationshipDescription {
+	defer runtime.KeepAlive(destinationEntity)
 	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setDestinationEntity:"), objref.IDOf(destinationEntity))
 	return rd
 }
 
 // WithInverseRelationship sets the relationship that represents the inverse of the current relationship.
 func (rd *RelationshipDescription) WithInverseRelationship(inverseRelationship *RelationshipDescription) *RelationshipDescription {
+	defer runtime.KeepAlive(inverseRelationship)
 	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setInverseRelationship:"), objref.IDOf(inverseRelationship))
 	return rd
 }
@@ -108,6 +112,7 @@ func (rd *RelationshipDescription) WithTransient(transient bool) *RelationshipDe
 
 // WithUserInfo sets the user info dictionary of the receiver.
 func (rd *RelationshipDescription) WithUserInfo(userInfo obj.Object) *RelationshipDescription {
+	defer runtime.KeepAlive(userInfo)
 	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return rd
 }
@@ -144,42 +149,49 @@ func (rd *RelationshipDescription) WithRenamingIdentifier(renamingIdentifier str
 
 // DestinationEntity returns the destination entity.
 func (rd *RelationshipDescription) DestinationEntity() *EntityDescription {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("destinationEntity"))
 	return EntityDescriptionFromID(_r)
 }
 
 // InverseRelationship returns the inverse relationship.
 func (rd *RelationshipDescription) InverseRelationship() *RelationshipDescription {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("inverseRelationship"))
 	return RelationshipDescriptionFromID(_r)
 }
 
 // MaxCount returns the max count.
 func (rd *RelationshipDescription) MaxCount() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("maxCount"))
 	return _r
 }
 
 // MinCount returns the min count.
 func (rd *RelationshipDescription) MinCount() int {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("minCount"))
 	return _r
 }
 
 // DeleteRule returns the delete rule.
 func (rd *RelationshipDescription) DeleteRule() DeleteRule {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[DeleteRule](objref.IDOf(rd), objc.RegisterName("deleteRule"))
 	return _r
 }
 
 // IsToMany reports whether the object is to many.
 func (rd *RelationshipDescription) IsToMany() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isToMany"))
 	return _r
 }
 
 // IsOrdered reports whether the object is ordered.
 func (rd *RelationshipDescription) IsOrdered() bool {
+	defer runtime.KeepAlive(rd)
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isOrdered"))
 	return _r
 }

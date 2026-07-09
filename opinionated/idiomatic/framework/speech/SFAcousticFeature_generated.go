@@ -5,6 +5,8 @@
 package speech
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func acousticFeatureAdopt(id objc.ID) *AcousticFeature {
 
 // Description returns the object's -description text.
 func (af *AcousticFeature) Description() string {
+	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (af *AcousticFeature) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(af)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(af), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (af *AcousticFeature) IsKind(className string) bool {
+	defer runtime.KeepAlive(af)
 	return rt.IsKind(objref.IDOf(af), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (af *AcousticFeature) String() string {
+	defer runtime.KeepAlive(af)
 	return rt.Description(objref.IDOf(af))
 }
 
@@ -76,12 +83,14 @@ func NewAcousticFeature() *AcousticFeature {
 //
 // AcousticFeatureValuePerFrame returns the collection as a Go slice.
 func (af *AcousticFeature) AcousticFeatureValuePerFrame() []obj.Object {
+	defer runtime.KeepAlive(af)
 	_arr := objc.Send[objc.ID](objref.IDOf(af), objc.RegisterName("acousticFeatureValuePerFrame"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FrameDuration returns the duration of the audio frame.
 func (af *AcousticFeature) FrameDuration() float64 {
+	defer runtime.KeepAlive(af)
 	_r := objc.Send[float64](objref.IDOf(af), objc.RegisterName("frameDuration"))
 	return _r
 }

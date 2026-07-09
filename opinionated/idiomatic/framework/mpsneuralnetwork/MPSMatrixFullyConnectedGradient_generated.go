@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func matrixFullyConnectedGradientAdopt(id objc.ID) *MatrixFullyConnectedGradient
 
 // Description returns the object's -description text.
 func (mfcg *MatrixFullyConnectedGradient) Description() string {
+	defer runtime.KeepAlive(mfcg)
 	return rt.Description(objref.IDOf(mfcg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mfcg *MatrixFullyConnectedGradient) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mfcg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mfcg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mfcg *MatrixFullyConnectedGradient) IsKind(className string) bool {
+	defer runtime.KeepAlive(mfcg)
 	return rt.IsKind(objref.IDOf(mfcg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mfcg *MatrixFullyConnectedGradient) String() string {
+	defer runtime.KeepAlive(mfcg)
 	return rt.Description(objref.IDOf(mfcg))
 }
 
@@ -96,24 +103,28 @@ func (mfcg *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyC
 
 // SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() int {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
 // SourceOutputFeatureChannels returns the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() int {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceOutputFeatureChannels"))
 	return _r
 }
 
 // SourceInputFeatureChannels returns the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) SourceInputFeatureChannels() int {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
 // Alpha returns scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
 func (mfcg *MatrixFullyConnectedGradient) Alpha() float64 {
+	defer runtime.KeepAlive(mfcg)
 	_r := objc.Send[float64](objref.IDOf(mfcg), objc.RegisterName("alpha"))
 	return _r
 }

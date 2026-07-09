@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRTimeSynchronizationClusterTimeZoneStatusEventAdopt(id objc.ID) *MTRTimeS
 
 // Description returns the object's -description text.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Description() string {
+	defer runtime.KeepAlive(mtsctzse)
 	return rt.Description(objref.IDOf(mtsctzse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtsctzse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtsctzse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtsctzse)
 	return rt.IsKind(objref.IDOf(mtsctzse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) String() string {
+	defer runtime.KeepAlive(mtsctzse)
 	return rt.Description(objref.IDOf(mtsctzse))
 }
 
@@ -72,6 +80,7 @@ func NewMTRTimeSynchronizationClusterTimeZoneStatusEvent() *MTRTimeSynchronizati
 
 // WithOffset sets the offset.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneStatusEvent {
+	defer runtime.KeepAlive(offset)
 	objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtsctzse
 }
@@ -83,13 +92,15 @@ func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) WithName(name 
 }
 
 // Offset returns the offset.
-func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() obj.Object {
+func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Offset() *foundation.Number {
+	defer runtime.KeepAlive(mtsctzse)
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("offset"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Name returns the name.
 func (mtsctzse *MTRTimeSynchronizationClusterTimeZoneStatusEvent) Name() string {
+	defer runtime.KeepAlive(mtsctzse)
 	_r := objc.Send[objc.ID](objref.IDOf(mtsctzse), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

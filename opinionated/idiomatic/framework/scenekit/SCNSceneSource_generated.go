@@ -5,6 +5,7 @@
 package scenekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,41 +51,50 @@ func sceneSourceAdopt(id objc.ID) *SceneSource {
 
 // Description returns the object's -description text.
 func (ss *SceneSource) Description() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ss *SceneSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ss), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ss *SceneSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(ss)
 	return rt.IsKind(objref.IDOf(ss), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ss *SceneSource) String() string {
+	defer runtime.KeepAlive(ss)
 	return rt.Description(objref.IDOf(ss))
 }
 
 // NewSceneSourceWithURLOptions initializes a scene source for reading the scene graph from a specified file.
 func NewSceneSourceWithURLOptions(url string, options obj.Object) *SceneSource {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), rt.FileURL(url), objref.IDOf(options))
 	return sceneSourceAdopt(_id)
 }
 
 // NewSceneSourceWithDataOptions initializes a scene source for reading the scene graph contained in an NSData object.
-func NewSceneSourceWithDataOptions(data obj.Object, options obj.Object) *SceneSource {
+func NewSceneSourceWithDataOptions(data []byte, options obj.Object) *SceneSource {
+	defer runtime.KeepAlive(options)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), rt.BytesToNSData(data), objref.IDOf(options))
 	return sceneSourceAdopt(_id)
 }
 
-// SceneWithOptionsError instantiates a scene from the scene source with the specified options.
-func (ss *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene, err error) {
+// SceneWithOptions instantiates a scene from the scene source with the specified options.
+func (ss *SceneSource) SceneWithOptions(options obj.Object) (result *Scene, err error) {
+	defer runtime.KeepAlive(ss)
+	defer runtime.KeepAlive(options)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("sceneWithOptions:error:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -95,12 +105,14 @@ func (ss *SceneSource) SceneWithOptionsError(options obj.Object) (result *Scene,
 
 // PropertyForKey returns metadata about the scene.
 func (ss *SceneSource) PropertyForKey(key string) obj.Object {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("propertyForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // EntriesPassingTest loads and returns all objects in the scene source that pass the test in a given block.
 func (ss *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) []obj.Object {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("entriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
@@ -108,13 +120,15 @@ func (ss *SceneSource) EntriesPassingTest(predicate func(obj.Object, obj.Object,
 }
 
 // URL returns the receiver's URL (if any).
-func (ss *SceneSource) URL() obj.Object {
+func (ss *SceneSource) URL() string {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Data returns the receiver's data (if any).
-func (ss *SceneSource) Data() obj.Object {
+func (ss *SceneSource) Data() []byte {
+	defer runtime.KeepAlive(ss)
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

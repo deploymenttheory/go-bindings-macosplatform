@@ -56,6 +56,33 @@ func (e CrashDetectionEventResponse) String() string {
 	}
 }
 
+// An enumeration that defines the status of a requested voice call.
+type EmergencyResponseManagerVoiceCallStatus int64
+
+const (
+	EmergencyResponseManagerVoiceCallStatusDialing      EmergencyResponseManagerVoiceCallStatus = 0
+	EmergencyResponseManagerVoiceCallStatusActive       EmergencyResponseManagerVoiceCallStatus = 1
+	EmergencyResponseManagerVoiceCallStatusDisconnected EmergencyResponseManagerVoiceCallStatus = 2
+	EmergencyResponseManagerVoiceCallStatusFailed       EmergencyResponseManagerVoiceCallStatus = 3
+)
+
+// String returns the EmergencyResponseManagerVoiceCallStatus constant's name, or its numeric form when the
+// value is not a known constant.
+func (e EmergencyResponseManagerVoiceCallStatus) String() string {
+	switch e {
+	case EmergencyResponseManagerVoiceCallStatusDialing:
+		return "EmergencyResponseManagerVoiceCallStatusDialing"
+	case EmergencyResponseManagerVoiceCallStatusActive:
+		return "EmergencyResponseManagerVoiceCallStatusActive"
+	case EmergencyResponseManagerVoiceCallStatusDisconnected:
+		return "EmergencyResponseManagerVoiceCallStatusDisconnected"
+	case EmergencyResponseManagerVoiceCallStatusFailed:
+		return "EmergencyResponseManagerVoiceCallStatusFailed"
+	default:
+		return fmt.Sprintf("EmergencyResponseManagerVoiceCallStatus(%d)", int64(e))
+	}
+}
+
 // Codes for identifying errors in SafetyKit.
 type ErrorCode int64
 

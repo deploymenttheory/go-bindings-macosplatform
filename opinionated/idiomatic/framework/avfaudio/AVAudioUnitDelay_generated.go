@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -83,24 +85,28 @@ func (aud *AudioUnitDelay) WithBypass(bypass bool) *AudioUnitDelay {
 
 // DelayTime returns range:      0 -> 2 Default:    1 Unit:       Seconds
 func (aud *AudioUnitDelay) DelayTime() float64 {
+	defer runtime.KeepAlive(aud)
 	_r := objc.Send[float64](objref.IDOf(aud), objc.RegisterName("delayTime"))
 	return _r
 }
 
 // Feedback returns amount of the output signal fed back into the delay line Range:      -100 -> 100 Default:    50 Unit:       Percent
 func (aud *AudioUnitDelay) Feedback() float32 {
+	defer runtime.KeepAlive(aud)
 	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("feedback"))
 	return _r
 }
 
 // LowPassCutoff returns cutoff frequency above which high frequency content is rolled off Range:      10 -> (samplerate/2) Default:    15000 Unit:       Hertz
 func (aud *AudioUnitDelay) LowPassCutoff() float32 {
+	defer runtime.KeepAlive(aud)
 	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("lowPassCutoff"))
 	return _r
 }
 
 // WetDryMix returns blend of the wet and dry signals Range:      0 (all dry) -> 100 (all wet) Default:    100 Unit:       Percent
 func (aud *AudioUnitDelay) WetDryMix() float32 {
+	defer runtime.KeepAlive(aud)
 	_r := objc.Send[float32](objref.IDOf(aud), objc.RegisterName("wetDryMix"))
 	return _r
 }

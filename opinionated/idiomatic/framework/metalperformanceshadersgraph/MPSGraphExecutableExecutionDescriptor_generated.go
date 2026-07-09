@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,6 +61,7 @@ func (geed *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntil
 
 // WaitUntilCompleted reports whether flag for the graph executable to wait till the execution has completed. Default value is false.
 func (geed *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
+	defer runtime.KeepAlive(geed)
 	_r := objc.Send[bool](objref.IDOf(geed), objc.RegisterName("waitUntilCompleted"))
 	return _r
 }

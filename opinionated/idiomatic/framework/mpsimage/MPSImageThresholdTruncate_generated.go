@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -65,6 +67,7 @@ func (itt *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *Image
 
 // ThresholdValue returns the threshold value used to init the threshold filter
 func (itt *ImageThresholdTruncate) ThresholdValue() float32 {
+	defer runtime.KeepAlive(itt)
 	_r := objc.Send[float32](objref.IDOf(itt), objc.RegisterName("thresholdValue"))
 	return _r
 }

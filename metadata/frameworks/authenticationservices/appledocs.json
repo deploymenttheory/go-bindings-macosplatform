@@ -1833,7 +1833,7 @@
       },
       "extensionOutput": {
         "doc": "An output from WebAuthn extensions.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/extensionoutput-46ib3"
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyassertioncredential/extensionoutput-7t6rn"
       },
       "init(userHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:extensionOutput:)": {
         "doc": "Initializes a passkey assertion credential object, optionally specifying an extension output.",
@@ -1930,8 +1930,8 @@
         "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/clientdatahash"
       },
       "extensionInput": {
-        "doc": "An input for WebAuthn extensions.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/extensioninput-2edlv"
+        "doc": "Inputs for WebAuthn extensions you use for passkey assertion.",
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeycredentialrequestparameters/extensioninput-5ny4g"
       },
       "relyingPartyIdentifier": {
         "doc": "The relying party that issues the challenge.",
@@ -1957,7 +1957,7 @@
       },
       "extensionOutput": {
         "doc": "An output from WebAuthn extensions.",
-        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/extensionoutput-2lf9m"
+        "url": "https://developer.apple.com/documentation/authenticationservices/aspasskeyregistrationcredential/extensionoutput-95gvu"
       },
       "init(relyingParty:clientDataHash:credentialID:attestationObject:extensionOutput:)": {
         "doc": "Initializes a passkey registration credential object.",

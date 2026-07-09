@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func textureViewDescriptorAdopt(id objc.ID) *TextureViewDescriptor {
 
 // Description returns the object's -description text.
 func (tvd *TextureViewDescriptor) Description() string {
+	defer runtime.KeepAlive(tvd)
 	return rt.Description(objref.IDOf(tvd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tvd *TextureViewDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tvd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tvd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tvd *TextureViewDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(tvd)
 	return rt.IsKind(objref.IDOf(tvd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tvd *TextureViewDescriptor) String() string {
+	defer runtime.KeepAlive(tvd)
 	return rt.Description(objref.IDOf(tvd))
 }
 
@@ -97,24 +104,28 @@ func (tvd *TextureViewDescriptor) WithSliceRange(sliceRange foundation.NSRange) 
 
 // PixelFormat returns a desired pixel format of a texture view.
 func (tvd *TextureViewDescriptor) PixelFormat() PixelFormat {
+	defer runtime.KeepAlive(tvd)
 	_r := objc.Send[PixelFormat](objref.IDOf(tvd), objc.RegisterName("pixelFormat"))
 	return _r
 }
 
 // TextureType returns a desired texture view of a texture view.
 func (tvd *TextureViewDescriptor) TextureType() TextureType {
+	defer runtime.KeepAlive(tvd)
 	_r := objc.Send[TextureType](objref.IDOf(tvd), objc.RegisterName("textureType"))
 	return _r
 }
 
 // LevelRange returns a desired range of mip levels of a texture view.
 func (tvd *TextureViewDescriptor) LevelRange() foundation.NSRange {
+	defer runtime.KeepAlive(tvd)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tvd), objc.RegisterName("levelRange"))
 	return _r
 }
 
 // SliceRange returns a desired range of slices of a texture view.
 func (tvd *TextureViewDescriptor) SliceRange() foundation.NSRange {
+	defer runtime.KeepAlive(tvd)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tvd), objc.RegisterName("sliceRange"))
 	return _r
 }

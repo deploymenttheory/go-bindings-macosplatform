@@ -5,9 +5,11 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,14 +49,15 @@ func musicUserEventAdopt(id objc.ID) *MusicUserEvent {
 }
 
 // NewMusicUserEventWithData creates a user event with the data you specify.
-func NewMusicUserEventWithData(data obj.Object) *MusicUserEvent {
+func NewMusicUserEventWithData(data []byte) *MusicUserEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMusicUserEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), rt.BytesToNSData(data))
 	return musicUserEventAdopt(_id)
 }
 
 // SizeInBytes returns the size in bytes.
 func (mue *MusicUserEvent) SizeInBytes() int {
+	defer runtime.KeepAlive(mue)
 	_r := objc.Send[int](objref.IDOf(mue), objc.RegisterName("sizeInBytes"))
 	return _r
 }

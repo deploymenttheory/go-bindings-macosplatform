@@ -37,8 +37,8 @@ func VZEFIVariableStoreFromID(id objc.ID) *VZEFIVariableStore {
 }
 
 // Initialize the variable store from the URL of an existing file.
-func (o *VZEFIVariableStore) InitWithURL(uRL *foundation.NSURL) *VZEFIVariableStore {
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitWithURL, uRL.Ptr())
+func (o *VZEFIVariableStore) InitWithURL(url *foundation.NSURL) *VZEFIVariableStore {
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitWithURL, url.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -46,9 +46,9 @@ func (o *VZEFIVariableStore) InitWithURL(uRL *foundation.NSURL) *VZEFIVariableSt
 }
 
 // Creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
-func (o *VZEFIVariableStore) InitCreatingVariableStoreAtURLOptionsError(uRL *foundation.NSURL, options VZEFIVariableStoreInitializationOptions) (*VZEFIVariableStore, error) {
+func (o *VZEFIVariableStore) InitCreatingVariableStoreAtURLOptionsError(url *foundation.NSURL, options VZEFIVariableStoreInitializationOptions) (*VZEFIVariableStore, error) {
 	var _nsErr uintptr
-	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError, uRL.Ptr(), options, unsafe.Pointer(&_nsErr))
+	_ret := objc.Send[objc.ID](o.Ptr(), _vZEFIVariableStoreSelInitCreatingVariableStoreAtURLOptionsError, url.Ptr(), options, unsafe.Pointer(&_nsErr))
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}

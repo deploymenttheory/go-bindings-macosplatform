@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -203,6 +205,7 @@ func (sav *ScrubberArrangedView) WithWantsLayer(wantsLayer bool) *ScrubberArrang
 
 // WithLayer sets the layer.
 func (sav *ScrubberArrangedView) WithLayer(layer obj.Object) *ScrubberArrangedView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -252,6 +255,7 @@ func (sav *ScrubberArrangedView) WithBackgroundFilters(items ...obj.Object) *Scr
 
 // WithCompositingFilter sets the compositing filter.
 func (sav *ScrubberArrangedView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberArrangedView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -269,6 +273,7 @@ func (sav *ScrubberArrangedView) WithContentFilters(items ...obj.Object) *Scrubb
 
 // WithShadow sets the shadow.
 func (sav *ScrubberArrangedView) WithShadow(shadow *Shadow) *ScrubberArrangedView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -317,6 +322,7 @@ func (sav *ScrubberArrangedView) WithPreparedContentRect(preparedContentRect cor
 
 // WithNextKeyView sets the next key view.
 func (sav *ScrubberArrangedView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberArrangedView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -366,6 +372,7 @@ func (sav *ScrubberArrangedView) WithPrefersCompactControlSizeMetrics(prefersCom
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sav *ScrubberArrangedView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberArrangedView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -422,6 +429,7 @@ func (sav *ScrubberArrangedView) WithWantsExtendedDynamicRangeOpenGLSurface(want
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sav *ScrubberArrangedView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberArrangedView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -430,6 +438,7 @@ func (sav *ScrubberArrangedView) WithPressureConfiguration(pressureConfiguration
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sav *ScrubberArrangedView) WithNextResponder(nextResponder ResponderProvider) *ScrubberArrangedView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -438,6 +447,7 @@ func (sav *ScrubberArrangedView) WithNextResponder(nextResponder ResponderProvid
 
 // WithMenu sets returns the responder’s menu.
 func (sav *ScrubberArrangedView) WithMenu(menu *Menu) *ScrubberArrangedView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -446,6 +456,7 @@ func (sav *ScrubberArrangedView) WithMenu(menu *Menu) *ScrubberArrangedView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sav *ScrubberArrangedView) WithUserActivity(userActivity obj.Object) *ScrubberArrangedView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -454,6 +465,7 @@ func (sav *ScrubberArrangedView) WithUserActivity(userActivity obj.Object) *Scru
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sav *ScrubberArrangedView) WithTouchBar(touchBar *TouchBar) *ScrubberArrangedView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -462,6 +474,8 @@ func (sav *ScrubberArrangedView) WithTouchBar(touchBar *TouchBar) *ScrubberArran
 
 // ApplyLayoutAttributes updates the layout of the arranged view to respect the provided layout attributes.
 func (sav *ScrubberArrangedView) ApplyLayoutAttributes(layoutAttributes *ScrubberLayoutAttributes) {
+	defer runtime.KeepAlive(sav)
+	defer runtime.KeepAlive(layoutAttributes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("applyLayoutAttributes:"), objref.IDOf(layoutAttributes))
 	})
@@ -470,6 +484,7 @@ func (sav *ScrubberArrangedView) ApplyLayoutAttributes(layoutAttributes *Scrubbe
 
 // IsSelected reports whether the object is selected.
 func (sav *ScrubberArrangedView) IsSelected() bool {
+	defer runtime.KeepAlive(sav)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -483,6 +498,7 @@ func (sav *ScrubberArrangedView) IsSelected() bool {
 
 // IsHighlighted reports whether the object is highlighted.
 func (sav *ScrubberArrangedView) IsHighlighted() bool {
+	defer runtime.KeepAlive(sav)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

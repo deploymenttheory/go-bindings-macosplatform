@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterElectricalMeasurementAdopt(id objc.ID) *MTRClusterElectricalMeasu
 
 // NewMTRClusterElectricalMeasurementWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterElectricalMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterElectricalMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterElectricalMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterElectricalMeasurementAdopt(_id)
@@ -53,887 +59,1195 @@ func NewMTRClusterElectricalMeasurementWithDeviceEndpointIDQueue(device *MTRDevi
 
 // NewMTRClusterElectricalMeasurementWithDeviceEndpointQueue creates a new MTRClusterElectricalMeasurement.
 func NewMTRClusterElectricalMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterElectricalMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterElectricalMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterElectricalMeasurementAdopt(_id)
 }
 
 // ReadAttributeMeasurementTypeWithParams reads attribute measurement type with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasurementTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasurementTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcVoltageWithParams reads attribute dc voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcVoltageMinWithParams reads attribute dc voltage min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcVoltageMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcVoltageMaxWithParams reads attribute dc voltage max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcVoltageMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcCurrentWithParams reads attribute dc current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcCurrentMinWithParams reads attribute dc current min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcCurrentMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcCurrentMaxWithParams reads attribute dc current max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcCurrentMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcPowerWithParams reads attribute dc power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcPowerMinWithParams reads attribute dc power min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcPowerMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcPowerMaxWithParams reads attribute dc power max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcPowerMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcVoltageMultiplierWithParams reads attribute dc voltage multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcVoltageMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcVoltageDivisorWithParams reads attribute dc voltage divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcVoltageDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcVoltageDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcCurrentMultiplierWithParams reads attribute dc current multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcCurrentMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcCurrentDivisorWithParams reads attribute dc current divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcCurrentDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcCurrentDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcPowerMultiplierWithParams reads attribute dc power multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcPowerMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeDcPowerDivisorWithParams reads attribute dc power divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeDcPowerDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeDcPowerDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcFrequencyWithParams reads attribute ac frequency with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcFrequencyWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcFrequencyMinWithParams reads attribute ac frequency min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcFrequencyMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcFrequencyMaxWithParams reads attribute ac frequency max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcFrequencyMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeNeutralCurrentWithParams reads attribute neutral current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeNeutralCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTotalActivePowerWithParams reads attribute total active power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeTotalActivePowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeTotalActivePowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTotalReactivePowerWithParams reads attribute total reactive power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeTotalReactivePowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeTotalReactivePowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeTotalApparentPowerWithParams reads attribute total apparent power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeTotalApparentPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeTotalApparentPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasured1stHarmonicCurrentWithParams reads attribute measured1st harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured1stHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasured1stHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasured3rdHarmonicCurrentWithParams reads attribute measured3rd harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured3rdHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasured3rdHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasured5thHarmonicCurrentWithParams reads attribute measured5th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured5thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasured5thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasured7thHarmonicCurrentWithParams reads attribute measured7th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured7thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasured7thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasured9thHarmonicCurrentWithParams reads attribute measured9th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured9thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasured9thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasured11thHarmonicCurrentWithParams reads attribute measured11th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasured11thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasured11thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasuredPhase1stHarmonicCurrentWithParams reads attribute measured phase1st harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase1stHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasuredPhase1stHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams reads attribute measured phase3rd harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase3rdHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasuredPhase3rdHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasuredPhase5thHarmonicCurrentWithParams reads attribute measured phase5th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase5thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasuredPhase5thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasuredPhase7thHarmonicCurrentWithParams reads attribute measured phase7th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase7thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasuredPhase7thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasuredPhase9thHarmonicCurrentWithParams reads attribute measured phase9th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase9thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasuredPhase9thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeMeasuredPhase11thHarmonicCurrentWithParams reads attribute measured phase11th harmonic current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeMeasuredPhase11thHarmonicCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeMeasuredPhase11thHarmonicCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcFrequencyMultiplierWithParams reads attribute ac frequency multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcFrequencyMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcFrequencyDivisorWithParams reads attribute ac frequency divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcFrequencyDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcFrequencyDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerMultiplierWithParams reads attribute power multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributePowerMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerDivisorWithParams reads attribute power divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributePowerDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeHarmonicCurrentMultiplierWithParams reads attribute harmonic current multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeHarmonicCurrentMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeHarmonicCurrentMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePhaseHarmonicCurrentMultiplierWithParams reads attribute phase harmonic current multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributePhaseHarmonicCurrentMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributePhaseHarmonicCurrentMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInstantaneousVoltageWithParams reads attribute instantaneous voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeInstantaneousVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInstantaneousLineCurrentWithParams reads attribute instantaneous line current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousLineCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeInstantaneousLineCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInstantaneousActiveCurrentWithParams reads attribute instantaneous active current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousActiveCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeInstantaneousActiveCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInstantaneousReactiveCurrentWithParams reads attribute instantaneous reactive current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousReactiveCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeInstantaneousReactiveCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeInstantaneousPowerWithParams reads attribute instantaneous power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeInstantaneousPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeInstantaneousPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageWithParams reads attribute rms voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageMinWithParams reads attribute rms voltage min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageMaxWithParams reads attribute rms voltage max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentWithParams reads attribute rms current with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentMinWithParams reads attribute rms current min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentMaxWithParams reads attribute rms current max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerWithParams reads attribute active power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerMinWithParams reads attribute active power min with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerMinWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerMaxWithParams reads attribute active power max with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerMaxWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeReactivePowerWithParams reads attribute reactive power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeReactivePowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeApparentPowerWithParams reads attribute apparent power with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeApparentPowerWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerFactorWithParams reads attribute power factor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerFactorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerFactorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributePowerFactorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsVoltageMeasurementPeriodWithParams reads attribute average rms voltage measurement period with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsVoltageMeasurementPeriodWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval writes attribute average rms voltage measurement period with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams writes attribute average rms voltage measurement period with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsVoltageMeasurementPeriodWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsVoltageMeasurementPeriodWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAverageRmsUnderVoltageCounterWithParams reads attribute average rms under voltage counter with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsUnderVoltageCounterWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval writes attribute average rms under voltage counter with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams writes attribute average rms under voltage counter with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAverageRmsUnderVoltageCounterWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAverageRmsUnderVoltageCounterWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRmsExtremeOverVoltagePeriodWithParams reads attribute rms extreme over voltage period with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeOverVoltagePeriodWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval writes attribute rms extreme over voltage period with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams writes attribute rms extreme over voltage period with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeOverVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeOverVoltagePeriodWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRmsExtremeUnderVoltagePeriodWithParams reads attribute rms extreme under voltage period with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeUnderVoltagePeriodWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval writes attribute rms extreme under voltage period with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams writes attribute rms extreme under voltage period with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsExtremeUnderVoltagePeriodWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsExtremeUnderVoltagePeriodWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRmsVoltageSagPeriodWithParams reads attribute rms voltage sag period with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSagPeriodWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval writes attribute rms voltage sag period with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams writes attribute rms voltage sag period with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSagPeriodWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSagPeriodWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRmsVoltageSwellPeriodWithParams reads attribute rms voltage swell period with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSwellPeriodWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval writes attribute rms voltage swell period with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams writes attribute rms voltage swell period with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeRmsVoltageSwellPeriodWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeRmsVoltageSwellPeriodWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAcVoltageMultiplierWithParams reads attribute ac voltage multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcVoltageMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcVoltageDivisorWithParams reads attribute ac voltage divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcVoltageDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcCurrentMultiplierWithParams reads attribute ac current multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcCurrentMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcCurrentDivisorWithParams reads attribute ac current divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcCurrentDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcPowerMultiplierWithParams reads attribute ac power multiplier with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcPowerMultiplierWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcPowerMultiplierWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcPowerDivisorWithParams reads attribute ac power divisor with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcPowerDivisorWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcPowerDivisorWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeOverloadAlarmsMaskWithParams reads attribute overload alarms mask with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeOverloadAlarmsMaskWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeOverloadAlarmsMaskWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval writes attribute overload alarms mask with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams writes attribute overload alarms mask with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeOverloadAlarmsMaskWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeVoltageOverloadWithParams reads attribute voltage overload with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeVoltageOverloadWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeVoltageOverloadWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentOverloadWithParams reads attribute current overload with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeCurrentOverloadWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeCurrentOverloadWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcOverloadAlarmsMaskWithParams reads attribute ac overload alarms mask with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcOverloadAlarmsMaskWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcOverloadAlarmsMaskWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval writes attribute ac overload alarms mask with value expected value interval.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams writes attribute ac overload alarms mask with value expected value interval params.
-func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcem *MTRClusterElectricalMeasurement) WriteAttributeAcOverloadAlarmsMaskWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("writeAttributeAcOverloadAlarmsMaskWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeAcVoltageOverloadWithParams reads attribute ac voltage overload with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcVoltageOverloadWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcVoltageOverloadWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcCurrentOverloadWithParams reads attribute ac current overload with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcCurrentOverloadWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcCurrentOverloadWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcActivePowerOverloadWithParams reads attribute ac active power overload with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcActivePowerOverloadWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcActivePowerOverloadWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcReactivePowerOverloadWithParams reads attribute ac reactive power overload with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcReactivePowerOverloadWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcReactivePowerOverloadWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsOverVoltageWithParams reads attribute average rms over voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsOverVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsUnderVoltageWithParams reads attribute average rms under voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsUnderVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsExtremeOverVoltageWithParams reads attribute rms extreme over voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeOverVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsExtremeUnderVoltageWithParams reads attribute rms extreme under voltage with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltageWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeUnderVoltageWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageSagWithParams reads attribute rms voltage sag with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSagWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageSwellWithParams reads attribute rms voltage swell with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSwellWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLineCurrentPhaseBWithParams reads attribute line current phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeLineCurrentPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveCurrentPhaseBWithParams reads attribute active current phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActiveCurrentPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeReactiveCurrentPhaseBWithParams reads attribute reactive current phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeReactiveCurrentPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltagePhaseBWithParams reads attribute rms voltage phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltagePhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageMinPhaseBWithParams reads attribute rms voltage min phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageMinPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageMaxPhaseBWithParams reads attribute rms voltage max phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageMaxPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentPhaseBWithParams reads attribute rms current phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentMinPhaseBWithParams reads attribute rms current min phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentMinPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentMaxPhaseBWithParams reads attribute rms current max phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentMaxPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerPhaseBWithParams reads attribute active power phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerMinPhaseBWithParams reads attribute active power min phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerMinPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerMaxPhaseBWithParams reads attribute active power max phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerMaxPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeReactivePowerPhaseBWithParams reads attribute reactive power phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeReactivePowerPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeApparentPowerPhaseBWithParams reads attribute apparent power phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeApparentPowerPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerFactorPhaseBWithParams reads attribute power factor phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributePowerFactorPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams reads attribute average rms voltage measurement period phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsVoltageMeasurementPeriodPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams reads attribute average rms over voltage counter phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsOverVoltageCounterPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams reads attribute average rms under voltage counter phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsUnderVoltageCounterPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams reads attribute rms extreme over voltage period phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeOverVoltagePeriodPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams reads attribute rms extreme under voltage period phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeUnderVoltagePeriodPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageSagPeriodPhaseBWithParams reads attribute rms voltage sag period phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSagPeriodPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageSwellPeriodPhaseBWithParams reads attribute rms voltage swell period phase b with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseBWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSwellPeriodPhaseBWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeLineCurrentPhaseCWithParams reads attribute line current phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeLineCurrentPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeLineCurrentPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActiveCurrentPhaseCWithParams reads attribute active current phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActiveCurrentPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActiveCurrentPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeReactiveCurrentPhaseCWithParams reads attribute reactive current phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactiveCurrentPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeReactiveCurrentPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltagePhaseCWithParams reads attribute rms voltage phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltagePhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltagePhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageMinPhaseCWithParams reads attribute rms voltage min phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMinPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageMinPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageMaxPhaseCWithParams reads attribute rms voltage max phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageMaxPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageMaxPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentPhaseCWithParams reads attribute rms current phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentMinPhaseCWithParams reads attribute rms current min phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMinPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentMinPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsCurrentMaxPhaseCWithParams reads attribute rms current max phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsCurrentMaxPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsCurrentMaxPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerPhaseCWithParams reads attribute active power phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerMinPhaseCWithParams reads attribute active power min phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMinPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerMinPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeActivePowerMaxPhaseCWithParams reads attribute active power max phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeActivePowerMaxPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeActivePowerMaxPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeReactivePowerPhaseCWithParams reads attribute reactive power phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeReactivePowerPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeReactivePowerPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeApparentPowerPhaseCWithParams reads attribute apparent power phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeApparentPowerPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeApparentPowerPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePowerFactorPhaseCWithParams reads attribute power factor phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributePowerFactorPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributePowerFactorPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams reads attribute average rms voltage measurement period phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsVoltageMeasurementPeriodPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams reads attribute average rms over voltage counter phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsOverVoltageCounterPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsOverVoltageCounterPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams reads attribute average rms under voltage counter phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAverageRmsUnderVoltageCounterPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAverageRmsUnderVoltageCounterPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams reads attribute rms extreme over voltage period phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeOverVoltagePeriodPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams reads attribute rms extreme under voltage period phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsExtremeUnderVoltagePeriodPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageSagPeriodPhaseCWithParams reads attribute rms voltage sag period phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSagPeriodPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSagPeriodPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeRmsVoltageSwellPeriodPhaseCWithParams reads attribute rms voltage swell period phase c with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeRmsVoltageSwellPeriodPhaseCWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeRmsVoltageSwellPeriodPhaseCWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcem *MTRClusterElectricalMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcem *MTRClusterElectricalMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcem)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcem), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterElectricalMeasurement)(nil)

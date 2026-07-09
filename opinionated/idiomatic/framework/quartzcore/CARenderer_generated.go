@@ -5,6 +5,8 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func rendererAdopt(id objc.ID) *Renderer {
 
 // Description returns the object's -description text.
 func (r *Renderer) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Renderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Renderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Renderer) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -75,6 +82,7 @@ func NewRenderer() *Renderer {
 
 // WithLayer sets the root layer of the layer-tree the receiver should render.
 func (r *Renderer) WithLayer(layer LayerProvider) *Renderer {
+	defer runtime.KeepAlive(layer)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return r
 }
@@ -87,39 +95,46 @@ func (r *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
 
 // UpdateBounds returns the bounds of the update region that contains all pixels that will be rendered by the current frame.
 func (r *Renderer) UpdateBounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(r), objc.RegisterName("updateBounds"))
 	return _r
 }
 
 // AddUpdateRect adds the rectangle to the update region of the current frame.
 func (r_ *Renderer) AddUpdateRect(r corefoundation.CGRect) {
+	defer runtime.KeepAlive(r_)
 	objc.Send[objc.ID](objref.IDOf(r_), objc.RegisterName("addUpdateRect:"), r)
 }
 
 // Render render the update region of the current frame to the target context.
 func (r *Renderer) Render() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("render"))
 }
 
 // NextFrameTime returns the time at which the next update should happen.
 func (r *Renderer) NextFrameTime() float64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("nextFrameTime"))
 	return _r
 }
 
 // EndFrame release any data associated with the current frame.
 func (r *Renderer) EndFrame() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("endFrame"))
 }
 
 // Layer returns the layer.
 func (r *Renderer) Layer() *Layer {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("layer"))
 	return LayerFromID(_r)
 }
 
 // Bounds returns the bounds.
 func (r *Renderer) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(r), objc.RegisterName("bounds"))
 	return _r
 }

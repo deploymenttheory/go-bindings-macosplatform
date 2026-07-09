@@ -5,10 +5,12 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,43 +56,50 @@ func NewMetricHLSMediaSegmentRequestEvent() *MetricHLSMediaSegmentRequestEvent {
 }
 
 // URL returns the URL of the media segment. If no value is available, returns nil.
-func (mhmsre *MetricHLSMediaSegmentRequestEvent) URL() obj.Object {
+func (mhmsre *MetricHLSMediaSegmentRequestEvent) URL() string {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhmsre), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsMapSegment reports whether the media segment request is for a map segment.
 func (mhmsre *MetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[bool](objref.IDOf(mhmsre), objc.RegisterName("isMapSegment"))
 	return _r
 }
 
 // MediaType returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
-func (mhmsre *MetricHLSMediaSegmentRequestEvent) MediaType() obj.Object {
+func (mhmsre *MetricHLSMediaSegmentRequestEvent) MediaType() *foundation.String {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhmsre), objc.RegisterName("mediaType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // ByteRange returns the byte range for the media segment. If not available, the range start and end will be 0.
 func (mhmsre *MetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(mhmsre), objc.RegisterName("byteRange"))
 	return _r
 }
 
 // IndexFileURL returns the URL of the index file in which this segment was declared. If not available, returns nil.
-func (mhmsre *MetricHLSMediaSegmentRequestEvent) IndexFileURL() obj.Object {
+func (mhmsre *MetricHLSMediaSegmentRequestEvent) IndexFileURL() string {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhmsre), objc.RegisterName("indexFileURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // SegmentDuration returns the duration of segment in seconds.
 func (mhmsre *MetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[float64](objref.IDOf(mhmsre), objc.RegisterName("segmentDuration"))
 	return _r
 }
 
 // MediaResourceRequestEvent returns the media resource request event which was used to satisfy the media segment.
 func (mhmsre *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	defer runtime.KeepAlive(mhmsre)
 	_r := objc.Send[objc.ID](objref.IDOf(mhmsre), objc.RegisterName("mediaResourceRequestEvent"))
 	return MetricMediaResourceRequestEventFromID(_r)
 }

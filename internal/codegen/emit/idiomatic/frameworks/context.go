@@ -5,6 +5,7 @@ package idiofw
 import (
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/idioconf"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 )
@@ -24,6 +25,10 @@ import (
 type frameworkContext struct {
 	framework *meta.FrameworkMeta
 	prefix    string // common class-name prefix (e.g. "VZ"); from detectClassPrefix
+	// idio is the framework's idiomatic.json sidecar (curated renames, delegate
+	// selection, error typedefs). nil when absent — every idioconf helper is
+	// nil-receiver safe, so lookups need no guard.
+	idio *idioconf.File
 
 	ownTypes    map[string]bool // exported Go type names the raw package defines
 	ownEnums    map[string]bool // Go type names of the framework's own enums
@@ -34,14 +39,36 @@ type frameworkContext struct {
 	// so a de-prefix collision or a class outside the framework never produces an
 	// embed of an undefined type.
 	classGoNames map[string]bool
+	// cEnumLocalNames maps a snake_case C enum's mechanical Go type name (and
+	// its raw key) to the idiomatic local spelling (Hv_exit_reason_t →
+	// ExitReason). Total and collision-free; absent names use the class-prefix
+	// strip. See localEnumTypeName.
+	cEnumLocalNames map[string]string
+	// delegates maps each emitted delegate protocol's ObjC name to its Go
+	// interface name (VZVirtualMachineDelegate → VirtualMachineDelegate).
+	// Populated by EmitFrameworkWrappers before class emission so setters can
+	// type delegate properties as the interface.
+	delegates map[string]string
 
 	referenced map[string]bool // enum names a resolved signature localized
+}
+
+// localEnumTypeName returns the idiomatic package-local spelling for one of
+// the framework's own enum type names: the C-enum rename table for snake_case
+// names, the class-prefix strip for everything else. Every site that names an
+// enum type consults this one function, so signatures, the enum definitions,
+// struct fields, and name reservations always agree.
+func (fc *frameworkContext) localEnumTypeName(goType string) string {
+	if local, ok := fc.cEnumLocalNames[goType]; ok {
+		return local
+	}
+	return deprefixEnumName(goType, fc.prefix)
 }
 
 // newFrameworkContext computes the per-framework derived data once. The four
 // pure sets mirror the former cache builders exactly; referenced starts empty
 // and is filled as signatures are resolved.
-func newFrameworkContext(framework *meta.FrameworkMeta) *frameworkContext {
+func newFrameworkContext(framework *meta.FrameworkMeta, idio *idioconf.File) *frameworkContext {
 	prefix := detectClassPrefix(framework)
 	classGoNames := make(map[string]bool)
 	for className, class := range framework.Classes {
@@ -51,13 +78,15 @@ func newFrameworkContext(framework *meta.FrameworkMeta) *frameworkContext {
 		classGoNames[trialTypeName(className, prefix)] = true
 	}
 	return &frameworkContext{
-		framework:    framework,
-		prefix:       prefix,
-		ownTypes:     buildOwnTypeNames(framework),
-		ownEnums:     buildOwnEnumNames(framework),
-		localStruct:  buildLocalValueStructNames(framework),
-		classGoNames: classGoNames,
-		referenced:   map[string]bool{},
+		framework:       framework,
+		prefix:          prefix,
+		idio:            idio,
+		ownTypes:        buildOwnTypeNames(framework),
+		ownEnums:        buildOwnEnumNames(framework),
+		localStruct:     buildLocalValueStructNames(framework),
+		classGoNames:    classGoNames,
+		cEnumLocalNames: buildCEnumLocalNames(framework, classGoNames),
+		referenced:      map[string]bool{},
 	}
 }
 

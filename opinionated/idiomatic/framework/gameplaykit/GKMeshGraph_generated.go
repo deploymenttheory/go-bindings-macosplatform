@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -63,21 +64,26 @@ func (mg *MeshGraph) WithTriangulationMode(triangulationMode MeshGraphTriangulat
 
 // AddObstacles adds new obstacles to the graph.
 func (mg *MeshGraph) AddObstacles(obstacles []*PolygonObstacle) {
+	defer runtime.KeepAlive(mg)
 	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveObstacles removes the specified obstacle from the graph.
 func (mg *MeshGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
+	defer runtime.KeepAlive(mg)
 	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ConnectNodeUsingObstacles adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
 func (mg *MeshGraph) ConnectNodeUsingObstacles(node obj.Object) {
+	defer runtime.KeepAlive(mg)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
 }
 
 // Triangulate creates or updates the graph with a network of nodes that describes the open space around its obstacles.
 func (mg *MeshGraph) Triangulate() {
+	defer runtime.KeepAlive(mg)
 	objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("triangulate"))
 }
 
@@ -85,24 +91,28 @@ func (mg *MeshGraph) Triangulate() {
 //
 // Obstacles returns the collection as a Go slice.
 func (mg *MeshGraph) Obstacles() []*PolygonObstacle {
+	defer runtime.KeepAlive(mg)
 	_arr := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("obstacles"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
 }
 
 // BufferRadius returns the distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
 func (mg *MeshGraph) BufferRadius() float32 {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[float32](objref.IDOf(mg), objc.RegisterName("bufferRadius"))
 	return _r
 }
 
 // TriangulationMode specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator
 func (mg *MeshGraph) TriangulationMode() MeshGraphTriangulationMode {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[MeshGraphTriangulationMode](objref.IDOf(mg), objc.RegisterName("triangulationMode"))
 	return _r
 }
 
 // TriangleCount returns the number of triangles currently in this mesh graph
 func (mg *MeshGraph) TriangleCount() int {
+	defer runtime.KeepAlive(mg)
 	_r := objc.Send[int](objref.IDOf(mg), objc.RegisterName("triangleCount"))
 	return _r
 }

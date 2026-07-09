@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -61,6 +63,7 @@ func NewScrubberProportionalLayoutWithNumberOfVisibleItems(numberOfVisibleItems 
 
 // NewScrubberProportionalLayoutWithCoder initializes and returns a newly allocated proprotional layout object from a storyboard or nib file.
 func NewScrubberProportionalLayoutWithCoder(coder obj.Object) *ScrubberProportionalLayout {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *ScrubberProportionalLayout
 	purego.Main(func() {
 		_mainthread0 = func() *ScrubberProportionalLayout {
@@ -82,6 +85,7 @@ func (spl *ScrubberProportionalLayout) WithNumberOfVisibleItems(numberOfVisibleI
 
 // NumberOfVisibleItems returns the number of items that should fit within the scrubber's viewport at once.
 func (spl *ScrubberProportionalLayout) NumberOfVisibleItems() int {
+	defer runtime.KeepAlive(spl)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

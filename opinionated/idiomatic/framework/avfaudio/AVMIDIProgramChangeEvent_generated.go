@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (mpce *MIDIProgramChangeEvent) WithChannel(channel int) *MIDIProgramChangeE
 
 // ProgramNumber returns the program number.
 func (mpce *MIDIProgramChangeEvent) ProgramNumber() int {
+	defer runtime.KeepAlive(mpce)
 	_r := objc.Send[int](objref.IDOf(mpce), objc.RegisterName("programNumber"))
 	return _r
 }

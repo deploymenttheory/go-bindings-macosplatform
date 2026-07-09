@@ -5,6 +5,8 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewChangeHistoryDeleteContactEvent() *ChangeHistoryDeleteContactEvent {
 
 // ContactIdentifier returns the contact identifier.
 func (chdce *ChangeHistoryDeleteContactEvent) ContactIdentifier() string {
+	defer runtime.KeepAlive(chdce)
 	_r := objc.Send[objc.ID](objref.IDOf(chdce), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -67,18 +69,21 @@ func (uik *UnaryImageKernel) WithLabel(label string) *UnaryImageKernel {
 
 // SourceRegionForDestinationSize determines the region of the source texture that will be read for an encode operation.
 func (uik *UnaryImageKernel) SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	defer runtime.KeepAlive(uik)
 	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(uik), objc.RegisterName("sourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // Offset returns the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
 func (uik *UnaryImageKernel) Offset() mpscore.MPSOffset {
+	defer runtime.KeepAlive(uik)
 	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(uik), objc.RegisterName("offset"))
 	return _r
 }
 
 // ClipRect returns an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
 func (uik *UnaryImageKernel) ClipRect() metal.MTLRegion {
+	defer runtime.KeepAlive(uik)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(uik), objc.RegisterName("clipRect"))
 	return _r
 }

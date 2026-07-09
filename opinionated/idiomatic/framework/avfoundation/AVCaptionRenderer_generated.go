@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
@@ -49,22 +51,27 @@ func captionRendererAdopt(id objc.ID) *CaptionRenderer {
 
 // Description returns the object's -description text.
 func (cr *CaptionRenderer) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *CaptionRenderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *CaptionRenderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *CaptionRenderer) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
@@ -89,12 +96,15 @@ func (cr *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRend
 
 // CaptionSceneChangesInRange determine render time ranges within an enclosing time range to account for visual changes among captions.
 func (cr *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) []*CaptionRendererScene {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("captionSceneChangesInRange:"), consideredTimeRange)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CaptionRendererScene { return CaptionRendererSceneFromID(_id) })
 }
 
 // RenderInContextForTime draw the captions for the time you specify.
 func (cr *CaptionRenderer) RenderInContextForTime(ctx obj.Object, time_ coremedia.CMTime) {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(ctx)
 	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("renderInContext:forTime:"), objref.IDOf(ctx), time_)
 }
 
@@ -102,12 +112,14 @@ func (cr *CaptionRenderer) RenderInContextForTime(ctx obj.Object, time_ coremedi
 //
 // Captions returns the collection as a Go slice.
 func (cr *CaptionRenderer) Captions() []*Caption {
+	defer runtime.KeepAlive(cr)
 	_arr := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("captions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
 // Bounds returns a CGRect holding bounds for the drawing of caption scene(s). This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
 func (cr *CaptionRenderer) Bounds() corefoundation.CGRect {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cr), objc.RegisterName("bounds"))
 	return _r
 }

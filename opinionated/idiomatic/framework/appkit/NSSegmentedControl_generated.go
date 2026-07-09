@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -102,6 +104,7 @@ func (sc *SegmentedControl) WithTrackingMode(trackingMode SegmentSwitchTracking)
 
 // WithSelectedSegmentBezelColor sets the color of the selected segment’s bezel, in appearances that support it.
 func (sc *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl {
+	defer runtime.KeepAlive(selectedSegmentBezelColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelectedSegmentBezelColor:"), objref.IDOf(selectedSegmentBezelColor))
 	})
@@ -126,6 +129,7 @@ func (sc *SegmentedControl) WithBorderShape(borderShape ControlBorderShape) *Seg
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (sc *SegmentedControl) WithTarget(target obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -190,6 +194,7 @@ func (sc *SegmentedControl) WithControlSize(controlSize ControlSize) *SegmentedC
 
 // WithFormatter sets the receiver’s formatter.
 func (sc *SegmentedControl) WithFormatter(formatter obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -198,6 +203,7 @@ func (sc *SegmentedControl) WithFormatter(formatter obj.Object) *SegmentedContro
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (sc *SegmentedControl) WithObjectValue(objectValue obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -214,6 +220,7 @@ func (sc *SegmentedControl) WithStringValue(stringValue string) *SegmentedContro
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (sc *SegmentedControl) WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -254,6 +261,7 @@ func (sc *SegmentedControl) WithDoubleValue(doubleValue float64) *SegmentedContr
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (sc *SegmentedControl) WithFont(font *Font) *SegmentedControl {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -302,6 +310,7 @@ func (sc *SegmentedControl) WithAllowsExpansionToolTips(allowsExpansionToolTips 
 
 // WithCell sets the cell.
 func (sc *SegmentedControl) WithCell(cell CellProvider) *SegmentedControl {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -447,6 +456,7 @@ func (sc *SegmentedControl) WithWantsLayer(wantsLayer bool) *SegmentedControl {
 
 // WithLayer sets the layer.
 func (sc *SegmentedControl) WithLayer(layer obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -496,6 +506,7 @@ func (sc *SegmentedControl) WithBackgroundFilters(items ...obj.Object) *Segmente
 
 // WithCompositingFilter sets the compositing filter.
 func (sc *SegmentedControl) WithCompositingFilter(compositingFilter obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -513,6 +524,7 @@ func (sc *SegmentedControl) WithContentFilters(items ...obj.Object) *SegmentedCo
 
 // WithShadow sets the shadow.
 func (sc *SegmentedControl) WithShadow(shadow *Shadow) *SegmentedControl {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -561,6 +573,7 @@ func (sc *SegmentedControl) WithPreparedContentRect(preparedContentRect corefoun
 
 // WithNextKeyView sets the next key view.
 func (sc *SegmentedControl) WithNextKeyView(nextKeyView ViewProvider) *SegmentedControl {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -610,6 +623,7 @@ func (sc *SegmentedControl) WithPrefersCompactControlSizeMetrics(prefersCompactC
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sc *SegmentedControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -666,6 +680,7 @@ func (sc *SegmentedControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExte
 
 // WithPressureConfiguration sets the pressure configuration.
 func (sc *SegmentedControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -674,6 +689,7 @@ func (sc *SegmentedControl) WithPressureConfiguration(pressureConfiguration *Pre
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (sc *SegmentedControl) WithNextResponder(nextResponder ResponderProvider) *SegmentedControl {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -682,6 +698,7 @@ func (sc *SegmentedControl) WithNextResponder(nextResponder ResponderProvider) *
 
 // WithMenu sets returns the responder’s menu.
 func (sc *SegmentedControl) WithMenu(menu *Menu) *SegmentedControl {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -690,6 +707,7 @@ func (sc *SegmentedControl) WithMenu(menu *Menu) *SegmentedControl {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (sc *SegmentedControl) WithUserActivity(userActivity obj.Object) *SegmentedControl {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -698,6 +716,7 @@ func (sc *SegmentedControl) WithUserActivity(userActivity obj.Object) *Segmented
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (sc *SegmentedControl) WithTouchBar(touchBar *TouchBar) *SegmentedControl {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -706,6 +725,7 @@ func (sc *SegmentedControl) WithTouchBar(touchBar *TouchBar) *SegmentedControl {
 
 // SelectSegmentWithTag selects the segment with the specified tag.
 func (sc *SegmentedControl) SelectSegmentWithTag(tag int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -719,6 +739,7 @@ func (sc *SegmentedControl) SelectSegmentWithTag(tag int) bool {
 
 // SetWidthForSegment sets the width of the specified segment.
 func (sc *SegmentedControl) SetWidthForSegment(width float64, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWidth:forSegment:"), width, segment)
 	})
@@ -727,6 +748,7 @@ func (sc *SegmentedControl) SetWidthForSegment(width float64, segment int) {
 
 // WidthForSegment returns the width of the specified segment.
 func (sc *SegmentedControl) WidthForSegment(segment int) float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -740,6 +762,8 @@ func (sc *SegmentedControl) WidthForSegment(segment int) float64 {
 
 // SetImageForSegment sets the image for the specified segment.
 func (sc *SegmentedControl) SetImageForSegment(image *Image, segment int) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
 	})
@@ -748,6 +772,7 @@ func (sc *SegmentedControl) SetImageForSegment(image *Image, segment int) {
 
 // ImageForSegment returns the image associated with the specified segment.
 func (sc *SegmentedControl) ImageForSegment(segment int) *Image {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -761,6 +786,7 @@ func (sc *SegmentedControl) ImageForSegment(segment int) *Image {
 
 // SetImageScalingForSegment sets the scaling mode used to display the specified segment’s image.
 func (sc *SegmentedControl) SetImageScalingForSegment(scaling ImageScaling, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
 	})
@@ -769,6 +795,7 @@ func (sc *SegmentedControl) SetImageScalingForSegment(scaling ImageScaling, segm
 
 // ImageScalingForSegment returns the scaling mode used to display the specified segment’s image.
 func (sc *SegmentedControl) ImageScalingForSegment(segment int) ImageScaling {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -782,6 +809,7 @@ func (sc *SegmentedControl) ImageScalingForSegment(segment int) ImageScaling {
 
 // SetLabelForSegment sets the label for the specified segment.
 func (sc *SegmentedControl) SetLabelForSegment(label string, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
 	})
@@ -790,6 +818,7 @@ func (sc *SegmentedControl) SetLabelForSegment(label string, segment int) {
 
 // LabelForSegment returns the label of the specified segment.
 func (sc *SegmentedControl) LabelForSegment(segment int) string {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -806,6 +835,8 @@ func (sc *SegmentedControl) LabelForSegment(segment int) string {
 
 // SetMenuForSegment sets the menu for the specified segment.
 func (sc *SegmentedControl) SetMenuForSegment(menu *Menu, segment int) {
+	defer runtime.KeepAlive(sc)
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
 	})
@@ -814,6 +845,7 @@ func (sc *SegmentedControl) SetMenuForSegment(menu *Menu, segment int) {
 
 // MenuForSegment returns the menu for the specified segment.
 func (sc *SegmentedControl) MenuForSegment(segment int) *Menu {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Menu
 	purego.Main(func() {
 		_mainthread0 = func() *Menu {
@@ -827,6 +859,7 @@ func (sc *SegmentedControl) MenuForSegment(segment int) *Menu {
 
 // SetSelectedForSegment sets the selection state of the specified segment.
 func (sc *SegmentedControl) SetSelectedForSegment(selected bool, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSelected:forSegment:"), selected, segment)
 	})
@@ -835,6 +868,7 @@ func (sc *SegmentedControl) SetSelectedForSegment(selected bool, segment int) {
 
 // IsSelectedForSegment returns a Boolean value indicating whether the specified segment is selected.
 func (sc *SegmentedControl) IsSelectedForSegment(segment int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -848,6 +882,7 @@ func (sc *SegmentedControl) IsSelectedForSegment(segment int) bool {
 
 // SetEnabledForSegment sets the enabled state of the specified segment
 func (sc *SegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
 	})
@@ -856,6 +891,7 @@ func (sc *SegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
 
 // IsEnabledForSegment returns a Boolean value indicating whether the specified segment is enabled.
 func (sc *SegmentedControl) IsEnabledForSegment(segment int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -869,6 +905,7 @@ func (sc *SegmentedControl) IsEnabledForSegment(segment int) bool {
 
 // SetToolTipForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetToolTipForSegment(toolTip string, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
 	})
@@ -877,6 +914,7 @@ func (sc *SegmentedControl) SetToolTipForSegment(toolTip string, segment int) {
 
 // ToolTipForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) ToolTipForSegment(segment int) string {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -893,6 +931,7 @@ func (sc *SegmentedControl) ToolTipForSegment(segment int) string {
 
 // SetTagForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetTagForSegment(tag int, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTag:forSegment:"), tag, segment)
 	})
@@ -901,6 +940,7 @@ func (sc *SegmentedControl) SetTagForSegment(tag int, segment int) {
 
 // TagForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) TagForSegment(segment int) int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -914,6 +954,7 @@ func (sc *SegmentedControl) TagForSegment(segment int) int {
 
 // SetShowsMenuIndicatorForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetShowsMenuIndicatorForSegment(showsMenuIndicator bool, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShowsMenuIndicator:forSegment:"), showsMenuIndicator, segment)
 	})
@@ -922,6 +963,7 @@ func (sc *SegmentedControl) SetShowsMenuIndicatorForSegment(showsMenuIndicator b
 
 // ShowsMenuIndicatorForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) ShowsMenuIndicatorForSegment(segment int) bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -935,6 +977,7 @@ func (sc *SegmentedControl) ShowsMenuIndicatorForSegment(segment int) bool {
 
 // SetAlignmentForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) SetAlignmentForSegment(alignment TextAlignment, segment int) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlignment:forSegment:"), alignment, segment)
 	})
@@ -943,6 +986,7 @@ func (sc *SegmentedControl) SetAlignmentForSegment(alignment TextAlignment, segm
 
 // AlignmentForSegment wraps the corresponding Objective-C method.
 func (sc *SegmentedControl) AlignmentForSegment(segment int) TextAlignment {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 TextAlignment
 	purego.Main(func() {
 		_mainthread0 = func() TextAlignment {
@@ -954,16 +998,18 @@ func (sc *SegmentedControl) AlignmentForSegment(segment int) TextAlignment {
 
 }
 
-// CompressWithPrioritizedCompressionOptions wraps the corresponding Objective-C method.
-func (sc *SegmentedControl) CompressWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) {
+// CompressWithPrioritizedCompression wraps the corresponding Objective-C method.
+func (sc *SegmentedControl) CompressWithPrioritizedCompression(prioritizedOptions []*UserInterfaceCompressionOptions) {
+	defer runtime.KeepAlive(sc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("compressWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
-// MinimumSizeWithPrioritizedCompressionOptions wraps the corresponding Objective-C method.
-func (sc *SegmentedControl) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) corefoundation.CGSize {
+// MinimumSizeWithPrioritizedCompression wraps the corresponding Objective-C method.
+func (sc *SegmentedControl) MinimumSizeWithPrioritizedCompression(prioritizedOptions []*UserInterfaceCompressionOptions) corefoundation.CGSize {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -977,6 +1023,7 @@ func (sc *SegmentedControl) MinimumSizeWithPrioritizedCompressionOptions(priorit
 
 // SegmentCount returns the segment count.
 func (sc *SegmentedControl) SegmentCount() int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -990,6 +1037,7 @@ func (sc *SegmentedControl) SegmentCount() int {
 
 // SelectedSegment returns the selected segment.
 func (sc *SegmentedControl) SelectedSegment() int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1003,6 +1051,7 @@ func (sc *SegmentedControl) SelectedSegment() int {
 
 // SegmentStyle returns the segment style.
 func (sc *SegmentedControl) SegmentStyle() SegmentStyle {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 SegmentStyle
 	purego.Main(func() {
 		_mainthread0 = func() SegmentStyle {
@@ -1016,6 +1065,7 @@ func (sc *SegmentedControl) SegmentStyle() SegmentStyle {
 
 // IsSpringLoaded reports whether the object is spring loaded.
 func (sc *SegmentedControl) IsSpringLoaded() bool {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1029,6 +1079,7 @@ func (sc *SegmentedControl) IsSpringLoaded() bool {
 
 // TrackingMode returns the tracking mode.
 func (sc *SegmentedControl) TrackingMode() SegmentSwitchTracking {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 SegmentSwitchTracking
 	purego.Main(func() {
 		_mainthread0 = func() SegmentSwitchTracking {
@@ -1042,6 +1093,7 @@ func (sc *SegmentedControl) TrackingMode() SegmentSwitchTracking {
 
 // DoubleValueForSelectedSegment returns the double value for selected segment.
 func (sc *SegmentedControl) DoubleValueForSelectedSegment() float64 {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -1055,6 +1107,7 @@ func (sc *SegmentedControl) DoubleValueForSelectedSegment() float64 {
 
 // SelectedSegmentBezelColor returns the selected segment bezel color.
 func (sc *SegmentedControl) SelectedSegmentBezelColor() *Color {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1068,6 +1121,7 @@ func (sc *SegmentedControl) SelectedSegmentBezelColor() *Color {
 
 // IndexOfSelectedItem returns the index of selected item.
 func (sc *SegmentedControl) IndexOfSelectedItem() int {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1081,6 +1135,7 @@ func (sc *SegmentedControl) IndexOfSelectedItem() int {
 
 // SegmentDistribution returns the segment distribution.
 func (sc *SegmentedControl) SegmentDistribution() SegmentDistribution {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 SegmentDistribution
 	purego.Main(func() {
 		_mainthread0 = func() SegmentDistribution {
@@ -1094,6 +1149,7 @@ func (sc *SegmentedControl) SegmentDistribution() SegmentDistribution {
 
 // ActiveCompressionOptions returns the active compression options.
 func (sc *SegmentedControl) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 *UserInterfaceCompressionOptions
 	purego.Main(func() {
 		_mainthread0 = func() *UserInterfaceCompressionOptions {
@@ -1107,6 +1163,7 @@ func (sc *SegmentedControl) ActiveCompressionOptions() *UserInterfaceCompression
 
 // BorderShape returns the border shape.
 func (sc *SegmentedControl) BorderShape() ControlBorderShape {
+	defer runtime.KeepAlive(sc)
 	var _mainthread0 ControlBorderShape
 	purego.Main(func() {
 		_mainthread0 = func() ControlBorderShape {

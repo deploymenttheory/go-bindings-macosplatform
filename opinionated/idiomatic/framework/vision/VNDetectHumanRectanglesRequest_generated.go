@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -84,6 +86,7 @@ func (dhrr *DetectHumanRectanglesRequest) WithRevision(revision int) *DetectHuma
 
 // UpperBodyOnly reports whether boolean property to specify whether the human upper body or full body needs to be detected. The default is true, meaning the request is setup to detect upper body only
 func (dhrr *DetectHumanRectanglesRequest) UpperBodyOnly() bool {
+	defer runtime.KeepAlive(dhrr)
 	_r := objc.Send[bool](objref.IDOf(dhrr), objc.RegisterName("upperBodyOnly"))
 	return _r
 }

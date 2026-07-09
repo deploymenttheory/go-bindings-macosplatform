@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +51,27 @@ func timeZoneAdopt(id objc.ID) *TimeZone {
 
 // Description returns the object's -description text.
 func (tz *TimeZone) Description() string {
+	defer runtime.KeepAlive(tz)
 	return rt.Description(objref.IDOf(tz))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tz *TimeZone) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tz)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tz), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tz *TimeZone) IsKind(className string) bool {
+	defer runtime.KeepAlive(tz)
 	return rt.IsKind(objref.IDOf(tz), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tz *TimeZone) String() string {
+	defer runtime.KeepAlive(tz)
 	return rt.Description(objref.IDOf(tz))
 }
 
@@ -76,9 +83,9 @@ func NewTimeZoneWithName(tzName string) *TimeZone {
 }
 
 // NewTimeZoneWithNameData initializes a time zone with a given identifier and time zone data.
-func NewTimeZoneWithNameData(tzName string, aData *Data) *TimeZone {
+func NewTimeZoneWithNameData(tzName string, aData []byte) *TimeZone {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(tzName), objref.IDOf(aData))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:data:"), purego.NSString(tzName), rt.BytesToNSData(aData))
 	return timeZoneAdopt(_id)
 }
 
@@ -89,20 +96,22 @@ func (tz *TimeZone) WithObservationInfo(observationInfo unsafe.Pointer) *TimeZon
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (tz *TimeZone) WithScriptingProperties(scriptingProperties obj.Object) *TimeZone {
-	objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (tz *TimeZone) WithScriptingProperties(scriptingProperties map[string]obj.Object) *TimeZone {
+	objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return tz
 }
 
 // SecondsFromGMTForDate returns the difference in seconds between the receiver and Greenwich Mean Time at a given date.
-func (tz *TimeZone) SecondsFromGMTForDate(aDate *Date) int {
-	_r := objc.Send[int](objref.IDOf(tz), objc.RegisterName("secondsFromGMTForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) SecondsFromGMTForDate(aDate time.Time) int {
+	defer runtime.KeepAlive(tz)
+	_r := objc.Send[int](objref.IDOf(tz), objc.RegisterName("secondsFromGMTForDate:"), rt.TimeToNSDate(aDate))
 	return _r
 }
 
 // AbbreviationForDate returns the abbreviation for the receiver at a given date.
-func (tz *TimeZone) AbbreviationForDate(aDate *Date) string {
-	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("abbreviationForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) AbbreviationForDate(aDate time.Time) string {
+	defer runtime.KeepAlive(tz)
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("abbreviationForDate:"), rt.TimeToNSDate(aDate))
 	if _r == 0 {
 		return ""
 	}
@@ -110,25 +119,29 @@ func (tz *TimeZone) AbbreviationForDate(aDate *Date) string {
 }
 
 // IsDaylightSavingTimeForDate indicates whether the receiver uses daylight saving time on a given date.
-func (tz *TimeZone) IsDaylightSavingTimeForDate(aDate *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isDaylightSavingTimeForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) IsDaylightSavingTimeForDate(aDate time.Time) bool {
+	defer runtime.KeepAlive(tz)
+	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isDaylightSavingTimeForDate:"), rt.TimeToNSDate(aDate))
 	return _r
 }
 
 // DaylightSavingTimeOffsetForDate returns the daylight saving time offset for a given date.
-func (tz *TimeZone) DaylightSavingTimeOffsetForDate(aDate *Date) float64 {
-	_r := objc.Send[float64](objref.IDOf(tz), objc.RegisterName("daylightSavingTimeOffsetForDate:"), objref.IDOf(aDate))
+func (tz *TimeZone) DaylightSavingTimeOffsetForDate(aDate time.Time) float64 {
+	defer runtime.KeepAlive(tz)
+	_r := objc.Send[float64](objref.IDOf(tz), objc.RegisterName("daylightSavingTimeOffsetForDate:"), rt.TimeToNSDate(aDate))
 	return _r
 }
 
 // NextDaylightSavingTimeTransitionAfterDate returns the next daylight saving time transition after a given date.
-func (tz *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate *Date) *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("nextDaylightSavingTimeTransitionAfterDate:"), objref.IDOf(aDate))
-	return DateFromID(_r)
+func (tz *TimeZone) NextDaylightSavingTimeTransitionAfterDate(aDate time.Time) time.Time {
+	defer runtime.KeepAlive(tz)
+	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("nextDaylightSavingTimeTransitionAfterDate:"), rt.TimeToNSDate(aDate))
+	return rt.NSDateToTime(_r)
 }
 
 // Name returns the name.
 func (tz *TimeZone) Name() string {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -137,19 +150,24 @@ func (tz *TimeZone) Name() string {
 }
 
 // Data returns the data.
-func (tz *TimeZone) Data() *Data {
+func (tz *TimeZone) Data() []byte {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("data"))
-	return DataFromID(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // IsEqualToTimeZone indicates whether the receiver has the same name and data as the specified time zone.
 func (tz *TimeZone) IsEqualToTimeZone(aTimeZone *TimeZone) bool {
+	defer runtime.KeepAlive(tz)
+	defer runtime.KeepAlive(aTimeZone)
 	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isEqualToTimeZone:"), objref.IDOf(aTimeZone))
 	return _r
 }
 
 // LocalizedNameLocale returns the localized name of the time zone.
 func (tz *TimeZone) LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale) string {
+	defer runtime.KeepAlive(tz)
+	defer runtime.KeepAlive(locale)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("localizedName:locale:"), style, objref.IDOf(locale))
 	if _r == 0 {
 		return ""
@@ -159,12 +177,14 @@ func (tz *TimeZone) LocalizedNameLocale(style TimeZoneNameStyle, locale *Locale)
 
 // SecondsFromGMT returns the seconds from gmt.
 func (tz *TimeZone) SecondsFromGMT() int {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[int](objref.IDOf(tz), objc.RegisterName("secondsFromGMT"))
 	return _r
 }
 
 // Abbreviation returns the abbreviation.
 func (tz *TimeZone) Abbreviation() string {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("abbreviation"))
 	if _r == 0 {
 		return ""
@@ -174,18 +194,21 @@ func (tz *TimeZone) Abbreviation() string {
 
 // IsDaylightSavingTime reports whether the object is daylight saving time.
 func (tz *TimeZone) IsDaylightSavingTime() bool {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[bool](objref.IDOf(tz), objc.RegisterName("isDaylightSavingTime"))
 	return _r
 }
 
 // DaylightSavingTimeOffset returns the daylight saving time offset.
 func (tz *TimeZone) DaylightSavingTimeOffset() float64 {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[float64](objref.IDOf(tz), objc.RegisterName("daylightSavingTimeOffset"))
 	return _r
 }
 
 // NextDaylightSavingTimeTransition returns the next daylight saving time transition.
-func (tz *TimeZone) NextDaylightSavingTimeTransition() *Date {
+func (tz *TimeZone) NextDaylightSavingTimeTransition() time.Time {
+	defer runtime.KeepAlive(tz)
 	_r := objc.Send[objc.ID](objref.IDOf(tz), objc.RegisterName("nextDaylightSavingTimeTransition"))
-	return DateFromID(_r)
+	return rt.NSDateToTime(_r)
 }

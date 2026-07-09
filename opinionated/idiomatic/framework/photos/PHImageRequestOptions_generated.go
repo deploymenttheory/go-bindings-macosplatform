@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func imageRequestOptionsAdopt(id objc.ID) *ImageRequestOptions {
 
 // Description returns the object's -description text.
 func (iro *ImageRequestOptions) Description() string {
+	defer runtime.KeepAlive(iro)
 	return rt.Description(objref.IDOf(iro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iro *ImageRequestOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iro)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iro *ImageRequestOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(iro)
 	return rt.IsKind(objref.IDOf(iro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iro *ImageRequestOptions) String() string {
+	defer runtime.KeepAlive(iro)
 	return rt.Description(objref.IDOf(iro))
 }
 
@@ -111,36 +118,42 @@ func (iro *ImageRequestOptions) WithAllowSecondaryDegradedImage(allowSecondaryDe
 
 // DeliveryMode returns the delivery mode.
 func (iro *ImageRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
+	defer runtime.KeepAlive(iro)
 	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(iro), objc.RegisterName("deliveryMode"))
 	return _r
 }
 
 // ResizeMode returns the resize mode.
 func (iro *ImageRequestOptions) ResizeMode() ImageRequestOptionsResizeMode {
+	defer runtime.KeepAlive(iro)
 	_r := objc.Send[ImageRequestOptionsResizeMode](objref.IDOf(iro), objc.RegisterName("resizeMode"))
 	return _r
 }
 
 // NormalizedCropRect returns the normalized crop rect.
 func (iro *ImageRequestOptions) NormalizedCropRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(iro)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(iro), objc.RegisterName("normalizedCropRect"))
 	return _r
 }
 
 // IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (iro *ImageRequestOptions) IsNetworkAccessAllowed() bool {
+	defer runtime.KeepAlive(iro)
 	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
 
 // IsSynchronous reports whether the object is synchronous.
 func (iro *ImageRequestOptions) IsSynchronous() bool {
+	defer runtime.KeepAlive(iro)
 	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("isSynchronous"))
 	return _r
 }
 
 // AllowSecondaryDegradedImage wraps the corresponding Objective-C method.
 func (iro *ImageRequestOptions) AllowSecondaryDegradedImage() bool {
+	defer runtime.KeepAlive(iro)
 	_r := objc.Send[bool](objref.IDOf(iro), objc.RegisterName("allowSecondaryDegradedImage"))
 	return _r
 }

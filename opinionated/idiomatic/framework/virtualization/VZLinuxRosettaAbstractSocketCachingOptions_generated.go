@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,8 +49,8 @@ func linuxRosettaAbstractSocketCachingOptionsAdopt(id objc.ID) *LinuxRosettaAbst
 	return x
 }
 
-// NewLinuxRosettaAbstractSocketCachingOptionsWithNameError initialize options to set on a Rosetta directory share.
-func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (result *LinuxRosettaAbstractSocketCachingOptions, err error) {
+// NewLinuxRosettaAbstractSocketCachingOptionsWithName initialize options to set on a Rosetta directory share.
+func NewLinuxRosettaAbstractSocketCachingOptionsWithName(name string) (result *LinuxRosettaAbstractSocketCachingOptions, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
@@ -61,6 +62,7 @@ func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (resu
 
 // Name returns name set by initWithName. This is the name of the Abstract Socket to be used by Rosetta.
 func (lrasco *LinuxRosettaAbstractSocketCachingOptions) Name() string {
+	defer runtime.KeepAlive(lrasco)
 	_r := objc.Send[objc.ID](objref.IDOf(lrasco), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

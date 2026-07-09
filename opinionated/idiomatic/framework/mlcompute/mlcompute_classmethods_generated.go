@@ -5,11 +5,14 @@
 package mlcompute
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -39,6 +42,7 @@ func DescriptorWithTypeABC(activationType ActivationType, a float32, b float32, 
 
 // LayerWithDescriptor creates an activation layer with the descriptor you specify.
 func LayerWithDescriptor(descriptor *ActivationDescriptor) *ActivationLayer {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(descriptor))
 	return ActivationLayerFromID(_r)
 }
@@ -213,30 +217,35 @@ func HardSwishLayer() *ActivationLayer {
 
 // OptimizerWithDescriptor creates an Adam optimizer with the descriptor you specify.
 func OptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *AdamOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
 	return AdamOptimizerFromID(_r)
 }
 
 // OptimizerWithDescriptorBeta1Beta2EpsilonTimeStep creates an Adam optimizer with the values you specify.
 func OptimizerWithDescriptorBeta1Beta2EpsilonTimeStep(optimizerDescriptor *OptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, timeStep int) *AdamOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:timeStep:"), objref.IDOf(optimizerDescriptor), beta1, beta2, epsilon, timeStep)
 	return AdamOptimizerFromID(_r)
 }
 
 // OptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep creates an Adam optimizer with the values you specify.
 func OptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *OptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep int) *AdamOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:"), objref.IDOf(optimizerDescriptor), beta1, beta2, epsilon, usesAMSGrad, timeStep)
 	return AdamOptimizerFromID(_r)
 }
 
 // MLCAdamWOptimizerOptimizerWithDescriptor creates a default optimizer with the descriptor you specify.
 func MLCAdamWOptimizerOptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *AdamWOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamWOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
 	return AdamWOptimizerFromID(_r)
 }
 
 // MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep creates an AdamW optimizer with the values you specify.
 func MLCAdamWOptimizerOptimizerWithDescriptorBeta1Beta2EpsilonUsesAMSGradTimeStep(optimizerDescriptor *OptimizerDescriptor, beta1 float32, beta2 float32, epsilon float32, usesAMSGrad bool, timeStep int) *AdamWOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCAdamWOptimizer")), objc.RegisterName("optimizerWithDescriptor:beta1:beta2:epsilon:usesAMSGrad:timeStep:"), objref.IDOf(optimizerDescriptor), beta1, beta2, epsilon, usesAMSGrad, timeStep)
 	return AdamWOptimizerFromID(_r)
 }
@@ -249,12 +258,20 @@ func LayerWithOperation(operation ArithmeticOperation) *ArithmeticLayer {
 
 // LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon creates a batch normalization layer with the number of feature channels, tensors, and variance epsilon you specify.
 func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilon(featureChannelCount int, mean *Tensor, variance *Tensor, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *BatchNormalizationLayer {
+	defer runtime.KeepAlive(mean)
+	defer runtime.KeepAlive(variance)
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCBatchNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:"), featureChannelCount, objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
 	return BatchNormalizationLayerFromID(_r)
 }
 
 // LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum creates a batch normalization layer with the number of feature channels, tensors, variance epsilon, and momentum you specify.
 func LayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount int, mean *Tensor, variance *Tensor, beta *Tensor, gamma *Tensor, varianceEpsilon float32, momentum float32) *BatchNormalizationLayer {
+	defer runtime.KeepAlive(mean)
+	defer runtime.KeepAlive(variance)
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCBatchNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:"), featureChannelCount, objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon, momentum)
 	return BatchNormalizationLayerFromID(_r)
 }
@@ -278,8 +295,8 @@ func LayerWithDimension(dimension int) *ConcatenationLayer {
 }
 
 // DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes creates a descriptor with the type, kernel sizes, number of feature channels and groups, strides, dilation rates, and padding policy you specify.
-func DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType ConvolutionType, kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithType:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), convolutionType, purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func DescriptorWithTypeKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(convolutionType ConvolutionType, kernelSizes []*foundation.Number, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithType:kernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), convolutionType, purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
@@ -290,14 +307,14 @@ func DescriptorWithKernelWidthKernelHeightInputFeatureChannelCountOutputFeatureC
 }
 
 // DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes creates a convolution descriptor with the kernel sizes, number of feature channels, strides, padding policy, and padding sizes you specify.
-func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, inputFeatureChannelCount int, outputFeatureChannelCount int, strides []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
 // DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes creates a convolution descriptor with the kernel and padding options, number of feature channels and groups, and dilation rates you specify.
-func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func DescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("descriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
@@ -308,14 +325,14 @@ func ConvolutionTransposeDescriptorWithKernelWidthKernelHeightInputFeatureChanne
 }
 
 // ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes creates a convolution transpose descriptor with the kernel sizes, number of feature channels, strides, and padding options you specify.
-func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountStridesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, inputFeatureChannelCount int, outputFeatureChannelCount int, strides []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
 // ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes creates a convolution transpose descriptor with the kernel and padding options, number of feature channels and groups, and dilation rates you specify.
-func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func ConvolutionTransposeDescriptorWithKernelSizesInputFeatureChannelCountOutputFeatureChannelCountGroupCountStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, inputFeatureChannelCount int, outputFeatureChannelCount int, groupCount int, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("convolutionTransposeDescriptorWithKernelSizes:inputFeatureChannelCount:outputFeatureChannelCount:groupCount:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, outputFeatureChannelCount, groupCount, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
@@ -326,19 +343,22 @@ func DepthwiseConvolutionDescriptorWithKernelWidthKernelHeightInputFeatureChanne
 }
 
 // DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes creates a depthwise convolution descriptor with the kernel and padding options, number of input feature channels, and channel multiplier you specify.
-func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, channelMultiplier int, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, channelMultiplier, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, inputFeatureChannelCount int, channelMultiplier int, strides []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, channelMultiplier, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
 // DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes creates a convolution descriptor with the kernel and padding options, number of input channels, channel multiplier, and dilation rates you specify.
-func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, inputFeatureChannelCount int, channelMultiplier int, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *ConvolutionDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, channelMultiplier, purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func DepthwiseConvolutionDescriptorWithKernelSizesInputFeatureChannelCountChannelMultiplierStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, inputFeatureChannelCount int, channelMultiplier int, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *ConvolutionDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionDescriptor")), objc.RegisterName("depthwiseConvolutionDescriptorWithKernelSizes:inputFeatureChannelCount:channelMultiplier:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), inputFeatureChannelCount, channelMultiplier, purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ConvolutionDescriptorFromID(_r)
 }
 
 // LayerWithWeightsBiasesDescriptor creates a convolution layer with the weights, biases, and descriptor you specify.
 func LayerWithWeightsBiasesDescriptor(weights *Tensor, biases *Tensor, descriptor *ConvolutionDescriptor) *ConvolutionLayer {
+	defer runtime.KeepAlive(weights)
+	defer runtime.KeepAlive(biases)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCConvolutionLayer")), objc.RegisterName("layerWithWeights:biases:descriptor:"), objref.IDOf(weights), objref.IDOf(biases), objref.IDOf(descriptor))
 	return ConvolutionLayerFromID(_r)
 }
@@ -387,24 +407,36 @@ func LayerWithRateSeed(rate float32, seed int) *DropoutLayer {
 
 // DescriptorWithEmbeddingCountEmbeddingDimension creates an embedding descriptor with the size of the dictionary and dimension of embedding vectors you specify.
 func DescriptorWithEmbeddingCountEmbeddingDimension(embeddingCount obj.Object, embeddingDimension obj.Object) *EmbeddingDescriptor {
+	defer runtime.KeepAlive(embeddingCount)
+	defer runtime.KeepAlive(embeddingDimension)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingDescriptor")), objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:"), objref.IDOf(embeddingCount), objref.IDOf(embeddingDimension))
 	return EmbeddingDescriptorFromID(_r)
 }
 
 // DescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency creates a new embedding descriptor with the size and dimension of embedding vectors, padding index, and norm and scaling options that you specify.
 func DescriptorWithEmbeddingCountEmbeddingDimensionPaddingIndexMaximumNormPNormScalesGradientByFrequency(embeddingCount obj.Object, embeddingDimension obj.Object, paddingIndex obj.Object, maximumNorm obj.Object, pNorm obj.Object, scalesGradientByFrequency bool) *EmbeddingDescriptor {
+	defer runtime.KeepAlive(embeddingCount)
+	defer runtime.KeepAlive(embeddingDimension)
+	defer runtime.KeepAlive(paddingIndex)
+	defer runtime.KeepAlive(maximumNorm)
+	defer runtime.KeepAlive(pNorm)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingDescriptor")), objc.RegisterName("descriptorWithEmbeddingCount:embeddingDimension:paddingIndex:maximumNorm:pNorm:scalesGradientByFrequency:"), objref.IDOf(embeddingCount), objref.IDOf(embeddingDimension), objref.IDOf(paddingIndex), objref.IDOf(maximumNorm), objref.IDOf(pNorm), scalesGradientByFrequency)
 	return EmbeddingDescriptorFromID(_r)
 }
 
 // LayerWithDescriptorWeights creates an embedding layer with the descriptor and word embedding weights tensor you specify.
 func LayerWithDescriptorWeights(descriptor *EmbeddingDescriptor, weights *Tensor) *EmbeddingLayer {
+	defer runtime.KeepAlive(descriptor)
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingLayer")), objc.RegisterName("layerWithDescriptor:weights:"), objref.IDOf(descriptor), objref.IDOf(weights))
 	return EmbeddingLayerFromID(_r)
 }
 
 // MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor creates a fully connected layer with the weights, biases, and convolution descriptor you specify.
 func MLCFullyConnectedLayerLayerWithWeightsBiasesDescriptor(weights *Tensor, biases *Tensor, descriptor *ConvolutionDescriptor) *FullyConnectedLayer {
+	defer runtime.KeepAlive(weights)
+	defer runtime.KeepAlive(biases)
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCFullyConnectedLayer")), objc.RegisterName("layerWithWeights:biases:descriptor:"), objref.IDOf(weights), objref.IDOf(biases), objref.IDOf(descriptor))
 	return FullyConnectedLayerFromID(_r)
 }
@@ -429,6 +461,8 @@ func MLCGraphGraph() *Graph {
 
 // LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon creates a group normalization layer with the number of feature channels and groups, beta and gamma tensors, and variance epsilon you specify.
 func LayerWithFeatureChannelCountGroupCountBetaGammaVarianceEpsilon(featureChannelCount int, groupCount int, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *GroupNormalizationLayer {
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCGroupNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:groupCount:beta:gamma:varianceEpsilon:"), featureChannelCount, groupCount, objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
 	return GroupNormalizationLayerFromID(_r)
 }
@@ -441,18 +475,26 @@ func GraphWithGraphObjects(graphObjects []*Graph) *InferenceGraph {
 
 // LayerWithFeatureChannelCountBetaGammaVarianceEpsilon creates an instance normalization layer with the number of feature channels, beta and gamma tensors, and variance epsilon you specify.
 func LayerWithFeatureChannelCountBetaGammaVarianceEpsilon(featureChannelCount int, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *InstanceNormalizationLayer {
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:beta:gamma:varianceEpsilon:"), featureChannelCount, objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
 	return InstanceNormalizationLayerFromID(_r)
 }
 
 // LayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum creates an instance normalization layer with the number of feature channels, beta and gamma tensors, variance epsilon, and momentum you specify.
 func LayerWithFeatureChannelCountBetaGammaVarianceEpsilonMomentum(featureChannelCount int, beta *Tensor, gamma *Tensor, varianceEpsilon float32, momentum float32) *InstanceNormalizationLayer {
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:beta:gamma:varianceEpsilon:momentum:"), featureChannelCount, objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon, momentum)
 	return InstanceNormalizationLayerFromID(_r)
 }
 
 // MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum creates an instance normalization layer with the number of feature channels, mean, variance, beta and gamma tensors, variance epsilon, and momentum you specify.
 func MLCInstanceNormalizationLayerLayerWithFeatureChannelCountMeanVarianceBetaGammaVarianceEpsilonMomentum(featureChannelCount int, mean *Tensor, variance *Tensor, beta *Tensor, gamma *Tensor, varianceEpsilon float32, momentum float32) *InstanceNormalizationLayer {
+	defer runtime.KeepAlive(mean)
+	defer runtime.KeepAlive(variance)
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCInstanceNormalizationLayer")), objc.RegisterName("layerWithFeatureChannelCount:mean:variance:beta:gamma:varianceEpsilon:momentum:"), featureChannelCount, objref.IDOf(mean), objref.IDOf(variance), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon, momentum)
 	return InstanceNormalizationLayerFromID(_r)
 }
@@ -489,31 +531,38 @@ func DescriptorWithInputSizeHiddenSizeLayerCountUsesBiasesBatchFirstIsBidirectio
 
 // LayerWithDescriptorInputWeightsHiddenWeightsBiases creates an LSTM layer with the descriptor, input and hidden weights, and biases you specify.
 func LayerWithDescriptorInputWeightsHiddenWeightsBiases(descriptor *LSTMDescriptor, inputWeights []*Tensor, hiddenWeights []*Tensor, biases []*Tensor) *LSTMLayer {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMLayer")), objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:biases:"), objref.IDOf(descriptor), purego.SliceToNSArray(inputWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(hiddenWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return LSTMLayerFromID(_r)
 }
 
 // LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases creates an LSTM layer with the descriptor, weights, and biases you specify.
 func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiases(descriptor *LSTMDescriptor, inputWeights []*Tensor, hiddenWeights []*Tensor, peepholeWeights []*Tensor, biases []*Tensor) *LSTMLayer {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMLayer")), objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:"), objref.IDOf(descriptor), purego.SliceToNSArray(inputWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(hiddenWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(peepholeWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return LSTMLayerFromID(_r)
 }
 
 // LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation creates an LSTM layer using the descriptor, weights, biases, gate activations, and output result activation that you specify.
 func LayerWithDescriptorInputWeightsHiddenWeightsPeepholeWeightsBiasesGateActivationsOutputResultActivation(descriptor *LSTMDescriptor, inputWeights []*Tensor, hiddenWeights []*Tensor, peepholeWeights []*Tensor, biases []*Tensor, gateActivations []*ActivationDescriptor, outputResultActivation *ActivationDescriptor) *LSTMLayer {
+	defer runtime.KeepAlive(descriptor)
+	defer runtime.KeepAlive(outputResultActivation)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLSTMLayer")), objc.RegisterName("layerWithDescriptor:inputWeights:hiddenWeights:peepholeWeights:biases:gateActivations:outputResultActivation:"), objref.IDOf(descriptor), purego.SliceToNSArray(inputWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(hiddenWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(peepholeWeights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(gateActivations, func(_v *ActivationDescriptor) objc.ID { return objref.IDOf(_v) }), objref.IDOf(outputResultActivation))
 	return LSTMLayerFromID(_r)
 }
 
 // SupportsDataTypeOnDevice returns a Boolean that indicates whether instances of this layer accept source tensors for the data type and device that you specify.
 func SupportsDataTypeOnDevice(dataType DataType, device *Device) bool {
+	defer runtime.KeepAlive(device)
 	_r := objc.Send[bool](objc.ID(_class("MLCLayer")), objc.RegisterName("supportsDataType:onDevice:"), dataType, objref.IDOf(device))
 	return _r
 }
 
 // LayerWithNormalizedShapeBetaGammaVarianceEpsilon creates a normalization layer with a shape, beta and gamma tensors, and variance epsilon you specify.
-func LayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape []obj.Object, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *LayerNormalizationLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCLayerNormalizationLayer")), objc.RegisterName("layerWithNormalizedShape:beta:gamma:varianceEpsilon:"), purego.SliceToNSArray(normalizedShape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
+func LayerWithNormalizedShapeBetaGammaVarianceEpsilon(normalizedShape []*foundation.Number, beta *Tensor, gamma *Tensor, varianceEpsilon float32) *LayerNormalizationLayer {
+	defer runtime.KeepAlive(beta)
+	defer runtime.KeepAlive(gamma)
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCLayerNormalizationLayer")), objc.RegisterName("layerWithNormalizedShape:beta:gamma:varianceEpsilon:"), purego.SliceToNSArray(normalizedShape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(beta), objref.IDOf(gamma), varianceEpsilon)
 	return LayerNormalizationLayerFromID(_r)
 }
 
@@ -543,12 +592,15 @@ func DescriptorWithTypeReductionTypeWeightLabelSmoothingClassCountEpsilonDelta(l
 
 // MLCLossLayerLayerWithDescriptor creates a loss layer with the descriptor you specify.
 func MLCLossLayerLayerWithDescriptor(lossDescriptor *LossDescriptor) *LossLayer {
+	defer runtime.KeepAlive(lossDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(lossDescriptor))
 	return LossLayerFromID(_r)
 }
 
 // MLCLossLayerLayerWithDescriptorWeights creates a loss layer with the descriptor and weights you specify.
 func MLCLossLayerLayerWithDescriptorWeights(lossDescriptor *LossDescriptor, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(lossDescriptor)
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("layerWithDescriptor:weights:"), objref.IDOf(lossDescriptor), objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -561,6 +613,7 @@ func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(redu
 
 // SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights creates a softmax cross entropy loss layer with the reduction type, label smoothing, number of classes, and weights you specify.
 func SoftmaxCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType ReductionType, labelSmoothing float32, classCount int, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("softmaxCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:"), reductionType, labelSmoothing, classCount, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -573,6 +626,7 @@ func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeight(
 
 // CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights creates a categorical cross entropy loss layer with the reduction type, label smoothing, number of classes, and weights you specify.
 func CategoricalCrossEntropyLossWithReductionTypeLabelSmoothingClassCountWeights(reductionType ReductionType, labelSmoothing float32, classCount int, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("categoricalCrossEntropyLossWithReductionType:labelSmoothing:classCount:weights:"), reductionType, labelSmoothing, classCount, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -585,6 +639,7 @@ func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeight(reductionType 
 
 // SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights creates a sigmoid cross entropy loss layer with the reduction type, label smoothing, and weights you specify.
 func SigmoidCrossEntropyLossWithReductionTypeLabelSmoothingWeights(reductionType ReductionType, labelSmoothing float32, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("sigmoidCrossEntropyLossWithReductionType:labelSmoothing:weights:"), reductionType, labelSmoothing, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -597,6 +652,7 @@ func LogLossWithReductionTypeEpsilonWeight(reductionType ReductionType, epsilon 
 
 // LogLossWithReductionTypeEpsilonWeights creates a log loss layer with the reduction type, epsilon, and weights you specify.
 func LogLossWithReductionTypeEpsilonWeights(reductionType ReductionType, epsilon float32, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("logLossWithReductionType:epsilon:weights:"), reductionType, epsilon, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -609,6 +665,7 @@ func HuberLossWithReductionTypeDeltaWeight(reductionType ReductionType, delta fl
 
 // HuberLossWithReductionTypeDeltaWeights creates a huber loss layer with the reduction type, delta, and weights you specify.
 func HuberLossWithReductionTypeDeltaWeights(reductionType ReductionType, delta float32, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("huberLossWithReductionType:delta:weights:"), reductionType, delta, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -621,6 +678,7 @@ func MeanAbsoluteErrorLossWithReductionTypeWeight(reductionType ReductionType, w
 
 // MeanAbsoluteErrorLossWithReductionTypeWeights creates a mean absolute loss layer with the reduction type and weights you specify.
 func MeanAbsoluteErrorLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("meanAbsoluteErrorLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -633,6 +691,7 @@ func MeanSquaredErrorLossWithReductionTypeWeight(reductionType ReductionType, we
 
 // MeanSquaredErrorLossWithReductionTypeWeights creates a mean squared loss layer with the reduction type and weights you specify.
 func MeanSquaredErrorLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("meanSquaredErrorLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -645,6 +704,7 @@ func HingeLossWithReductionTypeWeight(reductionType ReductionType, weight float3
 
 // HingeLossWithReductionTypeWeights creates a hinge loss layer with the reduction type and weights you specify.
 func HingeLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("hingeLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -657,6 +717,7 @@ func CosineDistanceLossWithReductionTypeWeight(reductionType ReductionType, weig
 
 // CosineDistanceLossWithReductionTypeWeights creates a cosine distance loss layer with the reduction type and weights you specify.
 func CosineDistanceLossWithReductionTypeWeights(reductionType ReductionType, weights *Tensor) *LossLayer {
+	defer runtime.KeepAlive(weights)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCLossLayer")), objc.RegisterName("cosineDistanceLossWithReductionType:weights:"), reductionType, objref.IDOf(weights))
 	return LossLayerFromID(_r)
 }
@@ -675,6 +736,7 @@ func Descriptor() *MatMulDescriptor {
 
 // MLCMatMulLayerLayerWithDescriptor creates a matrix multiplication layer with the specified descriptor you specify.
 func MLCMatMulLayerLayerWithDescriptor(descriptor *MatMulDescriptor) *MatMulLayer {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCMatMulLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(descriptor))
 	return MatMulLayerFromID(_r)
 }
@@ -693,6 +755,7 @@ func DescriptorWithModelDimensionHeadCount(modelDimension int, headCount int) *M
 
 // LayerWithDescriptorWeightsBiasesAttentionBiases creates a multi-head attention layer with the descriptor, weights, and biases you specify.
 func LayerWithDescriptorWeightsBiasesAttentionBiases(descriptor *MultiheadAttentionDescriptor, weights []*Tensor, biases []*Tensor, attentionBiases []*Tensor) *MultiheadAttentionLayer {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCMultiheadAttentionLayer")), objc.RegisterName("layerWithDescriptor:weights:biases:attentionBiases:"), objref.IDOf(descriptor), purego.SliceToNSArray(weights, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(biases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(attentionBiases, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
 	return MultiheadAttentionLayerFromID(_r)
 }
@@ -716,38 +779,39 @@ func DescriptorWithLearningRateGradientRescaleAppliesGradientClippingGradientCli
 }
 
 // LayerWithReflectionPadding creates a padding layer with the reflection padding sizes you specify.
-func LayerWithReflectionPadding(padding []obj.Object) *PaddingLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithReflectionPadding:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func LayerWithReflectionPadding(padding []*foundation.Number) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithReflectionPadding:"), purego.SliceToNSArray(padding, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PaddingLayerFromID(_r)
 }
 
 // LayerWithSymmetricPadding creates a padding layer with the symmetric padding sizes you specify.
-func LayerWithSymmetricPadding(padding []obj.Object) *PaddingLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithSymmetricPadding:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func LayerWithSymmetricPadding(padding []*foundation.Number) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithSymmetricPadding:"), purego.SliceToNSArray(padding, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PaddingLayerFromID(_r)
 }
 
 // LayerWithZeroPadding creates a padding layer with the zero padding sizes you specify.
-func LayerWithZeroPadding(padding []obj.Object) *PaddingLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithZeroPadding:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func LayerWithZeroPadding(padding []*foundation.Number) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithZeroPadding:"), purego.SliceToNSArray(padding, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PaddingLayerFromID(_r)
 }
 
 // LayerWithConstantPaddingConstantValue creates a padding layer with the constant padding sizes and constant valu you specify.
-func LayerWithConstantPaddingConstantValue(padding []obj.Object, constantValue float32) *PaddingLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithConstantPadding:constantValue:"), purego.SliceToNSArray(padding, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), constantValue)
+func LayerWithConstantPaddingConstantValue(padding []*foundation.Number, constantValue float32) *PaddingLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPaddingLayer")), objc.RegisterName("layerWithConstantPadding:constantValue:"), purego.SliceToNSArray(padding, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), constantValue)
 	return PaddingLayerFromID(_r)
 }
 
 // SetRNGSeedTo sets the global random number generator seed value.
 func SetRNGSeedTo(seed obj.Object) {
+	defer runtime.KeepAlive(seed)
 	objc.Send[objc.ID](objc.ID(_class("MLCPlatform")), objc.RegisterName("setRNGSeedTo:"), objref.IDOf(seed))
 }
 
 // GetRNGseed returns the global random number generator seed value.
-func GetRNGseed() obj.Object {
+func GetRNGseed() *foundation.Number {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCPlatform")), objc.RegisterName("getRNGseed"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // PoolingDescriptorWithTypeKernelSizeStride creates a pooling descriptor with the pooling function, kernel size, and stride you specify.
@@ -757,55 +821,58 @@ func PoolingDescriptorWithTypeKernelSizeStride(poolingType PoolingType, kernelSi
 }
 
 // MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes creates a descriptor for a max pooling function with the kernel sizes, strides, padding policy, and padding sizes that you specify.
-func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func MaxPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, strides []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PoolingDescriptorFromID(_r)
 }
 
 // MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes creates a descriptor for a max pooling function with the kernel sizes, strides, dilation rates, padding policy, and padding sizes that you specify.
-func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func MaxPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("maxPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PoolingDescriptorFromID(_r)
 }
 
 // AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding creates an average pooling descriptor with the kernel sizes, strides, padding policy, padding sizes, and zero padding option that you specify.
-func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes []obj.Object, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object, countIncludesPadding bool) *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:countIncludesPadding:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), countIncludesPadding)
+func AveragePoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes []*foundation.Number, strides []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number, countIncludesPadding bool) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:countIncludesPadding:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), countIncludesPadding)
 	return PoolingDescriptorFromID(_r)
 }
 
 // AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding creates an average pooling descriptor with the kernel sizes, strides, dilution rates, padding policy and sizes, and zero padding option you specify.
-func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object, countIncludesPadding bool) *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:countIncludesPadding:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), countIncludesPadding)
+func AveragePoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizesCountIncludesPadding(kernelSizes []*foundation.Number, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number, countIncludesPadding bool) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("averagePoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:countIncludesPadding:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), countIncludesPadding)
 	return PoolingDescriptorFromID(_r)
 }
 
 // L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes creates a descriptor for an L2 norm pooling function with the kernel sizes, strides, padding policy, and padding sizes that you specify.
-func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func L2NormPoolingDescriptorWithKernelSizesStridesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, strides []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PoolingDescriptorFromID(_r)
 }
 
 // L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes creates a descriptor for an L2 norm pooling function with the kernel sizes, strides, dilation rates, padding policy, and padding sizes you specify.
-func L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []obj.Object, strides []obj.Object, dilationRates []obj.Object, paddingPolicy PaddingPolicy, paddingSizes []obj.Object) *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func L2NormPoolingDescriptorWithKernelSizesStridesDilationRatesPaddingPolicyPaddingSizes(kernelSizes []*foundation.Number, strides []*foundation.Number, dilationRates []*foundation.Number, paddingPolicy PaddingPolicy, paddingSizes []*foundation.Number) *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingDescriptor")), objc.RegisterName("l2NormPoolingDescriptorWithKernelSizes:strides:dilationRates:paddingPolicy:paddingSizes:"), purego.SliceToNSArray(kernelSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(strides, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(dilationRates, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), paddingPolicy, purego.SliceToNSArray(paddingSizes, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return PoolingDescriptorFromID(_r)
 }
 
 // MLCPoolingLayerLayerWithDescriptor creates a pooling layer with the descriptor you specify.
 func MLCPoolingLayerLayerWithDescriptor(descriptor *PoolingDescriptor) *PoolingLayer {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCPoolingLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(descriptor))
 	return PoolingLayerFromID(_r)
 }
 
 // MLCRMSPropOptimizerOptimizerWithDescriptor creates an RMSProp optimizer with the descriptor you specify.
 func MLCRMSPropOptimizerOptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *RMSPropOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCRMSPropOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
 	return RMSPropOptimizerFromID(_r)
 }
 
 // OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered creates an RMSProp optimizer with the descriptor, momentum scale, smoothing, epsilon, and option to compute the centered RMSProp that you specify.
 func OptimizerWithDescriptorMomentumScaleAlphaEpsilonIsCentered(optimizerDescriptor *OptimizerDescriptor, momentumScale float32, alpha float32, epsilon float32, isCentered bool) *RMSPropOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCRMSPropOptimizer")), objc.RegisterName("optimizerWithDescriptor:momentumScale:alpha:epsilon:isCentered:"), objref.IDOf(optimizerDescriptor), momentumScale, alpha, epsilon, isCentered)
 	return RMSPropOptimizerFromID(_r)
 }
@@ -817,25 +884,27 @@ func LayerWithReductionTypeDimension(reductionType ReductionType, dimension int)
 }
 
 // LayerWithReductionTypeDimensions creates a reduction layer using the reduction type and dimensions you specify.
-func LayerWithReductionTypeDimensions(reductionType ReductionType, dimensions []obj.Object) *ReductionLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCReductionLayer")), objc.RegisterName("layerWithReductionType:dimensions:"), reductionType, purego.SliceToNSArray(dimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func LayerWithReductionTypeDimensions(reductionType ReductionType, dimensions []*foundation.Number) *ReductionLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCReductionLayer")), objc.RegisterName("layerWithReductionType:dimensions:"), reductionType, purego.SliceToNSArray(dimensions, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ReductionLayerFromID(_r)
 }
 
 // LayerWithShape creates a reshape layer with the shape you specify.
-func LayerWithShape(shape []obj.Object) *ReshapeLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCReshapeLayer")), objc.RegisterName("layerWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func LayerWithShape(shape []*foundation.Number) *ReshapeLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCReshapeLayer")), objc.RegisterName("layerWithShape:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return ReshapeLayerFromID(_r)
 }
 
 // MLCSGDOptimizerOptimizerWithDescriptor creates an SGD optimizer with the descriptor you specify.
 func MLCSGDOptimizerOptimizerWithDescriptor(optimizerDescriptor *OptimizerDescriptor) *SGDOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCSGDOptimizer")), objc.RegisterName("optimizerWithDescriptor:"), objref.IDOf(optimizerDescriptor))
 	return SGDOptimizerFromID(_r)
 }
 
 // OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum create an SGD optimizer with the descriptor, momentum scale, and option to enable Nesterov momentum that you specify.
 func OptimizerWithDescriptorMomentumScaleUsesNesterovMomentum(optimizerDescriptor *OptimizerDescriptor, momentumScale float32, usesNesterovMomentum bool) *SGDOptimizer {
+	defer runtime.KeepAlive(optimizerDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCSGDOptimizer")), objc.RegisterName("optimizerWithDescriptor:momentumScale:usesNesterovMomentum:"), objref.IDOf(optimizerDescriptor), momentumScale, usesNesterovMomentum)
 	return SGDOptimizerFromID(_r)
 }
@@ -853,8 +922,8 @@ func MLCSelectionLayerLayer() *SelectionLayer {
 }
 
 // SliceLayerWithStartEndStride creates a slice layer with the specified start, end, and stride.
-func SliceLayerWithStartEndStride(start []obj.Object, end []obj.Object, stride []obj.Object) *SliceLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCSliceLayer")), objc.RegisterName("sliceLayerWithStart:end:stride:"), purego.SliceToNSArray(start, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(end, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(stride, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func SliceLayerWithStartEndStride(start []*foundation.Number, end []*foundation.Number, stride []*foundation.Number) *SliceLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSliceLayer")), objc.RegisterName("sliceLayerWithStart:end:stride:"), purego.SliceToNSArray(start, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(end, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(stride, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return SliceLayerFromID(_r)
 }
 
@@ -877,68 +946,76 @@ func LayerWithSplitCountDimension(splitCount int, dimension int) *SplitLayer {
 }
 
 // LayerWithSplitSectionLengthsDimension creates a split layer with the lengths of each split section and dimension you specify.
-func LayerWithSplitSectionLengthsDimension(splitSectionLengths []obj.Object, dimension int) *SplitLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCSplitLayer")), objc.RegisterName("layerWithSplitSectionLengths:dimension:"), purego.SliceToNSArray(splitSectionLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dimension)
+func LayerWithSplitSectionLengthsDimension(splitSectionLengths []*foundation.Number, dimension int) *SplitLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCSplitLayer")), objc.RegisterName("layerWithSplitSectionLengths:dimension:"), purego.SliceToNSArray(splitSectionLengths, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dimension)
 	return SplitLayerFromID(_r)
 }
 
 // TensorWithDescriptor creates a tensor without data, using the descriptor you specify.
 func TensorWithDescriptor(tensorDescriptor *TensorDescriptor) *Tensor {
+	defer runtime.KeepAlive(tensorDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:"), objref.IDOf(tensorDescriptor))
 	return TensorFromID(_r)
 }
 
 // TensorWithDescriptorRandomInitializerType creates a tensor with the descriptor and random initializer type you specify.
 func TensorWithDescriptorRandomInitializerType(tensorDescriptor *TensorDescriptor, randomInitializerType RandomInitializerType) *Tensor {
+	defer runtime.KeepAlive(tensorDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:randomInitializerType:"), objref.IDOf(tensorDescriptor), randomInitializerType)
 	return TensorFromID(_r)
 }
 
 // TensorWithDescriptorFillWithData creates a tensor with the descriptor and scalar value you specify.
 func TensorWithDescriptorFillWithData(tensorDescriptor *TensorDescriptor, fillData obj.Object) *Tensor {
+	defer runtime.KeepAlive(tensorDescriptor)
+	defer runtime.KeepAlive(fillData)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:fillWithData:"), objref.IDOf(tensorDescriptor), objref.IDOf(fillData))
 	return TensorFromID(_r)
 }
 
 // TensorWithDescriptorData creates a tensor with the descriptor and data you specify.
 func TensorWithDescriptorData(tensorDescriptor *TensorDescriptor, data *TensorData) *Tensor {
+	defer runtime.KeepAlive(tensorDescriptor)
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithDescriptor:data:"), objref.IDOf(tensorDescriptor), objref.IDOf(data))
 	return TensorFromID(_r)
 }
 
 // TensorWithShape creates a tensor without data, with the shape you specify.
-func TensorWithShape(shape []obj.Object) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func TensorWithShape(shape []*foundation.Number) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return TensorFromID(_r)
 }
 
 // TensorWithShapeRandomInitializerType creates a tensor with the shape and random initializer type you specify.
-func TensorWithShapeRandomInitializerType(shape []obj.Object, randomInitializerType RandomInitializerType) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:randomInitializerType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), randomInitializerType)
+func TensorWithShapeRandomInitializerType(shape []*foundation.Number, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:randomInitializerType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), randomInitializerType)
 	return TensorFromID(_r)
 }
 
 // TensorWithShapeRandomInitializerTypeDataType creates a tensor with the shape, random initializer, and data type you specify.
-func TensorWithShapeRandomInitializerTypeDataType(shape []obj.Object, randomInitializerType RandomInitializerType, dataType DataType) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:randomInitializerType:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), randomInitializerType, dataType)
+func TensorWithShapeRandomInitializerTypeDataType(shape []*foundation.Number, randomInitializerType RandomInitializerType, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:randomInitializerType:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), randomInitializerType, dataType)
 	return TensorFromID(_r)
 }
 
 // TensorWithShapeDataType creates a tensor without data, with the shape and data type you specify.
-func TensorWithShapeDataType(shape []obj.Object, dataType DataType) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType)
+func TensorWithShapeDataType(shape []*foundation.Number, dataType DataType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dataType)
 	return TensorFromID(_r)
 }
 
 // TensorWithShapeDataDataType creates a tensor with the shape, data, and data type you specify.
-func TensorWithShapeDataDataType(shape []obj.Object, data *TensorData, dataType DataType) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:data:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(data), dataType)
+func TensorWithShapeDataDataType(shape []*foundation.Number, data *TensorData, dataType DataType) *Tensor {
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:data:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(data), dataType)
 	return TensorFromID(_r)
 }
 
 // TensorWithShapeFillWithDataDataType creates a tensor with the shape, scalar value, and data type you specify.
-func TensorWithShapeFillWithDataDataType(shape []obj.Object, fillData obj.Object, dataType DataType) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:fillWithData:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(fillData), dataType)
+func TensorWithShapeFillWithDataDataType(shape []*foundation.Number, fillData obj.Object, dataType DataType) *Tensor {
+	defer runtime.KeepAlive(fillData)
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithShape:fillWithData:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), objref.IDOf(fillData), dataType)
 	return TensorFromID(_r)
 }
 
@@ -962,12 +1039,14 @@ func TensorWithWidthHeightFeatureChannelCountBatchSizeRandomInitializerType(widt
 
 // TensorWithWidthHeightFeatureChannelCountBatchSizeData creates a tensor with the sizes, number of feature channels, and data you specify.
 func TensorWithWidthHeightFeatureChannelCountBatchSizeData(width int, height int, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:"), width, height, featureChannelCount, batchSize, objref.IDOf(data))
 	return TensorFromID(_r)
 }
 
 // TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType creates a tensor with the sizes, number of feature channels, data, and data type you specify.
 func TensorWithWidthHeightFeatureChannelCountBatchSizeDataDataType(width int, height int, featureChannelCount int, batchSize int, data *TensorData, dataType DataType) *Tensor {
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithWidth:height:featureChannelCount:batchSize:data:dataType:"), width, height, featureChannelCount, batchSize, objref.IDOf(data), dataType)
 	return TensorFromID(_r)
 }
@@ -986,43 +1065,45 @@ func TensorWithSequenceLengthFeatureChannelCountBatchSizeRandomInitializerType(s
 
 // TensorWithSequenceLengthFeatureChannelCountBatchSizeData creates a tensor with the sequence length, number of feature channels, batch size, and data you specify.
 func TensorWithSequenceLengthFeatureChannelCountBatchSizeData(sequenceLength int, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
+	defer runtime.KeepAlive(data)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLength:featureChannelCount:batchSize:data:"), sequenceLength, featureChannelCount, batchSize, objref.IDOf(data))
 	return TensorFromID(_r)
 }
 
 // TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and random initializer type you specify.
-func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths []obj.Object, sortedSequences bool, featureChannelCount int, batchSize int, randomInitializerType RandomInitializerType) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:randomInitializerType:"), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, randomInitializerType)
+func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeRandomInitializerType(sequenceLengths []*foundation.Number, sortedSequences bool, featureChannelCount int, batchSize int, randomInitializerType RandomInitializerType) *Tensor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:randomInitializerType:"), purego.SliceToNSArray(sequenceLengths, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, randomInitializerType)
 	return TensorFromID(_r)
 }
 
 // TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData creates a tensor with the sequence lengths, sorting indicator, number of feature channels, batch size, and data you specify.
-func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths []obj.Object, sortedSequences bool, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:"), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, objref.IDOf(data))
+func TensorWithSequenceLengthsSortedSequencesFeatureChannelCountBatchSizeData(sequenceLengths []*foundation.Number, sortedSequences bool, featureChannelCount int, batchSize int, data *TensorData) *Tensor {
+	defer runtime.KeepAlive(data)
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensor")), objc.RegisterName("tensorWithSequenceLengths:sortedSequences:featureChannelCount:batchSize:data:"), purego.SliceToNSArray(sequenceLengths, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), sortedSequences, featureChannelCount, batchSize, objref.IDOf(data))
 	return TensorFromID(_r)
 }
 
 // DataWithBytesNoCopyLength creates a tensor data instance with the buffer of data and length of bytes you specify.
-func DataWithBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *TensorData {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithBytesNoCopy:length:"), bytes_, length)
+func DataWithBytesNoCopyLength(data unsafe.Pointer, length int) *TensorData {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithBytesNoCopy:length:"), data, length)
 	return TensorDataFromID(_r)
 }
 
 // DataWithImmutableBytesNoCopyLength creates a tensor data instance with the buffer of immutable data and length of bytes you specify.
-func DataWithImmutableBytesNoCopyLength(bytes_ unsafe.Pointer, length int) *TensorData {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithImmutableBytesNoCopy:length:"), bytes_, length)
+func DataWithImmutableBytesNoCopyLength(data unsafe.Pointer, length int) *TensorData {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorData")), objc.RegisterName("dataWithImmutableBytesNoCopy:length:"), data, length)
 	return TensorDataFromID(_r)
 }
 
 // DescriptorWithShapeDataType creates a tensor descriptor with the shape and data type you specify.
-func DescriptorWithShapeDataType(shape []obj.Object, dataType DataType) *TensorDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dataType)
+func DescriptorWithShapeDataType(shape []*foundation.Number, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), dataType)
 	return TensorDescriptorFromID(_r)
 }
 
 // DescriptorWithShapeSequenceLengthsSortedSequencesDataType creates a tensor descriptor with the shape, variable sequence lengths, sorting indicator, and data type you specify.
-func DescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape []obj.Object, sequenceLengths []obj.Object, sortedSequences bool, dataType DataType) *TensorDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:sequenceLengths:sortedSequences:dataType:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sequenceLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sortedSequences, dataType)
+func DescriptorWithShapeSequenceLengthsSortedSequencesDataType(shape []*foundation.Number, sequenceLengths []*foundation.Number, sortedSequences bool, dataType DataType) *TensorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorDescriptor")), objc.RegisterName("descriptorWithShape:sequenceLengths:sortedSequences:dataType:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sequenceLengths, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), sortedSequences, dataType)
 	return TensorDescriptorFromID(_r)
 }
 
@@ -1064,48 +1145,53 @@ func MaxTensorDimensions() int {
 
 // ParameterWithTensor creates a tensor parameter with the tensor you specify.
 func ParameterWithTensor(tensor *Tensor) *TensorParameter {
+	defer runtime.KeepAlive(tensor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorParameter")), objc.RegisterName("parameterWithTensor:"), objref.IDOf(tensor))
 	return TensorParameterFromID(_r)
 }
 
 // ParameterWithTensorOptimizerData creates a tensor parameter with the tensor and optimizer data you specify.
 func ParameterWithTensorOptimizerData(tensor *Tensor, optimizerData []*TensorData) *TensorParameter {
+	defer runtime.KeepAlive(tensor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTensorParameter")), objc.RegisterName("parameterWithTensor:optimizerData:"), objref.IDOf(tensor), purego.SliceToNSArray(optimizerData, func(_v *TensorData) objc.ID { return objref.IDOf(_v) }))
 	return TensorParameterFromID(_r)
 }
 
 // GraphWithGraphObjectsLossLayerOptimizer creates a training graph with the layers from the graph objects, loss layer, and optimizer you specify.
 func GraphWithGraphObjectsLossLayerOptimizer(graphObjects []*Graph, lossLayer *Layer, optimizer *Optimizer) *TrainingGraph {
+	defer runtime.KeepAlive(lossLayer)
+	defer runtime.KeepAlive(optimizer)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCTrainingGraph")), objc.RegisterName("graphWithGraphObjects:lossLayer:optimizer:"), purego.SliceToNSArray(graphObjects, func(_v *Graph) objc.ID { return objref.IDOf(_v) }), objref.IDOf(lossLayer), objref.IDOf(optimizer))
 	return TrainingGraphFromID(_r)
 }
 
 // LayerWithDimensions creates a transpose layer with the dimensions you specify.
-func LayerWithDimensions(dimensions []obj.Object) *TransposeLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCTransposeLayer")), objc.RegisterName("layerWithDimensions:"), purego.SliceToNSArray(dimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func LayerWithDimensions(dimensions []*foundation.Number) *TransposeLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCTransposeLayer")), objc.RegisterName("layerWithDimensions:"), purego.SliceToNSArray(dimensions, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return TransposeLayerFromID(_r)
 }
 
 // MLCUpsampleLayerLayerWithShape creates an upsample layer with the shape you specify.
-func MLCUpsampleLayerLayerWithShape(shape []obj.Object) *UpsampleLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("layerWithShape:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func MLCUpsampleLayerLayerWithShape(shape []*foundation.Number) *UpsampleLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("layerWithShape:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }))
 	return UpsampleLayerFromID(_r)
 }
 
 // LayerWithShapeSampleModeAlignsCorners creates an upsample layer with the shape, upsampling algorithm, and corner alignement option you specify.
-func LayerWithShapeSampleModeAlignsCorners(shape []obj.Object, sampleMode SampleMode, alignsCorners bool) *UpsampleLayer {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("layerWithShape:sampleMode:alignsCorners:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), sampleMode, alignsCorners)
+func LayerWithShapeSampleModeAlignsCorners(shape []*foundation.Number, sampleMode SampleMode, alignsCorners bool) *UpsampleLayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCUpsampleLayer")), objc.RegisterName("layerWithShape:sampleMode:alignsCorners:"), purego.SliceToNSArray(shape, func(_v *foundation.Number) objc.ID { return objref.IDOf(_v) }), sampleMode, alignsCorners)
 	return UpsampleLayerFromID(_r)
 }
 
 // DescriptorWithAnchorBoxesAnchorBoxCount creates a YOLO loss filter descriptor with the anchor box data and number of anchor boxes you specify.
-func DescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes obj.Object, anchorBoxCount int) *YOLOLossDescriptor {
-	_r := objc.Send[objc.ID](objc.ID(_class("MLCYOLOLossDescriptor")), objc.RegisterName("descriptorWithAnchorBoxes:anchorBoxCount:"), objref.IDOf(anchorBoxes), anchorBoxCount)
+func DescriptorWithAnchorBoxesAnchorBoxCount(anchorBoxes []byte, anchorBoxCount int) *YOLOLossDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MLCYOLOLossDescriptor")), objc.RegisterName("descriptorWithAnchorBoxes:anchorBoxCount:"), rt.BytesToNSData(anchorBoxes), anchorBoxCount)
 	return YOLOLossDescriptorFromID(_r)
 }
 
 // MLCYOLOLossLayerLayerWithDescriptor creates a YOLO loss layer with the descriptor you specify.
 func MLCYOLOLossLayerLayerWithDescriptor(lossDescriptor *YOLOLossDescriptor) *YOLOLossLayer {
+	defer runtime.KeepAlive(lossDescriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("MLCYOLOLossLayer")), objc.RegisterName("layerWithDescriptor:"), objref.IDOf(lossDescriptor))
 	return YOLOLossLayerFromID(_r)
 }

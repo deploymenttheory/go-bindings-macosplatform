@@ -5,7 +5,10 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func contactAdopt(id objc.ID) *Contact {
 
 // Description returns the object's -description text.
 func (c *Contact) Description() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (c *Contact) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (c *Contact) IsKind(className string) bool {
+	defer runtime.KeepAlive(c)
 	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (c *Contact) String() string {
+	defer runtime.KeepAlive(c)
 	return rt.Description(objref.IDOf(c))
 }
 
@@ -74,18 +82,21 @@ func NewContact() *Contact {
 
 // WithName sets the contact’s first and last name, or nil if the contact’s name is not needed for the transaction.
 func (c *Contact) WithName(name obj.Object) *Contact {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), objref.IDOf(name))
 	return c
 }
 
 // WithPostalAddress sets the contact’s full postal address.
 func (c *Contact) WithPostalAddress(postalAddress obj.Object) *Contact {
+	defer runtime.KeepAlive(postalAddress)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPostalAddress:"), objref.IDOf(postalAddress))
 	return c
 }
 
 // WithPhoneNumber sets the contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.
 func (c *Contact) WithPhoneNumber(phoneNumber obj.Object) *Contact {
+	defer runtime.KeepAlive(phoneNumber)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPhoneNumber:"), objref.IDOf(phoneNumber))
 	return c
 }
@@ -103,25 +114,29 @@ func (c *Contact) WithSupplementarySubLocality(supplementarySubLocality string) 
 }
 
 // Name returns the name.
-func (c *Contact) Name() obj.Object {
+func (c *Contact) Name() *foundation.PersonNameComponents {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
-	return obj.Wrap(_r)
+	return foundation.PersonNameComponentsFromID(_r)
 }
 
 // PostalAddress returns the postal address.
 func (c *Contact) PostalAddress() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("postalAddress"))
 	return obj.Wrap(_r)
 }
 
 // PhoneNumber returns the phone number.
 func (c *Contact) PhoneNumber() obj.Object {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneNumber"))
 	return obj.Wrap(_r)
 }
 
 // EmailAddress returns the email address.
 func (c *Contact) EmailAddress() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
@@ -131,6 +146,7 @@ func (c *Contact) EmailAddress() string {
 
 // SupplementarySubLocality returns the supplementary sub locality.
 func (c *Contact) SupplementarySubLocality() string {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("supplementarySubLocality"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func recurringPaymentRequestAdopt(id objc.ID) *RecurringPaymentRequest {
 
 // Description returns the object's -description text.
 func (rpr *RecurringPaymentRequest) Description() string {
+	defer runtime.KeepAlive(rpr)
 	return rt.Description(objref.IDOf(rpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpr *RecurringPaymentRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpr *RecurringPaymentRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpr)
 	return rt.IsKind(objref.IDOf(rpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpr *RecurringPaymentRequest) String() string {
+	defer runtime.KeepAlive(rpr)
 	return rt.Description(objref.IDOf(rpr))
 }
 
 // NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL create a recurring payment object with a description, regular billing information, and a management URL.
 func NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL(paymentDescription string, regularBilling *RecurringPaymentSummaryItem, managementURL string) *RecurringPaymentRequest {
+	defer runtime.KeepAlive(regularBilling)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKRecurringPaymentRequest")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:regularBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(regularBilling), rt.FileURL(managementURL))
 	return recurringPaymentRequestAdopt(_id)
@@ -81,12 +89,14 @@ func (rpr *RecurringPaymentRequest) WithPaymentDescription(paymentDescription st
 
 // WithRegularBilling sets the regular billing cycle for the recurring payment, including start and end dates, an interval, and an interval count.
 func (rpr *RecurringPaymentRequest) WithRegularBilling(regularBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
+	defer runtime.KeepAlive(regularBilling)
 	objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("setRegularBilling:"), objref.IDOf(regularBilling))
 	return rpr
 }
 
 // WithTrialBilling sets the trial billing cycle for the recurring payment.
 func (rpr *RecurringPaymentRequest) WithTrialBilling(trialBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
+	defer runtime.KeepAlive(trialBilling)
 	objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("setTrialBilling:"), objref.IDOf(trialBilling))
 	return rpr
 }
@@ -111,6 +121,7 @@ func (rpr *RecurringPaymentRequest) WithTokenNotificationURL(tokenNotificationUR
 
 // PaymentDescription returns the payment description.
 func (rpr *RecurringPaymentRequest) PaymentDescription() string {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
 		return ""
@@ -120,18 +131,21 @@ func (rpr *RecurringPaymentRequest) PaymentDescription() string {
 
 // RegularBilling returns the regular billing.
 func (rpr *RecurringPaymentRequest) RegularBilling() *RecurringPaymentSummaryItem {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("regularBilling"))
 	return RecurringPaymentSummaryItemFromID(_r)
 }
 
 // TrialBilling returns the trial billing.
 func (rpr *RecurringPaymentRequest) TrialBilling() *RecurringPaymentSummaryItem {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("trialBilling"))
 	return RecurringPaymentSummaryItemFromID(_r)
 }
 
 // BillingAgreement returns the billing agreement.
 func (rpr *RecurringPaymentRequest) BillingAgreement() string {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
 		return ""
@@ -140,13 +154,15 @@ func (rpr *RecurringPaymentRequest) BillingAgreement() string {
 }
 
 // ManagementURL returns the management URL.
-func (rpr *RecurringPaymentRequest) ManagementURL() obj.Object {
+func (rpr *RecurringPaymentRequest) ManagementURL() string {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("managementURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // TokenNotificationURL returns the token notification URL.
-func (rpr *RecurringPaymentRequest) TokenNotificationURL() obj.Object {
+func (rpr *RecurringPaymentRequest) TokenNotificationURL() string {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tokenNotificationURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }

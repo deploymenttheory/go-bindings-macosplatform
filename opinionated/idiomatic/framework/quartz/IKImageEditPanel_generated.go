@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iKImageEditPanelAdopt(id objc.ID) *IKImageEditPanel {
 
 // Description returns the object's -description text.
 func (iiep *IKImageEditPanel) Description() string {
+	defer runtime.KeepAlive(iiep)
 	return rt.Description(objref.IDOf(iiep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (iiep *IKImageEditPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(iiep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(iiep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (iiep *IKImageEditPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(iiep)
 	return rt.IsKind(objref.IDOf(iiep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (iiep *IKImageEditPanel) String() string {
+	defer runtime.KeepAlive(iiep)
 	return rt.Description(objref.IDOf(iiep))
 }
 
@@ -80,6 +87,7 @@ func NewIKImageEditPanel() *IKImageEditPanel {
 
 // WithDataSource sets specifies the edit panel’s dataSource.
 func (iiep *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEditPanel {
+	defer runtime.KeepAlive(dataSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 	})
@@ -88,6 +96,7 @@ func (iiep *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEdit
 
 // ReloadData reloads the data from the data associated with an image editing panel.
 func (iiep *IKImageEditPanel) ReloadData() {
+	defer runtime.KeepAlive(iiep)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iiep), objc.RegisterName("reloadData"))
 	})
@@ -96,6 +105,7 @@ func (iiep *IKImageEditPanel) ReloadData() {
 
 // DataSource returns data source associated with an image editing panel
 func (iiep *IKImageEditPanel) DataSource() obj.Object {
+	defer runtime.KeepAlive(iiep)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -109,6 +119,7 @@ func (iiep *IKImageEditPanel) DataSource() obj.Object {
 
 // FilterArray returns array of filters reflecting the current user adjustments in the adjust or effects tab.
 func (iiep *IKImageEditPanel) FilterArray() obj.Object {
+	defer runtime.KeepAlive(iiep)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

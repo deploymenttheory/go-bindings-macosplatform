@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccessControlClusterReviewFabricRestrictionsParamsAdopt(id objc.ID) *MTR
 
 // Description returns the object's -description text.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) Description() string {
+	defer runtime.KeepAlive(maccrfrp)
 	return rt.Description(objref.IDOf(maccrfrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccrfrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccrfrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccrfrp)
 	return rt.IsKind(objref.IDOf(maccrfrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) String() string {
+	defer runtime.KeepAlive(maccrfrp)
 	return rt.Description(objref.IDOf(maccrfrp))
 }
 
@@ -72,35 +80,42 @@ func NewMTRAccessControlClusterReviewFabricRestrictionsParams() *MTRAccessContro
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return maccrfrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return maccrfrp
 }
 
 // Arl returns the arl.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) Arl() obj.Object {
+	defer runtime.KeepAlive(maccrfrp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("arl"))
 	return obj.Wrap(_r)
 }
 
 // SetArl wraps the corresponding Objective-C method.
 func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) SetArl(arl obj.Object) {
+	defer runtime.KeepAlive(maccrfrp)
+	defer runtime.KeepAlive(arl)
 	objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("setArl:"), objref.IDOf(arl))
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) TimedInvokeTimeoutMs() obj.Object {
+func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(maccrfrp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) ServerSideProcessingTimeout() obj.Object {
+func (maccrfrp *MTRAccessControlClusterReviewFabricRestrictionsParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(maccrfrp)
 	_r := objc.Send[objc.ID](objref.IDOf(maccrfrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

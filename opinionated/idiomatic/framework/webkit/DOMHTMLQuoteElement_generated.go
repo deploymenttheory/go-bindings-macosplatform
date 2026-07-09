@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -159,6 +161,7 @@ func (dqe *DOMHTMLQuoteElement) WithTextContent(textContent string) *DOMHTMLQuot
 
 // Cite returns the cite.
 func (dqe *DOMHTMLQuoteElement) Cite() string {
+	defer runtime.KeepAlive(dqe)
 	_r := objc.Send[objc.ID](objref.IDOf(dqe), objc.RegisterName("cite"))
 	if _r == 0 {
 		return ""

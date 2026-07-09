@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -68,6 +70,7 @@ func (mp *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
 //
 // Polylines returns the collection as a Go slice.
 func (mp *MultiPolyline) Polylines() []*Polyline {
+	defer runtime.KeepAlive(mp)
 	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("polylines"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polyline { return PolylineFromID(_id) })
 }

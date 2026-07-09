@@ -5,6 +5,9 @@
 package metrickit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func diagnosticPayloadAdopt(id objc.ID) *DiagnosticPayload {
 
 // Description returns the object's -description text.
 func (dp *DiagnosticPayload) Description() string {
+	defer runtime.KeepAlive(dp)
 	return rt.Description(objref.IDOf(dp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dp *DiagnosticPayload) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dp *DiagnosticPayload) IsKind(className string) bool {
+	defer runtime.KeepAlive(dp)
 	return rt.IsKind(objref.IDOf(dp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dp *DiagnosticPayload) String() string {
+	defer runtime.KeepAlive(dp)
 	return rt.Description(objref.IDOf(dp))
 }
 
@@ -73,13 +81,15 @@ func NewDiagnosticPayload() *DiagnosticPayload {
 }
 
 // JSONRepresentation returns the contents of the payload in JSON format.
-func (dp *DiagnosticPayload) JSONRepresentation() obj.Object {
+func (dp *DiagnosticPayload) JSONRepresentation() []byte {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("JSONRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // DictionaryRepresentation returns the results of the payload as a dictionary.
 func (dp *DiagnosticPayload) DictionaryRepresentation() obj.Object {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
@@ -88,6 +98,7 @@ func (dp *DiagnosticPayload) DictionaryRepresentation() obj.Object {
 //
 // CPUExceptionDiagnostics returns the collection as a Go slice.
 func (dp *DiagnosticPayload) CPUExceptionDiagnostics() []*CPUExceptionDiagnostic {
+	defer runtime.KeepAlive(dp)
 	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("cpuExceptionDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CPUExceptionDiagnostic { return CPUExceptionDiagnosticFromID(_id) })
 }
@@ -96,6 +107,7 @@ func (dp *DiagnosticPayload) CPUExceptionDiagnostics() []*CPUExceptionDiagnostic
 //
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
 func (dp *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
+	defer runtime.KeepAlive(dp)
 	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("diskWriteExceptionDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiskWriteExceptionDiagnostic { return DiskWriteExceptionDiagnosticFromID(_id) })
 }
@@ -104,6 +116,7 @@ func (dp *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExcepti
 //
 // HangDiagnostics returns the collection as a Go slice.
 func (dp *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
+	defer runtime.KeepAlive(dp)
 	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("hangDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HangDiagnostic { return HangDiagnosticFromID(_id) })
 }
@@ -112,18 +125,21 @@ func (dp *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
 //
 // CrashDiagnostics returns the collection as a Go slice.
 func (dp *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
+	defer runtime.KeepAlive(dp)
 	_arr := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("crashDiagnostics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CrashDiagnostic { return CrashDiagnosticFromID(_id) })
 }
 
 // TimeStampBegin returns an NSDate object that indicates the start time for which the payload was generated.
-func (dp *DiagnosticPayload) TimeStampBegin() obj.Object {
+func (dp *DiagnosticPayload) TimeStampBegin() time.Time {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeStampBegin"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // TimeStampEnd returns an NSDate object that indicates the end time for which the payload was generated.
-func (dp *DiagnosticPayload) TimeStampEnd() obj.Object {
+func (dp *DiagnosticPayload) TimeStampEnd() time.Time {
+	defer runtime.KeepAlive(dp)
 	_r := objc.Send[objc.ID](objref.IDOf(dp), objc.RegisterName("timeStampEnd"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

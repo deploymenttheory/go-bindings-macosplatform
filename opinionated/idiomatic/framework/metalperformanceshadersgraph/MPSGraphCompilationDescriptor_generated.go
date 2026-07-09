@@ -5,9 +5,11 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -68,6 +70,7 @@ func (gcd *GraphCompilationDescriptor) WithWaitForCompilationCompletion(waitForC
 
 // WithDispatchQueue sets the dispatch queue used for the compilation.
 func (gcd *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue obj.Object) *GraphCompilationDescriptor {
+	defer runtime.KeepAlive(dispatchQueue)
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("setDispatchQueue:"), objref.IDOf(dispatchQueue))
 	return gcd
 }
@@ -92,40 +95,47 @@ func (gcd *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPreci
 
 // DisableTypeInference turns off type inference and relies on type inference during runtime.
 func (gcd *GraphCompilationDescriptor) DisableTypeInference() {
+	defer runtime.KeepAlive(gcd)
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("disableTypeInference"))
 }
 
 // ConvertLayoutToNHWC turns on Automatic Layout Conversion (for conv like operations) for GPU.
 func (gcd *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
+	defer runtime.KeepAlive(gcd)
 	objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("convertLayoutToNHWC"))
 }
 
 // OptimizationLevel returns the optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
 func (gcd *GraphCompilationDescriptor) OptimizationLevel() GraphOptimization {
+	defer runtime.KeepAlive(gcd)
 	_r := objc.Send[GraphOptimization](objref.IDOf(gcd), objc.RegisterName("optimizationLevel"))
 	return _r
 }
 
 // WaitForCompilationCompletion reports whether flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to false.
 func (gcd *GraphCompilationDescriptor) WaitForCompilationCompletion() bool {
+	defer runtime.KeepAlive(gcd)
 	_r := objc.Send[bool](objref.IDOf(gcd), objc.RegisterName("waitForCompilationCompletion"))
 	return _r
 }
 
 // DispatchQueue returns the dispatch queue used for the compilation. Default value is nil.
-func (gcd *GraphCompilationDescriptor) DispatchQueue() obj.Object {
+func (gcd *GraphCompilationDescriptor) DispatchQueue() *foundation.Object {
+	defer runtime.KeepAlive(gcd)
 	_r := objc.Send[objc.ID](objref.IDOf(gcd), objc.RegisterName("dispatchQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // OptimizationProfile returns the optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
 func (gcd *GraphCompilationDescriptor) OptimizationProfile() GraphOptimizationProfile {
+	defer runtime.KeepAlive(gcd)
 	_r := objc.Send[GraphOptimizationProfile](objref.IDOf(gcd), objc.RegisterName("optimizationProfile"))
 	return _r
 }
 
 // ReducedPrecisionFastMath returns across the executable allow reduced precision fast math optimizations.
 func (gcd *GraphCompilationDescriptor) ReducedPrecisionFastMath() GraphReducedPrecisionFastMath {
+	defer runtime.KeepAlive(gcd)
 	_r := objc.Send[GraphReducedPrecisionFastMath](objref.IDOf(gcd), objc.RegisterName("reducedPrecisionFastMath"))
 	return _r
 }

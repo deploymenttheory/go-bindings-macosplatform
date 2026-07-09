@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterMediaPlaybackAdopt(id objc.ID) *MTRBaseClusterMediaPlayback {
 
 // NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterMediaPlayback {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterMediaPlayback")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterMediaPlaybackAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointIDQueue(device *MTRBaseDevi
 
 // NewMTRBaseClusterMediaPlaybackWithDeviceEndpointQueue creates a new MTRBaseClusterMediaPlayback.
 func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterMediaPlayback {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterMediaPlayback")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterMediaPlaybackAdopt(_id)
@@ -65,6 +71,8 @@ func NewMTRBaseClusterMediaPlaybackWithDeviceEndpointQueue(device *MTRBaseDevice
 //
 // PlayWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -90,6 +98,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithParamsCompletion(ctx context.C
 //
 // PlayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -115,6 +124,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithCompletion(ctx context.Context
 //
 // PauseWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -140,6 +151,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParamsCompletion(ctx context.
 //
 // PauseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -165,6 +177,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithCompletion(ctx context.Contex
 //
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -190,6 +204,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopWithParamsCompletion(ctx context.C
 //
 // StopWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -215,6 +230,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopWithCompletion(ctx context.Context
 //
 // StartOverWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -240,6 +257,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParamsCompletion(ctx cont
 //
 // StartOverWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -265,6 +283,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithCompletion(ctx context.Co
 //
 // PreviousWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -290,6 +310,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithParamsCompletion(ctx conte
 //
 // PreviousWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -315,6 +336,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithCompletion(ctx context.Con
 //
 // NextWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -340,6 +363,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) NextWithParamsCompletion(ctx context.C
 //
 // NextWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -365,6 +389,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) NextWithCompletion(ctx context.Context
 //
 // RewindWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -390,6 +416,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithParamsCompletion(ctx context
 //
 // RewindWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -415,6 +442,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithCompletion(ctx context.Conte
 //
 // FastForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -440,6 +469,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithParamsCompletion(ctx co
 //
 // FastForwardWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -465,6 +495,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithCompletion(ctx context.
 //
 // SkipForwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -490,6 +522,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SkipForwardWithParamsCompletion(ctx co
 //
 // SkipBackwardWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -515,6 +549,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SkipBackwardWithParamsCompletion(ctx c
 //
 // SeekWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -540,6 +576,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParamsCompletion(ctx context.C
 //
 // ReadAttributeCurrentStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +602,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeCurrentStateWithCompletio
 //
 // SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +629,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithPara
 //
 // ReadAttributeStartTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeStartTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +655,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeStartTimeWithCompletion(c
 //
 // SubscribeAttributeStartTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +682,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithParamsS
 //
 // ReadAttributeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +708,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeDurationWithCompletion(ct
 //
 // SubscribeAttributeDurationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +735,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithParamsSu
 //
 // ReadAttributeSampledPositionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSampledPositionWithCompletion(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackPositionStruct, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPositionStruct
 		err error
@@ -715,6 +761,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSampledPositionWithComple
 //
 // SubscribeAttributeSampledPositionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRMediaPlaybackClusterPlaybackPositionStruct, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPositionStruct
 		err error
@@ -740,6 +788,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithP
 //
 // ReadAttributePlaybackSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +814,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeedWithCompleti
 //
 // SubscribeAttributePlaybackSpeedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +841,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithPar
 //
 // ReadAttributeSeekRangeEndWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEndWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +867,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEndWithCompletio
 //
 // SubscribeAttributeSeekRangeEndWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +894,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithPara
 //
 // ReadAttributeSeekRangeStartWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStartWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +920,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStartWithComplet
 //
 // SubscribeAttributeSeekRangeStartWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +947,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithPa
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +973,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandListWithC
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +1000,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandList
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1026,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandListWithCo
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1053,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListW
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1079,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAttributeListWithCompleti
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1106,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithPar
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1132,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMapWithCompletion(
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1159,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithParams
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1185,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevisionWithComple
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1212,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithP
 //
 // PlayWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1165,6 +1239,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PlayWithParams(ctx context.Context, pa
 //
 // Play blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) Play(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1190,6 +1265,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Play(ctx context.Context) (result *MTR
 //
 // PauseWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1215,6 +1292,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PauseWithParams(ctx context.Context, p
 //
 // Pause blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) Pause(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1240,6 +1318,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Pause(ctx context.Context) (result *MT
 //
 // StopPlaybackWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1265,6 +1345,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopPlaybackWithParams(ctx context.Con
 //
 // StopPlayback blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1290,6 +1371,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StopPlayback(ctx context.Context) (res
 //
 // StartOverWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1315,6 +1398,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOverWithParams(ctx context.Contex
 //
 // StartOver blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) StartOver(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1340,6 +1424,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) StartOver(ctx context.Context) (result
 //
 // PreviousWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithParams(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1365,6 +1451,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) PreviousWithParams(ctx context.Context
 //
 // Previous blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) Previous(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1390,6 +1477,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Previous(ctx context.Context) (result 
 //
 // NextWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) NextWithParams(ctx context.Context, params *MTRMediaPlaybackClusterNextParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1415,6 +1504,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) NextWithParams(ctx context.Context, pa
 //
 // Next blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) Next(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1440,6 +1530,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Next(ctx context.Context) (result *MTR
 //
 // RewindWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithParams(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1465,6 +1557,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) RewindWithParams(ctx context.Context, 
 //
 // Rewind blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) Rewind(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1490,6 +1583,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) Rewind(ctx context.Context) (result *M
 //
 // FastForwardWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1515,6 +1610,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) FastForwardWithParams(ctx context.Cont
 //
 // FastForward blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) FastForward(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1540,6 +1636,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) FastForward(ctx context.Context) (resu
 //
 // SkipForwardWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SkipForwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1565,6 +1663,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SkipForwardWithParams(ctx context.Cont
 //
 // SkipBackwardWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SkipBackwardWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1590,6 +1690,8 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SkipBackwardWithParams(ctx context.Con
 //
 // SeekWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParams(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
@@ -1615,6 +1717,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SeekWithParams(ctx context.Context, pa
 //
 // ReadAttributeCurrentState blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeCurrentState(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1743,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeCurrentState(ctx context.
 //
 // SubscribeAttributeCurrentStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1772,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeCurrentStateWithMinI
 //
 // ReadAttributeStartTime blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeStartTime(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1798,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeStartTime(ctx context.Con
 //
 // SubscribeAttributeStartTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1827,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeStartTimeWithMinInte
 //
 // ReadAttributeDuration blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeDuration(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1853,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeDuration(ctx context.Cont
 //
 // SubscribeAttributeDurationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1882,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeDurationWithMinInter
 //
 // ReadAttributeSampledPosition blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSampledPosition(ctx context.Context) (result *MTRMediaPlaybackClusterPlaybackPosition, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPosition
 		err error
@@ -1790,6 +1908,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSampledPosition(ctx conte
 //
 // SubscribeAttributeSampledPositionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRMediaPlaybackClusterPlaybackPosition, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackPosition
 		err error
@@ -1815,6 +1937,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSampledPositionWithM
 //
 // ReadAttributePlaybackSpeed blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeed(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1963,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributePlaybackSpeed(ctx context
 //
 // SubscribeAttributePlaybackSpeedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1865,6 +1992,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributePlaybackSpeedWithMin
 //
 // ReadAttributeSeekRangeEnd blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEnd(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1890,6 +2018,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeEnd(ctx context.
 //
 // SubscribeAttributeSeekRangeEndWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1915,6 +2047,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeEndWithMinI
 //
 // ReadAttributeSeekRangeStart blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStart(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1940,6 +2073,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeSeekRangeStart(ctx contex
 //
 // SubscribeAttributeSeekRangeStartWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1965,6 +2102,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeSeekRangeStartWithMi
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1990,6 +2128,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeGeneratedCommandList(ctx 
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2015,6 +2157,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeGeneratedCommandList
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2040,6 +2183,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAcceptedCommandList(ctx c
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2065,6 +2212,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAcceptedCommandListW
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2090,6 +2238,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeAttributeList(ctx context
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2115,6 +2267,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeAttributeListWithMin
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2140,6 +2293,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeFeatureMap(ctx context.Co
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2165,6 +2322,7 @@ func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeFeatureMapWithMinInt
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
 	type _result struct {
 		val obj.Object
 		err error
@@ -2190,6 +2348,10 @@ func (mbcmp *MTRBaseClusterMediaPlayback) ReadAttributeClusterRevision(ctx conte
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcmp *MTRBaseClusterMediaPlayback) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcmp)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

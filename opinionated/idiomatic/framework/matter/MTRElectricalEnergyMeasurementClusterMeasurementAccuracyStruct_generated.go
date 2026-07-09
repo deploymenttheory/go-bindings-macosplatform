@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructAdopt(id objc
 
 // Description returns the object's -description text.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Description() string {
+	defer runtime.KeepAlive(meemcmas)
 	return rt.Description(objref.IDOf(meemcmas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meemcmas)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meemcmas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(meemcmas)
 	return rt.IsKind(objref.IDOf(meemcmas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) String() string {
+	defer runtime.KeepAlive(meemcmas)
 	return rt.Description(objref.IDOf(meemcmas))
 }
 
@@ -72,59 +80,70 @@ func NewMTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct() *MTREle
 
 // WithMeasurementType sets the measurement type.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMeasurementType(measurementType obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	defer runtime.KeepAlive(measurementType)
 	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMeasurementType:"), objref.IDOf(measurementType))
 	return meemcmas
 }
 
 // WithMeasured sets the measured.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMeasured(measured obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	defer runtime.KeepAlive(measured)
 	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMeasured:"), objref.IDOf(measured))
 	return meemcmas
 }
 
 // WithMinMeasuredValue sets the min measured value.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMinMeasuredValue(minMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	defer runtime.KeepAlive(minMeasuredValue)
 	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMinMeasuredValue:"), objref.IDOf(minMeasuredValue))
 	return meemcmas
 }
 
 // WithMaxMeasuredValue sets the max measured value.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMaxMeasuredValue(maxMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	defer runtime.KeepAlive(maxMeasuredValue)
 	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMaxMeasuredValue:"), objref.IDOf(maxMeasuredValue))
 	return meemcmas
 }
 
 // MeasurementType returns the measurement type.
-func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MeasurementType() obj.Object {
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MeasurementType() *foundation.Number {
+	defer runtime.KeepAlive(meemcmas)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("measurementType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Measured returns the measured.
-func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Measured() obj.Object {
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Measured() *foundation.Number {
+	defer runtime.KeepAlive(meemcmas)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("measured"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MinMeasuredValue returns the min measured value.
-func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MinMeasuredValue() obj.Object {
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MinMeasuredValue() *foundation.Number {
+	defer runtime.KeepAlive(meemcmas)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("minMeasuredValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaxMeasuredValue returns the max measured value.
-func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MaxMeasuredValue() obj.Object {
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MaxMeasuredValue() *foundation.Number {
+	defer runtime.KeepAlive(meemcmas)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("maxMeasuredValue"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AccuracyRanges returns the accuracy ranges.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) AccuracyRanges() obj.Object {
+	defer runtime.KeepAlive(meemcmas)
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("accuracyRanges"))
 	return obj.Wrap(_r)
 }
 
 // SetAccuracyRanges wraps the corresponding Objective-C method.
 func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetAccuracyRanges(accuracyRanges obj.Object) {
+	defer runtime.KeepAlive(meemcmas)
+	defer runtime.KeepAlive(accuracyRanges)
 	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setAccuracyRanges:"), objref.IDOf(accuracyRanges))
 }

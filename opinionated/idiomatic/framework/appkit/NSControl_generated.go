@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -63,6 +65,7 @@ func NewControlWithFrame(frameRect corefoundation.CGRect) *Control {
 
 // NewControlWithCoder initializes a control with data in an unarchiver.
 func NewControlWithCoder(coder obj.Object) *Control {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *Control
 	purego.Main(func() {
 		_mainthread0 = func() *Control {
@@ -76,6 +79,7 @@ func NewControlWithCoder(coder obj.Object) *Control {
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (c *Control) WithTarget(target obj.Object) *Control {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -140,6 +144,7 @@ func (c *Control) WithControlSize(controlSize ControlSize) *Control {
 
 // WithFormatter sets the receiver’s formatter.
 func (c *Control) WithFormatter(formatter obj.Object) *Control {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -148,6 +153,7 @@ func (c *Control) WithFormatter(formatter obj.Object) *Control {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (c *Control) WithObjectValue(objectValue obj.Object) *Control {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -164,6 +170,7 @@ func (c *Control) WithStringValue(stringValue string) *Control {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (c *Control) WithAttributedStringValue(attributedStringValue obj.Object) *Control {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -204,6 +211,7 @@ func (c *Control) WithDoubleValue(doubleValue float64) *Control {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (c *Control) WithFont(font *Font) *Control {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -252,6 +260,7 @@ func (c *Control) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Con
 
 // WithCell sets the cell.
 func (c *Control) WithCell(cell CellProvider) *Control {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -397,6 +406,7 @@ func (c *Control) WithWantsLayer(wantsLayer bool) *Control {
 
 // WithLayer sets the layer.
 func (c *Control) WithLayer(layer obj.Object) *Control {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -446,6 +456,7 @@ func (c *Control) WithBackgroundFilters(items ...obj.Object) *Control {
 
 // WithCompositingFilter sets the compositing filter.
 func (c *Control) WithCompositingFilter(compositingFilter obj.Object) *Control {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -463,6 +474,7 @@ func (c *Control) WithContentFilters(items ...obj.Object) *Control {
 
 // WithShadow sets the shadow.
 func (c *Control) WithShadow(shadow *Shadow) *Control {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -511,6 +523,7 @@ func (c *Control) WithPreparedContentRect(preparedContentRect corefoundation.CGR
 
 // WithNextKeyView sets the next key view.
 func (c *Control) WithNextKeyView(nextKeyView ViewProvider) *Control {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -560,6 +573,7 @@ func (c *Control) WithPrefersCompactControlSizeMetrics(prefersCompactControlSize
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (c *Control) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Control {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -616,6 +630,7 @@ func (c *Control) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynami
 
 // WithPressureConfiguration sets the pressure configuration.
 func (c *Control) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Control {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -624,6 +639,7 @@ func (c *Control) WithPressureConfiguration(pressureConfiguration *PressureConfi
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (c *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -632,6 +648,7 @@ func (c *Control) WithNextResponder(nextResponder ResponderProvider) *Control {
 
 // WithMenu sets returns the responder’s menu.
 func (c *Control) WithMenu(menu *Menu) *Control {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -640,6 +657,7 @@ func (c *Control) WithMenu(menu *Menu) *Control {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (c *Control) WithUserActivity(userActivity obj.Object) *Control {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -648,6 +666,7 @@ func (c *Control) WithUserActivity(userActivity obj.Object) *Control {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (c *Control) WithTouchBar(touchBar *TouchBar) *Control {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -656,6 +675,7 @@ func (c *Control) WithTouchBar(touchBar *TouchBar) *Control {
 
 // SizeThatFits asks the control to calculate and return the size that best fits the specified size.
 func (c *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -669,6 +689,7 @@ func (c *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize
 
 // SizeToFit resizes the receiver’s frame so that it’s the minimum size needed to contain its cell.
 func (c *Control) SizeToFit() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sizeToFit"))
 	})
@@ -677,6 +698,7 @@ func (c *Control) SizeToFit() {
 
 // SendActionOn sets the conditions on which the receiver sends action messages to its target.
 func (c *Control) SendActionOn(mask EventMask) int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -690,6 +712,8 @@ func (c *Control) SendActionOn(mask EventMask) int {
 
 // TakeIntValueFrom sets the value of the receiver’s cell to an integer value obtained from the specified object.
 func (c *Control) TakeIntValueFrom(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntValueFrom:"), objref.IDOf(sender))
 	})
@@ -698,6 +722,8 @@ func (c *Control) TakeIntValueFrom(sender obj.Object) {
 
 // TakeFloatValueFrom sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
 func (c *Control) TakeFloatValueFrom(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeFloatValueFrom:"), objref.IDOf(sender))
 	})
@@ -706,6 +732,8 @@ func (c *Control) TakeFloatValueFrom(sender obj.Object) {
 
 // TakeDoubleValueFrom sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
 func (c *Control) TakeDoubleValueFrom(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeDoubleValueFrom:"), objref.IDOf(sender))
 	})
@@ -714,6 +742,8 @@ func (c *Control) TakeDoubleValueFrom(sender obj.Object) {
 
 // TakeStringValueFrom sets the value of the receiver’s cell to the string value obtained from the specified object.
 func (c *Control) TakeStringValueFrom(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeStringValueFrom:"), objref.IDOf(sender))
 	})
@@ -722,6 +752,8 @@ func (c *Control) TakeStringValueFrom(sender obj.Object) {
 
 // TakeObjectValueFrom sets the value of the receiver’s cell to the object value obtained from the specified object.
 func (c *Control) TakeObjectValueFrom(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeObjectValueFrom:"), objref.IDOf(sender))
 	})
@@ -730,6 +762,8 @@ func (c *Control) TakeObjectValueFrom(sender obj.Object) {
 
 // TakeIntegerValueFrom sets the value of the receiver’s cell to an NSInteger value obtained from the specified object.
 func (c *Control) TakeIntegerValueFrom(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("takeIntegerValueFrom:"), objref.IDOf(sender))
 	})
@@ -738,6 +772,8 @@ func (c *Control) TakeIntegerValueFrom(sender obj.Object) {
 
 // PerformClick simulates a single mouse click on the receiver.
 func (c *Control) PerformClick(sender obj.Object) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("performClick:"), objref.IDOf(sender))
 	})
@@ -746,6 +782,7 @@ func (c *Control) PerformClick(sender obj.Object) {
 
 // ExpansionFrameWithFrame the frame in which a tool tip can be displayed, if needed.
 func (c *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -759,6 +796,8 @@ func (c *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) co
 
 // DrawWithExpansionFrameInView performs custom expansion tool tip drawing.
 func (c *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *View) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawWithExpansionFrame:inView:"), contentFrame, objref.IDOf(view))
 	})
@@ -767,6 +806,7 @@ func (c *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRec
 
 // Target returns the target.
 func (c *Control) Target() obj.Object {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -780,6 +820,7 @@ func (c *Control) Target() obj.Object {
 
 // IgnoresMultiClick wraps the corresponding Objective-C method.
 func (c *Control) IgnoresMultiClick() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -793,6 +834,7 @@ func (c *Control) IgnoresMultiClick() bool {
 
 // IsContinuous reports whether the object is continuous.
 func (c *Control) IsContinuous() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -806,6 +848,7 @@ func (c *Control) IsContinuous() bool {
 
 // IsEnabled reports whether the object is enabled.
 func (c *Control) IsEnabled() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -819,6 +862,7 @@ func (c *Control) IsEnabled() bool {
 
 // RefusesFirstResponder wraps the corresponding Objective-C method.
 func (c *Control) RefusesFirstResponder() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -832,6 +876,7 @@ func (c *Control) RefusesFirstResponder() bool {
 
 // IsHighlighted reports whether the object is highlighted.
 func (c *Control) IsHighlighted() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -845,6 +890,7 @@ func (c *Control) IsHighlighted() bool {
 
 // ControlSize returns the control size.
 func (c *Control) ControlSize() ControlSize {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 ControlSize
 	purego.Main(func() {
 		_mainthread0 = func() ControlSize {
@@ -857,12 +903,13 @@ func (c *Control) ControlSize() ControlSize {
 }
 
 // Formatter returns the formatter.
-func (c *Control) Formatter() obj.Object {
-	var _mainthread0 obj.Object
+func (c *Control) Formatter() *foundation.Formatter {
+	defer runtime.KeepAlive(c)
+	var _mainthread0 *foundation.Formatter
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Formatter {
 			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("formatter"))
-			return obj.Wrap(_r)
+			return foundation.FormatterFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -871,6 +918,7 @@ func (c *Control) Formatter() obj.Object {
 
 // ObjectValue returns the object value.
 func (c *Control) ObjectValue() obj.Object {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -884,6 +932,7 @@ func (c *Control) ObjectValue() obj.Object {
 
 // StringValue returns the string value.
 func (c *Control) StringValue() string {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -899,12 +948,13 @@ func (c *Control) StringValue() string {
 }
 
 // AttributedStringValue returns the attributed string value.
-func (c *Control) AttributedStringValue() obj.Object {
-	var _mainthread0 obj.Object
+func (c *Control) AttributedStringValue() *foundation.AttributedString {
+	defer runtime.KeepAlive(c)
+	var _mainthread0 *foundation.AttributedString
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.AttributedString {
 			_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributedStringValue"))
-			return obj.Wrap(_r)
+			return foundation.AttributedStringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -913,6 +963,7 @@ func (c *Control) AttributedStringValue() obj.Object {
 
 // IntValue returns the int value.
 func (c *Control) IntValue() int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -926,6 +977,7 @@ func (c *Control) IntValue() int {
 
 // IntegerValue returns the integer value.
 func (c *Control) IntegerValue() int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -939,6 +991,7 @@ func (c *Control) IntegerValue() int {
 
 // FloatValue returns the float value.
 func (c *Control) FloatValue() float32 {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 float32
 	purego.Main(func() {
 		_mainthread0 = func() float32 {
@@ -952,6 +1005,7 @@ func (c *Control) FloatValue() float32 {
 
 // DoubleValue returns the double value.
 func (c *Control) DoubleValue() float64 {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -965,6 +1019,7 @@ func (c *Control) DoubleValue() float64 {
 
 // Font returns the font.
 func (c *Control) Font() *Font {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 *Font
 	purego.Main(func() {
 		_mainthread0 = func() *Font {
@@ -978,6 +1033,7 @@ func (c *Control) Font() *Font {
 
 // UsesSingleLineMode wraps the corresponding Objective-C method.
 func (c *Control) UsesSingleLineMode() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -991,6 +1047,7 @@ func (c *Control) UsesSingleLineMode() bool {
 
 // LineBreakMode returns the line break mode.
 func (c *Control) LineBreakMode() LineBreakMode {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 LineBreakMode
 	purego.Main(func() {
 		_mainthread0 = func() LineBreakMode {
@@ -1004,6 +1061,7 @@ func (c *Control) LineBreakMode() LineBreakMode {
 
 // Alignment returns the alignment.
 func (c *Control) Alignment() TextAlignment {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 TextAlignment
 	purego.Main(func() {
 		_mainthread0 = func() TextAlignment {
@@ -1017,6 +1075,7 @@ func (c *Control) Alignment() TextAlignment {
 
 // BaseWritingDirection returns the base writing direction.
 func (c *Control) BaseWritingDirection() WritingDirection {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 WritingDirection
 	purego.Main(func() {
 		_mainthread0 = func() WritingDirection {
@@ -1030,6 +1089,7 @@ func (c *Control) BaseWritingDirection() WritingDirection {
 
 // AllowsExpansionToolTips wraps the corresponding Objective-C method.
 func (c *Control) AllowsExpansionToolTips() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1043,6 +1103,7 @@ func (c *Control) AllowsExpansionToolTips() bool {
 
 // CurrentEditor returns the current field editor for the control.
 func (c *Control) CurrentEditor() *Text {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 *Text
 	purego.Main(func() {
 		_mainthread0 = func() *Text {
@@ -1056,6 +1117,7 @@ func (c *Control) CurrentEditor() *Text {
 
 // AbortEditing reports whether terminates the current editing operation and discards any edited text.
 func (c *Control) AbortEditing() bool {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1069,6 +1131,7 @@ func (c *Control) AbortEditing() bool {
 
 // ValidateEditing validates changes to any user-typed text.
 func (c *Control) ValidateEditing() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("validateEditing"))
 	})
@@ -1077,6 +1140,10 @@ func (c *Control) ValidateEditing() {
 
 // EditWithFrameEditorDelegateEvent begins editing of the receiver’s text using the specified field editor.
 func (c *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, event *Event) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(textObj)
+	defer runtime.KeepAlive(delegate)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("editWithFrame:editor:delegate:event:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), objref.IDOf(event))
 	})
@@ -1085,6 +1152,9 @@ func (c *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, t
 
 // SelectWithFrameEditorDelegateStartLength selects the specified text range in the receiver’s field editor.
 func (c *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *Text, delegate obj.Object, selStart int, selLength int) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(textObj)
+	defer runtime.KeepAlive(delegate)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectWithFrame:editor:delegate:start:length:"), rect, objref.IDOf(textObj), objref.IDOf(delegate), selStart, selLength)
 	})
@@ -1093,6 +1163,8 @@ func (c *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.C
 
 // EndEditing ends the editing of text in the receiver using the specified field editor.
 func (c *Control) EndEditing(textObj *Text) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(textObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("endEditing:"), objref.IDOf(textObj))
 	})
@@ -1101,6 +1173,7 @@ func (c *Control) EndEditing(textObj *Text) {
 
 // SetFloatingPointFormatLeftRight sets the auto-ranging and floating point number format of the receiver’s cell.
 func (c *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int, rightDigits int) {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setFloatingPointFormat:left:right:"), autoRange, leftDigits, rightDigits)
 	})
@@ -1109,6 +1182,7 @@ func (c *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits int
 
 // SelectedCell returns the selected cell.
 func (c *Control) SelectedCell() *Cell {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 *Cell
 	purego.Main(func() {
 		_mainthread0 = func() *Cell {
@@ -1122,6 +1196,7 @@ func (c *Control) SelectedCell() *Cell {
 
 // SelectedTag returns the selected tag.
 func (c *Control) SelectedTag() int {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1135,6 +1210,7 @@ func (c *Control) SelectedTag() int {
 
 // SetNeedsDisplay wraps the corresponding Objective-C method.
 func (c *Control) SetNeedsDisplay() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNeedsDisplay"))
 	})
@@ -1143,6 +1219,7 @@ func (c *Control) SetNeedsDisplay() {
 
 // CalcSize wraps the corresponding Objective-C method.
 func (c *Control) CalcSize() {
+	defer runtime.KeepAlive(c)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calcSize"))
 	})
@@ -1151,6 +1228,8 @@ func (c *Control) CalcSize() {
 
 // UpdateCell updates cell.
 func (c *Control) UpdateCell(cell *Cell) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCell:"), objref.IDOf(cell))
 	})
@@ -1159,6 +1238,8 @@ func (c *Control) UpdateCell(cell *Cell) {
 
 // UpdateCellInside updates cell inside.
 func (c *Control) UpdateCellInside(cell *Cell) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("updateCellInside:"), objref.IDOf(cell))
 	})
@@ -1167,6 +1248,8 @@ func (c *Control) UpdateCellInside(cell *Cell) {
 
 // DrawCellInside draws cell inside.
 func (c *Control) DrawCellInside(cell *Cell) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCellInside:"), objref.IDOf(cell))
 	})
@@ -1175,6 +1258,8 @@ func (c *Control) DrawCellInside(cell *Cell) {
 
 // DrawCell draws cell.
 func (c *Control) DrawCell(cell *Cell) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawCell:"), objref.IDOf(cell))
 	})
@@ -1183,6 +1268,8 @@ func (c *Control) DrawCell(cell *Cell) {
 
 // SelectCell selects cell.
 func (c *Control) SelectCell(cell *Cell) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCell:"), objref.IDOf(cell))
 	})
@@ -1191,6 +1278,7 @@ func (c *Control) SelectCell(cell *Cell) {
 
 // Cell returns the cell.
 func (c *Control) Cell() *Cell {
+	defer runtime.KeepAlive(c)
 	var _mainthread0 *Cell
 	purego.Main(func() {
 		_mainthread0 = func() *Cell {
@@ -1204,6 +1292,8 @@ func (c *Control) Cell() *Cell {
 
 // InvalidateIntrinsicContentSizeForCell notifies the control that the intrinsic content size for its cell is no longer valid.
 func (c *Control) InvalidateIntrinsicContentSizeForCell(cell *Cell) {
+	defer runtime.KeepAlive(c)
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("invalidateIntrinsicContentSizeForCell:"), objref.IDOf(cell))
 	})

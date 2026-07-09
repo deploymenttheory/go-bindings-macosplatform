@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func userNotificationActionAdopt(id objc.ID) *UserNotificationAction {
 
 // Description returns the object's -description text.
 func (una *UserNotificationAction) Description() string {
+	defer runtime.KeepAlive(una)
 	return rt.Description(objref.IDOf(una))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (una *UserNotificationAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(una)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(una), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (una *UserNotificationAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(una)
 	return rt.IsKind(objref.IDOf(una), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (una *UserNotificationAction) String() string {
+	defer runtime.KeepAlive(una)
 	return rt.Description(objref.IDOf(una))
 }
 
@@ -81,13 +87,14 @@ func (una *UserNotificationAction) WithObservationInfo(observationInfo unsafe.Po
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (una *UserNotificationAction) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction {
-	objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (una *UserNotificationAction) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UserNotificationAction {
+	objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return una
 }
 
 // Identifier returns the identifier.
 func (una *UserNotificationAction) Identifier() string {
+	defer runtime.KeepAlive(una)
 	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -97,6 +104,7 @@ func (una *UserNotificationAction) Identifier() string {
 
 // Title returns the title.
 func (una *UserNotificationAction) Title() string {
+	defer runtime.KeepAlive(una)
 	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""

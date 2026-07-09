@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterSoftwareDiagnosticsAdopt(id objc.ID) *MTRClusterSoftwareDiagnosti
 
 // NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue for all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterSoftwareDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterSoftwareDiagnosticsAdopt(_id)
@@ -53,63 +59,83 @@ func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice
 
 // NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterSoftwareDiagnostics.
 func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterSoftwareDiagnostics {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterSoftwareDiagnosticsAdopt(_id)
 }
 
 // ReadAttributeThreadMetricsWithParams reads attribute thread metrics with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeThreadMetricsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentHeapFreeWithParams reads attribute current heap free with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeCurrentHeapFreeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentHeapUsedWithParams reads attribute current heap used with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeCurrentHeapUsedWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeCurrentHeapHighWatermarkWithParams reads attribute current heap high watermark with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcsd)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterSoftwareDiagnostics)(nil)

@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -237,12 +239,14 @@ func (dtce *DOMHTMLTableCellElement) WithTextContent(textContent string) *DOMHTM
 
 // CellIndex returns the cell index.
 func (dtce *DOMHTMLTableCellElement) CellIndex() int {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[int](objref.IDOf(dtce), objc.RegisterName("cellIndex"))
 	return _r
 }
 
 // Align returns the align.
 func (dtce *DOMHTMLTableCellElement) Align() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -252,6 +256,7 @@ func (dtce *DOMHTMLTableCellElement) Align() string {
 
 // Axis returns the axis.
 func (dtce *DOMHTMLTableCellElement) Axis() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("axis"))
 	if _r == 0 {
 		return ""
@@ -261,6 +266,7 @@ func (dtce *DOMHTMLTableCellElement) Axis() string {
 
 // BgColor returns the bg color.
 func (dtce *DOMHTMLTableCellElement) BgColor() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("bgColor"))
 	if _r == 0 {
 		return ""
@@ -270,6 +276,7 @@ func (dtce *DOMHTMLTableCellElement) BgColor() string {
 
 // Ch returns the ch.
 func (dtce *DOMHTMLTableCellElement) Ch() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("ch"))
 	if _r == 0 {
 		return ""
@@ -279,6 +286,7 @@ func (dtce *DOMHTMLTableCellElement) Ch() string {
 
 // ChOff returns the ch off.
 func (dtce *DOMHTMLTableCellElement) ChOff() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("chOff"))
 	if _r == 0 {
 		return ""
@@ -288,18 +296,21 @@ func (dtce *DOMHTMLTableCellElement) ChOff() string {
 
 // ColSpan returns the col span.
 func (dtce *DOMHTMLTableCellElement) ColSpan() int {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[int](objref.IDOf(dtce), objc.RegisterName("colSpan"))
 	return _r
 }
 
 // RowSpan returns the row span.
 func (dtce *DOMHTMLTableCellElement) RowSpan() int {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[int](objref.IDOf(dtce), objc.RegisterName("rowSpan"))
 	return _r
 }
 
 // Headers returns the headers.
 func (dtce *DOMHTMLTableCellElement) Headers() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("headers"))
 	if _r == 0 {
 		return ""
@@ -309,6 +320,7 @@ func (dtce *DOMHTMLTableCellElement) Headers() string {
 
 // Height returns the height.
 func (dtce *DOMHTMLTableCellElement) Height() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("height"))
 	if _r == 0 {
 		return ""
@@ -318,12 +330,14 @@ func (dtce *DOMHTMLTableCellElement) Height() string {
 
 // NoWrap wraps the corresponding Objective-C method.
 func (dtce *DOMHTMLTableCellElement) NoWrap() bool {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[bool](objref.IDOf(dtce), objc.RegisterName("noWrap"))
 	return _r
 }
 
 // VAlign returns the v align.
 func (dtce *DOMHTMLTableCellElement) VAlign() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("vAlign"))
 	if _r == 0 {
 		return ""
@@ -333,6 +347,7 @@ func (dtce *DOMHTMLTableCellElement) VAlign() string {
 
 // Width returns the width.
 func (dtce *DOMHTMLTableCellElement) Width() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""
@@ -342,6 +357,7 @@ func (dtce *DOMHTMLTableCellElement) Width() string {
 
 // Abbr returns the abbr.
 func (dtce *DOMHTMLTableCellElement) Abbr() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("abbr"))
 	if _r == 0 {
 		return ""
@@ -351,6 +367,7 @@ func (dtce *DOMHTMLTableCellElement) Abbr() string {
 
 // Scope returns the scope.
 func (dtce *DOMHTMLTableCellElement) Scope() string {
+	defer runtime.KeepAlive(dtce)
 	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("scope"))
 	if _r == 0 {
 		return ""

@@ -5,6 +5,8 @@
 package quartzcomposer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func compositionRepositoryAdopt(id objc.ID) *CompositionRepository {
 
 // Description returns the object's -description text.
 func (cr *CompositionRepository) Description() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cr *CompositionRepository) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cr *CompositionRepository) IsKind(className string) bool {
+	defer runtime.KeepAlive(cr)
 	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cr *CompositionRepository) String() string {
+	defer runtime.KeepAlive(cr)
 	return rt.Description(objref.IDOf(cr))
 }
 
@@ -72,18 +79,23 @@ func NewCompositionRepository() *CompositionRepository {
 
 // CompositionWithIdentifier wraps the corresponding Objective-C method.
 func (cr *CompositionRepository) CompositionWithIdentifier(identifier string) obj.Object {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
 	return obj.Wrap(_r)
 }
 
 // CompositionsWithProtocolsAndAttributes wraps the corresponding Objective-C method.
 func (cr *CompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
+	defer runtime.KeepAlive(cr)
+	defer runtime.KeepAlive(protocols)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
 // AllCompositions returns the all compositions.
 func (cr *CompositionRepository) AllCompositions() obj.Object {
+	defer runtime.KeepAlive(cr)
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("allCompositions"))
 	return obj.Wrap(_r)
 }

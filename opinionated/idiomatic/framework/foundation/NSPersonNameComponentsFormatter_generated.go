@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -68,6 +70,7 @@ func (pncf *PersonNameComponentsFormatter) WithPhonetic(phonetic bool) *PersonNa
 
 // WithLocale sets the locale.
 func (pncf *PersonNameComponentsFormatter) WithLocale(locale *Locale) *PersonNameComponentsFormatter {
+	defer runtime.KeepAlive(locale)
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return pncf
 }
@@ -79,13 +82,15 @@ func (pncf *PersonNameComponentsFormatter) WithObservationInfo(observationInfo u
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (pncf *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponentsFormatter {
-	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (pncf *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *PersonNameComponentsFormatter {
+	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return pncf
 }
 
 // StringFromPersonNameComponents wraps the corresponding Objective-C method.
 func (pncf *PersonNameComponentsFormatter) StringFromPersonNameComponents(components *PersonNameComponents) string {
+	defer runtime.KeepAlive(pncf)
+	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("stringFromPersonNameComponents:"), objref.IDOf(components))
 	if _r == 0 {
 		return ""
@@ -95,30 +100,36 @@ func (pncf *PersonNameComponentsFormatter) StringFromPersonNameComponents(compon
 
 // AnnotatedStringFromPersonNameComponents wraps the corresponding Objective-C method.
 func (pncf *PersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *PersonNameComponents) *AttributedString {
+	defer runtime.KeepAlive(pncf)
+	defer runtime.KeepAlive(components)
 	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("annotatedStringFromPersonNameComponents:"), objref.IDOf(components))
 	return AttributedStringFromID(_r)
 }
 
 // PersonNameComponentsFromString wraps the corresponding Objective-C method.
-func (pncf *PersonNameComponentsFormatter) PersonNameComponentsFromString(string_ string) *PersonNameComponents {
-	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("personNameComponentsFromString:"), purego.NSString(string_))
+func (pncf *PersonNameComponentsFormatter) PersonNameComponentsFromString(str string) *PersonNameComponents {
+	defer runtime.KeepAlive(pncf)
+	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("personNameComponentsFromString:"), purego.NSString(str))
 	return PersonNameComponentsFromID(_r)
 }
 
 // Style returns the style.
 func (pncf *PersonNameComponentsFormatter) Style() PersonNameComponentsFormatterStyle {
+	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[PersonNameComponentsFormatterStyle](objref.IDOf(pncf), objc.RegisterName("style"))
 	return _r
 }
 
 // IsPhonetic reports whether the object is phonetic.
 func (pncf *PersonNameComponentsFormatter) IsPhonetic() bool {
+	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[bool](objref.IDOf(pncf), objc.RegisterName("isPhonetic"))
 	return _r
 }
 
 // Locale returns the locale.
 func (pncf *PersonNameComponentsFormatter) Locale() *Locale {
+	defer runtime.KeepAlive(pncf)
 	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }

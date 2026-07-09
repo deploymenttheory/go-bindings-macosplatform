@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolPulseEffect() *SymbolPulseEffect {
 
 // EffectWithByLayer returns a copy of the effect requesting an animation that pulses only the layers marked to always pulse.
 func (spe *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
+	defer runtime.KeepAlive(spe)
 	_r := objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("effectWithByLayer"))
 	return SymbolPulseEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect requesting an animation that pulses all layers simultaneously.
 func (spe *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {
+	defer runtime.KeepAlive(spe)
 	_r := objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolPulseEffectFromID(_r)
 }

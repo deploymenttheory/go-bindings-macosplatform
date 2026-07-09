@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -83,18 +85,21 @@ func (nrb *NNResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChann
 
 // ResizeWidth returns the resize width.
 func (nrb *NNResizeBilinear) ResizeWidth() int {
+	defer runtime.KeepAlive(nrb)
 	_r := objc.Send[int](objref.IDOf(nrb), objc.RegisterName("resizeWidth"))
 	return _r
 }
 
 // ResizeHeight returns the resize height.
 func (nrb *NNResizeBilinear) ResizeHeight() int {
+	defer runtime.KeepAlive(nrb)
 	_r := objc.Send[int](objref.IDOf(nrb), objc.RegisterName("resizeHeight"))
 	return _r
 }
 
 // AlignCorners reports whether if true, the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. The default is false.
 func (nrb *NNResizeBilinear) AlignCorners() bool {
+	defer runtime.KeepAlive(nrb)
 	_r := objc.Send[bool](objref.IDOf(nrb), objc.RegisterName("alignCorners"))
 	return _r
 }

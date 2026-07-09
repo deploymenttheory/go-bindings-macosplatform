@@ -5,6 +5,8 @@
 package addressbook
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,6 +54,8 @@ func NewMutableMultiValue() *MutableMultiValue {
 
 // AddValueWithLabel adds value with label.
 func (mmv *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) string {
+	defer runtime.KeepAlive(mmv)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objref.IDOf(mmv), objc.RegisterName("addValue:withLabel:"), objref.IDOf(value), purego.NSString(label))
 	if _r == 0 {
 		return ""
@@ -61,6 +65,8 @@ func (mmv *MutableMultiValue) AddValueWithLabel(value obj.Object, label string) 
 
 // InsertValueWithLabelAtIndex inserts value with label at index.
 func (mmv *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, label string, index int) string {
+	defer runtime.KeepAlive(mmv)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[objc.ID](objref.IDOf(mmv), objc.RegisterName("insertValue:withLabel:atIndex:"), objref.IDOf(value), purego.NSString(label), index)
 	if _r == 0 {
 		return ""
@@ -70,24 +76,29 @@ func (mmv *MutableMultiValue) InsertValueWithLabelAtIndex(value obj.Object, labe
 
 // RemoveValueAndLabelAtIndex removes value and label at index.
 func (mmv *MutableMultiValue) RemoveValueAndLabelAtIndex(index int) bool {
+	defer runtime.KeepAlive(mmv)
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("removeValueAndLabelAtIndex:"), index)
 	return _r
 }
 
 // ReplaceValueAtIndexWithValue replaces value at index with value.
 func (mmv *MutableMultiValue) ReplaceValueAtIndexWithValue(index int, value obj.Object) bool {
+	defer runtime.KeepAlive(mmv)
+	defer runtime.KeepAlive(value)
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("replaceValueAtIndex:withValue:"), index, objref.IDOf(value))
 	return _r
 }
 
 // ReplaceLabelAtIndexWithLabel replaces label at index with label.
 func (mmv *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index int, label string) bool {
+	defer runtime.KeepAlive(mmv)
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("replaceLabelAtIndex:withLabel:"), index, purego.NSString(label))
 	return _r
 }
 
 // SetPrimaryIdentifier wraps the corresponding Objective-C method.
 func (mmv *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
+	defer runtime.KeepAlive(mmv)
 	_r := objc.Send[bool](objref.IDOf(mmv), objc.RegisterName("setPrimaryIdentifier:"), purego.NSString(identifier))
 	return _r
 }

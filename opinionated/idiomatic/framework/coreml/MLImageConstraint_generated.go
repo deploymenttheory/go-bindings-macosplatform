@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func imageConstraintAdopt(id objc.ID) *ImageConstraint {
 
 // Description returns the object's -description text.
 func (ic *ImageConstraint) Description() string {
+	defer runtime.KeepAlive(ic)
 	return rt.Description(objref.IDOf(ic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ic *ImageConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ic)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ic *ImageConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(ic)
 	return rt.IsKind(objref.IDOf(ic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ic *ImageConstraint) String() string {
+	defer runtime.KeepAlive(ic)
 	return rt.Description(objref.IDOf(ic))
 }
 
@@ -74,24 +81,28 @@ func NewImageConstraint() *ImageConstraint {
 
 // PixelsHigh returns the required or default height of the image
 func (ic *ImageConstraint) PixelsHigh() int {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
 // PixelsWide returns the required or default width of the image
 func (ic *ImageConstraint) PixelsWide() int {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
 // PixelFormatType returns the accepted kCVPixelFormatType for the image.
 func (ic *ImageConstraint) PixelFormatType() int {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("pixelFormatType"))
 	return _r
 }
 
 // SizeConstraint returns detailed image size constraint
 func (ic *ImageConstraint) SizeConstraint() *ImageSizeConstraint {
+	defer runtime.KeepAlive(ic)
 	_r := objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("sizeConstraint"))
 	return ImageSizeConstraintFromID(_r)
 }

@@ -6,11 +6,13 @@ package healthkit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,9 +52,11 @@ func heartbeatSeriesBuilderAdopt(id objc.ID) *HeartbeatSeriesBuilder {
 }
 
 // NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate creates a new heartbeat series builder.
-func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *HealthStore, device *Device, startDate obj.Object) *HeartbeatSeriesBuilder {
+func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *HealthStore, device *Device, startDate time.Time) *HeartbeatSeriesBuilder {
+	defer runtime.KeepAlive(healthStore)
+	defer runtime.KeepAlive(device)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:startDate:"), objref.IDOf(healthStore), objref.IDOf(device), objref.IDOf(startDate))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:startDate:"), objref.IDOf(healthStore), objref.IDOf(device), rt.TimeToNSDate(startDate))
 	return heartbeatSeriesBuilderAdopt(_id)
 }
 
@@ -60,6 +64,7 @@ func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *Health
 //
 // FinishSeriesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (hsb *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (result *HeartbeatSeriesSample, err error) {
+	defer runtime.KeepAlive(hsb)
 	type _result struct {
 		val *HeartbeatSeriesSample
 		err error

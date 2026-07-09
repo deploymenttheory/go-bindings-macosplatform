@@ -5,6 +5,7 @@
 package opendirectory
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -62,8 +63,9 @@ func ModuleEntryWithNameXpcServiceName(name string, xpcServiceName string) *Modu
 	return ModuleEntryFromID(_r)
 }
 
-// NodeWithSessionTypeError returns an autoreleased node object with a specified session and type.
-func NodeWithSessionTypeError(inSession *Session, inType uint32) (result *Node, err error) {
+// NodeWithSessionType returns an autoreleased node object with a specified session and type.
+func NodeWithSessionType(inSession *Session, inType uint32) (result *Node, err error) {
+	defer runtime.KeepAlive(inSession)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODNode")), objc.RegisterName("nodeWithSession:type:error:"), objref.IDOf(inSession), inType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -72,8 +74,9 @@ func NodeWithSessionTypeError(inSession *Session, inType uint32) (result *Node, 
 	return NodeFromID(_r), nil
 }
 
-// NodeWithSessionNameError returns an autoreleased node object with a specified session and name.
-func NodeWithSessionNameError(inSession *Session, inName string) (result *Node, err error) {
+// NodeWithSessionName returns an autoreleased node object with a specified session and name.
+func NodeWithSessionName(inSession *Session, inName string) (result *Node, err error) {
+	defer runtime.KeepAlive(inSession)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODNode")), objc.RegisterName("nodeWithSession:name:error:"), objref.IDOf(inSession), purego.NSString(inName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -82,8 +85,13 @@ func NodeWithSessionNameError(inSession *Session, inName string) (result *Node, 
 	return NodeFromID(_r), nil
 }
 
-// QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError returns an autoreleased query object created with provided parameters.
-func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (result *Query, err error) {
+// QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResults returns an autoreleased query object created with provided parameters.
+func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResults(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (result *Query, err error) {
+	defer runtime.KeepAlive(inNode)
+	defer runtime.KeepAlive(inRecordTypeOrList)
+	defer runtime.KeepAlive(inAttribute)
+	defer runtime.KeepAlive(inQueryValueOrList)
+	defer runtime.KeepAlive(inReturnAttributeOrList)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODQuery")), objc.RegisterName("queryWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), objref.IDOf(inNode), objref.IDOf(inRecordTypeOrList), objref.IDOf(inAttribute), inMatchType, objref.IDOf(inQueryValueOrList), objref.IDOf(inReturnAttributeOrList), inMaximumResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
@@ -104,8 +112,9 @@ func DefaultSession() *Session {
 	return SessionFromID(_r)
 }
 
-// SessionWithOptionsError returns an autoreleased session object directed over proxy to another host.
-func SessionWithOptionsError(inOptions obj.Object) (result *Session, err error) {
+// SessionWithOptions returns an autoreleased session object directed over proxy to another host.
+func SessionWithOptions(inOptions obj.Object) (result *Session, err error) {
+	defer runtime.KeepAlive(inOptions)
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("sessionWithOptions:error:"), objref.IDOf(inOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {

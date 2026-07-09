@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -92,6 +94,7 @@ func (stbi *StepperTouchBarItem) WithValue(value float64) *StepperTouchBarItem {
 
 // WithTarget sets the target object that receives action messages from the stepper.
 func (stbi *StepperTouchBarItem) WithTarget(target obj.Object) *StepperTouchBarItem {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(stbi), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -116,6 +119,7 @@ func (stbi *StepperTouchBarItem) WithVisibilityPriority(visibilityPriority float
 
 // MaxValue returns the stepper's maximum value. The default is `59.0`.
 func (stbi *StepperTouchBarItem) MaxValue() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -129,6 +133,7 @@ func (stbi *StepperTouchBarItem) MaxValue() float64 {
 
 // MinValue returns the stepper's minimum value. The default is `0.0`.
 func (stbi *StepperTouchBarItem) MinValue() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -142,6 +147,7 @@ func (stbi *StepperTouchBarItem) MinValue() float64 {
 
 // Increment returns the stepper's increment value. The default value is `1.0`.
 func (stbi *StepperTouchBarItem) Increment() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -155,6 +161,7 @@ func (stbi *StepperTouchBarItem) Increment() float64 {
 
 // Value returns the current value of the stepper.
 func (stbi *StepperTouchBarItem) Value() float64 {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -168,6 +175,7 @@ func (stbi *StepperTouchBarItem) Value() float64 {
 
 // Target returns the target object that receives action messages from the stepper.
 func (stbi *StepperTouchBarItem) Target() obj.Object {
+	defer runtime.KeepAlive(stbi)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

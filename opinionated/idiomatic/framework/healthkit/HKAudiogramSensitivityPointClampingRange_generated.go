@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audiogramSensitivityPointClampingRangeAdopt(id objc.ID) *AudiogramSensitivi
 
 // Description returns the object's -description text.
 func (aspcr *AudiogramSensitivityPointClampingRange) Description() string {
+	defer runtime.KeepAlive(aspcr)
 	return rt.Description(objref.IDOf(aspcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aspcr *AudiogramSensitivityPointClampingRange) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aspcr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aspcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aspcr *AudiogramSensitivityPointClampingRange) IsKind(className string) bool {
+	defer runtime.KeepAlive(aspcr)
 	return rt.IsKind(objref.IDOf(aspcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aspcr *AudiogramSensitivityPointClampingRange) String() string {
+	defer runtime.KeepAlive(aspcr)
 	return rt.Description(objref.IDOf(aspcr))
 }
 
@@ -74,12 +81,14 @@ func NewAudiogramSensitivityPointClampingRange() *AudiogramSensitivityPointClamp
 
 // LowerBound returns the lower bound of the clamping range, if any, in dBHL.
 func (aspcr *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
+	defer runtime.KeepAlive(aspcr)
 	_r := objc.Send[objc.ID](objref.IDOf(aspcr), objc.RegisterName("lowerBound"))
 	return QuantityFromID(_r)
 }
 
 // UpperBound returns the upper bound of the clamping range, if any, in dBHL.
 func (aspcr *AudiogramSensitivityPointClampingRange) UpperBound() *Quantity {
+	defer runtime.KeepAlive(aspcr)
 	_r := objc.Send[objc.ID](objref.IDOf(aspcr), objc.RegisterName("upperBound"))
 	return QuantityFromID(_r)
 }

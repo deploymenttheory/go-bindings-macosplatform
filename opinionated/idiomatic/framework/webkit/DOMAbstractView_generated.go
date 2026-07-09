@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewDOMAbstractView() *DOMAbstractView {
 
 // Document returns the document.
 func (dav *DOMAbstractView) Document() *DOMDocument {
+	defer runtime.KeepAlive(dav)
 	_r := objc.Send[objc.ID](objref.IDOf(dav), objc.RegisterName("document"))
 	return DOMDocumentFromID(_r)
 }

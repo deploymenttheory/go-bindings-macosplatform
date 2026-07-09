@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func mapItemAnnotationAdopt(id objc.ID) *MapItemAnnotation {
 
 // Description returns the object's -description text.
 func (mia *MapItemAnnotation) Description() string {
+	defer runtime.KeepAlive(mia)
 	return rt.Description(objref.IDOf(mia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mia *MapItemAnnotation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mia)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mia *MapItemAnnotation) IsKind(className string) bool {
+	defer runtime.KeepAlive(mia)
 	return rt.IsKind(objref.IDOf(mia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mia *MapItemAnnotation) String() string {
+	defer runtime.KeepAlive(mia)
 	return rt.Description(objref.IDOf(mia))
 }
 
 // NewMapItemAnnotationWithMapItem creates a map item annotation
 func NewMapItemAnnotationWithMapItem(mapItem *MapItem) *MapItemAnnotation {
+	defer runtime.KeepAlive(mapItem)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemAnnotation")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
 	return mapItemAnnotationAdopt(_id)
@@ -75,6 +83,7 @@ func NewMapItemAnnotationWithMapItem(mapItem *MapItem) *MapItemAnnotation {
 
 // MapItem returns the map item.
 func (mia *MapItemAnnotation) MapItem() *MapItem {
+	defer runtime.KeepAlive(mia)
 	_r := objc.Send[objc.ID](objref.IDOf(mia), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }

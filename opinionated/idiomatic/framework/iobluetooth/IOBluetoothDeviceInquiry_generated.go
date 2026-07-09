@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func iOBluetoothDeviceInquiryAdopt(id objc.ID) *IOBluetoothDeviceInquiry {
 
 // Description returns the object's -description text.
 func (ibdi *IOBluetoothDeviceInquiry) Description() string {
+	defer runtime.KeepAlive(ibdi)
 	return rt.Description(objref.IDOf(ibdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibdi *IOBluetoothDeviceInquiry) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibdi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibdi *IOBluetoothDeviceInquiry) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibdi)
 	return rt.IsKind(objref.IDOf(ibdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibdi *IOBluetoothDeviceInquiry) String() string {
+	defer runtime.KeepAlive(ibdi)
 	return rt.Description(objref.IDOf(ibdi))
 }
 
 // NewIOBluetoothDeviceInquiryWithDelegate initializes an alloc’d inquiry object, and sets the delegate object, as if -setDelegate: were called on it.
 func NewIOBluetoothDeviceInquiryWithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry {
+	defer runtime.KeepAlive(delegate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDeviceInquiry")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:"), objref.IDOf(delegate))
 	return iOBluetoothDeviceInquiryAdopt(_id)
@@ -75,6 +83,7 @@ func NewIOBluetoothDeviceInquiryWithDelegate(delegate obj.Object) *IOBluetoothDe
 
 // WithDelegate sets the delegate.
 func (ibdi *IOBluetoothDeviceInquiry) WithDelegate(delegate obj.Object) *IOBluetoothDeviceInquiry {
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ibdi
 }
@@ -99,52 +108,61 @@ func (ibdi *IOBluetoothDeviceInquiry) WithUpdateNewDeviceNames(updateNewDeviceNa
 
 // Start returns tells inquiry object to begin the inquiry and name updating process, if specified.
 func (ibdi *IOBluetoothDeviceInquiry) Start() int {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("start"))
 	return _r
 }
 
 // Stop returns halts the inquiry object. Could either stop the search for new devices, or the updating of found device names.
 func (ibdi *IOBluetoothDeviceInquiry) Stop() int {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("stop"))
 	return _r
 }
 
 // FoundDevices returns found IOBluetoothDevice objects as an array.
 func (ibdi *IOBluetoothDeviceInquiry) FoundDevices() obj.Object {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("foundDevices"))
 	return obj.Wrap(_r)
 }
 
 // ClearFoundDevices removes all found devices from the inquiry object.
 func (ibdi *IOBluetoothDeviceInquiry) ClearFoundDevices() {
+	defer runtime.KeepAlive(ibdi)
 	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("clearFoundDevices"))
 }
 
 // SetSearchCriteriaMajorDeviceClassMinorDeviceClass use this method to set the criteria for the device search.
 func (ibdi *IOBluetoothDeviceInquiry) SetSearchCriteriaMajorDeviceClassMinorDeviceClass(inServiceClassMajor uint32, inMajorDeviceClass uint32, inMinorDeviceClass uint32) {
+	defer runtime.KeepAlive(ibdi)
 	objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("setSearchCriteria:majorDeviceClass:minorDeviceClass:"), inServiceClassMajor, inMajorDeviceClass, inMinorDeviceClass)
 }
 
 // Delegate returns the delegate.
 func (ibdi *IOBluetoothDeviceInquiry) Delegate() obj.Object {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[objc.ID](objref.IDOf(ibdi), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // InquiryLength returns the inquiry length.
 func (ibdi *IOBluetoothDeviceInquiry) InquiryLength() uint8 {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[uint8](objref.IDOf(ibdi), objc.RegisterName("inquiryLength"))
 	return _r
 }
 
 // SearchType returns the search type.
 func (ibdi *IOBluetoothDeviceInquiry) SearchType() int {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[int](objref.IDOf(ibdi), objc.RegisterName("searchType"))
 	return _r
 }
 
 // UpdateNewDeviceNames wraps the corresponding Objective-C method.
 func (ibdi *IOBluetoothDeviceInquiry) UpdateNewDeviceNames() bool {
+	defer runtime.KeepAlive(ibdi)
 	_r := objc.Send[bool](objref.IDOf(ibdi), objc.RegisterName("updateNewDeviceNames"))
 	return _r
 }

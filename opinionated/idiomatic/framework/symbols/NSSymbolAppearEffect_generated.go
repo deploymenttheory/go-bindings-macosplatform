@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolAppearEffect() *SymbolAppearEffect {
 
 // EffectWithByLayer returns an effect that makes each layer appear separately.
 func (sae *SymbolAppearEffect) EffectWithByLayer() *SymbolAppearEffect {
+	defer runtime.KeepAlive(sae)
 	_r := objc.Send[objc.ID](objref.IDOf(sae), objc.RegisterName("effectWithByLayer"))
 	return SymbolAppearEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns an effect that makes all layers appear simultaneously.
 func (sae *SymbolAppearEffect) EffectWithWholeSymbol() *SymbolAppearEffect {
+	defer runtime.KeepAlive(sae)
 	_r := objc.Send[objc.ID](objref.IDOf(sae), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolAppearEffectFromID(_r)
 }

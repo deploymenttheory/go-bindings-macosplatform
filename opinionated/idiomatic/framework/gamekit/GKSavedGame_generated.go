@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +52,27 @@ func savedGameAdopt(id objc.ID) *SavedGame {
 
 // Description returns the object's -description text.
 func (sg *SavedGame) Description() string {
+	defer runtime.KeepAlive(sg)
 	return rt.Description(objref.IDOf(sg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sg *SavedGame) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sg)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sg *SavedGame) IsKind(className string) bool {
+	defer runtime.KeepAlive(sg)
 	return rt.IsKind(objref.IDOf(sg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sg *SavedGame) String() string {
+	defer runtime.KeepAlive(sg)
 	return rt.Description(objref.IDOf(sg))
 }
 
@@ -79,6 +86,7 @@ func NewSavedGame() *SavedGame {
 //
 // LoadData blocks until the operation completes or ctx is cancelled.
 func (sg *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(sg)
 	type _result struct {
 		val obj.Object
 		err error
@@ -102,6 +110,7 @@ func (sg *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error
 
 // Name returns the name.
 func (sg *SavedGame) Name() string {
+	defer runtime.KeepAlive(sg)
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -111,6 +120,7 @@ func (sg *SavedGame) Name() string {
 
 // DeviceName returns the device name.
 func (sg *SavedGame) DeviceName() string {
+	defer runtime.KeepAlive(sg)
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("deviceName"))
 	if _r == 0 {
 		return ""
@@ -119,7 +129,8 @@ func (sg *SavedGame) DeviceName() string {
 }
 
 // ModificationDate returns the modification date.
-func (sg *SavedGame) ModificationDate() obj.Object {
+func (sg *SavedGame) ModificationDate() time.Time {
+	defer runtime.KeepAlive(sg)
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("modificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

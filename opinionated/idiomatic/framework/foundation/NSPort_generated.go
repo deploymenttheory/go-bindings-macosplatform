@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +53,27 @@ func portAdopt(id objc.ID) *Port {
 
 // Description returns the object's -description text.
 func (p *Port) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Port) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Port) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Port) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
@@ -77,56 +84,79 @@ func (p *Port) WithObservationInfo(observationInfo unsafe.Pointer) *Port {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (p *Port) WithScriptingProperties(scriptingProperties obj.Object) *Port {
-	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (p *Port) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Port {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return p
 }
 
 // Invalidate wraps the corresponding Objective-C method.
 func (p *Port) Invalidate() {
+	defer runtime.KeepAlive(p)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("invalidate"))
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
 func (p *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes from run loop for mode.
 func (p *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // SendBeforeDateComponentsFromReserved sends before date components from reserved.
-func (p *Port) SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:components:from:reserved:"), objref.IDOf(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
+func (p *Port) SendBeforeDateComponentsFromReserved(limitDate time.Time, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(components)
+	defer runtime.KeepAlive(receivePort)
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:components:from:reserved:"), rt.TimeToNSDate(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
 // SendBeforeDateMsgidComponentsFromReserved sends before date msgid components from reserved.
-func (p *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
-	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), objref.IDOf(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
+func (p *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate time.Time, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(components)
+	defer runtime.KeepAlive(receivePort)
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), rt.TimeToNSDate(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
 // AddConnectionToRunLoopForMode adds the receiver to the list of ports monitored by a given run loop for the given input mode.
 func (p *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(conn)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addConnection:toRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // RemoveConnectionFromRunLoopForMode removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
 func (p *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(conn)
+	defer runtime.KeepAlive(runLoop)
+	defer runtime.KeepAlive(mode)
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // IsValid reports whether the object is valid.
 func (p *Port) IsValid() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isValid"))
 	return _r
 }
 
 // ReservedSpaceLength returns the reserved space length.
 func (p *Port) ReservedSpaceLength() int {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("reservedSpaceLength"))
 	return _r
 }

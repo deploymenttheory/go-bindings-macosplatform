@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,6 +49,9 @@ func mTRClusterBinaryInputBasicAdopt(id objc.ID) *MTRClusterBinaryInputBasic {
 
 // NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue the queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 func NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBinaryInputBasic {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRClusterBinaryInputBasicAdopt(_id)
@@ -53,153 +59,213 @@ func NewMTRClusterBinaryInputBasicWithDeviceEndpointIDQueue(device *MTRDevice, e
 
 // NewMTRClusterBinaryInputBasicWithDeviceEndpointQueue creates a new MTRClusterBinaryInputBasic.
 func NewMTRClusterBinaryInputBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBinaryInputBasic {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBinaryInputBasic")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRClusterBinaryInputBasicAdopt(_id)
 }
 
 // ReadAttributeActiveTextWithParams reads attribute active text with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeActiveTextWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeActiveTextWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeActiveTextWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeActiveTextWithValueExpectedValueInterval writes attribute active text with value expected value interval.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeActiveTextWithValueExpectedValueIntervalParams writes attribute active text with value expected value interval params.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeActiveTextWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeActiveTextWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeDescriptionWithParams reads attribute description with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeDescriptionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeDescriptionWithValueExpectedValueInterval writes attribute description with value expected value interval.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDescriptionWithValueExpectedValueIntervalParams writes attribute description with value expected value interval params.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeDescriptionWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeDescriptionWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInactiveTextWithParams reads attribute inactive text with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeInactiveTextWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeInactiveTextWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeInactiveTextWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeInactiveTextWithValueExpectedValueInterval writes attribute inactive text with value expected value interval.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInactiveTextWithValueExpectedValueIntervalParams writes attribute inactive text with value expected value interval params.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeInactiveTextWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeInactiveTextWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOutOfServiceWithParams reads attribute out of service with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeOutOfServiceWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeOutOfServiceWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeOutOfServiceWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeOutOfServiceWithValueExpectedValueInterval writes attribute out of service with value expected value interval.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams writes attribute out of service with value expected value interval params.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeOutOfServiceWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeOutOfServiceWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributePolarityWithParams reads attribute polarity with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributePolarityWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributePolarityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributePolarityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributePresentValueWithParams reads attribute present value with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributePresentValueWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributePresentValueWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributePresentValueWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributePresentValueWithValueExpectedValueInterval writes attribute present value with value expected value interval.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributePresentValueWithValueExpectedValueIntervalParams writes attribute present value with value expected value interval params.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributePresentValueWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributePresentValueWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeReliabilityWithParams reads attribute reliability with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeReliabilityWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeReliabilityWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeReliabilityWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteAttributeReliabilityWithValueExpectedValueInterval writes attribute reliability with value expected value interval.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueInterval(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeReliabilityWithValueExpectedValueIntervalParams writes attribute reliability with value expected value interval params.
-func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcbib *MTRClusterBinaryInputBasic) WriteAttributeReliabilityWithValueExpectedValueIntervalParams(dataValueDictionary map[string]obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(expectedValueIntervalMs)
+	defer runtime.KeepAlive(params)
+	objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("writeAttributeReliabilityWithValue:expectedValueInterval:params:"), rt.MapToDict(dataValueDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeStatusFlagsWithParams reads attribute status flags with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeStatusFlagsWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeStatusFlagsWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeStatusFlagsWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeApplicationTypeWithParams reads attribute application type with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeApplicationTypeWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeApplicationTypeWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeApplicationTypeWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeAttributeListWithParams reads attribute attribute list with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeAttributeListWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeFeatureMapWithParams reads attribute feature map with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeFeatureMapWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
-func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+func (mcbib *MTRClusterBinaryInputBasic) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) map[string]obj.Object {
+	defer runtime.KeepAlive(mcbib)
+	defer runtime.KeepAlive(params)
 	_r := objc.Send[objc.ID](objref.IDOf(mcbib), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ MTRGenericClusterProvider = (*MTRClusterBinaryInputBasic)(nil)

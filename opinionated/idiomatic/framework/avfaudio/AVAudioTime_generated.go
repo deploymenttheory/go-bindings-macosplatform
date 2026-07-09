@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func audioTimeAdopt(id objc.ID) *AudioTime {
 
 // Description returns the object's -description text.
 func (at *AudioTime) Description() string {
+	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (at *AudioTime) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(at)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(at), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (at *AudioTime) IsKind(className string) bool {
+	defer runtime.KeepAlive(at)
 	return rt.IsKind(objref.IDOf(at), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (at *AudioTime) String() string {
+	defer runtime.KeepAlive(at)
 	return rt.Description(objref.IDOf(at))
 }
 
@@ -90,42 +97,50 @@ func NewAudioTimeWithHostTimeSampleTimeAtRate(hostTime uint64, sampleTime int64,
 
 // ExtrapolateTimeFromAnchor creates an audio time object by converting between host time and sample time.
 func (at *AudioTime) ExtrapolateTimeFromAnchor(anchorTime *AudioTime) *AudioTime {
+	defer runtime.KeepAlive(at)
+	defer runtime.KeepAlive(anchorTime)
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("extrapolateTimeFromAnchor:"), objref.IDOf(anchorTime))
 	return AudioTimeFromID(_r)
 }
 
 // IsHostTimeValid reports whether the hostTime property is valid.
 func (at *AudioTime) IsHostTimeValid() bool {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("isHostTimeValid"))
 	return _r
 }
 
 // HostTime returns the host time.
 func (at *AudioTime) HostTime() uint64 {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[uint64](objref.IDOf(at), objc.RegisterName("hostTime"))
 	return _r
 }
 
 // IsSampleTimeValid reports whether the sampleTime and sampleRate properties are valid.
 func (at *AudioTime) IsSampleTimeValid() bool {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("isSampleTimeValid"))
 	return _r
 }
 
 // SampleTime returns the time as a number of audio samples, as tracked by the current audio device.
 func (at *AudioTime) SampleTime() int64 {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[int64](objref.IDOf(at), objc.RegisterName("sampleTime"))
 	return _r
 }
 
 // SampleRate returns the sample rate at which sampleTime is being expressed.
 func (at *AudioTime) SampleRate() float64 {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[float64](objref.IDOf(at), objc.RegisterName("sampleRate"))
 	return _r
 }
 
 // AudioTimeStamp returns the time expressed as an AudioTimeStamp structure. This may be useful for compatibility with lower-level CoreAudio and AudioToolbox API's.
 func (at *AudioTime) AudioTimeStamp() coreaudiotypes.AudioTimeStamp {
+	defer runtime.KeepAlive(at)
 	_r := objc.Send[coreaudiotypes.AudioTimeStamp](objref.IDOf(at), objc.RegisterName("audioTimeStamp"))
 	return _r
 }

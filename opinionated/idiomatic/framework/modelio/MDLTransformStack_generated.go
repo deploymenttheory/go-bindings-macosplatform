@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func transformStackAdopt(id objc.ID) *TransformStack {
 
 // Description returns the object's -description text.
 func (ts *TransformStack) Description() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ts *TransformStack) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ts *TransformStack) IsKind(className string) bool {
+	defer runtime.KeepAlive(ts)
 	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ts *TransformStack) String() string {
+	defer runtime.KeepAlive(ts)
 	return rt.Description(objref.IDOf(ts))
 }
 
@@ -72,60 +79,70 @@ func NewTransformStack() *TransformStack {
 
 // AddTranslateOpInverse adds translate op inverse.
 func (ts *TransformStack) AddTranslateOpInverse(animatedValueName string, inverse bool) *TransformTranslateOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addTranslateOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformTranslateOpFromID(_r)
 }
 
 // AddRotateXOpInverse adds rotate x op inverse.
 func (ts *TransformStack) AddRotateXOpInverse(animatedValueName string, inverse bool) *TransformRotateXOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateXOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformRotateXOpFromID(_r)
 }
 
 // AddRotateYOpInverse adds rotate y op inverse.
 func (ts *TransformStack) AddRotateYOpInverse(animatedValueName string, inverse bool) *TransformRotateYOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateYOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformRotateYOpFromID(_r)
 }
 
 // AddRotateZOpInverse adds rotate z op inverse.
 func (ts *TransformStack) AddRotateZOpInverse(animatedValueName string, inverse bool) *TransformRotateZOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateZOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformRotateZOpFromID(_r)
 }
 
 // AddRotateOpOrderInverse adds rotate op order inverse.
 func (ts *TransformStack) AddRotateOpOrderInverse(animatedValueName string, order TransformOpRotationOrder, inverse bool) *TransformRotateOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addRotateOp:order:inverse:"), purego.NSString(animatedValueName), order, inverse)
 	return TransformRotateOpFromID(_r)
 }
 
 // AddScaleOpInverse adds scale op inverse.
 func (ts *TransformStack) AddScaleOpInverse(animatedValueName string, inverse bool) *TransformScaleOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addScaleOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformScaleOpFromID(_r)
 }
 
 // AddMatrixOpInverse adds matrix op inverse.
 func (ts *TransformStack) AddMatrixOpInverse(animatedValueName string, inverse bool) *TransformMatrixOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addMatrixOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformMatrixOpFromID(_r)
 }
 
 // AddOrientOpInverse adds orient op inverse.
 func (ts *TransformStack) AddOrientOpInverse(animatedValueName string, inverse bool) *TransformOrientOp {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addOrientOp:inverse:"), purego.NSString(animatedValueName), inverse)
 	return TransformOrientOpFromID(_r)
 }
 
 // AnimatedValueWithName wraps the corresponding Objective-C method.
 func (ts *TransformStack) AnimatedValueWithName(name string) *AnimatedValue {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("animatedValueWithName:"), purego.NSString(name))
 	return AnimatedValueFromID(_r)
 }
 
 // Count returns the count.
 func (ts *TransformStack) Count() int {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[int](objref.IDOf(ts), objc.RegisterName("count"))
 	return _r
 }
@@ -134,12 +151,14 @@ func (ts *TransformStack) Count() int {
 //
 // KeyTimes returns the collection as a Go slice.
 func (ts *TransformStack) KeyTimes() []obj.Object {
+	defer runtime.KeepAlive(ts)
 	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("keyTimes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TransformOps returns the transform ops.
 func (ts *TransformStack) TransformOps() []obj.Object {
+	defer runtime.KeepAlive(ts)
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("transformOps"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

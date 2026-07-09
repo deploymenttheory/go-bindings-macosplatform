@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nWBonjourServiceEndpointAdopt(id objc.ID) *NWBonjourServiceEndpoint {
 
 // Description returns the object's -description text.
 func (nbse *NWBonjourServiceEndpoint) Description() string {
+	defer runtime.KeepAlive(nbse)
 	return rt.Description(objref.IDOf(nbse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nbse *NWBonjourServiceEndpoint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nbse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nbse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nbse *NWBonjourServiceEndpoint) IsKind(className string) bool {
+	defer runtime.KeepAlive(nbse)
 	return rt.IsKind(objref.IDOf(nbse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nbse *NWBonjourServiceEndpoint) String() string {
+	defer runtime.KeepAlive(nbse)
 	return rt.Description(objref.IDOf(nbse))
 }
 
@@ -74,6 +81,7 @@ func NewNWBonjourServiceEndpoint() *NWBonjourServiceEndpoint {
 
 // Name returns the endpoint's Bonjour service name.
 func (nbse *NWBonjourServiceEndpoint) Name() string {
+	defer runtime.KeepAlive(nbse)
 	_r := objc.Send[objc.ID](objref.IDOf(nbse), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -83,6 +91,7 @@ func (nbse *NWBonjourServiceEndpoint) Name() string {
 
 // Type returns the endpoint's Bonjour service type.
 func (nbse *NWBonjourServiceEndpoint) Type() string {
+	defer runtime.KeepAlive(nbse)
 	_r := objc.Send[objc.ID](objref.IDOf(nbse), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
@@ -92,6 +101,7 @@ func (nbse *NWBonjourServiceEndpoint) Type() string {
 
 // Domain returns the endpoint's Bonjour service domain.
 func (nbse *NWBonjourServiceEndpoint) Domain() string {
+	defer runtime.KeepAlive(nbse)
 	_r := objc.Send[objc.ID](objref.IDOf(nbse), objc.RegisterName("domain"))
 	if _r == 0 {
 		return ""

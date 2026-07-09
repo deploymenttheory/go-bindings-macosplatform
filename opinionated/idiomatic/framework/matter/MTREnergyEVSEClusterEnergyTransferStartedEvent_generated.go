@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTREnergyEVSEClusterEnergyTransferStartedEventAdopt(id objc.ID) *MTREnergyE
 
 // Description returns the object's -description text.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) Description() string {
+	defer runtime.KeepAlive(meecetse)
 	return rt.Description(objref.IDOf(meecetse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(meecetse)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(meecetse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(meecetse)
 	return rt.IsKind(objref.IDOf(meecetse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) String() string {
+	defer runtime.KeepAlive(meecetse)
 	return rt.Description(objref.IDOf(meecetse))
 }
 
@@ -72,36 +80,42 @@ func NewMTREnergyEVSEClusterEnergyTransferStartedEvent() *MTREnergyEVSEClusterEn
 
 // WithSessionID sets the session ID.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	defer runtime.KeepAlive(sessionID)
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecetse
 }
 
 // WithState sets the state.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	defer runtime.KeepAlive(state)
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecetse
 }
 
 // WithMaximumCurrent sets the maximum current.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithMaximumCurrent(maximumCurrent obj.Object) *MTREnergyEVSEClusterEnergyTransferStartedEvent {
+	defer runtime.KeepAlive(maximumCurrent)
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setMaximumCurrent:"), objref.IDOf(maximumCurrent))
 	return meecetse
 }
 
 // SessionID returns the session ID.
-func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() obj.Object {
+func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() *foundation.Number {
+	defer runtime.KeepAlive(meecetse)
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("sessionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // State returns the state.
-func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() obj.Object {
+func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() *foundation.Number {
+	defer runtime.KeepAlive(meecetse)
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("state"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // MaximumCurrent returns the maximum current.
-func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() obj.Object {
+func (meecetse *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() *foundation.Number {
+	defer runtime.KeepAlive(meecetse)
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("maximumCurrent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

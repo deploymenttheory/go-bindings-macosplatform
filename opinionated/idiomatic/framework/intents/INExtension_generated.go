@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func extensionAdopt(id objc.ID) *Extension {
 
 // Description returns the object's -description text.
 func (e *Extension) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Extension) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Extension) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Extension) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 

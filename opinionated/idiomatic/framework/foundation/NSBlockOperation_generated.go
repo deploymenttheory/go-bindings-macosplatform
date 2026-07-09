@@ -6,11 +6,13 @@ package foundation
 
 import (
 	"context"
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -81,6 +83,7 @@ func (bo *BlockOperation) WithQualityOfService(qualityOfService QualityOfService
 
 // WithName sets the name.
 func (bo *BlockOperation) WithName(name StringProvider) *BlockOperation {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setName:"), objref.IDOf(name))
 	return bo
 }
@@ -92,8 +95,8 @@ func (bo *BlockOperation) WithObservationInfo(observationInfo unsafe.Pointer) *B
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (bo *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation {
-	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (bo *BlockOperation) WithScriptingProperties(scriptingProperties map[string]obj.Object) *BlockOperation {
+	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return bo
 }
 
@@ -101,6 +104,7 @@ func (bo *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object
 //
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
 func (bo *BlockOperation) AddExecutionBlock(ctx context.Context) error {
+	defer runtime.KeepAlive(bo)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil

@@ -7,7 +7,7 @@ package cryptotokenkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,9 +47,9 @@ func simpleTLVRecordAdopt(id objc.ID) *SimpleTLVRecord {
 }
 
 // NewSimpleTLVRecordWithTagValue initializes a TLV record with the specified tag and value.
-func NewSimpleTLVRecordWithTagValue(tag uint8, value obj.Object) *SimpleTLVRecord {
+func NewSimpleTLVRecordWithTagValue(tag uint8, value []byte) *SimpleTLVRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSimpleTLVRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, objref.IDOf(value))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, rt.BytesToNSData(value))
 	return simpleTLVRecordAdopt(_id)
 }
 

@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -115,13 +117,14 @@ func (bcf *ByteCountFormatter) WithObservationInfo(observationInfo unsafe.Pointe
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (bcf *ByteCountFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ByteCountFormatter {
-	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (bcf *ByteCountFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ByteCountFormatter {
+	objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return bcf
 }
 
 // StringFromByteCount wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) StringFromByteCount(byteCount int64) string {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("stringFromByteCount:"), byteCount)
 	if _r == 0 {
 		return ""
@@ -131,6 +134,8 @@ func (bcf *ByteCountFormatter) StringFromByteCount(byteCount int64) string {
 
 // StringFromMeasurement wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) StringFromMeasurement(measurement obj.Object) string {
+	defer runtime.KeepAlive(bcf)
+	defer runtime.KeepAlive(measurement)
 	_r := objc.Send[objc.ID](objref.IDOf(bcf), objc.RegisterName("stringFromMeasurement:"), objref.IDOf(measurement))
 	if _r == 0 {
 		return ""
@@ -140,54 +145,63 @@ func (bcf *ByteCountFormatter) StringFromMeasurement(measurement obj.Object) str
 
 // AllowedUnits returns the allowed units.
 func (bcf *ByteCountFormatter) AllowedUnits() ByteCountFormatterUnits {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[ByteCountFormatterUnits](objref.IDOf(bcf), objc.RegisterName("allowedUnits"))
 	return _r
 }
 
 // CountStyle returns the count style.
 func (bcf *ByteCountFormatter) CountStyle() ByteCountFormatterCountStyle {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[ByteCountFormatterCountStyle](objref.IDOf(bcf), objc.RegisterName("countStyle"))
 	return _r
 }
 
 // AllowsNonnumericFormatting wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) AllowsNonnumericFormatting() bool {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("allowsNonnumericFormatting"))
 	return _r
 }
 
 // IncludesUnit wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) IncludesUnit() bool {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("includesUnit"))
 	return _r
 }
 
 // IncludesCount wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) IncludesCount() bool {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("includesCount"))
 	return _r
 }
 
 // IncludesActualByteCount wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) IncludesActualByteCount() bool {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("includesActualByteCount"))
 	return _r
 }
 
 // IsAdaptive reports whether the object is adaptive.
 func (bcf *ByteCountFormatter) IsAdaptive() bool {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("isAdaptive"))
 	return _r
 }
 
 // ZeroPadsFractionDigits wraps the corresponding Objective-C method.
 func (bcf *ByteCountFormatter) ZeroPadsFractionDigits() bool {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[bool](objref.IDOf(bcf), objc.RegisterName("zeroPadsFractionDigits"))
 	return _r
 }
 
 // FormattingContext returns the formatting context.
 func (bcf *ByteCountFormatter) FormattingContext() FormattingContext {
+	defer runtime.KeepAlive(bcf)
 	_r := objc.Send[FormattingContext](objref.IDOf(bcf), objc.RegisterName("formattingContext"))
 	return _r
 }

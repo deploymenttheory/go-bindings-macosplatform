@@ -5,6 +5,8 @@
 package sharedwithyoucore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,34 +47,40 @@ func personIdentityAdopt(id objc.ID) *PersonIdentity {
 
 // Description returns the object's -description text.
 func (pi *PersonIdentity) Description() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pi *PersonIdentity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pi *PersonIdentity) IsKind(className string) bool {
+	defer runtime.KeepAlive(pi)
 	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pi *PersonIdentity) String() string {
+	defer runtime.KeepAlive(pi)
 	return rt.Description(objref.IDOf(pi))
 }
 
 // NewPersonIdentityWithRootHash an initializer The data contains a SHA256 hash of the user's combined public identities.
-func NewPersonIdentityWithRootHash(rootHash obj.Object) *PersonIdentity {
+func NewPersonIdentityWithRootHash(rootHash []byte) *PersonIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SWPersonIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootHash:"), objref.IDOf(rootHash))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRootHash:"), rt.BytesToNSData(rootHash))
 	return personIdentityAdopt(_id)
 }
 
 // RootHash returns the root hash of the tree that represents this individual's identity. The data contains a SHA256 hash of the user's combined public identities.
-func (pi *PersonIdentity) RootHash() obj.Object {
+func (pi *PersonIdentity) RootHash() []byte {
+	defer runtime.KeepAlive(pi)
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("rootHash"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

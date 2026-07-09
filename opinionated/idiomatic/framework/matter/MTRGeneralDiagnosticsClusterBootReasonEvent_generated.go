@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRGeneralDiagnosticsClusterBootReasonEventAdopt(id objc.ID) *MTRGeneralDia
 
 // Description returns the object's -description text.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) Description() string {
+	defer runtime.KeepAlive(mgdcbre)
 	return rt.Description(objref.IDOf(mgdcbre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mgdcbre)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mgdcbre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mgdcbre)
 	return rt.IsKind(objref.IDOf(mgdcbre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) String() string {
+	defer runtime.KeepAlive(mgdcbre)
 	return rt.Description(objref.IDOf(mgdcbre))
 }
 
@@ -72,12 +80,14 @@ func NewMTRGeneralDiagnosticsClusterBootReasonEvent() *MTRGeneralDiagnosticsClus
 
 // WithBootReason sets the boot reason.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) WithBootReason(bootReason obj.Object) *MTRGeneralDiagnosticsClusterBootReasonEvent {
+	defer runtime.KeepAlive(bootReason)
 	objc.Send[objc.ID](objref.IDOf(mgdcbre), objc.RegisterName("setBootReason:"), objref.IDOf(bootReason))
 	return mgdcbre
 }
 
 // BootReason returns the boot reason.
-func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() obj.Object {
+func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() *foundation.Number {
+	defer runtime.KeepAlive(mgdcbre)
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcbre), objc.RegisterName("bootReason"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

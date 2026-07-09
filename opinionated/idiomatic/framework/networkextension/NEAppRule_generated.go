@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func nEAppRuleAdopt(id objc.ID) *NEAppRule {
 
 // Description returns the object's -description text.
 func (nar *NEAppRule) Description() string {
+	defer runtime.KeepAlive(nar)
 	return rt.Description(objref.IDOf(nar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nar *NEAppRule) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nar)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nar *NEAppRule) IsKind(className string) bool {
+	defer runtime.KeepAlive(nar)
 	return rt.IsKind(objref.IDOf(nar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nar *NEAppRule) String() string {
+	defer runtime.KeepAlive(nar)
 	return rt.Description(objref.IDOf(nar))
 }
 
@@ -88,6 +95,7 @@ func (nar *NEAppRule) WithMatchTools(items ...*NEAppRule) *NEAppRule {
 
 // MatchSigningIdentifier returns a string containing a signing identifier. If the code signature of the executable being evaluated has a signing identifier equal to this string and all other conditions of the rule match, then the rule matches.
 func (nar *NEAppRule) MatchSigningIdentifier() string {
+	defer runtime.KeepAlive(nar)
 	_r := objc.Send[objc.ID](objref.IDOf(nar), objc.RegisterName("matchSigningIdentifier"))
 	if _r == 0 {
 		return ""
@@ -97,6 +105,7 @@ func (nar *NEAppRule) MatchSigningIdentifier() string {
 
 // MatchDesignatedRequirement returns a string containing a designated requirement. If the code signature of the exectuable being evaluated has a designated requirement equal to this string and all other conditions of the rule match, then the rule matches. This property is required on Mac OS X.
 func (nar *NEAppRule) MatchDesignatedRequirement() string {
+	defer runtime.KeepAlive(nar)
 	_r := objc.Send[objc.ID](objref.IDOf(nar), objc.RegisterName("matchDesignatedRequirement"))
 	if _r == 0 {
 		return ""
@@ -106,6 +115,7 @@ func (nar *NEAppRule) MatchDesignatedRequirement() string {
 
 // MatchPath returns a string containing a file system path. If the file system path of the executable being evaluated is equal to this string and all other conditions of the rule match, then the rule matches. This property is optional.
 func (nar *NEAppRule) MatchPath() string {
+	defer runtime.KeepAlive(nar)
 	_r := objc.Send[objc.ID](objref.IDOf(nar), objc.RegisterName("matchPath"))
 	if _r == 0 {
 		return ""
@@ -115,12 +125,15 @@ func (nar *NEAppRule) MatchPath() string {
 
 // MatchDomains returns an array of strings. This property is actually read-only. If the destination host of the network traffic being evaluated has a suffix equal to one of the strings in this array and all other conditions of the rule match, then the rule matches. This property is optional.
 func (nar *NEAppRule) MatchDomains() obj.Object {
+	defer runtime.KeepAlive(nar)
 	_r := objc.Send[objc.ID](objref.IDOf(nar), objc.RegisterName("matchDomains"))
 	return obj.Wrap(_r)
 }
 
 // SetMatchDomains wraps the corresponding Objective-C method.
 func (nar *NEAppRule) SetMatchDomains(matchDomains obj.Object) {
+	defer runtime.KeepAlive(nar)
+	defer runtime.KeepAlive(matchDomains)
 	objc.Send[objc.ID](objref.IDOf(nar), objc.RegisterName("setMatchDomains:"), objref.IDOf(matchDomains))
 }
 
@@ -128,6 +141,7 @@ func (nar *NEAppRule) SetMatchDomains(matchDomains obj.Object) {
 //
 // MatchTools returns the collection as a Go slice.
 func (nar *NEAppRule) MatchTools() []*NEAppRule {
+	defer runtime.KeepAlive(nar)
 	_arr := objc.Send[objc.ID](objref.IDOf(nar), objc.RegisterName("matchTools"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEAppRule { return NEAppRuleFromID(_id) })
 }

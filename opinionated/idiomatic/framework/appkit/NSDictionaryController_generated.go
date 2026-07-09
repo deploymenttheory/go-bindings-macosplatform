@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,6 +63,7 @@ func (dc *DictionaryController) WithInitialKey(initialKey string) *DictionaryCon
 
 // WithInitialValue sets the string used as the initial value for a newly inserted item.
 func (dc *DictionaryController) WithInitialValue(initialValue obj.Object) *DictionaryController {
+	defer runtime.KeepAlive(initialValue)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setInitialValue:"), objref.IDOf(initialValue))
 	return dc
 }
@@ -79,8 +83,8 @@ func (dc *DictionaryController) WithExcludedKeys(items ...obj.Object) *Dictionar
 }
 
 // WithLocalizedKeyDictionary sets the localized key names that are displayed by the receiver in place of the key names.
-func (dc *DictionaryController) WithLocalizedKeyDictionary(localizedKeyDictionary obj.Object) *DictionaryController {
-	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setLocalizedKeyDictionary:"), objref.IDOf(localizedKeyDictionary))
+func (dc *DictionaryController) WithLocalizedKeyDictionary(localizedKeyDictionary map[string]string) *DictionaryController {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setLocalizedKeyDictionary:"), rt.MapToDict(localizedKeyDictionary, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return dc
 }
 
@@ -105,6 +109,7 @@ func (dc *DictionaryController) WithSortDescriptors(items ...obj.Object) *Dictio
 
 // WithFilterPredicate sets a predicate used by the receiver to filter the array controller contents
 func (dc *DictionaryController) WithFilterPredicate(filterPredicate obj.Object) *DictionaryController {
+	defer runtime.KeepAlive(filterPredicate)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setFilterPredicate:"), objref.IDOf(filterPredicate))
 	return dc
 }
@@ -141,6 +146,7 @@ func (dc *DictionaryController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMul
 
 // WithSelectionIndexes sets an index set containing the indexes of the receiver’s currently selected objects in the content array
 func (dc *DictionaryController) WithSelectionIndexes(selectionIndexes obj.Object) *DictionaryController {
+	defer runtime.KeepAlive(selectionIndexes)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
 	return dc
 }
@@ -153,6 +159,7 @@ func (dc *DictionaryController) WithSelectionIndex(selectionIndex int) *Dictiona
 
 // WithContent sets the receiver’s content object.
 func (dc *DictionaryController) WithContent(content obj.Object) *DictionaryController {
+	defer runtime.KeepAlive(content)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setContent:"), objref.IDOf(content))
 	return dc
 }
@@ -171,6 +178,7 @@ func (dc *DictionaryController) WithEditable(editable bool) *DictionaryControlle
 
 // WithManagedObjectContext sets the receiver’s managed object context.
 func (dc *DictionaryController) WithManagedObjectContext(managedObjectContext obj.Object) *DictionaryController {
+	defer runtime.KeepAlive(managedObjectContext)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setManagedObjectContext:"), objref.IDOf(managedObjectContext))
 	return dc
 }
@@ -183,6 +191,7 @@ func (dc *DictionaryController) WithEntityName(entityName string) *DictionaryCon
 
 // WithFetchPredicate sets the receiver’s fetch predicate.
 func (dc *DictionaryController) WithFetchPredicate(fetchPredicate obj.Object) *DictionaryController {
+	defer runtime.KeepAlive(fetchPredicate)
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setFetchPredicate:"), objref.IDOf(fetchPredicate))
 	return dc
 }
@@ -197,6 +206,7 @@ func (dc *DictionaryController) WithUsesLazyFetching(usesLazyFetching bool) *Dic
 //
 // IncludedKeys returns the collection as a Go slice.
 func (dc *DictionaryController) IncludedKeys() []string {
+	defer runtime.KeepAlive(dc)
 	_arr := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("includedKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -205,18 +215,21 @@ func (dc *DictionaryController) IncludedKeys() []string {
 //
 // ExcludedKeys returns the collection as a Go slice.
 func (dc *DictionaryController) ExcludedKeys() []string {
+	defer runtime.KeepAlive(dc)
 	_arr := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("excludedKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocalizedKeyDictionary returns the localized key dictionary.
-func (dc *DictionaryController) LocalizedKeyDictionary() obj.Object {
+func (dc *DictionaryController) LocalizedKeyDictionary() map[string]string {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("localizedKeyDictionary"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // LocalizedKeyTable returns the localized key table.
 func (dc *DictionaryController) LocalizedKeyTable() string {
+	defer runtime.KeepAlive(dc)
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("localizedKeyTable"))
 	if _r == 0 {
 		return ""

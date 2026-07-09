@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationAppleIDProviderAdopt(id objc.ID) *AuthorizationAppleIDProvider
 
 // Description returns the object's -description text.
 func (aaip *AuthorizationAppleIDProvider) Description() string {
+	defer runtime.KeepAlive(aaip)
 	return rt.Description(objref.IDOf(aaip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aaip *AuthorizationAppleIDProvider) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aaip)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aaip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aaip *AuthorizationAppleIDProvider) IsKind(className string) bool {
+	defer runtime.KeepAlive(aaip)
 	return rt.IsKind(objref.IDOf(aaip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aaip *AuthorizationAppleIDProvider) String() string {
+	defer runtime.KeepAlive(aaip)
 	return rt.Description(objref.IDOf(aaip))
 }
 
@@ -74,6 +81,7 @@ func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
 
 // CreateRequest creates a new Apple ID authorization request.
 func (aaip *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
+	defer runtime.KeepAlive(aaip)
 	_r := objc.Send[objc.ID](objref.IDOf(aaip), objc.RegisterName("createRequest"))
 	return AuthorizationAppleIDRequestFromID(_r)
 }

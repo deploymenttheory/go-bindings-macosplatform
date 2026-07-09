@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +58,21 @@ func NewCreateCommand() *CreateCommand {
 
 // WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 func (cc *CreateCommand) WithDirectParameter(directParameter obj.Object) *CreateCommand {
+	defer runtime.KeepAlive(directParameter)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return cc
 }
 
 // WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 func (cc *CreateCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand {
+	defer runtime.KeepAlive(receiversSpecifier)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return cc
 }
 
 // WithArguments sets sets the arguments of the command to args.
-func (cc *CreateCommand) WithArguments(arguments obj.Object) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+func (cc *CreateCommand) WithArguments(arguments map[string]obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setArguments:"), rt.MapToDict(arguments, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cc
 }
 
@@ -80,18 +84,21 @@ func (cc *CreateCommand) WithScriptErrorNumber(scriptErrorNumber int) *CreateCom
 
 // WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (cc *CreateCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CreateCommand {
+	defer runtime.KeepAlive(scriptErrorOffendingObjectDescriptor)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return cc
 }
 
 // WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 func (cc *CreateCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CreateCommand {
+	defer runtime.KeepAlive(scriptErrorExpectedTypeDescriptor)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return cc
 }
 
 // WithScriptErrorString sets sets a script error string that is associated with execution of the command.
 func (cc *CreateCommand) WithScriptErrorString(scriptErrorString StringProvider) *CreateCommand {
+	defer runtime.KeepAlive(scriptErrorString)
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return cc
 }
@@ -103,21 +110,23 @@ func (cc *CreateCommand) WithObservationInfo(observationInfo unsafe.Pointer) *Cr
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (cc *CreateCommand) WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand {
-	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (cc *CreateCommand) WithScriptingProperties(scriptingProperties map[string]obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cc
 }
 
 // CreateClassDescription returns the create class description.
 func (cc *CreateCommand) CreateClassDescription() *ScriptClassDescription {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("createClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
 // ResolvedKeyDictionary returns the resolved key dictionary.
-func (cc *CreateCommand) ResolvedKeyDictionary() obj.Object {
+func (cc *CreateCommand) ResolvedKeyDictionary() map[string]obj.Object {
+	defer runtime.KeepAlive(cc)
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("resolvedKeyDictionary"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 var _ ScriptCommandProvider = (*CreateCommand)(nil)

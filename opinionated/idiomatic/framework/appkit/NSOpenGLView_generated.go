@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -50,6 +52,7 @@ func openGLViewAdopt(id objc.ID) *OpenGLView {
 
 // NewOpenGLViewWithFramePixelFormat returns an NSOpenGLView object initialized with the specified frame rectangle and pixel format.
 func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *OpenGLPixelFormat) *OpenGLView {
+	defer runtime.KeepAlive(format)
 	var _mainthread0 *OpenGLView
 	purego.Main(func() {
 		_mainthread0 = func() *OpenGLView {
@@ -63,6 +66,7 @@ func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *
 
 // WithOpenGLContext sets the NSOpenGLContext object associated with the receiver.
 func (ogv *OpenGLView) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView {
+	defer runtime.KeepAlive(openGLContext)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 	})
@@ -71,6 +75,7 @@ func (ogv *OpenGLView) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLVi
 
 // WithPixelFormat sets the NSOpenGLPixelFormat object associated with the receiver.
 func (ogv *OpenGLView) WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView {
+	defer runtime.KeepAlive(pixelFormat)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPixelFormat:"), objref.IDOf(pixelFormat))
 	})
@@ -216,6 +221,7 @@ func (ogv *OpenGLView) WithWantsLayer(wantsLayer bool) *OpenGLView {
 
 // WithLayer sets the layer.
 func (ogv *OpenGLView) WithLayer(layer obj.Object) *OpenGLView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -265,6 +271,7 @@ func (ogv *OpenGLView) WithBackgroundFilters(items ...obj.Object) *OpenGLView {
 
 // WithCompositingFilter sets the compositing filter.
 func (ogv *OpenGLView) WithCompositingFilter(compositingFilter obj.Object) *OpenGLView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -282,6 +289,7 @@ func (ogv *OpenGLView) WithContentFilters(items ...obj.Object) *OpenGLView {
 
 // WithShadow sets the shadow.
 func (ogv *OpenGLView) WithShadow(shadow *Shadow) *OpenGLView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -330,6 +338,7 @@ func (ogv *OpenGLView) WithPreparedContentRect(preparedContentRect corefoundatio
 
 // WithNextKeyView sets the next key view.
 func (ogv *OpenGLView) WithNextKeyView(nextKeyView ViewProvider) *OpenGLView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -379,6 +388,7 @@ func (ogv *OpenGLView) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (ogv *OpenGLView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -435,6 +445,7 @@ func (ogv *OpenGLView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedD
 
 // WithPressureConfiguration sets the pressure configuration.
 func (ogv *OpenGLView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OpenGLView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -443,6 +454,7 @@ func (ogv *OpenGLView) WithPressureConfiguration(pressureConfiguration *Pressure
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (ogv *OpenGLView) WithNextResponder(nextResponder ResponderProvider) *OpenGLView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -451,6 +463,7 @@ func (ogv *OpenGLView) WithNextResponder(nextResponder ResponderProvider) *OpenG
 
 // WithMenu sets returns the responder’s menu.
 func (ogv *OpenGLView) WithMenu(menu *Menu) *OpenGLView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -459,6 +472,7 @@ func (ogv *OpenGLView) WithMenu(menu *Menu) *OpenGLView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (ogv *OpenGLView) WithUserActivity(userActivity obj.Object) *OpenGLView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -467,6 +481,7 @@ func (ogv *OpenGLView) WithUserActivity(userActivity obj.Object) *OpenGLView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (ogv *OpenGLView) WithTouchBar(touchBar *TouchBar) *OpenGLView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -475,6 +490,7 @@ func (ogv *OpenGLView) WithTouchBar(touchBar *TouchBar) *OpenGLView {
 
 // ClearGLContext releases the NSOpenGLContext object associated with the view.
 func (ogv *OpenGLView) ClearGLContext() {
+	defer runtime.KeepAlive(ogv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("clearGLContext"))
 	})
@@ -483,6 +499,7 @@ func (ogv *OpenGLView) ClearGLContext() {
 
 // Update called by Cocoa when the view’s window moves or when the view itself moves or is resized.
 func (ogv *OpenGLView) Update() {
+	defer runtime.KeepAlive(ogv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("update"))
 	})
@@ -491,6 +508,7 @@ func (ogv *OpenGLView) Update() {
 
 // Reshape called by Cocoa when the view’s visible rectangle or bounds change.
 func (ogv *OpenGLView) Reshape() {
+	defer runtime.KeepAlive(ogv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("reshape"))
 	})
@@ -499,6 +517,7 @@ func (ogv *OpenGLView) Reshape() {
 
 // PrepareOpenGL used by subclasses to initialize OpenGL state.
 func (ogv *OpenGLView) PrepareOpenGL() {
+	defer runtime.KeepAlive(ogv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ogv), objc.RegisterName("prepareOpenGL"))
 	})
@@ -507,6 +526,7 @@ func (ogv *OpenGLView) PrepareOpenGL() {
 
 // OpenGLContext returns the open gl context.
 func (ogv *OpenGLView) OpenGLContext() *OpenGLContext {
+	defer runtime.KeepAlive(ogv)
 	var _mainthread0 *OpenGLContext
 	purego.Main(func() {
 		_mainthread0 = func() *OpenGLContext {
@@ -520,6 +540,7 @@ func (ogv *OpenGLView) OpenGLContext() *OpenGLContext {
 
 // PixelFormat returns the pixel format.
 func (ogv *OpenGLView) PixelFormat() *OpenGLPixelFormat {
+	defer runtime.KeepAlive(ogv)
 	var _mainthread0 *OpenGLPixelFormat
 	purego.Main(func() {
 		_mainthread0 = func() *OpenGLPixelFormat {

@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,27 +47,33 @@ func inputServerAdopt(id objc.ID) *InputServer {
 
 // Description returns the object's -description text.
 func (is *InputServer) Description() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (is *InputServer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(is)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (is *InputServer) IsKind(className string) bool {
+	defer runtime.KeepAlive(is)
 	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (is *InputServer) String() string {
+	defer runtime.KeepAlive(is)
 	return rt.Description(objref.IDOf(is))
 }
 
 // NewInputServerWithDelegateName creates a new InputServer.
 func NewInputServerWithDelegateName(delegate obj.Object, name string) *InputServer {
+	defer runtime.KeepAlive(delegate)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputServer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:name:"), objref.IDOf(delegate), purego.NSString(name))
 	return inputServerAdopt(_id)

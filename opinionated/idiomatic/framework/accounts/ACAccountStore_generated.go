@@ -5,6 +5,8 @@
 package accounts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func accountStoreAdopt(id objc.ID) *AccountStore {
 
 // Description returns the object's -description text.
 func (as *AccountStore) Description() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (as *AccountStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(as), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (as *AccountStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(as)
 	return rt.IsKind(objref.IDOf(as), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (as *AccountStore) String() string {
+	defer runtime.KeepAlive(as)
 	return rt.Description(objref.IDOf(as))
 }
 
@@ -74,24 +81,29 @@ func NewAccountStore() *AccountStore {
 
 // AccountWithIdentifier returns the account with the specified identifier.
 func (as *AccountStore) AccountWithIdentifier(identifier string) *Account {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountWithIdentifier:"), purego.NSString(identifier))
 	return AccountFromID(_r)
 }
 
 // AccountTypeWithAccountTypeIdentifier returns an account type that matches the specified identifier.
 func (as *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountTypeWithAccountTypeIdentifier:"), purego.NSString(typeIdentifier))
 	return AccountTypeFromID(_r)
 }
 
 // AccountsWithAccountType returns all accounts of the specified type.
 func (as *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Object {
+	defer runtime.KeepAlive(as)
+	defer runtime.KeepAlive(accountType)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accountsWithAccountType:"), objref.IDOf(accountType))
 	return obj.Wrap(_r)
 }
 
 // Accounts returns the accounts.
 func (as *AccountStore) Accounts() obj.Object {
+	defer runtime.KeepAlive(as)
 	_r := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("accounts"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func multiArrayShapeConstraintAdopt(id objc.ID) *MultiArrayShapeConstraint {
 
 // Description returns the object's -description text.
 func (masc *MultiArrayShapeConstraint) Description() string {
+	defer runtime.KeepAlive(masc)
 	return rt.Description(objref.IDOf(masc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (masc *MultiArrayShapeConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(masc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(masc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (masc *MultiArrayShapeConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(masc)
 	return rt.IsKind(objref.IDOf(masc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (masc *MultiArrayShapeConstraint) String() string {
+	defer runtime.KeepAlive(masc)
 	return rt.Description(objref.IDOf(masc))
 }
 
@@ -74,6 +81,7 @@ func NewMultiArrayShapeConstraint() *MultiArrayShapeConstraint {
 
 // Type returns the type.
 func (masc *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
+	defer runtime.KeepAlive(masc)
 	_r := objc.Send[MultiArrayShapeConstraintType](objref.IDOf(masc), objc.RegisterName("type"))
 	return _r
 }
@@ -82,6 +90,7 @@ func (masc *MultiArrayShapeConstraint) Type() MultiArrayShapeConstraintType {
 //
 // SizeRangeForDimension returns the collection as a Go slice.
 func (masc *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
+	defer runtime.KeepAlive(masc)
 	_arr := objc.Send[objc.ID](objref.IDOf(masc), objc.RegisterName("sizeRangeForDimension"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -90,6 +99,7 @@ func (masc *MultiArrayShapeConstraint) SizeRangeForDimension() []obj.Object {
 //
 // EnumeratedShapes returns the collection as a Go slice.
 func (masc *MultiArrayShapeConstraint) EnumeratedShapes() []obj.Object {
+	defer runtime.KeepAlive(masc)
 	_arr := objc.Send[objc.ID](objref.IDOf(masc), objc.RegisterName("enumeratedShapes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

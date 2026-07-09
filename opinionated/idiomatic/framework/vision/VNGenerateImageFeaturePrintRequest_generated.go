@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -84,6 +86,7 @@ func (gifpr *GenerateImageFeaturePrintRequest) WithRevision(revision int) *Gener
 
 // ImageCropAndScaleOption determine what type of croping and scaling action should be applied to the image before generating the feature print. The default value for this property is `VNImageCropAndScaleOptionScaleFill`.
 func (gifpr *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
+	defer runtime.KeepAlive(gifpr)
 	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(gifpr), objc.RegisterName("imageCropAndScaleOption"))
 	return _r
 }

@@ -5,8 +5,11 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func mapItemDetailViewControllerAdopt(id objc.ID) *MapItemDetailViewController {
 
 // Description returns the object's -description text.
 func (midvc *MapItemDetailViewController) Description() string {
+	defer runtime.KeepAlive(midvc)
 	return rt.Description(objref.IDOf(midvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (midvc *MapItemDetailViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(midvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(midvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (midvc *MapItemDetailViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(midvc)
 	return rt.IsKind(objref.IDOf(midvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (midvc *MapItemDetailViewController) String() string {
+	defer runtime.KeepAlive(midvc)
 	return rt.Description(objref.IDOf(midvc))
 }
 
 // NewMapItemDetailViewControllerWithMapItemDisplaysMap create a map item detail view controller
 func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *MapItem, displaysMap bool) *MapItemDetailViewController {
+	defer runtime.KeepAlive(mapItem)
 	var _mainthread0 *MapItemDetailViewController
 	purego.Main(func() {
 		_mainthread0 = func() *MapItemDetailViewController {
@@ -81,6 +90,7 @@ func NewMapItemDetailViewControllerWithMapItemDisplaysMap(mapItem *MapItem, disp
 
 // NewMapItemDetailViewControllerWithMapItem create a map item detail view controller.
 func NewMapItemDetailViewControllerWithMapItem(mapItem *MapItem) *MapItemDetailViewController {
+	defer runtime.KeepAlive(mapItem)
 	var _mainthread0 *MapItemDetailViewController
 	purego.Main(func() {
 		_mainthread0 = func() *MapItemDetailViewController {
@@ -94,14 +104,28 @@ func NewMapItemDetailViewControllerWithMapItem(mapItem *MapItem) *MapItemDetailV
 
 // WithMapItem sets the map item to display.
 func (midvc *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
+	defer runtime.KeepAlive(mapItem)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
 	})
 	return midvc
 }
 
+// WithDelegate sets the map item detail view controller’s delegate.
+func (midvc *MapItemDetailViewController) WithDelegate(delegate MapItemDetailViewControllerDelegate) *MapItemDetailViewController {
+	_shim := newMapItemDetailViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(midvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(midvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return midvc
+}
+
 // MapItem returns the map item.
 func (midvc *MapItemDetailViewController) MapItem() *MapItem {
+	defer runtime.KeepAlive(midvc)
 	var _mainthread0 *MapItem
 	purego.Main(func() {
 		_mainthread0 = func() *MapItem {

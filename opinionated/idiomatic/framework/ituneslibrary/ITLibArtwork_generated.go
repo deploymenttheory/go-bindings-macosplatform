@@ -5,6 +5,8 @@
 package ituneslibrary
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func libArtworkAdopt(id objc.ID) *LibArtwork {
 
 // Description returns the object's -description text.
 func (la *LibArtwork) Description() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (la *LibArtwork) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(la)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(la), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (la *LibArtwork) IsKind(className string) bool {
+	defer runtime.KeepAlive(la)
 	return rt.IsKind(objref.IDOf(la), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (la *LibArtwork) String() string {
+	defer runtime.KeepAlive(la)
 	return rt.Description(objref.IDOf(la))
 }
 
@@ -74,18 +81,21 @@ func NewLibArtwork() *LibArtwork {
 
 // Image returns the NSImage formed by calling [[NSImage alloc] initWithData:self.imageData].
 func (la *LibArtwork) Image() obj.Object {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
 // ImageData returns the data (bytes) of this artwork image.
-func (la *LibArtwork) ImageData() obj.Object {
+func (la *LibArtwork) ImageData() []byte {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[objc.ID](objref.IDOf(la), objc.RegisterName("imageData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ImageDataFormat returns the fortmat of the data returned by the imageData method.
 func (la *LibArtwork) ImageDataFormat() LibArtworkFormat {
+	defer runtime.KeepAlive(la)
 	_r := objc.Send[LibArtworkFormat](objref.IDOf(la), objc.RegisterName("imageDataFormat"))
 	return _r
 }

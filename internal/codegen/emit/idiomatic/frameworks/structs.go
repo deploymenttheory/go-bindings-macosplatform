@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/render"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/idiomatic/frameworks/view"
+	rawfw "github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/emit/raw/frameworks"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -63,7 +63,10 @@ func resolveStructFields(
 // cross-framework references, so a reference never names a struct that was
 // skipped. An enum-typed field is allowed when the enum is one the same framework
 // emits locally (see ComputeEmittableStructs).
-func ComputeEmittableStructs(frameworks []*meta.FrameworkMeta, mapper *typemap.Mapper) map[string]bool {
+func ComputeEmittableStructs(
+	frameworks []*meta.FrameworkMeta,
+	mapper *typemap.Mapper,
+) map[string]bool {
 	// Per-framework own-enum names (bare), so an enum-typed field is accepted only
 	// when the enum belongs to the same framework as the struct — the only case the
 	// idiomatic package emits a local definition for (registerLocalStructEnumRefs).
@@ -150,6 +153,17 @@ func registerLocalStructEnumRefs(fc *frameworkContext, mapper *typemap.Mapper) {
 	}
 }
 
+// structFieldGoName derives the exported Go field name for a C struct field:
+// snake_case becomes PascalCase with known initialisms re-cased
+// (virtual_address → VirtualAddress), plain names get their first letter
+// capitalised. Names only — the field order and types are ABI and untouched.
+func structFieldGoName(fieldName string) string {
+	if exported := naming.ExportedTypeName(fieldName); exported != "" {
+		return applyInitialisms(exported)
+	}
+	return capitalizeFirst(fieldName)
+}
+
 func emitStructTypeAliases(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fc *frameworkContext,
@@ -202,12 +216,12 @@ func emitStructTypeAliases(
 		fields := make([]view.Field, len(def.fieldNames))
 		for i, fname := range def.fieldNames {
 			gt := def.fieldTypes[i]
-			// An own-enum field names the local (de-prefixed) enum type emitEnums
-			// emits, not the raw full name, so the reference resolves in-package.
+			// An own-enum field names the local enum type emitEnums emits, not
+			// the raw full name, so the reference resolves in-package.
 			if fc.ownEnums[gt] {
-				gt = deprefixEnumName(gt, fc.prefix)
+				gt = fc.localEnumTypeName(gt)
 			}
-			fields[i] = view.Field{GoName: capitalizeFirst(fname), GoType: gt}
+			fields[i] = view.Field{GoName: structFieldGoName(fname), GoType: gt}
 		}
 		structs = append(structs, view.Struct{
 			GoName: goName,
@@ -226,4 +240,41 @@ func emitStructTypeAliases(
 	fname := pkgName + "_type_aliases_generated.go"
 	file := assembleFile(pkgName, nil, body)
 	return rawfw.WriteGoFile(filepath.Join(outDir, fname), file)
+}
+
+// ComputeIdiomaticClassIndex maps every ObjC class emitted by the idiomatic
+// layer to its owning idiomatic package and wrapper type name ("NSProgress" →
+// {foundation, Progress}). Only each class's canonical owner (ownerIndex)
+// contributes, and only frameworks the idiomatic generator actually emits
+// (callers pass the already-filtered framework list), so a reference built
+// from this index always names a type that exists. Every available class in an
+// emitted framework gets a wrapper file — a non-abstract class always carries
+// at least its +new constructor and an abstract base is emitted for embedding
+// — so no per-class emission check is needed.
+func ComputeIdiomaticClassIndex(
+	frameworks []*meta.FrameworkMeta,
+	ownerIndex map[string]string,
+) map[string]typemap.IdiomaticClassRef {
+	index := make(map[string]typemap.IdiomaticClassRef)
+	for _, framework := range frameworks {
+		prefix := detectClassPrefix(framework)
+		packageName := naming.PackageName(framework.Framework)
+		for className, class := range framework.Classes {
+			if class.Availability.IsUnavailable {
+				continue
+			}
+			if ownerIndex[className] != framework.Framework {
+				continue
+			}
+			typeName := trialTypeName(className, prefix)
+			if !isExportedGoIdent(typeName) {
+				continue
+			}
+			index[className] = typemap.IdiomaticClassRef{
+				Package:  packageName,
+				TypeName: typeName,
+			}
+		}
+	}
+	return index
 }

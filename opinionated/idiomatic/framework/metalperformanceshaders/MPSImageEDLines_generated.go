@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -100,48 +102,56 @@ func (iel *ImageEDLines) WithLabel(label string) *ImageEDLines {
 
 // ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
 func (iel *ImageEDLines) ClipRectSource() metal.MTLRegion {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[metal.MTLRegion](objref.IDOf(iel), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
 // GaussianSigma returns read-only sigma value used in performing Gaussian blur of the image. Default is 2.0
 func (iel *ImageEDLines) GaussianSigma() float32 {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("gaussianSigma"))
 	return _r
 }
 
 // MinLineLength returns read-write value used to set the minimum length of a line segment. Default is 32
 func (iel *ImageEDLines) MinLineLength() uint16 {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[uint16](objref.IDOf(iel), objc.RegisterName("minLineLength"))
 	return _r
 }
 
 // MaxLines returns read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
 func (iel *ImageEDLines) MaxLines() int {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[int](objref.IDOf(iel), objc.RegisterName("maxLines"))
 	return _r
 }
 
 // DetailRatio returns read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
 func (iel *ImageEDLines) DetailRatio() uint16 {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[uint16](objref.IDOf(iel), objc.RegisterName("detailRatio"))
 	return _r
 }
 
 // GradientThreshold returns read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
 func (iel *ImageEDLines) GradientThreshold() float32 {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("gradientThreshold"))
 	return _r
 }
 
 // LineErrorThreshold returns read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
 func (iel *ImageEDLines) LineErrorThreshold() float32 {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("lineErrorThreshold"))
 	return _r
 }
 
 // MergeLocalityThreshold returns read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
 func (iel *ImageEDLines) MergeLocalityThreshold() float32 {
+	defer runtime.KeepAlive(iel)
 	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("mergeLocalityThreshold"))
 	return _r
 }

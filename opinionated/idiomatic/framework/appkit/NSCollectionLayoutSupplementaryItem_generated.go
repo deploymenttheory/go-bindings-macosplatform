@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func (clsi *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *Collectio
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (clsi *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem {
+	defer runtime.KeepAlive(edgeSpacing)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(clsi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	})
@@ -63,6 +66,7 @@ func (clsi *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *Coll
 
 // ZIndex returns the z index.
 func (clsi *CollectionLayoutSupplementaryItem) ZIndex() int {
+	defer runtime.KeepAlive(clsi)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -76,6 +80,7 @@ func (clsi *CollectionLayoutSupplementaryItem) ZIndex() int {
 
 // ElementKind returns the element kind.
 func (clsi *CollectionLayoutSupplementaryItem) ElementKind() string {
+	defer runtime.KeepAlive(clsi)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -92,6 +97,7 @@ func (clsi *CollectionLayoutSupplementaryItem) ElementKind() string {
 
 // ContainerAnchor returns the container anchor.
 func (clsi *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
+	defer runtime.KeepAlive(clsi)
 	var _mainthread0 *CollectionLayoutAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutAnchor {
@@ -105,6 +111,7 @@ func (clsi *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayo
 
 // ItemAnchor returns the item anchor.
 func (clsi *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
+	defer runtime.KeepAlive(clsi)
 	var _mainthread0 *CollectionLayoutAnchor
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutAnchor {

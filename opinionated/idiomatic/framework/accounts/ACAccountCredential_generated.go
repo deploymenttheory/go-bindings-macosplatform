@@ -5,6 +5,9 @@
 package accounts
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func accountCredentialAdopt(id objc.ID) *AccountCredential {
 
 // Description returns the object's -description text.
 func (ac *AccountCredential) Description() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ac *AccountCredential) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ac *AccountCredential) IsKind(className string) bool {
+	defer runtime.KeepAlive(ac)
 	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ac *AccountCredential) String() string {
+	defer runtime.KeepAlive(ac)
 	return rt.Description(objref.IDOf(ac))
 }
 
@@ -74,9 +82,9 @@ func NewAccountCredentialWithOAuthTokenTokenSecret(token string, secret string) 
 }
 
 // NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate initializes an account credential using OAuth 2.
-func NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate(token string, refreshToken string, expiryDate obj.Object) *AccountCredential {
+func NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate(token string, refreshToken string, expiryDate time.Time) *AccountCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("ACAccountCredential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOAuth2Token:refreshToken:expiryDate:"), purego.NSString(token), purego.NSString(refreshToken), objref.IDOf(expiryDate))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOAuth2Token:refreshToken:expiryDate:"), purego.NSString(token), purego.NSString(refreshToken), rt.TimeToNSDate(expiryDate))
 	return accountCredentialAdopt(_id)
 }
 
@@ -88,6 +96,7 @@ func (ac *AccountCredential) WithOauthToken(oauthToken string) *AccountCredentia
 
 // OauthToken returns the oauth token.
 func (ac *AccountCredential) OauthToken() string {
+	defer runtime.KeepAlive(ac)
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("oauthToken"))
 	if _r == 0 {
 		return ""

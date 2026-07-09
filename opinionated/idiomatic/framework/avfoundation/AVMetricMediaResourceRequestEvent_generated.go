@@ -5,10 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,13 +57,15 @@ func NewMetricMediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 }
 
 // URL returns the URL of the resource request. If no value is available, returns nil.
-func (mmrre *MetricMediaResourceRequestEvent) URL() obj.Object {
+func (mmrre *MetricMediaResourceRequestEvent) URL() string {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // ServerAddress returns the IP address of the server. If not available, the value is nil.
 func (mmrre *MetricMediaResourceRequestEvent) ServerAddress() string {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("serverAddress"))
 	if _r == 0 {
 		return ""
@@ -69,51 +74,59 @@ func (mmrre *MetricMediaResourceRequestEvent) ServerAddress() string {
 }
 
 // RequestStartTime returns the start time of the resource request.
-func (mmrre *MetricMediaResourceRequestEvent) RequestStartTime() obj.Object {
+func (mmrre *MetricMediaResourceRequestEvent) RequestStartTime() time.Time {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("requestStartTime"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // RequestEndTime returns the end time of the resource request.
-func (mmrre *MetricMediaResourceRequestEvent) RequestEndTime() obj.Object {
+func (mmrre *MetricMediaResourceRequestEvent) RequestEndTime() time.Time {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("requestEndTime"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ResponseStartTime returns the start time of the resource request response.
-func (mmrre *MetricMediaResourceRequestEvent) ResponseStartTime() obj.Object {
+func (mmrre *MetricMediaResourceRequestEvent) ResponseStartTime() time.Time {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("responseStartTime"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ResponseEndTime returns the end time of the resource request response.
-func (mmrre *MetricMediaResourceRequestEvent) ResponseEndTime() obj.Object {
+func (mmrre *MetricMediaResourceRequestEvent) ResponseEndTime() time.Time {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("responseEndTime"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ByteRange returns the byte range downloaded for the resource request. If not available, the range start and end will be 0.
 func (mmrre *MetricMediaResourceRequestEvent) ByteRange() foundation.NSRange {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[foundation.NSRange](objref.IDOf(mmrre), objc.RegisterName("byteRange"))
 	return _r
 }
 
 // WasReadFromCache reports whether the resource was read from the cache.
 func (mmrre *MetricMediaResourceRequestEvent) WasReadFromCache() bool {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[bool](objref.IDOf(mmrre), objc.RegisterName("wasReadFromCache"))
 	return _r
 }
 
 // ErrorEvent returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
 func (mmrre *MetricMediaResourceRequestEvent) ErrorEvent() *MetricErrorEvent {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("errorEvent"))
 	return MetricErrorEventFromID(_r)
 }
 
 // NetworkTransactionMetrics returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
-func (mmrre *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() obj.Object {
+func (mmrre *MetricMediaResourceRequestEvent) NetworkTransactionMetrics() *foundation.URLSessionTaskMetrics {
+	defer runtime.KeepAlive(mmrre)
 	_r := objc.Send[objc.ID](objref.IDOf(mmrre), objc.RegisterName("networkTransactionMetrics"))
-	return obj.Wrap(_r)
+	return foundation.URLSessionTaskMetricsFromID(_r)
 }
 
 var _ MetricEventProvider = (*MetricMediaResourceRequestEvent)(nil)

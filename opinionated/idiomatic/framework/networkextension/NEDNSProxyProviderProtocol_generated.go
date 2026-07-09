@@ -5,9 +5,12 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +56,8 @@ func NewNEDNSProxyProviderProtocol() *NEDNSProxyProviderProtocol {
 }
 
 // WithProviderConfiguration sets a dictionary containing vendor-specific configuration parameters for a proxy provider.
-func (nppp *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
+func (nppp *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration map[string]obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setProviderConfiguration:"), rt.MapToDict(providerConfiguration, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return nppp
 }
 
@@ -77,20 +80,20 @@ func (nppp *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProx
 }
 
 // WithPasswordReference sets a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-func (nppp *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+func (nppp *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference []byte) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setPasswordReference:"), rt.BytesToNSData(passwordReference))
 	return nppp
 }
 
 // WithIdentityReference sets a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-func (nppp *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+func (nppp *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference []byte) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityReference:"), rt.BytesToNSData(identityReference))
 	return nppp
 }
 
 // WithIdentityData sets the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-func (nppp *NEDNSProxyProviderProtocol) WithIdentityData(identityData obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+func (nppp *NEDNSProxyProviderProtocol) WithIdentityData(identityData []byte) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityData:"), rt.BytesToNSData(identityData))
 	return nppp
 }
 
@@ -108,6 +111,7 @@ func (nppp *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep 
 
 // WithProxySettings sets the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 func (nppp *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return nppp
 }
@@ -149,13 +153,15 @@ func (nppp *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *N
 }
 
 // ProviderConfiguration returns a dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
-func (nppp *NEDNSProxyProviderProtocol) ProviderConfiguration() obj.Object {
+func (nppp *NEDNSProxyProviderProtocol) ProviderConfiguration() map[string]obj.Object {
+	defer runtime.KeepAlive(nppp)
 	_r := objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("providerConfiguration"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ProviderBundleIdentifier returns a string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
 func (nppp *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() string {
+	defer runtime.KeepAlive(nppp)
 	_r := objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("providerBundleIdentifier"))
 	if _r == 0 {
 		return ""

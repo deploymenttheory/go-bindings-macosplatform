@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterOccupancySensingAdopt(id objc.ID) *MTRBaseClusterOccupancySen
 
 // NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterOccupancySensing {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOccupancySensing")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterOccupancySensingAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue(device *MTRBaseD
 
 // NewMTRBaseClusterOccupancySensingWithDeviceEndpointQueue creates a new MTRBaseClusterOccupancySensing.
 func NewMTRBaseClusterOccupancySensingWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterOccupancySensing {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterOccupancySensing")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterOccupancySensingAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterOccupancySensingWithDeviceEndpointQueue(device *MTRBaseDev
 //
 // ReadAttributeOccupancyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancyWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancyWithCompletio
 //
 // SubscribeAttributeOccupancyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithPara
 //
 // ReadAttributeOccupancySensorTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeWit
 //
 // SubscribeAttributeOccupancySensorTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 //
 // ReadAttributeOccupancySensorTypeBitmapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBit
 //
 // SubscribeAttributeOccupancySensorTypeBitmapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBitmapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 //
 // ReadAttributeHoldTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeWithCompletion
 //
 // SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeWithParam
 //
 // ReadAttributeHoldTimeLimitsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithCompletion(ctx context.Context) (result *MTROccupancySensingClusterHoldTimeLimitsStruct, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val *MTROccupancySensingClusterHoldTimeLimitsStruct
 		err error
@@ -290,6 +309,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeHoldTimeLimitsWithComp
 //
 // SubscribeAttributeHoldTimeLimitsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTROccupancySensingClusterHoldTimeLimitsStruct, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val *MTROccupancySensingClusterHoldTimeLimitsStruct
 		err error
@@ -315,6 +336,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeHoldTimeLimitsWit
 //
 // ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIROccupiedToUnoccupie
 //
 // SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIROccupiedToUnoc
 //
 // ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupie
 //
 // SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOc
 //
 // ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePIRUnoccupiedToOccupie
 //
 // SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePIRUnoccupiedToOc
 //
 // ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUn
 //
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupie
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +654,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 //
 // ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +680,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupie
 //
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +707,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOc
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +733,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +760,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +786,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +813,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +839,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandListWi
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +866,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandL
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +892,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandListWit
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +919,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandLi
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +945,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAttributeListWithCompl
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +972,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWith
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +998,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMapWithCompleti
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1025,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithPar
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1051,8 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevisionWithCom
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1078,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWi
 //
 // ReadAttributeOccupancy blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancy(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1104,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancy(ctx context.
 //
 // SubscribeAttributeOccupancyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1133,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancyWithMinI
 //
 // ReadAttributeOccupancySensorType blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorType(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1159,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorType(ct
 //
 // SubscribeAttributeOccupancySensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1188,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 //
 // ReadAttributeOccupancySensorTypeBitmap blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBitmap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1214,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeOccupancySensorTypeBit
 //
 // SubscribeAttributeOccupancySensorTypeBitmapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTypeBitmapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1243,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeOccupancySensorTy
 //
 // ReadAttributePirOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1269,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirOccupiedToUnoccupie
 //
 // SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1298,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirOccupiedToUnoc
 //
 // ReadAttributePirUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1324,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupie
 //
 // SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1353,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOc
 //
 // ReadAttributePirUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1379,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePirUnoccupiedToOccupie
 //
 // SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1408,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePirUnoccupiedToOc
 //
 // ReadAttributeUltrasonicOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1434,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicOccupiedToUn
 //
 // SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1463,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicOccupie
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1489,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1518,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 //
 // ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1544,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeUltrasonicUnoccupiedTo
 //
 // SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1573,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeUltrasonicUnoccup
 //
 // ReadAttributePhysicalContactOccupiedToUnoccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupiedToUnoccupiedDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1599,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactOccupie
 //
 // SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOccupiedToUnoccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1628,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactOc
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedDelay blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedDelay(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1654,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1683,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 //
 // ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccupiedToOccupiedThreshold(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1709,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributePhysicalContactUnoccup
 //
 // SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUnoccupiedToOccupiedThresholdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1738,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributePhysicalContactUn
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1764,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeGeneratedCommandList(c
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1793,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeGeneratedCommandL
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1819,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAcceptedCommandList(ct
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1715,6 +1848,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAcceptedCommandLi
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1740,6 +1874,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeAttributeList(ctx cont
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1765,6 +1903,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeAttributeListWith
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1790,6 +1929,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeFeatureMap(ctx context
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1815,6 +1958,7 @@ func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeFeatureMapWithMin
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1840,6 +1984,10 @@ func (mbcos *MTRBaseClusterOccupancySensing) ReadAttributeClusterRevision(ctx co
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcos *MTRBaseClusterOccupancySensing) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcos)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

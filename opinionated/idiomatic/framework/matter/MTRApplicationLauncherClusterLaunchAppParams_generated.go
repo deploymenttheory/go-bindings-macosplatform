@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRApplicationLauncherClusterLaunchAppParamsAdopt(id objc.ID) *MTRApplicati
 
 // Description returns the object's -description text.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Description() string {
+	defer runtime.KeepAlive(malclap)
 	return rt.Description(objref.IDOf(malclap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(malclap)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(malclap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(malclap)
 	return rt.IsKind(objref.IDOf(malclap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) String() string {
+	defer runtime.KeepAlive(malclap)
 	return rt.Description(objref.IDOf(malclap))
 }
 
@@ -72,48 +80,55 @@ func NewMTRApplicationLauncherClusterLaunchAppParams() *MTRApplicationLauncherCl
 
 // WithApplication sets the application.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterLaunchAppParams {
+	defer runtime.KeepAlive(application)
 	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malclap
 }
 
 // WithData sets the data.
-func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithData(data obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
-	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setData:"), objref.IDOf(data))
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithData(data []byte) *MTRApplicationLauncherClusterLaunchAppParams {
+	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return malclap
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return malclap
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return malclap
 }
 
 // Application returns the application.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	defer runtime.KeepAlive(malclap)
 	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
 // Data returns the data.
-func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Data() obj.Object {
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Data() []byte {
+	defer runtime.KeepAlive(malclap)
 	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (malclap *MTRApplicationLauncherClusterLaunchAppParams) TimedInvokeTimeoutMs() obj.Object {
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(malclap)
 	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (malclap *MTRApplicationLauncherClusterLaunchAppParams) ServerSideProcessingTimeout() obj.Object {
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(malclap)
 	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

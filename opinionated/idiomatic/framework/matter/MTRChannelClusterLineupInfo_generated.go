@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -70,6 +72,7 @@ func (mccli *MTRChannelClusterLineupInfo) WithPostalCode(postalCode string) *MTR
 
 // WithLineupInfoType sets the lineup info type.
 func (mccli *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfo {
+	defer runtime.KeepAlive(lineupInfoType)
 	objc.Send[objc.ID](objref.IDOf(mccli), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return mccli
 }

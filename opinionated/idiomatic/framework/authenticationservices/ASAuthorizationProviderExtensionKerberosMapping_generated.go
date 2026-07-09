@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationProviderExtensionKerberosMappingAdopt(id objc.ID) *Authorizati
 
 // Description returns the object's -description text.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) Description() string {
+	defer runtime.KeepAlive(apekm)
 	return rt.Description(objref.IDOf(apekm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apekm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apekm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) IsKind(className string) bool {
+	defer runtime.KeepAlive(apekm)
 	return rt.IsKind(objref.IDOf(apekm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) String() string {
+	defer runtime.KeepAlive(apekm)
 	return rt.Description(objref.IDOf(apekm))
 }
 
@@ -116,6 +123,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) WithSessionKeyKeyNam
 
 // TicketKeyPath returns the keypath in the response JSON that uses this set of mappings. If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) TicketKeyPath() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("ticketKeyPath"))
 	if _r == 0 {
 		return ""
@@ -125,6 +133,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) TicketKeyPath() stri
 
 // MessageBufferKeyName returns the key name that contains the base64 encoded kerberos AS-REP string.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("messageBufferKeyName"))
 	if _r == 0 {
 		return ""
@@ -134,6 +143,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName
 
 // RealmKeyName returns the key name that contains the Kerberos Realm string.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) RealmKeyName() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("realmKeyName"))
 	if _r == 0 {
 		return ""
@@ -143,6 +153,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) RealmKeyName() strin
 
 // ServiceNameKeyName returns the key name that contains the Kerberos service name string.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("serviceNameKeyName"))
 	if _r == 0 {
 		return ""
@@ -152,6 +163,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName()
 
 // ClientNameKeyName returns the key name that contains the Kerberos client name string.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("clientNameKeyName"))
 	if _r == 0 {
 		return ""
@@ -161,6 +173,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() 
 
 // EncryptionKeyTypeKeyName returns the key name that contains the Kerberos session key type number. The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKeyName() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("encryptionKeyTypeKeyName"))
 	if _r == 0 {
 		return ""
@@ -170,6 +183,7 @@ func (apekm *AuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKey
 
 // SessionKeyKeyName returns the key name that contains the Kerberos session key.
 func (apekm *AuthorizationProviderExtensionKerberosMapping) SessionKeyKeyName() string {
+	defer runtime.KeepAlive(apekm)
 	_r := objc.Send[objc.ID](objref.IDOf(apekm), objc.RegisterName("sessionKeyKeyName"))
 	if _r == 0 {
 		return ""

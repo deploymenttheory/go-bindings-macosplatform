@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -68,6 +70,7 @@ func (mc *MutableCaption) WithTimeRange(timeRange coremedia.CMTimeRange) *Mutabl
 
 // WithRegion sets the region in which the caption exists.
 func (mc *MutableCaption) WithRegion(region CaptionRegionProvider) *MutableCaption {
+	defer runtime.KeepAlive(region)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRegion:"), objref.IDOf(region))
 	return mc
 }
@@ -86,71 +89,88 @@ func (mc *MutableCaption) WithAnimation(animation CaptionAnimation) *MutableCapt
 
 // SetTextColorInRange sets the text color for a range of text.
 func (mc *MutableCaption) SetTextColorInRange(color obj.Object, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextColor:inRange:"), objref.IDOf(color), range_)
 }
 
 // SetBackgroundColorInRange sets the background color for a range of text.
 func (mc *MutableCaption) SetBackgroundColorInRange(color obj.Object, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setBackgroundColor:inRange:"), objref.IDOf(color), range_)
 }
 
 // SetFontWeightInRange sets the font weight for a range of text.
 func (mc *MutableCaption) SetFontWeightInRange(fontWeight CaptionFontWeight, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setFontWeight:inRange:"), fontWeight, range_)
 }
 
 // SetFontStyleInRange sets the font style for a range of text.
 func (mc *MutableCaption) SetFontStyleInRange(fontStyle CaptionFontStyle, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setFontStyle:inRange:"), fontStyle, range_)
 }
 
 // SetDecorationInRange sets a decoration for a range of text.
 func (mc *MutableCaption) SetDecorationInRange(decoration CaptionDecoration, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setDecoration:inRange:"), decoration, range_)
 }
 
 // SetTextCombineInRange sets text combine for a range.
 func (mc *MutableCaption) SetTextCombineInRange(textCombine CaptionTextCombine, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setTextCombine:inRange:"), textCombine, range_)
 }
 
 // SetRubyInRange sets ruby text for a range.
 func (mc *MutableCaption) SetRubyInRange(ruby *CaptionRuby, range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
+	defer runtime.KeepAlive(ruby)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setRuby:inRange:"), objref.IDOf(ruby), range_)
 }
 
 // RemoveTextColorInRange removes the text color for a range of text.
 func (mc *MutableCaption) RemoveTextColorInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTextColorInRange:"), range_)
 }
 
 // RemoveBackgroundColorInRange removes a background color from a range of text.
 func (mc *MutableCaption) RemoveBackgroundColorInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeBackgroundColorInRange:"), range_)
 }
 
 // RemoveFontWeightInRange removes a font weight from a range of text.
 func (mc *MutableCaption) RemoveFontWeightInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeFontWeightInRange:"), range_)
 }
 
 // RemoveFontStyleInRange removes a font style from a range of text.
 func (mc *MutableCaption) RemoveFontStyleInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeFontStyleInRange:"), range_)
 }
 
 // RemoveDecorationInRange removes a decoration from a range of text.
 func (mc *MutableCaption) RemoveDecorationInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeDecorationInRange:"), range_)
 }
 
 // RemoveTextCombineInRange removes text combine from a range of text.
 func (mc *MutableCaption) RemoveTextCombineInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTextCombineInRange:"), range_)
 }
 
 // RemoveRubyInRange removes ruby text from a range.
 func (mc *MutableCaption) RemoveRubyInRange(range_ foundation.NSRange) {
+	defer runtime.KeepAlive(mc)
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeRubyInRange:"), range_)
 }
 

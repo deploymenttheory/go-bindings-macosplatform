@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -62,6 +64,7 @@ func NewImageView() *ImageView {
 
 // WithImage sets the image displayed by the image view.
 func (iv *ImageView) WithImage(image *Image) *ImageView {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -102,6 +105,7 @@ func (iv *ImageView) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *Image
 
 // WithSymbolConfiguration sets specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images.
 func (iv *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *ImageView {
+	defer runtime.KeepAlive(symbolConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
 	})
@@ -110,6 +114,7 @@ func (iv *ImageView) WithSymbolConfiguration(symbolConfiguration *ImageSymbolCon
 
 // WithContentTintColor sets a tint color to be used when rendering template image content.
 func (iv *ImageView) WithContentTintColor(contentTintColor *Color) *ImageView {
+	defer runtime.KeepAlive(contentTintColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
 	})
@@ -142,6 +147,7 @@ func (iv *ImageView) WithPreferredImageDynamicRange(preferredImageDynamicRange I
 
 // WithTarget sets the target object that receives action messages from the cell.
 func (iv *ImageView) WithTarget(target obj.Object) *ImageView {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -206,6 +212,7 @@ func (iv *ImageView) WithControlSize(controlSize ControlSize) *ImageView {
 
 // WithFormatter sets the receiver’s formatter.
 func (iv *ImageView) WithFormatter(formatter obj.Object) *ImageView {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -214,6 +221,7 @@ func (iv *ImageView) WithFormatter(formatter obj.Object) *ImageView {
 
 // WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
 func (iv *ImageView) WithObjectValue(objectValue obj.Object) *ImageView {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -230,6 +238,7 @@ func (iv *ImageView) WithStringValue(stringValue string) *ImageView {
 
 // WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
 func (iv *ImageView) WithAttributedStringValue(attributedStringValue obj.Object) *ImageView {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -270,6 +279,7 @@ func (iv *ImageView) WithDoubleValue(doubleValue float64) *ImageView {
 
 // WithFont sets the font used to draw text in the receiver’s cell.
 func (iv *ImageView) WithFont(font *Font) *ImageView {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -318,6 +328,7 @@ func (iv *ImageView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *
 
 // WithCell sets the cell.
 func (iv *ImageView) WithCell(cell CellProvider) *ImageView {
+	defer runtime.KeepAlive(cell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	})
@@ -463,6 +474,7 @@ func (iv *ImageView) WithWantsLayer(wantsLayer bool) *ImageView {
 
 // WithLayer sets the layer.
 func (iv *ImageView) WithLayer(layer obj.Object) *ImageView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -512,6 +524,7 @@ func (iv *ImageView) WithBackgroundFilters(items ...obj.Object) *ImageView {
 
 // WithCompositingFilter sets the compositing filter.
 func (iv *ImageView) WithCompositingFilter(compositingFilter obj.Object) *ImageView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -529,6 +542,7 @@ func (iv *ImageView) WithContentFilters(items ...obj.Object) *ImageView {
 
 // WithShadow sets the shadow.
 func (iv *ImageView) WithShadow(shadow *Shadow) *ImageView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -577,6 +591,7 @@ func (iv *ImageView) WithPreparedContentRect(preparedContentRect corefoundation.
 
 // WithNextKeyView sets the next key view.
 func (iv *ImageView) WithNextKeyView(nextKeyView ViewProvider) *ImageView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -626,6 +641,7 @@ func (iv *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (iv *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -682,6 +698,7 @@ func (iv *ImageView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyn
 
 // WithPressureConfiguration sets the pressure configuration.
 func (iv *ImageView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -690,6 +707,7 @@ func (iv *ImageView) WithPressureConfiguration(pressureConfiguration *PressureCo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (iv *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -698,6 +716,7 @@ func (iv *ImageView) WithNextResponder(nextResponder ResponderProvider) *ImageVi
 
 // WithMenu sets returns the responder’s menu.
 func (iv *ImageView) WithMenu(menu *Menu) *ImageView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -706,6 +725,7 @@ func (iv *ImageView) WithMenu(menu *Menu) *ImageView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (iv *ImageView) WithUserActivity(userActivity obj.Object) *ImageView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -714,6 +734,7 @@ func (iv *ImageView) WithUserActivity(userActivity obj.Object) *ImageView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (iv *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -722,6 +743,7 @@ func (iv *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
 
 // Image returns the image.
 func (iv *ImageView) Image() *Image {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -735,6 +757,7 @@ func (iv *ImageView) Image() *Image {
 
 // IsEditable reports whether the object is editable.
 func (iv *ImageView) IsEditable() bool {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -748,6 +771,7 @@ func (iv *ImageView) IsEditable() bool {
 
 // ImageAlignment returns the image alignment.
 func (iv *ImageView) ImageAlignment() ImageAlignment {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 ImageAlignment
 	purego.Main(func() {
 		_mainthread0 = func() ImageAlignment {
@@ -761,6 +785,7 @@ func (iv *ImageView) ImageAlignment() ImageAlignment {
 
 // ImageScaling returns the image scaling.
 func (iv *ImageView) ImageScaling() ImageScaling {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 ImageScaling
 	purego.Main(func() {
 		_mainthread0 = func() ImageScaling {
@@ -774,6 +799,7 @@ func (iv *ImageView) ImageScaling() ImageScaling {
 
 // ImageFrameStyle returns the image frame style.
 func (iv *ImageView) ImageFrameStyle() ImageFrameStyle {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 ImageFrameStyle
 	purego.Main(func() {
 		_mainthread0 = func() ImageFrameStyle {
@@ -787,6 +813,7 @@ func (iv *ImageView) ImageFrameStyle() ImageFrameStyle {
 
 // SymbolConfiguration specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the image view uses a default size, weight, and scale provided by the system. The default value is `nil`.
 func (iv *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 *ImageSymbolConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *ImageSymbolConfiguration {
@@ -800,6 +827,7 @@ func (iv *ImageView) SymbolConfiguration() *ImageSymbolConfiguration {
 
 // ContentTintColor returns a tint color to be used when rendering template image content. This color may be combined with other effects to produce a theme-appropriate rendition of the template image. A `nil` value indicates the standard set of effects without color modification. The default value is `nil`.
 func (iv *ImageView) ContentTintColor() *Color {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -813,6 +841,7 @@ func (iv *ImageView) ContentTintColor() *Color {
 
 // Animates wraps the corresponding Objective-C method.
 func (iv *ImageView) Animates() bool {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -826,6 +855,7 @@ func (iv *ImageView) Animates() bool {
 
 // AllowsCutCopyPaste wraps the corresponding Objective-C method.
 func (iv *ImageView) AllowsCutCopyPaste() bool {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -839,6 +869,7 @@ func (iv *ImageView) AllowsCutCopyPaste() bool {
 
 // PreferredImageDynamicRange returns preferred dynamic range when displaying an image in the receiving image view.
 func (iv *ImageView) PreferredImageDynamicRange() ImageDynamicRange {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 ImageDynamicRange
 	purego.Main(func() {
 		_mainthread0 = func() ImageDynamicRange {
@@ -852,6 +883,7 @@ func (iv *ImageView) PreferredImageDynamicRange() ImageDynamicRange {
 
 // ImageDynamicRange returns resolved dynamic range based on fully resolved image content. Note: this will return `NSImageDynamicRangeUnspecified` if the image view has not or can not resolve the content (either because it has no resolvable image content or has not resolved because the image view hasn't displayed.)
 func (iv *ImageView) ImageDynamicRange() ImageDynamicRange {
+	defer runtime.KeepAlive(iv)
 	var _mainthread0 ImageDynamicRange
 	purego.Main(func() {
 		_mainthread0 = func() ImageDynamicRange {
@@ -865,6 +897,8 @@ func (iv *ImageView) ImageDynamicRange() ImageDynamicRange {
 
 // AddSymbolEffect adds a symbol effect to the image view with default options and animation.
 func (iv *ImageView) AddSymbolEffect(symbolEffect obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolEffect)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:"), objref.IDOf(symbolEffect))
 	})
@@ -873,6 +907,9 @@ func (iv *ImageView) AddSymbolEffect(symbolEffect obj.Object) {
 
 // AddSymbolEffectOptions adds a symbol effect to the image view with the specified options and default animation.
 func (iv *ImageView) AddSymbolEffectOptions(symbolEffect obj.Object, options obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolEffect)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
 	})
@@ -881,6 +918,9 @@ func (iv *ImageView) AddSymbolEffectOptions(symbolEffect obj.Object, options obj
 
 // AddSymbolEffectOptionsAnimated adds a symbol effect to the image view with the specified options and animation.
 func (iv *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolEffect)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("addSymbolEffect:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
 	})
@@ -889,6 +929,8 @@ func (iv *ImageView) AddSymbolEffectOptionsAnimated(symbolEffect obj.Object, opt
 
 // RemoveSymbolEffectOfType removes the symbol effect that matches the specified effect type.
 func (iv *ImageView) RemoveSymbolEffectOfType(symbolEffect obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolEffect)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:"), objref.IDOf(symbolEffect))
 	})
@@ -897,6 +939,9 @@ func (iv *ImageView) RemoveSymbolEffectOfType(symbolEffect obj.Object) {
 
 // RemoveSymbolEffectOfTypeOptions removes the symbol effect that matches the specified effect type, using the specified options.
 func (iv *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect obj.Object, options obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolEffect)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:"), objref.IDOf(symbolEffect), objref.IDOf(options))
 	})
@@ -905,6 +950,9 @@ func (iv *ImageView) RemoveSymbolEffectOfTypeOptions(symbolEffect obj.Object, op
 
 // RemoveSymbolEffectOfTypeOptionsAnimated removes the symbol effect that matches the specified effect type, using the specified options and animation setting.
 func (iv *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect obj.Object, options obj.Object, animated bool) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolEffect)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeSymbolEffectOfType:options:animated:"), objref.IDOf(symbolEffect), objref.IDOf(options), animated)
 	})
@@ -913,6 +961,7 @@ func (iv *ImageView) RemoveSymbolEffectOfTypeOptionsAnimated(symbolEffect obj.Ob
 
 // RemoveAllSymbolEffects removes all symbol effects from the image view.
 func (iv *ImageView) RemoveAllSymbolEffects() {
+	defer runtime.KeepAlive(iv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffects"))
 	})
@@ -921,6 +970,8 @@ func (iv *ImageView) RemoveAllSymbolEffects() {
 
 // RemoveAllSymbolEffectsWithOptions removes all symbol effects from the image view, using the specified options.
 func (iv *ImageView) RemoveAllSymbolEffectsWithOptions(options obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:"), objref.IDOf(options))
 	})
@@ -929,6 +980,8 @@ func (iv *ImageView) RemoveAllSymbolEffectsWithOptions(options obj.Object) {
 
 // RemoveAllSymbolEffectsWithOptionsAnimated removes all symbol effects from the image view, using the specified options and animation setting.
 func (iv *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options obj.Object, animated bool) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("removeAllSymbolEffectsWithOptions:animated:"), objref.IDOf(options), animated)
 	})
@@ -937,6 +990,9 @@ func (iv *ImageView) RemoveAllSymbolEffectsWithOptionsAnimated(options obj.Objec
 
 // SetSymbolImageWithContentTransition sets a symbol image using the specified content-transition effect.
 func (iv *ImageView) SetSymbolImageWithContentTransition(symbolImage *Image, transition obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolImage)
+	defer runtime.KeepAlive(transition)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:"), objref.IDOf(symbolImage), objref.IDOf(transition))
 	})
@@ -945,6 +1001,10 @@ func (iv *ImageView) SetSymbolImageWithContentTransition(symbolImage *Image, tra
 
 // SetSymbolImageWithContentTransitionOptions sets a symbol image using the specified content-transition effect and options.
 func (iv *ImageView) SetSymbolImageWithContentTransitionOptions(symbolImage *Image, transition obj.Object, options obj.Object) {
+	defer runtime.KeepAlive(iv)
+	defer runtime.KeepAlive(symbolImage)
+	defer runtime.KeepAlive(transition)
+	defer runtime.KeepAlive(options)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSymbolImage:withContentTransition:options:"), objref.IDOf(symbolImage), objref.IDOf(transition), objref.IDOf(options))
 	})

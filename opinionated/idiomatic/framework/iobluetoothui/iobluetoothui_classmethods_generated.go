@@ -5,6 +5,7 @@
 package iobluetoothui
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -38,12 +39,15 @@ func ServiceBrowserController(inOptions uint32) *BluetoothServiceBrowserControll
 
 // BrowseDevicesOptions ***WARNING*** This method has been deprecated in favor of -setOptions:, -runModal and -getResults. This method allocates and runs the browser window as a modal window waiting for the user to either select a service, or cancel the browser window.
 func BrowseDevicesOptions(outRecord obj.Object, inOptions uint32) int {
+	defer runtime.KeepAlive(outRecord)
 	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevices:options:"), objref.IDOf(outRecord), inOptions)
 	return _r
 }
 
 // BrowseDevicesAsSheetForWindowOptionsWindow ***WARNING*** This method has been deprecated in favor of - beginSheetModalForWindow:modalDelegate:didEndSelector:contextInfo:. This method will allocate and run the IOBluetoothServiceBrowserController browser window as a sheet for a window.
 func BrowseDevicesAsSheetForWindowOptionsWindow(outRecord obj.Object, inOptions uint32, inWindow obj.Object) int {
+	defer runtime.KeepAlive(outRecord)
+	defer runtime.KeepAlive(inWindow)
 	_r := objc.Send[int](objc.ID(_class("IOBluetoothServiceBrowserController")), objc.RegisterName("browseDevicesAsSheetForWindow:options:window:"), objref.IDOf(outRecord), inOptions, objref.IDOf(inWindow))
 	return _r
 }

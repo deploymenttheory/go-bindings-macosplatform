@@ -5,6 +5,8 @@
 package javaruntimesupport
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func symbolicatorAdopt(id objc.ID) *Symbolicator {
 
 // Description returns the object's -description text.
 func (s *Symbolicator) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Symbolicator) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Symbolicator) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Symbolicator) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
@@ -72,6 +79,7 @@ func NewSymbolicator() *Symbolicator {
 
 // AddressForSymbol wraps the corresponding Objective-C method.
 func (s *Symbolicator) AddressForSymbol(symbolName string) uint64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[uint64](objref.IDOf(s), objc.RegisterName("addressForSymbol:"), purego.NSString(symbolName))
 	return _r
 }

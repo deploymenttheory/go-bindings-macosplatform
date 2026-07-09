@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func objectCollectionAdopt(id objc.ID) *ObjectCollection {
 
 // Description returns the object's -description text.
 func (oc *ObjectCollection) Description() string {
+	defer runtime.KeepAlive(oc)
 	return rt.Description(objref.IDOf(oc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (oc *ObjectCollection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(oc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(oc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (oc *ObjectCollection) IsKind(className string) bool {
+	defer runtime.KeepAlive(oc)
 	return rt.IsKind(objref.IDOf(oc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (oc *ObjectCollection) String() string {
+	defer runtime.KeepAlive(oc)
 	return rt.Description(objref.IDOf(oc))
 }
 
@@ -88,18 +95,21 @@ func (oc *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) 
 //
 // Sections returns the collection as a Go slice.
 func (oc *ObjectCollection) Sections() []obj.Object {
+	defer runtime.KeepAlive(oc)
 	_arr := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("sections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AllItems returns the all items.
 func (oc *ObjectCollection) AllItems() []obj.Object {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("allItems"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // UsesIndexedCollation wraps the corresponding Objective-C method.
 func (oc *ObjectCollection) UsesIndexedCollation() bool {
+	defer runtime.KeepAlive(oc)
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("usesIndexedCollation"))
 	return _r
 }

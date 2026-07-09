@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -165,6 +167,7 @@ func (dbe *DOMHTMLBaseElement) WithTextContent(textContent string) *DOMHTMLBaseE
 
 // Href returns the href.
 func (dbe *DOMHTMLBaseElement) Href() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
@@ -174,6 +177,7 @@ func (dbe *DOMHTMLBaseElement) Href() string {
 
 // Target returns the target.
 func (dbe *DOMHTMLBaseElement) Target() string {
+	defer runtime.KeepAlive(dbe)
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""

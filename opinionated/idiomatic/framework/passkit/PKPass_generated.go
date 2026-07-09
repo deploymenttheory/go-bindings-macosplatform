@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -52,30 +54,35 @@ func passAdopt(id objc.ID) *Pass {
 
 // Description returns the object's -description text.
 func (p *Pass) Description() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (p *Pass) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(p)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (p *Pass) IsKind(className string) bool {
+	defer runtime.KeepAlive(p)
 	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (p *Pass) String() string {
+	defer runtime.KeepAlive(p)
 	return rt.Description(objref.IDOf(p))
 }
 
-// NewPassWithDataError creates a pass using the data you provide.
-func NewPassWithDataError(data obj.Object) (result *Pass, err error) {
+// NewPassWithData creates a pass using the data you provide.
+func NewPassWithData(data []byte) (result *Pass, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPass")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), rt.BytesToNSData(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -84,30 +91,35 @@ func NewPassWithDataError(data obj.Object) (result *Pass, err error) {
 
 // LocalizedValueForFieldKey returns the localized value for a specified field of the pass.
 func (p *Pass) LocalizedValueForFieldKey(key string) obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedValueForFieldKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // PassType returns the pass type.
 func (p *Pass) PassType() PassType {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[PassType](objref.IDOf(p), objc.RegisterName("passType"))
 	return _r
 }
 
 // PaymentPass returns the payment pass.
 func (p *Pass) PaymentPass() *PaymentPass {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("paymentPass"))
 	return PaymentPassFromID(_r)
 }
 
 // SecureElementPass returns the secure element pass.
 func (p *Pass) SecureElementPass() *SecureElementPass {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("secureElementPass"))
 	return SecureElementPassFromID(_r)
 }
 
 // SerialNumber returns the serial number.
 func (p *Pass) SerialNumber() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("serialNumber"))
 	if _r == 0 {
 		return ""
@@ -117,6 +129,7 @@ func (p *Pass) SerialNumber() string {
 
 // PassTypeIdentifier returns the pass type identifier.
 func (p *Pass) PassTypeIdentifier() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("passTypeIdentifier"))
 	if _r == 0 {
 		return ""
@@ -125,13 +138,15 @@ func (p *Pass) PassTypeIdentifier() string {
 }
 
 // WebServiceURL returns the web service URL.
-func (p *Pass) WebServiceURL() obj.Object {
+func (p *Pass) WebServiceURL() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("webServiceURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // AuthenticationToken returns the authentication token.
 func (p *Pass) AuthenticationToken() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("authenticationToken"))
 	if _r == 0 {
 		return ""
@@ -141,6 +156,7 @@ func (p *Pass) AuthenticationToken() string {
 
 // LocalizedName returns the localized name.
 func (p *Pass) LocalizedName() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
@@ -150,6 +166,7 @@ func (p *Pass) LocalizedName() string {
 
 // LocalizedDescription returns the localized description.
 func (p *Pass) LocalizedDescription() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -159,6 +176,7 @@ func (p *Pass) LocalizedDescription() string {
 
 // OrganizationName returns the organization name.
 func (p *Pass) OrganizationName() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("organizationName"))
 	if _r == 0 {
 		return ""
@@ -167,39 +185,45 @@ func (p *Pass) OrganizationName() string {
 }
 
 // RelevantDate returns the relevant date.
-func (p *Pass) RelevantDate() obj.Object {
+func (p *Pass) RelevantDate() time.Time {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("relevantDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // RelevantDates returns the relevant dates.
 //
 // RelevantDates returns the collection as a Go slice.
 func (p *Pass) RelevantDates() []*PassRelevantDate {
+	defer runtime.KeepAlive(p)
 	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("relevantDates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PassRelevantDate { return PassRelevantDateFromID(_id) })
 }
 
 // UserInfo returns the user info.
 func (p *Pass) UserInfo() obj.Object {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // PassURL returns the pass URL.
-func (p *Pass) PassURL() obj.Object {
+func (p *Pass) PassURL() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("passURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // IsRemotePass reports whether the object is remote pass.
 func (p *Pass) IsRemotePass() bool {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isRemotePass"))
 	return _r
 }
 
 // DeviceName returns the device name.
 func (p *Pass) DeviceName() string {
+	defer runtime.KeepAlive(p)
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("deviceName"))
 	if _r == 0 {
 		return ""

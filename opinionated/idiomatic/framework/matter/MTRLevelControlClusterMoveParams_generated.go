@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRLevelControlClusterMoveParamsAdopt(id objc.ID) *MTRLevelControlClusterMo
 
 // Description returns the object's -description text.
 func (mlccmp *MTRLevelControlClusterMoveParams) Description() string {
+	defer runtime.KeepAlive(mlccmp)
 	return rt.Description(objref.IDOf(mlccmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mlccmp *MTRLevelControlClusterMoveParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mlccmp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mlccmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mlccmp *MTRLevelControlClusterMoveParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mlccmp)
 	return rt.IsKind(objref.IDOf(mlccmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mlccmp *MTRLevelControlClusterMoveParams) String() string {
+	defer runtime.KeepAlive(mlccmp)
 	return rt.Description(objref.IDOf(mlccmp))
 }
 
@@ -72,72 +80,84 @@ func NewMTRLevelControlClusterMoveParams() *MTRLevelControlClusterMoveParams {
 
 // WithMoveMode sets the move mode.
 func (mlccmp *MTRLevelControlClusterMoveParams) WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveParams {
+	defer runtime.KeepAlive(moveMode)
 	objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return mlccmp
 }
 
 // WithRate sets the rate.
 func (mlccmp *MTRLevelControlClusterMoveParams) WithRate(rate obj.Object) *MTRLevelControlClusterMoveParams {
+	defer runtime.KeepAlive(rate)
 	objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return mlccmp
 }
 
 // WithOptionsMask sets the options mask.
 func (mlccmp *MTRLevelControlClusterMoveParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mlccmp
 }
 
 // WithOptionsOverride sets the options override.
 func (mlccmp *MTRLevelControlClusterMoveParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mlccmp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mlccmp *MTRLevelControlClusterMoveParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mlccmp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mlccmp *MTRLevelControlClusterMoveParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mlccmp
 }
 
 // MoveMode returns the move mode.
-func (mlccmp *MTRLevelControlClusterMoveParams) MoveMode() obj.Object {
+func (mlccmp *MTRLevelControlClusterMoveParams) MoveMode() *foundation.Number {
+	defer runtime.KeepAlive(mlccmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("moveMode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Rate returns the rate.
-func (mlccmp *MTRLevelControlClusterMoveParams) Rate() obj.Object {
+func (mlccmp *MTRLevelControlClusterMoveParams) Rate() *foundation.Number {
+	defer runtime.KeepAlive(mlccmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("rate"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsMask returns the options mask.
-func (mlccmp *MTRLevelControlClusterMoveParams) OptionsMask() obj.Object {
+func (mlccmp *MTRLevelControlClusterMoveParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mlccmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mlccmp *MTRLevelControlClusterMoveParams) OptionsOverride() obj.Object {
+func (mlccmp *MTRLevelControlClusterMoveParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mlccmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mlccmp *MTRLevelControlClusterMoveParams) TimedInvokeTimeoutMs() obj.Object {
+func (mlccmp *MTRLevelControlClusterMoveParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mlccmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mlccmp *MTRLevelControlClusterMoveParams) ServerSideProcessingTimeout() obj.Object {
+func (mlccmp *MTRLevelControlClusterMoveParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mlccmp)
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

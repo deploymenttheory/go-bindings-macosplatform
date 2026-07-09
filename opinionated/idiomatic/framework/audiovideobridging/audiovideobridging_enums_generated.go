@@ -1099,3 +1099,124 @@ func (e AVB17221AEMCommandType) String() string {
 		return fmt.Sprintf("AVB17221AEMCommandType(%d)", int64(e))
 	}
 }
+
+// Bitmask — values may be combined with |.
+type AVB17221EntityPropertyChanged uint64
+
+const (
+	// The time to live property of the entity has changed.
+	AVB17221EntityPropertyChangedTimeToLive AVB17221EntityPropertyChanged = 1
+	// The GUID property of the entity has changed.
+	AVB17221EntityPropertyChangedGUID AVB17221EntityPropertyChanged = 2
+	// The entityID property of the entity has changed.
+	AVB17221EntityPropertyChangedEntityID AVB17221EntityPropertyChanged = 2
+	// The vendor ID property of the entity has changed.
+	AVB17221EntityPropertyChangedVendorID AVB17221EntityPropertyChanged = 4
+	// The model ID property of the entity has changed.
+	AVB17221EntityPropertyChangedModelID AVB17221EntityPropertyChanged = 8
+	// The entity capabilities property of the entity has changed.
+	AVB17221EntityPropertyChangedEntityCapabilities AVB17221EntityPropertyChanged = 16
+	// The taler stream sources property of the entity has changed.
+	AVB17221EntityPropertyChangedTalkerStreamSources AVB17221EntityPropertyChanged = 32
+	// The taler capabilities property of the entity has changed.
+	AVB17221EntityPropertyChangedTalkerCapabilities AVB17221EntityPropertyChanged = 64
+	// The listener stream sins property of the entity has changed.
+	AVB17221EntityPropertyChangedListenerStreamSinks AVB17221EntityPropertyChanged = 128
+	// The listener capabilities property of the entity has changed.
+	AVB17221EntityPropertyChangedListenerCapabilities AVB17221EntityPropertyChanged = 256
+	// The controller capabilities property of the entity has changed.
+	AVB17221EntityPropertyChangedControllerCapabilities AVB17221EntityPropertyChanged = 512
+	// The available index property of the entity has changed.
+	AVB17221EntityPropertyChangedAvailableIndex AVB17221EntityPropertyChanged = 1024
+	// The AS grandmaster ID property of the entity has changed.
+	AVB17221EntityPropertyChangedASGrandmasterID AVB17221EntityPropertyChanged = 2048
+	// The gPTP grandmaster ID property of the entity has changed.
+	AVB17221EntityPropertyChangedGPTPGrandmasterID AVB17221EntityPropertyChanged = 2048
+	// The MAC address property of the entity has changed.
+	AVB17221EntityPropertyChangedMACAddress AVB17221EntityPropertyChanged = 4096
+	// The association ID property of the entity has changed.
+	AVB17221EntityPropertyChangedAssociationID AVB17221EntityPropertyChanged = 32768
+	// The entity type property of the entity has changed.
+	AVB17221EntityPropertyChangedEntityType AVB17221EntityPropertyChanged = 65536
+	// The identify control index property of the entity has changed.
+	AVB17221EntityPropertyChangedIdentifyControlIndex AVB17221EntityPropertyChanged = 131072
+	// The interface index property of the entity has changed.
+	AVB17221EntityPropertyChangedInterfaceIndex AVB17221EntityPropertyChanged = 262144
+	// The gPTP domain property of the entity has changed.
+	AVB17221EntityPropertyChangedGPTPDomainNumber AVB17221EntityPropertyChanged = 524288
+	// The current configuration index property of the entity has changed.
+	AVB17221EntityPropertyChangedCurrentConfigurationIndex AVB17221EntityPropertyChanged = 1048576
+)
+
+// String returns the AVB17221EntityPropertyChanged constant's name, or its numeric form when the
+// value is not a known constant.
+func (e AVB17221EntityPropertyChanged) String() string {
+	var parts []string
+	if e&AVB17221EntityPropertyChangedTimeToLive != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedTimeToLive")
+	}
+	if e&AVB17221EntityPropertyChangedGUID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedGUID")
+	}
+	if e&AVB17221EntityPropertyChangedEntityID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedEntityID")
+	}
+	if e&AVB17221EntityPropertyChangedVendorID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedVendorID")
+	}
+	if e&AVB17221EntityPropertyChangedModelID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedModelID")
+	}
+	if e&AVB17221EntityPropertyChangedEntityCapabilities != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedEntityCapabilities")
+	}
+	if e&AVB17221EntityPropertyChangedTalkerStreamSources != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedTalkerStreamSources")
+	}
+	if e&AVB17221EntityPropertyChangedTalkerCapabilities != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedTalkerCapabilities")
+	}
+	if e&AVB17221EntityPropertyChangedListenerStreamSinks != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedListenerStreamSinks")
+	}
+	if e&AVB17221EntityPropertyChangedListenerCapabilities != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedListenerCapabilities")
+	}
+	if e&AVB17221EntityPropertyChangedControllerCapabilities != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedControllerCapabilities")
+	}
+	if e&AVB17221EntityPropertyChangedAvailableIndex != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedAvailableIndex")
+	}
+	if e&AVB17221EntityPropertyChangedASGrandmasterID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedASGrandmasterID")
+	}
+	if e&AVB17221EntityPropertyChangedGPTPGrandmasterID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedGPTPGrandmasterID")
+	}
+	if e&AVB17221EntityPropertyChangedMACAddress != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedMACAddress")
+	}
+	if e&AVB17221EntityPropertyChangedAssociationID != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedAssociationID")
+	}
+	if e&AVB17221EntityPropertyChangedEntityType != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedEntityType")
+	}
+	if e&AVB17221EntityPropertyChangedIdentifyControlIndex != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedIdentifyControlIndex")
+	}
+	if e&AVB17221EntityPropertyChangedInterfaceIndex != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedInterfaceIndex")
+	}
+	if e&AVB17221EntityPropertyChangedGPTPDomainNumber != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedGPTPDomainNumber")
+	}
+	if e&AVB17221EntityPropertyChangedCurrentConfigurationIndex != 0 {
+		parts = append(parts, "AVB17221EntityPropertyChangedCurrentConfigurationIndex")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

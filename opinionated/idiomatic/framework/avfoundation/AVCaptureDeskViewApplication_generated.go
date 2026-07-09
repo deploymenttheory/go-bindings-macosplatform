@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func captureDeskViewApplicationAdopt(id objc.ID) *CaptureDeskViewApplication {
 
 // Description returns the object's -description text.
 func (cdva *CaptureDeskViewApplication) Description() string {
+	defer runtime.KeepAlive(cdva)
 	return rt.Description(objref.IDOf(cdva))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cdva *CaptureDeskViewApplication) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cdva)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cdva), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cdva *CaptureDeskViewApplication) IsKind(className string) bool {
+	defer runtime.KeepAlive(cdva)
 	return rt.IsKind(objref.IDOf(cdva), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cdva *CaptureDeskViewApplication) String() string {
+	defer runtime.KeepAlive(cdva)
 	return rt.Description(objref.IDOf(cdva))
 }
 
@@ -79,6 +85,7 @@ func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
 //
 // Present blocks until the operation completes or ctx is cancelled.
 func (cdva *CaptureDeskViewApplication) Present(ctx context.Context) error {
+	defer runtime.KeepAlive(cdva)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -98,6 +105,8 @@ func (cdva *CaptureDeskViewApplication) Present(ctx context.Context) error {
 //
 // PresentWithLaunchConfiguration blocks until the operation completes or ctx is cancelled.
 func (cdva *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *CaptureDeskViewApplicationLaunchConfiguration) error {
+	defer runtime.KeepAlive(cdva)
+	defer runtime.KeepAlive(launchConfiguration)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error

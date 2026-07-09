@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func visibleFunctionTableDescriptorAdopt(id objc.ID) *VisibleFunctionTableDescri
 
 // Description returns the object's -description text.
 func (vftd *VisibleFunctionTableDescriptor) Description() string {
+	defer runtime.KeepAlive(vftd)
 	return rt.Description(objref.IDOf(vftd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vftd *VisibleFunctionTableDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vftd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vftd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vftd *VisibleFunctionTableDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(vftd)
 	return rt.IsKind(objref.IDOf(vftd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vftd *VisibleFunctionTableDescriptor) String() string {
+	defer runtime.KeepAlive(vftd)
 	return rt.Description(objref.IDOf(vftd))
 }
 
@@ -80,6 +87,7 @@ func (vftd *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount int)
 
 // FunctionCount returns the function count.
 func (vftd *VisibleFunctionTableDescriptor) FunctionCount() int {
+	defer runtime.KeepAlive(vftd)
 	_r := objc.Send[int](objref.IDOf(vftd), objc.RegisterName("functionCount"))
 	return _r
 }

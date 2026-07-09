@@ -5,10 +5,15 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,24 +60,28 @@ func NewShapeLayer() *ShapeLayer {
 
 // WithPath sets the path defining the shape to be rendered. Animatable.
 func (sl *ShapeLayer) WithPath(path obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(path)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return sl
 }
 
 // WithFillColor sets the color used to fill the shape’s path. Animatable.
 func (sl *ShapeLayer) WithFillColor(fillColor obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(fillColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return sl
 }
 
 // WithFillRule sets the fill rule used when filling the shape’s path.
 func (sl *ShapeLayer) WithFillRule(fillRule obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(fillRule)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setFillRule:"), objref.IDOf(fillRule))
 	return sl
 }
 
 // WithStrokeColor sets the color used to stroke the shape’s path. Animatable.
 func (sl *ShapeLayer) WithStrokeColor(strokeColor obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(strokeColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return sl
 }
@@ -103,12 +112,14 @@ func (sl *ShapeLayer) WithMiterLimit(miterLimit float64) *ShapeLayer {
 
 // WithLineCap sets specifies the line cap style for the shape’s path.
 func (sl *ShapeLayer) WithLineCap(lineCap obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(lineCap)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineCap:"), objref.IDOf(lineCap))
 	return sl
 }
 
 // WithLineJoin sets specifies the line join style for the shape’s path.
 func (sl *ShapeLayer) WithLineJoin(lineJoin obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(lineJoin)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLineJoin:"), objref.IDOf(lineJoin))
 	return sl
 }
@@ -189,6 +200,7 @@ func (sl *ShapeLayer) WithSublayers(items ...LayerProvider) *ShapeLayer {
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (sl *ShapeLayer) WithMask(mask LayerProvider) *ShapeLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return sl
 }
@@ -201,6 +213,7 @@ func (sl *ShapeLayer) WithMasksToBounds(masksToBounds bool) *ShapeLayer {
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (sl *ShapeLayer) WithContents(contents obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return sl
 }
@@ -213,6 +226,7 @@ func (sl *ShapeLayer) WithContentsRect(contentsRect corefoundation.CGRect) *Shap
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (sl *ShapeLayer) WithContentsGravity(contentsGravity obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return sl
 }
@@ -231,6 +245,7 @@ func (sl *ShapeLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (sl *ShapeLayer) WithContentsFormat(contentsFormat obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return sl
 }
@@ -243,12 +258,14 @@ func (sl *ShapeLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicR
 
 // WithToneMapMode sets the tone map mode.
 func (sl *ShapeLayer) WithToneMapMode(toneMapMode obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return sl
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (sl *ShapeLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return sl
 }
@@ -261,12 +278,14 @@ func (sl *ShapeLayer) WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (sl *ShapeLayer) WithMinificationFilter(minificationFilter obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return sl
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (sl *ShapeLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return sl
 }
@@ -309,6 +328,7 @@ func (sl *ShapeLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *S
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (sl *ShapeLayer) WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return sl
 }
@@ -327,6 +347,7 @@ func (sl *ShapeLayer) WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer {
 
 // WithCornerCurve sets the corner curve.
 func (sl *ShapeLayer) WithCornerCurve(cornerCurve obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return sl
 }
@@ -339,6 +360,7 @@ func (sl *ShapeLayer) WithBorderWidth(borderWidth float64) *ShapeLayer {
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (sl *ShapeLayer) WithBorderColor(borderColor obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return sl
 }
@@ -357,6 +379,7 @@ func (sl *ShapeLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ShapeLaye
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (sl *ShapeLayer) WithCompositingFilter(compositingFilter obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sl
 }
@@ -375,6 +398,7 @@ func (sl *ShapeLayer) WithRasterizationScale(rasterizationScale float64) *ShapeL
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (sl *ShapeLayer) WithShadowColor(shadowColor obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return sl
 }
@@ -399,6 +423,7 @@ func (sl *ShapeLayer) WithShadowRadius(shadowRadius float64) *ShapeLayer {
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (sl *ShapeLayer) WithShadowPath(shadowPath obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return sl
 }
@@ -410,8 +435,8 @@ func (sl *ShapeLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *S
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (sl *ShapeLayer) WithActions(actions obj.Object) *ShapeLayer {
-	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (sl *ShapeLayer) WithActions(actions map[string]obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sl
 }
 
@@ -421,8 +446,19 @@ func (sl *ShapeLayer) WithName(name string) *ShapeLayer {
 	return sl
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (sl *ShapeLayer) WithDelegate(delegate LayerDelegate) *ShapeLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(sl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(sl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return sl
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (sl *ShapeLayer) WithStyle(style obj.Object) *ShapeLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return sl
 }
@@ -436,66 +472,77 @@ func (sl *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
 
 // Path returns the path.
 func (sl *ShapeLayer) Path() obj.Object {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
 
 // FillColor returns the fill color.
 func (sl *ShapeLayer) FillColor() obj.Object {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillColor"))
 	return obj.Wrap(_r)
 }
 
 // FillRule returns the fill rule.
-func (sl *ShapeLayer) FillRule() obj.Object {
+func (sl *ShapeLayer) FillRule() *foundation.String {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillRule"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // StrokeColor returns the stroke color.
 func (sl *ShapeLayer) StrokeColor() obj.Object {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("strokeColor"))
 	return obj.Wrap(_r)
 }
 
 // StrokeStart returns the stroke start.
 func (sl *ShapeLayer) StrokeStart() float64 {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("strokeStart"))
 	return _r
 }
 
 // StrokeEnd returns the stroke end.
 func (sl *ShapeLayer) StrokeEnd() float64 {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("strokeEnd"))
 	return _r
 }
 
 // LineWidth returns the line width.
 func (sl *ShapeLayer) LineWidth() float64 {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("lineWidth"))
 	return _r
 }
 
 // MiterLimit returns the miter limit.
 func (sl *ShapeLayer) MiterLimit() float64 {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("miterLimit"))
 	return _r
 }
 
 // LineCap returns the line cap.
-func (sl *ShapeLayer) LineCap() obj.Object {
+func (sl *ShapeLayer) LineCap() *foundation.String {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineCap"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // LineJoin returns the line join.
-func (sl *ShapeLayer) LineJoin() obj.Object {
+func (sl *ShapeLayer) LineJoin() *foundation.String {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineJoin"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // LineDashPhase returns the line dash phase.
 func (sl *ShapeLayer) LineDashPhase() float64 {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("lineDashPhase"))
 	return _r
 }
@@ -504,6 +551,7 @@ func (sl *ShapeLayer) LineDashPhase() float64 {
 //
 // LineDashPattern returns the collection as a Go slice.
 func (sl *ShapeLayer) LineDashPattern() []obj.Object {
+	defer runtime.KeepAlive(sl)
 	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineDashPattern"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

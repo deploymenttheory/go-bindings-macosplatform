@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -77,18 +79,21 @@ func (autp *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {
 
 // Rate returns playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
 func (autp *AudioUnitTimePitch) Rate() float32 {
+	defer runtime.KeepAlive(autp)
 	_r := objc.Send[float32](objref.IDOf(autp), objc.RegisterName("rate"))
 	return _r
 }
 
 // Pitch returns amount by which the input signal is pitch shifted 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
 func (autp *AudioUnitTimePitch) Pitch() float32 {
+	defer runtime.KeepAlive(autp)
 	_r := objc.Send[float32](objref.IDOf(autp), objc.RegisterName("pitch"))
 	return _r
 }
 
 // Overlap returns amount of overlap between segments of the input audio signal A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
 func (autp *AudioUnitTimePitch) Overlap() float32 {
+	defer runtime.KeepAlive(autp)
 	_r := objc.Send[float32](objref.IDOf(autp), objc.RegisterName("overlap"))
 	return _r
 }

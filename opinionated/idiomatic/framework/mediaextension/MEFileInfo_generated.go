@@ -5,6 +5,8 @@
 package mediaextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func fileInfoAdopt(id objc.ID) *FileInfo {
 
 // Description returns the object's -description text.
 func (fi *FileInfo) Description() string {
+	defer runtime.KeepAlive(fi)
 	return rt.Description(objref.IDOf(fi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fi *FileInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fi *FileInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(fi)
 	return rt.IsKind(objref.IDOf(fi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fi *FileInfo) String() string {
+	defer runtime.KeepAlive(fi)
 	return rt.Description(objref.IDOf(fi))
 }
 
@@ -93,18 +100,21 @@ func (fi *FileInfo) WithSidecarFileName(sidecarFileName string) *FileInfo {
 
 // Duration returns the duration of the media asset if known, otherwise kCMTimeInvalid.
 func (fi *FileInfo) Duration() coremedia.CMTime {
+	defer runtime.KeepAlive(fi)
 	_r := objc.Send[coremedia.CMTime](objref.IDOf(fi), objc.RegisterName("duration"))
 	return _r
 }
 
 // FragmentsStatus indicates if the media asset is capable of being extended by fragments or contains fragments See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.
 func (fi *FileInfo) FragmentsStatus() FileInfoFragmentsStatus {
+	defer runtime.KeepAlive(fi)
 	_r := objc.Send[FileInfoFragmentsStatus](objref.IDOf(fi), objc.RegisterName("fragmentsStatus"))
 	return _r
 }
 
 // SidecarFileName returns the sidecar filename used by the MediaExtension. Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
 func (fi *FileInfo) SidecarFileName() string {
+	defer runtime.KeepAlive(fi)
 	_r := objc.Send[objc.ID](objref.IDOf(fi), objc.RegisterName("sidecarFileName"))
 	if _r == 0 {
 		return ""

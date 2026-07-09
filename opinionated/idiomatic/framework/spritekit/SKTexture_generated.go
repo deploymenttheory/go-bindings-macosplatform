@@ -6,6 +6,7 @@ package spritekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -52,22 +53,27 @@ func textureAdopt(id objc.ID) *Texture {
 
 // Description returns the object's -description text.
 func (t *Texture) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Texture) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Texture) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Texture) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -85,36 +91,43 @@ func (t *Texture) WithUsesMipmaps(usesMipmaps bool) *Texture {
 
 // TextureByApplyingCIFilter create new texture by applying a CIFilter to an existing one. Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed.
 func (t *Texture) TextureByApplyingCIFilter(filter obj.Object) *Texture {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(filter)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textureByApplyingCIFilter:"), objref.IDOf(filter))
 	return TextureFromID(_r)
 }
 
 // TextureByGeneratingNormalMap create new texture by generating a normal map texture.
 func (t *Texture) TextureByGeneratingNormalMap() *Texture {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textureByGeneratingNormalMap"))
 	return TextureFromID(_r)
 }
 
 // TextureByGeneratingNormalMapWithSmoothnessContrast create new texture by generating a normal map texture.
 func (t *Texture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *Texture {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textureByGeneratingNormalMapWithSmoothness:contrast:"), smoothness, contrast)
 	return TextureFromID(_r)
 }
 
 // TextureRect gets a rectangle that defines the portion of the texture used to render its image.
 func (t *Texture) TextureRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(t), objc.RegisterName("textureRect"))
 	return _r
 }
 
 // Size gets the size of the texture.
 func (t *Texture) Size() corefoundation.CGSize {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("size"))
 	return _r
 }
 
 // CGImage returns the texture’s image data as a Quartz 2D image.
 func (t *Texture) CGImage() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
 }
@@ -123,6 +136,7 @@ func (t *Texture) CGImage() obj.Object {
 //
 // Preload blocks until the operation completes or ctx is cancelled.
 func (t *Texture) Preload(ctx context.Context) error {
+	defer runtime.KeepAlive(t)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -138,12 +152,14 @@ func (t *Texture) Preload(ctx context.Context) error {
 
 // FilteringMode returns the filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
 func (t *Texture) FilteringMode() TextureFilteringMode {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[TextureFilteringMode](objref.IDOf(t), objc.RegisterName("filteringMode"))
 	return _r
 }
 
 // UsesMipmaps reports whether request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
 func (t *Texture) UsesMipmaps() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("usesMipmaps"))
 	return _r
 }

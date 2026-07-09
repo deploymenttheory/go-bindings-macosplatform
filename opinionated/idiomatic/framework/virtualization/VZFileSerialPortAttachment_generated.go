@@ -5,12 +5,12 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -50,8 +50,8 @@ func fileSerialPortAttachmentAdopt(id objc.ID) *FileSerialPortAttachment {
 	return x
 }
 
-// NewFileSerialPortAttachmentWithURLAppendError creates a file-based serial port attachment object.
-func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool) (result *FileSerialPortAttachment, err error) {
+// NewFileSerialPortAttachmentWithURLAppend creates a file-based serial port attachment object.
+func NewFileSerialPortAttachmentWithURLAppend(url string, shouldAppend bool) (result *FileSerialPortAttachment, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZFileSerialPortAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:error:"), rt.FileURL(url), shouldAppend, unsafe.Pointer(&_nsErr))
@@ -62,13 +62,15 @@ func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool
 }
 
 // URL returns the URL of the file for the attachment on the local file system.
-func (fspa *FileSerialPortAttachment) URL() obj.Object {
+func (fspa *FileSerialPortAttachment) URL() string {
+	defer runtime.KeepAlive(fspa)
 	_r := objc.Send[objc.ID](objref.IDOf(fspa), objc.RegisterName("URL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // Append reports whether the file should be opened in append mode.
 func (fspa *FileSerialPortAttachment) Append() bool {
+	defer runtime.KeepAlive(fspa)
 	_r := objc.Send[bool](objref.IDOf(fspa), objc.RegisterName("append"))
 	return _r
 }

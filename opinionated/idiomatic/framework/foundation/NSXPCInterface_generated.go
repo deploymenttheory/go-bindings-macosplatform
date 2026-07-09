@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func xPCInterfaceAdopt(id objc.ID) *XPCInterface {
 
 // Description returns the object's -description text.
 func (xi *XPCInterface) Description() string {
+	defer runtime.KeepAlive(xi)
 	return rt.Description(objref.IDOf(xi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (xi *XPCInterface) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(xi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(xi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (xi *XPCInterface) IsKind(className string) bool {
+	defer runtime.KeepAlive(xi)
 	return rt.IsKind(objref.IDOf(xi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (xi *XPCInterface) String() string {
+	defer runtime.KeepAlive(xi)
 	return rt.Description(objref.IDOf(xi))
 }
 
@@ -87,7 +93,7 @@ func (xi *XPCInterface) WithObservationInfo(observationInfo unsafe.Pointer) *XPC
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (xi *XPCInterface) WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface {
-	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (xi *XPCInterface) WithScriptingProperties(scriptingProperties map[string]obj.Object) *XPCInterface {
+	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return xi
 }

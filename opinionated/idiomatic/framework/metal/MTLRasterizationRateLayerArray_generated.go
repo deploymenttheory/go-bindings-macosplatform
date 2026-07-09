@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func rasterizationRateLayerArrayAdopt(id objc.ID) *RasterizationRateLayerArray {
 
 // Description returns the object's -description text.
 func (rrla *RasterizationRateLayerArray) Description() string {
+	defer runtime.KeepAlive(rrla)
 	return rt.Description(objref.IDOf(rrla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rrla *RasterizationRateLayerArray) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rrla)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rrla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rrla *RasterizationRateLayerArray) IsKind(className string) bool {
+	defer runtime.KeepAlive(rrla)
 	return rt.IsKind(objref.IDOf(rrla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rrla *RasterizationRateLayerArray) String() string {
+	defer runtime.KeepAlive(rrla)
 	return rt.Description(objref.IDOf(rrla))
 }
 
@@ -74,11 +81,14 @@ func NewRasterizationRateLayerArray() *RasterizationRateLayerArray {
 
 // ObjectAtIndexedSubscript retrieves the sample value at the specified index.
 func (rrla *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex int) *RasterizationRateLayerDescriptor {
+	defer runtime.KeepAlive(rrla)
 	_r := objc.Send[objc.ID](objref.IDOf(rrla), objc.RegisterName("objectAtIndexedSubscript:"), layerIndex)
 	return RasterizationRateLayerDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript stores a sample value at the specified index.
 func (rrla *RasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *RasterizationRateLayerDescriptor, layerIndex int) {
+	defer runtime.KeepAlive(rrla)
+	defer runtime.KeepAlive(layer)
 	objc.Send[objc.ID](objref.IDOf(rrla), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(layer), layerIndex)
 }

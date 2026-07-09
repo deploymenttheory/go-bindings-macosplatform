@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func credentialIdentityStoreAdopt(id objc.ID) *CredentialIdentityStore {
 
 // Description returns the object's -description text.
 func (cis *CredentialIdentityStore) Description() string {
+	defer runtime.KeepAlive(cis)
 	return rt.Description(objref.IDOf(cis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cis *CredentialIdentityStore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cis *CredentialIdentityStore) IsKind(className string) bool {
+	defer runtime.KeepAlive(cis)
 	return rt.IsKind(objref.IDOf(cis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cis *CredentialIdentityStore) String() string {
+	defer runtime.KeepAlive(cis)
 	return rt.Description(objref.IDOf(cis))
 }
 
@@ -78,6 +84,7 @@ func NewCredentialIdentityStore() *CredentialIdentityStore {
 //
 // GetCredentialIdentityStoreStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (cis *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (result *CredentialIdentityStoreState, err error) {
+	defer runtime.KeepAlive(cis)
 	type _result struct {
 		val *CredentialIdentityStoreState
 		err error
@@ -102,6 +109,8 @@ func (cis *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletio
 //
 // GetCredentialIdentitiesForServiceCredentialIdentityTypes blocks until the operation completes or ctx is cancelled.
 func (cis *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *CredentialServiceIdentifier, credentialIdentityTypes CredentialIdentityTypes) (result obj.Object, err error) {
+	defer runtime.KeepAlive(cis)
+	defer runtime.KeepAlive(serviceIdentifier)
 	type _result struct {
 		val obj.Object
 		err error

@@ -5,6 +5,8 @@
 package gamekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func leaderboardScoreAdopt(id objc.ID) *LeaderboardScore {
 
 // Description returns the object's -description text.
 func (ls *LeaderboardScore) Description() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ls *LeaderboardScore) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ls *LeaderboardScore) IsKind(className string) bool {
+	defer runtime.KeepAlive(ls)
 	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ls *LeaderboardScore) String() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
@@ -74,6 +81,7 @@ func NewLeaderboardScore() *LeaderboardScore {
 
 // WithPlayer sets the player who earns the score.
 func (ls *LeaderboardScore) WithPlayer(player PlayerProvider) *LeaderboardScore {
+	defer runtime.KeepAlive(player)
 	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	return ls
 }
@@ -98,24 +106,28 @@ func (ls *LeaderboardScore) WithLeaderboardID(leaderboardID string) *Leaderboard
 
 // Player returns the player who earns the score.
 func (ls *LeaderboardScore) Player() *Player {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // Value returns the score that the player earns.
 func (ls *LeaderboardScore) Value() int {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[int](objref.IDOf(ls), objc.RegisterName("value"))
 	return _r
 }
 
 // Context returns an integer value that your game uses.
 func (ls *LeaderboardScore) Context() int {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[int](objref.IDOf(ls), objc.RegisterName("context"))
 	return _r
 }
 
 // LeaderboardID returns the ID that Game Center uses for the leaderboard.
 func (ls *LeaderboardScore) LeaderboardID() string {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("leaderboardID"))
 	if _r == 0 {
 		return ""

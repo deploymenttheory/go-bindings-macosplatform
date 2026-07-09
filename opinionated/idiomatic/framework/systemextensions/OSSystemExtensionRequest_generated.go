@@ -5,8 +5,11 @@
 package systemextensions
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func systemExtensionRequestAdopt(id objc.ID) *SystemExtensionRequest {
 
 // Description returns the object's -description text.
 func (ser *SystemExtensionRequest) Description() string {
+	defer runtime.KeepAlive(ser)
 	return rt.Description(objref.IDOf(ser))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ser *SystemExtensionRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ser)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ser), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ser *SystemExtensionRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(ser)
 	return rt.IsKind(objref.IDOf(ser), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ser *SystemExtensionRequest) String() string {
+	defer runtime.KeepAlive(ser)
 	return rt.Description(objref.IDOf(ser))
 }
 
@@ -72,8 +80,19 @@ func NewSystemExtensionRequest() *SystemExtensionRequest {
 	return systemExtensionRequestAdopt(_id)
 }
 
+// WithDelegate sets a delegate to receive updates about the progress of a request.
+func (ser *SystemExtensionRequest) WithDelegate(delegate SystemExtensionRequestDelegate) *SystemExtensionRequest {
+	_shim := newSystemExtensionRequestDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(ser), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(ser), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return ser
+}
+
 // Identifier returns the bundle identifier of the target extension
 func (ser *SystemExtensionRequest) Identifier() string {
+	defer runtime.KeepAlive(ser)
 	_r := objc.Send[objc.ID](objref.IDOf(ser), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""

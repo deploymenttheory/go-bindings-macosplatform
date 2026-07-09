@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,16 +50,20 @@ func mACAddressAdopt(id objc.ID) *MACAddress {
 
 // Description returns the object's -description text.
 func (ma *MACAddress) Description() string {
+	defer runtime.KeepAlive(ma)
 	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ma *MACAddress) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ma)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ma *MACAddress) IsKind(className string) bool {
+	defer runtime.KeepAlive(ma)
 	return rt.IsKind(objref.IDOf(ma), className)
 }
 
@@ -70,14 +75,15 @@ func NewMACAddressWithEthernetAddress(ethernetAddress unsafe.Pointer) *MACAddres
 }
 
 // NewMACAddressWithString creates a MAC address object from a specially formatted string.
-func NewMACAddressWithString(string_ string) *MACAddress {
+func NewMACAddressWithString(str string) *MACAddress {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMACAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
 	return mACAddressAdopt(_id)
 }
 
 // String returns the address represented as a string. The 6 bytes are represented in hexadecimal form, separated by a colon character. Alphabetical characters are lowercase. The address is compatible with the parameter of -[VZMACAddress initWithString:].
 func (ma *MACAddress) String() string {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("string"))
 	if _r == 0 {
 		return ""
@@ -87,30 +93,35 @@ func (ma *MACAddress) String() string {
 
 // IsBroadcastAddress reports whether the address is the broadcast address.
 func (ma *MACAddress) IsBroadcastAddress() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isBroadcastAddress"))
 	return _r
 }
 
 // IsMulticastAddress reports whether the address is a multicast address.
 func (ma *MACAddress) IsMulticastAddress() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isMulticastAddress"))
 	return _r
 }
 
 // IsUnicastAddress reports whether the address is a unicast address.
 func (ma *MACAddress) IsUnicastAddress() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isUnicastAddress"))
 	return _r
 }
 
 // IsLocallyAdministeredAddress reports whether the address is a locally administered addresses (LAA).
 func (ma *MACAddress) IsLocallyAdministeredAddress() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isLocallyAdministeredAddress"))
 	return _r
 }
 
 // IsUniversallyAdministeredAddress reports whether the address is a universally administered addresses (UAA).
 func (ma *MACAddress) IsUniversallyAdministeredAddress() bool {
+	defer runtime.KeepAlive(ma)
 	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("isUniversallyAdministeredAddress"))
 	return _r
 }

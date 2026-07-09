@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -181,12 +182,14 @@ func (c *Camera) WithExposure(exposure unsafe.Pointer) *Camera {
 
 // WithParent sets the parent object that contains this object.
 func (c *Camera) WithParent(parent ObjectProvider) *Camera {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return c
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (c *Camera) WithInstance(instance ObjectProvider) *Camera {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return c
 }
@@ -199,118 +202,138 @@ func (c *Camera) WithHidden(hidden bool) *Camera {
 
 // LookAt orients the camera to face toward the specified point.
 func (c *Camera) LookAt(focusPosition unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("lookAt:"), focusPosition)
 }
 
 // LookAtFrom sets the camera’s position and orients the camera to face toward the specified point.
 func (c *Camera) LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.Pointer) {
+	defer runtime.KeepAlive(c)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("lookAt:from:"), focusPosition, cameraPosition)
 }
 
 // BokehKernelWithSize creates and returns a texture, based on the camera’s aperture blade count, to be used in rendering out-of-focus highlights in a scene.
 func (c *Camera) BokehKernelWithSize(size unsafe.Pointer) *Texture {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("bokehKernelWithSize:"), size)
 	return TextureFromID(_r)
 }
 
 // Projection returns the projection.
 func (c *Camera) Projection() CameraProjection {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[CameraProjection](objref.IDOf(c), objc.RegisterName("projection"))
 	return _r
 }
 
 // NearVisibilityDistance returns bounding distance for visible objects
 func (c *Camera) NearVisibilityDistance() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("nearVisibilityDistance"))
 	return _r
 }
 
 // FarVisibilityDistance returns the far visibility distance.
 func (c *Camera) FarVisibilityDistance() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("farVisibilityDistance"))
 	return _r
 }
 
 // WorldToMetersConversionScale returns world to meters conversion scale. Required for certain calculations.
 func (c *Camera) WorldToMetersConversionScale() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("worldToMetersConversionScale"))
 	return _r
 }
 
 // BarrelDistortion returns radial distortion of the lens, second order term
 func (c *Camera) BarrelDistortion() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("barrelDistortion"))
 	return _r
 }
 
 // FisheyeDistortion returns radial distortion of the lens, fourth order term
 func (c *Camera) FisheyeDistortion() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("fisheyeDistortion"))
 	return _r
 }
 
 // OpticalVignetting returns amount of optical vignetting, rom zero to one.
 func (c *Camera) OpticalVignetting() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("opticalVignetting"))
 	return _r
 }
 
 // ChromaticAberration returns amount of chromatic abberation, from zero to one.
 func (c *Camera) ChromaticAberration() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("chromaticAberration"))
 	return _r
 }
 
 // FocalLength returns lens focal length in mm.
 func (c *Camera) FocalLength() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("focalLength"))
 	return _r
 }
 
 // FocusDistance returns focus distance
 func (c *Camera) FocusDistance() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("focusDistance"))
 	return _r
 }
 
 // FieldOfView returns the field of view, in degrees.
 func (c *Camera) FieldOfView() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("fieldOfView"))
 	return _r
 }
 
 // FStop returns f-stop, default is 5.6
 func (c *Camera) FStop() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("fStop"))
 	return _r
 }
 
 // ApertureBladeCount returns aperture blade count, where zero indicates a circle.
 func (c *Camera) ApertureBladeCount() int {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("apertureBladeCount"))
 	return _r
 }
 
 // MaximumCircleOfConfusion returns maximum circle of confusion size in mm on the image plane
 func (c *Camera) MaximumCircleOfConfusion() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("maximumCircleOfConfusion"))
 	return _r
 }
 
 // ShutterOpenInterval returns shutter open interval, in seconds
 func (c *Camera) ShutterOpenInterval() float64 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("shutterOpenInterval"))
 	return _r
 }
 
 // SensorVerticalAperture returns vertical aperture of the sensor or film gate, default is 24mm
 func (c *Camera) SensorVerticalAperture() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("sensorVerticalAperture"))
 	return _r
 }
 
 // SensorAspect returns sensor or film gate aperture aspect ratio, default is 1.5
 func (c *Camera) SensorAspect() float32 {
+	defer runtime.KeepAlive(c)
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("sensorAspect"))
 	return _r
 }

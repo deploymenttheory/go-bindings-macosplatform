@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,7 @@ func toolPickerInkingItemAdopt(id objc.ID) *ToolPickerInkingItem {
 
 // NewToolPickerInkingItemWithInkType create a new tool picker item with a PKInkType.
 func NewToolPickerInkingItemWithInkType(inkType obj.Object) *ToolPickerInkingItem {
+	defer runtime.KeepAlive(inkType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:"), objref.IDOf(inkType))
 	return toolPickerInkingItemAdopt(_id)
@@ -55,6 +58,8 @@ func NewToolPickerInkingItemWithInkType(inkType obj.Object) *ToolPickerInkingIte
 
 // NewToolPickerInkingItemWithInkTypeColor creates a new ToolPickerInkingItem.
 func NewToolPickerInkingItemWithInkTypeColor(inkType obj.Object, color obj.Object) *ToolPickerInkingItem {
+	defer runtime.KeepAlive(inkType)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), objref.IDOf(inkType), objref.IDOf(color))
 	return toolPickerInkingItemAdopt(_id)
@@ -62,6 +67,7 @@ func NewToolPickerInkingItemWithInkTypeColor(inkType obj.Object, color obj.Objec
 
 // NewToolPickerInkingItemWithInkTypeWidth create a new tool picker item with a PKInkType.
 func NewToolPickerInkingItemWithInkTypeWidth(inkType obj.Object, width float64) *ToolPickerInkingItem {
+	defer runtime.KeepAlive(inkType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:width:"), objref.IDOf(inkType), width)
 	return toolPickerInkingItemAdopt(_id)
@@ -69,6 +75,8 @@ func NewToolPickerInkingItemWithInkTypeWidth(inkType obj.Object, width float64) 
 
 // NewToolPickerInkingItemWithInkTypeColorWidth creates a new inking item with the specified ink type, color, and width.
 func NewToolPickerInkingItemWithInkTypeColorWidth(inkType obj.Object, color obj.Object, width float64) *ToolPickerInkingItem {
+	defer runtime.KeepAlive(inkType)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:"), objref.IDOf(inkType), objref.IDOf(color), width)
 	return toolPickerInkingItemAdopt(_id)
@@ -76,6 +84,8 @@ func NewToolPickerInkingItemWithInkTypeColorWidth(inkType obj.Object, color obj.
 
 // NewToolPickerInkingItemWithInkTypeColorWidthIdentifier creates a new inking item with the specified ink type, color, width, and identifier.
 func NewToolPickerInkingItemWithInkTypeColorWidthIdentifier(inkType obj.Object, color obj.Object, width float64, identifier string) *ToolPickerInkingItem {
+	defer runtime.KeepAlive(inkType)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:identifier:"), objref.IDOf(inkType), objref.IDOf(color), width, purego.NSString(identifier))
 	return toolPickerInkingItemAdopt(_id)
@@ -83,6 +93,8 @@ func NewToolPickerInkingItemWithInkTypeColorWidthIdentifier(inkType obj.Object, 
 
 // NewToolPickerInkingItemWithInkTypeColorWidthAzimuthIdentifier creates a new ToolPickerInkingItem.
 func NewToolPickerInkingItemWithInkTypeColorWidthAzimuthIdentifier(inkType obj.Object, color obj.Object, width float64, azimuth float64, identifier string) *ToolPickerInkingItem {
+	defer runtime.KeepAlive(inkType)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerInkingItem")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:azimuth:identifier:"), objref.IDOf(inkType), objref.IDOf(color), width, azimuth, purego.NSString(identifier))
 	return toolPickerInkingItemAdopt(_id)
@@ -96,12 +108,14 @@ func (tpii *ToolPickerInkingItem) WithAllowsColorSelection(allowsColorSelection 
 
 // InkingTool returns a tool for drawing on a `PKCanvasView`.
 func (tpii *ToolPickerInkingItem) InkingTool() *InkingTool {
+	defer runtime.KeepAlive(tpii)
 	_r := objc.Send[objc.ID](objref.IDOf(tpii), objc.RegisterName("inkingTool"))
 	return InkingToolFromID(_r)
 }
 
 // AllowsColorSelection reports whether present color selection UI to the user. Default value is true.
 func (tpii *ToolPickerInkingItem) AllowsColorSelection() bool {
+	defer runtime.KeepAlive(tpii)
 	_r := objc.Send[bool](objref.IDOf(tpii), objc.RegisterName("allowsColorSelection"))
 	return _r
 }

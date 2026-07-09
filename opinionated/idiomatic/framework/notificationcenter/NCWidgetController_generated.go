@@ -5,6 +5,8 @@
 package notificationcenter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func widgetControllerAdopt(id objc.ID) *WidgetController {
 
 // Description returns the object's -description text.
 func (wc *WidgetController) Description() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wc *WidgetController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wc *WidgetController) IsKind(className string) bool {
+	defer runtime.KeepAlive(wc)
 	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wc *WidgetController) String() string {
+	defer runtime.KeepAlive(wc)
 	return rt.Description(objref.IDOf(wc))
 }
 
@@ -74,5 +81,6 @@ func NewWidgetController() *WidgetController {
 
 // SetHasContentForWidgetWithBundleIdentifier sets whether the specified widget has content to display.
 func (wc *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
+	defer runtime.KeepAlive(wc)
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setHasContent:forWidgetWithBundleIdentifier:"), flag, purego.NSString(bundleID))
 }

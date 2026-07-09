@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -49,22 +50,27 @@ func tokenWatcherAdopt(id objc.ID) *TokenWatcher {
 
 // Description returns the object's -description text.
 func (tw *TokenWatcher) Description() string {
+	defer runtime.KeepAlive(tw)
 	return rt.Description(objref.IDOf(tw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tw *TokenWatcher) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tw *TokenWatcher) IsKind(className string) bool {
+	defer runtime.KeepAlive(tw)
 	return rt.IsKind(objref.IDOf(tw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tw *TokenWatcher) String() string {
+	defer runtime.KeepAlive(tw)
 	return rt.Description(objref.IDOf(tw))
 }
 
@@ -85,6 +91,7 @@ func NewTokenWatcherWithInsertionHandler(insertionHandler func(obj.Object)) *Tok
 //
 // SetInsertionHandler blocks until the operation completes or ctx is cancelled.
 func (tw *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(tw)
 	type _result struct {
 		val string
 		err error
@@ -107,11 +114,13 @@ func (tw *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string,
 
 // AddRemovalHandlerForTokenID adds a removal handler for the specified token ID.
 func (tw *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string) {
+	defer runtime.KeepAlive(tw)
 	objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("addRemovalHandler:forTokenID:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { removalHandler(obj.Wrap(_b0)) }), purego.NSString(tokenID))
 }
 
 // TokenInfoForTokenID return TokenInfo for specific tokenID
 func (tw *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
+	defer runtime.KeepAlive(tw)
 	_r := objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("tokenInfoForTokenID:"), purego.NSString(tokenID))
 	return TokenWatcherTokenInfoFromID(_r)
 }
@@ -120,6 +129,7 @@ func (tw *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenIn
 //
 // TokenIDs returns the collection as a Go slice.
 func (tw *TokenWatcher) TokenIDs() []string {
+	defer runtime.KeepAlive(tw)
 	_arr := objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("tokenIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }

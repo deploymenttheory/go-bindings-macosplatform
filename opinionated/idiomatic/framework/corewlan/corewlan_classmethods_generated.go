@@ -5,9 +5,11 @@
 package corewlan
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -19,14 +21,15 @@ func CWConfigurationConfiguration() *Configuration {
 
 // ConfigurationWithConfiguration convenience method for getting a CWConfiguration object initialized with the given CWConfiguration object.
 func ConfigurationWithConfiguration(configuration *Configuration) *Configuration {
+	defer runtime.KeepAlive(configuration)
 	_r := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("configurationWithConfiguration:"), objref.IDOf(configuration))
 	return ConfigurationFromID(_r)
 }
 
 // InterfaceNames returns the list of BSD names for WLAN interfaces available on the current system.
-func InterfaceNames() obj.Object {
+func InterfaceNames() []string {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWInterface")), objc.RegisterName("interfaceNames"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // CWInterfaceInterface returns convenience method for getting an CWInterface object for the default WLAN interface.
@@ -49,6 +52,7 @@ func CWNetworkProfileNetworkProfile() *NetworkProfile {
 
 // NetworkProfileWithNetworkProfile convenience method for getting a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 func NetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *NetworkProfile {
+	defer runtime.KeepAlive(networkProfile)
 	_r := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("networkProfileWithNetworkProfile:"), objref.IDOf(networkProfile))
 	return NetworkProfileFromID(_r)
 }

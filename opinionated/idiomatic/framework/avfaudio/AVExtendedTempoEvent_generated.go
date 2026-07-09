@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (ete *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
 
 // Tempo returns the tempo.
 func (ete *ExtendedTempoEvent) Tempo() float64 {
+	defer runtime.KeepAlive(ete)
 	_r := objc.Send[float64](objref.IDOf(ete), objc.RegisterName("tempo"))
 	return _r
 }

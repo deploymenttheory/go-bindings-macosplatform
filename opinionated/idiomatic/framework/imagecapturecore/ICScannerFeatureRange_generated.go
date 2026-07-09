@@ -5,6 +5,8 @@
 package imagecapturecore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -59,30 +61,35 @@ func (sfr *ScannerFeatureRange) WithCurrentValue(currentValue float64) *ScannerF
 
 // CurrentValue returns ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
 func (sfr *ScannerFeatureRange) CurrentValue() float64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("currentValue"))
 	return _r
 }
 
 // DefaultValue returns the default value￼. Attempting to set the default value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the default value.
 func (sfr *ScannerFeatureRange) DefaultValue() float64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("defaultValue"))
 	return _r
 }
 
 // MinValue returns the minimum value.
 func (sfr *ScannerFeatureRange) MinValue() float64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("minValue"))
 	return _r
 }
 
 // MaxValue returns ￼The maximum value.
 func (sfr *ScannerFeatureRange) MaxValue() float64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("maxValue"))
 	return _r
 }
 
 // StepSize returns ￼The step size.
 func (sfr *ScannerFeatureRange) StepSize() float64 {
+	defer runtime.KeepAlive(sfr)
 	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("stepSize"))
 	return _r
 }

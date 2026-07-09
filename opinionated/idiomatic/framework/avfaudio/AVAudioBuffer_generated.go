@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func audioBufferAdopt(id objc.ID) *AudioBuffer {
 
 // Description returns the object's -description text.
 func (ab *AudioBuffer) Description() string {
+	defer runtime.KeepAlive(ab)
 	return rt.Description(objref.IDOf(ab))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ab *AudioBuffer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ab)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ab), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ab *AudioBuffer) IsKind(className string) bool {
+	defer runtime.KeepAlive(ab)
 	return rt.IsKind(objref.IDOf(ab), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ab *AudioBuffer) String() string {
+	defer runtime.KeepAlive(ab)
 	return rt.Description(objref.IDOf(ab))
 }
 
 // Format returns the format of the audio in the buffer.
 func (ab *AudioBuffer) Format() *AudioFormat {
+	defer runtime.KeepAlive(ab)
 	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("format"))
 	return AudioFormatFromID(_r)
 }

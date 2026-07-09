@@ -5,11 +5,15 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,8 +64,21 @@ func NewCollectionView() *CollectionView {
 	return _mainthread0
 }
 
+// WithDelegate sets the collection view’s delegate object.
+func (cv *CollectionView) WithDelegate(delegate CollectionViewDelegate) *CollectionView {
+	_shim := newCollectionViewDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(cv), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(cv), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return cv
+}
+
 // WithBackgroundView sets the background view placed behind all items and supplementary views.
 func (cv *CollectionView) WithBackgroundView(backgroundView ViewProvider) *CollectionView {
+	defer runtime.KeepAlive(backgroundView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundView:"), objref.IDOf(backgroundView))
 	})
@@ -78,6 +95,7 @@ func (cv *CollectionView) WithBackgroundViewScrollsWithContent(backgroundViewScr
 
 // WithCollectionViewLayout sets the layout object used to organize the collection view’s content.
 func (cv *CollectionView) WithCollectionViewLayout(collectionViewLayout CollectionViewLayoutProvider) *CollectionView {
+	defer runtime.KeepAlive(collectionViewLayout)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCollectionViewLayout:"), objref.IDOf(collectionViewLayout))
 	})
@@ -119,6 +137,7 @@ func (cv *CollectionView) WithAllowsMultipleSelection(allowsMultipleSelection bo
 
 // WithSelectionIndexes sets the indexes of the currently selected items.
 func (cv *CollectionView) WithSelectionIndexes(selectionIndexes obj.Object) *CollectionView {
+	defer runtime.KeepAlive(selectionIndexes)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSelectionIndexes:"), objref.IDOf(selectionIndexes))
 	})
@@ -126,15 +145,16 @@ func (cv *CollectionView) WithSelectionIndexes(selectionIndexes obj.Object) *Col
 }
 
 // WithSelectionIndexPaths sets the set of index paths representing the currently selected items.
-func (cv *CollectionView) WithSelectionIndexPaths(selectionIndexPaths obj.Object) *CollectionView {
+func (cv *CollectionView) WithSelectionIndexPaths(selectionIndexPaths []*foundation.IndexPath) *CollectionView {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSelectionIndexPaths:"), objref.IDOf(selectionIndexPaths))
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSelectionIndexPaths:"), rt.SliceToNSSet(selectionIndexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 	return cv
 }
 
 // WithItemPrototype sets the receiver’s collection view item prototype.
 func (cv *CollectionView) WithItemPrototype(itemPrototype *CollectionViewItem) *CollectionView {
+	defer runtime.KeepAlive(itemPrototype)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setItemPrototype:"), objref.IDOf(itemPrototype))
 	})
@@ -312,6 +332,7 @@ func (cv *CollectionView) WithWantsLayer(wantsLayer bool) *CollectionView {
 
 // WithLayer sets the layer.
 func (cv *CollectionView) WithLayer(layer obj.Object) *CollectionView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -361,6 +382,7 @@ func (cv *CollectionView) WithBackgroundFilters(items ...obj.Object) *Collection
 
 // WithCompositingFilter sets the compositing filter.
 func (cv *CollectionView) WithCompositingFilter(compositingFilter obj.Object) *CollectionView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -378,6 +400,7 @@ func (cv *CollectionView) WithContentFilters(items ...obj.Object) *CollectionVie
 
 // WithShadow sets the shadow.
 func (cv *CollectionView) WithShadow(shadow *Shadow) *CollectionView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -426,6 +449,7 @@ func (cv *CollectionView) WithPreparedContentRect(preparedContentRect corefounda
 
 // WithNextKeyView sets the next key view.
 func (cv *CollectionView) WithNextKeyView(nextKeyView ViewProvider) *CollectionView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -475,6 +499,7 @@ func (cv *CollectionView) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cv *CollectionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *CollectionView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -531,6 +556,7 @@ func (cv *CollectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtend
 
 // WithPressureConfiguration sets the pressure configuration.
 func (cv *CollectionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *CollectionView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -539,6 +565,7 @@ func (cv *CollectionView) WithPressureConfiguration(pressureConfiguration *Press
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (cv *CollectionView) WithNextResponder(nextResponder ResponderProvider) *CollectionView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -547,6 +574,7 @@ func (cv *CollectionView) WithNextResponder(nextResponder ResponderProvider) *Co
 
 // WithMenu sets returns the responder’s menu.
 func (cv *CollectionView) WithMenu(menu *Menu) *CollectionView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -555,6 +583,7 @@ func (cv *CollectionView) WithMenu(menu *Menu) *CollectionView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (cv *CollectionView) WithUserActivity(userActivity obj.Object) *CollectionView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -563,6 +592,7 @@ func (cv *CollectionView) WithUserActivity(userActivity obj.Object) *CollectionV
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (cv *CollectionView) WithTouchBar(touchBar *TouchBar) *CollectionView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -571,6 +601,7 @@ func (cv *CollectionView) WithTouchBar(touchBar *TouchBar) *CollectionView {
 
 // ReloadData reloads all of the data for the collection view.
 func (cv *CollectionView) ReloadData() {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("reloadData"))
 	})
@@ -579,6 +610,8 @@ func (cv *CollectionView) ReloadData() {
 
 // LayoutAttributesForItemAtIndexPath returns the layout information for the item at the specified index path.
 func (cv *CollectionView) LayoutAttributesForItemAtIndexPath(indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -592,6 +625,9 @@ func (cv *CollectionView) LayoutAttributesForItemAtIndexPath(indexPath obj.Objec
 
 // LayoutAttributesForSupplementaryElementOfKindAtIndexPath returns the layout information for the supplementary view at the specified index path.
 func (cv *CollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind obj.Object, indexPath obj.Object) *CollectionViewLayoutAttributes {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(kind)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewLayoutAttributes
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayoutAttributes {
@@ -605,6 +641,7 @@ func (cv *CollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPa
 
 // FrameForItemAtIndex returns the frame of the collection view item at the specified index.
 func (cv *CollectionView) FrameForItemAtIndex(index int) corefoundation.CGRect {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -618,6 +655,7 @@ func (cv *CollectionView) FrameForItemAtIndex(index int) corefoundation.CGRect {
 
 // FrameForItemAtIndexWithNumberOfItems returns the frame of an item based on the number of items in the collection view.
 func (cv *CollectionView) FrameForItemAtIndexWithNumberOfItems(index int, numberOfItems int) corefoundation.CGRect {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -631,6 +669,7 @@ func (cv *CollectionView) FrameForItemAtIndexWithNumberOfItems(index int, number
 
 // NumberOfItemsInSection returns the number of items in the specified section.
 func (cv *CollectionView) NumberOfItemsInSection(section int) int {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -643,23 +682,27 @@ func (cv *CollectionView) NumberOfItemsInSection(section int) int {
 }
 
 // SelectItemsAtIndexPathsScrollPosition adds the specified items to the current selection and optionally scrolls the items into position.
-func (cv *CollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths obj.Object, scrollPosition CollectionViewScrollPosition) {
+func (cv *CollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths []*foundation.IndexPath, scrollPosition CollectionViewScrollPosition) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectItemsAtIndexPaths:scrollPosition:"), objref.IDOf(indexPaths), scrollPosition)
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectItemsAtIndexPaths:scrollPosition:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }), scrollPosition)
 	})
 
 }
 
 // DeselectItemsAtIndexPaths removes the specified items from the current selection.
-func (cv *CollectionView) DeselectItemsAtIndexPaths(indexPaths obj.Object) {
+func (cv *CollectionView) DeselectItemsAtIndexPaths(indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("deselectItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("deselectItemsAtIndexPaths:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // SelectAll selects all items in the collection view, if doing so is possible.
 func (cv *CollectionView) SelectAll(sender obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 	})
@@ -668,6 +711,8 @@ func (cv *CollectionView) SelectAll(sender obj.Object) {
 
 // DeselectAll deselects all items in the collection view.
 func (cv *CollectionView) DeselectAll(sender obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("deselectAll:"), objref.IDOf(sender))
 	})
@@ -676,6 +721,9 @@ func (cv *CollectionView) DeselectAll(sender obj.Object) {
 
 // RegisterNibForItemWithIdentifier registers a nib file to use when creating items in the collection view.
 func (cv *CollectionView) RegisterNibForItemWithIdentifier(nib *Nib, identifier obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(nib)
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("registerNib:forItemWithIdentifier:"), objref.IDOf(nib), objref.IDOf(identifier))
 	})
@@ -684,6 +732,10 @@ func (cv *CollectionView) RegisterNibForItemWithIdentifier(nib *Nib, identifier 
 
 // RegisterNibForSupplementaryViewOfKindWithIdentifier registers a nib file to use when creating supplementary views in the collection view.
 func (cv *CollectionView) RegisterNibForSupplementaryViewOfKindWithIdentifier(nib *Nib, kind obj.Object, identifier obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(nib)
+	defer runtime.KeepAlive(kind)
+	defer runtime.KeepAlive(identifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("registerNib:forSupplementaryViewOfKind:withIdentifier:"), objref.IDOf(nib), objref.IDOf(kind), objref.IDOf(identifier))
 	})
@@ -692,6 +744,9 @@ func (cv *CollectionView) RegisterNibForSupplementaryViewOfKindWithIdentifier(ni
 
 // MakeItemWithIdentifierForIndexPath creates or returns a reusable item object of the specified type.
 func (cv *CollectionView) MakeItemWithIdentifierForIndexPath(identifier obj.Object, indexPath obj.Object) *CollectionViewItem {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewItem {
@@ -705,6 +760,10 @@ func (cv *CollectionView) MakeItemWithIdentifierForIndexPath(identifier obj.Obje
 
 // MakeSupplementaryViewOfKindWithIdentifierForIndexPath creates or returns a reusable supplementary view of the specified type.
 func (cv *CollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind obj.Object, identifier obj.Object, indexPath obj.Object) *View {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(identifier)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -718,6 +777,7 @@ func (cv *CollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(
 
 // ItemAtIndex returns the collection view item for the represented object at the specified index.
 func (cv *CollectionView) ItemAtIndex(index int) *CollectionViewItem {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *CollectionViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewItem {
@@ -731,6 +791,8 @@ func (cv *CollectionView) ItemAtIndex(index int) *CollectionViewItem {
 
 // ItemAtIndexPath returns the item associated with the specified index path.
 func (cv *CollectionView) ItemAtIndexPath(indexPath obj.Object) *CollectionViewItem {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *CollectionViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewItem {
@@ -746,6 +808,7 @@ func (cv *CollectionView) ItemAtIndexPath(indexPath obj.Object) *CollectionViewI
 //
 // VisibleItems returns the collection as a Go slice.
 func (cv *CollectionView) VisibleItems() []*CollectionViewItem {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 []*CollectionViewItem
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionViewItem {
@@ -757,12 +820,14 @@ func (cv *CollectionView) VisibleItems() []*CollectionViewItem {
 }
 
 // IndexPathsForVisibleItems returns the index paths of the currently active items.
-func (cv *CollectionView) IndexPathsForVisibleItems() obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cv *CollectionView) IndexPathsForVisibleItems() []*foundation.IndexPath {
+	defer runtime.KeepAlive(cv)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("indexPathsForVisibleItems"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -770,12 +835,14 @@ func (cv *CollectionView) IndexPathsForVisibleItems() obj.Object {
 }
 
 // IndexPathForItem returns the index path of the specified item.
-func (cv *CollectionView) IndexPathForItem(item *CollectionViewItem) obj.Object {
-	var _mainthread0 obj.Object
+func (cv *CollectionView) IndexPathForItem(item *CollectionViewItem) *foundation.IndexPath {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(item)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("indexPathForItem:"), objref.IDOf(item))
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -783,12 +850,13 @@ func (cv *CollectionView) IndexPathForItem(item *CollectionViewItem) obj.Object 
 }
 
 // IndexPathForItemAtPoint returns the index path of the item at the specified point.
-func (cv *CollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) obj.Object {
-	var _mainthread0 obj.Object
+func (cv *CollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) *foundation.IndexPath {
+	defer runtime.KeepAlive(cv)
+	var _mainthread0 *foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("indexPathForItemAtPoint:"), point)
-			return obj.Wrap(_r)
+			return foundation.IndexPathFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -797,6 +865,9 @@ func (cv *CollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) 
 
 // SupplementaryViewForElementKindAtIndexPath returns the supplementary view associated with the specified index path.
 func (cv *CollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind obj.Object, indexPath obj.Object) *View {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(elementKind)
+	defer runtime.KeepAlive(indexPath)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -810,6 +881,8 @@ func (cv *CollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind
 
 // VisibleSupplementaryViewsOfKind returns an array of the actively managed supplementary views in the collection view.
 func (cv *CollectionView) VisibleSupplementaryViewsOfKind(elementKind obj.Object) []*View {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(elementKind)
 	var _mainthread0 []*View
 	purego.Main(func() {
 		_mainthread0 = func() []*View {
@@ -822,12 +895,15 @@ func (cv *CollectionView) VisibleSupplementaryViewsOfKind(elementKind obj.Object
 }
 
 // IndexPathsForVisibleSupplementaryElementsOfKind returns the index paths of the currently active supplementary views.
-func (cv *CollectionView) IndexPathsForVisibleSupplementaryElementsOfKind(elementKind obj.Object) obj.Object {
-	var _mainthread0 obj.Object
+// The order of the returned elements is unspecified.
+func (cv *CollectionView) IndexPathsForVisibleSupplementaryElementsOfKind(elementKind obj.Object) []*foundation.IndexPath {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(elementKind)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("indexPathsForVisibleSupplementaryElementsOfKind:"), objref.IDOf(elementKind))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -836,6 +912,8 @@ func (cv *CollectionView) IndexPathsForVisibleSupplementaryElementsOfKind(elemen
 
 // InsertSections inserts new sections at the specified indexes.
 func (cv *CollectionView) InsertSections(sections obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(sections)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("insertSections:"), objref.IDOf(sections))
 	})
@@ -844,6 +922,8 @@ func (cv *CollectionView) InsertSections(sections obj.Object) {
 
 // DeleteSections deletes the specified sections and their contained items.
 func (cv *CollectionView) DeleteSections(sections obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(sections)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("deleteSections:"), objref.IDOf(sections))
 	})
@@ -852,6 +932,8 @@ func (cv *CollectionView) DeleteSections(sections obj.Object) {
 
 // ReloadSections reloads the data in the specified sections of the collection view.
 func (cv *CollectionView) ReloadSections(sections obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(sections)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("reloadSections:"), objref.IDOf(sections))
 	})
@@ -860,6 +942,7 @@ func (cv *CollectionView) ReloadSections(sections obj.Object) {
 
 // MoveSectionToSection moves a section from its current location to a new location.
 func (cv *CollectionView) MoveSectionToSection(section int, newSection int) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("moveSection:toSection:"), section, newSection)
 	})
@@ -867,31 +950,37 @@ func (cv *CollectionView) MoveSectionToSection(section int, newSection int) {
 }
 
 // InsertItemsAtIndexPaths inserts new items into the collection view at the specified locations.
-func (cv *CollectionView) InsertItemsAtIndexPaths(indexPaths obj.Object) {
+func (cv *CollectionView) InsertItemsAtIndexPaths(indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("insertItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("insertItemsAtIndexPaths:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // DeleteItemsAtIndexPaths deletes the items at the specified index paths.
-func (cv *CollectionView) DeleteItemsAtIndexPaths(indexPaths obj.Object) {
+func (cv *CollectionView) DeleteItemsAtIndexPaths(indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("deleteItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("deleteItemsAtIndexPaths:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // ReloadItemsAtIndexPaths reloads only the specified items.
-func (cv *CollectionView) ReloadItemsAtIndexPaths(indexPaths obj.Object) {
+func (cv *CollectionView) ReloadItemsAtIndexPaths(indexPaths []*foundation.IndexPath) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("reloadItemsAtIndexPaths:"), objref.IDOf(indexPaths))
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("reloadItemsAtIndexPaths:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // MoveItemAtIndexPathToIndexPath moves an item from one location to another in the collection view.
 func (cv *CollectionView) MoveItemAtIndexPathToIndexPath(indexPath obj.Object, newIndexPath obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(indexPath)
+	defer runtime.KeepAlive(newIndexPath)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("moveItemAtIndexPath:toIndexPath:"), objref.IDOf(indexPath), objref.IDOf(newIndexPath))
 	})
@@ -900,6 +989,7 @@ func (cv *CollectionView) MoveItemAtIndexPathToIndexPath(indexPath obj.Object, n
 
 // PerformBatchUpdatesCompletionHandler encapsulates multiple insert, delete, reload, and move operations into a single animated operation.
 func (cv *CollectionView) PerformBatchUpdatesCompletionHandler(updates func(), completionHandler func(bool)) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("performBatchUpdates:completionHandler:"), objc.NewBlock(func(_ objc.Block) { updates() }), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 	})
@@ -908,6 +998,8 @@ func (cv *CollectionView) PerformBatchUpdatesCompletionHandler(updates func(), c
 
 // ToggleSectionCollapse collapses the section in which the sender resides into a single horizontally scrollable row.
 func (cv *CollectionView) ToggleSectionCollapse(sender obj.Object) {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("toggleSectionCollapse:"), objref.IDOf(sender))
 	})
@@ -915,15 +1007,17 @@ func (cv *CollectionView) ToggleSectionCollapse(sender obj.Object) {
 }
 
 // ScrollToItemsAtIndexPathsScrollPosition scrolls the collection view contents until the specified items are visible.
-func (cv *CollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths obj.Object, scrollPosition CollectionViewScrollPosition) {
+func (cv *CollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths []*foundation.IndexPath, scrollPosition CollectionViewScrollPosition) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("scrollToItemsAtIndexPaths:scrollPosition:"), objref.IDOf(indexPaths), scrollPosition)
+		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("scrollToItemsAtIndexPaths:scrollPosition:"), rt.SliceToNSSet(indexPaths, func(_v *foundation.IndexPath) objc.ID { return objref.IDOf(_v) }), scrollPosition)
 	})
 
 }
 
 // SetDraggingSourceOperationMaskForLocal configures the drag operation mask.
 func (cv *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMask DragOperation, localDestination bool) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), dragOperationMask, localDestination)
 	})
@@ -932,6 +1026,7 @@ func (cv *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMa
 
 // Content returns the content.
 func (cv *CollectionView) Content() []obj.Object {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -945,6 +1040,7 @@ func (cv *CollectionView) Content() []obj.Object {
 
 // SetContent wraps the corresponding Objective-C method.
 func (cv *CollectionView) SetContent(content []obj.Object) {
+	defer runtime.KeepAlive(cv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContent:"), purego.SliceToNSArray(content, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -953,6 +1049,7 @@ func (cv *CollectionView) SetContent(content []obj.Object) {
 
 // BackgroundView returns the background view.
 func (cv *CollectionView) BackgroundView() *View {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -966,6 +1063,7 @@ func (cv *CollectionView) BackgroundView() *View {
 
 // BackgroundViewScrollsWithContent wraps the corresponding Objective-C method.
 func (cv *CollectionView) BackgroundViewScrollsWithContent() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -979,6 +1077,7 @@ func (cv *CollectionView) BackgroundViewScrollsWithContent() bool {
 
 // CollectionViewLayout returns the collection view layout.
 func (cv *CollectionView) CollectionViewLayout() *CollectionViewLayout {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *CollectionViewLayout
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewLayout {
@@ -994,6 +1093,7 @@ func (cv *CollectionView) CollectionViewLayout() *CollectionViewLayout {
 //
 // BackgroundColors returns the collection as a Go slice.
 func (cv *CollectionView) BackgroundColors() []*Color {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 []*Color
 	purego.Main(func() {
 		_mainthread0 = func() []*Color {
@@ -1006,6 +1106,7 @@ func (cv *CollectionView) BackgroundColors() []*Color {
 
 // NumberOfSections returns the number of sections.
 func (cv *CollectionView) NumberOfSections() int {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1019,6 +1120,7 @@ func (cv *CollectionView) NumberOfSections() int {
 
 // IsFirstResponder reports whether the object is first responder.
 func (cv *CollectionView) IsFirstResponder() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1032,6 +1134,7 @@ func (cv *CollectionView) IsFirstResponder() bool {
 
 // IsSelectable reports whether the object is selectable.
 func (cv *CollectionView) IsSelectable() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1045,6 +1148,7 @@ func (cv *CollectionView) IsSelectable() bool {
 
 // AllowsEmptySelection wraps the corresponding Objective-C method.
 func (cv *CollectionView) AllowsEmptySelection() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1058,6 +1162,7 @@ func (cv *CollectionView) AllowsEmptySelection() bool {
 
 // AllowsMultipleSelection wraps the corresponding Objective-C method.
 func (cv *CollectionView) AllowsMultipleSelection() bool {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1070,25 +1175,27 @@ func (cv *CollectionView) AllowsMultipleSelection() bool {
 }
 
 // SelectionIndexes returns the selection indexes.
-func (cv *CollectionView) SelectionIndexes() obj.Object {
-	var _mainthread0 obj.Object
+func (cv *CollectionView) SelectionIndexes() *foundation.IndexSet {
+	defer runtime.KeepAlive(cv)
+	var _mainthread0 *foundation.IndexSet
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.IndexSet {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectionIndexes"))
-			return obj.Wrap(_r)
+			return foundation.IndexSetFromID(_r)
 		}()
 	})
 	return _mainthread0
 
 }
 
-// SelectionIndexPaths returns the selection index paths.
-func (cv *CollectionView) SelectionIndexPaths() obj.Object {
-	var _mainthread0 obj.Object
+// SelectionIndexPaths returns the order of the returned elements is unspecified.
+func (cv *CollectionView) SelectionIndexPaths() []*foundation.IndexPath {
+	defer runtime.KeepAlive(cv)
+	var _mainthread0 []*foundation.IndexPath
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []*foundation.IndexPath {
 			_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectionIndexPaths"))
-			return obj.Wrap(_r)
+			return rt.NSSetToSlice(_r, func(_id objc.ID) *foundation.IndexPath { return foundation.IndexPathFromID(_id) })
 		}()
 	})
 	return _mainthread0
@@ -1097,6 +1204,8 @@ func (cv *CollectionView) SelectionIndexPaths() obj.Object {
 
 // NewItemForRepresentedObject returns the collection view item that is used for the specified object.
 func (cv *CollectionView) NewItemForRepresentedObject(object obj.Object) *CollectionViewItem {
+	defer runtime.KeepAlive(cv)
+	defer runtime.KeepAlive(object)
 	var _mainthread0 *CollectionViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewItem {
@@ -1110,6 +1219,7 @@ func (cv *CollectionView) NewItemForRepresentedObject(object obj.Object) *Collec
 
 // ItemPrototype returns the item prototype.
 func (cv *CollectionView) ItemPrototype() *CollectionViewItem {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 *CollectionViewItem
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionViewItem {
@@ -1123,6 +1233,7 @@ func (cv *CollectionView) ItemPrototype() *CollectionViewItem {
 
 // MaxNumberOfRows returns the max number of rows.
 func (cv *CollectionView) MaxNumberOfRows() int {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1136,6 +1247,7 @@ func (cv *CollectionView) MaxNumberOfRows() int {
 
 // MaxNumberOfColumns returns the max number of columns.
 func (cv *CollectionView) MaxNumberOfColumns() int {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1149,6 +1261,7 @@ func (cv *CollectionView) MaxNumberOfColumns() int {
 
 // MinItemSize returns the min item size.
 func (cv *CollectionView) MinItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1162,6 +1275,7 @@ func (cv *CollectionView) MinItemSize() corefoundation.CGSize {
 
 // MaxItemSize returns the max item size.
 func (cv *CollectionView) MaxItemSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(cv)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {

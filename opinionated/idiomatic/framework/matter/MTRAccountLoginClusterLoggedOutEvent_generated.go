@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRAccountLoginClusterLoggedOutEventAdopt(id objc.ID) *MTRAccountLoginClust
 
 // Description returns the object's -description text.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) Description() string {
+	defer runtime.KeepAlive(malcloe)
 	return rt.Description(objref.IDOf(malcloe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(malcloe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(malcloe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(malcloe)
 	return rt.IsKind(objref.IDOf(malcloe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) String() string {
+	defer runtime.KeepAlive(malcloe)
 	return rt.Description(objref.IDOf(malcloe))
 }
 
@@ -72,12 +80,14 @@ func NewMTRAccountLoginClusterLoggedOutEvent() *MTRAccountLoginClusterLoggedOutE
 
 // WithNode sets the node.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent {
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(malcloe), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return malcloe
 }
 
 // Node returns the node.
-func (malcloe *MTRAccountLoginClusterLoggedOutEvent) Node() obj.Object {
+func (malcloe *MTRAccountLoginClusterLoggedOutEvent) Node() *foundation.Number {
+	defer runtime.KeepAlive(malcloe)
 	_r := objc.Send[objc.ID](objref.IDOf(malcloe), objc.RegisterName("node"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

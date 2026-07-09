@@ -5,6 +5,9 @@
 package threadnetwork
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +50,27 @@ func tHCredentialsAdopt(id objc.ID) *THCredentials {
 
 // Description returns the object's -description text.
 func (tc *THCredentials) Description() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tc *THCredentials) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tc *THCredentials) IsKind(className string) bool {
+	defer runtime.KeepAlive(tc)
 	return rt.IsKind(objref.IDOf(tc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tc *THCredentials) String() string {
+	defer runtime.KeepAlive(tc)
 	return rt.Description(objref.IDOf(tc))
 }
 
@@ -80,6 +88,7 @@ func (tc *THCredentials) WithChannel(channel uint8) *THCredentials {
 
 // NetworkName returns the Thread network name.
 func (tc *THCredentials) NetworkName() string {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
@@ -88,55 +97,64 @@ func (tc *THCredentials) NetworkName() string {
 }
 
 // ExtendedPANID returns the Thread network extended PAN identifier.
-func (tc *THCredentials) ExtendedPANID() obj.Object {
+func (tc *THCredentials) ExtendedPANID() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("extendedPANID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // BorderAgentID returns the identifer of an active Thread network Border Agent. This property’s value is the MAC Extended Address, a random identifier that the active Thread network border router generates.
-func (tc *THCredentials) BorderAgentID() obj.Object {
+func (tc *THCredentials) BorderAgentID() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("borderAgentID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // ActiveOperationalDataSet returns the essential operational parameters for the Thread network. The framework parses this property, then extracts and sets “THCredentials/channel“, “THCredentials/extendedPANID“, “THCredentials/networkKey“, “THCredentials/networkName“, “THCredentials/panID“, and “THCredentials/PSKC“ when you call “THClient/storeCredentialsForBorderAgent:activeOperationalDataSet:completion:“.
-func (tc *THCredentials) ActiveOperationalDataSet() obj.Object {
+func (tc *THCredentials) ActiveOperationalDataSet() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("activeOperationalDataSet"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // NetworkKey returns the sixteen byte Thread network key.
-func (tc *THCredentials) NetworkKey() obj.Object {
+func (tc *THCredentials) NetworkKey() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("networkKey"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // PSKC returns the sixteen byte Thread network pre-shared key for the Commissioner.
-func (tc *THCredentials) PSKC() obj.Object {
+func (tc *THCredentials) PSKC() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("PSKC"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Channel returns the Thread network radio channel.
 func (tc *THCredentials) Channel() uint8 {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[uint8](objref.IDOf(tc), objc.RegisterName("channel"))
 	return _r
 }
 
 // PanID returns the two byte Thead network PAN identifier.
-func (tc *THCredentials) PanID() obj.Object {
+func (tc *THCredentials) PanID() []byte {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("panID"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CreationDate returns the date and time that the framework stored the credential in the database.
-func (tc *THCredentials) CreationDate() obj.Object {
+func (tc *THCredentials) CreationDate() time.Time {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // LastModificationDate returns the date and time that the framework updated the credential in the database.
-func (tc *THCredentials) LastModificationDate() obj.Object {
+func (tc *THCredentials) LastModificationDate() time.Time {
+	defer runtime.KeepAlive(tc)
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("lastModificationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }

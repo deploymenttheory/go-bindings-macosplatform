@@ -5,6 +5,7 @@
 package pdfkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func outlineAdopt(id objc.ID) *Outline {
 
 // Description returns the object's -description text.
 func (o *Outline) Description() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (o *Outline) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (o *Outline) IsKind(className string) bool {
+	defer runtime.KeepAlive(o)
 	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (o *Outline) String() string {
+	defer runtime.KeepAlive(o)
 	return rt.Description(objref.IDOf(o))
 }
 
@@ -88,6 +94,7 @@ func (o *Outline) WithIsOpen(isOpen bool) *Outline {
 
 // WithDestination sets returns the destination associated with the outline.
 func (o *Outline) WithDestination(destination *Destination) *Outline {
+	defer runtime.KeepAlive(destination)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return o
 }
@@ -100,40 +107,48 @@ func (o *Outline) WithAction(action unsafe.Pointer) *Outline {
 
 // ChildAtIndex returns the child outline object at the specified index.
 func (o *Outline) ChildAtIndex(index int) *Outline {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("childAtIndex:"), index)
 	return OutlineFromID(_r)
 }
 
 // InsertChildAtIndex inserts the specified outline object at the specified index.
 func (o *Outline) InsertChildAtIndex(child *Outline, index int) {
+	defer runtime.KeepAlive(o)
+	defer runtime.KeepAlive(child)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
 // RemoveFromParent removes the outline object from its parent (does nothing if outline object is the root outline object).
 func (o *Outline) RemoveFromParent() {
+	defer runtime.KeepAlive(o)
 	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("removeFromParent"))
 }
 
 // Document returns the document.
 func (o *Outline) Document() *Document {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("document"))
 	return DocumentFromID(_r)
 }
 
 // NumberOfChildren returns the number of children.
 func (o *Outline) NumberOfChildren() int {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("numberOfChildren"))
 	return _r
 }
 
 // Index returns the index.
 func (o *Outline) Index() int {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[int](objref.IDOf(o), objc.RegisterName("index"))
 	return _r
 }
 
 // Label returns the label.
 func (o *Outline) Label() string {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
@@ -143,12 +158,14 @@ func (o *Outline) Label() string {
 
 // IsOpen reports whether the object is open.
 func (o *Outline) IsOpen() bool {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isOpen"))
 	return _r
 }
 
 // Destination returns the destination.
 func (o *Outline) Destination() *Destination {
+	defer runtime.KeepAlive(o)
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("destination"))
 	return DestinationFromID(_r)
 }

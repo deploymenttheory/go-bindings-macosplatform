@@ -5,9 +5,12 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
@@ -59,6 +62,18 @@ func NewPageController() *PageController {
 	return _mainthread0
 }
 
+// WithDelegate sets the page controller’s delegate object.
+func (pc *PageController) WithDelegate(delegate PageControllerDelegate) *PageController {
+	_shim := newPageControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pc
+}
+
 // WithTransitionStyle sets the transition style the page controller uses when changing pages.
 func (pc *PageController) WithTransitionStyle(transitionStyle PageControllerTransitionStyle) *PageController {
 	purego.Main(func() {
@@ -77,6 +92,7 @@ func (pc *PageController) WithSelectedIndex(selectedIndex int) *PageController {
 
 // WithRepresentedObject sets the object whose value is presented in the receiver’s primary view.
 func (pc *PageController) WithRepresentedObject(representedObject obj.Object) *PageController {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -93,6 +109,7 @@ func (pc *PageController) WithTitle(title string) *PageController {
 
 // WithView sets the view controller’s primary view.
 func (pc *PageController) WithView(view ViewProvider) *PageController {
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setView:"), objref.IDOf(view))
 	})
@@ -118,6 +135,7 @@ func (pc *PageController) WithChildViewControllers(items ...ViewControllerProvid
 
 // WithSourceItemView sets the source item view.
 func (pc *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageController {
+	defer runtime.KeepAlive(sourceItemView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	})
@@ -134,6 +152,7 @@ func (pc *PageController) WithPreferredScreenOrigin(preferredScreenOrigin corefo
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (pc *PageController) WithNextResponder(nextResponder ResponderProvider) *PageController {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -142,6 +161,7 @@ func (pc *PageController) WithNextResponder(nextResponder ResponderProvider) *Pa
 
 // WithMenu sets returns the responder’s menu.
 func (pc *PageController) WithMenu(menu *Menu) *PageController {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -150,6 +170,7 @@ func (pc *PageController) WithMenu(menu *Menu) *PageController {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (pc *PageController) WithUserActivity(userActivity obj.Object) *PageController {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -158,6 +179,7 @@ func (pc *PageController) WithUserActivity(userActivity obj.Object) *PageControl
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (pc *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -166,6 +188,8 @@ func (pc *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
 
 // NavigateForwardToObject navigates to the specific object.
 func (pc *PageController) NavigateForwardToObject(object obj.Object) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateForwardToObject:"), objref.IDOf(object))
 	})
@@ -174,6 +198,7 @@ func (pc *PageController) NavigateForwardToObject(object obj.Object) {
 
 // CompleteTransition invoked when the page transition is completed.
 func (pc *PageController) CompleteTransition() {
+	defer runtime.KeepAlive(pc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("completeTransition"))
 	})
@@ -182,6 +207,8 @@ func (pc *PageController) CompleteTransition() {
 
 // NavigateBack navigates backwards in the page controller’s arranged objects array.
 func (pc *PageController) NavigateBack(sender obj.Object) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateBack:"), objref.IDOf(sender))
 	})
@@ -190,6 +217,8 @@ func (pc *PageController) NavigateBack(sender obj.Object) {
 
 // NavigateForward navigates to the next object in the page controller’s arranged objects array, if appropriate.
 func (pc *PageController) NavigateForward(sender obj.Object) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("navigateForward:"), objref.IDOf(sender))
 	})
@@ -198,6 +227,8 @@ func (pc *PageController) NavigateForward(sender obj.Object) {
 
 // TakeSelectedIndexFrom navigates to the selected index, which is taken from the sender.
 func (pc *PageController) TakeSelectedIndexFrom(sender obj.Object) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("takeSelectedIndexFrom:"), objref.IDOf(sender))
 	})
@@ -206,6 +237,7 @@ func (pc *PageController) TakeSelectedIndexFrom(sender obj.Object) {
 
 // SelectedViewController returns the selected view controller.
 func (pc *PageController) SelectedViewController() *ViewController {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -219,6 +251,7 @@ func (pc *PageController) SelectedViewController() *ViewController {
 
 // TransitionStyle returns the transition style.
 func (pc *PageController) TransitionStyle() PageControllerTransitionStyle {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 PageControllerTransitionStyle
 	purego.Main(func() {
 		_mainthread0 = func() PageControllerTransitionStyle {
@@ -232,6 +265,7 @@ func (pc *PageController) TransitionStyle() PageControllerTransitionStyle {
 
 // ArrangedObjects returns the arranged objects.
 func (pc *PageController) ArrangedObjects() obj.Object {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -245,6 +279,8 @@ func (pc *PageController) ArrangedObjects() obj.Object {
 
 // SetArrangedObjects wraps the corresponding Objective-C method.
 func (pc *PageController) SetArrangedObjects(arrangedObjects obj.Object) {
+	defer runtime.KeepAlive(pc)
+	defer runtime.KeepAlive(arrangedObjects)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setArrangedObjects:"), objref.IDOf(arrangedObjects))
 	})
@@ -253,6 +289,7 @@ func (pc *PageController) SetArrangedObjects(arrangedObjects obj.Object) {
 
 // SelectedIndex returns the selected index.
 func (pc *PageController) SelectedIndex() int {
+	defer runtime.KeepAlive(pc)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

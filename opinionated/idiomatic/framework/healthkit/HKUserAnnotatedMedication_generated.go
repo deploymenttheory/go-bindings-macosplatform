@@ -5,6 +5,8 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func userAnnotatedMedicationAdopt(id objc.ID) *UserAnnotatedMedication {
 
 // Description returns the object's -description text.
 func (uam *UserAnnotatedMedication) Description() string {
+	defer runtime.KeepAlive(uam)
 	return rt.Description(objref.IDOf(uam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (uam *UserAnnotatedMedication) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(uam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(uam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (uam *UserAnnotatedMedication) IsKind(className string) bool {
+	defer runtime.KeepAlive(uam)
 	return rt.IsKind(objref.IDOf(uam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (uam *UserAnnotatedMedication) String() string {
+	defer runtime.KeepAlive(uam)
 	return rt.Description(objref.IDOf(uam))
 }
 
@@ -74,6 +81,7 @@ func NewUserAnnotatedMedication() *UserAnnotatedMedication {
 
 // Nickname returns the nickname that a person added to a medication during the entry experience. This can be edited at any point.
 func (uam *UserAnnotatedMedication) Nickname() string {
+	defer runtime.KeepAlive(uam)
 	_r := objc.Send[objc.ID](objref.IDOf(uam), objc.RegisterName("nickname"))
 	if _r == 0 {
 		return ""
@@ -83,18 +91,21 @@ func (uam *UserAnnotatedMedication) Nickname() string {
 
 // IsArchived reports whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
 func (uam *UserAnnotatedMedication) IsArchived() bool {
+	defer runtime.KeepAlive(uam)
 	_r := objc.Send[bool](objref.IDOf(uam), objc.RegisterName("isArchived"))
 	return _r
 }
 
 // HasSchedule reports whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
 func (uam *UserAnnotatedMedication) HasSchedule() bool {
+	defer runtime.KeepAlive(uam)
 	_r := objc.Send[bool](objref.IDOf(uam), objc.RegisterName("hasSchedule"))
 	return _r
 }
 
 // Medication returns a reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
 func (uam *UserAnnotatedMedication) Medication() *MedicationConcept {
+	defer runtime.KeepAlive(uam)
 	_r := objc.Send[objc.ID](objref.IDOf(uam), objc.RegisterName("medication"))
 	return MedicationConceptFromID(_r)
 }

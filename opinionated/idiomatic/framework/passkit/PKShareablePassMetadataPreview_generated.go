@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -58,6 +60,7 @@ func (spmp *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName 
 
 // OwnerDisplayName returns the owner display name.
 func (spmp *ShareablePassMetadataPreview) OwnerDisplayName() string {
+	defer runtime.KeepAlive(spmp)
 	_r := objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("ownerDisplayName"))
 	if _r == 0 {
 		return ""
@@ -67,6 +70,7 @@ func (spmp *ShareablePassMetadataPreview) OwnerDisplayName() string {
 
 // ProvisioningTemplateIdentifier returns the provisioning template identifier.
 func (spmp *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
+	defer runtime.KeepAlive(spmp)
 	_r := objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {
 		return ""

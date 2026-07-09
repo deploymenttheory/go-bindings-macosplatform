@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func morphologyCustomPronounAdopt(id objc.ID) *MorphologyCustomPronoun {
 
 // Description returns the object's -description text.
 func (mcp *MorphologyCustomPronoun) Description() string {
+	defer runtime.KeepAlive(mcp)
 	return rt.Description(objref.IDOf(mcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcp *MorphologyCustomPronoun) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcp *MorphologyCustomPronoun) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcp)
 	return rt.IsKind(objref.IDOf(mcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcp *MorphologyCustomPronoun) String() string {
+	defer runtime.KeepAlive(mcp)
 	return rt.Description(objref.IDOf(mcp))
 }
 
@@ -76,30 +82,35 @@ func NewMorphologyCustomPronoun() *MorphologyCustomPronoun {
 
 // WithSubjectForm sets the subject pronoun form to apply when using this custom pronoun behavior.
 func (mcp *MorphologyCustomPronoun) WithSubjectForm(subjectForm StringProvider) *MorphologyCustomPronoun {
+	defer runtime.KeepAlive(subjectForm)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setSubjectForm:"), objref.IDOf(subjectForm))
 	return mcp
 }
 
 // WithObjectForm sets the object pronoun form to apply when using this custom pronoun behavior.
 func (mcp *MorphologyCustomPronoun) WithObjectForm(objectForm StringProvider) *MorphologyCustomPronoun {
+	defer runtime.KeepAlive(objectForm)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setObjectForm:"), objref.IDOf(objectForm))
 	return mcp
 }
 
 // WithPossessiveForm sets the posessive pronoun form to apply when using this custom pronoun behavior.
 func (mcp *MorphologyCustomPronoun) WithPossessiveForm(possessiveForm StringProvider) *MorphologyCustomPronoun {
+	defer runtime.KeepAlive(possessiveForm)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setPossessiveForm:"), objref.IDOf(possessiveForm))
 	return mcp
 }
 
 // WithPossessiveAdjectiveForm sets the posessive adjective pronoun form to apply when using this custom pronoun behavior.
 func (mcp *MorphologyCustomPronoun) WithPossessiveAdjectiveForm(possessiveAdjectiveForm StringProvider) *MorphologyCustomPronoun {
+	defer runtime.KeepAlive(possessiveAdjectiveForm)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setPossessiveAdjectiveForm:"), objref.IDOf(possessiveAdjectiveForm))
 	return mcp
 }
 
 // WithReflexiveForm sets the reflexive pronoun form to apply when using this custom pronoun behavior.
 func (mcp *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm StringProvider) *MorphologyCustomPronoun {
+	defer runtime.KeepAlive(reflexiveForm)
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setReflexiveForm:"), objref.IDOf(reflexiveForm))
 	return mcp
 }
@@ -111,13 +122,14 @@ func (mcp *MorphologyCustomPronoun) WithObservationInfo(observationInfo unsafe.P
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mcp *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyCustomPronoun {
-	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mcp *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MorphologyCustomPronoun {
+	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mcp
 }
 
 // SubjectForm returns the subject form.
 func (mcp *MorphologyCustomPronoun) SubjectForm() string {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("subjectForm"))
 	if _r == 0 {
 		return ""
@@ -127,6 +139,7 @@ func (mcp *MorphologyCustomPronoun) SubjectForm() string {
 
 // ObjectForm returns the object form.
 func (mcp *MorphologyCustomPronoun) ObjectForm() string {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("objectForm"))
 	if _r == 0 {
 		return ""
@@ -136,6 +149,7 @@ func (mcp *MorphologyCustomPronoun) ObjectForm() string {
 
 // PossessiveForm returns the possessive form.
 func (mcp *MorphologyCustomPronoun) PossessiveForm() string {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveForm"))
 	if _r == 0 {
 		return ""
@@ -145,6 +159,7 @@ func (mcp *MorphologyCustomPronoun) PossessiveForm() string {
 
 // PossessiveAdjectiveForm returns the possessive adjective form.
 func (mcp *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveAdjectiveForm"))
 	if _r == 0 {
 		return ""
@@ -154,6 +169,7 @@ func (mcp *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
 
 // ReflexiveForm returns the reflexive form.
 func (mcp *MorphologyCustomPronoun) ReflexiveForm() string {
+	defer runtime.KeepAlive(mcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("reflexiveForm"))
 	if _r == 0 {
 		return ""

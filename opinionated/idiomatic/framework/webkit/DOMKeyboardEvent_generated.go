@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -45,6 +47,7 @@ func dOMKeyboardEventAdopt(id objc.ID) *DOMKeyboardEvent {
 
 // NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey creates a new DOMKeyboardEvent.
 func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, keyIdentifier string, location int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool, altGraphKey bool) *DOMKeyboardEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMKeyboardEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:location:ctrlKey:altKey:shiftKey:metaKey:altGraphKey:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), purego.NSString(keyIdentifier), location, ctrlKey, altKey, shiftKey, metaKey, altGraphKey)
 	return dOMKeyboardEventAdopt(_id)
@@ -52,6 +55,7 @@ func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierLocatio
 
 // NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKey creates a new DOMKeyboardEvent.
 func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierLocationCtrlKeyAltKeyShiftKeyMetaKey(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, keyIdentifier string, location int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool) *DOMKeyboardEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMKeyboardEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:location:ctrlKey:altKey:shiftKey:metaKey:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), purego.NSString(keyIdentifier), location, ctrlKey, altKey, shiftKey, metaKey)
 	return dOMKeyboardEventAdopt(_id)
@@ -59,6 +63,7 @@ func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierLocatio
 
 // NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey creates a new DOMKeyboardEvent.
 func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKeyAltGraphKey(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, keyIdentifier string, keyLocation int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool, altGraphKey bool) *DOMKeyboardEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMKeyboardEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:keyLocation:ctrlKey:altKey:shiftKey:metaKey:altGraphKey:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), purego.NSString(keyIdentifier), keyLocation, ctrlKey, altKey, shiftKey, metaKey, altGraphKey)
 	return dOMKeyboardEventAdopt(_id)
@@ -66,6 +71,7 @@ func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLoca
 
 // NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKey creates a new DOMKeyboardEvent.
 func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLocationCtrlKeyAltKeyShiftKeyMetaKey(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, keyIdentifier string, keyLocation int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool) *DOMKeyboardEvent {
+	defer runtime.KeepAlive(view)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMKeyboardEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initKeyboardEvent:canBubble:cancelable:view:keyIdentifier:keyLocation:ctrlKey:altKey:shiftKey:metaKey:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), purego.NSString(keyIdentifier), keyLocation, ctrlKey, altKey, shiftKey, metaKey)
 	return dOMKeyboardEventAdopt(_id)
@@ -85,12 +91,14 @@ func (dke *DOMKeyboardEvent) WithCancelBubble(cancelBubble bool) *DOMKeyboardEve
 
 // GetModifierState wraps the corresponding Objective-C method.
 func (dke *DOMKeyboardEvent) GetModifierState(keyIdentifierArg string) bool {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[bool](objref.IDOf(dke), objc.RegisterName("getModifierState:"), purego.NSString(keyIdentifierArg))
 	return _r
 }
 
 // KeyIdentifier returns the key identifier.
 func (dke *DOMKeyboardEvent) KeyIdentifier() string {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[objc.ID](objref.IDOf(dke), objc.RegisterName("keyIdentifier"))
 	if _r == 0 {
 		return ""
@@ -100,42 +108,49 @@ func (dke *DOMKeyboardEvent) KeyIdentifier() string {
 
 // Location returns the location.
 func (dke *DOMKeyboardEvent) Location() int {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[int](objref.IDOf(dke), objc.RegisterName("location"))
 	return _r
 }
 
 // KeyLocation returns the key location.
 func (dke *DOMKeyboardEvent) KeyLocation() int {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[int](objref.IDOf(dke), objc.RegisterName("keyLocation"))
 	return _r
 }
 
 // CtrlKey wraps the corresponding Objective-C method.
 func (dke *DOMKeyboardEvent) CtrlKey() bool {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[bool](objref.IDOf(dke), objc.RegisterName("ctrlKey"))
 	return _r
 }
 
 // ShiftKey wraps the corresponding Objective-C method.
 func (dke *DOMKeyboardEvent) ShiftKey() bool {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[bool](objref.IDOf(dke), objc.RegisterName("shiftKey"))
 	return _r
 }
 
 // AltKey wraps the corresponding Objective-C method.
 func (dke *DOMKeyboardEvent) AltKey() bool {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[bool](objref.IDOf(dke), objc.RegisterName("altKey"))
 	return _r
 }
 
 // MetaKey wraps the corresponding Objective-C method.
 func (dke *DOMKeyboardEvent) MetaKey() bool {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[bool](objref.IDOf(dke), objc.RegisterName("metaKey"))
 	return _r
 }
 
 // AltGraphKey wraps the corresponding Objective-C method.
 func (dke *DOMKeyboardEvent) AltGraphKey() bool {
+	defer runtime.KeepAlive(dke)
 	_r := objc.Send[bool](objref.IDOf(dke), objc.RegisterName("altGraphKey"))
 	return _r
 }

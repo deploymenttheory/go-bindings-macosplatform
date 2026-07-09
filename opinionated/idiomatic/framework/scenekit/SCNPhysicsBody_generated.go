@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func physicsBodyAdopt(id objc.ID) *PhysicsBody {
 
 // Description returns the object's -description text.
 func (pb *PhysicsBody) Description() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pb *PhysicsBody) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pb *PhysicsBody) IsKind(className string) bool {
+	defer runtime.KeepAlive(pb)
 	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pb *PhysicsBody) String() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
@@ -116,6 +123,7 @@ func (pb *PhysicsBody) WithRollingFriction(rollingFriction float64) *PhysicsBody
 
 // WithPhysicsShape sets an object that defines the solid volume of the physics body for use in collision detection.
 func (pb *PhysicsBody) WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody {
+	defer runtime.KeepAlive(physicsShape)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setPhysicsShape:"), objref.IDOf(physicsShape))
 	return pb
 }
@@ -182,129 +190,151 @@ func (pb *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float
 
 // ClearAllForces cancels all continuous forces and torques acting on the physics body during the current simulation step.
 func (pb *PhysicsBody) ClearAllForces() {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("clearAllForces"))
 }
 
 // ResetTransform updates the position and orientation of a body in the physics simulation to match that of the node to which the body is attached.
 func (pb *PhysicsBody) ResetTransform() {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("resetTransform"))
 }
 
 // SetResting tells SceneKit whether to treat the body as currently being in motion.
 func (pb *PhysicsBody) SetResting(resting bool) {
+	defer runtime.KeepAlive(pb)
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setResting:"), resting)
 }
 
 // Type returns the type.
 func (pb *PhysicsBody) Type() PhysicsBodyType {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[PhysicsBodyType](objref.IDOf(pb), objc.RegisterName("type"))
 	return _r
 }
 
 // Mass returns the mass.
 func (pb *PhysicsBody) Mass() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("mass"))
 	return _r
 }
 
 // UsesDefaultMomentOfInertia wraps the corresponding Objective-C method.
 func (pb *PhysicsBody) UsesDefaultMomentOfInertia() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("usesDefaultMomentOfInertia"))
 	return _r
 }
 
 // Charge returns the charge.
 func (pb *PhysicsBody) Charge() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("charge"))
 	return _r
 }
 
 // Friction returns the friction.
 func (pb *PhysicsBody) Friction() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("friction"))
 	return _r
 }
 
 // Restitution returns the restitution.
 func (pb *PhysicsBody) Restitution() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("restitution"))
 	return _r
 }
 
 // RollingFriction returns the rolling friction.
 func (pb *PhysicsBody) RollingFriction() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("rollingFriction"))
 	return _r
 }
 
 // PhysicsShape returns the physics shape.
 func (pb *PhysicsBody) PhysicsShape() *PhysicsShape {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("physicsShape"))
 	return PhysicsShapeFromID(_r)
 }
 
 // IsResting reports whether the object is resting.
 func (pb *PhysicsBody) IsResting() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isResting"))
 	return _r
 }
 
 // AllowsResting wraps the corresponding Objective-C method.
 func (pb *PhysicsBody) AllowsResting() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("allowsResting"))
 	return _r
 }
 
 // Damping returns the damping.
 func (pb *PhysicsBody) Damping() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("damping"))
 	return _r
 }
 
 // AngularDamping returns the angular damping.
 func (pb *PhysicsBody) AngularDamping() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularDamping"))
 	return _r
 }
 
 // CategoryBitMask returns the category bit mask.
 func (pb *PhysicsBody) CategoryBitMask() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
 // CollisionBitMask returns the collision bit mask.
 func (pb *PhysicsBody) CollisionBitMask() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("collisionBitMask"))
 	return _r
 }
 
 // ContactTestBitMask returns the contact test bit mask.
 func (pb *PhysicsBody) ContactTestBitMask() int {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("contactTestBitMask"))
 	return _r
 }
 
 // IsAffectedByGravity reports whether the object is affected by gravity.
 func (pb *PhysicsBody) IsAffectedByGravity() bool {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isAffectedByGravity"))
 	return _r
 }
 
 // ContinuousCollisionDetectionThreshold returns the continuous collision detection threshold.
 func (pb *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("continuousCollisionDetectionThreshold"))
 	return _r
 }
 
 // LinearRestingThreshold returns the linear resting threshold.
 func (pb *PhysicsBody) LinearRestingThreshold() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("linearRestingThreshold"))
 	return _r
 }
 
 // AngularRestingThreshold returns the angular resting threshold.
 func (pb *PhysicsBody) AngularRestingThreshold() float64 {
+	defer runtime.KeepAlive(pb)
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularRestingThreshold"))
 	return _r
 }

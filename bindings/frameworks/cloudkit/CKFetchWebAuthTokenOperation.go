@@ -49,8 +49,8 @@ func (o *CKFetchWebAuthTokenOperation) Init() *CKFetchWebAuthTokenOperation {
 }
 
 // Creates a fetch operation for the specified API token.
-func (o *CKFetchWebAuthTokenOperation) InitWithAPIToken(aPIToken *foundation.NSString) *CKFetchWebAuthTokenOperation {
-	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelInitWithAPIToken, aPIToken.Ptr())
+func (o *CKFetchWebAuthTokenOperation) InitWithAPIToken(apiToken *foundation.NSString) *CKFetchWebAuthTokenOperation {
+	_ret := objc.Send[objc.ID](o.Ptr(), _cKFetchWebAuthTokenOperationSelInitWithAPIToken, apiToken.Ptr())
 	if _ret != 0 {
 		_ret.Send(objc.RegisterName("retain"))
 	}
@@ -66,8 +66,8 @@ func (o *CKFetchWebAuthTokenOperation) APIToken() *foundation.NSString {
 	return foundation.NSStringFromID(_ret)
 }
 
-func (o *CKFetchWebAuthTokenOperation) SetAPIToken(aPIToken *foundation.NSString) {
-	o.Ptr().Send(_cKFetchWebAuthTokenOperationSelSetAPIToken, aPIToken.Ptr())
+func (o *CKFetchWebAuthTokenOperation) SetAPIToken(apiToken *foundation.NSString) {
+	o.Ptr().Send(_cKFetchWebAuthTokenOperationSelSetAPIToken, apiToken.Ptr())
 }
 
 // The block to execute when the operation finishes. The closure returns no value and takes the following parameters: - If the operation is successful, the web authentication token; otherwise, `nil`. - An error that contains information about a problem, or `nil` if the system successfully fetches the token. The operation executes this closure only once. You must provide a closure capable of executing on a background thread, so any tasks that require access to the main thread must dispatch accordingly.

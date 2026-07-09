@@ -5,6 +5,8 @@
 package metrickit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func signpostIntervalDataAdopt(id objc.ID) *SignpostIntervalData {
 
 // Description returns the object's -description text.
 func (sid *SignpostIntervalData) Description() string {
+	defer runtime.KeepAlive(sid)
 	return rt.Description(objref.IDOf(sid))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sid *SignpostIntervalData) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sid)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sid), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sid *SignpostIntervalData) IsKind(className string) bool {
+	defer runtime.KeepAlive(sid)
 	return rt.IsKind(objref.IDOf(sid), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sid *SignpostIntervalData) String() string {
+	defer runtime.KeepAlive(sid)
 	return rt.Description(objref.IDOf(sid))
 }
 
@@ -74,30 +81,35 @@ func NewSignpostIntervalData() *SignpostIntervalData {
 
 // HistogrammedSignpostDuration returns a histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
 func (sid *SignpostIntervalData) HistogrammedSignpostDuration() obj.Object {
+	defer runtime.KeepAlive(sid)
 	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("histogrammedSignpostDuration"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeCPUTime returns cumulative CPU time aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (sid *SignpostIntervalData) CumulativeCPUTime() obj.Object {
+	defer runtime.KeepAlive(sid)
 	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("cumulativeCPUTime"))
 	return obj.Wrap(_r)
 }
 
 // AverageMemory returns average value of memory snapshots taken at beginning and end of MXSignpost intervals This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (sid *SignpostIntervalData) AverageMemory() obj.Object {
+	defer runtime.KeepAlive(sid)
 	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("averageMemory"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeLogicalWrites returns cumulative logical writes aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (sid *SignpostIntervalData) CumulativeLogicalWrites() obj.Object {
+	defer runtime.KeepAlive(sid)
 	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("cumulativeLogicalWrites"))
 	return obj.Wrap(_r)
 }
 
 // CumulativeHitchTimeRatio returns cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
 func (sid *SignpostIntervalData) CumulativeHitchTimeRatio() obj.Object {
+	defer runtime.KeepAlive(sid)
 	_r := objc.Send[objc.ID](objref.IDOf(sid), objc.RegisterName("cumulativeHitchTimeRatio"))
 	return obj.Wrap(_r)
 }

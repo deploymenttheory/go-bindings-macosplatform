@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func wKScriptMessageAdopt(id objc.ID) *WKScriptMessage {
 
 // Description returns the object's -description text.
 func (wsm *WKScriptMessage) Description() string {
+	defer runtime.KeepAlive(wsm)
 	return rt.Description(objref.IDOf(wsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wsm *WKScriptMessage) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wsm *WKScriptMessage) IsKind(className string) bool {
+	defer runtime.KeepAlive(wsm)
 	return rt.IsKind(objref.IDOf(wsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wsm *WKScriptMessage) String() string {
+	defer runtime.KeepAlive(wsm)
 	return rt.Description(objref.IDOf(wsm))
 }
 
@@ -80,6 +87,7 @@ func NewWKScriptMessage() *WKScriptMessage {
 
 // Body returns the body of the message. Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
 func (wsm *WKScriptMessage) Body() obj.Object {
+	defer runtime.KeepAlive(wsm)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -93,6 +101,7 @@ func (wsm *WKScriptMessage) Body() obj.Object {
 
 // WebView returns the web view sending the message.
 func (wsm *WKScriptMessage) WebView() *WKWebView {
+	defer runtime.KeepAlive(wsm)
 	var _mainthread0 *WKWebView
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebView {
@@ -106,6 +115,7 @@ func (wsm *WKScriptMessage) WebView() *WKWebView {
 
 // FrameInfo returns the frame sending the message.
 func (wsm *WKScriptMessage) FrameInfo() *WKFrameInfo {
+	defer runtime.KeepAlive(wsm)
 	var _mainthread0 *WKFrameInfo
 	purego.Main(func() {
 		_mainthread0 = func() *WKFrameInfo {
@@ -119,6 +129,7 @@ func (wsm *WKScriptMessage) FrameInfo() *WKFrameInfo {
 
 // Name returns the name of the message handler to which the message is sent.
 func (wsm *WKScriptMessage) Name() string {
+	defer runtime.KeepAlive(wsm)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -135,6 +146,7 @@ func (wsm *WKScriptMessage) Name() string {
 
 // World returns the content world from which the message was sent.
 func (wsm *WKScriptMessage) World() *WKContentWorld {
+	defer runtime.KeepAlive(wsm)
 	var _mainthread0 *WKContentWorld
 	purego.Main(func() {
 		_mainthread0 = func() *WKContentWorld {

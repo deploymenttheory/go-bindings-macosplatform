@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -213,6 +215,7 @@ func (dfe *DOMHTMLIFrameElement) WithTextContent(textContent string) *DOMHTMLIFr
 
 // Align returns the align.
 func (dfe *DOMHTMLIFrameElement) Align() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
@@ -222,6 +225,7 @@ func (dfe *DOMHTMLIFrameElement) Align() string {
 
 // FrameBorder returns the frame border.
 func (dfe *DOMHTMLIFrameElement) FrameBorder() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("frameBorder"))
 	if _r == 0 {
 		return ""
@@ -231,6 +235,7 @@ func (dfe *DOMHTMLIFrameElement) FrameBorder() string {
 
 // Height returns the height.
 func (dfe *DOMHTMLIFrameElement) Height() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("height"))
 	if _r == 0 {
 		return ""
@@ -240,6 +245,7 @@ func (dfe *DOMHTMLIFrameElement) Height() string {
 
 // LongDesc returns the long desc.
 func (dfe *DOMHTMLIFrameElement) LongDesc() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("longDesc"))
 	if _r == 0 {
 		return ""
@@ -249,6 +255,7 @@ func (dfe *DOMHTMLIFrameElement) LongDesc() string {
 
 // MarginHeight returns the margin height.
 func (dfe *DOMHTMLIFrameElement) MarginHeight() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("marginHeight"))
 	if _r == 0 {
 		return ""
@@ -258,6 +265,7 @@ func (dfe *DOMHTMLIFrameElement) MarginHeight() string {
 
 // MarginWidth returns the margin width.
 func (dfe *DOMHTMLIFrameElement) MarginWidth() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("marginWidth"))
 	if _r == 0 {
 		return ""
@@ -267,6 +275,7 @@ func (dfe *DOMHTMLIFrameElement) MarginWidth() string {
 
 // Name returns the name.
 func (dfe *DOMHTMLIFrameElement) Name() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -276,6 +285,7 @@ func (dfe *DOMHTMLIFrameElement) Name() string {
 
 // Scrolling returns the scrolling.
 func (dfe *DOMHTMLIFrameElement) Scrolling() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("scrolling"))
 	if _r == 0 {
 		return ""
@@ -285,6 +295,7 @@ func (dfe *DOMHTMLIFrameElement) Scrolling() string {
 
 // Src returns the src.
 func (dfe *DOMHTMLIFrameElement) Src() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("src"))
 	if _r == 0 {
 		return ""
@@ -294,6 +305,7 @@ func (dfe *DOMHTMLIFrameElement) Src() string {
 
 // Width returns the width.
 func (dfe *DOMHTMLIFrameElement) Width() string {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""
@@ -303,18 +315,21 @@ func (dfe *DOMHTMLIFrameElement) Width() string {
 
 // ContentDocument returns the content document.
 func (dfe *DOMHTMLIFrameElement) ContentDocument() *DOMDocument {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("contentDocument"))
 	return DOMDocumentFromID(_r)
 }
 
 // ContentWindow returns the content window.
 func (dfe *DOMHTMLIFrameElement) ContentWindow() *DOMAbstractView {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("contentWindow"))
 	return DOMAbstractViewFromID(_r)
 }
 
 // ContentFrame returns the content frame.
 func (dfe *DOMHTMLIFrameElement) ContentFrame() *WebFrame {
+	defer runtime.KeepAlive(dfe)
 	_r := objc.Send[objc.ID](objref.IDOf(dfe), objc.RegisterName("contentFrame"))
 	return WebFrameFromID(_r)
 }

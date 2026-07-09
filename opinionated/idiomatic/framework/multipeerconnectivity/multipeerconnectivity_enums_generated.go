@@ -93,3 +93,30 @@ func (e SessionSendDataMode) String() string {
 		return fmt.Sprintf("SessionSendDataMode(%d)", int64(e))
 	}
 }
+
+// Indicates the current state of a given peer within a session.
+type SessionState int64
+
+const (
+	// The peer is not (or is no longer) in this session.
+	SessionStateNotConnected SessionState = 0
+	// A connection to the peer is currently being established.
+	SessionStateConnecting SessionState = 1
+	// The peer is connected to this session.
+	SessionStateConnected SessionState = 2
+)
+
+// String returns the SessionState constant's name, or its numeric form when the
+// value is not a known constant.
+func (e SessionState) String() string {
+	switch e {
+	case SessionStateNotConnected:
+		return "SessionStateNotConnected"
+	case SessionStateConnecting:
+		return "SessionStateConnecting"
+	case SessionStateConnected:
+		return "SessionStateConnected"
+	default:
+		return fmt.Sprintf("SessionState(%d)", int64(e))
+	}
+}

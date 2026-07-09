@@ -5,6 +5,8 @@
 package metalfx
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func frameInterpolatorDescriptorAdopt(id objc.ID) *FrameInterpolatorDescriptor {
 
 // Description returns the object's -description text.
 func (fid *FrameInterpolatorDescriptor) Description() string {
+	defer runtime.KeepAlive(fid)
 	return rt.Description(objref.IDOf(fid))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fid *FrameInterpolatorDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fid)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fid), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fid *FrameInterpolatorDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(fid)
 	return rt.IsKind(objref.IDOf(fid), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fid *FrameInterpolatorDescriptor) String() string {
+	defer runtime.KeepAlive(fid)
 	return rt.Description(objref.IDOf(fid))
 }
 
@@ -98,24 +105,28 @@ func (fid *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight int) *Fram
 
 // InputWidth returns the width, in pixels, of the input motion and depth texture for the frame interpolator.
 func (fid *FrameInterpolatorDescriptor) InputWidth() int {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("inputWidth"))
 	return _r
 }
 
 // InputHeight returns the height, in pixels, of the input motion and depth texture for the frame interpolator.
 func (fid *FrameInterpolatorDescriptor) InputHeight() int {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("inputHeight"))
 	return _r
 }
 
 // OutputWidth returns the width, in pixels, of the output color texture for the frame interpolator.
 func (fid *FrameInterpolatorDescriptor) OutputWidth() int {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("outputWidth"))
 	return _r
 }
 
 // OutputHeight returns the height, in pixels, of the output color texture for the frame interpolator.
 func (fid *FrameInterpolatorDescriptor) OutputHeight() int {
+	defer runtime.KeepAlive(fid)
 	_r := objc.Send[int](objref.IDOf(fid), objc.RegisterName("outputHeight"))
 	return _r
 }

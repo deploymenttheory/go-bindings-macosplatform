@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func functionStitchingFunctionNodeAdopt(id objc.ID) *FunctionStitchingFunctionNo
 
 // Description returns the object's -description text.
 func (fsfn *FunctionStitchingFunctionNode) Description() string {
+	defer runtime.KeepAlive(fsfn)
 	return rt.Description(objref.IDOf(fsfn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fsfn *FunctionStitchingFunctionNode) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fsfn)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fsfn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fsfn *FunctionStitchingFunctionNode) IsKind(className string) bool {
+	defer runtime.KeepAlive(fsfn)
 	return rt.IsKind(objref.IDOf(fsfn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fsfn *FunctionStitchingFunctionNode) String() string {
+	defer runtime.KeepAlive(fsfn)
 	return rt.Description(objref.IDOf(fsfn))
 }
 
@@ -88,6 +95,7 @@ func (fsfn *FunctionStitchingFunctionNode) WithControlDependencies(items ...*Fun
 
 // Name returns the name.
 func (fsfn *FunctionStitchingFunctionNode) Name() string {
+	defer runtime.KeepAlive(fsfn)
 	_r := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -97,12 +105,14 @@ func (fsfn *FunctionStitchingFunctionNode) Name() string {
 
 // Arguments returns the arguments.
 func (fsfn *FunctionStitchingFunctionNode) Arguments() []obj.Object {
+	defer runtime.KeepAlive(fsfn)
 	_r := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetArguments wraps the corresponding Objective-C method.
 func (fsfn *FunctionStitchingFunctionNode) SetArguments(arguments []obj.Object) {
+	defer runtime.KeepAlive(fsfn)
 	objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("setArguments:"), purego.SliceToNSArray(arguments, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
@@ -110,6 +120,7 @@ func (fsfn *FunctionStitchingFunctionNode) SetArguments(arguments []obj.Object) 
 //
 // ControlDependencies returns the collection as a Go slice.
 func (fsfn *FunctionStitchingFunctionNode) ControlDependencies() []*FunctionStitchingFunctionNode {
+	defer runtime.KeepAlive(fsfn)
 	_arr := objc.Send[objc.ID](objref.IDOf(fsfn), objc.RegisterName("controlDependencies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingFunctionNode { return FunctionStitchingFunctionNodeFromID(_id) })
 }

@@ -5,6 +5,8 @@
 package phase
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mixerParametersAdopt(id objc.ID) *MixerParameters {
 
 // Description returns the object's -description text.
 func (mp *MixerParameters) Description() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mp *MixerParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mp *MixerParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(mp)
 	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mp *MixerParameters) String() string {
+	defer runtime.KeepAlive(mp)
 	return rt.Description(objref.IDOf(mp))
 }
 
@@ -74,10 +81,15 @@ func NewMixerParameters() *MixerParameters {
 
 // AddSpatialMixerParametersWithIdentifierSourceListener adds runtime parameters for a spatial mixer.
 func (mp *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener) {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(source)
+	defer runtime.KeepAlive(listener)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("addSpatialMixerParametersWithIdentifier:source:listener:"), purego.NSString(identifier), objref.IDOf(source), objref.IDOf(listener))
 }
 
 // AddAmbientMixerParametersWithIdentifierListener adds runtime parameters for an ambient mixer.
 func (mp *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener) {
+	defer runtime.KeepAlive(mp)
+	defer runtime.KeepAlive(listener)
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:"), purego.NSString(identifier), objref.IDOf(listener))
 }

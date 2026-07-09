@@ -5,6 +5,8 @@
 package modelio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,14 +50,15 @@ func photometricLightAdopt(id objc.ID) *PhotometricLight {
 }
 
 // NewPhotometricLightWithIESProfile initializes a light from photometry data in the file at the specified URL.
-func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
+func NewPhotometricLightWithIESProfile(url string) *PhotometricLight {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLPhotometricLight")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIESProfile:"), rt.FileURL(uRL))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIESProfile:"), rt.FileURL(url))
 	return photometricLightAdopt(_id)
 }
 
 // WithColor sets the color of the light source.
 func (pl *PhotometricLight) WithColor(color obj.Object) *PhotometricLight {
+	defer runtime.KeepAlive(color)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return pl
 }
@@ -104,12 +107,14 @@ func (pl *PhotometricLight) WithColorSpace(colorSpace string) *PhotometricLight 
 
 // WithParent sets the parent object that contains this object.
 func (pl *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
+	defer runtime.KeepAlive(parent)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return pl
 }
 
 // WithInstance sets the primary object, if applicable, of which this object is an instance.
 func (pl *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLight {
+	defer runtime.KeepAlive(instance)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return pl
 }
@@ -122,36 +127,42 @@ func (pl *PhotometricLight) WithHidden(hidden bool) *PhotometricLight {
 
 // GenerateSphericalHarmonicsFromLight generates spherical harmonics information based on the light’s photometry data.
 func (pl *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel int) {
+	defer runtime.KeepAlive(pl)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("generateSphericalHarmonicsFromLight:"), sphericalHarmonicsLevel)
 }
 
 // GenerateCubemapFromLight generates a cube map texture from the light’s photometry data.
 func (pl *PhotometricLight) GenerateCubemapFromLight(textureSize int) {
+	defer runtime.KeepAlive(pl)
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("generateCubemapFromLight:"), textureSize)
 }
 
 // GenerateTexture generate an IES compliant MDLTexture 1D when the number of horizontal angles is one and the innerConeAngle is < 180 2D when the previous statement fails and innerConeAngle < 89 3D in all other cases the parameter textureSize is the size in pixels of the texture image. For a size of N, 1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
 func (pl *PhotometricLight) GenerateTexture(textureSize int) *Texture {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("generateTexture:"), textureSize)
 	return TextureFromID(_r)
 }
 
 // LightCubeMap returns the light cube map.
 func (pl *PhotometricLight) LightCubeMap() *Texture {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("lightCubeMap"))
 	return TextureFromID(_r)
 }
 
 // SphericalHarmonicsLevel returns the spherical harmonics level.
 func (pl *PhotometricLight) SphericalHarmonicsLevel() int {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
 // SphericalHarmonicsCoefficients returns the spherical harmonics coefficients.
-func (pl *PhotometricLight) SphericalHarmonicsCoefficients() obj.Object {
+func (pl *PhotometricLight) SphericalHarmonicsCoefficients() []byte {
+	defer runtime.KeepAlive(pl)
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("sphericalHarmonicsCoefficients"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 var _ PhysicallyPlausibleLightProvider = (*PhotometricLight)(nil)

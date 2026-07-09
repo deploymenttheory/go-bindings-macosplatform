@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRCommissionerControlClusterCommissionNodeParamsAdopt(id objc.ID) *MTRComm
 
 // Description returns the object's -description text.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) Description() string {
+	defer runtime.KeepAlive(mccccnp)
 	return rt.Description(objref.IDOf(mccccnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccccnp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccccnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccccnp)
 	return rt.IsKind(objref.IDOf(mccccnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) String() string {
+	defer runtime.KeepAlive(mccccnp)
 	return rt.Description(objref.IDOf(mccccnp))
 }
 
@@ -72,48 +80,56 @@ func NewMTRCommissionerControlClusterCommissionNodeParams() *MTRCommissionerCont
 
 // WithRequestID sets the request ID.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	defer runtime.KeepAlive(requestID)
 	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return mccccnp
 }
 
 // WithResponseTimeoutSeconds sets the response timeout seconds.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithResponseTimeoutSeconds(responseTimeoutSeconds obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	defer runtime.KeepAlive(responseTimeoutSeconds)
 	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setResponseTimeoutSeconds:"), objref.IDOf(responseTimeoutSeconds))
 	return mccccnp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mccccnp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mccccnp
 }
 
 // RequestID returns the request ID.
-func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) RequestID() obj.Object {
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) RequestID() *foundation.Number {
+	defer runtime.KeepAlive(mccccnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("requestID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ResponseTimeoutSeconds returns the response timeout seconds.
-func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ResponseTimeoutSeconds() obj.Object {
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ResponseTimeoutSeconds() *foundation.Number {
+	defer runtime.KeepAlive(mccccnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("responseTimeoutSeconds"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) TimedInvokeTimeoutMs() obj.Object {
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mccccnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ServerSideProcessingTimeout() obj.Object {
+func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mccccnp)
 	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

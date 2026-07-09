@@ -5,8 +5,11 @@
 package videosubscriberaccount
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,22 +50,27 @@ func vSAccountManagerAdopt(id objc.ID) *VSAccountManager {
 
 // Description returns the object's -description text.
 func (vam *VSAccountManager) Description() string {
+	defer runtime.KeepAlive(vam)
 	return rt.Description(objref.IDOf(vam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vam *VSAccountManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vam)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vam *VSAccountManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(vam)
 	return rt.IsKind(objref.IDOf(vam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vam *VSAccountManager) String() string {
+	defer runtime.KeepAlive(vam)
 	return rt.Description(objref.IDOf(vam))
 }
 
@@ -70,4 +78,14 @@ func (vam *VSAccountManager) String() string {
 func NewVSAccountManager() *VSAccountManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountManager")), objc.RegisterName("new"))
 	return vSAccountManagerAdopt(_id)
+}
+
+// WithDelegate sets the delegate of the account manager object.
+func (vam *VSAccountManager) WithDelegate(delegate VSAccountManagerDelegate) *VSAccountManager {
+	_shim := newVSAccountManagerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(vam), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(vam), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return vam
 }

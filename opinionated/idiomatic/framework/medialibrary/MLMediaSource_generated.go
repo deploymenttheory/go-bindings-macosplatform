@@ -5,6 +5,8 @@
 package medialibrary
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func mediaSourceAdopt(id objc.ID) *MediaSource {
 
 // Description returns the object's -description text.
 func (ms *MediaSource) Description() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ms *MediaSource) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ms)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ms *MediaSource) IsKind(className string) bool {
+	defer runtime.KeepAlive(ms)
 	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ms *MediaSource) String() string {
+	defer runtime.KeepAlive(ms)
 	return rt.Description(objref.IDOf(ms))
 }
 
@@ -74,36 +81,42 @@ func NewMediaSource() *MediaSource {
 
 // MediaGroupForIdentifier returns the media group with the specified identifier.
 func (ms *MediaSource) MediaGroupForIdentifier(mediaGroupIdentifier string) *MediaGroup {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaGroupForIdentifier:"), purego.NSString(mediaGroupIdentifier))
 	return MediaGroupFromID(_r)
 }
 
 // MediaGroupsForIdentifiers returns the media groups with the specified identifiers.
-func (ms *MediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers []string) obj.Object {
+func (ms *MediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers []string) map[string]*MediaGroup {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaGroupsForIdentifiers:"), purego.SliceToNSArray(mediaGroupIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *MediaGroup { return MediaGroupFromID(_id) })
 }
 
 // MediaObjectForIdentifier returns the media object with the specified identifier.
 func (ms *MediaSource) MediaObjectForIdentifier(mediaObjectIdentifier string) *MediaObject {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaObjectForIdentifier:"), purego.NSString(mediaObjectIdentifier))
 	return MediaObjectFromID(_r)
 }
 
 // MediaObjectsForIdentifiers returns the media objects with the specified identifiers.
-func (ms *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers []string) obj.Object {
+func (ms *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers []string) map[string]*MediaObject {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaObjectsForIdentifiers:"), purego.SliceToNSArray(mediaObjectIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) *MediaObject { return MediaObjectFromID(_id) })
 }
 
 // MediaLibrary returns the media library.
 func (ms *MediaSource) MediaLibrary() *MediaLibrary {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
 // MediaSourceIdentifier returns the media source identifier.
 func (ms *MediaSource) MediaSourceIdentifier() string {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
 		return ""
@@ -112,13 +125,15 @@ func (ms *MediaSource) MediaSourceIdentifier() string {
 }
 
 // Attributes returns the attributes.
-func (ms *MediaSource) Attributes() obj.Object {
+func (ms *MediaSource) Attributes() map[string]obj.Object {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("attributes"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RootMediaGroup returns the root media group.
 func (ms *MediaSource) RootMediaGroup() *MediaGroup {
+	defer runtime.KeepAlive(ms)
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("rootMediaGroup"))
 	return MediaGroupFromID(_r)
 }

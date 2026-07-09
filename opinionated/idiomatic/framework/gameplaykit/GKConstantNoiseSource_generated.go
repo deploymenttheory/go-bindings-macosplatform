@@ -5,6 +5,8 @@
 package gameplaykit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -60,6 +62,7 @@ func (cns *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
 
 // Value returns the value.
 func (cns *ConstantNoiseSource) Value() float64 {
+	defer runtime.KeepAlive(cns)
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("value"))
 	return _r
 }

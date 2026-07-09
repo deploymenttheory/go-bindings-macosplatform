@@ -5,6 +5,8 @@
 package imagekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,27 +48,33 @@ func filterUIViewAdopt(id objc.ID) *FilterUIView {
 
 // Description returns the object's -description text.
 func (fuv *FilterUIView) Description() string {
+	defer runtime.KeepAlive(fuv)
 	return rt.Description(objref.IDOf(fuv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fuv *FilterUIView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fuv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fuv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fuv *FilterUIView) IsKind(className string) bool {
+	defer runtime.KeepAlive(fuv)
 	return rt.IsKind(objref.IDOf(fuv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fuv *FilterUIView) String() string {
+	defer runtime.KeepAlive(fuv)
 	return rt.Description(objref.IDOf(fuv))
 }
 
 // NewFilterUIViewWithFrameFilter the initWithFrame method initializes a view that retains the filter passed into it.
 func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter obj.Object) *FilterUIView {
+	defer runtime.KeepAlive(inFilter)
 	var _mainthread0 *FilterUIView
 	purego.Main(func() {
 		_mainthread0 = func() *FilterUIView {
@@ -80,6 +88,7 @@ func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter ob
 
 // Filter returns accessor method to return the filter instance that the view controls.
 func (fuv *FilterUIView) Filter() obj.Object {
+	defer runtime.KeepAlive(fuv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -93,6 +102,7 @@ func (fuv *FilterUIView) Filter() obj.Object {
 
 // ObjectController returns accessor method for the object controller for all bindings between the filter and the UI representation.
 func (fuv *FilterUIView) ObjectController() obj.Object {
+	defer runtime.KeepAlive(fuv)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {

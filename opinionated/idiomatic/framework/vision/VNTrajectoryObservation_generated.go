@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -55,6 +57,7 @@ func NewTrajectoryObservation() *TrajectoryObservation {
 //
 // DetectedPoints returns the collection as a Go slice.
 func (to *TrajectoryObservation) DetectedPoints() []*Point {
+	defer runtime.KeepAlive(to)
 	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("detectedPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
 }
@@ -63,12 +66,14 @@ func (to *TrajectoryObservation) DetectedPoints() []*Point {
 //
 // ProjectedPoints returns the collection as a Go slice.
 func (to *TrajectoryObservation) ProjectedPoints() []*Point {
+	defer runtime.KeepAlive(to)
 	_arr := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("projectedPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Point { return PointFromID(_id) })
 }
 
 // MovingAverageRadius returns the moving average radius of the object being tracked. This is the radius of the object at each detected point (used to determine the trajectory) averaged.
 func (to *TrajectoryObservation) MovingAverageRadius() float64 {
+	defer runtime.KeepAlive(to)
 	_r := objc.Send[float64](objref.IDOf(to), objc.RegisterName("movingAverageRadius"))
 	return _r
 }

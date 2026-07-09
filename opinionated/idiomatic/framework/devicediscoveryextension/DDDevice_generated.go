@@ -5,7 +5,10 @@
 package devicediscoveryextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func dDDeviceAdopt(id objc.ID) *DDDevice {
 
 // Description returns the object's -description text.
 func (dd *DDDevice) Description() string {
+	defer runtime.KeepAlive(dd)
 	return rt.Description(objref.IDOf(dd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (dd *DDDevice) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(dd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(dd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (dd *DDDevice) IsKind(className string) bool {
+	defer runtime.KeepAlive(dd)
 	return rt.IsKind(objref.IDOf(dd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (dd *DDDevice) String() string {
+	defer runtime.KeepAlive(dd)
 	return rt.Description(objref.IDOf(dd))
 }
 
 // NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier creates an object that describes a discovered device.
 func NewDDDeviceWithDisplayNameCategoryProtocolTypeIdentifier(displayName string, category DDDeviceCategory, protocolType obj.Object, identifier string) *DDDevice {
+	defer runtime.KeepAlive(protocolType)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("DDDevice")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:category:protocolType:identifier:"), purego.NSString(displayName), category, objref.IDOf(protocolType), purego.NSString(identifier))
 	return dDDeviceAdopt(_id)
@@ -81,6 +90,7 @@ func (dd *DDDevice) WithDeviceSupports(deviceSupports DDDeviceSupports) *DDDevic
 
 // WithBluetoothIdentifier sets an identifier to communicate with the device through Bluetooth wireless technology.
 func (dd *DDDevice) WithBluetoothIdentifier(bluetoothIdentifier obj.Object) *DDDevice {
+	defer runtime.KeepAlive(bluetoothIdentifier)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setBluetoothIdentifier:"), objref.IDOf(bluetoothIdentifier))
 	return dd
 }
@@ -129,6 +139,7 @@ func (dd *DDDevice) WithMediaContentSubtitle(mediaContentSubtitle string) *DDDev
 
 // WithNetworkEndpoint sets an object that describes a local-network device.
 func (dd *DDDevice) WithNetworkEndpoint(networkEndpoint obj.Object) *DDDevice {
+	defer runtime.KeepAlive(networkEndpoint)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setNetworkEndpoint:"), objref.IDOf(networkEndpoint))
 	return dd
 }
@@ -141,6 +152,7 @@ func (dd *DDDevice) WithProtocol(protocol DDDeviceProtocol) *DDDevice {
 
 // WithProtocolType sets a custom universal type that describes the device’s manner of communication with the extension.
 func (dd *DDDevice) WithProtocolType(protocolType obj.Object) *DDDevice {
+	defer runtime.KeepAlive(protocolType)
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setProtocolType:"), objref.IDOf(protocolType))
 	return dd
 }
@@ -152,8 +164,8 @@ func (dd *DDDevice) WithState(state DDDeviceState) *DDDevice {
 }
 
 // WithSSID sets device's WiFi Hotspot SSID.
-func (dd *DDDevice) WithSSID(sSID string) *DDDevice {
-	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setSSID:"), purego.NSString(sSID))
+func (dd *DDDevice) WithSSID(ssid string) *DDDevice {
+	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setSSID:"), purego.NSString(ssid))
 	return dd
 }
 
@@ -164,8 +176,8 @@ func (dd *DDDevice) WithSupportsGrouping(supportsGrouping bool) *DDDevice {
 }
 
 // WithTxtRecordData sets a dictionary of metadata for the device that the extension communicates with over the local network.
-func (dd *DDDevice) WithTxtRecordData(txtRecordData obj.Object) *DDDevice {
-	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setTxtRecordData:"), objref.IDOf(txtRecordData))
+func (dd *DDDevice) WithTxtRecordData(txtRecordData []byte) *DDDevice {
+	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setTxtRecordData:"), rt.BytesToNSData(txtRecordData))
 	return dd
 }
 
@@ -201,24 +213,28 @@ func (dd *DDDevice) WithWifiAwareVendorName(wifiAwareVendorName string) *DDDevic
 
 // DeviceSupports returns device supported capabilities.
 func (dd *DDDevice) DeviceSupports() DDDeviceSupports {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DDDeviceSupports](objref.IDOf(dd), objc.RegisterName("deviceSupports"))
 	return _r
 }
 
 // BluetoothIdentifier returns identifier to communicate with the device via Bluetooth.
-func (dd *DDDevice) BluetoothIdentifier() obj.Object {
+func (dd *DDDevice) BluetoothIdentifier() *foundation.UUID {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("bluetoothIdentifier"))
-	return obj.Wrap(_r)
+	return foundation.UUIDFromID(_r)
 }
 
 // Category returns category of the device.
 func (dd *DDDevice) Category() DDDeviceCategory {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DDDeviceCategory](objref.IDOf(dd), objc.RegisterName("category"))
 	return _r
 }
 
 // DisplayImageName returns device's custom asset for product image name in the main App bundle.
 func (dd *DDDevice) DisplayImageName() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("displayImageName"))
 	if _r == 0 {
 		return ""
@@ -228,6 +244,7 @@ func (dd *DDDevice) DisplayImageName() string {
 
 // DisplayName returns name of the device. Should be suitable for displaying to a user.
 func (dd *DDDevice) DisplayName() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
@@ -237,6 +254,7 @@ func (dd *DDDevice) DisplayName() string {
 
 // Identifier returns identifier of the device.
 func (dd *DDDevice) Identifier() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -246,12 +264,14 @@ func (dd *DDDevice) Identifier() string {
 
 // MediaPlaybackState returns current state of media playback on this device.
 func (dd *DDDevice) MediaPlaybackState() DDDeviceMediaPlaybackState {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DDDeviceMediaPlaybackState](objref.IDOf(dd), objc.RegisterName("mediaPlaybackState"))
 	return _r
 }
 
 // MediaContentTitle returns title of the media content being played.
 func (dd *DDDevice) MediaContentTitle() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("mediaContentTitle"))
 	if _r == 0 {
 		return ""
@@ -261,6 +281,7 @@ func (dd *DDDevice) MediaContentTitle() string {
 
 // MediaContentSubtitle returns subtitle of the media content being played. It can be used to display extra information about the content, such as the name of the artist.
 func (dd *DDDevice) MediaContentSubtitle() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("mediaContentSubtitle"))
 	if _r == 0 {
 		return ""
@@ -269,31 +290,36 @@ func (dd *DDDevice) MediaContentSubtitle() string {
 }
 
 // NetworkEndpoint returns endpoint to communicate with the device via networking.
-func (dd *DDDevice) NetworkEndpoint() obj.Object {
+func (dd *DDDevice) NetworkEndpoint() *foundation.Object {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("networkEndpoint"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // Protocol returns protocol of the device.
 func (dd *DDDevice) Protocol() DDDeviceProtocol {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DDDeviceProtocol](objref.IDOf(dd), objc.RegisterName("protocol"))
 	return _r
 }
 
 // ProtocolType returns uniform Type for the protocol.
 func (dd *DDDevice) ProtocolType() obj.Object {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("protocolType"))
 	return obj.Wrap(_r)
 }
 
 // State returns state of the device.
 func (dd *DDDevice) State() DDDeviceState {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DDDeviceState](objref.IDOf(dd), objc.RegisterName("state"))
 	return _r
 }
 
 // SSID returns device's WiFi Hotspot SSID.
 func (dd *DDDevice) SSID() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("SSID"))
 	if _r == 0 {
 		return ""
@@ -303,24 +329,28 @@ func (dd *DDDevice) SSID() string {
 
 // SupportsGrouping reports whether the device supports grouping with other devices with the same protocol.
 func (dd *DDDevice) SupportsGrouping() bool {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[bool](objref.IDOf(dd), objc.RegisterName("supportsGrouping"))
 	return _r
 }
 
 // TxtRecordData returns TXT record of the device.
-func (dd *DDDevice) TxtRecordData() obj.Object {
+func (dd *DDDevice) TxtRecordData() []byte {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("txtRecordData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // URL returns URL used for SSDP connection. The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
-func (dd *DDDevice) URL() obj.Object {
+func (dd *DDDevice) URL() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("url"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // WifiAwareServiceName returns device's Wi-Fi Aware's service name.
 func (dd *DDDevice) WifiAwareServiceName() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("wifiAwareServiceName"))
 	if _r == 0 {
 		return ""
@@ -330,12 +360,14 @@ func (dd *DDDevice) WifiAwareServiceName() string {
 
 // WifiAwareServiceRole returns device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
 func (dd *DDDevice) WifiAwareServiceRole() DDDeviceWiFiAwareServiceRole {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[DDDeviceWiFiAwareServiceRole](objref.IDOf(dd), objc.RegisterName("wifiAwareServiceRole"))
 	return _r
 }
 
 // WifiAwareModelName returns device's Wi-Fi Aware model name.
 func (dd *DDDevice) WifiAwareModelName() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("wifiAwareModelName"))
 	if _r == 0 {
 		return ""
@@ -345,6 +377,7 @@ func (dd *DDDevice) WifiAwareModelName() string {
 
 // WifiAwareVendorName returns device's Wi-Fi Aware vendor name.
 func (dd *DDDevice) WifiAwareVendorName() string {
+	defer runtime.KeepAlive(dd)
 	_r := objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("wifiAwareVendorName"))
 	if _r == 0 {
 		return ""

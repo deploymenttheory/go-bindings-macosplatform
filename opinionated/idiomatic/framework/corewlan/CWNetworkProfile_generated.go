@@ -5,6 +5,8 @@
 package corewlan
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func networkProfileAdopt(id objc.ID) *NetworkProfile {
 
 // Description returns the object's -description text.
 func (np *NetworkProfile) Description() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (np *NetworkProfile) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (np *NetworkProfile) IsKind(className string) bool {
+	defer runtime.KeepAlive(np)
 	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (np *NetworkProfile) String() string {
+	defer runtime.KeepAlive(np)
 	return rt.Description(objref.IDOf(np))
 }
 
 // NewNetworkProfileWithNetworkProfile creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 func NewNetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *NetworkProfile {
+	defer runtime.KeepAlive(networkProfile)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNetworkProfile:"), objref.IDOf(networkProfile))
 	return networkProfileAdopt(_id)
@@ -77,12 +85,15 @@ func NewNetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *Networ
 
 // IsEqualToNetworkProfile determine CWNetworkProfile object equality.
 func (np *NetworkProfile) IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool {
+	defer runtime.KeepAlive(np)
+	defer runtime.KeepAlive(networkProfile)
 	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isEqualToNetworkProfile:"), objref.IDOf(networkProfile))
 	return _r
 }
 
 // Ssid returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (np *NetworkProfile) Ssid() string {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("ssid"))
 	if _r == 0 {
 		return ""
@@ -91,13 +102,15 @@ func (np *NetworkProfile) Ssid() string {
 }
 
 // SsidData returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. The SSID is 1-32 octets.
-func (np *NetworkProfile) SsidData() obj.Object {
+func (np *NetworkProfile) SsidData() []byte {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("ssidData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // Security returns the security type of the Wi-Fi network profile.
 func (np *NetworkProfile) Security() Security {
+	defer runtime.KeepAlive(np)
 	_r := objc.Send[Security](objref.IDOf(np), objc.RegisterName("security"))
 	return _r
 }

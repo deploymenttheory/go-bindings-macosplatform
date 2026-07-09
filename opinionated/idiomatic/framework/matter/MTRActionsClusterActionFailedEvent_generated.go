@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRActionsClusterActionFailedEventAdopt(id objc.ID) *MTRActionsClusterActio
 
 // Description returns the object's -description text.
 func (macafe *MTRActionsClusterActionFailedEvent) Description() string {
+	defer runtime.KeepAlive(macafe)
 	return rt.Description(objref.IDOf(macafe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macafe *MTRActionsClusterActionFailedEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macafe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macafe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macafe *MTRActionsClusterActionFailedEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(macafe)
 	return rt.IsKind(objref.IDOf(macafe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macafe *MTRActionsClusterActionFailedEvent) String() string {
+	defer runtime.KeepAlive(macafe)
 	return rt.Description(objref.IDOf(macafe))
 }
 
@@ -72,48 +80,56 @@ func NewMTRActionsClusterActionFailedEvent() *MTRActionsClusterActionFailedEvent
 
 // WithActionID sets the action ID.
 func (macafe *MTRActionsClusterActionFailedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterActionFailedEvent {
+	defer runtime.KeepAlive(actionID)
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macafe
 }
 
 // WithInvokeID sets the invoke ID.
 func (macafe *MTRActionsClusterActionFailedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterActionFailedEvent {
+	defer runtime.KeepAlive(invokeID)
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macafe
 }
 
 // WithNewState sets the new state.
 func (macafe *MTRActionsClusterActionFailedEvent) WithNewState(newState obj.Object) *MTRActionsClusterActionFailedEvent {
+	defer runtime.KeepAlive(newState)
 	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return macafe
 }
 
 // WithError sets the error.
-func (macafe *MTRActionsClusterActionFailedEvent) WithError(error_ obj.Object) *MTRActionsClusterActionFailedEvent {
-	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setError:"), objref.IDOf(error_))
+func (macafe *MTRActionsClusterActionFailedEvent) WithError(err obj.Object) *MTRActionsClusterActionFailedEvent {
+	defer runtime.KeepAlive(err)
+	objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("setError:"), objref.IDOf(err))
 	return macafe
 }
 
 // ActionID returns the action ID.
-func (macafe *MTRActionsClusterActionFailedEvent) ActionID() obj.Object {
+func (macafe *MTRActionsClusterActionFailedEvent) ActionID() *foundation.Number {
+	defer runtime.KeepAlive(macafe)
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("actionID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // InvokeID returns the invoke ID.
-func (macafe *MTRActionsClusterActionFailedEvent) InvokeID() obj.Object {
+func (macafe *MTRActionsClusterActionFailedEvent) InvokeID() *foundation.Number {
+	defer runtime.KeepAlive(macafe)
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("invokeID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // NewState returns the new state.
-func (macafe *MTRActionsClusterActionFailedEvent) NewState() obj.Object {
+func (macafe *MTRActionsClusterActionFailedEvent) NewState() *foundation.Number {
+	defer runtime.KeepAlive(macafe)
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("getNewState"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Error returns the error.
-func (macafe *MTRActionsClusterActionFailedEvent) Error() obj.Object {
+func (macafe *MTRActionsClusterActionFailedEvent) Error() *foundation.Number {
+	defer runtime.KeepAlive(macafe)
 	_r := objc.Send[objc.ID](objref.IDOf(macafe), objc.RegisterName("error"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

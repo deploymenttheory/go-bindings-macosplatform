@@ -37,6 +37,6 @@ func (o *TKSmartCardUserInteractionForSecurePINChange) PINConfirmation() TKSmart
 	return _ret
 }
 
-func (o *TKSmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) {
-	o.Ptr().Send(_tKSmartCardUserInteractionForSecurePINChangeSelSetPINConfirmation, pINConfirmation)
+func (o *TKSmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pinConfirmation TKSmartCardPINConfirmation) {
+	o.Ptr().Send(_tKSmartCardUserInteractionForSecurePINChangeSelSetPINConfirmation, pinConfirmation)
 }

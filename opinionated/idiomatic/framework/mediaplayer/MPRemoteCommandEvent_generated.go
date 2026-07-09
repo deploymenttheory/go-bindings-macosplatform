@@ -5,6 +5,8 @@
 package mediaplayer
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,33 +51,40 @@ func remoteCommandEventAdopt(id objc.ID) *RemoteCommandEvent {
 
 // Description returns the object's -description text.
 func (rce *RemoteCommandEvent) Description() string {
+	defer runtime.KeepAlive(rce)
 	return rt.Description(objref.IDOf(rce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rce *RemoteCommandEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rce)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rce *RemoteCommandEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(rce)
 	return rt.IsKind(objref.IDOf(rce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rce *RemoteCommandEvent) String() string {
+	defer runtime.KeepAlive(rce)
 	return rt.Description(objref.IDOf(rce))
 }
 
 // Command returns the command that sent the event.
 func (rce *RemoteCommandEvent) Command() *RemoteCommand {
+	defer runtime.KeepAlive(rce)
 	_r := objc.Send[objc.ID](objref.IDOf(rce), objc.RegisterName("command"))
 	return RemoteCommandFromID(_r)
 }
 
 // Timestamp returns the time when the event occurred.
 func (rce *RemoteCommandEvent) Timestamp() float64 {
+	defer runtime.KeepAlive(rce)
 	_r := objc.Send[float64](objref.IDOf(rce), objc.RegisterName("timestamp"))
 	return _r
 }

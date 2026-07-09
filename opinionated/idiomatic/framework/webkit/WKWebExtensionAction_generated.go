@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -46,22 +48,27 @@ func wKWebExtensionActionAdopt(id objc.ID) *WKWebExtensionAction {
 
 // Description returns the object's -description text.
 func (wwea *WKWebExtensionAction) Description() string {
+	defer runtime.KeepAlive(wwea)
 	return rt.Description(objref.IDOf(wwea))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (wwea *WKWebExtensionAction) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(wwea)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(wwea), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (wwea *WKWebExtensionAction) IsKind(className string) bool {
+	defer runtime.KeepAlive(wwea)
 	return rt.IsKind(objref.IDOf(wwea), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (wwea *WKWebExtensionAction) String() string {
+	defer runtime.KeepAlive(wwea)
 	return rt.Description(objref.IDOf(wwea))
 }
 
@@ -95,6 +102,7 @@ func (wwea *WKWebExtensionAction) WithInspectionName(inspectionName string) *WKW
 
 // IconForSize wraps the corresponding Objective-C method.
 func (wwea *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) obj.Object {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -108,6 +116,7 @@ func (wwea *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) obj.Ob
 
 // ClosePopup triggers the dismissal process of the popup. Invoke this method to manage the popup's lifecycle, ensuring the web view is unloaded and resources are released once the popup closes. This method is automatically called upon the dismissal of the action's “UIViewController“ or “NSPopover“.  For custom scenarios where the popup's lifecycle is manually managed, it must be explicitly invoked to ensure proper closure.
 func (wwea *WKWebExtensionAction) ClosePopup() {
+	defer runtime.KeepAlive(wwea)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(wwea), objc.RegisterName("closePopup"))
 	})
@@ -116,6 +125,7 @@ func (wwea *WKWebExtensionAction) ClosePopup() {
 
 // WebExtensionContext returns the extension context to which this action is related.
 func (wwea *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 *WKWebExtensionContext
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebExtensionContext {
@@ -129,6 +139,7 @@ func (wwea *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
 
 // Label returns the localized display label for the action.
 func (wwea *WKWebExtensionAction) Label() string {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -145,6 +156,7 @@ func (wwea *WKWebExtensionAction) Label() string {
 
 // BadgeText returns the badge text for the action. Provides the text that appears on the badge for the action. An empty string signifies that no badge should be shown.
 func (wwea *WKWebExtensionAction) BadgeText() string {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -161,6 +173,7 @@ func (wwea *WKWebExtensionAction) BadgeText() string {
 
 // HasUnreadBadgeText reports whether the badge text is unread. This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
 func (wwea *WKWebExtensionAction) HasUnreadBadgeText() bool {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -174,6 +187,7 @@ func (wwea *WKWebExtensionAction) HasUnreadBadgeText() bool {
 
 // InspectionName returns the name shown when inspecting the popup web view. This is the text that will appear when inspecting the popup web view.
 func (wwea *WKWebExtensionAction) InspectionName() string {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -190,6 +204,7 @@ func (wwea *WKWebExtensionAction) InspectionName() string {
 
 // IsEnabled reports whether the action is enabled.
 func (wwea *WKWebExtensionAction) IsEnabled() bool {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -205,6 +220,7 @@ func (wwea *WKWebExtensionAction) IsEnabled() bool {
 //
 // MenuItems returns the collection as a Go slice.
 func (wwea *WKWebExtensionAction) MenuItems() []obj.Object {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 []obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() []obj.Object {
@@ -217,6 +233,7 @@ func (wwea *WKWebExtensionAction) MenuItems() []obj.Object {
 
 // PresentsPopup reports whether the action has a popup. Use this property to check if the action has a popup before attempting to show any popup views.
 func (wwea *WKWebExtensionAction) PresentsPopup() bool {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -230,6 +247,7 @@ func (wwea *WKWebExtensionAction) PresentsPopup() bool {
 
 // PopupPopover returns a popover that presents a web view loaded with the popup page for this action, or `nil` if no popup is specified. This popover contains a view controller with a web view preloaded with the popup page. It automatically adjusts its size to fit the web view's content size. The “presentsPopup“ property should be checked to determine the availability of a popup before using this property.  Dismissing the popover will close the popup and unload the web view.
 func (wwea *WKWebExtensionAction) PopupPopover() obj.Object {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -243,6 +261,7 @@ func (wwea *WKWebExtensionAction) PopupPopover() obj.Object {
 
 // PopupWebView returns a web view loaded with the popup page for this action, or `nil` if no popup is specified. The web view will be preloaded with the popup page upon first access or after it has been unloaded. Use the “presentsPopup“ property to determine whether a popup should be displayed before using this property.
 func (wwea *WKWebExtensionAction) PopupWebView() *WKWebView {
+	defer runtime.KeepAlive(wwea)
 	var _mainthread0 *WKWebView
 	purego.Main(func() {
 		_mainthread0 = func() *WKWebView {

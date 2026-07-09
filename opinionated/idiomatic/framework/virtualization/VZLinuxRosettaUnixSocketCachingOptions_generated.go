@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -54,8 +55,8 @@ func NewLinuxRosettaUnixSocketCachingOptions() *LinuxRosettaUnixSocketCachingOpt
 	return linuxRosettaUnixSocketCachingOptionsAdopt(_id)
 }
 
-// NewLinuxRosettaUnixSocketCachingOptionsWithPathError creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
-func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (result *LinuxRosettaUnixSocketCachingOptions, err error) {
+// NewLinuxRosettaUnixSocketCachingOptionsWithPath creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.
+func NewLinuxRosettaUnixSocketCachingOptionsWithPath(path string) (result *LinuxRosettaUnixSocketCachingOptions, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaUnixSocketCachingOptions")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
@@ -67,6 +68,7 @@ func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (result *
 
 // Path returns path set by initWithPath. This is the path of the Unix Domain Socket to be used by Rosetta.
 func (lrusco *LinuxRosettaUnixSocketCachingOptions) Path() string {
+	defer runtime.KeepAlive(lrusco)
 	_r := objc.Send[objc.ID](objref.IDOf(lrusco), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""

@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,22 +51,27 @@ func cloudServiceControllerAdopt(id objc.ID) *CloudServiceController {
 
 // Description returns the object's -description text.
 func (csc *CloudServiceController) Description() string {
+	defer runtime.KeepAlive(csc)
 	return rt.Description(objref.IDOf(csc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (csc *CloudServiceController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(csc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(csc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (csc *CloudServiceController) IsKind(className string) bool {
+	defer runtime.KeepAlive(csc)
 	return rt.IsKind(objref.IDOf(csc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (csc *CloudServiceController) String() string {
+	defer runtime.KeepAlive(csc)
 	return rt.Description(objref.IDOf(csc))
 }
 
@@ -79,6 +85,7 @@ func NewCloudServiceController() *CloudServiceController {
 //
 // RequestStorefrontCountryCode blocks until the operation completes or ctx is cancelled.
 func (csc *CloudServiceController) RequestStorefrontCountryCode(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(csc)
 	type _result struct {
 		val string
 		err error
@@ -104,6 +111,7 @@ func (csc *CloudServiceController) RequestStorefrontCountryCode(ctx context.Cont
 //
 // RequestStorefrontIdentifier blocks until the operation completes or ctx is cancelled.
 func (csc *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context) (result string, err error) {
+	defer runtime.KeepAlive(csc)
 	type _result struct {
 		val string
 		err error
@@ -129,6 +137,7 @@ func (csc *CloudServiceController) RequestStorefrontIdentifier(ctx context.Conte
 //
 // RequestUserTokenForDeveloperToken blocks until the operation completes or ctx is cancelled.
 func (csc *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (result string, err error) {
+	defer runtime.KeepAlive(csc)
 	type _result struct {
 		val string
 		err error

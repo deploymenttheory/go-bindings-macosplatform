@@ -54,14 +54,14 @@ type VImagePerpsectiveTransform struct {
 }
 
 type VImageRGBPrimaries struct {
-	Red_x   float32
-	Green_x float32
-	Blue_x  float32
-	White_x float32
-	Red_y   float32
-	Green_y float32
-	Blue_y  float32
-	White_y float32
+	RedX   float32
+	GreenX float32
+	BlueX  float32
+	WhiteX float32
+	RedY   float32
+	GreenY float32
+	BlueY  float32
+	WhiteY float32
 }
 
 type VImageTransferFunction struct {
@@ -76,8 +76,8 @@ type VImageTransferFunction struct {
 }
 
 type VImageWhitePoint struct {
-	White_x float32
-	White_y float32
+	WhiteX float32
+	WhiteY float32
 }
 
 // Range and clamping information for Y'CbCr pixel formats Y'CbCr formats frequently don't use the entire representable range available to them to represent image data. While a "full range" video format does use the entire range, a "video range" format often leaves the extrema unused, except perhaps to represent values outside of the standard Y'=[0,1] CbCr = [-0.5, 0.5] range. For example, a 8-bit video range format typically uses the range [16,235] for Y' and [16, 240] for Cb and Cr. Some examples:

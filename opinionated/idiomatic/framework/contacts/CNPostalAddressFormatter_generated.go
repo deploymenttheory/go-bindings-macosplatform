@@ -5,7 +5,10 @@
 package contacts
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func postalAddressFormatterAdopt(id objc.ID) *PostalAddressFormatter {
 
 // Description returns the object's -description text.
 func (paf *PostalAddressFormatter) Description() string {
+	defer runtime.KeepAlive(paf)
 	return rt.Description(objref.IDOf(paf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (paf *PostalAddressFormatter) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(paf)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(paf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (paf *PostalAddressFormatter) IsKind(className string) bool {
+	defer runtime.KeepAlive(paf)
 	return rt.IsKind(objref.IDOf(paf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (paf *PostalAddressFormatter) String() string {
+	defer runtime.KeepAlive(paf)
 	return rt.Description(objref.IDOf(paf))
 }
 
@@ -80,6 +88,8 @@ func (paf *PostalAddressFormatter) WithStyle(style PostalAddressFormatterStyle) 
 
 // StringFromPostalAddress returns a formatted postal address.
 func (paf *PostalAddressFormatter) StringFromPostalAddress(postalAddress *PostalAddress) string {
+	defer runtime.KeepAlive(paf)
+	defer runtime.KeepAlive(postalAddress)
 	_r := objc.Send[objc.ID](objref.IDOf(paf), objc.RegisterName("stringFromPostalAddress:"), objref.IDOf(postalAddress))
 	if _r == 0 {
 		return ""
@@ -88,13 +98,17 @@ func (paf *PostalAddressFormatter) StringFromPostalAddress(postalAddress *Postal
 }
 
 // AttributedStringFromPostalAddressWithDefaultAttributes returns a formatted postal address as an attributed string.
-func (paf *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) obj.Object {
+func (paf *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *PostalAddress, attributes obj.Object) *foundation.AttributedString {
+	defer runtime.KeepAlive(paf)
+	defer runtime.KeepAlive(postalAddress)
+	defer runtime.KeepAlive(attributes)
 	_r := objc.Send[objc.ID](objref.IDOf(paf), objc.RegisterName("attributedStringFromPostalAddress:withDefaultAttributes:"), objref.IDOf(postalAddress), objref.IDOf(attributes))
-	return obj.Wrap(_r)
+	return foundation.AttributedStringFromID(_r)
 }
 
 // Style returns the style for a postal address formatter instance. The default value is CNPostalAddressFormatterStyleMailingAddress.
 func (paf *PostalAddressFormatter) Style() PostalAddressFormatterStyle {
+	defer runtime.KeepAlive(paf)
 	_r := objc.Send[PostalAddressFormatterStyle](objref.IDOf(paf), objc.RegisterName("style"))
 	return _r
 }

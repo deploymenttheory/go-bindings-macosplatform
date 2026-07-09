@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRWaterHeaterModeClusterModeTagStructAdopt(id objc.ID) *MTRWaterHeaterMode
 
 // Description returns the object's -description text.
 func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) Description() string {
+	defer runtime.KeepAlive(mwhmcmts)
 	return rt.Description(objref.IDOf(mwhmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mwhmcmts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mwhmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mwhmcmts)
 	return rt.IsKind(objref.IDOf(mwhmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) String() string {
+	defer runtime.KeepAlive(mwhmcmts)
 	return rt.Description(objref.IDOf(mwhmcmts))
 }
 
@@ -72,24 +80,28 @@ func NewMTRWaterHeaterModeClusterModeTagStruct() *MTRWaterHeaterModeClusterModeT
 
 // WithMfgCode sets the mfg code.
 func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRWaterHeaterModeClusterModeTagStruct {
+	defer runtime.KeepAlive(mfgCode)
 	objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mwhmcmts
 }
 
 // WithValue sets the value.
 func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) WithValue(value obj.Object) *MTRWaterHeaterModeClusterModeTagStruct {
+	defer runtime.KeepAlive(value)
 	objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mwhmcmts
 }
 
 // MfgCode returns the mfg code.
-func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) MfgCode() obj.Object {
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) MfgCode() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("mfgCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Value returns the value.
-func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) Value() obj.Object {
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) Value() *foundation.Number {
+	defer runtime.KeepAlive(mwhmcmts)
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("value"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

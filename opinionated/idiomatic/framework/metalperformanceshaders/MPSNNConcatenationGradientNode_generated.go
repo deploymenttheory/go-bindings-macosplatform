@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -48,6 +50,9 @@ func nNConcatenationGradientNodeAdopt(id objc.ID) *NNConcatenationGradientNode {
 
 // NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState init a MPSNNConcatenationGradientNode Generally you should use [MPSNNConcatenationNode gradientFiltersWithSources:] instead.
 func NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState(gradientSourceNode obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNConcatenationGradientNode {
+	defer runtime.KeepAlive(gradientSourceNode)
+	defer runtime.KeepAlive(sourceImage)
+	defer runtime.KeepAlive(gradientState)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNConcatenationGradientNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(gradientSourceNode), objref.IDOf(sourceImage), objref.IDOf(gradientState))
 	return nNConcatenationGradientNodeAdopt(_id)

@@ -6,12 +6,16 @@ package appkit
 
 import (
 	"context"
+	"runtime"
+	"time"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -67,6 +71,7 @@ func NewWindowWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CG
 
 // NewWindowWithContentRectStyleMaskBackingDeferScreen initializes an allocated window with the specified values.
 func NewWindowWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style WindowStyleMask, backingStoreType BackingStoreType, flag bool, screen *Screen) *Window {
+	defer runtime.KeepAlive(screen)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -166,9 +171,22 @@ func (w *Window) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Wind
 
 // WithContentView sets the window’s content view, the highest accessible view object in the window’s view hierarchy.
 func (w *Window) WithContentView(contentView ViewProvider) *Window {
+	defer runtime.KeepAlive(contentView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	})
+	return w
+}
+
+// WithDelegate sets the window’s delegate.
+func (w *Window) WithDelegate(delegate WindowDelegate) *Window {
+	_shim := newWindowDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(w), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(w), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
 	return w
 }
 
@@ -238,6 +256,7 @@ func (w *Window) WithReleasedWhenClosed(releasedWhenClosed bool) *Window {
 
 // WithBackgroundColor sets the color of the window’s background.
 func (w *Window) WithBackgroundColor(backgroundColor *Color) *Window {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -278,6 +297,7 @@ func (w *Window) WithCanHide(canHide bool) *Window {
 
 // WithMiniwindowImage sets the custom miniaturized window image of the window.
 func (w *Window) WithMiniwindowImage(miniwindowImage *Image) *Window {
+	defer runtime.KeepAlive(miniwindowImage)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setMiniwindowImage:"), objref.IDOf(miniwindowImage))
 	})
@@ -414,6 +434,7 @@ func (w *Window) WithAnimationBehavior(animationBehavior WindowAnimationBehavior
 
 // WithFrameAutosaveName sets the name used to automatically save the window’s frame rectangle data in the defaults system.
 func (w *Window) WithFrameAutosaveName(frameAutosaveName obj.Object) *Window {
+	defer runtime.KeepAlive(frameAutosaveName)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrameAutosaveName:"), objref.IDOf(frameAutosaveName))
 	})
@@ -470,6 +491,7 @@ func (w *Window) WithMaxFullScreenContentSize(maxFullScreenContentSize corefound
 
 // WithWindowController sets the window’s window controller.
 func (w *Window) WithWindowController(windowController *WindowController) *Window {
+	defer runtime.KeepAlive(windowController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setWindowController:"), objref.IDOf(windowController))
 	})
@@ -478,6 +500,7 @@ func (w *Window) WithWindowController(windowController *WindowController) *Windo
 
 // WithParentWindow sets the parent window to which the window is attached as a child.
 func (w *Window) WithParentWindow(parentWindow WindowProvider) *Window {
+	defer runtime.KeepAlive(parentWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
 	})
@@ -486,6 +509,7 @@ func (w *Window) WithParentWindow(parentWindow WindowProvider) *Window {
 
 // WithAppearanceSource sets an object that the window inherits its appearance from.
 func (w *Window) WithAppearanceSource(appearanceSource obj.Object) *Window {
+	defer runtime.KeepAlive(appearanceSource)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setAppearanceSource:"), objref.IDOf(appearanceSource))
 	})
@@ -494,6 +518,7 @@ func (w *Window) WithAppearanceSource(appearanceSource obj.Object) *Window {
 
 // WithColorSpace sets the window’s color space.
 func (w *Window) WithColorSpace(colorSpace *ColorSpace) *Window {
+	defer runtime.KeepAlive(colorSpace)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	})
@@ -510,6 +535,7 @@ func (w *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle TitlebarSepar
 
 // WithContentViewController sets the main content view controller for the window.
 func (w *Window) WithContentViewController(contentViewController ViewControllerProvider) *Window {
+	defer runtime.KeepAlive(contentViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setContentViewController:"), objref.IDOf(contentViewController))
 	})
@@ -518,6 +544,7 @@ func (w *Window) WithContentViewController(contentViewController ViewControllerP
 
 // WithInitialFirstResponder sets the view that’s made first responder (also called the key view) the first time the window is placed onscreen.
 func (w *Window) WithInitialFirstResponder(initialFirstResponder ViewProvider) *Window {
+	defer runtime.KeepAlive(initialFirstResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setInitialFirstResponder:"), objref.IDOf(initialFirstResponder))
 	})
@@ -526,6 +553,7 @@ func (w *Window) WithInitialFirstResponder(initialFirstResponder ViewProvider) *
 
 // WithDefaultButtonCell sets the button cell that performs as if clicked when the window receives a Return (or Enter) key event.
 func (w *Window) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Window {
+	defer runtime.KeepAlive(defaultButtonCell)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setDefaultButtonCell:"), objref.IDOf(defaultButtonCell))
 	})
@@ -542,6 +570,7 @@ func (w *Window) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop boo
 
 // WithToolbar sets the window’s toolbar.
 func (w *Window) WithToolbar(toolbar *Toolbar) *Window {
+	defer runtime.KeepAlive(toolbar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setToolbar:"), objref.IDOf(toolbar))
 	})
@@ -566,6 +595,7 @@ func (w *Window) WithTabbingMode(tabbingMode WindowTabbingMode) *Window {
 
 // WithTabbingIdentifier sets a value that allows a group of related windows.
 func (w *Window) WithTabbingIdentifier(tabbingIdentifier obj.Object) *Window {
+	defer runtime.KeepAlive(tabbingIdentifier)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setTabbingIdentifier:"), objref.IDOf(tabbingIdentifier))
 	})
@@ -646,6 +676,7 @@ func (w *Window) WithRestorationClass(restorationClass unsafe.Pointer) *Window {
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (w *Window) WithNextResponder(nextResponder ResponderProvider) *Window {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -654,6 +685,7 @@ func (w *Window) WithNextResponder(nextResponder ResponderProvider) *Window {
 
 // WithMenu sets returns the responder’s menu.
 func (w *Window) WithMenu(menu *Menu) *Window {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -662,6 +694,7 @@ func (w *Window) WithMenu(menu *Menu) *Window {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (w *Window) WithUserActivity(userActivity obj.Object) *Window {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -670,6 +703,7 @@ func (w *Window) WithUserActivity(userActivity obj.Object) *Window {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (w *Window) WithTouchBar(touchBar *TouchBar) *Window {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -678,6 +712,7 @@ func (w *Window) WithTouchBar(touchBar *TouchBar) *Window {
 
 // FrameRectForContentRect returns the window’s frame rectangle with a given content rectangle.
 func (w *Window) FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -691,6 +726,7 @@ func (w *Window) FrameRectForContentRect(contentRect corefoundation.CGRect) core
 
 // ContentRectForFrameRect returns the window’s content rectangle with a given frame rectangle.
 func (w *Window) ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -704,6 +740,8 @@ func (w *Window) ContentRectForFrameRect(frameRect corefoundation.CGRect) corefo
 
 // AddTitlebarAccessoryViewController adds the specified title bar accessory view controller to the window.
 func (w *Window) AddTitlebarAccessoryViewController(childViewController *TitlebarAccessoryViewController) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(childViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("addTitlebarAccessoryViewController:"), objref.IDOf(childViewController))
 	})
@@ -712,6 +750,8 @@ func (w *Window) AddTitlebarAccessoryViewController(childViewController *Titleba
 
 // InsertTitlebarAccessoryViewControllerAtIndex inserts the view controller into the window’s array of title bar accessory view controllers at the specified index.
 func (w *Window) InsertTitlebarAccessoryViewControllerAtIndex(childViewController *TitlebarAccessoryViewController, index int) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(childViewController)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("insertTitlebarAccessoryViewController:atIndex:"), objref.IDOf(childViewController), index)
 	})
@@ -720,6 +760,7 @@ func (w *Window) InsertTitlebarAccessoryViewControllerAtIndex(childViewControlle
 
 // RemoveTitlebarAccessoryViewControllerAtIndex removes the view controller at the specified index from the window’s array of title bar accessory view controllers.
 func (w *Window) RemoveTitlebarAccessoryViewControllerAtIndex(index int) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("removeTitlebarAccessoryViewControllerAtIndex:"), index)
 	})
@@ -728,6 +769,7 @@ func (w *Window) RemoveTitlebarAccessoryViewControllerAtIndex(index int) {
 
 // SetTitleWithRepresentedFilename sets a given path as the window’s title, formatting it as a file-system path, and records this path as the window’s associated file.
 func (w *Window) SetTitleWithRepresentedFilename(filename string) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setTitleWithRepresentedFilename:"), purego.NSString(filename))
 	})
@@ -736,6 +778,8 @@ func (w *Window) SetTitleWithRepresentedFilename(filename string) {
 
 // FieldEditorForObject returns the window’s field editor, creating it if requested.
 func (w *Window) FieldEditorForObject(createFlag bool, object obj.Object) *Text {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(object)
 	var _mainthread0 *Text
 	purego.Main(func() {
 		_mainthread0 = func() *Text {
@@ -749,6 +793,8 @@ func (w *Window) FieldEditorForObject(createFlag bool, object obj.Object) *Text 
 
 // EndEditingFor forces the field editor to give up its first responder status and prepares it for its next assignment.
 func (w *Window) EndEditingFor(object obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(object)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("endEditingFor:"), objref.IDOf(object))
 	})
@@ -757,6 +803,8 @@ func (w *Window) EndEditingFor(object obj.Object) {
 
 // ConstrainFrameRectToScreen modifies and returns a frame rectangle so that its top edge lies on a specific screen.
 func (w *Window) ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, screen *Screen) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(screen)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -770,6 +818,7 @@ func (w *Window) ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, scr
 
 // SetFrameDisplay sets the origin and size of the window’s frame rectangle according to a given frame rectangle, thereby setting its position and size onscreen.
 func (w *Window) SetFrameDisplay(frameRect corefoundation.CGRect, flag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrame:display:"), frameRect, flag)
 	})
@@ -778,6 +827,7 @@ func (w *Window) SetFrameDisplay(frameRect corefoundation.CGRect, flag bool) {
 
 // SetContentSize sets the size of the window’s content view to a given size, which is expressed in the window’s base coordinate system.
 func (w *Window) SetContentSize(size corefoundation.CGSize) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setContentSize:"), size)
 	})
@@ -786,6 +836,7 @@ func (w *Window) SetContentSize(size corefoundation.CGSize) {
 
 // SetFrameOrigin positions the bottom-left corner of the window’s frame rectangle at a given point in screen coordinates.
 func (w *Window) SetFrameOrigin(point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrameOrigin:"), point)
 	})
@@ -794,6 +845,7 @@ func (w *Window) SetFrameOrigin(point corefoundation.CGPoint) {
 
 // SetFrameTopLeftPoint positions the top-left corner of the window’s frame rectangle at a given point in screen coordinates.
 func (w *Window) SetFrameTopLeftPoint(point corefoundation.CGPoint) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrameTopLeftPoint:"), point)
 	})
@@ -802,6 +854,7 @@ func (w *Window) SetFrameTopLeftPoint(point corefoundation.CGPoint) {
 
 // CascadeTopLeftFromPoint positions the window’s top-left to a given point.
 func (w *Window) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -815,6 +868,7 @@ func (w *Window) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) co
 
 // AnimationResizeTime specifies the duration of a smooth frame-size change.
 func (w *Window) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -828,6 +882,7 @@ func (w *Window) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
 
 // SetFrameDisplayAnimate sets the origin and size of the window’s frame rectangle, with optional animation, according to a given frame rectangle, thereby setting its position and size onscreen.
 func (w *Window) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrame:display:animate:"), frameRect, displayFlag, animateFlag)
 	})
@@ -836,6 +891,7 @@ func (w *Window) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, display
 
 // DisplayIfNeeded passes a display message down the window’s view hierarchy, thus redrawing all views that need displaying.
 func (w *Window) DisplayIfNeeded() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("displayIfNeeded"))
 	})
@@ -844,6 +900,7 @@ func (w *Window) DisplayIfNeeded() {
 
 // Display passes a display message down the window’s view hierarchy, thus redrawing all views within the window.
 func (w *Window) Display() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("display"))
 	})
@@ -852,6 +909,7 @@ func (w *Window) Display() {
 
 // Update updates the window.
 func (w *Window) Update() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("update"))
 	})
@@ -860,6 +918,8 @@ func (w *Window) Update() {
 
 // MakeFirstResponder attempts to make a given responder the first responder for the window.
 func (w *Window) MakeFirstResponder(responder *Responder) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(responder)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -873,6 +933,7 @@ func (w *Window) MakeFirstResponder(responder *Responder) bool {
 
 // Close removes the window from the screen.
 func (w *Window) Close() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("close"))
 	})
@@ -881,6 +942,8 @@ func (w *Window) Close() {
 
 // Miniaturize removes the window from the screen list and displays the minimized window in the Dock.
 func (w *Window) Miniaturize(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("miniaturize:"), objref.IDOf(sender))
 	})
@@ -889,6 +952,8 @@ func (w *Window) Miniaturize(sender obj.Object) {
 
 // Deminiaturize de-minimizes the window.
 func (w *Window) Deminiaturize(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("deminiaturize:"), objref.IDOf(sender))
 	})
@@ -897,6 +962,8 @@ func (w *Window) Deminiaturize(sender obj.Object) {
 
 // Zoom toggles the size and location of the window between its standard state (which the application provides as the best size to display the window’s data) and its user state (a new size and location the user may have set by moving or resizing the window).
 func (w *Window) Zoom(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("zoom:"), objref.IDOf(sender))
 	})
@@ -905,6 +972,7 @@ func (w *Window) Zoom(sender obj.Object) {
 
 // Center sets the window’s location to the center of the screen.
 func (w *Window) Center() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("center"))
 	})
@@ -913,6 +981,8 @@ func (w *Window) Center() {
 
 // MakeKeyAndOrderFront moves the window to the front of the screen list, within its level, and makes it the key window; that is, it shows the window.
 func (w *Window) MakeKeyAndOrderFront(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("makeKeyAndOrderFront:"), objref.IDOf(sender))
 	})
@@ -921,6 +991,8 @@ func (w *Window) MakeKeyAndOrderFront(sender obj.Object) {
 
 // OrderFront moves the window to the front of its level in the screen list, without changing either the key window or the main window.
 func (w *Window) OrderFront(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("orderFront:"), objref.IDOf(sender))
 	})
@@ -929,6 +1001,8 @@ func (w *Window) OrderFront(sender obj.Object) {
 
 // OrderBack moves the window to the back of its level in the screen list, without changing either the key window or the main window.
 func (w *Window) OrderBack(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("orderBack:"), objref.IDOf(sender))
 	})
@@ -937,6 +1011,8 @@ func (w *Window) OrderBack(sender obj.Object) {
 
 // OrderOut removes the window from the screen list, which hides the window.
 func (w *Window) OrderOut(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("orderOut:"), objref.IDOf(sender))
 	})
@@ -945,6 +1021,7 @@ func (w *Window) OrderOut(sender obj.Object) {
 
 // OrderWindowRelativeTo repositions the window’s window device in the window server’s screen list.
 func (w *Window) OrderWindowRelativeTo(place WindowOrderingMode, otherWin int) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("orderWindow:relativeTo:"), place, otherWin)
 	})
@@ -953,6 +1030,7 @@ func (w *Window) OrderWindowRelativeTo(place WindowOrderingMode, otherWin int) {
 
 // OrderFrontRegardless moves the window to the front of its level, even if its application isn’t active, without changing either the key window or the main window.
 func (w *Window) OrderFrontRegardless() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("orderFrontRegardless"))
 	})
@@ -961,6 +1039,7 @@ func (w *Window) OrderFrontRegardless() {
 
 // MakeKeyWindow makes the window the key window.
 func (w *Window) MakeKeyWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("makeKeyWindow"))
 	})
@@ -969,6 +1048,7 @@ func (w *Window) MakeKeyWindow() {
 
 // MakeMainWindow makes the window the main window.
 func (w *Window) MakeMainWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("makeMainWindow"))
 	})
@@ -977,6 +1057,7 @@ func (w *Window) MakeMainWindow() {
 
 // BecomeKeyWindow informs the window that it has become the key window.
 func (w *Window) BecomeKeyWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("becomeKeyWindow"))
 	})
@@ -985,6 +1066,7 @@ func (w *Window) BecomeKeyWindow() {
 
 // ResignKeyWindow resigns the window’s key window status.
 func (w *Window) ResignKeyWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("resignKeyWindow"))
 	})
@@ -993,6 +1075,7 @@ func (w *Window) ResignKeyWindow() {
 
 // BecomeMainWindow informs the window that it has become the main window.
 func (w *Window) BecomeMainWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("becomeMainWindow"))
 	})
@@ -1001,6 +1084,7 @@ func (w *Window) BecomeMainWindow() {
 
 // ResignMainWindow resigns the window’s main window status.
 func (w *Window) ResignMainWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("resignMainWindow"))
 	})
@@ -1009,6 +1093,7 @@ func (w *Window) ResignMainWindow() {
 
 // ConvertRectToScreen converts a rectangle to the screen coordinate system from the window’s coordinate system.
 func (w *Window) ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1022,6 +1107,7 @@ func (w *Window) ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.
 
 // ConvertRectFromScreen converts a rectangle from the screen coordinate system to the window’s coordinate system.
 func (w *Window) ConvertRectFromScreen(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1035,6 +1121,7 @@ func (w *Window) ConvertRectFromScreen(rect corefoundation.CGRect) corefoundatio
 
 // ConvertPointToScreen converts a point to the screen coordinate system from the window’s coordinate system.
 func (w *Window) ConvertPointToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -1048,6 +1135,7 @@ func (w *Window) ConvertPointToScreen(point corefoundation.CGPoint) corefoundati
 
 // ConvertPointFromScreen converts a point from the screen coordinate system to the window’s coordinate system.
 func (w *Window) ConvertPointFromScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -1061,6 +1149,7 @@ func (w *Window) ConvertPointFromScreen(point corefoundation.CGPoint) corefounda
 
 // ConvertRectToBacking converts a rectangle from the window’s coordinate system to its pixel-aligned backing store coordinate system.
 func (w *Window) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1074,6 +1163,7 @@ func (w *Window) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation
 
 // ConvertRectFromBacking converts a rectangle from its pixel-aligned backing store coordinate system to the window’s coordinate system.
 func (w *Window) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1087,6 +1177,7 @@ func (w *Window) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundati
 
 // ConvertPointToBacking converts a point from the window’s coordinate system to its pixel-aligned backing store coordinate system.
 func (w *Window) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -1100,6 +1191,7 @@ func (w *Window) ConvertPointToBacking(point corefoundation.CGPoint) corefoundat
 
 // ConvertPointFromBacking converts a point from its pixel-aligned backing store coordinate system to the window’s coordinate system.
 func (w *Window) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -1113,6 +1205,8 @@ func (w *Window) ConvertPointFromBacking(point corefoundation.CGPoint) corefound
 
 // PerformClose simulates the user clicking the close button by momentarily highlighting the button and then closing the window.
 func (w *Window) PerformClose(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("performClose:"), objref.IDOf(sender))
 	})
@@ -1121,6 +1215,8 @@ func (w *Window) PerformClose(sender obj.Object) {
 
 // PerformMiniaturize simulates the user clicking the minimize button by momentarily highlighting the button, then minimizing the window.
 func (w *Window) PerformMiniaturize(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("performMiniaturize:"), objref.IDOf(sender))
 	})
@@ -1129,6 +1225,8 @@ func (w *Window) PerformMiniaturize(sender obj.Object) {
 
 // PerformZoom this action method simulates the user clicking the zoom box by momentarily highlighting the button and then zooming the window.
 func (w *Window) PerformZoom(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("performZoom:"), objref.IDOf(sender))
 	})
@@ -1136,12 +1234,13 @@ func (w *Window) PerformZoom(sender obj.Object) {
 }
 
 // DataWithEPSInsideRect returns EPS data that draws the region of the window within a given rectangle.
-func (w *Window) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) DataWithEPSInsideRect(rect corefoundation.CGRect) []byte {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 []byte
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []byte {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("dataWithEPSInsideRect:"), rect)
-			return obj.Wrap(_r)
+			return rt.NSDataToBytes(_r)
 		}()
 	})
 	return _mainthread0
@@ -1149,12 +1248,13 @@ func (w *Window) DataWithEPSInsideRect(rect corefoundation.CGRect) obj.Object {
 }
 
 // DataWithPDFInsideRect returns PDF data that draws the region of the window within a given rectangle.
-func (w *Window) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) DataWithPDFInsideRect(rect corefoundation.CGRect) []byte {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 []byte
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() []byte {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("dataWithPDFInsideRect:"), rect)
-			return obj.Wrap(_r)
+			return rt.NSDataToBytes(_r)
 		}()
 	})
 	return _mainthread0
@@ -1163,6 +1263,8 @@ func (w *Window) DataWithPDFInsideRect(rect corefoundation.CGRect) obj.Object {
 
 // Print runs the Print panel, and if the user chooses an option other than canceling, prints the window (its frame view and all subviews).
 func (w *Window) Print(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("print:"), objref.IDOf(sender))
 	})
@@ -1171,6 +1273,7 @@ func (w *Window) Print(sender obj.Object) {
 
 // SetDynamicDepthLimit sets a Boolean value that indicates whether the window’s depth limit can change to match the depth of the screen it’s on.
 func (w *Window) SetDynamicDepthLimit(flag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setDynamicDepthLimit:"), flag)
 	})
@@ -1179,6 +1282,7 @@ func (w *Window) SetDynamicDepthLimit(flag bool) {
 
 // InvalidateShadow invalidates the window shadow so that it is recomputed based on the current window shape.
 func (w *Window) InvalidateShadow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("invalidateShadow"))
 	})
@@ -1187,6 +1291,8 @@ func (w *Window) InvalidateShadow() {
 
 // ToggleFullScreen takes the window into or out of fullscreen mode,
 func (w *Window) ToggleFullScreen(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("toggleFullScreen:"), objref.IDOf(sender))
 	})
@@ -1194,15 +1300,19 @@ func (w *Window) ToggleFullScreen(sender obj.Object) {
 }
 
 // SetFrameFromString sets the window’s frame rectangle from a given string representation.
-func (w *Window) SetFrameFromString(string_ obj.Object) {
+func (w *Window) SetFrameFromString(str obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(str)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrameFromString:"), objref.IDOf(string_))
+		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setFrameFromString:"), objref.IDOf(str))
 	})
 
 }
 
 // SaveFrameUsingName saves the window’s frame rectangle in the user defaults system under a given name.
 func (w *Window) SaveFrameUsingName(name obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(name)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("saveFrameUsingName:"), objref.IDOf(name))
 	})
@@ -1211,6 +1321,8 @@ func (w *Window) SaveFrameUsingName(name obj.Object) {
 
 // SetFrameUsingNameForce sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system. Can operate on non-resizable windows.
 func (w *Window) SetFrameUsingNameForce(name obj.Object, force bool) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(name)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1224,6 +1336,8 @@ func (w *Window) SetFrameUsingNameForce(name obj.Object, force bool) bool {
 
 // SetFrameUsingName sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system.
 func (w *Window) SetFrameUsingName(name obj.Object) bool {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(name)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1237,6 +1351,8 @@ func (w *Window) SetFrameUsingName(name obj.Object) bool {
 
 // BeginSheetCompletionHandler starts a document-modal session and presents—or queues for presentation—a sheet.
 func (w *Window) BeginSheetCompletionHandler(sheetWindow *Window, handler func(int)) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sheetWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("beginSheet:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 	})
@@ -1245,6 +1361,8 @@ func (w *Window) BeginSheetCompletionHandler(sheetWindow *Window, handler func(i
 
 // BeginCriticalSheetCompletionHandler starts a document-modal session and presents the specified critical sheet.
 func (w *Window) BeginCriticalSheetCompletionHandler(sheetWindow *Window, handler func(int)) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sheetWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("beginCriticalSheet:completionHandler:"), objref.IDOf(sheetWindow), objc.NewBlock(func(_ objc.Block, _b0 int) { handler(_b0) }))
 	})
@@ -1253,6 +1371,8 @@ func (w *Window) BeginCriticalSheetCompletionHandler(sheetWindow *Window, handle
 
 // EndSheet ends a document-modal session and dismisses the specified sheet.
 func (w *Window) EndSheet(sheetWindow *Window) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sheetWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("endSheet:"), objref.IDOf(sheetWindow))
 	})
@@ -1261,6 +1381,8 @@ func (w *Window) EndSheet(sheetWindow *Window) {
 
 // EndSheetReturnCode ends a document-modal session and dismisses the specified sheet.
 func (w *Window) EndSheetReturnCode(sheetWindow *Window, returnCode int) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sheetWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheetWindow), returnCode)
 	})
@@ -1269,6 +1391,7 @@ func (w *Window) EndSheetReturnCode(sheetWindow *Window, returnCode int) {
 
 // StandardWindowButton returns the window button of a given window button kind in the window’s view hierarchy.
 func (w *Window) StandardWindowButton(b WindowButton) *Button {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Button
 	purego.Main(func() {
 		_mainthread0 = func() *Button {
@@ -1282,6 +1405,8 @@ func (w *Window) StandardWindowButton(b WindowButton) *Button {
 
 // AddChildWindowOrdered adds a given window as a child window of the window.
 func (w *Window) AddChildWindowOrdered(childWin *Window, place WindowOrderingMode) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(childWin)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("addChildWindow:ordered:"), objref.IDOf(childWin), place)
 	})
@@ -1290,6 +1415,8 @@ func (w *Window) AddChildWindowOrdered(childWin *Window, place WindowOrderingMod
 
 // RemoveChildWindow detaches a given child window from the window.
 func (w *Window) RemoveChildWindow(childWin *Window) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(childWin)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("removeChildWindow:"), objref.IDOf(childWin))
 	})
@@ -1298,6 +1425,7 @@ func (w *Window) RemoveChildWindow(childWin *Window) {
 
 // CanRepresentDisplayGamut a Boolean value that indicates if the window and its screen use a color space that can represent the specified display gamut.
 func (w *Window) CanRepresentDisplayGamut(displayGamut DisplayGamut) bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1309,8 +1437,10 @@ func (w *Window) CanRepresentDisplayGamut(displayGamut DisplayGamut) bool {
 
 }
 
-// PerformWindowDragWithEvent starts a window drag based on the specified mouse-down event.
-func (w *Window) PerformWindowDragWithEvent(event *Event) {
+// PerformWindowDrag starts a window drag based on the specified mouse-down event.
+func (w *Window) PerformWindowDrag(event *Event) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("performWindowDragWithEvent:"), objref.IDOf(event))
 	})
@@ -1319,6 +1449,8 @@ func (w *Window) PerformWindowDragWithEvent(event *Event) {
 
 // SelectNextKeyView searches for a candidate next key view and, if it finds one, tries to make it the first responder.
 func (w *Window) SelectNextKeyView(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("selectNextKeyView:"), objref.IDOf(sender))
 	})
@@ -1327,6 +1459,8 @@ func (w *Window) SelectNextKeyView(sender obj.Object) {
 
 // SelectPreviousKeyView searches for a candidate previous key view and, if it finds one, tries to make it the first responder.
 func (w *Window) SelectPreviousKeyView(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("selectPreviousKeyView:"), objref.IDOf(sender))
 	})
@@ -1335,6 +1469,8 @@ func (w *Window) SelectPreviousKeyView(sender obj.Object) {
 
 // SelectKeyViewFollowingView gives key view status to the view that follows the given view.
 func (w *Window) SelectKeyViewFollowingView(view *View) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("selectKeyViewFollowingView:"), objref.IDOf(view))
 	})
@@ -1343,6 +1479,8 @@ func (w *Window) SelectKeyViewFollowingView(view *View) {
 
 // SelectKeyViewPrecedingView gives key view status to the view that precedes the given view.
 func (w *Window) SelectKeyViewPrecedingView(view *View) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("selectKeyViewPrecedingView:"), objref.IDOf(view))
 	})
@@ -1351,6 +1489,7 @@ func (w *Window) SelectKeyViewPrecedingView(view *View) {
 
 // DisableKeyEquivalentForDefaultButtonCell disables the default button cell’s key equivalent, so it doesn’t perform a click when the user presses Return (or Enter).
 func (w *Window) DisableKeyEquivalentForDefaultButtonCell() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableKeyEquivalentForDefaultButtonCell"))
 	})
@@ -1359,6 +1498,7 @@ func (w *Window) DisableKeyEquivalentForDefaultButtonCell() {
 
 // EnableKeyEquivalentForDefaultButtonCell reenables the default button cell’s key equivalent, so it performs a click when the user presses Return (or Enter).
 func (w *Window) EnableKeyEquivalentForDefaultButtonCell() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("enableKeyEquivalentForDefaultButtonCell"))
 	})
@@ -1367,6 +1507,7 @@ func (w *Window) EnableKeyEquivalentForDefaultButtonCell() {
 
 // RecalculateKeyViewLoop marks the key view loop as “dirty” and in need of recalculation.
 func (w *Window) RecalculateKeyViewLoop() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("recalculateKeyViewLoop"))
 	})
@@ -1375,6 +1516,8 @@ func (w *Window) RecalculateKeyViewLoop() {
 
 // ToggleToolbarShown toggles the visibility of the window’s toolbar.
 func (w *Window) ToggleToolbarShown(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("toggleToolbarShown:"), objref.IDOf(sender))
 	})
@@ -1383,6 +1526,8 @@ func (w *Window) ToggleToolbarShown(sender obj.Object) {
 
 // RunToolbarCustomizationPalette presents the toolbar customization user interface.
 func (w *Window) RunToolbarCustomizationPalette(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("runToolbarCustomizationPalette:"), objref.IDOf(sender))
 	})
@@ -1391,6 +1536,8 @@ func (w *Window) RunToolbarCustomizationPalette(sender obj.Object) {
 
 // SelectNextTab selects the next tab in the tab group in the trailing direction.
 func (w *Window) SelectNextTab(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("selectNextTab:"), objref.IDOf(sender))
 	})
@@ -1399,6 +1546,8 @@ func (w *Window) SelectNextTab(sender obj.Object) {
 
 // SelectPreviousTab selects the previous tab in the tab group in the leading direction.
 func (w *Window) SelectPreviousTab(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("selectPreviousTab:"), objref.IDOf(sender))
 	})
@@ -1407,6 +1556,8 @@ func (w *Window) SelectPreviousTab(sender obj.Object) {
 
 // MoveTabToNewWindow moves the tab to a new containing window.
 func (w *Window) MoveTabToNewWindow(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("moveTabToNewWindow:"), objref.IDOf(sender))
 	})
@@ -1415,6 +1566,8 @@ func (w *Window) MoveTabToNewWindow(sender obj.Object) {
 
 // MergeAllWindows merges all open windows into a single tabbed window.
 func (w *Window) MergeAllWindows(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("mergeAllWindows:"), objref.IDOf(sender))
 	})
@@ -1423,6 +1576,8 @@ func (w *Window) MergeAllWindows(sender obj.Object) {
 
 // ToggleTabBar shows or hides the tab bar.
 func (w *Window) ToggleTabBar(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("toggleTabBar:"), objref.IDOf(sender))
 	})
@@ -1431,6 +1586,8 @@ func (w *Window) ToggleTabBar(sender obj.Object) {
 
 // ToggleTabOverview shows or hides the tab overview.
 func (w *Window) ToggleTabOverview(sender obj.Object) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("toggleTabOverview:"), objref.IDOf(sender))
 	})
@@ -1439,6 +1596,8 @@ func (w *Window) ToggleTabOverview(sender obj.Object) {
 
 // AddTabbedWindowOrdered adds the provided window as a new tab in a tabbed window using the specified ordering instruction.
 func (w *Window) AddTabbedWindowOrdered(window *Window, ordered WindowOrderingMode) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(window)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("addTabbedWindow:ordered:"), objref.IDOf(window), ordered)
 	})
@@ -1449,6 +1608,8 @@ func (w *Window) AddTabbedWindowOrdered(window *Window, ordered WindowOrderingMo
 //
 // TransferWindowSharingToWindow blocks until the operation completes or ctx is cancelled.
 func (w *Window) TransferWindowSharingToWindow(ctx context.Context, window *Window) error {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(window)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -1468,6 +1629,8 @@ func (w *Window) TransferWindowSharingToWindow(ctx context.Context, window *Wind
 //
 // RequestSharingOfWindow blocks until the operation completes or ctx is cancelled.
 func (w *Window) RequestSharingOfWindow(ctx context.Context, window *Window) error {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(window)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -1487,6 +1650,8 @@ func (w *Window) RequestSharingOfWindow(ctx context.Context, window *Window) err
 //
 // RequestSharingOfWindowUsingPreviewTitle blocks until the operation completes or ctx is cancelled.
 func (w *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, image *Image, title string) error {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(image)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -1504,6 +1669,7 @@ func (w *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, im
 
 // Title returns the title.
 func (w *Window) Title() string {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1520,6 +1686,7 @@ func (w *Window) Title() string {
 
 // Subtitle returns secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
 func (w *Window) Subtitle() string {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1536,6 +1703,7 @@ func (w *Window) Subtitle() string {
 
 // TitleVisibility returns see the enum values for how this property works.
 func (w *Window) TitleVisibility() WindowTitleVisibility {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowTitleVisibility
 	purego.Main(func() {
 		_mainthread0 = func() WindowTitleVisibility {
@@ -1549,6 +1717,7 @@ func (w *Window) TitleVisibility() WindowTitleVisibility {
 
 // TitlebarAppearsTransparent reports whether when \c true, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
 func (w *Window) TitlebarAppearsTransparent() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1562,6 +1731,7 @@ func (w *Window) TitlebarAppearsTransparent() bool {
 
 // ToolbarStyle specifies how the titlebar area of the window should appear when the window displays an NSToolbar
 func (w *Window) ToolbarStyle() WindowToolbarStyle {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowToolbarStyle
 	purego.Main(func() {
 		_mainthread0 = func() WindowToolbarStyle {
@@ -1575,6 +1745,7 @@ func (w *Window) ToolbarStyle() WindowToolbarStyle {
 
 // ContentLayoutRect returns the \c contentLayoutRect will return the area inside the window that is for non-obscured content. Typically, this is the same thing as the `contentView`'s frame. However, for windows with the \c NSFullSizeContentViewWindowMask set, there needs to be a way to determine the portion that is not under the toolbar. The \c contentLayoutRect returns the portion of the layout that is not obscured under the toolbar. \c contentLayoutRect is in window coordinates. It is KVO compliant. */
 func (w *Window) ContentLayoutRect() corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1588,6 +1759,7 @@ func (w *Window) ContentLayoutRect() corefoundation.CGRect {
 
 // ContentLayoutGuide returns \c contentLayoutGuide is a corollary to \c contentLayoutRect. It can be used by autolayout constraints to automatically bind to the \c contentLayoutRect.
 func (w *Window) ContentLayoutGuide() obj.Object {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -1603,6 +1775,7 @@ func (w *Window) ContentLayoutGuide() obj.Object {
 //
 // TitlebarAccessoryViewControllers returns the collection as a Go slice.
 func (w *Window) TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 []*TitlebarAccessoryViewController
 	purego.Main(func() {
 		_mainthread0 = func() []*TitlebarAccessoryViewController {
@@ -1614,12 +1787,13 @@ func (w *Window) TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewCont
 }
 
 // RepresentedURL returns if url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
-func (w *Window) RepresentedURL() obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) RepresentedURL() string {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("representedURL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0
@@ -1628,6 +1802,7 @@ func (w *Window) RepresentedURL() obj.Object {
 
 // RepresentedFilename returns the represented filename.
 func (w *Window) RepresentedFilename() string {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1644,6 +1819,7 @@ func (w *Window) RepresentedFilename() string {
 
 // IsExcludedFromWindowsMenu reports whether the object is excluded from windows menu.
 func (w *Window) IsExcludedFromWindowsMenu() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1657,6 +1833,7 @@ func (w *Window) IsExcludedFromWindowsMenu() bool {
 
 // ContentView returns the content view.
 func (w *Window) ContentView() *View {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -1670,6 +1847,7 @@ func (w *Window) ContentView() *View {
 
 // WindowNumber returns the window number.
 func (w *Window) WindowNumber() int {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -1683,6 +1861,7 @@ func (w *Window) WindowNumber() int {
 
 // StyleMask returns the style mask.
 func (w *Window) StyleMask() WindowStyleMask {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowStyleMask
 	purego.Main(func() {
 		_mainthread0 = func() WindowStyleMask {
@@ -1696,6 +1875,7 @@ func (w *Window) StyleMask() WindowStyleMask {
 
 // CascadingReferenceFrame returns the frame to use when cascading or sizing a new window based on the receiver's position or size. This may be different from `frame` when the receiver is positioned by the system.
 func (w *Window) CascadingReferenceFrame() corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1709,6 +1889,7 @@ func (w *Window) CascadingReferenceFrame() corefoundation.CGRect {
 
 // Frame returns the frame.
 func (w *Window) Frame() corefoundation.CGRect {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGRect
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGRect {
@@ -1722,6 +1903,7 @@ func (w *Window) Frame() corefoundation.CGRect {
 
 // InLiveResize wraps the corresponding Objective-C method.
 func (w *Window) InLiveResize() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1735,6 +1917,7 @@ func (w *Window) InLiveResize() bool {
 
 // ResizeIncrements returns the resize increments.
 func (w *Window) ResizeIncrements() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1748,6 +1931,7 @@ func (w *Window) ResizeIncrements() corefoundation.CGSize {
 
 // AspectRatio returns the aspect ratio.
 func (w *Window) AspectRatio() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1761,6 +1945,7 @@ func (w *Window) AspectRatio() corefoundation.CGSize {
 
 // ContentResizeIncrements returns the content resize increments.
 func (w *Window) ContentResizeIncrements() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1774,6 +1959,7 @@ func (w *Window) ContentResizeIncrements() corefoundation.CGSize {
 
 // ContentAspectRatio returns the content aspect ratio.
 func (w *Window) ContentAspectRatio() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -1787,6 +1973,7 @@ func (w *Window) ContentAspectRatio() corefoundation.CGSize {
 
 // ViewsNeedDisplay wraps the corresponding Objective-C method.
 func (w *Window) ViewsNeedDisplay() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1800,6 +1987,7 @@ func (w *Window) ViewsNeedDisplay() bool {
 
 // PreservesContentDuringLiveResize wraps the corresponding Objective-C method.
 func (w *Window) PreservesContentDuringLiveResize() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1813,6 +2001,7 @@ func (w *Window) PreservesContentDuringLiveResize() bool {
 
 // FirstResponder returns the first responder.
 func (w *Window) FirstResponder() *Responder {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Responder
 	purego.Main(func() {
 		_mainthread0 = func() *Responder {
@@ -1826,6 +2015,7 @@ func (w *Window) FirstResponder() *Responder {
 
 // ResizeFlags returns the resize flags.
 func (w *Window) ResizeFlags() EventModifierFlags {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 EventModifierFlags
 	purego.Main(func() {
 		_mainthread0 = func() EventModifierFlags {
@@ -1839,6 +2029,7 @@ func (w *Window) ResizeFlags() EventModifierFlags {
 
 // IsReleasedWhenClosed reports whether the object is released when closed.
 func (w *Window) IsReleasedWhenClosed() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1852,6 +2043,7 @@ func (w *Window) IsReleasedWhenClosed() bool {
 
 // IsZoomed reports whether the object is zoomed.
 func (w *Window) IsZoomed() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1865,6 +2057,7 @@ func (w *Window) IsZoomed() bool {
 
 // IsMiniaturized reports whether the object is miniaturized.
 func (w *Window) IsMiniaturized() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1878,6 +2071,7 @@ func (w *Window) IsMiniaturized() bool {
 
 // BackgroundColor returns the background color.
 func (w *Window) BackgroundColor() *Color {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Color
 	purego.Main(func() {
 		_mainthread0 = func() *Color {
@@ -1891,6 +2085,7 @@ func (w *Window) BackgroundColor() *Color {
 
 // IsMovable reports whether the object is movable.
 func (w *Window) IsMovable() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1904,6 +2099,7 @@ func (w *Window) IsMovable() bool {
 
 // IsMovableByWindowBackground reports whether the object is movable by window background.
 func (w *Window) IsMovableByWindowBackground() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1917,6 +2113,7 @@ func (w *Window) IsMovableByWindowBackground() bool {
 
 // HidesOnDeactivate wraps the corresponding Objective-C method.
 func (w *Window) HidesOnDeactivate() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1930,6 +2127,7 @@ func (w *Window) HidesOnDeactivate() bool {
 
 // CanHide reports whether a window can be hidden during `-[NSApplication hide:]`. Default is \c true.
 func (w *Window) CanHide() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1943,6 +2141,7 @@ func (w *Window) CanHide() bool {
 
 // MiniwindowImage returns the miniwindow image.
 func (w *Window) MiniwindowImage() *Image {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Image
 	purego.Main(func() {
 		_mainthread0 = func() *Image {
@@ -1956,6 +2155,7 @@ func (w *Window) MiniwindowImage() *Image {
 
 // MiniwindowTitle returns the miniwindow title.
 func (w *Window) MiniwindowTitle() string {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -1972,6 +2172,7 @@ func (w *Window) MiniwindowTitle() string {
 
 // DockTile returns the dock tile.
 func (w *Window) DockTile() *DockTile {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *DockTile
 	purego.Main(func() {
 		_mainthread0 = func() *DockTile {
@@ -1985,6 +2186,7 @@ func (w *Window) DockTile() *DockTile {
 
 // IsDocumentEdited reports whether the object is document edited.
 func (w *Window) IsDocumentEdited() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -1998,6 +2200,7 @@ func (w *Window) IsDocumentEdited() bool {
 
 // IsVisible reports whether the object is visible.
 func (w *Window) IsVisible() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2011,6 +2214,7 @@ func (w *Window) IsVisible() bool {
 
 // IsKeyWindow reports whether the object is key window.
 func (w *Window) IsKeyWindow() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2024,6 +2228,7 @@ func (w *Window) IsKeyWindow() bool {
 
 // IsMainWindow reports whether the object is main window.
 func (w *Window) IsMainWindow() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2037,6 +2242,7 @@ func (w *Window) IsMainWindow() bool {
 
 // CanBecomeKeyWindow wraps the corresponding Objective-C method.
 func (w *Window) CanBecomeKeyWindow() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2050,6 +2256,7 @@ func (w *Window) CanBecomeKeyWindow() bool {
 
 // CanBecomeMainWindow wraps the corresponding Objective-C method.
 func (w *Window) CanBecomeMainWindow() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2063,6 +2270,7 @@ func (w *Window) CanBecomeMainWindow() bool {
 
 // WorksWhenModal wraps the corresponding Objective-C method.
 func (w *Window) WorksWhenModal() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2076,6 +2284,7 @@ func (w *Window) WorksWhenModal() bool {
 
 // PreventsApplicationTerminationWhenModal reports whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
 func (w *Window) PreventsApplicationTerminationWhenModal() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2089,6 +2298,7 @@ func (w *Window) PreventsApplicationTerminationWhenModal() bool {
 
 // BackingScaleFactor returns the scale factor representing the number of backing store pixels corresponding to each linear unit in window space on this \c NSWindow. This method is provided for rare cases when the explicit scale factor is needed. Please use `-convert*ToBacking:` methods whenever possible.
 func (w *Window) BackingScaleFactor() float64 {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -2102,6 +2312,7 @@ func (w *Window) BackingScaleFactor() float64 {
 
 // AllowsToolTipsWhenApplicationIsInactive reports whether default is \c false. Set to \c true to allow a window to display tooltips even when the application is in the background. Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window. This can degrade system performance. Returns \c true if this window displays tooltips even when the application is in the background. To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
 func (w *Window) AllowsToolTipsWhenApplicationIsInactive() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2115,6 +2326,7 @@ func (w *Window) AllowsToolTipsWhenApplicationIsInactive() bool {
 
 // BackingType returns the backing type.
 func (w *Window) BackingType() BackingStoreType {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 BackingStoreType
 	purego.Main(func() {
 		_mainthread0 = func() BackingStoreType {
@@ -2128,6 +2340,7 @@ func (w *Window) BackingType() BackingStoreType {
 
 // Level returns the level.
 func (w *Window) Level() int {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -2141,6 +2354,7 @@ func (w *Window) Level() int {
 
 // DepthLimit returns the depth limit.
 func (w *Window) DepthLimit() WindowDepth {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowDepth
 	purego.Main(func() {
 		_mainthread0 = func() WindowDepth {
@@ -2154,6 +2368,7 @@ func (w *Window) DepthLimit() WindowDepth {
 
 // HasDynamicDepthLimit reports whether the object has dynamic depth limit.
 func (w *Window) HasDynamicDepthLimit() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2167,6 +2382,7 @@ func (w *Window) HasDynamicDepthLimit() bool {
 
 // Screen returns the screen property returns the best screen for the window. If the window only intersects one screen, it returns that screen. If it intersects more than one screen, then it resolves the tie through based on what space it is mostly on. It may return nil if there are no available screens, or it is completely off screen.
 func (w *Window) Screen() *Screen {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Screen
 	purego.Main(func() {
 		_mainthread0 = func() *Screen {
@@ -2180,6 +2396,7 @@ func (w *Window) Screen() *Screen {
 
 // DeepestScreen returns the deepest screen.
 func (w *Window) DeepestScreen() *Screen {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Screen
 	purego.Main(func() {
 		_mainthread0 = func() *Screen {
@@ -2193,6 +2410,7 @@ func (w *Window) DeepestScreen() *Screen {
 
 // HasShadow reports whether the object has shadow.
 func (w *Window) HasShadow() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2206,6 +2424,7 @@ func (w *Window) HasShadow() bool {
 
 // AlphaValue returns the alpha value.
 func (w *Window) AlphaValue() float64 {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -2219,6 +2438,7 @@ func (w *Window) AlphaValue() float64 {
 
 // IsOpaque reports whether the object is opaque.
 func (w *Window) IsOpaque() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2232,6 +2452,7 @@ func (w *Window) IsOpaque() bool {
 
 // SharingType returns `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
 func (w *Window) SharingType() WindowSharingType {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowSharingType
 	purego.Main(func() {
 		_mainthread0 = func() WindowSharingType {
@@ -2245,6 +2466,7 @@ func (w *Window) SharingType() WindowSharingType {
 
 // AllowsConcurrentViewDrawing reports whether controls whether threading of view drawing should be enabled for this window. Defaults to \c true. When this is set to \c true, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`. When this is set to \c false, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
 func (w *Window) AllowsConcurrentViewDrawing() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2258,6 +2480,7 @@ func (w *Window) AllowsConcurrentViewDrawing() bool {
 
 // DisplaysWhenScreenProfileChanges wraps the corresponding Objective-C method.
 func (w *Window) DisplaysWhenScreenProfileChanges() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2271,6 +2494,7 @@ func (w *Window) DisplaysWhenScreenProfileChanges() bool {
 
 // CanBecomeVisibleWithoutLogin reports whether this API controls whether the receiver is permitted onscreen before the user has logged in. This property is off by default. Alert panels and windows presented by input managers are examples of windows which should have this property set.
 func (w *Window) CanBecomeVisibleWithoutLogin() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2284,6 +2508,7 @@ func (w *Window) CanBecomeVisibleWithoutLogin() bool {
 
 // CollectionBehavior returns the collection behavior.
 func (w *Window) CollectionBehavior() WindowCollectionBehavior {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowCollectionBehavior
 	purego.Main(func() {
 		_mainthread0 = func() WindowCollectionBehavior {
@@ -2297,6 +2522,7 @@ func (w *Window) CollectionBehavior() WindowCollectionBehavior {
 
 // AnimationBehavior provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
 func (w *Window) AnimationBehavior() WindowAnimationBehavior {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowAnimationBehavior
 	purego.Main(func() {
 		_mainthread0 = func() WindowAnimationBehavior {
@@ -2310,6 +2536,7 @@ func (w *Window) AnimationBehavior() WindowAnimationBehavior {
 
 // IsOnActiveSpace reports whether returns \c true if this window is associated with the active space. For visible windows, this API indicates whether the window is currently visible on the active space. For offscreen windows, it indicates whether ordering the window onscreen would make it bring it onto the active space
 func (w *Window) IsOnActiveSpace() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2322,12 +2549,13 @@ func (w *Window) IsOnActiveSpace() bool {
 }
 
 // StringWithSavedFrame returns the string with saved frame.
-func (w *Window) StringWithSavedFrame() obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) StringWithSavedFrame() *foundation.String {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("stringWithSavedFrame"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2335,12 +2563,13 @@ func (w *Window) StringWithSavedFrame() obj.Object {
 }
 
 // FrameAutosaveName returns the frame autosave name.
-func (w *Window) FrameAutosaveName() obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) FrameAutosaveName() *foundation.String {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("frameAutosaveName"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2349,6 +2578,7 @@ func (w *Window) FrameAutosaveName() obj.Object {
 
 // MinSize returns the min size.
 func (w *Window) MinSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2362,6 +2592,7 @@ func (w *Window) MinSize() corefoundation.CGSize {
 
 // MaxSize returns the max size.
 func (w *Window) MaxSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2375,6 +2606,7 @@ func (w *Window) MaxSize() corefoundation.CGSize {
 
 // ContentMinSize returns the content min size.
 func (w *Window) ContentMinSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2388,6 +2620,7 @@ func (w *Window) ContentMinSize() corefoundation.CGSize {
 
 // ContentMaxSize returns the content max size.
 func (w *Window) ContentMaxSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2401,6 +2634,7 @@ func (w *Window) ContentMaxSize() corefoundation.CGSize {
 
 // MinFullScreenContentSize returns the min full screen content size.
 func (w *Window) MinFullScreenContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2414,6 +2648,7 @@ func (w *Window) MinFullScreenContentSize() corefoundation.CGSize {
 
 // MaxFullScreenContentSize returns the max full screen content size.
 func (w *Window) MaxFullScreenContentSize() corefoundation.CGSize {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGSize
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGSize {
@@ -2427,6 +2662,7 @@ func (w *Window) MaxFullScreenContentSize() corefoundation.CGSize {
 
 // DeviceDescription returns the device description.
 func (w *Window) DeviceDescription() obj.Object {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -2440,6 +2676,7 @@ func (w *Window) DeviceDescription() obj.Object {
 
 // WindowController returns the window controller.
 func (w *Window) WindowController() *WindowController {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *WindowController
 	purego.Main(func() {
 		_mainthread0 = func() *WindowController {
@@ -2455,6 +2692,7 @@ func (w *Window) WindowController() *WindowController {
 //
 // Sheets returns the collection as a Go slice.
 func (w *Window) Sheets() []*Window {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 []*Window
 	purego.Main(func() {
 		_mainthread0 = func() []*Window {
@@ -2467,6 +2705,7 @@ func (w *Window) Sheets() []*Window {
 
 // AttachedSheet returns the top-most sheet if there is one or more sheets, or nil if there is no sheet.
 func (w *Window) AttachedSheet() *Window {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -2480,6 +2719,7 @@ func (w *Window) AttachedSheet() *Window {
 
 // IsSheet reports whether the object is sheet.
 func (w *Window) IsSheet() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2493,6 +2733,7 @@ func (w *Window) IsSheet() bool {
 
 // SheetParent returns the window that the sheet is directly attached to. This is based on the logical attachment of the sheet, not visual attachment. This relationship exists starting when the sheet is begun (using \c NSApplication's `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: or NSWindow's -beginSheet:completionHandler:`), and ending once it is ordered out. Returns nil if the window is not a sheet or has no sheet parent.
 func (w *Window) SheetParent() *Window {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -2508,6 +2749,7 @@ func (w *Window) SheetParent() *Window {
 //
 // ChildWindows returns the collection as a Go slice.
 func (w *Window) ChildWindows() []*Window {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 []*Window
 	purego.Main(func() {
 		_mainthread0 = func() []*Window {
@@ -2520,6 +2762,7 @@ func (w *Window) ChildWindows() []*Window {
 
 // ParentWindow returns the parent window.
 func (w *Window) ParentWindow() *Window {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Window
 	purego.Main(func() {
 		_mainthread0 = func() *Window {
@@ -2532,12 +2775,13 @@ func (w *Window) ParentWindow() *Window {
 }
 
 // AppearanceSource returns if set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
-func (w *Window) AppearanceSource() obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) AppearanceSource() *foundation.Object {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 *foundation.Object
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.Object {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("appearanceSource"))
-			return obj.Wrap(_r)
+			return foundation.ObjectFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2546,6 +2790,7 @@ func (w *Window) AppearanceSource() obj.Object {
 
 // ColorSpace returns the color space.
 func (w *Window) ColorSpace() *ColorSpace {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *ColorSpace
 	purego.Main(func() {
 		_mainthread0 = func() *ColorSpace {
@@ -2559,6 +2804,7 @@ func (w *Window) ColorSpace() *ColorSpace {
 
 // OcclusionState returns the occlusion state.
 func (w *Window) OcclusionState() WindowOcclusionState {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowOcclusionState
 	purego.Main(func() {
 		_mainthread0 = func() WindowOcclusionState {
@@ -2572,6 +2818,7 @@ func (w *Window) OcclusionState() WindowOcclusionState {
 
 // TitlebarSeparatorStyle specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
 func (w *Window) TitlebarSeparatorStyle() TitlebarSeparatorStyle {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 TitlebarSeparatorStyle
 	purego.Main(func() {
 		_mainthread0 = func() TitlebarSeparatorStyle {
@@ -2585,6 +2832,7 @@ func (w *Window) TitlebarSeparatorStyle() TitlebarSeparatorStyle {
 
 // ContentViewController returns the main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:
 func (w *Window) ContentViewController() *ViewController {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *ViewController
 	purego.Main(func() {
 		_mainthread0 = func() *ViewController {
@@ -2598,6 +2846,7 @@ func (w *Window) ContentViewController() *ViewController {
 
 // KeyViewSelectionDirection returns the key view selection direction.
 func (w *Window) KeyViewSelectionDirection() SelectionDirection {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 SelectionDirection
 	purego.Main(func() {
 		_mainthread0 = func() SelectionDirection {
@@ -2611,6 +2860,7 @@ func (w *Window) KeyViewSelectionDirection() SelectionDirection {
 
 // DefaultButtonCell returns the default button cell.
 func (w *Window) DefaultButtonCell() *ButtonCell {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *ButtonCell
 	purego.Main(func() {
 		_mainthread0 = func() *ButtonCell {
@@ -2624,6 +2874,7 @@ func (w *Window) DefaultButtonCell() *ButtonCell {
 
 // AutorecalculatesKeyViewLoop wraps the corresponding Objective-C method.
 func (w *Window) AutorecalculatesKeyViewLoop() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2637,6 +2888,7 @@ func (w *Window) AutorecalculatesKeyViewLoop() bool {
 
 // Toolbar returns the toolbar.
 func (w *Window) Toolbar() *Toolbar {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Toolbar
 	purego.Main(func() {
 		_mainthread0 = func() *Toolbar {
@@ -2650,6 +2902,7 @@ func (w *Window) Toolbar() *Toolbar {
 
 // ShowsToolbarButton wraps the corresponding Objective-C method.
 func (w *Window) ShowsToolbarButton() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2663,6 +2916,7 @@ func (w *Window) ShowsToolbarButton() bool {
 
 // TabbingMode get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
 func (w *Window) TabbingMode() WindowTabbingMode {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowTabbingMode
 	purego.Main(func() {
 		_mainthread0 = func() WindowTabbingMode {
@@ -2675,12 +2929,13 @@ func (w *Window) TabbingMode() WindowTabbingMode {
 }
 
 // TabbingIdentifier returns windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
-func (w *Window) TabbingIdentifier() obj.Object {
-	var _mainthread0 obj.Object
+func (w *Window) TabbingIdentifier() *foundation.String {
+	defer runtime.KeepAlive(w)
+	var _mainthread0 *foundation.String
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() *foundation.String {
 			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("tabbingIdentifier"))
-			return obj.Wrap(_r)
+			return foundation.StringFromID(_r)
 		}()
 	})
 	return _mainthread0
@@ -2691,6 +2946,7 @@ func (w *Window) TabbingIdentifier() obj.Object {
 //
 // TabbedWindows returns the collection as a Go slice.
 func (w *Window) TabbedWindows() []*Window {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 []*Window
 	purego.Main(func() {
 		_mainthread0 = func() []*Window {
@@ -2703,6 +2959,7 @@ func (w *Window) TabbedWindows() []*Window {
 
 // Tab returns access the properties for this window when it is a tabbed window environment. See the \c NSWindowTab header and comments for more information.
 func (w *Window) Tab() *WindowTab {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *WindowTab
 	purego.Main(func() {
 		_mainthread0 = func() *WindowTab {
@@ -2716,6 +2973,7 @@ func (w *Window) Tab() *WindowTab {
 
 // TabGroup represents a tab group of windows. This \c tabGroup is lazily created on demand.
 func (w *Window) TabGroup() *WindowTabGroup {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *WindowTabGroup
 	purego.Main(func() {
 		_mainthread0 = func() *WindowTabGroup {
@@ -2729,6 +2987,7 @@ func (w *Window) TabGroup() *WindowTabGroup {
 
 // HasActiveWindowSharingSession reports whether the receiver is the subject of an active SharePlay sharing session.
 func (w *Window) HasActiveWindowSharingSession() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2742,6 +3001,7 @@ func (w *Window) HasActiveWindowSharingSession() bool {
 
 // WindowTitlebarLayoutDirection returns retrieve the layout direction of the window titlebar: this includes the standard window buttons (close/minimize/maximize buttons) and the title for this window. In general, this will return "right to left" (RTL) if the primary system language is RTL. The layout direction may be RTL even in applications that do not have a RTL language localization. This value should be utilized if an application uses titlebarAppearsTransparent and places controls underneath the titlebar.
 func (w *Window) WindowTitlebarLayoutDirection() UserInterfaceLayoutDirection {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 UserInterfaceLayoutDirection
 	purego.Main(func() {
 		_mainthread0 = func() UserInterfaceLayoutDirection {
@@ -2755,6 +3015,8 @@ func (w *Window) WindowTitlebarLayoutDirection() UserInterfaceLayoutDirection {
 
 // TrackEventsMatchingMaskTimeoutModeHandler tracks events that match the specified mask using the specified tracking handler until the tracking handler explicitly terminates tracking.
 func (w *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask EventMask, timeout float64, mode obj.Object, trackingHandler func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(mode)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("trackEventsMatchingMask:timeout:mode:handler:"), mask, timeout, objref.IDOf(mode), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { trackingHandler(obj.Wrap(_b0), (*bool)(_b1)) }))
 	})
@@ -2763,6 +3025,7 @@ func (w *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask EventMask, timeo
 
 // NextEventMatchingMask returns the next event matching a given mask.
 func (w *Window) NextEventMatchingMask(mask EventMask) *Event {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Event
 	purego.Main(func() {
 		_mainthread0 = func() *Event {
@@ -2775,11 +3038,13 @@ func (w *Window) NextEventMatchingMask(mask EventMask) *Event {
 }
 
 // NextEventMatchingMaskUntilDateInModeDequeue forwards the message to the global application object.
-func (w *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event {
+func (w *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration time.Time, mode obj.Object, deqFlag bool) *Event {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(mode)
 	var _mainthread0 *Event
 	purego.Main(func() {
 		_mainthread0 = func() *Event {
-			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
+			_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, rt.TimeToNSDate(expiration), objref.IDOf(mode), deqFlag)
 			return EventFromID(_r)
 		}()
 	})
@@ -2789,6 +3054,8 @@ func (w *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, exp
 
 // DiscardEventsMatchingMaskBeforeEvent forwards the message to the global application object.
 func (w *Window) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(lastEvent)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
 	})
@@ -2797,6 +3064,8 @@ func (w *Window) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent 
 
 // PostEventAtStart forwards the message to the global application object.
 func (w *Window) PostEventAtStart(event *Event, flag bool) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), flag)
 	})
@@ -2805,6 +3074,8 @@ func (w *Window) PostEventAtStart(event *Event, flag bool) {
 
 // SendEvent this action method dispatches mouse and keyboard events the global application object sends to the window.
 func (w *Window) SendEvent(event *Event) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(event)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("sendEvent:"), objref.IDOf(event))
 	})
@@ -2813,6 +3084,7 @@ func (w *Window) SendEvent(event *Event) {
 
 // CurrentEvent returns the current event.
 func (w *Window) CurrentEvent() *Event {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *Event
 	purego.Main(func() {
 		_mainthread0 = func() *Event {
@@ -2826,6 +3098,7 @@ func (w *Window) CurrentEvent() *Event {
 
 // AcceptsMouseMovedEvents wraps the corresponding Objective-C method.
 func (w *Window) AcceptsMouseMovedEvents() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2839,6 +3112,7 @@ func (w *Window) AcceptsMouseMovedEvents() bool {
 
 // IgnoresMouseEvents wraps the corresponding Objective-C method.
 func (w *Window) IgnoresMouseEvents() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2852,6 +3126,7 @@ func (w *Window) IgnoresMouseEvents() bool {
 
 // MouseLocationOutsideOfEventStream returns the mouse location outside of event stream.
 func (w *Window) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -2865,6 +3140,7 @@ func (w *Window) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
 
 // DisableCursorRects disables all cursor rectangle management within the window.
 func (w *Window) DisableCursorRects() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableCursorRects"))
 	})
@@ -2873,6 +3149,7 @@ func (w *Window) DisableCursorRects() {
 
 // EnableCursorRects reenables cursor rectangle management within the window after a disableCursorRects message.
 func (w *Window) EnableCursorRects() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("enableCursorRects"))
 	})
@@ -2881,6 +3158,7 @@ func (w *Window) EnableCursorRects() {
 
 // DiscardCursorRects invalidates all cursor rectangles in the window.
 func (w *Window) DiscardCursorRects() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("discardCursorRects"))
 	})
@@ -2889,6 +3167,8 @@ func (w *Window) DiscardCursorRects() {
 
 // InvalidateCursorRectsForView marks as invalid the cursor rectangles of a given view object in the window, so they’ll be set up again when the window becomes key.
 func (w *Window) InvalidateCursorRectsForView(view *View) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("invalidateCursorRectsForView:"), objref.IDOf(view))
 	})
@@ -2897,6 +3177,7 @@ func (w *Window) InvalidateCursorRectsForView(view *View) {
 
 // ResetCursorRects clears the window’s cursor rectangles and the cursor rectangles of the NSView objects in its view hierarchy.
 func (w *Window) ResetCursorRects() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("resetCursorRects"))
 	})
@@ -2905,6 +3186,7 @@ func (w *Window) ResetCursorRects() {
 
 // AreCursorRectsEnabled wraps the corresponding Objective-C method.
 func (w *Window) AreCursorRectsEnabled() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -2918,6 +3200,11 @@ func (w *Window) AreCursorRectsEnabled() bool {
 
 // DragImageAtOffsetEventPasteboardSourceSlideBack begins a dragging session.
 func (w *Window) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, baseLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *Event, pboard *Pasteboard, sourceObj obj.Object, slideFlag bool) {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(image)
+	defer runtime.KeepAlive(event)
+	defer runtime.KeepAlive(pboard)
+	defer runtime.KeepAlive(sourceObj)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("dragImage:at:offset:event:pasteboard:source:slideBack:"), objref.IDOf(image), baseLocation, initialOffset, objref.IDOf(event), objref.IDOf(pboard), objref.IDOf(sourceObj), slideFlag)
 	})
@@ -2925,15 +3212,17 @@ func (w *Window) DragImageAtOffsetEventPasteboardSourceSlideBack(image *Image, b
 }
 
 // RegisterForDraggedTypes registers a set of pasteboard types that the window accepts as the destination of an image-dragging session.
-func (w *Window) RegisterForDraggedTypes(newTypes []obj.Object) {
+func (w *Window) RegisterForDraggedTypes(newTypes []*foundation.String) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("registerForDraggedTypes:"), purego.SliceToNSArray(newTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	})
 
 }
 
 // UnregisterDraggedTypes unregisters the window as a possible destination for dragging operations.
 func (w *Window) UnregisterDraggedTypes() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("unregisterDraggedTypes"))
 	})
@@ -2942,6 +3231,7 @@ func (w *Window) UnregisterDraggedTypes() {
 
 // CacheImageInRect wraps the corresponding Objective-C method.
 func (w *Window) CacheImageInRect(rect corefoundation.CGRect) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("cacheImageInRect:"), rect)
 	})
@@ -2950,6 +3240,7 @@ func (w *Window) CacheImageInRect(rect corefoundation.CGRect) {
 
 // RestoreCachedImage wraps the corresponding Objective-C method.
 func (w *Window) RestoreCachedImage() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("restoreCachedImage"))
 	})
@@ -2958,6 +3249,7 @@ func (w *Window) RestoreCachedImage() {
 
 // DiscardCachedImage wraps the corresponding Objective-C method.
 func (w *Window) DiscardCachedImage() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("discardCachedImage"))
 	})
@@ -2966,6 +3258,7 @@ func (w *Window) DiscardCachedImage() {
 
 // GState returns the g state.
 func (w *Window) GState() int {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -2979,6 +3272,7 @@ func (w *Window) GState() int {
 
 // ConvertBaseToScreen wraps the corresponding Objective-C method.
 func (w *Window) ConvertBaseToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -2992,6 +3286,7 @@ func (w *Window) ConvertBaseToScreen(point corefoundation.CGPoint) corefoundatio
 
 // ConvertScreenToBase wraps the corresponding Objective-C method.
 func (w *Window) ConvertScreenToBase(point corefoundation.CGPoint) corefoundation.CGPoint {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 corefoundation.CGPoint
 	purego.Main(func() {
 		_mainthread0 = func() corefoundation.CGPoint {
@@ -3005,6 +3300,7 @@ func (w *Window) ConvertScreenToBase(point corefoundation.CGPoint) corefoundatio
 
 // UserSpaceScaleFactor returns the user space scale factor.
 func (w *Window) UserSpaceScaleFactor() float64 {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -3018,6 +3314,7 @@ func (w *Window) UserSpaceScaleFactor() float64 {
 
 // UseOptimizedDrawing wraps the corresponding Objective-C method.
 func (w *Window) UseOptimizedDrawing(flag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("useOptimizedDrawing:"), flag)
 	})
@@ -3026,6 +3323,7 @@ func (w *Window) UseOptimizedDrawing(flag bool) {
 
 // CanStoreColor wraps the corresponding Objective-C method.
 func (w *Window) CanStoreColor() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3039,6 +3337,7 @@ func (w *Window) CanStoreColor() bool {
 
 // DisableFlushWindow disables flush window.
 func (w *Window) DisableFlushWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableFlushWindow"))
 	})
@@ -3047,6 +3346,7 @@ func (w *Window) DisableFlushWindow() {
 
 // EnableFlushWindow enables flush window.
 func (w *Window) EnableFlushWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("enableFlushWindow"))
 	})
@@ -3055,6 +3355,7 @@ func (w *Window) EnableFlushWindow() {
 
 // FlushWindow flushes window.
 func (w *Window) FlushWindow() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("flushWindow"))
 	})
@@ -3063,6 +3364,7 @@ func (w *Window) FlushWindow() {
 
 // FlushWindowIfNeeded flushes window if needed.
 func (w *Window) FlushWindowIfNeeded() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("flushWindowIfNeeded"))
 	})
@@ -3071,6 +3373,7 @@ func (w *Window) FlushWindowIfNeeded() {
 
 // DisableScreenUpdatesUntilFlush disables the window’s screen updates until the window is flushed.
 func (w *Window) DisableScreenUpdatesUntilFlush() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableScreenUpdatesUntilFlush"))
 	})
@@ -3079,6 +3382,7 @@ func (w *Window) DisableScreenUpdatesUntilFlush() {
 
 // IsFlushWindowDisabled reports whether the object is flush window disabled.
 func (w *Window) IsFlushWindowDisabled() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3092,6 +3396,7 @@ func (w *Window) IsFlushWindowDisabled() bool {
 
 // IsAutodisplay reports whether the object is autodisplay.
 func (w *Window) IsAutodisplay() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3105,6 +3410,7 @@ func (w *Window) IsAutodisplay() bool {
 
 // GraphicsContext returns the graphics context.
 func (w *Window) GraphicsContext() *GraphicsContext {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 *GraphicsContext
 	purego.Main(func() {
 		_mainthread0 = func() *GraphicsContext {
@@ -3118,6 +3424,7 @@ func (w *Window) GraphicsContext() *GraphicsContext {
 
 // IsOneShot reports whether the object is one shot.
 func (w *Window) IsOneShot() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3131,6 +3438,7 @@ func (w *Window) IsOneShot() bool {
 
 // PreferredBackingLocation returns the preferred backing location.
 func (w *Window) PreferredBackingLocation() WindowBackingLocation {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowBackingLocation
 	purego.Main(func() {
 		_mainthread0 = func() WindowBackingLocation {
@@ -3144,6 +3452,7 @@ func (w *Window) PreferredBackingLocation() WindowBackingLocation {
 
 // BackingLocation returns the backing location.
 func (w *Window) BackingLocation() WindowBackingLocation {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 WindowBackingLocation
 	purego.Main(func() {
 		_mainthread0 = func() WindowBackingLocation {
@@ -3157,6 +3466,7 @@ func (w *Window) BackingLocation() WindowBackingLocation {
 
 // ShowsResizeIndicator wraps the corresponding Objective-C method.
 func (w *Window) ShowsResizeIndicator() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3170,6 +3480,7 @@ func (w *Window) ShowsResizeIndicator() bool {
 
 // UpdateConstraintsIfNeeded updates the constraints based on changes to views in the window since the last layout.
 func (w *Window) UpdateConstraintsIfNeeded() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("updateConstraintsIfNeeded"))
 	})
@@ -3178,6 +3489,7 @@ func (w *Window) UpdateConstraintsIfNeeded() {
 
 // LayoutIfNeeded updates the layout of views in the window based on the current views and constraints.
 func (w *Window) LayoutIfNeeded() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("layoutIfNeeded"))
 	})
@@ -3186,6 +3498,7 @@ func (w *Window) LayoutIfNeeded() {
 
 // AnchorAttributeForOrientation returns the part of the window that stays stationary during constraint-based layout.
 func (w *Window) AnchorAttributeForOrientation(orientation LayoutConstraintOrientation) LayoutAttribute {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 LayoutAttribute
 	purego.Main(func() {
 		_mainthread0 = func() LayoutAttribute {
@@ -3199,6 +3512,7 @@ func (w *Window) AnchorAttributeForOrientation(orientation LayoutConstraintOrien
 
 // SetAnchorAttributeForOrientation sets the part of the window that stays stationary during constraint-based layout.
 func (w *Window) SetAnchorAttributeForOrientation(attr LayoutAttribute, orientation LayoutConstraintOrientation) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setAnchorAttribute:forOrientation:"), attr, orientation)
 	})
@@ -3207,6 +3521,7 @@ func (w *Window) SetAnchorAttributeForOrientation(attr LayoutAttribute, orientat
 
 // VisualizeConstraints displays a visual representation of the supplied constraints in the window.
 func (w *Window) VisualizeConstraints(constraints []*LayoutConstraint) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("visualizeConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 	})
@@ -3217,6 +3532,7 @@ func (w *Window) VisualizeConstraints(constraints []*LayoutConstraint) {
 //
 // Drawers returns the collection as a Go slice.
 func (w *Window) Drawers() []*Drawer {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 []*Drawer
 	purego.Main(func() {
 		_mainthread0 = func() []*Drawer {
@@ -3229,6 +3545,7 @@ func (w *Window) Drawers() []*Drawer {
 
 // SetIsMiniaturized sets the window’s miniaturized state to the value you specify.
 func (w *Window) SetIsMiniaturized(flag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setIsMiniaturized:"), flag)
 	})
@@ -3237,6 +3554,7 @@ func (w *Window) SetIsMiniaturized(flag bool) {
 
 // SetIsVisible sets the window’s visible state to the value you specify.
 func (w *Window) SetIsVisible(flag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setIsVisible:"), flag)
 	})
@@ -3245,6 +3563,7 @@ func (w *Window) SetIsVisible(flag bool) {
 
 // SetIsZoomed sets the window’s zoomed state to the value you specify.
 func (w *Window) SetIsZoomed(flag bool) {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setIsZoomed:"), flag)
 	})
@@ -3253,6 +3572,8 @@ func (w *Window) SetIsZoomed(flag bool) {
 
 // HandleCloseScriptCommand handles the AppleScript command to close the window (and its associated document, if any).
 func (w *Window) HandleCloseScriptCommand(command obj.Object) obj.Object {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(command)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -3266,6 +3587,8 @@ func (w *Window) HandleCloseScriptCommand(command obj.Object) obj.Object {
 
 // HandlePrintScriptCommand handles the AppleScript command to print the contents of the window (or its associated document, if any).
 func (w *Window) HandlePrintScriptCommand(command obj.Object) obj.Object {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(command)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -3279,6 +3602,8 @@ func (w *Window) HandlePrintScriptCommand(command obj.Object) obj.Object {
 
 // HandleSaveScriptCommand handles the AppleScript command to save the window (and its associated document, if any).
 func (w *Window) HandleSaveScriptCommand(command obj.Object) obj.Object {
+	defer runtime.KeepAlive(w)
+	defer runtime.KeepAlive(command)
 	var _mainthread0 obj.Object
 	purego.Main(func() {
 		_mainthread0 = func() obj.Object {
@@ -3292,6 +3617,7 @@ func (w *Window) HandleSaveScriptCommand(command obj.Object) obj.Object {
 
 // HasCloseBox reports whether the object has close box.
 func (w *Window) HasCloseBox() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3305,6 +3631,7 @@ func (w *Window) HasCloseBox() bool {
 
 // HasTitleBar reports whether the object has title bar.
 func (w *Window) HasTitleBar() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3318,6 +3645,7 @@ func (w *Window) HasTitleBar() bool {
 
 // IsFloatingPanel reports whether the object is floating panel.
 func (w *Window) IsFloatingPanel() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3331,6 +3659,7 @@ func (w *Window) IsFloatingPanel() bool {
 
 // IsMiniaturizable reports whether the object is miniaturizable.
 func (w *Window) IsMiniaturizable() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3344,6 +3673,7 @@ func (w *Window) IsMiniaturizable() bool {
 
 // IsModalPanel reports whether the object is modal panel.
 func (w *Window) IsModalPanel() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3357,6 +3687,7 @@ func (w *Window) IsModalPanel() bool {
 
 // IsResizable reports whether the object is resizable.
 func (w *Window) IsResizable() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3370,6 +3701,7 @@ func (w *Window) IsResizable() bool {
 
 // IsZoomable reports whether the object is zoomable.
 func (w *Window) IsZoomable() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -3383,6 +3715,7 @@ func (w *Window) IsZoomable() bool {
 
 // OrderedIndex returns the ordered index.
 func (w *Window) OrderedIndex() int {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -3396,6 +3729,7 @@ func (w *Window) OrderedIndex() int {
 
 // DisableSnapshotRestoration disables snapshot restoration.
 func (w *Window) DisableSnapshotRestoration() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableSnapshotRestoration"))
 	})
@@ -3404,6 +3738,7 @@ func (w *Window) DisableSnapshotRestoration() {
 
 // EnableSnapshotRestoration enables snapshot restoration.
 func (w *Window) EnableSnapshotRestoration() {
+	defer runtime.KeepAlive(w)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("enableSnapshotRestoration"))
 	})
@@ -3412,6 +3747,7 @@ func (w *Window) EnableSnapshotRestoration() {
 
 // IsRestorable reports whether the object is restorable.
 func (w *Window) IsRestorable() bool {
+	defer runtime.KeepAlive(w)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

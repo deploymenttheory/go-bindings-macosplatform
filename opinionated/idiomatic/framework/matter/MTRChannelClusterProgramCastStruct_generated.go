@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRChannelClusterProgramCastStructAdopt(id objc.ID) *MTRChannelClusterProgr
 
 // Description returns the object's -description text.
 func (mccpcs *MTRChannelClusterProgramCastStruct) Description() string {
+	defer runtime.KeepAlive(mccpcs)
 	return rt.Description(objref.IDOf(mccpcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mccpcs *MTRChannelClusterProgramCastStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mccpcs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mccpcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mccpcs *MTRChannelClusterProgramCastStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mccpcs)
 	return rt.IsKind(objref.IDOf(mccpcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mccpcs *MTRChannelClusterProgramCastStruct) String() string {
+	defer runtime.KeepAlive(mccpcs)
 	return rt.Description(objref.IDOf(mccpcs))
 }
 
@@ -84,6 +91,7 @@ func (mccpcs *MTRChannelClusterProgramCastStruct) WithRole(role string) *MTRChan
 
 // Name returns the name.
 func (mccpcs *MTRChannelClusterProgramCastStruct) Name() string {
+	defer runtime.KeepAlive(mccpcs)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -93,6 +101,7 @@ func (mccpcs *MTRChannelClusterProgramCastStruct) Name() string {
 
 // Role returns the role.
 func (mccpcs *MTRChannelClusterProgramCastStruct) Role() string {
+	defer runtime.KeepAlive(mccpcs)
 	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("role"))
 	if _r == 0 {
 		return ""

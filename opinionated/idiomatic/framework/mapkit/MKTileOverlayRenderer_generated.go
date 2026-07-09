@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func tileOverlayRendererAdopt(id objc.ID) *TileOverlayRenderer {
 
 // NewTileOverlayRendererWithTileOverlay initializes and returns a tile renderer with the specified overlay object.
 func NewTileOverlayRendererWithTileOverlay(overlay *TileOverlay) *TileOverlayRenderer {
+	defer runtime.KeepAlive(overlay)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKTileOverlayRenderer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileOverlay:"), objref.IDOf(overlay))
 	return tileOverlayRendererAdopt(_id)
@@ -60,6 +63,7 @@ func (tor *TileOverlayRenderer) WithAlpha(alpha float64) *TileOverlayRenderer {
 
 // ReloadData forces the tile overlay renderer to reload and redisplay the tiles.
 func (tor *TileOverlayRenderer) ReloadData() {
+	defer runtime.KeepAlive(tor)
 	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("reloadData"))
 }
 

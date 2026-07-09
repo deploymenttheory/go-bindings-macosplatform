@@ -6,6 +6,8 @@ package gamekit
 
 import (
 	"context"
+	"runtime"
+	"time"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,102 +52,127 @@ func gameActivityAdopt(id objc.ID) *GameActivity {
 
 // Description returns the object's -description text.
 func (ga *GameActivity) Description() string {
+	defer runtime.KeepAlive(ga)
 	return rt.Description(objref.IDOf(ga))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ga *GameActivity) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ga), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ga *GameActivity) IsKind(className string) bool {
+	defer runtime.KeepAlive(ga)
 	return rt.IsKind(objref.IDOf(ga), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ga *GameActivity) String() string {
+	defer runtime.KeepAlive(ga)
 	return rt.Description(objref.IDOf(ga))
 }
 
 // NewGameActivityWithDefinition creates a game activity with definition.
 func NewGameActivityWithDefinition(activityDefinition *GameActivityDefinition) *GameActivity {
+	defer runtime.KeepAlive(activityDefinition)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:"), objref.IDOf(activityDefinition))
 	return gameActivityAdopt(_id)
 }
 
 // WithProperties sets properties that contain additional information about the activity.
-func (ga *GameActivity) WithProperties(properties obj.Object) *GameActivity {
-	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+func (ga *GameActivity) WithProperties(properties map[string]string) *GameActivity {
+	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setProperties:"), rt.MapToDict(properties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return ga
 }
 
 // Start starts the game activity if it’s not already started.
 func (ga *GameActivity) Start() {
+	defer runtime.KeepAlive(ga)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("start"))
 }
 
 // Pause pauses the game activity if it’s not already paused.
 func (ga *GameActivity) Pause() {
+	defer runtime.KeepAlive(ga)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("pause"))
 }
 
 // Resume resumes the game activity if it was paused.
 func (ga *GameActivity) Resume() {
+	defer runtime.KeepAlive(ga)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("resume"))
 }
 
 // End ends the game activity if it’s not already ended.
 func (ga *GameActivity) End() {
+	defer runtime.KeepAlive(ga)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("end"))
 }
 
 // SetScoreOnLeaderboardToScoreContext set a score of a leaderboard with a context for a player.
 func (ga *GameActivity) SetScoreOnLeaderboardToScoreContext(leaderboard *Leaderboard, score int, context_ int) {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(leaderboard)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setScoreOnLeaderboard:toScore:context:"), objref.IDOf(leaderboard), score, context_)
 }
 
 // SetScoreOnLeaderboardToScore set a score of a leaderboard for a player.
 func (ga *GameActivity) SetScoreOnLeaderboardToScore(leaderboard *Leaderboard, score int) {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(leaderboard)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setScoreOnLeaderboard:toScore:"), objref.IDOf(leaderboard), score)
 }
 
 // GetScoreOnLeaderboard get the leaderboard score from a specific leaderboard of the local player if previously set.
 func (ga *GameActivity) GetScoreOnLeaderboard(leaderboard *Leaderboard) *LeaderboardScore {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(leaderboard)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("getScoreOnLeaderboard:"), objref.IDOf(leaderboard))
 	return LeaderboardScoreFromID(_r)
 }
 
 // RemoveScoresFromLeaderboards removes all scores from leaderboards for a player if exist.
 func (ga *GameActivity) RemoveScoresFromLeaderboards(leaderboards []*Leaderboard) {
+	defer runtime.KeepAlive(ga)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("removeScoresFromLeaderboards:"), purego.SliceToNSArray(leaderboards, func(_v *Leaderboard) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetProgressOnAchievementToPercentComplete set a progress for an achievement for a player.
 func (ga *GameActivity) SetProgressOnAchievementToPercentComplete(achievement *Achievement, percentComplete float64) {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(achievement)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setProgressOnAchievement:toPercentComplete:"), objref.IDOf(achievement), percentComplete)
 }
 
 // SetAchievementCompleted set progress to 100% for an achievement for a player.
 func (ga *GameActivity) SetAchievementCompleted(achievement *Achievement) {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(achievement)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("setAchievementCompleted:"), objref.IDOf(achievement))
 }
 
 // GetProgressOnAchievement get the achievement progress from a specific achievement of the local player if previously set.
 func (ga *GameActivity) GetProgressOnAchievement(achievement *Achievement) float64 {
+	defer runtime.KeepAlive(ga)
+	defer runtime.KeepAlive(achievement)
 	_r := objc.Send[float64](objref.IDOf(ga), objc.RegisterName("getProgressOnAchievement:"), objref.IDOf(achievement))
 	return _r
 }
 
 // RemoveAchievements removes all achievements if they exist.
 func (ga *GameActivity) RemoveAchievements(achievements []*Achievement) {
+	defer runtime.KeepAlive(ga)
 	objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("removeAchievements:"), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Identifier returns the identifier of this activity instance.
 func (ga *GameActivity) Identifier() string {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
@@ -155,24 +182,28 @@ func (ga *GameActivity) Identifier() string {
 
 // ActivityDefinition returns the activity definition that this activity instance is based on.
 func (ga *GameActivity) ActivityDefinition() *GameActivityDefinition {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("activityDefinition"))
 	return GameActivityDefinitionFromID(_r)
 }
 
 // Properties returns properties that contain additional information about the activity. This takes precedence over “GKGameActivityDefinition/defaultProperties“ on the activity definition. 1. The framework initializes this dictionary with the default properties from the activity definition and deep linked properties, if any. 2. If deep linking contains the same key as the default properties, the deep linked value overrides the default value. 3. You can update the properties at runtime.
-func (ga *GameActivity) Properties() obj.Object {
+func (ga *GameActivity) Properties() map[string]string {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("properties"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // State returns the state of the game activity.
 func (ga *GameActivity) State() GameActivityState {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[GameActivityState](objref.IDOf(ga), objc.RegisterName("state"))
 	return _r
 }
 
 // PartyCode returns if the game supports party code, this is the party code that can be shared among players to join the party. If the game doesn't support party code, this value will be `nil`. Use “GKGameActivity/start(definition:partyCode:)“ to create a game activity with a custom party code.
 func (ga *GameActivity) PartyCode() string {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("partyCode"))
 	if _r == 0 {
 		return ""
@@ -181,55 +212,66 @@ func (ga *GameActivity) PartyCode() string {
 }
 
 // PartyURL returns if the game supports party code, this is the URL that can be shared among players to join the party.
-func (ga *GameActivity) PartyURL() obj.Object {
+func (ga *GameActivity) PartyURL() string {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("partyURL"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // CreationDate returns the date when the activity was created.
-func (ga *GameActivity) CreationDate() obj.Object {
+func (ga *GameActivity) CreationDate() time.Time {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("creationDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // StartDate returns the date when the activity was initially started.
-func (ga *GameActivity) StartDate() obj.Object {
+func (ga *GameActivity) StartDate() time.Time {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // LastResumeDate returns the date when the activity was last resumed. - If the activity was first started, this will be the same as the start date. - If the activity was paused and resumed, this will be the date when the activity was resumed.
-func (ga *GameActivity) LastResumeDate() obj.Object {
+func (ga *GameActivity) LastResumeDate() time.Time {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("lastResumeDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // EndDate returns the date when the activity was officially ended.
-func (ga *GameActivity) EndDate() obj.Object {
+func (ga *GameActivity) EndDate() time.Time {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("endDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // Duration returns the total time elapsed while in active state.
 func (ga *GameActivity) Duration() float64 {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[float64](objref.IDOf(ga), objc.RegisterName("duration"))
 	return _r
 }
 
 // Achievements returns all achievements that have been associated with this activity. Progress of each achievement will be reported when the activity ends.
-func (ga *GameActivity) Achievements() obj.Object {
+// The order of the returned elements is unspecified.
+func (ga *GameActivity) Achievements() []*Achievement {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("achievements"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Achievement { return AchievementFromID(_id) })
 }
 
 // LeaderboardScores returns all leaderboard scores that have been associated with this activity. Scores will be submitted to the leaderboards when the activity ends.
-func (ga *GameActivity) LeaderboardScores() obj.Object {
+// The order of the returned elements is unspecified.
+func (ga *GameActivity) LeaderboardScores() []*LeaderboardScore {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("leaderboardScores"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *LeaderboardScore { return LeaderboardScoreFromID(_id) })
 }
 
 // MakeMatchRequest returns makes a match request object with information from the activity, which you can use to find matches for the local player.
 func (ga *GameActivity) MakeMatchRequest() *MatchRequest {
+	defer runtime.KeepAlive(ga)
 	_r := objc.Send[objc.ID](objref.IDOf(ga), objc.RegisterName("makeMatchRequest"))
 	return MatchRequestFromID(_r)
 }
@@ -238,6 +280,7 @@ func (ga *GameActivity) MakeMatchRequest() *MatchRequest {
 //
 // FindMatch blocks until the operation completes or ctx is cancelled.
 func (ga *GameActivity) FindMatch(ctx context.Context) (result *Match, err error) {
+	defer runtime.KeepAlive(ga)
 	type _result struct {
 		val *Match
 		err error
@@ -263,6 +306,7 @@ func (ga *GameActivity) FindMatch(ctx context.Context) (result *Match, err error
 //
 // FindPlayersForHostedMatch blocks until the operation completes or ctx is cancelled.
 func (ga *GameActivity) FindPlayersForHostedMatch(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(ga)
 	type _result struct {
 		val obj.Object
 		err error

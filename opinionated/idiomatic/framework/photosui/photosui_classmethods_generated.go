@@ -5,6 +5,8 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -24,6 +26,7 @@ func AllFilterMatchingSubfilters(subfilters []*PickerFilter) *PickerFilter {
 
 // NotFilterOfSubfilter returns a new filter formed by negating the given filter.
 func NotFilterOfSubfilter(subfilter *PickerFilter) *PickerFilter {
+	defer runtime.KeepAlive(subfilter)
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPickerFilter")), objc.RegisterName("notFilterOfSubfilter:"), objref.IDOf(subfilter))
 	return PickerFilterFromID(_r)
 }

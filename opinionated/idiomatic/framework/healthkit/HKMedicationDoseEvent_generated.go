@@ -5,9 +5,13 @@
 package healthkit
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,48 +56,56 @@ func NewMedicationDoseEvent() *MedicationDoseEvent {
 
 // MedicationDoseEventType returns the data type that identified the samples that store medication dose event data. You use this type when creating queries or filtering results by sample type.
 func (mde *MedicationDoseEvent) MedicationDoseEventType() *MedicationDoseEventType {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[objc.ID](objref.IDOf(mde), objc.RegisterName("medicationDoseEventType"))
 	return MedicationDoseEventTypeFromID(_r)
 }
 
 // ScheduleType returns the scheduling context for this logged dose event. The system sets this to “HKMedicationDoseEvent/ScheduleType/asNeeded“ when the person logs a dose without a schedule and “HKMedicationDoseEvent/ScheduleType/schedule“ when a person logs a dose from a scheduled medication reminder.
 func (mde *MedicationDoseEvent) ScheduleType() MedicationDoseEventScheduleType {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[MedicationDoseEventScheduleType](objref.IDOf(mde), objc.RegisterName("scheduleType"))
 	return _r
 }
 
 // MedicationConceptIdentifier returns the identifier of the medication concept the system associates with this dose event. The system uses this identifier to link the dose event back to its “HKMedicationConcept“ object.
 func (mde *MedicationDoseEvent) MedicationConceptIdentifier() *HealthConceptIdentifier {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[objc.ID](objref.IDOf(mde), objc.RegisterName("medicationConceptIdentifier"))
 	return HealthConceptIdentifierFromID(_r)
 }
 
 // ScheduledDate returns the date and time the person takes the medication, if scheduled. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“ and always null for  “HKMedicationDoseEvent/ScheduleType/asNeeded“.
-func (mde *MedicationDoseEvent) ScheduledDate() obj.Object {
+func (mde *MedicationDoseEvent) ScheduledDate() time.Time {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[objc.ID](objref.IDOf(mde), objc.RegisterName("scheduledDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // ScheduledDoseQuantity returns the dose quantity a person is expected to take based on their medication schedule. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“, and always null for “HKMedicationDoseEvent/ScheduleType/asNeeded“.
-func (mde *MedicationDoseEvent) ScheduledDoseQuantity() obj.Object {
+func (mde *MedicationDoseEvent) ScheduledDoseQuantity() *foundation.Number {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[objc.ID](objref.IDOf(mde), objc.RegisterName("scheduledDoseQuantity"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DoseQuantity returns the dose quantity the person reports as taken. For scheduled dose events, the value defaults to the “HKMedicationDoseEvent/scheduledDoseQuantity-477ge“, when logged from a reminder. For as needed dose events, the value defaults to `1` in the medication tracking experience, but can always be edited by the person logging.
-func (mde *MedicationDoseEvent) DoseQuantity() obj.Object {
+func (mde *MedicationDoseEvent) DoseQuantity() *foundation.Number {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[objc.ID](objref.IDOf(mde), objc.RegisterName("doseQuantity"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // LogStatus returns the log status the system assigns to this dose event.
 func (mde *MedicationDoseEvent) LogStatus() MedicationDoseEventLogStatus {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[MedicationDoseEventLogStatus](objref.IDOf(mde), objc.RegisterName("logStatus"))
 	return _r
 }
 
 // Unit returns the unit that the system associates with the medication when the person logs the dose. This ensures that the dose quantity is recorded with the correct measurement unit.
 func (mde *MedicationDoseEvent) Unit() *Unit {
+	defer runtime.KeepAlive(mde)
 	_r := objc.Send[objc.ID](objref.IDOf(mde), objc.RegisterName("unit"))
 	return UnitFromID(_r)
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterSetWeekDayScheduleParamsAdopt(id objc.ID) *MTRDoorLockClu
 
 // Description returns the object's -description text.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) Description() string {
+	defer runtime.KeepAlive(mdlcswdsp)
 	return rt.Description(objref.IDOf(mdlcswdsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcswdsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcswdsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcswdsp)
 	return rt.IsKind(objref.IDOf(mdlcswdsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) String() string {
+	defer runtime.KeepAlive(mdlcswdsp)
 	return rt.Description(objref.IDOf(mdlcswdsp))
 }
 
@@ -72,108 +80,126 @@ func NewMTRDoorLockClusterSetWeekDayScheduleParams() *MTRDoorLockClusterSetWeekD
 
 // WithWeekDayIndex sets the week day index.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(weekDayIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 	return mdlcswdsp
 }
 
 // WithUserIndex sets the user index.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcswdsp
 }
 
 // WithDaysMask sets the days mask.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithDaysMask(daysMask obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(daysMask)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setDaysMask:"), objref.IDOf(daysMask))
 	return mdlcswdsp
 }
 
 // WithStartHour sets the start hour.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithStartHour(startHour obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(startHour)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setStartHour:"), objref.IDOf(startHour))
 	return mdlcswdsp
 }
 
 // WithStartMinute sets the start minute.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithStartMinute(startMinute obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(startMinute)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setStartMinute:"), objref.IDOf(startMinute))
 	return mdlcswdsp
 }
 
 // WithEndHour sets the end hour.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithEndHour(endHour obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(endHour)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setEndHour:"), objref.IDOf(endHour))
 	return mdlcswdsp
 }
 
 // WithEndMinute sets the end minute.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithEndMinute(endMinute obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(endMinute)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setEndMinute:"), objref.IDOf(endMinute))
 	return mdlcswdsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcswdsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlcswdsp
 }
 
 // WeekDayIndex returns the week day index.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WeekDayIndex() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WeekDayIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("weekDayIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) UserIndex() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DaysMask returns the days mask.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) DaysMask() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) DaysMask() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("daysMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartHour returns the start hour.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) StartHour() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) StartHour() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("startHour"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartMinute returns the start minute.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) StartMinute() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) StartMinute() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("startMinute"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndHour returns the end hour.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) EndHour() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) EndHour() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("endHour"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndMinute returns the end minute.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) EndMinute() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) EndMinute() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("endMinute"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlcswdsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,29 +58,35 @@ func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowed(position unsafe.P
 
 // NodeAtGridPosition returns the node in the graph at the specified grid coordinates.
 func (gg *GridGraph) NodeAtGridPosition(position unsafe.Pointer) obj.Object {
+	defer runtime.KeepAlive(gg)
 	_r := objc.Send[objc.ID](objref.IDOf(gg), objc.RegisterName("nodeAtGridPosition:"), position)
 	return obj.Wrap(_r)
 }
 
 // ConnectNodeToAdjacentNodes adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
 func (gg *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
+	defer runtime.KeepAlive(gg)
+	defer runtime.KeepAlive(node)
 	objc.Send[objc.ID](objref.IDOf(gg), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
 }
 
 // GridWidth returns the grid width.
 func (gg *GridGraph) GridWidth() int {
+	defer runtime.KeepAlive(gg)
 	_r := objc.Send[int](objref.IDOf(gg), objc.RegisterName("gridWidth"))
 	return _r
 }
 
 // GridHeight returns the grid height.
 func (gg *GridGraph) GridHeight() int {
+	defer runtime.KeepAlive(gg)
 	_r := objc.Send[int](objref.IDOf(gg), objc.RegisterName("gridHeight"))
 	return _r
 }
 
 // DiagonalsAllowed wraps the corresponding Objective-C method.
 func (gg *GridGraph) DiagonalsAllowed() bool {
+	defer runtime.KeepAlive(gg)
 	_r := objc.Send[bool](objref.IDOf(gg), objc.RegisterName("diagonalsAllowed"))
 	return _r
 }

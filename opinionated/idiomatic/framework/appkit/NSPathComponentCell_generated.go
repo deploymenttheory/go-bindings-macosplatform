@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -60,15 +62,16 @@ func NewPathComponentCell() *PathComponentCell {
 }
 
 // WithURL sets the portion of the path from the root through the component represented by the receiver.
-func (pcc *PathComponentCell) WithURL(uRL string) *PathComponentCell {
+func (pcc *PathComponentCell) WithURL(url string) *PathComponentCell {
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setURL:"), rt.FileURL(url))
 	})
 	return pcc
 }
 
 // WithBackgroundColor sets the color of the cell’s background.
 func (pcc *PathComponentCell) WithBackgroundColor(backgroundColor *Color) *PathComponentCell {
+	defer runtime.KeepAlive(backgroundColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	})
@@ -85,6 +88,7 @@ func (pcc *PathComponentCell) WithDrawsBackground(drawsBackground bool) *PathCom
 
 // WithTextColor sets the color to use to draw the cell’s text.
 func (pcc *PathComponentCell) WithTextColor(textColor *Color) *PathComponentCell {
+	defer runtime.KeepAlive(textColor)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	})
@@ -109,6 +113,7 @@ func (pcc *PathComponentCell) WithPlaceholderString(placeholderString string) *P
 
 // WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
 func (pcc *PathComponentCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathComponentCell {
+	defer runtime.KeepAlive(placeholderAttributedString)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	})
@@ -126,6 +131,7 @@ func (pcc *PathComponentCell) WithAllowedInputSourceLocales(items ...obj.Object)
 
 // WithControlView sets the view associated with the cell.
 func (pcc *PathComponentCell) WithControlView(controlView ViewProvider) *PathComponentCell {
+	defer runtime.KeepAlive(controlView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	})
@@ -150,6 +156,7 @@ func (pcc *PathComponentCell) WithState(state int) *PathComponentCell {
 
 // WithTarget sets the object that receives the cell’s action messages.
 func (pcc *PathComponentCell) WithTarget(target obj.Object) *PathComponentCell {
+	defer runtime.KeepAlive(target)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	})
@@ -254,6 +261,7 @@ func (pcc *PathComponentCell) WithWraps(wraps bool) *PathComponentCell {
 
 // WithFont sets the font that the cell uses to display text.
 func (pcc *PathComponentCell) WithFont(font *Font) *PathComponentCell {
+	defer runtime.KeepAlive(font)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setFont:"), objref.IDOf(font))
 	})
@@ -262,6 +270,7 @@ func (pcc *PathComponentCell) WithFont(font *Font) *PathComponentCell {
 
 // WithFormatter sets the cell’s formatter object.
 func (pcc *PathComponentCell) WithFormatter(formatter obj.Object) *PathComponentCell {
+	defer runtime.KeepAlive(formatter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	})
@@ -270,6 +279,7 @@ func (pcc *PathComponentCell) WithFormatter(formatter obj.Object) *PathComponent
 
 // WithObjectValue sets the cell’s value as an Objective-C object.
 func (pcc *PathComponentCell) WithObjectValue(objectValue obj.Object) *PathComponentCell {
+	defer runtime.KeepAlive(objectValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	})
@@ -318,6 +328,7 @@ func (pcc *PathComponentCell) WithIntegerValue(integerValue int) *PathComponentC
 
 // WithImage sets the image displayed by the cell, if any.
 func (pcc *PathComponentCell) WithImage(image *Image) *PathComponentCell {
+	defer runtime.KeepAlive(image)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setImage:"), objref.IDOf(image))
 	})
@@ -334,6 +345,7 @@ func (pcc *PathComponentCell) WithControlSize(controlSize ControlSize) *PathComp
 
 // WithRepresentedObject sets the object represented by the cell.
 func (pcc *PathComponentCell) WithRepresentedObject(representedObject obj.Object) *PathComponentCell {
+	defer runtime.KeepAlive(representedObject)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	})
@@ -342,6 +354,7 @@ func (pcc *PathComponentCell) WithRepresentedObject(representedObject obj.Object
 
 // WithMenu sets the cell’s contextual menu.
 func (pcc *PathComponentCell) WithMenu(menu *Menu) *PathComponentCell {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -430,6 +443,7 @@ func (pcc *PathComponentCell) WithFocusRingType(focusRingType FocusRingType) *Pa
 
 // WithAttributedStringValue sets the cell’s value as an attributed string.
 func (pcc *PathComponentCell) WithAttributedStringValue(attributedStringValue obj.Object) *PathComponentCell {
+	defer runtime.KeepAlive(attributedStringValue)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	})
@@ -477,12 +491,13 @@ func (pcc *PathComponentCell) WithControlTint(controlTint ControlTint) *PathComp
 }
 
 // URL returns the URL.
-func (pcc *PathComponentCell) URL() obj.Object {
-	var _mainthread0 obj.Object
+func (pcc *PathComponentCell) URL() string {
+	defer runtime.KeepAlive(pcc)
+	var _mainthread0 string
 	purego.Main(func() {
-		_mainthread0 = func() obj.Object {
+		_mainthread0 = func() string {
 			_r := objc.Send[objc.ID](objref.IDOf(pcc), objc.RegisterName("URL"))
-			return obj.Wrap(_r)
+			return rt.URLString(_r)
 		}()
 	})
 	return _mainthread0

@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,6 +68,7 @@ func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Wit
 
 // WithPrf sets the prf.
 func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
+	defer runtime.KeepAlive(prf)
 	objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return askpkcar
 }
@@ -74,6 +77,7 @@ func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Wit
 //
 // AllowedCredentials returns the collection as a Go slice.
 func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+	defer runtime.KeepAlive(askpkcar)
 	_arr := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("allowedCredentials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 		return AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_id)
@@ -82,6 +86,7 @@ func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) All
 
 // AppID returns use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
 func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AppID() string {
+	defer runtime.KeepAlive(askpkcar)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("appID"))
 	if _r == 0 {
 		return ""
@@ -91,6 +96,7 @@ func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) App
 
 // Prf returns the prf.
 func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
+	defer runtime.KeepAlive(askpkcar)
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputFromID(_r)
 }

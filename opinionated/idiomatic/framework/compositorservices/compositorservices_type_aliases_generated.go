@@ -6,5 +6,5 @@ package compositorservices
 
 // A Mach absolute time clock value.
 type CpTime struct {
-	Cp_mach_abs_time uint64
+	CpMachAbsTime uint64
 }

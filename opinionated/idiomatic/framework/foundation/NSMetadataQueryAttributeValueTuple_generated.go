@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func metadataQueryAttributeValueTupleAdopt(id objc.ID) *MetadataQueryAttributeVa
 
 // Description returns the object's -description text.
 func (mqavt *MetadataQueryAttributeValueTuple) Description() string {
+	defer runtime.KeepAlive(mqavt)
 	return rt.Description(objref.IDOf(mqavt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mqavt *MetadataQueryAttributeValueTuple) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mqavt)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mqavt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mqavt *MetadataQueryAttributeValueTuple) IsKind(className string) bool {
+	defer runtime.KeepAlive(mqavt)
 	return rt.IsKind(objref.IDOf(mqavt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mqavt *MetadataQueryAttributeValueTuple) String() string {
+	defer runtime.KeepAlive(mqavt)
 	return rt.Description(objref.IDOf(mqavt))
 }
 
@@ -81,13 +87,14 @@ func (mqavt *MetadataQueryAttributeValueTuple) WithObservationInfo(observationIn
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mqavt *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple {
-	objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mqavt *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MetadataQueryAttributeValueTuple {
+	objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mqavt
 }
 
 // Attribute returns the attribute.
 func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
+	defer runtime.KeepAlive(mqavt)
 	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("attribute"))
 	if _r == 0 {
 		return ""
@@ -97,12 +104,14 @@ func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
 
 // Value returns the value.
 func (mqavt *MetadataQueryAttributeValueTuple) Value() obj.Object {
+	defer runtime.KeepAlive(mqavt)
 	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
 // Count returns the count.
 func (mqavt *MetadataQueryAttributeValueTuple) Count() int {
+	defer runtime.KeepAlive(mqavt)
 	_r := objc.Send[int](objref.IDOf(mqavt), objc.RegisterName("count"))
 	return _r
 }

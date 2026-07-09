@@ -5,6 +5,8 @@
 package iobluetooth
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func iOBluetoothDevicePairAdopt(id objc.ID) *IOBluetoothDevicePair {
 
 // Description returns the object's -description text.
 func (ibdp *IOBluetoothDevicePair) Description() string {
+	defer runtime.KeepAlive(ibdp)
 	return rt.Description(objref.IDOf(ibdp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ibdp *IOBluetoothDevicePair) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ibdp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ibdp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ibdp *IOBluetoothDevicePair) IsKind(className string) bool {
+	defer runtime.KeepAlive(ibdp)
 	return rt.IsKind(objref.IDOf(ibdp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ibdp *IOBluetoothDevicePair) String() string {
+	defer runtime.KeepAlive(ibdp)
 	return rt.Description(objref.IDOf(ibdp))
 }
 
@@ -74,39 +81,47 @@ func NewIOBluetoothDevicePair() *IOBluetoothDevicePair {
 
 // WithDelegate sets the delegate.
 func (ibdp *IOBluetoothDevicePair) WithDelegate(delegate obj.Object) *IOBluetoothDevicePair {
+	defer runtime.KeepAlive(delegate)
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ibdp
 }
 
 // Start returns kicks off the pairing with the device.
 func (ibdp *IOBluetoothDevicePair) Start() int {
+	defer runtime.KeepAlive(ibdp)
 	_r := objc.Send[int](objref.IDOf(ibdp), objc.RegisterName("start"))
 	return _r
 }
 
 // Stop stops the current pairing. Removes the delegate and disconnects if device was connected.
 func (ibdp *IOBluetoothDevicePair) Stop() {
+	defer runtime.KeepAlive(ibdp)
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("stop"))
 }
 
 // Device get the IOBluetoothDevice being used by the object.
 func (ibdp *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
+	defer runtime.KeepAlive(ibdp)
 	_r := objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("device"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
 // SetDevice set the device object to pair with. It is retained by the object.
 func (ibdp *IOBluetoothDevicePair) SetDevice(inDevice *IOBluetoothDevice) {
+	defer runtime.KeepAlive(ibdp)
+	defer runtime.KeepAlive(inDevice)
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("setDevice:"), objref.IDOf(inDevice))
 }
 
 // ReplyUserConfirmation this is the required reply to the devicePairingUserConfirmationRequest delegate message.
 func (ibdp *IOBluetoothDevicePair) ReplyUserConfirmation(reply bool) {
+	defer runtime.KeepAlive(ibdp)
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("replyUserConfirmation:"), reply)
 }
 
 // Delegate returns the delegate.
 func (ibdp *IOBluetoothDevicePair) Delegate() obj.Object {
+	defer runtime.KeepAlive(ibdp)
 	_r := objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }

@@ -5,6 +5,8 @@
 package cloudkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func referenceAdopt(id objc.ID) *Reference {
 
 // Description returns the object's -description text.
 func (r *Reference) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Reference) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Reference) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Reference) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // NewReferenceWithRecordIDAction creates a reference object that points to the record with the specified ID. - Parameters: - recordID: The ID of the target record. This method throws an exception if you specify `nil` for this parameter. - action: The ownership option use between the target record and any records that incorporate this reference object. If you specify the “CKRecord/ReferenceAction/deleteSelf“ option, the record that the `recordID` parameter references becomes the owner of (or acts as the parent of) any objects that use this reference object. For a list of possible values, see “CKRecord/ReferenceAction“. - Returns: An initialized reference object that points to the specified record. Use this method when you have only the ID of the record for the target of a link. You might use this method if you save only the ID of the record to a local data cache. When you create a reference object for use in a search predicate, the predicate ignores the value in the `action` parameter. Search predicates use only the ID of the record during their comparison.
 func NewReferenceWithRecordIDAction(recordID *RecordID, action ReferenceAction) *Reference {
+	defer runtime.KeepAlive(recordID)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKReference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:action:"), objref.IDOf(recordID), action)
 	return referenceAdopt(_id)
@@ -75,6 +83,7 @@ func NewReferenceWithRecordIDAction(recordID *RecordID, action ReferenceAction) 
 
 // NewReferenceWithRecordAction creates a reference object that points to the specified record object. - Parameters: - record: The target record of the reference. - action: The ownership options to use for the records. If you specify the “CKRecord/ReferenceAction/deleteSelf“ option, the object that the `recordID` parameter references becomes the owner of (or acts as the parent of) any objects that use this reference object. For a list of possible values, see “CKRecord/ReferenceAction“. - Returns: An initialized reference object that points to the specified record. Use this method to initialize a reference to a local record object. You can reference a local record that you create, or one that you fetch from the server. When you create a reference object for use in a search predicate, the predicate ignores the value in the `action` parameter. Search predicates use only the ID of the record during their comparison.
 func NewReferenceWithRecordAction(record *Record, action ReferenceAction) *Reference {
+	defer runtime.KeepAlive(record)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CKReference")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecord:action:"), objref.IDOf(record), action)
 	return referenceAdopt(_id)
@@ -82,12 +91,14 @@ func NewReferenceWithRecordAction(record *Record, action ReferenceAction) *Refer
 
 // ReferenceAction returns the ownership behavior for the records. The value in this property determines which action, if any, to take when deleting the target of the reference object — that is, the object that the “CKRecord/Reference/recordID“ property points to. When this property is “CKRecord/ReferenceAction/deleteSelf“, deleting the target object deletes any records that contain that reference in one of their fields. When this property is “CKRecord/ReferenceAction/none“, deleting the target object doesn't delete any additional objects.
 func (r *Reference) ReferenceAction() ReferenceAction {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[ReferenceAction](objref.IDOf(r), objc.RegisterName("referenceAction"))
 	return _r
 }
 
 // RecordID returns the ID of the referenced record. Use the ID in this property to fetch the record on the other end of the link.
 func (r *Reference) RecordID() *RecordID {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }

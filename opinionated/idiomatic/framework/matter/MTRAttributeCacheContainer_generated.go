@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func mTRAttributeCacheContainerAdopt(id objc.ID) *MTRAttributeCacheContainer {
 
 // Description returns the object's -description text.
 func (macc *MTRAttributeCacheContainer) Description() string {
+	defer runtime.KeepAlive(macc)
 	return rt.Description(objref.IDOf(macc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (macc *MTRAttributeCacheContainer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(macc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(macc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (macc *MTRAttributeCacheContainer) IsKind(className string) bool {
+	defer runtime.KeepAlive(macc)
 	return rt.IsKind(objref.IDOf(macc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (macc *MTRAttributeCacheContainer) String() string {
+	defer runtime.KeepAlive(macc)
 	return rt.Description(objref.IDOf(macc))
 }
 

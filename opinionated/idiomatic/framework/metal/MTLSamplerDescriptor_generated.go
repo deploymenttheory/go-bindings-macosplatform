@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func samplerDescriptorAdopt(id objc.ID) *SamplerDescriptor {
 
 // Description returns the object's -description text.
 func (sd *SamplerDescriptor) Description() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sd *SamplerDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sd *SamplerDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(sd)
 	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sd *SamplerDescriptor) String() string {
+	defer runtime.KeepAlive(sd)
 	return rt.Description(objref.IDOf(sd))
 }
 
@@ -176,102 +183,119 @@ func (sd *SamplerDescriptor) WithLabel(label string) *SamplerDescriptor {
 
 // MinFilter returns filter option for combining texels within a mipmap level the sample footprint is larger than a pixel (minification). The default value is MTLSamplerMinMagFilterNearest.
 func (sd *SamplerDescriptor) MinFilter() SamplerMinMagFilter {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerMinMagFilter](objref.IDOf(sd), objc.RegisterName("minFilter"))
 	return _r
 }
 
 // MagFilter returns filter option for combining texels within a mipmap level the sample footprint is smaller than a pixel (magnification). The default value is MTLSamplerMinMagFilterNearest.
 func (sd *SamplerDescriptor) MagFilter() SamplerMinMagFilter {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerMinMagFilter](objref.IDOf(sd), objc.RegisterName("magFilter"))
 	return _r
 }
 
 // MipFilter returns filter options for filtering between two mipmap levels. The default value is MTLSamplerMipFilterNotMipmapped
 func (sd *SamplerDescriptor) MipFilter() SamplerMipFilter {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerMipFilter](objref.IDOf(sd), objc.RegisterName("mipFilter"))
 	return _r
 }
 
 // MaxAnisotropy returns the number of samples that can be taken to improve quality of sample footprints that are anisotropic. The default value is 1.
 func (sd *SamplerDescriptor) MaxAnisotropy() int {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[int](objref.IDOf(sd), objc.RegisterName("maxAnisotropy"))
 	return _r
 }
 
 // SAddressMode set the wrap mode for the S texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
 func (sd *SamplerDescriptor) SAddressMode() SamplerAddressMode {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerAddressMode](objref.IDOf(sd), objc.RegisterName("sAddressMode"))
 	return _r
 }
 
 // TAddressMode set the wrap mode for the T texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
 func (sd *SamplerDescriptor) TAddressMode() SamplerAddressMode {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerAddressMode](objref.IDOf(sd), objc.RegisterName("tAddressMode"))
 	return _r
 }
 
 // RAddressMode set the wrap mode for the R texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
 func (sd *SamplerDescriptor) RAddressMode() SamplerAddressMode {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerAddressMode](objref.IDOf(sd), objc.RegisterName("rAddressMode"))
 	return _r
 }
 
 // BorderColor set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
 func (sd *SamplerDescriptor) BorderColor() SamplerBorderColor {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerBorderColor](objref.IDOf(sd), objc.RegisterName("borderColor"))
 	return _r
 }
 
 // ReductionMode sets the reduction mode for filtering contributing samples. The property's default value is “MTLSamplerReductionModeWeightedAverage“. The sampler ignores this property if any of the following property values are equal to a specific value: - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNotMipmapped“. - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNearest“. - The sampler's “minFilter“ property is equal to “MTLSamplerMinMagFilterNearest“. - The sampler's “magFilter“ property is equal to “MTLSamplerMinMagFilterNearest“.
 func (sd *SamplerDescriptor) ReductionMode() SamplerReductionMode {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[SamplerReductionMode](objref.IDOf(sd), objc.RegisterName("reductionMode"))
 	return _r
 }
 
 // NormalizedCoordinates reports whether if true, texture coordates are from 0 to 1. If false, texture coordinates are 0..width, 0..height. normalizedCoordinates defaults to true. Non-normalized coordinates should only be used with 1D and 2D textures with the ClampToEdge wrap mode, otherwise the results of sampling are undefined.
 func (sd *SamplerDescriptor) NormalizedCoordinates() bool {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("normalizedCoordinates"))
 	return _r
 }
 
 // LodMinClamp returns the minimum level of detail that will be used when sampling from a texture. The default value of lodMinClamp is 0.0.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
 func (sd *SamplerDescriptor) LodMinClamp() float32 {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[float32](objref.IDOf(sd), objc.RegisterName("lodMinClamp"))
 	return _r
 }
 
 // LodMaxClamp returns the maximum level of detail that will be used when sampling from a texture. The default value of lodMaxClamp is FLT_MAX.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
 func (sd *SamplerDescriptor) LodMaxClamp() float32 {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[float32](objref.IDOf(sd), objc.RegisterName("lodMaxClamp"))
 	return _r
 }
 
 // LodAverage reports whether if true, an average level of detail will be used when sampling from a texture. If false, no averaging is performed. lodAverage defaults to false. This option is a performance hint. An implementation is free to ignore this property.
 func (sd *SamplerDescriptor) LodAverage() bool {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("lodAverage"))
 	return _r
 }
 
 // LodBias sets the level-of-detail (lod) bias when sampling from a texture. The property's default value is `0.0f`. The precision format is `S4.6`, and the range is `[-16.0, 15.999]`.
 func (sd *SamplerDescriptor) LodBias() float32 {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[float32](objref.IDOf(sd), objc.RegisterName("lodBias"))
 	return _r
 }
 
 // CompareFunction set the comparison function used when sampling shadow maps. The default value is MTLCompareFunctionNever.
 func (sd *SamplerDescriptor) CompareFunction() CompareFunction {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[CompareFunction](objref.IDOf(sd), objc.RegisterName("compareFunction"))
 	return _r
 }
 
 // SupportArgumentBuffers reports whether the sampler can be used inside an argument buffer
 func (sd *SamplerDescriptor) SupportArgumentBuffers() bool {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[bool](objref.IDOf(sd), objc.RegisterName("supportArgumentBuffers"))
 	return _r
 }
 
 // Label returns a string to help identify the created object.
 func (sd *SamplerDescriptor) Label() string {
+	defer runtime.KeepAlive(sd)
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""

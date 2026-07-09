@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,27 +50,34 @@ func errorAdopt(id objc.ID) *Error {
 
 // Description returns the object's -description text.
 func (e *Error) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Error) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Error) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Error) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // NewErrorWithDomainCodeUserInfo returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
 func NewErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *Error {
+	defer runtime.KeepAlive(domain)
+	defer runtime.KeepAlive(dict)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:code:userInfo:"), objref.IDOf(domain), code, objref.IDOf(dict))
 	return errorAdopt(_id)
@@ -82,31 +90,35 @@ func (e *Error) WithObservationInfo(observationInfo unsafe.Pointer) *Error {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (e *Error) WithScriptingProperties(scriptingProperties obj.Object) *Error {
-	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (e *Error) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Error {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return e
 }
 
 // Domain returns the domain.
 func (e *Error) Domain() *String {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("domain"))
 	return StringFromID(_r)
 }
 
 // Code returns the code.
 func (e *Error) Code() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("code"))
 	return _r
 }
 
 // UserInfo returns the user info.
 func (e *Error) UserInfo() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedDescription returns the localized description.
 func (e *Error) LocalizedDescription() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
@@ -116,6 +128,7 @@ func (e *Error) LocalizedDescription() string {
 
 // LocalizedFailureReason returns the localized failure reason.
 func (e *Error) LocalizedFailureReason() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedFailureReason"))
 	if _r == 0 {
 		return ""
@@ -125,6 +138,7 @@ func (e *Error) LocalizedFailureReason() string {
 
 // LocalizedRecoverySuggestion returns the localized recovery suggestion.
 func (e *Error) LocalizedRecoverySuggestion() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedRecoverySuggestion"))
 	if _r == 0 {
 		return ""
@@ -136,18 +150,21 @@ func (e *Error) LocalizedRecoverySuggestion() string {
 //
 // LocalizedRecoveryOptions returns the collection as a Go slice.
 func (e *Error) LocalizedRecoveryOptions() []string {
+	defer runtime.KeepAlive(e)
 	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedRecoveryOptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // RecoveryAttempter returns the recovery attempter.
 func (e *Error) RecoveryAttempter() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("recoveryAttempter"))
 	return obj.Wrap(_r)
 }
 
 // HelpAnchor returns the help anchor.
 func (e *Error) HelpAnchor() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("helpAnchor"))
 	if _r == 0 {
 		return ""
@@ -157,6 +174,7 @@ func (e *Error) HelpAnchor() string {
 
 // UnderlyingErrors returns the underlying errors.
 func (e *Error) UnderlyingErrors() []obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("underlyingErrors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

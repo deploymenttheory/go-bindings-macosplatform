@@ -5,6 +5,8 @@
 package discrecordingui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func burnProgressPanelAdopt(id objc.ID) *BurnProgressPanel {
 
 // Description returns the object's -description text.
 func (bpp *BurnProgressPanel) Description() string {
+	defer runtime.KeepAlive(bpp)
 	return rt.Description(objref.IDOf(bpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (bpp *BurnProgressPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(bpp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(bpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (bpp *BurnProgressPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(bpp)
 	return rt.IsKind(objref.IDOf(bpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (bpp *BurnProgressPanel) String() string {
+	defer runtime.KeepAlive(bpp)
 	return rt.Description(objref.IDOf(bpp))
 }
 
@@ -80,6 +87,10 @@ func NewBurnProgressPanel() *BurnProgressPanel {
 
 // BeginProgressSheetForBurnLayoutModalForWindow presents the progress panel as a sheet and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
 func (bpp *BurnProgressPanel) BeginProgressSheetForBurnLayoutModalForWindow(burn obj.Object, layout obj.Object, docWindow obj.Object) {
+	defer runtime.KeepAlive(bpp)
+	defer runtime.KeepAlive(burn)
+	defer runtime.KeepAlive(layout)
+	defer runtime.KeepAlive(docWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("beginProgressSheetForBurn:layout:modalForWindow:"), objref.IDOf(burn), objref.IDOf(layout), objref.IDOf(docWindow))
 	})
@@ -88,6 +99,9 @@ func (bpp *BurnProgressPanel) BeginProgressSheetForBurnLayoutModalForWindow(burn
 
 // BeginProgressPanelForBurnLayout presents the progress panel on screen and begins the burn process. This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues.
 func (bpp *BurnProgressPanel) BeginProgressPanelForBurnLayout(burn obj.Object, layout obj.Object) {
+	defer runtime.KeepAlive(bpp)
+	defer runtime.KeepAlive(burn)
+	defer runtime.KeepAlive(layout)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("beginProgressPanelForBurn:layout:"), objref.IDOf(burn), objref.IDOf(layout))
 	})
@@ -96,6 +110,7 @@ func (bpp *BurnProgressPanel) BeginProgressPanelForBurnLayout(burn obj.Object, l
 
 // SetDescription sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the burn.
 func (bpp *BurnProgressPanel) SetDescription(description string) {
+	defer runtime.KeepAlive(bpp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("setDescription:"), purego.NSString(description))
 	})
@@ -104,6 +119,7 @@ func (bpp *BurnProgressPanel) SetDescription(description string) {
 
 // SetVerboseProgressStatus sets the vebosity of the progress feedback. If verbose is <i>YES</i>, the panel will update status for every change. If verbose is <i>NO</i>, the panel will filter some status messages and only update for major changes. The default for the panel is filter the status messages.
 func (bpp *BurnProgressPanel) SetVerboseProgressStatus(verbose bool) {
+	defer runtime.KeepAlive(bpp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("setVerboseProgressStatus:"), verbose)
 	})
@@ -112,6 +128,7 @@ func (bpp *BurnProgressPanel) SetVerboseProgressStatus(verbose bool) {
 
 // VerboseProgressStatus reports whether returns the vebosity of the panel. This method will return <i>YES</i> if the panel will update status for every change and <i>NO</i> if the panel will filter some status messages and only update for major changes.
 func (bpp *BurnProgressPanel) VerboseProgressStatus() bool {
+	defer runtime.KeepAlive(bpp)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -125,6 +142,8 @@ func (bpp *BurnProgressPanel) VerboseProgressStatus() bool {
 
 // StopBurn invoked when the user clicks the panel's stop button.
 func (bpp *BurnProgressPanel) StopBurn(sender obj.Object) {
+	defer runtime.KeepAlive(bpp)
+	defer runtime.KeepAlive(sender)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(bpp), objc.RegisterName("stopBurn:"), objref.IDOf(sender))
 	})

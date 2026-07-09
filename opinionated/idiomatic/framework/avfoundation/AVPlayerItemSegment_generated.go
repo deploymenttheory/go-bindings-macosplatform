@@ -5,6 +5,9 @@
 package avfoundation
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +51,27 @@ func playerItemSegmentAdopt(id objc.ID) *PlayerItemSegment {
 
 // Description returns the object's -description text.
 func (pis *PlayerItemSegment) Description() string {
+	defer runtime.KeepAlive(pis)
 	return rt.Description(objref.IDOf(pis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pis *PlayerItemSegment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pis *PlayerItemSegment) IsKind(className string) bool {
+	defer runtime.KeepAlive(pis)
 	return rt.IsKind(objref.IDOf(pis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pis *PlayerItemSegment) String() string {
+	defer runtime.KeepAlive(pis)
 	return rt.Description(objref.IDOf(pis))
 }
 
@@ -75,12 +83,14 @@ func NewPlayerItemSegment() *PlayerItemSegment {
 
 // SegmentType returns the type of content this segment represents.
 func (pis *PlayerItemSegment) SegmentType() PlayerItemSegmentType {
+	defer runtime.KeepAlive(pis)
 	_r := objc.Send[PlayerItemSegmentType](objref.IDOf(pis), objc.RegisterName("segmentType"))
 	return _r
 }
 
 // TimeMapping returns the timeMapping for this segment. The timeMapping source timeRange represents the start and duration in the segment source's timeline (ie: primary item timeline or interstitial event). The target timeRange represents the start point and duration in the integrated timeline. For interstitial events which occupy a single point, the target's duration will be kCMTimeZero.
 func (pis *PlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
+	defer runtime.KeepAlive(pis)
 	_r := objc.Send[coremedia.CMTimeMapping](objref.IDOf(pis), objc.RegisterName("timeMapping"))
 	return _r
 }
@@ -89,18 +99,21 @@ func (pis *PlayerItemSegment) TimeMapping() coremedia.CMTimeMapping {
 //
 // LoadedTimeRanges returns the collection as a Go slice.
 func (pis *PlayerItemSegment) LoadedTimeRanges() []obj.Object {
+	defer runtime.KeepAlive(pis)
 	_arr := objc.Send[objc.ID](objref.IDOf(pis), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // StartDate returns the date this segment starts at. The date this segment starts at. This value will be nil if the primary item does not contain dates.
-func (pis *PlayerItemSegment) StartDate() obj.Object {
+func (pis *PlayerItemSegment) StartDate() time.Time {
+	defer runtime.KeepAlive(pis)
 	_r := objc.Send[objc.ID](objref.IDOf(pis), objc.RegisterName("startDate"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // InterstitialEvent returns the associated interstitial event for this segment. The associated interstitial event for this segment. This value will be nil for segments representing playback of the primary itme.
 func (pis *PlayerItemSegment) InterstitialEvent() *PlayerInterstitialEvent {
+	defer runtime.KeepAlive(pis)
 	_r := objc.Send[objc.ID](objref.IDOf(pis), objc.RegisterName("interstitialEvent"))
 	return PlayerInterstitialEventFromID(_r)
 }

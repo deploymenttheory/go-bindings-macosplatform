@@ -93,8 +93,8 @@ func (o *NEProxySettings) HTTPEnabled() bool {
 	return _ret
 }
 
-func (o *NEProxySettings) SetHTTPEnabled(hTTPEnabled bool) {
-	o.Ptr().Send(_nEProxySettingsSelSetHTTPEnabled, hTTPEnabled)
+func (o *NEProxySettings) SetHTTPEnabled(httpEnabled bool) {
+	o.Ptr().Send(_nEProxySettingsSelSetHTTPEnabled, httpEnabled)
 }
 
 // @property HTTPServer @discussion A NEProxyServer object containing the HTTP proxy server settings.
@@ -106,8 +106,8 @@ func (o *NEProxySettings) HTTPServer() *NEProxyServer {
 	return NEProxyServerFromID(_ret)
 }
 
-func (o *NEProxySettings) SetHTTPServer(hTTPServer *NEProxyServer) {
-	o.Ptr().Send(_nEProxySettingsSelSetHTTPServer, hTTPServer.Ptr())
+func (o *NEProxySettings) SetHTTPServer(httpServer *NEProxyServer) {
+	o.Ptr().Send(_nEProxySettingsSelSetHTTPServer, httpServer.Ptr())
 }
 
 // @property HTTPSEnabled @discussion A boolean indicating if the static HTTPS proxy is enabled.
@@ -116,8 +116,8 @@ func (o *NEProxySettings) HTTPSEnabled() bool {
 	return _ret
 }
 
-func (o *NEProxySettings) SetHTTPSEnabled(hTTPSEnabled bool) {
-	o.Ptr().Send(_nEProxySettingsSelSetHTTPSEnabled, hTTPSEnabled)
+func (o *NEProxySettings) SetHTTPSEnabled(httpsEnabled bool) {
+	o.Ptr().Send(_nEProxySettingsSelSetHTTPSEnabled, httpsEnabled)
 }
 
 // @property HTTPSServer @discussion A NEProxyServer object containing the HTTPS proxy server settings.
@@ -129,8 +129,8 @@ func (o *NEProxySettings) HTTPSServer() *NEProxyServer {
 	return NEProxyServerFromID(_ret)
 }
 
-func (o *NEProxySettings) SetHTTPSServer(hTTPSServer *NEProxyServer) {
-	o.Ptr().Send(_nEProxySettingsSelSetHTTPSServer, hTTPSServer.Ptr())
+func (o *NEProxySettings) SetHTTPSServer(httpsServer *NEProxyServer) {
+	o.Ptr().Send(_nEProxySettingsSelSetHTTPSServer, httpsServer.Ptr())
 }
 
 // @property excludeSimpleHostnames @discussion A flag indicating if the proxy settings should not be used for network destinations specified using single-label host names.

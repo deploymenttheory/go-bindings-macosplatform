@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -55,6 +57,8 @@ func NewNNBinaryArithmeticNodeWithSources(sourceNodes []obj.Object) *NNBinaryAri
 
 // NewNNBinaryArithmeticNodeWithLeftSourceRightSource init an arithemtic node with two sources
 func NewNNBinaryArithmeticNodeWithLeftSourceRightSource(left obj.Object, right obj.Object) *NNBinaryArithmeticNode {
+	defer runtime.KeepAlive(left)
+	defer runtime.KeepAlive(right)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNBinaryArithmeticNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftSource:rightSource:"), objref.IDOf(left), objref.IDOf(right))
 	return nNBinaryArithmeticNodeAdopt(_id)
@@ -134,72 +138,84 @@ func (nban *NNBinaryArithmeticNode) WithLabel(label string) *NNBinaryArithmeticN
 
 // GradientFiltersWithSources create new arithmetic gradient nodes Create two new arithmetic gradient nodes - one that computes the gradient for the primary source image and one that computes the gradient for the secondary sourcefrom the inference pass.
 func (nban *NNBinaryArithmeticNode) GradientFiltersWithSources(gradientImages []obj.Object) []obj.Object {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[objc.ID](objref.IDOf(nban), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(gradientImages, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PrimaryScale returns the primary scale.
 func (nban *NNBinaryArithmeticNode) PrimaryScale() float32 {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("primaryScale"))
 	return _r
 }
 
 // SecondaryScale returns the secondary scale.
 func (nban *NNBinaryArithmeticNode) SecondaryScale() float32 {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
 // Bias returns the bias.
 func (nban *NNBinaryArithmeticNode) Bias() float32 {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("bias"))
 	return _r
 }
 
 // PrimaryStrideInPixelsX returns the primary stride in pixels x.
 func (nban *NNBinaryArithmeticNode) PrimaryStrideInPixelsX() int {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("primaryStrideInPixelsX"))
 	return _r
 }
 
 // PrimaryStrideInPixelsY returns the primary stride in pixels y.
 func (nban *NNBinaryArithmeticNode) PrimaryStrideInPixelsY() int {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("primaryStrideInPixelsY"))
 	return _r
 }
 
 // PrimaryStrideInFeatureChannels returns the primary stride in feature channels.
 func (nban *NNBinaryArithmeticNode) PrimaryStrideInFeatureChannels() int {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("primaryStrideInFeatureChannels"))
 	return _r
 }
 
 // SecondaryStrideInPixelsX returns the secondary stride in pixels x.
 func (nban *NNBinaryArithmeticNode) SecondaryStrideInPixelsX() int {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("secondaryStrideInPixelsX"))
 	return _r
 }
 
 // SecondaryStrideInPixelsY returns the secondary stride in pixels y.
 func (nban *NNBinaryArithmeticNode) SecondaryStrideInPixelsY() int {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("secondaryStrideInPixelsY"))
 	return _r
 }
 
 // SecondaryStrideInFeatureChannels returns the secondary stride in feature channels.
 func (nban *NNBinaryArithmeticNode) SecondaryStrideInFeatureChannels() int {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[int](objref.IDOf(nban), objc.RegisterName("secondaryStrideInFeatureChannels"))
 	return _r
 }
 
 // MinimumValue returns the minimum value.
 func (nban *NNBinaryArithmeticNode) MinimumValue() float32 {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // MaximumValue returns the maximum value.
 func (nban *NNBinaryArithmeticNode) MaximumValue() float32 {
+	defer runtime.KeepAlive(nban)
 	_r := objc.Send[float32](objref.IDOf(nban), objc.RegisterName("maximumValue"))
 	return _r
 }

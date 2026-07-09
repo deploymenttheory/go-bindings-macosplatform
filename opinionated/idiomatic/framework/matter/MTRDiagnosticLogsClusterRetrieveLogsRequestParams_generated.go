@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt(id objc.ID) *MTRDiag
 
 // Description returns the object's -description text.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Description() string {
+	defer runtime.KeepAlive(mdlcrlrp)
 	return rt.Description(objref.IDOf(mdlcrlrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcrlrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcrlrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcrlrp)
 	return rt.IsKind(objref.IDOf(mdlcrlrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) String() string {
+	defer runtime.KeepAlive(mdlcrlrp)
 	return rt.Description(objref.IDOf(mdlcrlrp))
 }
 
@@ -72,12 +80,14 @@ func NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams() *MTRDiagnosticLogsCl
 
 // WithIntent sets the intent.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithIntent(intent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	defer runtime.KeepAlive(intent)
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setIntent:"), objref.IDOf(intent))
 	return mdlcrlrp
 }
 
 // WithRequestedProtocol sets the requested protocol.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithRequestedProtocol(requestedProtocol obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	defer runtime.KeepAlive(requestedProtocol)
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setRequestedProtocol:"), objref.IDOf(requestedProtocol))
 	return mdlcrlrp
 }
@@ -90,30 +100,35 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTransferF
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcrlrp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlcrlrp
 }
 
 // Intent returns the intent.
-func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() obj.Object {
+func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() *foundation.Number {
+	defer runtime.KeepAlive(mdlcrlrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("intent"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RequestedProtocol returns the requested protocol.
-func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() obj.Object {
+func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() *foundation.Number {
+	defer runtime.KeepAlive(mdlcrlrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("requestedProtocol"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TransferFileDesignator returns the transfer file designator.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileDesignator() string {
+	defer runtime.KeepAlive(mdlcrlrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("transferFileDesignator"))
 	if _r == 0 {
 		return ""
@@ -122,13 +137,15 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileD
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcrlrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlcrlrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

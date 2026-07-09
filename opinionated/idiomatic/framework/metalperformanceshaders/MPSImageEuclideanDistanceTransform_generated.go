@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
@@ -79,6 +81,7 @@ func (iedt *ImageEuclideanDistanceTransform) WithLabel(label string) *ImageEucli
 
 // SearchLimitRadius defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
 func (iedt *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
+	defer runtime.KeepAlive(iedt)
 	_r := objc.Send[float32](objref.IDOf(iedt), objc.RegisterName("searchLimitRadius"))
 	return _r
 }

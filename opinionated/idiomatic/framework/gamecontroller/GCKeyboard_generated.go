@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func keyboardAdopt(id objc.ID) *Keyboard {
 
 // Description returns the object's -description text.
 func (k *Keyboard) Description() string {
+	defer runtime.KeepAlive(k)
 	return rt.Description(objref.IDOf(k))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (k *Keyboard) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(k)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(k), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (k *Keyboard) IsKind(className string) bool {
+	defer runtime.KeepAlive(k)
 	return rt.IsKind(objref.IDOf(k), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (k *Keyboard) String() string {
+	defer runtime.KeepAlive(k)
 	return rt.Description(objref.IDOf(k))
 }
 
@@ -74,6 +81,7 @@ func NewKeyboard() *Keyboard {
 
 // KeyboardInput returns unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
 func (k *Keyboard) KeyboardInput() *KeyboardInput {
+	defer runtime.KeepAlive(k)
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("keyboardInput"))
 	return KeyboardInputFromID(_r)
 }

@@ -5,11 +5,13 @@
 package audiotoolbox
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -68,30 +70,33 @@ func (auvb *AudioUnitV2Bridge) WithMaximumFramesToRender(maximumFramesToRender u
 
 // WithParameterTree sets an audio unit’s parameters, organized in a tree hierarchy.
 func (auvb *AudioUnitV2Bridge) WithParameterTree(parameterTree *ParameterTree) *AudioUnitV2Bridge {
+	defer runtime.KeepAlive(parameterTree)
 	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setParameterTree:"), objref.IDOf(parameterTree))
 	return auvb
 }
 
 // WithHostMIDIProtocol sets the MIDI protocol to be used by the host for receiving MIDIEventList data. Hosts should set this property to the protocol they wish to receive MIDIEventList data from the Audio Unit. This should be set prior to initialization, all translatable messages will be converted  (if necessary) to this property's protocol prior to delivery to the host. Host should setup in the following order: - Set hostMIDIProtocol - Set MIDIOutputEventListBlock - Call allocateRenderResourcesAndReturnError This is bridged to the v2 API property kAudioUnitProperty_HostMIDIProtocol. Notes: - If overriding this property, subclassers must call [super setHostMIDIProtocol:] - hostMIDIProtocol should be set before attempting to query AudioUnitMIDIProtocol or calling allocateRenderResourcesAndReturnError to allow Audio Units to optionally match their input MIDI protocol to the desired host protocol and prevent protocol conversion.
 func (auvb *AudioUnitV2Bridge) WithHostMIDIProtocol(hostMIDIProtocol obj.Object) *AudioUnitV2Bridge {
+	defer runtime.KeepAlive(hostMIDIProtocol)
 	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setHostMIDIProtocol:"), objref.IDOf(hostMIDIProtocol))
 	return auvb
 }
 
 // WithFullState sets a persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.
-func (auvb *AudioUnitV2Bridge) WithFullState(fullState obj.Object) *AudioUnitV2Bridge {
-	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setFullState:"), objref.IDOf(fullState))
+func (auvb *AudioUnitV2Bridge) WithFullState(fullState map[string]obj.Object) *AudioUnitV2Bridge {
+	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setFullState:"), rt.MapToDict(fullState, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return auvb
 }
 
 // WithFullStateForDocument sets a persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.
-func (auvb *AudioUnitV2Bridge) WithFullStateForDocument(fullStateForDocument obj.Object) *AudioUnitV2Bridge {
-	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setFullStateForDocument:"), objref.IDOf(fullStateForDocument))
+func (auvb *AudioUnitV2Bridge) WithFullStateForDocument(fullStateForDocument map[string]obj.Object) *AudioUnitV2Bridge {
+	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setFullStateForDocument:"), rt.MapToDict(fullStateForDocument, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return auvb
 }
 
 // WithCurrentPreset sets the audio unit’s last-selected preset.
 func (auvb *AudioUnitV2Bridge) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnitV2Bridge {
+	defer runtime.KeepAlive(currentPreset)
 	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setCurrentPreset:"), objref.IDOf(currentPreset))
 	return auvb
 }
@@ -152,8 +157,8 @@ func (auvb *AudioUnitV2Bridge) WithIntendedSpatialExperience(intendedSpatialExpe
 }
 
 // WithMIDIOutputBufferSizeHint sets hint to control the size of the allocated buffer for outgoing MIDI events. This property allows the plug-in to provide a hint to the framework regarding the size of its outgoing MIDI data buffer. If the plug-in produces more MIDI output data than the default size of the allocated buffer, then the plug-in can provide this property to increase the size of this buffer. The value represents the number of 3-byte Legacy MIDI messages that fit into the buffer or a single MIDIEventList containing 1 MIDIEventPacket of 2 words when using MIDI 2.0 (MIDIEventList based API's). This property is set to the default value by the framework. In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI output in one render call, set this property to increase the buffer. This only provides a recommendation to the framework. Bridged to kAudioUnitProperty_MIDIOutputBufferSizeHint.
-func (auvb *AudioUnitV2Bridge) WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *AudioUnitV2Bridge {
-	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setMIDIOutputBufferSizeHint:"), mIDIOutputBufferSizeHint)
+func (auvb *AudioUnitV2Bridge) WithMIDIOutputBufferSizeHint(midiOutputBufferSizeHint int) *AudioUnitV2Bridge {
+	objc.Send[objc.ID](objref.IDOf(auvb), objc.RegisterName("setMIDIOutputBufferSizeHint:"), midiOutputBufferSizeHint)
 	return auvb
 }
 

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRServiceAreaClusterProgressStructAdopt(id objc.ID) *MTRServiceAreaCluster
 
 // Description returns the object's -description text.
 func (msacps *MTRServiceAreaClusterProgressStruct) Description() string {
+	defer runtime.KeepAlive(msacps)
 	return rt.Description(objref.IDOf(msacps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (msacps *MTRServiceAreaClusterProgressStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(msacps)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(msacps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (msacps *MTRServiceAreaClusterProgressStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(msacps)
 	return rt.IsKind(objref.IDOf(msacps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (msacps *MTRServiceAreaClusterProgressStruct) String() string {
+	defer runtime.KeepAlive(msacps)
 	return rt.Description(objref.IDOf(msacps))
 }
 
@@ -72,36 +80,42 @@ func NewMTRServiceAreaClusterProgressStruct() *MTRServiceAreaClusterProgressStru
 
 // WithAreaID sets the area ID.
 func (msacps *MTRServiceAreaClusterProgressStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterProgressStruct {
+	defer runtime.KeepAlive(areaID)
 	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 	return msacps
 }
 
 // WithStatus sets the status.
 func (msacps *MTRServiceAreaClusterProgressStruct) WithStatus(status obj.Object) *MTRServiceAreaClusterProgressStruct {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return msacps
 }
 
 // WithTotalOperationalTime sets the total operational time.
 func (msacps *MTRServiceAreaClusterProgressStruct) WithTotalOperationalTime(totalOperationalTime obj.Object) *MTRServiceAreaClusterProgressStruct {
+	defer runtime.KeepAlive(totalOperationalTime)
 	objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("setTotalOperationalTime:"), objref.IDOf(totalOperationalTime))
 	return msacps
 }
 
 // AreaID returns the area ID.
-func (msacps *MTRServiceAreaClusterProgressStruct) AreaID() obj.Object {
+func (msacps *MTRServiceAreaClusterProgressStruct) AreaID() *foundation.Number {
+	defer runtime.KeepAlive(msacps)
 	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("areaID"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Status returns the status.
-func (msacps *MTRServiceAreaClusterProgressStruct) Status() obj.Object {
+func (msacps *MTRServiceAreaClusterProgressStruct) Status() *foundation.Number {
+	defer runtime.KeepAlive(msacps)
 	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TotalOperationalTime returns the total operational time.
-func (msacps *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() obj.Object {
+func (msacps *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() *foundation.Number {
+	defer runtime.KeepAlive(msacps)
 	_r := objc.Send[objc.ID](objref.IDOf(msacps), objc.RegisterName("totalOperationalTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

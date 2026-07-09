@@ -5,6 +5,9 @@
 package matter
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,58 +48,69 @@ func mTRCertificateInfoAdopt(id objc.ID) *MTRCertificateInfo {
 
 // Description returns the object's -description text.
 func (mci *MTRCertificateInfo) Description() string {
+	defer runtime.KeepAlive(mci)
 	return rt.Description(objref.IDOf(mci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mci *MTRCertificateInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mci *MTRCertificateInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(mci)
 	return rt.IsKind(objref.IDOf(mci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mci *MTRCertificateInfo) String() string {
+	defer runtime.KeepAlive(mci)
 	return rt.Description(objref.IDOf(mci))
 }
 
 // NewMTRCertificateInfoWithTLVBytes initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
-func NewMTRCertificateInfoWithTLVBytes(bytes_ obj.Object) *MTRCertificateInfo {
+func NewMTRCertificateInfoWithTLVBytes(data obj.Object) *MTRCertificateInfo {
+	defer runtime.KeepAlive(data)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRCertificateInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTLVBytes:"), objref.IDOf(bytes_))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTLVBytes:"), objref.IDOf(data))
 	return mTRCertificateInfoAdopt(_id)
 }
 
 // Issuer returns the Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
 func (mci *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("issuer"))
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
 // Subject returns the Distinguished Name of the entity represented by the certificate.
 func (mci *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("subject"))
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
 // NotBefore returns the not before.
-func (mci *MTRCertificateInfo) NotBefore() obj.Object {
+func (mci *MTRCertificateInfo) NotBefore() time.Time {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("notBefore"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // NotAfter returns the not after.
-func (mci *MTRCertificateInfo) NotAfter() obj.Object {
+func (mci *MTRCertificateInfo) NotAfter() time.Time {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("notAfter"))
-	return obj.Wrap(_r)
+	return rt.NSDateToTime(_r)
 }
 
 // PublicKeyData returns public key data for this certificate
-func (mci *MTRCertificateInfo) PublicKeyData() obj.Object {
+func (mci *MTRCertificateInfo) PublicKeyData() []byte {
+	defer runtime.KeepAlive(mci)
 	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("publicKeyData"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

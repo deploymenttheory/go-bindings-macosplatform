@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPublicKeyCredentialLargeBlobAssertionInputAdopt(id objc.ID) *A
 
 // Description returns the object's -description text.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Description() string {
+	defer runtime.KeepAlive(apkclbai)
 	return rt.Description(objref.IDOf(apkclbai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(apkclbai)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(apkclbai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) IsKind(className string) bool {
+	defer runtime.KeepAlive(apkclbai)
 	return rt.IsKind(objref.IDOf(apkclbai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) String() string {
+	defer runtime.KeepAlive(apkclbai)
 	return rt.Description(objref.IDOf(apkclbai))
 }
 
@@ -74,19 +81,21 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(ope
 }
 
 // WithDataToWrite sets the data to write.
-func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite []byte) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("setDataToWrite:"), rt.BytesToNSData(dataToWrite))
 	return apkclbai
 }
 
 // Operation returns the operation.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
+	defer runtime.KeepAlive(apkclbai)
 	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobAssertionOperation](objref.IDOf(apkclbai), objc.RegisterName("operation"))
 	return _r
 }
 
 // DataToWrite returns the data to write.
-func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() obj.Object {
+func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() []byte {
+	defer runtime.KeepAlive(apkclbai)
 	_r := objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("dataToWrite"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

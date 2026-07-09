@@ -5,6 +5,8 @@
 package fileprovider
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func fileProviderRequestAdopt(id objc.ID) *FileProviderRequest {
 
 // Description returns the object's -description text.
 func (fpr *FileProviderRequest) Description() string {
+	defer runtime.KeepAlive(fpr)
 	return rt.Description(objref.IDOf(fpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (fpr *FileProviderRequest) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(fpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(fpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (fpr *FileProviderRequest) IsKind(className string) bool {
+	defer runtime.KeepAlive(fpr)
 	return rt.IsKind(objref.IDOf(fpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (fpr *FileProviderRequest) String() string {
+	defer runtime.KeepAlive(fpr)
 	return rt.Description(objref.IDOf(fpr))
 }
 
@@ -74,24 +81,28 @@ func NewFileProviderRequest() *FileProviderRequest {
 
 // IsSystemRequest reports whether the request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
 func (fpr *FileProviderRequest) IsSystemRequest() bool {
+	defer runtime.KeepAlive(fpr)
 	_r := objc.Send[bool](objref.IDOf(fpr), objc.RegisterName("isSystemRequest"))
 	return _r
 }
 
 // IsFileViewerRequest reports whether the request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
 func (fpr *FileProviderRequest) IsFileViewerRequest() bool {
+	defer runtime.KeepAlive(fpr)
 	_r := objc.Send[bool](objref.IDOf(fpr), objc.RegisterName("isFileViewerRequest"))
 	return _r
 }
 
 // RequestingExecutable returns the URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
-func (fpr *FileProviderRequest) RequestingExecutable() obj.Object {
+func (fpr *FileProviderRequest) RequestingExecutable() string {
+	defer runtime.KeepAlive(fpr)
 	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("requestingExecutable"))
-	return obj.Wrap(_r)
+	return rt.URLString(_r)
 }
 
 // DomainVersion returns the version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
 func (fpr *FileProviderRequest) DomainVersion() *FileProviderDomainVersion {
+	defer runtime.KeepAlive(fpr)
 	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("domainVersion"))
 	return FileProviderDomainVersionFromID(_r)
 }

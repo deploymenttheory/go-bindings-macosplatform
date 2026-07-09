@@ -5,7 +5,10 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func tokenDriverConfigurationAdopt(id objc.ID) *TokenDriverConfiguration {
 
 // Description returns the object's -description text.
 func (tdc *TokenDriverConfiguration) Description() string {
+	defer runtime.KeepAlive(tdc)
 	return rt.Description(objref.IDOf(tdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tdc *TokenDriverConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tdc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tdc *TokenDriverConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(tdc)
 	return rt.IsKind(objref.IDOf(tdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tdc *TokenDriverConfiguration) String() string {
+	defer runtime.KeepAlive(tdc)
 	return rt.Description(objref.IDOf(tdc))
 }
 
@@ -74,23 +82,29 @@ func NewTokenDriverConfiguration() *TokenDriverConfiguration {
 
 // AddTokenConfigurationForTokenInstanceID creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
 func (tdc *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration {
+	defer runtime.KeepAlive(tdc)
+	defer runtime.KeepAlive(instanceID)
 	_r := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("addTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 	return TokenConfigurationFromID(_r)
 }
 
 // RemoveTokenConfigurationForTokenInstanceID removes configuration with specified tokenID. Does nothing if no such token configuration exists.
 func (tdc *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object) {
+	defer runtime.KeepAlive(tdc)
+	defer runtime.KeepAlive(instanceID)
 	objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("removeTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 }
 
 // ClassID returns classID of the token configuration. ClassID is taken from
-func (tdc *TokenDriverConfiguration) ClassID() obj.Object {
+func (tdc *TokenDriverConfiguration) ClassID() *foundation.String {
+	defer runtime.KeepAlive(tdc)
 	_r := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("classID"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // TokenConfigurations returns dictionary of all currently configured tokens for this token class, keyed by instanceID.
 func (tdc *TokenDriverConfiguration) TokenConfigurations() obj.Object {
+	defer runtime.KeepAlive(tdc)
 	_r := objc.Send[objc.ID](objref.IDOf(tdc), objc.RegisterName("tokenConfigurations"))
 	return obj.Wrap(_r)
 }

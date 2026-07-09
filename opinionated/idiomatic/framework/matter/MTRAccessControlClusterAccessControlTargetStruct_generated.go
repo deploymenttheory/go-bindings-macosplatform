@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRAccessControlClusterAccessControlTargetStructAdopt(id objc.ID) *MTRAcces
 
 // Description returns the object's -description text.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Description() string {
+	defer runtime.KeepAlive(maccacts)
 	return rt.Description(objref.IDOf(maccacts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(maccacts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(maccacts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(maccacts)
 	return rt.IsKind(objref.IDOf(maccacts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) String() string {
+	defer runtime.KeepAlive(maccacts)
 	return rt.Description(objref.IDOf(maccacts))
 }
 
 // WithCluster sets the cluster.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
+	defer runtime.KeepAlive(cluster)
 	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return maccacts
 }
 
 // WithEndpoint sets the endpoint.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
+	defer runtime.KeepAlive(endpoint)
 	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return maccacts
 }
 
 // WithDeviceType sets the device type.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
+	defer runtime.KeepAlive(deviceType)
 	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return maccacts
 }
 
 // Cluster returns the cluster.
-func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Cluster() obj.Object {
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Cluster() *foundation.Number {
+	defer runtime.KeepAlive(maccacts)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("cluster"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Endpoint returns the endpoint.
-func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() obj.Object {
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() *foundation.Number {
+	defer runtime.KeepAlive(maccacts)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("endpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DeviceType returns the device type.
-func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() obj.Object {
+func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() *foundation.Number {
+	defer runtime.KeepAlive(maccacts)
 	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("deviceType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRAccessControlClusterAccessControlTargetStruct marks MTRAccessControlClusterAccessControlTargetStruct — and, by embedding promotion, its

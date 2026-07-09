@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,6 +58,7 @@ func NewMassFormatter() *MassFormatter {
 
 // WithNumberFormatter sets the number formatter.
 func (mf *MassFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter {
+	defer runtime.KeepAlive(numberFormatter)
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return mf
 }
@@ -79,13 +82,14 @@ func (mf *MassFormatter) WithObservationInfo(observationInfo unsafe.Pointer) *Ma
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (mf *MassFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MassFormatter {
-	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (mf *MassFormatter) WithScriptingProperties(scriptingProperties map[string]obj.Object) *MassFormatter {
+	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return mf
 }
 
 // StringFromValueUnit wraps the corresponding Objective-C method.
 func (mf *MassFormatter) StringFromValueUnit(value float64, unit MassFormatterUnit) string {
+	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("stringFromValue:unit:"), value, unit)
 	if _r == 0 {
 		return ""
@@ -95,6 +99,7 @@ func (mf *MassFormatter) StringFromValueUnit(value float64, unit MassFormatterUn
 
 // StringFromKilograms wraps the corresponding Objective-C method.
 func (mf *MassFormatter) StringFromKilograms(numberInKilograms float64) string {
+	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("stringFromKilograms:"), numberInKilograms)
 	if _r == 0 {
 		return ""
@@ -104,6 +109,7 @@ func (mf *MassFormatter) StringFromKilograms(numberInKilograms float64) string {
 
 // UnitStringFromValueUnit wraps the corresponding Objective-C method.
 func (mf *MassFormatter) UnitStringFromValueUnit(value float64, unit MassFormatterUnit) string {
+	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
 	if _r == 0 {
 		return ""
@@ -113,6 +119,7 @@ func (mf *MassFormatter) UnitStringFromValueUnit(value float64, unit MassFormatt
 
 // UnitStringFromKilogramsUsedUnit wraps the corresponding Objective-C method.
 func (mf *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float64) (result string, unitp MassFormatterUnit) {
+	defer runtime.KeepAlive(mf)
 	var _out0 MassFormatterUnit
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("unitStringFromKilograms:usedUnit:"), numberInKilograms, unsafe.Pointer(&_out0))
 	_v := ""
@@ -124,18 +131,21 @@ func (mf *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float
 
 // NumberFormatter returns the number formatter.
 func (mf *MassFormatter) NumberFormatter() *NumberFormatter {
+	defer runtime.KeepAlive(mf)
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
 // UnitStyle returns the unit style.
 func (mf *MassFormatter) UnitStyle() FormattingUnitStyle {
+	defer runtime.KeepAlive(mf)
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(mf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
 // IsForPersonMassUse reports whether the object is for person mass use.
 func (mf *MassFormatter) IsForPersonMassUse() bool {
+	defer runtime.KeepAlive(mf)
 	_r := objc.Send[bool](objref.IDOf(mf), objc.RegisterName("isForPersonMassUse"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package avfaudio
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func audioEnvironmentReverbParametersAdopt(id objc.ID) *AudioEnvironmentReverbPa
 
 // Description returns the object's -description text.
 func (aerp *AudioEnvironmentReverbParameters) Description() string {
+	defer runtime.KeepAlive(aerp)
 	return rt.Description(objref.IDOf(aerp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (aerp *AudioEnvironmentReverbParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(aerp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(aerp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (aerp *AudioEnvironmentReverbParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(aerp)
 	return rt.IsKind(objref.IDOf(aerp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (aerp *AudioEnvironmentReverbParameters) String() string {
+	defer runtime.KeepAlive(aerp)
 	return rt.Description(objref.IDOf(aerp))
 }
 
@@ -86,23 +93,27 @@ func (aerp *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnv
 
 // LoadFactoryReverbPreset loads one of the reverbs factory presets.
 func (aerp *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AudioUnitReverbPreset) {
+	defer runtime.KeepAlive(aerp)
 	objc.Send[objc.ID](objref.IDOf(aerp), objc.RegisterName("loadFactoryReverbPreset:"), preset)
 }
 
 // Enable reports whether turns on/off the reverb Default: false
 func (aerp *AudioEnvironmentReverbParameters) Enable() bool {
+	defer runtime.KeepAlive(aerp)
 	_r := objc.Send[bool](objref.IDOf(aerp), objc.RegisterName("enable"))
 	return _r
 }
 
 // Level returns controls the master level of the reverb Range:      -40 to 40 dB Default:    0.0
 func (aerp *AudioEnvironmentReverbParameters) Level() float32 {
+	defer runtime.KeepAlive(aerp)
 	_r := objc.Send[float32](objref.IDOf(aerp), objc.RegisterName("level"))
 	return _r
 }
 
 // FilterParameters returns filter that applies to the output of the reverb
 func (aerp *AudioEnvironmentReverbParameters) FilterParameters() *AudioUnitEQFilterParameters {
+	defer runtime.KeepAlive(aerp)
 	_r := objc.Send[objc.ID](objref.IDOf(aerp), objc.RegisterName("filterParameters"))
 	return AudioUnitEQFilterParametersFromID(_r)
 }

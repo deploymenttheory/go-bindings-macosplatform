@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -63,6 +65,7 @@ func NewGridViewWithFrame(frameRect corefoundation.CGRect) *GridView {
 
 // NewGridViewWithCoder creates a newly allocated grid view object from the coder.
 func NewGridViewWithCoder(coder obj.Object) *GridView {
+	defer runtime.KeepAlive(coder)
 	var _mainthread0 *GridView
 	purego.Main(func() {
 		_mainthread0 = func() *GridView {
@@ -253,6 +256,7 @@ func (gv *GridView) WithWantsLayer(wantsLayer bool) *GridView {
 
 // WithLayer sets the layer.
 func (gv *GridView) WithLayer(layer obj.Object) *GridView {
+	defer runtime.KeepAlive(layer)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	})
@@ -302,6 +306,7 @@ func (gv *GridView) WithBackgroundFilters(items ...obj.Object) *GridView {
 
 // WithCompositingFilter sets the compositing filter.
 func (gv *GridView) WithCompositingFilter(compositingFilter obj.Object) *GridView {
+	defer runtime.KeepAlive(compositingFilter)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	})
@@ -319,6 +324,7 @@ func (gv *GridView) WithContentFilters(items ...obj.Object) *GridView {
 
 // WithShadow sets the shadow.
 func (gv *GridView) WithShadow(shadow *Shadow) *GridView {
+	defer runtime.KeepAlive(shadow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	})
@@ -367,6 +373,7 @@ func (gv *GridView) WithPreparedContentRect(preparedContentRect corefoundation.C
 
 // WithNextKeyView sets the next key view.
 func (gv *GridView) WithNextKeyView(nextKeyView ViewProvider) *GridView {
+	defer runtime.KeepAlive(nextKeyView)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	})
@@ -416,6 +423,7 @@ func (gv *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 
 // WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gv *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView {
+	defer runtime.KeepAlive(writingToolsCoordinator)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	})
@@ -472,6 +480,7 @@ func (gv *GridView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDyna
 
 // WithPressureConfiguration sets the pressure configuration.
 func (gv *GridView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView {
+	defer runtime.KeepAlive(pressureConfiguration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	})
@@ -480,6 +489,7 @@ func (gv *GridView) WithPressureConfiguration(pressureConfiguration *PressureCon
 
 // WithNextResponder sets the next responder after this one, or nil if it has none.
 func (gv *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView {
+	defer runtime.KeepAlive(nextResponder)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	})
@@ -488,6 +498,7 @@ func (gv *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView
 
 // WithMenu sets returns the responder’s menu.
 func (gv *GridView) WithMenu(menu *Menu) *GridView {
+	defer runtime.KeepAlive(menu)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	})
@@ -496,6 +507,7 @@ func (gv *GridView) WithMenu(menu *Menu) *GridView {
 
 // WithUserActivity sets an object encapsulating a user activity supported by this responder.
 func (gv *GridView) WithUserActivity(userActivity obj.Object) *GridView {
+	defer runtime.KeepAlive(userActivity)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	})
@@ -504,6 +516,7 @@ func (gv *GridView) WithUserActivity(userActivity obj.Object) *GridView {
 
 // WithTouchBar sets the NSTouchBar object associated with the responder.
 func (gv *GridView) WithTouchBar(touchBar *TouchBar) *GridView {
+	defer runtime.KeepAlive(touchBar)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	})
@@ -512,6 +525,7 @@ func (gv *GridView) WithTouchBar(touchBar *TouchBar) *GridView {
 
 // RowAtIndex returns the grid row object at the specified index.
 func (gv *GridView) RowAtIndex(index int) *GridRow {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridRow
 	purego.Main(func() {
 		_mainthread0 = func() *GridRow {
@@ -525,6 +539,8 @@ func (gv *GridView) RowAtIndex(index int) *GridRow {
 
 // IndexOfRow returns the index of the specified grid row.
 func (gv *GridView) IndexOfRow(row *GridRow) int {
+	defer runtime.KeepAlive(gv)
+	defer runtime.KeepAlive(row)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -538,6 +554,7 @@ func (gv *GridView) IndexOfRow(row *GridRow) int {
 
 // ColumnAtIndex returns the grid column object at the specified index.
 func (gv *GridView) ColumnAtIndex(index int) *GridColumn {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridColumn
 	purego.Main(func() {
 		_mainthread0 = func() *GridColumn {
@@ -551,6 +568,8 @@ func (gv *GridView) ColumnAtIndex(index int) *GridColumn {
 
 // IndexOfColumn returns the index of the specified grid column.
 func (gv *GridView) IndexOfColumn(column *GridColumn) int {
+	defer runtime.KeepAlive(gv)
+	defer runtime.KeepAlive(column)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -564,6 +583,7 @@ func (gv *GridView) IndexOfColumn(column *GridColumn) int {
 
 // CellAtColumnIndexRowIndex returns the grid cell object at the specified column and row index.
 func (gv *GridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *GridCell {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridCell
 	purego.Main(func() {
 		_mainthread0 = func() *GridCell {
@@ -577,6 +597,8 @@ func (gv *GridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *Gr
 
 // CellForView returns the grid cell object that contains the given view or one of its ancestors.
 func (gv *GridView) CellForView(view *View) *GridCell {
+	defer runtime.KeepAlive(gv)
+	defer runtime.KeepAlive(view)
 	var _mainthread0 *GridCell
 	purego.Main(func() {
 		_mainthread0 = func() *GridCell {
@@ -590,6 +612,7 @@ func (gv *GridView) CellForView(view *View) *GridCell {
 
 // AddRowWithViews adds an array of views to a new row.
 func (gv *GridView) AddRowWithViews(views []*View) *GridRow {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridRow
 	purego.Main(func() {
 		_mainthread0 = func() *GridRow {
@@ -603,6 +626,7 @@ func (gv *GridView) AddRowWithViews(views []*View) *GridRow {
 
 // InsertRowAtIndexWithViews inserts the array of view objects into the grid view at the index.
 func (gv *GridView) InsertRowAtIndexWithViews(index int, views []*View) *GridRow {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridRow
 	purego.Main(func() {
 		_mainthread0 = func() *GridRow {
@@ -616,6 +640,7 @@ func (gv *GridView) InsertRowAtIndexWithViews(index int, views []*View) *GridRow
 
 // MoveRowAtIndexToIndex moves the specified row to the new row location.
 func (gv *GridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
+	defer runtime.KeepAlive(gv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("moveRowAtIndex:toIndex:"), fromIndex, toIndex)
 	})
@@ -624,6 +649,7 @@ func (gv *GridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
 
 // RemoveRowAtIndex removes the row from the grid view at the index.
 func (gv *GridView) RemoveRowAtIndex(index int) {
+	defer runtime.KeepAlive(gv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("removeRowAtIndex:"), index)
 	})
@@ -632,6 +658,7 @@ func (gv *GridView) RemoveRowAtIndex(index int) {
 
 // AddColumnWithViews adds a new column containing the array of views.
 func (gv *GridView) AddColumnWithViews(views []*View) *GridColumn {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridColumn
 	purego.Main(func() {
 		_mainthread0 = func() *GridColumn {
@@ -645,6 +672,7 @@ func (gv *GridView) AddColumnWithViews(views []*View) *GridColumn {
 
 // InsertColumnAtIndexWithViews inserts the array of view objects at the specified index.
 func (gv *GridView) InsertColumnAtIndexWithViews(index int, views []*View) *GridColumn {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 *GridColumn
 	purego.Main(func() {
 		_mainthread0 = func() *GridColumn {
@@ -658,6 +686,7 @@ func (gv *GridView) InsertColumnAtIndexWithViews(index int, views []*View) *Grid
 
 // MoveColumnAtIndexToIndex moves the specified column to a new column location.
 func (gv *GridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
+	defer runtime.KeepAlive(gv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("moveColumnAtIndex:toIndex:"), fromIndex, toIndex)
 	})
@@ -666,6 +695,7 @@ func (gv *GridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
 
 // RemoveColumnAtIndex removes the column from the grid view at the specified index.
 func (gv *GridView) RemoveColumnAtIndex(index int) {
+	defer runtime.KeepAlive(gv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("removeColumnAtIndex:"), index)
 	})
@@ -674,6 +704,7 @@ func (gv *GridView) RemoveColumnAtIndex(index int) {
 
 // MergeCellsInHorizontalRangeVerticalRange expands the cell at the top-leading corner of the horizontal and vertical range to cover the entire area.
 func (gv *GridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange) {
+	defer runtime.KeepAlive(gv)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("mergeCellsInHorizontalRange:verticalRange:"), hRange, vRange)
 	})
@@ -682,6 +713,7 @@ func (gv *GridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.N
 
 // NumberOfRows returns the number of rows.
 func (gv *GridView) NumberOfRows() int {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -695,6 +727,7 @@ func (gv *GridView) NumberOfRows() int {
 
 // NumberOfColumns returns the number of columns.
 func (gv *GridView) NumberOfColumns() int {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -708,6 +741,7 @@ func (gv *GridView) NumberOfColumns() int {
 
 // XPlacement returns the x placement.
 func (gv *GridView) XPlacement() GridCellPlacement {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 GridCellPlacement
 	purego.Main(func() {
 		_mainthread0 = func() GridCellPlacement {
@@ -721,6 +755,7 @@ func (gv *GridView) XPlacement() GridCellPlacement {
 
 // YPlacement returns the y placement.
 func (gv *GridView) YPlacement() GridCellPlacement {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 GridCellPlacement
 	purego.Main(func() {
 		_mainthread0 = func() GridCellPlacement {
@@ -734,6 +769,7 @@ func (gv *GridView) YPlacement() GridCellPlacement {
 
 // RowAlignment returns the row alignment.
 func (gv *GridView) RowAlignment() GridRowAlignment {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 GridRowAlignment
 	purego.Main(func() {
 		_mainthread0 = func() GridRowAlignment {
@@ -747,6 +783,7 @@ func (gv *GridView) RowAlignment() GridRowAlignment {
 
 // RowSpacing returns the row spacing.
 func (gv *GridView) RowSpacing() float64 {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {
@@ -760,6 +797,7 @@ func (gv *GridView) RowSpacing() float64 {
 
 // ColumnSpacing returns the column spacing.
 func (gv *GridView) ColumnSpacing() float64 {
+	defer runtime.KeepAlive(gv)
 	var _mainthread0 float64
 	purego.Main(func() {
 		_mainthread0 = func() float64 {

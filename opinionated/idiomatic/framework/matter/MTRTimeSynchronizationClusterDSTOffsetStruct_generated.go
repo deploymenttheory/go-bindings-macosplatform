@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRTimeSynchronizationClusterDSTOffsetStructAdopt(id objc.ID) *MTRTimeSynch
 
 // Description returns the object's -description text.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) Description() string {
+	defer runtime.KeepAlive(mtscdos)
 	return rt.Description(objref.IDOf(mtscdos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtscdos)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtscdos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtscdos)
 	return rt.IsKind(objref.IDOf(mtscdos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) String() string {
+	defer runtime.KeepAlive(mtscdos)
 	return rt.Description(objref.IDOf(mtscdos))
 }
 
 // WithOffset sets the offset.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	defer runtime.KeepAlive(offset)
 	objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtscdos
 }
 
 // WithValidStarting sets the valid starting.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	defer runtime.KeepAlive(validStarting)
 	objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
 	return mtscdos
 }
 
 // WithValidUntil sets the valid until.
 func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDSTOffsetStruct {
+	defer runtime.KeepAlive(validUntil)
 	objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
 	return mtscdos
 }
 
 // Offset returns the offset.
-func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() obj.Object {
+func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() *foundation.Number {
+	defer runtime.KeepAlive(mtscdos)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("offset"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ValidStarting returns the valid starting.
-func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() obj.Object {
+func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() *foundation.Number {
+	defer runtime.KeepAlive(mtscdos)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("validStarting"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ValidUntil returns the valid until.
-func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() obj.Object {
+func (mtscdos *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() *foundation.Number {
+	defer runtime.KeepAlive(mtscdos)
 	_r := objc.Send[objc.ID](objref.IDOf(mtscdos), objc.RegisterName("validUntil"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRTimeSynchronizationClusterDSTOffsetStruct marks MTRTimeSynchronizationClusterDSTOffsetStruct — and, by embedding promotion, its

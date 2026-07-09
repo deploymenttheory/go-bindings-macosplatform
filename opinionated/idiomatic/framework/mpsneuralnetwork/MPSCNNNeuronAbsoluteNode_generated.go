@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -47,6 +49,7 @@ func cNNNeuronAbsoluteNodeAdopt(id objc.ID) *CNNNeuronAbsoluteNode {
 
 // NewCNNNeuronAbsoluteNodeWithSource init a node with default values for parameters a & b
 func NewCNNNeuronAbsoluteNodeWithSource(sourceNode *NNImageNode) *CNNNeuronAbsoluteNode {
+	defer runtime.KeepAlive(sourceNode)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronAbsoluteNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
 	return cNNNeuronAbsoluteNodeAdopt(_id)

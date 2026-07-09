@@ -5,6 +5,8 @@
 package virtualization
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewVirtioSoundDeviceInputStreamConfiguration() *VirtioSoundDeviceInputStrea
 
 // WithSource sets an audio stream source that defines how the host supplies audio data for the guest.
 func (vsdisc *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration {
+	defer runtime.KeepAlive(source)
 	objc.Send[objc.ID](objref.IDOf(vsdisc), objc.RegisterName("setSource:"), objref.IDOf(source))
 	return vsdisc
 }
 
 // Source returns the source.
 func (vsdisc *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
+	defer runtime.KeepAlive(vsdisc)
 	_r := objc.Send[objc.ID](objref.IDOf(vsdisc), objc.RegisterName("source"))
 	return AudioInputStreamSourceFromID(_r)
 }

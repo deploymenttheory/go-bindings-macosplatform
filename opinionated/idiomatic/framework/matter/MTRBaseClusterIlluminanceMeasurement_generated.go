@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterIlluminanceMeasurementAdopt(id objc.ID) *MTRBaseClusterIllumi
 
 // NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterIlluminanceMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterIlluminanceMeasurementAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointIDQueue(device *MT
 
 // NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointQueue creates a new MTRBaseClusterIlluminanceMeasurement.
 func NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterIlluminanceMeasurement {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterIlluminanceMeasurementAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointQueue(device *MTRB
 //
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMeasuredValueWit
 //
 // SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMeasuredVal
 //
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMinMeasuredValue
 //
 // SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMinMeasured
 //
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMaxMeasuredValue
 //
 // SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMaxMeasured
 //
 // ReadAttributeToleranceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeToleranceWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeToleranceWithCom
 //
 // SubscribeAttributeToleranceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeToleranceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeToleranceWi
 //
 // ReadAttributeLightSensorTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeLightSensorTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeLightSensorTypeW
 //
 // SubscribeAttributeLightSensorTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeLightSensorTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeLightSensor
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeGeneratedCommand
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeGeneratedCo
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAcceptedCommandL
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAcceptedCom
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAttributeListWit
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAttributeLi
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeFeatureMapWithCo
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeFeatureMapW
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeClusterRevisionW
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeClusterRevi
 //
 // ReadAttributeMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMeasuredValue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMeasuredValue(ct
 //
 // SubscribeAttributeMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +656,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMeasuredVal
 //
 // ReadAttributeMinMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMinMeasuredValue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +682,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMinMeasuredValue
 //
 // SubscribeAttributeMinMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMinMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +711,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMinMeasured
 //
 // ReadAttributeMaxMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMaxMeasuredValue(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +737,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeMaxMeasuredValue
 //
 // SubscribeAttributeMaxMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMaxMeasuredValueWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +766,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeMaxMeasured
 //
 // ReadAttributeTolerance blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeTolerance(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +792,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeTolerance(ctx co
 //
 // SubscribeAttributeToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeToleranceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +821,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeToleranceWi
 //
 // ReadAttributeLightSensorType blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeLightSensorType(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +847,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeLightSensorType(
 //
 // SubscribeAttributeLightSensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeLightSensorTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +876,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeLightSensor
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +902,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeGeneratedCommand
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +931,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeGeneratedCo
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +957,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAcceptedCommandL
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +986,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAcceptedCom
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +1012,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeAttributeList(ct
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1041,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeAttributeLi
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1067,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeFeatureMap(ctx c
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1096,7 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeFeatureMapW
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1122,10 @@ func (mbcim *MTRBaseClusterIlluminanceMeasurement) ReadAttributeClusterRevision(
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterIlluminanceMeasurement) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcim)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

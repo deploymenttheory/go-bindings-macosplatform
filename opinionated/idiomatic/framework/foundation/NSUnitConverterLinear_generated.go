@@ -5,11 +5,13 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -69,19 +71,21 @@ func (ucl *UnitConverterLinear) WithObservationInfo(observationInfo unsafe.Point
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (ucl *UnitConverterLinear) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverterLinear {
-	objc.Send[objc.ID](objref.IDOf(ucl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (ucl *UnitConverterLinear) WithScriptingProperties(scriptingProperties map[string]obj.Object) *UnitConverterLinear {
+	objc.Send[objc.ID](objref.IDOf(ucl), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return ucl
 }
 
 // Coefficient returns the coefficient.
 func (ucl *UnitConverterLinear) Coefficient() float64 {
+	defer runtime.KeepAlive(ucl)
 	_r := objc.Send[float64](objref.IDOf(ucl), objc.RegisterName("coefficient"))
 	return _r
 }
 
 // Constant returns the constant.
 func (ucl *UnitConverterLinear) Constant() float64 {
+	defer runtime.KeepAlive(ucl)
 	_r := objc.Send[float64](objref.IDOf(ucl), objc.RegisterName("constant"))
 	return _r
 }

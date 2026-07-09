@@ -5,6 +5,8 @@
 package cryptotokenkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func tokenKeyExchangeParametersAdopt(id objc.ID) *TokenKeyExchangeParameters {
 
 // Description returns the object's -description text.
 func (tkep *TokenKeyExchangeParameters) Description() string {
+	defer runtime.KeepAlive(tkep)
 	return rt.Description(objref.IDOf(tkep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (tkep *TokenKeyExchangeParameters) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(tkep)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(tkep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (tkep *TokenKeyExchangeParameters) IsKind(className string) bool {
+	defer runtime.KeepAlive(tkep)
 	return rt.IsKind(objref.IDOf(tkep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (tkep *TokenKeyExchangeParameters) String() string {
+	defer runtime.KeepAlive(tkep)
 	return rt.Description(objref.IDOf(tkep))
 }
 
@@ -74,12 +81,14 @@ func NewTokenKeyExchangeParameters() *TokenKeyExchangeParameters {
 
 // RequestedSize returns requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
 func (tkep *TokenKeyExchangeParameters) RequestedSize() int {
+	defer runtime.KeepAlive(tkep)
 	_r := objc.Send[int](objref.IDOf(tkep), objc.RegisterName("requestedSize"))
 	return _r
 }
 
 // SharedInfo returns additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
-func (tkep *TokenKeyExchangeParameters) SharedInfo() obj.Object {
+func (tkep *TokenKeyExchangeParameters) SharedInfo() []byte {
+	defer runtime.KeepAlive(tkep)
 	_r := objc.Send[objc.ID](objref.IDOf(tkep), objc.RegisterName("sharedInfo"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

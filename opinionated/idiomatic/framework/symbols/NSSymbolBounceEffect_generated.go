@@ -5,6 +5,8 @@
 package symbols
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,12 +55,14 @@ func NewSymbolBounceEffect() *SymbolBounceEffect {
 
 // EffectWithByLayer returns an effect that bounces each layer separately.
 func (sbe *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
+	defer runtime.KeepAlive(sbe)
 	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithByLayer"))
 	return SymbolBounceEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns an effect that bounces all layers simultaneously.
 func (sbe *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
+	defer runtime.KeepAlive(sbe)
 	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolBounceEffectFromID(_r)
 }

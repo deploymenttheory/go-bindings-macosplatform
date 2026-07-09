@@ -5,6 +5,8 @@
 package discrecordingui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func eraseProgressPanelAdopt(id objc.ID) *EraseProgressPanel {
 
 // Description returns the object's -description text.
 func (epp *EraseProgressPanel) Description() string {
+	defer runtime.KeepAlive(epp)
 	return rt.Description(objref.IDOf(epp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (epp *EraseProgressPanel) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(epp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(epp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (epp *EraseProgressPanel) IsKind(className string) bool {
+	defer runtime.KeepAlive(epp)
 	return rt.IsKind(objref.IDOf(epp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (epp *EraseProgressPanel) String() string {
+	defer runtime.KeepAlive(epp)
 	return rt.Description(objref.IDOf(epp))
 }
 
@@ -80,6 +87,9 @@ func NewEraseProgressPanel() *EraseProgressPanel {
 
 // BeginProgressSheetForEraseModalForWindow presents the progress panel as a sheet and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
 func (epp *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase obj.Object, docWindow obj.Object) {
+	defer runtime.KeepAlive(epp)
+	defer runtime.KeepAlive(erase)
+	defer runtime.KeepAlive(docWindow)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("beginProgressSheetForErase:modalForWindow:"), objref.IDOf(erase), objref.IDOf(docWindow))
 	})
@@ -88,6 +98,8 @@ func (epp *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase ob
 
 // BeginProgressPanelForErase presents the progress panel on screen and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
 func (epp *EraseProgressPanel) BeginProgressPanelForErase(erase obj.Object) {
+	defer runtime.KeepAlive(epp)
+	defer runtime.KeepAlive(erase)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("beginProgressPanelForErase:"), objref.IDOf(erase))
 	})
@@ -96,6 +108,7 @@ func (epp *EraseProgressPanel) BeginProgressPanelForErase(erase obj.Object) {
 
 // SetDescription sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase.
 func (epp *EraseProgressPanel) SetDescription(description string) {
+	defer runtime.KeepAlive(epp)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(epp), objc.RegisterName("setDescription:"), purego.NSString(description))
 	})

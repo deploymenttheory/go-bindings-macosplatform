@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterFanControlAdopt(id objc.ID) *MTRBaseClusterFanControl {
 
 // NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterFanControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterFanControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterFanControlAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterFanControlWithDeviceEndpointIDQueue(device *MTRBaseDevice,
 
 // NewMTRBaseClusterFanControlWithDeviceEndpointQueue creates a new MTRBaseClusterFanControl.
 func NewMTRBaseClusterFanControlWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterFanControl {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterFanControl")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterFanControlAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterFanControlWithDeviceEndpointQueue(device *MTRBaseDevice, e
 //
 // ReadAttributeFanModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeWithCompletion(ctx co
 //
 // SubscribeAttributeFanModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithParamsSubscr
 //
 // ReadAttributeFanModeSequenceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeSequenceWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeSequenceWithCompletio
 //
 // SubscribeAttributeFanModeSequenceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithPara
 //
 // ReadAttributePercentSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentSettingWithCompletion
 //
 // SubscribeAttributePercentSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithParam
 //
 // ReadAttributePercentCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentCurrentWithCompletion
 //
 // SubscribeAttributePercentCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithParam
 //
 // ReadAttributeSpeedMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedMaxWithCompletion(ctx c
 //
 // SubscribeAttributeSpeedMaxWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithParamsSubsc
 //
 // ReadAttributeSpeedSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedSettingWithCompletion(c
 //
 // SubscribeAttributeSpeedSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithParamsS
 //
 // ReadAttributeSpeedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedCurrentWithCompletion(c
 //
 // SubscribeAttributeSpeedCurrentWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithParamsS
 //
 // ReadAttributeRockSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSupportWithCompletion(ct
 //
 // SubscribeAttributeRockSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithParamsSu
 //
 // ReadAttributeRockSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSettingWithCompletion(ct
 //
 // SubscribeAttributeRockSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +548,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithParamsSu
 //
 // ReadAttributeWindSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +574,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSupportWithCompletion(ct
 //
 // SubscribeAttributeWindSupportWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +601,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithParamsSu
 //
 // ReadAttributeWindSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +627,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSettingWithCompletion(ct
 //
 // SubscribeAttributeWindSettingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +654,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithParamsSu
 //
 // ReadAttributeAirflowDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAirflowDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +680,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAirflowDirectionWithCompleti
 //
 // SubscribeAttributeAirflowDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAirflowDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +707,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAirflowDirectionWithPar
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +733,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandListWithComp
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +760,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWit
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +786,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandListWithCompl
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +813,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWith
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +839,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAttributeListWithCompletion(
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +866,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithParams
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +892,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFeatureMapWithCompletion(ctx
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -865,6 +919,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithParamsSub
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -890,6 +945,8 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeClusterRevisionWithCompletio
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -915,6 +972,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithPara
 //
 // ReadAttributeFanMode blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanMode(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -940,6 +998,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanMode(ctx context.Context)
 //
 // SubscribeAttributeFanModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -965,6 +1027,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithMinIntervalM
 //
 // ReadAttributeFanModeSequence blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeSequence(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -990,6 +1053,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeSequence(ctx context.
 //
 // SubscribeAttributeFanModeSequenceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1015,6 +1082,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithMinI
 //
 // ReadAttributePercentSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentSetting(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1040,6 +1108,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentSetting(ctx context.C
 //
 // SubscribeAttributePercentSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1065,6 +1137,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithMinIn
 //
 // ReadAttributePercentCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentCurrent(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1090,6 +1163,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentCurrent(ctx context.C
 //
 // SubscribeAttributePercentCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1115,6 +1192,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithMinIn
 //
 // ReadAttributeSpeedMax blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedMax(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1140,6 +1218,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedMax(ctx context.Context
 //
 // SubscribeAttributeSpeedMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1165,6 +1247,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithMinInterval
 //
 // ReadAttributeSpeedSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedSetting(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1190,6 +1273,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedSetting(ctx context.Con
 //
 // SubscribeAttributeSpeedSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1215,6 +1302,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithMinInte
 //
 // ReadAttributeSpeedCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedCurrent(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1240,6 +1328,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedCurrent(ctx context.Con
 //
 // SubscribeAttributeSpeedCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1265,6 +1357,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithMinInte
 //
 // ReadAttributeRockSupport blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSupport(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1290,6 +1383,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSupport(ctx context.Cont
 //
 // SubscribeAttributeRockSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1315,6 +1412,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithMinInter
 //
 // ReadAttributeRockSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSetting(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1340,6 +1438,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSetting(ctx context.Cont
 //
 // SubscribeAttributeRockSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1365,6 +1467,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithMinInter
 //
 // ReadAttributeWindSupport blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSupport(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1390,6 +1493,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSupport(ctx context.Cont
 //
 // SubscribeAttributeWindSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1415,6 +1522,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithMinInter
 //
 // ReadAttributeWindSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSetting(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1440,6 +1548,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSetting(ctx context.Cont
 //
 // SubscribeAttributeWindSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1465,6 +1577,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithMinInter
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1490,6 +1603,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandList(ctx con
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1515,6 +1632,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWit
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1540,6 +1658,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandList(ctx cont
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1565,6 +1687,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWith
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1590,6 +1713,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAttributeList(ctx context.Co
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1615,6 +1742,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithMinInt
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1640,6 +1768,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFeatureMap(ctx context.Conte
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1665,6 +1797,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithMinInterv
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -1690,6 +1823,10 @@ func (mbcfc *MTRBaseClusterFanControl) ReadAttributeClusterRevision(ctx context.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbcfc)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

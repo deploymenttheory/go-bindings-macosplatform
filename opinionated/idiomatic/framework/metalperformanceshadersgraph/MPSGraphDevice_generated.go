@@ -5,6 +5,8 @@
 package metalperformanceshadersgraph
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewGraphDevice() *GraphDevice {
 
 // Type returns device of the MPSGraphDevice.
 func (gd *GraphDevice) Type() GraphDeviceType {
+	defer runtime.KeepAlive(gd)
 	_r := objc.Send[GraphDeviceType](objref.IDOf(gd), objc.RegisterName("type"))
 	return _r
 }

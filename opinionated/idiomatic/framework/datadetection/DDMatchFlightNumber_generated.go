@@ -5,6 +5,8 @@
 package datadetection
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -53,6 +55,7 @@ func NewMatchFlightNumber() *MatchFlightNumber {
 
 // Airline returns the name of an airline.
 func (mfn *MatchFlightNumber) Airline() string {
+	defer runtime.KeepAlive(mfn)
 	_r := objc.Send[objc.ID](objref.IDOf(mfn), objc.RegisterName("airline"))
 	if _r == 0 {
 		return ""
@@ -62,6 +65,7 @@ func (mfn *MatchFlightNumber) Airline() string {
 
 // FlightNumber returns a string that represents a flight number.
 func (mfn *MatchFlightNumber) FlightNumber() string {
+	defer runtime.KeepAlive(mfn)
 	_r := objc.Send[objc.ID](objref.IDOf(mfn), objc.RegisterName("flightNumber"))
 	if _r == 0 {
 		return ""

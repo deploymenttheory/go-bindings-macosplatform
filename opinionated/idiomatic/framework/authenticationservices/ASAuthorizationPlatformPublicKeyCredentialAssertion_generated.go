@@ -5,6 +5,8 @@
 package authenticationservices
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func authorizationPlatformPublicKeyCredentialAssertionAdopt(id objc.ID) *Authori
 
 // Description returns the object's -description text.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Description() string {
+	defer runtime.KeepAlive(appkca)
 	return rt.Description(objref.IDOf(appkca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(appkca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(appkca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) IsKind(className string) bool {
+	defer runtime.KeepAlive(appkca)
 	return rt.IsKind(objref.IDOf(appkca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) String() string {
+	defer runtime.KeepAlive(appkca)
 	return rt.Description(objref.IDOf(appkca))
 }
 
@@ -74,18 +81,21 @@ func NewAuthorizationPlatformPublicKeyCredentialAssertion() *AuthorizationPlatfo
 
 // Attachment returns the attachment.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() AuthorizationPublicKeyCredentialAttachment {
+	defer runtime.KeepAlive(appkca)
 	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(appkca), objc.RegisterName("attachment"))
 	return _r
 }
 
 // LargeBlob returns the large blob.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	defer runtime.KeepAlive(appkca)
 	_r := objc.Send[objc.ID](objref.IDOf(appkca), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }
 
 // Prf returns the prf.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	defer runtime.KeepAlive(appkca)
 	_r := objc.Send[objc.ID](objref.IDOf(appkca), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)
 }

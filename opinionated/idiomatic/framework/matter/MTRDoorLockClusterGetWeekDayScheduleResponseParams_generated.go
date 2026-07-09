@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRDoorLockClusterGetWeekDayScheduleResponseParamsAdopt(id objc.ID) *MTRDoo
 
 // Description returns the object's -description text.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Description() string {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	return rt.Description(objref.IDOf(mdlcgwdsrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlcgwdsrp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlcgwdsrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	return rt.IsKind(objref.IDOf(mdlcgwdsrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) String() string {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	return rt.Description(objref.IDOf(mdlcgwdsrp))
 }
 
-// NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError initialize an MTRDoorLockClusterGetWeekDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
-func NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
+// NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValue initialize an MTRDoorLockClusterGetWeekDayScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+func NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRDoorLockClusterGetWeekDayScheduleResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetWeekDayScheduleResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,108 +87,126 @@ func NewMTRDoorLockClusterGetWeekDayScheduleResponseParamsWithResponseValueError
 
 // WithWeekDayIndex sets the week day index.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(weekDayIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 	return mdlcgwdsrp
 }
 
 // WithUserIndex sets the user index.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgwdsrp
 }
 
 // WithStatus sets the status.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(status)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdlcgwdsrp
 }
 
 // WithDaysMask sets the days mask.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithDaysMask(daysMask obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(daysMask)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setDaysMask:"), objref.IDOf(daysMask))
 	return mdlcgwdsrp
 }
 
 // WithStartHour sets the start hour.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStartHour(startHour obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(startHour)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setStartHour:"), objref.IDOf(startHour))
 	return mdlcgwdsrp
 }
 
 // WithStartMinute sets the start minute.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithStartMinute(startMinute obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(startMinute)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setStartMinute:"), objref.IDOf(startMinute))
 	return mdlcgwdsrp
 }
 
 // WithEndHour sets the end hour.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithEndHour(endHour obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(endHour)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setEndHour:"), objref.IDOf(endHour))
 	return mdlcgwdsrp
 }
 
 // WithEndMinute sets the end minute.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithEndMinute(endMinute obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(endMinute)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setEndMinute:"), objref.IDOf(endMinute))
 	return mdlcgwdsrp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetWeekDayScheduleResponseParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlcgwdsrp
 }
 
 // WeekDayIndex returns the week day index.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WeekDayIndex() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) WeekDayIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("weekDayIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) UserIndex() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Status returns the status.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Status() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) Status() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("status"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // DaysMask returns the days mask.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) DaysMask() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) DaysMask() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("daysMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartHour returns the start hour.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartHour() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartHour() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("startHour"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // StartMinute returns the start minute.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartMinute() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) StartMinute() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("startMinute"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndHour returns the end hour.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndHour() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndHour() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("endHour"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // EndMinute returns the end minute.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndMinute() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) EndMinute() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("endMinute"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlcgwdsrp *MTRDoorLockClusterGetWeekDayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlcgwdsrp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsrp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

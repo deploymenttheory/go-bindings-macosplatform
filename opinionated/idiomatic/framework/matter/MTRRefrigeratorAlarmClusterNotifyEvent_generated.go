@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRRefrigeratorAlarmClusterNotifyEventAdopt(id objc.ID) *MTRRefrigeratorAla
 
 // Description returns the object's -description text.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Description() string {
+	defer runtime.KeepAlive(mracne)
 	return rt.Description(objref.IDOf(mracne))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mracne)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mracne), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mracne)
 	return rt.IsKind(objref.IDOf(mracne), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) String() string {
+	defer runtime.KeepAlive(mracne)
 	return rt.Description(objref.IDOf(mracne))
 }
 
@@ -72,48 +80,56 @@ func NewMTRRefrigeratorAlarmClusterNotifyEvent() *MTRRefrigeratorAlarmClusterNot
 
 // WithActive sets the active.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithActive(active obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(active)
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setActive:"), objref.IDOf(active))
 	return mracne
 }
 
 // WithInactive sets the inactive.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithInactive(inactive obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(inactive)
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setInactive:"), objref.IDOf(inactive))
 	return mracne
 }
 
 // WithState sets the state.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithState(state obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(state)
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setState:"), objref.IDOf(state))
 	return mracne
 }
 
 // WithMask sets the mask.
 func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) WithMask(mask obj.Object) *MTRRefrigeratorAlarmClusterNotifyEvent {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return mracne
 }
 
 // Active returns the active.
-func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Active() obj.Object {
+func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Active() *foundation.Number {
+	defer runtime.KeepAlive(mracne)
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("active"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Inactive returns the inactive.
-func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Inactive() obj.Object {
+func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Inactive() *foundation.Number {
+	defer runtime.KeepAlive(mracne)
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("inactive"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // State returns the state.
-func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) State() obj.Object {
+func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) State() *foundation.Number {
+	defer runtime.KeepAlive(mracne)
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("state"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // Mask returns the mask.
-func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Mask() obj.Object {
+func (mracne *MTRRefrigeratorAlarmClusterNotifyEvent) Mask() *foundation.Number {
+	defer runtime.KeepAlive(mracne)
 	_r := objc.Send[objc.ID](objref.IDOf(mracne), objc.RegisterName("mask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

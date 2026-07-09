@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,27 +51,33 @@ func collectionLayoutItemAdopt(id objc.ID) *CollectionLayoutItem {
 
 // Description returns the object's -description text.
 func (cli *CollectionLayoutItem) Description() string {
+	defer runtime.KeepAlive(cli)
 	return rt.Description(objref.IDOf(cli))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cli *CollectionLayoutItem) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cli)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cli), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cli *CollectionLayoutItem) IsKind(className string) bool {
+	defer runtime.KeepAlive(cli)
 	return rt.IsKind(objref.IDOf(cli), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cli *CollectionLayoutItem) String() string {
+	defer runtime.KeepAlive(cli)
 	return rt.Description(objref.IDOf(cli))
 }
 
 // WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
 func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
+	defer runtime.KeepAlive(edgeSpacing)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(cli), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	})
@@ -78,6 +86,7 @@ func (cli *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEd
 
 // EdgeSpacing returns the edge spacing.
 func (cli *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
+	defer runtime.KeepAlive(cli)
 	var _mainthread0 *CollectionLayoutEdgeSpacing
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutEdgeSpacing {
@@ -91,6 +100,7 @@ func (cli *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
 
 // LayoutSize returns the layout size.
 func (cli *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
+	defer runtime.KeepAlive(cli)
 	var _mainthread0 *CollectionLayoutSize
 	purego.Main(func() {
 		_mainthread0 = func() *CollectionLayoutSize {
@@ -106,6 +116,7 @@ func (cli *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
 //
 // SupplementaryItems returns the collection as a Go slice.
 func (cli *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
+	defer runtime.KeepAlive(cli)
 	var _mainthread0 []*CollectionLayoutSupplementaryItem
 	purego.Main(func() {
 		_mainthread0 = func() []*CollectionLayoutSupplementaryItem {

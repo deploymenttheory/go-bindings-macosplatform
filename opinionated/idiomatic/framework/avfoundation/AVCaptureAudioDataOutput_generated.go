@@ -5,9 +5,13 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +57,8 @@ func NewCaptureAudioDataOutput() *CaptureAudioDataOutput {
 }
 
 // WithAudioSettings sets the settings used to decode or re-encode audio before it’s output.
-func (cado *CaptureAudioDataOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioDataOutput {
-	objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
+func (cado *CaptureAudioDataOutput) WithAudioSettings(audioSettings map[string]obj.Object) *CaptureAudioDataOutput {
+	objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("setAudioSettings:"), rt.MapToDict(audioSettings, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return cado
 }
 
@@ -71,25 +75,30 @@ func (cado *CaptureAudioDataOutput) WithDeferredStartEnabled(deferredStartEnable
 }
 
 // RecommendedAudioSettingsForAssetWriterWithOutputFileType specifies the recommended settings for use with an AVAssetWriterInput.
-func (cado *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object {
+func (cado *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) map[string]obj.Object {
+	defer runtime.KeepAlive(cado)
+	defer runtime.KeepAlive(outputFileType)
 	_r := objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("recommendedAudioSettingsForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SampleBufferCallbackQueue returns the dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
-func (cado *CaptureAudioDataOutput) SampleBufferCallbackQueue() obj.Object {
+func (cado *CaptureAudioDataOutput) SampleBufferCallbackQueue() *foundation.Object {
+	defer runtime.KeepAlive(cado)
 	_r := objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("sampleBufferCallbackQueue"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // AudioSettings specifies the settings used to decode or re-encode audio before it is output by the receiver. The value of this property is an NSDictionary containing values for audio settings keys defined in AVAudioSettings.h. When audioSettings is set to nil, the AVCaptureAudioDataOutput vends samples in their device native format.
-func (cado *CaptureAudioDataOutput) AudioSettings() obj.Object {
+func (cado *CaptureAudioDataOutput) AudioSettings() map[string]obj.Object {
+	defer runtime.KeepAlive(cado)
 	_r := objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("audioSettings"))
-	return obj.Wrap(_r)
+	return rt.DictToMap(_r, func(_id objc.ID) string { return purego.GoString(_id) }, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SpatialAudioChannelLayoutTag returns the audio channel layout tag of the audio sample buffers produced by the audio data output. When you set your audio data output's associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, the “AVCaptureSession“ allows up to two “AVCaptureAudioDataOutput“ instances to be connected to the First-order Ambisonsics (FOA) input. If you connect a single “AVCaptureAudioDataOutput“ instance, you must configure its “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to produce either four channels of FOA audio or two channels of Stereo audio. If you connect two “AVCaptureAudioDataOutput“ instances, you must configure one to output four channels of FOA audio and the other to output two channels of Stereo audio. Thus, when you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, you must set your connected “AVCaptureAudioDataOutput“ instance's “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to either `kAudioChannelLayoutTag_Stereo` for stereo, or `(kAudioChannelLayoutTag_HOA_ACN_SN3D | 4)` for FOA (see <doc://com.apple.documentation/documentation/coreaudiotypes/audiochannellayouttag>). When you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ to any other value, the “AVCaptureSession“ only supports one “AVCaptureAudioDataOutput“, and you may only set “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ to `kAudioChannelLayoutTag_Unknown` (the default value). Your “AVCaptureSession“ validates your app's adherence to the the above rules when you call “AVCaptureSession/startRunning:“ or “AVCaptureSession/commitConfiguration“ and throws a `NSInvalidArgumentException` if necessary.
 func (cado *CaptureAudioDataOutput) SpatialAudioChannelLayoutTag() int {
+	defer runtime.KeepAlive(cado)
 	_r := objc.Send[int](objref.IDOf(cado), objc.RegisterName("spatialAudioChannelLayoutTag"))
 	return _r
 }

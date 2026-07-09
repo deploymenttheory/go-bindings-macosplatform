@@ -5,6 +5,8 @@
 package intents
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func paymentMethodAdopt(id objc.ID) *PaymentMethod {
 
 // Description returns the object's -description text.
 func (pm *PaymentMethod) Description() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pm *PaymentMethod) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pm *PaymentMethod) IsKind(className string) bool {
+	defer runtime.KeepAlive(pm)
 	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pm *PaymentMethod) String() string {
+	defer runtime.KeepAlive(pm)
 	return rt.Description(objref.IDOf(pm))
 }
 
 // NewPaymentMethodWithTypeNameIdentificationHintIcon initializes the payment method object with the specified type and descriptive information.
 func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ PaymentMethodType, name string, identificationHint string, icon *Image) *PaymentMethod {
+	defer runtime.KeepAlive(icon)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INPaymentMethod")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), type_, purego.NSString(name), purego.NSString(identificationHint), objref.IDOf(icon))
 	return paymentMethodAdopt(_id)
@@ -75,12 +83,14 @@ func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ PaymentMethodType,
 
 // Type returns the type.
 func (pm *PaymentMethod) Type() PaymentMethodType {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[PaymentMethodType](objref.IDOf(pm), objc.RegisterName("type"))
 	return _r
 }
 
 // Name returns the name.
 func (pm *PaymentMethod) Name() string {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -90,12 +100,14 @@ func (pm *PaymentMethod) Name() string {
 
 // Icon returns the icon.
 func (pm *PaymentMethod) Icon() *Image {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("icon"))
 	return ImageFromID(_r)
 }
 
 // IdentificationHint returns the identification hint.
 func (pm *PaymentMethod) IdentificationHint() string {
+	defer runtime.KeepAlive(pm)
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("identificationHint"))
 	if _r == 0 {
 		return ""

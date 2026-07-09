@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -49,6 +50,9 @@ func mTRBaseClusterThermostatUserInterfaceConfigurationAdopt(id objc.ID) *MTRBas
 
 // NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue for all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 func NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterThermostatUserInterfaceConfiguration {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(endpointID)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
 	return mTRBaseClusterThermostatUserInterfaceConfigurationAdopt(_id)
@@ -56,6 +60,8 @@ func NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQu
 
 // NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue creates a new MTRBaseClusterThermostatUserInterfaceConfiguration.
 func NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterThermostatUserInterfaceConfiguration {
+	defer runtime.KeepAlive(device)
+	defer runtime.KeepAlive(queue)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
 	return mTRBaseClusterThermostatUserInterfaceConfigurationAdopt(_id)
@@ -65,6 +71,7 @@ func NewMTRBaseClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueu
 //
 // ReadAttributeTemperatureDisplayModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -90,6 +97,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeTemperatureDisplayModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeTemperatureDisplayModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -115,6 +124,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeKeypadLockoutWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockoutWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -140,6 +150,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeKeypadLockoutWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeKeypadLockoutWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -165,6 +177,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeScheduleProgrammingVisibilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibilityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -190,6 +203,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeScheduleProgrammingVisibilityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeScheduleProgrammingVisibilityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -215,6 +230,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,6 +256,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -265,6 +283,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -290,6 +309,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -315,6 +336,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -340,6 +362,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -365,6 +389,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -390,6 +415,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -415,6 +442,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -440,6 +468,8 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -465,6 +495,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeTemperatureDisplayMode blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayMode(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -490,6 +521,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeTemperatureDisplayModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeTemperatureDisplayModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -515,6 +550,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeKeypadLockout blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockout(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -540,6 +576,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeKeypadLockoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeKeypadLockoutWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -565,6 +605,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeScheduleProgrammingVisibility blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibility(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -590,6 +631,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeScheduleProgrammingVisibilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeScheduleProgrammingVisibilityWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -615,6 +660,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -640,6 +686,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -665,6 +715,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -690,6 +741,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -715,6 +770,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -740,6 +796,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -765,6 +825,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -790,6 +851,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error
@@ -815,6 +880,7 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttr
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
 	type _result struct {
 		val obj.Object
 		err error
@@ -840,6 +906,10 @@ func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) ReadAttribute
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
 func (mbctuic *MTRBaseClusterThermostatUserInterfaceConfiguration) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+	defer runtime.KeepAlive(mbctuic)
+	defer runtime.KeepAlive(minInterval)
+	defer runtime.KeepAlive(maxInterval)
+	defer runtime.KeepAlive(params)
 	type _result struct {
 		val obj.Object
 		err error

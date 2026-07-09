@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func rendererAdopt(id objc.ID) *Renderer {
 
 // Description returns the object's -description text.
 func (r *Renderer) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Renderer) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Renderer) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Renderer) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -75,44 +82,52 @@ func NewRenderer() *Renderer {
 
 // WithScene sets the scene to be rendered.
 func (r *Renderer) WithScene(scene *Scene) *Renderer {
+	defer runtime.KeepAlive(scene)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return r
 }
 
 // RenderAtTime renders the scene’s contents at the specified system time in the renderer’s OpenGL context.
 func (r *Renderer) RenderAtTime(time_ float64) {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("renderAtTime:"), time_)
 }
 
 // UpdateAtTime updates the receiver's scene at the specified time (system time).
 func (r *Renderer) UpdateAtTime(time_ float64) {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateAtTime:"), time_)
 }
 
 // SnapshotAtTimeWithSizeAntialiasingMode creates an image by drawing the renderer’s content at the specified system time.
 func (r *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode AntialiasingMode) obj.Object {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("snapshotAtTime:withSize:antialiasingMode:"), time_, size, antialiasingMode)
 	return obj.Wrap(_r)
 }
 
 // UpdateProbesAtTime update the specified probes by computing their incoming irradiance in the receiver's scene at the specified time. Light probes are only supported with Metal. This method is observable using NSProgress.
 func (r *Renderer) UpdateProbesAtTime(lightProbes []*Node, time_ float64) {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateProbes:atTime:"), purego.SliceToNSArray(lightProbes, func(_v *Node) objc.ID { return objref.IDOf(_v) }), time_)
 }
 
 // Scene specifies the scene of the receiver
 func (r *Renderer) Scene() *Scene {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
 // NextFrameTime returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
 func (r *Renderer) NextFrameTime() float64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("nextFrameTime"))
 	return _r
 }
 
 // Render renders the scene’s contents in the renderer’s OpenGL context.
 func (r *Renderer) Render() {
+	defer runtime.KeepAlive(r)
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("render"))
 }

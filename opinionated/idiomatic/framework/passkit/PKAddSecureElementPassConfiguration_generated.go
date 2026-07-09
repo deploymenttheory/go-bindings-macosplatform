@@ -5,6 +5,8 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func addSecureElementPassConfigurationAdopt(id objc.ID) *AddSecureElementPassCon
 
 // Description returns the object's -description text.
 func (asepc *AddSecureElementPassConfiguration) Description() string {
+	defer runtime.KeepAlive(asepc)
 	return rt.Description(objref.IDOf(asepc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (asepc *AddSecureElementPassConfiguration) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(asepc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(asepc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (asepc *AddSecureElementPassConfiguration) IsKind(className string) bool {
+	defer runtime.KeepAlive(asepc)
 	return rt.IsKind(objref.IDOf(asepc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (asepc *AddSecureElementPassConfiguration) String() string {
+	defer runtime.KeepAlive(asepc)
 	return rt.Description(objref.IDOf(asepc))
 }
 
@@ -82,6 +89,7 @@ func (asepc *AddSecureElementPassConfiguration) WithLocalizedDescription(localiz
 
 // IssuerIdentifier returns the issuer identifier.
 func (asepc *AddSecureElementPassConfiguration) IssuerIdentifier() string {
+	defer runtime.KeepAlive(asepc)
 	_r := objc.Send[objc.ID](objref.IDOf(asepc), objc.RegisterName("issuerIdentifier"))
 	if _r == 0 {
 		return ""
@@ -91,6 +99,7 @@ func (asepc *AddSecureElementPassConfiguration) IssuerIdentifier() string {
 
 // LocalizedDescription returns the localized description.
 func (asepc *AddSecureElementPassConfiguration) LocalizedDescription() string {
+	defer runtime.KeepAlive(asepc)
 	_r := objc.Send[objc.ID](objref.IDOf(asepc), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""

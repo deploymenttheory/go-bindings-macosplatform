@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func multiArrayConstraintAdopt(id objc.ID) *MultiArrayConstraint {
 
 // Description returns the object's -description text.
 func (mac *MultiArrayConstraint) Description() string {
+	defer runtime.KeepAlive(mac)
 	return rt.Description(objref.IDOf(mac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mac *MultiArrayConstraint) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mac)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mac *MultiArrayConstraint) IsKind(className string) bool {
+	defer runtime.KeepAlive(mac)
 	return rt.IsKind(objref.IDOf(mac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mac *MultiArrayConstraint) String() string {
+	defer runtime.KeepAlive(mac)
 	return rt.Description(objref.IDOf(mac))
 }
 
@@ -76,18 +83,21 @@ func NewMultiArrayConstraint() *MultiArrayConstraint {
 //
 // Shape returns the collection as a Go slice.
 func (mac *MultiArrayConstraint) Shape() []obj.Object {
+	defer runtime.KeepAlive(mac)
 	_arr := objc.Send[objc.ID](objref.IDOf(mac), objc.RegisterName("shape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DataType returns the data type.
 func (mac *MultiArrayConstraint) DataType() MultiArrayDataType {
+	defer runtime.KeepAlive(mac)
 	_r := objc.Send[MultiArrayDataType](objref.IDOf(mac), objc.RegisterName("dataType"))
 	return _r
 }
 
 // ShapeConstraint returns the shape constraint.
 func (mac *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
+	defer runtime.KeepAlive(mac)
 	_r := objc.Send[objc.ID](objref.IDOf(mac), objc.RegisterName("shapeConstraint"))
 	return MultiArrayShapeConstraintFromID(_r)
 }

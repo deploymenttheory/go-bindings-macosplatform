@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,56 +52,77 @@ func imageManagerAdopt(id objc.ID) *ImageManager {
 
 // Description returns the object's -description text.
 func (im *ImageManager) Description() string {
+	defer runtime.KeepAlive(im)
 	return rt.Description(objref.IDOf(im))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (im *ImageManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(im), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (im *ImageManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(im)
 	return rt.IsKind(objref.IDOf(im), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (im *ImageManager) String() string {
+	defer runtime.KeepAlive(im)
 	return rt.Description(objref.IDOf(im))
 }
 
 // RequestImageForAssetTargetSizeContentModeOptionsResultHandler requests an image representation for the specified asset.
 func (im *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *ImageRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[int32](objref.IDOf(im), objc.RegisterName("requestImageForAsset:targetSize:contentMode:options:resultHandler:"), objref.IDOf(asset), targetSize, contentMode, objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
 // CancelImageRequest cancels an asynchronous request
 func (im *ImageManager) CancelImageRequest(requestID int32) {
+	defer runtime.KeepAlive(im)
 	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("cancelImageRequest:"), requestID)
 }
 
 // RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler requests a Live Photo representation for the specified asset.
 func (im *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *Asset, targetSize corefoundation.CGSize, contentMode ImageContentMode, options *LivePhotoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[int32](objref.IDOf(im), objc.RegisterName("requestLivePhotoForAsset:targetSize:contentMode:options:resultHandler:"), objref.IDOf(asset), targetSize, contentMode, objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
 // RequestPlayerItemForVideoOptionsResultHandler requests a representation of the video asset for playback, to be loaded asynchronously.
 func (im *ImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[int32](objref.IDOf(im), objc.RegisterName("requestPlayerItemForVideo:options:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
 // RequestExportSessionForVideoOptionsExportPresetResultHandler requests an export session for writing the video asset’s data to a file, to be loaded asynchronously.
 func (im *ImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *Asset, options *VideoRequestOptions, exportPreset string, resultHandler func(obj.Object, obj.Object)) int32 {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[int32](objref.IDOf(im), objc.RegisterName("requestExportSessionForVideo:options:exportPreset:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), purego.NSString(exportPreset), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return _r
 }
 
 // RequestAVAssetForVideoOptionsResultHandler requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
 func (im *ImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object, obj.Object)) int32 {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(asset)
+	defer runtime.KeepAlive(options)
 	_r := objc.Send[int32](objref.IDOf(im), objc.RegisterName("requestAVAssetForVideo:options:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
 		resultHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
 	}))

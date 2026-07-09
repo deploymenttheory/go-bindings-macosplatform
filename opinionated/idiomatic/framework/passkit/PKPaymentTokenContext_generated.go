@@ -5,7 +5,10 @@
 package passkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,27 +50,33 @@ func paymentTokenContextAdopt(id objc.ID) *PaymentTokenContext {
 
 // Description returns the object's -description text.
 func (ptc *PaymentTokenContext) Description() string {
+	defer runtime.KeepAlive(ptc)
 	return rt.Description(objref.IDOf(ptc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ptc *PaymentTokenContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ptc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ptc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ptc *PaymentTokenContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(ptc)
 	return rt.IsKind(objref.IDOf(ptc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ptc *PaymentTokenContext) String() string {
+	defer runtime.KeepAlive(ptc)
 	return rt.Description(objref.IDOf(ptc))
 }
 
 // NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount create a payment token context for a single merchant.
 func NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount(merchantIdentifier string, externalIdentifier string, merchantName string, merchantDomain string, amount obj.Object) *PaymentTokenContext {
+	defer runtime.KeepAlive(amount)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentTokenContext")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:externalIdentifier:merchantName:merchantDomain:amount:"), purego.NSString(merchantIdentifier), purego.NSString(externalIdentifier), purego.NSString(merchantName), purego.NSString(merchantDomain), objref.IDOf(amount))
 	return paymentTokenContextAdopt(_id)
@@ -99,12 +108,14 @@ func (ptc *PaymentTokenContext) WithMerchantDomain(merchantDomain string) *Payme
 
 // WithAmount sets the amount to authorize for the payment token.
 func (ptc *PaymentTokenContext) WithAmount(amount obj.Object) *PaymentTokenContext {
+	defer runtime.KeepAlive(amount)
 	objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return ptc
 }
 
 // MerchantIdentifier returns the merchant identifier.
 func (ptc *PaymentTokenContext) MerchantIdentifier() string {
+	defer runtime.KeepAlive(ptc)
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("merchantIdentifier"))
 	if _r == 0 {
 		return ""
@@ -114,6 +125,7 @@ func (ptc *PaymentTokenContext) MerchantIdentifier() string {
 
 // ExternalIdentifier returns the external identifier.
 func (ptc *PaymentTokenContext) ExternalIdentifier() string {
+	defer runtime.KeepAlive(ptc)
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("externalIdentifier"))
 	if _r == 0 {
 		return ""
@@ -123,6 +135,7 @@ func (ptc *PaymentTokenContext) ExternalIdentifier() string {
 
 // MerchantName returns the merchant name.
 func (ptc *PaymentTokenContext) MerchantName() string {
+	defer runtime.KeepAlive(ptc)
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("merchantName"))
 	if _r == 0 {
 		return ""
@@ -132,6 +145,7 @@ func (ptc *PaymentTokenContext) MerchantName() string {
 
 // MerchantDomain returns the merchant domain.
 func (ptc *PaymentTokenContext) MerchantDomain() string {
+	defer runtime.KeepAlive(ptc)
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("merchantDomain"))
 	if _r == 0 {
 		return ""
@@ -140,7 +154,8 @@ func (ptc *PaymentTokenContext) MerchantDomain() string {
 }
 
 // Amount returns the amount.
-func (ptc *PaymentTokenContext) Amount() obj.Object {
+func (ptc *PaymentTokenContext) Amount() *foundation.DecimalNumber {
+	defer runtime.KeepAlive(ptc)
 	_r := objc.Send[objc.ID](objref.IDOf(ptc), objc.RegisterName("amount"))
-	return obj.Wrap(_r)
+	return foundation.DecimalNumberFromID(_r)
 }

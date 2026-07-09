@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func printOperationAdopt(id objc.ID) *PrintOperation {
 
 // Description returns the object's -description text.
 func (po *PrintOperation) Description() string {
+	defer runtime.KeepAlive(po)
 	return rt.Description(objref.IDOf(po))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (po *PrintOperation) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(po)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(po), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (po *PrintOperation) IsKind(className string) bool {
+	defer runtime.KeepAlive(po)
 	return rt.IsKind(objref.IDOf(po), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (po *PrintOperation) String() string {
+	defer runtime.KeepAlive(po)
 	return rt.Description(objref.IDOf(po))
 }
 
@@ -105,6 +112,7 @@ func (po *PrintOperation) WithShowsProgressPanel(showsProgressPanel bool) *Print
 
 // WithPrintPanel sets the print panel object to use during the operation.
 func (po *PrintOperation) WithPrintPanel(printPanel *PrintPanel) *PrintOperation {
+	defer runtime.KeepAlive(printPanel)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPrintPanel:"), objref.IDOf(printPanel))
 	})
@@ -112,9 +120,10 @@ func (po *PrintOperation) WithPrintPanel(printPanel *PrintPanel) *PrintOperation
 }
 
 // WithPDFPanel sets the PDF panel object to use during the operation.
-func (po *PrintOperation) WithPDFPanel(pDFPanel *PDFPanel) *PrintOperation {
+func (po *PrintOperation) WithPDFPanel(pdfPanel *PDFPanel) *PrintOperation {
+	defer runtime.KeepAlive(pdfPanel)
 	purego.Main(func() {
-		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPDFPanel:"), objref.IDOf(pDFPanel))
+		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPDFPanel:"), objref.IDOf(pdfPanel))
 	})
 	return po
 }
@@ -137,6 +146,7 @@ func (po *PrintOperation) WithPageOrder(pageOrder PrintingPageOrder) *PrintOpera
 
 // WithPrintInfo sets the printing information associated with the print operation.
 func (po *PrintOperation) WithPrintInfo(printInfo *PrintInfo) *PrintOperation {
+	defer runtime.KeepAlive(printInfo)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setPrintInfo:"), objref.IDOf(printInfo))
 	})
@@ -145,6 +155,7 @@ func (po *PrintOperation) WithPrintInfo(printInfo *PrintInfo) *PrintOperation {
 
 // RunOperation reports whether runs the print operation on the current thread.
 func (po *PrintOperation) RunOperation() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -158,6 +169,7 @@ func (po *PrintOperation) RunOperation() bool {
 
 // CreateContext creates the graphics context object used for drawing during the operation.
 func (po *PrintOperation) CreateContext() *GraphicsContext {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *GraphicsContext
 	purego.Main(func() {
 		_mainthread0 = func() *GraphicsContext {
@@ -171,6 +183,7 @@ func (po *PrintOperation) CreateContext() *GraphicsContext {
 
 // DestroyContext destroys the print operation’s graphics context.
 func (po *PrintOperation) DestroyContext() {
+	defer runtime.KeepAlive(po)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("destroyContext"))
 	})
@@ -179,6 +192,7 @@ func (po *PrintOperation) DestroyContext() {
 
 // DeliverResult reports whether delivers the results of the print operation to the intended destination.
 func (po *PrintOperation) DeliverResult() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -192,6 +206,7 @@ func (po *PrintOperation) DeliverResult() bool {
 
 // CleanUpOperation called at the end of a print operation to remove the print operation as the current operation.
 func (po *PrintOperation) CleanUpOperation() {
+	defer runtime.KeepAlive(po)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("cleanUpOperation"))
 	})
@@ -200,6 +215,7 @@ func (po *PrintOperation) CleanUpOperation() {
 
 // IsCopyingOperation reports whether the object is copying operation.
 func (po *PrintOperation) IsCopyingOperation() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -213,6 +229,7 @@ func (po *PrintOperation) IsCopyingOperation() bool {
 
 // PreferredRenderingQuality returns the preferred rendering quality.
 func (po *PrintOperation) PreferredRenderingQuality() PrintRenderingQuality {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 PrintRenderingQuality
 	purego.Main(func() {
 		_mainthread0 = func() PrintRenderingQuality {
@@ -226,6 +243,7 @@ func (po *PrintOperation) PreferredRenderingQuality() PrintRenderingQuality {
 
 // JobTitle returns the job title.
 func (po *PrintOperation) JobTitle() string {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -242,6 +260,7 @@ func (po *PrintOperation) JobTitle() string {
 
 // ShowsPrintPanel wraps the corresponding Objective-C method.
 func (po *PrintOperation) ShowsPrintPanel() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -255,6 +274,7 @@ func (po *PrintOperation) ShowsPrintPanel() bool {
 
 // ShowsProgressPanel wraps the corresponding Objective-C method.
 func (po *PrintOperation) ShowsProgressPanel() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -268,6 +288,7 @@ func (po *PrintOperation) ShowsProgressPanel() bool {
 
 // PrintPanel returns the print panel.
 func (po *PrintOperation) PrintPanel() *PrintPanel {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *PrintPanel
 	purego.Main(func() {
 		_mainthread0 = func() *PrintPanel {
@@ -281,6 +302,7 @@ func (po *PrintOperation) PrintPanel() *PrintPanel {
 
 // PDFPanel returns the pdf panel.
 func (po *PrintOperation) PDFPanel() *PDFPanel {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *PDFPanel
 	purego.Main(func() {
 		_mainthread0 = func() *PDFPanel {
@@ -294,6 +316,7 @@ func (po *PrintOperation) PDFPanel() *PDFPanel {
 
 // CanSpawnSeparateThread wraps the corresponding Objective-C method.
 func (po *PrintOperation) CanSpawnSeparateThread() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -307,6 +330,7 @@ func (po *PrintOperation) CanSpawnSeparateThread() bool {
 
 // PageOrder returns the page order.
 func (po *PrintOperation) PageOrder() PrintingPageOrder {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 PrintingPageOrder
 	purego.Main(func() {
 		_mainthread0 = func() PrintingPageOrder {
@@ -320,6 +344,7 @@ func (po *PrintOperation) PageOrder() PrintingPageOrder {
 
 // View returns the view.
 func (po *PrintOperation) View() *View {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -333,6 +358,7 @@ func (po *PrintOperation) View() *View {
 
 // PrintInfo returns the print info.
 func (po *PrintOperation) PrintInfo() *PrintInfo {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *PrintInfo
 	purego.Main(func() {
 		_mainthread0 = func() *PrintInfo {
@@ -346,6 +372,7 @@ func (po *PrintOperation) PrintInfo() *PrintInfo {
 
 // Context returns the context.
 func (po *PrintOperation) Context() *GraphicsContext {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *GraphicsContext
 	purego.Main(func() {
 		_mainthread0 = func() *GraphicsContext {
@@ -359,6 +386,7 @@ func (po *PrintOperation) Context() *GraphicsContext {
 
 // PageRange returns the page range.
 func (po *PrintOperation) PageRange() foundation.NSRange {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 foundation.NSRange
 	purego.Main(func() {
 		_mainthread0 = func() foundation.NSRange {
@@ -372,6 +400,7 @@ func (po *PrintOperation) PageRange() foundation.NSRange {
 
 // CurrentPage returns the current page.
 func (po *PrintOperation) CurrentPage() int {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -385,6 +414,8 @@ func (po *PrintOperation) CurrentPage() int {
 
 // SetAccessoryView sets the custom accessory view to be displayed by the print operation’s print panel.
 func (po *PrintOperation) SetAccessoryView(view *View) {
+	defer runtime.KeepAlive(po)
+	defer runtime.KeepAlive(view)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setAccessoryView:"), objref.IDOf(view))
 	})
@@ -393,6 +424,7 @@ func (po *PrintOperation) SetAccessoryView(view *View) {
 
 // AccessoryView returns the accessory view used by the print operation’s print panel.
 func (po *PrintOperation) AccessoryView() *View {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 *View
 	purego.Main(func() {
 		_mainthread0 = func() *View {
@@ -406,6 +438,7 @@ func (po *PrintOperation) AccessoryView() *View {
 
 // SetJobStyleHint sets the type of content that the print job is printing.
 func (po *PrintOperation) SetJobStyleHint(hint string) {
+	defer runtime.KeepAlive(po)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setJobStyleHint:"), purego.NSString(hint))
 	})
@@ -414,6 +447,7 @@ func (po *PrintOperation) SetJobStyleHint(hint string) {
 
 // JobStyleHint returns the type of content that the print job is printing.
 func (po *PrintOperation) JobStyleHint() string {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -430,6 +464,7 @@ func (po *PrintOperation) JobStyleHint() string {
 
 // SetShowPanels sets whether the print operation should display a print panel.
 func (po *PrintOperation) SetShowPanels(flag bool) {
+	defer runtime.KeepAlive(po)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(po), objc.RegisterName("setShowPanels:"), flag)
 	})
@@ -438,6 +473,7 @@ func (po *PrintOperation) SetShowPanels(flag bool) {
 
 // ShowPanels reports whether returns a Boolean value that indicates whether the print panel is to be displayed.
 func (po *PrintOperation) ShowPanels() bool {
+	defer runtime.KeepAlive(po)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {

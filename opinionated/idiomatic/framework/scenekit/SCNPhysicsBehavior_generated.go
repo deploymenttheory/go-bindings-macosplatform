@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func physicsBehaviorAdopt(id objc.ID) *PhysicsBehavior {
 
 // Description returns the object's -description text.
 func (pb *PhysicsBehavior) Description() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pb *PhysicsBehavior) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pb *PhysicsBehavior) IsKind(className string) bool {
+	defer runtime.KeepAlive(pb)
 	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pb *PhysicsBehavior) String() string {
+	defer runtime.KeepAlive(pb)
 	return rt.Description(objref.IDOf(pb))
 }
 

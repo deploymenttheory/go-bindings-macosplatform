@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRSmokeCOAlarmClusterLowBatteryEventAdopt(id objc.ID) *MTRSmokeCOAlarmClus
 
 // Description returns the object's -description text.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) Description() string {
+	defer runtime.KeepAlive(mscaclbe)
 	return rt.Description(objref.IDOf(mscaclbe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mscaclbe)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mscaclbe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) IsKind(className string) bool {
+	defer runtime.KeepAlive(mscaclbe)
 	return rt.IsKind(objref.IDOf(mscaclbe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) String() string {
+	defer runtime.KeepAlive(mscaclbe)
 	return rt.Description(objref.IDOf(mscaclbe))
 }
 
@@ -72,12 +80,14 @@ func NewMTRSmokeCOAlarmClusterLowBatteryEvent() *MTRSmokeCOAlarmClusterLowBatter
 
 // WithAlarmSeverityLevel sets the alarm severity level.
 func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterLowBatteryEvent {
+	defer runtime.KeepAlive(alarmSeverityLevel)
 	objc.Send[objc.ID](objref.IDOf(mscaclbe), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 	return mscaclbe
 }
 
 // AlarmSeverityLevel returns the alarm severity level.
-func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) AlarmSeverityLevel() obj.Object {
+func (mscaclbe *MTRSmokeCOAlarmClusterLowBatteryEvent) AlarmSeverityLevel() *foundation.Number {
+	defer runtime.KeepAlive(mscaclbe)
 	_r := objc.Send[objc.ID](objref.IDOf(mscaclbe), objc.RegisterName("alarmSeverityLevel"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

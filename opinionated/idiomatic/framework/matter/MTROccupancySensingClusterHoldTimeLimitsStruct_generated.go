@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTROccupancySensingClusterHoldTimeLimitsStructAdopt(id objc.ID) *MTROccupan
 
 // Description returns the object's -description text.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) Description() string {
+	defer runtime.KeepAlive(moschtls)
 	return rt.Description(objref.IDOf(moschtls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moschtls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moschtls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(moschtls)
 	return rt.IsKind(objref.IDOf(moschtls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) String() string {
+	defer runtime.KeepAlive(moschtls)
 	return rt.Description(objref.IDOf(moschtls))
 }
 
@@ -72,36 +80,42 @@ func NewMTROccupancySensingClusterHoldTimeLimitsStruct() *MTROccupancySensingClu
 
 // WithHoldTimeMin sets the hold time min.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	defer runtime.KeepAlive(holdTimeMin)
 	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
 	return moschtls
 }
 
 // WithHoldTimeMax sets the hold time max.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	defer runtime.KeepAlive(holdTimeMax)
 	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
 	return moschtls
 }
 
 // WithHoldTimeDefault sets the hold time default.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	defer runtime.KeepAlive(holdTimeDefault)
 	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
 	return moschtls
 }
 
 // HoldTimeMin returns the hold time min.
-func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() obj.Object {
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() *foundation.Number {
+	defer runtime.KeepAlive(moschtls)
 	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeMin"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // HoldTimeMax returns the hold time max.
-func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() obj.Object {
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() *foundation.Number {
+	defer runtime.KeepAlive(moschtls)
 	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeMax"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // HoldTimeDefault returns the hold time default.
-func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() obj.Object {
+func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() *foundation.Number {
+	defer runtime.KeepAlive(moschtls)
 	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeDefault"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

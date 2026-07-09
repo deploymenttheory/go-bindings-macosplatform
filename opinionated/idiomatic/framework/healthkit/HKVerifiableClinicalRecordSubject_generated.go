@@ -5,7 +5,10 @@
 package healthkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,22 +50,27 @@ func verifiableClinicalRecordSubjectAdopt(id objc.ID) *VerifiableClinicalRecordS
 
 // Description returns the object's -description text.
 func (vcrs *VerifiableClinicalRecordSubject) Description() string {
+	defer runtime.KeepAlive(vcrs)
 	return rt.Description(objref.IDOf(vcrs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vcrs *VerifiableClinicalRecordSubject) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vcrs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vcrs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vcrs *VerifiableClinicalRecordSubject) IsKind(className string) bool {
+	defer runtime.KeepAlive(vcrs)
 	return rt.IsKind(objref.IDOf(vcrs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vcrs *VerifiableClinicalRecordSubject) String() string {
+	defer runtime.KeepAlive(vcrs)
 	return rt.Description(objref.IDOf(vcrs))
 }
 
@@ -74,6 +82,7 @@ func NewVerifiableClinicalRecordSubject() *VerifiableClinicalRecordSubject {
 
 // FullName returns the subject's full name.
 func (vcrs *VerifiableClinicalRecordSubject) FullName() string {
+	defer runtime.KeepAlive(vcrs)
 	_r := objc.Send[objc.ID](objref.IDOf(vcrs), objc.RegisterName("fullName"))
 	if _r == 0 {
 		return ""
@@ -82,7 +91,8 @@ func (vcrs *VerifiableClinicalRecordSubject) FullName() string {
 }
 
 // DateOfBirthComponents returns the subject's date of birth components.
-func (vcrs *VerifiableClinicalRecordSubject) DateOfBirthComponents() obj.Object {
+func (vcrs *VerifiableClinicalRecordSubject) DateOfBirthComponents() *foundation.DateComponents {
+	defer runtime.KeepAlive(vcrs)
 	_r := objc.Send[objc.ID](objref.IDOf(vcrs), objc.RegisterName("dateOfBirthComponents"))
-	return obj.Wrap(_r)
+	return foundation.DateComponentsFromID(_r)
 }

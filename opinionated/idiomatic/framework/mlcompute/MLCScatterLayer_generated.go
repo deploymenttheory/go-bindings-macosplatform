@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -65,12 +67,14 @@ func (sl *ScatterLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Scatter
 
 // Dimension returns the dimension along which to index
 func (sl *ScatterLayer) Dimension() int {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("dimension"))
 	return _r
 }
 
 // ReductionType returns the reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum.
 func (sl *ScatterLayer) ReductionType() ReductionType {
+	defer runtime.KeepAlive(sl)
 	_r := objc.Send[ReductionType](objref.IDOf(sl), objc.RegisterName("reductionType"))
 	return _r
 }

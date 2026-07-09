@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func scriptExecutionContextAdopt(id objc.ID) *ScriptExecutionContext {
 
 // Description returns the object's -description text.
 func (sec *ScriptExecutionContext) Description() string {
+	defer runtime.KeepAlive(sec)
 	return rt.Description(objref.IDOf(sec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sec *ScriptExecutionContext) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sec)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sec *ScriptExecutionContext) IsKind(className string) bool {
+	defer runtime.KeepAlive(sec)
 	return rt.IsKind(objref.IDOf(sec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sec *ScriptExecutionContext) String() string {
+	defer runtime.KeepAlive(sec)
 	return rt.Description(objref.IDOf(sec))
 }
 
@@ -76,18 +82,21 @@ func NewScriptExecutionContext() *ScriptExecutionContext {
 
 // WithTopLevelObject sets sets the top-level object for an object-specifier evaluation.
 func (sec *ScriptExecutionContext) WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext {
+	defer runtime.KeepAlive(topLevelObject)
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
 	return sec
 }
 
 // WithObjectBeingTested sets sets the top-level container object currently being tested in a “whose” qualifier to a given object.
 func (sec *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext {
+	defer runtime.KeepAlive(objectBeingTested)
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
 	return sec
 }
 
 // WithRangeContainerObject sets sets the top-level container object for a range-specifier evaluation to a give object.
 func (sec *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext {
+	defer runtime.KeepAlive(rangeContainerObject)
 	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
 	return sec
 }
@@ -99,25 +108,28 @@ func (sec *ScriptExecutionContext) WithObservationInfo(observationInfo unsafe.Po
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (sec *ScriptExecutionContext) WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext {
-	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (sec *ScriptExecutionContext) WithScriptingProperties(scriptingProperties map[string]obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return sec
 }
 
 // TopLevelObject returns the top level object.
 func (sec *ScriptExecutionContext) TopLevelObject() obj.Object {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("topLevelObject"))
 	return obj.Wrap(_r)
 }
 
 // ObjectBeingTested returns the object being tested.
 func (sec *ScriptExecutionContext) ObjectBeingTested() obj.Object {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("objectBeingTested"))
 	return obj.Wrap(_r)
 }
 
 // RangeContainerObject returns the range container object.
 func (sec *ScriptExecutionContext) RangeContainerObject() obj.Object {
+	defer runtime.KeepAlive(sec)
 	_r := objc.Send[objc.ID](objref.IDOf(sec), objc.RegisterName("rangeContainerObject"))
 	return obj.Wrap(_r)
 }

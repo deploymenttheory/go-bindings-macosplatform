@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -50,27 +51,33 @@ func nWTCPConnectionAdopt(id objc.ID) *NWTCPConnection {
 
 // Description returns the object's -description text.
 func (nc *NWTCPConnection) Description() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nc *NWTCPConnection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nc *NWTCPConnection) IsKind(className string) bool {
+	defer runtime.KeepAlive(nc)
 	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nc *NWTCPConnection) String() string {
+	defer runtime.KeepAlive(nc)
 	return rt.Description(objref.IDOf(nc))
 }
 
 // NewNWTCPConnectionWithUpgradeForConnection this convenience initializer can be used to create a new connection that will only be connected if there exists a better path (as determined by the system) to the remote endpoint of the original connection.
 func NewNWTCPConnectionWithUpgradeForConnection(connection *NWTCPConnection) *NWTCPConnection {
+	defer runtime.KeepAlive(connection)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NWTCPConnection")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpgradeForConnection:"), objref.IDOf(connection))
 	return nWTCPConnectionAdopt(_id)
@@ -78,6 +85,7 @@ func NewNWTCPConnectionWithUpgradeForConnection(connection *NWTCPConnection) *NW
 
 // Cancel cancel the connection.
 func (nc *NWTCPConnection) Cancel() {
+	defer runtime.KeepAlive(nc)
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("cancel"))
 }
 
@@ -85,6 +93,7 @@ func (nc *NWTCPConnection) Cancel() {
 //
 // ReadLength blocks until the operation completes or ctx is cancelled.
 func (nc *NWTCPConnection) ReadLength(ctx context.Context, length int) (result obj.Object, err error) {
+	defer runtime.KeepAlive(nc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -110,6 +119,7 @@ func (nc *NWTCPConnection) ReadLength(ctx context.Context, length int) (result o
 //
 // ReadMinimumLengthMaximumLength blocks until the operation completes or ctx is cancelled.
 func (nc *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, minimum int, maximum int) (result obj.Object, err error) {
+	defer runtime.KeepAlive(nc)
 	type _result struct {
 		val obj.Object
 		err error
@@ -134,14 +144,15 @@ func (nc *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, m
 // Write write the data to the connection.
 //
 // Write blocks until the operation completes or ctx is cancelled.
-func (nc *NWTCPConnection) Write(ctx context.Context, data obj.Object) error {
+func (nc *NWTCPConnection) Write(ctx context.Context, data []byte) error {
+	defer runtime.KeepAlive(nc)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("write:completionHandler:"), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("write:completionHandler:"), rt.BytesToNSData(data), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -152,35 +163,41 @@ func (nc *NWTCPConnection) Write(ctx context.Context, data obj.Object) error {
 
 // WriteClose close the connection for writing.
 func (nc *NWTCPConnection) WriteClose() {
+	defer runtime.KeepAlive(nc)
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("writeClose"))
 }
 
 // State returns the status of the connection. Use KVO to watch this property to get updates.
 func (nc *NWTCPConnection) State() NWTCPConnectionState {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[NWTCPConnectionState](objref.IDOf(nc), objc.RegisterName("state"))
 	return _r
 }
 
 // IsViable reports whether the connection can read and write data, false otherwise. Use KVO to watch this property.
 func (nc *NWTCPConnection) IsViable() bool {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[bool](objref.IDOf(nc), objc.RegisterName("isViable"))
 	return _r
 }
 
 // HasBetterPath reports whether the system determines there is a better path the destination can be reached if the caller creates a new connection using the same endpoint and parameters. This can be done using the convenience upgrade initializer method. Use KVO to watch this property to get updates.
 func (nc *NWTCPConnection) HasBetterPath() bool {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[bool](objref.IDOf(nc), objc.RegisterName("hasBetterPath"))
 	return _r
 }
 
 // ConnectedPath returns the network path over which the connection was established. The caller can query additional properties from the NWPath object for more information. Note that this contains a snapshot of information at the time of connection establishment for this connection only. As a result, some underlying properties might change in time and might not reflect the path for other connections that might be established at different times.
 func (nc *NWTCPConnection) ConnectedPath() *NWPath {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("connectedPath"))
 	return NWPathFromID(_r)
 }
 
 // TxtRecord returns when the connection is connected to a Bonjour service endpoint, the TXT record associated with the Bonjour service is available via this property. Beware that the value comes from the network. Care must be taken when parsing this potentially malicious value.
-func (nc *NWTCPConnection) TxtRecord() obj.Object {
+func (nc *NWTCPConnection) TxtRecord() []byte {
+	defer runtime.KeepAlive(nc)
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("txtRecord"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

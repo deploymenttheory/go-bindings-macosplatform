@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -48,27 +49,33 @@ func meshAdopt(id objc.ID) *Mesh {
 
 // Description returns the object's -description text.
 func (m *Mesh) Description() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (m *Mesh) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(m)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (m *Mesh) IsKind(className string) bool {
+	defer runtime.KeepAlive(m)
 	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (m *Mesh) String() string {
+	defer runtime.KeepAlive(m)
 	return rt.Description(objref.IDOf(m))
 }
 
-// NewMeshWithMeshError initialize the mesh and the mesh's submeshes This does NOT initialize any meshes that are children of the Model I/O mesh
-func NewMeshWithMeshError(mesh obj.Object) (result *Mesh, err error) {
+// NewMeshWithMesh initialize the mesh and the mesh's submeshes This does NOT initialize any meshes that are children of the Model I/O mesh
+func NewMeshWithMesh(mesh obj.Object) (result *Mesh, err error) {
+	defer runtime.KeepAlive(mesh)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("GLKMesh")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMesh:error:"), objref.IDOf(mesh), unsafe.Pointer(&_nsErr))
@@ -80,6 +87,7 @@ func NewMeshWithMeshError(mesh obj.Object) (result *Mesh, err error) {
 
 // VertexCount returns number of verticies in the vertexBuffers
 func (m *Mesh) VertexCount() int {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("vertexCount"))
 	return _r
 }
@@ -88,12 +96,14 @@ func (m *Mesh) VertexCount() int {
 //
 // VertexBuffers returns the collection as a Go slice.
 func (m *Mesh) VertexBuffers() []*MeshBuffer {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("vertexBuffers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MeshBuffer { return MeshBufferFromID(_id) })
 }
 
 // VertexDescriptor returns model I/O vertex descriptor specifying the layout of data in vertexBuffers This is not directly used by this object, but the application can use this information to determine rendering state or setup a vertex attribute object.
 func (m *Mesh) VertexDescriptor() obj.Object {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("vertexDescriptor"))
 	return obj.Wrap(_r)
 }
@@ -102,12 +112,14 @@ func (m *Mesh) VertexDescriptor() obj.Object {
 //
 // Submeshes returns the collection as a Go slice.
 func (m *Mesh) Submeshes() []*Submesh {
+	defer runtime.KeepAlive(m)
 	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("submeshes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Submesh { return SubmeshFromID(_id) })
 }
 
 // Name returns name of the mesh copies from the originating Model I/O mesh Can be used by the app to identiry the mesh in it's scene/world/renderer etc.
 func (m *Mesh) Name() string {
+	defer runtime.KeepAlive(m)
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""

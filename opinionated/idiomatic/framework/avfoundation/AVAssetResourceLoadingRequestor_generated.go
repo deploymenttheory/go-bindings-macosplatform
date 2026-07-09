@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetResourceLoadingRequestorAdopt(id objc.ID) *AssetResourceLoadingRequest
 
 // Description returns the object's -description text.
 func (arlr *AssetResourceLoadingRequestor) Description() string {
+	defer runtime.KeepAlive(arlr)
 	return rt.Description(objref.IDOf(arlr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (arlr *AssetResourceLoadingRequestor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(arlr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(arlr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (arlr *AssetResourceLoadingRequestor) IsKind(className string) bool {
+	defer runtime.KeepAlive(arlr)
 	return rt.IsKind(objref.IDOf(arlr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (arlr *AssetResourceLoadingRequestor) String() string {
+	defer runtime.KeepAlive(arlr)
 	return rt.Description(objref.IDOf(arlr))
 }
 
@@ -74,6 +81,7 @@ func NewAssetResourceLoadingRequestor() *AssetResourceLoadingRequestor {
 
 // ProvidesExpiredSessionReports wraps the corresponding Objective-C method.
 func (arlr *AssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
+	defer runtime.KeepAlive(arlr)
 	_r := objc.Send[bool](objref.IDOf(arlr), objc.RegisterName("providesExpiredSessionReports"))
 	return _r
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func stageInputOutputDescriptorAdopt(id objc.ID) *StageInputOutputDescriptor {
 
 // Description returns the object's -description text.
 func (siod *StageInputOutputDescriptor) Description() string {
+	defer runtime.KeepAlive(siod)
 	return rt.Description(objref.IDOf(siod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (siod *StageInputOutputDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(siod)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(siod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (siod *StageInputOutputDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(siod)
 	return rt.IsKind(objref.IDOf(siod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (siod *StageInputOutputDescriptor) String() string {
+	defer runtime.KeepAlive(siod)
 	return rt.Description(objref.IDOf(siod))
 }
 
@@ -86,29 +93,34 @@ func (siod *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex in
 
 // Reset resets the default state for the descriptor.
 func (siod *StageInputOutputDescriptor) Reset() {
+	defer runtime.KeepAlive(siod)
 	objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("reset"))
 }
 
 // Layouts returns the layouts.
 func (siod *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
+	defer runtime.KeepAlive(siod)
 	_r := objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("layouts"))
 	return BufferLayoutDescriptorArrayFromID(_r)
 }
 
 // Attributes returns the attributes.
 func (siod *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
+	defer runtime.KeepAlive(siod)
 	_r := objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("attributes"))
 	return AttributeDescriptorArrayFromID(_r)
 }
 
 // IndexType returns the index type.
 func (siod *StageInputOutputDescriptor) IndexType() IndexType {
+	defer runtime.KeepAlive(siod)
 	_r := objc.Send[IndexType](objref.IDOf(siod), objc.RegisterName("indexType"))
 	return _r
 }
 
 // IndexBufferIndex returns the index buffer index.
 func (siod *StageInputOutputDescriptor) IndexBufferIndex() int {
+	defer runtime.KeepAlive(siod)
 	_r := objc.Send[int](objref.IDOf(siod), objc.RegisterName("indexBufferIndex"))
 	return _r
 }

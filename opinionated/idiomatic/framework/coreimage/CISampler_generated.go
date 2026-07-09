@@ -5,6 +5,8 @@
 package coreimage
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,27 +50,33 @@ func samplerAdopt(id objc.ID) *Sampler {
 
 // Description returns the object's -description text.
 func (s *Sampler) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Sampler) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Sampler) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Sampler) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // NewSamplerWithImage initializes a sampler with an image object.
 func NewSamplerWithImage(im *Image) *Sampler {
+	defer runtime.KeepAlive(im)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:"), objref.IDOf(im))
 	return samplerAdopt(_id)
@@ -76,6 +84,8 @@ func NewSamplerWithImage(im *Image) *Sampler {
 
 // NewSamplerWithImageKeysAndValues initializes the sampler with an image object using options specified as key-value pairs.
 func NewSamplerWithImageKeysAndValues(im *Image, key0 obj.Object) *Sampler {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(key0)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:keysAndValues:"), objref.IDOf(im), objref.IDOf(key0))
 	return samplerAdopt(_id)
@@ -83,6 +93,8 @@ func NewSamplerWithImageKeysAndValues(im *Image, key0 obj.Object) *Sampler {
 
 // NewSamplerWithImageOptions initializes the sampler with an image object using options specified in a dictionary.
 func NewSamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
+	defer runtime.KeepAlive(im)
+	defer runtime.KeepAlive(dict)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), objref.IDOf(im), objref.IDOf(dict))
 	return samplerAdopt(_id)
@@ -90,12 +102,14 @@ func NewSamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
 
 // Definition returns the definition.
 func (s *Sampler) Definition() *FilterShape {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("definition"))
 	return FilterShapeFromID(_r)
 }
 
 // Extent returns the extent.
 func (s *Sampler) Extent() corefoundation.CGRect {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("extent"))
 	return _r
 }

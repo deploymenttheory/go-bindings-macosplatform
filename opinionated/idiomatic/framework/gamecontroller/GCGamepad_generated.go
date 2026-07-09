@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,54 +56,63 @@ func (g *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Objec
 
 // SaveSnapshot returns saves a snapshot of all of the profile’s elements.
 func (g *Gamepad) SaveSnapshot() *GamepadSnapshot {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("saveSnapshot"))
 	return GamepadSnapshotFromID(_r)
 }
 
 // Controller returns a profile keeps a reference to the controller that this profile is mapping input from.
 func (g *Gamepad) Controller() *Controller {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
 // Dpad returns required to be analog in the Standard profile. All the elements of this directional input are thus analog.
 func (g *Gamepad) Dpad() *ControllerDirectionPad {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("dpad"))
 	return ControllerDirectionPadFromID(_r)
 }
 
 // ButtonA returns all face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
 func (g *Gamepad) ButtonA() *ControllerButtonInput {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonA"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonB returns the button b.
 func (g *Gamepad) ButtonB() *ControllerButtonInput {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonX returns the button x.
 func (g *Gamepad) ButtonX() *ControllerButtonInput {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonY returns the button y.
 func (g *Gamepad) ButtonY() *ControllerButtonInput {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // LeftShoulder returns shoulder buttons are required to be analog inputs.
 func (g *Gamepad) LeftShoulder() *ControllerButtonInput {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("leftShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightShoulder returns shoulder buttons are required to be analog inputs.
 func (g *Gamepad) RightShoulder() *ControllerButtonInput {
+	defer runtime.KeepAlive(g)
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("rightShoulder"))
 	return ControllerButtonInputFromID(_r)
 }

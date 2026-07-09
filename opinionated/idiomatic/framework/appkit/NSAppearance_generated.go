@@ -6,8 +6,10 @@ package appkit
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,27 +51,34 @@ func appearanceAdopt(id objc.ID) *Appearance {
 
 // Description returns the object's -description text.
 func (a *Appearance) Description() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (a *Appearance) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(a)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (a *Appearance) IsKind(className string) bool {
+	defer runtime.KeepAlive(a)
 	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (a *Appearance) String() string {
+	defer runtime.KeepAlive(a)
 	return rt.Description(objref.IDOf(a))
 }
 
 // NewAppearanceWithAppearanceNamedBundle creates an appearance object from the named appearance file located in the specified bundle.
 func NewAppearanceWithAppearanceNamedBundle(name obj.Object, bundle obj.Object) *Appearance {
+	defer runtime.KeepAlive(name)
+	defer runtime.KeepAlive(bundle)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAppearanceNamed:bundle:"), objref.IDOf(name), objref.IDOf(bundle))
 	return appearanceAdopt(_id)
@@ -77,6 +86,7 @@ func NewAppearanceWithAppearanceNamedBundle(name obj.Object, bundle obj.Object) 
 
 // NewAppearanceWithCoder creates a new Appearance.
 func NewAppearanceWithCoder(coder obj.Object) *Appearance {
+	defer runtime.KeepAlive(coder)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppearance")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return appearanceAdopt(_id)
@@ -86,6 +96,7 @@ func NewAppearanceWithCoder(coder obj.Object) *Appearance {
 //
 // PerformAsCurrentDrawingAppearance blocks until the operation completes or ctx is cancelled.
 func (a *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) error {
+	defer runtime.KeepAlive(a)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
@@ -100,19 +111,22 @@ func (a *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) erro
 }
 
 // BestMatchFromAppearancesWithNames returns the appearance name that most closely matches the current appearance object.
-func (a *Appearance) BestMatchFromAppearancesWithNames(appearances []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bestMatchFromAppearancesWithNames:"), purego.SliceToNSArray(appearances, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-	return obj.Wrap(_r)
+func (a *Appearance) BestMatchFromAppearancesWithNames(appearances []*foundation.String) *foundation.String {
+	defer runtime.KeepAlive(a)
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("bestMatchFromAppearancesWithNames:"), purego.SliceToNSArray(appearances, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
+	return foundation.StringFromID(_r)
 }
 
 // Name returns the name.
-func (a *Appearance) Name() obj.Object {
+func (a *Appearance) Name() *foundation.String {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // AllowsVibrancy wraps the corresponding Objective-C method.
 func (a *Appearance) AllowsVibrancy() bool {
+	defer runtime.KeepAlive(a)
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("allowsVibrancy"))
 	return _r
 }

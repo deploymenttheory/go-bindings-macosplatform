@@ -5,6 +5,8 @@
 package mediaaccessibility
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func musicHapticsManagerAdopt(id objc.ID) *MusicHapticsManager {
 
 // Description returns the object's -description text.
 func (mhm *MusicHapticsManager) Description() string {
+	defer runtime.KeepAlive(mhm)
 	return rt.Description(objref.IDOf(mhm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mhm *MusicHapticsManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mhm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mhm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mhm *MusicHapticsManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(mhm)
 	return rt.IsKind(objref.IDOf(mhm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mhm *MusicHapticsManager) String() string {
+	defer runtime.KeepAlive(mhm)
 	return rt.Description(objref.IDOf(mhm))
 }
 
@@ -74,11 +81,13 @@ func NewMusicHapticsManager() *MusicHapticsManager {
 
 // CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler checks whether a haptic track is available for the song with the specified International Standard Recording Code (ISRC).
 func (mhm *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
+	defer runtime.KeepAlive(mhm)
 	objc.Send[objc.ID](objref.IDOf(mhm), objc.RegisterName("checkHapticTrackAvailabilityForMediaMatchingCode:completionHandler:"), purego.NSString(internationalStandardRecordingCode), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // IsActive reports whether the user setting to indicate Music Haptics are currently active.
 func (mhm *MusicHapticsManager) IsActive() bool {
+	defer runtime.KeepAlive(mhm)
 	_r := objc.Send[bool](objref.IDOf(mhm), objc.RegisterName("isActive"))
 	return _r
 }

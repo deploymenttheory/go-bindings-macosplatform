@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,22 +50,27 @@ func eventAdopt(id objc.ID) *Event {
 
 // Description returns the object's -description text.
 func (e *Event) Description() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (e *Event) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (e *Event) IsKind(className string) bool {
+	defer runtime.KeepAlive(e)
 	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (e *Event) String() string {
+	defer runtime.KeepAlive(e)
 	return rt.Description(objref.IDOf(e))
 }
 
@@ -75,6 +82,7 @@ func NewEvent() *Event {
 
 // CharactersByApplyingModifiers returns the new characters that result if you apply the specified modifier keys to the event.
 func (e *Event) CharactersByApplyingModifiers(modifiers EventModifierFlags) string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("charactersByApplyingModifiers:"), modifiers)
 	if _r == 0 {
 		return ""
@@ -83,145 +91,175 @@ func (e *Event) CharactersByApplyingModifiers(modifiers EventModifierFlags) stri
 }
 
 // TouchesMatchingPhaseInView returns the touch objects associated with the specified phase.
-func (e *Event) TouchesMatchingPhaseInView(phase TouchPhase, view *View) obj.Object {
+// The order of the returned elements is unspecified.
+func (e *Event) TouchesMatchingPhaseInView(phase TouchPhase, view *View) []*Touch {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(view)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("touchesMatchingPhase:inView:"), phase, objref.IDOf(view))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
 }
 
 // AllTouches returns all touch objects associated with the event.
-func (e *Event) AllTouches() obj.Object {
+// The order of the returned elements is unspecified.
+func (e *Event) AllTouches() []*Touch {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allTouches"))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
 }
 
 // TouchesForView returns the touch objects from the event that belong to the specified view.
-func (e *Event) TouchesForView(view *View) obj.Object {
+// The order of the returned elements is unspecified.
+func (e *Event) TouchesForView(view *View) []*Touch {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(view)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("touchesForView:"), objref.IDOf(view))
-	return obj.Wrap(_r)
+	return rt.NSSetToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
 }
 
 // CoalescedTouchesForTouch returns all of the touch objects associated with the specified main touch.
 func (e *Event) CoalescedTouchesForTouch(touch *Touch) []*Touch {
+	defer runtime.KeepAlive(e)
+	defer runtime.KeepAlive(touch)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("coalescedTouchesForTouch:"), objref.IDOf(touch))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
 }
 
 // Type returns the type.
 func (e *Event) Type() EventType {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventType](objref.IDOf(e), objc.RegisterName("type"))
 	return _r
 }
 
 // ModifierFlags returns the modifier flags.
 func (e *Event) ModifierFlags() EventModifierFlags {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventModifierFlags](objref.IDOf(e), objc.RegisterName("modifierFlags"))
 	return _r
 }
 
 // Timestamp returns the timestamp.
 func (e *Event) Timestamp() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("timestamp"))
 	return _r
 }
 
 // Window returns the window.
 func (e *Event) Window() *Window {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("window"))
 	return WindowFromID(_r)
 }
 
 // WindowNumber returns the window number.
 func (e *Event) WindowNumber() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("windowNumber"))
 	return _r
 }
 
 // Context returns the context.
 func (e *Event) Context() *GraphicsContext {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("context"))
 	return GraphicsContextFromID(_r)
 }
 
 // ClickCount returns the click count.
 func (e *Event) ClickCount() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("clickCount"))
 	return _r
 }
 
 // ButtonNumber returns the button number.
 func (e *Event) ButtonNumber() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("buttonNumber"))
 	return _r
 }
 
 // EventNumber returns the event number.
 func (e *Event) EventNumber() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("eventNumber"))
 	return _r
 }
 
 // Pressure returns the pressure.
 func (e *Event) Pressure() float32 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float32](objref.IDOf(e), objc.RegisterName("pressure"))
 	return _r
 }
 
 // LocationInWindow returns the location in window.
 func (e *Event) LocationInWindow() corefoundation.CGPoint {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(e), objc.RegisterName("locationInWindow"))
 	return _r
 }
 
 // DeltaX returns the delta x.
 func (e *Event) DeltaX() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("deltaX"))
 	return _r
 }
 
 // DeltaY returns the delta y.
 func (e *Event) DeltaY() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("deltaY"))
 	return _r
 }
 
 // DeltaZ returns the delta z.
 func (e *Event) DeltaZ() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("deltaZ"))
 	return _r
 }
 
 // HasPreciseScrollingDeltas reports whether the object has precise scrolling deltas.
 func (e *Event) HasPreciseScrollingDeltas() bool {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("hasPreciseScrollingDeltas"))
 	return _r
 }
 
 // ScrollingDeltaX returns the scrolling delta x.
 func (e *Event) ScrollingDeltaX() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("scrollingDeltaX"))
 	return _r
 }
 
 // ScrollingDeltaY returns the scrolling delta y.
 func (e *Event) ScrollingDeltaY() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("scrollingDeltaY"))
 	return _r
 }
 
 // MomentumPhase returns the momentum phase.
 func (e *Event) MomentumPhase() EventPhase {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventPhase](objref.IDOf(e), objc.RegisterName("momentumPhase"))
 	return _r
 }
 
 // IsDirectionInvertedFromDevice reports whether the object is direction inverted from device.
 func (e *Event) IsDirectionInvertedFromDevice() bool {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isDirectionInvertedFromDevice"))
 	return _r
 }
 
 // Characters returns the characters.
 func (e *Event) Characters() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("characters"))
 	if _r == 0 {
 		return ""
@@ -231,6 +269,7 @@ func (e *Event) Characters() string {
 
 // CharactersIgnoringModifiers returns the characters ignoring modifiers.
 func (e *Event) CharactersIgnoringModifiers() string {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("charactersIgnoringModifiers"))
 	if _r == 0 {
 		return ""
@@ -240,198 +279,231 @@ func (e *Event) CharactersIgnoringModifiers() string {
 
 // IsARepeat reports whether the object is a repeat.
 func (e *Event) IsARepeat() bool {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isARepeat"))
 	return _r
 }
 
 // KeyCode returns the key code.
 func (e *Event) KeyCode() uint16 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[uint16](objref.IDOf(e), objc.RegisterName("keyCode"))
 	return _r
 }
 
 // TrackingNumber returns the tracking number.
 func (e *Event) TrackingNumber() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("trackingNumber"))
 	return _r
 }
 
 // TrackingArea returns the tracking area.
 func (e *Event) TrackingArea() *TrackingArea {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("trackingArea"))
 	return TrackingAreaFromID(_r)
 }
 
 // Subtype returns the subtype.
 func (e *Event) Subtype() EventSubtype {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventSubtype](objref.IDOf(e), objc.RegisterName("subtype"))
 	return _r
 }
 
 // Data1 returns the data1.
 func (e *Event) Data1() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("data1"))
 	return _r
 }
 
 // Data2 returns the data2.
 func (e *Event) Data2() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("data2"))
 	return _r
 }
 
 // CGEvent returns the cg event.
 func (e *Event) CGEvent() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("CGEvent"))
 	return obj.Wrap(_r)
 }
 
 // Magnification returns the magnification.
 func (e *Event) Magnification() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("magnification"))
 	return _r
 }
 
 // DeviceID returns the device ID.
 func (e *Event) DeviceID() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("deviceID"))
 	return _r
 }
 
 // Rotation returns the rotation.
 func (e *Event) Rotation() float32 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float32](objref.IDOf(e), objc.RegisterName("rotation"))
 	return _r
 }
 
 // AbsoluteX returns the absolute x.
 func (e *Event) AbsoluteX() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("absoluteX"))
 	return _r
 }
 
 // AbsoluteY returns the absolute y.
 func (e *Event) AbsoluteY() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("absoluteY"))
 	return _r
 }
 
 // AbsoluteZ returns the absolute z.
 func (e *Event) AbsoluteZ() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("absoluteZ"))
 	return _r
 }
 
 // ButtonMask returns the button mask.
 func (e *Event) ButtonMask() EventButtonMask {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventButtonMask](objref.IDOf(e), objc.RegisterName("buttonMask"))
 	return _r
 }
 
 // Tilt returns the tilt.
 func (e *Event) Tilt() corefoundation.CGPoint {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(e), objc.RegisterName("tilt"))
 	return _r
 }
 
 // TangentialPressure returns the tangential pressure.
 func (e *Event) TangentialPressure() float32 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float32](objref.IDOf(e), objc.RegisterName("tangentialPressure"))
 	return _r
 }
 
 // VendorDefined returns the vendor defined.
 func (e *Event) VendorDefined() obj.Object {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("vendorDefined"))
 	return obj.Wrap(_r)
 }
 
 // VendorID returns the vendor ID.
 func (e *Event) VendorID() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("vendorID"))
 	return _r
 }
 
 // TabletID returns the tablet ID.
 func (e *Event) TabletID() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("tabletID"))
 	return _r
 }
 
 // PointingDeviceID returns the pointing device ID.
 func (e *Event) PointingDeviceID() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("pointingDeviceID"))
 	return _r
 }
 
 // SystemTabletID returns the system tablet ID.
 func (e *Event) SystemTabletID() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("systemTabletID"))
 	return _r
 }
 
 // VendorPointingDeviceType returns the vendor pointing device type.
 func (e *Event) VendorPointingDeviceType() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("vendorPointingDeviceType"))
 	return _r
 }
 
 // PointingDeviceSerialNumber returns the pointing device serial number.
 func (e *Event) PointingDeviceSerialNumber() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("pointingDeviceSerialNumber"))
 	return _r
 }
 
 // UniqueID returns the unique ID.
 func (e *Event) UniqueID() uint64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[uint64](objref.IDOf(e), objc.RegisterName("uniqueID"))
 	return _r
 }
 
 // CapabilityMask returns the capability mask.
 func (e *Event) CapabilityMask() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("capabilityMask"))
 	return _r
 }
 
 // PointingDeviceType returns the pointing device type.
 func (e *Event) PointingDeviceType() PointingDeviceType {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[PointingDeviceType](objref.IDOf(e), objc.RegisterName("pointingDeviceType"))
 	return _r
 }
 
 // IsEnteringProximity reports whether the object is entering proximity.
 func (e *Event) IsEnteringProximity() bool {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isEnteringProximity"))
 	return _r
 }
 
 // Phase returns the phase.
 func (e *Event) Phase() EventPhase {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventPhase](objref.IDOf(e), objc.RegisterName("phase"))
 	return _r
 }
 
 // Stage returns the stage.
 func (e *Event) Stage() int {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("stage"))
 	return _r
 }
 
 // StageTransition returns the stage transition.
 func (e *Event) StageTransition() float64 {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("stageTransition"))
 	return _r
 }
 
 // AssociatedEventsMask returns the associated events mask.
 func (e *Event) AssociatedEventsMask() EventMask {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[EventMask](objref.IDOf(e), objc.RegisterName("associatedEventsMask"))
 	return _r
 }
 
 // PressureBehavior returns the pressure behavior.
 func (e *Event) PressureBehavior() PressureBehavior {
+	defer runtime.KeepAlive(e)
 	_r := objc.Send[PressureBehavior](objref.IDOf(e), objc.RegisterName("pressureBehavior"))
 	return _r
 }

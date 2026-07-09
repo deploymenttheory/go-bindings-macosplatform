@@ -5,6 +5,8 @@
 package localauthentication
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +53,7 @@ func NewEnvironmentMechanismUserPassword() *EnvironmentMechanismUserPassword {
 
 // IsSet reports whether the object is set.
 func (emup *EnvironmentMechanismUserPassword) IsSet() bool {
+	defer runtime.KeepAlive(emup)
 	_r := objc.Send[bool](objref.IDOf(emup), objc.RegisterName("isSet"))
 	return _r
 }

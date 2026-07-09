@@ -5,6 +5,7 @@
 package shazamkit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -50,30 +51,35 @@ func signatureAdopt(id objc.ID) *Signature {
 
 // Description returns the object's -description text.
 func (s *Signature) Description() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (s *Signature) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(s)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (s *Signature) IsKind(className string) bool {
+	defer runtime.KeepAlive(s)
 	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (s *Signature) String() string {
+	defer runtime.KeepAlive(s)
 	return rt.Description(objref.IDOf(s))
 }
 
-// NewSignatureWithDataRepresentationError creates a signature object from raw data.
-func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (result *Signature, err error) {
+// NewSignatureWithDataRepresentation creates a signature object from raw data.
+func NewSignatureWithDataRepresentation(dataRepresentation []byte) (result *Signature, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), rt.BytesToNSData(dataRepresentation), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -82,12 +88,14 @@ func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (res
 
 // Duration returns the duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
 func (s *Signature) Duration() float64 {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("duration"))
 	return _r
 }
 
 // DataRepresentation returns the raw data for the signature.
-func (s *Signature) DataRepresentation() obj.Object {
+func (s *Signature) DataRepresentation() []byte {
+	defer runtime.KeepAlive(s)
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("dataRepresentation"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

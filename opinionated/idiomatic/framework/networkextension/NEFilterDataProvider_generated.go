@@ -6,11 +6,12 @@ package networkextension
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -57,30 +58,40 @@ func NewNEFilterDataProvider() *NEFilterDataProvider {
 
 // HandleNewFlow make a filtering decision for a newly-created flow of network content.
 func (nfdp *NEFilterDataProvider) HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
 	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
 	return NEFilterNewFlowVerdictFromID(_r)
 }
 
 // HandleInboundDataFromFlowReadBytesStartOffsetReadBytes make a filtering decision about a chunk of inbound data.
-func (nfdp *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
+func (nfdp *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes []byte) *NEFilterDataVerdict {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, rt.BytesToNSData(readBytes))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes make a filtering decision about a chunk of outbound data.
-func (nfdp *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
-	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
+func (nfdp *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes []byte) *NEFilterDataVerdict {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
+	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, rt.BytesToNSData(readBytes))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // HandleInboundDataCompleteForFlow make a filtering decision after seeing all of the inbound data for a flow.
 func (nfdp *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
 	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleInboundDataCompleteForFlow:"), objref.IDOf(flow))
 	return NEFilterDataVerdictFromID(_r)
 }
 
 // HandleOutboundDataCompleteForFlow make a filtering decision after seeing all of the outbound data for a flow.
 func (nfdp *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
 	_r := objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("handleOutboundDataCompleteForFlow:"), objref.IDOf(flow))
 	return NEFilterDataVerdictFromID(_r)
 }
@@ -89,6 +100,8 @@ func (nfdp *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilt
 //
 // ApplySettings blocks until the operation completes or ctx is cancelled.
 func (nfdp *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFilterSettings) error {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(settings)
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
@@ -106,11 +119,17 @@ func (nfdp *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *N
 
 // ResumeFlowWithVerdict resumes a previously-paused flow.
 func (nfdp *NEFilterDataProvider) ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict) {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
+	defer runtime.KeepAlive(verdict)
 	objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("resumeFlow:withVerdict:"), objref.IDOf(flow), objref.IDOf(verdict))
 }
 
 // UpdateFlowUsingVerdictForDirection updates the verdict for a flow outside the context of any filter data provider callback.
 func (nfdp *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection) {
+	defer runtime.KeepAlive(nfdp)
+	defer runtime.KeepAlive(flow)
+	defer runtime.KeepAlive(verdict)
 	objc.Send[objc.ID](objref.IDOf(nfdp), objc.RegisterName("updateFlow:usingVerdict:forDirection:"), objref.IDOf(flow), objref.IDOf(verdict), direction)
 }
 

@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"context"
+	"runtime"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
@@ -71,6 +72,8 @@ func SecondsForHostTime(hostTime uint64) float64 {
 //
 // InstantiateWithComponentDescriptionOptions blocks until the operation completes or ctx is cancelled.
 func InstantiateWithComponentDescriptionOptions(ctx context.Context, audioComponentDescription obj.Object, options obj.Object) (result *AudioUnit, err error) {
+	defer runtime.KeepAlive(audioComponentDescription)
+	defer runtime.KeepAlive(options)
 	type _result struct {
 		val *AudioUnit
 		err error
@@ -139,19 +142,20 @@ func PersonalVoiceAuthorizationStatus() SpeechSynthesisPersonalVoiceAuthorizatio
 }
 
 // SpeechUtteranceWithString creates an utterance with the text string that you specify for the speech synthesizer to speak.
-func SpeechUtteranceWithString(string_ string) *SpeechUtterance {
-	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithString:"), purego.NSString(string_))
+func SpeechUtteranceWithString(str string) *SpeechUtterance {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithString:"), purego.NSString(str))
 	return SpeechUtteranceFromID(_r)
 }
 
 // SpeechUtteranceWithAttributedString creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
-func SpeechUtteranceWithAttributedString(string_ obj.Object) *SpeechUtterance {
-	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithAttributedString:"), objref.IDOf(string_))
+func SpeechUtteranceWithAttributedString(str obj.Object) *SpeechUtterance {
+	defer runtime.KeepAlive(str)
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithAttributedString:"), objref.IDOf(str))
 	return SpeechUtteranceFromID(_r)
 }
 
 // SpeechUtteranceWithSSMLRepresentation returns a new speech utterance with an Speech Synthesis Markup Language (SSML) string.
-func SpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
-	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithSSMLRepresentation:"), purego.NSString(string_))
+func SpeechUtteranceWithSSMLRepresentation(str string) *SpeechUtterance {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("speechUtteranceWithSSMLRepresentation:"), purego.NSString(str))
 	return SpeechUtteranceFromID(_r)
 }

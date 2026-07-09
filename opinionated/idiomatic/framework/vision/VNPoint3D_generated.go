@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -51,22 +52,27 @@ func point3DAdopt(id objc.ID) *Point3D {
 
 // Description returns the object's -description text.
 func (pd *Point3D) Description() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pd *Point3D) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pd *Point3D) IsKind(className string) bool {
+	defer runtime.KeepAlive(pd)
 	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pd *Point3D) String() string {
+	defer runtime.KeepAlive(pd)
 	return rt.Description(objref.IDOf(pd))
 }
 

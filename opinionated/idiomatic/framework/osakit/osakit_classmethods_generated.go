@@ -5,7 +5,10 @@
 package osakit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -28,6 +31,7 @@ func LanguageForName(name string) *Language {
 
 // LanguageForScriptDataDescriptor wraps the corresponding Objective-C method.
 func LanguageForScriptDataDescriptor(descriptor obj.Object) *Language {
+	defer runtime.KeepAlive(descriptor)
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("languageForScriptDataDescriptor:"), objref.IDOf(descriptor))
 	return LanguageFromID(_r)
 }
@@ -40,17 +44,19 @@ func DefaultLanguage() *Language {
 
 // SetDefaultLanguage wraps the corresponding Objective-C method.
 func SetDefaultLanguage(defaultLanguage *Language) {
+	defer runtime.KeepAlive(defaultLanguage)
 	objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("setDefaultLanguage:"), objref.IDOf(defaultLanguage))
 }
 
 // LanguageInstanceWithLanguage wraps the corresponding Objective-C method.
 func LanguageInstanceWithLanguage(language *Language) *LanguageInstance {
+	defer runtime.KeepAlive(language)
 	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguageInstance")), objc.RegisterName("languageInstanceWithLanguage:"), objref.IDOf(language))
 	return LanguageInstanceFromID(_r)
 }
 
 // ScriptDataDescriptorWithContentsOfURL wraps the corresponding Objective-C method.
-func ScriptDataDescriptorWithContentsOfURL(url string) obj.Object {
+func ScriptDataDescriptorWithContentsOfURL(url string) *foundation.AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("scriptDataDescriptorWithContentsOfURL:"), rt.FileURL(url))
-	return obj.Wrap(_r)
+	return foundation.AppleEventDescriptorFromID(_r)
 }

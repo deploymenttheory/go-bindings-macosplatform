@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func modelStructureProgramBlockAdopt(id objc.ID) *ModelStructureProgramBlock {
 
 // Description returns the object's -description text.
 func (mspb *ModelStructureProgramBlock) Description() string {
+	defer runtime.KeepAlive(mspb)
 	return rt.Description(objref.IDOf(mspb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mspb *ModelStructureProgramBlock) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mspb)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mspb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mspb *ModelStructureProgramBlock) IsKind(className string) bool {
+	defer runtime.KeepAlive(mspb)
 	return rt.IsKind(objref.IDOf(mspb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mspb *ModelStructureProgramBlock) String() string {
+	defer runtime.KeepAlive(mspb)
 	return rt.Description(objref.IDOf(mspb))
 }
 
@@ -76,6 +83,7 @@ func NewModelStructureProgramBlock() *ModelStructureProgramBlock {
 //
 // Inputs returns the collection as a Go slice.
 func (mspb *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedValueType {
+	defer runtime.KeepAlive(mspb)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
 		return ModelStructureProgramNamedValueTypeFromID(_id)
@@ -86,6 +94,7 @@ func (mspb *ModelStructureProgramBlock) Inputs() []*ModelStructureProgramNamedVa
 //
 // OutputNames returns the collection as a Go slice.
 func (mspb *ModelStructureProgramBlock) OutputNames() []string {
+	defer runtime.KeepAlive(mspb)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("outputNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
@@ -94,6 +103,7 @@ func (mspb *ModelStructureProgramBlock) OutputNames() []string {
 //
 // Operations returns the collection as a Go slice.
 func (mspb *ModelStructureProgramBlock) Operations() []*ModelStructureProgramOperation {
+	defer runtime.KeepAlive(mspb)
 	_arr := objc.Send[objc.ID](objref.IDOf(mspb), objc.RegisterName("operations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramOperation { return ModelStructureProgramOperationFromID(_id) })
 }

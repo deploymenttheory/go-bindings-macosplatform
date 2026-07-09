@@ -5,9 +5,11 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,13 +55,15 @@ func NewNEFilterSocketFlow() *NEFilterSocketFlow {
 }
 
 // RemoteFlowEndpoint returns the flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
-func (nfsf *NEFilterSocketFlow) RemoteFlowEndpoint() obj.Object {
+func (nfsf *NEFilterSocketFlow) RemoteFlowEndpoint() *foundation.Object {
+	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("remoteFlowEndpoint"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // RemoteHostname returns the flow's remote hostname. This property is only non-nil if the flow was created using Network.framework or NSURLSession.
 func (nfsf *NEFilterSocketFlow) RemoteHostname() string {
+	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("remoteHostname"))
 	if _r == 0 {
 		return ""
@@ -68,25 +72,29 @@ func (nfsf *NEFilterSocketFlow) RemoteHostname() string {
 }
 
 // LocalFlowEndpoint returns the flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
-func (nfsf *NEFilterSocketFlow) LocalFlowEndpoint() obj.Object {
+func (nfsf *NEFilterSocketFlow) LocalFlowEndpoint() *foundation.Object {
+	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("localFlowEndpoint"))
-	return obj.Wrap(_r)
+	return foundation.ObjectFromID(_r)
 }
 
 // SocketFamily returns socket family of the socket flow, such as PF_INET.
 func (nfsf *NEFilterSocketFlow) SocketFamily() int {
+	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[int](objref.IDOf(nfsf), objc.RegisterName("socketFamily"))
 	return _r
 }
 
 // SocketType returns socket type of the socket flow, such as SOCK_STREAM.
 func (nfsf *NEFilterSocketFlow) SocketType() int {
+	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[int](objref.IDOf(nfsf), objc.RegisterName("socketType"))
 	return _r
 }
 
 // SocketProtocol returns socket protocol of the socket flow, such as IPPROTO_TCP.
 func (nfsf *NEFilterSocketFlow) SocketProtocol() int {
+	defer runtime.KeepAlive(nfsf)
 	_r := objc.Send[int](objref.IDOf(nfsf), objc.RegisterName("socketProtocol"))
 	return _r
 }

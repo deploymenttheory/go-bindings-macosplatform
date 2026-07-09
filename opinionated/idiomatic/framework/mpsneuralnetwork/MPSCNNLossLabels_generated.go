@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func cNNLossLabelsAdopt(id objc.ID) *CNNLossLabels {
 
 // Description returns the object's -description text.
 func (cll *CNNLossLabels) Description() string {
+	defer runtime.KeepAlive(cll)
 	return rt.Description(objref.IDOf(cll))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cll *CNNLossLabels) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cll)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cll), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cll *CNNLossLabels) IsKind(className string) bool {
+	defer runtime.KeepAlive(cll)
 	return rt.IsKind(objref.IDOf(cll), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cll *CNNLossLabels) String() string {
+	defer runtime.KeepAlive(cll)
 	return rt.Description(objref.IDOf(cll))
 }
 
@@ -72,18 +79,21 @@ func NewCNNLossLabels() *CNNLossLabels {
 
 // LossImage returns loss image accessor method.
 func (cll *CNNLossLabels) LossImage() obj.Object {
+	defer runtime.KeepAlive(cll)
 	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("lossImage"))
 	return obj.Wrap(_r)
 }
 
 // LabelsImage returns labels image accessor method.
 func (cll *CNNLossLabels) LabelsImage() obj.Object {
+	defer runtime.KeepAlive(cll)
 	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("labelsImage"))
 	return obj.Wrap(_r)
 }
 
 // WeightsImage returns weights image accessor method.
 func (cll *CNNLossLabels) WeightsImage() obj.Object {
+	defer runtime.KeepAlive(cll)
 	_r := objc.Send[objc.ID](objref.IDOf(cll), objc.RegisterName("weightsImage"))
 	return obj.Wrap(_r)
 }

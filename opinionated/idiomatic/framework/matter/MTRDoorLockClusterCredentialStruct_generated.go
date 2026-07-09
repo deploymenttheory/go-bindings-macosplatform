@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,47 +50,56 @@ func mTRDoorLockClusterCredentialStructAdopt(id objc.ID) *MTRDoorLockClusterCred
 
 // Description returns the object's -description text.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) Description() string {
+	defer runtime.KeepAlive(mdlccs)
 	return rt.Description(objref.IDOf(mdlccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlccs)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlccs)
 	return rt.IsKind(objref.IDOf(mdlccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) String() string {
+	defer runtime.KeepAlive(mdlccs)
 	return rt.Description(objref.IDOf(mdlccs))
 }
 
 // WithCredentialType sets the credential type.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterCredentialStruct {
+	defer runtime.KeepAlive(credentialType)
 	objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 	return mdlccs
 }
 
 // WithCredentialIndex sets the credential index.
 func (mdlccs *MTRDoorLockClusterCredentialStruct) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterCredentialStruct {
+	defer runtime.KeepAlive(credentialIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 	return mdlccs
 }
 
 // CredentialType returns the credential type.
-func (mdlccs *MTRDoorLockClusterCredentialStruct) CredentialType() obj.Object {
+func (mdlccs *MTRDoorLockClusterCredentialStruct) CredentialType() *foundation.Number {
+	defer runtime.KeepAlive(mdlccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("credentialType"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CredentialIndex returns the credential index.
-func (mdlccs *MTRDoorLockClusterCredentialStruct) CredentialIndex() obj.Object {
+func (mdlccs *MTRDoorLockClusterCredentialStruct) CredentialIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlccs)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccs), objc.RegisterName("credentialIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRDoorLockClusterCredentialStruct marks MTRDoorLockClusterCredentialStruct — and, by embedding promotion, its

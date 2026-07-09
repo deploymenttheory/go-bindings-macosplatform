@@ -5,6 +5,8 @@
 package appkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func glyphInfoAdopt(id objc.ID) *GlyphInfo {
 
 // Description returns the object's -description text.
 func (gi *GlyphInfo) Description() string {
+	defer runtime.KeepAlive(gi)
 	return rt.Description(objref.IDOf(gi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (gi *GlyphInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(gi)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(gi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (gi *GlyphInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(gi)
 	return rt.IsKind(objref.IDOf(gi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (gi *GlyphInfo) String() string {
+	defer runtime.KeepAlive(gi)
 	return rt.Description(objref.IDOf(gi))
 }
 
@@ -74,12 +81,14 @@ func NewGlyphInfo() *GlyphInfo {
 
 // GlyphID returns the glyph ID.
 func (gi *GlyphInfo) GlyphID() uint16 {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[uint16](objref.IDOf(gi), objc.RegisterName("glyphID"))
 	return _r
 }
 
 // BaseString returns the base string.
 func (gi *GlyphInfo) BaseString() string {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("baseString"))
 	if _r == 0 {
 		return ""
@@ -89,6 +98,7 @@ func (gi *GlyphInfo) BaseString() string {
 
 // GlyphName returns the glyph name.
 func (gi *GlyphInfo) GlyphName() string {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("glyphName"))
 	if _r == 0 {
 		return ""
@@ -98,12 +108,14 @@ func (gi *GlyphInfo) GlyphName() string {
 
 // CharacterIdentifier returns the character identifier.
 func (gi *GlyphInfo) CharacterIdentifier() int {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[int](objref.IDOf(gi), objc.RegisterName("characterIdentifier"))
 	return _r
 }
 
 // CharacterCollection returns the character collection.
 func (gi *GlyphInfo) CharacterCollection() CharacterCollection {
+	defer runtime.KeepAlive(gi)
 	_r := objc.Send[CharacterCollection](objref.IDOf(gi), objc.RegisterName("characterCollection"))
 	return _r
 }

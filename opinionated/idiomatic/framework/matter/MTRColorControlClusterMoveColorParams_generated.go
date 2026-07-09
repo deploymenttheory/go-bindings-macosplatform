@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRColorControlClusterMoveColorParamsAdopt(id objc.ID) *MTRColorControlClus
 
 // Description returns the object's -description text.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) Description() string {
+	defer runtime.KeepAlive(mcccmcp)
 	return rt.Description(objref.IDOf(mcccmcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mcccmcp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mcccmcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mcccmcp)
 	return rt.IsKind(objref.IDOf(mcccmcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) String() string {
+	defer runtime.KeepAlive(mcccmcp)
 	return rt.Description(objref.IDOf(mcccmcp))
 }
 
@@ -72,72 +80,84 @@ func NewMTRColorControlClusterMoveColorParams() *MTRColorControlClusterMoveColor
 
 // WithRateX sets the rate x.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) WithRateX(rateX obj.Object) *MTRColorControlClusterMoveColorParams {
+	defer runtime.KeepAlive(rateX)
 	objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("setRateX:"), objref.IDOf(rateX))
 	return mcccmcp
 }
 
 // WithRateY sets the rate y.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) WithRateY(rateY obj.Object) *MTRColorControlClusterMoveColorParams {
+	defer runtime.KeepAlive(rateY)
 	objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("setRateY:"), objref.IDOf(rateY))
 	return mcccmcp
 }
 
 // WithOptionsMask sets the options mask.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveColorParams {
+	defer runtime.KeepAlive(optionsMask)
 	objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmcp
 }
 
 // WithOptionsOverride sets the options override.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveColorParams {
+	defer runtime.KeepAlive(optionsOverride)
 	objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmcp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveColorParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mcccmcp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mcccmcp *MTRColorControlClusterMoveColorParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveColorParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mcccmcp
 }
 
 // RateX returns the rate x.
-func (mcccmcp *MTRColorControlClusterMoveColorParams) RateX() obj.Object {
+func (mcccmcp *MTRColorControlClusterMoveColorParams) RateX() *foundation.Number {
+	defer runtime.KeepAlive(mcccmcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("rateX"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // RateY returns the rate y.
-func (mcccmcp *MTRColorControlClusterMoveColorParams) RateY() obj.Object {
+func (mcccmcp *MTRColorControlClusterMoveColorParams) RateY() *foundation.Number {
+	defer runtime.KeepAlive(mcccmcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("rateY"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsMask returns the options mask.
-func (mcccmcp *MTRColorControlClusterMoveColorParams) OptionsMask() obj.Object {
+func (mcccmcp *MTRColorControlClusterMoveColorParams) OptionsMask() *foundation.Number {
+	defer runtime.KeepAlive(mcccmcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("optionsMask"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // OptionsOverride returns the options override.
-func (mcccmcp *MTRColorControlClusterMoveColorParams) OptionsOverride() obj.Object {
+func (mcccmcp *MTRColorControlClusterMoveColorParams) OptionsOverride() *foundation.Number {
+	defer runtime.KeepAlive(mcccmcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("optionsOverride"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mcccmcp *MTRColorControlClusterMoveColorParams) TimedInvokeTimeoutMs() obj.Object {
+func (mcccmcp *MTRColorControlClusterMoveColorParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mcccmcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mcccmcp *MTRColorControlClusterMoveColorParams) ServerSideProcessingTimeout() obj.Object {
+func (mcccmcp *MTRColorControlClusterMoveColorParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mcccmcp)
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmcp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

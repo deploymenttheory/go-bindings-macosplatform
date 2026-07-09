@@ -5,6 +5,8 @@
 package mlcompute
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -66,12 +68,14 @@ func (rl *ReductionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Reduc
 
 // ReductionType returns the reduction type
 func (rl *ReductionLayer) ReductionType() ReductionType {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[ReductionType](objref.IDOf(rl), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // Dimension returns the dimension over which to perform the reduction operation
 func (rl *ReductionLayer) Dimension() int {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[int](objref.IDOf(rl), objc.RegisterName("dimension"))
 	return _r
 }
@@ -80,6 +84,7 @@ func (rl *ReductionLayer) Dimension() int {
 //
 // Dimensions returns the collection as a Go slice.
 func (rl *ReductionLayer) Dimensions() []obj.Object {
+	defer runtime.KeepAlive(rl)
 	_arr := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("dimensions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func nNNeuronDescriptorAdopt(id objc.ID) *NNNeuronDescriptor {
 
 // Description returns the object's -description text.
 func (nnd *NNNeuronDescriptor) Description() string {
+	defer runtime.KeepAlive(nnd)
 	return rt.Description(objref.IDOf(nnd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (nnd *NNNeuronDescriptor) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(nnd)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(nnd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (nnd *NNNeuronDescriptor) IsKind(className string) bool {
+	defer runtime.KeepAlive(nnd)
 	return rt.IsKind(objref.IDOf(nnd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (nnd *NNNeuronDescriptor) String() string {
+	defer runtime.KeepAlive(nnd)
 	return rt.Description(objref.IDOf(nnd))
 }
 
@@ -95,37 +102,42 @@ func (nnd *NNNeuronDescriptor) WithC(c float32) *NNNeuronDescriptor {
 }
 
 // WithData sets the data.
-func (nnd *NNNeuronDescriptor) WithData(data obj.Object) *NNNeuronDescriptor {
-	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setData:"), objref.IDOf(data))
+func (nnd *NNNeuronDescriptor) WithData(data []byte) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setData:"), rt.BytesToNSData(data))
 	return nnd
 }
 
 // NeuronType returns the neuron type.
 func (nnd *NNNeuronDescriptor) NeuronType() CNNNeuronType {
+	defer runtime.KeepAlive(nnd)
 	_r := objc.Send[CNNNeuronType](objref.IDOf(nnd), objc.RegisterName("neuronType"))
 	return _r
 }
 
 // A returns the a.
 func (nnd *NNNeuronDescriptor) A() float32 {
+	defer runtime.KeepAlive(nnd)
 	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("a"))
 	return _r
 }
 
 // B returns the b.
 func (nnd *NNNeuronDescriptor) B() float32 {
+	defer runtime.KeepAlive(nnd)
 	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("b"))
 	return _r
 }
 
 // C returns the c.
 func (nnd *NNNeuronDescriptor) C() float32 {
+	defer runtime.KeepAlive(nnd)
 	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("c"))
 	return _r
 }
 
 // Data returns the data.
-func (nnd *NNNeuronDescriptor) Data() obj.Object {
+func (nnd *NNNeuronDescriptor) Data() []byte {
+	defer runtime.KeepAlive(nnd)
 	_r := objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("data"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

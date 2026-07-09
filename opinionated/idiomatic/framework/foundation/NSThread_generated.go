@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -49,22 +50,27 @@ func threadAdopt(id objc.ID) *Thread {
 
 // Description returns the object's -description text.
 func (t *Thread) Description() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (t *Thread) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(t)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (t *Thread) IsKind(className string) bool {
+	defer runtime.KeepAlive(t)
 	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (t *Thread) String() string {
+	defer runtime.KeepAlive(t)
 	return rt.Description(objref.IDOf(t))
 }
 
@@ -95,6 +101,7 @@ func (t *Thread) WithQualityOfService(qualityOfService QualityOfService) *Thread
 
 // WithName sets the name.
 func (t *Thread) WithName(name StringProvider) *Thread {
+	defer runtime.KeepAlive(name)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setName:"), objref.IDOf(name))
 	return t
 }
@@ -112,46 +119,53 @@ func (t *Thread) WithObservationInfo(observationInfo unsafe.Pointer) *Thread {
 }
 
 // WithScriptingProperties sets the scripting properties.
-func (t *Thread) WithScriptingProperties(scriptingProperties obj.Object) *Thread {
-	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+func (t *Thread) WithScriptingProperties(scriptingProperties map[string]obj.Object) *Thread {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), rt.MapToDict(scriptingProperties, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return t
 }
 
 // Cancel wraps the corresponding Objective-C method.
 func (t *Thread) Cancel() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cancel"))
 }
 
 // Start wraps the corresponding Objective-C method.
 func (t *Thread) Start() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("start"))
 }
 
 // Main wraps the corresponding Objective-C method.
 func (t *Thread) Main() {
+	defer runtime.KeepAlive(t)
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("main"))
 }
 
 // ThreadDictionary returns the thread dictionary.
 func (t *Thread) ThreadDictionary() obj.Object {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("threadDictionary"))
 	return obj.Wrap(_r)
 }
 
 // ThreadPriority returns the thread priority.
 func (t *Thread) ThreadPriority() float64 {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("threadPriority"))
 	return _r
 }
 
 // QualityOfService returns the quality of service.
 func (t *Thread) QualityOfService() QualityOfService {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[QualityOfService](objref.IDOf(t), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
 // Name returns the name.
 func (t *Thread) Name() string {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -161,30 +175,35 @@ func (t *Thread) Name() string {
 
 // StackSize returns the stack size.
 func (t *Thread) StackSize() int {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("stackSize"))
 	return _r
 }
 
 // IsMainThread reports whether the object is main thread.
 func (t *Thread) IsMainThread() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isMainThread"))
 	return _r
 }
 
 // IsExecuting reports whether the object is executing.
 func (t *Thread) IsExecuting() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isExecuting"))
 	return _r
 }
 
 // IsFinished reports whether the object is finished.
 func (t *Thread) IsFinished() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFinished"))
 	return _r
 }
 
 // IsCancelled reports whether the object is cancelled.
 func (t *Thread) IsCancelled() bool {
+	defer runtime.KeepAlive(t)
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isCancelled"))
 	return _r
 }

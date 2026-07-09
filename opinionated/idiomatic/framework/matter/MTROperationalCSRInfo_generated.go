@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,73 +48,87 @@ func mTROperationalCSRInfoAdopt(id objc.ID) *MTROperationalCSRInfo {
 
 // Description returns the object's -description text.
 func (moci *MTROperationalCSRInfo) Description() string {
+	defer runtime.KeepAlive(moci)
 	return rt.Description(objref.IDOf(moci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (moci *MTROperationalCSRInfo) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(moci)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(moci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (moci *MTROperationalCSRInfo) IsKind(className string) bool {
+	defer runtime.KeepAlive(moci)
 	return rt.IsKind(objref.IDOf(moci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (moci *MTROperationalCSRInfo) String() string {
+	defer runtime.KeepAlive(moci)
 	return rt.Description(objref.IDOf(moci))
 }
 
 // NewMTROperationalCSRInfoWithCSRCsrNonceCsrElementsTLVAttestationSignature initialize an MTROperationalCSRInfo by providing all the fields.  It's the caller's responsibility to ensure that csr and csrNonce match the csrElementsTLV.
-func NewMTROperationalCSRInfoWithCSRCsrNonceCsrElementsTLVAttestationSignature(csr obj.Object, csrNonce obj.Object, csrElementsTLV obj.Object, attestationSignature obj.Object) *MTROperationalCSRInfo {
+func NewMTROperationalCSRInfoWithCSRCsrNonceCsrElementsTLVAttestationSignature(csr obj.Object, csrNonce []byte, csrElementsTLV obj.Object, attestationSignature []byte) *MTROperationalCSRInfo {
+	defer runtime.KeepAlive(csr)
+	defer runtime.KeepAlive(csrElementsTLV)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCSRInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSR:csrNonce:csrElementsTLV:attestationSignature:"), objref.IDOf(csr), objref.IDOf(csrNonce), objref.IDOf(csrElementsTLV), objref.IDOf(attestationSignature))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSR:csrNonce:csrElementsTLV:attestationSignature:"), objref.IDOf(csr), rt.BytesToNSData(csrNonce), objref.IDOf(csrElementsTLV), rt.BytesToNSData(attestationSignature))
 	return mTROperationalCSRInfoAdopt(_id)
 }
 
 // NewMTROperationalCSRInfoWithCSRNonceCsrElementsTLVAttestationSignature initialize an MTROperationalCSRInfo by providing the csrNonce (for example, the nonce the client initially supplied), and the csrElementsTLV and attestationSignature that the server returned.  This will ensure that csrNonce matches the data in csrElementsTLV, returning nil if it does not, and extract the csr from csrElementsTLV.
-func NewMTROperationalCSRInfoWithCSRNonceCsrElementsTLVAttestationSignature(csrNonce obj.Object, csrElementsTLV obj.Object, attestationSignature obj.Object) *MTROperationalCSRInfo {
+func NewMTROperationalCSRInfoWithCSRNonceCsrElementsTLVAttestationSignature(csrNonce []byte, csrElementsTLV obj.Object, attestationSignature []byte) *MTROperationalCSRInfo {
+	defer runtime.KeepAlive(csrElementsTLV)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCSRInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSRNonce:csrElementsTLV:attestationSignature:"), objref.IDOf(csrNonce), objref.IDOf(csrElementsTLV), objref.IDOf(attestationSignature))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSRNonce:csrElementsTLV:attestationSignature:"), rt.BytesToNSData(csrNonce), objref.IDOf(csrElementsTLV), rt.BytesToNSData(attestationSignature))
 	return mTROperationalCSRInfoAdopt(_id)
 }
 
 // NewMTROperationalCSRInfoWithCSRElementsTLVAttestationSignature initialize an MTROperationalCSRInfo by providing just the csrElementsTLV and attestationSignature (which can come from an MTROperationalCredentialsClusterCSRResponseParams).  This will extract the csr and csrNonce from the csrElementsTLV, if possible, and return nil if that fails.
-func NewMTROperationalCSRInfoWithCSRElementsTLVAttestationSignature(csrElementsTLV obj.Object, attestationSignature obj.Object) *MTROperationalCSRInfo {
+func NewMTROperationalCSRInfoWithCSRElementsTLVAttestationSignature(csrElementsTLV obj.Object, attestationSignature []byte) *MTROperationalCSRInfo {
+	defer runtime.KeepAlive(csrElementsTLV)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCSRInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSRElementsTLV:attestationSignature:"), objref.IDOf(csrElementsTLV), objref.IDOf(attestationSignature))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSRElementsTLV:attestationSignature:"), objref.IDOf(csrElementsTLV), rt.BytesToNSData(attestationSignature))
 	return mTROperationalCSRInfoAdopt(_id)
 }
 
 // NewMTROperationalCSRInfoWithCSRResponseParams initialize an MTROperationalCSRInfo by providing an MTROperationalCredentialsClusterCSRResponseParams.  This will extract the relevant fields from the response data.
 func NewMTROperationalCSRInfoWithCSRResponseParams(responseParams *MTROperationalCredentialsClusterCSRResponseParams) *MTROperationalCSRInfo {
+	defer runtime.KeepAlive(responseParams)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCSRInfo")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCSRResponseParams:"), objref.IDOf(responseParams))
 	return mTROperationalCSRInfoAdopt(_id)
 }
 
 // Csr returns DER-encoded certificate signing request.
-func (moci *MTROperationalCSRInfo) Csr() obj.Object {
+func (moci *MTROperationalCSRInfo) Csr() *foundation.Data {
+	defer runtime.KeepAlive(moci)
 	_r := objc.Send[objc.ID](objref.IDOf(moci), objc.RegisterName("csr"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // CsrNonce returns the nonce associated with this CSR.
-func (moci *MTROperationalCSRInfo) CsrNonce() obj.Object {
+func (moci *MTROperationalCSRInfo) CsrNonce() []byte {
+	defer runtime.KeepAlive(moci)
 	_r := objc.Send[objc.ID](objref.IDOf(moci), objc.RegisterName("csrNonce"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }
 
 // CsrElementsTLV returns TLV-encoded nocsr-elements structure.  This includes the "csr" and "csrNonce" fields, and can include additional vendor-specific information.
-func (moci *MTROperationalCSRInfo) CsrElementsTLV() obj.Object {
+func (moci *MTROperationalCSRInfo) CsrElementsTLV() *foundation.Data {
+	defer runtime.KeepAlive(moci)
 	_r := objc.Send[objc.ID](objref.IDOf(moci), objc.RegisterName("csrElementsTLV"))
-	return obj.Wrap(_r)
+	return foundation.DataFromID(_r)
 }
 
 // AttestationSignature returns a signature, using the device attestation private key of the device that created the CSR, over the concatenation of csrElementsTLV and the attestation challenge from the secure session. The attestation challenge is available in MTRAttestionInfo.
-func (moci *MTROperationalCSRInfo) AttestationSignature() obj.Object {
+func (moci *MTROperationalCSRInfo) AttestationSignature() []byte {
+	defer runtime.KeepAlive(moci)
 	_r := objc.Send[objc.ID](objref.IDOf(moci), objc.RegisterName("attestationSignature"))
-	return obj.Wrap(_r)
+	return rt.NSDataToBytes(_r)
 }

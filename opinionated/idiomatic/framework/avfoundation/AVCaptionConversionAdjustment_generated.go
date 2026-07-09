@@ -5,7 +5,10 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -49,29 +52,35 @@ func captionConversionAdjustmentAdopt(id objc.ID) *CaptionConversionAdjustment {
 
 // Description returns the object's -description text.
 func (cca *CaptionConversionAdjustment) Description() string {
+	defer runtime.KeepAlive(cca)
 	return rt.Description(objref.IDOf(cca))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cca *CaptionConversionAdjustment) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cca)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cca), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cca *CaptionConversionAdjustment) IsKind(className string) bool {
+	defer runtime.KeepAlive(cca)
 	return rt.IsKind(objref.IDOf(cca), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cca *CaptionConversionAdjustment) String() string {
+	defer runtime.KeepAlive(cca)
 	return rt.Description(objref.IDOf(cca))
 }
 
 // AdjustmentType returns the adjustment type.
-func (cca *CaptionConversionAdjustment) AdjustmentType() obj.Object {
+func (cca *CaptionConversionAdjustment) AdjustmentType() *foundation.String {
+	defer runtime.KeepAlive(cca)
 	_r := objc.Send[objc.ID](objref.IDOf(cca), objc.RegisterName("adjustmentType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // isCaptionConversionAdjustment marks CaptionConversionAdjustment — and, by embedding promotion, its

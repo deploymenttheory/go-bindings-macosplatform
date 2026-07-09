@@ -5,10 +5,12 @@
 package matter
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -48,30 +50,35 @@ func mTRThermostatClusterAtomicResponseParamsAdopt(id objc.ID) *MTRThermostatClu
 
 // Description returns the object's -description text.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) Description() string {
+	defer runtime.KeepAlive(mtcarp)
 	return rt.Description(objref.IDOf(mtcarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcarp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcarp)
 	return rt.IsKind(objref.IDOf(mtcarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) String() string {
+	defer runtime.KeepAlive(mtcarp)
 	return rt.Description(objref.IDOf(mtcarp))
 }
 
-// NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
-func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseValue obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
+// NewMTRThermostatClusterAtomicResponseParamsWithResponseValue initialize an MTRThermostatClusterAtomicResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
+func NewMTRThermostatClusterAtomicResponseParamsWithResponseValue(responseValue map[string]obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterAtomicResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), rt.MapToDict(responseValue, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -80,35 +87,42 @@ func NewMTRThermostatClusterAtomicResponseParamsWithResponseValueError(responseV
 
 // WithStatusCode sets the status code.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) WithStatusCode(statusCode obj.Object) *MTRThermostatClusterAtomicResponseParams {
+	defer runtime.KeepAlive(statusCode)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return mtcarp
 }
 
 // WithTimeout sets the timeout.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicResponseParams {
+	defer runtime.KeepAlive(timeout)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return mtcarp
 }
 
 // StatusCode returns the status code.
-func (mtcarp *MTRThermostatClusterAtomicResponseParams) StatusCode() obj.Object {
+func (mtcarp *MTRThermostatClusterAtomicResponseParams) StatusCode() *foundation.Number {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("statusCode"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // AttributeStatus returns the attribute status.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) AttributeStatus() obj.Object {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("attributeStatus"))
 	return obj.Wrap(_r)
 }
 
 // SetAttributeStatus wraps the corresponding Objective-C method.
 func (mtcarp *MTRThermostatClusterAtomicResponseParams) SetAttributeStatus(attributeStatus obj.Object) {
+	defer runtime.KeepAlive(mtcarp)
+	defer runtime.KeepAlive(attributeStatus)
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setAttributeStatus:"), objref.IDOf(attributeStatus))
 }
 
 // Timeout returns the timeout.
-func (mtcarp *MTRThermostatClusterAtomicResponseParams) Timeout() obj.Object {
+func (mtcarp *MTRThermostatClusterAtomicResponseParams) Timeout() *foundation.Number {
+	defer runtime.KeepAlive(mtcarp)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("timeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

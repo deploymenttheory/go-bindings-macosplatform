@@ -5,9 +5,11 @@
 package intents
 
 import (
+	"runtime"
+	"time"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,20 +50,25 @@ func busReservationAdopt(id objc.ID) *BusReservation {
 }
 
 // NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip creates a bus reservation with the specified contents and attributes.
-func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, busTrip *BusTrip) *BusReservation {
+func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatBusTrip(itemReference *SpeakableString, reservationNumber string, bookingTime time.Time, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, url string, reservedSeat *Seat, busTrip *BusTrip) *BusReservation {
+	defer runtime.KeepAlive(itemReference)
+	defer runtime.KeepAlive(reservedSeat)
+	defer runtime.KeepAlive(busTrip)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INBusReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(busTrip))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:busTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), rt.TimeToNSDate(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(url), objref.IDOf(reservedSeat), objref.IDOf(busTrip))
 	return busReservationAdopt(_id)
 }
 
 // ReservedSeat returns the reserved seat.
 func (br *BusReservation) ReservedSeat() *Seat {
+	defer runtime.KeepAlive(br)
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // BusTrip returns the bus trip.
 func (br *BusReservation) BusTrip() *BusTrip {
+	defer runtime.KeepAlive(br)
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("busTrip"))
 	return BusTripFromID(_r)
 }

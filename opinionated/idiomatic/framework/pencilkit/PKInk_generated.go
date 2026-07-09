@@ -5,7 +5,10 @@
 package pencilkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,46 +50,56 @@ func inkAdopt(id objc.ID) *Ink {
 
 // Description returns the object's -description text.
 func (i *Ink) Description() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (i *Ink) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(i)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (i *Ink) IsKind(className string) bool {
+	defer runtime.KeepAlive(i)
 	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (i *Ink) String() string {
+	defer runtime.KeepAlive(i)
 	return rt.Description(objref.IDOf(i))
 }
 
 // NewInkWithInkTypeColor creates a new Ink.
 func NewInkWithInkTypeColor(type_ obj.Object, color obj.Object) *Ink {
+	defer runtime.KeepAlive(type_)
+	defer runtime.KeepAlive(color)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInk")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), objref.IDOf(type_), objref.IDOf(color))
 	return inkAdopt(_id)
 }
 
 // InkType returns the type of ink, eg. pen, pencil...
-func (i *Ink) InkType() obj.Object {
+func (i *Ink) InkType() *foundation.String {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("inkType"))
-	return obj.Wrap(_r)
+	return foundation.StringFromID(_r)
 }
 
 // Color returns the color.
 func (i *Ink) Color() obj.Object {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
 // RequiredContentVersion returns the PencilKit version required to use this ink.
 func (i *Ink) RequiredContentVersion() ContentVersion {
+	defer runtime.KeepAlive(i)
 	_r := objc.Send[ContentVersion](objref.IDOf(i), objc.RegisterName("requiredContentVersion"))
 	return _r
 }

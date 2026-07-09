@@ -5,6 +5,8 @@
 package osakit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -45,22 +47,27 @@ func scriptViewAdopt(id objc.ID) *ScriptView {
 
 // Description returns the object's -description text.
 func (sv *ScriptView) Description() string {
+	defer runtime.KeepAlive(sv)
 	return rt.Description(objref.IDOf(sv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (sv *ScriptView) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(sv)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(sv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (sv *ScriptView) IsKind(className string) bool {
+	defer runtime.KeepAlive(sv)
 	return rt.IsKind(objref.IDOf(sv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (sv *ScriptView) String() string {
+	defer runtime.KeepAlive(sv)
 	return rt.Description(objref.IDOf(sv))
 }
 
@@ -134,6 +141,7 @@ func (sv *ScriptView) WithIndentWidth(indentWidth int) *ScriptView {
 
 // Source returns the source.
 func (sv *ScriptView) Source() string {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 string
 	purego.Main(func() {
 		_mainthread0 = func() string {
@@ -150,6 +158,7 @@ func (sv *ScriptView) Source() string {
 
 // UsesScriptAssistant wraps the corresponding Objective-C method.
 func (sv *ScriptView) UsesScriptAssistant() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -163,6 +172,7 @@ func (sv *ScriptView) UsesScriptAssistant() bool {
 
 // UsesTabs wraps the corresponding Objective-C method.
 func (sv *ScriptView) UsesTabs() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -176,6 +186,7 @@ func (sv *ScriptView) UsesTabs() bool {
 
 // TabWidth returns the tab width.
 func (sv *ScriptView) TabWidth() int {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {
@@ -189,6 +200,7 @@ func (sv *ScriptView) TabWidth() int {
 
 // WrapsLines wraps the corresponding Objective-C method.
 func (sv *ScriptView) WrapsLines() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -202,6 +214,7 @@ func (sv *ScriptView) WrapsLines() bool {
 
 // IndentsWrappedLines wraps the corresponding Objective-C method.
 func (sv *ScriptView) IndentsWrappedLines() bool {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 bool
 	purego.Main(func() {
 		_mainthread0 = func() bool {
@@ -215,6 +228,7 @@ func (sv *ScriptView) IndentsWrappedLines() bool {
 
 // IndentWidth returns the indent width.
 func (sv *ScriptView) IndentWidth() int {
+	defer runtime.KeepAlive(sv)
 	var _mainthread0 int
 	purego.Main(func() {
 		_mainthread0 = func() int {

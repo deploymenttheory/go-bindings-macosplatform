@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
@@ -245,13 +246,13 @@ func NSBitsPerSampleFromDepth(depth WindowDepth) int {
 var _fnNSColorSpaceFromDepth func(WindowDepth) objc.ID
 
 // NSColorSpaceFromDepth calls the AppKit framework function NSColorSpaceFromDepth.
-func NSColorSpaceFromDepth(depth WindowDepth) obj.Object {
+func NSColorSpaceFromDepth(depth WindowDepth) *foundation.String {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSColorSpaceFromDepth == nil {
 		ebipurego.RegisterLibFunc(&_fnNSColorSpaceFromDepth, _lib, "NSColorSpaceFromDepth")
 	}
 	_ret := _fnNSColorSpaceFromDepth(depth)
-	return obj.Wrap(_ret)
+	return foundation.StringFromID(_ret)
 }
 
 var _fnNSConvertGlyphsToPackedGlyphs func(unsafe.Pointer, int, MultibyteGlyphPacking, string) int
@@ -305,25 +306,25 @@ func NSCountWindowsForContext(context_ int) (count int64) {
 var _fnNSCreateFileContentsPboardType func(objc.ID) objc.ID
 
 // NSCreateFileContentsPboardType calls the AppKit framework function NSCreateFileContentsPboardType.
-func NSCreateFileContentsPboardType(fileType string) obj.Object {
+func NSCreateFileContentsPboardType(fileType string) *foundation.String {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCreateFileContentsPboardType == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCreateFileContentsPboardType, _lib, "NSCreateFileContentsPboardType")
 	}
 	_ret := _fnNSCreateFileContentsPboardType(purego.NSString(fileType))
-	return obj.Wrap(_ret)
+	return foundation.StringFromID(_ret)
 }
 
 var _fnNSCreateFilenamePboardType func(objc.ID) objc.ID
 
 // NSCreateFilenamePboardType calls the AppKit framework function NSCreateFilenamePboardType.
-func NSCreateFilenamePboardType(fileType string) obj.Object {
+func NSCreateFilenamePboardType(fileType string) *foundation.String {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSCreateFilenamePboardType == nil {
 		ebipurego.RegisterLibFunc(&_fnNSCreateFilenamePboardType, _lib, "NSCreateFilenamePboardType")
 	}
 	_ret := _fnNSCreateFilenamePboardType(purego.NSString(fileType))
-	return obj.Wrap(_ret)
+	return foundation.StringFromID(_ret)
 }
 
 var _fnNSDisableScreenUpdates func()
@@ -544,12 +545,12 @@ func NSGetFileType(pboardType obj.Object) string {
 var _fnNSGetFileTypes func(objc.ID) objc.ID
 
 // NSGetFileTypes calls the AppKit framework function NSGetFileTypes.
-func NSGetFileTypes(pboardTypes []obj.Object) []string {
+func NSGetFileTypes(pboardTypes []*foundation.String) []string {
 	_loadOnce.Do(_loadLibrary)
 	if _fnNSGetFileTypes == nil {
 		ebipurego.RegisterLibFunc(&_fnNSGetFileTypes, _lib, "NSGetFileTypes")
 	}
-	_ret := _fnNSGetFileTypes(purego.SliceToNSArray(pboardTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	_ret := _fnNSGetFileTypes(purego.SliceToNSArray(pboardTypes, func(_v *foundation.String) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_ret, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 

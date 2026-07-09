@@ -6,7 +6,12 @@
     so only the tokens and statement order matter, not the indentation.
 */}}
 {{define "method"}}{{if .DocComment}}{{.DocComment}}{{end}}func {{.Recv}}{{.GoName}}({{.ParamStr}}){{.RetSig}} {
-{{- if .MainThread}}{{template "main_thread_body" .}}{{else}}
+{{- range .KeepAlive}}
+defer runtime.KeepAlive({{.}})
+{{- end}}
+{{- if .MainThread}}
+{{template "main_thread_body" .}}
+{{- else}}
 {{template "dispatch_tail" .Dispatch}}
 {{- end}}
 }

@@ -5,6 +5,8 @@
 package metal
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func renderPipelineReflectionAdopt(id objc.ID) *RenderPipelineReflection {
 
 // Description returns the object's -description text.
 func (rpr *RenderPipelineReflection) Description() string {
+	defer runtime.KeepAlive(rpr)
 	return rt.Description(objref.IDOf(rpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (rpr *RenderPipelineReflection) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(rpr)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(rpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (rpr *RenderPipelineReflection) IsKind(className string) bool {
+	defer runtime.KeepAlive(rpr)
 	return rt.IsKind(objref.IDOf(rpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (rpr *RenderPipelineReflection) String() string {
+	defer runtime.KeepAlive(rpr)
 	return rt.Description(objref.IDOf(rpr))
 }
 
@@ -74,30 +81,35 @@ func NewRenderPipelineReflection() *RenderPipelineReflection {
 
 // VertexBindings returns the vertex bindings.
 func (rpr *RenderPipelineReflection) VertexBindings() []obj.Object {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("vertexBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FragmentBindings returns the fragment bindings.
 func (rpr *RenderPipelineReflection) FragmentBindings() []obj.Object {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("fragmentBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TileBindings returns the tile bindings.
 func (rpr *RenderPipelineReflection) TileBindings() []obj.Object {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tileBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ObjectBindings returns the object bindings.
 func (rpr *RenderPipelineReflection) ObjectBindings() []obj.Object {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("objectBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // MeshBindings returns the mesh bindings.
 func (rpr *RenderPipelineReflection) MeshBindings() []obj.Object {
+	defer runtime.KeepAlive(rpr)
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("meshBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
@@ -106,6 +118,7 @@ func (rpr *RenderPipelineReflection) MeshBindings() []obj.Object {
 //
 // VertexArguments returns the collection as a Go slice.
 func (rpr *RenderPipelineReflection) VertexArguments() []*Argument {
+	defer runtime.KeepAlive(rpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("vertexArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
@@ -114,6 +127,7 @@ func (rpr *RenderPipelineReflection) VertexArguments() []*Argument {
 //
 // FragmentArguments returns the collection as a Go slice.
 func (rpr *RenderPipelineReflection) FragmentArguments() []*Argument {
+	defer runtime.KeepAlive(rpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("fragmentArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
@@ -122,6 +136,7 @@ func (rpr *RenderPipelineReflection) FragmentArguments() []*Argument {
 //
 // TileArguments returns the collection as a Go slice.
 func (rpr *RenderPipelineReflection) TileArguments() []*Argument {
+	defer runtime.KeepAlive(rpr)
 	_arr := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tileArguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }

@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -47,59 +50,70 @@ func mTRThermostatClusterWeeklyScheduleTransitionStructAdopt(id objc.ID) *MTRThe
 
 // Description returns the object's -description text.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) Description() string {
+	defer runtime.KeepAlive(mtcwsts)
 	return rt.Description(objref.IDOf(mtcwsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mtcwsts)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mtcwsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) IsKind(className string) bool {
+	defer runtime.KeepAlive(mtcwsts)
 	return rt.IsKind(objref.IDOf(mtcwsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) String() string {
+	defer runtime.KeepAlive(mtcwsts)
 	return rt.Description(objref.IDOf(mtcwsts))
 }
 
 // WithTransitionTime sets the transition time.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	defer runtime.KeepAlive(transitionTime)
 	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mtcwsts
 }
 
 // WithHeatSetpoint sets the heat setpoint.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	defer runtime.KeepAlive(heatSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
 	return mtcwsts
 }
 
 // WithCoolSetpoint sets the cool setpoint.
 func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	defer runtime.KeepAlive(coolSetpoint)
 	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
 	return mtcwsts
 }
 
 // TransitionTime returns the transition time.
-func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() obj.Object {
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() *foundation.Number {
+	defer runtime.KeepAlive(mtcwsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("transitionTime"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // HeatSetpoint returns the heat setpoint.
-func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() obj.Object {
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtcwsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("heatSetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // CoolSetpoint returns the cool setpoint.
-func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() obj.Object {
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() *foundation.Number {
+	defer runtime.KeepAlive(mtcwsts)
 	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("coolSetpoint"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // isMTRThermostatClusterWeeklyScheduleTransitionStruct marks MTRThermostatClusterWeeklyScheduleTransitionStruct — and, by embedding promotion, its

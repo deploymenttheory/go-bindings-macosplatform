@@ -5,10 +5,14 @@
 package quartzcore
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -73,6 +77,7 @@ func (rl *ReplicatorLayer) WithInstanceDelay(instanceDelay float64) *ReplicatorL
 
 // WithInstanceColor sets defines the color used to multiply the source object. Animatable.
 func (rl *ReplicatorLayer) WithInstanceColor(instanceColor obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(instanceColor)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setInstanceColor:"), objref.IDOf(instanceColor))
 	return rl
 }
@@ -164,6 +169,7 @@ func (rl *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLaye
 
 // WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
 func (rl *ReplicatorLayer) WithMask(mask LayerProvider) *ReplicatorLayer {
+	defer runtime.KeepAlive(mask)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return rl
 }
@@ -176,6 +182,7 @@ func (rl *ReplicatorLayer) WithMasksToBounds(masksToBounds bool) *ReplicatorLaye
 
 // WithContents sets an object that provides the contents of the layer. Animatable.
 func (rl *ReplicatorLayer) WithContents(contents obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(contents)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return rl
 }
@@ -188,6 +195,7 @@ func (rl *ReplicatorLayer) WithContentsRect(contentsRect corefoundation.CGRect) 
 
 // WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 func (rl *ReplicatorLayer) WithContentsGravity(contentsGravity obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(contentsGravity)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return rl
 }
@@ -206,6 +214,7 @@ func (rl *ReplicatorLayer) WithContentsCenter(contentsCenter corefoundation.CGRe
 
 // WithContentsFormat sets a hint for the desired storage format of the layer contents.
 func (rl *ReplicatorLayer) WithContentsFormat(contentsFormat obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(contentsFormat)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return rl
 }
@@ -218,12 +227,14 @@ func (rl *ReplicatorLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDyn
 
 // WithToneMapMode sets the tone map mode.
 func (rl *ReplicatorLayer) WithToneMapMode(toneMapMode obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(toneMapMode)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return rl
 }
 
 // WithPreferredDynamicRange sets the preferred dynamic range.
 func (rl *ReplicatorLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(preferredDynamicRange)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return rl
 }
@@ -236,12 +247,14 @@ func (rl *ReplicatorLayer) WithContentsHeadroom(contentsHeadroom float64) *Repli
 
 // WithMinificationFilter sets the filter used when reducing the size of the content.
 func (rl *ReplicatorLayer) WithMinificationFilter(minificationFilter obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(minificationFilter)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return rl
 }
 
 // WithMagnificationFilter sets the filter used when increasing the size of the content.
 func (rl *ReplicatorLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(magnificationFilter)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return rl
 }
@@ -284,6 +297,7 @@ func (rl *ReplicatorLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing boo
 
 // WithBackgroundColor sets the background color of the receiver. Animatable.
 func (rl *ReplicatorLayer) WithBackgroundColor(backgroundColor obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(backgroundColor)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return rl
 }
@@ -302,6 +316,7 @@ func (rl *ReplicatorLayer) WithMaskedCorners(maskedCorners CornerMask) *Replicat
 
 // WithCornerCurve sets the corner curve.
 func (rl *ReplicatorLayer) WithCornerCurve(cornerCurve obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(cornerCurve)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return rl
 }
@@ -314,6 +329,7 @@ func (rl *ReplicatorLayer) WithBorderWidth(borderWidth float64) *ReplicatorLayer
 
 // WithBorderColor sets the color of the layer’s border. Animatable.
 func (rl *ReplicatorLayer) WithBorderColor(borderColor obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(borderColor)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return rl
 }
@@ -332,6 +348,7 @@ func (rl *ReplicatorLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *Repl
 
 // WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
 func (rl *ReplicatorLayer) WithCompositingFilter(compositingFilter obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(compositingFilter)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return rl
 }
@@ -350,6 +367,7 @@ func (rl *ReplicatorLayer) WithRasterizationScale(rasterizationScale float64) *R
 
 // WithShadowColor sets the color of the layer’s shadow. Animatable.
 func (rl *ReplicatorLayer) WithShadowColor(shadowColor obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(shadowColor)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return rl
 }
@@ -374,6 +392,7 @@ func (rl *ReplicatorLayer) WithShadowRadius(shadowRadius float64) *ReplicatorLay
 
 // WithShadowPath sets the shape of the layer’s shadow. Animatable.
 func (rl *ReplicatorLayer) WithShadowPath(shadowPath obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(shadowPath)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return rl
 }
@@ -385,8 +404,8 @@ func (rl *ReplicatorLayer) WithAutoresizingMask(autoresizingMask AutoresizingMas
 }
 
 // WithActions sets a dictionary containing layer actions.
-func (rl *ReplicatorLayer) WithActions(actions obj.Object) *ReplicatorLayer {
-	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+func (rl *ReplicatorLayer) WithActions(actions map[string]obj.Object) *ReplicatorLayer {
+	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setActions:"), rt.MapToDict(actions, func(_k string) objc.ID { return purego.NSString(_k) }, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return rl
 }
 
@@ -396,8 +415,19 @@ func (rl *ReplicatorLayer) WithName(name string) *ReplicatorLayer {
 	return rl
 }
 
+// WithDelegate sets the layer’s delegate object.
+func (rl *ReplicatorLayer) WithDelegate(delegate LayerDelegate) *ReplicatorLayer {
+	_shim := newLayerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(rl), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(rl), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return rl
+}
+
 // WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
 func (rl *ReplicatorLayer) WithStyle(style obj.Object) *ReplicatorLayer {
+	defer runtime.KeepAlive(style)
 	objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return rl
 }
@@ -411,48 +441,56 @@ func (rl *ReplicatorLayer) WithConstraints(items ...*Constraint) *ReplicatorLaye
 
 // InstanceCount returns the instance count.
 func (rl *ReplicatorLayer) InstanceCount() int {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[int](objref.IDOf(rl), objc.RegisterName("instanceCount"))
 	return _r
 }
 
 // PreservesDepth wraps the corresponding Objective-C method.
 func (rl *ReplicatorLayer) PreservesDepth() bool {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[bool](objref.IDOf(rl), objc.RegisterName("preservesDepth"))
 	return _r
 }
 
 // InstanceDelay returns the instance delay.
 func (rl *ReplicatorLayer) InstanceDelay() float64 {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[float64](objref.IDOf(rl), objc.RegisterName("instanceDelay"))
 	return _r
 }
 
 // InstanceColor returns the instance color.
 func (rl *ReplicatorLayer) InstanceColor() obj.Object {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[objc.ID](objref.IDOf(rl), objc.RegisterName("instanceColor"))
 	return obj.Wrap(_r)
 }
 
 // InstanceRedOffset returns the instance red offset.
 func (rl *ReplicatorLayer) InstanceRedOffset() float32 {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceRedOffset"))
 	return _r
 }
 
 // InstanceGreenOffset returns the instance green offset.
 func (rl *ReplicatorLayer) InstanceGreenOffset() float32 {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceGreenOffset"))
 	return _r
 }
 
 // InstanceBlueOffset returns the instance blue offset.
 func (rl *ReplicatorLayer) InstanceBlueOffset() float32 {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceBlueOffset"))
 	return _r
 }
 
 // InstanceAlphaOffset returns the instance alpha offset.
 func (rl *ReplicatorLayer) InstanceAlphaOffset() float32 {
+	defer runtime.KeepAlive(rl)
 	_r := objc.Send[float32](objref.IDOf(rl), objc.RegisterName("instanceAlphaOffset"))
 	return _r
 }

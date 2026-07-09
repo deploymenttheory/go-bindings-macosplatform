@@ -5,7 +5,10 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
@@ -45,22 +48,27 @@ func mTRDoorLockClusterClearYearDayScheduleParamsAdopt(id objc.ID) *MTRDoorLockC
 
 // Description returns the object's -description text.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) Description() string {
+	defer runtime.KeepAlive(mdlccydsp)
 	return rt.Description(objref.IDOf(mdlccydsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(mdlccydsp)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(mdlccydsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) IsKind(className string) bool {
+	defer runtime.KeepAlive(mdlccydsp)
 	return rt.IsKind(objref.IDOf(mdlccydsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) String() string {
+	defer runtime.KeepAlive(mdlccydsp)
 	return rt.Description(objref.IDOf(mdlccydsp))
 }
 
@@ -72,48 +80,56 @@ func NewMTRDoorLockClusterClearYearDayScheduleParams() *MTRDoorLockClusterClearY
 
 // WithYearDayIndex sets the year day index.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) WithYearDayIndex(yearDayIndex obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
+	defer runtime.KeepAlive(yearDayIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("setYearDayIndex:"), objref.IDOf(yearDayIndex))
 	return mdlccydsp
 }
 
 // WithUserIndex sets the user index.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
+	defer runtime.KeepAlive(userIndex)
 	objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlccydsp
 }
 
 // WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
+	defer runtime.KeepAlive(timedInvokeTimeoutMs)
 	objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return mdlccydsp
 }
 
 // WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearYearDayScheduleParams {
+	defer runtime.KeepAlive(serverSideProcessingTimeout)
 	objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return mdlccydsp
 }
 
 // YearDayIndex returns the year day index.
-func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) YearDayIndex() obj.Object {
+func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) YearDayIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlccydsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("yearDayIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // UserIndex returns the user index.
-func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) UserIndex() obj.Object {
+func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) UserIndex() *foundation.Number {
+	defer runtime.KeepAlive(mdlccydsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("userIndex"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) TimedInvokeTimeoutMs() *foundation.Number {
+	defer runtime.KeepAlive(mdlccydsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("timedInvokeTimeoutMs"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }
 
 // ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) ServerSideProcessingTimeout() obj.Object {
+func (mdlccydsp *MTRDoorLockClusterClearYearDayScheduleParams) ServerSideProcessingTimeout() *foundation.Number {
+	defer runtime.KeepAlive(mdlccydsp)
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccydsp), objc.RegisterName("serverSideProcessingTimeout"))
-	return obj.Wrap(_r)
+	return foundation.NumberFromID(_r)
 }

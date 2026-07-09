@@ -5,8 +5,11 @@
 package photosui
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -47,27 +50,33 @@ func pickerViewControllerAdopt(id objc.ID) *PickerViewController {
 
 // Description returns the object's -description text.
 func (pvc *PickerViewController) Description() string {
+	defer runtime.KeepAlive(pvc)
 	return rt.Description(objref.IDOf(pvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pvc *PickerViewController) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pvc)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pvc *PickerViewController) IsKind(className string) bool {
+	defer runtime.KeepAlive(pvc)
 	return rt.IsKind(objref.IDOf(pvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pvc *PickerViewController) String() string {
+	defer runtime.KeepAlive(pvc)
 	return rt.Description(objref.IDOf(pvc))
 }
 
 // NewPickerViewControllerWithConfiguration creates a new picker view controller with the configuration you specify.
 func NewPickerViewControllerWithConfiguration(configuration *PickerConfiguration) *PickerViewController {
+	defer runtime.KeepAlive(configuration)
 	var _mainthread0 *PickerViewController
 	purego.Main(func() {
 		_mainthread0 = func() *PickerViewController {
@@ -79,8 +88,22 @@ func NewPickerViewControllerWithConfiguration(configuration *PickerConfiguration
 	return _mainthread0
 }
 
+// WithDelegate sets the picker’s delegate object.
+func (pvc *PickerViewController) WithDelegate(delegate PickerViewControllerDelegate) *PickerViewController {
+	_shim := newPickerViewControllerDelegateShim(delegate)
+	_sel := objc.RegisterName("setDelegate:")
+	shim.Associate(objref.IDOf(pvc), uintptr(_sel), _shim)
+	purego.Main(func() {
+		objc.Send[objc.ID](objref.IDOf(pvc), _sel, _shim)
+	})
+	_shim.Send(objc.RegisterName("release"))
+	return pvc
+}
+
 // UpdatePickerUsingConfiguration customizes your app’s photo picker according to the given configuration.
 func (pvc *PickerViewController) UpdatePickerUsingConfiguration(configuration *PickerUpdateConfiguration) {
+	defer runtime.KeepAlive(pvc)
+	defer runtime.KeepAlive(configuration)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("updatePickerUsingConfiguration:"), objref.IDOf(configuration))
 	})
@@ -89,6 +112,7 @@ func (pvc *PickerViewController) UpdatePickerUsingConfiguration(configuration *P
 
 // DeselectAssetsWithIdentifiers deselects assets that are in a selected state.
 func (pvc *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []string) {
+	defer runtime.KeepAlive(pvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("deselectAssetsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	})
@@ -97,6 +121,7 @@ func (pvc *PickerViewController) DeselectAssetsWithIdentifiers(identifiers []str
 
 // MoveAssetWithIdentifierAfterAssetWithIdentifier reorders assets that are in a selected state.
 func (pvc *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
+	defer runtime.KeepAlive(pvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("moveAssetWithIdentifier:afterAssetWithIdentifier:"), purego.NSString(identifier), purego.NSString(afterIdentifier))
 	})
@@ -105,6 +130,7 @@ func (pvc *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier
 
 // ScrollToInitialPosition resets the visible photo thumbnails by scrolling the view to the picker’s initial position.
 func (pvc *PickerViewController) ScrollToInitialPosition() {
+	defer runtime.KeepAlive(pvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("scrollToInitialPosition"))
 	})
@@ -113,6 +139,7 @@ func (pvc *PickerViewController) ScrollToInitialPosition() {
 
 // ZoomIn changes the picker’s content scale by making the photo thumbnails larger in the view.
 func (pvc *PickerViewController) ZoomIn() {
+	defer runtime.KeepAlive(pvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomIn"))
 	})
@@ -121,6 +148,7 @@ func (pvc *PickerViewController) ZoomIn() {
 
 // ZoomOut changes the picker’s content scale by making the photo thumbnails smaller in the view.
 func (pvc *PickerViewController) ZoomOut() {
+	defer runtime.KeepAlive(pvc)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(pvc), objc.RegisterName("zoomOut"))
 	})
@@ -129,6 +157,7 @@ func (pvc *PickerViewController) ZoomOut() {
 
 // Configuration returns the configuration passed in during initialization.
 func (pvc *PickerViewController) Configuration() *PickerConfiguration {
+	defer runtime.KeepAlive(pvc)
 	var _mainthread0 *PickerConfiguration
 	purego.Main(func() {
 		_mainthread0 = func() *PickerConfiguration {

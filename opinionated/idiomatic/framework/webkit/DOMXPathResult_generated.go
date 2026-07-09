@@ -5,6 +5,8 @@
 package webkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -51,30 +53,35 @@ func NewDOMXPathResult() *DOMXPathResult {
 
 // IterateNext returns the iterate next.
 func (dpr *DOMXPathResult) IterateNext() *DOMNode {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("iterateNext"))
 	return DOMNodeFromID(_r)
 }
 
 // SnapshotItem wraps the corresponding Objective-C method.
 func (dpr *DOMXPathResult) SnapshotItem(index int) *DOMNode {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("snapshotItem:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // ResultType returns the result type.
 func (dpr *DOMXPathResult) ResultType() uint16 {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[uint16](objref.IDOf(dpr), objc.RegisterName("resultType"))
 	return _r
 }
 
 // NumberValue returns the number value.
 func (dpr *DOMXPathResult) NumberValue() float64 {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[float64](objref.IDOf(dpr), objc.RegisterName("numberValue"))
 	return _r
 }
 
 // StringValue returns the string value.
 func (dpr *DOMXPathResult) StringValue() string {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
@@ -84,24 +91,28 @@ func (dpr *DOMXPathResult) StringValue() string {
 
 // BooleanValue wraps the corresponding Objective-C method.
 func (dpr *DOMXPathResult) BooleanValue() bool {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[bool](objref.IDOf(dpr), objc.RegisterName("booleanValue"))
 	return _r
 }
 
 // SingleNodeValue returns the single node value.
 func (dpr *DOMXPathResult) SingleNodeValue() *DOMNode {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("singleNodeValue"))
 	return DOMNodeFromID(_r)
 }
 
 // InvalidIteratorState wraps the corresponding Objective-C method.
 func (dpr *DOMXPathResult) InvalidIteratorState() bool {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[bool](objref.IDOf(dpr), objc.RegisterName("invalidIteratorState"))
 	return _r
 }
 
 // SnapshotLength returns the snapshot length.
 func (dpr *DOMXPathResult) SnapshotLength() int {
+	defer runtime.KeepAlive(dpr)
 	_r := objc.Send[int](objref.IDOf(dpr), objc.RegisterName("snapshotLength"))
 	return _r
 }

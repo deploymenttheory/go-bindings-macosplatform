@@ -8,20 +8,20 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 )
 
+// ErrCodeIncompatibleDevice matches the ParavirtualizedGraphics error PGResumeErrorCodeIncompatibleDevice.
+var ErrCodeIncompatibleDevice = errkit.New("PGResumeErrorDomain", 4)
+
 // ErrCodeInternalFault matches the ParavirtualizedGraphics error PGResumeErrorCodeInternalFault.
 var ErrCodeInternalFault = errkit.New("PGResumeErrorDomain", 0)
-
-// ErrCodeInvalidSuspendStateVersion matches the ParavirtualizedGraphics error PGResumeErrorCodeInvalidSuspendStateVersion.
-var ErrCodeInvalidSuspendStateVersion = errkit.New("PGResumeErrorDomain", 1)
 
 // ErrCodeInvalidContent matches the ParavirtualizedGraphics error PGResumeErrorCodeInvalidContent.
 var ErrCodeInvalidContent = errkit.New("PGResumeErrorDomain", 2)
 
+// ErrCodeInvalidDisplayPortCount matches the ParavirtualizedGraphics error PGResumeErrorCodeInvalidDisplayPortCount.
+var ErrCodeInvalidDisplayPortCount = errkit.New("PGResumeErrorDomain", 5)
+
 // ErrCodeInvalidGuestVersion matches the ParavirtualizedGraphics error PGResumeErrorCodeInvalidGuestVersion.
 var ErrCodeInvalidGuestVersion = errkit.New("PGResumeErrorDomain", 3)
 
-// ErrCodeIncompatibleDevice matches the ParavirtualizedGraphics error PGResumeErrorCodeIncompatibleDevice.
-var ErrCodeIncompatibleDevice = errkit.New("PGResumeErrorDomain", 4)
-
-// ErrCodeInvalidDisplayPortCount matches the ParavirtualizedGraphics error PGResumeErrorCodeInvalidDisplayPortCount.
-var ErrCodeInvalidDisplayPortCount = errkit.New("PGResumeErrorDomain", 5)
+// ErrCodeInvalidSuspendStateVersion matches the ParavirtualizedGraphics error PGResumeErrorCodeInvalidSuspendStateVersion.
+var ErrCodeInvalidSuspendStateVersion = errkit.New("PGResumeErrorDomain", 1)

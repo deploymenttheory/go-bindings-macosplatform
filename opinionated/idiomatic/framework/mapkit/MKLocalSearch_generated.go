@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,27 +49,33 @@ func localSearchAdopt(id objc.ID) *LocalSearch {
 
 // Description returns the object's -description text.
 func (ls *LocalSearch) Description() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (ls *LocalSearch) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(ls)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (ls *LocalSearch) IsKind(className string) bool {
+	defer runtime.KeepAlive(ls)
 	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (ls *LocalSearch) String() string {
+	defer runtime.KeepAlive(ls)
 	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLocalSearchWithRequest creates and returns a search object with the specified parameters.
 func NewLocalSearchWithRequest(request *LocalSearchRequest) *LocalSearch {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
 	return localSearchAdopt(_id)
@@ -75,6 +83,7 @@ func NewLocalSearchWithRequest(request *LocalSearchRequest) *LocalSearch {
 
 // NewLocalSearchWithPointsOfInterestRequest creates and returns a search object for fetching points of interest.
 func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestRequest) *LocalSearch {
+	defer runtime.KeepAlive(request)
 	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointsOfInterestRequest:"), objref.IDOf(request))
 	return localSearchAdopt(_id)
@@ -82,6 +91,7 @@ func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestReq
 
 // Cancel cancels an in-progress search operation.
 func (ls *LocalSearch) Cancel() {
+	defer runtime.KeepAlive(ls)
 	purego.Main(func() {
 		objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cancel"))
 	})
@@ -90,6 +100,7 @@ func (ls *LocalSearch) Cancel() {
 
 // IsSearching reports whether the object is searching.
 func (ls *LocalSearch) IsSearching() bool {
+	defer runtime.KeepAlive(ls)
 	_r := objc.Send[bool](objref.IDOf(ls), objc.RegisterName("isSearching"))
 	return _r
 }

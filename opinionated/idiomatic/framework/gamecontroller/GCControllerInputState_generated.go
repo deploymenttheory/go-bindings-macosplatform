@@ -5,6 +5,8 @@
 package gamecontroller
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -49,22 +51,27 @@ func controllerInputStateAdopt(id objc.ID) *ControllerInputState {
 
 // Description returns the object's -description text.
 func (cis *ControllerInputState) Description() string {
+	defer runtime.KeepAlive(cis)
 	return rt.Description(objref.IDOf(cis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (cis *ControllerInputState) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(cis)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(cis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (cis *ControllerInputState) IsKind(className string) bool {
+	defer runtime.KeepAlive(cis)
 	return rt.IsKind(objref.IDOf(cis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (cis *ControllerInputState) String() string {
+	defer runtime.KeepAlive(cis)
 	return rt.Description(objref.IDOf(cis))
 }
 

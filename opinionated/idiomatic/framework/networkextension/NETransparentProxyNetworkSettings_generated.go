@@ -5,6 +5,8 @@
 package networkextension
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -66,13 +68,15 @@ func (ntpns *NETransparentProxyNetworkSettings) WithExcludedNetworkRules(items .
 }
 
 // WithDNSSettings sets the tunnel DNS settings.
-func (ntpns *NETransparentProxyNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings {
-	objc.Send[objc.ID](objref.IDOf(ntpns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
+func (ntpns *NETransparentProxyNetworkSettings) WithDNSSettings(dnsSettings NEDNSSettingsProvider) *NETransparentProxyNetworkSettings {
+	defer runtime.KeepAlive(dnsSettings)
+	objc.Send[objc.ID](objref.IDOf(ntpns), objc.RegisterName("setDNSSettings:"), objref.IDOf(dnsSettings))
 	return ntpns
 }
 
 // WithProxySettings sets the tunnel HTTP proxy settings.
 func (ntpns *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETransparentProxyNetworkSettings {
+	defer runtime.KeepAlive(proxySettings)
 	objc.Send[objc.ID](objref.IDOf(ntpns), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return ntpns
 }
@@ -81,6 +85,7 @@ func (ntpns *NETransparentProxyNetworkSettings) WithProxySettings(proxySettings 
 //
 // IncludedNetworkRules returns the collection as a Go slice.
 func (ntpns *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*NENetworkRule {
+	defer runtime.KeepAlive(ntpns)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpns), objc.RegisterName("includedNetworkRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NENetworkRule { return NENetworkRuleFromID(_id) })
 }
@@ -89,6 +94,7 @@ func (ntpns *NETransparentProxyNetworkSettings) IncludedNetworkRules() []*NENetw
 //
 // ExcludedNetworkRules returns the collection as a Go slice.
 func (ntpns *NETransparentProxyNetworkSettings) ExcludedNetworkRules() []*NENetworkRule {
+	defer runtime.KeepAlive(ntpns)
 	_arr := objc.Send[objc.ID](objref.IDOf(ntpns), objc.RegisterName("excludedNetworkRules"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NENetworkRule { return NENetworkRuleFromID(_id) })
 }

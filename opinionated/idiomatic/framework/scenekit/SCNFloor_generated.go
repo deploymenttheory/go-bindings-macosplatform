@@ -5,6 +5,8 @@
 package scenekit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
@@ -108,6 +110,7 @@ func (f *Floor) WithMaterials(items ...*Material) *Floor {
 
 // WithFirstMaterial sets the first material attached to the geometry.
 func (f *Floor) WithFirstMaterial(firstMaterial *Material) *Floor {
+	defer runtime.KeepAlive(firstMaterial)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return f
 }
@@ -121,6 +124,7 @@ func (f *Floor) WithLevelsOfDetail(items ...*LevelOfDetail) *Floor {
 
 // WithTessellator sets the tessellator.
 func (f *Floor) WithTessellator(tessellator *GeometryTessellator) *Floor {
+	defer runtime.KeepAlive(tessellator)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return f
 }
@@ -139,54 +143,63 @@ func (f *Floor) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Flo
 
 // WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 func (f *Floor) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Floor {
+	defer runtime.KeepAlive(edgeCreasesElement)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return f
 }
 
 // WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 func (f *Floor) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Floor {
+	defer runtime.KeepAlive(edgeCreasesSource)
 	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return f
 }
 
 // Reflectivity specifies the reflectivity of the floor. Animatable. If the value is greater than zero then the surface will reflect other objects in the scene. The default value is 0.25.
 func (f *Floor) Reflectivity() float64 {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("reflectivity"))
 	return _r
 }
 
 // ReflectionFalloffStart specifies the distance from the floor where the falloff begins. Animatable. The default value is 0.
 func (f *Floor) ReflectionFalloffStart() float64 {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("reflectionFalloffStart"))
 	return _r
 }
 
 // ReflectionFalloffEnd specifies the distance from the floor where the falloff finishes. Animatable. If the value is 0 then there is no falloff. The default value is 0.
 func (f *Floor) ReflectionFalloffEnd() float64 {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("reflectionFalloffEnd"))
 	return _r
 }
 
 // ReflectionCategoryBitMask determines the node categories to reflect. Defaults to all bits set.
 func (f *Floor) ReflectionCategoryBitMask() int {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("reflectionCategoryBitMask"))
 	return _r
 }
 
 // Width returns the floor extent along the X axis. Animatable. If the value is equal to 0, the floor is infinite on the X axis. The default value is 0.
 func (f *Floor) Width() float64 {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("width"))
 	return _r
 }
 
 // Length returns the floor extent along the Z axis. Animatable. If the value is equal to 0, the floor is infinite on the Z axis. The default value is 0.
 func (f *Floor) Length() float64 {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("length"))
 	return _r
 }
 
 // ReflectionResolutionScaleFactor specifies the resolution scale factor of the buffer used to render the reflection. Defaults to 1.0.
 func (f *Floor) ReflectionResolutionScaleFactor() float64 {
+	defer runtime.KeepAlive(f)
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("reflectionResolutionScaleFactor"))
 	return _r
 }

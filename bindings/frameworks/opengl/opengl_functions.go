@@ -79,20 +79,20 @@ func CGLCreateContext(pix unsafe.Pointer, share unsafe.Pointer, ctx unsafe.Point
 	return _fnCGLCreateContext(pix, share, ctx)
 }
 
-func CGLCreatePBuffer(width int32, height int32, target uint32, internalFormat uint32, max_level int32, pbuffer unsafe.Pointer) _CGLError {
-	return _fnCGLCreatePBuffer(width, height, target, internalFormat, max_level, pbuffer)
+func CGLCreatePBuffer(width int32, height int32, target uint32, internalFormat uint32, maxLevel int32, pbuffer unsafe.Pointer) _CGLError {
+	return _fnCGLCreatePBuffer(width, height, target, internalFormat, maxLevel, pbuffer)
 }
 
 func CGLDescribePBuffer(obj unsafe.Pointer, width *int32, height *int32, target *uint32, internalFormat *uint32, mipmap *int32) _CGLError {
 	return _fnCGLDescribePBuffer(obj, width, height, target, internalFormat, mipmap)
 }
 
-func CGLDescribePixelFormat(pix unsafe.Pointer, pix_num int32, attrib _CGLPixelFormatAttribute, value *int32) _CGLError {
-	return _fnCGLDescribePixelFormat(pix, pix_num, attrib, value)
+func CGLDescribePixelFormat(pix unsafe.Pointer, pixNum int32, attrib _CGLPixelFormatAttribute, value *int32) _CGLError {
+	return _fnCGLDescribePixelFormat(pix, pixNum, attrib, value)
 }
 
-func CGLDescribeRenderer(rend unsafe.Pointer, rend_num int32, prop _CGLRendererProperty, value *int32) _CGLError {
-	return _fnCGLDescribeRenderer(rend, rend_num, prop, value)
+func CGLDescribeRenderer(rend unsafe.Pointer, rendNum int32, prop _CGLRendererProperty, value *int32) _CGLError {
+	return _fnCGLDescribeRenderer(rend, rendNum, prop, value)
 }
 
 func CGLDestroyContext(ctx unsafe.Pointer) _CGLError {
@@ -191,8 +191,8 @@ func CGLLockContext(ctx unsafe.Pointer) _CGLError {
 	return _fnCGLLockContext(ctx)
 }
 
-func CGLQueryRendererInfo(display_mask uint32, rend unsafe.Pointer, nrend *int32) _CGLError {
-	return _fnCGLQueryRendererInfo(display_mask, rend, nrend)
+func CGLQueryRendererInfo(displayMask uint32, rend unsafe.Pointer, nrend *int32) _CGLError {
+	return _fnCGLQueryRendererInfo(displayMask, rend, nrend)
 }
 
 func CGLReleaseContext(ctx unsafe.Pointer) {
@@ -227,8 +227,8 @@ func CGLSetFullScreen(ctx unsafe.Pointer) _CGLError {
 	return _fnCGLSetFullScreen(ctx)
 }
 
-func CGLSetFullScreenOnDisplay(ctx unsafe.Pointer, display_mask uint32) _CGLError {
-	return _fnCGLSetFullScreenOnDisplay(ctx, display_mask)
+func CGLSetFullScreenOnDisplay(ctx unsafe.Pointer, displayMask uint32) _CGLError {
+	return _fnCGLSetFullScreenOnDisplay(ctx, displayMask)
 }
 
 func CGLSetGlobalOption(pname _CGLGlobalOption, params *int32) _CGLError {
@@ -256,8 +256,8 @@ func CGLSetVirtualScreen(ctx unsafe.Pointer, screen int32) _CGLError {
 }
 
 // @function  CGLTexImageIOSurface2D CGLTexImageIOSurface2D() allows you to bind a single image plane from an IOSurfaceRef to an OpenGL texture object.   It is the rough equivalent to glTexImage2D(), except that the underlying source data comes from an IOSurface rather than from an explicit pointer. Note that unlike glTexImage2D(), the binding is "live", in that if the contents of the IOSurface change, the contents become visible to OpenGL without making another call to CGLTexImageIOSurface2D().   That being said, there are a few synchronization things to worry about if you are using IOSurface to pass data between contexts and/or different processes, or between the CPU and OpenGL. In general IOSurface follows Apple's cross-context synchronization rules for OpenGL. Put simply, in order for changes done to an IOSurface on context A to become visible to context B, you must flush context A's command stream (via an explicit call to glFlush, glFlushRenderAPPLE, etc.), and then perform a 'bind' (in this case, glBindTexture()) on context B.  Note that in the case of an IOSurface backed texture used as a color buffer attachment for an FBO, you are only required to call glBindFramebuffer() again.  You do not have to call glFramebufferTexture2D(). Likewise, if you make changes to an IOSurface with the CPU, you *must* wrap those changes with calls to IOSurfaceLock() and IOSurfaceUnlock(), and call glBindTexture() again for OpenGL to pick up the changes. Going in the other direction, if you want changes made with OpenGL to an IOSurface to become visible to the CPU, you must also perform an explicit flush of the OpenGL context before calling IOSurfaceLock(), or you may not get the most recent data. IOSurface and OpenGL make no guarantees about correctness if these rules are not followed. Because of the way IOSurface is currently implemented, it does not allow for any kind of automatic format conversion to take place between the data in the IOSurface and the data seen by the GPU.   This means that OpenGL is going to interpret the data in the IOSurface exactly as how it is specified by the format and type parameters passed to CGLTexImageIOSurface2D(). The upshot if this is that the only supported format/type combinations are those that have exact matching hardware formats.   The table at the bottom of this file lists the format/type/ internalFormat combinations that are supported in Mac OS X 10.6. In cases where a given format/type combination has both an Internal Format and Sized Internal Format, either one may be used. Note that CGLTexImageIOSurface2D for the most part doesn't care what the pixel format or bytes per element of the IOSurface is.  Instead it only enforces the rule that there must be enough data in the plane being bound to cover what is required by the width/height/format/type parameters.   However, if you are using the IOSurface texture as a color buffer attachment to an FBO, then you must ensure that the bytes per element value of the IOSurface must match the effective bytes per pixel value for the format and type combination you are passing to OpenGL. @param ctx              The CGLContextObj for the OpenGL context you are using @param target           Must currently be GL_TEXTURE_RECTANGLE_ARB as of Mac OS X 10.6.0. @param internal_format  One of the supported values from the table below that matches the format/type combination. @param width            The width of the texture in pixels. @param height           The height of the texture in pixels. @param format           The OpenGL texture format enum @param type             The OpenGL texture type enum @param ioSurface        The IOSurfaceRef this texture is being bound to @param plane            Which plane of the IOSurface this texture is being bound to
-func CGLTexImageIOSurface2D(ctx unsafe.Pointer, target uint32, internal_format uint32, width int32, height int32, format uint32, type_ uint32, ioSurface unsafe.Pointer, plane uint32) _CGLError {
-	return _fnCGLTexImageIOSurface2D(ctx, target, internal_format, width, height, format, type_, ioSurface, plane)
+func CGLTexImageIOSurface2D(ctx unsafe.Pointer, target uint32, internalFormat uint32, width int32, height int32, format uint32, type_ uint32, ioSurface unsafe.Pointer, plane uint32) _CGLError {
+	return _fnCGLTexImageIOSurface2D(ctx, target, internalFormat, width, height, format, type_, ioSurface, plane)
 }
 
 func CGLTexImagePBuffer(ctx unsafe.Pointer, pbuffer unsafe.Pointer, source uint32) _CGLError {

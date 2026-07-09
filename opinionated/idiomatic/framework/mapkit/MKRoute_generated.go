@@ -5,6 +5,8 @@
 package mapkit
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func routeAdopt(id objc.ID) *Route {
 
 // Description returns the object's -description text.
 func (r *Route) Description() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (r *Route) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(r)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (r *Route) IsKind(className string) bool {
+	defer runtime.KeepAlive(r)
 	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (r *Route) String() string {
+	defer runtime.KeepAlive(r)
 	return rt.Description(objref.IDOf(r))
 }
 
@@ -74,6 +81,7 @@ func NewRoute() *Route {
 
 // Name returns the name.
 func (r *Route) Name() string {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
@@ -85,24 +93,28 @@ func (r *Route) Name() string {
 //
 // AdvisoryNotices returns the collection as a Go slice.
 func (r *Route) AdvisoryNotices() []string {
+	defer runtime.KeepAlive(r)
 	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("advisoryNotices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ExpectedTravelTime returns the expected travel time.
 func (r *Route) ExpectedTravelTime() float64 {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("expectedTravelTime"))
 	return _r
 }
 
 // TransportType returns the transport type.
 func (r *Route) TransportType() DirectionsTransportType {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[DirectionsTransportType](objref.IDOf(r), objc.RegisterName("transportType"))
 	return _r
 }
 
 // Polyline returns the polyline.
 func (r *Route) Polyline() *Polyline {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
@@ -111,18 +123,21 @@ func (r *Route) Polyline() *Polyline {
 //
 // Steps returns the collection as a Go slice.
 func (r *Route) Steps() []*RouteStep {
+	defer runtime.KeepAlive(r)
 	_arr := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("steps"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RouteStep { return RouteStepFromID(_id) })
 }
 
 // HasTolls reports whether the object has tolls.
 func (r *Route) HasTolls() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("hasTolls"))
 	return _r
 }
 
 // HasHighways reports whether the object has highways.
 func (r *Route) HasHighways() bool {
+	defer runtime.KeepAlive(r)
 	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("hasHighways"))
 	return _r
 }

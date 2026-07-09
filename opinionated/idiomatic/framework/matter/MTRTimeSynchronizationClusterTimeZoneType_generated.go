@@ -5,6 +5,8 @@
 package matter
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -52,12 +54,14 @@ func NewMTRTimeSynchronizationClusterTimeZoneType() *MTRTimeSynchronizationClust
 
 // WithOffset sets the offset.
 func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
+	defer runtime.KeepAlive(offset)
 	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtsctzt
 }
 
 // WithValidAt sets the valid at.
 func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
+	defer runtime.KeepAlive(validAt)
 	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
 	return mtsctzt
 }

@@ -5,11 +5,13 @@
 package spritekit
 
 import (
+	"runtime"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/shim"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
@@ -50,22 +52,27 @@ func physicsWorldAdopt(id objc.ID) *PhysicsWorld {
 
 // Description returns the object's -description text.
 func (pw *PhysicsWorld) Description() string {
+	defer runtime.KeepAlive(pw)
 	return rt.Description(objref.IDOf(pw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (pw *PhysicsWorld) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(pw)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(pw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (pw *PhysicsWorld) IsKind(className string) bool {
+	defer runtime.KeepAlive(pw)
 	return rt.IsKind(objref.IDOf(pw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (pw *PhysicsWorld) String() string {
+	defer runtime.KeepAlive(pw)
 	return rt.Description(objref.IDOf(pw))
 }
 
@@ -87,57 +94,79 @@ func (pw *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
 	return pw
 }
 
+// WithContactDelegate sets a delegate that is called when two physics bodies come in contact with each other.
+func (pw *PhysicsWorld) WithContactDelegate(contactDelegate PhysicsContactDelegate) *PhysicsWorld {
+	_shim := newPhysicsContactDelegateShim(contactDelegate)
+	_sel := objc.RegisterName("setContactDelegate:")
+	shim.Associate(objref.IDOf(pw), uintptr(_sel), _shim)
+	objc.Send[objc.ID](objref.IDOf(pw), _sel, _shim)
+	_shim.Send(objc.RegisterName("release"))
+	return pw
+}
+
 // AddJoint adds a joint to the physics world.
 func (pw *PhysicsWorld) AddJoint(joint *PhysicsJoint) {
+	defer runtime.KeepAlive(pw)
+	defer runtime.KeepAlive(joint)
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("addJoint:"), objref.IDOf(joint))
 }
 
 // RemoveJoint removes a specific joint from the physics world.
 func (pw *PhysicsWorld) RemoveJoint(joint *PhysicsJoint) {
+	defer runtime.KeepAlive(pw)
+	defer runtime.KeepAlive(joint)
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("removeJoint:"), objref.IDOf(joint))
 }
 
 // RemoveAllJoints removes all joints from the physics world.
 func (pw *PhysicsWorld) RemoveAllJoints() {
+	defer runtime.KeepAlive(pw)
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("removeAllJoints"))
 }
 
 // BodyAtPoint searches for the first physics body that contains a point.
 func (pw *PhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody {
+	defer runtime.KeepAlive(pw)
 	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("bodyAtPoint:"), point)
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyInRect searches for the first physics body that intersects the specified rectangle.
 func (pw *PhysicsWorld) BodyInRect(rect corefoundation.CGRect) *PhysicsBody {
+	defer runtime.KeepAlive(pw)
 	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("bodyInRect:"), rect)
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyAlongRayStartEnd searches for the first physics body that intersects a ray.
 func (pw *PhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *PhysicsBody {
+	defer runtime.KeepAlive(pw)
 	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("bodyAlongRayStart:end:"), start, end)
 	return PhysicsBodyFromID(_r)
 }
 
 // EnumerateBodiesAtPointUsing enumerates all the physics bodies in the scene that contain a point.
 func (pw *PhysicsWorld) EnumerateBodiesAtPointUsing(point corefoundation.CGPoint, block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(pw)
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("enumerateBodiesAtPoint:usingBlock:"), point, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // EnumerateBodiesInRectUsing enumerates all the physics bodies in the scene that intersect the specified rectangle.
 func (pw *PhysicsWorld) EnumerateBodiesInRectUsing(rect corefoundation.CGRect, block func(obj.Object, *bool)) {
+	defer runtime.KeepAlive(pw)
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("enumerateBodiesInRect:usingBlock:"), rect, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // Gravity returns a global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
 func (pw *PhysicsWorld) Gravity() corefoundation.CGVector {
+	defer runtime.KeepAlive(pw)
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pw), objc.RegisterName("gravity"))
 	return _r
 }
 
 // Speed returns the speed.
 func (pw *PhysicsWorld) Speed() float64 {
+	defer runtime.KeepAlive(pw)
 	_r := objc.Send[float64](objref.IDOf(pw), objc.RegisterName("speed"))
 	return _r
 }

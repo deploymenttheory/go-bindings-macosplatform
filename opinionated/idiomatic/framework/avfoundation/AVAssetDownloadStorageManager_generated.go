@@ -5,6 +5,8 @@
 package avfoundation
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func assetDownloadStorageManagerAdopt(id objc.ID) *AssetDownloadStorageManager {
 
 // Description returns the object's -description text.
 func (adsm *AssetDownloadStorageManager) Description() string {
+	defer runtime.KeepAlive(adsm)
 	return rt.Description(objref.IDOf(adsm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (adsm *AssetDownloadStorageManager) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(adsm)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(adsm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (adsm *AssetDownloadStorageManager) IsKind(className string) bool {
+	defer runtime.KeepAlive(adsm)
 	return rt.IsKind(objref.IDOf(adsm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (adsm *AssetDownloadStorageManager) String() string {
+	defer runtime.KeepAlive(adsm)
 	return rt.Description(objref.IDOf(adsm))
 }
 
@@ -74,11 +81,14 @@ func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
 
 // SetStorageManagementPolicyForURL sets a storage policy for the downloaded asset.
 func (adsm *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *AssetDownloadStorageManagementPolicy, downloadStorageURL string) {
+	defer runtime.KeepAlive(adsm)
+	defer runtime.KeepAlive(storageManagementPolicy)
 	objc.Send[objc.ID](objref.IDOf(adsm), objc.RegisterName("setStorageManagementPolicy:forURL:"), objref.IDOf(storageManagementPolicy), rt.FileURL(downloadStorageURL))
 }
 
 // StorageManagementPolicyForURL returns the storage management policy for a downloaded asset.
 func (adsm *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
+	defer runtime.KeepAlive(adsm)
 	_r := objc.Send[objc.ID](objref.IDOf(adsm), objc.RegisterName("storageManagementPolicyForURL:"), rt.FileURL(downloadStorageURL))
 	return AssetDownloadStorageManagementPolicyFromID(_r)
 }

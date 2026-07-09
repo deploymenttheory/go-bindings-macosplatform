@@ -5,6 +5,8 @@
 package coreml
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,6 +56,8 @@ func NewUpdateTask() *UpdateTask {
 
 // ResumeWithParameters resumes a model update with updated parameter values.
 func (ut *UpdateTask) ResumeWithParameters(updateParameters obj.Object) {
+	defer runtime.KeepAlive(ut)
+	defer runtime.KeepAlive(updateParameters)
 	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("resumeWithParameters:"), objref.IDOf(updateParameters))
 }
 

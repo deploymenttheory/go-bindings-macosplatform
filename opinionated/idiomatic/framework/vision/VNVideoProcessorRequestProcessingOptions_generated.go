@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"runtime"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,22 +49,27 @@ func videoProcessorRequestProcessingOptionsAdopt(id objc.ID) *VideoProcessorRequ
 
 // Description returns the object's -description text.
 func (vprpo *VideoProcessorRequestProcessingOptions) Description() string {
+	defer runtime.KeepAlive(vprpo)
 	return rt.Description(objref.IDOf(vprpo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
 func (vprpo *VideoProcessorRequestProcessingOptions) IsEqual(other obj.Object) bool {
+	defer runtime.KeepAlive(vprpo)
+	defer runtime.KeepAlive(other)
 	return rt.IsEqual(objref.IDOf(vprpo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
 func (vprpo *VideoProcessorRequestProcessingOptions) IsKind(className string) bool {
+	defer runtime.KeepAlive(vprpo)
 	return rt.IsKind(objref.IDOf(vprpo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
 func (vprpo *VideoProcessorRequestProcessingOptions) String() string {
+	defer runtime.KeepAlive(vprpo)
 	return rt.Description(objref.IDOf(vprpo))
 }
 
@@ -74,12 +81,14 @@ func NewVideoProcessorRequestProcessingOptions() *VideoProcessorRequestProcessin
 
 // WithCadence sets the cadence at which the request should be performed. If this property is not defined, then every frame will be processed.
 func (vprpo *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
+	defer runtime.KeepAlive(cadence)
 	objc.Send[objc.ID](objref.IDOf(vprpo), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
 	return vprpo
 }
 
 // Cadence returns the cadence.
 func (vprpo *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
+	defer runtime.KeepAlive(vprpo)
 	_r := objc.Send[objc.ID](objref.IDOf(vprpo), objc.RegisterName("cadence"))
 	return VideoProcessorCadenceFromID(_r)
 }
